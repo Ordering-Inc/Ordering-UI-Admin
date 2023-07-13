@@ -11,7 +11,9 @@ var _Shared = require("../../Shared");
 require("react-toastify/dist/ReactToastify.css");
 var _reactToastify = require("react-toastify");
 var _styledComponents = require("styled-components");
+var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _styles = require("./styles");
+var _styles2 = require("../../../styles");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
@@ -45,19 +47,27 @@ var OrderNotificationUI = function OrderNotificationUI(props) {
   var theme = (0, _styledComponents.useTheme)();
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
-    notificationModalOpen = _useState2[0],
-    setNotificationModalOpen = _useState2[1];
-  var _useState3 = (0, _react.useState)([]),
+    showModal = _useState2[0],
+    setShowModal = _useState2[1];
+  var _useState3 = (0, _react.useState)(false),
     _useState4 = _slicedToArray(_useState3, 2),
-    registerOrderIds = _useState4[0],
-    setRegisterOrderIds = _useState4[1];
-  var _useState5 = (0, _react.useState)({
+    isChecked = _useState4[0],
+    setIsChecked = _useState4[1];
+  var _useState5 = (0, _react.useState)(false),
+    _useState6 = _slicedToArray(_useState5, 2),
+    notificationModalOpen = _useState6[0],
+    setNotificationModalOpen = _useState6[1];
+  var _useState7 = (0, _react.useState)([]),
+    _useState8 = _slicedToArray(_useState7, 2),
+    registerOrderIds = _useState8[0],
+    setRegisterOrderIds = _useState8[1];
+  var _useState9 = (0, _react.useState)({
       open: false,
       content: []
     }),
-    _useState6 = _slicedToArray(_useState5, 2),
-    alertState = _useState6[0],
-    setAlertState = _useState6[1];
+    _useState10 = _slicedToArray(_useState9, 2),
+    alertState = _useState10[0],
+    setAlertState = _useState10[1];
   var handleNotification = function handleNotification(order) {
     var _order$products;
     if ((order === null || order === void 0 || (_order$products = order.products) === null || _order$products === void 0 || (_order$products = _order$products[0]) === null || _order$products === void 0 ? void 0 : _order$products.type) === 'gift_card') return;
@@ -129,11 +139,15 @@ var OrderNotificationUI = function OrderNotificationUI(props) {
     };
   }, [configState, registerOrderIds, customerId]);
   (0, _react.useEffect)(function () {
-    setAlertState({
-      open: true,
-      content: t('SOUND_WILL_BE_PLAYED', 'The sound will be played on this page whenever a new order is received.')
-    });
+    var isSaved = localStorage.getItem('new_order_notification');
+    if (!isSaved) setShowModal(true);
   }, []);
+  var handleClose = function handleClose() {
+    setShowModal(false);
+    if (isChecked) {
+      localStorage.setItem('new_order_notification', '1');
+    }
+  };
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "750px",
     open: notificationModalOpen,
@@ -173,7 +187,22 @@ var OrderNotificationUI = function OrderNotificationUI(props) {
       });
     },
     closeOnBackdrop: false
-  }));
+  }), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    open: showModal,
+    width: "700px",
+    onClose: handleClose,
+    title: t('ORDERING', 'Ordering')
+  }, /*#__PURE__*/_react.default.createElement(_styles.AlarmContent, null, /*#__PURE__*/_react.default.createElement("span", null, t('SOUND_WILL_BE_PLAYED', 'The sound will be played on this page whenever a new order is received.')), /*#__PURE__*/_react.default.createElement(_styles.CheckBoxWrapper, {
+    onClick: function onClick() {
+      return setIsChecked(function (prev) {
+        return !prev;
+      });
+    },
+    isChecked: isChecked
+  }, isChecked ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CheckSquareFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Square, null), /*#__PURE__*/_react.default.createElement("span", null, t('DONT_SHOW_AGAIN', 'Don\'t show again'))), /*#__PURE__*/_react.default.createElement(_styles2.Button, {
+    color: "primary",
+    onClick: handleClose
+  }, t('ACCEPT', 'Accept')))));
 };
 var OrderNotification = function OrderNotification(props) {
   var orderNotificationProps = _objectSpread(_objectSpread({}, props), {}, {
