@@ -81,8 +81,8 @@ export const Businesses = (props) => {
             isDisabed={actionState.loading}
           >
             <Checkbox
-              checked={selectedBusinessIds?.includes(business.id)}
-              onChange={e => handleSelectBusiness(business.id, e.target.checked)}
+              checked={selectedBusinessIds?.includes(business.id) || selectedBusinessIds.length === 0}
+              onChange={e => handleSelectBusiness(business.id, selectedBusinessIds.length === 0 ? true : e.target.checked)}
             />
             <WrapperImage>
               <Image bgimage={business?.logo} alt='logo' />
@@ -106,7 +106,7 @@ export const Businesses = (props) => {
         <Button
           type='button'
           color='primary'
-          disabled={actionState.loading}
+          disabled={actionState.loading || selectedBusinessIds.length === 0}
           onClick={() => onSaveBusinesses()}
         >
           {t('SAVE', 'Save')}
