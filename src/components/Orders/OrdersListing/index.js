@@ -84,7 +84,7 @@ export const OrdersListing = (props) => {
 
   useEffect(() => {
     if (!isNaN(pagination.total)) {
-      setOrdersTotalAmount(pagination.total)
+      setOrdersTotalAmount && setOrdersTotalAmount(pagination.total)
     }
   }, [pagination.total])
 
