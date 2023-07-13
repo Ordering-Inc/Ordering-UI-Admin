@@ -246,9 +246,7 @@ export const OrdersTable = (props) => {
       [type]: { ..._column, visable: !_column?.visable }
     }
     setAllowColumns(updatedAllowColumns)
-    if (type === 'externalId') {
-      saveUserSettings(JSON.parse(JSON.stringify(updatedAllowColumns)))
-    }
+    saveUserSettings(JSON.parse(JSON.stringify(updatedAllowColumns)))
   }
 
   const handleClickOrder = (order, e) => {
