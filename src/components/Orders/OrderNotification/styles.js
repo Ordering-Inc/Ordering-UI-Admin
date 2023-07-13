@@ -79,3 +79,40 @@ export const ToastWrapper = styled.div`
     }
   }
 `
+
+export const AlarmContent = styled.div`
+  button {
+    height: 44px;
+    width: 100%;
+    border-radius: 8px;
+    margin-top: 20px;
+  }
+  > span {
+    font-weight: 500;
+  }
+`
+
+export const CheckBoxWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-top: 10px;
+  span {
+    font-size: 14px;
+  }
+  svg {
+    ${props => props.theme?.rtl ? css`
+      margin-left: 10px;
+    ` : css`
+      margin-right: 10px;
+    `}
+    font-size: 16px;
+    color: ${props => props.theme.colors.secundaryLight};
+  }
+
+  ${({ isChecked }) => isChecked && css`
+    svg {
+      color: ${props => props.theme.colors?.primary};
+    }
+  `}
+`
