@@ -86,9 +86,9 @@ var Businesses = function Businesses(props) {
       key: business.id,
       isDisabed: actionState.loading
     }, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
-      checked: selectedBusinessIds === null || selectedBusinessIds === void 0 ? void 0 : selectedBusinessIds.includes(business.id),
+      checked: (selectedBusinessIds === null || selectedBusinessIds === void 0 ? void 0 : selectedBusinessIds.includes(business.id)) || selectedBusinessIds.length === 0,
       onChange: function onChange(e) {
-        return handleSelectBusiness(business.id, e.target.checked);
+        return handleSelectBusiness(business.id, selectedBusinessIds.length === 0 ? true : e.target.checked);
       }
     }), /*#__PURE__*/_react.default.createElement(_styles2.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles2.Image, {
       bgimage: business === null || business === void 0 ? void 0 : business.logo,
@@ -109,7 +109,7 @@ var Businesses = function Businesses(props) {
   })), !isAddMode && /*#__PURE__*/_react.default.createElement(_styles.Button, {
     type: "button",
     color: "primary",
-    disabled: actionState.loading,
+    disabled: actionState.loading || selectedBusinessIds.length === 0,
     onClick: function onClick() {
       return onSaveBusinesses();
     }
