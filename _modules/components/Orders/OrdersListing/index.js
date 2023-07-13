@@ -89,7 +89,7 @@ var OrdersListing = function OrdersListing(props) {
   }, [filterValues]);
   (0, _react.useEffect)(function () {
     if (!isNaN(pagination.total)) {
-      setOrdersTotalAmount(pagination.total);
+      setOrdersTotalAmount && setOrdersTotalAmount(pagination.total);
     }
   }, [pagination.total]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (ordersStatusGroup === groupStatus || isMessagesView) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !orderList.loading && (pagination === null || pagination === void 0 ? void 0 : pagination.total) === 0 ? /*#__PURE__*/_react.default.createElement(_styles2.WrapperNoneOrders, null, /*#__PURE__*/_react.default.createElement(_styles2.InnerNoneOrdersContainer, {
