@@ -183,7 +183,8 @@ var BusinessDeviceDetailUI = function BusinessDeviceDetailUI(props) {
     searchValue: businessSearchVal,
     handleChangeSearch: function handleChangeSearch(val) {
       return setBusinessSearchVal(val);
-    }
+    },
+    isDisabled: !!selectedDevice
   })), ((formState === null || formState === void 0 ? void 0 : (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.business_id) || (selectedDevice === null || selectedDevice === void 0 ? void 0 : selectedDevice.business_id)) && /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('BUSINESS_OWNER', 'Business owner')), businessList !== null && businessList !== void 0 && businessList.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 44
   }) : /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
