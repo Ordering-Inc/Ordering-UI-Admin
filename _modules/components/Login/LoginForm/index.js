@@ -78,7 +78,8 @@ var LoginFormUI = function LoginFormUI(props) {
   var _useForm = (0, _reactHookForm.useForm)(),
     handleSubmit = _useForm.handleSubmit,
     register = _useForm.register,
-    errors = _useForm.errors;
+    errors = _useForm.errors,
+    control = _useForm.control;
   var _useContext = (0, _react.useContext)(_ConfigFileContext.ConfigFileContext),
     _useContext2 = _slicedToArray(_useContext, 2),
     configFile = _useContext2[0],
@@ -113,6 +114,10 @@ var LoginFormUI = function LoginFormUI(props) {
     _useState12 = _slicedToArray(_useState11, 2),
     willVerifyOtpState = _useState12[0],
     setWillVerifyOtpState = _useState12[1];
+  var _useState13 = (0, _react.useState)(null),
+    _useState14 = _slicedToArray(_useState13, 2),
+    timer = _useState14[0],
+    setTimer = _useState14[1];
   var numOtpInputs = loginTab === 'otp' ? 6 : 4;
   var otpPlaceholder = _toConsumableArray(Array(numOtpInputs)).fill(0).join('');
   var _useCountdownTimer = (0, _useCountdownTimer3.useCountdownTimer)(600, !(checkPhoneCodeState !== null && checkPhoneCodeState !== void 0 && checkPhoneCodeState.loading) && willVerifyOtpState),
@@ -131,16 +136,15 @@ var LoginFormUI = function LoginFormUI(props) {
     }
     setSubmitted(true);
   };
-  var timeout = null;
-  var hanldeChangeProject = function hanldeChangeProject(e) {
-    e.persist();
-    clearTimeout(timeout);
+  var hanldeChangeProject = function hanldeChangeProject(project) {
+    clearTimeout(timer);
     setSubmitted(false);
-    timeout = setTimeout(function () {
+    var _timer = setTimeout(function () {
       setConfigFile(_objectSpread(_objectSpread({}, configFile), {}, {
-        project: e.target.value
+        project: project
       }));
     }, 750);
+    setTimer(_timer);
   };
   var handleChangeOtpType = function handleChangeOtpType(type) {
     handleChangeTab('otp');
@@ -308,19 +312,29 @@ var LoginFormUI = function LoginFormUI(props) {
     noValidate: true,
     isPopup: isPopup,
     onSubmit: handleSubmit(onSubmit)
-  }, !willVerifyOtpState && !useProjectDomain && /*#__PURE__*/_react.default.createElement(_styles2.InputWithIcon, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    type: "text",
+  }, !willVerifyOtpState && !useProjectDomain && /*#__PURE__*/_react.default.createElement(_styles2.InputWithIcon, null, /*#__PURE__*/_react.default.createElement(_reactHookForm.Controller, {
     name: "project",
-    "aria-label": "project",
-    placeholder: t('PROJECT', 'Project'),
-    ref: register({
+    control: control,
+    rules: {
       required: t('VALIDATION_ERROR_REQUIRED', 'Project is required').replace('_attribute_', t('PROJECT', 'Project'))
-    }),
-    onChange: function onChange(e) {
-      return hanldeChangeProject(e);
     },
-    autoComplete: "off",
-    autoCapitalize: "off"
+    render: function render(_ref) {
+      var _onChange = _ref.onChange,
+        value = _ref.value;
+      return /*#__PURE__*/_react.default.createElement(_styles.Input, {
+        type: "text",
+        placeholder: t('PROJECT', 'Project'),
+        value: value,
+        onChange: function onChange(e) {
+          var project = e.target.value.replace(/\s/g, '');
+          _onChange(project);
+          hanldeChangeProject(project);
+        },
+        autoComplete: "off",
+        autoCapitalize: "off"
+      });
+    },
+    defaultValue: ""
   }), /*#__PURE__*/_react.default.createElement(_MdExitToApp.default, null)), !willVerifyOtpState && (loginTab === 'email' || loginTab === 'otp' && otpType === 'email') && /*#__PURE__*/_react.default.createElement(_styles2.InputWithIcon, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
     type: "email",
     name: "email",

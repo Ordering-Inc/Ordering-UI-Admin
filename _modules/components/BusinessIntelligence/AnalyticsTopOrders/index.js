@@ -69,11 +69,14 @@ var AnalyticsTopOrders = function AnalyticsTopOrders(props) {
   })) : /*#__PURE__*/_react.default.createElement(_styles.TopOrdersContainerWrapper, null, (dataList === null || dataList === void 0 ? void 0 : dataList.data.length) > 0 ? /*#__PURE__*/_react.default.createElement(_styles.ProductCategoryContainer, {
     ref: downloadElementRef
   }, dataList === null || dataList === void 0 ? void 0 : dataList.data.map(function (item, i) {
+    var _parseFloat;
     return /*#__PURE__*/_react.default.createElement(_styles.TopOrdersContent, {
       key: i
-    }, /*#__PURE__*/_react.default.createElement("p", null, item === null || item === void 0 ? void 0 : item.name), /*#__PURE__*/_react.default.createElement(_styles.PercentContainer, {
-      percent: item === null || item === void 0 ? void 0 : item.orders_count
-    }, item === null || item === void 0 ? void 0 : item.orders_count, "%"));
+    }, /*#__PURE__*/_react.default.createElement("p", null, item === null || item === void 0 ? void 0 : item.name), /*#__PURE__*/_react.default.createElement(_styles.ValueWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ValueContainer, {
+      percent: item === null || item === void 0 ? void 0 : item.orders_percentage
+    }, item === null || item === void 0 ? void 0 : item.orders_count), /*#__PURE__*/_react.default.createElement(_styles.PercentContainer, {
+      percent: item === null || item === void 0 ? void 0 : item.orders_percentage
+    }, (_parseFloat = parseFloat(item === null || item === void 0 ? void 0 : item.orders_percentage)) === null || _parseFloat === void 0 ? void 0 : _parseFloat.toFixed(2), "%")));
   })) : /*#__PURE__*/_react.default.createElement(_styles.EmptyContent, null, t('NO_DATA', 'No Data'))));
 };
 exports.AnalyticsTopOrders = AnalyticsTopOrders;

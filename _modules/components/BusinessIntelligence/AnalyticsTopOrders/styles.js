@@ -4,9 +4,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.TopOrdersContent = exports.TopOrdersContainerWrapper = exports.SkeletonContainerWrapper = exports.ProductCategoryContainer = exports.PercentContainer = exports.EmptyContent = exports.Container = exports.AnalyticsTopOrdersHeader = exports.ActionBlock = void 0;
+exports.ValueWrapper = exports.ValueContainer = exports.TopOrdersContent = exports.TopOrdersContainerWrapper = exports.SkeletonContainerWrapper = exports.ProductCategoryContainer = exports.PercentContainer = exports.EmptyContent = exports.Container = exports.AnalyticsTopOrdersHeader = exports.ActionBlock = void 0;
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17;
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
@@ -34,18 +34,41 @@ var TopOrdersContent = _styledComponents.default.div(_templateObject6 || (_templ
 exports.TopOrdersContent = TopOrdersContent;
 var SkeletonContainerWrapper = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  > div {\n    margin-bottom: 5px;\n  }\n"])));
 exports.SkeletonContainerWrapper = SkeletonContainerWrapper;
-var PercentContainer = _styledComponents.default.span(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  font-size: 14px;\n  color: ", ";\n\n  ", "\n\n  ", "\n\n"])), function (props) {
+var PercentContainer = _styledComponents.default.span(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  font-size: 14px;\n  color: ", ";\n  min-width: 60px;\n  text-align: right;\n\n  ", "\n\n  ", "\n"])), function (props) {
   var _props$theme4;
   return (_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.colors.headingColor;
 }, function (_ref2) {
   var percent = _ref2.percent;
-  return percent > 50 && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    color: #00D27A;\n  "])));
+  return percent > 50 && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    color: ", ";\n  "])), function (props) {
+    return props.theme.colors.green;
+  });
 }, function (_ref3) {
   var percent = _ref3.percent;
-  return percent < 30 && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    color: #E63757;\n  "])));
+  return percent < 30 && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    color: ", ";\n  "])), function (props) {
+    return props.theme.colors.danger;
+  });
 });
 exports.PercentContainer = PercentContainer;
 var EmptyContent = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  padding: 10px;\n"])));
 exports.EmptyContent = EmptyContent;
 var ProductCategoryContainer = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  padding: 0 10px 10px 10px;\n"])));
 exports.ProductCategoryContainer = ProductCategoryContainer;
+var ValueWrapper = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  > span {\n    margin-left: 15px;\n    ", "\n  }\n"])), function (props) {
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n      margin-left: 0px;\n      margin-right: 15px;\n    "])));
+});
+exports.ValueWrapper = ValueWrapper;
+var ValueContainer = _styledComponents.default.span(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  font-size: 14px;\n  color: ", ";\n  \n  ", "\n\n  ", "\n"])), function (props) {
+  var _props$theme5;
+  return (_props$theme5 = props.theme) === null || _props$theme5 === void 0 ? void 0 : _props$theme5.colors.headingColor;
+}, function (_ref4) {
+  var percent = _ref4.percent;
+  return percent > 50 && (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    color: ", ";\n  "])), function (props) {
+    return props.theme.colors.green;
+  });
+}, function (_ref5) {
+  var percent = _ref5.percent;
+  return percent < 30 && (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n    color: ", ";\n  "])), function (props) {
+    return props.theme.colors.danger;
+  });
+});
+exports.ValueContainer = ValueContainer;
