@@ -156,6 +156,7 @@ const BusinessDeviceDetailUI = (props) => {
             searchBarIsNotLazyLoad
             searchValue={businessSearchVal}
             handleChangeSearch={(val) => setBusinessSearchVal(val)}
+            isDisabled={!!selectedDevice}
           />
         )}
       </SelectWrapper>
