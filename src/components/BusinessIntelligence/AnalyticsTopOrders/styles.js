@@ -64,15 +64,16 @@ export const SkeletonContainerWrapper = styled.div`
 export const PercentContainer = styled.span`
   font-size: 14px;
   color: ${props => props.theme?.colors.headingColor};
+  min-width: 60px;
+  text-align: right;
 
   ${({ percent }) => percent > 50 && css`
-    color: #00D27A;
+    color: ${props => props.theme.colors.green};
   `}
 
   ${({ percent }) => percent < 30 && css`
-    color: #E63757;
+    color: ${props => props.theme.colors.danger};
   `}
-
 `
 
 export const EmptyContent = styled.div`
@@ -84,4 +85,29 @@ export const EmptyContent = styled.div`
 
 export const ProductCategoryContainer = styled.div`
   padding: 0 10px 10px 10px;
+`
+
+export const ValueWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  > span {
+    margin-left: 15px;
+    ${props => props.theme.rtl && css`
+      margin-left: 0px;
+      margin-right: 15px;
+    `}
+  }
+`
+
+export const ValueContainer = styled.span`
+  font-size: 14px;
+  color: ${props => props.theme?.colors.headingColor};
+  
+  ${({ percent }) => percent > 50 && css`
+    color: ${props => props.theme.colors.green};
+  `}
+
+  ${({ percent }) => percent < 30 && css`
+    color: ${props => props.theme.colors.danger};
+  `}
 `

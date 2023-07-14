@@ -344,6 +344,15 @@ export const UserFormDetailsUI = (props) => {
                 />
               </DriverZoneRestrictionWrapper>
             )}
+            {isDriversPage && (
+              <DriverZoneRestrictionWrapper>
+                <span>{('MONO_SESSION', 'Mono session')}</span>
+                <Switch
+                  defaultChecked={formState?.changes?.mono_session ?? user?.mono_session ?? false}
+                  onChange={(val) => handleChangeSwtich('mono_session', val)}
+                />
+              </DriverZoneRestrictionWrapper>
+            )}
             <ActionsForm>
               <Button
                 id='form-btn'
