@@ -9,7 +9,9 @@ import {
   SkeletonContainerWrapper,
   PercentContainer,
   EmptyContent,
-  ProductCategoryContainer
+  ProductCategoryContainer,
+  ValueWrapper,
+  ValueContainer
 } from './styles'
 import BsDownload from '@meronex/icons/bs/BsDownload'
 import Skeleton from 'react-loading-skeleton'
@@ -68,7 +70,10 @@ export const AnalyticsTopOrders = (props) => {
                     dataList?.data.map((item, i) => (
                       <TopOrdersContent key={i}>
                         <p>{item?.name}</p>
-                        <PercentContainer percent={item?.orders_count}>{item?.orders_count}%</PercentContainer>
+                        <ValueWrapper>
+                          <ValueContainer percent={item?.orders_percentage}>{item?.orders_count}</ValueContainer>
+                          <PercentContainer percent={item?.orders_percentage}>{parseFloat(item?.orders_percentage)?.toFixed(2)}%</PercentContainer>
+                        </ValueWrapper>
                       </TopOrdersContent>
                     ))
                   }
