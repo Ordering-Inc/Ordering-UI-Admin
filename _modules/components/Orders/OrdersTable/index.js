@@ -286,9 +286,7 @@ var OrdersTable = function OrdersTable(props) {
       visable: !(_column !== null && _column !== void 0 && _column.visable)
     })));
     setAllowColumns(updatedAllowColumns);
-    if (type === 'externalId') {
-      saveUserSettings(JSON.parse(JSON.stringify(updatedAllowColumns)));
-    }
+    saveUserSettings(JSON.parse(JSON.stringify(updatedAllowColumns)));
   };
   var handleClickOrder = function handleClickOrder(order, e) {
     var inValid = !isSelectedOrders && (e.target.closest('.orderCheckBox') || e.target.closest('.driverInfo') || e.target.closest('.orderStatusTitle'));
