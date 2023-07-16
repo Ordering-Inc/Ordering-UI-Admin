@@ -66,7 +66,7 @@ export const ProductIngredient = (props) => {
           <Button
             borderRadius='8px'
             color='lightPrimary'
-            onClick={() => handleOpenIngredient(null)}
+            onClick={() => handleOpenIngredient(null, true)}
           >
             {t('ADD_INGREDIENT', 'Add ingredient')}
           </Button>
@@ -83,7 +83,7 @@ export const ProductIngredient = (props) => {
         ))}
         <AddIngredientButtonWrapper>
           <LinkButton
-            onClick={() => handleOpenIngredient(null)}
+            onClick={() => handleOpenIngredient(null, true)}
           >
             {t('ADD_INGREDIENT', 'Add ingredient')}
           </LinkButton>
