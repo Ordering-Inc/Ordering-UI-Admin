@@ -76,9 +76,18 @@ export const OptionsToSelectContainer = styled.div`
   > p {
     font-size: 12px;
     margin: 0 16px;
+
+    > span.new {
+      cursor: pointer;
+      color: ${props => props.theme.colors.primary};
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 `
 export const SelectOption = styled.div`
+  position: relative;
   cursor: pointer;
   width: 100%;
   padding: 9px 16px;
@@ -95,6 +104,19 @@ export const SelectOption = styled.div`
       text-overflow: ellipsis;
       white-space: nowrap;
     }
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
+    width: 20px;
+    height: 20px;
+    transform: translate(100%, -50%);
+    top: 11px;
+    right: 20px;
   }
 `
 
