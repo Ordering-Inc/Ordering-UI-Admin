@@ -30,7 +30,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var UserFormDetailsUI = function UserFormDetailsUI(props) {
-  var _validationFields$fie, _validationFields$fie2, _validationFields$fie5, _ref4, _formState$changes$ex, _formState$changes6, _ref5, _formState$changes$ti, _formState$changes7, _ref6, _formState$changes$dr, _formState$changes8;
+  var _validationFields$fie, _validationFields$fie2, _validationFields$fie5, _ref4, _formState$changes$ex, _formState$changes6, _ref5, _formState$changes$ti, _formState$changes7, _ref6, _formState$changes$dr, _formState$changes8, _ref7, _formState$changes$mo, _formState$changes9;
   var formState = props.formState,
     showField = props.showField,
     cleanFormState = props.cleanFormState,
@@ -348,6 +348,11 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     defaultChecked: (_ref6 = (_formState$changes$dr = formState === null || formState === void 0 || (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.driver_zone_restriction) !== null && _formState$changes$dr !== void 0 ? _formState$changes$dr : user === null || user === void 0 ? void 0 : user.driver_zone_restriction) !== null && _ref6 !== void 0 ? _ref6 : false,
     onChange: function onChange(val) {
       return handleChangeSwtich('driver_zone_restriction', val);
+    }
+  })), isDriversPage && /*#__PURE__*/_react.default.createElement(_styles2.DriverZoneRestrictionWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, ('MONO_SESSION', 'Mono session')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
+    defaultChecked: (_ref7 = (_formState$changes$mo = formState === null || formState === void 0 || (_formState$changes9 = formState.changes) === null || _formState$changes9 === void 0 ? void 0 : _formState$changes9.mono_session) !== null && _formState$changes$mo !== void 0 ? _formState$changes$mo : user === null || user === void 0 ? void 0 : user.mono_session) !== null && _ref7 !== void 0 ? _ref7 : false,
+    onChange: function onChange(val) {
+      return handleChangeSwtich('mono_session', val);
     }
   })), /*#__PURE__*/_react.default.createElement(_styles2.ActionsForm, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     id: "form-btn",
