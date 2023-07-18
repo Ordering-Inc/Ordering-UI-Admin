@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { ConfigFileContext } from '../../../contexts/ConfigFileContext'
-import { useForm } from 'react-hook-form'
+import { useForm, Controller } from 'react-hook-form'
 import parsePhoneNumber from 'libphonenumber-js'
 import {
   LoginForm as LoginFormController,
@@ -71,7 +71,7 @@ const LoginFormUI = (props) => {
   const [ordering] = useApi()
   const [{ configs }] = useConfig()
   const theme = useTheme()
-  const { handleSubmit, register, errors } = useForm()
+  const { handleSubmit, register, errors, control } = useForm()
   const [configFile, setConfigFile] = useContext(ConfigFileContext)
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
@@ -80,6 +80,7 @@ const LoginFormUI = (props) => {
   const [passwordSee, setPasswordSee] = useState(false)
   const [loginWithOtpState, setLoginWithOtpState] = useState(false)
   const [willVerifyOtpState, setWillVerifyOtpState] = useState(false)
+  const [timer, setTimer] = useState(null)
 
   const numOtpInputs = loginTab === 'otp' ? 6 : 4
   const otpPlaceholder = [...Array(numOtpInputs)].fill(0).join('')
@@ -100,14 +101,13 @@ const LoginFormUI = (props) => {
     setSubmitted(true)
   }
 
-  let timeout = null
-  const hanldeChangeProject = (e) => {
-    e.persist()
-    clearTimeout(timeout)
+  const hanldeChangeProject = (project) => {
+    clearTimeout(timer)
     setSubmitted(false)
-    timeout = setTimeout(function () {
-      setConfigFile({ ...configFile, project: e.target.value })
+    const _timer = setTimeout(function () {
+      setConfigFile({ ...configFile, project: project })
     }, 750)
+    setTimer(_timer)
   }
 
   const handleChangeOtpType = (type) => {
@@ -298,20 +298,30 @@ const LoginFormUI = (props) => {
         >
           {!willVerifyOtpState && (
             <InputWithIcon>
-              <Input
-                type='text'
+              <Controller
                 name='project'
-                aria-label='project'
-                placeholder={t('PROJECT', 'Project')}
-                ref={register({
+                control={control}
+                rules={{
                   required: t(
                     'VALIDATION_ERROR_REQUIRED',
                     'Project is required'
                   ).replace('_attribute_', t('PROJECT', 'Project'))
-                })}
-                onChange={(e) => hanldeChangeProject(e)}
-                autoComplete='off'
-                autoCapitalize='off'
+                }}
+                render={({ onChange, value }) => (
+                  <Input
+                    type='text'
+                    placeholder={t('PROJECT', 'Project')}
+                    value={value}
+                    onChange={(e) => {
+                      const project = e.target.value.replace(/\s/g, '')
+                      onChange(project)
+                      hanldeChangeProject(project)
+                    }}
+                    autoComplete='off'
+                    autoCapitalize='off'
+                  />
+                )}
+                defaultValue=''
               />
               <MdExitToApp />
             </InputWithIcon>
