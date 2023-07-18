@@ -322,7 +322,6 @@ const OrderDetailsUI = (props) => {
           <OrderStatus isDisabled={isTourOpen && currentTourStep === 1}>
             <div>
               <h2>{t('ORDER_STATUS_TEXT', 'Order status')}</h2>
-              {console.log('order', order)}
               {order?.delivery_datetime_utc &&
               <p>{parseDate(order?.delivery_datetime_utc)}  {`(${t('UTC_TIME', 'UTC time')})`}</p>
               }
