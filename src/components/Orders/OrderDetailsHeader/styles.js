@@ -89,15 +89,24 @@ export const PrinterSelectContainer = styled.div`
 
 export const PrinterSelect = styled.div`
   position: absolute;
+  right: 0;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
   z-index: 100;
-  border: 1px solid ${props => props.theme.colors.textGray};
+  padding: 0.5rem 0;
+  border: 1px solid ${props => props.theme.colors.borderColor};
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.12);
+  z-index: 12;
+  background-color: ${props => props.theme.colors.white};
 
   button {
-    padding: 10px 20px;
-    color: ${props => props.theme.colors.textGray};
+    height: auto;
+    padding: 0.25rem 1.5rem;
+    font-size: 12px;
+    border-radius: 0px;
+    font-weight: 400;
+    color: ${props => props.theme.colors.headingColor};
     &:hover {
       background-color: #f5f5f5;
     }

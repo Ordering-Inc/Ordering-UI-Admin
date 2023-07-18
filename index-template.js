@@ -40,6 +40,7 @@ import lalamove from './template/assets/images/lala-move.png'
 import pickerExpress from './template/assets/images/picker-express.png'
 import importMenu from './template/assets/images/import-menu.png'
 import importedMenu from './template/assets/images/imported-menu.png'
+import googleCalendarIcon from './template/assets/images/google-calendar-icon.png'
 
 /**
  * project statuses
@@ -319,7 +320,8 @@ theme.images = {
     lalamove,
     pickerExpress,
     importMenu,
-    importedMenu
+    importedMenu,
+    googleCalendarIcon
   },
   project: {
     active: projectActive,
