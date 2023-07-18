@@ -9,6 +9,7 @@ import { List as MenuIcon, InfoCircle } from 'react-bootstrap-icons'
 import { IconButton, Button } from '../../../styles'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { Sessions } from '../Sessions'
+import { useTheme } from 'styled-components'
 
 import {
   Container,
@@ -29,6 +30,7 @@ const ProfilePageUI = (props) => {
   const [, t] = useLanguage()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const [{ user }] = useSession()
+  const theme = useTheme()
 
   return (
     <Container>
@@ -75,7 +77,8 @@ const ProfilePageUI = (props) => {
                 outline
                 onClick={() => handleGoogleAccountLink()}
               >
-                {t('GOOGLE_ACCOUNT', 'Google account')}
+                <img src={theme.images.general.googleCalendarIcon} alt='Google Calendar Icon' />
+                {t('SYNC_WITH_GOOGLE_CALENDAR', 'Sync with Google calendar')}
               </Button>
             )}
           </ButtonsGroup>

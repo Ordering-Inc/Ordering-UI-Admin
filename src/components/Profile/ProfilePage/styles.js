@@ -68,6 +68,15 @@ export const ButtonsGroup = styled.div`
 
   button {
     height: 44px;
+    img {
+      width: 16px;
+      height: 16px;
+      margin-right: 8px;
+      ${props => props.theme?.rtl && css`
+        margin-right: 0px;
+        margin-left: 8px;
+      `}
+    }
   }
 `
 export const InfoWrapper = styled.div`
