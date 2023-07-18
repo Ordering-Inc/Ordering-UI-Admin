@@ -24,6 +24,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ThemeOption = function ThemeOption(props) {
+  var _Object$keys;
   var name = props.name,
     optionObject = props.optionObject,
     valueObject = props.valueObject,
@@ -67,12 +68,17 @@ var ThemeOption = function ThemeOption(props) {
     onChange: function onChange(e) {
       return handleChangeValue(e.target.checked);
     }
-  }), /*#__PURE__*/_react.default.createElement("h5", null, getTitle(name))), ((optionObject === null || optionObject === void 0 ? void 0 : optionObject.value_type) === 'integer' || (optionObject === null || optionObject === void 0 ? void 0 : optionObject.value_type) === 'string') && !(optionObject !== null && optionObject !== void 0 && optionObject.options) && !validHexColor(valueObject) && /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  }), /*#__PURE__*/_react.default.createElement("h5", null, getTitle(name))), ((optionObject === null || optionObject === void 0 ? void 0 : optionObject.value_type) === 'integer' || (optionObject === null || optionObject === void 0 ? void 0 : optionObject.value_type) === 'string' || name === 'borderRadius') && !(optionObject !== null && optionObject !== void 0 && optionObject.options) && !validHexColor(valueObject) && /*#__PURE__*/_react.default.createElement(_styles.Input, {
     defaultValue: valueObject,
     onChange: function onChange(e) {
       return handleChangeValue(e.target.value);
+    },
+    onInput: function onInput(e) {
+      if (name === 'borderRadius') {
+        e.target.value = Number(e.target.value) > 99 || e.target.value === '.' || (e.target.value.match(/\./g) || []).length > 1 ? e.target.value.slice(0, -1) : e.target.value.match("^[".concat(e.target.value === '0' ? '1' : '0', "-9/.]{1,9}$"));
+      }
     }
-  }), (optionObject === null || optionObject === void 0 ? void 0 : optionObject.value_type) === 'string' && validHexColor(valueObject) && /*#__PURE__*/_react.default.createElement(_styles2.ColorPickerContainer, null, /*#__PURE__*/_react.default.createElement(_Shared.ColorPicker, {
+  }), (optionObject === null || optionObject === void 0 ? void 0 : optionObject.value_type) === 'string' && name !== 'borderRadius' && validHexColor(valueObject) && /*#__PURE__*/_react.default.createElement(_styles2.ColorPickerContainer, null, /*#__PURE__*/_react.default.createElement(_Shared.ColorPicker, {
     defaultColor: valueObject,
     onChangeColor: function onChangeColor(color) {
       return handleChangeValue(color);
@@ -91,7 +97,7 @@ var ThemeOption = function ThemeOption(props) {
     valueObject: valueObject,
     handleAddThemeGallery: handleAddThemeGallery,
     handleChangeValue: handleChangeValue
-  }), typeof optionObject !== 'string' && Object.keys(optionObject).filter(function (subOption) {
+  }), !(optionObject !== null && optionObject !== void 0 && optionObject.value_type) && !(optionObject !== null && optionObject !== void 0 && optionObject.components) && Object.keys(optionObject).filter(function (subOption) {
     return subOption !== 'value_type' && subOption !== 'options';
   }).map(function (subOption) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
@@ -105,6 +111,18 @@ var ThemeOption = function ThemeOption(props) {
       setThemeValues: setThemeValues,
       handleAddThemeGallery: handleAddThemeGallery
     }));
-  }));
+  }), (optionObject === null || optionObject === void 0 ? void 0 : optionObject.components) && (Object === null || Object === void 0 ? void 0 : (_Object$keys = Object.keys(optionObject === null || optionObject === void 0 ? void 0 : optionObject.components)) === null || _Object$keys === void 0 ? void 0 : _Object$keys.map(function (subOption) {
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+      key: subOption
+    }, /*#__PURE__*/_react.default.createElement(ThemeOption, {
+      name: subOption,
+      optionObject: optionObject === null || optionObject === void 0 ? void 0 : optionObject.components[subOption],
+      valueObject: valueObject === null || valueObject === void 0 ? void 0 : valueObject.components[subOption],
+      path: path + '.' + subOption,
+      themeValues: themeValues,
+      setThemeValues: setThemeValues,
+      handleAddThemeGallery: handleAddThemeGallery
+    }));
+  })));
 };
 exports.ThemeOption = ThemeOption;
