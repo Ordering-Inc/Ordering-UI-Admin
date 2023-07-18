@@ -19,7 +19,8 @@ import {
   AreaWrapper,
   LargeArea,
   MediumArea,
-  SmallArea
+  SmallArea,
+  CheckboxContainer
 } from './styles'
 
 const DriversGroupAutoassignUI = (props) => {
@@ -125,8 +126,8 @@ const DriversGroupAutoassignUI = (props) => {
             />
           </FieldContainer>
         </div>
-        <div>
-          {(autoAssign !== 2 && (changesState?.autoassign_amount_drivers < 2 || (typeof changesState?.autoassign_amount_drivers === 'undefined' && curDriversGroup?.autoassign_amount_drivers < 2))) && (
+        {(autoAssign !== 2 && (changesState?.autoassign_amount_drivers < 2 || (typeof changesState?.autoassign_amount_drivers === 'undefined' && curDriversGroup?.autoassign_amount_drivers < 2))) && (
+          <CheckboxContainer>
             <CheckboxWrapper>
               <Checkbox
                 checked={changesState?.autoassign_autoaccept_by_driver ?? curDriversGroup?.autoassign_autoaccept_by_driver}
@@ -134,11 +135,21 @@ const DriversGroupAutoassignUI = (props) => {
               />
               <span>{t('ORDER_CONFIRMED_ACCEPTED_BY_DRIVER', 'Accepted by Driver')}</span>
             </CheckboxWrapper>
-          )}
-        </div>
+            {(typeof changesState?.autoassign_autoaccept_by_driver === 'undefined' ? !curDriversGroup?.autoassign_autoaccept_by_driver : !changesState?.autoassign_autoaccept_by_driver) && (
+              <CheckboxWrapper>
+                <Checkbox
+                  checked={changesState?.autoassign_autoassign_driver ?? curDriversGroup?.autoassign_autoassign_driver}
+                  onChange={e => onChangeSave({ autoassign_autoassign_driver: e.target.checked })}
+                />
+                <span>{t('AUTO_ASSIGNED', 'Auto assigned')}</span>
+              </CheckboxWrapper>
+            )}
+          </CheckboxContainer>
+        )}
       </RowGroupContainer>
 
-      {(((typeof changesState?.autoassign_autoaccept_by_driver === 'undefined' ? !curDriversGroup?.autoassign_autoaccept_by_driver : !changesState?.autoassign_autoaccept_by_driver)) ||
+      {(((typeof changesState?.autoassign_autoaccept_by_driver === 'undefined' ? !curDriversGroup?.autoassign_autoaccept_by_driver : !changesState?.autoassign_autoaccept_by_driver) &&
+      (typeof changesState?.autoassign_autoassign_driver === 'undefined' ? !curDriversGroup?.autoassign_autoassign_driver : !changesState?.autoassign_autoassign_driver)) ||
       (changesState?.type === 1 || (typeof changesState?.type === 'undefined' && curDriversGroup?.type === 1))) && (
         <FieldContainer>
           <label>{t('AUTO_REJECT_ORDER_GROUP_AFTER', 'Auto reject Orders After')}</label>
