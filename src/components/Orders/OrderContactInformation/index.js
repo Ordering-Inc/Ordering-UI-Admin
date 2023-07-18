@@ -186,6 +186,14 @@ export const OrderContactInformation = (props) => {
                     </td>
                   </tr>
                 )}
+                {!!order?.customer?.location && (
+                  <tr>
+                    <td>{t('LOCATION', 'Location')}</td>
+                    <td>
+                      <a href={`http://maps.google.com/?q=${order?.customer?.location?.lat},${order?.customer?.location?.lng}`} rel='noopener noreferrer' target='_blank'>{order?.customer?.location?.lat}, {order?.customer?.location?.lng}</a>
+                    </td>
+                  </tr>
+                )}
                 {!!order?.customer?.internal_number && (
                   <tr>
                     <td>{t('INTERNAL_NUMBER', 'Internal number')}</td>
