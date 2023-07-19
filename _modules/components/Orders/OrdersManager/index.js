@@ -243,7 +243,8 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     handleOpenCustomOrderDetail: function handleOpenCustomOrderDetail(id) {
       setOrderDetailId(id);
       setIsOpenOrderDetail(true);
-    }
+    },
+    handleOpenOrderDetail: handleOpenOrderDetail
   })), /*#__PURE__*/_react.default.createElement(_styles.OrdersContent, null, /*#__PURE__*/_react.default.createElement(_styles.OrdersInnerContent, {
     className: "order-content"
   }, /*#__PURE__*/_react.default.createElement(_styles.WrapItemView, null, /*#__PURE__*/_react.default.createElement(_OrdersDashboard.OrdersDashboard, {
