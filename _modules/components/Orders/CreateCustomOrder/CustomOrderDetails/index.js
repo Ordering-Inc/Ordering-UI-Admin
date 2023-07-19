@@ -37,7 +37,6 @@ var CustomOrderDetailsUI = function CustomOrderDetailsUI(props) {
     setCustomersPhones = props.setCustomersPhones,
     handleParentSidebarMove = props.handleParentSidebarMove,
     businessList = props.businessList,
-    getBusinessList = props.getBusinessList,
     selectedUser = props.selectedUser,
     selectedBusiness = props.selectedBusiness,
     setSelectedUser = props.setSelectedUser,
@@ -51,7 +50,8 @@ var CustomOrderDetailsUI = function CustomOrderDetailsUI(props) {
     handlePlaceOrderByTotal = props.handlePlaceOrderByTotal,
     extraFields = props.extraFields,
     setExtraFields = props.setExtraFields,
-    actionState = props.actionState;
+    actionState = props.actionState,
+    customerAddress = props.customerAddress;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -60,7 +60,6 @@ var CustomOrderDetailsUI = function CustomOrderDetailsUI(props) {
     validationFields = _useValidationFields2[0];
   var _useOrder = (0, _orderingComponentsAdmin.useOrder)(),
     _useOrder2 = _slicedToArray(_useOrder, 2),
-    orderState = _useOrder2[0],
     changeAddress = _useOrder2[1].changeAddress;
   var _useState = (0, _react.useState)({
       open: false,
@@ -103,23 +102,10 @@ var CustomOrderDetailsUI = function CustomOrderDetailsUI(props) {
     }
     handlePlaceOrderByTotal();
   };
-  var customerAddress = (0, _react.useMemo)(function () {
-    var address = null;
-    if (selectedUser !== null && selectedUser !== void 0 && selectedUser.addresses) {
-      address = selectedUser.addresses.find(function (address) {
-        return address === null || address === void 0 ? void 0 : address.default;
-      });
-    }
-    return address;
-  }, [selectedUser]);
   (0, _react.useEffect)(function () {
     if (!(customerAddress !== null && customerAddress !== void 0 && customerAddress.id)) return;
     changeAddress(customerAddress.id);
   }, [customerAddress === null || customerAddress === void 0 ? void 0 : customerAddress.id]);
-  (0, _react.useEffect)(function () {
-    if (!(customerAddress !== null && customerAddress !== void 0 && customerAddress.location) || orderState !== null && orderState !== void 0 && orderState.loading) return;
-    getBusinessList(customerAddress.location);
-  }, [customerAddress === null || customerAddress === void 0 ? void 0 : customerAddress.location, orderState]);
   (0, _react.useEffect)(function () {
     if (customersPhones !== null && customersPhones !== void 0 && customersPhones.error) {
       setAlertState({

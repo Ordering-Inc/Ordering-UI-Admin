@@ -12,6 +12,7 @@ var _Delivery = require("../../../Delivery");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _FaUserAlt = _interopRequireDefault(require("@meronex/icons/fa/FaUserAlt"));
 var _CgSpinnerTwoAlt = _interopRequireDefault(require("@meronex/icons/cg/CgSpinnerTwoAlt"));
+var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
 var _Shared = require("../../../Shared");
 var _styles = require("../../../../styles");
 var _utils = require("../../../../utils");
@@ -42,7 +43,9 @@ var SelectCustomer = function SelectCustomer(props) {
     optimizeImage = _useUtils2[0].optimizeImage;
   var _useCustomer = (0, _orderingComponentsAdmin.useCustomer)(),
     _useCustomer2 = _slicedToArray(_useCustomer, 2),
-    setUserCustomer = _useCustomer2[1].setUserCustomer;
+    _useCustomer2$ = _useCustomer2[1],
+    setUserCustomer = _useCustomer2$.setUserCustomer,
+    deleteUserCustomer = _useCustomer2$.deleteUserCustomer;
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configs = _useConfig2[0].configs;
@@ -75,7 +78,13 @@ var SelectCustomer = function SelectCustomer(props) {
   var onSelectUser = function onSelectUser(user) {
     setUserCustomer(user, true);
     setSelectedUser(user);
+    onChangeNumber('');
     setShowSearchbar(false);
+  };
+  var onRemoveCustomer = function onRemoveCustomer() {
+    deleteUserCustomer(true);
+    setSelectedUser(null);
+    setShowSearchbar(true);
   };
   var handleOpenAddForm = function handleOpenAddForm() {
     setOpenSidebar('user_add_form');
@@ -141,7 +150,12 @@ var SelectCustomer = function SelectCustomer(props) {
     }) : /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)), /*#__PURE__*/_react.default.createElement("span", {
       className: "name"
     }, user === null || user === void 0 ? void 0 : user.name, " ", user === null || user === void 0 ? void 0 : user.lastname));
-  })) : /*#__PURE__*/_react.default.createElement("p", null, customersPhones.loading ? t('LOADING', 'Loading') : (phone === null || phone === void 0 ? void 0 : phone.length) > 6 ? t('NO_OPTIONS', 'No options') : t('TYPE_AT_LEAST_NUMBER_SUGGEST', 'Type at least 7 numbers for suggesstions')))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.SelectedUserWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.SelectOption, {
+  })) : /*#__PURE__*/_react.default.createElement("p", null, customersPhones.loading ? t('LOADING', 'Loading') : (phone === null || phone === void 0 ? void 0 : phone.length) > 6 ? /*#__PURE__*/_react.default.createElement("span", {
+    className: "new",
+    onClick: function onClick() {
+      return handleOpenAddForm();
+    }
+  }, t('USERS_REGISTER', 'New user')) : t('TYPE_AT_LEAST_NUMBER_SUGGEST', 'Type at least 7 numbers for suggesstions')))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.SelectedUserWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.SelectOption, {
     onClick: function onClick() {
       return setShowSearchbar(true);
     }
@@ -150,7 +164,16 @@ var SelectCustomer = function SelectCustomer(props) {
     alt: ""
   }) : /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)), /*#__PURE__*/_react.default.createElement("span", {
     className: "name"
-  }, selectedUser === null || selectedUser === void 0 ? void 0 : selectedUser.name, " ", selectedUser === null || selectedUser === void 0 ? void 0 : selectedUser.lastname)))), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }, selectedUser === null || selectedUser === void 0 ? void 0 : selectedUser.name, " ", selectedUser === null || selectedUser === void 0 ? void 0 : selectedUser.lastname), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    circle: true,
+    outline: true,
+    color: "primary",
+    type: "reset",
+    className: "remove_option",
+    onClick: function onClick() {
+      return onRemoveCustomer();
+    }
+  }, /*#__PURE__*/_react.default.createElement(_MdClose.default, null))))), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "primary",
     disabled: openSidebar === 'user_add_form',
