@@ -323,7 +323,7 @@ const OrderDetailsUI = (props) => {
             <div>
               <h2>{t('ORDER_STATUS_TEXT', 'Order status')}</h2>
               {order?.delivery_datetime_utc &&
-              <p>{parseDate(order?.delivery_datetime_utc, { utc: false })}</p>
+              <p>{parseDate(order?.delivery_datetime_utc)}</p>
               }
               {order?.delivery_datetime && (
                 <p>{parseDate(order?.delivery_datetime, { utc: false })}  {`(${t('BUSINESS_TIME', 'Business time')})`}</p>
