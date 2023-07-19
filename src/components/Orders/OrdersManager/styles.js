@@ -5,7 +5,8 @@ export const OrdersListContainer = styled.div`
   padding: 20px;
   box-sizing: border-box;
   transition: all 0.5s;
-  overflow: hidden;
+  overflow: auto;
+  max-height: 100vh;
   ${({ isSelectedOrders }) => isSelectedOrders && css`
     margin-top: 0px;
     padding: 20px 0 0 0;
@@ -15,7 +16,7 @@ export const OrdersListContainer = styled.div`
   }
 `
 export const OrdersContent = styled.div`
-
+  margin-top: 10px;
 `
 export const OrdersInnerContent = styled.div`
 `
@@ -40,6 +41,7 @@ export const WrapItemView = styled.div`
   width: 100%;
 `
 export const OrderSubFilterControls = styled.div`
+  flex-wrap: wrap;
   display: flex;
   justify-content: space-between;
   width: 100%;
