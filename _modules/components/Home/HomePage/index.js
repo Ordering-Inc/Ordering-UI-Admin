@@ -257,7 +257,7 @@ var HomeUI = function HomeUI(props) {
       }));
     }));
   };
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.HomeContainer, null, width > 997 && /*#__PURE__*/_react.default.createElement(_styles.OrderingButtonWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('WHAT_DO_YOU_WANT_SEE_ORDERING', 'What do you want to see in ordering?')), !isEnabledWhiteLabelModule && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.HomeContainer, null, width > 997 && !isEnabledWhiteLabelModule && /*#__PURE__*/_react.default.createElement(_styles.OrderingButtonWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('WHAT_DO_YOU_WANT_SEE_ORDERING', 'What do you want to see in ordering?')), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     onClick: function onClick() {
       return setShowForm(true);

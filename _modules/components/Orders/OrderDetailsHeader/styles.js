@@ -35,9 +35,11 @@ var StripeLink = _styledComponents.default.a(_templateObject10 || (_templateObje
 exports.StripeLink = StripeLink;
 var PrinterSelectContainer = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  position: relative;\n  margin-right: 8px;\n"])));
 exports.PrinterSelectContainer = PrinterSelectContainer;
-var PrinterSelect = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  position: absolute;\n  border-radius: 8px;\n  display: flex;\n  flex-direction: column;\n  z-index: 100;\n  border: 1px solid ", ";\n\n  button {\n    padding: 10px 20px;\n    color: ", ";\n    &:hover {\n      background-color: #f5f5f5;\n    }\n  }\n"])), function (props) {
-  return props.theme.colors.textGray;
+var PrinterSelect = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  position: absolute;\n  right: 0;\n  border-radius: 8px;\n  display: flex;\n  flex-direction: column;\n  z-index: 100;\n  padding: 0.5rem 0;\n  border: 1px solid ", ";\n  box-shadow: 0px 4px 10px rgba(0,0,0,0.12);\n  z-index: 12;\n  background-color: ", ";\n\n  button {\n    height: auto;\n    padding: 0.25rem 1.5rem;\n    font-size: 12px;\n    border-radius: 0px;\n    font-weight: 400;\n    color: ", ";\n    &:hover {\n      background-color: #f5f5f5;\n    }\n  }\n"])), function (props) {
+  return props.theme.colors.borderColor;
 }, function (props) {
-  return props.theme.colors.textGray;
+  return props.theme.colors.white;
+}, function (props) {
+  return props.theme.colors.headingColor;
 });
 exports.PrinterSelect = PrinterSelect;

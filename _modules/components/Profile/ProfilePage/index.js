@@ -12,6 +12,7 @@ var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _styles = require("../../../styles");
 var _InfoShareContext = require("../../../contexts/InfoShareContext");
 var _Sessions = require("../Sessions");
+var _styledComponents = require("styled-components");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
@@ -37,6 +38,7 @@ var ProfilePageUI = function ProfilePageUI(props) {
   var _useSession = (0, _orderingComponentsAdmin.useSession)(),
     _useSession2 = _slicedToArray(_useSession, 1),
     user = _useSession2[0].user;
+  var theme = (0, _styledComponents.useTheme)();
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderContainer, null, isCollapse && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {
@@ -61,7 +63,10 @@ var ProfilePageUI = function ProfilePageUI(props) {
     onClick: function onClick() {
       return handleGoogleAccountLink();
     }
-  }, t('GOOGLE_ACCOUNT', 'Google account'))))), /*#__PURE__*/_react.default.createElement(_Sessions.Sessions, null));
+  }, /*#__PURE__*/_react.default.createElement("img", {
+    src: theme.images.general.googleCalendarIcon,
+    alt: "Google Calendar Icon"
+  }), t('SYNC_WITH_GOOGLE_CALENDAR', 'Sync with Google calendar'))))), /*#__PURE__*/_react.default.createElement(_Sessions.Sessions, null));
 };
 var ProfilePage = function ProfilePage(props) {
   var _useSession3 = (0, _orderingComponentsAdmin.useSession)(),

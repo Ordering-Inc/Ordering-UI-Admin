@@ -26,26 +26,31 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var AnalyticsCalendar = function AnalyticsCalendar(props) {
-  var _state$language;
+  var _state$language, _state$language2;
   var handleChangeDate = props.handleChangeDate,
     defaultValue = props.defaultValue,
-    leftAlign = props.leftAlign;
+    leftAlign = props.leftAlign,
+    isSingleDate = props.isSingleDate;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     state = _useLanguage2[0],
     t = _useLanguage2[1];
-  var _useState = (0, _react.useState)([{
+  var _useState = (0, _react.useState)(null),
+    _useState2 = _slicedToArray(_useState, 2),
+    date = _useState2[0],
+    setDate = _useState2[1];
+  var _useState3 = (0, _react.useState)([{
       startDate: null,
       endDate: null,
       key: 'selection'
     }]),
-    _useState2 = _slicedToArray(_useState, 2),
-    dateRange = _useState2[0],
-    setDateRange = _useState2[1];
-  var _useState3 = (0, _react.useState)(false),
     _useState4 = _slicedToArray(_useState3, 2),
-    isShowCalendar = _useState4[0],
-    setIsShowCalendar = _useState4[1];
+    dateRange = _useState4[0],
+    setDateRange = _useState4[1];
+  var _useState5 = (0, _react.useState)(false),
+    _useState6 = _slicedToArray(_useState5, 2),
+    isShowCalendar = _useState6[0],
+    setIsShowCalendar = _useState6[1];
   var calendarRef = (0, _react.useRef)();
   var handleClickOutside = function handleClickOutside(e) {
     var _calendarRef$current;
@@ -66,6 +71,10 @@ var AnalyticsCalendar = function AnalyticsCalendar(props) {
     }
     setDateRange([item.selection]);
   };
+  var handleChangeSingleDate = function handleChangeSingleDate(selectedDate) {
+    handleChangeDate((0, _moment.default)(selectedDate).format('YYYY-MM-DD'), (0, _moment.default)(selectedDate).format('YYYY-MM-DD'));
+    setDate(selectedDate);
+  };
   var dateFormat = function dateFormat(date1, date2) {
     var formattedDate = "".concat((0, _moment.default)(date1).format('YYYY-MM-DD'), "~").concat((0, _moment.default)(date2).format('YYYY-MM-DD'));
     if ((0, _moment.default)(date1).format('YYYY') === (0, _moment.default)(date2).format('YYYY')) {
@@ -73,6 +82,7 @@ var AnalyticsCalendar = function AnalyticsCalendar(props) {
     }
     return formattedDate;
   };
+  var singleDateFormat = function singleDateFormat(selectedDate) {};
   (0, _react.useEffect)(function () {
     window.addEventListener('click', handleClickOutside);
     return function () {
@@ -80,6 +90,11 @@ var AnalyticsCalendar = function AnalyticsCalendar(props) {
     };
   }, [isShowCalendar]);
   (0, _react.useEffect)(function () {
+    if (isSingleDate && defaultValue) {
+      setDate(new Date(defaultValue === null || defaultValue === void 0 ? void 0 : defaultValue.from));
+      console.log('this is date');
+      return;
+    }
     if (defaultValue && (defaultValue === null || defaultValue === void 0 ? void 0 : defaultValue.from) !== '' && (defaultValue === null || defaultValue === void 0 ? void 0 : defaultValue.to) !== '') {
       setDateRange([{
         startDate: new Date(defaultValue === null || defaultValue === void 0 ? void 0 : defaultValue.from),
@@ -90,13 +105,21 @@ var AnalyticsCalendar = function AnalyticsCalendar(props) {
   }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Button, {
     onClick: handleOpenCalendar
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Calendar4, null), dateRange[0].startDate ? dateFormat(dateRange[0].startDate, dateRange[0].endDate) : t('SELECT_DATE_RANGE', 'Select Date Range')), isShowCalendar && /*#__PURE__*/_react.default.createElement(_styles3.AnalyticsCalendarContainer, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Calendar4, null), isSingleDate ? date ? (0, _moment.default)(date).format('YYYY-MM-DD') : t('SELECT_DATE', 'Select a Date') : dateRange[0].startDate ? dateFormat(dateRange[0].startDate, dateRange[0].endDate) : t('SELECT_DATE_RANGE', 'Select Date Range')), isShowCalendar && /*#__PURE__*/_react.default.createElement(_styles3.AnalyticsCalendarContainer, {
     className: "ordering-calendar",
     ref: calendarRef,
     leftAlign: leftAlign
-  }, /*#__PURE__*/_react.default.createElement(_reactDateRange.DateRange, {
-    editableDateInputs: true,
+  }, isSingleDate ? /*#__PURE__*/_react.default.createElement(_reactDateRange.Calendar, {
     locale: (0, _utils.getLocale)(state === null || state === void 0 || (_state$language = state.language) === null || _state$language === void 0 ? void 0 : _state$language.code, locales),
+    date: date,
+    onChange: function onChange(date) {
+      return handleChangeSingleDate(date);
+    },
+    startDatePlaceholder: t('EARLY', 'Early'),
+    endDatePlaceholder: t('CONTINUOUS', 'Continuous')
+  }) : /*#__PURE__*/_react.default.createElement(_reactDateRange.DateRange, {
+    editableDateInputs: true,
+    locale: (0, _utils.getLocale)(state === null || state === void 0 || (_state$language2 = state.language) === null || _state$language2 === void 0 ? void 0 : _state$language2.code, locales),
     onChange: function onChange(item) {
       return handleChangeDates(item);
     },
