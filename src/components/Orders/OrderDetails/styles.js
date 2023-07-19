@@ -124,7 +124,7 @@ export const OrderStatus = styled.div`
   }
 `
 export const OrderStatusSelectorWrapper = styled.div`
-  min-width: 50%;
+  width: 45%;
   > div {
     > div:first-child {
       border-color: ${props => props.theme.colors?.secundary};

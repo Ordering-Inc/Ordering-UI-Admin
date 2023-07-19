@@ -322,13 +322,12 @@ const OrderDetailsUI = (props) => {
           <OrderStatus isDisabled={isTourOpen && currentTourStep === 1}>
             <div>
               <h2>{t('ORDER_STATUS_TEXT', 'Order status')}</h2>
-              <p>
-                {
-                  order?.delivery_datetime_utc
-                    ? parseDate(order?.delivery_datetime_utc)
-                    : parseDate(order?.delivery_datetime, { utc: false })
-                }
-              </p>
+              {order?.delivery_datetime_utc &&
+              <p>{parseDate(order?.delivery_datetime_utc, { utc: false })}</p>
+              }
+              {order?.delivery_datetime && (
+                <p>{parseDate(order?.delivery_datetime, { utc: false })}  {`(${t('BUSINESS_TIME', 'Business time')})`}</p>
+              )}
               <p>{order?.eta_time} {t('MIN', 'min')}</p>
             </div>
             <OrderStatusSelectorWrapper>
