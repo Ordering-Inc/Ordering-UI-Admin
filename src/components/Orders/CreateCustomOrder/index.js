@@ -6,7 +6,8 @@ import { Button } from '../../../styles'
 
 export const CreateCustomOrder = (props) => {
   const {
-    handleOpenCustomOrderDetail
+    handleOpenCustomOrderDetail,
+    handleOpenOrderDetail
   } = props
 
   const [, t] = useLanguage()
@@ -37,6 +38,7 @@ export const CreateCustomOrder = (props) => {
             handleParentSidebarMove={val => setMoveDistance(val)}
             handleOpenCustomOrderDetail={handleOpenCustomOrderDetail}
             onClose={() => setOpenSidebar(false)}
+            handleOpenOrderDetail={handleOpenOrderDetail}
           />
         </SideBar>
       )}

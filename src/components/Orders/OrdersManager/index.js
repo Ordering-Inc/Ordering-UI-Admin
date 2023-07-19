@@ -214,6 +214,7 @@ const OrdersManagerUI = (props) => {
                 setOrderDetailId(id)
                 setIsOpenOrderDetail(true)
               }}
+              handleOpenOrderDetail={handleOpenOrderDetail}
             />
           )}
         </OrderSubFilterControls>
