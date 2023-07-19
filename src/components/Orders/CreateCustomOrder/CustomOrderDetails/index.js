@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useLanguage, useOrder, useValidationFields, CustomOrderDetails as CustomOrderDetailsController } from 'ordering-components-admin'
 import { SelectCustomer } from '../SelectCustomer'
 import { OrderTypeSelector } from '../OrderTypeSelector'
@@ -26,7 +26,6 @@ const CustomOrderDetailsUI = (props) => {
     setCustomersPhones,
     handleParentSidebarMove,
     businessList,
-    getBusinessList,
     selectedUser,
     selectedBusiness,
     setSelectedUser,
@@ -40,12 +39,13 @@ const CustomOrderDetailsUI = (props) => {
     handlePlaceOrderByTotal,
     extraFields,
     setExtraFields,
-    actionState
+    actionState,
+    customerAddress
   } = props
 
   const [, t] = useLanguage()
   const [validationFields] = useValidationFields()
-  const [orderState, { changeAddress }] = useOrder()
+  const [, { changeAddress }] = useOrder()
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [isOrderByProducts, setIsOrderByProducts] = useState(true)
@@ -87,23 +87,10 @@ const CustomOrderDetailsUI = (props) => {
     handlePlaceOrderByTotal()
   }
 
-  const customerAddress = useMemo(() => {
-    let address = null
-    if (selectedUser?.addresses) {
-      address = selectedUser.addresses.find(address => address?.default)
-    }
-    return address
-  }, [selectedUser])
-
   useEffect(() => {
     if (!customerAddress?.id) return
     changeAddress(customerAddress.id)
   }, [customerAddress?.id])
-
-  useEffect(() => {
-    if (!customerAddress?.location || orderState?.loading) return
-    getBusinessList(customerAddress.location)
-  }, [customerAddress?.location, orderState])
 
   useEffect(() => {
     if (customersPhones?.error) {
