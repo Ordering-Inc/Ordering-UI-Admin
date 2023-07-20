@@ -7,19 +7,13 @@ export const OrdersContainer = styled.div`
     overflow: hidden;
   `}
 
-  @media (min-width: 768px) {
-    max-height: calc(var(--vh, 1vh) * 100 - 385px);
-  }
-
   @media (min-width: 992px) {
-    max-height: calc(var(--vh, 1vh) * 100 - 305px);
     ${({ isSelectedOrders }) => isSelectedOrders && css`
       max-height: calc(var(--vh, 1vh) * 100 - 345px);
     `}
   }
 
   @media (min-width: 1200px) {
-    max-height: calc(var(--vh, 1vh) * 100 - 275px);
     ${({ isSelectedOrders }) => isSelectedOrders && css`
       max-height: calc(var(--vh, 1vh) * 100 - 345px);
     `}

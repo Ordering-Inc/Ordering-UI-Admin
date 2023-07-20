@@ -5,6 +5,7 @@ import { AddressList } from '../../../Delivery'
 import { Dot, HouseDoor } from 'react-bootstrap-icons'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import CgSpinnerTwoAlt from '@meronex/icons/cg/CgSpinnerTwoAlt'
+import MdClose from '@meronex/icons/md/MdClose'
 import { SideBar } from '../../../Shared'
 import { Button, Input, LinkButton } from '../../../../styles'
 import { findExitingCountryPhoneCode } from '../../../../utils'
@@ -34,7 +35,7 @@ export const SelectCustomer = (props) => {
 
   const [, t] = useLanguage()
   const [{ optimizeImage }] = useUtils()
-  const [, { setUserCustomer }] = useCustomer()
+  const [, { setUserCustomer, deleteUserCustomer }] = useCustomer()
   const [{ configs }] = useConfig()
 
   const [searchInputFocus, setSearchInputFocus] = useState(false)
@@ -56,7 +57,14 @@ export const SelectCustomer = (props) => {
   const onSelectUser = (user) => {
     setUserCustomer(user, true)
     setSelectedUser(user)
+    onChangeNumber('')
     setShowSearchbar(false)
+  }
+
+  const onRemoveCustomer = () => {
+    deleteUserCustomer(true)
+    setSelectedUser(null)
+    setShowSearchbar(true)
   }
 
   const handleOpenAddForm = () => {
@@ -150,7 +158,9 @@ export const SelectCustomer = (props) => {
                       {
                         customersPhones.loading
                           ? t('LOADING', 'Loading')
-                          : phone?.length > 6 ? t('NO_OPTIONS', 'No options') : t('TYPE_AT_LEAST_NUMBER_SUGGEST', 'Type at least 7 numbers for suggesstions')
+                          : phone?.length > 6
+                            ? <span className='new' onClick={() => handleOpenAddForm()}>{t('USERS_REGISTER', 'New user')}</span>
+                            : t('TYPE_AT_LEAST_NUMBER_SUGGEST', 'Type at least 7 numbers for suggesstions')
                       }
                     </p>
                   )}
@@ -173,6 +183,17 @@ export const SelectCustomer = (props) => {
                     )}
                   </WrapperImage>
                   <span className='name'>{selectedUser?.name} {selectedUser?.lastname}</span>
+
+                  <Button
+                    circle
+                    outline
+                    color='primary'
+                    type='reset'
+                    className='remove_option'
+                    onClick={() => onRemoveCustomer()}
+                  >
+                    <MdClose />
+                  </Button>
                 </SelectOption>
               </SelectedUserWrapper>
             </>
