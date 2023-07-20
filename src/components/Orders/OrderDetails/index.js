@@ -12,10 +12,11 @@ import { OrderBill } from '../OrderBill'
 import { OrderContactInformation } from '../OrderContactInformation'
 import { XLg } from 'react-bootstrap-icons'
 import { NotFoundSource, Modal, Alert } from '../../Shared'
-import { IconButton } from '../../../styles'
+import { Button, IconButton, TextArea } from '../../../styles'
 import { OrderToPrint } from '../OrderToPrint'
 import { OrderToPrintTicket } from '../OrderToPrintTicket'
 import { getOrderStatuPickUp, getOrderStatus, getCurrenySymbol } from '../../../utils'
+import { useForm } from 'react-hook-form'
 
 import {
   Container,
@@ -34,7 +35,10 @@ import {
   RejectReasonsContainer,
   RejectReasonWrapper,
   RejectReasonsList,
-  DetailBottom
+  DetailBottom,
+  FormControl,
+  AssigmentCommentContainer,
+  ErrorMessage
 } from './styles'
 
 const OrderDetailsUI = (props) => {
@@ -54,9 +58,15 @@ const OrderDetailsUI = (props) => {
     actionStatus,
     handleRefundPaymentsStripe,
     handleOrderRefund,
-    isServiceOrder
+    isServiceOrder,
+    handleUpdateComment
   } = props
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm()
   const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
@@ -73,6 +83,7 @@ const OrderDetailsUI = (props) => {
   const [extraOpen, setExtraOpen] = useState(false)
   const [isExpand, setIsExpand] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [isCommentPopup, setIsCommentPopup] = useState(false)
 
   const placeSpotEnabled = [3, 4]
   const {
@@ -256,6 +267,11 @@ const OrderDetailsUI = (props) => {
     history.replace(`${location.pathname}?id=${orderId}`)
   }
 
+  const onSubmit = (data) => {
+    handleUpdateComment(data?.manual_driver_assignment_comment)
+    setIsCommentPopup(false)
+  }
+
   useEffect(() => {
     if (!open) return
     document.addEventListener('keydown', onCloseSidebar)
@@ -384,6 +400,7 @@ const OrderDetailsUI = (props) => {
               isTourOpen={isTourOpen}
               setCurrentTourStep={setCurrentTourStep}
               handleShowOption={handleShowOption}
+              setIsCommentPopup={setIsCommentPopup}
             />
             <OrderProducts>
               <h2>{t('EXPORT_SUMMARY', 'Summary')}</h2>
@@ -543,6 +560,27 @@ const OrderDetailsUI = (props) => {
         onAccept={() => setAlertState({ open: false, content: [] })}
         closeOnBackdrop={false}
       />
+      <Modal
+        width='500px'
+        open={isCommentPopup}
+        title={t('ORDERING', 'Ordering')}
+        onClose={() => setIsCommentPopup(false)}
+      >
+        <AssigmentCommentContainer onSubmit={handleSubmit(onSubmit)}>
+          <FormControl isError={errors.manual_driver_assignment_comment}>
+            <label>{t('MANUAL_DRIVER_ASSIGMENT_COMMENT', 'Manual driver assigment comment')}</label>
+            <TextArea
+              name='manual_driver_assignment_comment'
+              placeholder={t('MANUAL_DRIVER_ASSIGMENT_COMMENT', 'Manual driver assigment comment')}
+              ref={register({
+                required: true
+              })}
+            />
+            {errors.manual_driver_assignment_comment && <ErrorMessage>{t('FIELD_REQUIRED', 'This field is required')}</ErrorMessage>}
+          </FormControl>
+          <Button color='primary' type='submit'>{t('ACCEPT', 'Accept')}</Button>
+        </AssigmentCommentContainer>
+      </Modal>
     </Container>
   )
 }
