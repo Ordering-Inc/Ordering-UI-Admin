@@ -1,5 +1,5 @@
 import React from 'react'
-import { useLanguage, useUtils } from 'ordering-components-admin'
+import { useLanguage } from 'ordering-components-admin'
 import GiAlarmClock from '@meronex/icons/gi/GiAlarmClock'
 import {
   Container,
@@ -20,7 +20,6 @@ export const AnalyticsSpendList = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const [{ parseNumber }] = useUtils()
 
   return (
     <Container>
@@ -43,7 +42,7 @@ export const AnalyticsSpendList = (props) => {
           dataList?.data ? (
             <AnalyticsSpendListContent>
               <TimeContentWrapper>
-                <h1>{convertHMS(parseNumber((dataList?.data * 1), { separator: '.' }))}</h1>
+                <h1>{convertHMS(dataList?.data * 1)}</h1>
               </TimeContentWrapper>
               <ReviewContentWrapper>
                 <ReviewBlock>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage, useConfig } from 'ordering-components-admin'
-import { useForm } from 'react-hook-form'
+import { useForm, Controller } from 'react-hook-form'
 import { Button, Input, TextArea } from '../../../styles'
 import { Alert, Modal } from '../../Shared'
 import { RecordCircleFill, Circle } from 'react-bootstrap-icons'
@@ -21,7 +21,8 @@ export const RefundToWallet = (props) => {
   const {
     order,
     actionStatus,
-    handleOrderRefund
+    handleOrderRefund,
+    stripePaymethods
   } = props
 
   const [, t] = useLanguage()
@@ -31,7 +32,7 @@ export const RefundToWallet = (props) => {
   const isAllowStripeRefund = configs?.refund_stripe_allow_when_order_cancelled?.value === '1'
   const isAllowOtherRefund = configs?.refund_other_allow_when_order_cancelled?.value === '1'
 
-  const { handleSubmit, register, errors } = useForm()
+  const { handleSubmit, register, errors, control } = useForm()
   const [openModal, setOpenModal] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [isRefundAll, setIsRefundAll] = useState(true)
@@ -73,6 +74,9 @@ export const RefundToWallet = (props) => {
     setRefundAllDisabled(false)
     setIsRefundAll(true)
 
+    if (order?.refund_data && stripePaymethods.includes(order?.paymethod?.gateway)) {
+      setRefundDisabled(true)
+    }
     if (!order?.payment_events) return
     const totalRefundAmount = order?.payment_events?.filter(item => item.event === 'refund').reduce((total, event) => total + (event?.amount || 0), 0) || 0
     if (totalRefundAmount === (order?.summary?.total || order?.total)) {
@@ -88,7 +92,7 @@ export const RefundToWallet = (props) => {
       if (event?.wallet_event?.wallet?.type === 'cash') {
         if (isAllowCashWalletRefund) {
           _refundOptions.push({
-            value: event.id,
+            value: 'cash_wallet',
             content: <Option>{t('CASH_WALLET', 'Cash Wallet')}</Option>
           })
         }
@@ -108,10 +112,12 @@ export const RefundToWallet = (props) => {
         }
       } else {
         if (isAllowOtherRefund) {
-          _refundOptions.push({
-            value: event.id,
-            content: <Option>{event?.paymethod ? t(event?.paymethod?.gateway?.toUpperCase(), event?.paymethod?.name) : t(event?.data?.gateway?.toUpperCase(), event?.data?.gateway?.replaceAll('_', ' '))}</Option>
-          })
+          if (!_refundOptions.find(item => item.value === 'cash_wallet')) {
+            _refundOptions.push({
+              value: 'cash_wallet',
+              content: <Option>{t('CASH_WALLET', 'Cash Wallet')}</Option>
+            })
+          }
         }
       }
     })
@@ -189,9 +195,18 @@ export const RefundToWallet = (props) => {
               )}
               <RefundReasonContainer>
                 <label>{t('COMMENTS', 'Comments')}</label>
-                <TextArea
-                  rows={3}
+                <Controller
                   name='description'
+                  control={control}
+                  render={({ onChange, value }) => (
+                    <TextArea
+                      rows={3}
+                      value={value}
+                      onChange={e => {
+                        onChange(e.target.value)
+                      }}
+                    />
+                  )}
                 />
               </RefundReasonContainer>
               <Button

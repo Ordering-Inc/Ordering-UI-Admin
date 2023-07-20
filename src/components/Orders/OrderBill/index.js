@@ -268,6 +268,7 @@ export const OrderBill = (props) => {
           order={order}
           actionStatus={actionStatus}
           handleOrderRefund={handleOrderRefund}
+          stripePaymethods={stripePaymethods}
         />
       )}
       {order?.payment_events?.filter(item => item.event === 'refund').length > 0 && (
@@ -360,7 +361,7 @@ export const OrderBill = (props) => {
           <Button
             color='primary'
             borderRadius='8px'
-            disabled={actionStatus?.loading}
+            disabled={actionStatus?.loading || order?.payment_events?.find(item => item.event === 'refund' && stripePaymethods.includes(item?.paymethod?.gateway))}
             onClick={onClickRefund}
           >
             {t('REFUND', 'Refund')}
