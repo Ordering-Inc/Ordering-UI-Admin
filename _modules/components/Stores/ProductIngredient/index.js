@@ -74,7 +74,7 @@ var ProductIngredient = function ProductIngredient(props) {
     borderRadius: "8px",
     color: "lightPrimary",
     onClick: function onClick() {
-      return handleOpenIngredient(null);
+      return handleOpenIngredient(null, true);
     }
   }, t('ADD_INGREDIENT', 'Add ingredient'))), (product === null || product === void 0 ? void 0 : product.ingredients) && (product === null || product === void 0 ? void 0 : product.ingredients.map(function (ingredient) {
     return /*#__PURE__*/_react.default.createElement(_styles2.IngredientOption, {
@@ -86,7 +86,7 @@ var ProductIngredient = function ProductIngredient(props) {
     }, /*#__PURE__*/_react.default.createElement("span", null, ingredient === null || ingredient === void 0 ? void 0 : ingredient.name), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null));
   })), /*#__PURE__*/_react.default.createElement(_styles2.AddIngredientButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.LinkButton, {
     onClick: function onClick() {
-      return handleOpenIngredient(null);
+      return handleOpenIngredient(null, true);
     }
   }, t('ADD_INGREDIENT', 'Add ingredient')))), width >= 1000 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, openDetails && /*#__PURE__*/_react.default.createElement(_ProductIngredientDetails.ProductIngredientDetails, _extends({}, props, {
     ingredient: currentIngredient,

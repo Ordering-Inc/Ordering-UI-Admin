@@ -23,9 +23,6 @@ var AnalyticsSpendList = function AnalyticsSpendList(props) {
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
-  var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
-    _useUtils2 = _slicedToArray(_useUtils, 1),
-    parseNumber = _useUtils2[0].parseNumber;
   return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.AnalyticsSpendListHeader, null, /*#__PURE__*/_react.default.createElement("p", null, title)), dataList !== null && dataList !== void 0 && dataList.loading ? /*#__PURE__*/_react.default.createElement(_styles.AnalyticsSpendListContent, null, /*#__PURE__*/_react.default.createElement(_styles.TimeContentWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 70,
     height: 40
@@ -38,8 +35,6 @@ var AnalyticsSpendList = function AnalyticsSpendList(props) {
   }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 80,
     height: 20
-  }))) : dataList !== null && dataList !== void 0 && dataList.data ? /*#__PURE__*/_react.default.createElement(_styles.AnalyticsSpendListContent, null, /*#__PURE__*/_react.default.createElement(_styles.TimeContentWrapper, null, /*#__PURE__*/_react.default.createElement("h1", null, (0, _utils.convertHMS)(parseNumber((dataList === null || dataList === void 0 ? void 0 : dataList.data) * 1, {
-    separator: '.'
-  })))), /*#__PURE__*/_react.default.createElement(_styles.ReviewContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ReviewBlock, null, /*#__PURE__*/_react.default.createElement(_GiAlarmClock.default, null)), /*#__PURE__*/_react.default.createElement("p", null, t('REGULAR', 'Regular')))) : /*#__PURE__*/_react.default.createElement(_styles.EmptyContent, null, t('NO_DATA', 'No Data')));
+  }))) : dataList !== null && dataList !== void 0 && dataList.data ? /*#__PURE__*/_react.default.createElement(_styles.AnalyticsSpendListContent, null, /*#__PURE__*/_react.default.createElement(_styles.TimeContentWrapper, null, /*#__PURE__*/_react.default.createElement("h1", null, (0, _utils.convertHMS)((dataList === null || dataList === void 0 ? void 0 : dataList.data) * 1))), /*#__PURE__*/_react.default.createElement(_styles.ReviewContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ReviewBlock, null, /*#__PURE__*/_react.default.createElement(_GiAlarmClock.default, null)), /*#__PURE__*/_react.default.createElement("p", null, t('REGULAR', 'Regular')))) : /*#__PURE__*/_react.default.createElement(_styles.EmptyContent, null, t('NO_DATA', 'No Data')));
 };
 exports.AnalyticsSpendList = AnalyticsSpendList;
