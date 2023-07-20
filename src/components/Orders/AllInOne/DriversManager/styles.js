@@ -46,6 +46,6 @@ export const FilterContainer = styled.div`
 export const WrapperDriversList = styled.div`
   overflow-x: hidden;
   @media (min-width: 992px) {
-    max-height: calc(var(--vh, 1vh) * 100 - 410px);
+    max-height: min(calc(var(--vh, 1vh) * 100 - 410px), 770px);
   }
 `
