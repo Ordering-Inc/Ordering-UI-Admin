@@ -194,3 +194,56 @@ export const Option = styled.div`
   align-items: center;
   padding: 5px;
 `
+export const WarningMessage = styled.div`
+  position: absolute;
+  display: flex;
+  align-items: center;
+  z-index: 2000;
+  top: 100%;
+  background: ${props => props.theme.colors.warning100};
+  border: 1px solid ${props => props.theme.colors.warning};
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+  border-radius: 7.6px;
+  padding: 6px 15px;
+  box-sizing: border-box;
+  margin: 10px 0px 0px 0px !important;
+
+  right: 0px;
+  ${props => props.theme?.rtl && css`
+    left: 0px;
+    right: initial;
+  `}
+
+  svg {
+    font-size: 20px;
+    color: ${props => props.theme.colors.warning};
+  }
+
+  span {
+    font-size: 12px;
+    line-height: 18px;
+    color: ${props => props.theme.colors.headingColor};
+    margin: 0 10px;
+    flex: 1;
+  }
+
+  a {
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  @media (min-width: 768px) {
+    padding: 8px 20px;
+    font-size: 14px;
+    line-height: 24px;
+    right: 0px;
+    ${props => props.theme?.rtl && css`
+      left: 0px;
+      right: initial;
+    `}
+
+    span {
+      white-space: nowrap;
+    }
+  }
+`
