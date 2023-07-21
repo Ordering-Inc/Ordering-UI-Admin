@@ -36,7 +36,7 @@ export const PaymentMethods = (props) => {
         {!paymethodsList?.loading && paymethodsList?.paymethods.map((paymethod, idx) => (
           <PaymethodItem key={paymethod?.id} isBorderTop={idx === 0} onClick={() => handleChangeIds(paymethod.id)}>
             {paymethodIds.includes(paymethod?.id) ? <CheckSquareFill className='enabled' /> : <Square />}
-            <span>{paymethod?.name}</span>
+            <span>{t(paymethod?.gateway?.toUpperCase(), paymethod?.name)}</span>
           </PaymethodItem>
         ))}
       </ContentWrapper>

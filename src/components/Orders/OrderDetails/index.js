@@ -44,6 +44,9 @@ import {
 const OrderDetailsUI = (props) => {
   const {
     isSelectedOrders,
+    handleChangeCustomerInfoState,
+    customerInfoState,
+    handleUpdateCustomerInfo,
     open,
     handleBackRedirect,
     handleUpdateOrderStatus,
@@ -394,6 +397,9 @@ const OrderDetailsUI = (props) => {
           <div data-tour='tour_driver'>
             <OrderContactInformation
               isServiceOrder={isServiceOrder}
+              customerInfoState={customerInfoState}
+              handleChangeCustomerInfoState={handleChangeCustomerInfoState}
+              handleUpdateCustomerInfo={handleUpdateCustomerInfo}
               order={order}
               extraOpen={extraOpen}
               unreadAlert={unreadAlert}
