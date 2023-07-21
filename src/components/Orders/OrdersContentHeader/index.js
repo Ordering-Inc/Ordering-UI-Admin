@@ -146,7 +146,7 @@ export const OrdersContentHeader = (props) => {
             {(filterApplied || !!searchValue) && (
               <WarningMessage>
                 <TiWarningOutline />
-                <span>{t('WARNING_FILTER_APPLIED', 'Notifications Paused. Filters applied. You may miss new orders.')}</span>
+                <span>{t('WARNING_FILTER_APPLIED', 'Filters applied. You may miss new orders.')}</span>
                 <LinkButton onClick={() => handleClearFilters()}>{t('CLEAR_FILTERS', 'Clear filters')}</LinkButton>
               </WarningMessage>
             )}
