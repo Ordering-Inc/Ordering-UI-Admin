@@ -93,10 +93,14 @@ export const WrapperStar = styled.div`
 `
 
 export const DriverInfo = styled.div`
-  ${props => props.theme?.rtl ? css`
-    margin-right: 15px;
-  ` : css`
-    margin-left: 15px;
+  width: 100%;
+  flex: 1;
+  ${({ hidePhoto }) => !hidePhoto && css`
+    ${props => props.theme?.rtl ? css`
+      margin-right: 15px;
+    ` : css`
+      margin-left: 15px;
+    `}
   `}
   > div:first-child {
     display: flex;
@@ -106,7 +110,7 @@ export const DriverInfo = styled.div`
       margin: 0 5px;
     }
 
-    p {
+    p.name {
       font-size: 14px;
       color: ${props => props.theme.colors?.headingColor};
       font-weight: 600;
@@ -114,8 +118,13 @@ export const DriverInfo = styled.div`
       flex: 1;
     }
     .text-red {
-      margin-left: 2px;
+      font-size: 14px;
       color: red;
+      ${props => props.theme?.rtl ? css`
+        margin-right: 2px;
+      ` : css`
+        margin-left: 2px;
+      `}
     }
   }
 `
