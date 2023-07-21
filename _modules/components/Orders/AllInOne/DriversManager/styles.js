@@ -23,5 +23,5 @@ var FilterContainer = _styledComponents.default.div(_templateObject5 || (_templa
   return ((_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.backgroundPage) || '#FFF';
 });
 exports.FilterContainer = FilterContainer;
-var WrapperDriversList = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  overflow-x: hidden;\n  @media (min-width: 992px) {\n    max-height: calc(var(--vh, 1vh) * 100 - 410px);\n  }\n"])));
+var WrapperDriversList = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  overflow-x: hidden;\n  .driver-info-container {\n    p.name {\n      min-width: 50%;\n      max-width: 50%;\n    }\n  }\n  @media (min-width: 992px) {\n    max-height: min(calc(var(--vh, 1vh) * 100 - 410px), 770px);\n  }\n"])));
 exports.WrapperDriversList = WrapperDriversList;

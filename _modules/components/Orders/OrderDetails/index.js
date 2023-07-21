@@ -42,6 +42,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrderDetailsUI = function OrderDetailsUI(props) {
   var _order$place, _progressBarObjt, _order$products;
   var isSelectedOrders = props.isSelectedOrders,
+    handleChangeCustomerInfoState = props.handleChangeCustomerInfoState,
+    customerInfoState = props.customerInfoState,
+    handleUpdateCustomerInfo = props.handleUpdateCustomerInfo,
     open = props.open,
     handleBackRedirect = props.handleBackRedirect,
     handleUpdateOrderStatus = props.handleUpdateOrderStatus,
@@ -414,6 +417,9 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     "data-tour": "tour_driver"
   }, /*#__PURE__*/_react.default.createElement(_OrderContactInformation.OrderContactInformation, {
     isServiceOrder: isServiceOrder,
+    customerInfoState: customerInfoState,
+    handleChangeCustomerInfoState: handleChangeCustomerInfoState,
+    handleUpdateCustomerInfo: handleUpdateCustomerInfo,
     order: order,
     extraOpen: extraOpen,
     unreadAlert: unreadAlert,

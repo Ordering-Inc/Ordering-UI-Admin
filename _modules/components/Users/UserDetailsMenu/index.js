@@ -57,6 +57,9 @@ var UserDetailsMenu = function UserDetailsMenu(props) {
   }, {
     key: 'personalization',
     content: t('PERSONALIZATION', 'Personalization')
+  }, {
+    key: 'push_tokens',
+    content: t('PUSH_TOKENS', 'Push tokens')
   }];
   var professionalMenuList = [{
     key: 'profile',

@@ -42,6 +42,7 @@ var PaymentMethods = function PaymentMethods(props) {
     }
   }, [paymethodsList]);
   return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement("h2", null, t('PAYMENT_METHODS', 'Payment methods'), /*#__PURE__*/_react.default.createElement("sup", null, "*")), /*#__PURE__*/_react.default.createElement(_styles.ContentWrapper, null, !(paymethodsList !== null && paymethodsList !== void 0 && paymethodsList.loading) && (paymethodsList === null || paymethodsList === void 0 ? void 0 : paymethodsList.paymethods.map(function (paymethod, idx) {
+    var _paymethod$gateway;
     return /*#__PURE__*/_react.default.createElement(_styles.PaymethodItem, {
       key: paymethod === null || paymethod === void 0 ? void 0 : paymethod.id,
       isBorderTop: idx === 0,
@@ -50,7 +51,7 @@ var PaymentMethods = function PaymentMethods(props) {
       }
     }, paymethodIds.includes(paymethod === null || paymethod === void 0 ? void 0 : paymethod.id) ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CheckSquareFill, {
       className: "enabled"
-    }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Square, null), /*#__PURE__*/_react.default.createElement("span", null, paymethod === null || paymethod === void 0 ? void 0 : paymethod.name));
+    }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Square, null), /*#__PURE__*/_react.default.createElement("span", null, t(paymethod === null || paymethod === void 0 ? void 0 : (_paymethod$gateway = paymethod.gateway) === null || _paymethod$gateway === void 0 ? void 0 : _paymethod$gateway.toUpperCase(), paymethod === null || paymethod === void 0 ? void 0 : paymethod.name)));
   }))));
 };
 exports.PaymentMethods = PaymentMethods;

@@ -37,6 +37,9 @@ var UserDetailsMenu = function UserDetailsMenu(props) {
   }, {
     key: 'logs',
     content: t('LOGS', 'Logs')
+  }, {
+    key: 'push_tokens',
+    content: t('PUSH_TOKENS', 'Push tokens')
   }
   // { key: 'metafields', content: t('METAFIELDS', 'Metafields') },
   // { key: 'personalization', content: t('PERSONALIZATION', 'Personalization') }
