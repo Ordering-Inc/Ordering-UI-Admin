@@ -55,9 +55,11 @@ export const DriversList = (props) => {
             <DriverCard
               key={i}
             >
-              <WrapperImage>
-                <Skeleton width={45} height={45} />
-              </WrapperImage>
+              {!hidePhoto && (
+                <WrapperImage>
+                  <Skeleton width={45} height={45} />
+                </WrapperImage>
+              )}
               <DriverInfo>
                 <div>
                   <Skeleton width={100} />
@@ -80,18 +82,20 @@ export const DriversList = (props) => {
                   <Image bgimage={optimizeImage(driver?.photo || theme.images?.icons?.noDriver, 'h_50,c_limit')} />
                 </WrapperImage>
               )}
-              <DriverInfo>
-                <div>
-                  <p>{driver.name} {driver.lastname}</p>
+              <DriverInfo hidePhoto={hidePhoto}>
+                <div className='driver-info-container'>
+                  <p className='name'>{driver.name} {driver.lastname}</p>
                   <BsDot />
-                  <LinkButton
-                    className='driver-orders'
-                    disabled={!driver?.assigned_orders_count || driver?.assigned_orders_count === 0}
-                    onClick={() => onOpenDriverOrdersDetail(driver)}
-                  >
-                    {driver?.assigned_orders_count} {t('ORDERS', 'Orders')}
-                  </LinkButton>
-                  <p className='text-red'>{(driver?.busy && `(${t('BUSY', 'Busy')})`)}</p>
+                  <div>
+                    <LinkButton
+                      className='driver-orders'
+                      disabled={!driver?.assigned_orders_count || driver?.assigned_orders_count === 0}
+                      onClick={() => onOpenDriverOrdersDetail(driver)}
+                    >
+                      {driver?.assigned_orders_count} {t('ORDERS', 'Orders')}
+                    </LinkButton>
+                    <span className='text-red'>{(driver?.busy && `(${t('BUSY', 'Busy')})`)}</span>
+                  </div>
                 </div>
                 {driver?.qualification && (
                   <WrapperStar width={getStarWidth(driver?.qualification)} />
