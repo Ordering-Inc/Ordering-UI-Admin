@@ -257,3 +257,35 @@ export const RejectReasonWrapper = styled.div`
 export const DetailBottom = styled.div`
   height: 20px;
 `
+
+export const FormControl = styled.div`
+  label {
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+  textarea {
+    width: 100%;
+  }
+  ${({ isError }) => isError && css`
+    textarea {
+      border: 1px solid ${props => props.theme.colors.danger};
+      &:focus {
+        border: 1px solid ${props => props.theme.colors.danger};
+      }
+    }
+  `}
+`
+
+export const AssigmentCommentContainer = styled.form`
+  button {
+    width: 100%;
+    border-radius: 8px;
+    height: 44px;
+    margin-top: 30px;
+  }
+`
+
+export const ErrorMessage = styled.div`
+  color: ${props => props.theme.colors.danger};
+  font-size: 14px;
+`
