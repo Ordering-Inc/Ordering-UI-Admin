@@ -10,7 +10,7 @@ import { BusinessManagerBusinesses } from '../BusinessManagerBusinesses'
 import { ArrowsAngleContract, ArrowsAngleExpand, Envelope, Phone, ThreeDots } from 'react-bootstrap-icons'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
-import { Confirm } from '../../Shared'
+import { Confirm, PushTokens } from '../../Shared'
 import { Personalization } from '../../Shared/Personalization'
 import { UserMetaFields } from '../UserMetaFields'
 import { IconButton, Switch } from '../../../styles'
@@ -207,6 +207,12 @@ export const UserDetailsUI = (props) => {
             <PersonalizationWrapper>
               <Personalization />
             </PersonalizationWrapper>
+          )}
+          {currentMenuSelected === 'push_tokens' && (
+            <PushTokens
+              userId={userState.user?.id}
+              pushTokens={userState.user?.push_tokens || []}
+            />
           )}
         </>
       )}
