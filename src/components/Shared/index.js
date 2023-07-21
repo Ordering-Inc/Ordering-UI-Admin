@@ -15,6 +15,7 @@ import { Pagination } from './Pagination'
 import { PaginationButton } from './PaginationButton'
 import { Personalization } from './Personalization'
 import { ProtectedRoute } from './ProtectedRoute'
+import { PushTokens } from './PushTokens'
 import { Schedule } from './Schedule'
 import { SearchBar } from './SearchBar'
 import { RangeCalendar } from './RangeCalendar'
@@ -52,6 +53,7 @@ export {
   PaginationButton,
   Personalization,
   ProtectedRoute,
+  PushTokens,
   Schedule,
   SearchBar,
   RangeCalendar,

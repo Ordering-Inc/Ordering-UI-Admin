@@ -6,7 +6,7 @@ import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { useLanguage, UserDetails as UserDetailsController } from 'ordering-components-admin'
 import { OrdersManager } from '../../Orders/OrdersManager'
 import { AddressList } from '../AddressList'
-import { Personalization, Modal, Schedule } from '../../Shared'
+import { Personalization, Modal, Schedule, PushTokens } from '../../Shared'
 import { UserDetailsMenu } from '../UserDetailsMenu'
 import { UserProfileForm } from '../UserProfileForm'
 import { UserMetaFields } from '../../Users'
@@ -208,6 +208,12 @@ export const UserDetailsUI = (props) => {
               isSelectedOrders
               customerId={userState.user?.id}
               handleCustomOrderDetail={setExtraOpen}
+            />
+          )}
+          {currentMenuSelected === 'push_tokens' && (
+            <PushTokens
+              userId={userState?.user?.id}
+              pushTokens={userState?.user?.push_tokens || []}
             />
           )}
         </>
