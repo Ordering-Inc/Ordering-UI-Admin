@@ -179,7 +179,6 @@ const OrdersManagerUI = (props) => {
           citiesList={citiesList}
           paymethodsList={paymethodsList}
           businessesList={businessesList}
-          filterValues={filterValues}
           handleChangeSearch={handleChangeSearch}
           handleChangeFilterValues={handleChangeFilterValues}
           selectedOrderIds={selectedOrderIds}
