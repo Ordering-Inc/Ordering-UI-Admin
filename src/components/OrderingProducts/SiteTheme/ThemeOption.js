@@ -68,13 +68,20 @@ export const ThemeOption = (props) => {
         )}
         <h5>{getTitle(name)}</h5>
       </OptionHeader>
-      {((optionObject?.value_type === 'integer' || optionObject?.value_type === 'string') && !optionObject?.options && !validHexColor(valueObject)) && (
+      {((optionObject?.value_type === 'integer' || optionObject?.value_type === 'string' || name === 'borderRadius') && !optionObject?.options && !validHexColor(valueObject)) && (
         <Input
           defaultValue={valueObject}
           onChange={e => handleChangeValue(e.target.value)}
+          onInput={(e) => {
+            if (name === 'borderRadius') {
+            e.target.value = (Number(e.target.value) > 99 || e.target.value === '.' || (e.target.value.match(/\./g) || []).length > 1)
+              ? e.target.value.slice(0, -1)
+              : e.target.value.match(`^[${e.target.value === '0' ? '1' : '0'}-9/.]{1,9}$`)
+            }
+          }}
         />
       )}
-      {(optionObject?.value_type === 'string' && validHexColor(valueObject)) && (
+      {(optionObject?.value_type === 'string' && name !== 'borderRadius' && validHexColor(valueObject)) && (
         <ColorPickerContainer>
           <ColorPicker
             defaultColor={valueObject}
@@ -98,7 +105,7 @@ export const ThemeOption = (props) => {
           handleChangeValue={handleChangeValue}
         />
       )}
-      {typeof optionObject !== 'string' && Object.keys(optionObject).filter(subOption => subOption !== 'value_type' && subOption !== 'options').map(subOption => (
+      {(!optionObject?.value_type && !optionObject?.components) && Object.keys(optionObject).filter(subOption => subOption !== 'value_type' && subOption !== 'options').map(subOption => (
         <React.Fragment key={subOption}>
           {subOption !== 'components' && (
             <ThemeOption
@@ -111,6 +118,19 @@ export const ThemeOption = (props) => {
               handleAddThemeGallery={handleAddThemeGallery}
             />
           )}
+        </React.Fragment>
+      ))}
+        {optionObject?.components && Object?.keys(optionObject?.components)?.map(subOption => (
+        <React.Fragment key={subOption}>
+            <ThemeOption
+              name={subOption}
+              optionObject={optionObject?.components[subOption]}
+              valueObject={valueObject?.components[subOption]}
+              path={path + '.' + subOption}
+              themeValues={themeValues}
+              setThemeValues={setThemeValues}
+              handleAddThemeGallery={handleAddThemeGallery}
+            />
         </React.Fragment>
       ))}
     </OptionContainer>

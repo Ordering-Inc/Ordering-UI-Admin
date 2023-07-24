@@ -32,7 +32,8 @@ export const OrderContactInformation = (props) => {
     isTourOpen,
     setCurrentTourStep,
     handleOpenMessages,
-    isServiceOrder
+    isServiceOrder,
+    setIsCommentPopup
   } = props
 
   const [, t] = useLanguage()
@@ -254,6 +255,7 @@ export const OrderContactInformation = (props) => {
                 handleOpenMessages={handleOpenMessages}
                 isOrderDrivers
                 orderId={order?.id}
+                setIsCommentPopup={setIsCommentPopup}
               />
             </DriverSelectorContainer>
           )}
