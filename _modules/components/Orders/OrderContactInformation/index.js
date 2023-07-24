@@ -39,7 +39,8 @@ var OrderContactInformation = function OrderContactInformation(props) {
     handleOpenMessages = props.handleOpenMessages,
     isServiceOrder = props.isServiceOrder,
     handleUpdateCustomerInfo = props.handleUpdateCustomerInfo,
-    setIsCommentPopup = props.setIsCommentPopup;
+    setIsCommentPopup = props.setIsCommentPopup,
+    setAddressState = props.setAddressState;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -75,13 +76,17 @@ var OrderContactInformation = function OrderContactInformation(props) {
     setIsModalOpen(false);
   };
   var handleEdit = function handleEdit(event) {
-    event.stopPropagation();
-    setIsEdit(function (prev) {
-      return !prev;
-    });
+    if (event.target.closest('#accordion1').getAttribute('data-id') === '1') {
+      event.stopPropagation();
+      setIsEdit(function (prev) {
+        return !prev;
+      });
+    } else {
+      setIsEdit(true);
+    }
   };
   var handleChangeAddress = function handleChangeAddress(e) {
-    handleChangeCustomerInfoState({
+    setAddressState({
       address: e === null || e === void 0 ? void 0 : e.address,
       location: e === null || e === void 0 ? void 0 : e.location,
       zipcode: e === null || e === void 0 ? void 0 : e.zipcode
@@ -157,6 +162,11 @@ var OrderContactInformation = function OrderContactInformation(props) {
       handleChangeCustomerInfoState({
         cellphone: e.target.value
       });
+    },
+    onKeyPress: function onKeyPress(e) {
+      if (!/^[0-9]$/.test(e.key)) {
+        e.preventDefault();
+      }
     }
   }), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     placeholder: "jane.cooper@example.com",
@@ -249,6 +259,8 @@ var ContextAwareToggle = function ContextAwareToggle(_ref4) {
   };
   return /*#__PURE__*/_react.default.createElement(_styles2.ToggleItemWrapper, {
     active: isCurrentEventKey,
-    onClick: handleButtonClick
+    onClick: handleButtonClick,
+    id: "accordion".concat(eventKey),
+    "data-id": isCurrentEventKey ? '1' : '0'
   }, children);
 };

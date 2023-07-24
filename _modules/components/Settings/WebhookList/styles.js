@@ -48,7 +48,7 @@ var DropdownButtonWrapper = _styledComponents.default.div(_templateObject12 || (
   return props.theme.colors.headingColor;
 });
 exports.DropdownButtonWrapper = DropdownButtonWrapper;
-var SelectorWrapper = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  width: 100%;\n\n  .select {\n    border: none;\n  }\n"])));
+var SelectorWrapper = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  width: 100%;\n\n  .select {\n    border: none;\n    > div {\n      padding: 0;\n    }\n  }\n"])));
 exports.SelectorWrapper = SelectorWrapper;
 var PagesBottomContainer = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  flex-wrap: wrap;\n  row-gap: 10px;\n  margin: 15px 0;\n\n  > button {\n    height: 44px;\n  }\n"])));
 exports.PagesBottomContainer = PagesBottomContainer;

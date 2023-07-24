@@ -48,6 +48,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     open = props.open,
     handleBackRedirect = props.handleBackRedirect,
     handleUpdateOrderStatus = props.handleUpdateOrderStatus,
+    setAddressState = props.setAddressState,
     isTourOpen = props.isTourOpen,
     handleUpdateOrderForUnreadCount = props.handleUpdateOrderForUnreadCount,
     messages = props.messages,
@@ -425,6 +426,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     unreadAlert: unreadAlert,
     isTourOpen: isTourOpen,
     setCurrentTourStep: setCurrentTourStep,
+    setAddressState: setAddressState,
     handleShowOption: handleShowOption,
     setIsCommentPopup: setIsCommentPopup
   }), /*#__PURE__*/_react.default.createElement(_styles2.OrderProducts, null, /*#__PURE__*/_react.default.createElement("h2", null, t('EXPORT_SUMMARY', 'Summary')), (order === null || order === void 0 ? void 0 : (_order$products = order.products) === null || _order$products === void 0 ? void 0 : _order$products.length) && (order === null || order === void 0 ? void 0 : order.products.map(function (product) {

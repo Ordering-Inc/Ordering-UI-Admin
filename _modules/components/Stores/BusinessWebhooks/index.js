@@ -97,6 +97,9 @@ var BusinessWebhooksUI = function BusinessWebhooksUI(props) {
     value: 'orders_delivery_failed_driver',
     content: t('ORDERS_DELIVERY_FAILED_DRIVER')
   }, {
+    value: 'orders_unassigned_driver',
+    content: t('ORDERS_UNASSIGNED_DRIVER', 'Order unassigned driver')
+  }, {
     value: 'preorder_updated',
     content: t('PREORDER_UPDATED', 'Preorder updated')
   }, {

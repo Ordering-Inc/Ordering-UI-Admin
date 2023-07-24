@@ -67,6 +67,9 @@ var WebhookListSelector = function WebhookListSelector(props) {
     value: 'orders_delivery_failed_driver',
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('ORDERS_DELIVERY_FAILED_DRIVER', 'Order delivery failed by driver'))
   }, {
+    value: 'orders_unassigned_driver',
+    content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('ORDERS_UNASSIGNED_DRIVER', 'Order unassigned driver'))
+  }, {
     value: 'preorder_updated',
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('PREORDER_UPDATED', 'Preorder updated'))
   }, {
