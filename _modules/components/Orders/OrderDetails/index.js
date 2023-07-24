@@ -23,6 +23,7 @@ var _styles = require("../../../styles");
 var _OrderToPrint = require("../OrderToPrint");
 var _OrderToPrintTicket = require("../OrderToPrintTicket");
 var _utils = require("../../../utils");
+var _reactHookForm = require("react-hook-form");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -55,7 +56,12 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     actionStatus = props.actionStatus,
     handleRefundPaymentsStripe = props.handleRefundPaymentsStripe,
     handleOrderRefund = props.handleOrderRefund,
-    isServiceOrder = props.isServiceOrder;
+    isServiceOrder = props.isServiceOrder,
+    handleUpdateComment = props.handleUpdateComment;
+  var _useForm = (0, _reactHookForm.useForm)(),
+    register = _useForm.register,
+    handleSubmit = _useForm.handleSubmit,
+    errors = _useForm.formState.errors;
   var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -109,6 +115,10 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     _useState14 = _slicedToArray(_useState13, 2),
     alertState = _useState14[0],
     setAlertState = _useState14[1];
+  var _useState15 = (0, _react.useState)(false),
+    _useState16 = _slicedToArray(_useState15, 2),
+    isCommentPopup = _useState16[0],
+    setIsCommentPopup = _useState16[1];
   var placeSpotEnabled = [3, 4];
   var _props$order = props.order,
     order = _props$order.order,
@@ -304,6 +314,10 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     var orderId = query.get('id');
     history.replace("".concat(location.pathname, "?id=").concat(orderId));
   };
+  var onSubmit = function onSubmit(data) {
+    handleUpdateComment(data === null || data === void 0 ? void 0 : data.manual_driver_assignment_comment);
+    setIsCommentPopup(false);
+  };
   (0, _react.useEffect)(function () {
     if (!open) return;
     document.addEventListener('keydown', onCloseSidebar);
@@ -405,7 +419,8 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     unreadAlert: unreadAlert,
     isTourOpen: isTourOpen,
     setCurrentTourStep: setCurrentTourStep,
-    handleShowOption: handleShowOption
+    handleShowOption: handleShowOption,
+    setIsCommentPopup: setIsCommentPopup
   }), /*#__PURE__*/_react.default.createElement(_styles2.OrderProducts, null, /*#__PURE__*/_react.default.createElement("h2", null, t('EXPORT_SUMMARY', 'Summary')), (order === null || order === void 0 || (_order$products = order.products) === null || _order$products === void 0 ? void 0 : _order$products.length) && (order === null || order === void 0 ? void 0 : order.products.map(function (product) {
     return /*#__PURE__*/_react.default.createElement(_ProductItemAccordion.ProductItemAccordion, {
       key: product.id,
@@ -526,7 +541,27 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       });
     },
     closeOnBackdrop: false
-  }));
+  }), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    width: "500px",
+    open: isCommentPopup,
+    title: t('ORDERING', 'Ordering'),
+    onClose: function onClose() {
+      return setIsCommentPopup(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_styles2.AssigmentCommentContainer, {
+    onSubmit: handleSubmit(onSubmit)
+  }, /*#__PURE__*/_react.default.createElement(_styles2.FormControl, {
+    isError: errors.manual_driver_assignment_comment
+  }, /*#__PURE__*/_react.default.createElement("label", null, t('MANUAL_DRIVER_ASSIGMENT_COMMENT', 'Manual driver assigment comment')), /*#__PURE__*/_react.default.createElement(_styles.TextArea, {
+    name: "manual_driver_assignment_comment",
+    placeholder: t('MANUAL_DRIVER_ASSIGMENT_COMMENT', 'Manual driver assigment comment'),
+    ref: register({
+      required: true
+    })
+  }), errors.manual_driver_assignment_comment && /*#__PURE__*/_react.default.createElement(_styles2.ErrorMessage, null, t('FIELD_REQUIRED', 'This field is required'))), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    color: "primary",
+    type: "submit"
+  }, t('ACCEPT', 'Accept')))));
 };
 var OrderDetails = function OrderDetails(props) {
   var orderDetailsProps = _objectSpread(_objectSpread({}, props), {}, {

@@ -4,11 +4,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.StatusBarContainer = exports.StatusBar = exports.SkeletonWrapper = exports.RejectReasonsList = exports.RejectReasonsContainer = exports.RejectReasonWrapper = exports.PlaceSpotContainer = exports.OrderStatusSelectorWrapper = exports.OrderStatus = exports.OrderProducts = exports.OrderDetailsExtraContent = exports.OrderDetailsContent = exports.DetailBottom = exports.Container = exports.CloseButtonWrapper = exports.ChatContainer = exports.ButtonLink = exports.AdvancedLogistic = void 0;
+exports.StatusBarContainer = exports.StatusBar = exports.SkeletonWrapper = exports.RejectReasonsList = exports.RejectReasonsContainer = exports.RejectReasonWrapper = exports.PlaceSpotContainer = exports.OrderStatusSelectorWrapper = exports.OrderStatus = exports.OrderProducts = exports.OrderDetailsExtraContent = exports.OrderDetailsContent = exports.FormControl = exports.ErrorMessage = exports.DetailBottom = exports.Container = exports.CloseButtonWrapper = exports.ChatContainer = exports.ButtonLink = exports.AssigmentCommentContainer = exports.AdvancedLogistic = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 var _polished = require("polished");
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34;
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -122,3 +122,18 @@ var RejectReasonWrapper = _styledComponents.default.div(_templateObject29 || (_t
 exports.RejectReasonWrapper = RejectReasonWrapper;
 var DetailBottom = _styledComponents.default.div(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  height: 20px;\n"])));
 exports.DetailBottom = DetailBottom;
+var FormControl = _styledComponents.default.div(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n  label {\n    margin-bottom: 10px;\n    font-size: 14px;\n  }\n  textarea {\n    width: 100%;\n  }\n  ", "\n"])), function (_ref5) {
+  var isError = _ref5.isError;
+  return isError && (0, _styledComponents.css)(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n    textarea {\n      border: 1px solid ", ";\n      &:focus {\n        border: 1px solid ", ";\n      }\n    }\n  "])), function (props) {
+    return props.theme.colors.danger;
+  }, function (props) {
+    return props.theme.colors.danger;
+  });
+});
+exports.FormControl = FormControl;
+var AssigmentCommentContainer = _styledComponents.default.form(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n  button {\n    width: 100%;\n    border-radius: 8px;\n    height: 44px;\n    margin-top: 30px;\n  }\n"])));
+exports.AssigmentCommentContainer = AssigmentCommentContainer;
+var ErrorMessage = _styledComponents.default.div(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n  color: ", ";\n  font-size: 14px;\n"])), function (props) {
+  return props.theme.colors.danger;
+});
+exports.ErrorMessage = ErrorMessage;

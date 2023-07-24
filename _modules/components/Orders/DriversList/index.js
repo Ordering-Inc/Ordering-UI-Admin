@@ -62,7 +62,7 @@ var DriversList = function DriversList(props) {
   return /*#__PURE__*/_react.default.createElement(_styles2.DriversListContainer, null, loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, _toConsumableArray(Array(10).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.DriverCard, {
       key: i
-    }, /*#__PURE__*/_react.default.createElement(_styles2.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    }, !hidePhoto && /*#__PURE__*/_react.default.createElement(_styles2.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 45,
       height: 45
     })), /*#__PURE__*/_react.default.createElement(_styles2.DriverInfo, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -80,15 +80,21 @@ var DriversList = function DriversList(props) {
       active: (selectedDriver === null || selectedDriver === void 0 ? void 0 : selectedDriver.id) === driver.id
     }, !hidePhoto && /*#__PURE__*/_react.default.createElement(_styles2.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles2.Image, {
       bgimage: optimizeImage((driver === null || driver === void 0 ? void 0 : driver.photo) || ((_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.icons) === null || _theme$images === void 0 ? void 0 : _theme$images.noDriver), 'h_50,c_limit')
-    })), /*#__PURE__*/_react.default.createElement(_styles2.DriverInfo, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, driver.name, " ", driver.lastname), /*#__PURE__*/_react.default.createElement(_BsDot.default, null), /*#__PURE__*/_react.default.createElement(_styles.LinkButton, {
+    })), /*#__PURE__*/_react.default.createElement(_styles2.DriverInfo, {
+      hidePhoto: hidePhoto
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "driver-info-container"
+    }, /*#__PURE__*/_react.default.createElement("p", {
+      className: "name"
+    }, driver.name, " ", driver.lastname), /*#__PURE__*/_react.default.createElement(_BsDot.default, null), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles.LinkButton, {
       className: "driver-orders",
       disabled: !(driver !== null && driver !== void 0 && driver.assigned_orders_count) || (driver === null || driver === void 0 ? void 0 : driver.assigned_orders_count) === 0,
       onClick: function onClick() {
         return onOpenDriverOrdersDetail(driver);
       }
-    }, driver === null || driver === void 0 ? void 0 : driver.assigned_orders_count, " ", t('ORDERS', 'Orders')), /*#__PURE__*/_react.default.createElement("p", {
+    }, driver === null || driver === void 0 ? void 0 : driver.assigned_orders_count, " ", t('ORDERS', 'Orders')), /*#__PURE__*/_react.default.createElement("span", {
       className: "text-red"
-    }, (driver === null || driver === void 0 ? void 0 : driver.busy) && "(".concat(t('BUSY', 'Busy'), ")"))), (driver === null || driver === void 0 ? void 0 : driver.qualification) && /*#__PURE__*/_react.default.createElement(_styles2.WrapperStar, {
+    }, (driver === null || driver === void 0 ? void 0 : driver.busy) && "(".concat(t('BUSY', 'Busy'), ")")))), (driver === null || driver === void 0 ? void 0 : driver.qualification) && /*#__PURE__*/_react.default.createElement(_styles2.WrapperStar, {
       width: (0, _utils.getStarWidth)(driver === null || driver === void 0 ? void 0 : driver.qualification)
     })));
   })));
