@@ -32,6 +32,7 @@ import { LanguageTransSpread } from './LanguageTransSpread'
 import { LanguageTransTable } from './LanguageTransTable'
 import { MultiCountrySettings } from './MultiCountrySettings'
 import { CardFieldsSetting } from './CardFieldsSetting'
+import { GuestCheckoutFieldsSetting } from './GuestCheckoutFieldsSetting'
 export {
   Cms,
   IntegrationListing,
@@ -66,5 +67,6 @@ export {
   LanguageTransSpread,
   LanguageTransTable,
   MultiCountrySettings,
-  CardFieldsSetting
+  CardFieldsSetting,
+  GuestCheckoutFieldsSetting
 }

@@ -44,9 +44,13 @@ import {
 const OrderDetailsUI = (props) => {
   const {
     isSelectedOrders,
+    handleChangeCustomerInfoState,
+    customerInfoState,
+    handleUpdateCustomerInfo,
     open,
     handleBackRedirect,
     handleUpdateOrderStatus,
+    setAddressState,
     isTourOpen,
     handleUpdateOrderForUnreadCount,
     messages,
@@ -338,13 +342,12 @@ const OrderDetailsUI = (props) => {
           <OrderStatus isDisabled={isTourOpen && currentTourStep === 1}>
             <div>
               <h2>{t('ORDER_STATUS_TEXT', 'Order status')}</h2>
-              <p>
-                {
-                  order?.delivery_datetime_utc
-                    ? parseDate(order?.delivery_datetime_utc)
-                    : parseDate(order?.delivery_datetime, { utc: false })
-                }
-              </p>
+              {order?.delivery_datetime_utc &&
+              <p>{parseDate(order?.delivery_datetime_utc)}</p>
+              }
+              {order?.delivery_datetime && (
+                <p>{parseDate(order?.delivery_datetime, { utc: false })}  {`(${t('BUSINESS_TIME', 'Business time')})`}</p>
+              )}
               <p>{order?.eta_time} {t('MIN', 'min')}</p>
             </div>
             <OrderStatusSelectorWrapper>
@@ -395,11 +398,15 @@ const OrderDetailsUI = (props) => {
           <div data-tour='tour_driver'>
             <OrderContactInformation
               isServiceOrder={isServiceOrder}
+              customerInfoState={customerInfoState}
+              handleChangeCustomerInfoState={handleChangeCustomerInfoState}
+              handleUpdateCustomerInfo={handleUpdateCustomerInfo}
               order={order}
               extraOpen={extraOpen}
               unreadAlert={unreadAlert}
               isTourOpen={isTourOpen}
               setCurrentTourStep={setCurrentTourStep}
+              setAddressState={setAddressState}
               handleShowOption={handleShowOption}
               setIsCommentPopup={setIsCommentPopup}
             />

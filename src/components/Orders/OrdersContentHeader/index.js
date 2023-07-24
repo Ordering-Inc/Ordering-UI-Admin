@@ -1,18 +1,16 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { useLanguage, useConfig } from 'ordering-components-admin'
 import { SearchBar } from '../../Shared'
 import { OrdersFilterGroup } from '../OrdersFilterGroup'
-import { Funnel, List as MenuIcon, LifePreserver } from 'react-bootstrap-icons'
-import MdcFilterOff from '@meronex/icons/mdc/MdcFilterOff'
+import { List as MenuIcon, LifePreserver } from 'react-bootstrap-icons'
 import { OrdersDashboardSLAControls } from '../OrdersDashboardSLAControls'
 import { OrderDashboardSLASetting } from '../OrderDashboardSLASetting'
-import { IconButton, LinkButton } from '../../../styles'
+import { IconButton } from '../../../styles'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { OverlayTrigger, Tooltip } from 'react-bootstrap'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import { GoogleMapsApiKeySettingButton } from '../GoogleMapsApiKeySettingButton'
 import { WebsocketStatus } from '../WebsocketStatus'
-import TiWarningOutline from '@meronex/icons/ti/TiWarningOutline'
 
 import {
   OrderContentHeaderContainer,
@@ -20,8 +18,7 @@ import {
   HeaderTitle,
   TopRightSection,
   SLAControlsWrapper,
-  WrapperSearchAndFilter,
-  WarningMessage
+  WrapperSearchAndFilter
 } from './styles'
 
 export const OrdersContentHeader = (props) => {
@@ -36,7 +33,6 @@ export const OrdersContentHeader = (props) => {
     citiesList,
     paymethodsList,
     businessesList,
-    filterValues,
     selectedOrderIds,
     handleChangeFilterValues,
     handleOpenTour,
@@ -51,26 +47,7 @@ export const OrdersContentHeader = (props) => {
   const [, t] = useLanguage()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
 
-  const [filterApplied, setFilterApplied] = useState(false)
   const [configState] = useConfig()
-
-  const handleClearFilters = () => {
-    if (searchValue) handleChangeSearch('')
-    if (filterApplied) handleChangeFilterValues({})
-  }
-
-  useEffect(() => {
-    let _filterApplied = false
-    if (Object.keys(filterValues).length === 0) {
-      _filterApplied = false
-    } else {
-      _filterApplied = filterValues?.groupTypes?.length || filterValues.businessIds.length > 0 || filterValues.cityIds.length > 0 ||
-        filterValues.deliveryEndDatetime !== null || filterValues.deliveryFromDatetime !== null || filterValues.deliveryTypes.length > 0 ||
-        filterValues.driverIds.length > 0 || filterValues.paymethodIds.length > 0 || filterValues.statuses.length > 0 || filterValues?.metafield?.length > 0 ||
-        filterValues?.externalId || filterValues?.logisticStatus !== null || filterValues?.assigned !== null
-    }
-    setFilterApplied(_filterApplied)
-  }, [filterValues])
 
   return (
     <>
@@ -136,34 +113,21 @@ export const OrdersContentHeader = (props) => {
               search={searchValue}
               placeholder={t('SEARCH', 'Search')}
             />
-            <IconButton
-              color='black'
-              onClick={() => setFilterModalOpen && setFilterModalOpen(true)}
-              name='filter-btn'
-            >
-              {filterApplied ? <Funnel /> : <MdcFilterOff />}
-            </IconButton>
-            {(filterApplied || !!searchValue) && (
-              <WarningMessage>
-                <TiWarningOutline />
-                <span>{t('WARNING_FILTER_APPLIED', 'Filters applied. You may miss new orders.')}</span>
-                <LinkButton onClick={() => handleClearFilters()}>{t('CLEAR_FILTERS', 'Clear filters')}</LinkButton>
-              </WarningMessage>
-            )}
+            <OrdersFilterGroup
+              filterModalOpen={filterModalOpen}
+              setFilterModalOpen={setFilterModalOpen}
+              driverGroupList={driverGroupList}
+              driversList={driversList}
+              paymethodsList={paymethodsList}
+              businessesList={businessesList}
+              citiesList={citiesList}
+              handleChangeFilterValues={handleChangeFilterValues}
+              searchValue={searchValue}
+              handleChangeSearch={handleChangeSearch}
+            />
           </WrapperSearchAndFilter>
         </TopRightSection>
       </OrderContentHeaderContainer>
-
-      <OrdersFilterGroup
-        open={filterModalOpen}
-        handleCloseFilterModal={() => setFilterModalOpen && setFilterModalOpen(false)}
-        driverGroupList={driverGroupList}
-        driversList={driversList}
-        paymethodsList={paymethodsList}
-        businessesList={businessesList}
-        citiesList={citiesList}
-        handleChangeFilterValues={handleChangeFilterValues}
-      />
     </>
   )
 }
