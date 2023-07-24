@@ -81,7 +81,7 @@ export const BusinessDetails = (props) => {
                 apiKey={configs?.google_maps_api_key?.value}
                 location={formState?.changes?.location ?? defaultPosition}
                 mapControls={googleMapsControls}
-                handleChangeCenter={handleChangeCenter}
+                // handleChangeCenter={handleChangeCenter}
                 isFitCenter
               />
             </WrapperMap>
