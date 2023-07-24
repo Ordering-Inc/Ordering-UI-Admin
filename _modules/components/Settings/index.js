@@ -63,6 +63,12 @@ Object.defineProperty(exports, "EmailSetting", {
     return _EmailSetting.EmailSetting;
   }
 });
+Object.defineProperty(exports, "GuestCheckoutFieldsSetting", {
+  enumerable: true,
+  get: function get() {
+    return _GuestCheckoutFieldsSetting.GuestCheckoutFieldsSetting;
+  }
+});
 Object.defineProperty(exports, "InsertImage", {
   enumerable: true,
   get: function get() {
@@ -241,3 +247,4 @@ var _LanguageTransSpread = require("./LanguageTransSpread");
 var _LanguageTransTable = require("./LanguageTransTable");
 var _MultiCountrySettings = require("./MultiCountrySettings");
 var _CardFieldsSetting = require("./CardFieldsSetting");
+var _GuestCheckoutFieldsSetting = require("./GuestCheckoutFieldsSetting");

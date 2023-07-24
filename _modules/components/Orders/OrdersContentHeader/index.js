@@ -1,16 +1,14 @@
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.OrdersContentHeader = void 0;
-var _react = _interopRequireWildcard(require("react"));
+var _react = _interopRequireDefault(require("react"));
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _Shared = require("../../Shared");
 var _OrdersFilterGroup = require("../OrdersFilterGroup");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
-var _MdcFilterOff = _interopRequireDefault(require("@meronex/icons/mdc/MdcFilterOff"));
 var _OrdersDashboardSLAControls = require("../OrdersDashboardSLAControls");
 var _OrderDashboardSLASetting = require("../OrderDashboardSLASetting");
 var _styles = require("../../../styles");
@@ -19,11 +17,8 @@ var _reactBootstrap = require("react-bootstrap");
 var _useWindowSize2 = require("../../../hooks/useWindowSize");
 var _GoogleMapsApiKeySettingButton = require("../GoogleMapsApiKeySettingButton");
 var _WebsocketStatus = require("../WebsocketStatus");
-var _TiWarningOutline = _interopRequireDefault(require("@meronex/icons/ti/TiWarningOutline"));
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -42,7 +37,6 @@ var OrdersContentHeader = function OrdersContentHeader(props) {
     citiesList = props.citiesList,
     paymethodsList = props.paymethodsList,
     businessesList = props.businessesList,
-    filterValues = props.filterValues,
     selectedOrderIds = props.selectedOrderIds,
     handleChangeFilterValues = props.handleChangeFilterValues,
     handleOpenTour = props.handleOpenTour,
@@ -60,27 +54,9 @@ var OrdersContentHeader = function OrdersContentHeader(props) {
     _useInfoShare2 = _slicedToArray(_useInfoShare, 2),
     isCollapse = _useInfoShare2[0].isCollapse,
     handleMenuCollapse = _useInfoShare2[1].handleMenuCollapse;
-  var _useState = (0, _react.useState)(false),
-    _useState2 = _slicedToArray(_useState, 2),
-    filterApplied = _useState2[0],
-    setFilterApplied = _useState2[1];
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configState = _useConfig2[0];
-  var handleClearFilters = function handleClearFilters() {
-    if (searchValue) handleChangeSearch('');
-    if (filterApplied) handleChangeFilterValues({});
-  };
-  (0, _react.useEffect)(function () {
-    var _filterApplied = false;
-    if (Object.keys(filterValues).length === 0) {
-      _filterApplied = false;
-    } else {
-      var _filterValues$groupTy, _filterValues$metafie;
-      _filterApplied = (filterValues === null || filterValues === void 0 || (_filterValues$groupTy = filterValues.groupTypes) === null || _filterValues$groupTy === void 0 ? void 0 : _filterValues$groupTy.length) || filterValues.businessIds.length > 0 || filterValues.cityIds.length > 0 || filterValues.deliveryEndDatetime !== null || filterValues.deliveryFromDatetime !== null || filterValues.deliveryTypes.length > 0 || filterValues.driverIds.length > 0 || filterValues.paymethodIds.length > 0 || filterValues.statuses.length > 0 || (filterValues === null || filterValues === void 0 || (_filterValues$metafie = filterValues.metafield) === null || _filterValues$metafie === void 0 ? void 0 : _filterValues$metafie.length) > 0 || (filterValues === null || filterValues === void 0 ? void 0 : filterValues.externalId) || (filterValues === null || filterValues === void 0 ? void 0 : filterValues.logisticStatus) !== null || (filterValues === null || filterValues === void 0 ? void 0 : filterValues.assigned) !== null;
-    }
-    setFilterApplied(_filterApplied);
-  }, [filterValues]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.OrderContentHeaderContainer, {
     isDisableControl: isSelectedOrders
   }, !isDisableTitle && /*#__PURE__*/_react.default.createElement(_styles2.HeaderSection, null, isCollapse && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
@@ -111,27 +87,17 @@ var OrdersContentHeader = function OrdersContentHeader(props) {
     onSearch: handleChangeSearch,
     search: searchValue,
     placeholder: t('SEARCH', 'Search')
-  }), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
-    color: "black",
-    onClick: function onClick() {
-      return setFilterModalOpen && setFilterModalOpen(true);
-    },
-    name: "filter-btn"
-  }, filterApplied ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Funnel, null) : /*#__PURE__*/_react.default.createElement(_MdcFilterOff.default, null)), (filterApplied || !!searchValue) && /*#__PURE__*/_react.default.createElement(_styles2.WarningMessage, null, /*#__PURE__*/_react.default.createElement(_TiWarningOutline.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('WARNING_FILTER_APPLIED', 'Filters applied. You may miss new orders.')), /*#__PURE__*/_react.default.createElement(_styles.LinkButton, {
-    onClick: function onClick() {
-      return handleClearFilters();
-    }
-  }, t('CLEAR_FILTERS', 'Clear filters')))))), /*#__PURE__*/_react.default.createElement(_OrdersFilterGroup.OrdersFilterGroup, {
-    open: filterModalOpen,
-    handleCloseFilterModal: function handleCloseFilterModal() {
-      return setFilterModalOpen && setFilterModalOpen(false);
-    },
+  }), /*#__PURE__*/_react.default.createElement(_OrdersFilterGroup.OrdersFilterGroup, {
+    filterModalOpen: filterModalOpen,
+    setFilterModalOpen: setFilterModalOpen,
     driverGroupList: driverGroupList,
     driversList: driversList,
     paymethodsList: paymethodsList,
     businessesList: businessesList,
     citiesList: citiesList,
-    handleChangeFilterValues: handleChangeFilterValues
-  }));
+    handleChangeFilterValues: handleChangeFilterValues,
+    searchValue: searchValue,
+    handleChangeSearch: handleChangeSearch
+  })))));
 };
 exports.OrdersContentHeader = OrdersContentHeader;

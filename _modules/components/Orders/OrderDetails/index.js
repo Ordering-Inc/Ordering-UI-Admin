@@ -42,9 +42,13 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrderDetailsUI = function OrderDetailsUI(props) {
   var _order$place, _progressBarObjt, _order$products;
   var isSelectedOrders = props.isSelectedOrders,
+    handleChangeCustomerInfoState = props.handleChangeCustomerInfoState,
+    customerInfoState = props.customerInfoState,
+    handleUpdateCustomerInfo = props.handleUpdateCustomerInfo,
     open = props.open,
     handleBackRedirect = props.handleBackRedirect,
     handleUpdateOrderStatus = props.handleUpdateOrderStatus,
+    setAddressState = props.setAddressState,
     isTourOpen = props.isTourOpen,
     handleUpdateOrderForUnreadCount = props.handleUpdateOrderForUnreadCount,
     messages = props.messages,
@@ -399,9 +403,9 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     setIsExpand: setIsExpand
   }), /*#__PURE__*/_react.default.createElement(_styles2.OrderStatus, {
     isDisabled: isTourOpen && currentTourStep === 1
-  }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, t('ORDER_STATUS_TEXT', 'Order status')), /*#__PURE__*/_react.default.createElement("p", null, order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
+  }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, t('ORDER_STATUS_TEXT', 'Order status')), (order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) && /*#__PURE__*/_react.default.createElement("p", null, parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc)), (order === null || order === void 0 ? void 0 : order.delivery_datetime) && /*#__PURE__*/_react.default.createElement("p", null, parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
     utc: false
-  })), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : order.eta_time, " ", t('MIN', 'min'))), /*#__PURE__*/_react.default.createElement(_styles2.OrderStatusSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_OrderStatusTypeSelector.OrderStatusTypeSelector, {
+  }), "  ", "(".concat(t('BUSINESS_TIME', 'Business time'), ")")), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : order.eta_time, " ", t('MIN', 'min'))), /*#__PURE__*/_react.default.createElement(_styles2.OrderStatusSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_OrderStatusTypeSelector.OrderStatusTypeSelector, {
     isFirstSelect: true,
     noPadding: true,
     orderId: order.id,
@@ -414,11 +418,15 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     "data-tour": "tour_driver"
   }, /*#__PURE__*/_react.default.createElement(_OrderContactInformation.OrderContactInformation, {
     isServiceOrder: isServiceOrder,
+    customerInfoState: customerInfoState,
+    handleChangeCustomerInfoState: handleChangeCustomerInfoState,
+    handleUpdateCustomerInfo: handleUpdateCustomerInfo,
     order: order,
     extraOpen: extraOpen,
     unreadAlert: unreadAlert,
     isTourOpen: isTourOpen,
     setCurrentTourStep: setCurrentTourStep,
+    setAddressState: setAddressState,
     handleShowOption: handleShowOption,
     setIsCommentPopup: setIsCommentPopup
   }), /*#__PURE__*/_react.default.createElement(_styles2.OrderProducts, null, /*#__PURE__*/_react.default.createElement("h2", null, t('EXPORT_SUMMARY', 'Summary')), (order === null || order === void 0 || (_order$products = order.products) === null || _order$products === void 0 ? void 0 : _order$products.length) && (order === null || order === void 0 ? void 0 : order.products.map(function (product) {

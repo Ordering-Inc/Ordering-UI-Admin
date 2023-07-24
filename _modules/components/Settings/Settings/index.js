@@ -20,8 +20,9 @@ var _AddressFieldsSetting = require("../AddressFieldsSetting");
 var _LanguageSetting = require("../LanguageSetting");
 var _SitesAuthSettings = require("../SitesAuthSettings");
 var _MultiCountrySettings = require("../MultiCountrySettings");
-var _styles2 = require("./styles");
 var _CardFieldsSetting = require("../CardFieldsSetting");
+var _GuestCheckoutFieldsSetting = require("../GuestCheckoutFieldsSetting");
+var _styles2 = require("./styles");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
@@ -214,6 +215,16 @@ var SettingsUI = function SettingsUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles2.SettingItemWrapper, {
     className: "col-md-4 col-sm-6",
     onClick: function onClick() {
+      return handleOpenSettingDetails('guest_checkout');
+    }
+  }, /*#__PURE__*/_react.default.createElement(_SettingItemUI.SettingItemUI, {
+    title: t('GUEST_CHECKOUT_FIELDS', 'Guest checkout fields'),
+    description: t('GUEST_CHECKOUT_FIELDS_DESC', 'Which fields do you want to show on the guest checkout page?'),
+    icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CheckCircleFill, null),
+    active: isOpenSettingDetails === 'guest_checkout'
+  })), /*#__PURE__*/_react.default.createElement(_styles2.SettingItemWrapper, {
+    className: "col-md-4 col-sm-6",
+    onClick: function onClick() {
       return handleOpenSettingDetails('address');
     }
   }, /*#__PURE__*/_react.default.createElement(_SettingItemUI.SettingItemUI, {
@@ -308,7 +319,7 @@ var SettingsUI = function SettingsUI(props) {
       return handleBackRedirect();
     },
     showExpandIcon: true
-  }, isOpenSettingDetails === 'checkout' && /*#__PURE__*/_react.default.createElement(_CheckoutFieldsSetting.CheckoutFieldsSetting, null), isOpenSettingDetails === 'address' && /*#__PURE__*/_react.default.createElement(_AddressFieldsSetting.AddressFieldsSetting, null), isOpenSettingDetails === 'card' && /*#__PURE__*/_react.default.createElement(_CardFieldsSetting.CardFieldsSetting, null), isOpenSettingDetails === 'language' && /*#__PURE__*/_react.default.createElement(_LanguageSetting.LanguageSetting, null)));
+  }, isOpenSettingDetails === 'checkout' && /*#__PURE__*/_react.default.createElement(_CheckoutFieldsSetting.CheckoutFieldsSetting, null), isOpenSettingDetails === 'guest_checkout' && /*#__PURE__*/_react.default.createElement(_GuestCheckoutFieldsSetting.GuestCheckoutFieldsSetting, null), isOpenSettingDetails === 'address' && /*#__PURE__*/_react.default.createElement(_AddressFieldsSetting.AddressFieldsSetting, null), isOpenSettingDetails === 'card' && /*#__PURE__*/_react.default.createElement(_CardFieldsSetting.CardFieldsSetting, null), isOpenSettingDetails === 'language' && /*#__PURE__*/_react.default.createElement(_LanguageSetting.LanguageSetting, null)));
 };
 var Settings = function Settings(props) {
   var settingsProps = _objectSpread(_objectSpread({}, props), {}, {
