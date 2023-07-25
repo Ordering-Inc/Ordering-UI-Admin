@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { useLanguage, DragAndDrop, ExamineClick, BusinessFormDetails as BusinessFormDetailsController } from 'ordering-components-admin'
+import { useLanguage, DragAndDrop, ExamineClick, BusinessFormDetails as BusinessFormDetailsController, useConfig } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { Alert, Modal, ImageCrop, ColorPicker } from '../../Shared'
 import { bytesConverter, shape, ribbonValues } from '../../../utils'
@@ -47,17 +47,19 @@ const BusinessInformationUI = (props) => {
 
   const formMethods = useForm()
   const [, t] = useLanguage()
+  const [{ configs }] = useConfig()
   const headerImageInputRef = useRef(null)
   const logoImageInputRef = useRef(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [cropState, setCropState] = useState({ name: null, data: null, open: false })
+  const priceSymbol = configs?.format_number_currency?.value?.trim()
 
   const priceList = [
-    { key: '1', value: '$' },
-    { key: '2', value: '$$' },
-    { key: '3', value: '$$$' },
-    { key: '4', value: '$$$$' },
-    { key: '5', value: '$$$$$' }
+    { key: '1', value: `${priceSymbol}` },
+    { key: '2', value: `${Array(2).fill(priceSymbol).join('')}` },
+    { key: '3', value: `${Array(3).fill(priceSymbol).join('')}` },
+    { key: '4', value: `${Array(4).fill(priceSymbol).join('')}` },
+    { key: '5', value: `${Array(5).fill(priceSymbol).join('')}` }
   ]
 
   const socialOriginalURL = {
