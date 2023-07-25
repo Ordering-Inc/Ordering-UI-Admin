@@ -40,6 +40,11 @@ export const OrdersDashboardList = (props) => {
         <OrdersListController
           isMessagesView
           {...OrdersCommonControlProps}
+          paginationSettings={{
+            initialPage: isUseQuery && !isNaN(defaultPage) ? Number(defaultPage) : 1,
+            pageSize: isUseQuery && !isNaN(defaultPage) ? Number(defaultPageSize) : 10,
+            controlType: 'pages'
+          }}
           orderStatus={selectedSubOrderStatus?.all}
         />
       ) : (
