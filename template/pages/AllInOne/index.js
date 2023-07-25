@@ -1,17 +1,17 @@
 import React from 'react'
 import { HelmetTags } from '../../components/HelmetTags'
-import { useEvent } from 'ordering-components-admin'
 import { AllInOne as AllInOneController } from '../../../src/components/Orders'
+import { addQueryToUrl, removeQueryToUrl } from '../../../src/utils'
 
 export const AllInOne = (props) => {
-  const [events] = useEvent()
   const ordersListProps = {
     ...props,
+    isUseQuery: true,
     onOrderRedirect: (orderId) => {
       if (!orderId) {
-        return events.emit('go_to_page', { page: 'all_in_one', replace: true })
+        return removeQueryToUrl(['id'])
       }
-      return events.emit('go_to_page', { page: 'all_in_one', search: `?id=${orderId}` })
+      return addQueryToUrl({ id: orderId })
     }
   }
   return (
