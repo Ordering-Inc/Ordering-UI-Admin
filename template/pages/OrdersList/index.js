@@ -6,6 +6,7 @@ import { addQueryToUrl, removeQueryToUrl } from '../../../src/utils'
 export const OrdersList = (props) => {
   const ordersListProps = {
     ...props,
+    isUseQuery: true,
     onOrderRedirect: (orderId) => {
       if (!orderId) {
         return removeQueryToUrl(['id'])

@@ -48,7 +48,8 @@ const OrdersManagerUI = (props) => {
     allowColumns,
     setAllowColumns,
     timeStatus,
-    setTimeStatus
+    setTimeStatus,
+    isUseQuery
   } = props
 
   const [, t] = useLanguage()
@@ -191,7 +192,7 @@ const OrdersManagerUI = (props) => {
           setSlaSettingTime={setSlaSettingTime}
         />
         <OrderStatusFilterBar
-          isUseQuery
+          isUseQuery={isUseQuery}
           selectedOrderStatus={ordersStatusGroup}
           changeOrderStatus={handleOrdersStatusGroupFilter}
           ordersAmountByStatus={ordersAmountByStatus}
@@ -222,6 +223,7 @@ const OrdersManagerUI = (props) => {
           <OrdersInnerContent className='order-content'>
             <WrapItemView>
               <OrdersDashboard
+                isUseQuery={isUseQuery}
                 isSelectedOrders={isSelectedOrders}
                 driverId={props.driverId}
                 customerId={props.customerId}
