@@ -202,7 +202,7 @@ export const StatusBlock = (props) => {
             style={{ width: inputWidth }}
             onChange={(e) => handleMiuteChange(e)}
             onKeyPress={(e) => {
-              if (!/^-?[0-9]*$/.test(e.target.value + e.key)) {
+              if (!/^-?\d*$/.test(e.target.value)) {
                 e.preventDefault()
               }
             }}
