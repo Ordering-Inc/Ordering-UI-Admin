@@ -215,7 +215,7 @@ var StatusBlock = function StatusBlock(props) {
       return handleMiuteChange(e);
     },
     onKeyPress: function onKeyPress(e) {
-      if (!/^-?[0-9]*$/.test(e.target.value + e.key)) {
+      if (!/^-?\d*$/.test(e.target.value)) {
         e.preventDefault();
       }
     }
