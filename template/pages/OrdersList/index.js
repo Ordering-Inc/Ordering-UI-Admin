@@ -1,17 +1,16 @@
 import React from 'react'
 import { HelmetTags } from '../../components/HelmetTags'
-import { useEvent } from 'ordering-components-admin'
 import { OrdersManager as OrdersManagerController } from '../../../src/components/Orders'
+import { addQueryToUrl, removeQueryToUrl } from '../../../src/utils'
 
 export const OrdersList = (props) => {
-  const [events] = useEvent()
   const ordersListProps = {
     ...props,
     onOrderRedirect: (orderId) => {
       if (!orderId) {
-        return events.emit('go_to_page', { page: 'orders', replace: true })
+        return removeQueryToUrl(['id'])
       }
-      return events.emit('go_to_page', { page: 'orders', search: `?id=${orderId}` })
+      return addQueryToUrl({ id: orderId })
     }
   }
   return (

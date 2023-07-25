@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage, useUtils, useSession, OrderDetails as OrderDetailsController } from 'ordering-components-admin'
 import { ProductItemAccordion } from '../ProductItemAccordion'
@@ -15,7 +15,7 @@ import { NotFoundSource, Modal, Alert } from '../../Shared'
 import { Button, IconButton, TextArea } from '../../../styles'
 import { OrderToPrint } from '../OrderToPrint'
 import { OrderToPrintTicket } from '../OrderToPrintTicket'
-import { getOrderStatuPickUp, getOrderStatus, getCurrenySymbol } from '../../../utils'
+import { getOrderStatuPickUp, getOrderStatus, getCurrenySymbol, addQueryToUrl, removeQueryToUrl } from '../../../utils'
 import { useForm } from 'react-hook-form'
 
 import {
@@ -70,7 +70,6 @@ const OrderDetailsUI = (props) => {
     handleSubmit,
     formState: { errors }
   } = useForm()
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const { width } = useWindowSize()
@@ -155,8 +154,9 @@ const OrderDetailsUI = (props) => {
     setExtraOpen(true)
 
     if (!isInitialRender) {
-      const orderId = query.get('id')
-      history.replace(`${location.pathname}?id=${orderId}&section=${option}`)
+      addQueryToUrl({
+        section: option
+      })
     }
   }
 
@@ -266,8 +266,7 @@ const OrderDetailsUI = (props) => {
     setExtraOpen(false)
     setOpenMessages({ chat: false, history: false })
     setShowOption(null)
-    const orderId = query.get('id')
-    history.replace(`${location.pathname}?id=${orderId}`)
+    removeQueryToUrl(['section', 'tab'])
   }
 
   const onSubmit = (data) => {
@@ -341,9 +340,9 @@ const OrderDetailsUI = (props) => {
           <OrderStatus isDisabled={isTourOpen && currentTourStep === 1}>
             <div>
               <h2>{t('ORDER_STATUS_TEXT', 'Order status')}</h2>
-              {order?.delivery_datetime_utc &&
-              <p>{parseDate(order?.delivery_datetime_utc)}</p>
-              }
+              {order?.delivery_datetime_utc && (
+                <p>{parseDate(order?.delivery_datetime_utc)}</p>
+              )}
               {order?.delivery_datetime && (
                 <p>{parseDate(order?.delivery_datetime, { utc: false })}  {`(${t('BUSINESS_TIME', 'Business time')})`}</p>
               )}

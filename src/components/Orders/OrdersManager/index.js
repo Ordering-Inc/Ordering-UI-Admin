@@ -191,6 +191,7 @@ const OrdersManagerUI = (props) => {
           setSlaSettingTime={setSlaSettingTime}
         />
         <OrderStatusFilterBar
+          isUseQuery
           selectedOrderStatus={ordersStatusGroup}
           changeOrderStatus={handleOrdersStatusGroupFilter}
           ordersAmountByStatus={ordersAmountByStatus}
