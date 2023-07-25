@@ -6,6 +6,7 @@ export const DeliveriesManager = (props) => {
   const [events] = useEvent()
   const deliveriesManagerProps = {
     ...props,
+    isUseQuery: true,
     onOrderRedirect: (orderId) => {
       if (!orderId) {
         return events.emit('go_to_page', { page: 'deliveries', replace: true })

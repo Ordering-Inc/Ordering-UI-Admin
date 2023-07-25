@@ -161,6 +161,7 @@ export const OrdersListing = (props) => {
                   handleUpdateDriverLocation={handleUpdateDriverLocation}
                   slaSettingTime={slaSettingTime}
                   isDelivery={isDelivery}
+                  isUseQuery={isUseQuery}
                 />
               )}
             </WrapperOrderListContent>

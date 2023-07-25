@@ -14,8 +14,8 @@ export const OrdersDashboardList = (props) => {
 
   const query = new URLSearchParams(useLocation().search)
   const defaultStatus = query.get('status')
-  const defaultPage = query.get('page')
-  const defaultPageSize = query.get('pageSize')
+  const defaultPage = query.get('page') || 1
+  const defaultPageSize = query.get('pageSize') || 10
 
   const OrdersCommonControlProps = {
     ...props,
