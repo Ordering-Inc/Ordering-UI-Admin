@@ -299,6 +299,7 @@ export const PriceFilterItem = styled.div`
     font-weight: 400;
     font-size: 14px;
     margin-left: 8px;
+    text-wrap: nowrap;
     ${props => props.theme.rtl && css`
       margin-right: 8px;
       margin-left: 0px;
