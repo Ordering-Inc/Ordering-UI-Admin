@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useLanguage, UsersList as UsersListController } from 'ordering-components-admin'
 import { UsersList } from '../UsersList'
 import { UsersListingHeader } from '../UsersListingHeader'
@@ -10,6 +10,7 @@ import { SideBar } from '../../Shared'
 import { UserAddForm } from '../UserAddForm'
 import { UsersDeleteButton } from '../UsersDeleteButton'
 import { UsersExportCSV } from '../UsersExportCSV'
+import { addQueryToUrl, removeQueryToUrl } from '../../../utils'
 import { Button } from '../../../styles'
 
 import {
@@ -48,7 +49,6 @@ const UsersListingUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [queryId, setQueryId] = useState(null)
   const [isOpenUserDetails, setIsOpenUserDetails] = useState(false)
@@ -59,13 +59,11 @@ const UsersListingUI = (props) => {
     setIsOpenUserDetails(false)
     setOpenUser(null)
     setQueryId(null)
-    const enabled = selectedUserActiveState ? 'active' : 'inactive'
-    history.replace(`${location.pathname}?enabled=${enabled}`)
+    removeQueryToUrl(['id'])
   }
 
   const handleOpenUserDetails = (user) => {
-    const enabled = selectedUserActiveState ? 'active' : 'inactive'
-    history.replace(`${location.pathname}?enabled=${enabled}&id=${user?.id}`)
+    addQueryToUrl({ id: user?.id })
     setOpenUser(user)
     setOpenUserAddForm(false)
     setIsOpenUserDetails(true)
