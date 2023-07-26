@@ -39,6 +39,9 @@ var WebhookDelaySelector = function WebhookDelaySelector(props) {
   }, {
     value: 'pickup_time',
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('PICKUP_TIME', 'Pickup time'))
+  }, {
+    value: 'preparation_time',
+    content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('PREPARATION_TIME', 'Preparation time'))
   }];
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Select.Select, {
     options: delayOptions,
