@@ -5,6 +5,7 @@ import { Button, Switch, LinkButton } from '../../../styles'
 import { useTheme } from 'styled-components'
 import { SingleBusiness } from '../SingleBusiness'
 import { CheckSquareFill, Square } from 'react-bootstrap-icons'
+import { addQueryToUrl } from '../../../utils'
 
 import {
   BusinessListContainer,
@@ -39,7 +40,8 @@ export const BusinessesList = (props) => {
     selectedBusinessActiveState,
     setBusinessIds,
     handleGotToAdd,
-    citiesList
+    citiesList,
+    isUseQuery
   } = props
 
   const theme = useTheme()
@@ -123,6 +125,14 @@ export const BusinessesList = (props) => {
     const _isAllChecked = _businessIds.every(elem => businessIds.includes(elem))
     setIsAllChecked(_isAllChecked)
   }, [JSON.stringify(businessList.businesses), businessIds])
+
+  useEffect(() => {
+    if (!isUseQuery || !pagination?.currentPage || !pagination?.pageSize || !pagination?.total) return
+    addQueryToUrl({
+      page: pagination.currentPage,
+      pageSize: pagination.pageSize
+    })
+  }, [pagination?.currentPage, pagination?.pageSize, pagination?.total])
 
   return (
     <>

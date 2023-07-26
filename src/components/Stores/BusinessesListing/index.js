@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useLanguage, useEvent, DashboardBusinessList as BusinessListController } from 'ordering-components-admin'
 import BsGrid from '@meronex/icons/bs/BsGrid'
 import BsViewList from '@meronex/icons/bs/BsViewList'
-import { getStorageItem, setStorageItem } from '../../../utils'
+import { getStorageItem, setStorageItem, removeQueryToUrl, addQueryToUrl } from '../../../utils'
 import { Modal, SideBar } from '../../Shared'
 import { useTheme } from 'styled-components'
 
@@ -53,10 +53,10 @@ const BusinessesListingUI = (props) => {
     filterValues,
     businessTypeSelected,
     inActiveBusinesses,
-    citiesList
+    citiesList,
+    isUseQuery
   } = props
 
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const theme = useTheme()
   const [, t] = useLanguage()
@@ -158,18 +158,19 @@ const BusinessesListingUI = (props) => {
     }
     if (method === 'card') {
       getPageBusinesses(50, 1)
+      removeQueryToUrl(['page', 'pageSize'])
     }
   }
 
   const handleOpenSync = () => {
     setOpenSync(true)
-    history.replace(`${location.pathname}?header=sync`)
+    addQueryToUrl({ header: 'sync' })
   }
 
   const handleCloseSync = () => {
     setMoveDistance(0)
     setOpenSync(false)
-    history.replace(`${location.pathname}`)
+    removeQueryToUrl(['sync'])
   }
 
   useEffect(() => {
@@ -269,6 +270,7 @@ const BusinessesListingUI = (props) => {
             selectedBusinessActiveState={selectedBusinessActiveState}
             handleGotToAdd={handleGotToAdd}
             citiesList={citiesList}
+            isUseQuery={isUseQuery && viewMethod === 'list'}
           />
         )}
       </BusinessListingContainer>
@@ -332,13 +334,22 @@ const BusinessesListingUI = (props) => {
 }
 
 export const BusinessesListing = (props) => {
+  const query = new URLSearchParams(useLocation().search)
+  const defaultPage = query.get('page') || 1
+  const defaultPageSize = query.get('pageSize') || 10
+
   const businessListingProps = {
     ...props,
     UIComponent: BusinessesListingUI,
     asDashboard: true,
     isSearchByBusinessName: true,
     isSearchByBusinessEmail: true,
-    isSearchByBusinessPhone: true
+    isSearchByBusinessPhone: true,
+    paginationSettings: {
+      initialPage: props.isUseQuery && !isNaN(defaultPage) ? Number(defaultPage) : 1,
+      pageSize: props.isUseQuery && !isNaN(defaultPage) ? Number(defaultPageSize) : 10,
+      controlType: 'pages'
+    }
   }
   return (
     <BusinessListController {...businessListingProps} />

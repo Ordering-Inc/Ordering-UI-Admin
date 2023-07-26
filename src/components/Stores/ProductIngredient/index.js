@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useLanguage } from 'ordering-components-admin'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import { Button, LinkButton } from '../../../styles'
 import { ProductIngredientDetails } from '../ProductIngredientDetails'
 import { Modal } from '../../Shared'
 import { ChevronRight } from 'react-bootstrap-icons'
+import { addQueryToUrl, removeQueryToUrl } from '../../../utils'
 
 import {
   MainContainer,
@@ -21,7 +22,6 @@ export const ProductIngredient = (props) => {
     setIsExtendExtraOpen
   } = props
 
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const { width } = useWindowSize()
@@ -33,10 +33,7 @@ export const ProductIngredient = (props) => {
     setIsExtendExtraOpen(true)
     setOpenDetails(true)
     if (!isInitialRender) {
-      const category = query.get('category')
-      const product = query.get('product')
-      const section = query.get('section')
-      history.replace(`${location.pathname}?category=${category}&product=${product}&section=${section}&ingredient=${ingredient?.id}`)
+      addQueryToUrl({ ingredient: ingredient?.id })
     }
   }
 
@@ -44,10 +41,7 @@ export const ProductIngredient = (props) => {
     setOpenDetails(false)
     setIsExtendExtraOpen(false)
     setCurrentIngredient(null)
-    const category = query.get('category')
-    const product = query.get('product')
-    const section = query.get('section')
-    history.replace(`${location.pathname}?category=${category}&product=${product}&section=${section}`)
+    removeQueryToUrl(['ingredient'])
   }
 
   useEffect(() => {

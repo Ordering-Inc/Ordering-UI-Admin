@@ -9,7 +9,7 @@ export const AllInOne = (props) => {
     isUseQuery: true,
     onOrderRedirect: (orderId) => {
       if (!orderId) {
-        return removeQueryToUrl(['id'])
+        return removeQueryToUrl(['id', 'section', 'tab'])
       }
       return addQueryToUrl({ id: orderId })
     }

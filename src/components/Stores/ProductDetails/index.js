@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { ProductDetatils as ProductDetatilsController } from 'ordering-components-admin'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import { MoreSidebarLayout, Personalization } from '../../Shared'
@@ -12,6 +12,7 @@ import { ProductVideos } from '../ProductVideos'
 import { ProductMainDetails } from '../ProductMainDetails'
 import { BusinessServiceProfessionals } from '../BusinessServiceProfessionals'
 import { ServiceDetail } from '../ServiceDetail'
+import { addQueryToUrl, removeQueryToUrl } from '../../../utils'
 
 import {
   Container
@@ -39,7 +40,7 @@ const ProductDetailsUI = (props) => {
     handleChangeRibbon,
     cleanFormState
   } = props
-  const history = useHistory()
+
   const query = new URLSearchParams(useLocation().search)
   const { width } = useWindowSize()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -53,9 +54,7 @@ const ProductDetailsUI = (props) => {
     setShowOption(option)
     setExtraOpen(true)
     if (!isInitialRender) {
-      const category = query.get('category')
-      const product = query.get('product')
-      history.replace(`${location.pathname}?category=${category}&product=${product}&section=${option}`)
+      addQueryToUrl({ section: option })
     }
   }
 
@@ -63,9 +62,7 @@ const ProductDetailsUI = (props) => {
     setIsExtendExtraOpen(false)
     setExtraOpen(false)
     setShowOption(null)
-    const category = query.get('category')
-    const product = query.get('product')
-    history.replace(`${location.pathname}?category=${category}&product=${product}`)
+    removeQueryToUrl(['section'])
   }
 
   const actionSidebar = (value) => {

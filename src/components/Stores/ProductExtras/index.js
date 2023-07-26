@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useLanguage, ProductExtras as ProductExtrasController } from 'ordering-components-admin'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import { Button, Checkbox, LinkButton } from '../../../styles'
@@ -7,6 +7,7 @@ import { Alert, Confirm, Modal } from '../../Shared'
 import { ProductExtraOptions } from '../ProductExtraOptions'
 import { ChevronRight } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
+import { addQueryToUrl, removeQueryToUrl } from '../../../utils'
 
 import {
   MainContainer,
@@ -42,7 +43,6 @@ const ProductExtrasUI = (props) => {
     handleUpdateExtraState,
     setExtrasState
   } = props
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const theme = useTheme()
   const [, t] = useLanguage()
@@ -63,10 +63,7 @@ const ProductExtrasUI = (props) => {
     setCurrentExtra(extra)
     setOpenExtraDetails(true)
     if (!isInitialRender) {
-      const category = query.get('category')
-      const product = query.get('product')
-      const section = query.get('section')
-      history.replace(`${location.pathname}?category=${category}&product=${product}&section=${section}&extra=${extra.id}`)
+      addQueryToUrl({ extra: extra.id })
     }
   }
 
@@ -74,10 +71,7 @@ const ProductExtrasUI = (props) => {
     setOpenExtraDetails(false)
     setIsExtendExtraOpen(false)
     setCurrentExtra(null)
-    const category = query.get('category')
-    const product = query.get('product')
-    const section = query.get('section')
-    history.replace(`${location.pathname}?category=${category}&product=${product}&section=${section}`)
+    removeQueryToUrl(['extra'])
   }
 
   const handleExtraState = (id, checked) => {
