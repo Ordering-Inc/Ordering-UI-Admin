@@ -5,6 +5,7 @@ import { Pagination } from '../../Shared'
 import MdCheckBoxOutlineBlank from '@meronex/icons/md/MdCheckBoxOutlineBlank'
 import MdCheckBox from '@meronex/icons/md/MdCheckBox'
 import { Switch, LinkButton } from '../../../styles'
+import { addQueryToUrl } from '../../../utils'
 
 import {
   DriversCompaniesContainer,
@@ -28,7 +29,8 @@ export const DriversCompaniesList = (props) => {
     handleUpdateDriversCompany,
     handleSelectCompany,
     selectedCompanyList,
-    handleAllSelectCompany
+    handleAllSelectCompany,
+    isUseQuery
   } = props
 
   const [, t] = useLanguage()
@@ -90,6 +92,14 @@ export const DriversCompaniesList = (props) => {
     if (isInvalid) return
     handleOpenDetails(company)
   }
+
+  useEffect(() => {
+    if (!isUseQuery || !currentPage || !companiesPerPage || !totalPages) return
+    addQueryToUrl({
+      page: currentPage,
+      pageSize: companiesPerPage
+    })
+  }, [currentPage, companiesPerPage, totalPages])
 
   return (
     <>

@@ -32,7 +32,8 @@ const DriversCompaniesListingUI = (props) => {
     handleSelectCompany,
     selectedCompanyList,
     handleAllSelectCompany,
-    handleDeleteSelectedCompanies
+    handleDeleteSelectedCompanies,
+    isUseQuery
   } = props
 
   const query = new URLSearchParams(useLocation().search)
@@ -82,7 +83,7 @@ const DriversCompaniesListingUI = (props) => {
     setCurDriversCompanyId(null)
     setOpenDetails(false)
     setIsAddMode(false)
-    removeQueryToUrl(['id'])
+    removeQueryToUrl(['id', 'tab'])
   }
 
   useEffect(() => {
@@ -142,6 +143,7 @@ const DriversCompaniesListingUI = (props) => {
           handleSelectCompany={handleSelectCompany}
           selectedCompanyList={selectedCompanyList}
           handleAllSelectCompany={handleAllSelectCompany}
+          isUseQuery={isUseQuery}
         />
       ) : (
         <DriversCompanyAddForm
