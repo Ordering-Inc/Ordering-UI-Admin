@@ -127,9 +127,8 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
   };
   var handleClearFilter = function handleClearFilter() {
     handleResetFilterValues();
-    // handleChangeFilterValues({})
+    handleChangeFilterValues({});
   };
-
   var handleAddMetafieldValue = function handleAddMetafieldValue() {
     handleAddMetaField({
       id: (0, _utils.getUniqueId)(),
