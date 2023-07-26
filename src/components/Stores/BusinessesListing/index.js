@@ -170,7 +170,7 @@ const BusinessesListingUI = (props) => {
   const handleCloseSync = () => {
     setMoveDistance(0)
     setOpenSync(false)
-    removeQueryToUrl(['sync'])
+    removeQueryToUrl(['header', 'tab'])
   }
 
   useEffect(() => {
@@ -204,6 +204,7 @@ const BusinessesListingUI = (props) => {
         {!noBusinesses && (
           <ViewContainer>
             <BusinessActiveStateFilter
+              isUseQuery={isUseQuery}
               selectedBusinessActiveState={selectedBusinessActiveState}
               handleChangeBusinessActiveState={handleChangeBusinessActiveState}
             />
@@ -337,6 +338,7 @@ export const BusinessesListing = (props) => {
   const query = new URLSearchParams(useLocation().search)
   const defaultPage = query.get('page') || 1
   const defaultPageSize = query.get('pageSize') || 10
+  const defaultActive = query.get('active')
 
   const businessListingProps = {
     ...props,
@@ -349,7 +351,8 @@ export const BusinessesListing = (props) => {
       initialPage: props.isUseQuery && !isNaN(defaultPage) ? Number(defaultPage) : 1,
       pageSize: props.isUseQuery && !isNaN(defaultPage) ? Number(defaultPageSize) : 10,
       controlType: 'pages'
-    }
+    },
+    defaultActive: defaultActive === 'true'
   }
   return (
     <BusinessListController {...businessListingProps} />
