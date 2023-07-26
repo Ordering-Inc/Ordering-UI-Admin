@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useLanguage } from 'ordering-components-admin'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { IconButton } from '../../../styles'
@@ -7,6 +7,7 @@ import { List as MenuIcon, HouseDoor, ViewStacked, Shop, InfoCircle } from 'reac
 import { PostionItemUI } from './PostionItemUI'
 import { SideBar } from '../../Shared'
 import { PageBanners } from '../PageBanner'
+import { addQueryToUrl, removeQueryToUrl } from '../../../utils'
 
 import {
   AdBannersListingContainer,
@@ -17,7 +18,6 @@ import {
 } from './styles'
 
 export const AdBannersListing = (props) => {
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
@@ -78,14 +78,14 @@ export const AdBannersListing = (props) => {
     const selectedItem = bannerPositions.find(item => item.key === key)
     setOpenPositionDetail(selectedItem)
     if (!isInitialRender) {
-      history.replace(`${location.pathname}?position=${key}`)
+      addQueryToUrl({ position: key })
     }
   }
 
   const handleCloseDetails = () => {
     setOpenPositionDetail(null)
     setMoveDistance(0)
-    history.replace(`${location.pathname}`)
+    removeQueryToUrl(['position'])
   }
 
   useEffect(() => {

@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { SideBar } from '../../Shared'
 import { CampaignDetail } from '../CampaignDetail'
 import { CampaignHeader } from '../CampaignHeader'
 import { CampaignList } from '../CampaignList'
-import { CampaignListing as CampaignListingController } from 'ordering-components-admin'
+// import { CampaignListing as CampaignListingController } from 'ordering-components-admin'
+import { CampaignListing as CampaignListingController } from './naked'
+import { addQueryToUrl, removeQueryToUrl } from '../../../utils'
+
 import {
   CampaignListingContainer
 } from './styles'
 
 export const CampaignListingUI = (props) => {
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [isOpenDetail, setIsOpenDetail] = useState(false)
   const [selectedCampaign, setSelectedCampaign] = useState(null)
@@ -20,13 +22,13 @@ export const CampaignListingUI = (props) => {
     setSelectedCampaign(action)
     setSelectedCampaignId(action?.id)
     setIsOpenDetail(true)
-    action && history.replace(`${location.pathname}?id=${action?.id}`)
+    addQueryToUrl({ id: action?.id })
   }
 
   const handleCloseDetail = () => {
     setIsOpenDetail(false)
     setSelectedCampaign(null)
-    history.replace(`${location.pathname}`)
+    removeQueryToUrl(['id'])
   }
 
   useEffect(() => {
@@ -72,11 +74,19 @@ export const CampaignListingUI = (props) => {
 }
 
 export const CampaignListing = (props) => {
+  const query = new URLSearchParams(useLocation().search)
+  const defaultPage = query.get('page') || 1
+  const defaultPageSize = query.get('pageSize') || 10
   const campaignListingProps = {
     ...props,
     UIComponent: CampaignListingUI,
     isSearchByContactType: true,
-    isSearchByName: true
+    isSearchByName: true,
+    paginationSettings: {
+      initialPage: props.isUseQuery && !isNaN(defaultPage) ? Number(defaultPage) : 1,
+      pageSize: props.isUseQuery && !isNaN(defaultPage) ? Number(defaultPageSize) : 10,
+      controlType: 'pages'
+    }
   }
   return <CampaignListingController {...campaignListingProps} />
 }
