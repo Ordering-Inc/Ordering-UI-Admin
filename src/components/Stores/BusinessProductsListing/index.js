@@ -521,7 +521,10 @@ const BusinessProductsListingUI = (props) => {
           businessId={selectedBusiness?.id || businessState?.business?.id}
           handleSucessRemoveBusiness={() => handleStoresRedirect()}
           // handleSucessUpdateBusiness={handleSucessUpdateBusiness}
-          onClose={() => setOpenSidebar(null)}
+          onClose={() => {
+            setOpenSidebar(null)
+            removeQueryToUrl(['id'])
+          }}
           businessTypes={businessTypes}
           setBusinessTypes={setBusinessTypes}
         />

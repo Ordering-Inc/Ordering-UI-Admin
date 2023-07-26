@@ -62,7 +62,7 @@ const ProductDetailsUI = (props) => {
     setIsExtendExtraOpen(false)
     setExtraOpen(false)
     setShowOption(null)
-    removeQueryToUrl(['section'])
+    removeQueryToUrl(['section', 'tab', 'tag', 'ingredient', 'extra'])
   }
 
   const actionSidebar = (value) => {
