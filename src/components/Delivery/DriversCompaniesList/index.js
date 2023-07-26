@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import { useLanguage } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { Pagination } from '../../Shared'
@@ -34,10 +35,13 @@ export const DriversCompaniesList = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const query = new URLSearchParams(useLocation().search)
+  const defaultPage = query.get('page') || 1
+  const defaultPageSize = query.get('pageSize') || 10
 
   // Change page
-  const [currentPage, setCurrentPage] = useState(1)
-  const [companiesPerPage, setCompaniesPerPage] = useState(10)
+  const [currentPage, setCurrentPage] = useState(Number(defaultPage) || 1)
+  const [companiesPerPage, setCompaniesPerPage] = useState(Number(defaultPageSize) || 10)
 
   // Get current companies
   const [currentCompanies, setCurrentCompanies] = useState([])

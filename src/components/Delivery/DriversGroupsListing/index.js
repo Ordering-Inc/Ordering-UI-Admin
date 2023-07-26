@@ -35,7 +35,8 @@ const DriversGroupsListingUI = (props) => {
     handleUpdateDriversGroup,
     handleDeleteDriversGroup,
     driversCompanyList,
-    actionDisabled
+    actionDisabled,
+    isUseQuery
   } = props
 
   const history = useHistory()
@@ -208,6 +209,7 @@ const DriversGroupsListingUI = (props) => {
             handleSelectGroup={handleSelectGroup}
             handleAllSelectGroup={handleAllSelectGroup}
             actionDisabled={actionDisabled}
+            isUseQuery={isUseQuery}
           />
         ) : (
           <DriversGroupAddForm
