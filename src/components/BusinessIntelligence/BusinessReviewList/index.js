@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useLanguage, useUtils, DashboardBusinessList as BusinessListController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
 import { StarFill } from 'react-bootstrap-icons'
 import { Confirm, Pagination, SideBar } from '../../Shared'
 import { BusinessReviewDetails } from '../BusinessReviewDetails'
+import { addQueryToUrl, removeQueryToUrl } from '../../../utils'
 
 import {
   ReviewsTable,
@@ -26,10 +27,10 @@ const BusinessReviewsListingUI = (props) => {
     getPageBusinesses,
     handleUpdateReview,
     onSearch,
-    handleOpenProducts
+    handleOpenProducts,
+    isUseQuery
   } = props
 
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const theme = useTheme()
@@ -53,8 +54,7 @@ const BusinessReviewsListingUI = (props) => {
     setCurBusinessId(business.id)
     setOpenReview(true)
     if (!isInitialRender) {
-      const tab = query.get('tab')
-      history.replace(`${location.pathname}?tab=${tab}&id=${business.id}`)
+      addQueryToUrl({ id: business.id })
     }
   }
 
@@ -66,8 +66,7 @@ const BusinessReviewsListingUI = (props) => {
   const handleCloseReviewDetails = () => {
     setCurBusiness(null)
     setOpenReview(false)
-    const tab = query.get('tab')
-    history.replace(`${location.pathname}?tab=${tab}`)
+    removeQueryToUrl(['id'])
   }
 
   useEffect(() => {
@@ -78,6 +77,13 @@ const BusinessReviewsListingUI = (props) => {
       setOpenReview(true)
     }
   }, [])
+  useEffect(() => {
+    if (!isUseQuery || !pagination?.currentPage || !pagination?.pageSize || !pagination?.total) return
+    addQueryToUrl({
+      page: pagination.currentPage,
+      pageSize: pagination.pageSize
+    })
+  }, [pagination?.currentPage, pagination?.pageSize, pagination?.total])
 
   return (
     <>

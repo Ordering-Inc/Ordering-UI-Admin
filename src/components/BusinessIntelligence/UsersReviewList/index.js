@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import {
   useLanguage,
   useUtils,
@@ -9,6 +9,7 @@ import Skeleton from 'react-loading-skeleton'
 import { StarFill, PersonFill } from 'react-bootstrap-icons'
 import { Pagination, SideBar } from '../../Shared'
 import { UserReviewDetails } from '../UserReviewDetails'
+import { addQueryToUrl, removeQueryToUrl } from '../../../utils'
 
 import {
   ReviewsTable,
@@ -28,10 +29,10 @@ const DriversReviewListUI = (props) => {
     paginationProps,
     getUsers,
     onSearch,
-    defaultUserTypesSelected
+    defaultUserTypesSelected,
+    isUseQuery
   } = props
 
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const [{ optimizeImage, parseNumber }] = useUtils()
@@ -66,16 +67,14 @@ const DriversReviewListUI = (props) => {
     if (isInvalid) return
     handleOpenReview(user)
     if (!isInitialRender) {
-      const tab = query.get('tab')
-      history.replace(`${location.pathname}?tab=${tab}&id=${user.id}`)
+      addQueryToUrl({ id: user.id })
     }
   }
 
   const handleCloseReviewDetails = () => {
     setCurUser(null)
     setOpenReview(false)
-    const tab = query.get('tab')
-    history.replace(`${location.pathname}?tab=${tab}`)
+    removeQueryToUrl(['id'])
   }
 
   useEffect(() => {
@@ -85,6 +84,14 @@ const DriversReviewListUI = (props) => {
       setOpenReview(true)
     }
   }, [])
+
+  useEffect(() => {
+    if (!isUseQuery || !paginationProps?.currentPage || !paginationProps?.pageSize || !paginationProps?.totalPages) return
+    addQueryToUrl({
+      page: paginationProps.currentPage,
+      pageSize: paginationProps.pageSize
+    })
+  }, [paginationProps?.currentPage, paginationProps?.pageSize, paginationProps?.totalPages])
 
   return (
     <>
