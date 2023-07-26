@@ -39,7 +39,8 @@ export const OrderContactInformation = (props) => {
     handleOpenMessages,
     isServiceOrder,
     handleUpdateCustomerInfo,
-    setIsCommentPopup
+    setIsCommentPopup,
+    setAddressState
   } = props
 
   const [, t] = useLanguage()
@@ -65,12 +66,16 @@ export const OrderContactInformation = (props) => {
   }
 
   const handleEdit = (event) => {
-    event.stopPropagation()
-    setIsEdit(prev => !prev)
+    if (event.target.closest('#accordion1').getAttribute('data-id') === '1') {
+      event.stopPropagation()
+      setIsEdit(prev => !prev)
+    } else {
+      setIsEdit(true)
+    }
   }
 
   const handleChangeAddress = (e) => {
-    handleChangeCustomerInfoState({
+    setAddressState({
       address: e?.address,
       location: e?.location,
       zipcode: e?.zipcode
@@ -197,6 +202,11 @@ export const OrderContactInformation = (props) => {
                   value={customerInfoState?.customer?.cellphone ?? order?.customer?.cellphone ?? ''}
                   onChange={(e) => {
                     handleChangeCustomerInfoState({ cellphone: e.target.value })
+                  }}
+                  onKeyPress={(e) => {
+                    if (!/^[0-9]$/.test(e.key)) {
+                      e.preventDefault()
+                    }
                   }}
                 />
                 <Input
@@ -395,6 +405,8 @@ const ContextAwareToggle = ({ children, eventKey, callback }) => {
     <ToggleItemWrapper
       active={isCurrentEventKey}
       onClick={handleButtonClick}
+      id={`accordion${eventKey}`}
+      data-id={isCurrentEventKey ? '1' : '0'}
     >
       {children}
     </ToggleItemWrapper>

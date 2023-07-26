@@ -185,6 +185,9 @@ export const SelectorWrapper = styled.div`
 
   .select {
     border: none;
+    > div {
+      padding: 0;
+    }
   }
 `
 

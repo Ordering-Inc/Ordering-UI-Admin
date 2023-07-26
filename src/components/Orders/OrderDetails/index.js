@@ -50,6 +50,7 @@ const OrderDetailsUI = (props) => {
     open,
     handleBackRedirect,
     handleUpdateOrderStatus,
+    setAddressState,
     isTourOpen,
     handleUpdateOrderForUnreadCount,
     messages,
@@ -404,6 +405,7 @@ const OrderDetailsUI = (props) => {
               unreadAlert={unreadAlert}
               isTourOpen={isTourOpen}
               setCurrentTourStep={setCurrentTourStep}
+              setAddressState={setAddressState}
               handleShowOption={handleShowOption}
               setIsCommentPopup={setIsCommentPopup}
             />
