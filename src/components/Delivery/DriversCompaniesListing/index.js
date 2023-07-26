@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import {
   useLanguage,
   DriversCompaniesList as DriversCompaniesListController
@@ -11,6 +11,7 @@ import { Alert, Confirm, SearchBar, SideBar } from '../../Shared'
 import { DriversCompaniesList } from '../DriversCompaniesList'
 import { DriversCompanyDetailsForm } from '../DriversCompanyDetailsForm'
 import { DriversCompanyAddForm } from '../DriversCompanyAddForm'
+import { addQueryToUrl, removeQueryToUrl } from '../../../utils'
 
 import {
   DriversCompaniesListContainer,
@@ -34,7 +35,6 @@ const DriversCompaniesListingUI = (props) => {
     handleDeleteSelectedCompanies
   } = props
 
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
@@ -54,7 +54,7 @@ const DriversCompaniesListingUI = (props) => {
     }
     setOpenDetails(true)
     if (!isInitialRender) {
-      history.replace(`${location.pathname}?id=${driverCompany?.id}`)
+      addQueryToUrl({ id: driverCompany?.id })
     }
   }
 
@@ -82,7 +82,7 @@ const DriversCompaniesListingUI = (props) => {
     setCurDriversCompanyId(null)
     setOpenDetails(false)
     setIsAddMode(false)
-    history.replace(`${location.pathname}`)
+    removeQueryToUrl(['id'])
   }
 
   useEffect(() => {

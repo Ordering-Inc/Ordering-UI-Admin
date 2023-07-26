@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useLanguage, UsersList as UsersListController } from 'ordering-components-admin'
-import { getStorageItem, removeStorageItem, setStorageItem } from '../../../utils'
+import { getStorageItem, removeStorageItem, setStorageItem, addQueryToUrl } from '../../../utils'
 
 import { UsersListingHeader } from '../UsersListingHeader'
 import { UserTypeFilter } from '../UserTypeFilter'
@@ -52,11 +52,11 @@ const DeliveryUsersListingUI = (props) => {
     actionDisabled,
     driversGroupsState,
     setSelectedUsers,
-    actionStatus
+    actionStatus,
+    isUseQuery
   } = props
 
   const [, t] = useLanguage()
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [queryId, setQueryId] = useState(null)
   const [isOpenUserDetails, setIsOpenUserDetails] = useState(false)
@@ -79,7 +79,7 @@ const DeliveryUsersListingUI = (props) => {
     setOpenUser(user)
     setOpenUserAddForm(false)
     setIsOpenUserDetails(true)
-    history.replace(`${location.pathname}?id=${user.id}`)
+    addQueryToUrl({ id: user.id })
   }
 
   const handleOpenUserAddForm = () => {
@@ -210,6 +210,7 @@ const DeliveryUsersListingUI = (props) => {
           handleOpenUserAddForm={handleOpenUserAddForm}
           actionDisabled={actionDisabled}
           setSelectedUsers={setSelectedUsers}
+          isUseQuery={isUseQuery}
         />
       </UsersListingContainer>
 
@@ -268,13 +269,21 @@ const DeliveryUsersListingUI = (props) => {
 }
 
 export const DeliveryUsersListing = (props) => {
+  const query = new URLSearchParams(useLocation().search)
+  const defaultPage = query.get('page') || 1
+  const defaultPageSize = query.get('pageSize') || 10
   const usersListingProps = {
     ...props,
     UIComponent: DeliveryUsersListingUI,
     isSearchByUserEmail: true,
     isSearchByUserPhone: true,
     isSearchByUserName: true,
-    isDriver: true
+    isDriver: true,
+    paginationSettings: {
+      initialPage: props.isUseQuery && !isNaN(defaultPage) ? Number(defaultPage) : 1,
+      pageSize: props.isUseQuery && !isNaN(defaultPage) ? Number(defaultPageSize) : 10,
+      controlType: 'pages'
+    }
   }
   return (
     <UsersListController {...usersListingProps} />

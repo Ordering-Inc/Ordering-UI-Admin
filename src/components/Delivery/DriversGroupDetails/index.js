@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import {
   useLanguage,
   useConfig,
@@ -17,6 +17,7 @@ import { DriversGroupLogistics } from '../DriversGroupLogistics'
 import { DriversGroupLogs } from '../DriversGroupLogs'
 import { DriverGroupDeliveryDetails } from '../DriversGroupDeliveryDetails'
 import { useWindowSize } from '../../../hooks/useWindowSize'
+import { addQueryToUrl } from '../../../utils'
 
 import {
   DetailsContainer,
@@ -40,7 +41,6 @@ const DriversGroupDetailsUI = (props) => {
     driversGroupId
   } = props
 
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const theme = useTheme()
   const [, t] = useLanguage()
@@ -126,8 +126,7 @@ const DriversGroupDetailsUI = (props) => {
   const handleTabClick = (tab, isInitialRender) => {
     setShowMenu(tab)
     if (!isInitialRender) {
-      const id = query.get('id')
-      history.replace(`${location.pathname}?id=${id}&tab=${tab}`)
+      addQueryToUrl({ tab: tab })
     }
   }
 
