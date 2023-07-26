@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useLanguage, UsersList as UsersListController } from 'ordering-components-admin'
 import { getStorageItem, removeStorageItem, setStorageItem, addQueryToUrl } from '../../../utils'
@@ -58,6 +58,7 @@ const DeliveryUsersListingUI = (props) => {
 
   const [, t] = useLanguage()
   const query = new URLSearchParams(useLocation().search)
+  const firstRender = useRef(true)
   const [queryId, setQueryId] = useState(null)
   const [isOpenUserDetails, setIsOpenUserDetails] = useState(false)
   const [openUser, setOpenUser] = useState(null)
@@ -105,7 +106,7 @@ const DeliveryUsersListingUI = (props) => {
   }
 
   useEffect(() => {
-    if (usersList.loading) return
+    if (usersList.loading || !firstRender.current) return
     const id = query.get('id')
     if (id === null) {
       !isDriversManagersPage && setIsOpenUserDetails(false)
@@ -118,6 +119,7 @@ const DeliveryUsersListingUI = (props) => {
       }
       setIsOpenUserDetails(true)
     }
+    firstRender.current = false
   }, [usersList])
 
   const handleCloseAddForm = () => {
