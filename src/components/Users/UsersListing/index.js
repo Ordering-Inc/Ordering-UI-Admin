@@ -45,7 +45,8 @@ const UsersListingUI = (props) => {
     handleSuccessDeleteUser,
     setSelectedUsers,
     handleChangeMultiFilterValues,
-    multiFilterValues
+    multiFilterValues,
+    isUseQuery
   } = props
 
   const [, t] = useLanguage()
@@ -59,7 +60,7 @@ const UsersListingUI = (props) => {
     setIsOpenUserDetails(false)
     setOpenUser(null)
     setQueryId(null)
-    removeQueryToUrl(['id'])
+    removeQueryToUrl(['id', 'tab'])
   }
 
   const handleOpenUserDetails = (user) => {
@@ -146,6 +147,7 @@ const UsersListingUI = (props) => {
           handleOpenUserDetails={handleOpenUserDetails}
           handleOpenUserAddForm={handleOpenUserAddForm}
           setSelectedUsers={setSelectedUsers}
+          isUseQuery={isUseQuery}
         />
       </UsersListingContainer>
 
@@ -181,13 +183,20 @@ const UsersListingUI = (props) => {
 export const UsersListing = (props) => {
   const query = new URLSearchParams(useLocation().search)
   const defaultUserActiveState = query.get('enabled') !== 'inactive'
+  const defaultPage = query.get('page') || 1
+  const defaultPageSize = query.get('pageSize') || 10
   const usersListingProps = {
     ...props,
     defaultUserActiveState,
     UIComponent: UsersListingUI,
     isSearchByUserEmail: true,
     isSearchByUserPhone: true,
-    isSearchByUserName: true
+    isSearchByUserName: true,
+    paginationSettings: {
+      initialPage: props.isUseQuery && !isNaN(defaultPage) ? Number(defaultPage) : 1,
+      pageSize: props.isUseQuery && !isNaN(defaultPage) ? Number(defaultPageSize) : 10,
+      controlType: 'pages'
+    }
   }
   return (
     <UsersListController {...usersListingProps} />

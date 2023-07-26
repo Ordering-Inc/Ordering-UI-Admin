@@ -8,6 +8,7 @@ export const ManagersList = (props) => {
   const [events] = useEvent()
   const usersProps = {
     ...props,
+    isUseQuery: true,
     headerTitle: t('MANAGERS', 'Managers'),
     defaultUserTypesSelected: [0, 2, 9],
     propsToFetch: [
