@@ -119,10 +119,13 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     _useState14 = _slicedToArray(_useState13, 2),
     alertState = _useState14[0],
     setAlertState = _useState14[1];
-  var _useState15 = (0, _react.useState)(false),
+  var _useState15 = (0, _react.useState)({
+      open: false,
+      driverId: null
+    }),
     _useState16 = _slicedToArray(_useState15, 2),
-    isCommentPopup = _useState16[0],
-    setIsCommentPopup = _useState16[1];
+    commentInfoState = _useState16[0],
+    setCommentInfostate = _useState16[1];
   var placeSpotEnabled = [3, 4];
   var _props$order = props.order,
     order = _props$order.order,
@@ -319,8 +322,13 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     history.replace("".concat(location.pathname, "?id=").concat(orderId));
   };
   var onSubmit = function onSubmit(data) {
-    handleUpdateComment(data === null || data === void 0 ? void 0 : data.manual_driver_assignment_comment);
-    setIsCommentPopup(false);
+    handleUpdateComment({
+      comment: data === null || data === void 0 ? void 0 : data.manual_driver_assignment_comment,
+      driverId: commentInfoState === null || commentInfoState === void 0 ? void 0 : commentInfoState.driverId
+    });
+    setCommentInfostate(_objectSpread(_objectSpread({}, commentInfoState), {}, {
+      open: false
+    }));
   };
   (0, _react.useEffect)(function () {
     if (!open) return;
@@ -428,7 +436,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     setCurrentTourStep: setCurrentTourStep,
     setAddressState: setAddressState,
     handleShowOption: handleShowOption,
-    setIsCommentPopup: setIsCommentPopup
+    setCommentInfostate: setCommentInfostate
   }), /*#__PURE__*/_react.default.createElement(_styles2.OrderProducts, null, /*#__PURE__*/_react.default.createElement("h2", null, t('EXPORT_SUMMARY', 'Summary')), (order === null || order === void 0 ? void 0 : (_order$products = order.products) === null || _order$products === void 0 ? void 0 : _order$products.length) && (order === null || order === void 0 ? void 0 : order.products.map(function (product) {
     return /*#__PURE__*/_react.default.createElement(_ProductItemAccordion.ProductItemAccordion, {
       key: product.id,
@@ -551,10 +559,12 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     closeOnBackdrop: false
   }), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "500px",
-    open: isCommentPopup,
+    open: commentInfoState === null || commentInfoState === void 0 ? void 0 : commentInfoState.open,
     title: t('ORDERING', 'Ordering'),
     onClose: function onClose() {
-      return setIsCommentPopup(false);
+      return setCommentInfostate(_objectSpread(_objectSpread({}, commentInfoState), {}, {
+        open: false
+      }));
     }
   }, /*#__PURE__*/_react.default.createElement(_styles2.AssigmentCommentContainer, {
     onSubmit: handleSubmit(onSubmit)
