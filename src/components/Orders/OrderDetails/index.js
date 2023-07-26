@@ -87,7 +87,7 @@ const OrderDetailsUI = (props) => {
   const [extraOpen, setExtraOpen] = useState(false)
   const [isExpand, setIsExpand] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
-  const [isCommentPopup, setIsCommentPopup] = useState(false)
+  const [commentInfoState, setCommentInfostate] = useState({ open: false, driverId: null })
 
   const placeSpotEnabled = [3, 4]
   const {
@@ -272,8 +272,8 @@ const OrderDetailsUI = (props) => {
   }
 
   const onSubmit = (data) => {
-    handleUpdateComment(data?.manual_driver_assignment_comment)
-    setIsCommentPopup(false)
+    handleUpdateComment({ comment: data?.manual_driver_assignment_comment, driverId: commentInfoState?.driverId })
+    setCommentInfostate({ ...commentInfoState, open: false })
   }
 
   useEffect(() => {
@@ -408,7 +408,7 @@ const OrderDetailsUI = (props) => {
               setCurrentTourStep={setCurrentTourStep}
               setAddressState={setAddressState}
               handleShowOption={handleShowOption}
-              setIsCommentPopup={setIsCommentPopup}
+              setCommentInfostate={setCommentInfostate}
             />
             <OrderProducts>
               <h2>{t('EXPORT_SUMMARY', 'Summary')}</h2>
@@ -570,9 +570,9 @@ const OrderDetailsUI = (props) => {
       />
       <Modal
         width='500px'
-        open={isCommentPopup}
+        open={commentInfoState?.open}
         title={t('ORDERING', 'Ordering')}
-        onClose={() => setIsCommentPopup(false)}
+        onClose={() => setCommentInfostate({ ...commentInfoState, open: false })}
       >
         <AssigmentCommentContainer onSubmit={handleSubmit(onSubmit)}>
           <FormControl isError={errors.manual_driver_assignment_comment}>
