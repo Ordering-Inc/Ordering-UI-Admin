@@ -90,7 +90,7 @@ const OrdersFilterGroupUI = (props) => {
 
   const handleClearFilter = () => {
     handleResetFilterValues()
-    // handleChangeFilterValues({})
+    handleChangeFilterValues({})
   }
 
   const handleAddMetafieldValue = () => {
