@@ -226,11 +226,10 @@ export const OpenCartList = (props) => {
               </CartBody>
             ))
           ) : (
-            cartList.carts.map((cart, i) => (
+            cartList.carts.map(cart => (
               <CartBody
-                key={i}
+                key={cart?.id}
                 className={parseInt(cartDetailId) === cart.id ? 'active' : ''}
-
                 onClick={(e) => handleClickCart(cart, e)}
               >
                 <tr>
