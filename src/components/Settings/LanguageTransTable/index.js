@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { useLocation } from 'react-router-dom'
 import { useLanguage, LanguageTransTable as LanguageTransTableController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { Alert, Pagination } from '../../Shared'
 import { LinkButton } from '../../../styles'
+import { addQueryToUrl } from '../../../utils'
 
 import {
   TranslationTableContainer,
@@ -29,9 +31,12 @@ const LanguageTransTableUI = (props) => {
   const [isShowCreation, setIsShowCreation] = useState(false)
   const translationCreateRef = useRef(null)
 
+  const query = new URLSearchParams(useLocation().search)
+  const defaultPage = query.get('page') || 1
+  const defaultPageSize = query.get('pageSize') || 10
   // Change page
-  const [currentPage, setCurrentPage] = useState(1)
-  const [translationPerPage, setTranslationPerPage] = useState(10)
+  const [currentPage, setCurrentPage] = useState(Number(defaultPage) || 1)
+  const [translationPerPage, setTranslationPerPage] = useState(Number(defaultPageSize) || 10)
 
   // Get current products
   const [currentPages, setCurrentPages] = useState([])
@@ -109,6 +114,14 @@ const LanguageTransTableUI = (props) => {
   useEffect(() => {
     if (searchValue) setCurrentPage(1)
   }, [searchValue])
+
+  useEffect(() => {
+    if (!currentPage || !translationPerPage || !totalPages) return
+    addQueryToUrl({
+      page: currentPage,
+      pageSize: translationPerPage
+    })
+  }, [currentPage, translationPerPage, totalPages])
 
   return (
     <>
