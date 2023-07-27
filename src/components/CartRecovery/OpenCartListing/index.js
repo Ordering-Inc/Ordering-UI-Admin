@@ -30,6 +30,7 @@ const OpenCartListingUI = (props) => {
     pagination,
     getCartList,
     onCartRedirect,
+    handleSuccessDeleteCart,
     isUseQuery
   } = props
 
@@ -123,6 +124,7 @@ const OpenCartListingUI = (props) => {
           cart={detailsCart}
           cartId={cartDetailId}
           onClose={() => handleBackRedirect()}
+          handleSuccessDeleteCart={handleSuccessDeleteCart}
         />
       )}
       {totalSelectedOrder > 0 && (
@@ -131,7 +133,6 @@ const OpenCartListingUI = (props) => {
         </WrapperIndicator>
       )}
     </>
-
   )
 }
 
