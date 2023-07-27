@@ -4,8 +4,7 @@ import { SideBar } from '../../Shared'
 import { CampaignDetail } from '../CampaignDetail'
 import { CampaignHeader } from '../CampaignHeader'
 import { CampaignList } from '../CampaignList'
-// import { CampaignListing as CampaignListingController } from 'ordering-components-admin'
-import { CampaignListing as CampaignListingController } from './naked'
+import { CampaignListing as CampaignListingController } from 'ordering-components-admin'
 import { addQueryToUrl, removeQueryToUrl } from '../../../utils'
 
 import {
