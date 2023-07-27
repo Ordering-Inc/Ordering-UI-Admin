@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import {
   useLanguage,
   DriversCompanyDetails as DriversCompanyDetailsController
@@ -12,6 +12,7 @@ import { Alert, Confirm, DragScroll } from '../../Shared'
 import { DriversCompanyGeneralDetails } from '../DriversCompanyGeneralDetails'
 import { DriversCompanyScheduleDetails } from '../DriversCompanyScheduleDetails'
 import { DriversCompanyWebhooksDetails } from '../DriversCompanyWebhooksDetails'
+import { addQueryToUrl } from '../../../utils'
 
 import {
   DetailsContainer,
@@ -33,7 +34,6 @@ const DriversCompanyDetailsFormUI = (props) => {
     handleDeleteDriversCompany
   } = props
 
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const theme = useTheme()
@@ -88,8 +88,7 @@ const DriversCompanyDetailsFormUI = (props) => {
   const handleTabClick = (tab, isInitialRender) => {
     setCurrentTabItem(tab)
     if (!isInitialRender) {
-      const id = query.get('id')
-      history.replace(`${location.pathname}?id=${id}&tab=${tab}`)
+      addQueryToUrl({ tab: tab })
     }
   }
 

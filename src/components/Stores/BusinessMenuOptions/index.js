@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import {
   useLanguage,
   BusinessMenuOptions as BusinessMenuOptionsController
@@ -15,6 +15,7 @@ import { BusinessMenuBasicOptions } from '../BusinessMenuBasicOptions'
 import { BusinessMenuCustomFields } from '../BusinessMenuCustomFields'
 import { BusinessSharedMenuProducts } from '../BusinessSharedMenuProducts'
 import { BusinessMenuChannels } from '../BusinessMenuChannels'
+import { addQueryToUrl } from '../../../utils'
 
 import {
   Container,
@@ -39,7 +40,6 @@ const BusinessMenuOptionsUI = (props) => {
     sitesState
   } = props
 
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const theme = useTheme()
   const [, t] = useLanguage()
@@ -93,11 +93,7 @@ const BusinessMenuOptionsUI = (props) => {
 
   const handleTabClick = (settingTab) => {
     setSelectedMenuOption(settingTab)
-    const businessId = query.get('id')
-    const section = query.get('section')
-    const tab = isSelectedSharedMenus ? 'shared_menus' : 'menu'
-    const menu = query.get('menu')
-    history.replace(`${location.pathname}?id=${businessId}&section=${section}&tab=${tab}&menu=${menu}&setting_tab=${settingTab}`)
+    addQueryToUrl({ setting_tab: settingTab })
   }
 
   useEffect(() => {

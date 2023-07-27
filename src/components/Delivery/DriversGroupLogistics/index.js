@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useLanguage } from 'ordering-components-admin'
 import { Circle, RecordCircleFill, ChevronRight } from 'react-bootstrap-icons'
 import { useWindowSize } from '../../../hooks/useWindowSize'
@@ -8,6 +8,7 @@ import { SideBar, Modal } from '../../Shared'
 import { DriversGroupOrders } from '../DriversGroupOrders'
 import { DriversGroupAutoassign } from '../DriversGroupAutoassign'
 import { DriversMarkAsBusy } from '../DriversMarkAsBusy'
+import { addQueryToUrl } from '../../../utils'
 
 import {
   LogisticsContainer,
@@ -27,7 +28,6 @@ export const DriversGroupLogistics = (props) => {
     actionDisabled
   } = props
 
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const { width } = useWindowSize()
@@ -43,9 +43,7 @@ export const DriversGroupLogistics = (props) => {
     }
 
     if (!isInitialRender) {
-      const id = query.get('id')
-      const tab = query.get('tab')
-      history.replace(`${location.pathname}?id=${id}&tab=${tab}&config=${option}`)
+      addQueryToUrl({ config: option })
     }
   }
 

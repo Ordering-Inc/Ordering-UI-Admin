@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useLanguage, AdBannersList as AdBannersListController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { SideBar, Alert, SearchBar } from '../../Shared'
 import { Button, Switch, IconButton } from '../../../styles'
 import { ArrowsAngleContract, ArrowsAngleExpand, ChevronRight, InfoCircle } from 'react-bootstrap-icons'
 import { BannerDetails } from '../BannerDetails'
+import { addQueryToUrl, removeQueryToUrl } from '../../../utils'
+
 import {
   Container,
   HeaderContainer,
@@ -40,7 +42,6 @@ const PageBannersUI = (props) => {
     showAspectRatioBox
   } = props
 
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const { width } = useWindowSize()
@@ -59,8 +60,7 @@ const PageBannersUI = (props) => {
     setOpenItemsDetail(true)
     setMoveDistance(500)
     if (banner && !isInitialRender) {
-      const position = query.get('position')
-      history.replace(`${location.pathname}?position=${position}&banner=${banner?.id}`)
+      addQueryToUrl({ banner: banner?.id })
     }
   }
 
@@ -68,8 +68,7 @@ const PageBannersUI = (props) => {
     setMoveDistance(0)
     setOpenItemsDetail(false)
     setSelectedBanner(null)
-    const position = query.get('position')
-    history.replace(`${location.pathname}?position=${position}`)
+    removeQueryToUrl(['banner'])
   }
 
   const expandSidebar = () => {

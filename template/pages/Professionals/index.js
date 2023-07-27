@@ -1,13 +1,14 @@
 import React from 'react'
 import { HelmetTags } from '../../components/HelmetTags'
-import { useEvent, useLanguage } from 'ordering-components-admin'
+import { useLanguage } from 'ordering-components-admin'
 import { ProfessionalListing } from '../../../src/components/Users'
+import { addQueryToUrl, removeQueryToUrl } from '../../../src/utils'
 
 export const Professionals = (props) => {
   const [, t] = useLanguage()
-  const [events] = useEvent()
   const professionalProps = {
     ...props,
+    isUseQuery: true,
     headerTitle: t('PROFESSIONALS', 'Professionals'),
     defaultUserTypesSelected: [8],
     propsToFetch: [
@@ -19,9 +20,9 @@ export const Professionals = (props) => {
     ],
     onUserRedirect: (userId) => {
       if (!userId) {
-        return events.emit('go_to_page', { page: 'professionals', replace: true })
+        return removeQueryToUrl(['id', 'section', 'tab'])
       }
-      return events.emit('go_to_page', { page: 'professionals', search: `?id=${userId}` })
+      return addQueryToUrl({ id: userId })
     }
   }
 

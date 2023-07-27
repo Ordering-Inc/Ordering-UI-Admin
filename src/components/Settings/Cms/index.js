@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import { useLanguage, PagesList as PagesListController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { Button, IconButton, Switch, LinkButton } from '../../../styles'
@@ -9,6 +10,7 @@ import { useTheme } from 'styled-components'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { List as MenuIcon } from 'react-bootstrap-icons'
 import { PageForm } from '../PageForm'
+import { addQueryToUrl } from '../../../utils'
 
 import {
   StaticPageListContainer,
@@ -39,9 +41,12 @@ const CmsUI = (props) => {
   const [openModal, setOpenModal] = useState(false)
   const [curPageId, setCurPageId] = useState(null)
 
+  const query = new URLSearchParams(useLocation().search)
+  const defaultPage = query.get('page') || 1
+  const defaultPageSize = query.get('pageSize') || 10
   // Change page
-  const [currentPage, setCurrentPage] = useState(1)
-  const [pagesPerPage, setPagesPerPage] = useState(10)
+  const [currentPage, setCurrentPage] = useState(Number(defaultPage) || 1)
+  const [pagesPerPage, setPagesPerPage] = useState(Number(defaultPageSize) || 10)
 
   // Get current products
   const [currentPages, setCurrentPages] = useState([])
@@ -83,6 +88,14 @@ const CmsUI = (props) => {
     setCurPageId(pageId)
     setOpenModal(true)
   }
+
+  useEffect(() => {
+    if (!currentPage || !pagesPerPage || !totalPages) return
+    addQueryToUrl({
+      page: currentPage,
+      pageSize: pagesPerPage
+    })
+  }, [currentPage, pagesPerPage, totalPages])
 
   return (
     <>

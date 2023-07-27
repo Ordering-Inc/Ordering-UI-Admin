@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage } from 'ordering-components-admin'
 import { ColumnAllowSettingPopover, Pagination } from '../../Shared'
 import { Switch, LinkButton } from '../../../styles'
 import { useTheme } from 'styled-components'
+import { addQueryToUrl } from '../../../utils'
 
 import {
   Container,
@@ -22,7 +23,8 @@ export const RecoveryActionList = (props) => {
     getRecoveryList,
     handleOpenDetail,
     handleUpdateAction,
-    selectedAction
+    selectedAction,
+    isUseQuery
   } = props
 
   const [, t] = useLanguage()
@@ -72,6 +74,14 @@ export const RecoveryActionList = (props) => {
     if (inValid) return
     handleOpenDetail(action)
   }
+
+  useEffect(() => {
+    if (!isUseQuery || !paginationProps?.currentPage || !paginationProps?.pageSize || !paginationProps?.totalPages) return
+    addQueryToUrl({
+      page: paginationProps.currentPage,
+      pageSize: paginationProps.pageSize
+    })
+  }, [paginationProps?.currentPage, paginationProps?.pageSize, paginationProps?.totalPages])
 
   return (
     <>

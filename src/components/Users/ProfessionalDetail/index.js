@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
 import { ThreeDots, Calendar4Event, ArrowsAngleContract, ArrowsAngleExpand } from 'react-bootstrap-icons'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
@@ -12,6 +12,7 @@ import { ProfessionalSchedule } from '../ProfessionalSchedule'
 import { ProfessionalBusinessService } from '../ProfessionalBusinessService'
 import { UserMetaFields } from '../UserMetaFields'
 import { Button, IconButton, Switch } from '../../../styles'
+import { addQueryToUrl } from '../../../utils'
 
 import {
   DetailsHeader,
@@ -35,7 +36,6 @@ export const ProfessionalDetailUI = (props) => {
     actionStatus
   } = props
 
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const theme = useTheme()
   const [adminUserState] = useSession()
@@ -92,14 +92,7 @@ export const ProfessionalDetailUI = (props) => {
   const handleTabClick = (tab, isInitialRender) => {
     setCurrentMenuSelected(tab)
     if (!isInitialRender) {
-      const id = query.get('id')
-      const enabled = query.get('enabled')
-      const section = query.get('section')
-      if (section) {
-        history.replace(`${location.pathname}?enabled=${enabled}&id=${id}&section=${section}&tab=${tab}`)
-      } else {
-        history.replace(`${location.pathname}?enabled=${enabled}&id=${id}&tab=${tab}`)
-      }
+      addQueryToUrl({ tab: tab })
     }
   }
 

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useLanguage, UserWallet as UserWalletController } from 'ordering-components-admin'
 import { CustomerCashWalletDetails } from '../CustomerCashWalletDetails'
 import { CustomerWalletEvents } from '../CustomerWalletEvents'
+import { addQueryToUrl } from '../../../utils'
 
 import {
   Container,
@@ -11,7 +12,6 @@ import {
 } from './styles'
 
 const CustomerCashWalletUI = (props) => {
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const [showOption, setShowOption] = useState('cash_wallet')
@@ -19,10 +19,7 @@ const CustomerCashWalletUI = (props) => {
   const handleTabClick = (tab, isInitialRender) => {
     setShowOption(tab)
     if (!isInitialRender) {
-      const enabled = query.get('enabled')
-      const id = query.get('id')
-      const section = query.get('section')
-      history.replace(`${location.pathname}?enabled=${enabled}&id=${id}&section=${section}&tab=${tab}`)
+      addQueryToUrl({ tab: tab })
     }
   }
 
