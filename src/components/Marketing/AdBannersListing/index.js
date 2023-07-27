@@ -78,6 +78,7 @@ export const AdBannersListing = (props) => {
     const selectedItem = bannerPositions.find(item => item.key === key)
     setOpenPositionDetail(selectedItem)
     if (!isInitialRender) {
+      removeQueryToUrl(['banner'])
       addQueryToUrl({ position: key })
     }
   }
@@ -85,7 +86,7 @@ export const AdBannersListing = (props) => {
   const handleCloseDetails = () => {
     setOpenPositionDetail(null)
     setMoveDistance(0)
-    removeQueryToUrl(['position'])
+    removeQueryToUrl(['position', 'banner'])
   }
 
   useEffect(() => {
