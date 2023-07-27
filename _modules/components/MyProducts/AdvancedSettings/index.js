@@ -139,6 +139,18 @@ var AdvancedSettings = function AdvancedSettings(props) {
     name: t('NEAR_BUSINESS_BLOCK', 'Near business block'),
     type: 'hidden',
     path: 'business_view.components.near_business.hidden'
+  }, {
+    name: t('BUSINESS_LOGO', 'Business logo'),
+    type: 'hidden',
+    path: 'business_view.components.header.components.logo.hidden'
+  }, {
+    name: t('BUSINESS_INFO_ICON', 'Business info icon'),
+    type: 'hidden',
+    path: 'business_view.components.header.components.business_info.hidden'
+  }, {
+    name: t('BUSINESS_HEADER', 'Business header'),
+    type: 'hidden',
+    path: 'business_view.components.header.hidden'
   }];
   var businessInfoList = [{
     name: t('DESCRIPTION', 'Description'),
