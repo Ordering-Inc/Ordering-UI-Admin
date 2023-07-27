@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useConfig, useSession, useLanguage, EnterprisePromotionList as EnterprisePromontioListController } from 'ordering-components-admin'
 import { List as MenuIcon } from 'react-bootstrap-icons'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
@@ -8,6 +8,7 @@ import { Alert, SearchBar, SideBar } from '../../Shared'
 import { EnterprisePromotionList } from '../EnterprisePromotionList'
 import { EnterprisePromotionDetails } from '../EnterprisePromotionDetails'
 import { DisabledFeatureAlert } from '../../DisabledFeatureAlert'
+import { addQueryToUrl, removeQueryToUrl } from '../../../utils'
 
 import {
   PromotionsListingContainer,
@@ -29,7 +30,6 @@ const EnterprisePromotionListingUI = (props) => {
     handleSuccessDeletePromotion
   } = props
 
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
@@ -53,7 +53,7 @@ const EnterprisePromotionListingUI = (props) => {
     setCurPromotionId(promotion?.id)
     setOpenDetails(true)
     if (promotion) {
-      history.replace(`${location.pathname}?id=${promotion?.id}`)
+      addQueryToUrl({ id: promotion?.id })
     }
   }
 
@@ -62,7 +62,7 @@ const EnterprisePromotionListingUI = (props) => {
     setSideBarWidth(600)
     setOpenDetails(false)
     setSelectedPromotion(null)
-    history.replace(`${location.pathname}`)
+    removeQueryToUrl(['id'])
   }
 
   useEffect(() => {
@@ -167,9 +167,17 @@ const EnterprisePromotionListingUI = (props) => {
 }
 
 export const EnterprisePromotionListing = (props) => {
+  const query = new URLSearchParams(useLocation().search)
+  const defaultPage = query.get('page') || 1
+  const defaultPageSize = query.get('pageSize') || 10
   const enterpisePromotionsProps = {
     ...props,
-    UIComponent: EnterprisePromotionListingUI
+    UIComponent: EnterprisePromotionListingUI,
+    paginationSettings: {
+      initialPage: props.isUseQuery && !isNaN(defaultPage) ? Number(defaultPage) : 1,
+      pageSize: props.isUseQuery && !isNaN(defaultPage) ? Number(defaultPageSize) : 10,
+      controlType: 'pages'
+    }
   }
   return <EnterprisePromontioListController {...enterpisePromotionsProps} />
 }

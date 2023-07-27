@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { DragScroll } from '../../Shared'
 import CgSpinnerTwoAlt from '@meronex/icons/cg/CgSpinnerTwoAlt'
+import { useLocation } from 'react-router-dom'
+import { addQueryToUrl } from '../../../utils'
 
 import {
   OrderStatusFilterContainer,
@@ -10,17 +12,32 @@ import {
 
 export const OrderStatusFilterBar = (props) => {
   const {
+    isUseQuery,
     selectedOrderStatus,
     changeOrderStatus,
     ordersAmountByStatus
   } = props
 
+  const [, t] = useLanguage()
+  const query = new URLSearchParams(useLocation().search)
+  const defaultStatus = query.get('status')
+
   const changeSelectedOrderStatus = (orderStatus) => {
     window.scrollTo(0, 0)
     changeOrderStatus(orderStatus)
+    if (isUseQuery) {
+      addQueryToUrl({ status: orderStatus })
+    }
   }
 
-  const [, t] = useLanguage()
+  useEffect(() => {
+    if (!isUseQuery) return
+    if (defaultStatus) {
+      changeOrderStatus(defaultStatus)
+      return
+    }
+    addQueryToUrl({ status: 'pending' })
+  }, [])
 
   return (
     <>

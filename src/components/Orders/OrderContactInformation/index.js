@@ -54,8 +54,6 @@ export const OrderContactInformation = (props) => {
   const [currentCustomer, setCurrentCustomer] = useState(null)
   const [isEdit, setIsEdit] = useState(false)
 
-  console.log(customerInfoState, 'customerInfoState')
-
   const pastOrderStatuses = [1, 2, 5, 6, 10, 11, 12, 15, 16, 17]
 
   const handleReviewCustomer = (customer) => {

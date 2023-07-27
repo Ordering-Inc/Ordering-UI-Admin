@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useLanguage } from 'ordering-components-admin'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { IconButton } from '../../../styles'
 import { InvoiceDetails } from '../InvoiceDetails'
 import { SideBar } from '../../Shared'
+import { addQueryToUrl, removeQueryToUrl } from '../../../utils'
 
 import {
   List as MenuIcon,
@@ -21,7 +22,6 @@ import {
 } from './styles'
 
 export const InvoiceManager = (props) => {
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
@@ -37,14 +37,14 @@ export const InvoiceManager = (props) => {
     setOpenInvoiceDetail(true)
     setSelectedInvoice(index)
     if (!isInitialRender) {
-      history.replace(`${location.pathname}?invoice=${index}`)
+      addQueryToUrl({ invoice: index })
     }
   }
 
   const handleCloseInvoiceDetail = () => {
     setOpenInvoiceDetail(false)
     setSelectedInvoice(null)
-    history.replace(`${location.pathname}`)
+    removeQueryToUrl(['invoice', 'tab'])
   }
 
   useEffect(() => {

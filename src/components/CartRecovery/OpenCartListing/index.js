@@ -29,7 +29,9 @@ const OpenCartListingUI = (props) => {
     cartList,
     pagination,
     getCartList,
-    onCartRedirect
+    onCartRedirect,
+    handleSuccessDeleteCart,
+    isUseQuery
   } = props
 
   const query = new URLSearchParams(useLocation().search)
@@ -110,6 +112,7 @@ const OpenCartListingUI = (props) => {
                 getCartList={getCartList}
                 handleSelectedCartIds={handleSelectedCartIds}
                 handleOpenCartDetail={handleOpenCartDetail}
+                isUseQuery={isUseQuery}
               />
             </WrapItemView>
           </OpenCartsInnerContent>
@@ -121,6 +124,7 @@ const OpenCartListingUI = (props) => {
           cart={detailsCart}
           cartId={cartDetailId}
           onClose={() => handleBackRedirect()}
+          handleSuccessDeleteCart={handleSuccessDeleteCart}
         />
       )}
       {totalSelectedOrder > 0 && (
@@ -129,16 +133,23 @@ const OpenCartListingUI = (props) => {
         </WrapperIndicator>
       )}
     </>
-
   )
 }
 
 export const OpenCartListing = (props) => {
+  const query = new URLSearchParams(useLocation().search)
+  const defaultPage = query.get('page') || 1
+  const defaultPageSize = query.get('pageSize') || 10
   const openCartsProps = {
     ...props,
     UIComponent: OpenCartListingUI,
     isSearchByCartId: true,
-    isSearchByCityName: true
+    isSearchByCityName: true,
+    paginationSettings: {
+      initialPage: props.isUseQuery && !isNaN(defaultPage) ? Number(defaultPage) : 1,
+      pageSize: props.isUseQuery && !isNaN(defaultPage) ? Number(defaultPageSize) : 10,
+      controlType: 'pages'
+    }
   }
   return <OpenCartListingController {...openCartsProps} />
 }

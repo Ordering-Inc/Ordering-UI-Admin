@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useLanguage } from 'ordering-components-admin'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
@@ -10,6 +10,7 @@ import { useTheme } from 'styled-components'
 import { ThreeDots, XLg } from 'react-bootstrap-icons'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { Confirm } from '../../Shared'
+import { addQueryToUrl } from '../../../utils'
 
 import {
   Container,
@@ -35,7 +36,6 @@ export const PaymentOption = (props) => {
     handleDeletePaymethod
   } = props
 
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const theme = useTheme()
   const [, t] = useLanguage()
@@ -125,10 +125,7 @@ export const PaymentOption = (props) => {
   const handleTabClick = (tab, isInitialRender) => {
     setPaymentTabs(tab)
     if (!isInitialRender) {
-      const businessId = query.get('id')
-      const section = query.get('section')
-      const paymethod = query.get('paymethod')
-      history.replace(`${location.pathname}?id=${businessId}&section=${section}&paymethod=${paymethod}&payemthod_tab=${tab}`)
+      addQueryToUrl({ payemthod_tab: tab })
     }
   }
 

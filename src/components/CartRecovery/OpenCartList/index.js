@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 // import { Square, CheckSquareFill } from 'react-bootstrap-icons'
 import Skeleton from 'react-loading-skeleton'
@@ -8,6 +8,8 @@ import {
 } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import { ColumnAllowSettingPopover, Pagination } from '../../Shared'
+import { addQueryToUrl } from '../../../utils'
+
 import {
   CartsContainer,
   Table,
@@ -31,7 +33,8 @@ export const OpenCartList = (props) => {
     getCartList,
     // handleSelectedCartIds,
     // setSelectedCartIds,
-    handleOpenCartDetail
+    handleOpenCartDetail,
+    isUseQuery
   } = props
 
   const [, t] = useLanguage()
@@ -117,6 +120,14 @@ export const OpenCartList = (props) => {
   //   const _isAllChecked = cartIds.every(elem => selectedCartIds.includes(elem))
   //   setIsAllChecked(_isAllChecked)
   // }, [cartList.carts, selectedCartIds])
+
+  useEffect(() => {
+    if (!isUseQuery || !pagination?.currentPage || !pagination?.pageSize || !pagination?.totalPages) return
+    addQueryToUrl({
+      page: pagination.currentPage,
+      pageSize: pagination.pageSize
+    })
+  }, [pagination?.currentPage, pagination?.pageSize, pagination?.totalPages])
 
   return (
     <>
@@ -226,11 +237,10 @@ export const OpenCartList = (props) => {
               </CartBody>
             ))
           ) : (
-            cartList.carts.map((cart, i) => (
+            cartList.carts.map(cart => (
               <CartBody
-                key={i}
+                key={cart?.id}
                 className={parseInt(cartDetailId) === cart.id ? 'active' : ''}
-
                 onClick={(e) => handleClickCart(cart, e)}
               >
                 <tr>

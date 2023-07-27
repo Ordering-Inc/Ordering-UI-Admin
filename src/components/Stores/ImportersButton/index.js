@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useLanguage } from 'ordering-components-admin'
 import { Upload } from 'react-bootstrap-icons'
 import { Button } from '../../../styles'
 import { ImportersListing } from '../ImportersListing'
 import { SideBar } from '../../Shared'
 import { CsvImportButtonWrapper } from './styles'
+import { addQueryToUrl, removeQueryToUrl } from '../../../utils'
 
 export const ImportersButton = (props) => {
   const { setOpenSidebar } = props
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const [openImporters, setOpenImporters] = useState(false)
@@ -18,13 +18,12 @@ export const ImportersButton = (props) => {
   const handleOpenImporters = () => {
     setOpenSidebar && setOpenSidebar('importer')
     setOpenImporters(true)
-
-    history.replace(`${location.pathname}?header=importers`)
+    addQueryToUrl({ header: 'importers' })
   }
 
   const handleCloseImporters = () => {
     setOpenImporters(false)
-    history.replace(`${location.pathname}`)
+    removeQueryToUrl(['header'])
   }
 
   useEffect(() => {

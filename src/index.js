@@ -400,7 +400,7 @@ import {
 import { LogoutButton } from './components/LogoutButton'
 import { LanguageSelector } from './components/LanguageSelector'
 
-import { capitalize, verifyDecimals, setStorageItem, getStorageItem } from './utils'
+import { capitalize, verifyDecimals, setStorageItem, getStorageItem, addQueryToUrl, removeQueryToUrl } from './utils'
 
 // contexts
 import { ThemeContext, ThemeProvider, useTheme } from './contexts/ThemeContext'
@@ -821,6 +821,8 @@ export {
   verifyDecimals,
   setStorageItem,
   getStorageItem,
+  addQueryToUrl,
+  removeQueryToUrl,
 
   // contexts
   ThemeContext,

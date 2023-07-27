@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useLanguage, UserWallet as UserWalletController } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import Skeleton from 'react-loading-skeleton'
 import { CustomerWalletEvents } from '../CustomerWalletEvents'
 import { Button, Input, TextArea } from '../../../styles'
 import { Alert } from '../../Shared'
+import { addQueryToUrl } from '../../../utils'
 
 import {
   Container,
@@ -33,7 +34,6 @@ const CustomerPointsWalletUI = (props) => {
     handleReduceWalletMoney
   } = props
 
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const theme = useTheme()
@@ -44,10 +44,7 @@ const CustomerPointsWalletUI = (props) => {
   const handleTabClick = (tab, isInitialRender) => {
     setShowOption(tab)
     if (!isInitialRender) {
-      const enabled = query.get('enabled')
-      const id = query.get('id')
-      const section = query.get('section')
-      history.replace(`${location.pathname}?enabled=${enabled}&id=${id}&section=${section}&tab=${tab}`)
+      addQueryToUrl({ tab: tab })
     }
   }
 

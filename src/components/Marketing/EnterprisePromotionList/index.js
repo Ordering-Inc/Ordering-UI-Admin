@@ -5,6 +5,7 @@ import { useTheme } from 'styled-components'
 import { Image as ImageIcon } from 'react-bootstrap-icons'
 import { ColumnAllowSettingPopover, Pagination } from '../../Shared'
 import { Switch, LinkButton } from '../../../styles'
+import { addQueryToUrl } from '../../../utils'
 
 import {
   PromotionListContainer,
@@ -39,7 +40,8 @@ export const EnterprisePromotionList = (props) => {
     handleDrop,
     handleDragEnd,
     handleEnablePromotion,
-    isPromotionBottom
+    isPromotionBottom,
+    isUseQuery
   } = props
 
   const [, t] = useLanguage()
@@ -106,6 +108,14 @@ export const EnterprisePromotionList = (props) => {
       handleChangePage(paginationProps.currentPage - 1)
     }
   }, [promotionListState.promotions, paginationProps])
+
+  useEffect(() => {
+    if (!isUseQuery || !paginationProps?.currentPage || !paginationProps?.pageSize || !paginationProps?.totalPages) return
+    addQueryToUrl({
+      page: paginationProps.currentPage,
+      pageSize: paginationProps.pageSize
+    })
+  }, [paginationProps?.currentPage, paginationProps?.pageSize, paginationProps?.totalPages])
 
   return (
     <>

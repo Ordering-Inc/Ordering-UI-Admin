@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { RecoveryActionListing as RecoveryActionListingController } from 'ordering-components-admin'
 import { RecoveryActionHeader } from '../RecoveryActionHeader'
 import { RecoveryActionList } from '../RecoveryActionList'
 import { SideBar } from '../../Shared'
 import { RecoveryActionDetail } from '../RecoveryActionDetail'
 import { RecoveryActionAdd } from '../RecoveryActionAdd'
+import { addQueryToUrl, removeQueryToUrl } from '../../../utils'
 
 import {
   RecoveryActionsContainer
 } from './styles'
 
 const RecoveryActionListingUI = (props) => {
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [isOpenDetail, setIsOpenDetail] = useState(false)
   const [selectedAction, setSelectedAction] = useState(null)
@@ -23,7 +23,7 @@ const RecoveryActionListingUI = (props) => {
     setIsOpenDetail(false)
     setSelectedAction(null)
     setIsAddMode(false)
-    history.replace(`${location.pathname}`)
+    removeQueryToUrl(['id', 'tab'])
   }
 
   const handleOpenDetail = (action, isInitialRender) => {
@@ -32,13 +32,13 @@ const RecoveryActionListingUI = (props) => {
     setIsOpenDetail(true)
     if (!Object.keys(action || {}).length) {
       setIsAddMode(true)
-      history.replace(`${location.pathname}`)
+      removeQueryToUrl(['id'])
       return
     } else {
       setIsAddMode(false)
     }
     if (action && !isInitialRender) {
-      history.replace(`${location.pathname}?id=${action.id}`)
+      addQueryToUrl({ id: action.id })
     }
   }
 
@@ -92,11 +92,19 @@ const RecoveryActionListingUI = (props) => {
 }
 
 export const RecoveryActionListing = (props) => {
+  const query = new URLSearchParams(useLocation().search)
+  const defaultPage = query.get('page') || 1
+  const defaultPageSize = query.get('pageSize') || 10
   const recoveryActionsProps = {
     ...props,
     UIComponent: RecoveryActionListingUI,
     isSearchByName: true,
-    isSearchByDescription: true
+    isSearchByDescription: true,
+    paginationSettings: {
+      initialPage: props.isUseQuery && !isNaN(defaultPage) ? Number(defaultPage) : 1,
+      pageSize: props.isUseQuery && !isNaN(defaultPage) ? Number(defaultPageSize) : 10,
+      controlType: 'pages'
+    }
   }
   return <RecoveryActionListingController {...recoveryActionsProps} />
 }
