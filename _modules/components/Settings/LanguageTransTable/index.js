@@ -6,10 +6,12 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.LanguageTransTable = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _Shared = require("../../Shared");
 var _styles = require("../../../styles");
+var _utils = require("../../../utils");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -53,13 +55,15 @@ var LanguageTransTableUI = function LanguageTransTableUI(props) {
     isShowCreation = _useState4[0],
     setIsShowCreation = _useState4[1];
   var translationCreateRef = (0, _react.useRef)(null);
-
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
+  var defaultPage = query.get('page') || 1;
+  var defaultPageSize = query.get('pageSize') || 10;
   // Change page
-  var _useState5 = (0, _react.useState)(1),
+  var _useState5 = (0, _react.useState)(Number(defaultPage) || 1),
     _useState6 = _slicedToArray(_useState5, 2),
     currentPage = _useState6[0],
     setCurrentPage = _useState6[1];
-  var _useState7 = (0, _react.useState)(10),
+  var _useState7 = (0, _react.useState)(Number(defaultPageSize) || 10),
     _useState8 = _slicedToArray(_useState7, 2),
     translationPerPage = _useState8[0],
     setTranslationPerPage = _useState8[1];
@@ -144,6 +148,13 @@ var LanguageTransTableUI = function LanguageTransTableUI(props) {
   (0, _react.useEffect)(function () {
     if (searchValue) setCurrentPage(1);
   }, [searchValue]);
+  (0, _react.useEffect)(function () {
+    if (!currentPage || !translationPerPage || !totalPages) return;
+    (0, _utils.addQueryToUrl)({
+      page: currentPage,
+      pageSize: translationPerPage
+    });
+  }, [currentPage, translationPerPage, totalPages]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.TranslationTableContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.TranslationTable, null, /*#__PURE__*/_react.default.createElement(_styles2.TableHeader, null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, t('KEY', 'Key')), /*#__PURE__*/_react.default.createElement("th", null, t('TEXT', 'Text')))), translationList !== null && translationList !== void 0 && translationList.loading ? _toConsumableArray(Array(5).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.TableBody, {
       key: i

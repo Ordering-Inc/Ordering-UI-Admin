@@ -45,7 +45,8 @@ var DeliveriesManagerUI = function DeliveriesManagerUI(props) {
     onOrderRedirect = props.onOrderRedirect,
     numberOfOrdersBySubstatus = props.numberOfOrdersBySubstatus,
     timeStatus = props.timeStatus,
-    setTimeStatus = props.setTimeStatus;
+    setTimeStatus = props.setTimeStatus,
+    isUseQuery = props.isUseQuery;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -135,7 +136,8 @@ var DeliveriesManagerUI = function DeliveriesManagerUI(props) {
     timeStatus: timeStatus,
     ordersAmountByStatus: ordersAmountByStatus,
     setOrdersAmountByStatus: setOrdersAmountByStatus,
-    numberOfOrdersBySubstatus: numberOfOrdersBySubstatus
+    numberOfOrdersBySubstatus: numberOfOrdersBySubstatus,
+    isUseQuery: isUseQuery
   })))), isOpenOrderDetail && /*#__PURE__*/_react.default.createElement(_OrderDetails.OrderDetails, {
     open: isOpenOrderDetail,
     order: detailsOrder,

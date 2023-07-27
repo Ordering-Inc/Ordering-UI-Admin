@@ -55,7 +55,8 @@ var OrdersTable = function OrdersTable(props) {
     allowColumns = props.allowColumns,
     setAllowColumns = props.setAllowColumns,
     handleDrop = props.handleDrop,
-    saveUserSettings = props.saveUserSettings;
+    saveUserSettings = props.saveUserSettings,
+    isUseQuery = props.isUseQuery;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -362,6 +363,13 @@ var OrdersTable = function OrdersTable(props) {
       return document.removeEventListener('keydown', handleChangeKeyboard);
     };
   }, [isTourOpen, currentTourStep]);
+  (0, _react.useEffect)(function () {
+    if (!isUseQuery || !(pagination !== null && pagination !== void 0 && pagination.currentPage) || !(pagination !== null && pagination !== void 0 && pagination.pageSize) || !(pagination !== null && pagination !== void 0 && pagination.total)) return;
+    (0, _utils.addQueryToUrl)({
+      page: pagination.currentPage,
+      pageSize: pagination.pageSize
+    });
+  }, [pagination === null || pagination === void 0 ? void 0 : pagination.currentPage, pagination === null || pagination === void 0 ? void 0 : pagination.pageSize, pagination === null || pagination === void 0 ? void 0 : pagination.total]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OrdersContainer, {
     id: "orderTable",
     isSelectedOrders: isSelectedOrders,

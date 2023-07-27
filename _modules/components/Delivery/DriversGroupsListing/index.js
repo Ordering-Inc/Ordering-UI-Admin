@@ -51,7 +51,8 @@ var DriversGroupsListingUI = function DriversGroupsListingUI(props) {
     handleUpdateDriversGroup = props.handleUpdateDriversGroup,
     handleDeleteDriversGroup = props.handleDeleteDriversGroup,
     driversCompanyList = props.driversCompanyList,
-    actionDisabled = props.actionDisabled;
+    actionDisabled = props.actionDisabled,
+    isUseQuery = props.isUseQuery;
   var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -122,9 +123,11 @@ var DriversGroupsListingUI = function DriversGroupsListingUI(props) {
       setTimeout(function () {
         setCurrentTourStep(5);
       }, 50);
-      history.replace("".concat(location.pathname));
+      (0, _utils.removeQueryToUrl)(['id']);
     } else {
-      history.replace("".concat(location.pathname, "?id=").concat(driverGroup.id));
+      (0, _utils.addQueryToUrl)({
+        id: driverGroup.id
+      });
     }
   };
   (0, _react.useEffect)(function () {
@@ -195,7 +198,7 @@ var DriversGroupsListingUI = function DriversGroupsListingUI(props) {
     setCurDriversGroup(null);
     setOpenDetails(false);
     setIsTourOpen(false);
-    history.replace("".concat(location.pathname));
+    (0, _utils.removeQueryToUrl)(['id']);
   };
   (0, _react.useEffect)(function () {
     getDataFromStorage();
@@ -251,7 +254,8 @@ var DriversGroupsListingUI = function DriversGroupsListingUI(props) {
     selectedGroupList: selectedGroupList,
     handleSelectGroup: handleSelectGroup,
     handleAllSelectGroup: handleAllSelectGroup,
-    actionDisabled: actionDisabled
+    actionDisabled: actionDisabled,
+    isUseQuery: isUseQuery
   }) : /*#__PURE__*/_react.default.createElement(_DriversGroupAddForm.DriversGroupAddForm, {
     driversGroupsState: driversGroupsState,
     setDriversGroupsState: setDriversGroupsState,

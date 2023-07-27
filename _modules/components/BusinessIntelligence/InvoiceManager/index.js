@@ -12,6 +12,7 @@ var _InfoShareContext = require("../../../contexts/InfoShareContext");
 var _styles = require("../../../styles");
 var _InvoiceDetails = require("../InvoiceDetails");
 var _Shared = require("../../Shared");
+var _utils = require("../../../utils");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _styles2 = require("./styles");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -23,7 +24,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var InvoiceManager = function InvoiceManager(props) {
-  var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -57,13 +57,15 @@ var InvoiceManager = function InvoiceManager(props) {
     setOpenInvoiceDetail(true);
     setSelectedInvoice(index);
     if (!isInitialRender) {
-      history.replace("".concat(location.pathname, "?invoice=").concat(index));
+      (0, _utils.addQueryToUrl)({
+        invoice: index
+      });
     }
   };
   var handleCloseInvoiceDetail = function handleCloseInvoiceDetail() {
     setOpenInvoiceDetail(false);
     setSelectedInvoice(null);
-    history.replace("".concat(location.pathname));
+    (0, _utils.removeQueryToUrl)(['invoice', 'tab']);
   };
   (0, _react.useEffect)(function () {
     var invoice = query.get('invoice');

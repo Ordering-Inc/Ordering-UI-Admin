@@ -19,6 +19,7 @@ var _BusinessMenuBasicOptions = require("../BusinessMenuBasicOptions");
 var _BusinessMenuCustomFields = require("../BusinessMenuCustomFields");
 var _BusinessSharedMenuProducts = require("../BusinessSharedMenuProducts");
 var _BusinessMenuChannels = require("../BusinessMenuChannels");
+var _utils = require("../../../utils");
 var _styles2 = require("./styles");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -44,7 +45,6 @@ var BusinessMenuOptionsUI = function BusinessMenuOptionsUI(props) {
     handleDeleteMenu = props.handleDeleteMenu,
     setIsOpenSharedProduct = props.setIsOpenSharedProduct,
     sitesState = props.sitesState;
-  var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -111,11 +111,9 @@ var BusinessMenuOptionsUI = function BusinessMenuOptionsUI(props) {
   }, [menu]);
   var handleTabClick = function handleTabClick(settingTab) {
     setSelectedMenuOption(settingTab);
-    var businessId = query.get('id');
-    var section = query.get('section');
-    var tab = isSelectedSharedMenus ? 'shared_menus' : 'menu';
-    var menu = query.get('menu');
-    history.replace("".concat(location.pathname, "?id=").concat(businessId, "&section=").concat(section, "&tab=").concat(tab, "&menu=").concat(menu, "&setting_tab=").concat(settingTab));
+    (0, _utils.addQueryToUrl)({
+      setting_tab: settingTab
+    });
   };
   (0, _react.useEffect)(function () {
     if (isSelectedSharedMenus) {} else {

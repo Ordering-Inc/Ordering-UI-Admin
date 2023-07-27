@@ -57,7 +57,8 @@ var OrdersListing = function OrdersListing(props) {
     setAllowColumns = props.setAllowColumns,
     handleDrop = props.handleDrop,
     isDelivery = props.isDelivery,
-    saveUserSettings = props.saveUserSettings;
+    saveUserSettings = props.saveUserSettings,
+    isUseQuery = props.isUseQuery;
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -128,7 +129,8 @@ var OrdersListing = function OrdersListing(props) {
     allowColumns: allowColumns,
     setAllowColumns: setAllowColumns,
     handleDrop: handleDrop,
-    saveUserSettings: saveUserSettings
+    saveUserSettings: saveUserSettings,
+    isUseQuery: isUseQuery
   }) : /*#__PURE__*/_react.default.createElement(_OrdersCards.OrdersCards, {
     isMessagesView: isMessagesView,
     orderList: orderList,
@@ -143,7 +145,8 @@ var OrdersListing = function OrdersListing(props) {
     handleOrderCardClick: handleOrderCardClick,
     handleUpdateDriverLocation: handleUpdateDriverLocation,
     slaSettingTime: slaSettingTime,
-    isDelivery: isDelivery
+    isDelivery: isDelivery,
+    isUseQuery: isUseQuery
   }))));
 };
 exports.OrdersListing = OrdersListing;

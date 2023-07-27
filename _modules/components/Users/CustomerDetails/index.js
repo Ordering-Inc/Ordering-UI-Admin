@@ -16,6 +16,7 @@ var _UserDetails = require("../UserDetails");
 var _CustomerCashWallet = require("../CustomerCashWallet");
 var _Shared = require("../../Shared");
 var _styles = require("../../../styles");
+var _utils = require("../../../utils");
 var _styles2 = require("./styles");
 var _CustomerPointsWallet = require("../CustomerPointsWallet");
 var _useWindowSize2 = require("../../../hooks/useWindowSize");
@@ -40,7 +41,6 @@ var CustomerDetailsUI = function CustomerDetailsUI(props) {
     handleParentSidebarMove = props.handleParentSidebarMove,
     handleChangeActiveUser = props.handleChangeActiveUser,
     setSideBarWidth = props.setSideBarWidth;
-  var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -106,9 +106,9 @@ var CustomerDetailsUI = function CustomerDetailsUI(props) {
     handleParentSidebarMove(isExpand ? width / 2 : 500);
     setIsOpenMenu(true);
     if (!isInitialRender) {
-      var enabled = query.get('enabled');
-      var id = query.get('id');
-      history.replace("".concat(location.pathname, "?enabled=").concat(enabled, "&id=").concat(id, "&section=").concat(key));
+      (0, _utils.addQueryToUrl)({
+        section: key
+      });
     }
   };
   var handleCloseMenu = function handleCloseMenu() {
@@ -117,9 +117,7 @@ var CustomerDetailsUI = function CustomerDetailsUI(props) {
     setShowOption(null);
     setIsOpenMenu(false);
     setMenuMoveDistance(0);
-    var enabled = query.get('enabled');
-    var id = query.get('id');
-    history.replace("".concat(location.pathname, "?eanbled=").concat(enabled, "&id=").concat(id));
+    (0, _utils.removeQueryToUrl)(['section', 'tab']);
   };
   var expandSidebar = function expandSidebar() {
     var element = document.getElementById('customer_details');

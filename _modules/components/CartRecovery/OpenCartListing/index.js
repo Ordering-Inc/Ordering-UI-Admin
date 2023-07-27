@@ -41,7 +41,9 @@ var OpenCartListingUI = function OpenCartListingUI(props) {
     cartList = props.cartList,
     pagination = props.pagination,
     getCartList = props.getCartList,
-    onCartRedirect = props.onCartRedirect;
+    onCartRedirect = props.onCartRedirect,
+    handleSuccessDeleteCart = props.handleSuccessDeleteCart,
+    isUseQuery = props.isUseQuery;
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
@@ -121,21 +123,31 @@ var OpenCartListingUI = function OpenCartListingUI(props) {
     cartDetailId: cartDetailId,
     getCartList: getCartList,
     handleSelectedCartIds: handleSelectedCartIds,
-    handleOpenCartDetail: handleOpenCartDetail
+    handleOpenCartDetail: handleOpenCartDetail,
+    isUseQuery: isUseQuery
   }))))), isOpenCartDetail && /*#__PURE__*/_react.default.createElement(_OpenCartsDetail.OpenCartsDetail, {
     open: isOpenCartDetail,
     cart: detailsCart,
     cartId: cartDetailId,
     onClose: function onClose() {
       return handleBackRedirect();
-    }
+    },
+    handleSuccessDeleteCart: handleSuccessDeleteCart
   }), totalSelectedOrder > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperIndicator, null, setSelectedCartIds.length, "/", totalSelectedOrder));
 };
 var OpenCartListing = function OpenCartListing(props) {
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
+  var defaultPage = query.get('page') || 1;
+  var defaultPageSize = query.get('pageSize') || 10;
   var openCartsProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: OpenCartListingUI,
     isSearchByCartId: true,
-    isSearchByCityName: true
+    isSearchByCityName: true,
+    paginationSettings: {
+      initialPage: props.isUseQuery && !isNaN(defaultPage) ? Number(defaultPage) : 1,
+      pageSize: props.isUseQuery && !isNaN(defaultPage) ? Number(defaultPageSize) : 10,
+      controlType: 'pages'
+    }
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.OpenCartListing, openCartsProps);
 };

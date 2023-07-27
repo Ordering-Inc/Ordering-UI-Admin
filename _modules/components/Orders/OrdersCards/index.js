@@ -13,6 +13,7 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 var _FaUserAlt = _interopRequireDefault(require("@meronex/icons/fa/FaUserAlt"));
 var _Shared = require("../../Shared");
 var _useWindowSize2 = require("../../../hooks/useWindowSize");
+var _utils = require("../../../utils");
 var _styles = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -43,7 +44,8 @@ var OrdersCards = function OrdersCards(props) {
     handleOrderCardClick = props.handleOrderCardClick,
     handleUpdateDriverLocation = props.handleUpdateDriverLocation,
     slaSettingTime = props.slaSettingTime,
-    isDelivery = props.isDelivery;
+    isDelivery = props.isDelivery,
+    isUseQuery = props.isUseQuery;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -224,6 +226,13 @@ var OrdersCards = function OrdersCards(props) {
       slaBar: slaSettings
     }));
   }, [configState.loading]);
+  (0, _react.useEffect)(function () {
+    if (!isUseQuery || !(pagination !== null && pagination !== void 0 && pagination.currentPage) || !(pagination !== null && pagination !== void 0 && pagination.pageSize) || !(pagination !== null && pagination !== void 0 && pagination.total)) return;
+    (0, _utils.addQueryToUrl)({
+      page: pagination.currentPage,
+      pageSize: pagination.pageSize
+    });
+  }, [pagination === null || pagination === void 0 ? void 0 : pagination.currentPage, pagination === null || pagination === void 0 ? void 0 : pagination.pageSize, pagination === null || pagination === void 0 ? void 0 : pagination.total]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OrdersListContainer, null, orderList.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.OrderCard, {
       key: i

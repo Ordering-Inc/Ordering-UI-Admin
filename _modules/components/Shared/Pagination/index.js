@@ -82,7 +82,7 @@ var Pagination = function Pagination(props) {
     setActivePage(currentPage);
     var _visiblePages = getVisiblePages(currentPage, totalPages);
     setVisiblePages(filterPages(_visiblePages, totalPages));
-  }, [currentPage]);
+  }, [currentPage, totalPages]);
   return /*#__PURE__*/_react.default.createElement(_styles.PaginationContainer, null, /*#__PURE__*/_react.default.createElement(_styles.PaginationButtonContainer, null, /*#__PURE__*/_react.default.createElement(_styles.PageButton, {
     disabled: activePage === 1,
     onClick: function onClick() {

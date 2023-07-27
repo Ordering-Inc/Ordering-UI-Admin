@@ -17,6 +17,7 @@ var _styledComponents = require("styled-components");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _reactBootstrap = require("react-bootstrap");
 var _Shared = require("../../Shared");
+var _utils = require("../../../utils");
 var _styles3 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -49,7 +50,6 @@ var PaymentOption = function PaymentOption(props) {
     handleSaveClick = props.handleSaveClick,
     businessPaymethod = props.businessPaymethod,
     handleDeletePaymethod = props.handleDeletePaymethod;
-  var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -162,10 +162,9 @@ var PaymentOption = function PaymentOption(props) {
   var handleTabClick = function handleTabClick(tab, isInitialRender) {
     setPaymentTabs(tab);
     if (!isInitialRender) {
-      var businessId = query.get('id');
-      var section = query.get('section');
-      var paymethod = query.get('paymethod');
-      history.replace("".concat(location.pathname, "?id=").concat(businessId, "&section=").concat(section, "&paymethod=").concat(paymethod, "&payemthod_tab=").concat(tab));
+      (0, _utils.addQueryToUrl)({
+        payemthod_tab: tab
+      });
     }
   };
   (0, _react.useEffect)(function () {

@@ -15,6 +15,7 @@ var _ChatContactList = require("../ChatContactList");
 var _ChatBusinessesList = require("../ChatBusinessesList");
 var _Shared = require("../../Shared");
 var _useWindowSize2 = require("../../../hooks/useWindowSize");
+var _utils = require("../../../utils");
 var _styles = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -39,8 +40,8 @@ var MessagesListingUI = function MessagesListingUI(props) {
     filterValues = props.filterValues,
     selectedSubOrderStatus = props.selectedSubOrderStatus,
     handleChangeSearch = props.handleChangeSearch,
-    handleChangeFilterValues = props.handleChangeFilterValues;
-  var history = (0, _reactRouterDom.useHistory)();
+    handleChangeFilterValues = props.handleChangeFilterValues,
+    isUseQuery = props.isUseQuery;
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -91,7 +92,15 @@ var MessagesListingUI = function MessagesListingUI(props) {
     setDetailsOrder(order);
     setOrderDetailId(order.id);
     setIsOpenOrderDetail(true);
-    history.replace("".concat(location.pathname, "?id=").concat(order.id));
+    if (isUseQuery) {
+      (0, _utils.addQueryToUrl)({
+        id: order.id
+      });
+    }
+  };
+  var handleCloseOrderDetail = function handleCloseOrderDetail() {
+    setIsOpenOrderDetail(false);
+    (0, _utils.removeQueryToUrl)(['id']);
   };
   var handleOrderCardClick = function handleOrderCardClick(order) {
     setSelectedOrder(_objectSpread({}, order));
@@ -170,7 +179,8 @@ var MessagesListingUI = function MessagesListingUI(props) {
     orderIdForUnreadCountUpdate: orderIdForUnreadCountUpdate,
     handleOpenOrderDetail: handleOpenOrderDetail,
     handleOrderCardClick: handleOrderCardClick,
-    timeStatus: timeStatus
+    timeStatus: timeStatus,
+    isUseQuery: isUseQuery
   }), selectedOption === 'contacts' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, contactsOption === 'drivers' && /*#__PURE__*/_react.default.createElement(_ChatContactList.ChatContactList, {
     isDriver: true
   }), contactsOption === 'customers' && /*#__PURE__*/_react.default.createElement(_ChatContactList.ChatContactList, {
@@ -188,7 +198,7 @@ var MessagesListingUI = function MessagesListingUI(props) {
     orderId: orderDetailId,
     drivers: driversList.drivers,
     onClose: function onClose() {
-      return setIsOpenOrderDetail(false);
+      return handleCloseOrderDetail();
     }
   }), /*#__PURE__*/_react.default.createElement(_Orders.OrderNotification, null));
 };

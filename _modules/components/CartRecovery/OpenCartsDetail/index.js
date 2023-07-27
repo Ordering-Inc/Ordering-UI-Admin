@@ -7,6 +7,8 @@ Object.defineProperty(exports, "__esModule", {
 exports.OpenCartsDetail = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _orderingComponentsAdmin = require("ordering-components-admin");
+var _reactBootstrap = require("react-bootstrap");
+var _styledComponents = require("styled-components");
 var _ProductItemAccordion = require("../../Orders/ProductItemAccordion");
 var _useWindowSize2 = require("../../../hooks/useWindowSize");
 var _OpenCartBill = require("../OpenCartBill");
@@ -35,7 +37,9 @@ var OpenCartsDetailUI = function OpenCartsDetailUI(props) {
   var isSelectedOrders = props.isSelectedOrders,
     open = props.open,
     handleBackRedirect = props.handleBackRedirect,
-    cartState = props.cartState;
+    cartState = props.cartState,
+    handleDeleteCart = props.handleDeleteCart;
+  var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -52,6 +56,14 @@ var OpenCartsDetailUI = function OpenCartsDetailUI(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     isExpand = _useState4[0],
     setIsExpand = _useState4[1];
+  var _useState5 = (0, _react.useState)({
+      open: false,
+      content: null,
+      handleOnAccept: null
+    }),
+    _useState6 = _slicedToArray(_useState5, 2),
+    confirm = _useState6[0],
+    setConfirm = _useState6[1];
   var actionSidebar = function actionSidebar(value) {
     setIsMenuOpen(value);
     if (!value) {
@@ -84,6 +96,18 @@ var OpenCartsDetailUI = function OpenCartsDetailUI(props) {
     if (isExpand) element.style.width = '500px';else element.style.width = '100vw';
     setIsExpand(function (prev) {
       return !prev;
+    });
+  };
+  var onDeleteCart = function onDeleteCart(cart) {
+    setConfirm({
+      open: true,
+      content: t('QUESTION_DELETE_CART', 'Are you sure that you want to delete this cart?'),
+      handleOnAccept: function handleOnAccept() {
+        setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
+          open: false
+        }));
+        handleDeleteCart(cart);
+      }
     });
   };
   (0, _react.useEffect)(function () {
@@ -140,7 +164,15 @@ var OpenCartsDetailUI = function OpenCartsDetailUI(props) {
   }))), /*#__PURE__*/_react.default.createElement(_styles2.ButtonGroup, null, width > 576 && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: expandSidebar
-  }, isExpand ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowsAngleContract, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowsAngleExpand, null)), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+  }, isExpand ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowsAngleContract, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowsAngleExpand, null)), /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
+    menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
+    title: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDots, null),
+    id: theme !== null && theme !== void 0 && theme.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+    onClick: function onClick() {
+      return onDeleteCart(cartState === null || cartState === void 0 ? void 0 : cartState.cart);
+    }
+  }, t('DELETE', 'Delete')))), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {
       return props.onClose() && props.onClose();
@@ -158,6 +190,24 @@ var OpenCartsDetailUI = function OpenCartsDetailUI(props) {
     content: t('NOT_FOUND_ORDER', 'Sorry, we couldn\'t find the requested order.'),
     btnTitle: t('PROFILE_ORDERS_REDIRECT', 'Go to Orders'),
     onClickButton: handleBackRedirect
+  }), /*#__PURE__*/_react.default.createElement(_Shared.Confirm, {
+    width: "700px",
+    title: t('WEB_APPNAME', 'Ordering'),
+    content: confirm.content,
+    acceptText: t('ACCEPT', 'Accept'),
+    open: confirm.open,
+    onClose: function onClose() {
+      return setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
+        open: false
+      }));
+    },
+    onCancel: function onCancel() {
+      return setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
+        open: false
+      }));
+    },
+    onAccept: confirm.handleOnAccept,
+    closeOnBackdrop: false
   }));
 };
 var OpenCartsDetail = function OpenCartsDetail(props) {

@@ -27,6 +27,7 @@ var _BusinessFrontLayout = require("../BusinessFrontLayout");
 var _BusinessPlaceGroupList = require("../BusinessPlaceGroupList");
 var _SpoonityApiKey = require("../SpoonityApiKey");
 var _Shared = require("../../Shared");
+var _utils = require("../../../utils");
 var _styles = require("./styles");
 var _BusinessSalesChannel = require("../BusinessSalesChannel");
 var _BusinessQRCodeOptions = require("../BusinessQRCodeOptions");
@@ -67,7 +68,6 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
     handleUpdateSpoonityKey = props.handleUpdateSpoonityKey,
     spoonityKeyState = props.spoonityKeyState,
     siteState = props.siteState;
-  var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -136,16 +136,16 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
     setSelectedItem(item);
     setExtraOpen(true);
     if (!isInitialRender) {
-      var _businessId = query.get('id');
-      history.replace("".concat(location.pathname, "?id=").concat(_businessId, "&section=").concat(item));
+      (0, _utils.addQueryToUrl)({
+        section: item
+      });
     }
   };
   var handleCloseExtraOpen = function handleCloseExtraOpen() {
     setIsExtendExtraOpen(false);
     setExtraOpen(false);
     setSelectedItem(null);
-    var businessId = query.get('id');
-    history.replace("".concat(location.pathname, "?id=").concat(businessId));
+    (0, _utils.removeQueryToUrl)(['section', 'tab', 'business_type', 'paymethod', 'payemthod_tab', 'setting_tab', 'menu', 'zone', 'zone_tab', 'wallet']);
   };
   (0, _react.useEffect)(function () {
     if (!open) return;

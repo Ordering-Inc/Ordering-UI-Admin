@@ -13,6 +13,7 @@ var _RecoveryActionList = require("../RecoveryActionList");
 var _Shared = require("../../Shared");
 var _RecoveryActionDetail = require("../RecoveryActionDetail");
 var _RecoveryActionAdd = require("../RecoveryActionAdd");
+var _utils = require("../../../utils");
 var _styles = require("./styles");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -29,7 +30,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var RecoveryActionListingUI = function RecoveryActionListingUI(props) {
-  var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
@@ -51,7 +51,7 @@ var RecoveryActionListingUI = function RecoveryActionListingUI(props) {
     setIsOpenDetail(false);
     setSelectedAction(null);
     setIsAddMode(false);
-    history.replace("".concat(location.pathname));
+    (0, _utils.removeQueryToUrl)(['id', 'tab']);
   };
   var handleOpenDetail = function handleOpenDetail(action, isInitialRender) {
     setSelectedAction(action);
@@ -59,13 +59,15 @@ var RecoveryActionListingUI = function RecoveryActionListingUI(props) {
     setIsOpenDetail(true);
     if (!Object.keys(action || {}).length) {
       setIsAddMode(true);
-      history.replace("".concat(location.pathname));
+      (0, _utils.removeQueryToUrl)(['id']);
       return;
     } else {
       setIsAddMode(false);
     }
     if (action && !isInitialRender) {
-      history.replace("".concat(location.pathname, "?id=").concat(action.id));
+      (0, _utils.addQueryToUrl)({
+        id: action.id
+      });
     }
   };
   (0, _react.useEffect)(function () {
@@ -102,10 +104,18 @@ var RecoveryActionListingUI = function RecoveryActionListingUI(props) {
   }))));
 };
 var RecoveryActionListing = function RecoveryActionListing(props) {
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
+  var defaultPage = query.get('page') || 1;
+  var defaultPageSize = query.get('pageSize') || 10;
   var recoveryActionsProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: RecoveryActionListingUI,
     isSearchByName: true,
-    isSearchByDescription: true
+    isSearchByDescription: true,
+    paginationSettings: {
+      initialPage: props.isUseQuery && !isNaN(defaultPage) ? Number(defaultPage) : 1,
+      pageSize: props.isUseQuery && !isNaN(defaultPage) ? Number(defaultPageSize) : 10,
+      controlType: 'pages'
+    }
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.RecoveryActionListing, recoveryActionsProps);
 };

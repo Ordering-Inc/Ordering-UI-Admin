@@ -16,6 +16,7 @@ var _Shared = require("../../Shared");
 var _styles = require("../../../styles");
 var _SeoOptions = require("../SeoOptions");
 var _useWindowSize2 = require("../../../hooks/useWindowSize");
+var _utils = require("../../../utils");
 var _BusinessCategoryInfoSettingList = require("../BusinessCategoryInfoSettingList");
 var _BusinessProductsCategoyInfo = require("../BusinessProductsCategoyInfo");
 var _styles2 = require("./styles");
@@ -50,7 +51,6 @@ var BusinessProductsCategoyDetailsUI = function BusinessProductsCategoyDetailsUI
     handleChangeRibbon = props.handleChangeRibbon,
     isTutorialMode = props.isTutorialMode,
     handleTutorialSkip = props.handleTutorialSkip;
-  var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -120,8 +120,9 @@ var BusinessProductsCategoyDetailsUI = function BusinessProductsCategoyDetailsUI
   var handleTabClick = function handleTabClick(tab, isInitialRender) {
     setSelctedInfoItem(tab);
     if (!isInitialRender) {
-      var _category = query.get('category');
-      history.replace("".concat(location.pathname, "?category=").concat(_category, "&tab=").concat(tab));
+      (0, _utils.addQueryToUrl)({
+        tab: tab
+      });
     }
   };
   (0, _react.useEffect)(function () {

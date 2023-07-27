@@ -59,7 +59,8 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     handleCustomOrderDetail = props.handleCustomOrderDetail,
     setSelectedOrderIds = props.setSelectedOrderIds,
     allowColumns = props.allowColumns,
-    setAllowColumns = props.setAllowColumns;
+    setAllowColumns = props.setAllowColumns,
+    isUseQuery = props.isUseQuery;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -241,6 +242,7 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.MainContentContainer, null, /*#__PURE__*/_react.default.createElement(_styles.TopContent, null, /*#__PURE__*/_react.default.createElement(_styles.DriversContainer, null, /*#__PURE__*/_react.default.createElement(_DriversManager.DriversManager, {
     setMapsData: setMapsData
   })), /*#__PURE__*/_react.default.createElement(_styles.OrdersContainer, null, /*#__PURE__*/_react.default.createElement(_OrderStatusFilterBar.OrderStatusFilterBar, {
+    isUseQuery: isUseQuery,
     selectedOrderStatus: ordersStatusGroup,
     changeOrderStatus: handleOrdersStatusGroupFilter,
     ordersAmountByStatus: ordersAmountByStatus
@@ -285,7 +287,8 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     slaSettingTime: slaSettingTime,
     allowColumns: allowColumns,
     setAllowColumns: setAllowColumns,
-    setOrdersAmountByStatus: setOrdersAmountByStatus
+    setOrdersAmountByStatus: setOrdersAmountByStatus,
+    isUseQuery: isUseQuery
   })))))), /*#__PURE__*/_react.default.createElement(_styles.WrapperDriversLocation, null, /*#__PURE__*/_react.default.createElement(_DriversLocation.DriversLocation, {
     driversIsOnline: mapsData.driversIsOnline,
     selectedDriver: mapsData.selectedDriver,

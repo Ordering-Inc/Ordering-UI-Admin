@@ -12,6 +12,7 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _Shared = require("../../Shared");
 var _FirstSelect = require("../../../styles/Select/FirstSelect");
+var _utils = require("../../../utils");
 var _styles = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -36,7 +37,6 @@ var BusinessWalletsListUI = function BusinessWalletsListUI(props) {
     isClose = props.isClose,
     handleClosePaymethodDetails = props.handleClosePaymethodDetails,
     handleUpdateWallet = props.handleUpdateWallet;
-  var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -73,9 +73,9 @@ var BusinessWalletsListUI = function BusinessWalletsListUI(props) {
     setIsExtendExtraOpen(true);
     setIsOpenDetails(true);
     if (!isInitialRender) {
-      var businessId = query.get('id');
-      var section = query.get('section');
-      history.replace("".concat(location.pathname, "?id=").concat(businessId, "&section=").concat(section, "&wallet=").concat(config.id));
+      (0, _utils.addQueryToUrl)({
+        wallet: config.id
+      });
     }
   };
   var handleCloseWallet = function handleCloseWallet() {
@@ -83,9 +83,7 @@ var BusinessWalletsListUI = function BusinessWalletsListUI(props) {
     setIsOpenDetails(false);
     setIsExtendExtraOpen(false);
     setCurrentConfig(null);
-    var businessId = query.get('id');
-    var section = query.get('section');
-    history.replace("".concat(location.pathname, "?id=").concat(businessId, "&section=").concat(section));
+    (0, _utils.removeQueryToUrl)(['wallet']);
   };
   (0, _react.useEffect)(function () {
     var _currentConfig$option;

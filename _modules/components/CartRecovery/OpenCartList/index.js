@@ -11,6 +11,7 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _styledComponents = require("styled-components");
 var _Shared = require("../../Shared");
+var _utils = require("../../../utils");
 var _styles = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -36,7 +37,8 @@ var OpenCartList = function OpenCartList(props) {
     pagination = props.pagination,
     cartDetailId = props.cartDetailId,
     getCartList = props.getCartList,
-    handleOpenCartDetail = props.handleOpenCartDetail;
+    handleOpenCartDetail = props.handleOpenCartDetail,
+    isUseQuery = props.isUseQuery;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -121,6 +123,13 @@ var OpenCartList = function OpenCartList(props) {
   //   setIsAllChecked(_isAllChecked)
   // }, [cartList.carts, selectedCartIds])
 
+  (0, _react.useEffect)(function () {
+    if (!isUseQuery || !(pagination !== null && pagination !== void 0 && pagination.currentPage) || !(pagination !== null && pagination !== void 0 && pagination.pageSize) || !(pagination !== null && pagination !== void 0 && pagination.totalPages)) return;
+    (0, _utils.addQueryToUrl)({
+      page: pagination.currentPage,
+      pageSize: pagination.pageSize
+    });
+  }, [pagination === null || pagination === void 0 ? void 0 : pagination.currentPage, pagination === null || pagination === void 0 ? void 0 : pagination.pageSize, pagination === null || pagination === void 0 ? void 0 : pagination.totalPages]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CartsContainer, {
     id: "cartTable"
   }, /*#__PURE__*/_react.default.createElement(_styles.Table, {
@@ -198,10 +207,10 @@ var OpenCartList = function OpenCartList(props) {
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 60
     }))))));
-  }) : cartList.carts.map(function (cart, i) {
+  }) : cartList.carts.map(function (cart) {
     var _cart$business, _theme$images, _theme$images$dummies, _cart$business2, _cart$city, _cart$user, _cart$user2, _cart$user3, _cart$user4, _cart$user5, _cart$user6;
     return /*#__PURE__*/_react.default.createElement(_styles.CartBody, {
-      key: i,
+      key: cart === null || cart === void 0 ? void 0 : cart.id,
       className: parseInt(cartDetailId) === cart.id ? 'active' : '',
       onClick: function onClick(e) {
         return handleClickCart(cart, e);

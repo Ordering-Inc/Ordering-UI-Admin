@@ -66,8 +66,8 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     filterValues = props.filterValues,
     businessTypeSelected = props.businessTypeSelected,
     inActiveBusinesses = props.inActiveBusinesses,
-    citiesList = props.citiesList;
-  var history = (0, _reactRouterDom.useHistory)();
+    citiesList = props.citiesList,
+    isUseQuery = props.isUseQuery;
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -210,16 +210,19 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     }
     if (method === 'card') {
       getPageBusinesses(50, 1);
+      (0, _utils.removeQueryToUrl)(['page', 'pageSize']);
     }
   };
   var handleOpenSync = function handleOpenSync() {
     setOpenSync(true);
-    history.replace("".concat(location.pathname, "?header=sync"));
+    (0, _utils.addQueryToUrl)({
+      header: 'sync'
+    });
   };
   var handleCloseSync = function handleCloseSync() {
     setMoveDistance(0);
     setOpenSync(false);
-    history.replace("".concat(location.pathname));
+    (0, _utils.removeQueryToUrl)(['header', 'tab']);
   };
   (0, _react.useEffect)(function () {
     handleSetStorage();
@@ -246,6 +249,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     handleChangeFilterValues: handleChangeFilterValues,
     filterValues: filterValues
   }), !noBusinesses && /*#__PURE__*/_react.default.createElement(_styles.ViewContainer, null, /*#__PURE__*/_react.default.createElement(_BusinessActiveStateFilter.BusinessActiveStateFilter, {
+    isUseQuery: isUseQuery,
     selectedBusinessActiveState: selectedBusinessActiveState,
     handleChangeBusinessActiveState: handleChangeBusinessActiveState
   }), /*#__PURE__*/_react.default.createElement(_styles.WrapperView, null, /*#__PURE__*/_react.default.createElement(_styles.ViewMethodButton, {
@@ -295,7 +299,8 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     handleEnableAllBusiness: handleEnableAllBusiness,
     selectedBusinessActiveState: selectedBusinessActiveState,
     handleGotToAdd: handleGotToAdd,
-    citiesList: citiesList
+    citiesList: citiesList,
+    isUseQuery: isUseQuery && viewMethod === 'list'
   })), openBusinessDetails && /*#__PURE__*/_react.default.createElement(_BusinessDetails.BusinessDetails, {
     open: openBusinessDetails
     // business={detailsBusiness}
@@ -337,12 +342,22 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_BusinessAddStore.BusinessAddStore, null)));
 };
 var BusinessesListing = function BusinessesListing(props) {
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
+  var defaultPage = query.get('page') || 1;
+  var defaultPageSize = query.get('pageSize') || 10;
+  var defaultActive = query.get('active');
   var businessListingProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessesListingUI,
     asDashboard: true,
     isSearchByBusinessName: true,
     isSearchByBusinessEmail: true,
-    isSearchByBusinessPhone: true
+    isSearchByBusinessPhone: true,
+    paginationSettings: {
+      initialPage: props.isUseQuery && !isNaN(defaultPage) ? Number(defaultPage) : 1,
+      pageSize: props.isUseQuery && !isNaN(defaultPage) ? Number(defaultPageSize) : 10,
+      controlType: 'pages'
+    },
+    defaultActive: defaultActive === 'true'
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DashboardBusinessList, businessListingProps);
 };

@@ -5,6 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.OrdersDashboardList = void 0;
 var _react = _interopRequireDefault(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _OrdersListing = require("../OrdersListing");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -19,7 +20,12 @@ var OrdersDashboardList = function OrdersDashboardList(props) {
   var selectedSubOrderStatus = props.selectedSubOrderStatus,
     isMessagesView = props.isMessagesView,
     orderByOption = props.orderByOption,
-    setOrdersAmountByStatus = props.setOrdersAmountByStatus;
+    setOrdersAmountByStatus = props.setOrdersAmountByStatus,
+    isUseQuery = props.isUseQuery;
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
+  var defaultStatus = query.get('status');
+  var defaultPage = query.get('page') || 1;
+  var defaultPageSize = query.get('pageSize') || 10;
   var OrdersCommonControlProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: _OrdersListing.OrdersListing,
     useDefualtSessionManager: true,
@@ -36,10 +42,19 @@ var OrdersDashboardList = function OrdersDashboardList(props) {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isMessagesView ? /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DashboardOrdersList, _extends({
     isMessagesView: true
   }, OrdersCommonControlProps, {
+    paginationSettings: {
+      initialPage: isUseQuery && !isNaN(defaultPage) ? Number(defaultPage) : 1,
+      pageSize: isUseQuery && !isNaN(defaultPage) ? Number(defaultPageSize) : 10,
+      controlType: 'pages'
+    },
     orderStatus: selectedSubOrderStatus === null || selectedSubOrderStatus === void 0 ? void 0 : selectedSubOrderStatus.all
-  })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DashboardOrdersList, _extends({
-    groupStatus: "pending"
-  }, OrdersCommonControlProps, {
+  })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DashboardOrdersList, _extends({}, OrdersCommonControlProps, {
+    paginationSettings: {
+      initialPage: isUseQuery && defaultStatus === 'pending' && !isNaN(defaultPage) ? Number(defaultPage) : 1,
+      pageSize: isUseQuery && defaultStatus === 'pending' && !isNaN(defaultPage) ? Number(defaultPageSize) : 10,
+      controlType: 'pages'
+    },
+    groupStatus: "pending",
     orderStatus: selectedSubOrderStatus === null || selectedSubOrderStatus === void 0 ? void 0 : selectedSubOrderStatus.pending,
     setOrdersTotalAmount: function setOrdersTotalAmount(total) {
       return setOrdersAmountByStatus(function (prevState) {
@@ -51,6 +66,11 @@ var OrdersDashboardList = function OrdersDashboardList(props) {
   })), /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DashboardOrdersList, _extends({
     groupStatus: "inProgress"
   }, OrdersCommonControlProps, {
+    paginationSettings: {
+      initialPage: isUseQuery && defaultStatus === 'inProgress' && !isNaN(defaultPage) ? Number(defaultPage) : 1,
+      pageSize: isUseQuery && defaultStatus === 'inProgress' && !isNaN(defaultPage) ? Number(defaultPageSize) : 10,
+      controlType: 'pages'
+    },
     orderStatus: selectedSubOrderStatus === null || selectedSubOrderStatus === void 0 ? void 0 : selectedSubOrderStatus.inProgress,
     setOrdersTotalAmount: function setOrdersTotalAmount(total) {
       return setOrdersAmountByStatus(function (prevState) {
@@ -62,6 +82,11 @@ var OrdersDashboardList = function OrdersDashboardList(props) {
   })), /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DashboardOrdersList, _extends({
     groupStatus: "completed"
   }, OrdersCommonControlProps, {
+    paginationSettings: {
+      initialPage: isUseQuery && defaultStatus === 'completed' && !isNaN(defaultPage) ? Number(defaultPage) : 1,
+      pageSize: isUseQuery && defaultStatus === 'completed' && !isNaN(defaultPage) ? Number(defaultPageSize) : 10,
+      controlType: 'pages'
+    },
     orderStatus: selectedSubOrderStatus === null || selectedSubOrderStatus === void 0 ? void 0 : selectedSubOrderStatus.completed,
     setOrdersTotalAmount: function setOrdersTotalAmount(total) {
       return setOrdersAmountByStatus(function (prevState) {
@@ -73,6 +98,11 @@ var OrdersDashboardList = function OrdersDashboardList(props) {
   })), /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DashboardOrdersList, _extends({
     groupStatus: "cancelled"
   }, OrdersCommonControlProps, {
+    paginationSettings: {
+      initialPage: isUseQuery && defaultStatus === 'cancelled' && !isNaN(defaultPage) ? Number(defaultPage) : 1,
+      pageSize: isUseQuery && defaultStatus === 'cancelled' && !isNaN(defaultPage) ? Number(defaultPageSize) : 10,
+      controlType: 'pages'
+    },
     orderStatus: selectedSubOrderStatus === null || selectedSubOrderStatus === void 0 ? void 0 : selectedSubOrderStatus.cancelled,
     setOrdersTotalAmount: function setOrdersTotalAmount(total) {
       return setOrdersAmountByStatus(function (prevState) {

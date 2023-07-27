@@ -12,6 +12,7 @@ var _FaUserAlt = _interopRequireDefault(require("@meronex/icons/fa/FaUserAlt"));
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _styles = require("../../../styles");
 var _Shared = require("../../Shared");
+var _utils = require("../../../utils");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -41,7 +42,8 @@ var ProfessionalList = function ProfessionalList(props) {
     handleSelectedUsers = props.handleSelectedUsers,
     handleOpenUserDetails = props.handleOpenUserDetails,
     handleOpenUserAddForm = props.handleOpenUserAddForm,
-    setSelectedUsers = props.setSelectedUsers;
+    setSelectedUsers = props.setSelectedUsers,
+    isUseQuery = props.isUseQuery;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -160,6 +162,13 @@ var ProfessionalList = function ProfessionalList(props) {
     });
     setIsAllChecked(_isAllChecked);
   }, [usersList.users, selectedUsers]);
+  (0, _react.useEffect)(function () {
+    if (!isUseQuery || !(paginationProps !== null && paginationProps !== void 0 && paginationProps.currentPage) || !(paginationProps !== null && paginationProps !== void 0 && paginationProps.pageSize) || !(paginationProps !== null && paginationProps !== void 0 && paginationProps.totalPages)) return;
+    (0, _utils.addQueryToUrl)({
+      page: paginationProps.currentPage,
+      pageSize: paginationProps.pageSize
+    });
+  }, [paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.currentPage, paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.pageSize, paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.totalPages]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.UsersConatiner, null, /*#__PURE__*/_react.default.createElement(_styles2.UserTableWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.UsersTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.user) && /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles2.AllCheckWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, {
     className: "user_checkbox",
     isChecked: !(usersList !== null && usersList !== void 0 && usersList.loading) && isAllChecked,

@@ -12,6 +12,7 @@ var _styles = require("../../../styles");
 var _styledComponents = require("styled-components");
 var _SingleBusiness = require("../SingleBusiness");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
+var _utils = require("../../../utils");
 var _styles2 = require("./styles");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -49,7 +50,8 @@ var BusinessesList = function BusinessesList(props) {
     selectedBusinessActiveState = props.selectedBusinessActiveState,
     setBusinessIds = props.setBusinessIds,
     handleGotToAdd = props.handleGotToAdd,
-    citiesList = props.citiesList;
+    citiesList = props.citiesList,
+    isUseQuery = props.isUseQuery;
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -138,6 +140,13 @@ var BusinessesList = function BusinessesList(props) {
     });
     setIsAllChecked(_isAllChecked);
   }, [JSON.stringify(businessList.businesses), businessIds]);
+  (0, _react.useEffect)(function () {
+    if (!isUseQuery || !(pagination !== null && pagination !== void 0 && pagination.currentPage) || !(pagination !== null && pagination !== void 0 && pagination.pageSize) || !(pagination !== null && pagination !== void 0 && pagination.total)) return;
+    (0, _utils.addQueryToUrl)({
+      page: pagination.currentPage,
+      pageSize: pagination.pageSize
+    });
+  }, [pagination === null || pagination === void 0 ? void 0 : pagination.currentPage, pagination === null || pagination === void 0 ? void 0 : pagination.pageSize, pagination === null || pagination === void 0 ? void 0 : pagination.total]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, viewMethod === 'list' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.BusinessListContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.BusinessListTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles2.BusinessIdWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, {
     className: "all-checkbox",
     isChecked: !(businessList !== null && businessList !== void 0 && businessList.loading) && isAllChecked,

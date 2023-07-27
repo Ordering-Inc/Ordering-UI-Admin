@@ -6,12 +6,14 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.DriversCompaniesList = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _Shared = require("../../Shared");
 var _MdCheckBoxOutlineBlank = _interopRequireDefault(require("@meronex/icons/md/MdCheckBoxOutlineBlank"));
 var _MdCheckBox = _interopRequireDefault(require("@meronex/icons/md/MdCheckBox"));
 var _styles = require("../../../styles");
+var _utils = require("../../../utils");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -34,17 +36,21 @@ var DriversCompaniesList = function DriversCompaniesList(props) {
     handleUpdateDriversCompany = props.handleUpdateDriversCompany,
     handleSelectCompany = props.handleSelectCompany,
     selectedCompanyList = props.selectedCompanyList,
-    handleAllSelectCompany = props.handleAllSelectCompany;
+    handleAllSelectCompany = props.handleAllSelectCompany,
+    isUseQuery = props.isUseQuery;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
+  var defaultPage = query.get('page') || 1;
+  var defaultPageSize = query.get('pageSize') || 10;
 
   // Change page
-  var _useState = (0, _react.useState)(1),
+  var _useState = (0, _react.useState)(Number(defaultPage) || 1),
     _useState2 = _slicedToArray(_useState, 2),
     currentPage = _useState2[0],
     setCurrentPage = _useState2[1];
-  var _useState3 = (0, _react.useState)(10),
+  var _useState3 = (0, _react.useState)(Number(defaultPageSize) || 10),
     _useState4 = _slicedToArray(_useState3, 2),
     companiesPerPage = _useState4[0],
     setCompaniesPerPage = _useState4[1];
@@ -106,6 +112,13 @@ var DriversCompaniesList = function DriversCompaniesList(props) {
     if (isInvalid) return;
     handleOpenDetails(company);
   };
+  (0, _react.useEffect)(function () {
+    if (!isUseQuery || !currentPage || !companiesPerPage || !totalPages) return;
+    (0, _utils.addQueryToUrl)({
+      page: currentPage,
+      pageSize: companiesPerPage
+    });
+  }, [currentPage, companiesPerPage, totalPages]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.DriversCompaniesContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.TableWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.CompaniesTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles2.CompanyNameContainer, {
     isHeader: true
   }, /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, {

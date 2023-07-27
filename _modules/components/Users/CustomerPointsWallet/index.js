@@ -13,6 +13,7 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 var _CustomerWalletEvents = require("../CustomerWalletEvents");
 var _styles = require("../../../styles");
 var _Shared = require("../../Shared");
+var _utils = require("../../../utils");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -38,7 +39,6 @@ var CustomerPointsWalletUI = function CustomerPointsWalletUI(props) {
     reduceWalletState = props.reduceWalletState,
     handleAddWalletMoney = props.handleAddWalletMoney,
     handleReduceWalletMoney = props.handleReduceWalletMoney;
-  var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -58,10 +58,9 @@ var CustomerPointsWalletUI = function CustomerPointsWalletUI(props) {
   var handleTabClick = function handleTabClick(tab, isInitialRender) {
     setShowOption(tab);
     if (!isInitialRender) {
-      var enabled = query.get('enabled');
-      var id = query.get('id');
-      var section = query.get('section');
-      history.replace("".concat(location.pathname, "?enabled=").concat(enabled, "&id=").concat(id, "&section=").concat(section, "&tab=").concat(tab));
+      (0, _utils.addQueryToUrl)({
+        tab: tab
+      });
     }
   };
   (0, _react.useEffect)(function () {

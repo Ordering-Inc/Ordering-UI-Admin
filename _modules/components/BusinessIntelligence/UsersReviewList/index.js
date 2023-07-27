@@ -12,6 +12,7 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _Shared = require("../../Shared");
 var _UserReviewDetails = require("../UserReviewDetails");
+var _utils = require("../../../utils");
 var _styles = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -37,8 +38,8 @@ var DriversReviewListUI = function DriversReviewListUI(props) {
     paginationProps = props.paginationProps,
     getUsers = props.getUsers,
     onSearch = props.onSearch,
-    defaultUserTypesSelected = props.defaultUserTypesSelected;
-  var history = (0, _reactRouterDom.useHistory)();
+    defaultUserTypesSelected = props.defaultUserTypesSelected,
+    isUseQuery = props.isUseQuery;
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -83,15 +84,15 @@ var DriversReviewListUI = function DriversReviewListUI(props) {
     if (isInvalid) return;
     handleOpenReview(user);
     if (!isInitialRender) {
-      var tab = query.get('tab');
-      history.replace("".concat(location.pathname, "?tab=").concat(tab, "&id=").concat(user.id));
+      (0, _utils.addQueryToUrl)({
+        id: user.id
+      });
     }
   };
   var handleCloseReviewDetails = function handleCloseReviewDetails() {
     setCurUser(null);
     setOpenReview(false);
-    var tab = query.get('tab');
-    history.replace("".concat(location.pathname, "?tab=").concat(tab));
+    (0, _utils.removeQueryToUrl)(['id']);
   };
   (0, _react.useEffect)(function () {
     var id = query.get('id');
@@ -100,6 +101,13 @@ var DriversReviewListUI = function DriversReviewListUI(props) {
       setOpenReview(true);
     }
   }, []);
+  (0, _react.useEffect)(function () {
+    if (!isUseQuery || !(paginationProps !== null && paginationProps !== void 0 && paginationProps.currentPage) || !(paginationProps !== null && paginationProps !== void 0 && paginationProps.pageSize) || !(paginationProps !== null && paginationProps !== void 0 && paginationProps.totalPages)) return;
+    (0, _utils.addQueryToUrl)({
+      page: paginationProps.currentPage,
+      pageSize: paginationProps.pageSize
+    });
+  }, [paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.currentPage, paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.pageSize, paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.totalPages]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ReviewsTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles.ReviewObject, {
     isHeader: true
   }, headerTitle)), /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles.ReviewMarkerWrapper, {

@@ -15,6 +15,7 @@ var _Shared = require("../../Shared");
 var _DriversCompanyGeneralDetails = require("../DriversCompanyGeneralDetails");
 var _DriversCompanyScheduleDetails = require("../DriversCompanyScheduleDetails");
 var _DriversCompanyWebhooksDetails = require("../DriversCompanyWebhooksDetails");
+var _utils = require("../../../utils");
 var _styles = require("./styles");
 var _styles2 = require("../../../styles");
 var _useWindowSize2 = require("../../../hooks/useWindowSize");
@@ -39,7 +40,6 @@ var DriversCompanyDetailsFormUI = function DriversCompanyDetailsFormUI(props) {
     actionState = props.actionState,
     cleanActionState = props.cleanActionState,
     handleDeleteDriversCompany = props.handleDeleteDriversCompany;
-  var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -118,8 +118,9 @@ var DriversCompanyDetailsFormUI = function DriversCompanyDetailsFormUI(props) {
   var handleTabClick = function handleTabClick(tab, isInitialRender) {
     setCurrentTabItem(tab);
     if (!isInitialRender) {
-      var id = query.get('id');
-      history.replace("".concat(location.pathname, "?id=").concat(id, "&tab=").concat(tab));
+      (0, _utils.addQueryToUrl)({
+        tab: tab
+      });
     }
   };
   (0, _react.useEffect)(function () {

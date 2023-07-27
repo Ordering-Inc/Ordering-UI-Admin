@@ -10,6 +10,7 @@ var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _styles = require("../../../styles");
 var _Shared = require("../../Shared");
+var _utils = require("../../../utils");
 var _styles2 = require("./styles");
 var _BusinessWidgets = require("../BusinessWidgets");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -30,7 +31,6 @@ var BusinessOrderingChannels = function BusinessOrderingChannels(props) {
     handleUpdateBusinessClick = props.handleUpdateBusinessClick,
     business = props.business,
     setFormState = props.setFormState;
-  var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -81,9 +81,9 @@ var BusinessOrderingChannels = function BusinessOrderingChannels(props) {
   var handleChangeOption = function handleChangeOption(tab, isInitialRender) {
     setSelectedOption(tab);
     if (!isInitialRender) {
-      var businessId = query.get('id');
-      var section = query.get('section');
-      history.replace("".concat(location.pathname, "?id=").concat(businessId, "&section=").concat(section, "&tab=").concat(tab));
+      (0, _utils.addQueryToUrl)({
+        tab: tab
+      });
     }
   };
   (0, _react.useEffect)(function () {

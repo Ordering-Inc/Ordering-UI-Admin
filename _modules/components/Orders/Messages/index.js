@@ -15,6 +15,7 @@ var _AiOutlineInfoCircle = _interopRequireDefault(require("@meronex/icons/ai/AiO
 var _MdcCloseOctagonOutline = _interopRequireDefault(require("@meronex/icons/mdc/MdcCloseOctagonOutline"));
 var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
 var _reactBootstrap = require("react-bootstrap");
+var _utils = require("../../../utils");
 var _styles = require("./styles");
 var _Shared = require("../../Shared");
 var _styles2 = require("../../../styles");
@@ -64,7 +65,6 @@ var MessagesUI = function MessagesUI(props) {
     setCurrentTourStep = props.setCurrentTourStep,
     orderDetailClose = props.orderDetailClose,
     getHistoryComment = props.getHistoryComment;
-  var routerHistory = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -318,9 +318,9 @@ var MessagesUI = function MessagesUI(props) {
   var handleTabClick = function handleTabClick(tab, isInitialRender) {
     setTabActive(tab);
     if (!isInitialRender) {
-      var orderId = query.get('id');
-      var section = query.get('section');
-      routerHistory.replace("".concat(location.pathname, "?id=").concat(orderId, "&section=").concat(section, "&tab=").concat(tab));
+      (0, _utils.addQueryToUrl)({
+        tab: tab
+      });
     }
   };
   (0, _react.useEffect)(function () {

@@ -11,6 +11,7 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 var _Shared = require("../../Shared");
 var _styles = require("../../../styles");
 var _styledComponents = require("styled-components");
+var _utils = require("../../../utils");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -38,7 +39,8 @@ var RecoveryActionList = function RecoveryActionList(props) {
     getRecoveryList = props.getRecoveryList,
     handleOpenDetail = props.handleOpenDetail,
     handleUpdateAction = props.handleUpdateAction,
-    selectedAction = props.selectedAction;
+    selectedAction = props.selectedAction,
+    isUseQuery = props.isUseQuery;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -83,6 +85,13 @@ var RecoveryActionList = function RecoveryActionList(props) {
     if (inValid) return;
     handleOpenDetail(action);
   };
+  (0, _react.useEffect)(function () {
+    if (!isUseQuery || !(paginationProps !== null && paginationProps !== void 0 && paginationProps.currentPage) || !(paginationProps !== null && paginationProps !== void 0 && paginationProps.pageSize) || !(paginationProps !== null && paginationProps !== void 0 && paginationProps.totalPages)) return;
+    (0, _utils.addQueryToUrl)({
+      page: paginationProps.currentPage,
+      pageSize: paginationProps.pageSize
+    });
+  }, [paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.currentPage, paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.pageSize, paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.totalPages]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.Table, {
     isRelative: (recoveryActionList === null || recoveryActionList === void 0 ? void 0 : (_recoveryActionList$a = recoveryActionList.actions) === null || _recoveryActionList$a === void 0 ? void 0 : _recoveryActionList$a.length) > 5
   }, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, t('ACTION', 'Action')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.description) && /*#__PURE__*/_react.default.createElement("th", null, t('DESCRIPTION', 'Description')), /*#__PURE__*/_react.default.createElement("th", {

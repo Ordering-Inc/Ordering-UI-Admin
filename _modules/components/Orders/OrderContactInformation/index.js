@@ -66,7 +66,6 @@ var OrderContactInformation = function OrderContactInformation(props) {
     _useState6 = _slicedToArray(_useState5, 2),
     isEdit = _useState6[0],
     setIsEdit = _useState6[1];
-  console.log(customerInfoState, 'customerInfoState');
   var pastOrderStatuses = [1, 2, 5, 6, 10, 11, 12, 15, 16, 17];
   var handleReviewCustomer = function handleReviewCustomer(customer) {
     setCurrentCustomer(customer);

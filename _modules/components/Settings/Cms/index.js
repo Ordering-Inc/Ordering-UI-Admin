@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Cms = void 0;
 var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _styles = require("../../../styles");
@@ -16,6 +17,7 @@ var _styledComponents = require("styled-components");
 var _InfoShareContext = require("../../../contexts/InfoShareContext");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _PageForm = require("../PageForm");
+var _utils = require("../../../utils");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -60,13 +62,15 @@ var CmsUI = function CmsUI(props) {
     _useState6 = _slicedToArray(_useState5, 2),
     curPageId = _useState6[0],
     setCurPageId = _useState6[1];
-
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
+  var defaultPage = query.get('page') || 1;
+  var defaultPageSize = query.get('pageSize') || 10;
   // Change page
-  var _useState7 = (0, _react.useState)(1),
+  var _useState7 = (0, _react.useState)(Number(defaultPage) || 1),
     _useState8 = _slicedToArray(_useState7, 2),
     currentPage = _useState8[0],
     setCurrentPage = _useState8[1];
-  var _useState9 = (0, _react.useState)(10),
+  var _useState9 = (0, _react.useState)(Number(defaultPageSize) || 10),
     _useState10 = _slicedToArray(_useState9, 2),
     pagesPerPage = _useState10[0],
     setPagesPerPage = _useState10[1];
@@ -115,6 +119,13 @@ var CmsUI = function CmsUI(props) {
     setCurPageId(pageId);
     setOpenModal(true);
   };
+  (0, _react.useEffect)(function () {
+    if (!currentPage || !pagesPerPage || !totalPages) return;
+    (0, _utils.addQueryToUrl)({
+      page: currentPage,
+      pageSize: pagesPerPage
+    });
+  }, [currentPage, pagesPerPage, totalPages]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.StaticPageListContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderLeft, null, isCollapse && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {

@@ -66,7 +66,6 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     register = _useForm.register,
     handleSubmit = _useForm.handleSubmit,
     errors = _useForm.formState.errors;
-  var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -215,8 +214,9 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     }
     setExtraOpen(true);
     if (!isInitialRender) {
-      var orderId = query.get('id');
-      history.replace("".concat(location.pathname, "?id=").concat(orderId, "&section=").concat(option));
+      (0, _utils.addQueryToUrl)({
+        section: option
+      });
     }
   };
   (0, _react.useEffect)(function () {
@@ -318,8 +318,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
       history: false
     });
     setShowOption(null);
-    var orderId = query.get('id');
-    history.replace("".concat(location.pathname, "?id=").concat(orderId));
+    (0, _utils.removeQueryToUrl)(['section', 'tab']);
   };
   var onSubmit = function onSubmit(data) {
     handleUpdateComment({

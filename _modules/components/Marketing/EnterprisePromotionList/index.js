@@ -12,6 +12,7 @@ var _styledComponents = require("styled-components");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _Shared = require("../../Shared");
 var _styles = require("../../../styles");
+var _utils = require("../../../utils");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -45,7 +46,8 @@ var EnterprisePromotionList = function EnterprisePromotionList(props) {
     handleDrop = props.handleDrop,
     handleDragEnd = props.handleDragEnd,
     handleEnablePromotion = props.handleEnablePromotion,
-    isPromotionBottom = props.isPromotionBottom;
+    isPromotionBottom = props.isPromotionBottom,
+    isUseQuery = props.isUseQuery;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -124,6 +126,13 @@ var EnterprisePromotionList = function EnterprisePromotionList(props) {
       handleChangePage(paginationProps.currentPage - 1);
     }
   }, [promotionListState.promotions, paginationProps]);
+  (0, _react.useEffect)(function () {
+    if (!isUseQuery || !(paginationProps !== null && paginationProps !== void 0 && paginationProps.currentPage) || !(paginationProps !== null && paginationProps !== void 0 && paginationProps.pageSize) || !(paginationProps !== null && paginationProps !== void 0 && paginationProps.totalPages)) return;
+    (0, _utils.addQueryToUrl)({
+      page: paginationProps.currentPage,
+      pageSize: paginationProps.pageSize
+    });
+  }, [paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.currentPage, paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.pageSize, paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.totalPages]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.PromotionListContainer, {
     eventDisabled: eventDisabled
   }, /*#__PURE__*/_react.default.createElement(_styles2.PromotionListTable, {

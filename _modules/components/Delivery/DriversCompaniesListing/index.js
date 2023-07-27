@@ -15,6 +15,7 @@ var _Shared = require("../../Shared");
 var _DriversCompaniesList = require("../DriversCompaniesList");
 var _DriversCompanyDetailsForm = require("../DriversCompanyDetailsForm");
 var _DriversCompanyAddForm = require("../DriversCompanyAddForm");
+var _utils = require("../../../utils");
 var _styles2 = require("./styles");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -40,8 +41,8 @@ var DriversCompaniesListingUI = function DriversCompaniesListingUI(props) {
     handleSelectCompany = props.handleSelectCompany,
     selectedCompanyList = props.selectedCompanyList,
     handleAllSelectCompany = props.handleAllSelectCompany,
-    handleDeleteSelectedCompanies = props.handleDeleteSelectedCompanies;
-  var history = (0, _reactRouterDom.useHistory)();
+    handleDeleteSelectedCompanies = props.handleDeleteSelectedCompanies,
+    isUseQuery = props.isUseQuery;
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -90,7 +91,9 @@ var DriversCompaniesListingUI = function DriversCompaniesListingUI(props) {
     }
     setOpenDetails(true);
     if (!isInitialRender) {
-      history.replace("".concat(location.pathname, "?id=").concat(driverCompany === null || driverCompany === void 0 ? void 0 : driverCompany.id));
+      (0, _utils.addQueryToUrl)({
+        id: driverCompany === null || driverCompany === void 0 ? void 0 : driverCompany.id
+      });
     }
   };
   (0, _react.useEffect)(function () {
@@ -117,7 +120,7 @@ var DriversCompaniesListingUI = function DriversCompaniesListingUI(props) {
     setCurDriversCompanyId(null);
     setOpenDetails(false);
     setIsAddMode(false);
-    history.replace("".concat(location.pathname));
+    (0, _utils.removeQueryToUrl)(['id', 'tab']);
   };
   (0, _react.useEffect)(function () {
     var id = query.get('id');
@@ -160,7 +163,8 @@ var DriversCompaniesListingUI = function DriversCompaniesListingUI(props) {
     handleDeleteDriversCompany: handleDeleteDriversCompany,
     handleSelectCompany: handleSelectCompany,
     selectedCompanyList: selectedCompanyList,
-    handleAllSelectCompany: handleAllSelectCompany
+    handleAllSelectCompany: handleAllSelectCompany,
+    isUseQuery: isUseQuery
   }) : /*#__PURE__*/_react.default.createElement(_DriversCompanyAddForm.DriversCompanyAddForm, {
     driversCompaniesState: driversCompaniesState,
     setDriversCompaniesState: setDriversCompaniesState,

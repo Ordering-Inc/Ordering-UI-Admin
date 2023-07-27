@@ -12,6 +12,7 @@ var _Shared = require("../../Shared");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _useWindowSize2 = require("../../../hooks/useWindowSize");
 var _BsCardImage = _interopRequireDefault(require("@meronex/icons/bs/BsCardImage"));
+var _utils = require("../../../utils");
 var _styles = require("./styles");
 var _BusinessTypeDetail = require("../BusinessTypeDetail");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -41,7 +42,6 @@ var BusinessTypes = function BusinessTypes(props) {
     handleUpdateBusinessClick = props.handleUpdateBusinessClick,
     setBusinessTypes = props.setBusinessTypes,
     setIsExtendExtraOpen = props.setIsExtendExtraOpen;
-  var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -82,19 +82,15 @@ var BusinessTypes = function BusinessTypes(props) {
     setSelectedBusinessType(category);
     setIsExtendExtraOpen(true);
     setIsOpenTypeDetail(true);
-    var businessId = query.get('id');
-    var section = query.get('section');
-    var tab = query.get('tab');
-    history.replace("".concat(location.pathname, "?id=").concat(businessId, "&section=").concat(section, "&tab=").concat(tab, "&business_type=").concat(category === null || category === void 0 ? void 0 : category.id));
+    (0, _utils.addQueryToUrl)({
+      business_type: category === null || category === void 0 ? void 0 : category.id
+    });
   };
   var handleCloseDetail = function handleCloseDetail() {
     setIsOpenTypeDetail(false);
     setIsExtendExtraOpen(false);
     setSelectedBusinessType(null);
-    var businessId = query.get('id');
-    var section = query.get('section');
-    var tab = query.get('tab');
-    history.replace("".concat(location.pathname, "?id=").concat(businessId, "&section=").concat(section, "&tab=").concat(tab));
+    (0, _utils.removeQueryToUrl)(['business_type']);
   };
   var handleSelectBusinessTypes = function handleSelectBusinessTypes(typeId) {
     var _selectedBusinessTypes = _toConsumableArray(selectedBusinessTypes);
