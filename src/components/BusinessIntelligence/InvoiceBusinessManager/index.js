@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useLanguage, useApi, InvoiceBusinessManager as InvoiceBusinessManagerController } from 'ordering-components-admin'
 import { DragScroll, SpinnerLoader } from '../../Shared'
 import {
@@ -18,13 +18,13 @@ import { InvoiceOrderType } from '../InvoiceOrdertype'
 import { InvoiceBusinessPdf } from '../InvoiceBusinessPdf'
 import { IconButton } from '../../../styles'
 import { Download } from 'react-bootstrap-icons'
+import { addQueryToUrl } from '../../../utils'
 
 const InvoiceBusinessManagerUI = (props) => {
   const {
     exportInvoiceList
   } = props
 
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const [ordering] = useApi()
@@ -38,8 +38,7 @@ const InvoiceBusinessManagerUI = (props) => {
     window.scrollTo(0, 0)
     setSelectedDetailType(detailType)
     if (!isInitialRender) {
-      const invoice = query.get('invoice')
-      history.replace(`${location.pathname}?invoice=${invoice}&tab=${detailType}`)
+      addQueryToUrl({ tab: detailType })
     }
   }
 

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useLanguage } from 'ordering-components-admin'
 import { BusinessDeliveryDetails } from '../BusinessDeliveryDetails'
 import { BusinessPickupDetails } from '../BusinessPickupDetails'
 import { BusinessEta } from '../BusinessEta'
 import { DragScroll } from '../../Shared'
+import { addQueryToUrl } from '../../../utils'
 
 import {
   Container,
@@ -18,7 +19,6 @@ export const BusinessDeliveryPickupMore = (props) => {
     setIsExtendExtraOpen
   } = props
 
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const [selectedTab, setSelectedTab] = useState('delivery')
@@ -37,9 +37,7 @@ export const BusinessDeliveryPickupMore = (props) => {
   const handleTabClick = (tab, isInitialRender) => {
     setSelectedTab(tab)
     if (!isInitialRender) {
-      const businessId = query.get('id')
-      const section = query.get('section')
-      history.replace(`${location.pathname}?id=${businessId}&section=${section}&tab=${tab}`)
+      addQueryToUrl({ tab: tab })
     }
   }
 

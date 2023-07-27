@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useLanguage, useUtils, ReviewProductList as ReviewProductListController } from 'ordering-components-admin'
 import { ImageFill, StarFill } from 'react-bootstrap-icons'
 import Skeleton from 'react-loading-skeleton'
 import { Pagination, SideBar } from '../../Shared'
 import { ProductReviewDetails } from '../ProductReviewDetails'
+import { addQueryToUrl, removeQueryToUrl } from '../../../utils'
 
 import {
   ReviewsListingContainer,
@@ -23,10 +24,13 @@ export const ReviewProductsListingUI = (props) => {
     handleChangeSearch,
     searchValue,
     parentSearchValue,
-    businessId
+    businessId,
+    isUseQuery,
+    defaultPage,
+    defaultPageSize,
+    firstRender
   } = props
 
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const [{ optimizeImage }] = useUtils()
@@ -36,8 +40,8 @@ export const ReviewProductsListingUI = (props) => {
   const [curProductId, setCurProductId] = useState(null)
   const [curCategoryId, setCurCategoryId] = useState(null)
 
-  const [currentPage, setCurrentPage] = useState(1)
-  const [productsPerPage, setProductsPerPage] = useState(10)
+  const [currentPage, setCurrentPage] = useState(defaultPage || 1)
+  const [productsPerPage, setProductsPerPage] = useState(defaultPageSize || 10)
   const [currentProducts, setCurrentProducts] = useState([])
   const [totalPages, setTotalPages] = useState(null)
 
@@ -70,21 +74,21 @@ export const ReviewProductsListingUI = (props) => {
     setCurCategoryId(product?.category?.id)
     setOpenReview(true)
     if (!isInitialRender) {
-      const tab = query.get('tab')
-      const business = query.get('business')
-      history.replace(`${location.pathname}?tab=${tab}&business=${business}&category=${product?.category?.id}&product=${product.id}`)
+      addQueryToUrl({
+        category: product?.category?.id,
+        product: product.id
+      })
     }
   }
 
   const handleCloseReviewDetails = () => {
     setCurProduct(null)
     setOpenReview(false)
-    const tab = query.get('tab')
-    const business = query.get('business')
-    history.replace(`${location.pathname}?tab=${tab}&business=${business}`)
+    removeQueryToUrl(['category', 'product'])
   }
 
   useEffect(() => {
+    if (firstRender) return
     setCurrentPage(1)
   }, [searchValue])
 
@@ -101,6 +105,14 @@ export const ReviewProductsListingUI = (props) => {
       setOpenReview(true)
     }
   }, [])
+
+  useEffect(() => {
+    if (!isUseQuery || !currentPage || !productsPerPage || !totalPages) return
+    addQueryToUrl({
+      page: currentPage,
+      pageSize: productsPerPage
+    })
+  }, [currentPage, productsPerPage, totalPages])
 
   return (
     <>

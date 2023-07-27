@@ -1,17 +1,17 @@
 import React from 'react'
 import { HelmetTags } from '../../components/HelmetTags'
-import { useEvent } from 'ordering-components-admin'
 import { BusinessesListing } from '../../../src/components/Stores'
+import { addQueryToUrl, removeQueryToUrl } from '../../../src/utils'
 
 export const BusinessesList = (props) => {
-  const [events] = useEvent()
   const businessesProps = {
     ...props,
+    isUseQuery: true,
     onBusinessRedirect: (businessId) => {
       if (!businessId) {
-        return events.emit('go_to_page', { page: 'businesses', replace: true })
+        return removeQueryToUrl(['id', 'section', 'tab', 'business_type', 'paymethod', 'payemthod_tab', 'setting_tab', 'menu', 'product', 'zone', 'zone_tab', 'wallet'])
       }
-      return events.emit('go_to_page', { page: 'businesses', search: `?id=${businessId}` })
+      return addQueryToUrl({ id: businessId })
     }
   }
   return (

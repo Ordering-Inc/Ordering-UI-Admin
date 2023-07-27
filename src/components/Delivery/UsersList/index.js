@@ -8,6 +8,7 @@ import { Envelope, Phone } from 'react-bootstrap-icons'
 
 import { Switch, LinkButton } from '../../../styles'
 import { Pagination, ConfirmAdmin } from '../../Shared'
+import { addQueryToUrl } from '../../../utils'
 
 import {
   UsersConatiner,
@@ -42,7 +43,8 @@ export const UsersList = (props) => {
     isDriversManagersPage,
     actionDisabled,
     setSelectedUsers,
-    handleChangeAvailable
+    handleChangeAvailable,
+    isUseQuery
   } = props
 
   const [, t] = useLanguage()
@@ -108,6 +110,14 @@ export const UsersList = (props) => {
       handleChangePage(paginationProps.currentPage - 1)
     }
   }, [usersList.users, paginationProps])
+
+  useEffect(() => {
+    if (!isUseQuery || !paginationProps?.currentPage || !paginationProps?.pageSize || !paginationProps?.totalPages) return
+    addQueryToUrl({
+      page: paginationProps.currentPage,
+      pageSize: paginationProps.pageSize
+    })
+  }, [paginationProps?.currentPage, paginationProps?.pageSize, paginationProps?.totalPages])
 
   return (
     <>

@@ -3,7 +3,7 @@ import { useHistory, useLocation } from 'react-router-dom'
 import { useLanguage, DriversGroupsList as DriversGroupsListController } from 'ordering-components-admin'
 import { List as MenuIcon, LifePreserver } from 'react-bootstrap-icons'
 import { OverlayTrigger, Tooltip } from 'react-bootstrap'
-import { getStorageItem, removeStorageItem } from '../../../utils'
+import { getStorageItem, removeStorageItem, addQueryToUrl, removeQueryToUrl } from '../../../utils'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { Button, IconButton } from '../../../styles'
 import { Alert, Confirm, SearchBar, SideBar } from '../../Shared'
@@ -35,7 +35,8 @@ const DriversGroupsListingUI = (props) => {
     handleUpdateDriversGroup,
     handleDeleteDriversGroup,
     driversCompanyList,
-    actionDisabled
+    actionDisabled,
+    isUseQuery
   } = props
 
   const history = useHistory()
@@ -66,9 +67,9 @@ const DriversGroupsListingUI = (props) => {
       setTimeout(() => {
         setCurrentTourStep(5)
       }, 50)
-      history.replace(`${location.pathname}`)
+      removeQueryToUrl(['id'])
     } else {
-      history.replace(`${location.pathname}?id=${driverGroup.id}`)
+      addQueryToUrl({ id: driverGroup.id })
     }
   }
 
@@ -127,7 +128,7 @@ const DriversGroupsListingUI = (props) => {
     setCurDriversGroup(null)
     setOpenDetails(false)
     setIsTourOpen(false)
-    history.replace(`${location.pathname}`)
+    removeQueryToUrl(['id'])
   }
 
   useEffect(() => {
@@ -208,6 +209,7 @@ const DriversGroupsListingUI = (props) => {
             handleSelectGroup={handleSelectGroup}
             handleAllSelectGroup={handleAllSelectGroup}
             actionDisabled={actionDisabled}
+            isUseQuery={isUseQuery}
           />
         ) : (
           <DriversGroupAddForm

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useLanguage, useConfig, BusinessWalletsList as BusinessWalletsListController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { ChevronRight } from 'react-bootstrap-icons'
 import { SideBar } from '../../Shared'
 import { Select } from '../../../styles/Select/FirstSelect'
+import { addQueryToUrl, removeQueryToUrl } from '../../../utils'
 
 import {
   WalletsListContainer,
@@ -25,7 +26,6 @@ const BusinessWalletsListUI = (props) => {
     handleUpdateWallet
   } = props
 
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
@@ -52,9 +52,7 @@ const BusinessWalletsListUI = (props) => {
     setIsExtendExtraOpen(true)
     setIsOpenDetails(true)
     if (!isInitialRender) {
-      const businessId = query.get('id')
-      const section = query.get('section')
-      history.replace(`${location.pathname}?id=${businessId}&section=${section}&wallet=${config.id}`)
+      addQueryToUrl({ wallet: config.id })
     }
   }
   const handleCloseWallet = () => {
@@ -62,9 +60,7 @@ const BusinessWalletsListUI = (props) => {
     setIsOpenDetails(false)
     setIsExtendExtraOpen(false)
     setCurrentConfig(null)
-    const businessId = query.get('id')
-    const section = query.get('section')
-    history.replace(`${location.pathname}?id=${businessId}&section=${section}`)
+    removeQueryToUrl(['wallet'])
   }
 
   useEffect(() => {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { IconButton } from '../../../styles'
 import { useWindowSize } from '../../../hooks/useWindowSize'
@@ -49,6 +49,7 @@ import { ReportsPaymethodSales } from '../ReportsPaymethodSales'
 import { ReportsSaleAndCategory } from '../ReportsSaleAndCategory'
 import { ReportsAverageSales } from '../ReportsAverageSales'
 import { ReportsGeneralSales } from '../ReportsGeneralSales'
+import { addQueryToUrl, removeQueryToUrl } from '../../../utils'
 
 import {
   ReportsContainer,
@@ -57,7 +58,6 @@ import {
 } from './styles'
 
 export const Reports = (props) => {
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
@@ -92,14 +92,14 @@ export const Reports = (props) => {
   const handleCloseSidebar = () => {
     setIsOpen(false)
     setSelectedReport(0)
-    history.replace(`${location.pathname}`)
+    removeQueryToUrl(['id'])
   }
 
   const handleOpenSlider = (index, isInitialRender) => {
     setSelectedReport(index)
     setIsOpen(true)
     if (!isInitialRender) {
-      history.replace(`${location.pathname}?id=${index}`)
+      addQueryToUrl({ id: index })
     }
   }
 

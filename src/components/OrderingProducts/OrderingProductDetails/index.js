@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useLanguage, SiteDetails as SiteDetailsController } from 'ordering-components-admin'
 import { DefaultSelect, IconButton } from '../../../styles'
 import { ArrowsAngleContract, ArrowsAngleExpand, ThreeDots } from 'react-bootstrap-icons'
 import { Confirm } from '../../Shared'
 import { OrderingProductGeneralDetails } from '../OrderingProductGeneralDetails'
 import { SiteTheme } from '../SiteTheme'
+import { addQueryToUrl } from '../../../utils'
+
 import {
   Container,
   Tabs,
@@ -24,7 +26,6 @@ const OrderingProductDetailsUI = (props) => {
     handleDeleteSite
   } = props
 
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const [selectedTab, setSelectedTab] = useState('general')
@@ -65,7 +66,7 @@ const OrderingProductDetailsUI = (props) => {
     if (!isInitialRender) {
       const id = query.get('id')
       if (id) {
-        history.replace(`${location.pathname}?id=${id}&tab=${tab}`)
+        addQueryToUrl({ tab: tab })
       }
     }
   }

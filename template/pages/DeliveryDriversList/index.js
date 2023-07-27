@@ -1,22 +1,23 @@
 import React from 'react'
 import { HelmetTags } from '../../components/HelmetTags'
-import { useEvent, useLanguage } from 'ordering-components-admin'
+import { useLanguage } from 'ordering-components-admin'
 import { DeliveryUsersListing } from '../../../src/components/Delivery'
+import { addQueryToUrl, removeQueryToUrl } from '../../../src/utils'
 
 export const DeliveryDriversList = (props) => {
-  const [events] = useEvent()
   const [, t] = useLanguage()
   const usersProps = {
     ...props,
+    isUseQuery: true,
     headerTitle: t('DRIVERS', 'Drivers'),
     defaultUserTypesSelected: [4],
     disabledActiveStateCondition: true,
     isDriversPage: true,
     onUserRedirect: (userId) => {
       if (!userId) {
-        return events.emit('go_to_page', { page: 'delivery_drivers', replace: true })
+        return removeQueryToUrl(['id', 'tab'])
       }
-      return events.emit('go_to_page', { page: 'delivery_drivers', search: `?id=${userId}` })
+      return addQueryToUrl({ id: userId })
     }
   }
   return (

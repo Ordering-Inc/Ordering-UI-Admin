@@ -6,6 +6,7 @@ import Skeleton from 'react-loading-skeleton'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import { Pagination } from '../../Shared'
 import { useWindowSize } from '../../../hooks/useWindowSize'
+import { addQueryToUrl } from '../../../utils'
 
 import {
   OrdersListContainer,
@@ -34,7 +35,8 @@ export const OrdersCards = (props) => {
     handleOrderCardClick,
     handleUpdateDriverLocation,
     slaSettingTime,
-    isDelivery
+    isDelivery,
+    isUseQuery
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
@@ -158,6 +160,14 @@ export const OrdersCards = (props) => {
       slaBar: slaSettings
     })
   }, [configState.loading])
+
+  useEffect(() => {
+    if (!isUseQuery || !pagination?.currentPage || !pagination?.pageSize || !pagination?.total) return
+    addQueryToUrl({
+      page: pagination.currentPage,
+      pageSize: pagination.pageSize
+    })
+  }, [pagination?.currentPage, pagination?.pageSize, pagination?.total])
 
   return (
     <>

@@ -21,6 +21,7 @@ import {
 import { SearchBar } from '../../Shared'
 import { LanguageTransTable } from '../LanguageTransTable'
 import { LanguageTransSpread } from '../LanguageTransSpread'
+import { removeQueryToUrl } from '../../../utils'
 
 const LanguageManagerUI = (props) => {
   const {
@@ -67,7 +68,10 @@ const LanguageManagerUI = (props) => {
             </ViewIconWrapper>
             <ViewIconWrapper
               active={viewMode === 'spread'}
-              onClick={() => setViewMode('spread')}
+              onClick={() => {
+                setViewMode('spread')
+                removeQueryToUrl(['page', 'pageSize'])
+              }}
             >
               <Table />
             </ViewIconWrapper>

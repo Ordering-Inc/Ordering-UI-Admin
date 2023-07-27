@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useLanguage } from 'ordering-components-admin'
 import { DragScroll } from '../../Shared'
 import { SeoOptions } from '../SeoOptions'
 import { ProductDetatilsInformation } from '../ProductDetatilsInformation'
 import { ProductDetailsAdvanced } from '../ProductDetailsAdvanced'
 import { ProductTagsList } from '../ProductTagsList'
+import { addQueryToUrl } from '../../../utils'
 
 import {
   Container,
@@ -34,7 +35,7 @@ export const ProductMainDetails = (props) => {
     setFees,
     cleanFormState
   } = props
-  const history = useHistory()
+
   const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
 
@@ -49,10 +50,7 @@ export const ProductMainDetails = (props) => {
     setSelectedOption(tab)
     setIsExtendExtraOpen(false)
     if (!isInitialRender) {
-      const category = query.get('category')
-      const product = query.get('product')
-      const section = query.get('section')
-      history.replace(`${location.pathname}?category=${category}&product=${product}&section=${section}&tab=${tab}`)
+      addQueryToUrl({ tab: tab })
     }
   }
 

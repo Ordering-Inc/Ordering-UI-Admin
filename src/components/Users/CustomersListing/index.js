@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import {
   UsersList as UsersListController,
   useLanguage
@@ -14,6 +14,7 @@ import { UsersDeleteButton } from '../UsersDeleteButton'
 import { UsersExportCSV } from '../UsersExportCSV'
 import { Button } from '../../../styles'
 import { X as CloseIcon } from 'react-bootstrap-icons'
+import { addQueryToUrl, removeQueryToUrl } from '../../../utils'
 
 import {
   UsersListingContainer,
@@ -51,11 +52,11 @@ const CustomersListingUI = (props) => {
     orderFilterValue,
     handleChangeOrderFilterValue,
     handleChangeMultiFilterValues,
-    multiFilterValues
+    multiFilterValues,
+    isUseQuery
   } = props
 
   const [, t] = useLanguage()
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [queryId, setQueryId] = useState(null)
   const [isOpenUserDetails, setIsOpenUserDetails] = useState(false)
@@ -76,13 +77,11 @@ const CustomersListingUI = (props) => {
     setQueryId(null)
     setSideBarWidth(500)
     moveDistance && setMoveDistance(0)
-    const enabled = selectedUserActiveState ? 'active' : 'inactive'
-    history.replace(`${location.pathname}?enabled=${enabled}`)
+    removeQueryToUrl(['id', 'section', 'tab'])
   }
 
   const handleOpenUserDetails = (user) => {
-    const enabled = selectedUserActiveState ? 'active' : 'inactive'
-    history.replace(`${location.pathname}?enabled=${enabled}&id=${user?.id}`)
+    addQueryToUrl({ id: user?.id })
     setOpenUser(user)
     setOpenUserAddForm(false)
     setIsOpenUserDetails(true)
@@ -181,6 +180,7 @@ const CustomersListingUI = (props) => {
           handleOpenUserDetails={handleOpenUserDetails}
           handleOpenUserAddForm={handleOpenUserAddForm}
           setSelectedUsers={setSelectedUsers}
+          isUseQuery={isUseQuery}
         />
       </UsersListingContainer>
 
@@ -224,13 +224,20 @@ const CustomersListingUI = (props) => {
 export const CustomersListing = (props) => {
   const query = new URLSearchParams(useLocation().search)
   const defaultUserActiveState = query.get('enabled') !== 'inactive'
+  const defaultPage = query.get('page') || 1
+  const defaultPageSize = query.get('pageSize') || 10
   const customersProps = {
     ...props,
     defaultUserActiveState,
     UIComponent: CustomersListingUI,
     isSearchByUserEmail: true,
     isSearchByUserPhone: true,
-    isSearchByUserName: true
+    isSearchByUserName: true,
+    paginationSettings: {
+      initialPage: props.isUseQuery && !isNaN(defaultPage) ? Number(defaultPage) : 1,
+      pageSize: props.isUseQuery && !isNaN(defaultPage) ? Number(defaultPageSize) : 10,
+      controlType: 'pages'
+    }
   }
   return (
     <UsersListController {...customersProps} />

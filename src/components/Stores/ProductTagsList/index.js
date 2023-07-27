@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useLanguage, ProductTagsList as ProductTagsController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { SearchBar, SideBar } from '../../Shared'
 import { Button, Checkbox, LinkButton } from '../../../styles'
 import { ChevronRight, Image as ImageIcon } from 'react-bootstrap-icons'
 import { ProductTagDetails } from '../ProductTagDetails'
+import { addQueryToUrl, removeQueryToUrl } from '../../../utils'
 
 import {
   TagsListContainer,
@@ -33,7 +34,6 @@ const ProductTagsListUI = (props) => {
     handleSelectAllTags
   } = props
 
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const [selectedTag, setSelectedTag] = useState(null)
@@ -48,11 +48,7 @@ const ProductTagsListUI = (props) => {
     setIsOpenTagDetail(true)
 
     if (!isInitialRender) {
-      const category = query.get('category')
-      const product = query.get('product')
-      const section = query.get('section')
-      const tab = query.get('tab')
-      history.replace(`${location.pathname}?category=${category}&product=${product}&section=${section}&tab=${tab}&tag=${tag?.id}`)
+      addQueryToUrl({ tag: tag?.id })
     }
   }
 
@@ -60,11 +56,7 @@ const ProductTagsListUI = (props) => {
     setIsOpenTagDetail(false)
     setIsExtendExtraOpen(false)
     setSelectedTag(null)
-    const category = query.get('category')
-    const product = query.get('product')
-    const section = query.get('section')
-    const tab = query.get('tab')
-    history.replace(`${location.pathname}?category=${category}&product=${product}&section=${section}&tab=${tab}`)
+    removeQueryToUrl(['tag'])
   }
 
   useEffect(() => {

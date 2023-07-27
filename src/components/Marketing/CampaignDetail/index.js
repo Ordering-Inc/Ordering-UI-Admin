@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useTheme } from 'styled-components'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { useLanguage, CampaignDetail as CampaignDetailController } from 'ordering-components-admin'
@@ -7,6 +7,7 @@ import { ArrowsAngleContract, ArrowsAngleExpand, ThreeDots } from 'react-bootstr
 import { Confirm, Alert } from '../../Shared'
 import { CampaignDetailGeneral } from '../CampaignDetailGeneral'
 import { CampaignDetailContent } from '../CampaignDetailContent'
+import { addQueryToUrl } from '../../../utils'
 
 import {
   CampaignDetailContainer,
@@ -29,7 +30,6 @@ const CampaignDetailUI = (props) => {
     handleDeleteCampaign
   } = props
 
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const theme = useTheme()
   const [, t] = useLanguage()
@@ -83,8 +83,7 @@ const CampaignDetailUI = (props) => {
     setSelectedOption(tab)
 
     if (!isInitialRender) {
-      const id = query.get('id')
-      history.replace(`${location.pathname}?id=${id}&tab=${tab}`)
+      addQueryToUrl({ tab: tab })
     }
   }
 

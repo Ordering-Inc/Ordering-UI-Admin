@@ -31,7 +31,8 @@ const DeliveriesManagerUI = (props) => {
     onOrderRedirect,
     numberOfOrdersBySubstatus,
     timeStatus,
-    setTimeStatus
+    setTimeStatus,
+    isUseQuery
   } = props
 
   const [, t] = useLanguage()
@@ -112,6 +113,7 @@ const DeliveriesManagerUI = (props) => {
               ordersAmountByStatus={ordersAmountByStatus}
               setOrdersAmountByStatus={setOrdersAmountByStatus}
               numberOfOrdersBySubstatus={numberOfOrdersBySubstatus}
+              isUseQuery={isUseQuery}
             />
           </WrapItemView>
         </OrdersContent>
