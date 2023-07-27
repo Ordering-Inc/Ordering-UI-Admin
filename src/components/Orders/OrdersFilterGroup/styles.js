@@ -198,7 +198,7 @@ export const WarningMessage = styled.div`
   position: absolute;
   display: flex;
   align-items: center;
-  z-index: 2000;
+  z-index: 10;
   top: 100%;
   background: ${props => props.theme.colors.warning100};
   border: 1px solid ${props => props.theme.colors.warning};
