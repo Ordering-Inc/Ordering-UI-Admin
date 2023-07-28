@@ -81,10 +81,50 @@ export const MoreContainer = styled.div`
     font-size: 20px;
     color: ${props => props.theme.colors.headingColor};
   }
+`
 
-  > span {
+export const OptionNameWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  > span.name {
     font-size: 14px;
     padding: 0 10px;
+  }
+  button {
+    width: 24px;
+    min-width: 24px;
+    height: 24px;
+    svg {
+      font-size: 14px;
+    }
+  }
+`
+
+export const ExtraOptionEditContainer = styled.div`
+  padding: 20px;
+
+  > h2 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 30px;
+  }
+  button {
+    display: block;
+    margin-top: 30px;
+    height: 44px;
+    border-radius: 8px;
+    margin-left: auto;
+  }
+`
+
+export const FormControl = styled.div`
+  label {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  input {
+    width: 100%;
+    height: 44px;
   }
 `
 
