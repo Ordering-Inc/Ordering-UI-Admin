@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage, useUtils, OpenCartsDetail as OpenCartsDetailController } from 'ordering-components-admin'
+import { Dropdown, DropdownButton } from 'react-bootstrap'
+import { useTheme } from 'styled-components'
 import { ProductItemAccordion } from '../../Orders/ProductItemAccordion'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import { OpenCartBill } from '../OpenCartBill'
 import { OpenCartsContactInformation } from '../OpenCartsContactInformation'
-import { NotFoundSource } from '../../Shared'
+import { NotFoundSource, Confirm } from '../../Shared'
 import { IconButton as ButtonLink } from '../../../styles'
-import { ArrowsAngleContract, ArrowsAngleExpand, XLg as CloseIcon } from 'react-bootstrap-icons'
+import { ArrowsAngleContract, ArrowsAngleExpand, XLg as CloseIcon, ThreeDots } from 'react-bootstrap-icons'
 import Skeleton from 'react-loading-skeleton'
 
 import {
@@ -16,7 +18,8 @@ import {
   HeaderContainer,
   OrderInfoWrapper,
   ButtonGroup,
-  SkeletonWrapper
+  SkeletonWrapper,
+  ActionSelectorWrapper
 } from './styles'
 
 const OpenCartsDetailUI = (props) => {
@@ -24,15 +27,18 @@ const OpenCartsDetailUI = (props) => {
     isSelectedOrders,
     open,
     handleBackRedirect,
-    cartState
+    cartState,
+    handleDeleteCart
   } = props
 
+  const theme = useTheme()
   const [, t] = useLanguage()
   const { width } = useWindowSize()
   const [{ parseDate }] = useUtils()
 
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isExpand, setIsExpand] = useState(false)
+  const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
   const actionSidebar = (value) => {
     setIsMenuOpen(value)
@@ -72,6 +78,17 @@ const OpenCartsDetailUI = (props) => {
     if (isExpand) element.style.width = '500px'
     else element.style.width = '100vw'
     setIsExpand(prev => !prev)
+  }
+
+  const onDeleteCart = (cart) => {
+    setConfirm({
+      open: true,
+      content: t('QUESTION_DELETE_CART', 'Are you sure that you want to delete this cart?'),
+      handleOnAccept: () => {
+        setConfirm({ ...confirm, open: false })
+        handleDeleteCart(cart)
+      }
+    })
   }
 
   useEffect(() => {
@@ -116,6 +133,17 @@ const OpenCartsDetailUI = (props) => {
                       {isExpand ? <ArrowsAngleContract /> : <ArrowsAngleExpand />}
                     </ButtonLink>
                   )}
+                  <ActionSelectorWrapper>
+                    <DropdownButton
+                      menuAlign={theme?.rtl ? 'left' : 'right'}
+                      title={<ThreeDots />}
+                      id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
+                    >
+                      <Dropdown.Item onClick={() => onDeleteCart(cartState?.cart)}>
+                        {t('DELETE', 'Delete')}
+                      </Dropdown.Item>
+                    </DropdownButton>
+                  </ActionSelectorWrapper>
                   <ButtonLink
                     color='black'
                     onClick={() => props.onClose() && props.onClose()}
@@ -154,6 +182,18 @@ const OpenCartsDetailUI = (props) => {
           onClickButton={handleBackRedirect}
         />
       )}
+
+      <Confirm
+        width='700px'
+        title={t('WEB_APPNAME', 'Ordering')}
+        content={confirm.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={confirm.open}
+        onClose={() => setConfirm({ ...confirm, open: false })}
+        onCancel={() => setConfirm({ ...confirm, open: false })}
+        onAccept={confirm.handleOnAccept}
+        closeOnBackdrop={false}
+      />
     </Container>
   )
 }

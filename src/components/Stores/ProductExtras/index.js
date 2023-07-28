@@ -2,10 +2,10 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import { useLanguage, ProductExtras as ProductExtrasController } from 'ordering-components-admin'
 import { useWindowSize } from '../../../hooks/useWindowSize'
-import { Button, Checkbox, LinkButton } from '../../../styles'
+import { Button, Checkbox, IconButton, Input, LinkButton } from '../../../styles'
 import { Alert, Confirm, Modal } from '../../Shared'
 import { ProductExtraOptions } from '../ProductExtraOptions'
-import { ChevronRight } from 'react-bootstrap-icons'
+import { ChevronRight, Pencil } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
 
 import {
@@ -18,7 +18,10 @@ import {
   Details,
   ExtraAddForm,
   AddButtonWrapper,
-  DragImageWrapper
+  DragImageWrapper,
+  OptionNameWrapper,
+  ExtraOptionEditContainer,
+  FormControl
 } from './styles'
 
 const ProductExtrasUI = (props) => {
@@ -52,10 +55,14 @@ const ProductExtrasUI = (props) => {
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
   const [openExtraDetails, setOpenExtraDetails] = useState(false)
+  const [openExtraEdit, setOpenExtraEdit] = useState(false)
   const [currentExtra, setCurrentExtra] = useState(null)
   const [extraIds, setExtraIds] = useState([])
   const [isCheckboxClicked, setIsCheckboxClicked] = useState(false)
   const [timer, setTimer] = useState(null)
+  const [extraSelected, setExtraSelected] = useState(null)
+
+  const extraInputRef = useRef()
 
   const handleOpenExtraDetails = (e, extra, isInitialRender) => {
     if (e?.target?.closest('.extra-checkbox') || e?.target?.closest('.draggable-dots')) return
@@ -89,6 +96,17 @@ const ProductExtrasUI = (props) => {
     setIsCheckboxClicked(true)
   }
 
+  const handleOpenEdit = (event, extra) => {
+    event.stopPropagation()
+    setExtraSelected(extra)
+    setOpenExtraEdit(true)
+  }
+
+  const handleCloseEdit = () => {
+    setOpenExtraEdit(false)
+    setExtraSelected(null)
+  }
+
   const onChangeAddExtraInput = (e) => {
     e.persist()
     clearTimeout(timer)
@@ -98,6 +116,21 @@ const ProductExtrasUI = (props) => {
       }
     }, 750)
     setTimer(_timer)
+  }
+
+  const handleChangeExtra = async (id, changes) => {
+    if (!extraInputRef?.current?.value) {
+      setAlertState({
+        open: true,
+        content: [t(
+          'VALIDATION_ERROR_REQUIRED',
+          'Name is required'
+        ).replace('_attribute_', t('NAME', 'Name'))]
+      })
+      return
+    }
+    await handleUpdateExtraState(id, changes)
+    handleCloseEdit()
   }
 
   useEffect(() => {
@@ -175,7 +208,12 @@ const ProductExtrasUI = (props) => {
                 />
               </CheckboxContainer>
               <MoreContainer>
-                <span>{extra.name}</span>
+                <OptionNameWrapper>
+                  <span className='name'>{extra.name}</span>
+                  <IconButton onClick={(e) => handleOpenEdit(e, extra)}>
+                    <Pencil />
+                  </IconButton>
+                </OptionNameWrapper>
                 <Details>
                   <ChevronRight />
                 </Details>
@@ -248,6 +286,25 @@ const ProductExtrasUI = (props) => {
           )}
         </>
       )}
+      <Modal
+        width='760px'
+        open={openExtraEdit}
+        onClose={() => handleCloseEdit()}
+        padding='20px'
+      >
+        <ExtraOptionEditContainer>
+          <h2>{t('PRODUCT_OPTION', 'Product option')}</h2>
+          <FormControl>
+            <label>{t('NAME', 'Name')}</label>
+            <Input
+              placeholder={t('NAME', 'Name')}
+              defaultValue={extraSelected?.name}
+              ref={extraInputRef}
+            />
+          </FormControl>
+          <Button color='primary' onClick={() => handleChangeExtra(extraSelected?.id, { name: extraInputRef?.current?.value })}>{t('SAVE', 'Save')}</Button>
+        </ExtraOptionEditContainer>
+      </Modal>
       <Alert
         title={t('WEB_APPNAME', 'Ordering')}
         content={alertState.content}
