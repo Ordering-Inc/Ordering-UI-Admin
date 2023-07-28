@@ -41,7 +41,9 @@ var OpenCartListingUI = function OpenCartListingUI(props) {
     cartList = props.cartList,
     pagination = props.pagination,
     getCartList = props.getCartList,
-    onCartRedirect = props.onCartRedirect;
+    onCartRedirect = props.onCartRedirect,
+    handleSuccessDeleteCart = props.handleSuccessDeleteCart,
+    isUseQuery = props.isUseQuery;
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
@@ -128,7 +130,8 @@ var OpenCartListingUI = function OpenCartListingUI(props) {
     cartId: cartDetailId,
     onClose: function onClose() {
       return handleBackRedirect();
-    }
+    },
+    handleSuccessDeleteCart: handleSuccessDeleteCart
   }), totalSelectedOrder > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperIndicator, null, setSelectedCartIds.length, "/", totalSelectedOrder));
 };
 var OpenCartListing = function OpenCartListing(props) {

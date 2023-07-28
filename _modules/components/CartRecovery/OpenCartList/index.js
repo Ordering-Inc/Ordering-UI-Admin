@@ -198,10 +198,10 @@ var OpenCartList = function OpenCartList(props) {
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 60
     }))))));
-  }) : cartList.carts.map(function (cart, i) {
+  }) : cartList.carts.map(function (cart) {
     var _cart$business, _theme$images, _cart$business2, _cart$city, _cart$user, _cart$user2, _cart$user3, _cart$user4, _cart$user5, _cart$user6;
     return /*#__PURE__*/_react.default.createElement(_styles.CartBody, {
-      key: i,
+      key: cart === null || cart === void 0 ? void 0 : cart.id,
       className: parseInt(cartDetailId) === cart.id ? 'active' : '',
       onClick: function onClick(e) {
         return handleClickCart(cart, e);

@@ -81,7 +81,7 @@ var PriceFilterListWrapper = _styledComponents.default.div(_templateObject27 || 
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n    margin-right: -10px;\n    margin-left: 0px;\n  "])));
 });
 exports.PriceFilterListWrapper = PriceFilterListWrapper;
-var PriceFilterItem = _styledComponents.default.div(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  cursor: pointer;\n\n  svg {\n    font-size: 16px;\n    color: ", ";\n    transition: all 0.3s linear;\n    min-width: 16px;\n  }\n\n  span {\n    font-weight: 400;\n    font-size: 14px;\n    margin-left: 8px;\n    ", "\n  }\n\n  ", "\n"])), function (props) {
+var PriceFilterItem = _styledComponents.default.div(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  cursor: pointer;\n\n  svg {\n    font-size: 16px;\n    color: ", ";\n    transition: all 0.3s linear;\n    min-width: 16px;\n  }\n\n  span {\n    font-weight: 400;\n    font-size: 14px;\n    margin-left: 8px;\n    text-wrap: nowrap;\n    ", "\n  }\n\n  ", "\n"])), function (props) {
   return props.theme.colors.secundaryLight;
 }, function (props) {
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n      margin-right: 8px;\n      margin-left: 0px;\n    "])));

@@ -30,7 +30,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessInformationUI = function BusinessInformationUI(props) {
-  var _formState$changes5, _formState$result3, _businessState$busine2, _businessState$busine3, _formState$changes6, _formState$changes7, _formState$changes8, _formState$result4, _businessState$busine4, _businessState$busine5, _formState$changes9, _formState$changes10, _formState$changes$na, _formState$changes11, _businessState$busine6, _formState$changes$ex, _formState$changes12, _businessState$busine7, _formState$changes$de, _formState$changes13, _businessState$busine8, _formState$changes$ph, _formState$changes14, _businessState$busine9, _formState$changes$ce, _formState$changes15, _businessState$busine10, _businessState$busine11, _businessState$busine12, _formState$changes16, _formState$changes17, _businessState$busine13, _formState$changes$ri, _formState$changes18, _businessState$busine14, _businessState$busine15, _formState$changes19, _formState$changes20, _businessState$busine16, _formState$changes$ri2, _formState$changes21, _businessState$busine17, _formState$changes$fa, _formState$changes28, _businessState$busine22, _formState$changes$in, _formState$changes29, _businessState$busine23, _formState$changes$ti, _formState$changes30, _businessState$busine24, _formState$changes$pi, _formState$changes31, _businessState$busine25, _formState$changes$wh, _formState$changes32, _businessState$busine26, _formState$changes$sn, _formState$changes33, _businessState$busine27;
+  var _configs$format_numbe, _formState$changes5, _formState$result3, _businessState$busine2, _businessState$busine3, _formState$changes6, _formState$changes7, _formState$changes8, _formState$result4, _businessState$busine4, _businessState$busine5, _formState$changes9, _formState$changes10, _formState$changes$na, _formState$changes11, _businessState$busine6, _formState$changes$ex, _formState$changes12, _businessState$busine7, _formState$changes$de, _formState$changes13, _businessState$busine8, _formState$changes$ph, _formState$changes14, _businessState$busine9, _formState$changes$ce, _formState$changes15, _businessState$busine10, _businessState$busine11, _businessState$busine12, _formState$changes16, _formState$changes17, _businessState$busine13, _formState$changes$ri, _formState$changes18, _businessState$busine14, _businessState$busine15, _formState$changes19, _formState$changes20, _businessState$busine16, _formState$changes$ri2, _formState$changes21, _businessState$busine17, _formState$changes$fa, _formState$changes28, _businessState$busine22, _formState$changes$in, _formState$changes29, _businessState$busine23, _formState$changes$ti, _formState$changes30, _businessState$busine24, _formState$changes$pi, _formState$changes31, _businessState$busine25, _formState$changes$wh, _formState$changes32, _businessState$busine26, _formState$changes$sn, _formState$changes33, _businessState$busine27;
   var formState = props.formState,
     businessState = props.businessState,
     handlechangeImage = props.handlechangeImage,
@@ -42,6 +42,9 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
+  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configs = _useConfig2[0].configs;
   var headerImageInputRef = (0, _react.useRef)(null);
   var logoImageInputRef = (0, _react.useRef)(null);
   var _useState = (0, _react.useState)({
@@ -59,21 +62,22 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     cropState = _useState4[0],
     setCropState = _useState4[1];
+  var priceSymbol = configs === null || configs === void 0 || (_configs$format_numbe = configs.format_number_currency) === null || _configs$format_numbe === void 0 || (_configs$format_numbe = _configs$format_numbe.value) === null || _configs$format_numbe === void 0 ? void 0 : _configs$format_numbe.trim();
   var priceList = [{
     key: '1',
-    value: '$'
+    value: "".concat(priceSymbol)
   }, {
     key: '2',
-    value: '$$'
+    value: "".concat(Array(2).fill(priceSymbol).join(''))
   }, {
     key: '3',
-    value: '$$$'
+    value: "".concat(Array(3).fill(priceSymbol).join(''))
   }, {
     key: '4',
-    value: '$$$$'
+    value: "".concat(Array(4).fill(priceSymbol).join(''))
   }, {
     key: '5',
-    value: '$$$$$'
+    value: "".concat(Array(5).fill(priceSymbol).join(''))
   }];
   var socialOriginalURL = {
     facebook: 'https://www.facebook.com/',
