@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useLanguage, ExamineClick, DragAndDrop, useConfig, useApi } from 'ordering-components-admin'
-import { OrderingWebsite as OrderingWebsiteController } from './test'
+import { useLanguage, ExamineClick, DragAndDrop, useConfig, useApi, OrderingWebsite as OrderingWebsiteController } from 'ordering-components-admin'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { useLocation } from 'react-router-dom'
 import { Button, IconButton, Input, TextArea } from '../../../styles'
@@ -201,7 +200,7 @@ const OrderingWebsiteUI = (props) => {
   const handleChangeFranchise = (value) => {
     handleChangeValue(value, 'website_theme', 'franchise_slug')
   }
-  console.log('selected', franchiseSelected)
+
   useEffect(() => {
     if (franchisesList?.loading || !franchisesList?.franchises) return
     if (themeValues?.website_theme?.components?.type === 'franchise') {
@@ -433,7 +432,6 @@ const OrderingWebsiteUI = (props) => {
                         <SelectFranchise
                           defaultValue={themeValues?.website_theme?.components?.franchise_slug}
                           franchisesList={franchisesList}
-                          setFranchiseSelected={setFranchiseSelected}
                           onChange={value => handleChangeFranchise(value)}
                         />
                       )}
