@@ -1,5 +1,6 @@
-import React, { useRef, useState } from 'react'
-import { useLanguage, ExamineClick, DragAndDrop, useConfig, useApi, OrderingWebsite as OrderingWebsiteController } from 'ordering-components-admin'
+import React, { useEffect, useRef, useState } from 'react'
+import { useLanguage, ExamineClick, DragAndDrop, useConfig, useApi } from 'ordering-components-admin'
+import { OrderingWebsite as OrderingWebsiteController } from './test'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { useLocation } from 'react-router-dom'
 import { Button, IconButton, Input, TextArea } from '../../../styles'
@@ -93,6 +94,7 @@ const OrderingWebsiteUI = (props) => {
   const [selectedSetting, setSelectedSetting] = useState('basic')
   const [isCustomDomain, setIsCustomDomain] = useState(false)
   const [selectedSubSetting, setSelectedSubSetting] = useState('')
+  const [franchiseSelected, setFranchiseSelected] = useState(null)
 
   const previewImages = {
     marketplace: theme.images.preview.marketplace,
@@ -195,6 +197,17 @@ const OrderingWebsiteUI = (props) => {
     setSelectedSetting(key)
     setSelectedSubSetting('')
   }
+
+  const handleChangeFranchise = (value) => {
+    handleChangeValue(value, 'website_theme', 'franchise_slug')
+  }
+  console.log('selected', franchiseSelected)
+  useEffect(() => {
+    if (franchisesList?.loading || !franchisesList?.franchises) return
+    if (themeValues?.website_theme?.components?.type === 'franchise') {
+      setFranchiseSelected(franchisesList.franchises.find(franchise => franchise?.id === themeValues?.website_theme?.components?.franchise_slug))
+    }
+  }, [themeValues?.website_theme?.components?.franchise_slug, themeValues?.website_theme?.components?.type, franchisesList])
 
   return (
     <>
@@ -420,7 +433,8 @@ const OrderingWebsiteUI = (props) => {
                         <SelectFranchise
                           defaultValue={themeValues?.website_theme?.components?.franchise_slug}
                           franchisesList={franchisesList}
-                          onChange={value => handleChangeValue(value, 'website_theme', 'franchise_slug')}
+                          setFranchiseSelected={setFranchiseSelected}
+                          onChange={value => handleChangeFranchise(value)}
                         />
                       )}
 
@@ -440,7 +454,7 @@ const OrderingWebsiteUI = (props) => {
                     </div>
                     {themeValues?.website_theme?.components?.type && (
                       <WebsitePriviewImageWrapper>
-                        <img src={previewImages?.[themeValues?.website_theme?.components?.type]} />
+                        <img src={franchiseSelected?.header || previewImages?.[themeValues?.website_theme?.components?.type]} />
                       </WebsitePriviewImageWrapper>
                     )}
                   </WebsiteThemeBlock>
@@ -600,7 +614,7 @@ const OrderingWebsiteUI = (props) => {
                         />
                       </div>
                     </ColorPickerWrapper>
-                    </ContentWrapper>
+                  </ContentWrapper>
                   <ContentWrapper>
                     <div>
                       <p>{t('HOMEPAGE_CONTENT', 'Homepage Content')}</p>
