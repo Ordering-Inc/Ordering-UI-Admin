@@ -17,7 +17,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var DeadlinesTypeSelector = function DeadlinesTypeSelector(props) {
-  var _theme$images, _theme$images$icons, _theme$images2, _theme$images2$icons, _theme$images3, _theme$images3$icons, _theme$images4, _theme$images4$icons, _theme$images5, _theme$images5$icons;
+  var _theme$images, _theme$images2, _theme$images3, _theme$images4, _theme$images5;
   var defaultValue = props.defaultValue,
     handleChangeDeadlineType = props.handleChangeDeadlineType;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -27,31 +27,31 @@ var DeadlinesTypeSelector = function DeadlinesTypeSelector(props) {
   var deadlineTypes = [{
     value: 0,
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, /*#__PURE__*/_react.default.createElement("img", {
-      src: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$icons = _theme$images.icons) === null || _theme$images$icons === void 0 ? void 0 : _theme$images$icons.deadline,
+      src: theme === null || theme === void 0 || (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.icons) === null || _theme$images === void 0 ? void 0 : _theme$images.deadline,
       alt: "deadline"
     }), t('DEADLINES', 'deadlines'))
   }, {
     value: 1,
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, /*#__PURE__*/_react.default.createElement("img", {
-      src: theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$icons = _theme$images2.icons) === null || _theme$images2$icons === void 0 ? void 0 : _theme$images2$icons.deadlineOK,
+      src: theme === null || theme === void 0 || (_theme$images2 = theme.images) === null || _theme$images2 === void 0 || (_theme$images2 = _theme$images2.icons) === null || _theme$images2 === void 0 ? void 0 : _theme$images2.deadlineOK,
       alt: "deadline OK"
     }), /*#__PURE__*/_react.default.createElement(_styles.DeadlineOk, null, t('OK', 'ok')))
   }, {
     value: 2,
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, /*#__PURE__*/_react.default.createElement("img", {
-      src: theme === null || theme === void 0 ? void 0 : (_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$icons = _theme$images3.icons) === null || _theme$images3$icons === void 0 ? void 0 : _theme$images3$icons.deadlineRisk,
+      src: theme === null || theme === void 0 || (_theme$images3 = theme.images) === null || _theme$images3 === void 0 || (_theme$images3 = _theme$images3.icons) === null || _theme$images3 === void 0 ? void 0 : _theme$images3.deadlineRisk,
       alt: "deadline risk"
     }), /*#__PURE__*/_react.default.createElement(_styles.DeadlineRisk, null, t('AT_RISK', 'at risk')))
   }, {
     value: 3,
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, /*#__PURE__*/_react.default.createElement("img", {
-      src: theme === null || theme === void 0 ? void 0 : (_theme$images4 = theme.images) === null || _theme$images4 === void 0 ? void 0 : (_theme$images4$icons = _theme$images4.icons) === null || _theme$images4$icons === void 0 ? void 0 : _theme$images4$icons.deadlineDelayed,
+      src: theme === null || theme === void 0 || (_theme$images4 = theme.images) === null || _theme$images4 === void 0 || (_theme$images4 = _theme$images4.icons) === null || _theme$images4 === void 0 ? void 0 : _theme$images4.deadlineDelayed,
       alt: "deadline delayed"
     }), /*#__PURE__*/_react.default.createElement(_styles.DeadlineDelayed, null, t('DELAYED', 'delayed')))
   }, {
     value: 4,
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, /*#__PURE__*/_react.default.createElement("img", {
-      src: theme === null || theme === void 0 ? void 0 : (_theme$images5 = theme.images) === null || _theme$images5 === void 0 ? void 0 : (_theme$images5$icons = _theme$images5.icons) === null || _theme$images5$icons === void 0 ? void 0 : _theme$images5$icons.deadlineSetting,
+      src: theme === null || theme === void 0 || (_theme$images5 = theme.images) === null || _theme$images5 === void 0 || (_theme$images5 = _theme$images5.icons) === null || _theme$images5 === void 0 ? void 0 : _theme$images5.deadlineSetting,
       alt: "deadline setting"
     }), t('SETTINGS', 'settings'))
   }];

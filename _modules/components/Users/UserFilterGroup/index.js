@@ -165,7 +165,7 @@ var UserFilterGroupUI = function UserFilterGroupUI(props) {
     className: "range"
   }, /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
     placeholder: t('SELECT_CONDITION', 'Select a condition'),
-    defaultValue: filterValues === null || filterValues === void 0 ? void 0 : (_filterValues$ordersC = filterValues.ordersCount) === null || _filterValues$ordersC === void 0 ? void 0 : _filterValues$ordersC.condition,
+    defaultValue: filterValues === null || filterValues === void 0 || (_filterValues$ordersC = filterValues.ordersCount) === null || _filterValues$ordersC === void 0 ? void 0 : _filterValues$ordersC.condition,
     options: conditions,
     onChange: function onChange(condition) {
       return handleChangeValue({
@@ -179,7 +179,7 @@ var UserFilterGroupUI = function UserFilterGroupUI(props) {
     type: "text",
     placeholder: t('NUMBER', 'Number'),
     autoComplete: "off",
-    value: (filterValues === null || filterValues === void 0 ? void 0 : (_filterValues$ordersC2 = filterValues.ordersCount) === null || _filterValues$ordersC2 === void 0 ? void 0 : _filterValues$ordersC2.value) || '',
+    value: (filterValues === null || filterValues === void 0 || (_filterValues$ordersC2 = filterValues.ordersCount) === null || _filterValues$ordersC2 === void 0 ? void 0 : _filterValues$ordersC2.value) || '',
     onKeyPress: function onKeyPress(e) {
       if (!/^[0-9]$/.test(e.key)) {
         e.preventDefault();

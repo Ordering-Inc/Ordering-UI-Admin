@@ -111,7 +111,7 @@ var ThemeOption = function ThemeOption(props) {
       setThemeValues: setThemeValues,
       handleAddThemeGallery: handleAddThemeGallery
     }));
-  }), (optionObject === null || optionObject === void 0 ? void 0 : optionObject.components) && (Object === null || Object === void 0 ? void 0 : (_Object$keys = Object.keys(optionObject === null || optionObject === void 0 ? void 0 : optionObject.components)) === null || _Object$keys === void 0 ? void 0 : _Object$keys.map(function (subOption) {
+  }), (optionObject === null || optionObject === void 0 ? void 0 : optionObject.components) && (Object === null || Object === void 0 || (_Object$keys = Object.keys(optionObject === null || optionObject === void 0 ? void 0 : optionObject.components)) === null || _Object$keys === void 0 ? void 0 : _Object$keys.map(function (subOption) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: subOption
     }, /*#__PURE__*/_react.default.createElement(ThemeOption, {

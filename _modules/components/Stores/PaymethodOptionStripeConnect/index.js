@@ -84,9 +84,9 @@ var PaymethodOptionStripeConnect = function PaymethodOptionStripeConnect(props) 
     _useState8 = _slicedToArray(_useState7, 2),
     localState = _useState8[0],
     setLocalState = _useState8[1];
-  var filteredOptions = (_localState$sites = localState === null || localState === void 0 ? void 0 : localState.sites) !== null && _localState$sites !== void 0 ? _localState$sites : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$si = businessPaymethod.sites) === null || _businessPaymethod$si === void 0 ? void 0 : _businessPaymethod$si.filter(function (a) {
+  var filteredOptions = (_localState$sites = localState === null || localState === void 0 ? void 0 : localState.sites) !== null && _localState$sites !== void 0 ? _localState$sites : businessPaymethod === null || businessPaymethod === void 0 || (_businessPaymethod$si = businessPaymethod.sites) === null || _businessPaymethod$si === void 0 ? void 0 : _businessPaymethod$si.filter(function (a) {
     var _sitesState$sites;
-    return sitesState === null || sitesState === void 0 ? void 0 : (_sitesState$sites = sitesState.sites) === null || _sitesState$sites === void 0 ? void 0 : _sitesState$sites.find(function (b) {
+    return sitesState === null || sitesState === void 0 || (_sitesState$sites = sitesState.sites) === null || _sitesState$sites === void 0 ? void 0 : _sitesState$sites.find(function (b) {
       return a.id === b.id;
     });
   });
@@ -101,7 +101,7 @@ var PaymethodOptionStripeConnect = function PaymethodOptionStripeConnect(props) 
       setAll(!all);
     } else {
       var _ref, _changesState$values$, _businessPaymethod$va;
-      var array = (_ref = (_changesState$values$ = changesState === null || changesState === void 0 ? void 0 : changesState[values.key]) !== null && _changesState$values$ !== void 0 ? _changesState$values$ : values.key === 'allowed_order_types' ? businessPaymethod === null || businessPaymethod === void 0 ? void 0 : businessPaymethod[values.key] : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$va = businessPaymethod[values.key]) === null || _businessPaymethod$va === void 0 ? void 0 : _businessPaymethod$va.map(function (i) {
+      var array = (_ref = (_changesState$values$ = changesState === null || changesState === void 0 ? void 0 : changesState[values.key]) !== null && _changesState$values$ !== void 0 ? _changesState$values$ : values.key === 'allowed_order_types' ? businessPaymethod === null || businessPaymethod === void 0 ? void 0 : businessPaymethod[values.key] : businessPaymethod === null || businessPaymethod === void 0 || (_businessPaymethod$va = businessPaymethod[values.key]) === null || _businessPaymethod$va === void 0 ? void 0 : _businessPaymethod$va.map(function (i) {
         return i.id;
       })) !== null && _ref !== void 0 ? _ref : [];
       array = _toConsumableArray(new Set(array.includes(values.value) ? array.filter(function (item) {
@@ -130,7 +130,7 @@ var PaymethodOptionStripeConnect = function PaymethodOptionStripeConnect(props) 
         setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
           open: false
         }));
-        handleDeletePaymethod(businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$pa = businessPaymethod.paymethod) === null || _businessPaymethod$pa === void 0 ? void 0 : _businessPaymethod$pa.id);
+        handleDeletePaymethod(businessPaymethod === null || businessPaymethod === void 0 || (_businessPaymethod$pa = businessPaymethod.paymethod) === null || _businessPaymethod$pa === void 0 ? void 0 : _businessPaymethod$pa.id);
       }
     });
   };
@@ -194,7 +194,7 @@ var PaymethodOptionStripeConnect = function PaymethodOptionStripeConnect(props) 
     onClick: function onClick() {
       return handleTabClick(0);
     }
-  }, t('GENERAL', 'General')), (sitesState === null || sitesState === void 0 ? void 0 : (_sitesState$sites2 = sitesState.sites) === null || _sitesState$sites2 === void 0 ? void 0 : _sitesState$sites2.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles3.Tab, {
+  }, t('GENERAL', 'General')), (sitesState === null || sitesState === void 0 || (_sitesState$sites2 = sitesState.sites) === null || _sitesState$sites2 === void 0 ? void 0 : _sitesState$sites2.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles3.Tab, {
     active: paymentTabs === 1,
     onClick: function onClick() {
       return handleTabClick(1);
@@ -210,22 +210,22 @@ var PaymethodOptionStripeConnect = function PaymethodOptionStripeConnect(props) 
     }
   }, /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement(_BilStripe.default, null)), /*#__PURE__*/_react.default.createElement("span", null, t('CONNECT_WITH_STRIPE', 'Connect with stripe'))), /*#__PURE__*/_react.default.createElement(_styles2.FieldName, null, t('ACCESS_TOKEN_ID', 'Access token ID')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "token",
-    defaultValue: changesState !== null && changesState !== void 0 && (_changesState$data = changesState.data) !== null && _changesState$data !== void 0 && _changesState$data.token ? changesState === null || changesState === void 0 ? void 0 : (_changesState$data2 = changesState.data) === null || _changesState$data2 === void 0 ? void 0 : _changesState$data2.token : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$da = businessPaymethod.data) === null || _businessPaymethod$da === void 0 ? void 0 : _businessPaymethod$da.token,
+    defaultValue: changesState !== null && changesState !== void 0 && (_changesState$data = changesState.data) !== null && _changesState$data !== void 0 && _changesState$data.token ? changesState === null || changesState === void 0 || (_changesState$data2 = changesState.data) === null || _changesState$data2 === void 0 ? void 0 : _changesState$data2.token : businessPaymethod === null || businessPaymethod === void 0 || (_businessPaymethod$da = businessPaymethod.data) === null || _businessPaymethod$da === void 0 ? void 0 : _businessPaymethod$da.token,
     placeholder: t('ACCESS_TOKEN_ID', 'Access token ID'),
     disabled: true
   }), /*#__PURE__*/_react.default.createElement(_styles2.FieldName, null, t('PUBLISHABLE_KEY', 'Publishable key')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "publishable",
-    defaultValue: changesState !== null && changesState !== void 0 && (_changesState$data3 = changesState.data) !== null && _changesState$data3 !== void 0 && _changesState$data3.publishable ? changesState === null || changesState === void 0 ? void 0 : (_changesState$data4 = changesState.data) === null || _changesState$data4 === void 0 ? void 0 : _changesState$data4.publishable : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$da2 = businessPaymethod.data) === null || _businessPaymethod$da2 === void 0 ? void 0 : _businessPaymethod$da2.publishable,
+    defaultValue: changesState !== null && changesState !== void 0 && (_changesState$data3 = changesState.data) !== null && _changesState$data3 !== void 0 && _changesState$data3.publishable ? changesState === null || changesState === void 0 || (_changesState$data4 = changesState.data) === null || _changesState$data4 === void 0 ? void 0 : _changesState$data4.publishable : businessPaymethod === null || businessPaymethod === void 0 || (_businessPaymethod$da2 = businessPaymethod.data) === null || _businessPaymethod$da2 === void 0 ? void 0 : _businessPaymethod$da2.publishable,
     placeholder: t('PUBLISHABLE_KEY', 'Publishable key'),
     disabled: true
   }), /*#__PURE__*/_react.default.createElement(_styles2.FieldName, null, t('ID_USER', 'User ID')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "user",
-    defaultValue: changesState !== null && changesState !== void 0 && (_changesState$data5 = changesState.data) !== null && _changesState$data5 !== void 0 && _changesState$data5.user ? changesState === null || changesState === void 0 ? void 0 : (_changesState$data6 = changesState.data) === null || _changesState$data6 === void 0 ? void 0 : _changesState$data6.user : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$da3 = businessPaymethod.data) === null || _businessPaymethod$da3 === void 0 ? void 0 : _businessPaymethod$da3.user,
+    defaultValue: changesState !== null && changesState !== void 0 && (_changesState$data5 = changesState.data) !== null && _changesState$data5 !== void 0 && _changesState$data5.user ? changesState === null || changesState === void 0 || (_changesState$data6 = changesState.data) === null || _changesState$data6 === void 0 ? void 0 : _changesState$data6.user : businessPaymethod === null || businessPaymethod === void 0 || (_businessPaymethod$da3 = businessPaymethod.data) === null || _businessPaymethod$da3 === void 0 ? void 0 : _businessPaymethod$da3.user,
     placeholder: t('ID_USER', 'User ID'),
     disabled: true
   }), /*#__PURE__*/_react.default.createElement(_styles2.FieldName, null, t('REFRESH_TOKEN', 'Refresh token')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "refresh_token",
-    defaultValue: changesState !== null && changesState !== void 0 && (_changesState$data_sa = changesState.data_sandbox) !== null && _changesState$data_sa !== void 0 && _changesState$data_sa.refresh_token ? changesState === null || changesState === void 0 ? void 0 : (_changesState$data_sa2 = changesState.data_sandbox) === null || _changesState$data_sa2 === void 0 ? void 0 : _changesState$data_sa2.refresh_token : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$da4 = businessPaymethod.data_sandbox) === null || _businessPaymethod$da4 === void 0 ? void 0 : _businessPaymethod$da4.refresh_token,
+    defaultValue: changesState !== null && changesState !== void 0 && (_changesState$data_sa = changesState.data_sandbox) !== null && _changesState$data_sa !== void 0 && _changesState$data_sa.refresh_token ? changesState === null || changesState === void 0 || (_changesState$data_sa2 = changesState.data_sandbox) === null || _changesState$data_sa2 === void 0 ? void 0 : _changesState$data_sa2.refresh_token : businessPaymethod === null || businessPaymethod === void 0 || (_businessPaymethod$da4 = businessPaymethod.data_sandbox) === null || _businessPaymethod$da4 === void 0 ? void 0 : _businessPaymethod$da4.refresh_token,
     placeholder: t('REFRESH_TOKEN', 'Refresh token'),
     disabled: true
   }), /*#__PURE__*/_react.default.createElement(_styles2.InputGroup, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.FieldName, null, t('FIXED_FEE', 'Fixed fee')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
@@ -246,7 +246,7 @@ var PaymethodOptionStripeConnect = function PaymethodOptionStripeConnect(props) 
       return handleChangeStripeInput(e);
     },
     min: 0
-  })))), paymentTabs === 1 && (sitesState === null || sitesState === void 0 ? void 0 : (_sitesState$sites3 = sitesState.sites) === null || _sitesState$sites3 === void 0 ? void 0 : _sitesState$sites3.length) > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles4.TabOption, {
+  })))), paymentTabs === 1 && (sitesState === null || sitesState === void 0 || (_sitesState$sites3 = sitesState.sites) === null || _sitesState$sites3 === void 0 ? void 0 : _sitesState$sites3.length) > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles4.TabOption, {
     key: "all",
     onClick: function onClick() {
       return setPaymethodInfo({
@@ -266,7 +266,7 @@ var PaymethodOptionStripeConnect = function PaymethodOptionStripeConnect(props) 
           value: site.id
         });
       }
-    }, (_ref2 = (_localState$sites2 = localState === null || localState === void 0 ? void 0 : localState.sites) !== null && _localState$sites2 !== void 0 ? _localState$sites2 : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$si2 = businessPaymethod.sites) === null || _businessPaymethod$si2 === void 0 ? void 0 : _businessPaymethod$si2.map(function (s) {
+    }, (_ref2 = (_localState$sites2 = localState === null || localState === void 0 ? void 0 : localState.sites) !== null && _localState$sites2 !== void 0 ? _localState$sites2 : businessPaymethod === null || businessPaymethod === void 0 || (_businessPaymethod$si2 = businessPaymethod.sites) === null || _businessPaymethod$si2 === void 0 ? void 0 : _businessPaymethod$si2.map(function (s) {
       return s.id;
     })) !== null && _ref2 !== void 0 && _ref2.includes(site.id) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, {
       className: "fill"

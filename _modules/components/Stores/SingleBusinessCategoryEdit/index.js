@@ -73,7 +73,7 @@ var SingleBusinessCategoryUI = function SingleBusinessCategoryUI(props) {
       var _categoryFormState$re2;
       setAlertState({
         open: true,
-        content: categoryFormState === null || categoryFormState === void 0 ? void 0 : (_categoryFormState$re2 = categoryFormState.result) === null || _categoryFormState$re2 === void 0 ? void 0 : _categoryFormState$re2.result
+        content: categoryFormState === null || categoryFormState === void 0 || (_categoryFormState$re2 = categoryFormState.result) === null || _categoryFormState$re2 === void 0 ? void 0 : _categoryFormState$re2.result
       });
     }
   }, [categoryFormState === null || categoryFormState === void 0 ? void 0 : categoryFormState.result]);
@@ -92,7 +92,7 @@ var SingleBusinessCategoryUI = function SingleBusinessCategoryUI(props) {
     disabled: categoryFormState === null || categoryFormState === void 0 ? void 0 : categoryFormState.loading,
     className: "img-section"
   }, categoryFormState !== null && categoryFormState !== void 0 && (_categoryFormState$ch = categoryFormState.changes) !== null && _categoryFormState$ch !== void 0 && _categoryFormState$ch.image ? /*#__PURE__*/_react.default.createElement("img", {
-    src: optimizeImage(categoryFormState === null || categoryFormState === void 0 ? void 0 : (_categoryFormState$ch2 = categoryFormState.changes) === null || _categoryFormState$ch2 === void 0 ? void 0 : _categoryFormState$ch2.image, 'h_50,c_limit'),
+    src: optimizeImage(categoryFormState === null || categoryFormState === void 0 || (_categoryFormState$ch2 = categoryFormState.changes) === null || _categoryFormState$ch2 === void 0 ? void 0 : _categoryFormState$ch2.image, 'h_50,c_limit'),
     alt: "category image",
     loading: "lazy"
   }) : /*#__PURE__*/_react.default.createElement(_styles3.UploadWrapper, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null)))), /*#__PURE__*/_react.default.createElement(_styles2.CategoryContent, null, isSkeleton ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {

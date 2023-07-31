@@ -45,8 +45,8 @@ var GuestCheckoutFieldsSettingUI = function GuestCheckoutFieldsSettingUI(props) 
   var hideSettingList = ['city_dropdown_option', 'address', 'address_notes'];
   var orderValidationFields = ['name', 'middle_name', 'lastname', 'second_lastname', 'email', 'mobile_phone', 'city_dropdown_option', 'address', 'zipcode', 'address_notes', 'coupon', 'driver_tip', 'comments', 'birthdate'];
   var orderTypeList = (0, _react.useMemo)(function () {
-    var _configs$order_types_, _configs$order_types_2;
-    var orderTypes = configs === null || configs === void 0 ? void 0 : (_configs$order_types_ = configs.order_types_allowed) === null || _configs$order_types_ === void 0 ? void 0 : (_configs$order_types_2 = _configs$order_types_.options) === null || _configs$order_types_2 === void 0 ? void 0 : _configs$order_types_2.map(function (item) {
+    var _configs$order_types_;
+    var orderTypes = configs === null || configs === void 0 || (_configs$order_types_ = configs.order_types_allowed) === null || _configs$order_types_ === void 0 || (_configs$order_types_ = _configs$order_types_.options) === null || _configs$order_types_ === void 0 ? void 0 : _configs$order_types_.map(function (item) {
       var _item$text;
       return {
         value: item.value,

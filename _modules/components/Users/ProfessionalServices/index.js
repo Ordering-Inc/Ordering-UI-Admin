@@ -90,16 +90,16 @@ var ProfessionalServicesUI = function ProfessionalServicesUI(props) {
   (0, _react.useEffect)(function () {
     var _businessState$busine, _businessState$busine2;
     if (!(businessState !== null && businessState !== void 0 && (_businessState$busine = businessState.business) !== null && _businessState$busine !== void 0 && _businessState$busine.categories)) return;
-    var result = deepFilter(businessState === null || businessState === void 0 ? void 0 : (_businessState$busine2 = businessState.business) === null || _businessState$busine2 === void 0 ? void 0 : _businessState$busine2.categories);
+    var result = deepFilter(businessState === null || businessState === void 0 || (_businessState$busine2 = businessState.business) === null || _businessState$busine2 === void 0 ? void 0 : _businessState$busine2.categories);
     setCategories(result);
-  }, [businessState === null || businessState === void 0 ? void 0 : (_businessState$busine3 = businessState.business) === null || _businessState$busine3 === void 0 ? void 0 : _businessState$busine3.categories, searchValue]);
+  }, [businessState === null || businessState === void 0 || (_businessState$busine3 = businessState.business) === null || _businessState$busine3 === void 0 ? void 0 : _businessState$busine3.categories, searchValue]);
   (0, _react.useEffect)(function () {
     var _actionState$result;
     if (actionState !== null && actionState !== void 0 && (_actionState$result = actionState.result) !== null && _actionState$result !== void 0 && _actionState$result.error) {
       var _actionState$result2;
       setAlertState({
         open: true,
-        content: actionState === null || actionState === void 0 ? void 0 : (_actionState$result2 = actionState.result) === null || _actionState$result2 === void 0 ? void 0 : _actionState$result2.result
+        content: actionState === null || actionState === void 0 || (_actionState$result2 = actionState.result) === null || _actionState$result2 === void 0 ? void 0 : _actionState$result2.result
       });
     }
   }, [actionState === null || actionState === void 0 ? void 0 : actionState.result]);

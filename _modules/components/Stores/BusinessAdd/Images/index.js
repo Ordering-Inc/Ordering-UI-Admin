@@ -120,12 +120,12 @@ var Images = function Images(props) {
     },
     accept: "image/png, image/jpeg, image/jpg",
     disabled: formState.loading
-  }, (formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.logo) && /*#__PURE__*/_react.default.createElement("img", {
-    src: formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.logo,
+  }, (formState === null || formState === void 0 || (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.logo) && /*#__PURE__*/_react.default.createElement("img", {
+    src: formState === null || formState === void 0 || (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.logo,
     alt: "logo image",
     loading: "lazy"
   }), /*#__PURE__*/_react.default.createElement(_styles.UploadImageIconContainer, {
-    bgimage: formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.logo
+    bgimage: formState === null || formState === void 0 || (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.logo
   }, /*#__PURE__*/_react.default.createElement(_styles.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Image, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRAG_AND_DROP', 'Drag and drop'))))))), /*#__PURE__*/_react.default.createElement(_styles.ImgInfoWrapper, null, /*#__PURE__*/_react.default.createElement("h4", null, t('BUSINESS_LOGO', 'Business Logo')), /*#__PURE__*/_react.default.createElement("p", null, "512 x 512 px"), /*#__PURE__*/_react.default.createElement("p", null, t('FORMAT', 'Format'), ": PNG, JPG"))), /*#__PURE__*/_react.default.createElement(_styles.ImageFormGroup, null, /*#__PURE__*/_react.default.createElement(_styles.BackgroundImage, {
     onClick: function onClick() {
       return handleClickImage('header');
@@ -144,8 +144,8 @@ var Images = function Images(props) {
     },
     accept: "image/png, image/jpeg, image/jpg",
     disabled: formState.loading
-  }, (formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.header) && /*#__PURE__*/_react.default.createElement("img", {
-    src: formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.header,
+  }, (formState === null || formState === void 0 || (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.header) && /*#__PURE__*/_react.default.createElement("img", {
+    src: formState === null || formState === void 0 || (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.header,
     alt: "backgrond image",
     loading: "lazy"
   }), /*#__PURE__*/_react.default.createElement(_styles.UploadImageIconContainer, {

@@ -83,7 +83,7 @@ var CampaignSignUpOptionUI = function CampaignSignUpOptionUI(props) {
       });
       return;
     }
-    if ((ruleFormState === null || ruleFormState === void 0 ? void 0 : (_ruleFormState$change7 = ruleFormState.changes) === null || _ruleFormState$change7 === void 0 ? void 0 : _ruleFormState$change7.date) === (ruleFormState === null || ruleFormState === void 0 ? void 0 : (_ruleFormState$change8 = ruleFormState.changes) === null || _ruleFormState$change8 === void 0 ? void 0 : _ruleFormState$change8.max_date)) {
+    if ((ruleFormState === null || ruleFormState === void 0 || (_ruleFormState$change7 = ruleFormState.changes) === null || _ruleFormState$change7 === void 0 ? void 0 : _ruleFormState$change7.date) === (ruleFormState === null || ruleFormState === void 0 || (_ruleFormState$change8 = ruleFormState.changes) === null || _ruleFormState$change8 === void 0 ? void 0 : _ruleFormState$change8.max_date)) {
       setAlertState({
         open: true,
         content: t('MAX_DATE_AFTER_DATE', 'The Max date must be a date after date')
@@ -91,7 +91,7 @@ var CampaignSignUpOptionUI = function CampaignSignUpOptionUI(props) {
       return;
     }
     if (isAddMode) {
-      var _formState$changes, _formState$changes$co, _formState$changes2;
+      var _formState$changes, _formState$changes2;
       // if (formState?.changes?.audience_type === 'fixed' &&
       //   (ruleFormState?.changes?.date_condition === '=' ||
       //     ruleFormState?.changes?.date_condition === '>')
@@ -102,13 +102,13 @@ var CampaignSignUpOptionUI = function CampaignSignUpOptionUI(props) {
       //   })
       //   return
       // }
-      var found = formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : (_formState$changes$co = _formState$changes.conditions) === null || _formState$changes$co === void 0 ? void 0 : _formState$changes$co.find(function (item) {
+      var found = formState === null || formState === void 0 || (_formState$changes = formState.changes) === null || _formState$changes === void 0 || (_formState$changes = _formState$changes.conditions) === null || _formState$changes === void 0 ? void 0 : _formState$changes.find(function (item) {
         return item.type === type;
       });
-      var updatedConditions = _toConsumableArray(formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.conditions);
+      var updatedConditions = _toConsumableArray(formState === null || formState === void 0 || (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.conditions);
       if (found) {
         var _formState$changes3;
-        updatedConditions = formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.conditions.map(function (condition) {
+        updatedConditions = formState === null || formState === void 0 || (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.conditions.map(function (condition) {
           if (condition.type === type) {
             return _objectSpread({}, ruleFormState.changes);
           }

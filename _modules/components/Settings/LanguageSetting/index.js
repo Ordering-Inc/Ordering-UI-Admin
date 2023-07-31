@@ -82,7 +82,7 @@ var LanguageSettingUI = function LanguageSettingUI(props) {
       className: "status"
     }, /*#__PURE__*/_react.default.createElement(_styles.Switch, {
       defaultChecked: field.enabled,
-      disabled: (languageState === null || languageState === void 0 ? void 0 : (_languageState$langua = languageState.language) === null || _languageState$langua === void 0 ? void 0 : _languageState$langua.id) === field.id,
+      disabled: (languageState === null || languageState === void 0 || (_languageState$langua = languageState.language) === null || _languageState$langua === void 0 ? void 0 : _languageState$langua.id) === field.id,
       onChange: function onChange(val) {
         return handleChangeFieldSetting(field.id, {
           enabled: val

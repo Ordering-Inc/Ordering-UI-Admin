@@ -121,8 +121,8 @@ var PointsWalletLevelsUI = function PointsWalletLevelsUI(props) {
       width: 16,
       height: 16
     }));
-  })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (levelList === null || levelList === void 0 ? void 0 : (_levelList$levels = levelList.levels) === null || _levelList$levels === void 0 ? void 0 : _levelList$levels.length) > 0 && (levelList === null || levelList === void 0 ? void 0 : levelList.levels.map(function (level, i) {
-    var _theme$images, _theme$images$dummies;
+  })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (levelList === null || levelList === void 0 || (_levelList$levels = levelList.levels) === null || _levelList$levels === void 0 ? void 0 : _levelList$levels.length) > 0 && (levelList === null || levelList === void 0 ? void 0 : levelList.levels.map(function (level, i) {
+    var _theme$images;
     return /*#__PURE__*/_react.default.createElement(_styles.LevelItemContainer, {
       key: i,
       onClick: function onClick() {
@@ -130,7 +130,7 @@ var PointsWalletLevelsUI = function PointsWalletLevelsUI(props) {
       },
       active: (level === null || level === void 0 ? void 0 : level.id) === (selectedLevel === null || selectedLevel === void 0 ? void 0 : selectedLevel.id)
     }, /*#__PURE__*/_react.default.createElement(_styles.InfoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles.Image, {
-      bgimage: optimizeImage((level === null || level === void 0 ? void 0 : level.image) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo))
+      bgimage: optimizeImage((level === null || level === void 0 ? void 0 : level.image) || ((_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.dummies) === null || _theme$images === void 0 ? void 0 : _theme$images.businessLogo))
     })), /*#__PURE__*/_react.default.createElement(_styles.LevelName, null, level === null || level === void 0 ? void 0 : level.name)), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null));
   })))), /*#__PURE__*/_react.default.createElement(_styles.LevelBottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Button, {
     color: "primary",

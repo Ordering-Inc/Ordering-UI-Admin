@@ -22,7 +22,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessMenuChannels = function BusinessMenuChannels(props) {
-  var _formState$result3, _sitesState$sites, _sitesState$sites$fil;
+  var _formState$result3, _sitesState$sites;
   var formState = props.formState,
     handleUpdateBusinessMenuOption = props.handleUpdateBusinessMenuOption,
     sitesState = props.sitesState,
@@ -55,9 +55,9 @@ var BusinessMenuChannels = function BusinessMenuChannels(props) {
     if (!(formState !== null && formState !== void 0 && (_formState$result = formState.result) !== null && _formState$result !== void 0 && _formState$result.error)) return;
     setAlertState({
       open: true,
-      content: formState === null || formState === void 0 ? void 0 : (_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result
+      content: formState === null || formState === void 0 || (_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result
     });
-  }, [formState === null || formState === void 0 ? void 0 : (_formState$result3 = formState.result) === null || _formState$result3 === void 0 ? void 0 : _formState$result3.error]);
+  }, [formState === null || formState === void 0 || (_formState$result3 = formState.result) === null || _formState$result3 === void 0 ? void 0 : _formState$result3.error]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.BusinessMenuChannelsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.SearchBarWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
     placeholder: t('SEARCH', 'Search'),
     isCustomLayout: true,
@@ -75,17 +75,17 @@ var BusinessMenuChannels = function BusinessMenuChannels(props) {
     onClick: function onClick() {
       return handleSelectNoneChannels();
     }
-  }, t('SELECT_NONE', 'Select none'))), (_sitesState$sites = sitesState.sites) === null || _sitesState$sites === void 0 ? void 0 : (_sitesState$sites$fil = _sitesState$sites.filter(function (site) {
+  }, t('SELECT_NONE', 'Select none'))), (_sitesState$sites = sitesState.sites) === null || _sitesState$sites === void 0 || (_sitesState$sites = _sitesState$sites.filter(function (site) {
     var _site$name;
-    return site === null || site === void 0 ? void 0 : (_site$name = site.name) === null || _site$name === void 0 ? void 0 : _site$name.toLowerCase().includes(searchValue);
-  })) === null || _sitesState$sites$fil === void 0 ? void 0 : _sitesState$sites$fil.map(function (site) {
-    var _formState$changes$si, _formState$changes, _formState$changes$si2, _menu$sites;
+    return site === null || site === void 0 || (_site$name = site.name) === null || _site$name === void 0 ? void 0 : _site$name.toLowerCase().includes(searchValue);
+  })) === null || _sitesState$sites === void 0 ? void 0 : _sitesState$sites.map(function (site) {
+    var _formState$changes$si, _formState$changes, _menu$sites;
     return /*#__PURE__*/_react.default.createElement(_styles2.TabOption, {
       key: site.id,
       onClick: function onClick() {
         return handleChangeMenuSite(site.id);
       }
-    }, ((_formState$changes$si = formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : (_formState$changes$si2 = _formState$changes.sites) === null || _formState$changes$si2 === void 0 ? void 0 : _formState$changes$si2.includes(site.id)) !== null && _formState$changes$si !== void 0 ? _formState$changes$si : menu === null || menu === void 0 ? void 0 : (_menu$sites = menu.sites) === null || _menu$sites === void 0 ? void 0 : _menu$sites.find(function (s) {
+    }, ((_formState$changes$si = formState === null || formState === void 0 || (_formState$changes = formState.changes) === null || _formState$changes === void 0 || (_formState$changes = _formState$changes.sites) === null || _formState$changes === void 0 ? void 0 : _formState$changes.includes(site.id)) !== null && _formState$changes$si !== void 0 ? _formState$changes$si : menu === null || menu === void 0 || (_menu$sites = menu.sites) === null || _menu$sites === void 0 ? void 0 : _menu$sites.find(function (s) {
       return (s === null || s === void 0 ? void 0 : s.id) === (site === null || site === void 0 ? void 0 : site.id);
     })) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, {
       className: "fill"

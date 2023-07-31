@@ -116,14 +116,14 @@ var PointsWalletBusinessDetailUI = function PointsWalletBusinessDetailUI(props) 
     }
     if (Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length > 0) {
       var _formState$changes, _formState$changes2;
-      if ((formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.redemption_rate) === '') {
+      if ((formState === null || formState === void 0 || (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.redemption_rate) === '') {
         setAlertState({
           open: true,
           content: t('VALIDATION_ERROR_REQUIRED', 'Value is required').replace('_attribute_', 'redemption_rate')
         });
         return;
       }
-      if ((formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.accumulation_rate) === '') {
+      if ((formState === null || formState === void 0 || (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.accumulation_rate) === '') {
         setAlertState({
           open: true,
           content: t('VALIDATION_ERROR_REQUIRED', 'Value is required').replace('_attribute_', 'accumulation_rate')
@@ -150,7 +150,7 @@ var PointsWalletBusinessDetailUI = function PointsWalletBusinessDetailUI(props) 
   }, [formState === null || formState === void 0 ? void 0 : formState.error]);
   (0, _react.useEffect)(function () {
     var _formState$changes3, _formState$changes4;
-    if (formState !== null && formState !== void 0 && (_formState$changes3 = formState.changes) !== null && _formState$changes3 !== void 0 && _formState$changes3.maximum_accumulation ? formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.maximum_accumulation : walletData === null || walletData === void 0 ? void 0 : walletData.maximum_accumulation) {
+    if (formState !== null && formState !== void 0 && (_formState$changes3 = formState.changes) !== null && _formState$changes3 !== void 0 && _formState$changes3.maximum_accumulation ? formState === null || formState === void 0 || (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.maximum_accumulation : walletData === null || walletData === void 0 ? void 0 : walletData.maximum_accumulation) {
       setIsMaximum(true);
     } else {
       setIsMaximum(false);
@@ -173,7 +173,7 @@ var PointsWalletBusinessDetailUI = function PointsWalletBusinessDetailUI(props) 
     placeholder: "00 points",
     name: "redemption_rate",
     autoComplete: "off",
-    value: typeof (formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.redemption_rate) !== 'undefined' ? formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.redemption_rate : (_walletData$redemptio = walletData === null || walletData === void 0 ? void 0 : walletData.redemption_rate) !== null && _walletData$redemptio !== void 0 ? _walletData$redemptio : '',
+    value: typeof (formState === null || formState === void 0 || (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.redemption_rate) !== 'undefined' ? formState === null || formState === void 0 || (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.redemption_rate : (_walletData$redemptio = walletData === null || walletData === void 0 ? void 0 : walletData.redemption_rate) !== null && _walletData$redemptio !== void 0 ? _walletData$redemptio : '',
     onChange: handleChangeInput,
     onKeyPress: function onKeyPress(e) {
       if (!/^[0-9.]$/.test(e.key)) {
@@ -187,7 +187,7 @@ var PointsWalletBusinessDetailUI = function PointsWalletBusinessDetailUI(props) 
     placeholder: "00 points",
     name: "accumulation_rate",
     autoComplete: "off",
-    value: typeof (formState === null || formState === void 0 ? void 0 : (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.accumulation_rate) !== 'undefined' ? formState === null || formState === void 0 ? void 0 : (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.accumulation_rate : (_walletData$accumulat = walletData === null || walletData === void 0 ? void 0 : walletData.accumulation_rate) !== null && _walletData$accumulat !== void 0 ? _walletData$accumulat : '',
+    value: typeof (formState === null || formState === void 0 || (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.accumulation_rate) !== 'undefined' ? formState === null || formState === void 0 || (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.accumulation_rate : (_walletData$accumulat = walletData === null || walletData === void 0 ? void 0 : walletData.accumulation_rate) !== null && _walletData$accumulat !== void 0 ? _walletData$accumulat : '',
     onChange: handleChangeInput,
     onKeyPress: function onKeyPress(e) {
       if (!/^[0-9.]$/.test(e.key)) {
@@ -203,7 +203,7 @@ var PointsWalletBusinessDetailUI = function PointsWalletBusinessDetailUI(props) 
     type: "text",
     placeholder: "00 points",
     name: "maximum_accumulation",
-    value: (_ref = (_formState$changes$ma = formState === null || formState === void 0 ? void 0 : (_formState$changes9 = formState.changes) === null || _formState$changes9 === void 0 ? void 0 : _formState$changes9.maximum_accumulation) !== null && _formState$changes$ma !== void 0 ? _formState$changes$ma : walletData === null || walletData === void 0 ? void 0 : walletData.maximum_accumulation) !== null && _ref !== void 0 ? _ref : '',
+    value: (_ref = (_formState$changes$ma = formState === null || formState === void 0 || (_formState$changes9 = formState.changes) === null || _formState$changes9 === void 0 ? void 0 : _formState$changes9.maximum_accumulation) !== null && _formState$changes$ma !== void 0 ? _formState$changes$ma : walletData === null || walletData === void 0 ? void 0 : walletData.maximum_accumulation) !== null && _ref !== void 0 ? _ref : '',
     onChange: handleChangeInput,
     onKeyPress: function onKeyPress(e) {
       if (!/^[0-9.]$/.test(e.key)) {

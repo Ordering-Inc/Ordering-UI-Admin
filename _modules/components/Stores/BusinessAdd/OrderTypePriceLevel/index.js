@@ -16,7 +16,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrderTypePriceLevel = function OrderTypePriceLevel(props) {
-  var _configs$format_numbe, _configs$format_numbe2;
+  var _configs$format_numbe;
   var formState = props.formState,
     changeFormState = props.changeFormState;
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
@@ -25,7 +25,7 @@ var OrderTypePriceLevel = function OrderTypePriceLevel(props) {
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
-  var priceSymbol = configs === null || configs === void 0 ? void 0 : (_configs$format_numbe = configs.format_number_currency) === null || _configs$format_numbe === void 0 ? void 0 : (_configs$format_numbe2 = _configs$format_numbe.value) === null || _configs$format_numbe2 === void 0 ? void 0 : _configs$format_numbe2.trim();
+  var priceSymbol = configs === null || configs === void 0 || (_configs$format_numbe = configs.format_number_currency) === null || _configs$format_numbe === void 0 || (_configs$format_numbe = _configs$format_numbe.value) === null || _configs$format_numbe === void 0 ? void 0 : _configs$format_numbe.trim();
   var priceList = [{
     key: '1',
     value: "".concat(priceSymbol)
@@ -51,8 +51,8 @@ var OrderTypePriceLevel = function OrderTypePriceLevel(props) {
           price_level: item.key
         });
       },
-      active: (formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.price_level) === item.key
-    }, (formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.price_level) === item.key ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, item.value));
+      active: (formState === null || formState === void 0 || (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.price_level) === item.key
+    }, (formState === null || formState === void 0 || (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.price_level) === item.key ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, item.value));
   }))));
 };
 exports.OrderTypePriceLevel = OrderTypePriceLevel;

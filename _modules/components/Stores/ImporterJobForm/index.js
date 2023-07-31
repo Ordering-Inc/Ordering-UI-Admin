@@ -143,15 +143,15 @@ var ImporterJobFormUI = function ImporterJobFormUI(props) {
     }
   }, [formMethods.errors]);
   (0, _react.useEffect)(function () {
-    var _formState$result, _formState$result3, _formState$result4, _formState$result4$re;
+    var _formState$result, _formState$result3, _formState$result4;
     if ((_formState$result = formState.result) !== null && _formState$result !== void 0 && _formState$result.error && Object.keys(formState.result).length > 0) {
       var _formState$result2;
       setAlertState({
         open: true,
-        content: formState === null || formState === void 0 ? void 0 : (_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result
+        content: formState === null || formState === void 0 || (_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result
       });
     }
-    if (!((_formState$result3 = formState.result) !== null && _formState$result3 !== void 0 && _formState$result3.error) && (_formState$result4 = formState.result) !== null && _formState$result4 !== void 0 && (_formState$result4$re = _formState$result4.result) !== null && _formState$result4$re !== void 0 && _formState$result4$re.id) {
+    if (!((_formState$result3 = formState.result) !== null && _formState$result3 !== void 0 && _formState$result3.error) && (_formState$result4 = formState.result) !== null && _formState$result4 !== void 0 && (_formState$result4 = _formState$result4.result) !== null && _formState$result4 !== void 0 && _formState$result4.id) {
       onClose();
     }
   }, [formState.result]);
@@ -167,7 +167,7 @@ var ImporterJobFormUI = function ImporterJobFormUI(props) {
     type: "text",
     placeholder: ";",
     maxLength: "1",
-    defaultValue: formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.separator,
+    defaultValue: formState === null || formState === void 0 || (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.separator,
     onChange: handleChangeInput,
     disabled: formState.loading,
     autoComplete: "off"
@@ -176,7 +176,7 @@ var ImporterJobFormUI = function ImporterJobFormUI(props) {
     type: "text",
     placeholder: "\"",
     maxLength: "1",
-    defaultValue: formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.enclosure,
+    defaultValue: formState === null || formState === void 0 || (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.enclosure,
     onChange: handleChangeInput,
     disabled: formState.loading,
     autoComplete: "off"
@@ -185,7 +185,7 @@ var ImporterJobFormUI = function ImporterJobFormUI(props) {
     type: "text",
     placeholder: "\\",
     maxLength: "1",
-    defaultValue: formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.escape,
+    defaultValue: formState === null || formState === void 0 || (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.escape,
     onChange: handleChangeInput,
     disabled: formState.loading,
     autoComplete: "off"
@@ -193,7 +193,7 @@ var ImporterJobFormUI = function ImporterJobFormUI(props) {
     name: "start_line",
     type: "text",
     maxLength: "1",
-    defaultValue: formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.start_line,
+    defaultValue: formState === null || formState === void 0 || (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.start_line,
     onChange: handleChangeInput,
     disabled: formState.loading,
     autoComplete: "off"

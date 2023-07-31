@@ -153,7 +153,7 @@ var BusinessMenuOptionsUI = function BusinessMenuOptionsUI(props) {
     onClick: function onClick() {
       return handleTabClick('basic');
     }
-  }, t('BASIC', 'Basic')), (sitesState === null || sitesState === void 0 ? void 0 : (_sitesState$sites = sitesState.sites) === null || _sitesState$sites === void 0 ? void 0 : _sitesState$sites.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
+  }, t('BASIC', 'Basic')), (sitesState === null || sitesState === void 0 || (_sitesState$sites = sitesState.sites) === null || _sitesState$sites === void 0 ? void 0 : _sitesState$sites.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
     active: selectedMenuOption === 'channels',
     onClick: function onClick() {
       return handleTabClick('channels');

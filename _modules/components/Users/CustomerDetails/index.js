@@ -130,7 +130,7 @@ var CustomerDetailsUI = function CustomerDetailsUI(props) {
     handleParentSidebarMove(0);
     setIsOpenMenu(false);
     setShowOption(null);
-  }, [userState === null || userState === void 0 ? void 0 : (_userState$user = userState.user) === null || _userState$user === void 0 ? void 0 : _userState$user.id]);
+  }, [userState === null || userState === void 0 || (_userState$user = userState.user) === null || _userState$user === void 0 ? void 0 : _userState$user.id]);
   (0, _react.useEffect)(function () {
     if (userState.loading) return;
     var section = query.get('section');
@@ -148,7 +148,7 @@ var CustomerDetailsUI = function CustomerDetailsUI(props) {
       margin: '0px 5px'
     }
   }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, handleChangeActiveUser && /*#__PURE__*/_react.default.createElement(_styles.Switch, {
-    defaultChecked: (userState === null || userState === void 0 ? void 0 : (_userState$user4 = userState.user) === null || _userState$user4 === void 0 ? void 0 : _userState$user4.enabled) || false,
+    defaultChecked: (userState === null || userState === void 0 || (_userState$user4 = userState.user) === null || _userState$user4 === void 0 ? void 0 : _userState$user4.enabled) || false,
     onChange: function onChange(enabled) {
       return handleChangeActiveUser(_objectSpread(_objectSpread({}, userState === null || userState === void 0 ? void 0 : userState.user), {}, {
         enabled: enabled

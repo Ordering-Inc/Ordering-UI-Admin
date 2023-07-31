@@ -117,7 +117,7 @@ var UserDetailsUI = function UserDetailsUI(props) {
       margin: '0px 5px'
     }
   }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, handleChangeActiveUser && /*#__PURE__*/_react.default.createElement(_styles.Switch, {
-    defaultChecked: (userState === null || userState === void 0 ? void 0 : (_userState$user3 = userState.user) === null || _userState$user3 === void 0 ? void 0 : _userState$user3.enabled) || false,
+    defaultChecked: (userState === null || userState === void 0 || (_userState$user3 = userState.user) === null || _userState$user3 === void 0 ? void 0 : _userState$user3.enabled) || false,
     onChange: function onChange(enabled) {
       return handleChangeActiveUser(_objectSpread(_objectSpread({}, userState === null || userState === void 0 ? void 0 : userState.user), {}, {
         enabled: enabled
@@ -142,11 +142,11 @@ var UserDetailsUI = function UserDetailsUI(props) {
     handleChangeMenu: function handleChangeMenu(tab) {
       return handleTabClick(tab);
     },
-    isBusinessOwner: (userState === null || userState === void 0 ? void 0 : (_userState$user8 = userState.user) === null || _userState$user8 === void 0 ? void 0 : _userState$user8.level) === 2
+    isBusinessOwner: (userState === null || userState === void 0 || (_userState$user8 = userState.user) === null || _userState$user8 === void 0 ? void 0 : _userState$user8.level) === 2
   }), !(userState !== null && userState !== void 0 && userState.loading) && (userState === null || userState === void 0 ? void 0 : userState.user) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, currentMenuSelected === 'profile' && /*#__PURE__*/_react.default.createElement(_UserProfileForm.UserProfileForm, {
     user: userState.user,
     handleSuccessUpdate: handleSuccessUserUpdate
-  }), currentMenuSelected === 'saved_places' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (userState === null || userState === void 0 ? void 0 : (_userState$user9 = userState.user) === null || _userState$user9 === void 0 ? void 0 : _userState$user9.addresses) && /*#__PURE__*/_react.default.createElement(_styles2.SavedPlaces, null, /*#__PURE__*/_react.default.createElement(_Delivery.AddressList, {
+  }), currentMenuSelected === 'saved_places' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (userState === null || userState === void 0 || (_userState$user9 = userState.user) === null || _userState$user9 === void 0 ? void 0 : _userState$user9.addresses) && /*#__PURE__*/_react.default.createElement(_styles2.SavedPlaces, null, /*#__PURE__*/_react.default.createElement(_Delivery.AddressList, {
     isSeletectedUserAddresses: true,
     userId: (_userState$user10 = userState.user) === null || _userState$user10 === void 0 ? void 0 : _userState$user10.id,
     addresses: (_userState$user11 = userState.user) === null || _userState$user11 === void 0 ? void 0 : _userState$user11.addresses,
@@ -154,7 +154,7 @@ var UserDetailsUI = function UserDetailsUI(props) {
     userState: userState,
     handleSuccessUpdate: handleSuccessUserUpdate
   }))), currentMenuSelected === 'businesses' && /*#__PURE__*/_react.default.createElement(_BusinessManagerBusinesses.BusinessManagerBusinesses, {
-    userId: userState === null || userState === void 0 ? void 0 : (_userState$user12 = userState.user) === null || _userState$user12 === void 0 ? void 0 : _userState$user12.id
+    userId: userState === null || userState === void 0 || (_userState$user12 = userState.user) === null || _userState$user12 === void 0 ? void 0 : _userState$user12.id
   }), currentMenuSelected === 'orders' && /*#__PURE__*/_react.default.createElement(_styles2.OrdersWrapper, null, /*#__PURE__*/_react.default.createElement(_OrdersManager.OrdersManager, {
     isSelectedOrders: true,
     customerId: (_userState$user13 = userState.user) === null || _userState$user13 === void 0 ? void 0 : _userState$user13.id,

@@ -241,7 +241,7 @@ var ServiceDetail = function ServiceDetail(props) {
       var _formState$result2;
       setAlertState({
         open: true,
-        content: formState === null || formState === void 0 ? void 0 : (_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result
+        content: formState === null || formState === void 0 || (_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result
       });
     }
   }, [formState === null || formState === void 0 ? void 0 : formState.result]);
@@ -302,8 +302,8 @@ var ServiceDetail = function ServiceDetail(props) {
     src: optimizeImage(product === null || product === void 0 ? void 0 : product.images, 'h_200,c_limit'),
     alt: "product image",
     loading: "lazy"
-  }) : (formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.images) && /*#__PURE__*/_react.default.createElement("img", {
-    src: formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.images,
+  }) : (formState === null || formState === void 0 || (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.images) && /*#__PURE__*/_react.default.createElement("img", {
+    src: formState === null || formState === void 0 || (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.images,
     alt: "product image",
     loading: "lazy"
   }), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIconContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRAG_DROP_IMAGE_HERE', 'Put your image here'))))))), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('Name_V2', 'Name')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
@@ -316,10 +316,10 @@ var ServiceDetail = function ServiceDetail(props) {
     }),
     disabled: formState.loading,
     autoComplete: "off"
-  })), ((_formState$changes$ty = formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.type) !== null && _formState$changes$ty !== void 0 ? _formState$changes$ty : product === null || product === void 0 ? void 0 : product.type) === 'service' && /*#__PURE__*/_react.default.createElement(_styles2.FieldRow, null, /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('DURATION', 'Duration')), /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
+  })), ((_formState$changes$ty = formState === null || formState === void 0 || (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.type) !== null && _formState$changes$ty !== void 0 ? _formState$changes$ty : product === null || product === void 0 ? void 0 : product.type) === 'service' && /*#__PURE__*/_react.default.createElement(_styles2.FieldRow, null, /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('DURATION', 'Duration')), /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
     options: durationList,
     className: "select",
-    defaultValue: isCustom ? 'custom' : (_formState$changes$du = formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.duration) !== null && _formState$changes$du !== void 0 ? _formState$changes$du : product === null || product === void 0 ? void 0 : product.duration,
+    defaultValue: isCustom ? 'custom' : (_formState$changes$du = formState === null || formState === void 0 || (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.duration) !== null && _formState$changes$du !== void 0 ? _formState$changes$du : product === null || product === void 0 ? void 0 : product.duration,
     placeholder: t('SELECT_OPTION', 'Select an option'),
     onChange: function onChange(value) {
       return handleChangeSelect(value);

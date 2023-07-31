@@ -39,7 +39,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ReportsDriverScheduleUI = function ReportsDriverScheduleUI(props) {
-  var _reportData$content3, _reportData$content3$, _reportData$content4, _reportData$content4$;
+  var _reportData$content3, _reportData$content4;
   var filterList = props.filterList,
     handleChangeFilterList = props.handleChangeFilterList,
     reportData = props.reportData;
@@ -74,7 +74,7 @@ var ReportsDriverScheduleUI = function ReportsDriverScheduleUI(props) {
     var _reportData$content;
     var _available = [];
     var _notAvailable = [];
-    (reportData === null || reportData === void 0 ? void 0 : (_reportData$content = reportData.content) === null || _reportData$content === void 0 ? void 0 : _reportData$content.data) && reportData.content.data.forEach(function (data) {
+    (reportData === null || reportData === void 0 || (_reportData$content = reportData.content) === null || _reportData$content === void 0 ? void 0 : _reportData$content.data) && reportData.content.data.forEach(function (data) {
       data.lines.forEach(function (line) {
         if (line.label_key === dataKey) {
           line.ranges.forEach(function (range) {
@@ -129,8 +129,8 @@ var ReportsDriverScheduleUI = function ReportsDriverScheduleUI(props) {
     }
   }, [reportData === null || reportData === void 0 ? void 0 : reportData.error]);
   (0, _react.useEffect)(function () {
-    var _reportData$content2, _reportData$content2$;
-    if ((reportData === null || reportData === void 0 ? void 0 : (_reportData$content2 = reportData.content) === null || _reportData$content2 === void 0 ? void 0 : (_reportData$content2$ = _reportData$content2.data) === null || _reportData$content2$ === void 0 ? void 0 : _reportData$content2$.length) > 0) {
+    var _reportData$content2;
+    if ((reportData === null || reportData === void 0 || (_reportData$content2 = reportData.content) === null || _reportData$content2 === void 0 || (_reportData$content2 = _reportData$content2.data) === null || _reportData$content2 === void 0 ? void 0 : _reportData$content2.length) > 0) {
       var _data = {
         datasets: [{
           label: t('AVAILABLE', 'Available'),
@@ -191,7 +191,7 @@ var ReportsDriverScheduleUI = function ReportsDriverScheduleUI(props) {
     var _barChartRef$current;
     if (!(barChartRef !== null && barChartRef !== void 0 && barChartRef.current)) return;
     var a = document.createElement('a');
-    a.href = barChartRef === null || barChartRef === void 0 ? void 0 : (_barChartRef$current = barChartRef.current) === null || _barChartRef$current === void 0 ? void 0 : _barChartRef$current.toBase64Image();
+    a.href = barChartRef === null || barChartRef === void 0 || (_barChartRef$current = barChartRef.current) === null || _barChartRef$current === void 0 ? void 0 : _barChartRef$current.toBase64Image();
     a.download = 'driver_schedule.png';
     // Trigger the download
     a.click();
@@ -209,7 +209,7 @@ var ReportsDriverScheduleUI = function ReportsDriverScheduleUI(props) {
     defaultValue: filterList,
     isSingleDate: true
   })))), /*#__PURE__*/_react.default.createElement(_styles2.DistancePerBrandWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.ScheduleTitleBlock, {
-    active: (reportData === null || reportData === void 0 ? void 0 : (_reportData$content3 = reportData.content) === null || _reportData$content3 === void 0 ? void 0 : (_reportData$content3$ = _reportData$content3.data) === null || _reportData$content3$ === void 0 ? void 0 : _reportData$content3$.length) > 0
+    active: (reportData === null || reportData === void 0 || (_reportData$content3 = reportData.content) === null || _reportData$content3 === void 0 || (_reportData$content3 = _reportData$content3.data) === null || _reportData$content3 === void 0 ? void 0 : _reportData$content3.length) > 0
   }, /*#__PURE__*/_react.default.createElement("h2", null, t('DRIVER_SCHEDULE', 'DRIVER SCHEDULE')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Download, {
     onClick: function onClick() {
       return downloadChart();
@@ -223,7 +223,7 @@ var ReportsDriverScheduleUI = function ReportsDriverScheduleUI(props) {
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       height: 100
     }));
-  })) : /*#__PURE__*/_react.default.createElement(_styles2.ChartWrapper, null, (reportData === null || reportData === void 0 ? void 0 : (_reportData$content4 = reportData.content) === null || _reportData$content4 === void 0 ? void 0 : (_reportData$content4$ = _reportData$content4.data) === null || _reportData$content4$ === void 0 ? void 0 : _reportData$content4$.length) > 0 && chartData ? /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactChartjs.Bar, {
+  })) : /*#__PURE__*/_react.default.createElement(_styles2.ChartWrapper, null, (reportData === null || reportData === void 0 || (_reportData$content4 = reportData.content) === null || _reportData$content4 === void 0 || (_reportData$content4 = _reportData$content4.data) === null || _reportData$content4 === void 0 ? void 0 : _reportData$content4.length) > 0 && chartData ? /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactChartjs.Bar, {
     data: chartData,
     options: options,
     ref: barChartRef

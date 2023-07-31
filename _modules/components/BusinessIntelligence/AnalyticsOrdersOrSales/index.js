@@ -162,7 +162,7 @@ var AnalyticsOrdersOrSales = function AnalyticsOrdersOrSales(props) {
   };
   (0, _react.useEffect)(function () {
     var _chartDataList$data;
-    if (chartDataList !== null && chartDataList !== void 0 && chartDataList.data && (chartDataList === null || chartDataList === void 0 ? void 0 : (_chartDataList$data = chartDataList.data) === null || _chartDataList$data === void 0 ? void 0 : _chartDataList$data.length) > 0) {
+    if (chartDataList !== null && chartDataList !== void 0 && chartDataList.data && (chartDataList === null || chartDataList === void 0 || (_chartDataList$data = chartDataList.data) === null || _chartDataList$data === void 0 ? void 0 : _chartDataList$data.length) > 0) {
       var defaultData = {
         labels: generateLabel(),
         datasets: generateData()

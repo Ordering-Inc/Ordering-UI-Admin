@@ -124,13 +124,13 @@ var UploadMenuGuideUI = function UploadMenuGuideUI(props) {
       return handleFiles(dataTransfer.files);
     },
     accept: "image/png, image/jpeg, image/jpg, application/pdf"
-  }, (formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.file) && ((formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.type) === 'pdf' ? /*#__PURE__*/_react.default.createElement(_styles2.PdfIconBox, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.FileEarmarkPdfFill, null)) : /*#__PURE__*/_react.default.createElement("img", {
-    src: formState === null || formState === void 0 ? void 0 : (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.file,
+  }, (formState === null || formState === void 0 || (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.file) && ((formState === null || formState === void 0 || (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.type) === 'pdf' ? /*#__PURE__*/_react.default.createElement(_styles2.PdfIconBox, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.FileEarmarkPdfFill, null)) : /*#__PURE__*/_react.default.createElement("img", {
+    src: formState === null || formState === void 0 || (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.file,
     alt: "file",
     loading: "lazy"
   })), /*#__PURE__*/_react.default.createElement(_styles2.UploadIconBox, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CloudUploadFill, null), /*#__PURE__*/_react.default.createElement("p", null, t('DRAG_AND_DROP', 'Drag and drop'))))))), /*#__PURE__*/_react.default.createElement(_styles2.Or, null, t('OR', 'Or')), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('SHARE_YOUR_MENU_LINK', 'Share your menu link (From your webiste or another online ordering system)')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     placeholder: t('URL', 'URL'),
-    defaultValue: formState === null || formState === void 0 ? void 0 : (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.url,
+    defaultValue: formState === null || formState === void 0 || (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.url,
     onChange: function onChange(e) {
       return changeFormState({
         url: e.target.value

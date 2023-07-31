@@ -259,16 +259,16 @@ var ProductDetailsAdvancedUI = function ProductDetailsAdvancedUI(props) {
   var checkValidate = function checkValidate() {
     var _formState$changes, _formState$changes2, _formState$changes3, _formState$changes4, _formState$changes5;
     var valid = true;
-    if ((formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.maximum_per_order) === '0') {
+    if ((formState === null || formState === void 0 || (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.maximum_per_order) === '0') {
       valid = false;
       setAlertState({
         open: true,
         content: t('REMOVE_MAXIMUM_QUANTITY_RESTRICTION', 'To remove the maximum quantity restriction, leave the Maximum quantity to order space empty')
       });
     }
-    if (formState !== null && formState !== void 0 && (_formState$changes2 = formState.changes) !== null && _formState$changes2 !== void 0 && _formState$changes2.minimum_per_order && formState !== null && formState !== void 0 && (_formState$changes3 = formState.changes) !== null && _formState$changes3 !== void 0 && _formState$changes3.maximum_per_order && !((formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.maximum_per_order) === null || (formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.maximum_per_order) === '0')) {
+    if (formState !== null && formState !== void 0 && (_formState$changes2 = formState.changes) !== null && _formState$changes2 !== void 0 && _formState$changes2.minimum_per_order && formState !== null && formState !== void 0 && (_formState$changes3 = formState.changes) !== null && _formState$changes3 !== void 0 && _formState$changes3.maximum_per_order && !((formState === null || formState === void 0 || (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.maximum_per_order) === null || (formState === null || formState === void 0 || (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.maximum_per_order) === '0')) {
       var _formState$changes6, _formState$changes7;
-      if (Number(formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.minimum_per_order) >= Number(formState === null || formState === void 0 ? void 0 : (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.maximum_per_order)) {
+      if (Number(formState === null || formState === void 0 || (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.minimum_per_order) >= Number(formState === null || formState === void 0 || (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.maximum_per_order)) {
         valid = false;
         setAlertState({
           open: true,
@@ -295,7 +295,7 @@ var ProductDetailsAdvancedUI = function ProductDetailsAdvancedUI(props) {
       var _formState$result2;
       setAlertState({
         open: true,
-        content: formState === null || formState === void 0 ? void 0 : (_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result
+        content: formState === null || formState === void 0 || (_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result
       });
     }
   }, [formState === null || formState === void 0 ? void 0 : formState.result]);
@@ -318,13 +318,13 @@ var ProductDetailsAdvancedUI = function ProductDetailsAdvancedUI(props) {
     if (formState !== null && formState !== void 0 && (_formState$changes8 = formState.changes) !== null && _formState$changes8 !== void 0 && _formState$changes8.weight && !(formState !== null && formState !== void 0 && (_formState$changes9 = formState.changes) !== null && _formState$changes9 !== void 0 && _formState$changes9.weight_unit)) {
       handleClickProperty('weight_unit', 'grams');
     }
-  }, [formState === null || formState === void 0 ? void 0 : (_formState$changes10 = formState.changes) === null || _formState$changes10 === void 0 ? void 0 : _formState$changes10.weight]);
+  }, [formState === null || formState === void 0 || (_formState$changes10 = formState.changes) === null || _formState$changes10 === void 0 ? void 0 : _formState$changes10.weight]);
   (0, _react.useEffect)(function () {
     var _formState$changes11, _formState$changes12, _formState$changes13, _formState$changes14, _formState$changes15, _formState$changes16;
-    if (formState !== null && formState !== void 0 && (_formState$changes11 = formState.changes) !== null && _formState$changes11 !== void 0 && _formState$changes11.minimum_per_order && !(formState !== null && formState !== void 0 && (_formState$changes12 = formState.changes) !== null && _formState$changes12 !== void 0 && _formState$changes12.maximum_per_order || (formState === null || formState === void 0 ? void 0 : (_formState$changes13 = formState.changes) === null || _formState$changes13 === void 0 ? void 0 : _formState$changes13.maximum_per_order) === null)) {
+    if (formState !== null && formState !== void 0 && (_formState$changes11 = formState.changes) !== null && _formState$changes11 !== void 0 && _formState$changes11.minimum_per_order && !(formState !== null && formState !== void 0 && (_formState$changes12 = formState.changes) !== null && _formState$changes12 !== void 0 && _formState$changes12.maximum_per_order || (formState === null || formState === void 0 || (_formState$changes13 = formState.changes) === null || _formState$changes13 === void 0 ? void 0 : _formState$changes13.maximum_per_order) === null)) {
       handleClickProperty('maximum_per_order', productState === null || productState === void 0 ? void 0 : productState.maximum_per_order);
     }
-    if ((formState !== null && formState !== void 0 && (_formState$changes14 = formState.changes) !== null && _formState$changes14 !== void 0 && _formState$changes14.maximum_per_order || (formState === null || formState === void 0 ? void 0 : (_formState$changes15 = formState.changes) === null || _formState$changes15 === void 0 ? void 0 : _formState$changes15.maximum_per_order) === null) && !(formState !== null && formState !== void 0 && (_formState$changes16 = formState.changes) !== null && _formState$changes16 !== void 0 && _formState$changes16.minimum_per_order)) {
+    if ((formState !== null && formState !== void 0 && (_formState$changes14 = formState.changes) !== null && _formState$changes14 !== void 0 && _formState$changes14.maximum_per_order || (formState === null || formState === void 0 || (_formState$changes15 = formState.changes) === null || _formState$changes15 === void 0 ? void 0 : _formState$changes15.maximum_per_order) === null) && !(formState !== null && formState !== void 0 && (_formState$changes16 = formState.changes) !== null && _formState$changes16 !== void 0 && _formState$changes16.minimum_per_order)) {
       handleClickProperty('minimum_per_order', productState === null || productState === void 0 ? void 0 : productState.minimum_per_order);
     }
   }, [formState === null || formState === void 0 ? void 0 : formState.changes]);

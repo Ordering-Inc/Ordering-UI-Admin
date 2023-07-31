@@ -30,7 +30,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var UserFormDetailsUI = function UserFormDetailsUI(props) {
-  var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _validationFields$fie11, _ref4, _formState$changes$ex, _formState$changes6, _ref5, _formState$changes$ti, _formState$changes7, _ref6, _formState$changes$dr, _formState$changes8, _ref7, _formState$changes$mo, _formState$changes9;
+  var _validationFields$fie, _validationFields$fie2, _validationFields$fie5, _ref4, _formState$changes$ex, _formState$changes6, _ref5, _formState$changes$ti, _formState$changes7, _ref6, _formState$changes$dr, _formState$changes8, _ref7, _formState$changes$mo, _formState$changes9;
   var formState = props.formState,
     showField = props.showField,
     cleanFormState = props.cleanFormState,
@@ -95,7 +95,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       }
     });
   };
-  var showInputPhoneNumber = (_validationFields$fie = validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie2 = validationFields.fields) === null || _validationFields$fie2 === void 0 ? void 0 : (_validationFields$fie3 = _validationFields$fie2.checkout) === null || _validationFields$fie3 === void 0 ? void 0 : (_validationFields$fie4 = _validationFields$fie3.cellphone) === null || _validationFields$fie4 === void 0 ? void 0 : _validationFields$fie4.enabled) !== null && _validationFields$fie !== void 0 ? _validationFields$fie : false;
+  var showInputPhoneNumber = (_validationFields$fie = validationFields === null || validationFields === void 0 || (_validationFields$fie2 = validationFields.fields) === null || _validationFields$fie2 === void 0 || (_validationFields$fie2 = _validationFields$fie2.checkout) === null || _validationFields$fie2 === void 0 || (_validationFields$fie2 = _validationFields$fie2.cellphone) === null || _validationFields$fie2 === void 0 ? void 0 : _validationFields$fie2.enabled) !== null && _validationFields$fie !== void 0 ? _validationFields$fie : false;
   var setUserCellPhone = function setUserCellPhone() {
     var isEdit = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
     // if (userPhoneNumber && !userPhoneNumber.includes('null') && !isEdit) {
@@ -122,9 +122,9 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     setUserPhoneNumber((user === null || user === void 0 ? void 0 : user.cellphone) || '');
   };
   var onSubmit = function onSubmit() {
-    var _validationFields$fie5, _validationFields$fie6, _validationFields$fie7, _validationFields$fie8, _validationFields$fie9, _validationFields$fie10;
+    var _validationFields$fie3, _validationFields$fie4;
     var isPhoneNumberValid = userPhoneNumber ? isValidPhoneNumber : true;
-    if (!userPhoneNumber && validationFields !== null && validationFields !== void 0 && (_validationFields$fie5 = validationFields.fields) !== null && _validationFields$fie5 !== void 0 && (_validationFields$fie6 = _validationFields$fie5.checkout) !== null && _validationFields$fie6 !== void 0 && (_validationFields$fie7 = _validationFields$fie6.cellphone) !== null && _validationFields$fie7 !== void 0 && _validationFields$fie7.enabled && validationFields !== null && validationFields !== void 0 && (_validationFields$fie8 = validationFields.fields) !== null && _validationFields$fie8 !== void 0 && (_validationFields$fie9 = _validationFields$fie8.checkout) !== null && _validationFields$fie9 !== void 0 && (_validationFields$fie10 = _validationFields$fie9.cellphone) !== null && _validationFields$fie10 !== void 0 && _validationFields$fie10.required) {
+    if (!userPhoneNumber && validationFields !== null && validationFields !== void 0 && (_validationFields$fie3 = validationFields.fields) !== null && _validationFields$fie3 !== void 0 && (_validationFields$fie3 = _validationFields$fie3.checkout) !== null && _validationFields$fie3 !== void 0 && (_validationFields$fie3 = _validationFields$fie3.cellphone) !== null && _validationFields$fie3 !== void 0 && _validationFields$fie3.enabled && validationFields !== null && validationFields !== void 0 && (_validationFields$fie4 = validationFields.fields) !== null && _validationFields$fie4 !== void 0 && (_validationFields$fie4 = _validationFields$fie4.checkout) !== null && _validationFields$fie4 !== void 0 && (_validationFields$fie4 = _validationFields$fie4.cellphone) !== null && _validationFields$fie4 !== void 0 && _validationFields$fie4.required) {
       setAlertState({
         open: true,
         content: [t('VALIDATION_ERROR_MOBILE_PHONE_REQUIRED', 'The field Phone Number is required.')]
@@ -231,8 +231,8 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
   }, [user]);
   (0, _react.useEffect)(function () {
     if (!validationFields.loading && emailInput.current) {
-      var _formState$result3, _formState$result4, _formState$result4$re, _ref, _formState$changes$em, _formState$changes5;
-      formMethods.setValue('email', formState !== null && formState !== void 0 && (_formState$result3 = formState.result) !== null && _formState$result3 !== void 0 && _formState$result3.result ? formState === null || formState === void 0 ? void 0 : (_formState$result4 = formState.result) === null || _formState$result4 === void 0 ? void 0 : (_formState$result4$re = _formState$result4.result) === null || _formState$result4$re === void 0 ? void 0 : _formState$result4$re.email : (_ref = (_formState$changes$em = formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.email) !== null && _formState$changes$em !== void 0 ? _formState$changes$em : user && (user === null || user === void 0 ? void 0 : user.email)) !== null && _ref !== void 0 ? _ref : '');
+      var _formState$result3, _formState$result4, _ref, _formState$changes$em, _formState$changes5;
+      formMethods.setValue('email', formState !== null && formState !== void 0 && (_formState$result3 = formState.result) !== null && _formState$result3 !== void 0 && _formState$result3.result ? formState === null || formState === void 0 || (_formState$result4 = formState.result) === null || _formState$result4 === void 0 || (_formState$result4 = _formState$result4.result) === null || _formState$result4 === void 0 ? void 0 : _formState$result4.email : (_ref = (_formState$changes$em = formState === null || formState === void 0 || (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.email) !== null && _formState$changes$em !== void 0 ? _formState$changes$em : user && (user === null || user === void 0 ? void 0 : user.email)) !== null && _ref !== void 0 ? _ref : '');
     }
   }, [validationFields, emailInput.current]);
   (0, _react.useEffect)(function () {
@@ -265,7 +265,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.FormInput, {
     onSubmit: formMethods.handleSubmit(onSubmit)
   }, !(validationFields !== null && validationFields !== void 0 && validationFields.loading) ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (0, _utils.sortInputFields)({
-    values: validationFields === null || validationFields === void 0 ? void 0 : (_validationFields$fie11 = validationFields.fields) === null || _validationFields$fie11 === void 0 ? void 0 : _validationFields$fie11.checkout
+    values: validationFields === null || validationFields === void 0 || (_validationFields$fie5 = validationFields.fields) === null || _validationFields$fie5 === void 0 ? void 0 : _validationFields$fie5.checkout
   }).map(function (field) {
     var _ref2, _formState$changes$fi, _ref3, _formState$changes$fi2;
     return showField && showField(field.code) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
@@ -299,7 +299,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     name: "external_id",
     className: "form",
     placeholder: t('EXTERNAL_ID', 'External Id'),
-    defaultValue: (_ref4 = (_formState$changes$ex = formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.external_id) !== null && _formState$changes$ex !== void 0 ? _formState$changes$ex : user && (user === null || user === void 0 ? void 0 : user.external_id)) !== null && _ref4 !== void 0 ? _ref4 : '',
+    defaultValue: (_ref4 = (_formState$changes$ex = formState === null || formState === void 0 || (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.external_id) !== null && _formState$changes$ex !== void 0 ? _formState$changes$ex : user && (user === null || user === void 0 ? void 0 : user.external_id)) !== null && _ref4 !== void 0 ? _ref4 : '',
     onChange: handleChangeInput,
     autoComplete: "off",
     onKeyPress: function onKeyPress(e) {
@@ -311,7 +311,7 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     isTimezone: true
   }, /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
     placeholder: t('SELECT_TIMEZONE', 'Select a timezone'),
-    defaultValue: (_ref5 = (_formState$changes$ti = formState === null || formState === void 0 ? void 0 : (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.timezone) !== null && _formState$changes$ti !== void 0 ? _formState$changes$ti : user === null || user === void 0 ? void 0 : user.timezone) !== null && _ref5 !== void 0 ? _ref5 : '',
+    defaultValue: (_ref5 = (_formState$changes$ti = formState === null || formState === void 0 || (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.timezone) !== null && _formState$changes$ti !== void 0 ? _formState$changes$ti : user === null || user === void 0 ? void 0 : user.timezone) !== null && _ref5 !== void 0 ? _ref5 : '',
     options: timezonesOptions,
     onChange: function onChange(val) {
       return handleChangeSwtich('timezone', val);
@@ -345,12 +345,12 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       return setPasswordSee(!passwordSee);
     }
   }, !passwordSee ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Eye, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.EyeSlash, null))), isDriversPage && /*#__PURE__*/_react.default.createElement(_styles2.DriverZoneRestrictionWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, ('DRIVER_ZONE_RESTRICTION', 'Driver Zone Restriccion')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
-    defaultChecked: (_ref6 = (_formState$changes$dr = formState === null || formState === void 0 ? void 0 : (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.driver_zone_restriction) !== null && _formState$changes$dr !== void 0 ? _formState$changes$dr : user === null || user === void 0 ? void 0 : user.driver_zone_restriction) !== null && _ref6 !== void 0 ? _ref6 : false,
+    defaultChecked: (_ref6 = (_formState$changes$dr = formState === null || formState === void 0 || (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.driver_zone_restriction) !== null && _formState$changes$dr !== void 0 ? _formState$changes$dr : user === null || user === void 0 ? void 0 : user.driver_zone_restriction) !== null && _ref6 !== void 0 ? _ref6 : false,
     onChange: function onChange(val) {
       return handleChangeSwtich('driver_zone_restriction', val);
     }
   })), isDriversPage && /*#__PURE__*/_react.default.createElement(_styles2.DriverZoneRestrictionWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, ('MONO_SESSION', 'Mono session')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
-    defaultChecked: (_ref7 = (_formState$changes$mo = formState === null || formState === void 0 ? void 0 : (_formState$changes9 = formState.changes) === null || _formState$changes9 === void 0 ? void 0 : _formState$changes9.mono_session) !== null && _formState$changes$mo !== void 0 ? _formState$changes$mo : user === null || user === void 0 ? void 0 : user.mono_session) !== null && _ref7 !== void 0 ? _ref7 : false,
+    defaultChecked: (_ref7 = (_formState$changes$mo = formState === null || formState === void 0 || (_formState$changes9 = formState.changes) === null || _formState$changes9 === void 0 ? void 0 : _formState$changes9.mono_session) !== null && _formState$changes$mo !== void 0 ? _formState$changes$mo : user === null || user === void 0 ? void 0 : user.mono_session) !== null && _ref7 !== void 0 ? _ref7 : false,
     onChange: function onChange(val) {
       return handleChangeSwtich('mono_session', val);
     }

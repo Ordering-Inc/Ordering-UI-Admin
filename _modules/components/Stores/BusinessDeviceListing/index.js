@@ -107,7 +107,7 @@ var BusinessDeviceListingUI = function BusinessDeviceListingUI(props) {
   };
   var handleClickBrand = function handleClickBrand(e, brandId, isInitialRender) {
     var _e$target;
-    var isInvalid = e === null || e === void 0 ? void 0 : (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.closest('.brand_enable_control');
+    var isInvalid = e === null || e === void 0 || (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.closest('.brand_enable_control');
     if (isInvalid) return;
     handleOpenSideBar(brandId);
     if (!isInitialRender) {
@@ -121,11 +121,11 @@ var BusinessDeviceListingUI = function BusinessDeviceListingUI(props) {
   };
   (0, _react.useEffect)(function () {
     var _deviceListState$devi;
-    if ((deviceListState === null || deviceListState === void 0 ? void 0 : (_deviceListState$devi = deviceListState.devices) === null || _deviceListState$devi === void 0 ? void 0 : _deviceListState$devi.length) > 0) {
+    if ((deviceListState === null || deviceListState === void 0 || (_deviceListState$devi = deviceListState.devices) === null || _deviceListState$devi === void 0 ? void 0 : _deviceListState$devi.length) > 0) {
       var devices = [];
       if (searchValue) {
         var _deviceListState$devi2;
-        devices = deviceListState === null || deviceListState === void 0 ? void 0 : (_deviceListState$devi2 = deviceListState.devices) === null || _deviceListState$devi2 === void 0 ? void 0 : _deviceListState$devi2.filter(function (device) {
+        devices = deviceListState === null || deviceListState === void 0 || (_deviceListState$devi2 = deviceListState.devices) === null || _deviceListState$devi2 === void 0 ? void 0 : _deviceListState$devi2.filter(function (device) {
           var _device$name;
           return (_device$name = device.name) === null || _device$name === void 0 ? void 0 : _device$name.toLowerCase().includes(searchValue === null || searchValue === void 0 ? void 0 : searchValue.toLowerCase());
         });
@@ -138,7 +138,7 @@ var BusinessDeviceListingUI = function BusinessDeviceListingUI(props) {
   (0, _react.useEffect)(function () {
     if ((deviceList === null || deviceList === void 0 ? void 0 : deviceList.length) > 0 && selectedDevice) {
       var _deviceListState$devi3;
-      var device = deviceListState === null || deviceListState === void 0 ? void 0 : (_deviceListState$devi3 = deviceListState.devices) === null || _deviceListState$devi3 === void 0 ? void 0 : _deviceListState$devi3.find(function (item) {
+      var device = deviceListState === null || deviceListState === void 0 || (_deviceListState$devi3 = deviceListState.devices) === null || _deviceListState$devi3 === void 0 ? void 0 : _deviceListState$devi3.find(function (item) {
         return item.id === (selectedDevice === null || selectedDevice === void 0 ? void 0 : selectedDevice.id);
       });
       setSelectedDevice(device);
@@ -185,7 +185,7 @@ var BusinessDeviceListingUI = function BusinessDeviceListingUI(props) {
       height: 20
     }))))), /*#__PURE__*/_react.default.createElement("td", null)));
   }) : deviceList.map(function (device) {
-    var _device$business, _theme$images, _theme$images$dummies, _device$business2, _device$business3;
+    var _device$business, _theme$images, _device$business2, _device$business3;
     return /*#__PURE__*/_react.default.createElement(_styles2.BrandBody, {
       key: device.id,
       active: device.id === (selectedDevice === null || selectedDevice === void 0 ? void 0 : selectedDevice.id),
@@ -193,8 +193,8 @@ var BusinessDeviceListingUI = function BusinessDeviceListingUI(props) {
         return handleClickBrand(e, device.id);
       }
     }, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.device_name) && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", null, device === null || device === void 0 ? void 0 : device.name))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.business) && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.BrandGeneralInfo, null, /*#__PURE__*/_react.default.createElement(_styles2.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles2.Image, {
-      bgimage: optimizeImage((device === null || device === void 0 ? void 0 : (_device$business = device.business) === null || _device$business === void 0 ? void 0 : _device$business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_50,c_limit')
-    })), /*#__PURE__*/_react.default.createElement(_styles2.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", null, device === null || device === void 0 ? void 0 : (_device$business2 = device.business) === null || _device$business2 === void 0 ? void 0 : _device$business2.name), /*#__PURE__*/_react.default.createElement("span", null, device === null || device === void 0 ? void 0 : (_device$business3 = device.business) === null || _device$business3 === void 0 ? void 0 : _device$business3.address)))), /*#__PURE__*/_react.default.createElement("td", null)));
+      bgimage: optimizeImage((device === null || device === void 0 || (_device$business = device.business) === null || _device$business === void 0 ? void 0 : _device$business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.dummies) === null || _theme$images === void 0 ? void 0 : _theme$images.businessLogo), 'h_50,c_limit')
+    })), /*#__PURE__*/_react.default.createElement(_styles2.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", null, device === null || device === void 0 || (_device$business2 = device.business) === null || _device$business2 === void 0 ? void 0 : _device$business2.name), /*#__PURE__*/_react.default.createElement("span", null, device === null || device === void 0 || (_device$business3 = device.business) === null || _device$business3 === void 0 ? void 0 : _device$business3.address)))), /*#__PURE__*/_react.default.createElement("td", null)));
   }))), /*#__PURE__*/_react.default.createElement(_styles2.BrandListBottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles.LinkButton, {
     onClick: function onClick() {
       return handleOpenSideBar();

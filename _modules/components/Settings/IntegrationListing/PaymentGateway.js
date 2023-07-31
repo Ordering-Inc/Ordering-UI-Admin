@@ -97,7 +97,7 @@ var PaymentGatewayUI = function PaymentGatewayUI(props) {
       }
     }
   }, [categoryList.loading]);
-  return /*#__PURE__*/_react.default.createElement(_styles.CategorySection, null, /*#__PURE__*/_react.default.createElement("h2", null, t('PAYMENT_GETWAYS', 'Payment Gateways')), !(categoryList !== null && categoryList !== void 0 && categoryList.loading) && /*#__PURE__*/_react.default.createElement(_styles.SettingList, null, categoryList === null || categoryList === void 0 ? void 0 : (_categoryList$categor = categoryList.categories) === null || _categoryList$categor === void 0 ? void 0 : _categoryList$categor.filter(function (item) {
+  return /*#__PURE__*/_react.default.createElement(_styles.CategorySection, null, /*#__PURE__*/_react.default.createElement("h2", null, t('PAYMENT_GETWAYS', 'Payment Gateways')), !(categoryList !== null && categoryList !== void 0 && categoryList.loading) && /*#__PURE__*/_react.default.createElement(_styles.SettingList, null, categoryList === null || categoryList === void 0 || (_categoryList$categor = categoryList.categories) === null || _categoryList$categor === void 0 ? void 0 : _categoryList$categor.filter(function (item) {
     return allowOptions.includes(item.key);
   }).map(function (setting) {
     return /*#__PURE__*/_react.default.createElement(_styles.SettingItemContainer, {

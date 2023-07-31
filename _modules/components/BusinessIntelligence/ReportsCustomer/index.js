@@ -33,7 +33,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ReportsCustomerUI = function ReportsCustomerUI(props) {
-  var _reportData$content7, _reportData$content7$, _reportData$content7$2, _reportData$content7$3, _reportData$content8, _reportData$content8$, _reportData$content8$2, _reportData$content8$3, _reportData$content9, _reportData$content9$, _reportData$content9$2, _reportData$content9$3;
+  var _reportData$content7, _reportData$content8, _reportData$content9;
   var filterList = props.filterList,
     handleChangeFilterList = props.handleChangeFilterList,
     reportData = props.reportData;
@@ -51,10 +51,10 @@ var ReportsCustomerUI = function ReportsCustomerUI(props) {
     }));
   };
   var downloadCSV = function downloadCSV() {
-    var _reportData$content, _reportData$content$d, _reportData$content$d2, _reportData$content2, _reportData$content2$, _reportData$content2$2;
-    if (!(reportData !== null && reportData !== void 0 && (_reportData$content = reportData.content) !== null && _reportData$content !== void 0 && (_reportData$content$d = _reportData$content.dataset) !== null && _reportData$content$d !== void 0 && (_reportData$content$d2 = _reportData$content$d.dataset) !== null && _reportData$content$d2 !== void 0 && _reportData$content$d2.data)) return;
+    var _reportData$content, _reportData$content2;
+    if (!(reportData !== null && reportData !== void 0 && (_reportData$content = reportData.content) !== null && _reportData$content !== void 0 && (_reportData$content = _reportData$content.dataset) !== null && _reportData$content !== void 0 && (_reportData$content = _reportData$content.dataset) !== null && _reportData$content !== void 0 && _reportData$content.data)) return;
     var csv = "".concat(t('CATEGORY', 'Category'), ", ").concat(t('MARK', 'Mark'), "\n");
-    var _iterator = _createForOfIteratorHelper(reportData === null || reportData === void 0 ? void 0 : (_reportData$content2 = reportData.content) === null || _reportData$content2 === void 0 ? void 0 : (_reportData$content2$ = _reportData$content2.dataset) === null || _reportData$content2$ === void 0 ? void 0 : (_reportData$content2$2 = _reportData$content2$.dataset[0]) === null || _reportData$content2$2 === void 0 ? void 0 : _reportData$content2$2.data),
+    var _iterator = _createForOfIteratorHelper(reportData === null || reportData === void 0 || (_reportData$content2 = reportData.content) === null || _reportData$content2 === void 0 || (_reportData$content2 = _reportData$content2.dataset) === null || _reportData$content2 === void 0 || (_reportData$content2 = _reportData$content2.dataset[0]) === null || _reportData$content2 === void 0 ? void 0 : _reportData$content2.data),
       _step;
     try {
       for (_iterator.s(); !(_step = _iterator.n()).done;) {
@@ -79,11 +79,11 @@ var ReportsCustomerUI = function ReportsCustomerUI(props) {
     document.body.removeChild(downloadLink);
   };
   var generateData = function generateData() {
-    var _reportData$content3, _reportData$content3$, _reportData$content3$2;
+    var _reportData$content3;
     var datasets = [];
-    if (reportData !== null && reportData !== void 0 && (_reportData$content3 = reportData.content) !== null && _reportData$content3 !== void 0 && (_reportData$content3$ = _reportData$content3.dataset) !== null && _reportData$content3$ !== void 0 && (_reportData$content3$2 = _reportData$content3$.dataset[0]) !== null && _reportData$content3$2 !== void 0 && _reportData$content3$2.data) {
-      var _reportData$content4, _reportData$content4$, _reportData$content4$2;
-      var _iterator2 = _createForOfIteratorHelper(reportData === null || reportData === void 0 ? void 0 : (_reportData$content4 = reportData.content) === null || _reportData$content4 === void 0 ? void 0 : (_reportData$content4$ = _reportData$content4.dataset) === null || _reportData$content4$ === void 0 ? void 0 : (_reportData$content4$2 = _reportData$content4$.dataset[0]) === null || _reportData$content4$2 === void 0 ? void 0 : _reportData$content4$2.data),
+    if (reportData !== null && reportData !== void 0 && (_reportData$content3 = reportData.content) !== null && _reportData$content3 !== void 0 && (_reportData$content3 = _reportData$content3.dataset) !== null && _reportData$content3 !== void 0 && (_reportData$content3 = _reportData$content3.dataset[0]) !== null && _reportData$content3 !== void 0 && _reportData$content3.data) {
+      var _reportData$content4;
+      var _iterator2 = _createForOfIteratorHelper(reportData === null || reportData === void 0 || (_reportData$content4 = reportData.content) === null || _reportData$content4 === void 0 || (_reportData$content4 = _reportData$content4.dataset) === null || _reportData$content4 === void 0 || (_reportData$content4 = _reportData$content4.dataset[0]) === null || _reportData$content4 === void 0 ? void 0 : _reportData$content4.data),
         _step2;
       try {
         for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
@@ -99,11 +99,11 @@ var ReportsCustomerUI = function ReportsCustomerUI(props) {
     return datasets;
   };
   var generateLabels = function generateLabels() {
-    var _reportData$content5, _reportData$content5$, _reportData$content5$2;
+    var _reportData$content5;
     var labels = [];
-    if (reportData !== null && reportData !== void 0 && (_reportData$content5 = reportData.content) !== null && _reportData$content5 !== void 0 && (_reportData$content5$ = _reportData$content5.dataset) !== null && _reportData$content5$ !== void 0 && (_reportData$content5$2 = _reportData$content5$.dataset[0]) !== null && _reportData$content5$2 !== void 0 && _reportData$content5$2.data) {
-      var _reportData$content6, _reportData$content6$, _reportData$content6$2;
-      var _iterator3 = _createForOfIteratorHelper(reportData === null || reportData === void 0 ? void 0 : (_reportData$content6 = reportData.content) === null || _reportData$content6 === void 0 ? void 0 : (_reportData$content6$ = _reportData$content6.dataset) === null || _reportData$content6$ === void 0 ? void 0 : (_reportData$content6$2 = _reportData$content6$.dataset[0]) === null || _reportData$content6$2 === void 0 ? void 0 : _reportData$content6$2.data),
+    if (reportData !== null && reportData !== void 0 && (_reportData$content5 = reportData.content) !== null && _reportData$content5 !== void 0 && (_reportData$content5 = _reportData$content5.dataset) !== null && _reportData$content5 !== void 0 && (_reportData$content5 = _reportData$content5.dataset[0]) !== null && _reportData$content5 !== void 0 && _reportData$content5.data) {
+      var _reportData$content6;
+      var _iterator3 = _createForOfIteratorHelper(reportData === null || reportData === void 0 || (_reportData$content6 = reportData.content) === null || _reportData$content6 === void 0 || (_reportData$content6 = _reportData$content6.dataset) === null || _reportData$content6 === void 0 || (_reportData$content6 = _reportData$content6.dataset[0]) === null || _reportData$content6 === void 0 ? void 0 : _reportData$content6.data),
         _step3;
       try {
         for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
@@ -121,7 +121,7 @@ var ReportsCustomerUI = function ReportsCustomerUI(props) {
   var data = {
     labels: generateLabels(),
     datasets: [{
-      label: t(reportData === null || reportData === void 0 ? void 0 : (_reportData$content7 = reportData.content) === null || _reportData$content7 === void 0 ? void 0 : (_reportData$content7$ = _reportData$content7.dataset) === null || _reportData$content7$ === void 0 ? void 0 : (_reportData$content7$2 = _reportData$content7$.dataset[0]) === null || _reportData$content7$2 === void 0 ? void 0 : (_reportData$content7$3 = _reportData$content7$2.label) === null || _reportData$content7$3 === void 0 ? void 0 : _reportData$content7$3.toUpperCase(), 'Report header qualification'),
+      label: t(reportData === null || reportData === void 0 || (_reportData$content7 = reportData.content) === null || _reportData$content7 === void 0 || (_reportData$content7 = _reportData$content7.dataset) === null || _reportData$content7 === void 0 || (_reportData$content7 = _reportData$content7.dataset[0]) === null || _reportData$content7 === void 0 || (_reportData$content7 = _reportData$content7.label) === null || _reportData$content7 === void 0 ? void 0 : _reportData$content7.toUpperCase(), 'Report header qualification'),
       data: generateData(),
       fill: true,
       borderColor: '#2C7BE5',
@@ -179,14 +179,14 @@ var ReportsCustomerUI = function ReportsCustomerUI(props) {
     handleChangeDate: handleChangeDate,
     defaultValue: filterList
   })))), /*#__PURE__*/_react.default.createElement(_styles.ChartBlockWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ChartTitleBlock, {
-    active: (reportData === null || reportData === void 0 ? void 0 : (_reportData$content8 = reportData.content) === null || _reportData$content8 === void 0 ? void 0 : (_reportData$content8$ = _reportData$content8.dataset) === null || _reportData$content8$ === void 0 ? void 0 : (_reportData$content8$2 = _reportData$content8$.dataset) === null || _reportData$content8$2 === void 0 ? void 0 : (_reportData$content8$3 = _reportData$content8$2.data) === null || _reportData$content8$3 === void 0 ? void 0 : _reportData$content8$3.length) > 0
+    active: (reportData === null || reportData === void 0 || (_reportData$content8 = reportData.content) === null || _reportData$content8 === void 0 || (_reportData$content8 = _reportData$content8.dataset) === null || _reportData$content8 === void 0 || (_reportData$content8 = _reportData$content8.dataset) === null || _reportData$content8 === void 0 || (_reportData$content8 = _reportData$content8.data) === null || _reportData$content8 === void 0 ? void 0 : _reportData$content8.length) > 0
   }, /*#__PURE__*/_react.default.createElement("h2", null, t('CUSTOMER_SATISFACTION', 'Customer safisfaction')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Download, {
     onClick: function onClick() {
       return downloadCSV();
     }
   })), /*#__PURE__*/_react.default.createElement(_styles.ChartWrapper, null, reportData !== null && reportData !== void 0 && reportData.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 350
-  }) : (reportData === null || reportData === void 0 ? void 0 : (_reportData$content9 = reportData.content) === null || _reportData$content9 === void 0 ? void 0 : (_reportData$content9$ = _reportData$content9.dataset) === null || _reportData$content9$ === void 0 ? void 0 : (_reportData$content9$2 = _reportData$content9$.dataset[0]) === null || _reportData$content9$2 === void 0 ? void 0 : (_reportData$content9$3 = _reportData$content9$2.data) === null || _reportData$content9$3 === void 0 ? void 0 : _reportData$content9$3.length) > 0 ? /*#__PURE__*/_react.default.createElement(_reactChartjs.Bar, {
+  }) : (reportData === null || reportData === void 0 || (_reportData$content9 = reportData.content) === null || _reportData$content9 === void 0 || (_reportData$content9 = _reportData$content9.dataset) === null || _reportData$content9 === void 0 || (_reportData$content9 = _reportData$content9.dataset[0]) === null || _reportData$content9 === void 0 || (_reportData$content9 = _reportData$content9.data) === null || _reportData$content9 === void 0 ? void 0 : _reportData$content9.length) > 0 ? /*#__PURE__*/_react.default.createElement(_reactChartjs.Bar, {
     data: data,
     options: options
   }) : /*#__PURE__*/_react.default.createElement(_styles.EmptyContent, null, t('NO_DATA', 'No Data')))), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {

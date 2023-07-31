@@ -80,7 +80,7 @@ var DriversReviewListUI = function DriversReviewListUI(props) {
   };
   var handleClickReview = function handleClickReview(e, user, isInitialRender) {
     var _e$target;
-    var isInvalid = (e === null || e === void 0 ? void 0 : (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.closest('.review-enabled')) || e.target.closest('.review-actions');
+    var isInvalid = (e === null || e === void 0 || (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.closest('.review-enabled')) || e.target.closest('.review-actions');
     if (isInvalid) return;
     handleOpenReview(user);
     if (!isInitialRender) {

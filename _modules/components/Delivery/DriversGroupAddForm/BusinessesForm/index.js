@@ -44,7 +44,7 @@ var BusinessesForm = function BusinessesForm(props) {
     if (searchValue) {
       _filteredBusinesses = businesses.filter(function (business) {
         var _business$name;
-        return business === null || business === void 0 ? void 0 : (_business$name = business.name) === null || _business$name === void 0 ? void 0 : _business$name.toLowerCase().includes(searchValue === null || searchValue === void 0 ? void 0 : searchValue.toLowerCase());
+        return business === null || business === void 0 || (_business$name = business.name) === null || _business$name === void 0 ? void 0 : _business$name.toLowerCase().includes(searchValue === null || searchValue === void 0 ? void 0 : searchValue.toLowerCase());
       });
     } else {
       _filteredBusinesses = _toConsumableArray(businesses);

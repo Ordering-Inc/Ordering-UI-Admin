@@ -29,7 +29,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var RecoveryActionAddUI = function RecoveryActionAddUI(props) {
-  var _formState$changes$na, _formState$changes4, _formState$changes$de, _formState$changes5, _formState$changes$ti2, _formState$changes6, _formState$changes$ch, _formState$changes7, _formState$changes8, _formState$changes$bo, _formState$changes9;
+  var _formState$changes$na, _formState$changes4, _formState$changes$de, _formState$changes5, _formState$changes$ti, _formState$changes6, _formState$changes$ch, _formState$changes7, _formState$changes8, _formState$changes$bo, _formState$changes9;
   var onClose = props.onClose,
     formState = props.formState,
     handleAddRecoveryAction = props.handleAddRecoveryAction,
@@ -134,8 +134,8 @@ var RecoveryActionAddUI = function RecoveryActionAddUI(props) {
     });
   };
   var onSubmit = function onSubmit() {
-    var _formState$changes, _formState$changes$ti, _formState$changes2, _formState$changes3;
-    if (!((_formState$changes = formState.changes) !== null && _formState$changes !== void 0 && (_formState$changes$ti = _formState$changes.times) !== null && _formState$changes$ti !== void 0 && _formState$changes$ti[0])) {
+    var _formState$changes, _formState$changes2, _formState$changes3;
+    if (!((_formState$changes = formState.changes) !== null && _formState$changes !== void 0 && (_formState$changes = _formState$changes.times) !== null && _formState$changes !== void 0 && _formState$changes[0])) {
       setAlertState({
         open: true,
         content: [t('VALIDATION_ERROR_REQUIRED', 'Name is required').replace('_attribute_', t('TIME', 'Time'))]
@@ -199,7 +199,7 @@ var RecoveryActionAddUI = function RecoveryActionAddUI(props) {
     name: "name",
     type: "text",
     placeholder: t('NAME', 'name'),
-    value: (_formState$changes$na = formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.name) !== null && _formState$changes$na !== void 0 ? _formState$changes$na : '',
+    value: (_formState$changes$na = formState === null || formState === void 0 || (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.name) !== null && _formState$changes$na !== void 0 ? _formState$changes$na : '',
     ref: register({
       required: t('VALIDATION_ERROR_REQUIRED', 'Name is required').replace('_attribute_', t('NAME', 'Name'))
     }),
@@ -210,7 +210,7 @@ var RecoveryActionAddUI = function RecoveryActionAddUI(props) {
     placeholder: t('WRITE_LITTLE_DESCRIPTION', 'Write a little description'),
     name: "description",
     rows: 3,
-    value: (_formState$changes$de = formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.description) !== null && _formState$changes$de !== void 0 ? _formState$changes$de : '',
+    value: (_formState$changes$de = formState === null || formState === void 0 || (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.description) !== null && _formState$changes$de !== void 0 ? _formState$changes$de : '',
     onChange: handleChangeInput,
     disabled: formState.loading,
     autoComplete: "off"
@@ -268,14 +268,14 @@ var RecoveryActionAddUI = function RecoveryActionAddUI(props) {
   }))))), /*#__PURE__*/_react.default.createElement(_styles2.CardContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('NOTIFICATIONS', 'Notifications')), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('TITLE', 'Title')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "title",
     placeholder: t('TITLE', 'Title'),
-    defaultValue: (_formState$changes$ti2 = formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.title) !== null && _formState$changes$ti2 !== void 0 ? _formState$changes$ti2 : '',
+    defaultValue: (_formState$changes$ti = formState === null || formState === void 0 || (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.title) !== null && _formState$changes$ti !== void 0 ? _formState$changes$ti : '',
     onChange: handleChangeInput,
     ref: register({
       required: t('VALIDATION_ERROR_REQUIRED', 'Name is required').replace('_attribute_', t('TITLE', 'Title'))
     })
   })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('CHANNEL', 'Channel')), /*#__PURE__*/_react.default.createElement(_Select.Select, {
     placeholder: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, t('SELECT_CHANNEL', 'Select a channel')),
-    defaultValue: (_formState$changes$ch = formState === null || formState === void 0 ? void 0 : (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.channel) !== null && _formState$changes$ch !== void 0 ? _formState$changes$ch : '',
+    defaultValue: (_formState$changes$ch = formState === null || formState === void 0 || (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.channel) !== null && _formState$changes$ch !== void 0 ? _formState$changes$ch : '',
     options: channelList,
     onChange: function onChange(val) {
       setValue('body', '');
@@ -294,7 +294,7 @@ var RecoveryActionAddUI = function RecoveryActionAddUI(props) {
     name: "body",
     rows: 3,
     placeholder: t('WRITE_MESSAGE', 'Write a message'),
-    defaultValue: (_formState$changes$bo = formState === null || formState === void 0 ? void 0 : (_formState$changes9 = formState.changes) === null || _formState$changes9 === void 0 ? void 0 : _formState$changes9.body) !== null && _formState$changes$bo !== void 0 ? _formState$changes$bo : '',
+    defaultValue: (_formState$changes$bo = formState === null || formState === void 0 || (_formState$changes9 = formState.changes) === null || _formState$changes9 === void 0 ? void 0 : _formState$changes9.body) !== null && _formState$changes$bo !== void 0 ? _formState$changes$bo : '',
     onChange: handleChangeInput,
     ref: register({
       required: t('VALIDATION_ERROR_REQUIRED', 'Name is required').replace('_attribute_', t('MESSAGE', 'Message'))

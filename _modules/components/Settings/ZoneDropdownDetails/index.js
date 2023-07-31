@@ -41,7 +41,7 @@ var ZoneDropdownDetails = function ZoneDropdownDetails(props) {
       return handleChangesState('name', e.target.value);
     }
   })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('COUNTRY', 'Country')), /*#__PURE__*/_react.default.createElement(_CountrySelector.CountrySelector, {
-    defaultValue: (changesState === null || changesState === void 0 ? void 0 : changesState.country_id) || parseInt(zoneDropdown === null || zoneDropdown === void 0 ? void 0 : (_zoneDropdown$city = zoneDropdown.city) === null || _zoneDropdown$city === void 0 ? void 0 : _zoneDropdown$city.country_id),
+    defaultValue: (changesState === null || changesState === void 0 ? void 0 : changesState.country_id) || parseInt(zoneDropdown === null || zoneDropdown === void 0 || (_zoneDropdown$city = zoneDropdown.city) === null || _zoneDropdown$city === void 0 ? void 0 : _zoneDropdown$city.country_id),
     countries: countries,
     handleChangeCountry: function handleChangeCountry(val) {
       return handleChangesState('country_id', val);

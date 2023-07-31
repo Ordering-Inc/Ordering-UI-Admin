@@ -24,7 +24,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrderStatusTypeSelector = function OrderStatusTypeSelector(props) {
-  var _theme$images, _theme$images$orderSt, _theme$images2, _theme$images2$orderS, _theme$images3, _theme$images3$orderS, _theme$images4, _theme$images4$orderS;
+  var _theme$images, _theme$images2, _theme$images3, _theme$images4;
   var defaultValue = props.defaultValue,
     deliveryType = props.deliveryType,
     mutiOrdersChange = props.mutiOrdersChange,
@@ -62,7 +62,7 @@ var OrderStatusTypeSelector = function OrderStatusTypeSelector(props) {
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
       noPadding: noPadding
     }, /*#__PURE__*/_react.default.createElement("img", {
-      src: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$orderSt = _theme$images.orderStatus) === null || _theme$images$orderSt === void 0 ? void 0 : _theme$images$orderSt.pending,
+      src: theme === null || theme === void 0 || (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.orderStatus) === null || _theme$images === void 0 ? void 0 : _theme$images.pending,
       alt: "pending"
     }), /*#__PURE__*/_react.default.createElement("p", null, t('PENDING', 'Pending'))),
     disabled: true
@@ -84,7 +84,7 @@ var OrderStatusTypeSelector = function OrderStatusTypeSelector(props) {
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
       noPadding: noPadding
     }, /*#__PURE__*/_react.default.createElement("img", {
-      src: theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$orderS = _theme$images2.orderStatus) === null || _theme$images2$orderS === void 0 ? void 0 : _theme$images2$orderS.inProgress,
+      src: theme === null || theme === void 0 || (_theme$images2 = theme.images) === null || _theme$images2 === void 0 || (_theme$images2 = _theme$images2.orderStatus) === null || _theme$images2 === void 0 ? void 0 : _theme$images2.inProgress,
       alt: "progress"
     }), /*#__PURE__*/_react.default.createElement("p", null, t('IN_PROGRESS', 'In Progress'))),
     disabled: true
@@ -153,7 +153,7 @@ var OrderStatusTypeSelector = function OrderStatusTypeSelector(props) {
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
       noPadding: noPadding
     }, /*#__PURE__*/_react.default.createElement("img", {
-      src: theme === null || theme === void 0 ? void 0 : (_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$orderS = _theme$images3.orderStatus) === null || _theme$images3$orderS === void 0 ? void 0 : _theme$images3$orderS.completed,
+      src: theme === null || theme === void 0 || (_theme$images3 = theme.images) === null || _theme$images3 === void 0 || (_theme$images3 = _theme$images3.orderStatus) === null || _theme$images3 === void 0 ? void 0 : _theme$images3.completed,
       alt: "completed"
     }), /*#__PURE__*/_react.default.createElement("p", null, t('COMPLETED', 'Completed'))),
     disabled: true
@@ -180,7 +180,7 @@ var OrderStatusTypeSelector = function OrderStatusTypeSelector(props) {
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
       noPadding: noPadding
     }, /*#__PURE__*/_react.default.createElement("img", {
-      src: theme === null || theme === void 0 ? void 0 : (_theme$images4 = theme.images) === null || _theme$images4 === void 0 ? void 0 : (_theme$images4$orderS = _theme$images4.orderStatus) === null || _theme$images4$orderS === void 0 ? void 0 : _theme$images4$orderS.cancelled,
+      src: theme === null || theme === void 0 || (_theme$images4 = theme.images) === null || _theme$images4 === void 0 || (_theme$images4 = _theme$images4.orderStatus) === null || _theme$images4 === void 0 ? void 0 : _theme$images4.cancelled,
       alt: "cancelled"
     }), /*#__PURE__*/_react.default.createElement("p", null, t('CACELLED', 'Cancelled'))),
     disabled: true

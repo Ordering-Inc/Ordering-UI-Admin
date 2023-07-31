@@ -260,8 +260,8 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
   }, [(_extraState$extra4 = extraState.extra) === null || _extraState$extra4 === void 0 ? void 0 : _extraState$extra4.name]);
   (0, _react.useEffect)(function () {
     var _extraState$extra5;
-    setExternalId(extraState === null || extraState === void 0 ? void 0 : (_extraState$extra5 = extraState.extra) === null || _extraState$extra5 === void 0 ? void 0 : _extraState$extra5.external_id);
-  }, [extraState === null || extraState === void 0 ? void 0 : (_extraState$extra6 = extraState.extra) === null || _extraState$extra6 === void 0 ? void 0 : _extraState$extra6.external_id]);
+    setExternalId(extraState === null || extraState === void 0 || (_extraState$extra5 = extraState.extra) === null || _extraState$extra5 === void 0 ? void 0 : _extraState$extra5.external_id);
+  }, [extraState === null || extraState === void 0 || (_extraState$extra6 = extraState.extra) === null || _extraState$extra6 === void 0 ? void 0 : _extraState$extra6.external_id]);
   return /*#__PURE__*/_react.default.createElement(_styles2.MainContainer, {
     id: "extra_options"
   }, /*#__PURE__*/_react.default.createElement(_styles2.OptionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("input", {

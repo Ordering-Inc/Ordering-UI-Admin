@@ -108,7 +108,7 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
     _useState12 = _slicedToArray(_useState11, 2),
     isOpenWalletDetails = _useState12[0],
     setIsOpenWalletDetails = _useState12[1];
-  var isWalletCashEnabled = (configs === null || configs === void 0 ? void 0 : (_configs$wallet_enabl = configs.wallet_enabled) === null || _configs$wallet_enabl === void 0 ? void 0 : _configs$wallet_enabl.value) === '1';
+  var isWalletCashEnabled = (configs === null || configs === void 0 || (_configs$wallet_enabl = configs.wallet_enabled) === null || _configs$wallet_enabl === void 0 ? void 0 : _configs$wallet_enabl.value) === '1';
   var orderTypes = [{
     value: 1,
     text: t('DELIVERY', 'Delivery')
@@ -150,7 +150,7 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
   };
   var handleOpenEdit = function handleOpenEdit(e, paymethodId, paymethodGateway, isInitialRender) {
     var _e$target;
-    var inValid = e === null || e === void 0 ? void 0 : (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.closest('.paymethod-checkbox');
+    var inValid = e === null || e === void 0 || (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.closest('.paymethod-checkbox');
     if (inValid) return true;
     if (!isTutorialMode && isCheckFoundBusinessPaymethod(paymethodId)) {
       setSelectedPaymethodGateway(paymethodGateway);
@@ -240,7 +240,7 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
     }))));
   }) : /*#__PURE__*/_react.default.createElement(_styles2.PaymethodListWrapper, null, paymethodsList.paymethods.filter(function (paymethod) {
     var _paymethod$name;
-    return paymethod === null || paymethod === void 0 ? void 0 : (_paymethod$name = paymethod.name) === null || _paymethod$name === void 0 ? void 0 : _paymethod$name.toLowerCase().includes(searchValue === null || searchValue === void 0 ? void 0 : searchValue.toLowerCase());
+    return paymethod === null || paymethod === void 0 || (_paymethod$name = paymethod.name) === null || _paymethod$name === void 0 ? void 0 : _paymethod$name.toLowerCase().includes(searchValue === null || searchValue === void 0 ? void 0 : searchValue.toLowerCase());
   }).map(function (paymethod) {
     var _paymethod$gateway;
     return /*#__PURE__*/_react.default.createElement(_styles2.PaymethodOptionContainer, {
@@ -257,7 +257,7 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
       }
     }, isCheckEnableSate(paymethod.id) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, {
       className: "fill"
-    }) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null)), /*#__PURE__*/_react.default.createElement(_styles2.PaymethodName, null, t(paymethod === null || paymethod === void 0 ? void 0 : (_paymethod$gateway = paymethod.gateway) === null || _paymethod$gateway === void 0 ? void 0 : _paymethod$gateway.toUpperCase(), paymethod === null || paymethod === void 0 ? void 0 : paymethod.name)), !isTutorialMode && isCheckFoundBusinessPaymethod(paymethod.id) && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null));
+    }) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null)), /*#__PURE__*/_react.default.createElement(_styles2.PaymethodName, null, t(paymethod === null || paymethod === void 0 || (_paymethod$gateway = paymethod.gateway) === null || _paymethod$gateway === void 0 ? void 0 : _paymethod$gateway.toUpperCase(), paymethod === null || paymethod === void 0 ? void 0 : paymethod.name)), !isTutorialMode && isCheckFoundBusinessPaymethod(paymethod.id) && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null));
   }), isWalletCashEnabled && /*#__PURE__*/_react.default.createElement(_BusinessWalletsList.BusinessWalletsList, {
     business: business,
     setIsOpenWalletDetails: setIsOpenWalletDetails,

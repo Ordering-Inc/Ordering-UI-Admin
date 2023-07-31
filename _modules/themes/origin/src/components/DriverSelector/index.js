@@ -71,7 +71,7 @@ var DriverSelectorUI = function DriverSelectorUI(props) {
     }, t('DRIVERS_LOADING', 'Drivers loading'), "...")
   }];
   (0, _react.useEffect)(function () {
-    var _theme$images, _theme$images$icons;
+    var _theme$images;
     var _driversOptionList = [{
       value: 'default',
       content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
@@ -79,7 +79,7 @@ var DriverSelectorUI = function DriverSelectorUI(props) {
       }, orderView ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperDriverImage, {
         small: small
       }, /*#__PURE__*/_react.default.createElement(_styles.DriverImage, {
-        bgimage: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$icons = _theme$images.icons) === null || _theme$images$icons === void 0 ? void 0 : _theme$images$icons.noDriver,
+        bgimage: theme === null || theme === void 0 || (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.icons) === null || _theme$images === void 0 ? void 0 : _theme$images.noDriver,
         small: small
       })), /*#__PURE__*/_react.default.createElement(_styles.OptionContent, null, /*#__PURE__*/_react.default.createElement(_styles.DriverNameContainer, null, /*#__PURE__*/_react.default.createElement(_styles.DriverName, {
         small: small

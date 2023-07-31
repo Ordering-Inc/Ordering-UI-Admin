@@ -138,7 +138,7 @@ var SettingsListUI = function SettingsListUI(props) {
       var _settingsState$result2;
       setAlertState({
         open: true,
-        content: settingsState === null || settingsState === void 0 ? void 0 : (_settingsState$result2 = settingsState.result) === null || _settingsState$result2 === void 0 ? void 0 : _settingsState$result2.result
+        content: settingsState === null || settingsState === void 0 || (_settingsState$result2 = settingsState.result) === null || _settingsState$result2 === void 0 ? void 0 : _settingsState$result2.result
       });
     }
   }, [settingsState === null || settingsState === void 0 ? void 0 : settingsState.result]);
@@ -155,7 +155,7 @@ var SettingsListUI = function SettingsListUI(props) {
     width: 70,
     height: 44
   })), !settingsState.error && !settingsState.loading && configs && !settingsState.API && /*#__PURE__*/_react.default.createElement(_styles2.GeneralContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.FormContainer, null, configs.length > 0 && configs.map(function (config, i) {
-    var _config$options, _config$options2, _config$options3, _config$options4, _config$value, _config$value$split, _config$value$split$f;
+    var _config$options, _config$options2, _config$options3, _config$options4, _config$value;
     return /*#__PURE__*/_react.default.createElement("div", {
       key: i
     }, config.type === 1 && /*#__PURE__*/_react.default.createElement(_styles2.FormGroupText, {
@@ -184,7 +184,7 @@ var SettingsListUI = function SettingsListUI(props) {
       handleSelectChange: function handleSelectChange(value) {
         return handleInputChange(value, config === null || config === void 0 ? void 0 : config.id);
       }
-    })), config.type === 3 && /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, null, (config === null || config === void 0 ? void 0 : config.name) && /*#__PURE__*/_react.default.createElement("label", null, config === null || config === void 0 ? void 0 : config.name), (config === null || config === void 0 ? void 0 : config.description) && /*#__PURE__*/_react.default.createElement("p", null, config === null || config === void 0 ? void 0 : config.description), (config === null || config === void 0 ? void 0 : (_config$options = config.options) === null || _config$options === void 0 ? void 0 : _config$options.length) > 0 && (config === null || config === void 0 ? void 0 : (_config$options2 = config.options) === null || _config$options2 === void 0 ? void 0 : _config$options2.map(function (item, j) {
+    })), config.type === 3 && /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, null, (config === null || config === void 0 ? void 0 : config.name) && /*#__PURE__*/_react.default.createElement("label", null, config === null || config === void 0 ? void 0 : config.name), (config === null || config === void 0 ? void 0 : config.description) && /*#__PURE__*/_react.default.createElement("p", null, config === null || config === void 0 ? void 0 : config.description), (config === null || config === void 0 || (_config$options = config.options) === null || _config$options === void 0 ? void 0 : _config$options.length) > 0 && (config === null || config === void 0 || (_config$options2 = config.options) === null || _config$options2 === void 0 ? void 0 : _config$options2.map(function (item, j) {
       return /*#__PURE__*/_react.default.createElement(_styles2.FormGroupWrapper, {
         key: j
       }, /*#__PURE__*/_react.default.createElement(_styles2.FormGroupCheck, {
@@ -208,7 +208,7 @@ var SettingsListUI = function SettingsListUI(props) {
       },
       className: "form-control",
       placeholder: "placeholder"
-    })) : /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, null, (config === null || config === void 0 ? void 0 : config.name) && /*#__PURE__*/_react.default.createElement("label", null, config === null || config === void 0 ? void 0 : config.name), (config === null || config === void 0 ? void 0 : config.description) && /*#__PURE__*/_react.default.createElement("p", null, config === null || config === void 0 ? void 0 : config.description), (config === null || config === void 0 ? void 0 : (_config$options3 = config.options) === null || _config$options3 === void 0 ? void 0 : _config$options3.length) > 0 && (config === null || config === void 0 ? void 0 : (_config$options4 = config.options) === null || _config$options4 === void 0 ? void 0 : _config$options4.map(function (item, j) {
+    })) : /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, null, (config === null || config === void 0 ? void 0 : config.name) && /*#__PURE__*/_react.default.createElement("label", null, config === null || config === void 0 ? void 0 : config.name), (config === null || config === void 0 ? void 0 : config.description) && /*#__PURE__*/_react.default.createElement("p", null, config === null || config === void 0 ? void 0 : config.description), (config === null || config === void 0 || (_config$options3 = config.options) === null || _config$options3 === void 0 ? void 0 : _config$options3.length) > 0 && (config === null || config === void 0 || (_config$options4 = config.options) === null || _config$options4 === void 0 ? void 0 : _config$options4.map(function (item, j) {
       return /*#__PURE__*/_react.default.createElement(_styles2.FormGroupWrapper, {
         key: j
       }, /*#__PURE__*/_react.default.createElement(_styles2.FormGroupCheck, {
@@ -227,9 +227,9 @@ var SettingsListUI = function SettingsListUI(props) {
       saveConfig: saveConfig
     }), config.type === 6 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.FormGroupText, {
       className: "form-group"
-    }, /*#__PURE__*/_react.default.createElement("label", null, config === null || config === void 0 ? void 0 : config.name), (config === null || config === void 0 ? void 0 : config.description) && /*#__PURE__*/_react.default.createElement(_styles2.Description, null, config === null || config === void 0 ? void 0 : config.description), config === null || config === void 0 ? void 0 : (_config$value = config.value) === null || _config$value === void 0 ? void 0 : (_config$value$split = _config$value.split('|')) === null || _config$value$split === void 0 ? void 0 : (_config$value$split$f = _config$value$split.filter(function (value) {
+    }, /*#__PURE__*/_react.default.createElement("label", null, config === null || config === void 0 ? void 0 : config.name), (config === null || config === void 0 ? void 0 : config.description) && /*#__PURE__*/_react.default.createElement(_styles2.Description, null, config === null || config === void 0 ? void 0 : config.description), config === null || config === void 0 || (_config$value = config.value) === null || _config$value === void 0 || (_config$value = _config$value.split('|')) === null || _config$value === void 0 || (_config$value = _config$value.filter(function (value) {
       return valuesTypeSix.includes(value === null || value === void 0 ? void 0 : value.split(',')[0]);
-    })) === null || _config$value$split$f === void 0 ? void 0 : _config$value$split$f.map(function (value, i, hash) {
+    })) === null || _config$value === void 0 ? void 0 : _config$value.map(function (value, i, hash) {
       return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
         key: "".concat(config === null || config === void 0 ? void 0 : config.id, " ").concat(value)
       }, /*#__PURE__*/_react.default.createElement(_styles2.Description, {
@@ -251,7 +251,7 @@ var SettingsListUI = function SettingsListUI(props) {
     content: t('NOT_FOUND_CONFIG', 'Sorry, we couldn\'t find the config.'),
     btnTitle: t('PROFILE_CATEGORY_REDIRECT', 'Go to Category Description'),
     onClickButton: onCloseSettingsList
-  })), (settingsState === null || settingsState === void 0 ? void 0 : (_settingsState$change = settingsState.changes) === null || _settingsState$change === void 0 ? void 0 : _settingsState$change.length) > 0 && !settingsState.loading && !settingsState.API && /*#__PURE__*/_react.default.createElement(_styles2.SubmitBtnWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  })), (settingsState === null || settingsState === void 0 || (_settingsState$change = settingsState.changes) === null || _settingsState$change === void 0 ? void 0 : _settingsState$change.length) > 0 && !settingsState.loading && !settingsState.API && /*#__PURE__*/_react.default.createElement(_styles2.SubmitBtnWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     onClick: handleSubmit
   }, t('SAVE', 'Save'))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {

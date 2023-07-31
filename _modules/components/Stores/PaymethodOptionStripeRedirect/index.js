@@ -83,9 +83,9 @@ var PaymethodOptionStripeRedirect = function PaymethodOptionStripeRedirect(props
     _useState8 = _slicedToArray(_useState7, 2),
     localState = _useState8[0],
     setLocalState = _useState8[1];
-  var filteredOptions = (_localState$sites = localState === null || localState === void 0 ? void 0 : localState.sites) !== null && _localState$sites !== void 0 ? _localState$sites : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$si = businessPaymethod.sites) === null || _businessPaymethod$si === void 0 ? void 0 : _businessPaymethod$si.filter(function (a) {
+  var filteredOptions = (_localState$sites = localState === null || localState === void 0 ? void 0 : localState.sites) !== null && _localState$sites !== void 0 ? _localState$sites : businessPaymethod === null || businessPaymethod === void 0 || (_businessPaymethod$si = businessPaymethod.sites) === null || _businessPaymethod$si === void 0 ? void 0 : _businessPaymethod$si.filter(function (a) {
     var _sitesState$sites;
-    return sitesState === null || sitesState === void 0 ? void 0 : (_sitesState$sites = sitesState.sites) === null || _sitesState$sites === void 0 ? void 0 : _sitesState$sites.find(function (b) {
+    return sitesState === null || sitesState === void 0 || (_sitesState$sites = sitesState.sites) === null || _sitesState$sites === void 0 ? void 0 : _sitesState$sites.find(function (b) {
       return a.id === b.id;
     });
   });
@@ -100,7 +100,7 @@ var PaymethodOptionStripeRedirect = function PaymethodOptionStripeRedirect(props
       setAll(!all);
     } else {
       var _ref, _changesState$values$, _businessPaymethod$va;
-      var array = (_ref = (_changesState$values$ = changesState === null || changesState === void 0 ? void 0 : changesState[values.key]) !== null && _changesState$values$ !== void 0 ? _changesState$values$ : values.key === 'allowed_order_types' ? businessPaymethod === null || businessPaymethod === void 0 ? void 0 : businessPaymethod[values.key] : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$va = businessPaymethod[values.key]) === null || _businessPaymethod$va === void 0 ? void 0 : _businessPaymethod$va.map(function (i) {
+      var array = (_ref = (_changesState$values$ = changesState === null || changesState === void 0 ? void 0 : changesState[values.key]) !== null && _changesState$values$ !== void 0 ? _changesState$values$ : values.key === 'allowed_order_types' ? businessPaymethod === null || businessPaymethod === void 0 ? void 0 : businessPaymethod[values.key] : businessPaymethod === null || businessPaymethod === void 0 || (_businessPaymethod$va = businessPaymethod[values.key]) === null || _businessPaymethod$va === void 0 ? void 0 : _businessPaymethod$va.map(function (i) {
         return i.id;
       })) !== null && _ref !== void 0 ? _ref : [];
       array = _toConsumableArray(new Set(array.includes(values.value) ? array.filter(function (item) {
@@ -129,7 +129,7 @@ var PaymethodOptionStripeRedirect = function PaymethodOptionStripeRedirect(props
         setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
           open: false
         }));
-        handleDeletePaymethod(businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$pa = businessPaymethod.paymethod) === null || _businessPaymethod$pa === void 0 ? void 0 : _businessPaymethod$pa.id);
+        handleDeletePaymethod(businessPaymethod === null || businessPaymethod === void 0 || (_businessPaymethod$pa = businessPaymethod.paymethod) === null || _businessPaymethod$pa === void 0 ? void 0 : _businessPaymethod$pa.id);
       }
     });
   };
@@ -201,7 +201,7 @@ var PaymethodOptionStripeRedirect = function PaymethodOptionStripeRedirect(props
     onClick: function onClick() {
       return handleTabClick(0);
     }
-  }, t('GENERAL', 'General')), (sitesState === null || sitesState === void 0 ? void 0 : (_sitesState$sites2 = sitesState.sites) === null || _sitesState$sites2 === void 0 ? void 0 : _sitesState$sites2.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles3.Tab, {
+  }, t('GENERAL', 'General')), (sitesState === null || sitesState === void 0 || (_sitesState$sites2 = sitesState.sites) === null || _sitesState$sites2 === void 0 ? void 0 : _sitesState$sites2.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles3.Tab, {
     active: paymentTabs === 1,
     onClick: function onClick() {
       return handleTabClick(1);
@@ -218,33 +218,33 @@ var PaymethodOptionStripeRedirect = function PaymethodOptionStripeRedirect(props
     }
   }), /*#__PURE__*/_react.default.createElement("span", null, t('SANDBOX', 'Sandbox'))), /*#__PURE__*/_react.default.createElement(_styles2.FieldName, null, t('PUBLISHABLE_KEY', 'Publishable key')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "publishable",
-    defaultValue: changesState !== null && changesState !== void 0 && (_changesState$data = changesState.data) !== null && _changesState$data !== void 0 && _changesState$data.publishable ? changesState === null || changesState === void 0 ? void 0 : (_changesState$data2 = changesState.data) === null || _changesState$data2 === void 0 ? void 0 : _changesState$data2.publishable : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$da = businessPaymethod.data) === null || _businessPaymethod$da === void 0 ? void 0 : _businessPaymethod$da.publishable,
+    defaultValue: changesState !== null && changesState !== void 0 && (_changesState$data = changesState.data) !== null && _changesState$data !== void 0 && _changesState$data.publishable ? changesState === null || changesState === void 0 || (_changesState$data2 = changesState.data) === null || _changesState$data2 === void 0 ? void 0 : _changesState$data2.publishable : businessPaymethod === null || businessPaymethod === void 0 || (_businessPaymethod$da = businessPaymethod.data) === null || _businessPaymethod$da === void 0 ? void 0 : _businessPaymethod$da.publishable,
     placeholder: t('PUBLISHABLE_KEY', 'Publishable key'),
     onChange: function onChange(e) {
       return handleChangeInput(e, false);
     }
   }), /*#__PURE__*/_react.default.createElement(_styles2.FieldName, null, t('SECRET_KEY', 'Secret key')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "secret",
-    defaultValue: changesState !== null && changesState !== void 0 && (_changesState$data3 = changesState.data) !== null && _changesState$data3 !== void 0 && _changesState$data3.secret ? changesState === null || changesState === void 0 ? void 0 : (_changesState$data4 = changesState.data) === null || _changesState$data4 === void 0 ? void 0 : _changesState$data4.secret : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$da2 = businessPaymethod.data) === null || _businessPaymethod$da2 === void 0 ? void 0 : _businessPaymethod$da2.secret,
+    defaultValue: changesState !== null && changesState !== void 0 && (_changesState$data3 = changesState.data) !== null && _changesState$data3 !== void 0 && _changesState$data3.secret ? changesState === null || changesState === void 0 || (_changesState$data4 = changesState.data) === null || _changesState$data4 === void 0 ? void 0 : _changesState$data4.secret : businessPaymethod === null || businessPaymethod === void 0 || (_businessPaymethod$da2 = businessPaymethod.data) === null || _businessPaymethod$da2 === void 0 ? void 0 : _businessPaymethod$da2.secret,
     placeholder: t('SECRET_KEY', 'Secret key'),
     onChange: function onChange(e) {
       return handleChangeInput(e, false);
     }
   }), /*#__PURE__*/_react.default.createElement(_styles2.FieldName, null, t('PUBLISHABLE_KEY', 'Publishable key'), " (", t('SANDBOX', 'Sandbox'), ")"), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "publishable",
-    defaultValue: changesState !== null && changesState !== void 0 && (_changesState$data_sa = changesState.data_sandbox) !== null && _changesState$data_sa !== void 0 && _changesState$data_sa.publishable ? changesState === null || changesState === void 0 ? void 0 : (_changesState$data_sa2 = changesState.data_sandbox) === null || _changesState$data_sa2 === void 0 ? void 0 : _changesState$data_sa2.publishable : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$da3 = businessPaymethod.data_sandbox) === null || _businessPaymethod$da3 === void 0 ? void 0 : _businessPaymethod$da3.publishable,
+    defaultValue: changesState !== null && changesState !== void 0 && (_changesState$data_sa = changesState.data_sandbox) !== null && _changesState$data_sa !== void 0 && _changesState$data_sa.publishable ? changesState === null || changesState === void 0 || (_changesState$data_sa2 = changesState.data_sandbox) === null || _changesState$data_sa2 === void 0 ? void 0 : _changesState$data_sa2.publishable : businessPaymethod === null || businessPaymethod === void 0 || (_businessPaymethod$da3 = businessPaymethod.data_sandbox) === null || _businessPaymethod$da3 === void 0 ? void 0 : _businessPaymethod$da3.publishable,
     placeholder: "".concat(t('PUBLISHABLE_KEY', 'Publishable key'), " (").concat(t('SANDBOX', 'Sandbox'), ")"),
     onChange: function onChange(e) {
       return handleChangeInput(e, true);
     }
   }), /*#__PURE__*/_react.default.createElement(_styles2.FieldName, null, t('SECRECT_KEY', 'Secret key'), " (", t('SANDBOX', 'Sandbox'), ")"), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "secret",
-    defaultValue: changesState !== null && changesState !== void 0 && (_changesState$data_sa3 = changesState.data_sandbox) !== null && _changesState$data_sa3 !== void 0 && _changesState$data_sa3.secret ? changesState === null || changesState === void 0 ? void 0 : (_changesState$data_sa4 = changesState.data_sandbox) === null || _changesState$data_sa4 === void 0 ? void 0 : _changesState$data_sa4.secret : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$da4 = businessPaymethod.data_sandbox) === null || _businessPaymethod$da4 === void 0 ? void 0 : _businessPaymethod$da4.secret,
+    defaultValue: changesState !== null && changesState !== void 0 && (_changesState$data_sa3 = changesState.data_sandbox) !== null && _changesState$data_sa3 !== void 0 && _changesState$data_sa3.secret ? changesState === null || changesState === void 0 || (_changesState$data_sa4 = changesState.data_sandbox) === null || _changesState$data_sa4 === void 0 ? void 0 : _changesState$data_sa4.secret : businessPaymethod === null || businessPaymethod === void 0 || (_businessPaymethod$da4 = businessPaymethod.data_sandbox) === null || _businessPaymethod$da4 === void 0 ? void 0 : _businessPaymethod$da4.secret,
     placeholder: "".concat(t('SECRECT_KEY', 'Secret key'), " (").concat(t('SANDBOX', 'Sandbox'), ")"),
     onChange: function onChange(e) {
       return handleChangeInput(e, true);
     }
-  })), paymentTabs === 1 && (sitesState === null || sitesState === void 0 ? void 0 : (_sitesState$sites3 = sitesState.sites) === null || _sitesState$sites3 === void 0 ? void 0 : _sitesState$sites3.length) > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles4.TabOption, {
+  })), paymentTabs === 1 && (sitesState === null || sitesState === void 0 || (_sitesState$sites3 = sitesState.sites) === null || _sitesState$sites3 === void 0 ? void 0 : _sitesState$sites3.length) > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles4.TabOption, {
     key: "all",
     onClick: function onClick() {
       return setPaymethodInfo({
@@ -264,7 +264,7 @@ var PaymethodOptionStripeRedirect = function PaymethodOptionStripeRedirect(props
           value: site.id
         });
       }
-    }, (_ref3 = (_localState$sites2 = localState === null || localState === void 0 ? void 0 : localState.sites) !== null && _localState$sites2 !== void 0 ? _localState$sites2 : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$si2 = businessPaymethod.sites) === null || _businessPaymethod$si2 === void 0 ? void 0 : _businessPaymethod$si2.map(function (s) {
+    }, (_ref3 = (_localState$sites2 = localState === null || localState === void 0 ? void 0 : localState.sites) !== null && _localState$sites2 !== void 0 ? _localState$sites2 : businessPaymethod === null || businessPaymethod === void 0 || (_businessPaymethod$si2 = businessPaymethod.sites) === null || _businessPaymethod$si2 === void 0 ? void 0 : _businessPaymethod$si2.map(function (s) {
       return s.id;
     })) !== null && _ref3 !== void 0 && _ref3.includes(site.id) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, {
       className: "fill"

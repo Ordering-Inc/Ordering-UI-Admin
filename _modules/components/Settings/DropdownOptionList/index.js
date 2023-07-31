@@ -131,7 +131,7 @@ var DropdownOptionList = function DropdownOptionList(props) {
   }, [countriesState]);
   var handleClickZoneDropdown = function handleClickZoneDropdown(e, zone, isInitialRender) {
     var _e$target, _e$target2, _e$target3;
-    var isInvalid = (e === null || e === void 0 ? void 0 : (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.closest('.zone-checkbox')) || (e === null || e === void 0 ? void 0 : (_e$target2 = e.target) === null || _e$target2 === void 0 ? void 0 : _e$target2.closest('.zone-enabled')) || (e === null || e === void 0 ? void 0 : (_e$target3 = e.target) === null || _e$target3 === void 0 ? void 0 : _e$target3.closest('.zone-actions'));
+    var isInvalid = (e === null || e === void 0 || (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.closest('.zone-checkbox')) || (e === null || e === void 0 || (_e$target2 = e.target) === null || _e$target2 === void 0 ? void 0 : _e$target2.closest('.zone-enabled')) || (e === null || e === void 0 || (_e$target3 = e.target) === null || _e$target3 === void 0 ? void 0 : _e$target3.closest('.zone-actions'));
     if (isInvalid) return;
     handleOpenZoneDropdownDetails(zone);
     if (!isInitialRender) {
@@ -211,7 +211,7 @@ var DropdownOptionList = function DropdownOptionList(props) {
     }, selectedZoneList.find(function (_zone) {
       return (_zone === null || _zone === void 0 ? void 0 : _zone.id) === dropdownOption.id;
     }) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null)), /*#__PURE__*/_react.default.createElement("span", null, dropdownOption === null || dropdownOption === void 0 ? void 0 : dropdownOption.name)), /*#__PURE__*/_react.default.createElement(_styles2.CountryName, null, /*#__PURE__*/_react.default.createElement(_CountrySelector.CountrySelector, {
-      defaultValue: parseInt(dropdownOption === null || dropdownOption === void 0 ? void 0 : (_dropdownOption$city = dropdownOption.city) === null || _dropdownOption$city === void 0 ? void 0 : _dropdownOption$city.country_id),
+      defaultValue: parseInt(dropdownOption === null || dropdownOption === void 0 || (_dropdownOption$city = dropdownOption.city) === null || _dropdownOption$city === void 0 ? void 0 : _dropdownOption$city.country_id),
       countries: countriesState === null || countriesState === void 0 ? void 0 : countriesState.countries
     })), /*#__PURE__*/_react.default.createElement(_styles2.CityName, null, /*#__PURE__*/_react.default.createElement(_Shared.CitySelector, {
       isDefault: true,

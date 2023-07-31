@@ -30,7 +30,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var DriversGroupsListingDetailsUI = function DriversGroupsListingDetailsUI(props) {
-  var _history$location2, _history$location2$st;
+  var _history$location2;
   var driversGroupsState = props.driversGroupsState,
     selectedGroupList = props.selectedGroupList,
     handleSelectGroup = props.handleSelectGroup,
@@ -76,11 +76,11 @@ var DriversGroupsListingDetailsUI = function DriversGroupsListingDetailsUI(props
     setIsTourOpen(true);
   };
   (0, _react.useEffect)(function () {
-    var _history$location, _history$location$sta;
-    if ((_history$location = history.location) !== null && _history$location !== void 0 && (_history$location$sta = _history$location.state) !== null && _history$location$sta !== void 0 && _history$location$sta.isFromTourDriversGroup) {
+    var _history$location;
+    if ((_history$location = history.location) !== null && _history$location !== void 0 && (_history$location = _history$location.state) !== null && _history$location !== void 0 && _history$location.isFromTourDriversGroup) {
       handleOpenTour();
     }
-  }, [(_history$location2 = history.location) === null || _history$location2 === void 0 ? void 0 : (_history$location2$st = _history$location2.state) === null || _history$location2$st === void 0 ? void 0 : _history$location2$st.isFromTourDriversGroup]);
+  }, [(_history$location2 = history.location) === null || _history$location2 === void 0 || (_history$location2 = _history$location2.state) === null || _history$location2 === void 0 ? void 0 : _history$location2.isFromTourDriversGroup]);
   var getDataFromStorage = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       var value;

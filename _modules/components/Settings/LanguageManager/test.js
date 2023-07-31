@@ -117,11 +117,11 @@ var LanguageManager = function LanguageManager(props) {
             }));
             showToast(_orderingComponentsAdmin.ToastType.Info, t('LOADING', 'Loading'));
             changes = {
-              key: formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.key,
-              text: formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.text
+              key: formState === null || formState === void 0 || (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.key,
+              text: formState === null || formState === void 0 || (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.text
             };
             _context.next = 6;
-            return ordering.translations(formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.id).save(changes);
+            return ordering.translations(formState === null || formState === void 0 || (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.id).save(changes);
           case 6:
             _yield$ordering$trans = _context.sent;
             _yield$ordering$trans2 = _yield$ordering$trans.content;

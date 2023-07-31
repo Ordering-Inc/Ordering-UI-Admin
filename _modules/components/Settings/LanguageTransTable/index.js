@@ -121,7 +121,7 @@ var LanguageTransTableUI = function LanguageTransTableUI(props) {
     var translations = [];
     if (searchValue) {
       var _translationList$tran;
-      translations = translationList === null || translationList === void 0 ? void 0 : (_translationList$tran = translationList.translations) === null || _translationList$tran === void 0 ? void 0 : _translationList$tran.filter(function (translation) {
+      translations = translationList === null || translationList === void 0 || (_translationList$tran = translationList.translations) === null || _translationList$tran === void 0 ? void 0 : _translationList$tran.filter(function (translation) {
         var _translation$key, _translation$text;
         return ((_translation$key = translation.key) === null || _translation$key === void 0 ? void 0 : _translation$key.toLowerCase().includes(searchValue === null || searchValue === void 0 ? void 0 : searchValue.toLowerCase())) || ((_translation$text = translation.text) === null || _translation$text === void 0 ? void 0 : _translation$text.toLowerCase().includes(searchValue === null || searchValue === void 0 ? void 0 : searchValue.toLowerCase()));
       });
@@ -141,7 +141,7 @@ var LanguageTransTableUI = function LanguageTransTableUI(props) {
       var _creationFormState$re2;
       setAlertState({
         open: true,
-        content: creationFormState === null || creationFormState === void 0 ? void 0 : (_creationFormState$re2 = creationFormState.result) === null || _creationFormState$re2 === void 0 ? void 0 : _creationFormState$re2.result
+        content: creationFormState === null || creationFormState === void 0 || (_creationFormState$re2 = creationFormState.result) === null || _creationFormState$re2 === void 0 ? void 0 : _creationFormState$re2.result
       });
     }
   }, [creationFormState === null || creationFormState === void 0 ? void 0 : creationFormState.result]);
@@ -186,14 +186,14 @@ var LanguageTransTableUI = function LanguageTransTableUI(props) {
   }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement("input", {
     type: "text",
     placeholder: t('KEY', 'Write a key'),
-    defaultValue: creationFormState === null || creationFormState === void 0 ? void 0 : (_creationFormState$ch = creationFormState.changes) === null || _creationFormState$ch === void 0 ? void 0 : _creationFormState$ch.key,
+    defaultValue: creationFormState === null || creationFormState === void 0 || (_creationFormState$ch = creationFormState.changes) === null || _creationFormState$ch === void 0 ? void 0 : _creationFormState$ch.key,
     onChange: function onChange(e) {
       return handleChangeInput('key', e);
     }
   })), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement("input", {
     type: "text",
     placeholder: t('WRITE_A_TEXT', 'Write a text'),
-    defaultValue: creationFormState === null || creationFormState === void 0 ? void 0 : (_creationFormState$ch2 = creationFormState.changes) === null || _creationFormState$ch2 === void 0 ? void 0 : _creationFormState$ch2.text,
+    defaultValue: creationFormState === null || creationFormState === void 0 || (_creationFormState$ch2 = creationFormState.changes) === null || _creationFormState$ch2 === void 0 ? void 0 : _creationFormState$ch2.text,
     onChange: function onChange(e) {
       return handleChangeInput('text', e);
     }

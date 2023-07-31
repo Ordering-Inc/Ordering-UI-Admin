@@ -194,7 +194,7 @@ var BannerImageDetailsUI = function BannerImageDetailsUI(props) {
     accept: "image/png, image/jpeg, image/jpg",
     disabled: changesState.loading
   }, changesState !== null && changesState !== void 0 && (_changesState$changes = changesState.changes) !== null && _changesState$changes !== void 0 && _changesState$changes.image ? /*#__PURE__*/_react.default.createElement("img", {
-    src: changesState === null || changesState === void 0 ? void 0 : (_changesState$changes2 = changesState.changes) === null || _changesState$changes2 === void 0 ? void 0 : _changesState$changes2.image,
+    src: changesState === null || changesState === void 0 || (_changesState$changes2 = changesState.changes) === null || _changesState$changes2 === void 0 ? void 0 : _changesState$changes2.image,
     alt: "item image",
     loading: "lazy"
   }) : ((_imageState$image2 = imageState.image) === null || _imageState$image2 === void 0 ? void 0 : _imageState$image2.url) && /*#__PURE__*/_react.default.createElement("img", {

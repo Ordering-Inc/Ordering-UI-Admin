@@ -55,7 +55,7 @@ var BusinessLink = function BusinessLink(props) {
       width: 100
     })));
   })) : /*#__PURE__*/_react.default.createElement(_styles.BusinessListWrapper, null, businessList.businesses.length > 0 ? businessList.businesses.map(function (business) {
-    var _theme$images, _theme$images$dummies;
+    var _theme$images;
     return /*#__PURE__*/_react.default.createElement(_styles.BusinessItemContainer, {
       key: business.id
     }, /*#__PURE__*/_react.default.createElement(_styles.RadioButton, {
@@ -67,7 +67,7 @@ var BusinessLink = function BusinessLink(props) {
     }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, {
       color: theme.colors.secundaryLight
     })), /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles.Image, {
-      bgimage: optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_40,c_limit')
+      bgimage: optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.dummies) === null || _theme$images === void 0 ? void 0 : _theme$images.businessLogo), 'h_40,c_limit')
     })), /*#__PURE__*/_react.default.createElement(_styles.BusinessName, null, business === null || business === void 0 ? void 0 : business.name));
   }) : /*#__PURE__*/_react.default.createElement(_Shared.NotFoundSource, null)));
 };

@@ -67,7 +67,7 @@ var LanguageTransSpreadUI = function LanguageTransSpreadUI(props) {
     var translations = [];
     if (searchValue) {
       var _translationList$tran;
-      translations = translationList === null || translationList === void 0 ? void 0 : (_translationList$tran = translationList.translations) === null || _translationList$tran === void 0 ? void 0 : _translationList$tran.filter(function (translation) {
+      translations = translationList === null || translationList === void 0 || (_translationList$tran = translationList.translations) === null || _translationList$tran === void 0 ? void 0 : _translationList$tran.filter(function (translation) {
         var _translation$key, _translation$text;
         return ((_translation$key = translation.key) === null || _translation$key === void 0 ? void 0 : _translation$key.toLowerCase().includes(searchValue === null || searchValue === void 0 ? void 0 : searchValue.toLowerCase())) || ((_translation$text = translation.text) === null || _translation$text === void 0 ? void 0 : _translation$text.toLowerCase().includes(searchValue === null || searchValue === void 0 ? void 0 : searchValue.toLowerCase()));
       });
@@ -85,7 +85,7 @@ var LanguageTransSpreadUI = function LanguageTransSpreadUI(props) {
       var _creationFormState$re2;
       setAlertState({
         open: true,
-        content: creationFormState === null || creationFormState === void 0 ? void 0 : (_creationFormState$re2 = creationFormState.result) === null || _creationFormState$re2 === void 0 ? void 0 : _creationFormState$re2.result
+        content: creationFormState === null || creationFormState === void 0 || (_creationFormState$re2 = creationFormState.result) === null || _creationFormState$re2 === void 0 ? void 0 : _creationFormState$re2.result
       });
     }
   }, [creationFormState === null || creationFormState === void 0 ? void 0 : creationFormState.result]);

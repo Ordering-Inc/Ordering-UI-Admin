@@ -41,7 +41,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var LoginFormUI = function LoginFormUI(props) {
-  var _configs$dashboard_lo, _theme$images, _theme$images$general, _configs$dashboard_lo2, _theme$images2, _theme$images2$logos;
+  var _configs$dashboard_lo, _theme$images, _configs$dashboard_lo2, _theme$images2;
   var useLoginOtpEmail = props.useLoginOtpEmail,
     useLoginOptCellphone = props.useLoginOptCellphone,
     useLoginByCellphone = props.useLoginByCellphone,
@@ -189,12 +189,12 @@ var LoginFormUI = function LoginFormUI(props) {
   (0, _react.useEffect)(function () {
     var _formState$result;
     if (!formState.loading && (_formState$result = formState.result) !== null && _formState$result !== void 0 && _formState$result.error) {
-      var _formState$result2, _formState$result2$re, _formState$result3;
-      if (((_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : (_formState$result2$re = _formState$result2.result) === null || _formState$result2$re === void 0 ? void 0 : _formState$result2$re[0]) === 'ERROR_AUTH_VERIFICATION_CODE') {
+      var _formState$result2, _formState$result3;
+      if (((_formState$result2 = formState.result) === null || _formState$result2 === void 0 || (_formState$result2 = _formState$result2.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2[0]) === 'ERROR_AUTH_VERIFICATION_CODE') {
         var _configs$security_rec;
         setRecaptchaVersion({
           version: 'v2',
-          siteKey: configs === null || configs === void 0 ? void 0 : (_configs$security_rec = configs.security_recaptcha_site_key) === null || _configs$security_rec === void 0 ? void 0 : _configs$security_rec.value
+          siteKey: configs === null || configs === void 0 || (_configs$security_rec = configs.security_recaptcha_site_key) === null || _configs$security_rec === void 0 ? void 0 : _configs$security_rec.value
         });
         setAlertState({
           open: true,
@@ -240,7 +240,7 @@ var LoginFormUI = function LoginFormUI(props) {
       var _checkPhoneCodeState$2;
       setAlertState({
         open: true,
-        content: (checkPhoneCodeState === null || checkPhoneCodeState === void 0 ? void 0 : (_checkPhoneCodeState$2 = checkPhoneCodeState.result) === null || _checkPhoneCodeState$2 === void 0 ? void 0 : _checkPhoneCodeState$2.result) || [t('ERROR', 'Error')]
+        content: (checkPhoneCodeState === null || checkPhoneCodeState === void 0 || (_checkPhoneCodeState$2 = checkPhoneCodeState.result) === null || _checkPhoneCodeState$2 === void 0 ? void 0 : _checkPhoneCodeState$2.result) || [t('ERROR', 'Error')]
       });
     } else if (checkPhoneCodeState !== null && checkPhoneCodeState !== void 0 && (_checkPhoneCodeState$3 = checkPhoneCodeState.result) !== null && _checkPhoneCodeState$3 !== void 0 && _checkPhoneCodeState$3.result) {
       setAlertState({
@@ -260,13 +260,13 @@ var LoginFormUI = function LoginFormUI(props) {
   }, [otpLeftTime]);
   (0, _react.useEffect)(function () {
     var _configs$security_rec2;
-    if (configs && Object.keys(configs).length > 0 && (configs === null || configs === void 0 ? void 0 : (_configs$security_rec2 = configs.security_recaptcha_auth) === null || _configs$security_rec2 === void 0 ? void 0 : _configs$security_rec2.value) === '1') {
+    if (configs && Object.keys(configs).length > 0 && (configs === null || configs === void 0 || (_configs$security_rec2 = configs.security_recaptcha_auth) === null || _configs$security_rec2 === void 0 ? void 0 : _configs$security_rec2.value) === '1') {
       var _configs$security_rec3, _configs$security_rec4, _configs$security_rec5, _configs$security_rec7;
-      if ((configs === null || configs === void 0 ? void 0 : (_configs$security_rec3 = configs.security_recaptcha_type) === null || _configs$security_rec3 === void 0 ? void 0 : _configs$security_rec3.value) === 'v3' && (configs === null || configs === void 0 ? void 0 : (_configs$security_rec4 = configs.security_recaptcha_score_v3) === null || _configs$security_rec4 === void 0 ? void 0 : _configs$security_rec4.value) > 0 && configs !== null && configs !== void 0 && (_configs$security_rec5 = configs.security_recaptcha_site_key_v3) !== null && _configs$security_rec5 !== void 0 && _configs$security_rec5.value) {
+      if ((configs === null || configs === void 0 || (_configs$security_rec3 = configs.security_recaptcha_type) === null || _configs$security_rec3 === void 0 ? void 0 : _configs$security_rec3.value) === 'v3' && (configs === null || configs === void 0 || (_configs$security_rec4 = configs.security_recaptcha_score_v3) === null || _configs$security_rec4 === void 0 ? void 0 : _configs$security_rec4.value) > 0 && configs !== null && configs !== void 0 && (_configs$security_rec5 = configs.security_recaptcha_site_key_v3) !== null && _configs$security_rec5 !== void 0 && _configs$security_rec5.value) {
         var _configs$security_rec6;
         setRecaptchaVersion({
           version: 'v3',
-          siteKey: configs === null || configs === void 0 ? void 0 : (_configs$security_rec6 = configs.security_recaptcha_site_key_v3) === null || _configs$security_rec6 === void 0 ? void 0 : _configs$security_rec6.value
+          siteKey: configs === null || configs === void 0 || (_configs$security_rec6 = configs.security_recaptcha_site_key_v3) === null || _configs$security_rec6 === void 0 ? void 0 : _configs$security_rec6.value
         });
         return;
       }
@@ -274,7 +274,7 @@ var LoginFormUI = function LoginFormUI(props) {
         var _configs$security_rec8;
         setRecaptchaVersion({
           version: 'v2',
-          siteKey: configs === null || configs === void 0 ? void 0 : (_configs$security_rec8 = configs.security_recaptcha_site_key) === null || _configs$security_rec8 === void 0 ? void 0 : _configs$security_rec8.value
+          siteKey: configs === null || configs === void 0 || (_configs$security_rec8 = configs.security_recaptcha_site_key) === null || _configs$security_rec8 === void 0 ? void 0 : _configs$security_rec8.value
         });
       }
     }
@@ -282,9 +282,9 @@ var LoginFormUI = function LoginFormUI(props) {
   return /*#__PURE__*/_react.default.createElement(_styles2.LoginContainer, {
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement(_styles2.LoginHeroContainer, {
-    bgimage: (configs === null || configs === void 0 ? void 0 : (_configs$dashboard_lo = configs.dashboard_login_background) === null || _configs$dashboard_lo === void 0 ? void 0 : _configs$dashboard_lo.value) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$general = _theme$images.general) === null || _theme$images$general === void 0 ? void 0 : _theme$images$general.loginHero)
+    bgimage: (configs === null || configs === void 0 || (_configs$dashboard_lo = configs.dashboard_login_background) === null || _configs$dashboard_lo === void 0 ? void 0 : _configs$dashboard_lo.value) || ((_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.general) === null || _theme$images === void 0 ? void 0 : _theme$images.loginHero)
   }, /*#__PURE__*/_react.default.createElement("img", {
-    src: (configs === null || configs === void 0 ? void 0 : (_configs$dashboard_lo2 = configs.dashboard_logo) === null || _configs$dashboard_lo2 === void 0 ? void 0 : _configs$dashboard_lo2.value) || (theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$logos = _theme$images2.logos) === null || _theme$images2$logos === void 0 ? void 0 : _theme$images2$logos.logotypeInvert),
+    src: (configs === null || configs === void 0 || (_configs$dashboard_lo2 = configs.dashboard_logo) === null || _configs$dashboard_lo2 === void 0 ? void 0 : _configs$dashboard_lo2.value) || (theme === null || theme === void 0 || (_theme$images2 = theme.images) === null || _theme$images2 === void 0 || (_theme$images2 = _theme$images2.logos) === null || _theme$images2 === void 0 ? void 0 : _theme$images2.logotypeInvert),
     alt: "Logo login"
   })), /*#__PURE__*/_react.default.createElement(_styles2.FormSide, {
     isPopup: isPopup

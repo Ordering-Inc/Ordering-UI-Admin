@@ -184,7 +184,7 @@ var ProductGalleryUI = function ProductGalleryUI(props) {
       accept: "image/png, image/jpeg, image/jpg",
       disabled: changesState.loading || productGalleryState.loading
     }, changesState !== null && changesState !== void 0 && (_changesState$changes = changesState.changes) !== null && _changesState$changes !== void 0 && _changesState$changes.file && (changesState === null || changesState === void 0 ? void 0 : changesState.itemId) === photo.id ? /*#__PURE__*/_react.default.createElement("img", {
-      src: changesState === null || changesState === void 0 ? void 0 : (_changesState$changes2 = changesState.changes) === null || _changesState$changes2 === void 0 ? void 0 : _changesState$changes2.file,
+      src: changesState === null || changesState === void 0 || (_changesState$changes2 = changesState.changes) === null || _changesState$changes2 === void 0 ? void 0 : _changesState$changes2.file,
       alt: "option image",
       loading: "lazy"
     }) : (photo === null || photo === void 0 ? void 0 : photo.file) && /*#__PURE__*/_react.default.createElement("img", {
@@ -226,8 +226,8 @@ var ProductGalleryUI = function ProductGalleryUI(props) {
     },
     accept: "image/png, image/jpeg, image/jpg",
     disabled: changesState.loading || productGalleryState.loading
-  }, (changesState === null || changesState === void 0 ? void 0 : (_changesState$changes3 = changesState.changes) === null || _changesState$changes3 === void 0 ? void 0 : _changesState$changes3.file) && (changesState === null || changesState === void 0 ? void 0 : changesState.itemId) === null && /*#__PURE__*/_react.default.createElement("img", {
-    src: changesState === null || changesState === void 0 ? void 0 : (_changesState$changes4 = changesState.changes) === null || _changesState$changes4 === void 0 ? void 0 : _changesState$changes4.file,
+  }, (changesState === null || changesState === void 0 || (_changesState$changes3 = changesState.changes) === null || _changesState$changes3 === void 0 ? void 0 : _changesState$changes3.file) && (changesState === null || changesState === void 0 ? void 0 : changesState.itemId) === null && /*#__PURE__*/_react.default.createElement("img", {
+    src: changesState === null || changesState === void 0 || (_changesState$changes4 = changesState.changes) === null || _changesState$changes4 === void 0 ? void 0 : _changesState$changes4.file,
     alt: "option image",
     loading: "lazy"
   }), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIconContainer, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PlusCircle, null), /*#__PURE__*/_react.default.createElement("p", null, t('DRAG_AND_DROP', 'Drag and drop')))))), /*#__PURE__*/_react.default.createElement(_styles2.GalleryItemBottom, {

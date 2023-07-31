@@ -86,9 +86,9 @@ var ReportsDriverFilterUI = function ReportsDriverFilterUI(props) {
     var _driverList$drivers;
     if (driverList.loading) return;
     var _totalPages;
-    if ((driverList === null || driverList === void 0 ? void 0 : (_driverList$drivers = driverList.drivers) === null || _driverList$drivers === void 0 ? void 0 : _driverList$drivers.length) > 0) {
+    if ((driverList === null || driverList === void 0 || (_driverList$drivers = driverList.drivers) === null || _driverList$drivers === void 0 ? void 0 : _driverList$drivers.length) > 0) {
       var _driverList$drivers2;
-      _totalPages = Math.ceil((driverList === null || driverList === void 0 ? void 0 : (_driverList$drivers2 = driverList.drivers) === null || _driverList$drivers2 === void 0 ? void 0 : _driverList$drivers2.length) / pagesPerPage);
+      _totalPages = Math.ceil((driverList === null || driverList === void 0 || (_driverList$drivers2 = driverList.drivers) === null || _driverList$drivers2 === void 0 ? void 0 : _driverList$drivers2.length) / pagesPerPage);
     }
     var indexOfLastPost = currentPage * pagesPerPage;
     var indexOfFirstPost = indexOfLastPost - pagesPerPage;
@@ -127,7 +127,7 @@ var ReportsDriverFilterUI = function ReportsDriverFilterUI(props) {
     }, isCheckEnableSate(driver.id) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, {
       className: "fill"
     }) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), /*#__PURE__*/_react.default.createElement(_styles.BusinessName, null, driver === null || driver === void 0 ? void 0 : driver.name));
-  }), (driverList === null || driverList === void 0 ? void 0 : (_driverList$drivers3 = driverList.drivers) === null || _driverList$drivers3 === void 0 ? void 0 : _driverList$drivers3.length) > 0 && /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
+  }), (driverList === null || driverList === void 0 || (_driverList$drivers3 = driverList.drivers) === null || _driverList$drivers3 === void 0 ? void 0 : _driverList$drivers3.length) > 0 && /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
     currentPage: currentPage,
     totalPages: totalPages,
     handleChangePage: handleChangePage,
