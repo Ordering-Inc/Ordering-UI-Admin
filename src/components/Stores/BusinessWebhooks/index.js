@@ -56,11 +56,12 @@ const BusinessWebhooksUI = (props) => {
   const timeList = [
     { value: '', content: t('SELECT_DELAY', 'Select a delay') },
     { value: '0', content: t('IMMEDIATELY', 'Immediately') },
-    { value: 'delivery_time', content: t('DELIVERY_TIME', 'Delivery time') },
-    { value: 'pickup_time', content: t('PICKUP_TIME', 'Pickup time') },
     { value: '300', content: `5 ${t('MINUTES', 'Minutes')}` },
     { value: '600', content: `10 ${t('MINUTES', 'Minutes')}` },
-    { value: '900', content: `15 ${t('MINUTES', 'Minutes')}` }
+    { value: '900', content: `15 ${t('MINUTES', 'Minutes')}` },
+    { value: 'delivery_time', content: t('DELIVERY_TIME', 'Delivery time') },
+    { value: 'pickup_time', content: t('PICKUP_TIME', 'Pickup time') },
+    { value: 'preparation_time', content: t('PREPARATION_TIME', 'Preparation time') }
   ]
 
   const closeAlert = () => {
