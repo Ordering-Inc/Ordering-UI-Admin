@@ -76,8 +76,9 @@ var BusinessDetails = function BusinessDetails(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles.GoogleMapContainer, null, /*#__PURE__*/_react.default.createElement("label", null, t('GOOGLE_PLACE_ID', 'Google place ID')), /*#__PURE__*/_react.default.createElement("p", null, placeId !== null && placeId !== void 0 ? placeId : googleMapsApiKey), (configs === null || configs === void 0 || (_configs$google_maps_2 = configs.google_maps_api_key) === null || _configs$google_maps_2 === void 0 ? void 0 : _configs$google_maps_2.value) && /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, null, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.GoogleMapsMap, {
     apiKey: configs === null || configs === void 0 || (_configs$google_maps_3 = configs.google_maps_api_key) === null || _configs$google_maps_3 === void 0 ? void 0 : _configs$google_maps_3.value,
     location: (_formState$changes$lo = formState === null || formState === void 0 || (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.location) !== null && _formState$changes$lo !== void 0 ? _formState$changes$lo : defaultPosition,
-    mapControls: googleMapsControls,
-    handleChangeCenter: handleChangeCenter,
+    mapControls: googleMapsControls
+    // handleChangeCenter={handleChangeCenter}
+    ,
     isFitCenter: true
   }))), /*#__PURE__*/_react.default.createElement(_styles.FormControl, {
     noBottom: true

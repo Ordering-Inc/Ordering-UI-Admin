@@ -27,14 +27,19 @@ var SearchBarWrapper = _styledComponents.default.div(_templateObject3 || (_templ
   return props.theme.colors.headingColor;
 });
 exports.SearchBarWrapper = SearchBarWrapper;
-var OptionsToSelectContainer = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 50px;\n  left: 0;\n  width: 100%;\n  max-height: 300px;\n  overflow-x: hidden;\n  border-radius: 8px;\n  border: 1px solid ", ";\n  background-color: ", ";\n  padding: 9px 0;\n\n  > p {\n    font-size: 12px;\n    margin: 0 16px;\n  }\n"])), function (props) {
+var OptionsToSelectContainer = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  position: absolute;\n  top: 50px;\n  left: 0;\n  width: 100%;\n  max-height: 300px;\n  overflow-x: hidden;\n  border-radius: 8px;\n  border: 1px solid ", ";\n  background-color: ", ";\n  padding: 9px 0;\n\n  > p {\n    font-size: 12px;\n    margin: 0 16px;\n\n    > span.new {\n      cursor: pointer;\n      color: ", ";\n      &:hover {\n        text-decoration: underline;\n      }\n    }\n  }\n"])), function (props) {
   return props.theme.colors.borderColor;
 }, function (props) {
   return props.theme.colors.backgroundPage;
+}, function (props) {
+  return props.theme.colors.primary;
 });
 exports.OptionsToSelectContainer = OptionsToSelectContainer;
-var SelectOption = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  width: 100%;\n  padding: 9px 16px;\n  display: flex;\n  align-items: center;\n\n  &:hover {\n    background-color: ", ";\n  }\n  span {\n    font-size: 14px;\n    &.name {\n      overflow: hidden;\n      text-overflow: ellipsis;\n      white-space: nowrap;\n    }\n  }\n"])), function (props) {
+var SelectOption = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  position: relative;\n  cursor: pointer;\n  width: 100%;\n  padding: 9px 16px;\n  display: flex;\n  align-items: center;\n\n  &:hover {\n    background-color: ", ";\n  }\n  span {\n    font-size: 14px;\n    &.name {\n      overflow: hidden;\n      text-overflow: ellipsis;\n      white-space: nowrap;\n    }\n  }\n\n  button {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    position: absolute;\n    background: ", ";\n    width: 20px;\n    height: 20px;\n    transform: translate(100%, -50%);\n    top: 11px;\n    right: 20px;\n  }\n"])), function (props) {
   return props.theme.colors.secundary;
+}, function (props) {
+  var _props$theme$colors;
+  return ((_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.backgroundPage) || '#FFF';
 });
 exports.SelectOption = SelectOption;
 var WrapperImage = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  position: relative;\n  max-width: 24px;\n  max-height: 24px;\n  height: 24px;\n  width: 24px;\n  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);\n  border-radius: 8px;\n  margin: 0 6px;\n\n  svg {\n    width: 100%;\n    height: 100%;\n    padding: 3px;\n    box-sizing: border-box;\n    border-radius: 50%;\n  }\n\n  img {\n    width: 100%;\n    height: 100%;\n    border-radius: 8px;\n    object-fit: cover;\n  }\n"])));
