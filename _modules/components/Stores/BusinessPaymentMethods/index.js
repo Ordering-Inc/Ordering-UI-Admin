@@ -125,6 +125,12 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
   }, {
     value: 5,
     text: t('DRIVER_THRU', 'Driver thru')
+  }, {
+    value: 7,
+    text: t('CATERING_DELIVERY', 'Catering delivery')
+  }, {
+    value: 8,
+    text: t('CATERING_PICKUP', 'Catering pickup')
   }];
   var methodsPay = ['google_pay', 'apple_pay'];
   var closeAlert = function closeAlert() {
