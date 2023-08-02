@@ -24,7 +24,9 @@ var OrdersDashboardControls = function OrdersDashboardControls(props) {
     handleDeleteMultiOrders = props.handleDeleteMultiOrders,
     handleChangeMultiOrdersStatus = props.handleChangeMultiOrdersStatus,
     handleOpenCustomOrderDetail = props.handleOpenCustomOrderDetail,
-    handleOpenOrderDetail = props.handleOpenOrderDetail;
+    handleOpenOrderDetail = props.handleOpenOrderDetail,
+    ordersStatusGroup = props.ordersStatusGroup,
+    selectedSubOrderStatus = props.selectedSubOrderStatus;
   var _useSession = (0, _orderingComponentsAdmin.useSession)(),
     _useSession2 = _slicedToArray(_useSession, 1),
     user = _useSession2[0].user;
@@ -32,7 +34,9 @@ var OrdersDashboardControls = function OrdersDashboardControls(props) {
     handleOpenCustomOrderDetail: handleOpenCustomOrderDetail,
     handleOpenOrderDetail: handleOpenOrderDetail
   }), /*#__PURE__*/_react.default.createElement(_OrdersExportCSV.OrdersExportCSV, {
-    filterValues: filterValues
+    filterValues: filterValues,
+    ordersStatusGroup: ordersStatusGroup,
+    selectedSubOrderStatus: selectedSubOrderStatus
   }), selectedOrderNumber > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (user === null || user === void 0 ? void 0 : user.level) !== 5 && /*#__PURE__*/_react.default.createElement(_OrderDelete.OrderDelete, {
     handleDeleteMultiOrders: handleDeleteMultiOrders
   }), /*#__PURE__*/_react.default.createElement(_styles.WrapOrderStatusTypeSelector, null, /*#__PURE__*/_react.default.createElement(_OrderStatusTypeSelector.OrderStatusTypeSelector, {
