@@ -83,7 +83,9 @@ const BusinessPaymentMethodsUI = (props) => {
     { value: 2, text: t('PICKUP', 'Pickup') },
     { value: 3, text: t('EATIN', 'Eatin') },
     { value: 4, text: t('CURBSIDE', 'Curbside') },
-    { value: 5, text: t('DRIVER_THRU', 'Driver thru') }
+    { value: 5, text: t('DRIVER_THRU', 'Driver thru') },
+    { value: 7, text: t('CATERING_DELIVERY', 'Catering delivery') },
+    { value: 8, text: t('CATERING_PICKUP', 'Catering pickup') }
   ]
 
   const methodsPay = ['google_pay', 'apple_pay']
