@@ -177,7 +177,7 @@ export const BusinessProductList = (props) => {
                     (isLazyLoadProducts ? categoryState.products : currentProducts).sort((a, b) => a.rank - b.rank).map((product, i) => (
                       <SingleBusinessProduct
                         {...props}
-                        key={product.id}
+                        key={`${product?.id}_${i}`}
                         productDetailsId={productDetailsId}
                         product={product}
                         allowColumns={allowColumns}
