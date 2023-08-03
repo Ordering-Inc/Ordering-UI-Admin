@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
 import {
   UserDetails as UserDetailsController,
@@ -37,7 +37,8 @@ const CustomerDetailsUI = (props) => {
     handleDeleteUser,
     handleParentSidebarMove,
     handleChangeActiveUser,
-    setSideBarWidth
+    setSideBarWidth,
+    userId
   } = props
 
   const query = new URLSearchParams(useLocation().search)
@@ -46,6 +47,7 @@ const CustomerDetailsUI = (props) => {
   const [{ optimizeImage }] = useUtils()
   const { width } = useWindowSize()
 
+  const firstRender = useRef(true)
   const [showOption, setShowOption] = useState(null)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [isOpenMenu, setIsOpenMenu] = useState(false)
@@ -79,6 +81,7 @@ const CustomerDetailsUI = (props) => {
     if (!isInitialRender) {
       addQueryToUrl({ section: key })
     }
+    firstRender.current = false
   }
 
   const handleCloseMenu = () => {
@@ -98,10 +101,13 @@ const CustomerDetailsUI = (props) => {
   }
 
   useEffect(() => {
+    if (firstRender.current) return
     handleParentSidebarMove(0)
     setIsOpenMenu(false)
     setShowOption(null)
-  }, [userState?.user?.id])
+    setSideBarWidth(500)
+    removeQueryToUrl(['section', 'tab'])
+  }, [userId])
 
   useEffect(() => {
     if (userState.loading) return

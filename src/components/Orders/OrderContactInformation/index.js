@@ -40,7 +40,8 @@ export const OrderContactInformation = (props) => {
     isServiceOrder,
     handleUpdateCustomerInfo,
     setAddressState,
-    setCommentInfostate
+    setCommentInfostate,
+    commentInfoState
   } = props
 
   const [, t] = useLanguage()
@@ -323,13 +324,13 @@ export const OrderContactInformation = (props) => {
               />
             </CompanySelectorContainer>
           )}
-          {!order?.driver_company_id && (
+          {!order?.driver_company_id && !commentInfoState?.open && (
             <DriverSelectorContainer>
               <p>{t('DRIVER_ASSIGN', 'Driver assign')}</p>
               <DriverSelector
                 small
                 isPhoneView
-                defaultValue={order?.driver_id ?? 'default'}
+                defaultValue={commentInfoState?.driverId ?? order?.driver_id ?? 'default'}
                 order={order}
                 isTourOpen={isTourOpen}
                 setCurrentTourStep={setCurrentTourStep}
