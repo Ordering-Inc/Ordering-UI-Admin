@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import React, { useEffect, useState, useRef } from 'react'
+import { useLocation, useHistory } from 'react-router-dom'
 import {
   UserDetails as UserDetailsController,
   useLanguage,
@@ -36,7 +36,8 @@ const CustomerDetailsUI = (props) => {
     handleDeleteUser,
     handleParentSidebarMove,
     handleChangeActiveUser,
-    setSideBarWidth
+    setSideBarWidth,
+    userId
   } = props
 
   const history = useHistory()
@@ -46,6 +47,7 @@ const CustomerDetailsUI = (props) => {
   const [{ optimizeImage }] = useUtils()
   const { width } = useWindowSize()
 
+  const firstRender = useRef(true)
   const [showOption, setShowOption] = useState(null)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [isOpenMenu, setIsOpenMenu] = useState(false)
@@ -81,6 +83,7 @@ const CustomerDetailsUI = (props) => {
       const id = query.get('id')
       history.replace(`${location.pathname}?enabled=${enabled}&id=${id}&section=${key}`)
     }
+    firstRender.current = false
   }
 
   const handleCloseMenu = () => {
@@ -102,10 +105,13 @@ const CustomerDetailsUI = (props) => {
   }
 
   useEffect(() => {
+    if (firstRender.current) return
     handleParentSidebarMove(0)
     setIsOpenMenu(false)
     setShowOption(null)
-  }, [userState?.user?.id])
+    setSideBarWidth(500)
+    removeQueryToUrl(['section', 'tab'])
+  }, [userId])
 
   useEffect(() => {
     if (userState.loading) return
