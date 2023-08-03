@@ -435,7 +435,8 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     setCurrentTourStep: setCurrentTourStep,
     setAddressState: setAddressState,
     handleShowOption: handleShowOption,
-    setCommentInfostate: setCommentInfostate
+    setCommentInfostate: setCommentInfostate,
+    commentInfoState: commentInfoState
   }), /*#__PURE__*/_react.default.createElement(_styles2.OrderProducts, null, /*#__PURE__*/_react.default.createElement("h2", null, t('EXPORT_SUMMARY', 'Summary')), (order === null || order === void 0 || (_order$products = order.products) === null || _order$products === void 0 ? void 0 : _order$products.length) && (order === null || order === void 0 ? void 0 : order.products.map(function (product) {
     return /*#__PURE__*/_react.default.createElement(_ProductItemAccordion.ProductItemAccordion, {
       key: product.id,
@@ -561,9 +562,10 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     open: commentInfoState === null || commentInfoState === void 0 ? void 0 : commentInfoState.open,
     title: t('ORDERING', 'Ordering'),
     onClose: function onClose() {
-      return setCommentInfostate(_objectSpread(_objectSpread({}, commentInfoState), {}, {
+      return setCommentInfostate({
+        driverId: null,
         open: false
-      }));
+      });
     }
   }, /*#__PURE__*/_react.default.createElement(_styles2.AssigmentCommentContainer, {
     onSubmit: handleSubmit(onSubmit)

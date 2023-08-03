@@ -35,12 +35,13 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var CustomerDetailsUI = function CustomerDetailsUI(props) {
-  var _userState$user, _userState$user2, _userState$user3, _userState$user4, _userState$user5, _userState$user6, _userState$user7, _userState$user8, _userState$user9, _userState$user10;
+  var _userState$user, _userState$user2, _userState$user3, _userState$user4, _userState$user5, _userState$user6, _userState$user7, _userState$user8, _userState$user9;
   var userState = props.userState,
     handleDeleteUser = props.handleDeleteUser,
     handleParentSidebarMove = props.handleParentSidebarMove,
     handleChangeActiveUser = props.handleChangeActiveUser,
-    setSideBarWidth = props.setSideBarWidth;
+    setSideBarWidth = props.setSideBarWidth,
+    userId = props.userId;
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -51,6 +52,7 @@ var CustomerDetailsUI = function CustomerDetailsUI(props) {
     optimizeImage = _useUtils2[0].optimizeImage;
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
     width = _useWindowSize.width;
+  var firstRender = (0, _react.useRef)(true);
   var _useState = (0, _react.useState)(null),
     _useState2 = _slicedToArray(_useState, 2),
     showOption = _useState2[0],
@@ -110,6 +112,7 @@ var CustomerDetailsUI = function CustomerDetailsUI(props) {
         section: key
       });
     }
+    firstRender.current = false;
   };
   var handleCloseMenu = function handleCloseMenu() {
     setSideBarWidth(isExpand ? width : 500);
@@ -127,10 +130,13 @@ var CustomerDetailsUI = function CustomerDetailsUI(props) {
     });
   };
   (0, _react.useEffect)(function () {
+    if (firstRender.current) return;
     handleParentSidebarMove(0);
     setIsOpenMenu(false);
     setShowOption(null);
-  }, [userState === null || userState === void 0 || (_userState$user = userState.user) === null || _userState$user === void 0 ? void 0 : _userState$user.id]);
+    setSideBarWidth(500);
+    (0, _utils.removeQueryToUrl)(['section', 'tab']);
+  }, [userId]);
   (0, _react.useEffect)(function () {
     if (userState.loading) return;
     var section = query.get('section');
@@ -142,19 +148,19 @@ var CustomerDetailsUI = function CustomerDetailsUI(props) {
     width: 150
   }) : /*#__PURE__*/_react.default.createElement("span", {
     className: "customer-name"
-  }, (_userState$user2 = userState.user) === null || _userState$user2 === void 0 ? void 0 : _userState$user2.name, " ", (_userState$user3 = userState.user) === null || _userState$user3 === void 0 ? void 0 : _userState$user3.lastname), userState !== null && userState !== void 0 && userState.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }, (_userState$user = userState.user) === null || _userState$user === void 0 ? void 0 : _userState$user.name, " ", (_userState$user2 = userState.user) === null || _userState$user2 === void 0 ? void 0 : _userState$user2.lastname), userState !== null && userState !== void 0 && userState.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 50,
     style: {
       margin: '0px 5px'
     }
   }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, handleChangeActiveUser && /*#__PURE__*/_react.default.createElement(_styles.Switch, {
-    defaultChecked: (userState === null || userState === void 0 || (_userState$user4 = userState.user) === null || _userState$user4 === void 0 ? void 0 : _userState$user4.enabled) || false,
+    defaultChecked: (userState === null || userState === void 0 || (_userState$user3 = userState.user) === null || _userState$user3 === void 0 ? void 0 : _userState$user3.enabled) || false,
     onChange: function onChange(enabled) {
       return handleChangeActiveUser(_objectSpread(_objectSpread({}, userState === null || userState === void 0 ? void 0 : userState.user), {}, {
         enabled: enabled
       }));
     }
-  }))), !!((_userState$user5 = userState.user) !== null && _userState$user5 !== void 0 && _userState$user5.phone_verified) && /*#__PURE__*/_react.default.createElement(_styles2.VerifiedItem, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Phone, null), t('VERIFIED', 'Verified')), !!((_userState$user6 = userState.user) !== null && _userState$user6 !== void 0 && _userState$user6.email_verified) && /*#__PURE__*/_react.default.createElement(_styles2.VerifiedItem, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Envelope, null), t('VERIFIED', 'Verified'))), /*#__PURE__*/_react.default.createElement(_styles2.RightHeader, null, width > 576 && !isOpenMenu && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+  }))), !!((_userState$user4 = userState.user) !== null && _userState$user4 !== void 0 && _userState$user4.phone_verified) && /*#__PURE__*/_react.default.createElement(_styles2.VerifiedItem, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Phone, null), t('VERIFIED', 'Verified')), !!((_userState$user5 = userState.user) !== null && _userState$user5 !== void 0 && _userState$user5.email_verified) && /*#__PURE__*/_react.default.createElement(_styles2.VerifiedItem, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Envelope, null), t('VERIFIED', 'Verified'))), /*#__PURE__*/_react.default.createElement(_styles2.RightHeader, null, width > 576 && !isOpenMenu && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {
       return expandSidebar();
@@ -167,8 +173,8 @@ var CustomerDetailsUI = function CustomerDetailsUI(props) {
     onClick: function onClick() {
       return onDeleteCustomer();
     }
-  }, t('DELETE', 'Delete')))))), /*#__PURE__*/_react.default.createElement(_styles2.PhotoWrapper, null, userState.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null) : (_userState$user7 = userState.user) !== null && _userState$user7 !== void 0 && _userState$user7.photo ? /*#__PURE__*/_react.default.createElement("img", {
-    src: optimizeImage((_userState$user8 = userState.user) === null || _userState$user8 === void 0 ? void 0 : _userState$user8.photo, 'w_220,c_limit'),
+  }, t('DELETE', 'Delete')))))), /*#__PURE__*/_react.default.createElement(_styles2.PhotoWrapper, null, userState.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null) : (_userState$user6 = userState.user) !== null && _userState$user6 !== void 0 && _userState$user6.photo ? /*#__PURE__*/_react.default.createElement("img", {
+    src: optimizeImage((_userState$user7 = userState.user) === null || _userState$user7 === void 0 ? void 0 : _userState$user7.photo, 'w_220,c_limit'),
     alt: ""
   }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PersonFill, null)), /*#__PURE__*/_react.default.createElement(_styles2.MenusContainer, {
     isLoading: userState.loading
@@ -213,9 +219,9 @@ var CustomerDetailsUI = function CustomerDetailsUI(props) {
       return setMenuMoveDistance(isOpen ? 500 : 0);
     }
   })), showOption === 'cash_wallet' && /*#__PURE__*/_react.default.createElement(_CustomerCashWallet.CustomerCashWallet, {
-    userId: (_userState$user9 = userState.user) === null || _userState$user9 === void 0 ? void 0 : _userState$user9.id
+    userId: (_userState$user8 = userState.user) === null || _userState$user8 === void 0 ? void 0 : _userState$user8.id
   }), showOption === 'points_wallet' && /*#__PURE__*/_react.default.createElement(_CustomerPointsWallet.CustomerPointsWallet, {
-    userId: (_userState$user10 = userState.user) === null || _userState$user10 === void 0 ? void 0 : _userState$user10.id,
+    userId: (_userState$user9 = userState.user) === null || _userState$user9 === void 0 ? void 0 : _userState$user9.id,
     user: userState.user
   })));
 };

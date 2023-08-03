@@ -37,7 +37,8 @@ var DriverSelectorUI = function DriverSelectorUI(props) {
     handleAssignDriver = props.handleAssignDriver,
     isTourOpen = props.isTourOpen,
     setCurrentTourStep = props.setCurrentTourStep,
-    handleOpenMessages = props.handleOpenMessages;
+    handleOpenMessages = props.handleOpenMessages,
+    setCommentInfostate = props.setCommentInfostate;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -164,10 +165,21 @@ var DriverSelectorUI = function DriverSelectorUI(props) {
     if (driverId === 'remove') {
       driverId = null;
     }
-    handleAssignDriver({
-      orderId: order.id,
-      driverId: driverId
-    });
+    if (driverId && setCommentInfostate) {
+      setCommentInfostate({
+        open: true,
+        driverId: driverId
+      });
+    } else {
+      setCommentInfostate && setCommentInfostate({
+        open: false,
+        driverId: null
+      });
+      handleAssignDriver({
+        orderId: order.id,
+        driverId: driverId
+      });
+    }
     if (isTourOpen && setCurrentTourStep) {
       handleOpenMessages('chat');
       setTimeout(function () {
