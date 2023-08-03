@@ -408,6 +408,7 @@ const OrderDetailsUI = (props) => {
               setAddressState={setAddressState}
               handleShowOption={handleShowOption}
               setCommentInfostate={setCommentInfostate}
+              commentInfoState={commentInfoState}
             />
             <OrderProducts>
               <h2>{t('EXPORT_SUMMARY', 'Summary')}</h2>
@@ -571,7 +572,7 @@ const OrderDetailsUI = (props) => {
         width='500px'
         open={commentInfoState?.open}
         title={t('ORDERING', 'Ordering')}
-        onClose={() => setCommentInfostate({ ...commentInfoState, open: false })}
+        onClose={() => setCommentInfostate({ driverId: null, open: false })}
       >
         <AssigmentCommentContainer onSubmit={handleSubmit(onSubmit)}>
           <FormControl isError={errors.manual_driver_assignment_comment}>
