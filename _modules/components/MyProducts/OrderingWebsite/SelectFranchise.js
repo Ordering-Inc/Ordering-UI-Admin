@@ -39,7 +39,7 @@ var SelectFranchise = function SelectFranchise(props) {
     franchisesList.franchises.map(function (franchise) {
       var _theme$images;
       _options.push({
-        value: franchise === null || franchise === void 0 ? void 0 : franchise.id,
+        value: franchise === null || franchise === void 0 ? void 0 : franchise.slug,
         content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, /*#__PURE__*/_react.default.createElement("img", {
           src: optimizeImage((franchise === null || franchise === void 0 ? void 0 : franchise.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.dummies) === null || _theme$images === void 0 ? void 0 : _theme$images.businessLogo), 'h_50,c_limit'),
           alt: ""

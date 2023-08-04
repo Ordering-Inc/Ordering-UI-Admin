@@ -167,7 +167,7 @@ var BusinessProductList = function BusinessProductList(props) {
     return a.rank - b.rank;
   }).map(function (product, i) {
     return /*#__PURE__*/_react.default.createElement(_SingleBusinessProduct.SingleBusinessProduct, _extends({}, props, {
-      key: i,
+      key: "".concat(product === null || product === void 0 ? void 0 : product.id, "_").concat(i),
       productDetailsId: productDetailsId,
       product: product,
       allowColumns: allowColumns,
