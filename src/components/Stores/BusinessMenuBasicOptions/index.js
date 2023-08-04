@@ -28,7 +28,6 @@ export const BusinessMenuBasicOptions = (props) => {
     selectedProducts,
     setSelectedProducts,
     handleChangeScheduleState,
-
     subCategoriesList
   } = props
   const [, t] = useLanguage()
