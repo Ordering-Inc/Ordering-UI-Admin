@@ -32,6 +32,8 @@ export const CampaignList = (props) => {
 
   const [, t] = useLanguage()
   const [openModal, setOpenModal] = useState(false)
+  const [openUnsubscribed, setOpenUnsubscribed] = useState(false)
+  const [openBounced, setOpenBounced] = useState(false)
 
   const [allowColumns, setAllowColumns] = useState({
     campaign: true,
@@ -123,6 +125,16 @@ export const CampaignList = (props) => {
   const handleOpens = (campaign) => {
     setSelectedCampaign(campaign)
     setOpenModal(true)
+  }
+
+  const handleOpenUnsubscribed = (campaign) => {
+    setSelectedCampaign(campaign)
+    setOpenUnsubscribed(true)
+  }
+
+  const handleOpenBounced = (campaign) => {
+    setSelectedCampaign(campaign)
+    setOpenBounced(true)
   }
 
   useEffect(() => {
@@ -267,10 +279,18 @@ export const CampaignList = (props) => {
                     </td>
                   )}
                   {allowColumns?.unsubscribed_count && (
-                    <td>{campaign?.unsubscribed_count || 0}</td>
+                    <td>
+                      <LinkText onClick={() => handleOpenUnsubscribed(campaign)} className='opens'>
+                        {campaign?.unsubscribed_count || 0}
+                      </LinkText>
+                    </td>
                   )}
                   {allowColumns?.bounced_count && (
-                    <td>{campaign?.bounced_count || 0}</td>
+                    <td>
+                      <LinkText onClick={() => handleOpenBounced(campaign)} className='opens'>
+                        {campaign?.bounced_count || 0}
+                      </LinkText>
+                    </td>
                   )}
                   <td>
                     {campaign?.audience_type === 'dynamic' && (
@@ -322,6 +342,33 @@ export const CampaignList = (props) => {
         onClose={() => setOpenModal(false)}
       >
         <CampaignUserList
+          isOpens
+          title={t('OPENS', 'Opens')}
+          campaignId={selectedCampaign?.id}
+        />
+      </Modal>
+      <Modal
+        width='700px'
+        height='80vh'
+        padding='30px'
+        open={openUnsubscribed}
+        onClose={() => setOpenUnsubscribed(false)}
+      >
+        <CampaignUserList
+          title={t('UNSUBSCRIBED', 'Unsubscribed')}
+          campaignId={selectedCampaign?.id}
+        />
+      </Modal>
+      <Modal
+        width='700px'
+        height='80vh'
+        padding='30px'
+        open={openBounced}
+        onClose={() => setOpenBounced(false)}
+      >
+        <CampaignUserList
+          isBounces
+          title={t('BOUNCES', 'Bounces')}
           campaignId={selectedCampaign?.id}
         />
       </Modal>

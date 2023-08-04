@@ -137,6 +137,7 @@ export const Description = styled.div`
   font-size: 14px;
   margin: 10px 0px;
   span {
+    cursor: pointer;
     color: ${props => props.theme.colors.primary};
   }
 `
