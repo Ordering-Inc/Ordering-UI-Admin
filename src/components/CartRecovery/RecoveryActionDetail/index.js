@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useLanguage, RecoveryActionDetail as RecoveryActionDetailController } from 'ordering-components-admin'
 import { Alert, Confirm } from '../../Shared'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { ArrowsAngleContract, ArrowsAngleExpand, ThreeDots } from 'react-bootstrap-icons'
 import { IconButton, Switch } from '../../../styles'
 import { useTheme } from 'styled-components'
+import { addQueryToUrl } from '../../../utils'
 
 import {
   RecoveryActionDetailContainer,
@@ -31,7 +32,6 @@ const RecoveryActionDetailUI = (props) => {
     handleDeleteRecoveryAction
   } = props
 
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const theme = useTheme()
   const [, t] = useLanguage()
@@ -57,8 +57,7 @@ const RecoveryActionDetailUI = (props) => {
     }
     setSelectedOption(key)
     if (!isInitialRender) {
-      const id = query.get('id')
-      history.replace(`${location.pathname}?id=${id}&tab=${key}`)
+      addQueryToUrl({ tab: key })
     }
   }
 

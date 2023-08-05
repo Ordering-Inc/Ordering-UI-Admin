@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom'
 import {
   useLanguage,
   useUtils,
@@ -11,6 +10,8 @@ import { List as MenuIcon } from 'react-bootstrap-icons'
 import { Button, IconButton, LinkButton } from '../../../styles'
 import { useTheme } from 'styled-components'
 import { Alert, SearchBar, SideBar, ColumnAllowSettingPopover } from '../../Shared'
+import { addQueryToUrl, removeQueryToUrl } from '../../../utils'
+
 import {
   BrandListingContainer,
   HeaderContainer,
@@ -35,7 +36,6 @@ const BusinessDeviceListingUI = (props) => {
     handleUpdateDeviceList
   } = props
 
-  const history = useHistory()
   const [, t] = useLanguage()
   const theme = useTheme()
   const [{ optimizeImage }] = useUtils()
@@ -63,7 +63,7 @@ const BusinessDeviceListingUI = (props) => {
   const handleCloseSidebar = () => {
     setIsOpen(false)
     setSelectedDevice(null)
-    history.replace(`${location.pathname}`)
+    removeQueryToUrl(['id'])
   }
 
   const handleOpenSideBar = (id) => {
@@ -88,7 +88,7 @@ const BusinessDeviceListingUI = (props) => {
     if (isInvalid) return
     handleOpenSideBar(brandId)
     if (!isInitialRender) {
-      history.replace(`${location.pathname}?id=${brandId}`)
+      addQueryToUrl({ id: brandId })
     }
   }
 

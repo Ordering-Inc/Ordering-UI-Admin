@@ -200,6 +200,7 @@ const ReportsDriverScheduleUI = (props) => {
               <AnalyticsCalendar
                 handleChangeDate={handleChangeDate}
                 defaultValue={filterList}
+                isSingleDate
               />
             </CalendarWrapper>
           </TimeZoneAndCalendar>

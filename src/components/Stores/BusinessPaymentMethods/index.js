@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
 import {
   useLanguage,
@@ -21,6 +21,7 @@ import { PaymentOptionPaypal } from '../PaymentOptionPaypal'
 import { PaymentOptionSquare } from '../PaymentOptionSquare'
 import { PaymentOptionMethods } from '../PaymentOptionMethods'
 import { BusinessWalletsList } from '../BusinessWalletsList'
+import { addQueryToUrl, removeQueryToUrl } from '../../../utils'
 
 import {
   MainContainer,
@@ -65,7 +66,6 @@ const BusinessPaymentMethodsUI = (props) => {
     handleTutorialContinue
   } = props
 
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const [{ configs }] = useConfig()
@@ -83,7 +83,9 @@ const BusinessPaymentMethodsUI = (props) => {
     { value: 2, text: t('PICKUP', 'Pickup') },
     { value: 3, text: t('EATIN', 'Eatin') },
     { value: 4, text: t('CURBSIDE', 'Curbside') },
-    { value: 5, text: t('DRIVER_THRU', 'Driver thru') }
+    { value: 5, text: t('DRIVER_THRU', 'Driver thru') },
+    { value: 7, text: t('CATERING_DELIVERY', 'Catering delivery') },
+    { value: 8, text: t('CATERING_PICKUP', 'Catering pickup') }
   ]
 
   const methodsPay = ['google_pay', 'apple_pay']
@@ -120,9 +122,7 @@ const BusinessPaymentMethodsUI = (props) => {
       setIsExtendExtraOpen(true)
     }
     if (!isInitialRender) {
-      const businessId = query.get('id')
-      const section = query.get('section')
-      history.replace(`${location.pathname}?id=${businessId}&section=${section}&paymethod=${paymethodId}`)
+      addQueryToUrl({ paymethod: paymethodId })
     }
   }
 
@@ -148,9 +148,7 @@ const BusinessPaymentMethodsUI = (props) => {
     setIsEdit(false)
     setSelectedBusinessPaymethod(null)
     setIsSuccessDeleted(false)
-    const businessId = query.get('id')
-    const section = query.get('section')
-    history.replace(`${location.pathname}?id=${businessId}&section=${section}`)
+    removeQueryToUrl(['paymethod'])
   }
 
   useEffect(() => {

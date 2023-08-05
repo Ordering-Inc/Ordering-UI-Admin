@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useSession, useLanguage, BusinessDetails as BusinessDetailsController } from 'ordering-components-admin'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import { BusinessSummary } from '../BusinessSummary'
@@ -22,6 +22,7 @@ import { BusinessPlaceGroupList } from '../BusinessPlaceGroupList'
 import { SpoonityApiKey } from '../SpoonityApiKey'
 
 import { MoreSidebarLayout, Personalization, Alert } from '../../Shared'
+import { addQueryToUrl, removeQueryToUrl } from '../../../utils'
 
 import {
   BarContainer
@@ -55,7 +56,6 @@ export const BusinessDetailsUI = (props) => {
     siteState
   } = props
 
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const { width } = useWindowSize()
@@ -101,8 +101,7 @@ export const BusinessDetailsUI = (props) => {
     setSelectedItem(item)
     setExtraOpen(true)
     if (!isInitialRender) {
-      const businessId = query.get('id')
-      history.replace(`${location.pathname}?id=${businessId}&section=${item}`)
+      addQueryToUrl({ section: item })
     }
   }
 
@@ -110,8 +109,7 @@ export const BusinessDetailsUI = (props) => {
     setIsExtendExtraOpen(false)
     setExtraOpen(false)
     setSelectedItem(null)
-    const businessId = query.get('id')
-    history.replace(`${location.pathname}?id=${businessId}`)
+    removeQueryToUrl(['section', 'tab', 'business_type', 'paymethod', 'payemthod_tab', 'setting_tab', 'menu', 'zone', 'zone_tab', 'wallet'])
   }
 
   useEffect(() => {

@@ -233,12 +233,10 @@ const HomeUI = (props) => {
   return (
     <>
       <HomeContainer>
-        {width > 997 && (
+        {width > 997 && !isEnabledWhiteLabelModule && (
           <OrderingButtonWrapper>
             <span>{t('WHAT_DO_YOU_WANT_SEE_ORDERING', 'What do you want to see in ordering?')}</span>
-            {!isEnabledWhiteLabelModule && (
-              <Button color='primary' onClick={() => setShowForm(true)}>{t('CLICK_HERE', 'Click here')}</Button>
-            )}
+            <Button color='primary' onClick={() => setShowForm(true)}>{t('CLICK_HERE', 'Click here')}</Button>
           </OrderingButtonWrapper>
         )}
         <Breadcrumb>

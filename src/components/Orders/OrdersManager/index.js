@@ -48,7 +48,8 @@ const OrdersManagerUI = (props) => {
     allowColumns,
     setAllowColumns,
     timeStatus,
-    setTimeStatus
+    setTimeStatus,
+    isUseQuery
   } = props
 
   const [, t] = useLanguage()
@@ -179,7 +180,6 @@ const OrdersManagerUI = (props) => {
           citiesList={citiesList}
           paymethodsList={paymethodsList}
           businessesList={businessesList}
-          filterValues={filterValues}
           handleChangeSearch={handleChangeSearch}
           handleChangeFilterValues={handleChangeFilterValues}
           selectedOrderIds={selectedOrderIds}
@@ -192,6 +192,7 @@ const OrdersManagerUI = (props) => {
           setSlaSettingTime={setSlaSettingTime}
         />
         <OrderStatusFilterBar
+          isUseQuery={isUseQuery}
           selectedOrderStatus={ordersStatusGroup}
           changeOrderStatus={handleOrdersStatusGroupFilter}
           ordersAmountByStatus={ordersAmountByStatus}
@@ -214,6 +215,9 @@ const OrdersManagerUI = (props) => {
                 setOrderDetailId(id)
                 setIsOpenOrderDetail(true)
               }}
+              handleOpenOrderDetail={handleOpenOrderDetail}
+              ordersStatusGroup={ordersStatusGroup}
+              selectedSubOrderStatus={selectedSubOrderStatus}
             />
           )}
         </OrderSubFilterControls>
@@ -221,6 +225,7 @@ const OrdersManagerUI = (props) => {
           <OrdersInnerContent className='order-content'>
             <WrapItemView>
               <OrdersDashboard
+                isUseQuery={isUseQuery}
                 isSelectedOrders={isSelectedOrders}
                 driverId={props.driverId}
                 customerId={props.customerId}

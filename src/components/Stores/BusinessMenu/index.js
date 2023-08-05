@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useLanguage, BusinessMenu as BusinessMenuController } from 'ordering-components-admin'
 import { BusinessMenuOptions } from '../BusinessMenuOptions'
 import { Confirm, Modal, SearchBar } from '../../Shared'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import { Button, Checkbox, LinkButton } from '../../../styles'
 import { ChevronRight } from 'react-bootstrap-icons'
+import { addQueryToUrl, removeQueryToUrl } from '../../../utils'
 
 import {
   MainContainer,
@@ -33,7 +34,6 @@ const BusinessMenuUI = (props) => {
     sitesState
   } = props
 
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const { width } = useWindowSize()
@@ -59,10 +59,7 @@ const BusinessMenuUI = (props) => {
     setCurrentMenu(null)
     if (!isTab) {
       setInitMenuId(null)
-      const businessId = query.get('id')
-      const section = query.get('section')
-      const tab = isSelectedSharedMenus ? 'shared_menus' : 'menu'
-      history.replace(`${location.pathname}?id=${businessId}&section=${section}&tab=${tab}`)
+      removeQueryToUrl(['menu', 'product'])
     }
   }
 
@@ -71,10 +68,7 @@ const BusinessMenuUI = (props) => {
     if (isInvalid) return
     handleOpenOptions('option', menu)
     if (!isInitialRender) {
-      const businessId = query.get('id')
-      const section = query.get('section')
-      const tab = isSelectedSharedMenus ? 'shared_menus' : 'menu'
-      history.replace(`${location.pathname}?id=${businessId}&section=${section}&tab=${tab}&menu=${menu.id}`)
+      addQueryToUrl({ menu: menu.id })
     }
   }
 
@@ -88,10 +82,8 @@ const BusinessMenuUI = (props) => {
     handleCloseOption(true)
     setIsSelectedSharedMenus(isShared)
     if (!isInitialRender) {
-      const businessId = query.get('id')
-      const section = query.get('section')
       const tab = isShared ? 'shared_menus' : 'menu'
-      history.replace(`${location.pathname}?id=${businessId}&section=${section}&tab=${tab}`)
+      addQueryToUrl({ tab: tab })
     }
   }
 

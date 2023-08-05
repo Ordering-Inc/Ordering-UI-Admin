@@ -220,3 +220,13 @@ export const SmallArea = styled.div`
     border-color: ${props => props.theme.colors.primary};
   `}
 `
+export const CheckboxContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  > div {
+    &:not(:first-child) {
+      margin-top: 5px;
+    }
+  }
+`

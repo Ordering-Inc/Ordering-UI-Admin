@@ -16,7 +16,10 @@ export const OrdersDashboardControls = (props) => {
     filterValues,
     handleDeleteMultiOrders,
     handleChangeMultiOrdersStatus,
-    handleOpenCustomOrderDetail
+    handleOpenCustomOrderDetail,
+    handleOpenOrderDetail,
+    ordersStatusGroup,
+    selectedSubOrderStatus
   } = props
 
   const [{ user }] = useSession()
@@ -25,8 +28,12 @@ export const OrdersDashboardControls = (props) => {
     <>
       <OrderDashboardControlsContainer>
         <InnerContnet>
-          <CreateCustomOrder handleOpenCustomOrderDetail={handleOpenCustomOrderDetail} />
-          <OrdersExportCSV filterValues={filterValues} />
+          <CreateCustomOrder handleOpenCustomOrderDetail={handleOpenCustomOrderDetail} handleOpenOrderDetail={handleOpenOrderDetail} />
+          <OrdersExportCSV
+            filterValues={filterValues}
+            ordersStatusGroup={ordersStatusGroup}
+            selectedSubOrderStatus={selectedSubOrderStatus}
+          />
           {selectedOrderNumber > 0 && (
             <>
               {user?.level !== 5 && (

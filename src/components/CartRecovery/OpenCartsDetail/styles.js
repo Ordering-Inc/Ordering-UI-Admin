@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { darken } from 'polished'
 
 export const Container = styled.div`
   display: flex;
@@ -111,5 +112,58 @@ export const SkeletonWrapper = styled.div`
   flex-direction: column;
   > span {
     width: 100%;
+  }
+`
+export const ActionSelectorWrapper = styled.div`
+  button {
+    background: transparent !important;
+    border: none;
+    padding: 0px 5px;
+    &:active,
+    &:focus {
+      border-color: unset !important;
+      box-shadow: none !important;
+    }
+    svg {
+      color: ${props => props.theme.colors.headingColor};
+      font-size: 20px;
+    }
+
+    &:after {
+      display: none;
+    }
+
+    &:hover {
+      background: ${props => darken(0.04, props.theme.colors.secundary)} !important;
+    }
+    &:active {
+      background: ${props => darken(0.1, props.theme.colors.secundary)} !important;
+    }
+  }
+
+  .show {
+    button {
+      background: ${props => darken(0.04, props.theme.colors.secundary)} !important;
+    }
+    >div {
+      border: 1px solid ${props => props.theme.colors.borderColor};
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+    }
+  }
+
+  > div {
+    > div {
+      border-radius: 8px;
+      .dropdown-item {
+        font-size: 12px;
+        color: ${props => props.theme.colors.headingColor};
+        &:active {
+          background: ${props => darken(0.1, props.theme.colors.secundary)} !important;
+        }
+      }
+      .dropdown-item:last-child {
+        color: #E63757;
+      }
+    }
   }
 `

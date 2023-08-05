@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { useLanguage, UserDetails as UserDetailsController } from 'ordering-components-admin'
 import { OrdersManager } from '../../Orders/OrdersManager'
 import { AddressList } from '../AddressList'
-import { Personalization, Modal, Schedule } from '../../Shared'
+import { Personalization, Modal, Schedule, PushTokens } from '../../Shared'
 import { UserDetailsMenu } from '../UserDetailsMenu'
 import { UserProfileForm } from '../UserProfileForm'
 import { UserMetaFields } from '../../Users'
@@ -16,6 +16,8 @@ import { DriverGroupSetting } from '../DriverGroupSetting'
 import { ArrowsAngleContract, ArrowsAngleExpand, ThreeDots } from 'react-bootstrap-icons'
 import { Switch, Button, IconButton } from '../../../styles'
 import { ActionsForm } from '../UserFormDetails/styles'
+import { addQueryToUrl } from '../../../utils'
+
 import {
   UserName,
   SavedPlaces,
@@ -42,7 +44,6 @@ export const UserDetailsUI = (props) => {
     actionDisabled
   } = props
 
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const theme = useTheme()
   const [, t] = useLanguage()
@@ -67,13 +68,7 @@ export const UserDetailsUI = (props) => {
   const handleTabClick = (tab, isInitialRender) => {
     setCurrentMenuSelected(tab)
     if (!isInitialRender) {
-      const id = query.get('id')
-      const section = query.get('section')
-      if (section) {
-        history.replace(`${location.pathname}?id=${id}&section=${section}&tab=${tab}`)
-      } else {
-        history.replace(`${location.pathname}?id=${id}&tab=${tab}`)
-      }
+      addQueryToUrl({ tab: tab })
     }
   }
 
@@ -208,6 +203,12 @@ export const UserDetailsUI = (props) => {
               isSelectedOrders
               customerId={userState.user?.id}
               handleCustomOrderDetail={setExtraOpen}
+            />
+          )}
+          {currentMenuSelected === 'push_tokens' && (
+            <PushTokens
+              userId={userState?.user?.id}
+              pushTokens={userState?.user?.push_tokens || []}
             />
           )}
         </>

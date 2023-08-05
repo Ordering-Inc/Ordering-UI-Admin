@@ -27,6 +27,7 @@ export const WebhookListSelector = (props) => {
     { value: 'orders_pickup_failed_driver', content: <Option>{t('ORDERS_PICKUP_FAILED_DRIVER', 'Order pickup failed by driver')}</Option> },
     { value: 'orders_delivery_completed_driver', content: <Option>{t('ORDERS_DELIVERY_COMPLETED_DRIVER', 'Order delivery completed by driver')}</Option> },
     { value: 'orders_delivery_failed_driver', content: <Option>{t('ORDERS_DELIVERY_FAILED_DRIVER', 'Order delivery failed by driver')}</Option> },
+    { value: 'orders_unassigned_driver', content: <Option>{t('ORDERS_UNASSIGNED_DRIVER', 'Order unassigned driver')}</Option> },
     { value: 'preorder_updated', content: <Option>{t('PREORDER_UPDATED', 'Preorder updated')}</Option> },
     { value: 'drivers_changes', content: <Option>{t('DRIVERS_CHANGES', 'Driver changes')}</Option> }
   ]

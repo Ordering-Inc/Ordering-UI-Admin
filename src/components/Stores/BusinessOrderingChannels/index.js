@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useLanguage } from 'ordering-components-admin'
 import { Button, Input } from '../../../styles'
 import { Alert } from '../../Shared'
+import { addQueryToUrl } from '../../../utils'
 
 import {
   BusinessOrderingChannelsContainer,
@@ -23,7 +24,6 @@ export const BusinessOrderingChannels = (props) => {
     setFormState
   } = props
 
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const [slug, setSlug] = useState('')
@@ -61,9 +61,7 @@ export const BusinessOrderingChannels = (props) => {
   const handleChangeOption = (tab, isInitialRender) => {
     setSelectedOption(tab)
     if (!isInitialRender) {
-      const businessId = query.get('id')
-      const section = query.get('section')
-      history.replace(`${location.pathname}?id=${businessId}&section=${section}&tab=${tab}`)
+      addQueryToUrl({ tab: tab })
     }
   }
 

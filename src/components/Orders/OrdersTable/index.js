@@ -11,7 +11,7 @@ import {
 } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import { ColumnAllowSettingPopover, Pagination } from '../../Shared'
-import { getCurrenySymbol } from '../../../utils'
+import { getCurrenySymbol, addQueryToUrl } from '../../../utils'
 
 import {
   OrdersContainer,
@@ -56,7 +56,8 @@ export const OrdersTable = (props) => {
     allowColumns,
     setAllowColumns,
     handleDrop,
-    saveUserSettings
+    saveUserSettings,
+    isUseQuery
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
@@ -246,9 +247,7 @@ export const OrdersTable = (props) => {
       [type]: { ..._column, visable: !_column?.visable }
     }
     setAllowColumns(updatedAllowColumns)
-    if (type === 'externalId') {
-      saveUserSettings(JSON.parse(JSON.stringify(updatedAllowColumns)))
-    }
+    saveUserSettings(JSON.parse(JSON.stringify(updatedAllowColumns)))
   }
 
   const handleClickOrder = (order, e) => {
@@ -318,6 +317,14 @@ export const OrdersTable = (props) => {
     document.addEventListener('keydown', handleChangeKeyboard)
     return () => document.removeEventListener('keydown', handleChangeKeyboard)
   }, [isTourOpen, currentTourStep])
+
+  useEffect(() => {
+    if (!isUseQuery || !pagination?.currentPage || !pagination?.pageSize || !pagination?.total) return
+    addQueryToUrl({
+      page: pagination.currentPage,
+      pageSize: pagination.pageSize
+    })
+  }, [pagination?.currentPage, pagination?.pageSize, pagination?.total])
 
   return (
     <>

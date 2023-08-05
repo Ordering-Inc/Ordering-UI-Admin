@@ -1,11 +1,11 @@
 import React, { useContext, useState } from 'react'
-import { useLanguage, useSession, useUtils } from 'ordering-components-admin'
+import { useLanguage, useSession, useUtils, useConfig, GoogleAutocompleteInput } from 'ordering-components-admin'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import BisBusiness from '@meronex/icons/bi/BisBusiness'
 import { DriverSelector } from '../DriverSelector'
 import { CompanySelector } from '../CompanySelector'
-import { IconButton } from '../../../styles'
-import { Telephone, ChevronDown } from 'react-bootstrap-icons'
+import { Button, IconButton, Input, TextArea } from '../../../styles'
+import { Telephone, ChevronDown, Pencil } from 'react-bootstrap-icons'
 import { Accordion, AccordionContext, useAccordionToggle } from 'react-bootstrap'
 import { ReviewCustomer } from '../ReviewCustomer'
 import { Modal } from '../../Shared'
@@ -23,24 +23,37 @@ import {
   CutsomerDetail,
   CustomerInfoTable,
   ToggleItemWrapper,
-  ReviewButton
+  ReviewButton,
+  CustomerEditWrapper,
+  ActionIconWrapper,
+  ReviewWrapper
 } from './styles'
 
 export const OrderContactInformation = (props) => {
   const {
     order,
+    customerInfoState,
+    handleChangeCustomerInfoState,
     isTourOpen,
     setCurrentTourStep,
     handleOpenMessages,
-    isServiceOrder
+    isServiceOrder,
+    handleUpdateCustomerInfo,
+    setAddressState,
+    setCommentInfostate,
+    commentInfoState
   } = props
 
   const [, t] = useLanguage()
   const [{ user }] = useSession()
   const [{ optimizeImage }] = useUtils()
+  const [{ configs }] = useConfig()
+
+  const googleMapsApiKey = configs?.google_maps_api_key?.value
 
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [currentCustomer, setCurrentCustomer] = useState(null)
+  const [isEdit, setIsEdit] = useState(false)
 
   const pastOrderStatuses = [1, 2, 5, 6, 10, 11, 12, 15, 16, 17]
 
@@ -51,6 +64,28 @@ export const OrderContactInformation = (props) => {
 
   const handleCustomerReviewed = () => {
     setIsModalOpen(false)
+  }
+
+  const handleEdit = (event) => {
+    if (event.target.closest('#accordion1').getAttribute('data-id') === '1') {
+      event.stopPropagation()
+      setIsEdit(prev => !prev)
+    } else {
+      setIsEdit(true)
+    }
+  }
+
+  const handleChangeAddress = (e) => {
+    setAddressState({
+      address: e?.address,
+      location: e?.location,
+      zipcode: e?.zipcode
+    })
+  }
+
+  const handleUpdateCustomer = async () => {
+    await handleUpdateCustomerInfo()
+    setIsEdit(false)
   }
 
   return (
@@ -153,65 +188,121 @@ export const OrderContactInformation = (props) => {
                 </ReviewButton>
               )}
             </InfoContent>
-            <ChevronDown className='down-arrow' />
+            <ActionIconWrapper>
+              <Pencil className='edit-icon' onClick={handleEdit} />
+              <ChevronDown className='down-arrow' />
+            </ActionIconWrapper>
           </CustomerInfo>
         </ContextAwareToggle>
         <Accordion.Collapse eventKey='1'>
           <CutsomerDetail>
-            <CustomerInfoTable>
-              <tbody>
-                {order?.customer?.cellphone && (
-                  <tr>
-                    <td>{t('CELLPHONE', 'Phone / Mobile')}</td>
-                    <td>
-                      <a href={`tel:${order?.customer?.country_phone_code ? '+' + order?.customer?.country_phone_code : ''}${order?.customer?.cellphone}`}>
-                        {(order?.customer?.country_phone_code && `+${order?.customer?.country_phone_code}`)} {order?.customer?.cellphone}
-                      </a>
-                    </td>
-                  </tr>
-                )}
-                {order?.customer?.email && (
-                  <tr>
-                    <td>{t('EMAIL', 'Email')}</td>
-                    <td>
-                      <a href={`mailto: ${order?.customer?.email}`}>{order?.customer?.email}</a>
-                    </td>
-                  </tr>
-                )}
-                {!!order?.customer?.address && (
-                  <tr>
-                    <td>{t('CHECKOUT_FULL_ADDRESS', 'Full address')}</td>
-                    <td>
-                      <a href={`http://maps.google.com/?q=${order?.customer?.address}`} rel='noopener noreferrer' target='_blank'>{order?.customer?.address}</a>
-                    </td>
-                  </tr>
-                )}
-                {!!order?.customer?.internal_number && (
-                  <tr>
-                    <td>{t('INTERNAL_NUMBER', 'Internal number')}</td>
-                    <td>{order?.customer?.internal_number}</td>
-                  </tr>
-                )}
-                {!!order?.customer?.address_notes && (
-                  <tr>
-                    <td>{t('NOTES', 'Notes')}</td>
-                    <td>{order?.customer?.address_notes}</td>
-                  </tr>
-                )}
-                {!!order?.customer?.zipcode && (
-                  <tr>
-                    <td>{t('ZIPCODE', 'Zipcode')}</td>
-                    <td>{order?.customer?.zipcode}</td>
-                  </tr>
-                )}
-                {!!order?.on_behalf_of && (
-                  <tr>
-                    <td>{t('ON_BEHALF_OF', 'On behalf of')}</td>
-                    <td>{order?.on_behalf_of}</td>
-                  </tr>
-                )}
-              </tbody>
-            </CustomerInfoTable>
+            {isEdit ? (
+              <CustomerEditWrapper>
+                <Input
+                  placeholder='(603) 555-0123'
+                  value={customerInfoState?.customer?.cellphone ?? order?.customer?.cellphone ?? ''}
+                  onChange={(e) => {
+                    handleChangeCustomerInfoState({ cellphone: e.target.value })
+                  }}
+                  onKeyPress={(e) => {
+                    if (!/^[0-9]$/.test(e.key)) {
+                      e.preventDefault()
+                    }
+                  }}
+                />
+                <Input
+                  placeholder='jane.cooper@example.com'
+                  value={customerInfoState?.customer?.email ?? order?.customer?.email ?? ''}
+                  onChange={(e) => {
+                    handleChangeCustomerInfoState({ email: e.target.value })
+                  }}
+                />
+                <GoogleAutocompleteInput
+                  name='address'
+                  className='input-autocomplete'
+                  apiKey={googleMapsApiKey}
+                  placeholder={t('ADDRESS', 'Address')}
+                  onChangeAddress={(e) => {
+                    handleChangeAddress(e)
+                  }}
+                  defaultValue={order?.customer?.address ?? ''}
+                  autoComplete='new-password'
+                  countryCode={configs?.country_autocomplete?.value || '*'}
+                />
+                {/* <ReviewWrapper>
+                  <label>{t('REVIEW_FROM_DRIVER_OR_ADMIN', 'Review from driver or admin')}</label>
+                  <TextArea
+                    placeholder={t('REVIEW', 'Review')}
+                  />
+                </ReviewWrapper> */}
+                <Button color='primary' onClick={handleUpdateCustomer}>
+                  {customerInfoState?.loading ? t('LOADING', 'Loading') : t('SAVE', 'Save')}
+                </Button>
+              </CustomerEditWrapper>
+            ) : (
+              <CustomerInfoTable>
+                <tbody>
+                  {order?.customer?.cellphone && (
+                    <tr>
+                      <td>{t('CELLPHONE', 'Phone / Mobile')}</td>
+                      <td>
+                        <a href={`tel:${order?.customer?.country_phone_code ? '+' + order?.customer?.country_phone_code : ''}${order?.customer?.cellphone}`}>
+                          {(order?.customer?.country_phone_code && `+${order?.customer?.country_phone_code}`)} {order?.customer?.cellphone}
+                        </a>
+                      </td>
+                    </tr>
+                  )}
+                  {order?.customer?.email && (
+                    <tr>
+                      <td>{t('EMAIL', 'Email')}</td>
+                      <td>
+                        <a href={`mailto: ${order?.customer?.email}`}>{order?.customer?.email}</a>
+                      </td>
+                    </tr>
+                  )}
+                  {!!order?.customer?.address && (
+                    <tr>
+                      <td>{t('CHECKOUT_FULL_ADDRESS', 'Full address')}</td>
+                      <td>
+                        <a href={`http://maps.google.com/?q=${order?.customer?.address}`} rel='noopener noreferrer' target='_blank'>{order?.customer?.address}</a>
+                      </td>
+                    </tr>
+                  )}
+                  {!!order?.customer?.location && (
+                    <tr>
+                      <td>{t('LOCATION', 'Location')}</td>
+                      <td>
+                        <a href={`http://maps.google.com/?q=${order?.customer?.location?.lat},${order?.customer?.location?.lng}`} rel='noopener noreferrer' target='_blank'>{order?.customer?.location?.lat}, {order?.customer?.location?.lng}</a>
+                      </td>
+                    </tr>
+                  )}
+                  {!!order?.customer?.internal_number && (
+                    <tr>
+                      <td>{t('INTERNAL_NUMBER', 'Internal number')}</td>
+                      <td>{order?.customer?.internal_number}</td>
+                    </tr>
+                  )}
+                  {!!order?.customer?.address_notes && (
+                    <tr>
+                      <td>{t('NOTES', 'Notes')}</td>
+                      <td>{order?.customer?.address_notes}</td>
+                    </tr>
+                  )}
+                  {!!order?.customer?.zipcode && (
+                    <tr>
+                      <td>{t('ZIPCODE', 'Zipcode')}</td>
+                      <td>{order?.customer?.zipcode}</td>
+                    </tr>
+                  )}
+                  {!!order?.on_behalf_of && (
+                    <tr>
+                      <td>{t('ON_BEHALF_OF', 'On behalf of')}</td>
+                      <td>{order?.on_behalf_of}</td>
+                    </tr>
+                  )}
+                </tbody>
+              </CustomerInfoTable>
+            )}
           </CutsomerDetail>
         </Accordion.Collapse>
       </Accordion>
@@ -233,19 +324,20 @@ export const OrderContactInformation = (props) => {
               />
             </CompanySelectorContainer>
           )}
-          {!order?.driver_company_id && (
+          {!order?.driver_company_id && !commentInfoState?.open && (
             <DriverSelectorContainer>
               <p>{t('DRIVER_ASSIGN', 'Driver assign')}</p>
               <DriverSelector
                 small
                 isPhoneView
-                defaultValue={order?.driver_id ?? 'default'}
+                defaultValue={commentInfoState?.driverId ?? order?.driver_id ?? 'default'}
                 order={order}
                 isTourOpen={isTourOpen}
                 setCurrentTourStep={setCurrentTourStep}
                 handleOpenMessages={handleOpenMessages}
                 isOrderDrivers
                 orderId={order?.id}
+                setCommentInfostate={setCommentInfostate}
               />
             </DriverSelectorContainer>
           )}
@@ -314,6 +406,8 @@ const ContextAwareToggle = ({ children, eventKey, callback }) => {
     <ToggleItemWrapper
       active={isCurrentEventKey}
       onClick={handleButtonClick}
+      id={`accordion${eventKey}`}
+      data-id={isCurrentEventKey ? '1' : '0'}
     >
       {children}
     </ToggleItemWrapper>

@@ -20,7 +20,8 @@ export const UserDetailsMenu = (props) => {
     { key: 'driver_group', content: t('DRIVER_GROUP', 'Driver group') },
     { key: 'saved_places', content: t('SAVED_PLACES', 'Saved places') },
     { key: 'schedule', content: t('SCHEDULE', 'Schedule') },
-    { key: 'logs', content: t('LOGS', 'Logs') }
+    { key: 'logs', content: t('LOGS', 'Logs') },
+    { key: 'push_tokens', content: t('PUSH_TOKENS', 'Push tokens') }
     // { key: 'metafields', content: t('METAFIELDS', 'Metafields') },
     // { key: 'personalization', content: t('PERSONALIZATION', 'Personalization') }
   ] : [

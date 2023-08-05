@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import moment from 'moment'
-import { DateRange } from 'react-date-range'
+import { DateRange, Calendar } from 'react-date-range'
 import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css'
 import { Calendar4 } from 'react-bootstrap-icons'
@@ -14,11 +14,13 @@ export const AnalyticsCalendar = (props) => {
   const {
     handleChangeDate,
     defaultValue,
-    leftAlign
+    leftAlign,
+    isSingleDate
   } = props
 
   const [state, t] = useLanguage()
 
+  const [date, setDate] = useState(null)
   const [dateRange, setDateRange] = useState([
     {
       startDate: null,
@@ -49,6 +51,11 @@ export const AnalyticsCalendar = (props) => {
     setDateRange([item.selection])
   }
 
+  const handleChangeSingleDate = (selectedDate) => {
+    handleChangeDate(moment(selectedDate).format('YYYY-MM-DD'), moment(selectedDate).format('YYYY-MM-DD'))
+    setDate(selectedDate)
+  }
+
   const dateFormat = (date1, date2) => {
     let formattedDate = `${moment(date1).format('YYYY-MM-DD')}~${moment(date2).format('YYYY-MM-DD')}`
     if (moment(date1).format('YYYY') === moment(date2).format('YYYY')) {
@@ -58,12 +65,22 @@ export const AnalyticsCalendar = (props) => {
     return formattedDate
   }
 
+  const singleDateFormat = (selectedDate) => {
+
+  }
+
   useEffect(() => {
     window.addEventListener('click', handleClickOutside)
     return () => window.removeEventListener('click', handleClickOutside)
   }, [isShowCalendar])
 
   useEffect(() => {
+    if (isSingleDate && defaultValue) {
+      setDate(new Date(defaultValue?.from))
+      console.log('this is date')
+      return
+    }
+
     if (defaultValue && defaultValue?.from !== '' && defaultValue?.to !== '') {
       setDateRange([
         {
@@ -80,21 +97,33 @@ export const AnalyticsCalendar = (props) => {
       <Button onClick={handleOpenCalendar}>
         <Calendar4 />
         {
-          dateRange[0].startDate ? dateFormat(dateRange[0].startDate, dateRange[0].endDate) : t('SELECT_DATE_RANGE', 'Select Date Range')
+          isSingleDate
+            ? (date ? moment(date).format('YYYY-MM-DD') : t('SELECT_DATE', 'Select a Date'))
+            : (dateRange[0].startDate ? dateFormat(dateRange[0].startDate, dateRange[0].endDate) : t('SELECT_DATE_RANGE', 'Select Date Range'))
         }
       </Button>
       {
         isShowCalendar && (
           <AnalyticsCalendarContainer className='ordering-calendar' ref={calendarRef} leftAlign={leftAlign}>
-            <DateRange
-              editableDateInputs
-              locale={getLocale(state?.language?.code, locales)}
-              onChange={item => handleChangeDates(item)}
-              moveRangeOnFirstSelection={false}
-              ranges={dateRange}
-              startDatePlaceholder={t('EARLY', 'Early')}
-              endDatePlaceholder={t('CONTINUOUS', 'Continuous')}
-            />
+            {isSingleDate ? (
+              <Calendar
+                locale={getLocale(state?.language?.code, locales)}
+                date={date}
+                onChange={(date) => handleChangeSingleDate(date)}
+                startDatePlaceholder={t('EARLY', 'Early')}
+                endDatePlaceholder={t('CONTINUOUS', 'Continuous')}
+              />
+            ) : (
+              <DateRange
+                editableDateInputs
+                locale={getLocale(state?.language?.code, locales)}
+                onChange={item => handleChangeDates(item)}
+                moveRangeOnFirstSelection={false}
+                ranges={dateRange}
+                startDatePlaceholder={t('EARLY', 'Early')}
+                endDatePlaceholder={t('CONTINUOUS', 'Continuous')}
+              />
+            )}
           </AnalyticsCalendarContainer>
         )
       }

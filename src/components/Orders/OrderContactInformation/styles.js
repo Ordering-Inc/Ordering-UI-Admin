@@ -1,5 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
+import { darken } from 'polished'
 
 export const BusinessInfo = styled.div`
   display: flex;
@@ -100,6 +101,35 @@ export const InfoContent = styled.div`
 `
 
 export const CustomerInfo = styled(BusinessInfo)``
+
+export const ActionIconWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  > .down-arrow {
+    transition: all 0.3s;
+    margin: 0 10px;
+  }
+  .edit-icon {
+    color: ${props => props.theme.colors.secundaryLight};
+    cursor: pointer;
+  }
+`
+
+export const ReviewWrapper = styled.div`
+  margin-top: 23px;
+  label {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+  textarea {
+    width: 100%;
+  }
+`
 
 export const DriverInfoContainer = styled.div`
   display: flex;
@@ -208,4 +238,41 @@ export const ReviewButton = styled.span`
   color: ${props => props.theme.colors.primary};
   font-size: 14px;
   text-decoration: underline;
+`
+
+export const CustomerEditWrapper = styled.div`
+  input {
+    width: 100%;
+    margin-bottom: 12px;
+  }
+  .input-autocomplete {
+    width: 100%;
+    background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
+    border: 1px solid ${props => props.theme.colors.borderColor};
+    border-radius: 8px;
+    font-size: 14px;
+    padding: 10px 15px;
+    outline: none;
+    ::placeholder {
+      color: ${props => props.theme.colors.secundaryLight};
+    }
+
+    &:-ms-input-placeholder {
+      color: ${props => props.theme.colors.secundaryLight};
+    }
+
+    &::-ms-input-placeholder { /* Microsoft Edge */
+      color: ${props => props.theme.colors.secundaryLight};
+    }
+    &:focus {
+      border-color: ${() => darken(0.07, '#CCC')};
+    }
+  }
+  button {
+    margin-top: 10px;
+    display: block;
+    height: 44px;
+    border-radius: 8px;
+    margin-left: auto;
+  }
 `

@@ -31,7 +31,8 @@ export const UserDetailsMenu = (props) => {
     { key: 'saved_places', content: t('SAVED_PLACES', 'Saved places') },
     { key: 'orders', content: t('ORDERS', 'Orders') },
     { key: 'metafields', content: t('METAFIELDS', 'Metafields') },
-    { key: 'personalization', content: t('PERSONALIZATION', 'Personalization') }
+    { key: 'personalization', content: t('PERSONALIZATION', 'Personalization') },
+    { key: 'push_tokens', content: t('PUSH_TOKENS', 'Push tokens') }
   ]
 
   const professionalMenuList = [

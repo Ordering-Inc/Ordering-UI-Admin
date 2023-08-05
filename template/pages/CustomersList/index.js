@@ -1,13 +1,14 @@
 import React from 'react'
 import { HelmetTags } from '../../components/HelmetTags'
-import { useEvent, useLanguage } from 'ordering-components-admin'
+import { useLanguage } from 'ordering-components-admin'
 import { CustomersListing } from '../../../src/components/Users'
+import { addQueryToUrl, removeQueryToUrl } from '../../../src/utils'
 
 export const CustomersList = (props) => {
   const [, t] = useLanguage()
-  const [events] = useEvent()
   const customersProps = {
     ...props,
+    isUseQuery: true,
     headerTitle: t('CUSTOMERS', 'Customers'),
     defaultUserTypesSelected: [3],
     propsToFetch: [
@@ -15,13 +16,13 @@ export const CustomersList = (props) => {
       'country_phone_code', 'city_id', 'city', 'address', 'addresses',
       'address_notes', 'dropdown_option_id', 'dropdown_option', 'location',
       'zipcode', 'level', 'enabled', 'middle_name', 'second_lastname', 'birthdate', 'drivergroups',
-      'phone_verified', 'email_verified', 'wallets', 'orders_count'
+      'phone_verified', 'email_verified', 'wallets', 'orders_count', 'push_tokens'
     ],
     onUserRedirect: (userId) => {
       if (!userId) {
-        return events.emit('go_to_page', { page: 'customers', replace: true })
+        return removeQueryToUrl(['id', 'section', 'tab'])
       }
-      return events.emit('go_to_page', { page: 'customers', search: `?id=${userId}` })
+      return addQueryToUrl({ id: userId })
     }
   }
   return (

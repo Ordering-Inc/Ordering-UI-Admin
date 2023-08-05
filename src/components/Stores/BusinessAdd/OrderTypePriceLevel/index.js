@@ -1,5 +1,5 @@
 import React from 'react'
-import { useLanguage } from 'ordering-components-admin'
+import { useLanguage, useConfig } from 'ordering-components-admin'
 import { RecordCircleFill, Circle } from 'react-bootstrap-icons'
 import {
   Container,
@@ -11,14 +11,17 @@ import {
 export const OrderTypePriceLevel = (props) => {
   const { formState, changeFormState } = props
 
+  const [{ configs }] = useConfig()
   const [, t] = useLanguage()
 
+  const priceSymbol = configs?.format_number_currency?.value?.trim()
+
   const priceList = [
-    { key: '1', value: '$' },
-    { key: '2', value: '$$' },
-    { key: '3', value: '$$$' },
-    { key: '4', value: '$$$$' },
-    { key: '5', value: '$$$$$' }
+    { key: '1', value: `${priceSymbol}` },
+    { key: '2', value: `${Array(2).fill(priceSymbol).join('')}` },
+    { key: '3', value: `${Array(3).fill(priceSymbol).join('')}` },
+    { key: '4', value: `${Array(4).fill(priceSymbol).join('')}` },
+    { key: '5', value: `${Array(5).fill(priceSymbol).join('')}` }
   ]
 
   return (

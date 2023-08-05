@@ -89,6 +89,7 @@ export const SLAControlsWrapper = styled.div`
 `
 
 export const WrapperSearchAndFilter = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   margin-top: 10px;

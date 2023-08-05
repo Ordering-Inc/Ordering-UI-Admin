@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useLanguage, OrdersManage as OrdersManageController } from 'ordering-components-admin'
 import { OrdersContentHeader, OrdersDashboardList, OrderNotification, OrderDetails, Messages } from '../../Orders'
 import { Button } from '../../../styles/Buttons'
@@ -8,6 +8,7 @@ import { ChatContactList } from '../ChatContactList'
 import { ChatBusinessesList } from '../ChatBusinessesList'
 import { AutoScroll } from '../../Shared'
 import { useWindowSize } from '../../../hooks/useWindowSize'
+import { addQueryToUrl, removeQueryToUrl } from '../../../utils'
 
 import {
   MessagesListingContainer,
@@ -32,10 +33,10 @@ const MessagesListingUI = (props) => {
     filterValues,
     selectedSubOrderStatus,
     handleChangeSearch,
-    handleChangeFilterValues
+    handleChangeFilterValues,
+    isUseQuery
   } = props
 
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
 
   const [, t] = useLanguage()
@@ -56,7 +57,14 @@ const MessagesListingUI = (props) => {
     setOrderDetailId(order.id)
     setIsOpenOrderDetail(true)
 
-    history.replace(`${location.pathname}?id=${order.id}`)
+    if (isUseQuery) {
+      addQueryToUrl({ id: order.id })
+    }
+  }
+
+  const handleCloseOrderDetail = () => {
+    setIsOpenOrderDetail(false)
+    removeQueryToUrl(['id'])
   }
 
   const handleOrderCardClick = (order) => {
@@ -176,6 +184,7 @@ const MessagesListingUI = (props) => {
                 handleOpenOrderDetail={handleOpenOrderDetail}
                 handleOrderCardClick={handleOrderCardClick}
                 timeStatus={timeStatus}
+                isUseQuery={isUseQuery}
               />
             )}
             {selectedOption === 'contacts' && (
@@ -211,7 +220,7 @@ const MessagesListingUI = (props) => {
           order={detailsOrder}
           orderId={orderDetailId}
           drivers={driversList.drivers}
-          onClose={() => setIsOpenOrderDetail(false)}
+          onClose={() => handleCloseOrderDetail()}
         />
       )}
       <OrderNotification />
