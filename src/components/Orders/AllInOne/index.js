@@ -281,6 +281,7 @@ const OrdersManagerUI = (props) => {
               selectedDriver={mapsData.selectedDriver}
               onlineDrivers={mapsData.onlineDrivers}
               offlineDrivers={mapsData.offlineDrivers}
+              selectedOrder={!detailsOrder?.driver_id ? detailsOrder : null}
             />
           </WrapperDriversLocation>
         </MainContentContainer>

@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useConfig } from 'ordering-components-admin'
 import GoogleMapReact, { fitBounds } from 'google-map-react'
 import { DriverMapMarkerAndInfo } from '../DriverMapMarkerAndInfo'
+import { InterActOrderMarker } from '../InterActOrderMarker'
 
 import {
   WrapperMap
@@ -12,7 +13,8 @@ export const DriversLocation = (props) => {
     driversIsOnline,
     onlineDrivers,
     offlineDrivers,
-    selectedDriver
+    selectedDriver,
+    selectedOrder
   } = props
 
   const [configState] = useConfig()
@@ -39,7 +41,7 @@ export const DriversLocation = (props) => {
   const mapFit = () => {
     const bounds = new window.google.maps.LatLngBounds()
 
-    if (showDrivers.length === 1) {
+    if (showDrivers.length === 1 && !selectedOrder) {
       setMapCenter(
         (showDrivers[0].location !== null && typeof showDrivers[0].location === 'object' && showDrivers[0].location?.lat && showDrivers[0].location?.lng)
           ? showDrivers[0].location
@@ -64,6 +66,17 @@ export const DriversLocation = (props) => {
           }
           : defaultCenter
       const newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
+      bounds.extend(newPoint)
+    }
+
+    if (selectedDriver && selectedOrder) {
+      let marker, newPoint
+      marker = selectedOrder?.business?.location !== null ? selectedOrder?.business?.location : defaultCenter
+      newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
+      bounds.extend(newPoint)
+
+      marker = selectedOrder?.customer?.location !== null && selectedOrder?.customer?.location?.lat ? selectedOrder.customer.location : defaultCenter
+      newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
       bounds.extend(newPoint)
     }
 
@@ -97,10 +110,14 @@ export const DriversLocation = (props) => {
       setMapFitted(false)
       return
     }
+    if (selectedOrder && selectedDriver) {
+      mapFit()
+      return
+    }
     if (!mapFitted) {
       mapFit()
     }
-  }, [showDrivers, mapLoaded, mapFitted])
+  }, [showDrivers, mapLoaded, mapFitted, selectedOrder])
 
   useEffect(() => {
     if (selectedDriver) {
@@ -162,6 +179,22 @@ export const DriversLocation = (props) => {
                 }
               />
             ))}
+          {selectedDriver && selectedOrder && (
+            <InterActOrderMarker
+              customer={selectedOrder?.customer}
+              lat={selectedOrder?.customer?.location?.lat ? selectedOrder?.customer?.location?.lat : defaultCenter.lat}
+              lng={selectedOrder?.customer?.location?.lng ? selectedOrder?.customer?.location?.lng : defaultCenter.lng}
+              image={selectedOrder?.customer?.photo}
+            />
+          )}
+          {selectedDriver && selectedOrder && (
+            <InterActOrderMarker
+              business={selectedOrder?.business}
+              lat={selectedOrder?.business?.location?.lat}
+              lng={selectedOrder?.business?.location?.lng}
+              image={selectedOrder?.business?.logo}
+            />
+          )}
         </GoogleMapReact>
       )}
     </WrapperMap>
