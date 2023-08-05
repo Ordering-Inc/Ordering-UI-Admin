@@ -47,6 +47,7 @@ const SettingsUI = (props) => {
   const [isOpenSettingDetails, setIsOpenSettingDetails] = useState(null)
   const [openSitesAuthSettings, setOpenSitesAuthSettings] = useState(false)
   const [openMultiCountrySettings, setOpenMultiCountrySettings] = useState(false)
+  const [openCheckoutSettings, setOpenCheckoutSettings] = useState(false)
   const [moveDistance, setMoveDistance] = useState(0)
 
   const [events] = useEvent()
@@ -74,6 +75,7 @@ const SettingsUI = (props) => {
     setIsOpenSettingDetails(null)
     setOpenSitesAuthSettings(false)
     setOpenMultiCountrySettings(false)
+    setOpenCheckoutSettings(false)
     setIsOpenDescription(true)
     setSelectedCategory(category)
     handChangeConfig && handChangeConfig(false)
@@ -85,6 +87,7 @@ const SettingsUI = (props) => {
   const handleOpenSettingDetails = (item, isInitialRender) => {
     setIsOpenDescription(false)
     setOpenSitesAuthSettings(false)
+    setOpenCheckoutSettings(false)
     setOpenMultiCountrySettings(false)
     setSelectedCategory(null)
     setIsOpenSettingDetails(item)
@@ -111,12 +114,23 @@ const SettingsUI = (props) => {
     }
   }
 
+  const handleOpenCheckout = (isInitialRender) => {
+    setIsOpenDescription(false)
+    setIsOpenSettingDetails(null)
+    setOpenSitesAuthSettings(false)
+    setOpenCheckoutSettings(true)
+    if (!isInitialRender) {
+      history.replace(`${location.pathname}?category=site`)
+    }
+  }
+
   const handleBackRedirect = () => {
     setIsOpenDescription(false)
     setSelectedCategory(null)
     setIsOpenSettingDetails(null)
     setMoveDistance(0)
     setOpenMultiCountrySettings(false)
+    setOpenCheckoutSettings(false)
     setOpenSitesAuthSettings(false)
     history.replace(`${location.pathname}`)
   }
@@ -130,6 +144,8 @@ const SettingsUI = (props) => {
           handleOpenSites(true)
         } else if (categoryId === 'multi_country') {
           handleOpenMultiCountry(true)
+        } else if (categoryId === 'site') {
+          setOpenCheckoutSettings(true)
         } else {
           handleOpenSettingDetails(categoryId, true)
         }
@@ -190,13 +206,13 @@ const SettingsUI = (props) => {
               </SettingItemWrapper>
               <SettingItemWrapper
                 className='col-md-4 col-sm-6'
-                onClick={() => handleOpenSettingDetails('checkout')}
+                onClick={() => handleOpenCheckout()}
               >
                 <SettingItemUI
                   title={t('CHECKOUT_FIELDS', 'Checkout fields')}
                   description={t('CHECKOUT_FIELDS_DESC')}
                   icon={<CheckCircleFill />}
-                  active={isOpenSettingDetails === 'checkout'}
+                  active={openCheckoutSettings}
                 />
               </SettingItemWrapper>
               <SettingItemWrapper
@@ -324,6 +340,16 @@ const SettingsUI = (props) => {
           <MultiCountrySettings setMoveDistance={setMoveDistance} />
         </SideBar>
       )}
+      {openCheckoutSettings && (
+        <SideBar
+          defaultSideBarWidth={500 + moveDistance}
+          moveDistance={moveDistance}
+          open={openCheckoutSettings}
+          onClose={() => handleBackRedirect()}
+        >
+          <CheckoutFieldsSetting setMoveDistance={setMoveDistance} />
+        </SideBar>
+      )}
       {
         isOpenSettingDetails && (
           <SideBar
@@ -333,9 +359,6 @@ const SettingsUI = (props) => {
             onClose={() => handleBackRedirect()}
             showExpandIcon
           >
-            {isOpenSettingDetails === 'checkout' && (
-              <CheckoutFieldsSetting />
-            )}
             {isOpenSettingDetails === 'guest_checkout' && (
               <GuestCheckoutFieldsSetting />
             )}
