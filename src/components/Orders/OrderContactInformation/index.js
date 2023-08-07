@@ -229,6 +229,13 @@ export const OrderContactInformation = (props) => {
                   autoComplete='new-password'
                   countryCode={configs?.country_autocomplete?.value || '*'}
                 />
+                <Input
+                  placeholder={t('NOTES', 'Notes')}
+                  defaultValue={customerInfoState?.customer?.address_notes ?? order?.customer?.address_notes ?? ''}
+                  onChange={(e) => {
+                    handleChangeCustomerInfoState({ address_notes: e.target.value })
+                  }}
+                />
                 {/* <ReviewWrapper>
                   <label>{t('REVIEW_FROM_DRIVER_OR_ADMIN', 'Review from driver or admin')}</label>
                   <TextArea
