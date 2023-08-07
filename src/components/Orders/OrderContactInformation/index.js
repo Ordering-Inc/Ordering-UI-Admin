@@ -40,7 +40,8 @@ export const OrderContactInformation = (props) => {
     isServiceOrder,
     handleUpdateCustomerInfo,
     setAddressState,
-    setCommentInfostate
+    setCommentInfostate,
+    commentInfoState
   } = props
 
   const [, t] = useLanguage()
@@ -228,6 +229,13 @@ export const OrderContactInformation = (props) => {
                   autoComplete='new-password'
                   countryCode={configs?.country_autocomplete?.value || '*'}
                 />
+                <Input
+                  placeholder={t('NOTES', 'Notes')}
+                  defaultValue={customerInfoState?.customer?.address_notes ?? order?.customer?.address_notes ?? ''}
+                  onChange={(e) => {
+                    handleChangeCustomerInfoState({ address_notes: e.target.value })
+                  }}
+                />
                 {/* <ReviewWrapper>
                   <label>{t('REVIEW_FROM_DRIVER_OR_ADMIN', 'Review from driver or admin')}</label>
                   <TextArea
@@ -323,13 +331,13 @@ export const OrderContactInformation = (props) => {
               />
             </CompanySelectorContainer>
           )}
-          {!order?.driver_company_id && (
+          {!order?.driver_company_id && !commentInfoState?.open && (
             <DriverSelectorContainer>
               <p>{t('DRIVER_ASSIGN', 'Driver assign')}</p>
               <DriverSelector
                 small
                 isPhoneView
-                defaultValue={order?.driver_id ?? 'default'}
+                defaultValue={commentInfoState?.driverId ?? order?.driver_id ?? 'default'}
                 order={order}
                 isTourOpen={isTourOpen}
                 setCurrentTourStep={setCurrentTourStep}
