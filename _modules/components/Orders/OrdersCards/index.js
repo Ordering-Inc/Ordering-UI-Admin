@@ -34,7 +34,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrdersCards = function OrdersCards(props) {
-  var _orderList$orders;
+  var _configState$configs, _configState$configs$, _orderList$orders;
   var isMessagesView = props.isMessagesView,
     orderList = props.orderList,
     pagination = props.pagination,
@@ -70,6 +70,7 @@ var OrdersCards = function OrdersCards(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     allowColumns = _useState4[0],
     setAllowColumns = _useState4[1];
+  var showExternalId = (configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.change_order_id) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value) === '1';
   var handleChangePage = function handleChangePage(page) {
     getPageOrders(pagination.pageSize, page);
   };
@@ -219,8 +220,8 @@ var OrdersCards = function OrdersCards(props) {
     }
   }, [orderList === null || orderList === void 0 ? void 0 : orderList.orders]);
   (0, _react.useEffect)(function () {
-    var _configState$configs, _configState$configs$;
-    var slaSettings = (configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.order_deadlines_enabled) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value) === '1';
+    var _configState$configs2, _configState$configs3;
+    var slaSettings = (configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.order_deadlines_enabled) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value) === '1';
     setAllowColumns(_objectSpread(_objectSpread({}, allowColumns), {}, {
       timer: slaSettings,
       slaBar: slaSettings
@@ -274,7 +275,7 @@ var OrdersCards = function OrdersCards(props) {
       onClick: function onClick(e) {
         return handleOrderClick(e, order);
       }
-    }, /*#__PURE__*/_react.default.createElement(_styles.CardHeading, null, /*#__PURE__*/_react.default.createElement(_styles.OrderHeader, null, /*#__PURE__*/_react.default.createElement("h2", null, /*#__PURE__*/_react.default.createElement("span", null, t('INVOICE_ORDER_NO', 'Order No.'), " ", order === null || order === void 0 ? void 0 : order.id)), /*#__PURE__*/_react.default.createElement("p", null, (_getOrderStatus = getOrderStatus(order.status)) === null || _getOrderStatus === void 0 ? void 0 : _getOrderStatus.value), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
+    }, /*#__PURE__*/_react.default.createElement(_styles.CardHeading, null, /*#__PURE__*/_react.default.createElement(_styles.OrderHeader, null, /*#__PURE__*/_react.default.createElement("h2", null, /*#__PURE__*/_react.default.createElement("span", null, t('INVOICE_ORDER_NO', 'Order No.'), " ", showExternalId && !!(order !== null && order !== void 0 && order.external_id) ? order.external_id : order.id)), /*#__PURE__*/_react.default.createElement("p", null, (_getOrderStatus = getOrderStatus(order.status)) === null || _getOrderStatus === void 0 ? void 0 : _getOrderStatus.value), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
       utc: false
     })), /*#__PURE__*/_react.default.createElement(_styles.ViewDetails, {
       className: "view-details",
