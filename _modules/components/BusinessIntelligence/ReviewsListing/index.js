@@ -16,6 +16,7 @@ var _BusinessReviewList = require("../BusinessReviewList");
 var _UsersReviewList = require("../UsersReviewList");
 var _BusinessSelectHeader = require("../../Stores/BusinessSelectHeader");
 var _ReviewProductsListing = require("../ReviewProductsListing");
+var _utils = require("../../../utils");
 var _styles2 = require("./styles");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -26,8 +27,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ReviewsListing = function ReviewsListing(props) {
-  var history = (0, _reactRouterDom.useHistory)();
+  var isUseQuery = props.isUseQuery;
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
+  var defaultTab = query.get('tab');
+  var defaultPage = query.get('page') || 1;
+  var defaultPageSize = query.get('pageSize') || 10;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -35,7 +39,8 @@ var ReviewsListing = function ReviewsListing(props) {
     _useInfoShare2 = _slicedToArray(_useInfoShare, 2),
     isCollapse = _useInfoShare2[0].isCollapse,
     handleMenuCollapse = _useInfoShare2[1].handleMenuCollapse;
-  var _useState = (0, _react.useState)('business'),
+  var firstRender = (0, _react.useRef)(true);
+  var _useState = (0, _react.useState)(defaultTab || 'business'),
     _useState2 = _slicedToArray(_useState, 2),
     showOption = _useState2[0],
     setShowOption = _useState2[1];
@@ -59,14 +64,21 @@ var ReviewsListing = function ReviewsListing(props) {
     setShowSelect(false);
     setBusiness(business);
     setBusinessId(business.id);
-    var tab = query.get('tab');
-    history.replace("".concat(location.pathname, "?tab=").concat(tab, "&business=").concat(business.id));
+    (0, _utils.addQueryToUrl)({
+      business: business.id
+    });
   };
   var handleChangeOption = function handleChangeOption(option, isInitialRender) {
-    setShowOption(option);
-    if (option === 'products' && !businessId) setShowSelect(true);
     if (!isInitialRender) {
-      history.replace("".concat(location.pathname, "?tab=").concat(option));
+      firstRender.current = false;
+      (0, _utils.removeQueryToUrl)(['page', 'pageSize', 'business', 'category', 'product', 'id']);
+      (0, _utils.addQueryToUrl)({
+        tab: option
+      });
+    }
+    setShowOption(option);
+    if (option === 'products' && !businessId) {
+      setShowSelect(true);
     }
   };
   var handleOpenProducts = function handleOpenProducts(business) {
@@ -143,19 +155,47 @@ var ReviewsListing = function ReviewsListing(props) {
     }
   }, t('PRODUCTS', 'Products'))), showOption === 'business' && /*#__PURE__*/_react.default.createElement(_BusinessReviewList.BusinessReviewList, {
     parentSearchValue: searchValue,
-    handleOpenProducts: handleOpenProducts
+    handleOpenProducts: handleOpenProducts,
+    isUseQuery: isUseQuery,
+    paginationSettings: {
+      initialPage: isUseQuery && firstRender.current && !isNaN(defaultPage) ? Number(defaultPage) : 1,
+      pageSize: isUseQuery && firstRender.current && !isNaN(defaultPage) ? Number(defaultPageSize) : 10,
+      controlType: 'pages'
+    }
   }), showOption === 'drivers' && /*#__PURE__*/_react.default.createElement(_UsersReviewList.UsersReviewList, {
     defaultUserTypesSelected: [4],
-    parentSearchValue: searchValue
+    parentSearchValue: searchValue,
+    isUseQuery: isUseQuery,
+    paginationSettings: {
+      initialPage: isUseQuery && firstRender.current && !isNaN(defaultPage) ? Number(defaultPage) : 1,
+      pageSize: isUseQuery && firstRender.current && !isNaN(defaultPage) ? Number(defaultPageSize) : 10,
+      controlType: 'pages'
+    }
   }), showOption === 'customers' && /*#__PURE__*/_react.default.createElement(_UsersReviewList.UsersReviewList, {
     defaultUserTypesSelected: [3],
-    parentSearchValue: searchValue
+    parentSearchValue: searchValue,
+    isUseQuery: isUseQuery,
+    paginationSettings: {
+      initialPage: isUseQuery && firstRender.current && !isNaN(defaultPage) ? Number(defaultPage) : 1,
+      pageSize: isUseQuery && firstRender.current && !isNaN(defaultPage) ? Number(defaultPageSize) : 10,
+      controlType: 'pages'
+    }
   }), showOption === 'professionals' && /*#__PURE__*/_react.default.createElement(_UsersReviewList.UsersReviewList, {
     defaultUserTypesSelected: [8],
-    parentSearchValue: searchValue
+    parentSearchValue: searchValue,
+    isUseQuery: isUseQuery,
+    paginationSettings: {
+      initialPage: isUseQuery && firstRender.current && !isNaN(defaultPage) ? Number(defaultPage) : 1,
+      pageSize: isUseQuery && firstRender.current && !isNaN(defaultPage) ? Number(defaultPageSize) : 10,
+      controlType: 'pages'
+    }
   }), showOption === 'products' && businessId && /*#__PURE__*/_react.default.createElement(_ReviewProductsListing.ReviewProductsListing, {
     parentSearchValue: searchValue,
-    businessId: businessId
+    businessId: businessId,
+    isUseQuery: isUseQuery,
+    defaultPage: isUseQuery && firstRender.current && !isNaN(defaultPage) ? Number(defaultPage) : 1,
+    defaultPageSize: isUseQuery && firstRender.current && !isNaN(defaultPage) ? Number(defaultPageSize) : 10,
+    firstRender: firstRender.current
   })));
 };
 exports.ReviewsListing = ReviewsListing;

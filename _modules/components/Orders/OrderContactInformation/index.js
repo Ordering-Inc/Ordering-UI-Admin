@@ -30,7 +30,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrderContactInformation = function OrderContactInformation(props) {
-  var _configs$google_maps_, _order$business, _order$business2, _order$business3, _order$business4, _order$business5, _order$business6, _order$business7, _order$business8, _order$business9, _order$business10, _order$business11, _order$business12, _order$business13, _order$business14, _order$business15, _order$customer, _order$customer2, _order$customer3, _order$customer4, _order$customer5, _order$customer6, _order$customer7, _order$customer8, _order$customer9, _order$customer10, _order$customer11, _order$customer12, _order$customer13, _ref2, _customerInfoState$cu, _customerInfoState$cu2, _order$customer17, _ref3, _customerInfoState$cu3, _customerInfoState$cu4, _order$customer18, _order$customer$addre, _order$customer19, _configs$country_auto, _order$customer20, _order$customer21, _order$customer22, _order$customer23, _order$customer24, _order$customer25, _order$customer26, _order$customer27, _order$customer28, _order$customer29, _order$customer30, _order$customer31, _order$customer32, _order$customer33, _order$customer34, _order$customer35, _order$customer36, _order$customer37, _order$customer38, _order$customer39, _order$customer40, _order$customer41, _order$customer42, _order$customer43, _order$driver_company, _order$driver_id, _order$driver, _order$driver2, _order$driver3, _order$driver4, _order$driver5, _order$driver6, _order$driver7;
+  var _configs$google_maps_, _order$business, _order$business2, _order$business3, _order$business4, _order$business5, _order$business6, _order$business7, _order$business8, _order$business9, _order$business10, _order$business11, _order$business12, _order$business13, _order$business14, _order$business15, _order$customer, _order$customer2, _order$customer3, _order$customer4, _order$customer5, _order$customer6, _order$customer7, _order$customer8, _order$customer9, _order$customer10, _order$customer11, _order$customer12, _order$customer13, _ref2, _customerInfoState$cu, _customerInfoState$cu2, _order$customer17, _ref3, _customerInfoState$cu3, _customerInfoState$cu4, _order$customer18, _order$customer$addre, _order$customer19, _configs$country_auto, _order$customer20, _order$customer21, _order$customer22, _order$customer23, _order$customer24, _order$customer25, _order$customer26, _order$customer27, _order$customer28, _order$customer29, _order$customer30, _order$customer31, _order$customer32, _order$customer33, _order$customer34, _order$customer35, _order$customer36, _order$customer37, _order$customer38, _order$customer39, _order$customer40, _order$customer41, _order$customer42, _order$customer43, _order$driver_company, _ref4, _commentInfoState$dri, _order$driver, _order$driver2, _order$driver3, _order$driver4, _order$driver5, _order$driver6, _order$driver7;
   var order = props.order,
     customerInfoState = props.customerInfoState,
     handleChangeCustomerInfoState = props.handleChangeCustomerInfoState,
@@ -39,8 +39,9 @@ var OrderContactInformation = function OrderContactInformation(props) {
     handleOpenMessages = props.handleOpenMessages,
     isServiceOrder = props.isServiceOrder,
     handleUpdateCustomerInfo = props.handleUpdateCustomerInfo,
-    setIsCommentPopup = props.setIsCommentPopup,
-    setAddressState = props.setAddressState;
+    setAddressState = props.setAddressState,
+    setCommentInfostate = props.setCommentInfostate,
+    commentInfoState = props.commentInfoState;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -66,7 +67,6 @@ var OrderContactInformation = function OrderContactInformation(props) {
     _useState6 = _slicedToArray(_useState5, 2),
     isEdit = _useState6[0],
     setIsEdit = _useState6[1];
-  console.log(customerInfoState, 'customerInfoState');
   var pastOrderStatuses = [1, 2, 5, 6, 10, 11, 12, 15, 16, 17];
   var handleReviewCustomer = function handleReviewCustomer(customer) {
     setCurrentCustomer(customer);
@@ -212,17 +212,17 @@ var OrderContactInformation = function OrderContactInformation(props) {
     handleOpenMessages: handleOpenMessages,
     isOrderDrivers: true,
     orderId: order === null || order === void 0 ? void 0 : order.id
-  })), !(order !== null && order !== void 0 && order.driver_company_id) && /*#__PURE__*/_react.default.createElement(_styles2.DriverSelectorContainer, null, /*#__PURE__*/_react.default.createElement("p", null, t('DRIVER_ASSIGN', 'Driver assign')), /*#__PURE__*/_react.default.createElement(_DriverSelector.DriverSelector, {
+  })), !(order !== null && order !== void 0 && order.driver_company_id) && !(commentInfoState !== null && commentInfoState !== void 0 && commentInfoState.open) && /*#__PURE__*/_react.default.createElement(_styles2.DriverSelectorContainer, null, /*#__PURE__*/_react.default.createElement("p", null, t('DRIVER_ASSIGN', 'Driver assign')), /*#__PURE__*/_react.default.createElement(_DriverSelector.DriverSelector, {
     small: true,
     isPhoneView: true,
-    defaultValue: (_order$driver_id = order === null || order === void 0 ? void 0 : order.driver_id) !== null && _order$driver_id !== void 0 ? _order$driver_id : 'default',
+    defaultValue: (_ref4 = (_commentInfoState$dri = commentInfoState === null || commentInfoState === void 0 ? void 0 : commentInfoState.driverId) !== null && _commentInfoState$dri !== void 0 ? _commentInfoState$dri : order === null || order === void 0 ? void 0 : order.driver_id) !== null && _ref4 !== void 0 ? _ref4 : 'default',
     order: order,
     isTourOpen: isTourOpen,
     setCurrentTourStep: setCurrentTourStep,
     handleOpenMessages: handleOpenMessages,
     isOrderDrivers: true,
     orderId: order === null || order === void 0 ? void 0 : order.id,
-    setIsCommentPopup: setIsCommentPopup
+    setCommentInfostate: setCommentInfostate
   })), /*#__PURE__*/_react.default.createElement(_styles2.DriverInfoContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.DriverInfo, null, /*#__PURE__*/_react.default.createElement(_styles2.PhotoWrapper, null, order !== null && order !== void 0 && (_order$driver = order.driver) !== null && _order$driver !== void 0 && _order$driver.photo ? /*#__PURE__*/_react.default.createElement(_styles2.Photo, {
     bgimage: optimizeImage(order === null || order === void 0 || (_order$driver2 = order.driver) === null || _order$driver2 === void 0 ? void 0 : _order$driver2.photo, 'h_50,c_limit')
   }) : /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)), order.driver_id ? /*#__PURE__*/_react.default.createElement(_styles2.InfoContent, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 || (_order$driver3 = order.driver) === null || _order$driver3 === void 0 ? void 0 : _order$driver3.name, " ", order === null || order === void 0 || (_order$driver4 = order.driver) === null || _order$driver4 === void 0 ? void 0 : _order$driver4.middle_name, " ", order === null || order === void 0 || (_order$driver5 = order.driver) === null || _order$driver5 === void 0 ? void 0 : _order$driver5.lastname, " ", order === null || order === void 0 || (_order$driver6 = order.driver) === null || _order$driver6 === void 0 ? void 0 : _order$driver6.second_lastname), (order === null || order === void 0 || (_order$driver7 = order.driver) === null || _order$driver7 === void 0 ? void 0 : _order$driver7.cellphone) && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
@@ -245,10 +245,10 @@ var OrderContactInformation = function OrderContactInformation(props) {
   })));
 };
 exports.OrderContactInformation = OrderContactInformation;
-var ContextAwareToggle = function ContextAwareToggle(_ref4) {
-  var children = _ref4.children,
-    eventKey = _ref4.eventKey,
-    callback = _ref4.callback;
+var ContextAwareToggle = function ContextAwareToggle(_ref5) {
+  var children = _ref5.children,
+    eventKey = _ref5.eventKey,
+    callback = _ref5.callback;
   var currentEventKey = (0, _react.useContext)(_reactBootstrap.AccordionContext);
   var decoratedOnClick = (0, _reactBootstrap.useAccordionToggle)(eventKey, function () {
     return callback && callback(eventKey);

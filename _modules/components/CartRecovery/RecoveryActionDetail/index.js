@@ -13,6 +13,7 @@ var _reactBootstrap = require("react-bootstrap");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _styles = require("../../../styles");
 var _styledComponents = require("styled-components");
+var _utils = require("../../../utils");
 var _styles2 = require("./styles");
 var _RecoveryGeneral = require("../RecoveryGeneral");
 var _RecoveryNotificationList = require("../RecoveryNotificationList");
@@ -39,7 +40,6 @@ var RecoveryActionDetailUI = function RecoveryActionDetailUI(props) {
     isAddMode = props.isAddMode,
     actionState = props.actionState,
     handleDeleteRecoveryAction = props.handleDeleteRecoveryAction;
-  var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -87,8 +87,9 @@ var RecoveryActionDetailUI = function RecoveryActionDetailUI(props) {
     }
     setSelectedOption(key);
     if (!isInitialRender) {
-      var id = query.get('id');
-      history.replace("".concat(location.pathname, "?id=").concat(id, "&tab=").concat(key));
+      (0, _utils.addQueryToUrl)({
+        tab: key
+      });
     }
   };
   var closeAlert = function closeAlert() {

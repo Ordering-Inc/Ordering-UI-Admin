@@ -58,7 +58,8 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     allowColumns = props.allowColumns,
     setAllowColumns = props.setAllowColumns,
     timeStatus = props.timeStatus,
-    setTimeStatus = props.setTimeStatus;
+    setTimeStatus = props.setTimeStatus,
+    isUseQuery = props.isUseQuery;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -225,6 +226,7 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     setTimeStatus: setTimeStatus,
     setSlaSettingTime: setSlaSettingTime
   }), /*#__PURE__*/_react.default.createElement(_OrderStatusFilterBar.OrderStatusFilterBar, {
+    isUseQuery: isUseQuery,
     selectedOrderStatus: ordersStatusGroup,
     changeOrderStatus: handleOrdersStatusGroupFilter,
     ordersAmountByStatus: ordersAmountByStatus
@@ -249,6 +251,7 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles.OrdersContent, null, /*#__PURE__*/_react.default.createElement(_styles.OrdersInnerContent, {
     className: "order-content"
   }, /*#__PURE__*/_react.default.createElement(_styles.WrapItemView, null, /*#__PURE__*/_react.default.createElement(_OrdersDashboard.OrdersDashboard, {
+    isUseQuery: isUseQuery,
     isSelectedOrders: isSelectedOrders,
     driverId: props.driverId,
     customerId: props.customerId,

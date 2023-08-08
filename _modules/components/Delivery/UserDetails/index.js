@@ -23,6 +23,7 @@ var _DriverGroupSetting = require("../DriverGroupSetting");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _styles = require("../../../styles");
 var _styles2 = require("../UserFormDetails/styles");
+var _utils = require("../../../utils");
 var _styles3 = require("./styles");
 var _useWindowSize2 = require("../../../hooks/useWindowSize");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -52,7 +53,6 @@ var UserDetailsUI = function UserDetailsUI(props) {
     handleScheduleState = props.handleScheduleState,
     handleScheduleUpdateUser = props.handleScheduleUpdateUser,
     actionDisabled = props.actionDisabled;
-  var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -90,13 +90,9 @@ var UserDetailsUI = function UserDetailsUI(props) {
   var handleTabClick = function handleTabClick(tab, isInitialRender) {
     setCurrentMenuSelected(tab);
     if (!isInitialRender) {
-      var id = query.get('id');
-      var section = query.get('section');
-      if (section) {
-        history.replace("".concat(location.pathname, "?id=").concat(id, "&section=").concat(section, "&tab=").concat(tab));
-      } else {
-        history.replace("".concat(location.pathname, "?id=").concat(id, "&tab=").concat(tab));
-      }
+      (0, _utils.addQueryToUrl)({
+        tab: tab
+      });
     }
   };
   (0, _react.useEffect)(function () {

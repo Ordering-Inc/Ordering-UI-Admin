@@ -14,6 +14,7 @@ var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _Shared = require("../../Shared");
 var _CampaignDetailGeneral = require("../CampaignDetailGeneral");
 var _CampaignDetailContent = require("../CampaignDetailContent");
+var _utils = require("../../../utils");
 var _styles = require("./styles");
 var _styles2 = require("../../../styles");
 var _useWindowSize2 = require("../../../hooks/useWindowSize");
@@ -36,7 +37,6 @@ var CampaignDetailUI = function CampaignDetailUI(props) {
     formState = props.formState,
     campaignState = props.campaignState,
     handleDeleteCampaign = props.handleDeleteCampaign;
-  var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -110,8 +110,9 @@ var CampaignDetailUI = function CampaignDetailUI(props) {
   var handleTabClick = function handleTabClick(tab, isInitialRender) {
     setSelectedOption(tab);
     if (!isInitialRender) {
-      var id = query.get('id');
-      history.replace("".concat(location.pathname, "?id=").concat(id, "&tab=").concat(tab));
+      (0, _utils.addQueryToUrl)({
+        tab: tab
+      });
     }
   };
   (0, _react.useEffect)(function () {

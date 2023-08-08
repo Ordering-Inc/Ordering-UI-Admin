@@ -17,6 +17,7 @@ var _Shared = require("../../Shared");
 var _UserAddForm = require("../UserAddForm");
 var _UsersDeleteButton = require("../UsersDeleteButton");
 var _UsersExportCSV = require("../UsersExportCSV");
+var _utils = require("../../../utils");
 var _styles = require("../../../styles");
 var _styles2 = require("./styles");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -56,11 +57,11 @@ var UsersListingUI = function UsersListingUI(props) {
     handleSuccessDeleteUser = props.handleSuccessDeleteUser,
     setSelectedUsers = props.setSelectedUsers,
     handleChangeMultiFilterValues = props.handleChangeMultiFilterValues,
-    multiFilterValues = props.multiFilterValues;
+    multiFilterValues = props.multiFilterValues,
+    isUseQuery = props.isUseQuery;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
-  var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useState = (0, _react.useState)(null),
     _useState2 = _slicedToArray(_useState, 2),
@@ -82,12 +83,12 @@ var UsersListingUI = function UsersListingUI(props) {
     setIsOpenUserDetails(false);
     setOpenUser(null);
     setQueryId(null);
-    var enabled = selectedUserActiveState ? 'active' : 'inactive';
-    history.replace("".concat(location.pathname, "?enabled=").concat(enabled));
+    (0, _utils.removeQueryToUrl)(['id', 'tab']);
   };
   var handleOpenUserDetails = function handleOpenUserDetails(user) {
-    var enabled = selectedUserActiveState ? 'active' : 'inactive';
-    history.replace("".concat(location.pathname, "?enabled=").concat(enabled, "&id=").concat(user === null || user === void 0 ? void 0 : user.id));
+    (0, _utils.addQueryToUrl)({
+      id: user === null || user === void 0 ? void 0 : user.id
+    });
     setOpenUser(user);
     setOpenUserAddForm(false);
     setIsOpenUserDetails(true);
@@ -154,7 +155,8 @@ var UsersListingUI = function UsersListingUI(props) {
     userDetailsId: (openUser === null || openUser === void 0 ? void 0 : openUser.id) || queryId,
     handleOpenUserDetails: handleOpenUserDetails,
     handleOpenUserAddForm: handleOpenUserAddForm,
-    setSelectedUsers: setSelectedUsers
+    setSelectedUsers: setSelectedUsers,
+    isUseQuery: isUseQuery
   })), isOpenUserDetails && /*#__PURE__*/_react.default.createElement(_UserDetailsLateralBar.UserDetailsLateralBar, {
     isManagers: true,
     open: isOpenUserDetails,
@@ -183,12 +185,19 @@ var UsersListingUI = function UsersListingUI(props) {
 var UsersListing = function UsersListing(props) {
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var defaultUserActiveState = query.get('enabled') !== 'inactive';
+  var defaultPage = query.get('page') || 1;
+  var defaultPageSize = query.get('pageSize') || 10;
   var usersListingProps = _objectSpread(_objectSpread({}, props), {}, {
     defaultUserActiveState: defaultUserActiveState,
     UIComponent: UsersListingUI,
     isSearchByUserEmail: true,
     isSearchByUserPhone: true,
-    isSearchByUserName: true
+    isSearchByUserName: true,
+    paginationSettings: {
+      initialPage: props.isUseQuery && !isNaN(defaultPage) ? Number(defaultPage) : 1,
+      pageSize: props.isUseQuery && !isNaN(defaultPage) ? Number(defaultPageSize) : 10,
+      controlType: 'pages'
+    }
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.UsersList, usersListingProps);
 };

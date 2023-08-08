@@ -14,6 +14,7 @@ var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _useWindowSize2 = require("../../../hooks/useWindowSize");
 var _BusinessPlaceGroup = require("../BusinessPlaceGroup");
 var _Shared = require("../../Shared");
+var _utils = require("../../../utils");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -44,7 +45,6 @@ var BusinessPlaceGroupListUI = function BusinessPlaceGroupListUI(props) {
     handleChangeEnabled = props.handleChangeEnabled,
     handleMultiChangeEnabled = props.handleMultiChangeEnabled,
     getMultiCheckStatus = props.getMultiCheckStatus;
-  var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -68,9 +68,7 @@ var BusinessPlaceGroupListUI = function BusinessPlaceGroupListUI(props) {
     setOpenDetail(false);
     setSelectedPlace(null);
     setIsExtendExtraOpen(false);
-    var businessId = query.get('id');
-    var section = query.get('section');
-    history.replace("".concat(location.pathname, "?id=").concat(businessId, "&section=").concat(section));
+    (0, _utils.removeQueryToUrl)(['place_group']);
   };
   var handleUpdateSelectedPlaceGroup = function handleUpdateSelectedPlaceGroup(placeGroup) {
     setSelectedPlace(placeGroup);
@@ -80,9 +78,9 @@ var BusinessPlaceGroupListUI = function BusinessPlaceGroupListUI(props) {
     if (e !== null && e !== void 0 && (_e$target = e.target) !== null && _e$target !== void 0 && _e$target.closest('.check-box')) return;
     handleOpenDetail(placeGroup);
     if (!isInitialRender) {
-      var businessId = query.get('id');
-      var section = query.get('section');
-      history.replace("".concat(location.pathname, "?id=").concat(businessId, "&section=").concat(section, "&place_group=").concat(placeGroup.id));
+      (0, _utils.addQueryToUrl)({
+        place_group: placeGroup.id
+      });
     }
   };
   var handleCheckBoxChange = function handleCheckBoxChange(placeGroup) {

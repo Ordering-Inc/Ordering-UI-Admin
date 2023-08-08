@@ -18,6 +18,7 @@ var _UsersDeleteButton = require("../UsersDeleteButton");
 var _UsersExportCSV = require("../UsersExportCSV");
 var _styles = require("../../../styles");
 var _OccupationsFilter = require("../OccupationsFilter");
+var _utils = require("../../../utils");
 var _styles2 = require("./styles");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -59,14 +60,14 @@ var ProfessionalListingUI = function ProfessionalListingUI(props) {
     handleSelectOccupation = props.handleSelectOccupation,
     setSelectedUsers = props.setSelectedUsers,
     handleChangeMultiFilterValues = props.handleChangeMultiFilterValues,
-    multiFilterValues = props.multiFilterValues;
+    multiFilterValues = props.multiFilterValues,
+    isUseQuery = props.isUseQuery;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configs = _useConfig2[0].configs;
-  var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useState = (0, _react.useState)(null),
     _useState2 = _slicedToArray(_useState, 2),
@@ -96,12 +97,12 @@ var ProfessionalListingUI = function ProfessionalListingUI(props) {
     setIsOpenUserDetails(false);
     setOpenUser(null);
     setQueryId(null);
-    var enabled = selectedUserActiveState ? 'active' : 'inactive';
-    history.replace("".concat(location.pathname, "?enabled=").concat(enabled));
+    (0, _utils.removeQueryToUrl)(['id', 'tab']);
   };
   var handleOpenUserDetails = function handleOpenUserDetails(user) {
-    var enabled = selectedUserActiveState ? 'active' : 'inactive';
-    history.replace("".concat(location.pathname, "?enabled=").concat(enabled, "&id=").concat(user === null || user === void 0 ? void 0 : user.id));
+    (0, _utils.addQueryToUrl)({
+      id: user === null || user === void 0 ? void 0 : user.id
+    });
     setOpenUser(user);
     setOpenUserAddForm(false);
     setIsOpenUserDetails(true);
@@ -176,7 +177,8 @@ var ProfessionalListingUI = function ProfessionalListingUI(props) {
     userDetailsId: (openUser === null || openUser === void 0 ? void 0 : openUser.id) || queryId,
     handleOpenUserDetails: handleOpenUserDetails,
     handleOpenUserAddForm: handleOpenUserAddForm,
-    setSelectedUsers: setSelectedUsers
+    setSelectedUsers: setSelectedUsers,
+    isUseQuery: isUseQuery
   })) : /*#__PURE__*/_react.default.createElement(_styles2.WarningText, null, t('APPOINTMENTS_FEATURE_NOT_ENABLED', 'The appointments feature is not enabled.'))), isOpenUserDetails && /*#__PURE__*/_react.default.createElement(_UserDetailsLateralBar.UserDetailsLateralBar, {
     isProfessionals: true,
     open: isOpenUserDetails,
@@ -225,13 +227,20 @@ var ProfessionalListingUI = function ProfessionalListingUI(props) {
 var ProfessionalListing = function ProfessionalListing(props) {
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var defaultUserActiveState = query.get('enabled') !== 'inactive';
+  var defaultPage = query.get('page') || 1;
+  var defaultPageSize = query.get('pageSize') || 10;
   var usersListingProps = _objectSpread(_objectSpread({}, props), {}, {
     defaultUserActiveState: defaultUserActiveState,
     isProfessional: true,
     UIComponent: ProfessionalListingUI,
     isSearchByUserEmail: true,
     isSearchByUserPhone: true,
-    isSearchByUserName: true
+    isSearchByUserName: true,
+    paginationSettings: {
+      initialPage: props.isUseQuery && !isNaN(defaultPage) ? Number(defaultPage) : 1,
+      pageSize: props.isUseQuery && !isNaN(defaultPage) ? Number(defaultPageSize) : 10,
+      controlType: 'pages'
+    }
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.UsersList, usersListingProps);
 };

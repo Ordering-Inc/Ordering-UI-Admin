@@ -123,7 +123,8 @@ var OpenCartListingUI = function OpenCartListingUI(props) {
     cartDetailId: cartDetailId,
     getCartList: getCartList,
     handleSelectedCartIds: handleSelectedCartIds,
-    handleOpenCartDetail: handleOpenCartDetail
+    handleOpenCartDetail: handleOpenCartDetail,
+    isUseQuery: isUseQuery
   }))))), isOpenCartDetail && /*#__PURE__*/_react.default.createElement(_OpenCartsDetail.OpenCartsDetail, {
     open: isOpenCartDetail,
     cart: detailsCart,
@@ -135,10 +136,18 @@ var OpenCartListingUI = function OpenCartListingUI(props) {
   }), totalSelectedOrder > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperIndicator, null, setSelectedCartIds.length, "/", totalSelectedOrder));
 };
 var OpenCartListing = function OpenCartListing(props) {
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
+  var defaultPage = query.get('page') || 1;
+  var defaultPageSize = query.get('pageSize') || 10;
   var openCartsProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: OpenCartListingUI,
     isSearchByCartId: true,
-    isSearchByCityName: true
+    isSearchByCityName: true,
+    paginationSettings: {
+      initialPage: props.isUseQuery && !isNaN(defaultPage) ? Number(defaultPage) : 1,
+      pageSize: props.isUseQuery && !isNaN(defaultPage) ? Number(defaultPageSize) : 10,
+      controlType: 'pages'
+    }
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.OpenCartListing, openCartsProps);
 };

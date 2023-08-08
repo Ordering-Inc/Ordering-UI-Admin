@@ -31,8 +31,8 @@ var _ImportersButton = require("../ImportersButton");
 var _AddBusinessForm = require("../AddBusinessForm");
 var _ProductStep = require("../ProductStep");
 var _BusinessAddStore = require("../BusinessAddStore");
-var _styles2 = require("./styles");
 var _utils = require("../../../utils");
+var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -79,7 +79,6 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     categoryState = props.categoryState,
     handleUpdateCategoryState = props.handleUpdateCategoryState,
     siteState = props.siteState;
-  var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -172,7 +171,9 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
       setCategorySelected(category);
       setOpenSidebar('category_details');
       if (!isInitialRender) {
-        history.replace("".concat(location.pathname, "?category=").concat(category.id));
+        (0, _utils.addQueryToUrl)({
+          category: category.id
+        });
       }
     } else {
       setCurrentCategory(null);
@@ -187,7 +188,7 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     });
     setCurrentCategory(null);
     setOpenSidebar(null);
-    history.replace("".concat(location.pathname));
+    (0, _utils.removeQueryToUrl)(['category']);
   };
   var handleOpenProductDetails = function handleOpenProductDetails(product, isInitialRender) {
     setSelectedProduct(product);
@@ -336,7 +337,9 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     className: "business",
     onClick: function onClick() {
       var _businessState$busine15;
-      history.replace("".concat(location.pathname, "?id=").concat(businessState === null || businessState === void 0 || (_businessState$busine15 = businessState.business) === null || _businessState$busine15 === void 0 ? void 0 : _businessState$busine15.id));
+      (0, _utils.addQueryToUrl)({
+        id: businessState === null || businessState === void 0 || (_businessState$busine15 = businessState.business) === null || _businessState$busine15 === void 0 ? void 0 : _businessState$busine15.id
+      });
       setOpenSidebar('business_details');
     }
   }, (selectedBusiness === null || selectedBusiness === void 0 ? void 0 : selectedBusiness.name) || (businessState === null || businessState === void 0 || (_businessState$busine16 = businessState.business) === null || _businessState$busine16 === void 0 ? void 0 : _businessState$busine16.name)), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null), /*#__PURE__*/_react.default.createElement("span", null, categorySelected === null || categorySelected === void 0 ? void 0 : categorySelected.name))))), slug && /*#__PURE__*/_react.default.createElement(_styles2.ActionsGroup, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
@@ -473,7 +476,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     // handleSucessUpdateBusiness={handleSucessUpdateBusiness}
     ,
     onClose: function onClose() {
-      return setOpenSidebar(null);
+      setOpenSidebar(null);
+      (0, _utils.removeQueryToUrl)(['id']);
     },
     businessTypes: businessTypes,
     setBusinessTypes: setBusinessTypes

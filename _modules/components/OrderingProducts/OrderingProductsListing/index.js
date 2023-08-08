@@ -14,6 +14,7 @@ var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _styles = require("../../../styles");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _OrderingProductDetails = require("../OrderingProductDetails");
+var _utils = require("../../../utils");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -41,8 +42,8 @@ var OrderingProductsUI = function OrderingProductsUI(props) {
     getSites = props.getSites,
     paginationProps = props.paginationProps,
     setPaginationProps = props.setPaginationProps,
-    handleSuccessUpdateSites = props.handleSuccessUpdateSites;
-  var history = (0, _reactRouterDom.useHistory)();
+    handleSuccessUpdateSites = props.handleSuccessUpdateSites,
+    isUseQuery = props.isUseQuery;
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -80,13 +81,15 @@ var OrderingProductsUI = function OrderingProductsUI(props) {
     setSelectedSite(product);
     setOpenDetails(true);
     if (product && !isInitialRender) {
-      history.replace("".concat(location.pathname, "?id=").concat(product === null || product === void 0 ? void 0 : product.id));
+      (0, _utils.addQueryToUrl)({
+        id: product === null || product === void 0 ? void 0 : product.id
+      });
     }
   };
   var handleCloseDetail = function handleCloseDetail() {
     setOpenDetails(false);
     setSelectedSite(null);
-    history.replace("".concat(location.pathname));
+    (0, _utils.removeQueryToUrl)(['id']);
   };
   (0, _react.useEffect)(function () {
     if (!(sitesListState !== null && sitesListState !== void 0 && sitesListState.error)) return;
@@ -105,6 +108,13 @@ var OrderingProductsUI = function OrderingProductsUI(props) {
       if (initProduct) onClickProduct(initProduct, true);
     }
   }, [sitesListState]);
+  (0, _react.useEffect)(function () {
+    if (!isUseQuery || !(paginationProps !== null && paginationProps !== void 0 && paginationProps.currentPage) || !(paginationProps !== null && paginationProps !== void 0 && paginationProps.pageSize) || !(paginationProps !== null && paginationProps !== void 0 && paginationProps.totalPages)) return;
+    (0, _utils.addQueryToUrl)({
+      page: paginationProps.currentPage,
+      pageSize: paginationProps.pageSize
+    });
+  }, [paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.currentPage, paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.pageSize, paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.totalPages]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.OrderingProductsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderTitleContainer, null, isCollapse && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {
@@ -200,8 +210,16 @@ var OrderingProductsUI = function OrderingProductsUI(props) {
   }));
 };
 var OrderingProductsListing = function OrderingProductsListing(props) {
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
+  var defaultPage = query.get('page') || 1;
+  var defaultPageSize = query.get('pageSize') || 10;
   var sitesProps = _objectSpread(_objectSpread({}, props), {}, {
-    UIComponent: OrderingProductsUI
+    UIComponent: OrderingProductsUI,
+    paginationSettings: {
+      initialPage: props.isUseQuery && !isNaN(defaultPage) ? Number(defaultPage) : 1,
+      pageSize: props.isUseQuery && !isNaN(defaultPage) ? Number(defaultPageSize) : 10,
+      controlType: 'pages'
+    }
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.SitesList, sitesProps);
 };

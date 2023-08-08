@@ -13,6 +13,7 @@ var _styledComponents = require("styled-components");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _Shared = require("../../Shared");
 var _BusinessReviewDetails = require("../BusinessReviewDetails");
+var _utils = require("../../../utils");
 var _styles = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -40,8 +41,8 @@ var BusinessReviewsListingUI = function BusinessReviewsListingUI(props) {
     getPageBusinesses = props.getPageBusinesses,
     handleUpdateReview = props.handleUpdateReview,
     onSearch = props.onSearch,
-    handleOpenProducts = props.handleOpenProducts;
-  var history = (0, _reactRouterDom.useHistory)();
+    handleOpenProducts = props.handleOpenProducts,
+    isUseQuery = props.isUseQuery;
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -82,8 +83,9 @@ var BusinessReviewsListingUI = function BusinessReviewsListingUI(props) {
     setCurBusinessId(business.id);
     setOpenReview(true);
     if (!isInitialRender) {
-      var tab = query.get('tab');
-      history.replace("".concat(location.pathname, "?tab=").concat(tab, "&id=").concat(business.id));
+      (0, _utils.addQueryToUrl)({
+        id: business.id
+      });
     }
   };
   (0, _react.useEffect)(function () {
@@ -93,8 +95,7 @@ var BusinessReviewsListingUI = function BusinessReviewsListingUI(props) {
   var handleCloseReviewDetails = function handleCloseReviewDetails() {
     setCurBusiness(null);
     setOpenReview(false);
-    var tab = query.get('tab');
-    history.replace("".concat(location.pathname, "?tab=").concat(tab));
+    (0, _utils.removeQueryToUrl)(['id']);
   };
   (0, _react.useEffect)(function () {
     var tab = query.get('tab');
@@ -104,6 +105,13 @@ var BusinessReviewsListingUI = function BusinessReviewsListingUI(props) {
       setOpenReview(true);
     }
   }, []);
+  (0, _react.useEffect)(function () {
+    if (!isUseQuery || !(pagination !== null && pagination !== void 0 && pagination.currentPage) || !(pagination !== null && pagination !== void 0 && pagination.pageSize) || !(pagination !== null && pagination !== void 0 && pagination.total)) return;
+    (0, _utils.addQueryToUrl)({
+      page: pagination.currentPage,
+      pageSize: pagination.pageSize
+    });
+  }, [pagination === null || pagination === void 0 ? void 0 : pagination.currentPage, pagination === null || pagination === void 0 ? void 0 : pagination.pageSize, pagination === null || pagination === void 0 ? void 0 : pagination.total]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ReviewsTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles.ReviewObject, {
     isHeader: true
   }, t('BUSINESS', 'Business'))), /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles.ReviewMarkerWrapper, {

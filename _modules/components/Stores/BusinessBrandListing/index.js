@@ -16,6 +16,7 @@ var _styledComponents = require("styled-components");
 var _Shared = require("../../Shared");
 var _BusinessBrandGENDetail = require("../BusinessBrandGENDetail");
 var _BusinessBrandBUSIDetail = require("../BusinessBrandBUSIDetail");
+var _utils = require("../../../utils");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -46,7 +47,6 @@ var BusinessBrandListingUI = function BusinessBrandListingUI(props) {
     handleDeleteBrand = props.handleDeleteBrand,
     openDetail = props.openDetail,
     setOpenDetail = props.setOpenDetail;
-  var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -89,7 +89,7 @@ var BusinessBrandListingUI = function BusinessBrandListingUI(props) {
   var handleCloseSidebar = function handleCloseSidebar() {
     setOpenDetail(false);
     setSelectedBrand(null);
-    history.replace("".concat(location.pathname));
+    (0, _utils.removeQueryToUrl)(['id', 'tab']);
   };
   var handleOpenSideBar = function handleOpenSideBar(id) {
     setSelectedType('general');
@@ -115,7 +115,9 @@ var BusinessBrandListingUI = function BusinessBrandListingUI(props) {
     if (isInvalid) return;
     handleOpenSideBar(brandId);
     if (!isInitialRender) {
-      history.replace("".concat(location.pathname, "?id=").concat(brandId));
+      (0, _utils.addQueryToUrl)({
+        id: brandId
+      });
     }
   };
   var expandSideBar = function expandSideBar() {
@@ -172,8 +174,9 @@ var BusinessBrandListingUI = function BusinessBrandListingUI(props) {
   var handleTabClick = function handleTabClick(tab, isInitialRender) {
     setSelectedType(tab);
     if (!isInitialRender) {
-      var id = query.get('id');
-      history.replace("".concat(location.pathname, "?id=").concat(id, "&tab=").concat(tab));
+      (0, _utils.addQueryToUrl)({
+        tab: tab
+      });
     }
   };
   (0, _react.useEffect)(function () {

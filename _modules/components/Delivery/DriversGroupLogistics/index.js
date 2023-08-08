@@ -15,6 +15,7 @@ var _Shared = require("../../Shared");
 var _DriversGroupOrders = require("../DriversGroupOrders");
 var _DriversGroupAutoassign = require("../DriversGroupAutoassign");
 var _DriversMarkAsBusy = require("../DriversMarkAsBusy");
+var _utils = require("../../../utils");
 var _styles2 = require("./styles");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -32,7 +33,6 @@ var DriversGroupLogistics = function DriversGroupLogistics(props) {
     handleParentSidebarMove = props.handleParentSidebarMove,
     handleUpdateDriversGroup = props.handleUpdateDriversGroup,
     actionDisabled = props.actionDisabled;
-  var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -54,9 +54,9 @@ var DriversGroupLogistics = function DriversGroupLogistics(props) {
       handleParentSidebarMove(700);
     }
     if (!isInitialRender) {
-      var id = query.get('id');
-      var tab = query.get('tab');
-      history.replace("".concat(location.pathname, "?id=").concat(id, "&tab=").concat(tab, "&config=").concat(option));
+      (0, _utils.addQueryToUrl)({
+        config: option
+      });
     }
   };
   var handleCloseSidebar = function handleCloseSidebar() {

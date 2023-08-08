@@ -19,6 +19,7 @@ var _ProfessionalSchedule = require("../ProfessionalSchedule");
 var _ProfessionalBusinessService = require("../ProfessionalBusinessService");
 var _UserMetaFields = require("../UserMetaFields");
 var _styles = require("../../../styles");
+var _utils = require("../../../utils");
 var _styles2 = require("./styles");
 var _useWindowSize2 = require("../../../hooks/useWindowSize");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -45,7 +46,6 @@ var ProfessionalDetailUI = function ProfessionalDetailUI(props) {
     handleChangeActiveUser = props.handleChangeActiveUser,
     handleGoogleCalendarSync = props.handleGoogleCalendarSync,
     actionStatus = props.actionStatus;
-  var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var theme = (0, _styledComponents.useTheme)();
   var _useSession = (0, _orderingComponentsAdmin.useSession)(),
@@ -126,14 +126,9 @@ var ProfessionalDetailUI = function ProfessionalDetailUI(props) {
   var handleTabClick = function handleTabClick(tab, isInitialRender) {
     setCurrentMenuSelected(tab);
     if (!isInitialRender) {
-      var id = query.get('id');
-      var enabled = query.get('enabled');
-      var section = query.get('section');
-      if (section) {
-        history.replace("".concat(location.pathname, "?enabled=").concat(enabled, "&id=").concat(id, "&section=").concat(section, "&tab=").concat(tab));
-      } else {
-        history.replace("".concat(location.pathname, "?enabled=").concat(enabled, "&id=").concat(id, "&tab=").concat(tab));
-      }
+      (0, _utils.addQueryToUrl)({
+        tab: tab
+      });
     }
   };
   (0, _react.useEffect)(function () {

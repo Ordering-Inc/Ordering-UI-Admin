@@ -13,6 +13,7 @@ var _Shared = require("../../Shared");
 var _styles = require("../../../styles");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _ProductTagDetails = require("../ProductTagDetails");
+var _utils = require("../../../utils");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -45,7 +46,6 @@ var ProductTagsListUI = function ProductTagsListUI(props) {
     handleChangeProductTag = props.handleChangeProductTag,
     handleSelectNoneTags = props.handleSelectNoneTags,
     handleSelectAllTags = props.handleSelectAllTags;
-  var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -66,22 +66,16 @@ var ProductTagsListUI = function ProductTagsListUI(props) {
     setIsExtendExtraOpen(true);
     setIsOpenTagDetail(true);
     if (!isInitialRender) {
-      var category = query.get('category');
-      var product = query.get('product');
-      var section = query.get('section');
-      var tab = query.get('tab');
-      history.replace("".concat(location.pathname, "?category=").concat(category, "&product=").concat(product, "&section=").concat(section, "&tab=").concat(tab, "&tag=").concat(tag === null || tag === void 0 ? void 0 : tag.id));
+      (0, _utils.addQueryToUrl)({
+        tag: tag === null || tag === void 0 ? void 0 : tag.id
+      });
     }
   };
   var handleCloseDetail = function handleCloseDetail() {
     setIsOpenTagDetail(false);
     setIsExtendExtraOpen(false);
     setSelectedTag(null);
-    var category = query.get('category');
-    var product = query.get('product');
-    var section = query.get('section');
-    var tab = query.get('tab');
-    history.replace("".concat(location.pathname, "?category=").concat(category, "&product=").concat(product, "&section=").concat(section, "&tab=").concat(tab));
+    (0, _utils.removeQueryToUrl)(['tag']);
   };
   (0, _react.useEffect)(function () {
     if (tagsState.loading) return;

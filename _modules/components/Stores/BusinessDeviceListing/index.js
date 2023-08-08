@@ -6,7 +6,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.BusinessDeviceListing = void 0;
 var _react = _interopRequireWildcard(require("react"));
-var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _InfoShareContext = require("../../../contexts/InfoShareContext");
@@ -14,6 +13,7 @@ var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _styles = require("../../../styles");
 var _styledComponents = require("styled-components");
 var _Shared = require("../../Shared");
+var _utils = require("../../../utils");
 var _styles2 = require("./styles");
 var _BusinessDeviceDetail = require("../BusinessDeviceDetail");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -39,7 +39,6 @@ var BusinessDeviceListingUI = function BusinessDeviceListingUI(props) {
     _onSearch = props.onSearch,
     deviceListState = props.deviceListState,
     handleUpdateDeviceList = props.handleUpdateDeviceList;
-  var history = (0, _reactRouterDom.useHistory)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -87,7 +86,7 @@ var BusinessDeviceListingUI = function BusinessDeviceListingUI(props) {
   var handleCloseSidebar = function handleCloseSidebar() {
     setIsOpen(false);
     setSelectedDevice(null);
-    history.replace("".concat(location.pathname));
+    (0, _utils.removeQueryToUrl)(['id']);
   };
   var handleOpenSideBar = function handleOpenSideBar(id) {
     if (id) {
@@ -112,7 +111,9 @@ var BusinessDeviceListingUI = function BusinessDeviceListingUI(props) {
     if (isInvalid) return;
     handleOpenSideBar(brandId);
     if (!isInitialRender) {
-      history.replace("".concat(location.pathname, "?id=").concat(brandId));
+      (0, _utils.addQueryToUrl)({
+        id: brandId
+      });
     }
   };
   var handleChangeAllowColumns = function handleChangeAllowColumns(type) {

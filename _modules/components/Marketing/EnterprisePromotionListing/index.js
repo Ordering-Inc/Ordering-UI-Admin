@@ -15,6 +15,7 @@ var _Shared = require("../../Shared");
 var _EnterprisePromotionList = require("../EnterprisePromotionList");
 var _EnterprisePromotionDetails = require("../EnterprisePromotionDetails");
 var _DisabledFeatureAlert = require("../../DisabledFeatureAlert");
+var _utils = require("../../../utils");
 var _styles2 = require("./styles");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -40,7 +41,6 @@ var EnterprisePromotionListingUI = function EnterprisePromotionListingUI(props) 
     paymethodsState = props.paymethodsState,
     businessesList = props.businessesList,
     handleSuccessDeletePromotion = props.handleSuccessDeletePromotion;
-  var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -98,7 +98,9 @@ var EnterprisePromotionListingUI = function EnterprisePromotionListingUI(props) 
     setCurPromotionId(promotion === null || promotion === void 0 ? void 0 : promotion.id);
     setOpenDetails(true);
     if (promotion) {
-      history.replace("".concat(location.pathname, "?id=").concat(promotion === null || promotion === void 0 ? void 0 : promotion.id));
+      (0, _utils.addQueryToUrl)({
+        id: promotion === null || promotion === void 0 ? void 0 : promotion.id
+      });
     }
   };
   var handleCloseDetails = function handleCloseDetails() {
@@ -106,7 +108,7 @@ var EnterprisePromotionListingUI = function EnterprisePromotionListingUI(props) 
     setSideBarWidth(600);
     setOpenDetails(false);
     setSelectedPromotion(null);
-    history.replace("".concat(location.pathname));
+    (0, _utils.removeQueryToUrl)(['id']);
   };
   (0, _react.useEffect)(function () {
     if (!(promotionListState !== null && promotionListState !== void 0 && promotionListState.error)) return;
@@ -195,8 +197,16 @@ var EnterprisePromotionListingUI = function EnterprisePromotionListingUI(props) 
   }));
 };
 var EnterprisePromotionListing = function EnterprisePromotionListing(props) {
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
+  var defaultPage = query.get('page') || 1;
+  var defaultPageSize = query.get('pageSize') || 10;
   var enterpisePromotionsProps = _objectSpread(_objectSpread({}, props), {}, {
-    UIComponent: EnterprisePromotionListingUI
+    UIComponent: EnterprisePromotionListingUI,
+    paginationSettings: {
+      initialPage: props.isUseQuery && !isNaN(defaultPage) ? Number(defaultPage) : 1,
+      pageSize: props.isUseQuery && !isNaN(defaultPage) ? Number(defaultPageSize) : 10,
+      controlType: 'pages'
+    }
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.EnterprisePromotionList, enterpisePromotionsProps);
 };

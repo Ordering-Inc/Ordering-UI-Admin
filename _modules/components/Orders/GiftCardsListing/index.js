@@ -5,15 +5,19 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.GiftCardsListing = void 0;
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
+var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _InfoShareContext = require("../../../contexts/InfoShareContext");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _styles = require("../../../styles");
 var _Shared = require("../../Shared");
+var _utils = require("../../../utils");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -36,7 +40,8 @@ var GiftCardsListingUI = function GiftCardsListingUI(props) {
     setActiveStatus = props.setActiveStatus,
     getGiftCards = props.getGiftCards,
     searchValue = props.searchValue,
-    onSearch = props.onSearch;
+    onSearch = props.onSearch,
+    isUseQuery = props.isUseQuery;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -44,6 +49,8 @@ var GiftCardsListingUI = function GiftCardsListingUI(props) {
     _useInfoShare2 = _slicedToArray(_useInfoShare, 2),
     isCollapse = _useInfoShare2[0].isCollapse,
     handleMenuCollapse = _useInfoShare2[1].handleMenuCollapse;
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
+  var defaultStatus = query.get('status');
   var handleChangePage = function handleChangePage(page) {
     getGiftCards(page, paginationProps.pageSize);
   };
@@ -51,6 +58,31 @@ var GiftCardsListingUI = function GiftCardsListingUI(props) {
     var expectedPage = Math.ceil(paginationProps.from / pageSize);
     getGiftCards(expectedPage, pageSize);
   };
+  var handleChangeStatus = function handleChangeStatus(status) {
+    setActiveStatus(status);
+    if (isUseQuery) {
+      (0, _utils.addQueryToUrl)({
+        status: status
+      });
+    }
+  };
+  (0, _react.useEffect)(function () {
+    if (!isUseQuery) return;
+    if (defaultStatus) {
+      setActiveStatus(defaultStatus);
+      return;
+    }
+    (0, _utils.addQueryToUrl)({
+      status: 'pending'
+    });
+  }, []);
+  (0, _react.useEffect)(function () {
+    if (!isUseQuery || !(paginationProps !== null && paginationProps !== void 0 && paginationProps.currentPage) || !(paginationProps !== null && paginationProps !== void 0 && paginationProps.pageSize) || !(paginationProps !== null && paginationProps !== void 0 && paginationProps.totalPages)) return;
+    (0, _utils.addQueryToUrl)({
+      page: paginationProps.currentPage,
+      pageSize: paginationProps.pageSize
+    });
+  }, [paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.currentPage, paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.pageSize, paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.totalPages]);
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderTitle, null, isCollapse && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {
@@ -65,12 +97,12 @@ var GiftCardsListingUI = function GiftCardsListingUI(props) {
   }))), /*#__PURE__*/_react.default.createElement(_styles2.TabsWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
     active: activeStatus === 'pending',
     onClick: function onClick() {
-      return setActiveStatus('pending');
+      return handleChangeStatus('pending');
     }
   }, t('ORDER_PENDING', 'Pending')), /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
     active: activeStatus === 'activated',
     onClick: function onClick() {
-      return setActiveStatus('activated');
+      return handleChangeStatus('activated');
     }
   }, t('REDEEMED', 'Redeemed'))), /*#__PURE__*/_react.default.createElement(_styles2.GiftCardsTableWrapper, null, /*#__PURE__*/_react.default.createElement("table", null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, t('ID', 'ID')), /*#__PURE__*/_react.default.createElement("th", null, t('PURCHASED_BY', 'Purchased by')), /*#__PURE__*/_react.default.createElement("th", null, t('REDEEMED_BY', 'Redeemed by')), /*#__PURE__*/_react.default.createElement("th", null, t('PURCHASED_DATE', 'Purchased date')), /*#__PURE__*/_react.default.createElement("th", null, t('REDEEMED_DATE', 'Redeemed date')))), giftCards.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.GiftCardRow, {
@@ -132,12 +164,21 @@ var GiftCardsListingUI = function GiftCardsListingUI(props) {
   })));
 };
 var GiftCardsListing = function GiftCardsListing(props) {
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
+  var defaultStatus = query.get('status');
+  var defaultPage = query.get('page') || 1;
+  var defaultPageSize = query.get('pageSize') || 10;
   var giftCardsProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: GiftCardsListingUI,
     isSearchById: true,
     isSearchByAuthorName: true,
     isSearchByAuthorEmail: true,
-    isSearchByAuthorPhone: true
+    isSearchByAuthorPhone: true,
+    defaultStatus: defaultStatus,
+    paginationSettings: {
+      initialPage: Number(defaultPage),
+      pageSize: Number(defaultPageSize)
+    }
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.GiftCardsList, giftCardsProps);
 };

@@ -200,6 +200,13 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     formMethods.setValue('email', (_e$target$value2 = e.target.value) === null || _e$target$value2 === void 0 ? void 0 : _e$target$value2.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, ''));
     emailInput.current.value = (_e$target$value3 = e.target.value) === null || _e$target$value3 === void 0 ? void 0 : _e$target$value3.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '');
   };
+  var handleExternalIdPaste = function handleExternalIdPaste(event) {
+    event.preventDefault();
+    var pastedData = event.clipboardData.getData('text/plain');
+    var sanitizedData = pastedData.replace(/\s/g, '').replace(/[^\d]/g, '');
+    document.execCommand('insertText', false, sanitizedData);
+    handleChangeSwtich('external_id', sanitizedData);
+  };
   (0, _react.useEffect)(function () {
     if (Object.keys(formMethods.errors).length > 0) {
       var content = Object.values(formMethods.errors).map(function (error) {
@@ -306,7 +313,8 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       if (!/^[0-9]$/.test(e.key)) {
         e.preventDefault();
       }
-    }
+    },
+    onPaste: handleExternalIdPaste
   }), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, {
     isTimezone: true
   }, /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {

@@ -19,6 +19,7 @@ var _styles3 = require("../PaymentOptionStripeDirect/styles");
 var _RiCheckboxBlankLine = _interopRequireDefault(require("@meronex/icons/ri/RiCheckboxBlankLine"));
 var _RiCheckboxFill = _interopRequireDefault(require("@meronex/icons/ri/RiCheckboxFill"));
 var _SiSquare = _interopRequireDefault(require("@meronex/icons/si/SiSquare"));
+var _utils = require("../../../utils");
 var _styles4 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -55,7 +56,6 @@ var PaymentOptionSquareUI = function PaymentOptionSquareUI(props) {
     handleChangeDataInput = props.handleChangeDataInput,
     handleChangeSanboxDataInput = props.handleChangeSanboxDataInput,
     handleChangeSandbox = props.handleChangeSandbox;
-  var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -140,10 +140,9 @@ var PaymentOptionSquareUI = function PaymentOptionSquareUI(props) {
   var handleTabClick = function handleTabClick(tab, isInitialRender) {
     setPaymentTabs(tab);
     if (!isInitialRender) {
-      var businessId = query.get('id');
-      var section = query.get('section');
-      var paymethod = query.get('paymethod');
-      history.replace("".concat(location.pathname, "?id=").concat(businessId, "&section=").concat(section, "&paymethod=").concat(paymethod, "&payemthod_tab=").concat(tab));
+      (0, _utils.addQueryToUrl)({
+        payemthod_tab: tab
+      });
     }
   };
   (0, _react.useEffect)(function () {

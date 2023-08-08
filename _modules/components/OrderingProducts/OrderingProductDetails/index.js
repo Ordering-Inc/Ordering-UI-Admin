@@ -13,6 +13,7 @@ var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _Shared = require("../../Shared");
 var _OrderingProductGeneralDetails = require("../OrderingProductGeneralDetails");
 var _SiteTheme = require("../SiteTheme");
+var _utils = require("../../../utils");
 var _styles2 = require("./styles");
 var _useWindowSize2 = require("../../../hooks/useWindowSize");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -33,7 +34,6 @@ var OrderingProductDetailsUI = function OrderingProductDetailsUI(props) {
   var siteState = props.siteState,
     isAddMode = props.isAddMode,
     handleDeleteSite = props.handleDeleteSite;
-  var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -92,7 +92,9 @@ var OrderingProductDetailsUI = function OrderingProductDetailsUI(props) {
     if (!isInitialRender) {
       var id = query.get('id');
       if (id) {
-        history.replace("".concat(location.pathname, "?id=").concat(id, "&tab=").concat(tab));
+        (0, _utils.addQueryToUrl)({
+          tab: tab
+        });
       }
     }
   };

@@ -2415,6 +2415,12 @@ Object.defineProperty(exports, "ZoneDropdownDetails", {
     return _Settings.ZoneDropdownDetails;
   }
 });
+Object.defineProperty(exports, "addQueryToUrl", {
+  enumerable: true,
+  get: function get() {
+    return _utils.addQueryToUrl;
+  }
+});
 Object.defineProperty(exports, "capitalize", {
   enumerable: true,
   get: function get() {
@@ -2425,6 +2431,12 @@ Object.defineProperty(exports, "getStorageItem", {
   enumerable: true,
   get: function get() {
     return _utils.getStorageItem;
+  }
+});
+Object.defineProperty(exports, "removeQueryToUrl", {
+  enumerable: true,
+  get: function get() {
+    return _utils.removeQueryToUrl;
   }
 });
 Object.defineProperty(exports, "setStorageItem", {

@@ -67,12 +67,13 @@ var DeliveryUsersListingUI = function DeliveryUsersListingUI(props) {
     actionDisabled = props.actionDisabled,
     driversGroupsState = props.driversGroupsState,
     setSelectedUsers = props.setSelectedUsers,
-    actionStatus = props.actionStatus;
+    actionStatus = props.actionStatus,
+    isUseQuery = props.isUseQuery;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
-  var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
+  var firstRender = (0, _react.useRef)(true);
   var _useState = (0, _react.useState)(null),
     _useState2 = _slicedToArray(_useState, 2),
     queryId = _useState2[0],
@@ -115,7 +116,9 @@ var DeliveryUsersListingUI = function DeliveryUsersListingUI(props) {
     setOpenUser(user);
     setOpenUserAddForm(false);
     setIsOpenUserDetails(true);
-    history.replace("".concat(location.pathname, "?id=").concat(user.id));
+    (0, _utils.addQueryToUrl)({
+      id: user.id
+    });
   };
   var handleOpenUserAddForm = function handleOpenUserAddForm() {
     var id = query.get('id');
@@ -137,7 +140,7 @@ var DeliveryUsersListingUI = function DeliveryUsersListingUI(props) {
     setIsTourOpen(true);
   };
   (0, _react.useEffect)(function () {
-    if (usersList.loading) return;
+    if (usersList.loading || !firstRender.current) return;
     var id = query.get('id');
     if (id === null) {
       !isDriversManagersPage && setIsOpenUserDetails(false);
@@ -152,6 +155,7 @@ var DeliveryUsersListingUI = function DeliveryUsersListingUI(props) {
       }
       setIsOpenUserDetails(true);
     }
+    firstRender.current = false;
   }, [usersList]);
   var handleCloseAddForm = function handleCloseAddForm() {
     setOpenUserAddForm(false);
@@ -268,7 +272,8 @@ var DeliveryUsersListingUI = function DeliveryUsersListingUI(props) {
     handleOpenUserDetails: handleOpenUserDetails,
     handleOpenUserAddForm: handleOpenUserAddForm,
     actionDisabled: actionDisabled,
-    setSelectedUsers: setSelectedUsers
+    setSelectedUsers: setSelectedUsers,
+    isUseQuery: isUseQuery
   })), isOpenUserDetails && /*#__PURE__*/_react.default.createElement(_UserDetailsLateralBar.UserDetailsLateralBar, {
     isDriversPage: isDriversPage,
     isDriversManagersPage: isDriversManagersPage,
@@ -324,12 +329,20 @@ var DeliveryUsersListingUI = function DeliveryUsersListingUI(props) {
   }));
 };
 var DeliveryUsersListing = function DeliveryUsersListing(props) {
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
+  var defaultPage = query.get('page') || 1;
+  var defaultPageSize = query.get('pageSize') || 10;
   var usersListingProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: DeliveryUsersListingUI,
     isSearchByUserEmail: true,
     isSearchByUserPhone: true,
     isSearchByUserName: true,
-    isDriver: true
+    isDriver: true,
+    paginationSettings: {
+      initialPage: props.isUseQuery && !isNaN(defaultPage) ? Number(defaultPage) : 1,
+      pageSize: props.isUseQuery && !isNaN(defaultPage) ? Number(defaultPageSize) : 10,
+      controlType: 'pages'
+    }
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.UsersList, usersListingProps);
 };

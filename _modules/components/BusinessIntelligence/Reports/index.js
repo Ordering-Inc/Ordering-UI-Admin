@@ -34,6 +34,8 @@ var _ReportsPaymethodSales = require("../ReportsPaymethodSales");
 var _ReportsSaleAndCategory = require("../ReportsSaleAndCategory");
 var _ReportsAverageSales = require("../ReportsAverageSales");
 var _ReportsGeneralSales = require("../ReportsGeneralSales");
+var _ReportsSlaOrders = require("./ReportsSlaOrders");
+var _utils = require("../../../utils");
 var _styles2 = require("./styles");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -44,7 +46,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var Reports = function Reports(props) {
-  var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -164,17 +165,24 @@ var Reports = function Reports(props) {
     name: t('TOP_SELLING_AND_CATEOGRY', 'Top selling and category'),
     description: t('TOP_SELLING_AND_CATEOGRY_DESC', 'Top selling and category description'),
     icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Tag, null)
+  }, {
+    id: 21,
+    name: t('SLA_ORDERS', 'SLA orders'),
+    description: t('SLA_ORDERS_DESC', 'SLA orders description'),
+    icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ListTask, null)
   }];
   var handleCloseSidebar = function handleCloseSidebar() {
     setIsOpen(false);
     setSelectedReport(0);
-    history.replace("".concat(location.pathname));
+    (0, _utils.removeQueryToUrl)(['id']);
   };
   var handleOpenSlider = function handleOpenSlider(index, isInitialRender) {
     setSelectedReport(index);
     setIsOpen(true);
     if (!isInitialRender) {
-      history.replace("".concat(location.pathname, "?id=").concat(index));
+      (0, _utils.addQueryToUrl)({
+        id: index
+      });
     }
   };
   (0, _react.useEffect)(function () {
@@ -212,6 +220,6 @@ var Reports = function Reports(props) {
     onClose: function onClose() {
       return handleCloseSidebar();
     }
-  }, selectedReport === 1 && /*#__PURE__*/_react.default.createElement(_ReportsBusinessDistance.ReportsBusinessDistance, null), selectedReport === 2 && /*#__PURE__*/_react.default.createElement(_ReportsOrderDistance.ReportsOrderDistance, null), selectedReport === 3 && /*#__PURE__*/_react.default.createElement(_ReportsBusinessSpend.ReportsBusinessSpend, null), selectedReport === 4 && /*#__PURE__*/_react.default.createElement(_ReportsDriverOrderTime.ReportsDriverOrderTime, null), selectedReport === 5 && /*#__PURE__*/_react.default.createElement(_ReportsDriverSpend.ReportsDriverSpend, null), selectedReport === 6 && /*#__PURE__*/_react.default.createElement(_ReportsDriverOrder.ReportsDriverOrder, null), selectedReport === 7 && /*#__PURE__*/_react.default.createElement(_ReportsDriverSchedule.ReportsDriverSchedule, null), selectedReport === 8 && /*#__PURE__*/_react.default.createElement(_ReportsOrderStatus.ReportsOrderStatus, null), selectedReport === 9 && /*#__PURE__*/_react.default.createElement(_ReportsHeatMap.ReportsHeatMap, null), selectedReport === 10 && /*#__PURE__*/_react.default.createElement(_ReportsDriverDistance.ReportsDriverDistance, null), selectedReport === 11 && /*#__PURE__*/_react.default.createElement(_ReportsSpentTime.ReportsSpentTime, null), selectedReport === 12 && /*#__PURE__*/_react.default.createElement(_ReportsTopDrivers.ReportsTopDrivers, null), selectedReport === 13 && /*#__PURE__*/_react.default.createElement(_ReportsOrders.ReportsOrders, null), selectedReport === 14 && /*#__PURE__*/_react.default.createElement(_ReportsSales.ReportsSales, null), selectedReport === 15 && /*#__PURE__*/_react.default.createElement(_ReportsUsers.ReportsUsers, null), selectedReport === 16 && /*#__PURE__*/_react.default.createElement(_ReportsCustomer.ReportsCustomer, null), selectedReport === 17 && /*#__PURE__*/_react.default.createElement(_ReportsPaymethodSales.ReportsPaymethodSales, null), selectedReport === 18 && /*#__PURE__*/_react.default.createElement(_ReportsAverageSales.ReportsAverageSales, null), selectedReport === 19 && /*#__PURE__*/_react.default.createElement(_ReportsGeneralSales.ReportsGeneralSales, null), selectedReport === 20 && /*#__PURE__*/_react.default.createElement(_ReportsSaleAndCategory.ReportsSaleAndCategory, null)));
+  }, selectedReport === 1 && /*#__PURE__*/_react.default.createElement(_ReportsBusinessDistance.ReportsBusinessDistance, null), selectedReport === 2 && /*#__PURE__*/_react.default.createElement(_ReportsOrderDistance.ReportsOrderDistance, null), selectedReport === 3 && /*#__PURE__*/_react.default.createElement(_ReportsBusinessSpend.ReportsBusinessSpend, null), selectedReport === 4 && /*#__PURE__*/_react.default.createElement(_ReportsDriverOrderTime.ReportsDriverOrderTime, null), selectedReport === 5 && /*#__PURE__*/_react.default.createElement(_ReportsDriverSpend.ReportsDriverSpend, null), selectedReport === 6 && /*#__PURE__*/_react.default.createElement(_ReportsDriverOrder.ReportsDriverOrder, null), selectedReport === 7 && /*#__PURE__*/_react.default.createElement(_ReportsDriverSchedule.ReportsDriverSchedule, null), selectedReport === 8 && /*#__PURE__*/_react.default.createElement(_ReportsOrderStatus.ReportsOrderStatus, null), selectedReport === 9 && /*#__PURE__*/_react.default.createElement(_ReportsHeatMap.ReportsHeatMap, null), selectedReport === 10 && /*#__PURE__*/_react.default.createElement(_ReportsDriverDistance.ReportsDriverDistance, null), selectedReport === 11 && /*#__PURE__*/_react.default.createElement(_ReportsSpentTime.ReportsSpentTime, null), selectedReport === 12 && /*#__PURE__*/_react.default.createElement(_ReportsTopDrivers.ReportsTopDrivers, null), selectedReport === 13 && /*#__PURE__*/_react.default.createElement(_ReportsOrders.ReportsOrders, null), selectedReport === 14 && /*#__PURE__*/_react.default.createElement(_ReportsSales.ReportsSales, null), selectedReport === 15 && /*#__PURE__*/_react.default.createElement(_ReportsUsers.ReportsUsers, null), selectedReport === 16 && /*#__PURE__*/_react.default.createElement(_ReportsCustomer.ReportsCustomer, null), selectedReport === 17 && /*#__PURE__*/_react.default.createElement(_ReportsPaymethodSales.ReportsPaymethodSales, null), selectedReport === 18 && /*#__PURE__*/_react.default.createElement(_ReportsAverageSales.ReportsAverageSales, null), selectedReport === 19 && /*#__PURE__*/_react.default.createElement(_ReportsGeneralSales.ReportsGeneralSales, null), selectedReport === 20 && /*#__PURE__*/_react.default.createElement(_ReportsSaleAndCategory.ReportsSaleAndCategory, null), selectedReport === 21 && /*#__PURE__*/_react.default.createElement(_ReportsSlaOrders.ReportsSlaOrders, null)));
 };
 exports.Reports = Reports;

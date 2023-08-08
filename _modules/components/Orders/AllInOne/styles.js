@@ -45,11 +45,11 @@ var HeaderTitleContainer = _styledComponents.default.div(_templateObject15 || (_
 exports.HeaderTitleContainer = HeaderTitleContainer;
 var MainContentContainer = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  margin-top: 15px;\n"])));
 exports.MainContentContainer = MainContentContainer;
-var TopContent = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column-reverse;\n  margin-bottom: 20px;\n  border-bottom: 5px solid ", ";\n  @media (min-width: 992px) {\n    flex-direction: row;\n    #orderTable {\n      max-height: calc(var(--vh, 1vh) * 100 - 475px);\n    }\n  }\n"])), function (props) {
+var TopContent = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column-reverse;\n  margin-bottom: 20px;\n  border-bottom: 5px solid ", ";\n  @media (min-width: 992px) {\n    flex-direction: row;\n    #orderTable {\n      max-height: calc(var(--vh, 1vh) * 50 - 180px);\n    }\n  }\n"])), function (props) {
   return props.theme.colors.borderColor;
 });
 exports.TopContent = TopContent;
-var WrapperDriversLocation = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  border-radius: 8px;\n  overflow: hidden;\n  height: 700px;\n"])));
+var WrapperDriversLocation = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  border-radius: 8px;\n  overflow: hidden;\n  height: calc(var(--vh, 1vh) * 100 - 40px);\n\n  @media (min-width: 992px) {\n    height: calc(var(--vh, 1vh) * 50 - 115px);\n  }\n"])));
 exports.WrapperDriversLocation = WrapperDriversLocation;
 var DriversContainer = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  box-sizing: border-box;\n  @media (min-width: 992px) {\n    ", "\n  }\n"])), function (props) {
   var _props$theme3;

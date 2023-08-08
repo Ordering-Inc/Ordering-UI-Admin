@@ -21,6 +21,7 @@ var _Shared = require("../../Shared");
 var _Personalization = require("../../Shared/Personalization");
 var _UserMetaFields = require("../UserMetaFields");
 var _styles = require("../../../styles");
+var _utils = require("../../../utils");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -44,7 +45,6 @@ var UserDetailsUI = function UserDetailsUI(props) {
     handleSuccessUserUpdate = props.handleSuccessUserUpdate,
     handleDeleteUser = props.handleDeleteUser,
     handleChangeActiveUser = props.handleChangeActiveUser;
-  var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var theme = (0, _styledComponents.useTheme)();
   var _useSession = (0, _orderingComponentsAdmin.useSession)(),
@@ -94,14 +94,9 @@ var UserDetailsUI = function UserDetailsUI(props) {
   var handleTabClick = function handleTabClick(tab, isInitialRender) {
     setCurrentMenuSelected(tab);
     if (!isInitialRender) {
-      var enabled = query.get('enabled');
-      var id = query.get('id');
-      var section = query.get('section');
-      if (section) {
-        history.replace("".concat(location.pathname, "?enabled=").concat(enabled, "&id=").concat(id, "&section=").concat(section, "&tab=").concat(tab));
-      } else {
-        history.replace("".concat(location.pathname, "?enabled=").concat(enabled, "&id=").concat(id, "&tab=").concat(tab));
-      }
+      (0, _utils.addQueryToUrl)({
+        tab: tab
+      });
     }
   };
   (0, _react.useEffect)(function () {

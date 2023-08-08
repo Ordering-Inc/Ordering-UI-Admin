@@ -13,6 +13,7 @@ var _Shared = require("../../Shared");
 var _styles = require("../../../styles");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _BannerDetails = require("../BannerDetails");
+var _utils = require("../../../utils");
 var _styles2 = require("./styles");
 var _useWindowSize2 = require("../../../hooks/useWindowSize");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -47,7 +48,6 @@ var PageBannersUI = function PageBannersUI(props) {
     handleSuccessDelete = props.handleSuccessDelete,
     aspectRatio = props.aspectRatio,
     isSearhShow = props.isSearhShow;
-  var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -90,16 +90,16 @@ var PageBannersUI = function PageBannersUI(props) {
     setOpenItemsDetail(true);
     setMoveDistance(500);
     if (banner && !isInitialRender) {
-      var position = query.get('position');
-      history.replace("".concat(location.pathname, "?position=").concat(position, "&banner=").concat(banner === null || banner === void 0 ? void 0 : banner.id));
+      (0, _utils.addQueryToUrl)({
+        banner: banner === null || banner === void 0 ? void 0 : banner.id
+      });
     }
   };
   var handleCloseDetail = function handleCloseDetail() {
     setMoveDistance(0);
     setOpenItemsDetail(false);
     setSelectedBanner(null);
-    var position = query.get('position');
-    history.replace("".concat(location.pathname, "?position=").concat(position));
+    (0, _utils.removeQueryToUrl)(['banner']);
   };
   var expandSidebar = function expandSidebar() {
     var element = document.getElementById('sideSlider');

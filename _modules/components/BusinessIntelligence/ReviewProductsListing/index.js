@@ -12,6 +12,7 @@ var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _Shared = require("../../Shared");
 var _ProductReviewDetails = require("../ProductReviewDetails");
+var _utils = require("../../../utils");
 var _styles = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -37,8 +38,11 @@ var ReviewProductsListingUI = function ReviewProductsListingUI(props) {
     handleChangeSearch = props.handleChangeSearch,
     searchValue = props.searchValue,
     parentSearchValue = props.parentSearchValue,
-    businessId = props.businessId;
-  var history = (0, _reactRouterDom.useHistory)();
+    businessId = props.businessId,
+    isUseQuery = props.isUseQuery,
+    defaultPage = props.defaultPage,
+    defaultPageSize = props.defaultPageSize,
+    firstRender = props.firstRender;
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -62,11 +66,11 @@ var ReviewProductsListingUI = function ReviewProductsListingUI(props) {
     _useState8 = _slicedToArray(_useState7, 2),
     curCategoryId = _useState8[0],
     setCurCategoryId = _useState8[1];
-  var _useState9 = (0, _react.useState)(1),
+  var _useState9 = (0, _react.useState)(defaultPage || 1),
     _useState10 = _slicedToArray(_useState9, 2),
     currentPage = _useState10[0],
     setCurrentPage = _useState10[1];
-  var _useState11 = (0, _react.useState)(10),
+  var _useState11 = (0, _react.useState)(defaultPageSize || 10),
     _useState12 = _slicedToArray(_useState11, 2),
     productsPerPage = _useState12[0],
     setProductsPerPage = _useState12[1];
@@ -106,19 +110,19 @@ var ReviewProductsListingUI = function ReviewProductsListingUI(props) {
     setOpenReview(true);
     if (!isInitialRender) {
       var _product$category2;
-      var tab = query.get('tab');
-      var business = query.get('business');
-      history.replace("".concat(location.pathname, "?tab=").concat(tab, "&business=").concat(business, "&category=").concat(product === null || product === void 0 || (_product$category2 = product.category) === null || _product$category2 === void 0 ? void 0 : _product$category2.id, "&product=").concat(product.id));
+      (0, _utils.addQueryToUrl)({
+        category: product === null || product === void 0 || (_product$category2 = product.category) === null || _product$category2 === void 0 ? void 0 : _product$category2.id,
+        product: product.id
+      });
     }
   };
   var handleCloseReviewDetails = function handleCloseReviewDetails() {
     setCurProduct(null);
     setOpenReview(false);
-    var tab = query.get('tab');
-    var business = query.get('business');
-    history.replace("".concat(location.pathname, "?tab=").concat(tab, "&business=").concat(business));
+    (0, _utils.removeQueryToUrl)(['category', 'product']);
   };
   (0, _react.useEffect)(function () {
+    if (firstRender) return;
     setCurrentPage(1);
   }, [searchValue]);
   (0, _react.useEffect)(function () {
@@ -133,6 +137,13 @@ var ReviewProductsListingUI = function ReviewProductsListingUI(props) {
       setOpenReview(true);
     }
   }, []);
+  (0, _react.useEffect)(function () {
+    if (!isUseQuery || !currentPage || !productsPerPage || !totalPages) return;
+    (0, _utils.addQueryToUrl)({
+      page: currentPage,
+      pageSize: productsPerPage
+    });
+  }, [currentPage, productsPerPage, totalPages]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.ReviewsListingContainer, null, /*#__PURE__*/_react.default.createElement(_styles.ReviewsTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles.ReviewObject, {
     isHeader: true
   }, t('PRODUCT', 'Product'))), /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles.ReviewMarkerWrapper, {

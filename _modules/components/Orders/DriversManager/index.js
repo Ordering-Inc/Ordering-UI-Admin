@@ -37,7 +37,9 @@ var DriversManagerUI = function DriversManagerUI(props) {
   var onDriverRedirect = props.onDriverRedirect,
     handleChangeSearch = props.handleChangeSearch,
     searchValue = props.searchValue,
-    driversIsOnline = props.driversIsOnline;
+    driversIsOnline = props.driversIsOnline,
+    selectedDriver = props.selectedDriver,
+    setSelectedDriver = props.setSelectedDriver;
   var _props$driversList = props.driversList,
     drivers = _props$driversList.drivers,
     loading = _props$driversList.loading;
@@ -59,12 +61,8 @@ var DriversManagerUI = function DriversManagerUI(props) {
     setIsOpenDriverOrders = _useState2[1];
   var _useState3 = (0, _react.useState)(null),
     _useState4 = _slicedToArray(_useState3, 2),
-    selectedDriver = _useState4[0],
-    setSelectedDriver = _useState4[1];
-  var _useState5 = (0, _react.useState)(null),
-    _useState6 = _slicedToArray(_useState5, 2),
-    openDriver = _useState6[0],
-    setOpenDriver = _useState6[1];
+    openDriver = _useState4[0],
+    setOpenDriver = _useState4[1];
   var handleBackRedirect = function handleBackRedirect() {
     setIsOpenDriverOrders(false);
     onDriverRedirect();
