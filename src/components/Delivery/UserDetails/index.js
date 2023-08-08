@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
-import { useLanguage, UserDetails as UserDetailsController } from 'ordering-components-admin'
+import { useConfig, useLanguage, UserDetails as UserDetailsController } from 'ordering-components-admin'
 import { OrdersManager } from '../../Orders/OrdersManager'
 import { AddressList } from '../AddressList'
 import { Personalization, Modal, Schedule, PushTokens } from '../../Shared'
@@ -52,6 +52,8 @@ export const UserDetailsUI = (props) => {
   const [isCustomField, setIsCustomField] = useState(false)
   const [isPersonalization, setIsPersonalization] = useState(false)
   const [isExpand, setIsExpand] = useState(false)
+  const [{ configs }] = useConfig()
+  const disableSchedule = configs?.allow_driver_manager_update_driver_schedule?.value === '1'
 
   const expandSidebar = () => {
     const element = document.getElementById('user_lateral_bar')
@@ -139,6 +141,7 @@ export const UserDetailsUI = (props) => {
         isDriverMenu={isDriversPage}
         currentMenuSelected={currentMenuSelected}
         handleChangeMenu={handleTabClick}
+        disableSchedule={disableSchedule}
       />
       {!userState?.loading && userState?.user && (
         <>
