@@ -48,6 +48,7 @@ export const OrdersCards = (props) => {
     timer: true,
     slaBar: true
   })
+  const showExternalId = configState?.configs?.change_order_id?.value === '1'
 
   const handleChangePage = (page) => {
     getPageOrders(pagination.pageSize, page)
@@ -217,7 +218,7 @@ export const OrdersCards = (props) => {
                 <CardHeading>
                   <OrderHeader>
                     <h2>
-                      <span>{t('INVOICE_ORDER_NO', 'Order No.')} {order?.id}</span>
+                      <span>{t('INVOICE_ORDER_NO', 'Order No.')} {(showExternalId && !!order?.external_id) ? order.external_id : order.id}</span>
                     </h2>
                     <p>{getOrderStatus(order.status)?.value}</p>
                     <div>

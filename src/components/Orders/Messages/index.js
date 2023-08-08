@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useUtils, useLanguage, useSession, Messages as MessagesController } from 'ordering-components-admin'
+import { useUtils, useLanguage, useSession, Messages as MessagesController, useConfig } from 'ordering-components-admin'
 import { useForm, Controller } from 'react-hook-form'
 import { useTheme } from 'styled-components'
 import Skeleton from 'react-loading-skeleton'
@@ -102,6 +102,8 @@ export const MessagesUI = (props) => {
   const [isChatDisabled, setIsChatDisabled] = useState(false)
   const previousStatus = [1, 2, 5, 6, 10, 11, 12, 16, 17]
   const chatDisabled = previousStatus.includes(order?.status)
+  const [{ configs }] = useConfig()
+  const showExternalId = configs?.change_order_id?.value === '1'
 
   const adminMessageList = [
     { key: 'message_1', text: t('ADMIN_MESSAGE_1', 'admin_message_1') },
@@ -331,7 +333,7 @@ export const MessagesUI = (props) => {
               {isChat && (
                 <ChatHeader>
                   <OrderNumber>
-                    {t('INVOICE_ORDER_NO', 'Order No')} {order.id}
+                    {t('INVOICE_ORDER_NO', 'Order No')} {(showExternalId && !!order?.external_id) ? order.external_id : order.id}
                   </OrderNumber>
                   <ImageContainer>
                     {user?.level !== 2 && (

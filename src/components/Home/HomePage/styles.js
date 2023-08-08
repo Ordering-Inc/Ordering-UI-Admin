@@ -587,3 +587,32 @@ export const HubspotFormWrapper = styled.div`
   min-height: 445px;
   position: relative;
 `
+
+export const OnboardingLessonsContainer = styled.div`
+  background-color: ${props => props.theme.colors.lightPrimary};
+  padding: 50px 15px;
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h1 {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 36px;
+    text-align: center;
+  }
+  p {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    text-align: center;
+    margin: 8px 0 17px 0;
+  }
+  button {
+    border-radius: 7.6px;
+    padding: 10px;
+    line-height: 20px;
+    min-width: 216px;
+  }
+`
