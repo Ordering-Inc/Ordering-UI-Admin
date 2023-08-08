@@ -145,3 +145,7 @@ export const SandboxWrapper = styled.div`
     `}
   }
 `
+
+export const EmptyMessage = styled.div`
+  padding: 15px 0;
+`
