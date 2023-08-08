@@ -79,10 +79,10 @@ var BusinessPreorderDetails = function BusinessPreorderDetails(props) {
     }));
   };
   var changePreorderConfigs = function changePreorderConfigs(params) {
-    var _business$configs;
-    var cateringString = business === null || business === void 0 || (_business$configs = business.configs) === null || _business$configs === void 0 || (_business$configs = _business$configs.find(function (config) {
+    var _business$configs, _business$configs$fin;
+    var cateringString = business === null || business === void 0 ? void 0 : (_business$configs = business.configs) === null || _business$configs === void 0 ? void 0 : (_business$configs$fin = _business$configs.find(function (config) {
       return (config === null || config === void 0 ? void 0 : config.id) === (params === null || params === void 0 ? void 0 : params.id);
-    })) === null || _business$configs === void 0 ? void 0 : _business$configs.value;
+    })) === null || _business$configs$fin === void 0 ? void 0 : _business$configs$fin.value;
     var stringParam = cateringString.split('|').map(function (string) {
       return string.includes(params.type) ? "".concat(params.type, ",").concat(params.value) : string;
     }).join('|');

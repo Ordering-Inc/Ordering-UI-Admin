@@ -29,7 +29,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var CampaignSMS = function CampaignSMS(props) {
-  var _contactState$changes3, _contactState$changes4, _contactState$changes5, _contactState$changes6;
+  var _contactState$changes5, _contactState$changes6, _contactState$changes7, _contactState$changes8, _contactState$changes9, _contactState$changes10, _contactState$changes11, _contactState$changes12;
   var isAddMode = props.isAddMode,
     contactState = props.contactState,
     handleChangeData = props.handleChangeData,
@@ -53,7 +53,7 @@ var CampaignSMS = function CampaignSMS(props) {
   });
   var isEnableConfig = (0, _react.useMemo)(function () {
     var _category$configs;
-    return category === null || category === void 0 || (_category$configs = category.configs) === null || _category$configs === void 0 ? void 0 : _category$configs.every(function (config) {
+    return category === null || category === void 0 ? void 0 : (_category$configs = category.configs) === null || _category$configs === void 0 ? void 0 : _category$configs.every(function (config) {
       return !!(config !== null && config !== void 0 && config.value);
     });
   }, [category]);
@@ -64,15 +64,15 @@ var CampaignSMS = function CampaignSMS(props) {
     });
   };
   var handleSaveSms = function handleSaveSms() {
-    var _contactState$changes, _contactState$changes2;
-    if (!(contactState !== null && contactState !== void 0 && (_contactState$changes = contactState.changes) !== null && _contactState$changes !== void 0 && (_contactState$changes = _contactState$changes.contact_data) !== null && _contactState$changes !== void 0 && _contactState$changes.title)) {
+    var _contactState$changes, _contactState$changes2, _contactState$changes3, _contactState$changes4;
+    if (!(contactState !== null && contactState !== void 0 && (_contactState$changes = contactState.changes) !== null && _contactState$changes !== void 0 && (_contactState$changes2 = _contactState$changes.contact_data) !== null && _contactState$changes2 !== void 0 && _contactState$changes2.title)) {
       setAlertState({
         open: true,
         content: t('VALIDATION_ERROR_REQUIRED', 'Title is required').replace('_attribute_', t('TITLE', 'Title'))
       });
       return;
     }
-    if (!(contactState !== null && contactState !== void 0 && (_contactState$changes2 = contactState.changes) !== null && _contactState$changes2 !== void 0 && (_contactState$changes2 = _contactState$changes2.contact_data) !== null && _contactState$changes2 !== void 0 && _contactState$changes2.body)) {
+    if (!(contactState !== null && contactState !== void 0 && (_contactState$changes3 = contactState.changes) !== null && _contactState$changes3 !== void 0 && (_contactState$changes4 = _contactState$changes3.contact_data) !== null && _contactState$changes4 !== void 0 && _contactState$changes4.body)) {
       setAlertState({
         open: true,
         content: t('VALIDATION_ERROR_REQUIRED', 'Body is required').replace('_attribute_', t('BODY', 'Body'))
@@ -80,10 +80,10 @@ var CampaignSMS = function CampaignSMS(props) {
       return;
     }
     if (isAddMode) {
-      var _formState$changes;
-      if ((formState === null || formState === void 0 || (_formState$changes = formState.changes) === null || _formState$changes === void 0 || (_formState$changes = _formState$changes.conditions) === null || _formState$changes === void 0 ? void 0 : _formState$changes.length) > 0) {
+      var _formState$changes, _formState$changes$co;
+      if ((formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : (_formState$changes$co = _formState$changes.conditions) === null || _formState$changes$co === void 0 ? void 0 : _formState$changes$co.length) > 0) {
         var _formState$changes2;
-        var _iterator = _createForOfIteratorHelper(formState === null || formState === void 0 || (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.conditions),
+        var _iterator = _createForOfIteratorHelper(formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.conditions),
           _step;
         try {
           for (_iterator.s(); !(_step = _iterator.n()).done;) {
@@ -117,16 +117,16 @@ var CampaignSMS = function CampaignSMS(props) {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isEnableConfig ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('TITLE', 'Title')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "title",
     placeholder: t('TITLE', 'Title'),
-    defaultValue: (contactState === null || contactState === void 0 || (_contactState$changes3 = contactState.changes) === null || _contactState$changes3 === void 0 || (_contactState$changes3 = _contactState$changes3.contact_data) === null || _contactState$changes3 === void 0 ? void 0 : _contactState$changes3.title) || '',
+    defaultValue: (contactState === null || contactState === void 0 ? void 0 : (_contactState$changes5 = contactState.changes) === null || _contactState$changes5 === void 0 ? void 0 : (_contactState$changes6 = _contactState$changes5.contact_data) === null || _contactState$changes6 === void 0 ? void 0 : _contactState$changes6.title) || '',
     onChange: handleChangeData
   })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('MESSAGES', 'Messages')), /*#__PURE__*/_react.default.createElement(_styles.TextArea, {
     name: "body",
     placeholder: t('WRITE_MESSAGE', 'Write a message'),
-    defaultValue: (contactState === null || contactState === void 0 || (_contactState$changes4 = contactState.changes) === null || _contactState$changes4 === void 0 || (_contactState$changes4 = _contactState$changes4.contact_data) === null || _contactState$changes4 === void 0 ? void 0 : _contactState$changes4.body) || '',
+    defaultValue: (contactState === null || contactState === void 0 ? void 0 : (_contactState$changes7 = contactState.changes) === null || _contactState$changes7 === void 0 ? void 0 : (_contactState$changes8 = _contactState$changes7.contact_data) === null || _contactState$changes8 === void 0 ? void 0 : _contactState$changes8.body) || '',
     onChange: handleChangeData
   })), /*#__PURE__*/_react.default.createElement(_styles2.SmsPreviewWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.SmsContentLayout, {
     bgimage: theme.images.general.mobileHalfMask
-  }, /*#__PURE__*/_react.default.createElement(_styles2.SmsPreviewContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.SmsPreviewContent, null, /*#__PURE__*/_react.default.createElement("h2", null, (contactState === null || contactState === void 0 || (_contactState$changes5 = contactState.changes) === null || _contactState$changes5 === void 0 || (_contactState$changes5 = _contactState$changes5.contact_data) === null || _contactState$changes5 === void 0 ? void 0 : _contactState$changes5.title) || ''), /*#__PURE__*/_react.default.createElement("p", null, (contactState === null || contactState === void 0 || (_contactState$changes6 = contactState.changes) === null || _contactState$changes6 === void 0 || (_contactState$changes6 = _contactState$changes6.contact_data) === null || _contactState$changes6 === void 0 ? void 0 : _contactState$changes6.body) || '')))))), /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.SmsPreviewContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.SmsPreviewContent, null, /*#__PURE__*/_react.default.createElement("h2", null, (contactState === null || contactState === void 0 ? void 0 : (_contactState$changes9 = contactState.changes) === null || _contactState$changes9 === void 0 ? void 0 : (_contactState$changes10 = _contactState$changes9.contact_data) === null || _contactState$changes10 === void 0 ? void 0 : _contactState$changes10.title) || ''), /*#__PURE__*/_react.default.createElement("p", null, (contactState === null || contactState === void 0 ? void 0 : (_contactState$changes11 = contactState.changes) === null || _contactState$changes11 === void 0 ? void 0 : (_contactState$changes12 = _contactState$changes11.contact_data) === null || _contactState$changes12 === void 0 ? void 0 : _contactState$changes12.body) || '')))))), /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     onClick: function onClick() {
       return handleSaveSms();

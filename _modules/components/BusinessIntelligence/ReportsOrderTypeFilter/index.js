@@ -49,7 +49,7 @@ var ReportsOrderTypeFilter = function ReportsOrderTypeFilter(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     orderTypeIds = _useState4[0],
     setOrderTypeIds = _useState4[1];
-  var configTypes = (configs === null || configs === void 0 || (_configs$order_types_ = configs.order_types_allowed) === null || _configs$order_types_ === void 0 ? void 0 : _configs$order_types_.value.split('|').map(function (value) {
+  var configTypes = (configs === null || configs === void 0 ? void 0 : (_configs$order_types_ = configs.order_types_allowed) === null || _configs$order_types_ === void 0 ? void 0 : _configs$order_types_.value.split('|').map(function (value) {
     return Number(value);
   })) || [];
   var defaultOrderTypes = [{
@@ -140,7 +140,7 @@ var ReportsOrderTypeFilter = function ReportsOrderTypeFilter(props) {
       return [].concat(_toConsumableArray(prev), [cur.value]);
     }, []);
     setOrderTypeIds(_toConsumableArray((filterList === null || filterList === void 0 ? void 0 : filterList.delivery_types_ids) || _orderTypeIds));
-    if (!(filterList !== null && filterList !== void 0 && filterList.delivery_types_ids) || (filterList === null || filterList === void 0 || (_filterList$delivery_ = filterList.delivery_types_ids) === null || _filterList$delivery_ === void 0 ? void 0 : _filterList$delivery_.length) === orderTypes.length) setIsAllCheck(true);
+    if (!(filterList !== null && filterList !== void 0 && filterList.delivery_types_ids) || (filterList === null || filterList === void 0 ? void 0 : (_filterList$delivery_ = filterList.delivery_types_ids) === null || _filterList$delivery_ === void 0 ? void 0 : _filterList$delivery_.length) === orderTypes.length) setIsAllCheck(true);
   }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.OrderTypeFilterContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.OrderTypeFilterOption, {
     onClick: handleChangeAllCheck

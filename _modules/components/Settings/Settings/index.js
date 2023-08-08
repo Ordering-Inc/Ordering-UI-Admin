@@ -42,7 +42,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var SettingsUI = function SettingsUI(props) {
-  var _configs$multicountry, _categoryList$categor, _theme$images;
+  var _configs$multicountry, _categoryList$categor, _theme$images, _theme$images$dummies;
   var categoryList = props.categoryList,
     settingsType = props.settingsType,
     handChangeConfig = props.handChangeConfig;
@@ -55,7 +55,7 @@ var SettingsUI = function SettingsUI(props) {
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configs = _useConfig2[0].configs;
-  var isMulticountryEnabled = configs === null || configs === void 0 || (_configs$multicountry = configs.multicountry) === null || _configs$multicountry === void 0 ? void 0 : _configs$multicountry.value;
+  var isMulticountryEnabled = configs === null || configs === void 0 ? void 0 : (_configs$multicountry = configs.multicountry) === null || _configs$multicountry === void 0 ? void 0 : _configs$multicountry.value;
   var _useInfoShare = (0, _InfoShareContext.useInfoShare)(),
     _useInfoShare2 = _slicedToArray(_useInfoShare, 2),
     isCollapse = _useInfoShare2[0].isCollapse,
@@ -304,7 +304,7 @@ var SettingsUI = function SettingsUI(props) {
       active: (selectedCategory === null || selectedCategory === void 0 ? void 0 : selectedCategory.id) === (category === null || category === void 0 ? void 0 : category.id)
     })));
   })), !categoryList.loading && ((_categoryList$categor = categoryList.categories) === null || _categoryList$categor === void 0 ? void 0 : _categoryList$categor.length) === 0 && settingsType !== 'key_basic' && /*#__PURE__*/_react.default.createElement(_styles2.WrapperNoneConfigs, null, /*#__PURE__*/_react.default.createElement(_styles2.InnerNoneConfigsContainer, null, /*#__PURE__*/_react.default.createElement("img", {
-    src: theme === null || theme === void 0 || (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.dummies) === null || _theme$images === void 0 ? void 0 : _theme$images.noOrders,
+    src: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.noOrders,
     alt: "none"
   }), /*#__PURE__*/_react.default.createElement("p", null, t('NO_SETTINGS', 'No Settings yet.'))))), isOpenDescription && /*#__PURE__*/_react.default.createElement(_SettingsDetail.SettingsDetail, _extends({}, props, {
     open: isOpenDescription,

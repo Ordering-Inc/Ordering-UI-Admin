@@ -183,8 +183,8 @@ var ProductTagDetailsUI = function ProductTagDetailsUI(props) {
     src: optimizeImage((_tagState$tag3 = tagState.tag) === null || _tagState$tag3 === void 0 ? void 0 : _tagState$tag3.image, 'h_200,c_limit'),
     alt: "tag image",
     loading: "lazy"
-  }) : (formState === null || formState === void 0 || (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.image) && /*#__PURE__*/_react.default.createElement("img", {
-    src: formState === null || formState === void 0 || (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.image,
+  }) : (formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.image) && /*#__PURE__*/_react.default.createElement("img", {
+    src: formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.image,
     alt: "tag image",
     loading: "lazy"
   }), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIconContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Image, null)))))), /*#__PURE__*/_react.default.createElement(_styles2.FormController, null, /*#__PURE__*/_react.default.createElement("label", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement(_styles.Input, {

@@ -70,16 +70,16 @@ var OrderNotificationUI = function OrderNotificationUI(props) {
     alertState = _useState10[0],
     setAlertState = _useState10[1];
   var handleNotification = function handleNotification(order) {
-    var _order$products;
-    if ((order === null || order === void 0 || (_order$products = order.products) === null || _order$products === void 0 || (_order$products = _order$products[0]) === null || _order$products === void 0 ? void 0 : _order$products.type) === 'gift_card') return;
+    var _order$products, _order$products$;
+    if ((order === null || order === void 0 ? void 0 : (_order$products = order.products) === null || _order$products === void 0 ? void 0 : (_order$products$ = _order$products[0]) === null || _order$products$ === void 0 ? void 0 : _order$products$.type) === 'gift_card') return;
     if (customerId && (order === null || order === void 0 ? void 0 : order.customer_id) !== customerId) return;
     if (isOnlyDelivery && (order === null || order === void 0 ? void 0 : order.delivery_type) !== 1) return;
     var _registerOrderIds = _toConsumableArray(registerOrderIds);
     if (!_registerOrderIds.includes(order.id)) {
-      var _configState$configs;
+      var _configState$configs, _configState$configs$;
       _registerOrderIds.push(order.id);
       setRegisterOrderIds(_registerOrderIds);
-      if ((configState === null || configState === void 0 || (_configState$configs = configState.configs) === null || _configState$configs === void 0 || (_configState$configs = _configState$configs.notification_toast) === null || _configState$configs === void 0 ? void 0 : _configState$configs.value) === 'true') {
+      if ((configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.notification_toast) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value) === 'true') {
         toastNotify(order.id);
       } else {
         setNotificationModalOpen(true);
@@ -136,7 +136,7 @@ var OrderNotificationUI = function OrderNotificationUI(props) {
     return function () {
       return clearInterval(interval);
     };
-  }, [notificationModalOpen, configState === null || configState === void 0 || (_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 ? void 0 : _configState$configs4.disable_sound_notification]);
+  }, [notificationModalOpen, configState === null || configState === void 0 ? void 0 : (_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 ? void 0 : _configState$configs4.disable_sound_notification]);
   (0, _react.useEffect)(function () {
     if (configState.loading) return;
     events.on('order_added', handleNotification);

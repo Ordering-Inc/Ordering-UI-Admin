@@ -21,7 +21,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var InvoiceDriverPdf = function InvoiceDriverPdf(props) {
-  var _theme$images, _exportInvoiceList$in, _exportInvoiceList$in2, _exportInvoiceList$in3, _exportInvoiceList$in4, _exportInvoiceList$in5, _exportInvoiceList$in6, _exportInvoiceList$in7, _exportInvoiceList$in8, _exportInvoiceList$in9, _exportInvoiceList$in10, _exportInvoiceList$in11, _exportInvoiceList$in12, _exportInvoiceList$in13, _exportInvoiceList$in14, _exportInvoiceList$in15, _exportInvoiceList$in16, _exportInvoiceList$in17, _exportInvoiceList$in18, _exportInvoiceList$in19, _exportInvoiceList$in20, _exportInvoiceList$in21, _exportInvoiceList$in22, _exportInvoiceList$in23, _exportInvoiceList$in24, _exportInvoiceList$in25, _exportInvoiceList$in26;
+  var _theme$images, _theme$images$logos, _exportInvoiceList$in, _exportInvoiceList$in2, _exportInvoiceList$in3, _exportInvoiceList$in4, _exportInvoiceList$in5, _exportInvoiceList$in6, _exportInvoiceList$in7, _exportInvoiceList$in8, _exportInvoiceList$in9, _exportInvoiceList$in10, _exportInvoiceList$in11, _exportInvoiceList$in12, _exportInvoiceList$in13, _exportInvoiceList$in14, _exportInvoiceList$in15, _exportInvoiceList$in16, _exportInvoiceList$in17, _exportInvoiceList$in18, _exportInvoiceList$in19, _exportInvoiceList$in20, _exportInvoiceList$in21, _exportInvoiceList$in22, _exportInvoiceList$in23, _exportInvoiceList$in24, _exportInvoiceList$in25, _exportInvoiceList$in26, _exportInvoiceList$in27, _exportInvoiceList$in28;
   var exportInvoiceList = props.exportInvoiceList,
     getSubtotal = props.getSubtotal,
     getTotal = props.getTotal;
@@ -223,7 +223,7 @@ var InvoiceDriverPdf = function InvoiceDriverPdf(props) {
     });
     return objectStatus && objectStatus;
   };
-  var logoImage = theme === null || theme === void 0 || (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.logos) === null || _theme$images === void 0 ? void 0 : _theme$images.logoPdf;
+  var logoImage = theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$logos = _theme$images.logos) === null || _theme$images$logos === void 0 ? void 0 : _theme$images$logos.logoPdf;
   var _useState = (0, _react.useState)(null),
     _useState2 = _slicedToArray(_useState, 2),
     base64ImageString = _useState2[0],
@@ -274,7 +274,7 @@ var InvoiceDriverPdf = function InvoiceDriverPdf(props) {
     fluid: true,
     loading: "lazy",
     style: styles.imageWrapper
-  }), /*#__PURE__*/_react.default.createElement("br", null), /*#__PURE__*/_react.default.createElement("span", null, t('INVOICE_FOR', 'Invoice for'), " ", /*#__PURE__*/_react.default.createElement("b", null, exportInvoiceList === null || exportInvoiceList === void 0 || (_exportInvoiceList$in = exportInvoiceList.invoice) === null || _exportInvoiceList$in === void 0 || (_exportInvoiceList$in = _exportInvoiceList$in.driver) === null || _exportInvoiceList$in === void 0 ? void 0 : _exportInvoiceList$in.name)), /*#__PURE__*/_react.default.createElement("br", null), (exportInvoiceList === null || exportInvoiceList === void 0 || (_exportInvoiceList$in2 = exportInvoiceList.invoice) === null || _exportInvoiceList$in2 === void 0 ? void 0 : _exportInvoiceList$in2.from) && (exportInvoiceList === null || exportInvoiceList === void 0 || (_exportInvoiceList$in3 = exportInvoiceList.invoice) === null || _exportInvoiceList$in3 === void 0 ? void 0 : _exportInvoiceList$in3.to) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("span", null, t('FROM', 'From'), " ", /*#__PURE__*/_react.default.createElement("b", null, exportInvoiceList === null || exportInvoiceList === void 0 || (_exportInvoiceList$in4 = exportInvoiceList.invoice) === null || _exportInvoiceList$in4 === void 0 ? void 0 : _exportInvoiceList$in4.from), " ", t('TO', 'To'), " ", /*#__PURE__*/_react.default.createElement("b", null, exportInvoiceList === null || exportInvoiceList === void 0 || (_exportInvoiceList$in5 = exportInvoiceList.invoice) === null || _exportInvoiceList$in5 === void 0 ? void 0 : _exportInvoiceList$in5.to)), /*#__PURE__*/_react.default.createElement("br", null)), /*#__PURE__*/_react.default.createElement("span", null, t('AMOUNT_TO_ORDERS', 'Amount to orders'), ": ", exportInvoiceList === null || exportInvoiceList === void 0 || (_exportInvoiceList$in6 = exportInvoiceList.invoice) === null || _exportInvoiceList$in6 === void 0 ? void 0 : _exportInvoiceList$in6.orders.length), /*#__PURE__*/_react.default.createElement("table", {
+  }), /*#__PURE__*/_react.default.createElement("br", null), /*#__PURE__*/_react.default.createElement("span", null, t('INVOICE_FOR', 'Invoice for'), " ", /*#__PURE__*/_react.default.createElement("b", null, exportInvoiceList === null || exportInvoiceList === void 0 ? void 0 : (_exportInvoiceList$in = exportInvoiceList.invoice) === null || _exportInvoiceList$in === void 0 ? void 0 : (_exportInvoiceList$in2 = _exportInvoiceList$in.driver) === null || _exportInvoiceList$in2 === void 0 ? void 0 : _exportInvoiceList$in2.name)), /*#__PURE__*/_react.default.createElement("br", null), (exportInvoiceList === null || exportInvoiceList === void 0 ? void 0 : (_exportInvoiceList$in3 = exportInvoiceList.invoice) === null || _exportInvoiceList$in3 === void 0 ? void 0 : _exportInvoiceList$in3.from) && (exportInvoiceList === null || exportInvoiceList === void 0 ? void 0 : (_exportInvoiceList$in4 = exportInvoiceList.invoice) === null || _exportInvoiceList$in4 === void 0 ? void 0 : _exportInvoiceList$in4.to) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("span", null, t('FROM', 'From'), " ", /*#__PURE__*/_react.default.createElement("b", null, exportInvoiceList === null || exportInvoiceList === void 0 ? void 0 : (_exportInvoiceList$in5 = exportInvoiceList.invoice) === null || _exportInvoiceList$in5 === void 0 ? void 0 : _exportInvoiceList$in5.from), " ", t('TO', 'To'), " ", /*#__PURE__*/_react.default.createElement("b", null, exportInvoiceList === null || exportInvoiceList === void 0 ? void 0 : (_exportInvoiceList$in6 = exportInvoiceList.invoice) === null || _exportInvoiceList$in6 === void 0 ? void 0 : _exportInvoiceList$in6.to)), /*#__PURE__*/_react.default.createElement("br", null)), /*#__PURE__*/_react.default.createElement("span", null, t('AMOUNT_TO_ORDERS', 'Amount to orders'), ": ", exportInvoiceList === null || exportInvoiceList === void 0 ? void 0 : (_exportInvoiceList$in7 = exportInvoiceList.invoice) === null || _exportInvoiceList$in7 === void 0 ? void 0 : _exportInvoiceList$in7.orders.length), /*#__PURE__*/_react.default.createElement("table", {
     style: styles.table
   }, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", {
     style: styles.table.thead.trFirst
@@ -293,7 +293,7 @@ var InvoiceDriverPdf = function InvoiceDriverPdf(props) {
     style: styles.table.thead.th
   }, t('SUBTOTAL', 'Subtotal')), /*#__PURE__*/_react.default.createElement("th", {
     style: styles.table.thead.th
-  }, t('TOTAL', 'Total')))), /*#__PURE__*/_react.default.createElement("tbody", null, (exportInvoiceList === null || exportInvoiceList === void 0 || (_exportInvoiceList$in7 = exportInvoiceList.invoice) === null || _exportInvoiceList$in7 === void 0 ? void 0 : _exportInvoiceList$in7.orders) && (exportInvoiceList === null || exportInvoiceList === void 0 || (_exportInvoiceList$in8 = exportInvoiceList.invoice) === null || _exportInvoiceList$in8 === void 0 || (_exportInvoiceList$in8 = _exportInvoiceList$in8.orders) === null || _exportInvoiceList$in8 === void 0 ? void 0 : _exportInvoiceList$in8.map(function (order, i) {
+  }, t('TOTAL', 'Total')))), /*#__PURE__*/_react.default.createElement("tbody", null, (exportInvoiceList === null || exportInvoiceList === void 0 ? void 0 : (_exportInvoiceList$in8 = exportInvoiceList.invoice) === null || _exportInvoiceList$in8 === void 0 ? void 0 : _exportInvoiceList$in8.orders) && (exportInvoiceList === null || exportInvoiceList === void 0 ? void 0 : (_exportInvoiceList$in9 = exportInvoiceList.invoice) === null || _exportInvoiceList$in9 === void 0 ? void 0 : (_exportInvoiceList$in10 = _exportInvoiceList$in9.orders) === null || _exportInvoiceList$in10 === void 0 ? void 0 : _exportInvoiceList$in10.map(function (order, i) {
     return /*#__PURE__*/_react.default.createElement("tr", {
       key: i
     }, /*#__PURE__*/_react.default.createElement("td", {
@@ -318,14 +318,14 @@ var InvoiceDriverPdf = function InvoiceDriverPdf(props) {
     colSpan: "4"
   }, t('SUBTOTAL', 'Subtotal')), /*#__PURE__*/_react.default.createElement("td", {
     style: styles.table.tfoot.tr.td
-  }, parsePrice(exportInvoiceList === null || exportInvoiceList === void 0 || (_exportInvoiceList$in9 = exportInvoiceList.invoice) === null || _exportInvoiceList$in9 === void 0 ? void 0 : _exportInvoiceList$in9.orders_subtotal))), /*#__PURE__*/_react.default.createElement("tr", {
+  }, parsePrice(exportInvoiceList === null || exportInvoiceList === void 0 ? void 0 : (_exportInvoiceList$in11 = exportInvoiceList.invoice) === null || _exportInvoiceList$in11 === void 0 ? void 0 : _exportInvoiceList$in11.orders_subtotal))), /*#__PURE__*/_react.default.createElement("tr", {
     style: styles.table.tfoot.tr
   }, /*#__PURE__*/_react.default.createElement("td", {
     style: styles.table.tfoot.tr.td,
     colSpan: "4"
   }, t('TOTAL', 'Total')), /*#__PURE__*/_react.default.createElement("td", {
     style: styles.table.tfoot.tr.td
-  }, parsePrice(exportInvoiceList === null || exportInvoiceList === void 0 || (_exportInvoiceList$in10 = exportInvoiceList.invoice) === null || _exportInvoiceList$in10 === void 0 ? void 0 : _exportInvoiceList$in10.orders_total))))), /*#__PURE__*/_react.default.createElement("table", {
+  }, parsePrice(exportInvoiceList === null || exportInvoiceList === void 0 ? void 0 : (_exportInvoiceList$in12 = exportInvoiceList.invoice) === null || _exportInvoiceList$in12 === void 0 ? void 0 : _exportInvoiceList$in12.orders_total))))), /*#__PURE__*/_react.default.createElement("table", {
     style: styles.table
   }, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", {
     style: styles.table.thead.trLast
@@ -336,31 +336,31 @@ var InvoiceDriverPdf = function InvoiceDriverPdf(props) {
     style: styles.table.tbody.tr.td
   }, t('ORDERS', 'Orders'), " (", t('SUBTOTAL', 'Subtotal'), ")"), /*#__PURE__*/_react.default.createElement("td", {
     style: styles.table.tbody.tr.tdNumber
-  }, parsePrice(exportInvoiceList === null || exportInvoiceList === void 0 || (_exportInvoiceList$in11 = exportInvoiceList.invoice) === null || _exportInvoiceList$in11 === void 0 ? void 0 : _exportInvoiceList$in11.orders_subtotal))), /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", {
+  }, parsePrice(exportInvoiceList === null || exportInvoiceList === void 0 ? void 0 : (_exportInvoiceList$in13 = exportInvoiceList.invoice) === null || _exportInvoiceList$in13 === void 0 ? void 0 : _exportInvoiceList$in13.orders_subtotal))), /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", {
     style: styles.table.tbody.tr.td
   }, t('DISCOUNT', 'Discount')), /*#__PURE__*/_react.default.createElement("td", {
     style: styles.table.tbody.tr.tdNumber
-  }, parsePrice(exportInvoiceList === null || exportInvoiceList === void 0 || (_exportInvoiceList$in12 = exportInvoiceList.invoice) === null || _exportInvoiceList$in12 === void 0 ? void 0 : _exportInvoiceList$in12.discounts))), /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", {
+  }, parsePrice(exportInvoiceList === null || exportInvoiceList === void 0 ? void 0 : (_exportInvoiceList$in14 = exportInvoiceList.invoice) === null || _exportInvoiceList$in14 === void 0 ? void 0 : _exportInvoiceList$in14.discounts))), /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", {
     style: styles.table.tbody.tr.td
-  }, t('PERCENTAGE_FEE', 'Percentage Fee'), " (", exportInvoiceList === null || exportInvoiceList === void 0 || (_exportInvoiceList$in13 = exportInvoiceList.invoice) === null || _exportInvoiceList$in13 === void 0 ? void 0 : _exportInvoiceList$in13.percentage_fee, "%)"), /*#__PURE__*/_react.default.createElement("td", {
+  }, t('PERCENTAGE_FEE', 'Percentage Fee'), " (", exportInvoiceList === null || exportInvoiceList === void 0 ? void 0 : (_exportInvoiceList$in15 = exportInvoiceList.invoice) === null || _exportInvoiceList$in15 === void 0 ? void 0 : _exportInvoiceList$in15.percentage_fee, "%)"), /*#__PURE__*/_react.default.createElement("td", {
     style: styles.table.tbody.tr.tdNumber
-  }, parsePrice(exportInvoiceList === null || exportInvoiceList === void 0 || (_exportInvoiceList$in14 = exportInvoiceList.invoice) === null || _exportInvoiceList$in14 === void 0 ? void 0 : _exportInvoiceList$in14.percentage_fee_total))), /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", {
+  }, parsePrice(exportInvoiceList === null || exportInvoiceList === void 0 ? void 0 : (_exportInvoiceList$in16 = exportInvoiceList.invoice) === null || _exportInvoiceList$in16 === void 0 ? void 0 : _exportInvoiceList$in16.percentage_fee_total))), /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", {
     style: styles.table.tbody.tr.td
   }, t('FIXED_FEE', 'Fixed Fee')), /*#__PURE__*/_react.default.createElement("td", {
     style: styles.table.tbody.tr.tdNumber
-  }, parsePrice(exportInvoiceList === null || exportInvoiceList === void 0 || (_exportInvoiceList$in15 = exportInvoiceList.invoice) === null || _exportInvoiceList$in15 === void 0 ? void 0 : _exportInvoiceList$in15.fixed_fee_total))), /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", {
+  }, parsePrice(exportInvoiceList === null || exportInvoiceList === void 0 ? void 0 : (_exportInvoiceList$in17 = exportInvoiceList.invoice) === null || _exportInvoiceList$in17 === void 0 ? void 0 : _exportInvoiceList$in17.fixed_fee_total))), /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", {
     style: styles.table.tbody.tr.td
   }, t('DELIVERY_PRICE', 'Delivery price'), " ", t('PERCENTAGE', 'Percentage')), /*#__PURE__*/_react.default.createElement("td", {
     style: styles.table.tbody.tr.tdNumber
-  }, parsePrice(exportInvoiceList === null || exportInvoiceList === void 0 || (_exportInvoiceList$in16 = exportInvoiceList.invoice) === null || _exportInvoiceList$in16 === void 0 ? void 0 : _exportInvoiceList$in16.percentage_delivery_price_total))), /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", {
+  }, parsePrice(exportInvoiceList === null || exportInvoiceList === void 0 ? void 0 : (_exportInvoiceList$in18 = exportInvoiceList.invoice) === null || _exportInvoiceList$in18 === void 0 ? void 0 : _exportInvoiceList$in18.percentage_delivery_price_total))), /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", {
     style: styles.table.tbody.tr.td
   }, t('DRIVER_TIP', 'Driver tip'), " ", t('PERCENTAGE', 'Percentage')), /*#__PURE__*/_react.default.createElement("td", {
     style: styles.table.tbody.tr.tdNumber
-  }, parsePrice(exportInvoiceList === null || exportInvoiceList === void 0 || (_exportInvoiceList$in17 = exportInvoiceList.invoice) === null || _exportInvoiceList$in17 === void 0 ? void 0 : _exportInvoiceList$in17.percentage_driver_tip_total))), /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", {
+  }, parsePrice(exportInvoiceList === null || exportInvoiceList === void 0 ? void 0 : (_exportInvoiceList$in19 = exportInvoiceList.invoice) === null || _exportInvoiceList$in19 === void 0 ? void 0 : _exportInvoiceList$in19.percentage_driver_tip_total))), /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", {
     style: styles.table.tbody.tr.td
-  }, t('MISC', 'Misc'), " ", (exportInvoiceList === null || exportInvoiceList === void 0 || (_exportInvoiceList$in18 = exportInvoiceList.invoice) === null || _exportInvoiceList$in18 === void 0 ? void 0 : _exportInvoiceList$in18.misc_description) && /*#__PURE__*/_react.default.createElement("small", null, "(", exportInvoiceList === null || exportInvoiceList === void 0 || (_exportInvoiceList$in19 = exportInvoiceList.invoice) === null || _exportInvoiceList$in19 === void 0 ? void 0 : _exportInvoiceList$in19.misc_description, ")")), /*#__PURE__*/_react.default.createElement("td", {
+  }, t('MISC', 'Misc'), " ", (exportInvoiceList === null || exportInvoiceList === void 0 ? void 0 : (_exportInvoiceList$in20 = exportInvoiceList.invoice) === null || _exportInvoiceList$in20 === void 0 ? void 0 : _exportInvoiceList$in20.misc_description) && /*#__PURE__*/_react.default.createElement("small", null, "(", exportInvoiceList === null || exportInvoiceList === void 0 ? void 0 : (_exportInvoiceList$in21 = exportInvoiceList.invoice) === null || _exportInvoiceList$in21 === void 0 ? void 0 : _exportInvoiceList$in21.misc_description, ")")), /*#__PURE__*/_react.default.createElement("td", {
     style: styles.table.tbody.tr.tdNumber
-  }, parsePrice(exportInvoiceList === null || exportInvoiceList === void 0 || (_exportInvoiceList$in20 = exportInvoiceList.invoice) === null || _exportInvoiceList$in20 === void 0 ? void 0 : _exportInvoiceList$in20.misc_amount)))), /*#__PURE__*/_react.default.createElement("tfoot", {
+  }, parsePrice(exportInvoiceList === null || exportInvoiceList === void 0 ? void 0 : (_exportInvoiceList$in22 = exportInvoiceList.invoice) === null || _exportInvoiceList$in22 === void 0 ? void 0 : _exportInvoiceList$in22.misc_amount)))), /*#__PURE__*/_react.default.createElement("tfoot", {
     style: styles.table.tfoot
   }, /*#__PURE__*/_react.default.createElement("tr", {
     style: styles.table.tfoot.tr
@@ -368,22 +368,22 @@ var InvoiceDriverPdf = function InvoiceDriverPdf(props) {
     style: styles.table.tfoot.tr.td
   }, t('SUBTOTAL', 'Subtotal')), /*#__PURE__*/_react.default.createElement("td", {
     style: styles.table.tfoot.tr.td
-  }, parsePrice(exportInvoiceList === null || exportInvoiceList === void 0 || (_exportInvoiceList$in21 = exportInvoiceList.invoice) === null || _exportInvoiceList$in21 === void 0 ? void 0 : _exportInvoiceList$in21.subtotal))), /*#__PURE__*/_react.default.createElement("tr", {
+  }, parsePrice(exportInvoiceList === null || exportInvoiceList === void 0 ? void 0 : (_exportInvoiceList$in23 = exportInvoiceList.invoice) === null || _exportInvoiceList$in23 === void 0 ? void 0 : _exportInvoiceList$in23.subtotal))), /*#__PURE__*/_react.default.createElement("tr", {
     style: styles.table.tfoot.tr
   }, /*#__PURE__*/_react.default.createElement("td", {
     style: styles.table.tfoot.tr.td
-  }, t('TAX', 'Tax'), " (", exportInvoiceList === null || exportInvoiceList === void 0 || (_exportInvoiceList$in22 = exportInvoiceList.invoice) === null || _exportInvoiceList$in22 === void 0 ? void 0 : _exportInvoiceList$in22.tax, "%)"), /*#__PURE__*/_react.default.createElement("td", {
+  }, t('TAX', 'Tax'), " (", exportInvoiceList === null || exportInvoiceList === void 0 ? void 0 : (_exportInvoiceList$in24 = exportInvoiceList.invoice) === null || _exportInvoiceList$in24 === void 0 ? void 0 : _exportInvoiceList$in24.tax, "%)"), /*#__PURE__*/_react.default.createElement("td", {
     style: styles.table.tfoot.tr.td
-  }, parsePrice(exportInvoiceList === null || exportInvoiceList === void 0 || (_exportInvoiceList$in23 = exportInvoiceList.invoice) === null || _exportInvoiceList$in23 === void 0 ? void 0 : _exportInvoiceList$in23.tax_total))), /*#__PURE__*/_react.default.createElement("tr", {
+  }, parsePrice(exportInvoiceList === null || exportInvoiceList === void 0 ? void 0 : (_exportInvoiceList$in25 = exportInvoiceList.invoice) === null || _exportInvoiceList$in25 === void 0 ? void 0 : _exportInvoiceList$in25.tax_total))), /*#__PURE__*/_react.default.createElement("tr", {
     style: styles.table.tfoot.tr
   }, /*#__PURE__*/_react.default.createElement("td", {
     style: styles.table.tfoot.tr.td
   }, t('TOTAL', 'Total')), /*#__PURE__*/_react.default.createElement("td", {
     style: styles.table.tfoot.tr.td
-  }, parsePrice(exportInvoiceList === null || exportInvoiceList === void 0 || (_exportInvoiceList$in24 = exportInvoiceList.invoice) === null || _exportInvoiceList$in24 === void 0 ? void 0 : _exportInvoiceList$in24.total))))), (exportInvoiceList === null || exportInvoiceList === void 0 || (_exportInvoiceList$in25 = exportInvoiceList.invoice) === null || _exportInvoiceList$in25 === void 0 ? void 0 : _exportInvoiceList$in25.notes) && /*#__PURE__*/_react.default.createElement("p", {
+  }, parsePrice(exportInvoiceList === null || exportInvoiceList === void 0 ? void 0 : (_exportInvoiceList$in26 = exportInvoiceList.invoice) === null || _exportInvoiceList$in26 === void 0 ? void 0 : _exportInvoiceList$in26.total))))), (exportInvoiceList === null || exportInvoiceList === void 0 ? void 0 : (_exportInvoiceList$in27 = exportInvoiceList.invoice) === null || _exportInvoiceList$in27 === void 0 ? void 0 : _exportInvoiceList$in27.notes) && /*#__PURE__*/_react.default.createElement("p", {
     style: styles.notes,
     dangerouslySetInnerHTML: {
-      __html: exportInvoiceList === null || exportInvoiceList === void 0 || (_exportInvoiceList$in26 = exportInvoiceList.invoice) === null || _exportInvoiceList$in26 === void 0 ? void 0 : _exportInvoiceList$in26.notes
+      __html: exportInvoiceList === null || exportInvoiceList === void 0 ? void 0 : (_exportInvoiceList$in28 = exportInvoiceList.invoice) === null || _exportInvoiceList$in28 === void 0 ? void 0 : _exportInvoiceList$in28.notes
     }
   }));
 };

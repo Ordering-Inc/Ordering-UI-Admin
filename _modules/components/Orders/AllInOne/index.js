@@ -293,7 +293,8 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     driversIsOnline: mapsData.driversIsOnline,
     selectedDriver: mapsData.selectedDriver,
     onlineDrivers: mapsData.onlineDrivers,
-    offlineDrivers: mapsData.offlineDrivers
+    offlineDrivers: mapsData.offlineDrivers,
+    selectedOrder: !(detailsOrder !== null && detailsOrder !== void 0 && detailsOrder.driver_id) ? detailsOrder : null
   })))), isOpenOrderDetail && /*#__PURE__*/_react.default.createElement(_OrderDetails.OrderDetails, {
     isSelectedOrders: isSelectedOrders,
     open: isOpenOrderDetail,

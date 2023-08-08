@@ -72,7 +72,7 @@ var BannerDetailsUI = function BannerDetailsUI(props) {
     setConfirm = _useState6[1];
   var tabOptions = (0, _react.useMemo)(function () {
     var _bannerState$banner, _bannerState$banner2;
-    if ((bannerState === null || bannerState === void 0 || (_bannerState$banner = bannerState.banner) === null || _bannerState$banner === void 0 ? void 0 : _bannerState$banner.position) === 'web_business_page' || (bannerState === null || bannerState === void 0 || (_bannerState$banner2 = bannerState.banner) === null || _bannerState$banner2 === void 0 ? void 0 : _bannerState$banner2.position) === 'app_business_page') {
+    if ((bannerState === null || bannerState === void 0 ? void 0 : (_bannerState$banner = bannerState.banner) === null || _bannerState$banner === void 0 ? void 0 : _bannerState$banner.position) === 'web_business_page' || (bannerState === null || bannerState === void 0 ? void 0 : (_bannerState$banner2 = bannerState.banner) === null || _bannerState$banner2 === void 0 ? void 0 : _bannerState$banner2.position) === 'app_business_page') {
       return [{
         key: 'images',
         content: t('IMAGES', 'Images')
@@ -120,7 +120,7 @@ var BannerDetailsUI = function BannerDetailsUI(props) {
     }, 750);
     setTimer(_timer);
   };
-  return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.LeftHeader, null, /*#__PURE__*/_react.default.createElement("h1", null, isAddMode ? t('ADD_BANNER', 'Add banner') : bannerState === null || bannerState === void 0 || (_bannerState$banner3 = bannerState.banner) === null || _bannerState$banner3 === void 0 ? void 0 : _bannerState$banner3.name), !isAddMode && /*#__PURE__*/_react.default.createElement(_styles.Switch, {
+  return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.LeftHeader, null, /*#__PURE__*/_react.default.createElement("h1", null, isAddMode ? t('ADD_BANNER', 'Add banner') : bannerState === null || bannerState === void 0 ? void 0 : (_bannerState$banner3 = bannerState.banner) === null || _bannerState$banner3 === void 0 ? void 0 : _bannerState$banner3.name), !isAddMode && /*#__PURE__*/_react.default.createElement(_styles.Switch, {
     defaultChecked: (_bannerState$banner4 = bannerState.banner) === null || _bannerState$banner4 === void 0 ? void 0 : _bannerState$banner4.enabled,
     onChange: function onChange(enabled) {
       return handleUpdateClick({
@@ -136,9 +136,9 @@ var BannerDetailsUI = function BannerDetailsUI(props) {
       return onClickDeleteBanner();
     }
   }, t('DELETE', 'Delete')))))), !isAddMode && /*#__PURE__*/_react.default.createElement(_styles2.FormController, {
-    key: bannerState === null || bannerState === void 0 || (_bannerState$banner5 = bannerState.banner) === null || _bannerState$banner5 === void 0 ? void 0 : _bannerState$banner5.id
+    key: bannerState === null || bannerState === void 0 ? void 0 : (_bannerState$banner5 = bannerState.banner) === null || _bannerState$banner5 === void 0 ? void 0 : _bannerState$banner5.id
   }, /*#__PURE__*/_react.default.createElement("label", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    defaultValue: (bannerState === null || bannerState === void 0 || (_bannerState$banner6 = bannerState.banner) === null || _bannerState$banner6 === void 0 ? void 0 : _bannerState$banner6.name) || '',
+    defaultValue: (bannerState === null || bannerState === void 0 ? void 0 : (_bannerState$banner6 = bannerState.banner) === null || _bannerState$banner6 === void 0 ? void 0 : _bannerState$banner6.name) || '',
     onChange: function onChange(e) {
       return handleChangeBannerName(e.target.value);
     }
@@ -162,7 +162,7 @@ var BannerDetailsUI = function BannerDetailsUI(props) {
       }
     }, option.content);
   })), selectedTab === 'images' && /*#__PURE__*/_react.default.createElement(_BannerImages.BannerImages, _extends({}, props, {
-    bannerId: bannerState === null || bannerState === void 0 || (_bannerState$banner7 = bannerState.banner) === null || _bannerState$banner7 === void 0 ? void 0 : _bannerState$banner7.id,
+    bannerId: bannerState === null || bannerState === void 0 ? void 0 : (_bannerState$banner7 = bannerState.banner) === null || _bannerState$banner7 === void 0 ? void 0 : _bannerState$banner7.id,
     setBannerMoveDistance: setBannerMoveDistance
   })), selectedTab === 'businesses' && /*#__PURE__*/_react.default.createElement(_Businesses.Businesses, {
     actionState: actionState,

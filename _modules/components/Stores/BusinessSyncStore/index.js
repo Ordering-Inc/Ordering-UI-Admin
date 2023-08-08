@@ -99,8 +99,8 @@ var BusinessSyncStoreUI = function BusinessSyncStoreUI(props) {
         marginRight: 10
       }
     }));
-  })) : /*#__PURE__*/_react.default.createElement(_styles.BusinessListWrapper, null, (businessList === null || businessList === void 0 || (_businessList$busines = businessList.businesses) === null || _businessList$busines === void 0 ? void 0 : _businessList$busines.length) > 0 ? businessList === null || businessList === void 0 ? void 0 : businessList.businesses.map(function (business, i) {
-    var _theme$images;
+  })) : /*#__PURE__*/_react.default.createElement(_styles.BusinessListWrapper, null, (businessList === null || businessList === void 0 ? void 0 : (_businessList$busines = businessList.businesses) === null || _businessList$busines === void 0 ? void 0 : _businessList$busines.length) > 0 ? businessList === null || businessList === void 0 ? void 0 : businessList.businesses.map(function (business, i) {
+    var _theme$images, _theme$images$dummies;
     return /*#__PURE__*/_react.default.createElement(_styles.BusinessItemContainer, {
       key: i,
       active: (selectedBusiness === null || selectedBusiness === void 0 ? void 0 : selectedBusiness.id) === (business === null || business === void 0 ? void 0 : business.id),
@@ -111,7 +111,7 @@ var BusinessSyncStoreUI = function BusinessSyncStoreUI(props) {
     }, /*#__PURE__*/_react.default.createElement("label", {
       htmlFor: business === null || business === void 0 ? void 0 : business.id
     }, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles.Image, {
-      bgimage: optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.dummies) === null || _theme$images === void 0 ? void 0 : _theme$images.businessLogo))
+      bgimage: optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo))
     })), /*#__PURE__*/_react.default.createElement(_styles.BusinessName, null, business === null || business === void 0 ? void 0 : business.name)), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null));
   }) : /*#__PURE__*/_react.default.createElement(_Shared.NotFoundSource, null), (pagination === null || pagination === void 0 ? void 0 : pagination.total) > 0 && /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
     currentPage: pagination.currentPage,

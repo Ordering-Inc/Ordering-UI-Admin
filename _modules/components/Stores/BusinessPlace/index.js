@@ -89,7 +89,7 @@ var BusinessPlaceUI = function BusinessPlaceUI(props) {
     name: "name",
     autoComplete: "off",
     onChange: handleChangeInput,
-    value: (_ref = (_formState$changes$na = formState === null || formState === void 0 || (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.name) !== null && _formState$changes$na !== void 0 ? _formState$changes$na : place === null || place === void 0 ? void 0 : place.name) !== null && _ref !== void 0 ? _ref : '',
+    value: (_ref = (_formState$changes$na = formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.name) !== null && _formState$changes$na !== void 0 ? _formState$changes$na : place === null || place === void 0 ? void 0 : place.name) !== null && _ref !== void 0 ? _ref : '',
     ref: formMethods.register({
       required: t('VALIDATION_ERROR_REQUIRED', 'Name is required').replace('_attribute_', t('NAME', 'Name'))
     })

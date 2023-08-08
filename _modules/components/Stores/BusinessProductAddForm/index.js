@@ -44,7 +44,7 @@ var BusinessProductAddFormUI = function BusinessProductAddFormUI(props) {
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configs = _useConfig2[0].configs;
   var productImageInputRef = (0, _react.useRef)(null);
-  var isEnabledAppointmentsFeature = configs === null || configs === void 0 || (_configs$appointments = configs.appointments) === null || _configs$appointments === void 0 ? void 0 : _configs$appointments.value;
+  var isEnabledAppointmentsFeature = configs === null || configs === void 0 ? void 0 : (_configs$appointments = configs.appointments) === null || _configs$appointments === void 0 ? void 0 : _configs$appointments.value;
   var _useState = (0, _react.useState)([]),
     _useState2 = _slicedToArray(_useState, 2),
     hours = _useState2[0],
@@ -202,7 +202,7 @@ var BusinessProductAddFormUI = function BusinessProductAddFormUI(props) {
       var _formState$result2;
       setAlertState({
         open: true,
-        content: formState === null || formState === void 0 || (_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result
+        content: formState === null || formState === void 0 ? void 0 : (_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result
       });
     }
   }, [formState === null || formState === void 0 ? void 0 : formState.result]);
@@ -228,8 +228,8 @@ var BusinessProductAddFormUI = function BusinessProductAddFormUI(props) {
     },
     accept: "image/png, image/jpeg, image/jpg",
     disabled: formState.loading
-  }, formState !== null && formState !== void 0 && formState.loading ? /*#__PURE__*/_react.default.createElement(_styles2.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null)) : !(formState !== null && formState !== void 0 && (_formState$changes = formState.changes) !== null && _formState$changes !== void 0 && _formState$changes.images) ? /*#__PURE__*/_react.default.createElement("div", null) : (formState === null || formState === void 0 || (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.images) && /*#__PURE__*/_react.default.createElement("img", {
-    src: formState === null || formState === void 0 || (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.images,
+  }, formState !== null && formState !== void 0 && formState.loading ? /*#__PURE__*/_react.default.createElement(_styles2.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null)) : !(formState !== null && formState !== void 0 && (_formState$changes = formState.changes) !== null && _formState$changes !== void 0 && _formState$changes.images) ? /*#__PURE__*/_react.default.createElement("div", null) : (formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.images) && /*#__PURE__*/_react.default.createElement("img", {
+    src: formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.images,
     alt: "business type image",
     loading: "lazy"
   }), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIconContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRAG_DROP_IMAGE_HERE', 'Put your image here'))))))), isEnabledAppointmentsFeature && (typeList === null || typeList === void 0 ? void 0 : typeList.length) > 1 && /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, {
@@ -237,17 +237,17 @@ var BusinessProductAddFormUI = function BusinessProductAddFormUI(props) {
   }, /*#__PURE__*/_react.default.createElement("label", null, t('TYPE', 'Type')), /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
     options: typeList,
     className: "select",
-    defaultValue: (_formState$changes$ty = formState === null || formState === void 0 || (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.type) !== null && _formState$changes$ty !== void 0 ? _formState$changes$ty : 'item',
+    defaultValue: (_formState$changes$ty = formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.type) !== null && _formState$changes$ty !== void 0 ? _formState$changes$ty : 'item',
     placeholder: t('SELECT_OPTION', 'Select an option'),
     onChange: function onChange(value) {
       return handleChangeItem({
         type: value
       });
     }
-  })), (formState === null || formState === void 0 || (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.type) === 'service' && /*#__PURE__*/_react.default.createElement(_styles2.FieldRow, null, /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('DURATION', 'Duration')), /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
+  })), (formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.type) === 'service' && /*#__PURE__*/_react.default.createElement(_styles2.FieldRow, null, /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('DURATION', 'Duration')), /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
     options: durationList,
     className: "select",
-    defaultValue: isCustom ? 'custom' : (_formState$changes$du = formState === null || formState === void 0 || (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.duration) !== null && _formState$changes$du !== void 0 ? _formState$changes$du : '',
+    defaultValue: isCustom ? 'custom' : (_formState$changes$du = formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.duration) !== null && _formState$changes$du !== void 0 ? _formState$changes$du : '',
     placeholder: t('SELECT_OPTION', 'Select an option'),
     onChange: function onChange(value) {
       return handleChangeSelect(value);
@@ -273,14 +273,14 @@ var BusinessProductAddFormUI = function BusinessProductAddFormUI(props) {
   })))))), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('PRODUCT_NAME', 'Product name')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     type: "text",
     name: "name",
-    defaultValue: (formState === null || formState === void 0 || (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.name) || '',
+    defaultValue: (formState === null || formState === void 0 ? void 0 : (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.name) || '',
     onChange: handleChangeInput,
     placeholder: t('WRITE_A_NAME', 'Write a name'),
     autoComplete: "off"
   })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('PRICE', 'Price')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     type: "number",
     name: "price",
-    defaultValue: (formState === null || formState === void 0 || (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.price) || '',
+    defaultValue: (formState === null || formState === void 0 ? void 0 : (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.price) || '',
     onChange: handleChangeInput,
     placeholder: t('WRITE_PRICE', 'Write price'),
     autoComplete: "off",
@@ -292,7 +292,7 @@ var BusinessProductAddFormUI = function BusinessProductAddFormUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('DESCRIPTION', 'Description')), /*#__PURE__*/_react.default.createElement(_styles.TextArea, {
     rows: 4,
     name: "description",
-    defaultValue: (formState === null || formState === void 0 || (_formState$changes9 = formState.changes) === null || _formState$changes9 === void 0 ? void 0 : _formState$changes9.description) || '',
+    defaultValue: (formState === null || formState === void 0 ? void 0 : (_formState$changes9 = formState.changes) === null || _formState$changes9 === void 0 ? void 0 : _formState$changes9.description) || '',
     onChange: handleChangeInput,
     placeholder: t('WRITE_DESCRIPTION', 'Write description'),
     autoComplete: "off"

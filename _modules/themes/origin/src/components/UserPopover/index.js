@@ -95,9 +95,9 @@ var UserPopover = function UserPopover(props) {
     ref: referenceElement,
     onClick: props.onClick
   }, /*#__PURE__*/_react.default.createElement(_styles.DropDownContainer, null, /*#__PURE__*/_react.default.createElement(_style.DropDownImage, {
-    src: sessionState === null || sessionState === void 0 || (_sessionState$user = sessionState.user) === null || _sessionState$user === void 0 ? void 0 : _sessionState$user.photo,
+    src: sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user = sessionState.user) === null || _sessionState$user === void 0 ? void 0 : _sessionState$user.photo,
     fallback: /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)
-  }), width > 600 && /*#__PURE__*/_react.default.createElement("span", null, sessionState === null || sessionState === void 0 || (_sessionState$user2 = sessionState.user) === null || _sessionState$user2 === void 0 ? void 0 : _sessionState$user2.name, " ", sessionState === null || sessionState === void 0 || (_sessionState$user3 = sessionState.user) === null || _sessionState$user3 === void 0 ? void 0 : _sessionState$user3.lastname), width > 600 && /*#__PURE__*/_react.default.createElement(_EnChevronDown.default, null))), /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, _extends({
+  }), width > 600 && /*#__PURE__*/_react.default.createElement("span", null, sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user2 = sessionState.user) === null || _sessionState$user2 === void 0 ? void 0 : _sessionState$user2.name, " ", sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user3 = sessionState.user) === null || _sessionState$user3 === void 0 ? void 0 : _sessionState$user3.lastname), width > 600 && /*#__PURE__*/_react.default.createElement(_EnChevronDown.default, null))), /*#__PURE__*/_react.default.createElement(_styles.PopoverBody, _extends({
     ref: popperElement,
     style: popStyle
   }, attributes.popper), /*#__PURE__*/_react.default.createElement(_styles.PopoverList, null, /*#__PURE__*/_react.default.createElement(PopoverListItemLogout, {

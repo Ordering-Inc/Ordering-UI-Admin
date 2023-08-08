@@ -21,7 +21,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var DeliveryZone = function DeliveryZone(props) {
-  var _zoneState$name, _zoneState$minimum, _zoneState$price, _configState$configs2, _zoneState$data$dista, _zoneState$data, _formState$changes, _configState$configs4, _zoneState$data2, _configState$configs5;
+  var _zoneState$name, _zoneState$minimum, _zoneState$price, _configState$configs2, _configState$configs3, _zoneState$data$dista, _zoneState$data, _formState$changes, _configState$configs6, _configState$configs7, _zoneState$data2, _configState$configs8, _configState$configs9;
   var formState = props.formState,
     zoneState = props.zoneState,
     handleChangeZoneState = props.handleChangeZoneState,
@@ -149,11 +149,11 @@ var DeliveryZone = function DeliveryZone(props) {
     }
   }, [clearState]);
   (0, _react.useEffect)(function () {
-    var _configState$configs;
+    var _configState$configs, _configState$configs$;
     if (zoneType === 2 || zoneType === 4) return;
     var content = '<div style="width: 90px; height: 30px">' + '<span>Radius: </span>';
     content += parseNumber((zoneData === null || zoneData === void 0 ? void 0 : zoneData.radio) || (zoneData === null || zoneData === void 0 ? void 0 : zoneData.distance));
-    content += "<span>".concat(zoneType === 5 ? configState === null || configState === void 0 || (_configState$configs = configState.configs) === null || _configState$configs === void 0 || (_configState$configs = _configState$configs.distance_unit) === null || _configState$configs === void 0 ? void 0 : _configState$configs.value : 'km', "</span>") + '</div>';
+    content += "<span>".concat(zoneType === 5 ? configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.distance_unit) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value : 'km', "</span>") + '</div>';
     setInfoContentString(content);
   }, [zoneData, zoneType]);
   (0, _react.useEffect)(function () {
@@ -191,30 +191,30 @@ var DeliveryZone = function DeliveryZone(props) {
       return handleChangeZoneState(e);
     }
   }))), zoneType === 5 && /*#__PURE__*/_react.default.createElement(_styles2.Row, null, /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('DISTANCE_FROM_STORE', 'Distance from store')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    placeholder: "1 - 99 ".concat(configState === null || configState === void 0 || (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 || (_configState$configs2 = _configState$configs2.distance_unit) === null || _configState$configs2 === void 0 ? void 0 : _configState$configs2.value),
+    placeholder: "1 - 99 ".concat(configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.distance_unit) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value),
     name: "distance",
     maxLength: 2,
-    value: (_zoneState$data$dista = zoneState === null || zoneState === void 0 || (_zoneState$data = zoneState.data) === null || _zoneState$data === void 0 ? void 0 : _zoneState$data.distance) !== null && _zoneState$data$dista !== void 0 ? _zoneState$data$dista : '',
+    value: (_zoneState$data$dista = zoneState === null || zoneState === void 0 ? void 0 : (_zoneState$data = zoneState.data) === null || _zoneState$data === void 0 ? void 0 : _zoneState$data.distance) !== null && _zoneState$data$dista !== void 0 ? _zoneState$data$dista : '',
     onInput: function onInput(e) {
       e.target.value = e.target.value.match("^[".concat(e.target.value === '0' ? '1' : '0', "-9]{1,2}$"));
     },
     onChange: function onChange(e) {
-      var _configState$configs3;
-      return handleChangeZoneState(e, false, configState === null || configState === void 0 || (_configState$configs3 = configState.configs) === null || _configState$configs3 === void 0 || (_configState$configs3 = _configState$configs3.distance_unit) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value);
+      var _configState$configs4, _configState$configs5;
+      return handleChangeZoneState(e, false, configState === null || configState === void 0 ? void 0 : (_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 ? void 0 : (_configState$configs5 = _configState$configs4.distance_unit) === null || _configState$configs5 === void 0 ? void 0 : _configState$configs5.value);
     }
   }))), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('BUSINESS_ADDRESS', 'Business address')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "address",
-    defaultValue: formState === null || formState === void 0 || (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.address,
+    defaultValue: formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.address,
     disabled: true
-  })), zoneType !== 4 && isShowMap && (configState !== null && configState !== void 0 && (_configState$configs4 = configState.configs) !== null && _configState$configs4 !== void 0 && (_configState$configs4 = _configState$configs4.google_maps_api_key) !== null && _configState$configs4 !== void 0 && _configState$configs4.value ? /*#__PURE__*/_react.default.createElement(_styles2.WrapperMap, null, zoneType !== 5 && /*#__PURE__*/_react.default.createElement("button", {
+  })), zoneType !== 4 && isShowMap && (configState !== null && configState !== void 0 && (_configState$configs6 = configState.configs) !== null && _configState$configs6 !== void 0 && (_configState$configs7 = _configState$configs6.google_maps_api_key) !== null && _configState$configs7 !== void 0 && _configState$configs7.value ? /*#__PURE__*/_react.default.createElement(_styles2.WrapperMap, null, zoneType !== 5 && /*#__PURE__*/_react.default.createElement("button", {
     type: "button",
     onClick: function onClick() {
       return setClearState(true);
     }
   }, t('CLEAR', 'Clear')), /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.BusinessZoneGoogleMaps, {
-    distance: zoneState === null || zoneState === void 0 || (_zoneState$data2 = zoneState.data) === null || _zoneState$data2 === void 0 ? void 0 : _zoneState$data2.distance,
+    distance: zoneState === null || zoneState === void 0 ? void 0 : (_zoneState$data2 = zoneState.data) === null || _zoneState$data2 === void 0 ? void 0 : _zoneState$data2.distance,
     disabled: true,
-    apiKey: configState === null || configState === void 0 || (_configState$configs5 = configState.configs) === null || _configState$configs5 === void 0 || (_configState$configs5 = _configState$configs5.google_maps_api_key) === null || _configState$configs5 === void 0 ? void 0 : _configState$configs5.value,
+    apiKey: configState === null || configState === void 0 ? void 0 : (_configState$configs8 = configState.configs) === null || _configState$configs8 === void 0 ? void 0 : (_configState$configs9 = _configState$configs8.google_maps_api_key) === null || _configState$configs9 === void 0 ? void 0 : _configState$configs9.value,
     mapControls: googleMapsControls,
     clearState: clearState,
     setClearState: setClearState,

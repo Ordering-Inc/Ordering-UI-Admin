@@ -41,7 +41,7 @@ var RestaurantSelectGuide = function RestaurantSelectGuide(props) {
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configs = _useConfig2[0].configs;
-  var googleMapsApiKey = configs === null || configs === void 0 || (_configs$google_maps_ = configs.google_maps_api_key) === null || _configs$google_maps_ === void 0 ? void 0 : _configs$google_maps_.value;
+  var googleMapsApiKey = configs === null || configs === void 0 ? void 0 : (_configs$google_maps_ = configs.google_maps_api_key) === null || _configs$google_maps_ === void 0 ? void 0 : _configs$google_maps_.value;
   var handleSubmit = function handleSubmit() {
     setStep(3);
     handleImport();
@@ -76,7 +76,7 @@ var RestaurantSelectGuide = function RestaurantSelectGuide(props) {
     },
     defaultValue: (_orderingBusiness$add = orderingBusiness === null || orderingBusiness === void 0 ? void 0 : orderingBusiness.address) !== null && _orderingBusiness$add !== void 0 ? _orderingBusiness$add : '',
     autoComplete: "new-password",
-    countryCode: (configs === null || configs === void 0 || (_configs$country_auto = configs.country_autocomplete) === null || _configs$country_auto === void 0 ? void 0 : _configs$country_auto.value) || '*'
+    countryCode: (configs === null || configs === void 0 ? void 0 : (_configs$country_auto = configs.country_autocomplete) === null || _configs$country_auto === void 0 ? void 0 : _configs$country_auto.value) || '*'
   })), businessListState.loading && /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 15,
     width: 100

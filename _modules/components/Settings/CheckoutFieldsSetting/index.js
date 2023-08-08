@@ -155,11 +155,11 @@ var CheckoutFieldsSettingUI = function CheckoutFieldsSettingUI(props) {
       key: field.id
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "name"
-    }, t(field === null || field === void 0 || (_field$validation_fie = field.validation_field) === null || _field$validation_fie === void 0 ? void 0 : _field$validation_fie.code.toUpperCase())), /*#__PURE__*/_react.default.createElement("div", {
+    }, t(field === null || field === void 0 ? void 0 : (_field$validation_fie = field.validation_field) === null || _field$validation_fie === void 0 ? void 0 : _field$validation_fie.code.toUpperCase())), /*#__PURE__*/_react.default.createElement("div", {
       className: "required"
     }, /*#__PURE__*/_react.default.createElement(_styles.Switch, {
       defaultChecked: field.required,
-      disabled: (field === null || field === void 0 || (_field$validation_fie2 = field.validation_field) === null || _field$validation_fie2 === void 0 ? void 0 : _field$validation_fie2.code) === 'email',
+      disabled: (field === null || field === void 0 ? void 0 : (_field$validation_fie2 = field.validation_field) === null || _field$validation_fie2 === void 0 ? void 0 : _field$validation_fie2.code) === 'email',
       onChange: function onChange(val) {
         return handleChangeCheckoutFieldSetting(field.validation_field_id, selectedSiteId, {
           required: val
@@ -169,7 +169,7 @@ var CheckoutFieldsSettingUI = function CheckoutFieldsSettingUI(props) {
       className: "status"
     }, /*#__PURE__*/_react.default.createElement(_styles.Switch, {
       defaultChecked: field.enabled,
-      disabled: (field === null || field === void 0 || (_field$validation_fie3 = field.validation_field) === null || _field$validation_fie3 === void 0 ? void 0 : _field$validation_fie3.code) === 'email',
+      disabled: (field === null || field === void 0 ? void 0 : (_field$validation_fie3 = field.validation_field) === null || _field$validation_fie3 === void 0 ? void 0 : _field$validation_fie3.code) === 'email',
       onChange: function onChange(val) {
         return handleChangeCheckoutFieldSetting(field.validation_field_id, selectedSiteId, {
           enabled: val
@@ -200,6 +200,6 @@ var CheckoutFieldsSetting = function CheckoutFieldsSetting(props) {
   var checkoutFieldsProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: CheckoutFieldsSettingUI
   });
-  return /*#__PURE__*/_react.default.createElement(_reactRouterDom.CheckoutFieldsSetting, checkoutFieldsProps);
+  return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.CheckoutFieldsSetting, checkoutFieldsProps);
 };
 exports.CheckoutFieldsSetting = CheckoutFieldsSetting;

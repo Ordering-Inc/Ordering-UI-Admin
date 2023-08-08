@@ -29,7 +29,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var AddBusinessFormUI = function AddBusinessFormUI(props) {
-  var _configs$google_maps_, _formState$changes, _formState$result3, _formState$result4, _formState$changes2, _formState$changes3, _formState$result5, _formState$result6, _formState$changes4, _formState$result7, _formState$result8, _formState$changes5, _formState$result9, _formState$result10, _formState$changes6, _formState$changes7, _formState$result11, _formState$result12, _formState$changes8, _formState$result13, _formState$result14, _formState$changes$ci, _formState$changes9, _formState$result15, _formState$result16, _formState$changes$ad, _formState$changes10, _configs$country_auto, _configs$google_maps_2, _formState$changes$lo, _formState$changes11;
+  var _configs$google_maps_, _formState$changes, _formState$result3, _formState$result3$re, _formState$result4, _formState$result4$re, _formState$changes2, _formState$changes3, _formState$result5, _formState$result5$re, _formState$result6, _formState$result6$re, _formState$changes4, _formState$result7, _formState$result8, _formState$result8$re, _formState$changes5, _formState$result9, _formState$result10, _formState$result10$r, _formState$changes6, _formState$changes7, _formState$result11, _formState$result12, _formState$result12$r, _formState$changes8, _formState$result13, _formState$result14, _formState$result14$r, _formState$changes$ci, _formState$changes9, _formState$result15, _formState$result16, _formState$result16$r, _formState$changes$ad, _formState$changes10, _configs$country_auto, _configs$google_maps_2, _formState$changes$lo, _formState$changes11;
   var isTutorialMode = props.isTutorialMode,
     formState = props.formState,
     setFormState = props.setFormState,
@@ -63,7 +63,7 @@ var AddBusinessFormUI = function AddBusinessFormUI(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     cropState = _useState4[0],
     setCropState = _useState4[1];
-  var googleMapsApiKey = configs === null || configs === void 0 || (_configs$google_maps_ = configs.google_maps_api_key) === null || _configs$google_maps_ === void 0 ? void 0 : _configs$google_maps_.value;
+  var googleMapsApiKey = configs === null || configs === void 0 ? void 0 : (_configs$google_maps_ = configs.google_maps_api_key) === null || _configs$google_maps_ === void 0 ? void 0 : _configs$google_maps_.value;
   var googleMapsControls = {
     defaultZoom: 15,
     zoomControl: true,
@@ -157,7 +157,7 @@ var AddBusinessFormUI = function AddBusinessFormUI(props) {
       var _formState$result2;
       setAlertState({
         open: true,
-        content: formState === null || formState === void 0 || (_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result
+        content: formState === null || formState === void 0 ? void 0 : (_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result
       });
     }
   }, [formState === null || formState === void 0 ? void 0 : formState.result]);
@@ -182,12 +182,12 @@ var AddBusinessFormUI = function AddBusinessFormUI(props) {
     },
     accept: "image/png, image/jpeg, image/jpg",
     disabled: formState.loading
-  }, formState.loading ? /*#__PURE__*/_react.default.createElement(_styles2.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null)) : !((_formState$changes = formState.changes) !== null && _formState$changes !== void 0 && _formState$changes.header) ? (formState === null || formState === void 0 || (_formState$result3 = formState.result) === null || _formState$result3 === void 0 || (_formState$result3 = _formState$result3.result) === null || _formState$result3 === void 0 ? void 0 : _formState$result3.header) && /*#__PURE__*/_react.default.createElement("img", {
-    src: formState === null || formState === void 0 || (_formState$result4 = formState.result) === null || _formState$result4 === void 0 || (_formState$result4 = _formState$result4.result) === null || _formState$result4 === void 0 ? void 0 : _formState$result4.header,
+  }, formState.loading ? /*#__PURE__*/_react.default.createElement(_styles2.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null)) : !((_formState$changes = formState.changes) !== null && _formState$changes !== void 0 && _formState$changes.header) ? (formState === null || formState === void 0 ? void 0 : (_formState$result3 = formState.result) === null || _formState$result3 === void 0 ? void 0 : (_formState$result3$re = _formState$result3.result) === null || _formState$result3$re === void 0 ? void 0 : _formState$result3$re.header) && /*#__PURE__*/_react.default.createElement("img", {
+    src: formState === null || formState === void 0 ? void 0 : (_formState$result4 = formState.result) === null || _formState$result4 === void 0 ? void 0 : (_formState$result4$re = _formState$result4.result) === null || _formState$result4$re === void 0 ? void 0 : _formState$result4$re.header,
     alt: "header",
     loading: "lazy"
   }) : /*#__PURE__*/_react.default.createElement("img", {
-    src: formState === null || formState === void 0 || (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.header,
+    src: formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.header,
     alt: "header image",
     loading: "lazy"
   }), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIconContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRAG_DROP_IMAGE_HERE', 'Put your image here'))))))), /*#__PURE__*/_react.default.createElement(_styles2.LogoImage, {
@@ -209,12 +209,12 @@ var AddBusinessFormUI = function AddBusinessFormUI(props) {
     },
     accept: "image/png, image/jpeg, image/jpg",
     disabled: formState.loading
-  }, formState.loading ? /*#__PURE__*/_react.default.createElement(_styles2.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null)) : !((_formState$changes3 = formState.changes) !== null && _formState$changes3 !== void 0 && _formState$changes3.logo) ? (formState === null || formState === void 0 || (_formState$result5 = formState.result) === null || _formState$result5 === void 0 || (_formState$result5 = _formState$result5.result) === null || _formState$result5 === void 0 ? void 0 : _formState$result5.logo) && /*#__PURE__*/_react.default.createElement("img", {
-    src: formState === null || formState === void 0 || (_formState$result6 = formState.result) === null || _formState$result6 === void 0 || (_formState$result6 = _formState$result6.result) === null || _formState$result6 === void 0 ? void 0 : _formState$result6.logo,
+  }, formState.loading ? /*#__PURE__*/_react.default.createElement(_styles2.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null)) : !((_formState$changes3 = formState.changes) !== null && _formState$changes3 !== void 0 && _formState$changes3.logo) ? (formState === null || formState === void 0 ? void 0 : (_formState$result5 = formState.result) === null || _formState$result5 === void 0 ? void 0 : (_formState$result5$re = _formState$result5.result) === null || _formState$result5$re === void 0 ? void 0 : _formState$result5$re.logo) && /*#__PURE__*/_react.default.createElement("img", {
+    src: formState === null || formState === void 0 ? void 0 : (_formState$result6 = formState.result) === null || _formState$result6 === void 0 ? void 0 : (_formState$result6$re = _formState$result6.result) === null || _formState$result6$re === void 0 ? void 0 : _formState$result6$re.logo,
     alt: "logo image",
     loading: "lazy"
   }) : /*#__PURE__*/_react.default.createElement("img", {
-    src: formState === null || formState === void 0 || (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.logo,
+    src: formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.logo,
     alt: "logo image",
     loading: "lazy"
   }), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIconContainer, {
@@ -225,7 +225,7 @@ var AddBusinessFormUI = function AddBusinessFormUI(props) {
     name: "name",
     type: "text",
     placeholder: t('NAME', 'name'),
-    defaultValue: formState !== null && formState !== void 0 && (_formState$result7 = formState.result) !== null && _formState$result7 !== void 0 && _formState$result7.result ? formState === null || formState === void 0 || (_formState$result8 = formState.result) === null || _formState$result8 === void 0 || (_formState$result8 = _formState$result8.result) === null || _formState$result8 === void 0 ? void 0 : _formState$result8.name : formState === null || formState === void 0 || (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.name,
+    defaultValue: formState !== null && formState !== void 0 && (_formState$result7 = formState.result) !== null && _formState$result7 !== void 0 && _formState$result7.result ? formState === null || formState === void 0 ? void 0 : (_formState$result8 = formState.result) === null || _formState$result8 === void 0 ? void 0 : (_formState$result8$re = _formState$result8.result) === null || _formState$result8$re === void 0 ? void 0 : _formState$result8$re.name : formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.name,
     onChange: function onChange(e) {
       handleChangeInput([{
         name: 'name',
@@ -244,7 +244,7 @@ var AddBusinessFormUI = function AddBusinessFormUI(props) {
     name: "email",
     type: "email",
     placeholder: t('EMAIL', 'email'),
-    defaultValue: formState !== null && formState !== void 0 && (_formState$result9 = formState.result) !== null && _formState$result9 !== void 0 && _formState$result9.result ? formState === null || formState === void 0 || (_formState$result10 = formState.result) === null || _formState$result10 === void 0 || (_formState$result10 = _formState$result10.result) === null || _formState$result10 === void 0 ? void 0 : _formState$result10.email : formState === null || formState === void 0 || (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.email,
+    defaultValue: formState !== null && formState !== void 0 && (_formState$result9 = formState.result) !== null && _formState$result9 !== void 0 && _formState$result9.result ? formState === null || formState === void 0 ? void 0 : (_formState$result10 = formState.result) === null || _formState$result10 === void 0 ? void 0 : (_formState$result10$r = _formState$result10.result) === null || _formState$result10$r === void 0 ? void 0 : _formState$result10$r.email : formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.email,
     onChange: handleChangeInput,
     ref: formMethods.register({
       required: t('VALIDATION_ERROR_REQUIRED', 'Email is required').replace('_attribute_', t('EMAIL', 'Email')),
@@ -258,7 +258,7 @@ var AddBusinessFormUI = function AddBusinessFormUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('BUSINESS_SLUG', 'Business slug')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "slug",
     placeholder: t('SLUG', 'slug'),
-    value: (formState === null || formState === void 0 || (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.slug) || '',
+    value: (formState === null || formState === void 0 ? void 0 : (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.slug) || '',
     onChange: handleChangeInput,
     ref: formMethods.register({
       required: t('BUSINESS_SLUG_REQUIRED', 'Business slug is required')
@@ -274,14 +274,14 @@ var AddBusinessFormUI = function AddBusinessFormUI(props) {
     rows: 4,
     name: "description",
     placeholder: t('SHORT_BUSINESS_ABOUT', 'Write a little description'),
-    defaultValue: formState !== null && formState !== void 0 && (_formState$result11 = formState.result) !== null && _formState$result11 !== void 0 && _formState$result11.result ? formState === null || formState === void 0 || (_formState$result12 = formState.result) === null || _formState$result12 === void 0 || (_formState$result12 = _formState$result12.result) === null || _formState$result12 === void 0 ? void 0 : _formState$result12.description : formState === null || formState === void 0 || (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.description,
+    defaultValue: formState !== null && formState !== void 0 && (_formState$result11 = formState.result) !== null && _formState$result11 !== void 0 && _formState$result11.result ? formState === null || formState === void 0 ? void 0 : (_formState$result12 = formState.result) === null || _formState$result12 === void 0 ? void 0 : (_formState$result12$r = _formState$result12.result) === null || _formState$result12$r === void 0 ? void 0 : _formState$result12$r.description : formState === null || formState === void 0 ? void 0 : (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.description,
     onChange: handleChangeInput,
     disabled: formState.loading,
     autoComplete: "off"
   })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('CITY', 'City')), /*#__PURE__*/_react.default.createElement(_Shared.CitySelector, {
     isDefault: true,
     isAddMode: true,
-    defaultValue: formState !== null && formState !== void 0 && (_formState$result13 = formState.result) !== null && _formState$result13 !== void 0 && _formState$result13.result ? formState === null || formState === void 0 || (_formState$result14 = formState.result) === null || _formState$result14 === void 0 || (_formState$result14 = _formState$result14.result) === null || _formState$result14 === void 0 ? void 0 : _formState$result14.city_id : (_formState$changes$ci = formState === null || formState === void 0 || (_formState$changes9 = formState.changes) === null || _formState$changes9 === void 0 ? void 0 : _formState$changes9.city_id) !== null && _formState$changes$ci !== void 0 ? _formState$changes$ci : '',
+    defaultValue: formState !== null && formState !== void 0 && (_formState$result13 = formState.result) !== null && _formState$result13 !== void 0 && _formState$result13.result ? formState === null || formState === void 0 ? void 0 : (_formState$result14 = formState.result) === null || _formState$result14 === void 0 ? void 0 : (_formState$result14$r = _formState$result14.result) === null || _formState$result14$r === void 0 ? void 0 : _formState$result14$r.city_id : (_formState$changes$ci = formState === null || formState === void 0 ? void 0 : (_formState$changes9 = formState.changes) === null || _formState$changes9 === void 0 ? void 0 : _formState$changes9.city_id) !== null && _formState$changes$ci !== void 0 ? _formState$changes$ci : '',
     handleChangeCity: function handleChangeCity(cityId) {
       return setFormState(_objectSpread(_objectSpread({}, formState), {}, {
         changes: _objectSpread(_objectSpread({}, formState.changes), {}, {
@@ -300,12 +300,12 @@ var AddBusinessFormUI = function AddBusinessFormUI(props) {
     onChange: function onChange(e) {
       handleChangeInput(e);
     },
-    defaultValue: formState !== null && formState !== void 0 && (_formState$result15 = formState.result) !== null && _formState$result15 !== void 0 && _formState$result15.result ? formState === null || formState === void 0 || (_formState$result16 = formState.result) === null || _formState$result16 === void 0 || (_formState$result16 = _formState$result16.result) === null || _formState$result16 === void 0 ? void 0 : _formState$result16.address : (_formState$changes$ad = formState === null || formState === void 0 || (_formState$changes10 = formState.changes) === null || _formState$changes10 === void 0 ? void 0 : _formState$changes10.address) !== null && _formState$changes$ad !== void 0 ? _formState$changes$ad : '',
+    defaultValue: formState !== null && formState !== void 0 && (_formState$result15 = formState.result) !== null && _formState$result15 !== void 0 && _formState$result15.result ? formState === null || formState === void 0 ? void 0 : (_formState$result16 = formState.result) === null || _formState$result16 === void 0 ? void 0 : (_formState$result16$r = _formState$result16.result) === null || _formState$result16$r === void 0 ? void 0 : _formState$result16$r.address : (_formState$changes$ad = formState === null || formState === void 0 ? void 0 : (_formState$changes10 = formState.changes) === null || _formState$changes10 === void 0 ? void 0 : _formState$changes10.address) !== null && _formState$changes$ad !== void 0 ? _formState$changes$ad : '',
     autoComplete: "new-password",
-    countryCode: (configs === null || configs === void 0 || (_configs$country_auto = configs.country_autocomplete) === null || _configs$country_auto === void 0 ? void 0 : _configs$country_auto.value) || '*'
+    countryCode: (configs === null || configs === void 0 ? void 0 : (_configs$country_auto = configs.country_autocomplete) === null || _configs$country_auto === void 0 ? void 0 : _configs$country_auto.value) || '*'
   })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperMap, null, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.GoogleMapsMap, {
-    apiKey: configs === null || configs === void 0 || (_configs$google_maps_2 = configs.google_maps_api_key) === null || _configs$google_maps_2 === void 0 ? void 0 : _configs$google_maps_2.value,
-    location: (_formState$changes$lo = formState === null || formState === void 0 || (_formState$changes11 = formState.changes) === null || _formState$changes11 === void 0 ? void 0 : _formState$changes11.location) !== null && _formState$changes$lo !== void 0 ? _formState$changes$lo : defaultPosition,
+    apiKey: configs === null || configs === void 0 ? void 0 : (_configs$google_maps_2 = configs.google_maps_api_key) === null || _configs$google_maps_2 === void 0 ? void 0 : _configs$google_maps_2.value,
+    location: (_formState$changes$lo = formState === null || formState === void 0 ? void 0 : (_formState$changes11 = formState.changes) === null || _formState$changes11 === void 0 ? void 0 : _formState$changes11.location) !== null && _formState$changes$lo !== void 0 ? _formState$changes$lo : defaultPosition,
     mapControls: googleMapsControls,
     handleChangeCenter: handleChangeCenter,
     isFitCenter: true

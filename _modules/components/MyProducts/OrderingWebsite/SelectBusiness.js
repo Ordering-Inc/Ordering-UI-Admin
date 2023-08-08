@@ -37,11 +37,11 @@ var SelectBusiness = function SelectBusiness(props) {
     if (businessesList !== null && businessesList !== void 0 && businessesList.loading || !(businessesList !== null && businessesList !== void 0 && businessesList.businesses)) return;
     var _businessOptions = [];
     businessesList.businesses.map(function (business) {
-      var _theme$images;
+      var _theme$images, _theme$images$dummies;
       _businessOptions.push({
         value: business === null || business === void 0 ? void 0 : business.slug,
         content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, /*#__PURE__*/_react.default.createElement("img", {
-          src: optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.dummies) === null || _theme$images === void 0 ? void 0 : _theme$images.businessLogo), 'h_50,c_limit'),
+          src: optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_50,c_limit'),
           alt: ""
         }), /*#__PURE__*/_react.default.createElement("span", null, business === null || business === void 0 ? void 0 : business.name))
       });

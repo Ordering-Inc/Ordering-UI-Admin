@@ -37,11 +37,11 @@ var SelectFranchise = function SelectFranchise(props) {
     if (franchisesList !== null && franchisesList !== void 0 && franchisesList.loading || !(franchisesList !== null && franchisesList !== void 0 && franchisesList.franchises)) return;
     var _options = [];
     franchisesList.franchises.map(function (franchise) {
-      var _theme$images;
+      var _theme$images, _theme$images$dummies;
       _options.push({
         value: franchise === null || franchise === void 0 ? void 0 : franchise.slug,
         content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, /*#__PURE__*/_react.default.createElement("img", {
-          src: optimizeImage((franchise === null || franchise === void 0 ? void 0 : franchise.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.dummies) === null || _theme$images === void 0 ? void 0 : _theme$images.businessLogo), 'h_50,c_limit'),
+          src: optimizeImage((franchise === null || franchise === void 0 ? void 0 : franchise.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_50,c_limit'),
           alt: ""
         }), /*#__PURE__*/_react.default.createElement("span", null, franchise === null || franchise === void 0 ? void 0 : franchise.name))
       });

@@ -132,8 +132,8 @@ var BusinessServiceProfessionalsUI = function BusinessServiceProfessionalsUI(pro
       width: 16,
       height: 16
     }));
-  })) : usersList === null || usersList === void 0 || (_usersList$users = usersList.users) === null || _usersList$users === void 0 ? void 0 : _usersList$users.map(function (user, i) {
-    var _theme$images;
+  })) : usersList === null || usersList === void 0 ? void 0 : (_usersList$users = usersList.users) === null || _usersList$users === void 0 ? void 0 : _usersList$users.map(function (user, i) {
+    var _theme$images, _theme$images$dummies;
     return /*#__PURE__*/_react.default.createElement(_styles2.ProfessionalItemContainer, {
       key: i,
       onClick: function onClick(e) {
@@ -143,7 +143,7 @@ var BusinessServiceProfessionalsUI = function BusinessServiceProfessionalsUI(pro
     }, /*#__PURE__*/_react.default.createElement(_styles2.CheckWrapper, null, /*#__PURE__*/_react.default.createElement("label", {
       htmlFor: user === null || user === void 0 ? void 0 : user.id
     }, /*#__PURE__*/_react.default.createElement(_styles2.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles2.Image, {
-      bgimage: optimizeImage((user === null || user === void 0 ? void 0 : user.photo) || ((_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.dummies) === null || _theme$images === void 0 ? void 0 : _theme$images.businessLogo))
+      bgimage: optimizeImage((user === null || user === void 0 ? void 0 : user.photo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo))
     })), /*#__PURE__*/_react.default.createElement(_styles2.UserInfo, null, /*#__PURE__*/_react.default.createElement("h3", null, user === null || user === void 0 ? void 0 : user.name), /*#__PURE__*/_react.default.createElement("p", null, user === null || user === void 0 ? void 0 : user.email)))), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null));
   }), /*#__PURE__*/_react.default.createElement(_styles2.BottomWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.AddBtn, {
     onClick: function onClick() {

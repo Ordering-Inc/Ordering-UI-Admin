@@ -36,7 +36,7 @@ var LogisticsUI = function LogisticsUI(props) {
     var _log$data, _log$data2, _log$data3, _log$data4, _log$with_orders;
     switch (log.event) {
       case 'logistic_driver_found':
-        return "Driver ".concat(log.driver.name, " found to the order at ").concat(parseDistance(((log === null || log === void 0 || (_log$data = log.data) === null || _log$data === void 0 ? void 0 : _log$data.distance) / 1000).toFixed(2)));
+        return "Driver ".concat(log.driver.name, " found to the order at ").concat(parseDistance(((log === null || log === void 0 ? void 0 : (_log$data = log.data) === null || _log$data === void 0 ? void 0 : _log$data.distance) / 1000).toFixed(2)));
       case 'logistic_driver_found_group':
         return "Driver ".concat(log.driver.name, " found");
       case 'logistic_driver_not_found':
@@ -44,19 +44,19 @@ var LogisticsUI = function LogisticsUI(props) {
       case 'logistic_driver_not_found_group':
         return 'Drivers was not found to the group';
       case 'logistic_driver_found_in_coverage':
-        return "Logistic: Driver ".concat(log.driver.name, " found to the order at ").concat(parseDistance(((log === null || log === void 0 || (_log$data2 = log.data) === null || _log$data2 === void 0 ? void 0 : _log$data2.distance) / 1000).toFixed(2)), " in ").concat(parseDistance((log.data.coverage / 1000).toFixed(2)), " of coverage.");
+        return "Logistic: Driver ".concat(log.driver.name, " found to the order at ").concat(parseDistance(((log === null || log === void 0 ? void 0 : (_log$data2 = log.data) === null || _log$data2 === void 0 ? void 0 : _log$data2.distance) / 1000).toFixed(2)), " in ").concat(parseDistance((log.data.coverage / 1000).toFixed(2)), " of coverage.");
       case 'logistic_driver_found_in_coverage_group':
         return 'logistic driver found in coverage group';
       case 'logistic_driver_found_out_coverage':
-        return "Driver ".concat(log.driver.name, " found to the order at ").concat(parseDistance(((log === null || log === void 0 || (_log$data3 = log.data) === null || _log$data3 === void 0 ? void 0 : _log$data3.distance) / 1000).toFixed(2)), " out of ").concat(parseDistance((log.data.coverage / 1000).toFixed(2)), " of coverage.");
+        return "Driver ".concat(log.driver.name, " found to the order at ").concat(parseDistance(((log === null || log === void 0 ? void 0 : (_log$data3 = log.data) === null || _log$data3 === void 0 ? void 0 : _log$data3.distance) / 1000).toFixed(2)), " out of ").concat(parseDistance((log.data.coverage / 1000).toFixed(2)), " of coverage.");
       case 'logistic_driver_found_out_coverage_group':
         return 'logistic driver found out coverage group';
       case 'logistic_driver_autoaccepted':
-        return "Order was auto-assigned and auto-accepted by driver ".concat(log.driver.name, " at ").concat(parseDistance(((log === null || log === void 0 || (_log$data4 = log.data) === null || _log$data4 === void 0 ? void 0 : _log$data4.distance) / 1000).toFixed(2)), ".");
+        return "Order was auto-assigned and auto-accepted by driver ".concat(log.driver.name, " at ").concat(parseDistance(((log === null || log === void 0 ? void 0 : (_log$data4 = log.data) === null || _log$data4 === void 0 ? void 0 : _log$data4.distance) / 1000).toFixed(2)), ".");
       case 'logistic_driver_autoaccepted_group':
         return 'logisticdriver autoaccepted group';
       case 'logistic_request_autorejected':
-        return "Request of the driver ".concat(log.driver.name, " was auto-rejected with order ").concat(log === null || log === void 0 || (_log$with_orders = log.with_orders) === null || _log$with_orders === void 0 ? void 0 : _log$with_orders.join(), " by process.");
+        return "Request of the driver ".concat(log.driver.name, " was auto-rejected with order ").concat(log === null || log === void 0 ? void 0 : (_log$with_orders = log.with_orders) === null || _log$with_orders === void 0 ? void 0 : _log$with_orders.join(), " by process.");
       case 'logistic_request_autorejected_group':
         return 'logistic request autorejected group';
       case 'logistic_assign_request_accepted':
@@ -120,7 +120,7 @@ var LogisticsUI = function LogisticsUI(props) {
     var _log$data5;
     return /*#__PURE__*/_react.default.createElement(_styles.BubbleConsole, {
       key: log.id
-    }, getEventName(log), log.event === 'logistic_expired' && /*#__PURE__*/_react.default.createElement(_styles.Reason, null, "Reason: ", log === null || log === void 0 || (_log$data5 = log.data) === null || _log$data5 === void 0 ? void 0 : _log$data5.reason), /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(log.updated_at)));
+    }, getEventName(log), log.event === 'logistic_expired' && /*#__PURE__*/_react.default.createElement(_styles.Reason, null, "Reason: ", log === null || log === void 0 ? void 0 : (_log$data5 = log.data) === null || _log$data5 === void 0 ? void 0 : _log$data5.reason), /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(log.updated_at)));
   })));
 };
 var Logistics = function Logistics(props) {

@@ -77,8 +77,8 @@ var BusinessPickupDetailsUI = function BusinessPickupDetailsUI(props) {
     var _business$pickup_time, _business$pickup_time2;
     setTimeList();
     setCurPickupTime({
-      hour: business !== null && business !== void 0 && business.pickup_time ? (business === null || business === void 0 || (_business$pickup_time = business.pickup_time) === null || _business$pickup_time === void 0 ? void 0 : _business$pickup_time.split(':')[0]) * 1 + '' : '0',
-      minute: business !== null && business !== void 0 && business.pickup_time ? (business === null || business === void 0 || (_business$pickup_time2 = business.pickup_time) === null || _business$pickup_time2 === void 0 ? void 0 : _business$pickup_time2.split(':')[1]) * 1 + '' : '0'
+      hour: business !== null && business !== void 0 && business.pickup_time ? (business === null || business === void 0 ? void 0 : (_business$pickup_time = business.pickup_time) === null || _business$pickup_time === void 0 ? void 0 : _business$pickup_time.split(':')[0]) * 1 + '' : '0',
+      minute: business !== null && business !== void 0 && business.pickup_time ? (business === null || business === void 0 ? void 0 : (_business$pickup_time2 = business.pickup_time) === null || _business$pickup_time2 === void 0 ? void 0 : _business$pickup_time2.split(':')[1]) * 1 + '' : '0'
     });
   }, []);
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.SectionTitle, null, t('PREORDER_STEP_2_TIME', 'Order time')), /*#__PURE__*/_react.default.createElement(_styles2.TimeSelectContainer, null, /*#__PURE__*/_react.default.createElement("label", null, t('ESTIMATED_PICKUP_TIME', 'Pickup Time')), /*#__PURE__*/_react.default.createElement(_styles2.TimeBlock, null, /*#__PURE__*/_react.default.createElement("select", {

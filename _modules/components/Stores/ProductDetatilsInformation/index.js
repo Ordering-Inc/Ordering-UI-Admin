@@ -30,7 +30,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ProductDetatilsInformation = function ProductDetatilsInformation(props) {
-  var _formState$changes3, _formState$changes5, _formState$changes6, _formState$result3, _formState$changes7, _formState$changes8, _formState$changes9, _formState$changes10, _formState$changes11, _formState$changes12, _formState$changes$in, _formState$changes13, _formState$changes14, _formState$changes15, _product$ribbon, _formState$changes16, _formState$changes17, _product$ribbon2, _formState$changes$ri, _formState$changes18, _product$ribbon3, _formState$changes19, _formState$changes20, _product$ribbon4, _formState$changes$ri2, _formState$changes21, _product$ribbon5;
+  var _formState$changes3, _formState$changes5, _formState$changes6, _formState$result3, _formState$changes7, _formState$changes8, _formState$changes9, _formState$changes10, _formState$changes11, _formState$changes12, _formState$changes$in, _formState$changes13, _formState$changes14, _formState$changes15, _product$ribbon, _formState$changes16, _formState$changes16$, _formState$changes17, _formState$changes17$, _product$ribbon2, _formState$changes$ri, _formState$changes18, _formState$changes18$, _product$ribbon3, _formState$changes19, _formState$changes19$, _formState$changes20, _formState$changes20$, _product$ribbon4, _formState$changes$ri2, _formState$changes21, _formState$changes21$, _product$ribbon5;
   var product = props.product,
     formState = props.formState,
     handlechangeImage = props.handlechangeImage,
@@ -190,7 +190,7 @@ var ProductDetatilsInformation = function ProductDetatilsInformation(props) {
       var _formState$result2;
       setAlertState({
         open: true,
-        content: formState === null || formState === void 0 || (_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result
+        content: formState === null || formState === void 0 ? void 0 : (_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result
       });
     }
   }, [formState === null || formState === void 0 ? void 0 : formState.result]);
@@ -213,18 +213,18 @@ var ProductDetatilsInformation = function ProductDetatilsInformation(props) {
   }, [autoGenerateCode]);
   (0, _react.useEffect)(function () {
     var _formState$changes;
-    if (typeof (formState === null || formState === void 0 || (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.price) !== 'undefined') {
+    if (typeof (formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.price) !== 'undefined') {
       var _formState$changes2;
-      setMinimumRegualrPrice(parseFloat(formState === null || formState === void 0 || (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.price) + 0.01);
+      setMinimumRegualrPrice(parseFloat(formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.price) + 0.01);
       return;
     }
     if (product !== null && product !== void 0 && product.price) {
       setMinimumRegualrPrice(parseFloat(product === null || product === void 0 ? void 0 : product.price) + 0.01);
     }
-  }, [product === null || product === void 0 ? void 0 : product.price, formState === null || formState === void 0 || (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.price]);
+  }, [product === null || product === void 0 ? void 0 : product.price, formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.price]);
   (0, _react.useEffect)(function () {
     var _formState$changes4;
-    if (typeof (formState === null || formState === void 0 || (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.name) === 'undefined') return;
+    if (typeof (formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.name) === 'undefined') return;
     var generateCode = {
       target: {
         name: 'slug',
@@ -232,7 +232,7 @@ var ProductDetatilsInformation = function ProductDetatilsInformation(props) {
       }
     };
     handleChangeInput(generateCode);
-  }, [formState === null || formState === void 0 || (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.name]);
+  }, [formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.name]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.FormInput, {
     onSubmit: formMethods.handleSubmit(onSubmit)
   }, /*#__PURE__*/_react.default.createElement(_styles2.ProductImage, {
@@ -258,8 +258,8 @@ var ProductDetatilsInformation = function ProductDetatilsInformation(props) {
     src: optimizeImage(product === null || product === void 0 ? void 0 : product.images, 'h_200,c_limit'),
     alt: "product image",
     loading: "lazy"
-  }) : (formState === null || formState === void 0 || (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.images) && /*#__PURE__*/_react.default.createElement("img", {
-    src: formState === null || formState === void 0 || (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.images,
+  }) : (formState === null || formState === void 0 ? void 0 : (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.images) && /*#__PURE__*/_react.default.createElement("img", {
+    src: formState === null || formState === void 0 ? void 0 : (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.images,
     alt: "product image",
     loading: "lazy"
   }), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIconContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRAG_DROP_IMAGE_HERE', 'Put your image here'))))))), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('Name_V2', 'Name')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
@@ -302,11 +302,11 @@ var ProductDetatilsInformation = function ProductDetatilsInformation(props) {
     placeholder: parsePrice(0),
     defaultValue: product === null || product === void 0 ? void 0 : product.offer_price,
     ref: formMethods.register({
-      min: (typeof (formState === null || formState === void 0 || (_formState$changes9 = formState.changes) === null || _formState$changes9 === void 0 ? void 0 : _formState$changes9.in_offer) === 'undefined' && (product === null || product === void 0 ? void 0 : product.in_offer) || (formState === null || formState === void 0 || (_formState$changes10 = formState.changes) === null || _formState$changes10 === void 0 ? void 0 : _formState$changes10.in_offer)) && minimumRegualrPrice,
-      required: typeof (formState === null || formState === void 0 || (_formState$changes11 = formState.changes) === null || _formState$changes11 === void 0 ? void 0 : _formState$changes11.in_offer) === 'undefined' && product !== null && product !== void 0 && product.in_offer || formState !== null && formState !== void 0 && (_formState$changes12 = formState.changes) !== null && _formState$changes12 !== void 0 && _formState$changes12.in_offer ? t('VALIDATION_ERROR_REQUIRED', 'The Regular Price field is required').replace('_attribute_', t('REGULAR_PRICE', 'Regular Price')) : false
+      min: (typeof (formState === null || formState === void 0 ? void 0 : (_formState$changes9 = formState.changes) === null || _formState$changes9 === void 0 ? void 0 : _formState$changes9.in_offer) === 'undefined' && (product === null || product === void 0 ? void 0 : product.in_offer) || (formState === null || formState === void 0 ? void 0 : (_formState$changes10 = formState.changes) === null || _formState$changes10 === void 0 ? void 0 : _formState$changes10.in_offer)) && minimumRegualrPrice,
+      required: typeof (formState === null || formState === void 0 ? void 0 : (_formState$changes11 = formState.changes) === null || _formState$changes11 === void 0 ? void 0 : _formState$changes11.in_offer) === 'undefined' && product !== null && product !== void 0 && product.in_offer || formState !== null && formState !== void 0 && (_formState$changes12 = formState.changes) !== null && _formState$changes12 !== void 0 && _formState$changes12.in_offer ? t('VALIDATION_ERROR_REQUIRED', 'The Regular Price field is required').replace('_attribute_', t('REGULAR_PRICE', 'Regular Price')) : false
     }),
     onChange: handleChangeRegularPrice,
-    disabled: formState.loading || !((_formState$changes$in = formState === null || formState === void 0 || (_formState$changes13 = formState.changes) === null || _formState$changes13 === void 0 ? void 0 : _formState$changes13.in_offer) !== null && _formState$changes$in !== void 0 ? _formState$changes$in : product === null || product === void 0 ? void 0 : product.in_offer),
+    disabled: formState.loading || !((_formState$changes$in = formState === null || formState === void 0 ? void 0 : (_formState$changes13 = formState.changes) === null || _formState$changes13 === void 0 ? void 0 : _formState$changes13.in_offer) !== null && _formState$changes$in !== void 0 ? _formState$changes$in : product === null || product === void 0 ? void 0 : product.in_offer),
     autoComplete: "off",
     onKeyPress: function onKeyPress(e) {
       if (!/^[0-9.]$/.test(e.key)) {
@@ -328,7 +328,7 @@ var ProductDetatilsInformation = function ProductDetatilsInformation(props) {
         inventoried: val
       });
     }
-  })), (typeof (formState === null || formState === void 0 || (_formState$changes14 = formState.changes) === null || _formState$changes14 === void 0 ? void 0 : _formState$changes14.inventoried) !== 'undefined' ? formState === null || formState === void 0 || (_formState$changes15 = formState.changes) === null || _formState$changes15 === void 0 ? void 0 : _formState$changes15.inventoried : product === null || product === void 0 ? void 0 : product.inventoried) && /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('QUANTITY', 'Quantity')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  })), (typeof (formState === null || formState === void 0 ? void 0 : (_formState$changes14 = formState.changes) === null || _formState$changes14 === void 0 ? void 0 : _formState$changes14.inventoried) !== 'undefined' ? formState === null || formState === void 0 ? void 0 : (_formState$changes15 = formState.changes) === null || _formState$changes15 === void 0 ? void 0 : _formState$changes15.inventoried : product === null || product === void 0 ? void 0 : product.inventoried) && /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('QUANTITY', 'Quantity')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "quantity",
     placeholder: t('QUANTITY', 'Quantity'),
     defaultValue: product === null || product === void 0 ? void 0 : product.quantity,
@@ -345,14 +345,14 @@ var ProductDetatilsInformation = function ProductDetatilsInformation(props) {
       }
     }
   })), /*#__PURE__*/_react.default.createElement(_styles2.InventoryWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('RIBBON', 'Ribbon')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
-    defaultChecked: (product === null || product === void 0 || (_product$ribbon = product.ribbon) === null || _product$ribbon === void 0 ? void 0 : _product$ribbon.enabled) || false,
+    defaultChecked: (product === null || product === void 0 ? void 0 : (_product$ribbon = product.ribbon) === null || _product$ribbon === void 0 ? void 0 : _product$ribbon.enabled) || false,
     onChange: function onChange(val) {
       return handleChangeEnable(val);
     }
-  })), (typeof (formState === null || formState === void 0 || (_formState$changes16 = formState.changes) === null || _formState$changes16 === void 0 || (_formState$changes16 = _formState$changes16.ribbon) === null || _formState$changes16 === void 0 ? void 0 : _formState$changes16.enabled) !== 'undefined' ? formState === null || formState === void 0 || (_formState$changes17 = formState.changes) === null || _formState$changes17 === void 0 || (_formState$changes17 = _formState$changes17.ribbon) === null || _formState$changes17 === void 0 ? void 0 : _formState$changes17.enabled : product === null || product === void 0 || (_product$ribbon2 = product.ribbon) === null || _product$ribbon2 === void 0 ? void 0 : _product$ribbon2.enabled) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('TEXT', 'Text')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  })), (typeof (formState === null || formState === void 0 ? void 0 : (_formState$changes16 = formState.changes) === null || _formState$changes16 === void 0 ? void 0 : (_formState$changes16$ = _formState$changes16.ribbon) === null || _formState$changes16$ === void 0 ? void 0 : _formState$changes16$.enabled) !== 'undefined' ? formState === null || formState === void 0 ? void 0 : (_formState$changes17 = formState.changes) === null || _formState$changes17 === void 0 ? void 0 : (_formState$changes17$ = _formState$changes17.ribbon) === null || _formState$changes17$ === void 0 ? void 0 : _formState$changes17$.enabled : product === null || product === void 0 ? void 0 : (_product$ribbon2 = product.ribbon) === null || _product$ribbon2 === void 0 ? void 0 : _product$ribbon2.enabled) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('TEXT', 'Text')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "text",
     placeholder: t('TEXT', 'Text'),
-    defaultValue: (_formState$changes$ri = formState === null || formState === void 0 || (_formState$changes18 = formState.changes) === null || _formState$changes18 === void 0 || (_formState$changes18 = _formState$changes18.ribbon) === null || _formState$changes18 === void 0 ? void 0 : _formState$changes18.text) !== null && _formState$changes$ri !== void 0 ? _formState$changes$ri : product === null || product === void 0 || (_product$ribbon3 = product.ribbon) === null || _product$ribbon3 === void 0 ? void 0 : _product$ribbon3.text,
+    defaultValue: (_formState$changes$ri = formState === null || formState === void 0 ? void 0 : (_formState$changes18 = formState.changes) === null || _formState$changes18 === void 0 ? void 0 : (_formState$changes18$ = _formState$changes18.ribbon) === null || _formState$changes18$ === void 0 ? void 0 : _formState$changes18$.text) !== null && _formState$changes$ri !== void 0 ? _formState$changes$ri : product === null || product === void 0 ? void 0 : (_product$ribbon3 = product.ribbon) === null || _product$ribbon3 === void 0 ? void 0 : _product$ribbon3.text,
     onChange: function onChange(e) {
       return handleChangeRibbon({
         text: e.target.value
@@ -361,28 +361,28 @@ var ProductDetatilsInformation = function ProductDetatilsInformation(props) {
     disabled: formState.loading,
     autoComplete: "off",
     ref: formMethods.register({
-      required: product !== null && product !== void 0 && product.ribbon && (typeof (formState === null || formState === void 0 || (_formState$changes19 = formState.changes) === null || _formState$changes19 === void 0 || (_formState$changes19 = _formState$changes19.ribbon) === null || _formState$changes19 === void 0 ? void 0 : _formState$changes19.enabled) !== 'undefined' ? formState === null || formState === void 0 || (_formState$changes20 = formState.changes) === null || _formState$changes20 === void 0 || (_formState$changes20 = _formState$changes20.ribbon) === null || _formState$changes20 === void 0 ? void 0 : _formState$changes20.enabled : product === null || product === void 0 || (_product$ribbon4 = product.ribbon) === null || _product$ribbon4 === void 0 ? void 0 : _product$ribbon4.enabled) ? t('VALIDATION_ERROR_REQUIRED', 'The Ribbon text field is required').replace('_attribute_', t('Ribbon_Text', 'Ribbon text')) : false
+      required: product !== null && product !== void 0 && product.ribbon && (typeof (formState === null || formState === void 0 ? void 0 : (_formState$changes19 = formState.changes) === null || _formState$changes19 === void 0 ? void 0 : (_formState$changes19$ = _formState$changes19.ribbon) === null || _formState$changes19$ === void 0 ? void 0 : _formState$changes19$.enabled) !== 'undefined' ? formState === null || formState === void 0 ? void 0 : (_formState$changes20 = formState.changes) === null || _formState$changes20 === void 0 ? void 0 : (_formState$changes20$ = _formState$changes20.ribbon) === null || _formState$changes20$ === void 0 ? void 0 : _formState$changes20$.enabled : product === null || product === void 0 ? void 0 : (_product$ribbon4 = product.ribbon) === null || _product$ribbon4 === void 0 ? void 0 : _product$ribbon4.enabled) ? t('VALIDATION_ERROR_REQUIRED', 'The Ribbon text field is required').replace('_attribute_', t('Ribbon_Text', 'Ribbon text')) : false
     })
   })), /*#__PURE__*/_react.default.createElement(_styles2.ColorShapeWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.ColorWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('COLOR', 'Color')), /*#__PURE__*/_react.default.createElement(_Shared.ColorPicker, {
-    defaultColor: (_formState$changes$ri2 = formState === null || formState === void 0 || (_formState$changes21 = formState.changes) === null || _formState$changes21 === void 0 || (_formState$changes21 = _formState$changes21.ribbon) === null || _formState$changes21 === void 0 ? void 0 : _formState$changes21.color) !== null && _formState$changes$ri2 !== void 0 ? _formState$changes$ri2 : product === null || product === void 0 || (_product$ribbon5 = product.ribbon) === null || _product$ribbon5 === void 0 ? void 0 : _product$ribbon5.color,
+    defaultColor: (_formState$changes$ri2 = formState === null || formState === void 0 ? void 0 : (_formState$changes21 = formState.changes) === null || _formState$changes21 === void 0 ? void 0 : (_formState$changes21$ = _formState$changes21.ribbon) === null || _formState$changes21$ === void 0 ? void 0 : _formState$changes21$.color) !== null && _formState$changes$ri2 !== void 0 ? _formState$changes$ri2 : product === null || product === void 0 ? void 0 : (_product$ribbon5 = product.ribbon) === null || _product$ribbon5 === void 0 ? void 0 : _product$ribbon5.color,
     onChangeColor: function onChangeColor(color) {
       return handleChangeRibbon({
         color: color
       });
     }
   })), /*#__PURE__*/_react.default.createElement(_styles2.ShapeWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('SHAPE', 'Shape')), /*#__PURE__*/_react.default.createElement(_styles2.ShapeContentWrapper, null, _utils.shape && Object.keys(_utils.shape).map(function (key, i) {
-    var _formState$changes22, _formState$changes23, _product$ribbon6, _formState$changes24, _formState$changes25, _product$ribbon7;
+    var _formState$changes22, _formState$changes22$, _formState$changes23, _formState$changes23$, _product$ribbon6, _formState$changes24, _formState$changes24$, _formState$changes25, _formState$changes25$, _product$ribbon7;
     return /*#__PURE__*/_react.default.createElement(_styles2.ShapeBoxWrapper, {
       key: i,
       shapeRect: _utils.shape[key] === (_utils.shape === null || _utils.shape === void 0 ? void 0 : _utils.shape.rectangleRound),
       round: _utils.shape[key] === (_utils.shape === null || _utils.shape === void 0 ? void 0 : _utils.shape.capsuleShape),
-      active: formState !== null && formState !== void 0 && (_formState$changes22 = formState.changes) !== null && _formState$changes22 !== void 0 && (_formState$changes22 = _formState$changes22.ribbon) !== null && _formState$changes22 !== void 0 && _formState$changes22.shape ? (formState === null || formState === void 0 || (_formState$changes23 = formState.changes) === null || _formState$changes23 === void 0 || (_formState$changes23 = _formState$changes23.ribbon) === null || _formState$changes23 === void 0 ? void 0 : _formState$changes23.shape) === _utils.shape[key] : (product === null || product === void 0 || (_product$ribbon6 = product.ribbon) === null || _product$ribbon6 === void 0 ? void 0 : _product$ribbon6.shape) === _utils.shape[key],
+      active: formState !== null && formState !== void 0 && (_formState$changes22 = formState.changes) !== null && _formState$changes22 !== void 0 && (_formState$changes22$ = _formState$changes22.ribbon) !== null && _formState$changes22$ !== void 0 && _formState$changes22$.shape ? (formState === null || formState === void 0 ? void 0 : (_formState$changes23 = formState.changes) === null || _formState$changes23 === void 0 ? void 0 : (_formState$changes23$ = _formState$changes23.ribbon) === null || _formState$changes23$ === void 0 ? void 0 : _formState$changes23$.shape) === _utils.shape[key] : (product === null || product === void 0 ? void 0 : (_product$ribbon6 = product.ribbon) === null || _product$ribbon6 === void 0 ? void 0 : _product$ribbon6.shape) === _utils.shape[key],
       onClick: function onClick() {
         return handleChangeRibbon({
           shape: _utils.shape[key]
         });
       }
-    }, /*#__PURE__*/_react.default.createElement("div", null), (product !== null && product !== void 0 && product.ribbon && formState !== null && formState !== void 0 && (_formState$changes24 = formState.changes) !== null && _formState$changes24 !== void 0 && (_formState$changes24 = _formState$changes24.ribbon) !== null && _formState$changes24 !== void 0 && _formState$changes24.shape ? (formState === null || formState === void 0 || (_formState$changes25 = formState.changes) === null || _formState$changes25 === void 0 || (_formState$changes25 = _formState$changes25.ribbon) === null || _formState$changes25 === void 0 ? void 0 : _formState$changes25.shape) === _utils.shape[key] : (product === null || product === void 0 || (_product$ribbon7 = product.ribbon) === null || _product$ribbon7 === void 0 ? void 0 : _product$ribbon7.shape) === _utils.shape[key]) ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null));
+    }, /*#__PURE__*/_react.default.createElement("div", null), (product !== null && product !== void 0 && product.ribbon && formState !== null && formState !== void 0 && (_formState$changes24 = formState.changes) !== null && _formState$changes24 !== void 0 && (_formState$changes24$ = _formState$changes24.ribbon) !== null && _formState$changes24$ !== void 0 && _formState$changes24$.shape ? (formState === null || formState === void 0 ? void 0 : (_formState$changes25 = formState.changes) === null || _formState$changes25 === void 0 ? void 0 : (_formState$changes25$ = _formState$changes25.ribbon) === null || _formState$changes25$ === void 0 ? void 0 : _formState$changes25$.shape) === _utils.shape[key] : (product === null || product === void 0 ? void 0 : (_product$ribbon7 = product.ribbon) === null || _product$ribbon7 === void 0 ? void 0 : _product$ribbon7.shape) === _utils.shape[key]) ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null));
   }))))), /*#__PURE__*/_react.default.createElement(_styles2.ActionsForm, null, onCancel && /*#__PURE__*/_react.default.createElement(_styles.Button, {
     outline: true,
     borderRadius: "7.6px",

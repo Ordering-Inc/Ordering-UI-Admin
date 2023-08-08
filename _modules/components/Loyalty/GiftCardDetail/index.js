@@ -99,21 +99,21 @@ var GiftCardDetailUI = function GiftCardDetailUI(props) {
   };
   var onSubmit = function onSubmit() {
     var _formState$changes, _formState$changes2, _formState$changes3;
-    if ((formState === null || formState === void 0 || (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.name) === '') {
+    if ((formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.name) === '') {
       setAlertState({
         open: true,
         content: t('VALIDATION_ERROR_REQUIRED', 'Value is required').replace('_attribute_', 'name')
       });
       return;
     }
-    if ((formState === null || formState === void 0 || (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.accumulation_rate) === '') {
+    if ((formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.accumulation_rate) === '') {
       setAlertState({
         open: true,
         content: t('VALIDATION_ERROR_REQUIRED', 'Value is required').replace('_attribute_', 'accumulation_rate')
       });
       return;
     }
-    if ((formState === null || formState === void 0 || (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.minimum_points) === '') {
+    if ((formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.minimum_points) === '') {
       setAlertState({
         open: true,
         content: t('VALIDATION_ERROR_REQUIRED', 'Value is required').replace('_attribute_', 'points_required')
@@ -165,7 +165,7 @@ var GiftCardDetailUI = function GiftCardDetailUI(props) {
       content: formState.error
     });
   }, [formState === null || formState === void 0 ? void 0 : formState.error]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.DetailsHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.LeftHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.LevelName, null, product !== null && product !== void 0 && product.id ? (_formState$changes$na = formState === null || formState === void 0 || (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.name) !== null && _formState$changes$na !== void 0 ? _formState$changes$na : product === null || product === void 0 ? void 0 : product.name : t('NEW_GIFT_CARD', 'New gift card')), (product === null || product === void 0 ? void 0 : product.id) && /*#__PURE__*/_react.default.createElement(_styles.Switch, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.DetailsHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.LeftHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.LevelName, null, product !== null && product !== void 0 && product.id ? (_formState$changes$na = formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.name) !== null && _formState$changes$na !== void 0 ? _formState$changes$na : product === null || product === void 0 ? void 0 : product.name : t('NEW_GIFT_CARD', 'New gift card')), (product === null || product === void 0 ? void 0 : product.id) && /*#__PURE__*/_react.default.createElement(_styles.Switch, {
     defaultChecked: product === null || product === void 0 ? void 0 : product.enabled,
     onChange: function onChange(val) {
       return handleUpdateProduct({
@@ -203,21 +203,21 @@ var GiftCardDetailUI = function GiftCardDetailUI(props) {
     src: optimizeImage(product === null || product === void 0 ? void 0 : product.image, 'h_200,c_limit'),
     alt: "tag image",
     loading: "lazy"
-  }) : (formState === null || formState === void 0 || (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.image) && /*#__PURE__*/_react.default.createElement("img", {
-    src: formState === null || formState === void 0 || (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.image,
+  }) : (formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.image) && /*#__PURE__*/_react.default.createElement("img", {
+    src: formState === null || formState === void 0 ? void 0 : (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.image,
     alt: "tag image",
     loading: "lazy"
   }), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIconContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Image, null)))))), /*#__PURE__*/_react.default.createElement(_styles2.FormController, null, /*#__PURE__*/_react.default.createElement("label", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "name",
     placeholder: t('Name', 'name'),
-    value: (_ref = (_formState$changes$na2 = formState === null || formState === void 0 || (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.name) !== null && _formState$changes$na2 !== void 0 ? _formState$changes$na2 : product === null || product === void 0 ? void 0 : product.name) !== null && _ref !== void 0 ? _ref : '',
+    value: (_ref = (_formState$changes$na2 = formState === null || formState === void 0 ? void 0 : (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.name) !== null && _formState$changes$na2 !== void 0 ? _formState$changes$na2 : product === null || product === void 0 ? void 0 : product.name) !== null && _ref !== void 0 ? _ref : '',
     onChange: handleChangeInput,
     disabled: formState.loading,
     autoComplete: "off"
   })), /*#__PURE__*/_react.default.createElement(_styles2.FormController, null, /*#__PURE__*/_react.default.createElement("label", null, t('AMOUNT', 'Amount')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "price",
     placeholder: t('AMOUNT', 'Amount'),
-    value: (_ref2 = (_formState$changes$pr = formState === null || formState === void 0 || (_formState$changes9 = formState.changes) === null || _formState$changes9 === void 0 ? void 0 : _formState$changes9.price) !== null && _formState$changes$pr !== void 0 ? _formState$changes$pr : product === null || product === void 0 ? void 0 : product.price) !== null && _ref2 !== void 0 ? _ref2 : '',
+    value: (_ref2 = (_formState$changes$pr = formState === null || formState === void 0 ? void 0 : (_formState$changes9 = formState.changes) === null || _formState$changes9 === void 0 ? void 0 : _formState$changes9.price) !== null && _formState$changes$pr !== void 0 ? _formState$changes$pr : product === null || product === void 0 ? void 0 : product.price) !== null && _ref2 !== void 0 ? _ref2 : '',
     onChange: handleChangeInput,
     disabled: formState.loading,
     autoComplete: "off",

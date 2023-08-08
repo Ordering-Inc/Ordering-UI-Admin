@@ -60,7 +60,7 @@ var ProductTagsListUI = function ProductTagsListUI(props) {
     setIsOpenTagDetail = _useState4[1];
   var handleOpenProductTagDetail = function handleOpenProductTagDetail(e, tag, isInitialRender) {
     var _e$target;
-    var isInvalid = e === null || e === void 0 || (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.closest('.product-tag-checkbox');
+    var isInvalid = e === null || e === void 0 ? void 0 : (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.closest('.product-tag-checkbox');
     if (isInvalid) return;
     setSelectedTag(tag);
     setIsExtendExtraOpen(true);

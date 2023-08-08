@@ -27,7 +27,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var SelectCustomer = function SelectCustomer(props) {
-  var _customersPhones$user, _customersPhones$user2, _configs$default_coun;
+  var _customersPhones$user, _customersPhones$user2, _configs$default_coun, _configs$default_coun2;
   var phone = props.phone,
     customersPhones = props.customersPhones,
     selectedUser = props.selectedUser,
@@ -138,7 +138,7 @@ var SelectCustomer = function SelectCustomer(props) {
     }
   }), customersPhones.loading && /*#__PURE__*/_react.default.createElement("span", {
     className: "loading"
-  }, /*#__PURE__*/_react.default.createElement(_CgSpinnerTwoAlt.default, null)), searchInputFocus && /*#__PURE__*/_react.default.createElement(_styles2.OptionsToSelectContainer, null, (customersPhones === null || customersPhones === void 0 || (_customersPhones$user = customersPhones.users) === null || _customersPhones$user === void 0 ? void 0 : _customersPhones$user.length) > 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, customersPhones === null || customersPhones === void 0 || (_customersPhones$user2 = customersPhones.users) === null || _customersPhones$user2 === void 0 ? void 0 : _customersPhones$user2.map(function (user) {
+  }, /*#__PURE__*/_react.default.createElement(_CgSpinnerTwoAlt.default, null)), searchInputFocus && /*#__PURE__*/_react.default.createElement(_styles2.OptionsToSelectContainer, null, (customersPhones === null || customersPhones === void 0 ? void 0 : (_customersPhones$user = customersPhones.users) === null || _customersPhones$user === void 0 ? void 0 : _customersPhones$user.length) > 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, customersPhones === null || customersPhones === void 0 ? void 0 : (_customersPhones$user2 = customersPhones.users) === null || _customersPhones$user2 === void 0 ? void 0 : _customersPhones$user2.map(function (user) {
     return /*#__PURE__*/_react.default.createElement(_styles2.SelectOption, {
       key: user.id,
       onClick: function onClick() {
@@ -194,7 +194,7 @@ var SelectCustomer = function SelectCustomer(props) {
   }, /*#__PURE__*/_react.default.createElement(_Users.UserAddForm, {
     isFromCustomOrder: true,
     hideUserTypeSelector: true,
-    defaultPhoneNumber: ((selectedUser === null || selectedUser === void 0 ? void 0 : selectedUser.cellphone) || phone) && "+".concat((0, _utils.findExitingCountryPhoneCode)(configs === null || configs === void 0 || (_configs$default_coun = configs.default_country_code) === null || _configs$default_coun === void 0 || (_configs$default_coun = _configs$default_coun.value) === null || _configs$default_coun === void 0 ? void 0 : _configs$default_coun.toUpperCase()), " ").concat((selectedUser === null || selectedUser === void 0 ? void 0 : selectedUser.cellphone) || phone),
+    defaultPhoneNumber: ((selectedUser === null || selectedUser === void 0 ? void 0 : selectedUser.cellphone) || phone) && "+".concat((0, _utils.findExitingCountryPhoneCode)(configs === null || configs === void 0 ? void 0 : (_configs$default_coun = configs.default_country_code) === null || _configs$default_coun === void 0 ? void 0 : (_configs$default_coun2 = _configs$default_coun.value) === null || _configs$default_coun2 === void 0 ? void 0 : _configs$default_coun2.toUpperCase()), " ").concat((selectedUser === null || selectedUser === void 0 ? void 0 : selectedUser.cellphone) || phone),
     handleSuccessAdd: onSelectUser,
     onClose: function onClose() {
       return handleCloseSidebar();

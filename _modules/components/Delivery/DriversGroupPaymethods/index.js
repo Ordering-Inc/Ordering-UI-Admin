@@ -49,7 +49,7 @@ var DriversGroupPaymethods = function DriversGroupPaymethods(props) {
     if (searchValue) {
       _filteredPaymethods = paymethods.filter(function (paymethod) {
         var _paymethod$name;
-        return paymethod === null || paymethod === void 0 || (_paymethod$name = paymethod.name) === null || _paymethod$name === void 0 ? void 0 : _paymethod$name.toLowerCase().includes(searchValue === null || searchValue === void 0 ? void 0 : searchValue.toLowerCase());
+        return paymethod === null || paymethod === void 0 ? void 0 : (_paymethod$name = paymethod.name) === null || _paymethod$name === void 0 ? void 0 : _paymethod$name.toLowerCase().includes(searchValue === null || searchValue === void 0 ? void 0 : searchValue.toLowerCase());
       });
     } else {
       _filteredPaymethods = _toConsumableArray(paymethods);
@@ -86,7 +86,7 @@ var DriversGroupPaymethods = function DriversGroupPaymethods(props) {
       onChange: function onChange(e) {
         return handleSelectPaymethod(paymethod.id, e.target.checked);
       }
-    }), /*#__PURE__*/_react.default.createElement("p", null, t(paymethod === null || paymethod === void 0 || (_paymethod$gateway = paymethod.gateway) === null || _paymethod$gateway === void 0 ? void 0 : _paymethod$gateway.toUpperCase(), paymethod === null || paymethod === void 0 ? void 0 : paymethod.name)));
+    }), /*#__PURE__*/_react.default.createElement("p", null, t(paymethod === null || paymethod === void 0 ? void 0 : (_paymethod$gateway = paymethod.gateway) === null || _paymethod$gateway === void 0 ? void 0 : _paymethod$gateway.toUpperCase(), paymethod === null || paymethod === void 0 ? void 0 : paymethod.name)));
   })), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "primary",

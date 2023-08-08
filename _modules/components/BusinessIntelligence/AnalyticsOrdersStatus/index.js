@@ -108,7 +108,7 @@ var AnalyticsOrdersStatus = function AnalyticsOrdersStatus(props) {
       for (_iterator.s(); !(_step = _iterator.n()).done;) {
         var _orderStatus$label$st;
         var label = _step.value;
-        labels.push(orderStatus === null || orderStatus === void 0 || (_orderStatus$label$st = orderStatus[label.status]) === null || _orderStatus$label$st === void 0 ? void 0 : _orderStatus$label$st.value);
+        labels.push(orderStatus === null || orderStatus === void 0 ? void 0 : (_orderStatus$label$st = orderStatus[label.status]) === null || _orderStatus$label$st === void 0 ? void 0 : _orderStatus$label$st.value);
       }
     } catch (err) {
       _iterator.e(err);

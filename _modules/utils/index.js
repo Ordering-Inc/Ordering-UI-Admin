@@ -845,7 +845,7 @@ var stringToSlug = function stringToSlug(str) {
 exports.stringToSlug = stringToSlug;
 var getCurrenySymbol = function getCurrenySymbol(code) {
   var _CURRENCY$code$symbol, _CURRENCY$code;
-  return (_CURRENCY$code$symbol = _currency.CURRENCY === null || _currency.CURRENCY === void 0 || (_CURRENCY$code = _currency.CURRENCY[code]) === null || _CURRENCY$code === void 0 ? void 0 : _CURRENCY$code.symbol) !== null && _CURRENCY$code$symbol !== void 0 ? _CURRENCY$code$symbol : code;
+  return (_CURRENCY$code$symbol = _currency.CURRENCY === null || _currency.CURRENCY === void 0 ? void 0 : (_CURRENCY$code = _currency.CURRENCY[code]) === null || _CURRENCY$code === void 0 ? void 0 : _CURRENCY$code.symbol) !== null && _CURRENCY$code$symbol !== void 0 ? _CURRENCY$code$symbol : code;
 };
 exports.getCurrenySymbol = getCurrenySymbol;
 var queryStringToObject = function queryStringToObject(url) {

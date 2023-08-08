@@ -34,7 +34,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var SidebarMenuUI = function SidebarMenuUI(props) {
-  var _configs$powered_by_o, _configs$appointments, _sessionState$user, _sessionState$user2, _sessionState$user3, _sessionState$user4, _sessionState$user5, _sessionState$user6, _sessionState$user7, _configs$dashboard_lo, _theme$images, _sessionState$user8, _sessionState$user9, _sessionState$user10, _sessionState$user11, _sessionState$user16, _sessionState$user17, _sessionState$user18, _sessionState$user19, _sessionState$user21, _sessionState$user22, _sessionState$user23, _sessionState$user24, _sessionState$user25, _sessionState$user26, _sessionState$user27, _sessionState$user28, _sessionState$user29, _sessionState$user30, _sessionState$user31, _sessionState$user32, _sessionState$user33, _sessionState$user34, _sessionState$user35, _sessionState$user36, _sessionState$user37, _sessionState$user38, _sessionState$user39, _sessionState$user40;
+  var _configs$powered_by_o, _configs$appointments, _sessionState$user, _sessionState$user2, _sessionState$user3, _sessionState$user4, _sessionState$user5, _sessionState$user6, _sessionState$user7, _configs$dashboard_lo, _theme$images, _theme$images$logos, _sessionState$user8, _sessionState$user9, _sessionState$user10, _sessionState$user11, _sessionState$user16, _sessionState$user17, _sessionState$user18, _sessionState$user19, _sessionState$user21, _sessionState$user22, _sessionState$user23, _sessionState$user24, _sessionState$user25, _sessionState$user26, _sessionState$user27, _sessionState$user28, _sessionState$user29, _sessionState$user30, _sessionState$user31, _sessionState$user32, _sessionState$user33, _sessionState$user34, _sessionState$user35, _sessionState$user36, _sessionState$user37, _sessionState$user38, _sessionState$user39, _sessionState$user40;
   var getBillingToken = props.getBillingToken,
     billingUrl = props.billingUrl;
   var location = (0, _reactRouterDom.useLocation)();
@@ -62,8 +62,8 @@ var SidebarMenuUI = function SidebarMenuUI(props) {
     isCollapse = _useInfoShare2[0].isCollapse,
     handleMenuCollapse = _useInfoShare2[1].handleMenuCollapse;
   var windowSize = (0, _useWindowSize.useWindowSize)();
-  var isPoweredByOrderingModule = configs === null || configs === void 0 || (_configs$powered_by_o = configs.powered_by_ordering_module) === null || _configs$powered_by_o === void 0 ? void 0 : _configs$powered_by_o.value;
-  var isEnabledAppointmentsFeature = configs === null || configs === void 0 || (_configs$appointments = configs.appointments) === null || _configs$appointments === void 0 ? void 0 : _configs$appointments.value;
+  var isPoweredByOrderingModule = configs === null || configs === void 0 ? void 0 : (_configs$powered_by_o = configs.powered_by_ordering_module) === null || _configs$powered_by_o === void 0 ? void 0 : _configs$powered_by_o.value;
+  var isEnabledAppointmentsFeature = configs === null || configs === void 0 ? void 0 : (_configs$appointments = configs.appointments) === null || _configs$appointments === void 0 ? void 0 : _configs$appointments.value;
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     showMessage = _useState2[0],
@@ -282,25 +282,25 @@ var SidebarMenuUI = function SidebarMenuUI(props) {
     title: t('DRIVERS', 'Drivers'),
     pageName: 'delivery_drivers',
     url: '/delivery/drivers-list',
-    enabled: (sessionState === null || sessionState === void 0 || (_sessionState$user = sessionState.user) === null || _sessionState$user === void 0 ? void 0 : _sessionState$user.level) === 5 || (sessionState === null || sessionState === void 0 || (_sessionState$user2 = sessionState.user) === null || _sessionState$user2 === void 0 ? void 0 : _sessionState$user2.level) === 0 || (sessionState === null || sessionState === void 0 || (_sessionState$user3 = sessionState.user) === null || _sessionState$user3 === void 0 ? void 0 : _sessionState$user3.level) === 2
+    enabled: (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user = sessionState.user) === null || _sessionState$user === void 0 ? void 0 : _sessionState$user.level) === 5 || (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user2 = sessionState.user) === null || _sessionState$user2 === void 0 ? void 0 : _sessionState$user2.level) === 0 || (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user3 = sessionState.user) === null || _sessionState$user3 === void 0 ? void 0 : _sessionState$user3.level) === 2
   }, {
     id: 2,
     title: t('DRIVER_MANAGERS', 'Drivers manager'),
     pageName: 'drivers_managers',
     url: '/delivery/drivers-managers',
-    enabled: (sessionState === null || sessionState === void 0 || (_sessionState$user4 = sessionState.user) === null || _sessionState$user4 === void 0 ? void 0 : _sessionState$user4.level) === 0
+    enabled: (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user4 = sessionState.user) === null || _sessionState$user4 === void 0 ? void 0 : _sessionState$user4.level) === 0
   }, {
     id: 3,
     title: t('DELIVERY_COMPANIES', 'Delivery companies'),
     pageName: 'drivers_companies',
     url: '/delivery/drivers-companies',
-    enabled: (sessionState === null || sessionState === void 0 || (_sessionState$user5 = sessionState.user) === null || _sessionState$user5 === void 0 ? void 0 : _sessionState$user5.level) === 0
+    enabled: (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user5 = sessionState.user) === null || _sessionState$user5 === void 0 ? void 0 : _sessionState$user5.level) === 0
   }, {
     id: 4,
     title: t('DELIVERY_AUTOMATION', 'Delivery automation'),
     pageName: 'drivers_groups',
     url: '/delivery/drivers-groups',
-    enabled: (sessionState === null || sessionState === void 0 || (_sessionState$user6 = sessionState.user) === null || _sessionState$user6 === void 0 ? void 0 : _sessionState$user6.level) === 5 || (sessionState === null || sessionState === void 0 || (_sessionState$user7 = sessionState.user) === null || _sessionState$user7 === void 0 ? void 0 : _sessionState$user7.level) === 0
+    enabled: (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user6 = sessionState.user) === null || _sessionState$user6 === void 0 ? void 0 : _sessionState$user6.level) === 5 || (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user7 = sessionState.user) === null || _sessionState$user7 === void 0 ? void 0 : _sessionState$user7.level) === 0
   }];
   var marketingSubmenus = [{
     id: 1,
@@ -329,7 +329,7 @@ var SidebarMenuUI = function SidebarMenuUI(props) {
   };
   var handleOpenSite = function handleOpenSite() {
     var _configs$site_url, _configs$site_url2;
-    var siteUrl = site !== null && site !== void 0 && site.domain && (site === null || site === void 0 ? void 0 : site.ssl_process_status) === 'ended' ? "https://".concat(site === null || site === void 0 ? void 0 : site.domain) : configs !== null && configs !== void 0 && (_configs$site_url = configs.site_url) !== null && _configs$site_url !== void 0 && _configs$site_url.value ? configs === null || configs === void 0 || (_configs$site_url2 = configs.site_url) === null || _configs$site_url2 === void 0 ? void 0 : _configs$site_url2.value : "https://".concat(ordering.project, ".tryordering.com");
+    var siteUrl = site !== null && site !== void 0 && site.domain && (site === null || site === void 0 ? void 0 : site.ssl_process_status) === 'ended' ? "https://".concat(site === null || site === void 0 ? void 0 : site.domain) : configs !== null && configs !== void 0 && (_configs$site_url = configs.site_url) !== null && _configs$site_url !== void 0 && _configs$site_url.value ? configs === null || configs === void 0 ? void 0 : (_configs$site_url2 = configs.site_url) === null || _configs$site_url2 === void 0 ? void 0 : _configs$site_url2.value : "https://".concat(ordering.project, ".tryordering.com");
     handleGoToLink(siteUrl);
   };
   (0, _react.useEffect)(function () {
@@ -349,7 +349,7 @@ var SidebarMenuUI = function SidebarMenuUI(props) {
           case 2:
             billingState = _context.sent;
             if (!(billingState !== null && billingState !== void 0 && billingState.error) && billingState !== null && billingState !== void 0 && (_billingState$result = billingState.result) !== null && _billingState$result !== void 0 && _billingState$result.access_token) {
-              window.open("".concat(billingUrl, "?token=").concat(billingState === null || billingState === void 0 || (_billingState$result2 = billingState.result) === null || _billingState$result2 === void 0 ? void 0 : _billingState$result2.access_token), '_blank');
+              window.open("".concat(billingUrl, "?token=").concat(billingState === null || billingState === void 0 ? void 0 : (_billingState$result2 = billingState.result) === null || _billingState$result2 === void 0 ? void 0 : _billingState$result2.access_token), '_blank');
             }
           case 4:
           case "end":
@@ -376,7 +376,7 @@ var SidebarMenuUI = function SidebarMenuUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.SidebarInnerContainer, {
     className: "d-flex flex-column"
   }, /*#__PURE__*/_react.default.createElement(_styles.SidebarHeader, null, /*#__PURE__*/_react.default.createElement(_styles.LogoWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Image, {
-    src: (configs === null || configs === void 0 || (_configs$dashboard_lo = configs.dashboard_logo) === null || _configs$dashboard_lo === void 0 ? void 0 : _configs$dashboard_lo.value) || (theme === null || theme === void 0 || (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.logos) === null || _theme$images === void 0 ? void 0 : _theme$images.logotype),
+    src: (configs === null || configs === void 0 ? void 0 : (_configs$dashboard_lo = configs.dashboard_logo) === null || _configs$dashboard_lo === void 0 ? void 0 : _configs$dashboard_lo.value) || (theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$logos = _theme$images.logos) === null || _theme$images$logos === void 0 ? void 0 : _theme$images$logos.logotype),
     onClick: function onClick() {
       return handleGoToPage({
         page: 'home'
@@ -400,23 +400,23 @@ var SidebarMenuUI = function SidebarMenuUI(props) {
     className: "d-flex flex-column justify-content-between p-1 pt-0"
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "d-flex flex-column"
-  }, (sessionState === null || sessionState === void 0 || (_sessionState$user8 = sessionState.user) === null || _sessionState$user8 === void 0 ? void 0 : _sessionState$user8.level) === 0 && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
+  }, (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user8 = sessionState.user) === null || _sessionState$user8 === void 0 ? void 0 : _sessionState$user8.level) === 0 && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
     className: "d-flex align-items-center",
     variant: false,
     onClick: handleOpenSite
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.BoxArrowUpRight, null), /*#__PURE__*/_react.default.createElement("span", null, t('MY_WEBSITE', 'My Website'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion, null, (sessionState === null || sessionState === void 0 || (_sessionState$user9 = sessionState.user) === null || _sessionState$user9 === void 0 ? void 0 : _sessionState$user9.level) !== 5 && (sessionState === null || sessionState === void 0 || (_sessionState$user10 = sessionState.user) === null || _sessionState$user10 === void 0 ? void 0 : _sessionState$user10.level) !== 8 && /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.BoxArrowUpRight, null), /*#__PURE__*/_react.default.createElement("span", null, t('MY_WEBSITE', 'My Website'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion, null, (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user9 = sessionState.user) === null || _sessionState$user9 === void 0 ? void 0 : _sessionState$user9.level) !== 5 && (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user10 = sessionState.user) === null || _sessionState$user10 === void 0 ? void 0 : _sessionState$user10.level) !== 8 && /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "0",
     active: location.pathname === '/home',
     page: "home",
     handleGoToPage: handleGoToPage
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.HouseDoor, null), /*#__PURE__*/_react.default.createElement("span", null, t('HOME', 'Home')))), (sessionState === null || sessionState === void 0 || (_sessionState$user11 = sessionState.user) === null || _sessionState$user11 === void 0 ? void 0 : _sessionState$user11.level) !== 8 && /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.HouseDoor, null), /*#__PURE__*/_react.default.createElement("span", null, t('HOME', 'Home')))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user11 = sessionState.user) === null || _sessionState$user11 === void 0 ? void 0 : _sessionState$user11.level) !== 8 && /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "1",
     active: location.pathname === '/orders' || location.pathname === '/deliveries' || location.pathname === '/drivers' || location.pathname === '/all-in-one' || location.pathname === '/appointments' || location.pathname === '/gift-cards'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ListCheck, null), /*#__PURE__*/_react.default.createElement("span", null, t('ORDERS', 'Orders'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
     eventKey: "1"
   }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, ordersSubMenus.map(function (item) {
     var _sessionState$user12, _sessionState$user13, _sessionState$user14, _sessionState$user15;
-    return !((sessionState === null || sessionState === void 0 || (_sessionState$user12 = sessionState.user) === null || _sessionState$user12 === void 0 ? void 0 : _sessionState$user12.level) === 2 && item.pageName === 'drivers') && !(((sessionState === null || sessionState === void 0 || (_sessionState$user13 = sessionState.user) === null || _sessionState$user13 === void 0 ? void 0 : _sessionState$user13.level) === 2 || (sessionState === null || sessionState === void 0 || (_sessionState$user14 = sessionState.user) === null || _sessionState$user14 === void 0 ? void 0 : _sessionState$user14.level) === 5) && item.pageName === 'giftCards') && !((sessionState === null || sessionState === void 0 || (_sessionState$user15 = sessionState.user) === null || _sessionState$user15 === void 0 ? void 0 : _sessionState$user15.level) === 5 && item.pageName === 'appointments') && (item.pageName === 'appointments' ? isEnabledAppointmentsFeature && /*#__PURE__*/_react.default.createElement(_styles.SubMenu, {
+    return !((sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user12 = sessionState.user) === null || _sessionState$user12 === void 0 ? void 0 : _sessionState$user12.level) === 2 && item.pageName === 'drivers') && !(((sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user13 = sessionState.user) === null || _sessionState$user13 === void 0 ? void 0 : _sessionState$user13.level) === 2 || (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user14 = sessionState.user) === null || _sessionState$user14 === void 0 ? void 0 : _sessionState$user14.level) === 5) && item.pageName === 'giftCards') && !((sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user15 = sessionState.user) === null || _sessionState$user15 === void 0 ? void 0 : _sessionState$user15.level) === 5 && item.pageName === 'appointments') && (item.pageName === 'appointments' ? isEnabledAppointmentsFeature && /*#__PURE__*/_react.default.createElement(_styles.SubMenu, {
       key: item.id,
       active: location.pathname.includes(item.url),
       onClick: function onClick() {
@@ -433,19 +433,19 @@ var SidebarMenuUI = function SidebarMenuUI(props) {
         });
       }
     }, (0, _utils.firstLetterCapital)(item.title)));
-  })))), (sessionState === null || sessionState === void 0 || (_sessionState$user16 = sessionState.user) === null || _sessionState$user16 === void 0 ? void 0 : _sessionState$user16.level) !== 5 && (sessionState === null || sessionState === void 0 || (_sessionState$user17 = sessionState.user) === null || _sessionState$user17 === void 0 ? void 0 : _sessionState$user17.level) !== 8 && /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
+  })))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user16 = sessionState.user) === null || _sessionState$user16 === void 0 ? void 0 : _sessionState$user16.level) !== 5 && (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user17 = sessionState.user) === null || _sessionState$user17 === void 0 ? void 0 : _sessionState$user17.level) !== 8 && /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "2",
     page: "messages",
     handleGoToPage: handleGoToPage,
     active: location.pathname === '/messages'
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Chat, null), /*#__PURE__*/_react.default.createElement("span", null, t('MESSAGES', 'Messages')))), (sessionState === null || sessionState === void 0 || (_sessionState$user18 = sessionState.user) === null || _sessionState$user18 === void 0 ? void 0 : _sessionState$user18.level) !== 5 && (sessionState === null || sessionState === void 0 || (_sessionState$user19 = sessionState.user) === null || _sessionState$user19 === void 0 ? void 0 : _sessionState$user19.level) !== 8 && /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Chat, null), /*#__PURE__*/_react.default.createElement("span", null, t('MESSAGES', 'Messages')))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user18 = sessionState.user) === null || _sessionState$user18 === void 0 ? void 0 : _sessionState$user18.level) !== 5 && (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user19 = sessionState.user) === null || _sessionState$user19 === void 0 ? void 0 : _sessionState$user19.level) !== 8 && /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "3",
     active: location.pathname.includes('stores')
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Shop, null), /*#__PURE__*/_react.default.createElement("span", null, t('STORES', 'Stores'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
     eventKey: "3"
   }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, storesSubMenus.map(function (item) {
     var _sessionState$user20;
-    return !((sessionState === null || sessionState === void 0 || (_sessionState$user20 = sessionState.user) === null || _sessionState$user20 === void 0 ? void 0 : _sessionState$user20.level) === 2 && item.pageName === 'brand') && /*#__PURE__*/_react.default.createElement(_styles.SubMenu, {
+    return !((sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user20 = sessionState.user) === null || _sessionState$user20 === void 0 ? void 0 : _sessionState$user20.level) === 2 && item.pageName === 'brand') && /*#__PURE__*/_react.default.createElement(_styles.SubMenu, {
       key: item.id,
       active: location.pathname.includes(item === null || item === void 0 ? void 0 : item.url),
       onClick: function onClick() {
@@ -454,12 +454,12 @@ var SidebarMenuUI = function SidebarMenuUI(props) {
         });
       }
     }, item.title);
-  })))), ((sessionState === null || sessionState === void 0 || (_sessionState$user21 = sessionState.user) === null || _sessionState$user21 === void 0 ? void 0 : _sessionState$user21.level) === 0 || (sessionState === null || sessionState === void 0 || (_sessionState$user22 = sessionState.user) === null || _sessionState$user22 === void 0 ? void 0 : _sessionState$user22.level) === 2) && /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
+  })))), ((sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user21 = sessionState.user) === null || _sessionState$user21 === void 0 ? void 0 : _sessionState$user21.level) === 0 || (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user22 = sessionState.user) === null || _sessionState$user22 === void 0 ? void 0 : _sessionState$user22.level) === 2) && /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "4",
     active: location.pathname === '/users/customers' || location.pathname === '/users/managers' || location.pathname === '/users/operation' || location.pathname === '/users/professionals'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.People, null), /*#__PURE__*/_react.default.createElement("span", null, t('USERS', 'Users'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
     eventKey: "4"
-  }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, ((sessionState === null || sessionState === void 0 || (_sessionState$user23 = sessionState.user) === null || _sessionState$user23 === void 0 ? void 0 : _sessionState$user23.level) === 2 ? usersSubMenus.filter(function (menu) {
+  }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, ((sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user23 = sessionState.user) === null || _sessionState$user23 === void 0 ? void 0 : _sessionState$user23.level) === 2 ? usersSubMenus.filter(function (menu) {
     return buisnessOwnerUsersMenuIncluded.includes(menu.id);
   }) : usersSubMenus).map(function (item) {
     return item.pageName === 'professionals' ? isEnabledAppointmentsFeature && /*#__PURE__*/_react.default.createElement(_styles.SubMenu, {
@@ -479,12 +479,12 @@ var SidebarMenuUI = function SidebarMenuUI(props) {
         });
       }
     }, item.title);
-  })))), (sessionState === null || sessionState === void 0 || (_sessionState$user24 = sessionState.user) === null || _sessionState$user24 === void 0 ? void 0 : _sessionState$user24.level) !== 5 && (sessionState === null || sessionState === void 0 || (_sessionState$user25 = sessionState.user) === null || _sessionState$user25 === void 0 ? void 0 : _sessionState$user25.level) !== 8 && /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
+  })))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user24 = sessionState.user) === null || _sessionState$user24 === void 0 ? void 0 : _sessionState$user24.level) !== 5 && (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user25 = sessionState.user) === null || _sessionState$user25 === void 0 ? void 0 : _sessionState$user25.level) !== 8 && /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "5",
     active: location.pathname === '/intelligence/business' || location.pathname === '/intelligence/drivers' || location.pathname.includes('/intelligence/reviews') || location.pathname === '/intelligence/invoice' || location.pathname === '/intelligence/reports'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.BarChartLine, null), /*#__PURE__*/_react.default.createElement("span", null, (0, _utils.firstLetterCapital)(t('BUSINESS_INTELLIGENCE', 'Business Intelligence')))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
     eventKey: "5"
-  }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, ((sessionState === null || sessionState === void 0 || (_sessionState$user26 = sessionState.user) === null || _sessionState$user26 === void 0 ? void 0 : _sessionState$user26.level) === 2 ? businessIntelligenceSubMenus.filter(function (menu) {
+  }, /*#__PURE__*/_react.default.createElement(_styles.MenuContent, null, ((sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user26 = sessionState.user) === null || _sessionState$user26 === void 0 ? void 0 : _sessionState$user26.level) === 2 ? businessIntelligenceSubMenus.filter(function (menu) {
     return businessOwnerIntelligencesIncluded.includes(menu.id);
   }) : businessIntelligenceSubMenus).map(function (item) {
     return /*#__PURE__*/_react.default.createElement(_styles.SubMenu, {
@@ -496,7 +496,7 @@ var SidebarMenuUI = function SidebarMenuUI(props) {
         });
       }
     }, (0, _utils.firstLetterCapital)(item.title));
-  })))), ((sessionState === null || sessionState === void 0 || (_sessionState$user27 = sessionState.user) === null || _sessionState$user27 === void 0 ? void 0 : _sessionState$user27.level) === 0 || (sessionState === null || sessionState === void 0 || (_sessionState$user28 = sessionState.user) === null || _sessionState$user28 === void 0 ? void 0 : _sessionState$user28.level) === 5) && /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
+  })))), ((sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user27 = sessionState.user) === null || _sessionState$user27 === void 0 ? void 0 : _sessionState$user27.level) === 0 || (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user28 = sessionState.user) === null || _sessionState$user28 === void 0 ? void 0 : _sessionState$user28.level) === 5) && /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "7",
     active: location.pathname === '/delivery/drivers-list' || location.pathname === '/delivery/drivers-managers' || location.pathname === '/delivery/drivers-companies' || location.pathname === '/delivery/drivers-groups'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Truck, null), /*#__PURE__*/_react.default.createElement("span", null, t('DELIVERY', 'Delivery'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
@@ -511,7 +511,7 @@ var SidebarMenuUI = function SidebarMenuUI(props) {
         });
       }
     }, (0, _utils.firstLetterCapital)(item.title));
-  })))), (sessionState === null || sessionState === void 0 || (_sessionState$user29 = sessionState.user) === null || _sessionState$user29 === void 0 ? void 0 : _sessionState$user29.level) === 0 && /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
+  })))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user29 = sessionState.user) === null || _sessionState$user29 === void 0 ? void 0 : _sessionState$user29.level) === 0 && /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "8",
     active: location.pathname === '/marketing/promotions-enterprise' || location.pathname === '/marketing/campaign' || location.pathname === '/marketing/ad-banners'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GraphUp, null), /*#__PURE__*/_react.default.createElement("span", null, t('MARKETING', 'Marketing'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
@@ -526,7 +526,7 @@ var SidebarMenuUI = function SidebarMenuUI(props) {
         });
       }
     }, (0, _utils.firstLetterCapital)(item.title));
-  })))), (sessionState === null || sessionState === void 0 || (_sessionState$user30 = sessionState.user) === null || _sessionState$user30 === void 0 ? void 0 : _sessionState$user30.level) === 0 && /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
+  })))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user30 = sessionState.user) === null || _sessionState$user30 === void 0 ? void 0 : _sessionState$user30.level) === 0 && /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "9",
     active: location.pathname === '/loyalty/rewards-programs' || location.pathname === '/loyalty/levels' || location.pathname === '/loyalty/reports'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Award, null), /*#__PURE__*/_react.default.createElement("span", null, t('LOYALTY', 'Loyalty'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
@@ -541,7 +541,7 @@ var SidebarMenuUI = function SidebarMenuUI(props) {
         });
       }
     }, (0, _utils.firstLetterCapital)(item.title));
-  })))), (sessionState === null || sessionState === void 0 || (_sessionState$user31 = sessionState.user) === null || _sessionState$user31 === void 0 ? void 0 : _sessionState$user31.level) === 0 && /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
+  })))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user31 = sessionState.user) === null || _sessionState$user31 === void 0 ? void 0 : _sessionState$user31.level) === 0 && /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "10",
     active: location.pathname === '/cart-recovery/open-carts' || location.pathname === '/cart-recovery/recovery-actions'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Cart3, null), /*#__PURE__*/_react.default.createElement("span", null, t('CART_RECOVERY', 'Cart recovery'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
@@ -556,7 +556,7 @@ var SidebarMenuUI = function SidebarMenuUI(props) {
         });
       }
     }, (0, _utils.firstLetterCapital)(item.title));
-  })))), (sessionState === null || sessionState === void 0 || (_sessionState$user32 = sessionState.user) === null || _sessionState$user32 === void 0 ? void 0 : _sessionState$user32.level) === 0 && /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement("span", null, t('SALES_CHANNELS_AND_PRODUCTS', 'Sales channels and products')), /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
+  })))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user32 = sessionState.user) === null || _sessionState$user32 === void 0 ? void 0 : _sessionState$user32.level) === 0 && /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement("span", null, t('SALES_CHANNELS_AND_PRODUCTS', 'Sales channels and products')), /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "12",
     active: location.pathname === '/my-products/ordering-website' || location.pathname === '/my-products/customer-app' || location.pathname === '/my-products/store-app' || location.pathname === '/my-products/driver-app' || location.pathname === '/my-products/pos-app' || location.pathname === '/my-products/call-center-app' || location.pathname === '/my-products/kiosk-app' || location.pathname === '/my-products/custom-project'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.BagCheck, null), /*#__PURE__*/_react.default.createElement("span", null, t('MY_PRODUCTS', 'My products'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
@@ -573,7 +573,7 @@ var SidebarMenuUI = function SidebarMenuUI(props) {
     }, item.title);
   })))))), /*#__PURE__*/_react.default.createElement("div", {
     className: "d-flex flex-column mt-4"
-  }, /*#__PURE__*/_react.default.createElement(_styles.LanguageSelectorContainer, null, /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null)), (sessionState === null || sessionState === void 0 || (_sessionState$user33 = sessionState.user) === null || _sessionState$user33 === void 0 ? void 0 : _sessionState$user33.level) === 0 && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion, null, /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.LanguageSelectorContainer, null, /*#__PURE__*/_react.default.createElement(_LanguageSelector.LanguageSelector, null)), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user33 = sessionState.user) === null || _sessionState$user33 === void 0 ? void 0 : _sessionState$user33.level) === 0 && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion, null, /*#__PURE__*/_react.default.createElement(_styles.MenuContainer, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "5",
     active: location.pathname === '/settings/basic' || location.pathname === '/settings/operation' || location.pathname === '/settings/plugin' || location.pathname === '/settings/pages' || location.pathname === '/settings/integrations' || location.pathname === '/settings/places' || location.pathname === '/settings/advanced' || location.pathname === '/settings/language'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Gear, null), /*#__PURE__*/_react.default.createElement("span", null, t('SETTINGS', 'Settings'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
@@ -588,7 +588,7 @@ var SidebarMenuUI = function SidebarMenuUI(props) {
         });
       }
     }, (0, _utils.firstLetterCapital)(item.title));
-  }))))), (sessionState === null || sessionState === void 0 || (_sessionState$user34 = sessionState.user) === null || _sessionState$user34 === void 0 ? void 0 : _sessionState$user34.level) === 0 && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
+  }))))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user34 = sessionState.user) === null || _sessionState$user34 === void 0 ? void 0 : _sessionState$user34.level) === 0 && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
     className: "d-flex align-items-center",
     variant: location.pathname === '/ordering-products' && 'primary',
     onClick: function onClick() {
@@ -596,7 +596,7 @@ var SidebarMenuUI = function SidebarMenuUI(props) {
         page: 'ordering_products'
       });
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.WindowDock, null), /*#__PURE__*/_react.default.createElement("span", null, t('ORDERING_PRODUCTS', 'Ordering products'))), (sessionState === null || sessionState === void 0 || (_sessionState$user35 = sessionState.user) === null || _sessionState$user35 === void 0 ? void 0 : _sessionState$user35.level) === 0 && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.WindowDock, null), /*#__PURE__*/_react.default.createElement("span", null, t('ORDERING_PRODUCTS', 'Ordering products'))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user35 = sessionState.user) === null || _sessionState$user35 === void 0 ? void 0 : _sessionState$user35.level) === 0 && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
     className: "d-flex align-items-center",
     variant: location.pathname === '/support' && 'primary',
     onClick: function onClick() {
@@ -604,7 +604,7 @@ var SidebarMenuUI = function SidebarMenuUI(props) {
         page: 'support'
       });
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Headset, null), /*#__PURE__*/_react.default.createElement("span", null, t('SUPPORT', 'Support'))), (sessionState === null || sessionState === void 0 || (_sessionState$user36 = sessionState.user) === null || _sessionState$user36 === void 0 ? void 0 : _sessionState$user36.level) === 0 && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Headset, null), /*#__PURE__*/_react.default.createElement("span", null, t('SUPPORT', 'Support'))), (sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user36 = sessionState.user) === null || _sessionState$user36 === void 0 ? void 0 : _sessionState$user36.level) === 0 && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Button, {
     className: "d-flex align-items-center",
     variant: false,
     onClick: function onClick() {
@@ -622,11 +622,11 @@ var SidebarMenuUI = function SidebarMenuUI(props) {
       });
     }
   }, sessionState !== null && sessionState !== void 0 && (_sessionState$user37 = sessionState.user) !== null && _sessionState$user37 !== void 0 && _sessionState$user37.photo ? /*#__PURE__*/_react.default.createElement(_reactBootstrap.Image, {
-    src: sessionState === null || sessionState === void 0 || (_sessionState$user38 = sessionState.user) === null || _sessionState$user38 === void 0 ? void 0 : _sessionState$user38.photo,
+    src: sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user38 = sessionState.user) === null || _sessionState$user38 === void 0 ? void 0 : _sessionState$user38.photo,
     width: "30px",
     height: "30px",
     roundedCircle: true
-  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PersonFill, null), /*#__PURE__*/_react.default.createElement("span", null, sessionState === null || sessionState === void 0 || (_sessionState$user39 = sessionState.user) === null || _sessionState$user39 === void 0 ? void 0 : _sessionState$user39.name, " ", sessionState === null || sessionState === void 0 || (_sessionState$user40 = sessionState.user) === null || _sessionState$user40 === void 0 ? void 0 : _sessionState$user40.lastname)), /*#__PURE__*/_react.default.createElement(_LogoutButton.LogoutButton, null))))));
+  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PersonFill, null), /*#__PURE__*/_react.default.createElement("span", null, sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user39 = sessionState.user) === null || _sessionState$user39 === void 0 ? void 0 : _sessionState$user39.name, " ", sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user40 = sessionState.user) === null || _sessionState$user40 === void 0 ? void 0 : _sessionState$user40.lastname)), /*#__PURE__*/_react.default.createElement(_LogoutButton.LogoutButton, null))))));
 };
 var ContextAwareToggle = function ContextAwareToggle(_ref2) {
   var children = _ref2.children,

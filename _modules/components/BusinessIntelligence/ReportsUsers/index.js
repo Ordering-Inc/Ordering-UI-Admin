@@ -38,7 +38,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ReportsUsersUI = function ReportsUsersUI(props) {
-  var _reportData$content7;
+  var _reportData$content7, _reportData$content7$, _reportData$content7$2, _reportData$content7$3;
   var reportData = props.reportData,
     filterList = props.filterList,
     handleChangeFilterList = props.handleChangeFilterList;
@@ -72,11 +72,11 @@ var ReportsUsersUI = function ReportsUsersUI(props) {
     return rgbToHex(color.r, color.g, color.b);
   };
   var generateData = function generateData() {
-    var _reportData$content;
+    var _reportData$content, _reportData$content$d, _reportData$content$d2;
     var values = [];
-    if ((reportData === null || reportData === void 0 || (_reportData$content = reportData.content) === null || _reportData$content === void 0 || (_reportData$content = _reportData$content.dataset) === null || _reportData$content === void 0 || (_reportData$content = _reportData$content.dataset) === null || _reportData$content === void 0 ? void 0 : _reportData$content.length) > 0) {
-      var _reportData$content2;
-      values = reportData === null || reportData === void 0 || (_reportData$content2 = reportData.content) === null || _reportData$content2 === void 0 || (_reportData$content2 = _reportData$content2.dataset) === null || _reportData$content2 === void 0 || (_reportData$content2 = _reportData$content2.dataset) === null || _reportData$content2 === void 0 ? void 0 : _reportData$content2.map(function (item, index) {
+    if ((reportData === null || reportData === void 0 ? void 0 : (_reportData$content = reportData.content) === null || _reportData$content === void 0 ? void 0 : (_reportData$content$d = _reportData$content.dataset) === null || _reportData$content$d === void 0 ? void 0 : (_reportData$content$d2 = _reportData$content$d.dataset) === null || _reportData$content$d2 === void 0 ? void 0 : _reportData$content$d2.length) > 0) {
+      var _reportData$content2, _reportData$content2$, _reportData$content2$2;
+      values = reportData === null || reportData === void 0 ? void 0 : (_reportData$content2 = reportData.content) === null || _reportData$content2 === void 0 ? void 0 : (_reportData$content2$ = _reportData$content2.dataset) === null || _reportData$content2$ === void 0 ? void 0 : (_reportData$content2$2 = _reportData$content2$.dataset) === null || _reportData$content2$2 === void 0 ? void 0 : _reportData$content2$2.map(function (item, index) {
         var list = [];
         reportData.content.dataset.x.labels.forEach(function (label) {
           var _item$data;
@@ -134,11 +134,11 @@ var ReportsUsersUI = function ReportsUsersUI(props) {
     }));
   };
   var downloadCSV = function downloadCSV() {
-    var _reportData$content3;
-    if ((reportData === null || reportData === void 0 || (_reportData$content3 = reportData.content) === null || _reportData$content3 === void 0 || (_reportData$content3 = _reportData$content3.dataset) === null || _reportData$content3 === void 0 || (_reportData$content3 = _reportData$content3.dataset[0]) === null || _reportData$content3 === void 0 || (_reportData$content3 = _reportData$content3.data) === null || _reportData$content3 === void 0 ? void 0 : _reportData$content3.length) > 0) {
-      var _reportData$content4;
+    var _reportData$content3, _reportData$content3$, _reportData$content3$2, _reportData$content3$3;
+    if ((reportData === null || reportData === void 0 ? void 0 : (_reportData$content3 = reportData.content) === null || _reportData$content3 === void 0 ? void 0 : (_reportData$content3$ = _reportData$content3.dataset) === null || _reportData$content3$ === void 0 ? void 0 : (_reportData$content3$2 = _reportData$content3$.dataset[0]) === null || _reportData$content3$2 === void 0 ? void 0 : (_reportData$content3$3 = _reportData$content3$2.data) === null || _reportData$content3$3 === void 0 ? void 0 : _reportData$content3$3.length) > 0) {
+      var _reportData$content4, _reportData$content4$, _reportData$content4$2;
       var csv = "".concat(t('TIME', 'Time'), ", ").concat(t('USERS', 'Users'), "\n");
-      var _iterator = _createForOfIteratorHelper(reportData === null || reportData === void 0 || (_reportData$content4 = reportData.content) === null || _reportData$content4 === void 0 || (_reportData$content4 = _reportData$content4.dataset) === null || _reportData$content4 === void 0 || (_reportData$content4 = _reportData$content4.dataset[0]) === null || _reportData$content4 === void 0 ? void 0 : _reportData$content4.data),
+      var _iterator = _createForOfIteratorHelper(reportData === null || reportData === void 0 ? void 0 : (_reportData$content4 = reportData.content) === null || _reportData$content4 === void 0 ? void 0 : (_reportData$content4$ = _reportData$content4.dataset) === null || _reportData$content4$ === void 0 ? void 0 : (_reportData$content4$2 = _reportData$content4$.dataset[0]) === null || _reportData$content4$2 === void 0 ? void 0 : _reportData$content4$2.data),
         _step;
       try {
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
@@ -164,11 +164,11 @@ var ReportsUsersUI = function ReportsUsersUI(props) {
     }
   };
   (0, _react.useEffect)(function () {
-    var _reportData$content5;
-    if ((reportData === null || reportData === void 0 || (_reportData$content5 = reportData.content) === null || _reportData$content5 === void 0 || (_reportData$content5 = _reportData$content5.dataset) === null || _reportData$content5 === void 0 || (_reportData$content5 = _reportData$content5.x) === null || _reportData$content5 === void 0 ? void 0 : _reportData$content5.labels.length) > 0) {
-      var _reportData$content6;
+    var _reportData$content5, _reportData$content5$, _reportData$content5$2;
+    if ((reportData === null || reportData === void 0 ? void 0 : (_reportData$content5 = reportData.content) === null || _reportData$content5 === void 0 ? void 0 : (_reportData$content5$ = _reportData$content5.dataset) === null || _reportData$content5$ === void 0 ? void 0 : (_reportData$content5$2 = _reportData$content5$.x) === null || _reportData$content5$2 === void 0 ? void 0 : _reportData$content5$2.labels.length) > 0) {
+      var _reportData$content6, _reportData$content6$, _reportData$content6$2;
       var defaultData = {
-        labels: [''].concat(_toConsumableArray(reportData === null || reportData === void 0 || (_reportData$content6 = reportData.content) === null || _reportData$content6 === void 0 || (_reportData$content6 = _reportData$content6.dataset) === null || _reportData$content6 === void 0 || (_reportData$content6 = _reportData$content6.x) === null || _reportData$content6 === void 0 ? void 0 : _reportData$content6.labels)),
+        labels: [''].concat(_toConsumableArray(reportData === null || reportData === void 0 ? void 0 : (_reportData$content6 = reportData.content) === null || _reportData$content6 === void 0 ? void 0 : (_reportData$content6$ = _reportData$content6.dataset) === null || _reportData$content6$ === void 0 ? void 0 : (_reportData$content6$2 = _reportData$content6$.x) === null || _reportData$content6$2 === void 0 ? void 0 : _reportData$content6$2.labels)),
         datasets: generateData()
       };
       setDataOptions(defaultData);
@@ -185,7 +185,7 @@ var ReportsUsersUI = function ReportsUsersUI(props) {
     handleChangeDate: handleChangeDate,
     defaultValue: filterList
   })))), /*#__PURE__*/_react.default.createElement(_styles.ChartBlockWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ChartTitleBlock, {
-    active: (reportData === null || reportData === void 0 || (_reportData$content7 = reportData.content) === null || _reportData$content7 === void 0 || (_reportData$content7 = _reportData$content7.dataset) === null || _reportData$content7 === void 0 || (_reportData$content7 = _reportData$content7.dataset[0]) === null || _reportData$content7 === void 0 || (_reportData$content7 = _reportData$content7.data) === null || _reportData$content7 === void 0 ? void 0 : _reportData$content7.length) > 0
+    active: (reportData === null || reportData === void 0 ? void 0 : (_reportData$content7 = reportData.content) === null || _reportData$content7 === void 0 ? void 0 : (_reportData$content7$ = _reportData$content7.dataset) === null || _reportData$content7$ === void 0 ? void 0 : (_reportData$content7$2 = _reportData$content7$.dataset[0]) === null || _reportData$content7$2 === void 0 ? void 0 : (_reportData$content7$3 = _reportData$content7$2.data) === null || _reportData$content7$3 === void 0 ? void 0 : _reportData$content7$3.length) > 0
   }, /*#__PURE__*/_react.default.createElement("h2", null, t('REGISTER_USERS', 'Register users')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Download, {
     onClick: function onClick() {
       return downloadCSV();

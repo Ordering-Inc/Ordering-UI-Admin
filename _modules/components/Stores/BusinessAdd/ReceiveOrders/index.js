@@ -33,7 +33,7 @@ var ReceiveOrders = function ReceiveOrders(props) {
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configs = _useConfig2[0].configs;
-  var isEnabledWhiteLabelModule = configs === null || configs === void 0 || (_configs$white_label_ = configs.white_label_module) === null || _configs$white_label_ === void 0 ? void 0 : _configs$white_label_.value;
+  var isEnabledWhiteLabelModule = configs === null || configs === void 0 ? void 0 : (_configs$white_label_ = configs.white_label_module) === null || _configs$white_label_ === void 0 ? void 0 : _configs$white_label_.value;
   (0, _react.useEffect)(function () {
     if (user !== null && user !== void 0 && user.email) changeFormState({
       email: user === null || user === void 0 ? void 0 : user.email
@@ -41,7 +41,7 @@ var ReceiveOrders = function ReceiveOrders(props) {
   }, [user]);
   return /*#__PURE__*/_react.default.createElement(_styles2.ReceiveOrdersContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('RECEIVE_ORDERS', 'Receive orders')), /*#__PURE__*/_react.default.createElement(_styles2.ContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('BY_EMAIL', 'By Email'), /*#__PURE__*/_react.default.createElement("sup", null, "*")), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "email",
-    defaultValue: (_formState$changes$em = formState === null || formState === void 0 || (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.email) !== null && _formState$changes$em !== void 0 ? _formState$changes$em : '',
+    defaultValue: (_formState$changes$em = formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.email) !== null && _formState$changes$em !== void 0 ? _formState$changes$em : '',
     onChange: handleChangeInput,
     placeholder: t('ADD_EMAIL', 'Add email')
   })), !isEnabledWhiteLabelModule && /*#__PURE__*/_react.default.createElement(_styles2.DownloadWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('DOWNLOADS_APPS', 'Downloads apps')), /*#__PURE__*/_react.default.createElement(_styles2.DownloadIconWrapper, null, /*#__PURE__*/_react.default.createElement("a", {

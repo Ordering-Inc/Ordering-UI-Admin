@@ -127,7 +127,7 @@ var CountryFilterUI = function CountryFilterUI(props) {
     }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", {
       className: "name"
     }, country === null || country === void 0 ? void 0 : country.name));
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.PaginationWrapper, null, (countriesState === null || countriesState === void 0 || (_countriesState$count = countriesState.countries) === null || _countriesState$count === void 0 ? void 0 : _countriesState$count.length) > 0 && /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.PaginationWrapper, null, (countriesState === null || countriesState === void 0 ? void 0 : (_countriesState$count = countriesState.countries) === null || _countriesState$count === void 0 ? void 0 : _countriesState$count.length) > 0 && /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
     currentPage: currentPage,
     totalPages: totalPages,
     handleChangePage: handleChangePage,

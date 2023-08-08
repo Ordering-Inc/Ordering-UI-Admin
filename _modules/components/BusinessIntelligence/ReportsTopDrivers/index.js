@@ -35,7 +35,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ReportsTopDriversUI = function ReportsTopDriversUI(props) {
-  var _reportData$content11, _reportData$content12;
+  var _reportData$content13, _reportData$content14, _reportData$content15, _reportData$content16, _reportData$content17, _reportData$content18, _reportData$content19, _reportData$content20;
   var filterList = props.filterList,
     handleChangeFilterList = props.handleChangeFilterList,
     reportData = props.reportData;
@@ -57,10 +57,10 @@ var ReportsTopDriversUI = function ReportsTopDriversUI(props) {
     isDriverGroupFilter = _useState4[0],
     setIsDriverGroupFilter = _useState4[1];
   var downloadCSV = function downloadCSV() {
-    var _reportData$content, _reportData$content2;
-    if (!(reportData !== null && reportData !== void 0 && (_reportData$content = reportData.content) !== null && _reportData$content !== void 0 && (_reportData$content = _reportData$content.dataset) !== null && _reportData$content !== void 0 && (_reportData$content = _reportData$content.dataset) !== null && _reportData$content !== void 0 && _reportData$content.data)) return;
+    var _reportData$content, _reportData$content$d, _reportData$content$d2, _reportData$content2, _reportData$content2$, _reportData$content2$2;
+    if (!(reportData !== null && reportData !== void 0 && (_reportData$content = reportData.content) !== null && _reportData$content !== void 0 && (_reportData$content$d = _reportData$content.dataset) !== null && _reportData$content$d !== void 0 && (_reportData$content$d2 = _reportData$content$d.dataset) !== null && _reportData$content$d2 !== void 0 && _reportData$content$d2.data)) return;
     var csv = "".concat(t('DRIVER', 'Driver'), ", ").concat(t('ORDERS', 'Orders'), "\n");
-    var _iterator = _createForOfIteratorHelper(reportData === null || reportData === void 0 || (_reportData$content2 = reportData.content) === null || _reportData$content2 === void 0 || (_reportData$content2 = _reportData$content2.dataset) === null || _reportData$content2 === void 0 || (_reportData$content2 = _reportData$content2.dataset) === null || _reportData$content2 === void 0 ? void 0 : _reportData$content2.data),
+    var _iterator = _createForOfIteratorHelper(reportData === null || reportData === void 0 ? void 0 : (_reportData$content2 = reportData.content) === null || _reportData$content2 === void 0 ? void 0 : (_reportData$content2$ = _reportData$content2.dataset) === null || _reportData$content2$ === void 0 ? void 0 : (_reportData$content2$2 = _reportData$content2$.dataset) === null || _reportData$content2$2 === void 0 ? void 0 : _reportData$content2$2.data),
       _step;
     try {
       for (_iterator.s(); !(_step = _iterator.n()).done;) {
@@ -85,11 +85,11 @@ var ReportsTopDriversUI = function ReportsTopDriversUI(props) {
     document.body.removeChild(downloadLink);
   };
   var generateData = function generateData() {
-    var _reportData$content3;
+    var _reportData$content3, _reportData$content3$, _reportData$content3$2;
     var datasets = [];
-    if (reportData !== null && reportData !== void 0 && (_reportData$content3 = reportData.content) !== null && _reportData$content3 !== void 0 && (_reportData$content3 = _reportData$content3.dataset) !== null && _reportData$content3 !== void 0 && (_reportData$content3 = _reportData$content3.dataset) !== null && _reportData$content3 !== void 0 && _reportData$content3.data) {
-      var _reportData$content4;
-      var _iterator2 = _createForOfIteratorHelper(reportData === null || reportData === void 0 || (_reportData$content4 = reportData.content) === null || _reportData$content4 === void 0 || (_reportData$content4 = _reportData$content4.dataset) === null || _reportData$content4 === void 0 || (_reportData$content4 = _reportData$content4.dataset) === null || _reportData$content4 === void 0 ? void 0 : _reportData$content4.data),
+    if (reportData !== null && reportData !== void 0 && (_reportData$content3 = reportData.content) !== null && _reportData$content3 !== void 0 && (_reportData$content3$ = _reportData$content3.dataset) !== null && _reportData$content3$ !== void 0 && (_reportData$content3$2 = _reportData$content3$.dataset) !== null && _reportData$content3$2 !== void 0 && _reportData$content3$2.data) {
+      var _reportData$content4, _reportData$content4$, _reportData$content4$2;
+      var _iterator2 = _createForOfIteratorHelper(reportData === null || reportData === void 0 ? void 0 : (_reportData$content4 = reportData.content) === null || _reportData$content4 === void 0 ? void 0 : (_reportData$content4$ = _reportData$content4.dataset) === null || _reportData$content4$ === void 0 ? void 0 : (_reportData$content4$2 = _reportData$content4$.dataset) === null || _reportData$content4$2 === void 0 ? void 0 : _reportData$content4$2.data),
         _step2;
       try {
         for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
@@ -105,11 +105,11 @@ var ReportsTopDriversUI = function ReportsTopDriversUI(props) {
     return datasets;
   };
   var generateLabels = function generateLabels() {
-    var _reportData$content5;
+    var _reportData$content5, _reportData$content5$, _reportData$content5$2;
     var labels = [];
-    if (reportData !== null && reportData !== void 0 && (_reportData$content5 = reportData.content) !== null && _reportData$content5 !== void 0 && (_reportData$content5 = _reportData$content5.dataset) !== null && _reportData$content5 !== void 0 && (_reportData$content5 = _reportData$content5.dataset) !== null && _reportData$content5 !== void 0 && _reportData$content5.data) {
-      var _reportData$content6;
-      var _iterator3 = _createForOfIteratorHelper(reportData === null || reportData === void 0 || (_reportData$content6 = reportData.content) === null || _reportData$content6 === void 0 || (_reportData$content6 = _reportData$content6.dataset) === null || _reportData$content6 === void 0 || (_reportData$content6 = _reportData$content6.dataset) === null || _reportData$content6 === void 0 ? void 0 : _reportData$content6.data),
+    if (reportData !== null && reportData !== void 0 && (_reportData$content5 = reportData.content) !== null && _reportData$content5 !== void 0 && (_reportData$content5$ = _reportData$content5.dataset) !== null && _reportData$content5$ !== void 0 && (_reportData$content5$2 = _reportData$content5$.dataset) !== null && _reportData$content5$2 !== void 0 && _reportData$content5$2.data) {
+      var _reportData$content6, _reportData$content6$, _reportData$content6$2;
+      var _iterator3 = _createForOfIteratorHelper(reportData === null || reportData === void 0 ? void 0 : (_reportData$content6 = reportData.content) === null || _reportData$content6 === void 0 ? void 0 : (_reportData$content6$ = _reportData$content6.dataset) === null || _reportData$content6$ === void 0 ? void 0 : (_reportData$content6$2 = _reportData$content6$.dataset) === null || _reportData$content6$2 === void 0 ? void 0 : _reportData$content6$2.data),
         _step3;
       try {
         for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
@@ -177,25 +177,25 @@ var ReportsTopDriversUI = function ReportsTopDriversUI(props) {
       tooltip: {
         callbacks: {
           footer: function footer(tooltipItem) {
-            var _reportData$content7;
+            var _reportData$content7, _reportData$content7$, _reportData$content7$2, _reportData$content7$3;
             var label = '';
-            if ((reportData === null || reportData === void 0 || (_reportData$content7 = reportData.content) === null || _reportData$content7 === void 0 || (_reportData$content7 = _reportData$content7.dataset) === null || _reportData$content7 === void 0 || (_reportData$content7 = _reportData$content7.dataset) === null || _reportData$content7 === void 0 || (_reportData$content7 = _reportData$content7.data) === null || _reportData$content7 === void 0 ? void 0 : _reportData$content7.length) > 0) {
-              var _reportData$content8;
-              (reportData === null || reportData === void 0 || (_reportData$content8 = reportData.content) === null || _reportData$content8 === void 0 || (_reportData$content8 = _reportData$content8.dataset) === null || _reportData$content8 === void 0 || (_reportData$content8 = _reportData$content8.dataset) === null || _reportData$content8 === void 0 ? void 0 : _reportData$content8.data) && reportData.content.dataset.dataset.data.forEach(function (item) {
+            if ((reportData === null || reportData === void 0 ? void 0 : (_reportData$content7 = reportData.content) === null || _reportData$content7 === void 0 ? void 0 : (_reportData$content7$ = _reportData$content7.dataset) === null || _reportData$content7$ === void 0 ? void 0 : (_reportData$content7$2 = _reportData$content7$.dataset) === null || _reportData$content7$2 === void 0 ? void 0 : (_reportData$content7$3 = _reportData$content7$2.data) === null || _reportData$content7$3 === void 0 ? void 0 : _reportData$content7$3.length) > 0) {
+              var _reportData$content8, _reportData$content8$, _reportData$content8$2;
+              (reportData === null || reportData === void 0 ? void 0 : (_reportData$content8 = reportData.content) === null || _reportData$content8 === void 0 ? void 0 : (_reportData$content8$ = _reportData$content8.dataset) === null || _reportData$content8$ === void 0 ? void 0 : (_reportData$content8$2 = _reportData$content8$.dataset) === null || _reportData$content8$2 === void 0 ? void 0 : _reportData$content8$2.data) && reportData.content.dataset.dataset.data.forEach(function (item) {
                 var _tooltipItem$, _item$info$;
-                if (item.y === ((_tooltipItem$ = tooltipItem[0]) === null || _tooltipItem$ === void 0 ? void 0 : _tooltipItem$.label)) label = item === null || item === void 0 || (_item$info$ = item.info[0]) === null || _item$info$ === void 0 ? void 0 : _item$info$.label;
+                if (item.y === ((_tooltipItem$ = tooltipItem[0]) === null || _tooltipItem$ === void 0 ? void 0 : _tooltipItem$.label)) label = item === null || item === void 0 ? void 0 : (_item$info$ = item.info[0]) === null || _item$info$ === void 0 ? void 0 : _item$info$.label;
               });
             }
             return label;
           },
           beforeFooter: function beforeFooter(tooltipItem) {
-            var _reportData$content9;
+            var _reportData$content9, _reportData$content9$, _reportData$content9$2, _reportData$content9$3;
             var time = '';
-            if ((reportData === null || reportData === void 0 || (_reportData$content9 = reportData.content) === null || _reportData$content9 === void 0 || (_reportData$content9 = _reportData$content9.dataset) === null || _reportData$content9 === void 0 || (_reportData$content9 = _reportData$content9.dataset) === null || _reportData$content9 === void 0 || (_reportData$content9 = _reportData$content9.data) === null || _reportData$content9 === void 0 ? void 0 : _reportData$content9.length) > 0) {
-              var _reportData$content10;
-              (reportData === null || reportData === void 0 || (_reportData$content10 = reportData.content) === null || _reportData$content10 === void 0 || (_reportData$content10 = _reportData$content10.dataset) === null || _reportData$content10 === void 0 || (_reportData$content10 = _reportData$content10.dataset) === null || _reportData$content10 === void 0 ? void 0 : _reportData$content10.data) && reportData.content.dataset.dataset.data.forEach(function (item) {
+            if ((reportData === null || reportData === void 0 ? void 0 : (_reportData$content9 = reportData.content) === null || _reportData$content9 === void 0 ? void 0 : (_reportData$content9$ = _reportData$content9.dataset) === null || _reportData$content9$ === void 0 ? void 0 : (_reportData$content9$2 = _reportData$content9$.dataset) === null || _reportData$content9$2 === void 0 ? void 0 : (_reportData$content9$3 = _reportData$content9$2.data) === null || _reportData$content9$3 === void 0 ? void 0 : _reportData$content9$3.length) > 0) {
+              var _reportData$content10, _reportData$content11, _reportData$content12;
+              (reportData === null || reportData === void 0 ? void 0 : (_reportData$content10 = reportData.content) === null || _reportData$content10 === void 0 ? void 0 : (_reportData$content11 = _reportData$content10.dataset) === null || _reportData$content11 === void 0 ? void 0 : (_reportData$content12 = _reportData$content11.dataset) === null || _reportData$content12 === void 0 ? void 0 : _reportData$content12.data) && reportData.content.dataset.dataset.data.forEach(function (item) {
                 var _tooltipItem$2, _item$info$0$value, _item$info$2;
-                if (item.y === ((_tooltipItem$2 = tooltipItem[0]) === null || _tooltipItem$2 === void 0 ? void 0 : _tooltipItem$2.label)) time = (0, _utils.convertHMS)((_item$info$0$value = item === null || item === void 0 || (_item$info$2 = item.info[0]) === null || _item$info$2 === void 0 ? void 0 : _item$info$2.value) !== null && _item$info$0$value !== void 0 ? _item$info$0$value : 0);
+                if (item.y === ((_tooltipItem$2 = tooltipItem[0]) === null || _tooltipItem$2 === void 0 ? void 0 : _tooltipItem$2.label)) time = (0, _utils.convertHMS)((_item$info$0$value = item === null || item === void 0 ? void 0 : (_item$info$2 = item.info[0]) === null || _item$info$2 === void 0 ? void 0 : _item$info$2.value) !== null && _item$info$0$value !== void 0 ? _item$info$0$value : 0);
               });
             }
             return "".concat(t('AVERAGE_DELIVERY_TIME', 'Average delivery time'), ": ").concat(time);
@@ -217,14 +217,14 @@ var ReportsTopDriversUI = function ReportsTopDriversUI(props) {
     handleChangeDate: handleChangeDate,
     defaultValue: filterList
   })))), /*#__PURE__*/_react.default.createElement(_styles.ChartBlockWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ChartTitleBlock, {
-    active: (reportData === null || reportData === void 0 || (_reportData$content11 = reportData.content) === null || _reportData$content11 === void 0 || (_reportData$content11 = _reportData$content11.dataset) === null || _reportData$content11 === void 0 || (_reportData$content11 = _reportData$content11.dataset) === null || _reportData$content11 === void 0 || (_reportData$content11 = _reportData$content11.data) === null || _reportData$content11 === void 0 ? void 0 : _reportData$content11.length) > 0
+    active: (reportData === null || reportData === void 0 ? void 0 : (_reportData$content13 = reportData.content) === null || _reportData$content13 === void 0 ? void 0 : (_reportData$content14 = _reportData$content13.dataset) === null || _reportData$content14 === void 0 ? void 0 : (_reportData$content15 = _reportData$content14.dataset) === null || _reportData$content15 === void 0 ? void 0 : (_reportData$content16 = _reportData$content15.data) === null || _reportData$content16 === void 0 ? void 0 : _reportData$content16.length) > 0
   }, /*#__PURE__*/_react.default.createElement("h2", null, t('TOP_ORDERS', 'Top orders')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Download, {
     onClick: function onClick() {
       return downloadCSV();
     }
   })), /*#__PURE__*/_react.default.createElement(_styles.ChartWrapper, null, reportData !== null && reportData !== void 0 && reportData.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 350
-  }) : (reportData === null || reportData === void 0 || (_reportData$content12 = reportData.content) === null || _reportData$content12 === void 0 || (_reportData$content12 = _reportData$content12.dataset) === null || _reportData$content12 === void 0 || (_reportData$content12 = _reportData$content12.dataset) === null || _reportData$content12 === void 0 || (_reportData$content12 = _reportData$content12.data) === null || _reportData$content12 === void 0 ? void 0 : _reportData$content12.length) > 0 ? /*#__PURE__*/_react.default.createElement(_reactChartjs.Bar, {
+  }) : (reportData === null || reportData === void 0 ? void 0 : (_reportData$content17 = reportData.content) === null || _reportData$content17 === void 0 ? void 0 : (_reportData$content18 = _reportData$content17.dataset) === null || _reportData$content18 === void 0 ? void 0 : (_reportData$content19 = _reportData$content18.dataset) === null || _reportData$content19 === void 0 ? void 0 : (_reportData$content20 = _reportData$content19.data) === null || _reportData$content20 === void 0 ? void 0 : _reportData$content20.length) > 0 ? /*#__PURE__*/_react.default.createElement(_reactChartjs.Bar, {
     data: data,
     options: options
   }) : /*#__PURE__*/_react.default.createElement(_styles.EmptyContent, null, t('NO_DATA', 'No Data')))), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {

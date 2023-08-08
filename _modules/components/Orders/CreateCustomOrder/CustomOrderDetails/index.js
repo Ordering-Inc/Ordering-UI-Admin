@@ -82,7 +82,7 @@ var CustomOrderDetailsUI = function CustomOrderDetailsUI(props) {
     });
   };
   var handlePlaceOrder = function handlePlaceOrder() {
-    var _validationFields$fie, _validationFields$fie2;
+    var _validationFields$fie, _validationFields$fie2, _validationFields$fie3, _validationFields$fie4, _validationFields$fie5, _validationFields$fie6;
     var errMessage = [];
     if (!selectedBusiness) {
       errMessage.push(t('VALIDATION_ERROR_REQUIRED', 'Name is required').replace('_attribute_', t('BUSINESS', 'Business')));
@@ -90,7 +90,7 @@ var CustomOrderDetailsUI = function CustomOrderDetailsUI(props) {
     if (!(extraFields !== null && extraFields !== void 0 && extraFields.total)) {
       errMessage.push(t('VALIDATION_ERROR_REQUIRED', 'Name is required').replace('_attribute_', t('TOTAL', 'Total')));
     }
-    if (validationFields !== null && validationFields !== void 0 && (_validationFields$fie = validationFields.fields) !== null && _validationFields$fie !== void 0 && (_validationFields$fie = _validationFields$fie.checkout) !== null && _validationFields$fie !== void 0 && (_validationFields$fie = _validationFields$fie.comments) !== null && _validationFields$fie !== void 0 && _validationFields$fie.enabled && validationFields !== null && validationFields !== void 0 && (_validationFields$fie2 = validationFields.fields) !== null && _validationFields$fie2 !== void 0 && (_validationFields$fie2 = _validationFields$fie2.checkout) !== null && _validationFields$fie2 !== void 0 && (_validationFields$fie2 = _validationFields$fie2.comments) !== null && _validationFields$fie2 !== void 0 && _validationFields$fie2.required && !(extraFields !== null && extraFields !== void 0 && extraFields.comment)) {
+    if (validationFields !== null && validationFields !== void 0 && (_validationFields$fie = validationFields.fields) !== null && _validationFields$fie !== void 0 && (_validationFields$fie2 = _validationFields$fie.checkout) !== null && _validationFields$fie2 !== void 0 && (_validationFields$fie3 = _validationFields$fie2.comments) !== null && _validationFields$fie3 !== void 0 && _validationFields$fie3.enabled && validationFields !== null && validationFields !== void 0 && (_validationFields$fie4 = validationFields.fields) !== null && _validationFields$fie4 !== void 0 && (_validationFields$fie5 = _validationFields$fie4.checkout) !== null && _validationFields$fie5 !== void 0 && (_validationFields$fie6 = _validationFields$fie5.comments) !== null && _validationFields$fie6 !== void 0 && _validationFields$fie6.required && !(extraFields !== null && extraFields !== void 0 && extraFields.comment)) {
       errMessage.push(t('VALIDATION_ERROR_REQUIRED', 'Name is required').replace('_attribute_', t('COMMENT', 'Comment')));
     }
     if (errMessage.length > 0) {

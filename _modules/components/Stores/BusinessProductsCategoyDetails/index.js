@@ -113,7 +113,7 @@ var BusinessProductsCategoyDetailsUI = function BusinessProductsCategoyDetailsUI
       var _formState$result2;
       setAlertState({
         open: true,
-        content: formState === null || formState === void 0 || (_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result
+        content: formState === null || formState === void 0 ? void 0 : (_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result
       });
     }
   }, [formState === null || formState === void 0 ? void 0 : formState.result]);
@@ -154,8 +154,8 @@ var BusinessProductsCategoyDetailsUI = function BusinessProductsCategoyDetailsUI
     height: 30
   }))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.BusinessEnableWrapper, {
     className: "business_enable_control"
-  }, isAddMode ? /*#__PURE__*/_react.default.createElement("span", null, t('NEW_CATEGORY', 'New category')) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (formState === null || formState === void 0 || (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.name) && /*#__PURE__*/_react.default.createElement("span", null, formState === null || formState === void 0 || (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.name), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
-    defaultChecked: (formState === null || formState === void 0 || (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.enabled) || false,
+  }, isAddMode ? /*#__PURE__*/_react.default.createElement("span", null, t('NEW_CATEGORY', 'New category')) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.name) && /*#__PURE__*/_react.default.createElement("span", null, formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.name), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
+    defaultChecked: (formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.enabled) || false,
     onChange: function onChange(val) {
       return handleChangeCheckBox({
         enabled: val

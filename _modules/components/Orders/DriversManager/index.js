@@ -33,11 +33,13 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var DriversManagerUI = function DriversManagerUI(props) {
-  var _configState$configs;
+  var _configState$configs, _configState$configs$;
   var onDriverRedirect = props.onDriverRedirect,
     handleChangeSearch = props.handleChangeSearch,
     searchValue = props.searchValue,
-    driversIsOnline = props.driversIsOnline;
+    driversIsOnline = props.driversIsOnline,
+    selectedDriver = props.selectedDriver,
+    setSelectedDriver = props.setSelectedDriver;
   var _props$driversList = props.driversList,
     drivers = _props$driversList.drivers,
     loading = _props$driversList.loading;
@@ -51,7 +53,7 @@ var DriversManagerUI = function DriversManagerUI(props) {
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configState = _useConfig2[0];
-  var googleMapsApiKey = configState === null || configState === void 0 || (_configState$configs = configState.configs) === null || _configState$configs === void 0 || (_configState$configs = _configState$configs.google_maps_api_key) === null || _configState$configs === void 0 ? void 0 : _configState$configs.value;
+  var googleMapsApiKey = configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.google_maps_api_key) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value;
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
@@ -59,12 +61,8 @@ var DriversManagerUI = function DriversManagerUI(props) {
     setIsOpenDriverOrders = _useState2[1];
   var _useState3 = (0, _react.useState)(null),
     _useState4 = _slicedToArray(_useState3, 2),
-    selectedDriver = _useState4[0],
-    setSelectedDriver = _useState4[1];
-  var _useState5 = (0, _react.useState)(null),
-    _useState6 = _slicedToArray(_useState5, 2),
-    openDriver = _useState6[0],
-    setOpenDriver = _useState6[1];
+    openDriver = _useState4[0],
+    setOpenDriver = _useState4[1];
   var handleBackRedirect = function handleBackRedirect() {
     setIsOpenDriverOrders(false);
     onDriverRedirect();

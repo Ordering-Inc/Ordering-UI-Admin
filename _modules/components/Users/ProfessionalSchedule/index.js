@@ -67,7 +67,7 @@ var ProfessionalScheduleUI = function ProfessionalScheduleUI(props) {
     placeholder: "00",
     className: "max_days_in_future",
     name: "max_days_in_future",
-    value: ((_formState$changes$ma = formState === null || formState === void 0 || (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.max_days_in_future) !== null && _formState$changes$ma !== void 0 ? _formState$changes$ma : user === null || user === void 0 ? void 0 : user.max_days_in_future) || '',
+    value: ((_formState$changes$ma = formState === null || formState === void 0 ? void 0 : (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.max_days_in_future) !== null && _formState$changes$ma !== void 0 ? _formState$changes$ma : user === null || user === void 0 ? void 0 : user.max_days_in_future) || '',
     onChange: handleChangeInput,
     disabled: !isMaxDays,
     onKeyPress: function onKeyPress(e) {

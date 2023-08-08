@@ -28,7 +28,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessPreview = function BusinessPreview(props) {
-  var _theme$images, _sessionState$user, _sessionState$user2, _orderState$options, _business$reviews, _business$reviews2, _theme$images2, _theme$images3, _orderState$options2, _business$reviews3, _business$reviews4, _business$categories, _selectedCategory$pro, _business$categories2;
+  var _theme$images, _theme$images$logos, _sessionState$user, _sessionState$user2, _orderState$options, _business$reviews, _business$reviews2, _theme$images2, _theme$images2$dummie, _theme$images3, _theme$images3$dummie, _orderState$options2, _business$reviews3, _business$reviews4, _business$categories, _selectedCategory$pro, _business$categories2;
   var business = props.business,
     isMobileView = props.isMobileView;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -97,7 +97,7 @@ var BusinessPreview = function BusinessPreview(props) {
     var _types = [];
     types.forEach(function (type) {
       var _type$replace;
-      return business[type] && _types.push(t("BUSINESS_TYPE_".concat(type === null || type === void 0 || (_type$replace = type.replace(/\s/g, '_')) === null || _type$replace === void 0 ? void 0 : _type$replace.toUpperCase()), type));
+      return business[type] && _types.push(t("BUSINESS_TYPE_".concat(type === null || type === void 0 ? void 0 : (_type$replace = type.replace(/\s/g, '_')) === null || _type$replace === void 0 ? void 0 : _type$replace.toUpperCase()), type));
     });
     return _types.join(', ');
   };
@@ -129,10 +129,10 @@ var BusinessPreview = function BusinessPreview(props) {
     alt: "Logotype",
     width: "100px",
     height: "30px",
-    src: theme === null || theme === void 0 || (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.logos) === null || _theme$images === void 0 ? void 0 : _theme$images.logotype,
+    src: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$logos = _theme$images.logos) === null || _theme$images$logos === void 0 ? void 0 : _theme$images$logos.logotype,
     loading: "lazy"
   })), /*#__PURE__*/_react.default.createElement(_styles2.HeaderInfo, null, /*#__PURE__*/_react.default.createElement(_styles2.AddressWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GeoAlt, null), /*#__PURE__*/_react.default.createElement("span", null, "New York")), /*#__PURE__*/_react.default.createElement(_styles2.MomentWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('ASAP_ABBREVIATION', 'ASAP'))), /*#__PURE__*/_react.default.createElement(_styles2.OrderTypeWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('DELIVERY', 'Delivery')))), /*#__PURE__*/_react.default.createElement(_styles2.CartWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Cart3, null), /*#__PURE__*/_react.default.createElement("span", null, "0")), /*#__PURE__*/_react.default.createElement(_styles2.UserWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null), /*#__PURE__*/_react.default.createElement("div", null, sessionState !== null && sessionState !== void 0 && (_sessionState$user = sessionState.user) !== null && _sessionState$user !== void 0 && _sessionState$user.photo ? /*#__PURE__*/_react.default.createElement("img", {
-    src: sessionState === null || sessionState === void 0 || (_sessionState$user2 = sessionState.user) === null || _sessionState$user2 === void 0 ? void 0 : _sessionState$user2.photo
+    src: sessionState === null || sessionState === void 0 ? void 0 : (_sessionState$user2 = sessionState.user) === null || _sessionState$user2 === void 0 ? void 0 : _sessionState$user2.photo
   }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PersonFill, null)))), /*#__PURE__*/_react.default.createElement(_styles2.ContentWrapper, null, !isMobileView && /*#__PURE__*/_react.default.createElement(_styles2.BusinessInfoContainer, {
     isMobileView: isMobileView
   }, /*#__PURE__*/_react.default.createElement(_styles2.BusinessInfoContent, null, /*#__PURE__*/_react.default.createElement(_styles2.BusinessInfo, {
@@ -143,7 +143,7 @@ var BusinessPreview = function BusinessPreview(props) {
     className: "type"
   }, getBusinessType()), /*#__PURE__*/_react.default.createElement(_styles2.BusinessDetail, null, (orderState === null || orderState === void 0 ? void 0 : orderState.options.type) === 1 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h5", null, /*#__PURE__*/_react.default.createElement("span", null, t('DELIVERY_FEE', 'Delivery fee')), business && parsePrice((business === null || business === void 0 ? void 0 : business.delivery_price) || 0)), /*#__PURE__*/_react.default.createElement("span", {
     className: "dot"
-  }, "\u2022")), (orderState === null || orderState === void 0 || (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) === 1 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h5", null, convertHoursToMinutes(business === null || business === void 0 ? void 0 : business.delivery_time)), /*#__PURE__*/_react.default.createElement("span", {
+  }, "\u2022")), (orderState === null || orderState === void 0 ? void 0 : (_orderState$options = orderState.options) === null || _orderState$options === void 0 ? void 0 : _orderState$options.type) === 1 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h5", null, convertHoursToMinutes(business === null || business === void 0 ? void 0 : business.delivery_time)), /*#__PURE__*/_react.default.createElement("span", {
     className: "dot"
   }, "\u2022")) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h5", null, convertHoursToMinutes(business === null || business === void 0 ? void 0 : business.pickup_time)), /*#__PURE__*/_react.default.createElement("span", {
     className: "dot"
@@ -153,7 +153,7 @@ var BusinessPreview = function BusinessPreview(props) {
     className: "review"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.StarFill, {
     className: "start"
-  }), /*#__PURE__*/_react.default.createElement("p", null, business === null || business === void 0 || (_business$reviews = business.reviews) === null || _business$reviews === void 0 ? void 0 : _business$reviews.total))), /*#__PURE__*/_react.default.createElement("div", {
+  }), /*#__PURE__*/_react.default.createElement("p", null, business === null || business === void 0 ? void 0 : (_business$reviews = business.reviews) === null || _business$reviews === void 0 ? void 0 : _business$reviews.total))), /*#__PURE__*/_react.default.createElement("div", {
     className: "preorder-Reviews"
   }, /*#__PURE__*/_react.default.createElement("span", null, t('PREORDER', 'Preorder')), /*#__PURE__*/_react.default.createElement("span", {
     className: "dot"
@@ -170,11 +170,11 @@ var BusinessPreview = function BusinessPreview(props) {
     isClosed: !(business !== null && business !== void 0 && business.open),
     isMobileView: isMobileView
   }, !(business !== null && business !== void 0 && business.open) && /*#__PURE__*/_react.default.createElement("h1", null, t('CLOSED', 'Closed')), !isMobileView && /*#__PURE__*/_react.default.createElement(_styles2.BusinessContent, null, /*#__PURE__*/_react.default.createElement(_styles2.WrapperBusinessLogo, null, /*#__PURE__*/_react.default.createElement(_styles2.BusinessLogo, {
-    bgimage: optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images2 = theme.images) === null || _theme$images2 === void 0 || (_theme$images2 = _theme$images2.dummies) === null || _theme$images2 === void 0 ? void 0 : _theme$images2.businessLogo), 'h_200,c_limit')
+    bgimage: optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$dummie = _theme$images2.dummies) === null || _theme$images2$dummie === void 0 ? void 0 : _theme$images2$dummie.businessLogo), 'h_200,c_limit')
   }))), /*#__PURE__*/_react.default.createElement(_styles2.BusinessMoreDetail, null, /*#__PURE__*/_react.default.createElement(_BsInfoCircle.default, null))), isMobileView && /*#__PURE__*/_react.default.createElement(_styles2.WrapperBusinessLogo, {
     isMobileView: isMobileView
   }, /*#__PURE__*/_react.default.createElement(_styles2.BusinessLogo, {
-    bgimage: optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images3 = theme.images) === null || _theme$images3 === void 0 || (_theme$images3 = _theme$images3.dummies) === null || _theme$images3 === void 0 ? void 0 : _theme$images3.businessLogo), 'h_200,c_limit')
+    bgimage: optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$dummie = _theme$images3.dummies) === null || _theme$images3$dummie === void 0 ? void 0 : _theme$images3$dummie.businessLogo), 'h_200,c_limit')
   })), isMobileView && /*#__PURE__*/_react.default.createElement(_styles2.BusinessInfoContent, null, /*#__PURE__*/_react.default.createElement(_styles2.BusinessInfo, {
     className: "info"
   }, /*#__PURE__*/_react.default.createElement(_styles2.BusinessInfoItem, null, /*#__PURE__*/_react.default.createElement("h2", {
@@ -183,7 +183,7 @@ var BusinessPreview = function BusinessPreview(props) {
     className: "type"
   }, getBusinessType()), /*#__PURE__*/_react.default.createElement(_styles2.BusinessDetail, null, (orderState === null || orderState === void 0 ? void 0 : orderState.options.type) === 1 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h5", null, /*#__PURE__*/_react.default.createElement("span", null, t('DELIVERY_FEE', 'Delivery fee')), business && parsePrice((business === null || business === void 0 ? void 0 : business.delivery_price) || 0)), /*#__PURE__*/_react.default.createElement("span", {
     className: "dot"
-  }, "\u2022")), (orderState === null || orderState === void 0 || (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type) === 1 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h5", null, convertHoursToMinutes(business === null || business === void 0 ? void 0 : business.delivery_time)), /*#__PURE__*/_react.default.createElement("span", {
+  }, "\u2022")), (orderState === null || orderState === void 0 ? void 0 : (_orderState$options2 = orderState.options) === null || _orderState$options2 === void 0 ? void 0 : _orderState$options2.type) === 1 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h5", null, convertHoursToMinutes(business === null || business === void 0 ? void 0 : business.delivery_time)), /*#__PURE__*/_react.default.createElement("span", {
     className: "dot"
   }, "\u2022")) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h5", null, convertHoursToMinutes(business === null || business === void 0 ? void 0 : business.pickup_time)), /*#__PURE__*/_react.default.createElement("span", {
     className: "dot"
@@ -193,7 +193,7 @@ var BusinessPreview = function BusinessPreview(props) {
     className: "review"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.StarFill, {
     className: "start"
-  }), /*#__PURE__*/_react.default.createElement("p", null, business === null || business === void 0 || (_business$reviews3 = business.reviews) === null || _business$reviews3 === void 0 ? void 0 : _business$reviews3.total))), /*#__PURE__*/_react.default.createElement("div", {
+  }), /*#__PURE__*/_react.default.createElement("p", null, business === null || business === void 0 ? void 0 : (_business$reviews3 = business.reviews) === null || _business$reviews3 === void 0 ? void 0 : _business$reviews3.total))), /*#__PURE__*/_react.default.createElement("div", {
     className: "preorder-Reviews"
   }, /*#__PURE__*/_react.default.createElement("span", null, t('PREORDER', 'Preorder')), /*#__PURE__*/_react.default.createElement("span", {
     className: "dot"
@@ -201,7 +201,7 @@ var BusinessPreview = function BusinessPreview(props) {
     isMobileView: isMobileView
   }, /*#__PURE__*/_react.default.createElement(_styles2.CategoryWrapper, {
     className: "order_status_filter"
-  }, /*#__PURE__*/_react.default.createElement(_Shared.DragScroll, null, (business === null || business === void 0 || (_business$categories = business.categories) === null || _business$categories === void 0 ? void 0 : _business$categories.length) > 0 && [{
+  }, /*#__PURE__*/_react.default.createElement(_Shared.DragScroll, null, (business === null || business === void 0 ? void 0 : (_business$categories = business.categories) === null || _business$categories === void 0 ? void 0 : _business$categories.length) > 0 && [{
     id: 'all',
     name: t('ALL', 'All')
   }].concat(_toConsumableArray(business === null || business === void 0 ? void 0 : business.categories)).map(function (category, i) {
@@ -212,7 +212,7 @@ var BusinessPreview = function BusinessPreview(props) {
         return setSelectedCateogry(category);
       }
     }, category === null || category === void 0 ? void 0 : category.name);
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.BusinessProductList, null, (selectedCategory === null || selectedCategory === void 0 ? void 0 : selectedCategory.id) !== 'all' && /*#__PURE__*/_react.default.createElement(_styles2.ProductsListing, null, selectedCategory === null || selectedCategory === void 0 || (_selectedCategory$pro = selectedCategory.products) === null || _selectedCategory$pro === void 0 ? void 0 : _selectedCategory$pro.map(function (product) {
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.BusinessProductList, null, (selectedCategory === null || selectedCategory === void 0 ? void 0 : selectedCategory.id) !== 'all' && /*#__PURE__*/_react.default.createElement(_styles2.ProductsListing, null, selectedCategory === null || selectedCategory === void 0 ? void 0 : (_selectedCategory$pro = selectedCategory.products) === null || _selectedCategory$pro === void 0 ? void 0 : _selectedCategory$pro.map(function (product) {
     return /*#__PURE__*/_react.default.createElement(SingleProductCard, {
       key: product === null || product === void 0 ? void 0 : product.id,
       isSoldOut: product.inventoried && !product.quantity,
@@ -220,17 +220,17 @@ var BusinessPreview = function BusinessPreview(props) {
       businessId: business === null || business === void 0 ? void 0 : business.id,
       isMobileView: isMobileView
     });
-  })), (selectedCategory === null || selectedCategory === void 0 ? void 0 : selectedCategory.id) === 'all' && (business === null || business === void 0 || (_business$categories2 = business.categories) === null || _business$categories2 === void 0 ? void 0 : _business$categories2.map(function (category, i) {
+  })), (selectedCategory === null || selectedCategory === void 0 ? void 0 : selectedCategory.id) === 'all' && (business === null || business === void 0 ? void 0 : (_business$categories2 = business.categories) === null || _business$categories2 === void 0 ? void 0 : _business$categories2.map(function (category, i) {
     var _category$products, _category$products2;
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: i
-    }, (category === null || category === void 0 || (_category$products = category.products) === null || _category$products === void 0 ? void 0 : _category$products.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.WrapAllCategories, {
+    }, (category === null || category === void 0 ? void 0 : (_category$products = category.products) === null || _category$products === void 0 ? void 0 : _category$products.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.WrapAllCategories, {
       id: "category".concat(category === null || category === void 0 ? void 0 : category.id)
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "category-title"
     }, (category === null || category === void 0 ? void 0 : category.image) && /*#__PURE__*/_react.default.createElement("img", {
       src: category.image
-    }), /*#__PURE__*/_react.default.createElement("h3", null, category === null || category === void 0 ? void 0 : category.name)), /*#__PURE__*/_react.default.createElement(_styles2.ProductsListing, null, category === null || category === void 0 || (_category$products2 = category.products) === null || _category$products2 === void 0 ? void 0 : _category$products2.map(function (product) {
+    }), /*#__PURE__*/_react.default.createElement("h3", null, category === null || category === void 0 ? void 0 : category.name)), /*#__PURE__*/_react.default.createElement(_styles2.ProductsListing, null, category === null || category === void 0 ? void 0 : (_category$products2 = category.products) === null || _category$products2 === void 0 ? void 0 : _category$products2.map(function (product) {
       return /*#__PURE__*/_react.default.createElement(SingleProductCard, {
         key: product === null || product === void 0 ? void 0 : product.id,
         isSoldOut: product.inventoried && !product.quantity,
@@ -249,7 +249,7 @@ var BusinessPreview = function BusinessPreview(props) {
 };
 exports.BusinessPreview = BusinessPreview;
 var SingleProductCard = function SingleProductCard(props) {
-  var _orderState$carts, _cart$products, _cart$products2, _theme$images4;
+  var _orderState$carts, _cart$products, _cart$products2, _theme$images4, _theme$images4$dummie;
   var product = props.product,
     businessId = props.businessId,
     isSoldOut = props.isSoldOut,
@@ -272,12 +272,12 @@ var SingleProductCard = function SingleProductCard(props) {
   var editMode = typeof (product === null || product === void 0 ? void 0 : product.code) !== 'undefined';
   var removeToBalance = editMode ? product === null || product === void 0 ? void 0 : product.quantity : 0;
   var cart = (_orderState$carts = orderState.carts) === null || _orderState$carts === void 0 ? void 0 : _orderState$carts["businessId:".concat(businessId)];
-  var productCart = cart === null || cart === void 0 || (_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.find(function (prod) {
+  var productCart = cart === null || cart === void 0 ? void 0 : (_cart$products = cart.products) === null || _cart$products === void 0 ? void 0 : _cart$products.find(function (prod) {
     return prod.id === (product === null || product === void 0 ? void 0 : product.id);
   });
   var totalBalance = ((productCart === null || productCart === void 0 ? void 0 : productCart.quantity) || 0) - removeToBalance;
   var maxCartProductConfig = (stateConfig.configs.max_product_amount ? parseInt(stateConfig.configs.max_product_amount) : 100) - totalBalance;
-  var productBalance = ((cart === null || cart === void 0 || (_cart$products2 = cart.products) === null || _cart$products2 === void 0 ? void 0 : _cart$products2.reduce(function (sum, _product) {
+  var productBalance = ((cart === null || cart === void 0 ? void 0 : (_cart$products2 = cart.products) === null || _cart$products2 === void 0 ? void 0 : _cart$products2.reduce(function (sum, _product) {
     return sum + (product && _product.id === (product === null || product === void 0 ? void 0 : product.id) ? _product.quantity : 0);
   }, 0)) || 0) - removeToBalance;
   var maxCartProductInventory = (product !== null && product !== void 0 && product.inventoried ? product === null || product === void 0 ? void 0 : product.quantity : undefined) - productBalance;
@@ -291,6 +291,6 @@ var SingleProductCard = function SingleProductCard(props) {
   }, /*#__PURE__*/_react.default.createElement("h1", null, product === null || product === void 0 ? void 0 : product.name), /*#__PURE__*/_react.default.createElement(_styles2.PriceWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, parsePrice(product === null || product === void 0 ? void 0 : product.price))), /*#__PURE__*/_react.default.createElement("p", null, product === null || product === void 0 ? void 0 : product.description)), /*#__PURE__*/_react.default.createElement(_styles2.WrapLogo, null, /*#__PURE__*/_react.default.createElement(_styles2.CardLogo, {
     className: "image",
     soldOut: isSoldOut || maxProductQuantity <= 0,
-    bgimage: optimizeImage((product === null || product === void 0 ? void 0 : product.images) || ((_theme$images4 = theme.images) === null || _theme$images4 === void 0 || (_theme$images4 = _theme$images4.dummies) === null || _theme$images4 === void 0 ? void 0 : _theme$images4.product), 'h_200,c_limit')
+    bgimage: optimizeImage((product === null || product === void 0 ? void 0 : product.images) || ((_theme$images4 = theme.images) === null || _theme$images4 === void 0 ? void 0 : (_theme$images4$dummie = _theme$images4.dummies) === null || _theme$images4$dummie === void 0 ? void 0 : _theme$images4$dummie.product), 'h_200,c_limit')
   })), (isSoldOut || maxProductQuantity <= 0) && /*#__PURE__*/_react.default.createElement(_styles2.SoldOut, null, t('SOLD_OUT', 'SOLD OUT')));
 };

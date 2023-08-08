@@ -106,8 +106,8 @@ var BusinessDeliveryDetailsUI = function BusinessDeliveryDetailsUI(props) {
     var _business$delivery_ti, _business$delivery_ti2;
     setTimeList();
     setCurDeliveryTime({
-      hour: business !== null && business !== void 0 && business.delivery_time ? (business === null || business === void 0 || (_business$delivery_ti = business.delivery_time) === null || _business$delivery_ti === void 0 ? void 0 : _business$delivery_ti.split(':')[0]) * 1 + '' : '0',
-      minute: business !== null && business !== void 0 && business.delivery_time ? (business === null || business === void 0 || (_business$delivery_ti2 = business.delivery_time) === null || _business$delivery_ti2 === void 0 ? void 0 : _business$delivery_ti2.split(':')[1]) * 1 + '' : '0'
+      hour: business !== null && business !== void 0 && business.delivery_time ? (business === null || business === void 0 ? void 0 : (_business$delivery_ti = business.delivery_time) === null || _business$delivery_ti === void 0 ? void 0 : _business$delivery_ti.split(':')[0]) * 1 + '' : '0',
+      minute: business !== null && business !== void 0 && business.delivery_time ? (business === null || business === void 0 ? void 0 : (_business$delivery_ti2 = business.delivery_time) === null || _business$delivery_ti2 === void 0 ? void 0 : _business$delivery_ti2.split(':')[1]) * 1 + '' : '0'
     });
   }, []);
   (0, _react.useEffect)(function () {
@@ -159,7 +159,7 @@ var BusinessDeliveryDetailsUI = function BusinessDeliveryDetailsUI(props) {
     isSecondIcon: true,
     notAsync: true,
     placeholder: t('SELECT_PRIORITY', 'Select priority'),
-    defaultValue: (_business$order_defau = business === null || business === void 0 || (_business$order_defau2 = business.order_default_priority) === null || _business$order_defau2 === void 0 ? void 0 : _business$order_defau2.toString()) !== null && _business$order_defau !== void 0 ? _business$order_defau : '',
+    defaultValue: (_business$order_defau = business === null || business === void 0 ? void 0 : (_business$order_defau2 = business.order_default_priority) === null || _business$order_defau2 === void 0 ? void 0 : _business$order_defau2.toString()) !== null && _business$order_defau !== void 0 ? _business$order_defau : '',
     options: priorityList,
     onChange: function onChange(val) {
       return handleChangeForm({

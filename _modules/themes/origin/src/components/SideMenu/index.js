@@ -16,7 +16,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var SideMenu = function SideMenu(props) {
-  var _theme$images, _theme$images2, _theme$images3, _theme$images4;
+  var _theme$images, _theme$images$icons, _theme$images2, _theme$images2$icons, _theme$images3, _theme$images3$icons, _theme$images4, _theme$images4$icons;
   var theme = (0, _styledComponents.useTheme)();
   var _useEvent = (0, _orderingComponentsAdmin.useEvent)(),
     _useEvent2 = _slicedToArray(_useEvent, 1),
@@ -32,7 +32,7 @@ var SideMenu = function SideMenu(props) {
       });
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
-    src: theme === null || theme === void 0 || (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.icons) === null || _theme$images === void 0 ? void 0 : _theme$images.ordersList,
+    src: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$icons = _theme$images.icons) === null || _theme$images$icons === void 0 ? void 0 : _theme$images$icons.ordersList,
     alt: "orders list"
   })), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     active: window.location.pathname === '/shop',
@@ -42,7 +42,7 @@ var SideMenu = function SideMenu(props) {
       });
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
-    src: theme === null || theme === void 0 || (_theme$images2 = theme.images) === null || _theme$images2 === void 0 || (_theme$images2 = _theme$images2.icons) === null || _theme$images2 === void 0 ? void 0 : _theme$images2.shop,
+    src: theme === null || theme === void 0 ? void 0 : (_theme$images2 = theme.images) === null || _theme$images2 === void 0 ? void 0 : (_theme$images2$icons = _theme$images2.icons) === null || _theme$images2$icons === void 0 ? void 0 : _theme$images2$icons.shop,
     alt: "shop"
   })), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     active: window.location.pathname === '/chart',
@@ -52,7 +52,7 @@ var SideMenu = function SideMenu(props) {
       });
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
-    src: theme === null || theme === void 0 || (_theme$images3 = theme.images) === null || _theme$images3 === void 0 || (_theme$images3 = _theme$images3.icons) === null || _theme$images3 === void 0 ? void 0 : _theme$images3.pieChart,
+    src: theme === null || theme === void 0 ? void 0 : (_theme$images3 = theme.images) === null || _theme$images3 === void 0 ? void 0 : (_theme$images3$icons = _theme$images3.icons) === null || _theme$images3$icons === void 0 ? void 0 : _theme$images3$icons.pieChart,
     alt: "pie chart"
   })), /*#__PURE__*/_react.default.createElement(_styles.MenuLink, {
     active: window.location.pathname === '/setting',
@@ -62,7 +62,7 @@ var SideMenu = function SideMenu(props) {
       });
     }
   }, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, {
-    src: theme === null || theme === void 0 || (_theme$images4 = theme.images) === null || _theme$images4 === void 0 || (_theme$images4 = _theme$images4.icons) === null || _theme$images4 === void 0 ? void 0 : _theme$images4.setting,
+    src: theme === null || theme === void 0 ? void 0 : (_theme$images4 = theme.images) === null || _theme$images4 === void 0 ? void 0 : (_theme$images4$icons = _theme$images4.icons) === null || _theme$images4$icons === void 0 ? void 0 : _theme$images4$icons.setting,
     alt: "setting"
   }))));
 };

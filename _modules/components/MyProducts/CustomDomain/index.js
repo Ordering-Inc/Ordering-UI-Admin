@@ -92,7 +92,7 @@ var CustomDomainUI = function CustomDomainUI(props) {
     color: "primary"
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.InfoCircle, null)), /*#__PURE__*/_react.default.createElement(_styles2.CustomDomainInfoContent, null, /*#__PURE__*/_react.default.createElement("span", null, t('CUSTOM_DOMAIN_NOTIFY', 'Please make sure that your DNS CNAME is pointing {project-name}.tryordering.com'))))), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     placeholder: "www.yourdomain.com",
-    value: (formState === null || formState === void 0 || (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.domain) || '',
+    value: (formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.domain) || '',
     onChange: function onChange(e) {
       return handleChangeFormState({
         domain: e.target.value
@@ -101,7 +101,7 @@ var CustomDomainUI = function CustomDomainUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('SLL_SETUP_TYPE', 'SSL setup type')), /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
     options: sslTypeList,
     className: "select",
-    defaultValue: formState === null || formState === void 0 || (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.ssl_setup_type,
+    defaultValue: formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.ssl_setup_type,
     placeholder: t('SELECT_OPTION', 'Select an option'),
     onChange: function onChange(value) {
       return handleChangeFormState({

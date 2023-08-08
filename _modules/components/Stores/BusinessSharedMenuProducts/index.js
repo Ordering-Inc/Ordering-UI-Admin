@@ -54,7 +54,7 @@ var BusinessSharedMenuProductsUI = function BusinessSharedMenuProductsUI(props) 
     setIsOpenDetails = _useState6[1];
   var handleOpenProduct = function handleOpenProduct(e, product, isInitialRender) {
     var _e$target;
-    var isInvalid = e === null || e === void 0 || (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.closest('.product_checkbox');
+    var isInvalid = e === null || e === void 0 ? void 0 : (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.closest('.product_checkbox');
     if (isInvalid) return;
     setIsOpenSharedProduct(true);
     setCurrentProduct(product);

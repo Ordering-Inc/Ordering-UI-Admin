@@ -162,15 +162,15 @@ var ImporterFormUI = function ImporterFormUI(props) {
     }
   }, [importType]);
   (0, _react.useEffect)(function () {
-    var _formState$result, _formState$result3, _formState$result4;
+    var _formState$result, _formState$result3, _formState$result4, _formState$result4$re;
     if ((_formState$result = formState.result) !== null && _formState$result !== void 0 && _formState$result.error && Object.keys(formState.result).length > 0) {
       var _formState$result2;
       setAlertState({
         open: true,
-        content: formState === null || formState === void 0 || (_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result
+        content: formState === null || formState === void 0 ? void 0 : (_formState$result2 = formState.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.result
       });
     }
-    if (!((_formState$result3 = formState.result) !== null && _formState$result3 !== void 0 && _formState$result3.error) && (_formState$result4 = formState.result) !== null && _formState$result4 !== void 0 && (_formState$result4 = _formState$result4.result) !== null && _formState$result4 !== void 0 && _formState$result4.id) {
+    if (!((_formState$result3 = formState.result) !== null && _formState$result3 !== void 0 && _formState$result3.error) && (_formState$result4 = formState.result) !== null && _formState$result4 !== void 0 && (_formState$result4$re = _formState$result4.result) !== null && _formState$result4$re !== void 0 && _formState$result4$re.id) {
       onClose();
     }
   }, [formState.result]);

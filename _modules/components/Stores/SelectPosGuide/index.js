@@ -386,14 +386,14 @@ var SelectPosGuideUI = function SelectPosGuideUI(props) {
   };
   var handleContinue = function handleContinue() {
     var _formState$changes, _formState$changes2, _formState$changes3;
-    if (!(formState !== null && formState !== void 0 && (_formState$changes = formState.changes) !== null && _formState$changes !== void 0 && _formState$changes.pos) || (formState === null || formState === void 0 || (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.pos) === 'other' && hasOther) {
+    if (!(formState !== null && formState !== void 0 && (_formState$changes = formState.changes) !== null && _formState$changes !== void 0 && _formState$changes.pos) || (formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.pos) === 'other' && hasOther) {
       setAlertState({
         open: true,
         content: t('POS_REQUIRED', 'POS is required')
       });
       return;
     }
-    if ((formState === null || formState === void 0 || (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.pos) === 'other') {
+    if ((formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.pos) === 'other') {
       setHasOther(true);
       return;
     }
@@ -416,7 +416,7 @@ var SelectPosGuideUI = function SelectPosGuideUI(props) {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, !hasOther ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h2", null, t('SELECT_YOUR_POS', 'Select your POS')), /*#__PURE__*/_react.default.createElement(_styles2.SelectPosWrapper, null, /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
     options: typeOptions,
     className: "select",
-    defaultValue: (formState === null || formState === void 0 || (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.pos) || '',
+    defaultValue: (formState === null || formState === void 0 ? void 0 : (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.pos) || '',
     placeholder: t('SELECT_YOUR_POS', 'Select your POS'),
     onChange: function onChange(value) {
       return changeFormState({
@@ -436,7 +436,7 @@ var SelectPosGuideUI = function SelectPosGuideUI(props) {
     var _formState$changes5;
     return /*#__PURE__*/_react.default.createElement(_styles2.PosItem, {
       key: idx,
-      active: (formState === null || formState === void 0 || (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.pos) === item.key,
+      active: (formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.pos) === item.key,
       onClick: function onClick() {
         return changeFormState({
           pos: item.key

@@ -74,14 +74,14 @@ var AnalyticsRegisterUsers = function AnalyticsRegisterUsers(props) {
     var values = [];
     timeAxes.forEach(function (axe) {
       var _registerUsersList$da;
-      var index = registerUsersList === null || registerUsersList === void 0 || (_registerUsersList$da = registerUsersList.data) === null || _registerUsersList$da === void 0 ? void 0 : _registerUsersList$da.findIndex(function (history) {
+      var index = registerUsersList === null || registerUsersList === void 0 ? void 0 : (_registerUsersList$da = registerUsersList.data) === null || _registerUsersList$da === void 0 ? void 0 : _registerUsersList$da.findIndex(function (history) {
         return axe === (history === null || history === void 0 ? void 0 : history.time);
       });
       if (index !== -1) {
         var _registerUsersList$da2, _registerUsersList$da3;
         values.push({
-          x: registerUsersList === null || registerUsersList === void 0 || (_registerUsersList$da2 = registerUsersList.data[index]) === null || _registerUsersList$da2 === void 0 ? void 0 : _registerUsersList$da2.time,
-          y: registerUsersList === null || registerUsersList === void 0 || (_registerUsersList$da3 = registerUsersList.data[index]) === null || _registerUsersList$da3 === void 0 ? void 0 : _registerUsersList$da3.users
+          x: registerUsersList === null || registerUsersList === void 0 ? void 0 : (_registerUsersList$da2 = registerUsersList.data[index]) === null || _registerUsersList$da2 === void 0 ? void 0 : _registerUsersList$da2.time,
+          y: registerUsersList === null || registerUsersList === void 0 ? void 0 : (_registerUsersList$da3 = registerUsersList.data[index]) === null || _registerUsersList$da3 === void 0 ? void 0 : _registerUsersList$da3.users
         });
       } else {
         values.push({
@@ -216,13 +216,13 @@ var AnalyticsRegisterUsers = function AnalyticsRegisterUsers(props) {
   };
   var previewChart = function previewChart() {
     var _registerUsersList$da4;
-    if ((registerUsersList === null || registerUsersList === void 0 || (_registerUsersList$da4 = registerUsersList.data) === null || _registerUsersList$da4 === void 0 ? void 0 : _registerUsersList$da4.length) > 0) setIsShowPreview(true);
+    if ((registerUsersList === null || registerUsersList === void 0 ? void 0 : (_registerUsersList$da4 = registerUsersList.data) === null || _registerUsersList$da4 === void 0 ? void 0 : _registerUsersList$da4.length) > 0) setIsShowPreview(true);
   };
   (0, _react.useEffect)(function () {
     updateTimeAxes();
   }, [filterList]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.RegisterUsersHeader, null, /*#__PURE__*/_react.default.createElement("p", null, t('REGISTER_USERS', 'Register Users')), /*#__PURE__*/_react.default.createElement(_styles.ActionBlock, {
-    disabled: (registerUsersList === null || registerUsersList === void 0 || (_registerUsersList$da5 = registerUsersList.data) === null || _registerUsersList$da5 === void 0 ? void 0 : _registerUsersList$da5.length) === 0
+    disabled: (registerUsersList === null || registerUsersList === void 0 ? void 0 : (_registerUsersList$da5 = registerUsersList.data) === null || _registerUsersList$da5 === void 0 ? void 0 : _registerUsersList$da5.length) === 0
   }, /*#__PURE__*/_react.default.createElement(_BsArrowsAngleExpand.default, {
     onClick: previewChart
   }), /*#__PURE__*/_react.default.createElement(_BsDownload.default, {
@@ -230,7 +230,7 @@ var AnalyticsRegisterUsers = function AnalyticsRegisterUsers(props) {
     onClick: downloadImage
   }))), /*#__PURE__*/_react.default.createElement(_styles.RegisterUserChartWrapper, null, registerUsersList !== null && registerUsersList !== void 0 && registerUsersList.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 150
-  }) : (registerUsersList === null || registerUsersList === void 0 || (_registerUsersList$da6 = registerUsersList.data) === null || _registerUsersList$da6 === void 0 ? void 0 : _registerUsersList$da6.length) > 0 ? /*#__PURE__*/_react.default.createElement(_reactChartjs.Line, {
+  }) : (registerUsersList === null || registerUsersList === void 0 ? void 0 : (_registerUsersList$da6 = registerUsersList.data) === null || _registerUsersList$da6 === void 0 ? void 0 : _registerUsersList$da6.length) > 0 ? /*#__PURE__*/_react.default.createElement(_reactChartjs.Line, {
     data: defaultData,
     options: options,
     ref: chartRef

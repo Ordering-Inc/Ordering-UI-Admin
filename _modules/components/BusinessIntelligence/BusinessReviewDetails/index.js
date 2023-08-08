@@ -29,7 +29,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessReviewDetailsUI = function BusinessReviewDetailsUI(props) {
-  var _businessState$busine, _businessState$busine2, _theme$images;
+  var _businessState$busine, _businessState$busine2, _theme$images, _theme$images$dummies;
   var businessState = props.businessState,
     reviewsList = props.reviewsList,
     handleOpenProducts = props.handleOpenProducts,
@@ -53,7 +53,7 @@ var BusinessReviewDetailsUI = function BusinessReviewDetailsUI(props) {
       return handleOpenProducts(businessState.business);
     }
   }, t('PRODUCT_REVIEW', 'Product review'))), /*#__PURE__*/_react.default.createElement(_styles2.BusinessLogoContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles2.Image, {
-    bgimage: optimizeImage(((_businessState$busine2 = businessState.business) === null || _businessState$busine2 === void 0 ? void 0 : _businessState$busine2.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.dummies) === null || _theme$images === void 0 ? void 0 : _theme$images.businessLogo), 'h_120,c_limit')
+    bgimage: optimizeImage(((_businessState$busine2 = businessState.business) === null || _businessState$busine2 === void 0 ? void 0 : _businessState$busine2.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_120,c_limit')
   }))), reviewsList !== null && reviewsList !== void 0 && reviewsList.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.ReviewItemContatiner, {
       key: i
@@ -93,10 +93,10 @@ var BusinessReviewDetailsUI = function BusinessReviewDetailsUI(props) {
     }, /*#__PURE__*/_react.default.createElement(_styles2.ReviewItemHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.UserInfoContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.WrapperImage, {
       isSmall: true
     }, review !== null && review !== void 0 && (_review$user = review.user) !== null && _review$user !== void 0 && _review$user.photo ? /*#__PURE__*/_react.default.createElement(_styles2.Image, {
-      bgimage: optimizeImage(review === null || review === void 0 || (_review$user2 = review.user) === null || _review$user2 === void 0 ? void 0 : _review$user2.photo)
+      bgimage: optimizeImage(review === null || review === void 0 ? void 0 : (_review$user2 = review.user) === null || _review$user2 === void 0 ? void 0 : _review$user2.photo)
     }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PersonFill, null)), /*#__PURE__*/_react.default.createElement(_styles2.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", {
       className: "bold"
-    }, review === null || review === void 0 || (_review$user3 = review.user) === null || _review$user3 === void 0 ? void 0 : _review$user3.name, " ", review === null || review === void 0 || (_review$user4 = review.user) === null || _review$user4 === void 0 ? void 0 : _review$user4.lastname), (review === null || review === void 0 ? void 0 : review.created_at) && /*#__PURE__*/_react.default.createElement("p", null, parseDate(review === null || review === void 0 ? void 0 : review.created_at, {
+    }, review === null || review === void 0 ? void 0 : (_review$user3 = review.user) === null || _review$user3 === void 0 ? void 0 : _review$user3.name, " ", review === null || review === void 0 ? void 0 : (_review$user4 = review.user) === null || _review$user4 === void 0 ? void 0 : _review$user4.lastname), (review === null || review === void 0 ? void 0 : review.created_at) && /*#__PURE__*/_react.default.createElement("p", null, parseDate(review === null || review === void 0 ? void 0 : review.created_at, {
       utc: false
     })), (review === null || review === void 0 ? void 0 : review.order_id) && /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement("span", null, t('INVOICE_ORDER_NO', 'Order No.'), ' '), /*#__PURE__*/_react.default.createElement("span", null, review === null || review === void 0 ? void 0 : review.order_id)))), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
       defaultChecked: review === null || review === void 0 ? void 0 : review.enabled,

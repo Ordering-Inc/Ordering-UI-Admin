@@ -51,7 +51,7 @@ var BusinessGprsPrintersUI = function BusinessGprsPrintersUI(props) {
   };
   (0, _react.useEffect)(function () {
     var _printersListState$pr;
-    if ((printersListState === null || printersListState === void 0 || (_printersListState$pr = printersListState.printers) === null || _printersListState$pr === void 0 ? void 0 : _printersListState$pr.length) === 0) return;
+    if ((printersListState === null || printersListState === void 0 ? void 0 : (_printersListState$pr = printersListState.printers) === null || _printersListState$pr === void 0 ? void 0 : _printersListState$pr.length) === 0) return;
     var _printers = [];
     var _iterator = _createForOfIteratorHelper(printersListState === null || printersListState === void 0 ? void 0 : printersListState.printers),
       _step;

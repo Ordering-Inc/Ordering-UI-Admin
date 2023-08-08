@@ -131,14 +131,14 @@ var SingleRecoveryNotificationUI = function SingleRecoveryNotificationUI(props) 
   }, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('TITLE', 'Title')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "title",
     placeholder: t('TITLE', 'Title'),
-    defaultValue: formState !== null && formState !== void 0 && (_formState$changes2 = formState.changes) !== null && _formState$changes2 !== void 0 && _formState$changes2.title ? formState === null || formState === void 0 || (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.title : (_notification$title = notification === null || notification === void 0 ? void 0 : notification.title) !== null && _notification$title !== void 0 ? _notification$title : '',
+    defaultValue: formState !== null && formState !== void 0 && (_formState$changes2 = formState.changes) !== null && _formState$changes2 !== void 0 && _formState$changes2.title ? formState === null || formState === void 0 ? void 0 : (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.title : (_notification$title = notification === null || notification === void 0 ? void 0 : notification.title) !== null && _notification$title !== void 0 ? _notification$title : '',
     ref: register({
       required: t('VALIDATION_ERROR_REQUIRED').replace('_attribute_', t('TITLE', 'Title'))
     }),
     onChange: handleChangeInput
   })), isAdd && /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('CHANNEL', 'Channel')), /*#__PURE__*/_react.default.createElement(_Select.Select, {
     placeholder: placeholder,
-    defaultValue: formState !== null && formState !== void 0 && (_formState$changes4 = formState.changes) !== null && _formState$changes4 !== void 0 && _formState$changes4.channel ? formState === null || formState === void 0 || (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.channel : (_notification$channel = notification === null || notification === void 0 ? void 0 : notification.channel) !== null && _notification$channel !== void 0 ? _notification$channel : '',
+    defaultValue: formState !== null && formState !== void 0 && (_formState$changes4 = formState.changes) !== null && _formState$changes4 !== void 0 && _formState$changes4.channel ? formState === null || formState === void 0 ? void 0 : (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.channel : (_notification$channel = notification === null || notification === void 0 ? void 0 : notification.channel) !== null && _notification$channel !== void 0 ? _notification$channel : '',
     options: channelList,
     onChange: function onChange(val) {
       setValue('body', '');
@@ -147,15 +147,15 @@ var SingleRecoveryNotificationUI = function SingleRecoveryNotificationUI(props) 
         body: ''
       });
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('MESSAGE', 'Message')), (formState === null || formState === void 0 || (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.channel) === 'email' || (notification === null || notification === void 0 ? void 0 : notification.channel) === 'email' ? /*#__PURE__*/_react.default.createElement(_Shared.HtmlEditor, {
-    body: formState !== null && formState !== void 0 && (_formState$changes7 = formState.changes) !== null && _formState$changes7 !== void 0 && _formState$changes7.body ? formState === null || formState === void 0 || (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.body : (_notification$body = notification === null || notification === void 0 ? void 0 : notification.body) !== null && _notification$body !== void 0 ? _notification$body : '',
+  })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('MESSAGE', 'Message')), (formState === null || formState === void 0 ? void 0 : (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.channel) === 'email' || (notification === null || notification === void 0 ? void 0 : notification.channel) === 'email' ? /*#__PURE__*/_react.default.createElement(_Shared.HtmlEditor, {
+    body: formState !== null && formState !== void 0 && (_formState$changes7 = formState.changes) !== null && _formState$changes7 !== void 0 && _formState$changes7.body ? formState === null || formState === void 0 ? void 0 : (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.body : (_notification$body = notification === null || notification === void 0 ? void 0 : notification.body) !== null && _notification$body !== void 0 ? _notification$body : '',
     handleChangeBody: function handleChangeBody(val) {
       return handleChangeSelect('body', val);
     }
   }) : /*#__PURE__*/_react.default.createElement(_styles.TextArea, {
     name: "body",
     placeholder: t('WRITE_MESSAGE', 'Write a message'),
-    defaultValue: formState !== null && formState !== void 0 && (_formState$changes9 = formState.changes) !== null && _formState$changes9 !== void 0 && _formState$changes9.body ? formState === null || formState === void 0 || (_formState$changes10 = formState.changes) === null || _formState$changes10 === void 0 ? void 0 : _formState$changes10.body : (_notification$body2 = notification === null || notification === void 0 ? void 0 : notification.body) !== null && _notification$body2 !== void 0 ? _notification$body2 : '',
+    defaultValue: formState !== null && formState !== void 0 && (_formState$changes9 = formState.changes) !== null && _formState$changes9 !== void 0 && _formState$changes9.body ? formState === null || formState === void 0 ? void 0 : (_formState$changes10 = formState.changes) === null || _formState$changes10 === void 0 ? void 0 : _formState$changes10.body : (_notification$body2 = notification === null || notification === void 0 ? void 0 : notification.body) !== null && _notification$body2 !== void 0 ? _notification$body2 : '',
     onChange: handleChangeInput,
     ref: register({
       required: t('VALIDATION_ERROR_REQUIRED').replace('_attribute_', t('MESSAGE', 'Message'))

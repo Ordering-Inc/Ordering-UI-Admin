@@ -44,14 +44,14 @@ var AnalyticsSpendTimes = function AnalyticsSpendTimes(props) {
     var values = [];
     timeAxes.forEach(function (axe) {
       var _chartDataList$data;
-      var index = chartDataList === null || chartDataList === void 0 || (_chartDataList$data = chartDataList.data) === null || _chartDataList$data === void 0 ? void 0 : _chartDataList$data.findIndex(function (history) {
+      var index = chartDataList === null || chartDataList === void 0 ? void 0 : (_chartDataList$data = chartDataList.data) === null || _chartDataList$data === void 0 ? void 0 : _chartDataList$data.findIndex(function (history) {
         return axe === (history === null || history === void 0 ? void 0 : history.time);
       });
       if (index !== -1) {
         var _chartDataList$data$i, _chartDataList$data$i2, _chartDataList$data$i3;
         values.push({
-          x: chartDataList === null || chartDataList === void 0 || (_chartDataList$data$i = chartDataList.data[index]) === null || _chartDataList$data$i === void 0 ? void 0 : _chartDataList$data$i.time,
-          y: chartDataList !== null && chartDataList !== void 0 && (_chartDataList$data$i2 = chartDataList.data[index]) !== null && _chartDataList$data$i2 !== void 0 && _chartDataList$data$i2.accept_spend ? (chartDataList === null || chartDataList === void 0 || (_chartDataList$data$i3 = chartDataList.data[index]) === null || _chartDataList$data$i3 === void 0 ? void 0 : _chartDataList$data$i3.accept_spend) / 60 : 0
+          x: chartDataList === null || chartDataList === void 0 ? void 0 : (_chartDataList$data$i = chartDataList.data[index]) === null || _chartDataList$data$i === void 0 ? void 0 : _chartDataList$data$i.time,
+          y: chartDataList !== null && chartDataList !== void 0 && (_chartDataList$data$i2 = chartDataList.data[index]) !== null && _chartDataList$data$i2 !== void 0 && _chartDataList$data$i2.accept_spend ? (chartDataList === null || chartDataList === void 0 ? void 0 : (_chartDataList$data$i3 = chartDataList.data[index]) === null || _chartDataList$data$i3 === void 0 ? void 0 : _chartDataList$data$i3.accept_spend) / 60 : 0
         });
       } else {
         values.push({
@@ -66,14 +66,14 @@ var AnalyticsSpendTimes = function AnalyticsSpendTimes(props) {
     var values = [];
     timeAxes.forEach(function (axe) {
       var _chartDataList$data2;
-      var index = chartDataList === null || chartDataList === void 0 || (_chartDataList$data2 = chartDataList.data) === null || _chartDataList$data2 === void 0 ? void 0 : _chartDataList$data2.findIndex(function (history) {
+      var index = chartDataList === null || chartDataList === void 0 ? void 0 : (_chartDataList$data2 = chartDataList.data) === null || _chartDataList$data2 === void 0 ? void 0 : _chartDataList$data2.findIndex(function (history) {
         return axe === (history === null || history === void 0 ? void 0 : history.time);
       });
       if (index !== -1) {
         var _chartDataList$data$i4, _chartDataList$data$i5, _chartDataList$data$i6;
         values.push({
-          x: chartDataList === null || chartDataList === void 0 || (_chartDataList$data$i4 = chartDataList.data[index]) === null || _chartDataList$data$i4 === void 0 ? void 0 : _chartDataList$data$i4.time,
-          y: chartDataList !== null && chartDataList !== void 0 && (_chartDataList$data$i5 = chartDataList.data[index]) !== null && _chartDataList$data$i5 !== void 0 && _chartDataList$data$i5.pickup_spend ? (chartDataList === null || chartDataList === void 0 || (_chartDataList$data$i6 = chartDataList.data[index]) === null || _chartDataList$data$i6 === void 0 ? void 0 : _chartDataList$data$i6.pickup_spend) / 60 : 0
+          x: chartDataList === null || chartDataList === void 0 ? void 0 : (_chartDataList$data$i4 = chartDataList.data[index]) === null || _chartDataList$data$i4 === void 0 ? void 0 : _chartDataList$data$i4.time,
+          y: chartDataList !== null && chartDataList !== void 0 && (_chartDataList$data$i5 = chartDataList.data[index]) !== null && _chartDataList$data$i5 !== void 0 && _chartDataList$data$i5.pickup_spend ? (chartDataList === null || chartDataList === void 0 ? void 0 : (_chartDataList$data$i6 = chartDataList.data[index]) === null || _chartDataList$data$i6 === void 0 ? void 0 : _chartDataList$data$i6.pickup_spend) / 60 : 0
         });
       } else {
         values.push({
@@ -88,14 +88,14 @@ var AnalyticsSpendTimes = function AnalyticsSpendTimes(props) {
     var values = [];
     timeAxes.forEach(function (axe) {
       var _chartDataList$data3;
-      var index = chartDataList === null || chartDataList === void 0 || (_chartDataList$data3 = chartDataList.data) === null || _chartDataList$data3 === void 0 ? void 0 : _chartDataList$data3.findIndex(function (history) {
+      var index = chartDataList === null || chartDataList === void 0 ? void 0 : (_chartDataList$data3 = chartDataList.data) === null || _chartDataList$data3 === void 0 ? void 0 : _chartDataList$data3.findIndex(function (history) {
         return axe === (history === null || history === void 0 ? void 0 : history.time);
       });
       if (index !== -1) {
         var _chartDataList$data$i7, _chartDataList$data$i8, _chartDataList$data$i9;
         values.push({
-          x: chartDataList === null || chartDataList === void 0 || (_chartDataList$data$i7 = chartDataList.data[index]) === null || _chartDataList$data$i7 === void 0 ? void 0 : _chartDataList$data$i7.time,
-          y: chartDataList !== null && chartDataList !== void 0 && (_chartDataList$data$i8 = chartDataList.data[index]) !== null && _chartDataList$data$i8 !== void 0 && _chartDataList$data$i8.delivery_spend ? (chartDataList === null || chartDataList === void 0 || (_chartDataList$data$i9 = chartDataList.data[index]) === null || _chartDataList$data$i9 === void 0 ? void 0 : _chartDataList$data$i9.delivery_spend) / 60 : 0
+          x: chartDataList === null || chartDataList === void 0 ? void 0 : (_chartDataList$data$i7 = chartDataList.data[index]) === null || _chartDataList$data$i7 === void 0 ? void 0 : _chartDataList$data$i7.time,
+          y: chartDataList !== null && chartDataList !== void 0 && (_chartDataList$data$i8 = chartDataList.data[index]) !== null && _chartDataList$data$i8 !== void 0 && _chartDataList$data$i8.delivery_spend ? (chartDataList === null || chartDataList === void 0 ? void 0 : (_chartDataList$data$i9 = chartDataList.data[index]) === null || _chartDataList$data$i9 === void 0 ? void 0 : _chartDataList$data$i9.delivery_spend) / 60 : 0
         });
       } else {
         values.push({
@@ -110,14 +110,14 @@ var AnalyticsSpendTimes = function AnalyticsSpendTimes(props) {
     var values = [];
     timeAxes.forEach(function (axe) {
       var _chartDataList$data4;
-      var index = chartDataList === null || chartDataList === void 0 || (_chartDataList$data4 = chartDataList.data) === null || _chartDataList$data4 === void 0 ? void 0 : _chartDataList$data4.findIndex(function (history) {
+      var index = chartDataList === null || chartDataList === void 0 ? void 0 : (_chartDataList$data4 = chartDataList.data) === null || _chartDataList$data4 === void 0 ? void 0 : _chartDataList$data4.findIndex(function (history) {
         return axe === (history === null || history === void 0 ? void 0 : history.time);
       });
       if (index !== -1) {
         var _chartDataList$data$i10, _chartDataList$data$i11, _chartDataList$data$i12;
         values.push({
-          x: chartDataList === null || chartDataList === void 0 || (_chartDataList$data$i10 = chartDataList.data[index]) === null || _chartDataList$data$i10 === void 0 ? void 0 : _chartDataList$data$i10.time,
-          y: chartDataList !== null && chartDataList !== void 0 && (_chartDataList$data$i11 = chartDataList.data[index]) !== null && _chartDataList$data$i11 !== void 0 && _chartDataList$data$i11.complete_spend ? (chartDataList === null || chartDataList === void 0 || (_chartDataList$data$i12 = chartDataList.data[index]) === null || _chartDataList$data$i12 === void 0 ? void 0 : _chartDataList$data$i12.complete_spend) / 60 : 0
+          x: chartDataList === null || chartDataList === void 0 ? void 0 : (_chartDataList$data$i10 = chartDataList.data[index]) === null || _chartDataList$data$i10 === void 0 ? void 0 : _chartDataList$data$i10.time,
+          y: chartDataList !== null && chartDataList !== void 0 && (_chartDataList$data$i11 = chartDataList.data[index]) !== null && _chartDataList$data$i11 !== void 0 && _chartDataList$data$i11.complete_spend ? (chartDataList === null || chartDataList === void 0 ? void 0 : (_chartDataList$data$i12 = chartDataList.data[index]) === null || _chartDataList$data$i12 === void 0 ? void 0 : _chartDataList$data$i12.complete_spend) / 60 : 0
         });
       } else {
         values.push({

@@ -48,7 +48,7 @@ var SettingsCountryFilter = function SettingsCountryFilter(props) {
     var timeZoneToFilter = _toConsumableArray(_constants.countryList);
     var _timeZoneList = timeZoneToFilter === null || timeZoneToFilter === void 0 ? void 0 : timeZoneToFilter.filter(function (item) {
       var _item$code;
-      return item === null || item === void 0 || (_item$code = item.code) === null || _item$code === void 0 ? void 0 : _item$code.toLocaleLowerCase().includes(evt.target.value.toLocaleLowerCase());
+      return item === null || item === void 0 ? void 0 : (_item$code = item.code) === null || _item$code === void 0 ? void 0 : _item$code.toLocaleLowerCase().includes(evt.target.value.toLocaleLowerCase());
     });
     setTimeZoneList(_timeZoneList);
     setSearchVal(evt.target.value);

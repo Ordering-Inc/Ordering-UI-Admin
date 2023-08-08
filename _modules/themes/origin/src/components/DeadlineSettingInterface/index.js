@@ -36,16 +36,16 @@ var DeadlineSettingInterface = function DeadlineSettingInterface(props) {
     if (e.target.name === 'deadlineDelayedDate') setDeadlineDelayedDate(e.target.value);
   };
   return /*#__PURE__*/_react.default.createElement(_styles.DeadlineSettingContainer, null, /*#__PURE__*/_react.default.createElement(_styles.TopContainer, null, /*#__PURE__*/_react.default.createElement(_styles.BorderContainer, null, t('AT_RISK', 'At Risk'))), /*#__PURE__*/_react.default.createElement(_styles.BottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles.DeadlineInputContainer, {
-    color: theme === null || theme === void 0 || (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.deadlineOk
+    color: theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.deadlineOk
   }, /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    borderColor: theme === null || theme === void 0 || (_theme$colors2 = theme.colors) === null || _theme$colors2 === void 0 ? void 0 : _theme$colors2.deadlineOk,
+    borderColor: theme === null || theme === void 0 ? void 0 : (_theme$colors2 = theme.colors) === null || _theme$colors2 === void 0 ? void 0 : _theme$colors2.deadlineOk,
     value: deadlineOkDate,
     name: "deadlineOkDate",
     onChange: handleChangeDeadlineDate
   }), t('OK', 'OK')), /*#__PURE__*/_react.default.createElement(_styles.DeadlineInputContainer, {
-    color: theme === null || theme === void 0 || (_theme$colors3 = theme.colors) === null || _theme$colors3 === void 0 ? void 0 : _theme$colors3.deadlineDelayed
+    color: theme === null || theme === void 0 ? void 0 : (_theme$colors3 = theme.colors) === null || _theme$colors3 === void 0 ? void 0 : _theme$colors3.deadlineDelayed
   }, /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    borderColor: theme === null || theme === void 0 || (_theme$colors4 = theme.colors) === null || _theme$colors4 === void 0 ? void 0 : _theme$colors4.deadlineDelayed,
+    borderColor: theme === null || theme === void 0 ? void 0 : (_theme$colors4 = theme.colors) === null || _theme$colors4 === void 0 ? void 0 : _theme$colors4.deadlineDelayed,
     value: deadlineDelayedDate,
     name: "deadlineDelayedDate",
     onChange: handleChangeDeadlineDate

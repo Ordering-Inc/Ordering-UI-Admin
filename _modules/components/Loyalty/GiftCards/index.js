@@ -123,8 +123,8 @@ var GiftCardsUI = function GiftCardsUI(props) {
       width: 16,
       height: 16
     }));
-  })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (platformProductsListState === null || platformProductsListState === void 0 || (_platformProductsList = platformProductsListState.products) === null || _platformProductsList === void 0 ? void 0 : _platformProductsList.length) > 0 ? platformProductsListState === null || platformProductsListState === void 0 ? void 0 : platformProductsListState.products.map(function (product) {
-    var _theme$images;
+  })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (platformProductsListState === null || platformProductsListState === void 0 ? void 0 : (_platformProductsList = platformProductsListState.products) === null || _platformProductsList === void 0 ? void 0 : _platformProductsList.length) > 0 ? platformProductsListState === null || platformProductsListState === void 0 ? void 0 : platformProductsListState.products.map(function (product) {
+    var _theme$images, _theme$images$dummies;
     return /*#__PURE__*/_react.default.createElement(_styles.ItemContainer, {
       key: product.id,
       onClick: function onClick() {
@@ -132,7 +132,7 @@ var GiftCardsUI = function GiftCardsUI(props) {
       },
       active: (product === null || product === void 0 ? void 0 : product.id) === (selectedProduct === null || selectedProduct === void 0 ? void 0 : selectedProduct.id)
     }, /*#__PURE__*/_react.default.createElement(_styles.InfoWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles.Image, {
-      bgimage: optimizeImage((product === null || product === void 0 ? void 0 : product.image) || ((_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.dummies) === null || _theme$images === void 0 ? void 0 : _theme$images.product))
+      bgimage: optimizeImage((product === null || product === void 0 ? void 0 : product.image) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.product))
     })), /*#__PURE__*/_react.default.createElement(_styles.ProductName, null, product === null || product === void 0 ? void 0 : product.name)), /*#__PURE__*/_react.default.createElement(_styles.PriceWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, parsePrice(product === null || product === void 0 ? void 0 : product.price)), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null)));
   }) : /*#__PURE__*/_react.default.createElement(_styles.NotFoundSourceWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.NotFoundSource, null)))), /*#__PURE__*/_react.default.createElement(_styles.BottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Button, {
     color: "primary",

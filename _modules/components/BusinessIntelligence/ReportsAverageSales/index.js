@@ -36,7 +36,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ReportsAverageSalesUI = function ReportsAverageSalesUI(props) {
-  var _filterList$franchise, _reportData$content2, _reportData$content3, _reportData$content4, _reportData$content5, _reportData$content6, _reportData$content7, _reportData$content8, _reportData1$content, _reportData1$content2, _reportData$content9, _reportData1$content3, _reportData1$content4, _reportData1$content5, _reportData1$content6;
+  var _filterList$franchise, _reportData$content2, _reportData$content2$, _reportData$content2$2, _reportData$content3, _reportData$content3$, _reportData$content3$2, _reportData$content4, _reportData$content4$, _reportData$content5, _reportData$content5$, _reportData$content6, _reportData$content6$, _reportData$content7, _reportData$content7$, _reportData$content8, _reportData$content8$, _reportData1$content, _reportData1$content$, _reportData1$content$2, _reportData1$content2, _reportData1$content3, _reportData1$content4, _reportData$content9, _reportData$content9$, _reportData1$content5, _reportData1$content6, _reportData1$content7, _reportData1$content8, _reportData1$content9, _reportData1$content10, _reportData1$content11, _reportData1$content12;
   var filterList = props.filterList,
     handleChangeFilterList = props.handleChangeFilterList,
     reportData = props.reportData,
@@ -63,8 +63,8 @@ var ReportsAverageSalesUI = function ReportsAverageSalesUI(props) {
     }));
   };
   var downloadCSV = function downloadCSV(name) {
-    var _reportData$content;
-    if ((reportData === null || reportData === void 0 || (_reportData$content = reportData.content) === null || _reportData$content === void 0 || (_reportData$content = _reportData$content.body) === null || _reportData$content === void 0 || (_reportData$content = _reportData$content.rows) === null || _reportData$content === void 0 ? void 0 : _reportData$content.length) === 0) return;
+    var _reportData$content, _reportData$content$b, _reportData$content$b2;
+    if ((reportData === null || reportData === void 0 ? void 0 : (_reportData$content = reportData.content) === null || _reportData$content === void 0 ? void 0 : (_reportData$content$b = _reportData$content.body) === null || _reportData$content$b === void 0 ? void 0 : (_reportData$content$b2 = _reportData$content$b.rows) === null || _reportData$content$b2 === void 0 ? void 0 : _reportData$content$b2.length) === 0) return;
     var csv = '';
     reportData.content.header.rows.forEach(function (tr) {
       tr.forEach(function (th) {
@@ -119,11 +119,11 @@ var ReportsAverageSalesUI = function ReportsAverageSalesUI(props) {
     onClick: function onClick() {
       return setIsBrandFilter(true);
     }
-  }, t('BRAND', 'Brand'), " (", filterList !== null && filterList !== void 0 && filterList.franchises_id ? filterList === null || filterList === void 0 || (_filterList$franchise = filterList.franchises_id) === null || _filterList$franchise === void 0 ? void 0 : _filterList$franchise.length : t('ALL', 'All'), ")")), /*#__PURE__*/_react.default.createElement(_styles2.TimeZoneAndCalendar, null, /*#__PURE__*/_react.default.createElement(_styles2.AnalyticsTimeZoneWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsFilterTimeZone.AnalyticsFilterTimeZone, props)), /*#__PURE__*/_react.default.createElement(_styles2.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, {
+  }, t('BRAND', 'Brand'), " (", filterList !== null && filterList !== void 0 && filterList.franchises_id ? filterList === null || filterList === void 0 ? void 0 : (_filterList$franchise = filterList.franchises_id) === null || _filterList$franchise === void 0 ? void 0 : _filterList$franchise.length : t('ALL', 'All'), ")")), /*#__PURE__*/_react.default.createElement(_styles2.TimeZoneAndCalendar, null, /*#__PURE__*/_react.default.createElement(_styles2.AnalyticsTimeZoneWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsFilterTimeZone.AnalyticsFilterTimeZone, props)), /*#__PURE__*/_react.default.createElement(_styles2.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, {
     handleChangeDate: handleChangeDate,
     defaultValue: filterList
   })))), /*#__PURE__*/_react.default.createElement(_styles2.OrderStatusTableWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.DistanceTitleBlock, {
-    active: (reportData === null || reportData === void 0 || (_reportData$content2 = reportData.content) === null || _reportData$content2 === void 0 || (_reportData$content2 = _reportData$content2.body) === null || _reportData$content2 === void 0 || (_reportData$content2 = _reportData$content2.rows) === null || _reportData$content2 === void 0 ? void 0 : _reportData$content2.length) > 0
+    active: (reportData === null || reportData === void 0 ? void 0 : (_reportData$content2 = reportData.content) === null || _reportData$content2 === void 0 ? void 0 : (_reportData$content2$ = _reportData$content2.body) === null || _reportData$content2$ === void 0 ? void 0 : (_reportData$content2$2 = _reportData$content2$.rows) === null || _reportData$content2$2 === void 0 ? void 0 : _reportData$content2$2.length) > 0
   }, /*#__PURE__*/_react.default.createElement("h2", null, t('SITE_AVERAGE_SALES', 'Site average sales')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Download, {
     onClick: function onClick() {
       return downloadCSV('site_sales_average');
@@ -135,9 +135,9 @@ var ReportsAverageSalesUI = function ReportsAverageSalesUI(props) {
       className: "col-md-3 col-sm-3 col-3",
       key: i
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null));
-  })) : /*#__PURE__*/_react.default.createElement(_styles2.TableWrapper, null, (reportData === null || reportData === void 0 || (_reportData$content3 = reportData.content) === null || _reportData$content3 === void 0 || (_reportData$content3 = _reportData$content3.body) === null || _reportData$content3 === void 0 || (_reportData$content3 = _reportData$content3.rows) === null || _reportData$content3 === void 0 ? void 0 : _reportData$content3.length) > 0 ? /*#__PURE__*/_react.default.createElement(_styles2.DistanceTable, {
+  })) : /*#__PURE__*/_react.default.createElement(_styles2.TableWrapper, null, (reportData === null || reportData === void 0 ? void 0 : (_reportData$content3 = reportData.content) === null || _reportData$content3 === void 0 ? void 0 : (_reportData$content3$ = _reportData$content3.body) === null || _reportData$content3$ === void 0 ? void 0 : (_reportData$content3$2 = _reportData$content3$.rows) === null || _reportData$content3$2 === void 0 ? void 0 : _reportData$content3$2.length) > 0 ? /*#__PURE__*/_react.default.createElement(_styles2.DistanceTable, {
     ref: tableRef
-  }, (reportData === null || reportData === void 0 || (_reportData$content4 = reportData.content) === null || _reportData$content4 === void 0 || (_reportData$content4 = _reportData$content4.header) === null || _reportData$content4 === void 0 ? void 0 : _reportData$content4.rows.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.Thead, null, reportData === null || reportData === void 0 || (_reportData$content5 = reportData.content) === null || _reportData$content5 === void 0 || (_reportData$content5 = _reportData$content5.header) === null || _reportData$content5 === void 0 ? void 0 : _reportData$content5.rows.map(function (tr, i) {
+  }, (reportData === null || reportData === void 0 ? void 0 : (_reportData$content4 = reportData.content) === null || _reportData$content4 === void 0 ? void 0 : (_reportData$content4$ = _reportData$content4.header) === null || _reportData$content4$ === void 0 ? void 0 : _reportData$content4$.rows.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.Thead, null, reportData === null || reportData === void 0 ? void 0 : (_reportData$content5 = reportData.content) === null || _reportData$content5 === void 0 ? void 0 : (_reportData$content5$ = _reportData$content5.header) === null || _reportData$content5$ === void 0 ? void 0 : _reportData$content5$.rows.map(function (tr, i) {
     return /*#__PURE__*/_react.default.createElement("tr", {
       key: i
     }, tr === null || tr === void 0 ? void 0 : tr.map(function (th, j) {
@@ -146,7 +146,7 @@ var ReportsAverageSalesUI = function ReportsAverageSalesUI(props) {
         colspan: th.colspan
       }, t(th.value.toUpperCase(), thObj[th.value]));
     }));
-  })), reportData === null || reportData === void 0 || (_reportData$content6 = reportData.content) === null || _reportData$content6 === void 0 || (_reportData$content6 = _reportData$content6.body) === null || _reportData$content6 === void 0 ? void 0 : _reportData$content6.rows.map(function (tbody, i) {
+  })), reportData === null || reportData === void 0 ? void 0 : (_reportData$content6 = reportData.content) === null || _reportData$content6 === void 0 ? void 0 : (_reportData$content6$ = _reportData$content6.body) === null || _reportData$content6$ === void 0 ? void 0 : _reportData$content6$.rows.map(function (tbody, i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.Tbody, {
       key: i
     }, /*#__PURE__*/_react.default.createElement("tr", null, tbody.map(function (td, j) {
@@ -155,7 +155,7 @@ var ReportsAverageSalesUI = function ReportsAverageSalesUI(props) {
         colspan: td.colspan
       }, td.value_unit === 'currency' ? parsePrice(td.value) : td.value);
     })));
-  }), (reportData === null || reportData === void 0 || (_reportData$content7 = reportData.content) === null || _reportData$content7 === void 0 || (_reportData$content7 = _reportData$content7.footer) === null || _reportData$content7 === void 0 ? void 0 : _reportData$content7.rows.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.Tfoot, null, reportData === null || reportData === void 0 || (_reportData$content8 = reportData.content) === null || _reportData$content8 === void 0 || (_reportData$content8 = _reportData$content8.footer) === null || _reportData$content8 === void 0 ? void 0 : _reportData$content8.rows.map(function (tr, i) {
+  }), (reportData === null || reportData === void 0 ? void 0 : (_reportData$content7 = reportData.content) === null || _reportData$content7 === void 0 ? void 0 : (_reportData$content7$ = _reportData$content7.footer) === null || _reportData$content7$ === void 0 ? void 0 : _reportData$content7$.rows.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.Tfoot, null, reportData === null || reportData === void 0 ? void 0 : (_reportData$content8 = reportData.content) === null || _reportData$content8 === void 0 ? void 0 : (_reportData$content8$ = _reportData$content8.footer) === null || _reportData$content8$ === void 0 ? void 0 : _reportData$content8$.rows.map(function (tr, i) {
     return /*#__PURE__*/_react.default.createElement("tr", {
       key: i
     }, tr === null || tr === void 0 ? void 0 : tr.map(function (td, j) {
@@ -165,7 +165,7 @@ var ReportsAverageSalesUI = function ReportsAverageSalesUI(props) {
       }, td.value);
     }));
   }))) : /*#__PURE__*/_react.default.createElement(_styles2.EmptyContent, null, t('NO_DATA', 'No Data')))), /*#__PURE__*/_react.default.createElement(_styles2.OrderStatusTableWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.DistanceTitleBlock, {
-    active: (reportData1 === null || reportData1 === void 0 || (_reportData1$content = reportData1.content) === null || _reportData1$content === void 0 || (_reportData1$content = _reportData1$content.body) === null || _reportData1$content === void 0 || (_reportData1$content = _reportData1$content.rows) === null || _reportData1$content === void 0 ? void 0 : _reportData1$content.length) > 0
+    active: (reportData1 === null || reportData1 === void 0 ? void 0 : (_reportData1$content = reportData1.content) === null || _reportData1$content === void 0 ? void 0 : (_reportData1$content$ = _reportData1$content.body) === null || _reportData1$content$ === void 0 ? void 0 : (_reportData1$content$2 = _reportData1$content$.rows) === null || _reportData1$content$2 === void 0 ? void 0 : _reportData1$content$2.length) > 0
   }, /*#__PURE__*/_react.default.createElement("h2", null, t('ORDER_TYPE_AVERAGE_SALES', 'Order type average sales')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Download, {
     onClick: function onClick() {
       return downloadCSV('order_type_sales_average');
@@ -177,9 +177,9 @@ var ReportsAverageSalesUI = function ReportsAverageSalesUI(props) {
       className: "col-md-3 col-sm-3 col-3",
       key: i
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null));
-  })) : /*#__PURE__*/_react.default.createElement(_styles2.TableWrapper, null, (reportData1 === null || reportData1 === void 0 || (_reportData1$content2 = reportData1.content) === null || _reportData1$content2 === void 0 || (_reportData1$content2 = _reportData1$content2.body) === null || _reportData1$content2 === void 0 || (_reportData1$content2 = _reportData1$content2.rows) === null || _reportData1$content2 === void 0 ? void 0 : _reportData1$content2.length) > 0 ? /*#__PURE__*/_react.default.createElement(_styles2.DistanceTable, {
+  })) : /*#__PURE__*/_react.default.createElement(_styles2.TableWrapper, null, (reportData1 === null || reportData1 === void 0 ? void 0 : (_reportData1$content2 = reportData1.content) === null || _reportData1$content2 === void 0 ? void 0 : (_reportData1$content3 = _reportData1$content2.body) === null || _reportData1$content3 === void 0 ? void 0 : (_reportData1$content4 = _reportData1$content3.rows) === null || _reportData1$content4 === void 0 ? void 0 : _reportData1$content4.length) > 0 ? /*#__PURE__*/_react.default.createElement(_styles2.DistanceTable, {
     ref: tableRef
-  }, (reportData === null || reportData === void 0 || (_reportData$content9 = reportData.content) === null || _reportData$content9 === void 0 || (_reportData$content9 = _reportData$content9.header) === null || _reportData$content9 === void 0 ? void 0 : _reportData$content9.rows.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.Thead, null, reportData1 === null || reportData1 === void 0 || (_reportData1$content3 = reportData1.content) === null || _reportData1$content3 === void 0 || (_reportData1$content3 = _reportData1$content3.header) === null || _reportData1$content3 === void 0 ? void 0 : _reportData1$content3.rows.map(function (tr, i) {
+  }, (reportData === null || reportData === void 0 ? void 0 : (_reportData$content9 = reportData.content) === null || _reportData$content9 === void 0 ? void 0 : (_reportData$content9$ = _reportData$content9.header) === null || _reportData$content9$ === void 0 ? void 0 : _reportData$content9$.rows.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.Thead, null, reportData1 === null || reportData1 === void 0 ? void 0 : (_reportData1$content5 = reportData1.content) === null || _reportData1$content5 === void 0 ? void 0 : (_reportData1$content6 = _reportData1$content5.header) === null || _reportData1$content6 === void 0 ? void 0 : _reportData1$content6.rows.map(function (tr, i) {
     return /*#__PURE__*/_react.default.createElement("tr", {
       key: i
     }, tr === null || tr === void 0 ? void 0 : tr.map(function (th, j) {
@@ -189,7 +189,7 @@ var ReportsAverageSalesUI = function ReportsAverageSalesUI(props) {
         colspan: th.colspan
       }, (_th$value = th.value) !== null && _th$value !== void 0 && _th$value.includes("_") ? t(th.value.toUpperCase(), thObj[th.value]) : th.value);
     }));
-  })), reportData1 === null || reportData1 === void 0 || (_reportData1$content4 = reportData1.content) === null || _reportData1$content4 === void 0 || (_reportData1$content4 = _reportData1$content4.body) === null || _reportData1$content4 === void 0 ? void 0 : _reportData1$content4.rows.map(function (tbody, i) {
+  })), reportData1 === null || reportData1 === void 0 ? void 0 : (_reportData1$content7 = reportData1.content) === null || _reportData1$content7 === void 0 ? void 0 : (_reportData1$content8 = _reportData1$content7.body) === null || _reportData1$content8 === void 0 ? void 0 : _reportData1$content8.rows.map(function (tbody, i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.Tbody, {
       key: i
     }, /*#__PURE__*/_react.default.createElement("tr", null, tbody.map(function (td, j) {
@@ -198,7 +198,7 @@ var ReportsAverageSalesUI = function ReportsAverageSalesUI(props) {
         colspan: td.colspan
       }, td.value_unit === 'currency' ? parsePrice(td.value) : td.value);
     })));
-  }), (reportData1 === null || reportData1 === void 0 || (_reportData1$content5 = reportData1.content) === null || _reportData1$content5 === void 0 || (_reportData1$content5 = _reportData1$content5.footer) === null || _reportData1$content5 === void 0 ? void 0 : _reportData1$content5.rows.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.Tfoot, null, reportData1 === null || reportData1 === void 0 || (_reportData1$content6 = reportData1.content) === null || _reportData1$content6 === void 0 || (_reportData1$content6 = _reportData1$content6.footer) === null || _reportData1$content6 === void 0 ? void 0 : _reportData1$content6.rows.map(function (tr, i) {
+  }), (reportData1 === null || reportData1 === void 0 ? void 0 : (_reportData1$content9 = reportData1.content) === null || _reportData1$content9 === void 0 ? void 0 : (_reportData1$content10 = _reportData1$content9.footer) === null || _reportData1$content10 === void 0 ? void 0 : _reportData1$content10.rows.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.Tfoot, null, reportData1 === null || reportData1 === void 0 ? void 0 : (_reportData1$content11 = reportData1.content) === null || _reportData1$content11 === void 0 ? void 0 : (_reportData1$content12 = _reportData1$content11.footer) === null || _reportData1$content12 === void 0 ? void 0 : _reportData1$content12.rows.map(function (tr, i) {
     return /*#__PURE__*/_react.default.createElement("tr", {
       key: i
     }, tr === null || tr === void 0 ? void 0 : tr.map(function (td, j) {

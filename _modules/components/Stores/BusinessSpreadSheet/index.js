@@ -93,7 +93,7 @@ var BusinessSpreadSheetUI = function BusinessSpreadSheetUI(props) {
       var _spreadSheetState$res2;
       setAlertState({
         open: true,
-        content: spreadSheetState === null || spreadSheetState === void 0 || (_spreadSheetState$res2 = spreadSheetState.result) === null || _spreadSheetState$res2 === void 0 ? void 0 : _spreadSheetState$res2.result
+        content: spreadSheetState === null || spreadSheetState === void 0 ? void 0 : (_spreadSheetState$res2 = spreadSheetState.result) === null || _spreadSheetState$res2 === void 0 ? void 0 : _spreadSheetState$res2.result
       });
     }
   }, [spreadSheetState === null || spreadSheetState === void 0 ? void 0 : spreadSheetState.result]);

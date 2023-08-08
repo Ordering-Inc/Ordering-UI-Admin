@@ -185,7 +185,7 @@ var ProfessionalBusinessServiceUI = function ProfessionalBusinessServiceUI(props
       return handleSelectAllBusinesses(false);
     }
   }, t('SELECT_NONE', 'Select none'))), (currentBusinesses === null || currentBusinesses === void 0 ? void 0 : currentBusinesses.length) > 0 ? currentBusinesses.map(function (business, i) {
-    var _theme$images;
+    var _theme$images, _theme$images$dummies;
     return /*#__PURE__*/_react.default.createElement(_styles2.BusinessItemContainer, {
       key: i,
       onClick: function onClick(e) {
@@ -203,9 +203,9 @@ var ProfessionalBusinessServiceUI = function ProfessionalBusinessServiceUI(props
     }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Square, null)), /*#__PURE__*/_react.default.createElement("label", {
       htmlFor: business === null || business === void 0 ? void 0 : business.id
     }, /*#__PURE__*/_react.default.createElement(_styles2.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles2.Image, {
-      bgimage: optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.dummies) === null || _theme$images === void 0 ? void 0 : _theme$images.businessLogo))
+      bgimage: optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo))
     })), /*#__PURE__*/_react.default.createElement(_styles2.BusinessName, null, business === null || business === void 0 ? void 0 : business.name))), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null));
-  }) : /*#__PURE__*/_react.default.createElement(_Shared.NotFoundSource, null), (businessList === null || businessList === void 0 || (_businessList$busines2 = businessList.businesses) === null || _businessList$busines2 === void 0 ? void 0 : _businessList$busines2.length) > 0 && /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
+  }) : /*#__PURE__*/_react.default.createElement(_Shared.NotFoundSource, null), (businessList === null || businessList === void 0 ? void 0 : (_businessList$busines2 = businessList.businesses) === null || _businessList$busines2 === void 0 ? void 0 : _businessList$busines2.length) > 0 && /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
     currentPage: currentPage,
     totalPages: totalPages,
     handleChangePage: handleChangePage,

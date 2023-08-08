@@ -46,7 +46,7 @@ var DriversGroupDrivers = function DriversGroupDrivers(props) {
     if (searchValue) {
       _filteredDrivers = drivers.filter(function (driver) {
         var _driver$name, _driver$email;
-        return (driver === null || driver === void 0 || (_driver$name = driver.name) === null || _driver$name === void 0 ? void 0 : _driver$name.toLowerCase().includes(searchValue === null || searchValue === void 0 ? void 0 : searchValue.toLowerCase())) || (driver === null || driver === void 0 || (_driver$email = driver.email) === null || _driver$email === void 0 ? void 0 : _driver$email.toLowerCase().includes(searchValue === null || searchValue === void 0 ? void 0 : searchValue.toLowerCase()));
+        return (driver === null || driver === void 0 ? void 0 : (_driver$name = driver.name) === null || _driver$name === void 0 ? void 0 : _driver$name.toLowerCase().includes(searchValue === null || searchValue === void 0 ? void 0 : searchValue.toLowerCase())) || (driver === null || driver === void 0 ? void 0 : (_driver$email = driver.email) === null || _driver$email === void 0 ? void 0 : _driver$email.toLowerCase().includes(searchValue === null || searchValue === void 0 ? void 0 : searchValue.toLowerCase()));
       });
     } else {
       _filteredDrivers = _toConsumableArray(drivers);

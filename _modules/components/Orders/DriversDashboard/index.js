@@ -21,7 +21,8 @@ var DriversDashboard = function DriversDashboard(props) {
     handleChangeDriver = props.handleChangeDriver,
     handleChangeDriverIsOnline = props.handleChangeDriverIsOnline,
     handleChangeDriversSubFilter = props.handleChangeDriversSubFilter,
-    handleOpenDriverOrders = props.handleOpenDriverOrders;
+    handleOpenDriverOrders = props.handleOpenDriverOrders,
+    assignedOrders = props.assignedOrders;
   var numberOfonlineDrivers = onlineDrivers.length;
   var numberOfofflineDrivers = offlineDrivers.length;
   var numberOfbusyDrivers = driversIsOnline ? onlineDrivers.filter(function (ele) {
@@ -59,7 +60,8 @@ var DriversDashboard = function DriversDashboard(props) {
     selectedDriver: selectedDriver,
     onlineDrivers: onlineDrivers,
     offlineDrivers: offlineDrivers,
-    driversList: driversList
+    driversList: driversList,
+    assignedOrders: assignedOrders
   })));
 };
 exports.DriversDashboard = DriversDashboard;

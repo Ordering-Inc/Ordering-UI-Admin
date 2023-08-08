@@ -93,7 +93,7 @@ var RecoveryActionList = function RecoveryActionList(props) {
     });
   }, [paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.currentPage, paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.pageSize, paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.totalPages]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.Table, {
-    isRelative: (recoveryActionList === null || recoveryActionList === void 0 || (_recoveryActionList$a = recoveryActionList.actions) === null || _recoveryActionList$a === void 0 ? void 0 : _recoveryActionList$a.length) > 5
+    isRelative: (recoveryActionList === null || recoveryActionList === void 0 ? void 0 : (_recoveryActionList$a = recoveryActionList.actions) === null || _recoveryActionList$a === void 0 ? void 0 : _recoveryActionList$a.length) > 5
   }, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, t('ACTION', 'Action')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.description) && /*#__PURE__*/_react.default.createElement("th", null, t('DESCRIPTION', 'Description')), /*#__PURE__*/_react.default.createElement("th", {
     className: "allow-colums action"
   }, /*#__PURE__*/_react.default.createElement(_Shared.ColumnAllowSettingPopover, {
@@ -170,7 +170,7 @@ var RecoveryActionList = function RecoveryActionList(props) {
     onClick: function onClick() {
       return handleOpenDetail({});
     }
-  }, t('ADD_NEW_RECOVERY_ACTION', 'Add new recovery action')), (recoveryActionList === null || recoveryActionList === void 0 || (_recoveryActionList$a2 = recoveryActionList.actions) === null || _recoveryActionList$a2 === void 0 ? void 0 : _recoveryActionList$a2.length) > 0 && /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
+  }, t('ADD_NEW_RECOVERY_ACTION', 'Add new recovery action')), (recoveryActionList === null || recoveryActionList === void 0 ? void 0 : (_recoveryActionList$a2 = recoveryActionList.actions) === null || _recoveryActionList$a2 === void 0 ? void 0 : _recoveryActionList$a2.length) > 0 && /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
     currentPage: paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.currentPage,
     totalPages: paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.totalPages,
     handleChangePage: handleChangePage,

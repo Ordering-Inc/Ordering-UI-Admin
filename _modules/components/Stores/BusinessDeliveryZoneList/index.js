@@ -50,7 +50,7 @@ var BusinessDeliveryZoneList = function BusinessDeliveryZoneList(props) {
   };
   var handleOpenZone = function handleOpenZone(e, zone, isInitialRender) {
     var _e$target;
-    var isInvalid = e === null || e === void 0 || (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.closest('.zone-enabled');
+    var isInvalid = e === null || e === void 0 ? void 0 : (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.closest('.zone-enabled');
     if (isInvalid) return;
     setCurZone(zone);
     setIsExtendExtraOpen(true);
@@ -65,7 +65,7 @@ var BusinessDeliveryZoneList = function BusinessDeliveryZoneList(props) {
     var zoneId = query.get('zone');
     if (zoneId) {
       var _business$zones;
-      var initZone = business === null || business === void 0 || (_business$zones = business.zones) === null || _business$zones === void 0 ? void 0 : _business$zones.find(function (zone) {
+      var initZone = business === null || business === void 0 ? void 0 : (_business$zones = business.zones) === null || _business$zones === void 0 ? void 0 : _business$zones.find(function (zone) {
         return zone.id === Number(zoneId);
       });
       if (initZone) {
@@ -80,7 +80,7 @@ var BusinessDeliveryZoneList = function BusinessDeliveryZoneList(props) {
     onChange: function onChange(e) {
       return handleChangeAllZoneState(e.target.checked);
     }
-  }))), /*#__PURE__*/_react.default.createElement("th", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement("th", null, t('MINIMUM', 'Minimum')), /*#__PURE__*/_react.default.createElement("th", null, t('PRICE', 'Price')), /*#__PURE__*/_react.default.createElement("th", null))), business === null || business === void 0 || (_business$zones2 = business.zones) === null || _business$zones2 === void 0 ? void 0 : _business$zones2.filter(function (zone) {
+  }))), /*#__PURE__*/_react.default.createElement("th", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement("th", null, t('MINIMUM', 'Minimum')), /*#__PURE__*/_react.default.createElement("th", null, t('PRICE', 'Price')), /*#__PURE__*/_react.default.createElement("th", null))), business === null || business === void 0 ? void 0 : (_business$zones2 = business.zones) === null || _business$zones2 === void 0 ? void 0 : _business$zones2.filter(function (zone) {
     return (zone === null || zone === void 0 ? void 0 : zone.type) !== 3;
   }).map(function (zone) {
     return /*#__PURE__*/_react.default.createElement(_styles2.ZoneTbody, {

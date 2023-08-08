@@ -35,7 +35,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ReportsHeatMapUI = function ReportsHeatMapUI(props) {
-  var _reportData$content, _filterList$franchise, _reportData$content2, _configState$configs, _configState$configs2, _reportData$content3, _reportData$content4, _theme$images;
+  var _reportData$content, _filterList$franchise, _reportData$content2, _reportData$content2$, _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _reportData$content3, _reportData$content4, _theme$images, _theme$images$icons;
   var filterList = props.filterList,
     handleChangeFilterList = props.handleChangeFilterList,
     reportData = props.reportData;
@@ -135,12 +135,12 @@ var ReportsHeatMapUI = function ReportsHeatMapUI(props) {
   }, [reportData === null || reportData === void 0 ? void 0 : reportData.error]);
   (0, _react.useEffect)(function () {
     setIsHeat(false);
-  }, [reportData === null || reportData === void 0 || (_reportData$content = reportData.content) === null || _reportData$content === void 0 ? void 0 : _reportData$content.locations]);
+  }, [reportData === null || reportData === void 0 ? void 0 : (_reportData$content = reportData.content) === null || _reportData$content === void 0 ? void 0 : _reportData$content.locations]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.HeatMapContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Title, null, t('HEAT_MAP_WITH', 'Heat map with')), /*#__PURE__*/_react.default.createElement(_styles2.ButtonActionList, null, /*#__PURE__*/_react.default.createElement(_styles2.BrandBusinessWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     onClick: function onClick() {
       return setIsBrandFilter(true);
     }
-  }, t('BRAND', 'Brand'), " (", filterList !== null && filterList !== void 0 && filterList.franchises_id ? filterList === null || filterList === void 0 || (_filterList$franchise = filterList.franchises_id) === null || _filterList$franchise === void 0 ? void 0 : _filterList$franchise.length : t('ALL', 'All'), ")"), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }, t('BRAND', 'Brand'), " (", filterList !== null && filterList !== void 0 && filterList.franchises_id ? filterList === null || filterList === void 0 ? void 0 : (_filterList$franchise = filterList.franchises_id) === null || _filterList$franchise === void 0 ? void 0 : _filterList$franchise.length : t('ALL', 'All'), ")"), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     onClick: function onClick() {
       return setIsBusinessFilter(true);
     }
@@ -160,19 +160,19 @@ var ReportsHeatMapUI = function ReportsHeatMapUI(props) {
     handleChangeDate: handleChangeDate,
     defaultValue: filterList
   })))), /*#__PURE__*/_react.default.createElement(_styles2.DistancePerBrandWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.DistanceTitleBlock, {
-    active: (reportData === null || reportData === void 0 || (_reportData$content2 = reportData.content) === null || _reportData$content2 === void 0 || (_reportData$content2 = _reportData$content2.locations) === null || _reportData$content2 === void 0 ? void 0 : _reportData$content2.length) > 0
+    active: (reportData === null || reportData === void 0 ? void 0 : (_reportData$content2 = reportData.content) === null || _reportData$content2 === void 0 ? void 0 : (_reportData$content2$ = _reportData$content2.locations) === null || _reportData$content2$ === void 0 ? void 0 : _reportData$content2$.length) > 0
   }, /*#__PURE__*/_react.default.createElement("h2", null, t('HEAT_MAP_WITH', 'Heat map with'))), reportData !== null && reportData !== void 0 && reportData.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 350
-  }) : /*#__PURE__*/_react.default.createElement(_styles2.WrapperMap, null, (configState === null || configState === void 0 || (_configState$configs = configState.configs) === null || _configState$configs === void 0 || (_configState$configs = _configState$configs.google_maps_api_key) === null || _configState$configs === void 0 ? void 0 : _configState$configs.value) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.GoogleMapsMap, {
-    apiKey: configState === null || configState === void 0 || (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 || (_configState$configs2 = _configState$configs2.google_maps_api_key) === null || _configState$configs2 === void 0 ? void 0 : _configState$configs2.value,
+  }) : /*#__PURE__*/_react.default.createElement(_styles2.WrapperMap, null, (configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.google_maps_api_key) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.GoogleMapsMap, {
+    apiKey: configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.google_maps_api_key) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value,
     location: (user === null || user === void 0 ? void 0 : user.location) || defaultPosition,
-    locations: reportData === null || reportData === void 0 || (_reportData$content3 = reportData.content) === null || _reportData$content3 === void 0 ? void 0 : _reportData$content3.locations,
-    data: reportData === null || reportData === void 0 || (_reportData$content4 = reportData.content) === null || _reportData$content4 === void 0 ? void 0 : _reportData$content4.zones,
+    locations: reportData === null || reportData === void 0 ? void 0 : (_reportData$content3 = reportData.content) === null || _reportData$content3 === void 0 ? void 0 : _reportData$content3.locations,
+    data: reportData === null || reportData === void 0 ? void 0 : (_reportData$content4 = reportData.content) === null || _reportData$content4 === void 0 ? void 0 : _reportData$content4.zones,
     fillStyle: fillStyle,
     mapControls: googleMapsControls,
     isHeatMap: true,
     isHeat: isHeat,
-    markerIcon: theme === null || theme === void 0 || (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.icons) === null || _theme$images === void 0 ? void 0 : _theme$images.mapMarker
+    markerIcon: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$icons = _theme$images.icons) === null || _theme$images$icons === void 0 ? void 0 : _theme$images$icons.mapMarker
   }), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "7.6px",
     color: "primary",

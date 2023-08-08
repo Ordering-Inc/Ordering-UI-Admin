@@ -38,7 +38,7 @@ var SocketStatusUI = function SocketStatusUI(props) {
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configs = _useConfig2[0].configs;
-  var isEnabledWhiteLabelModule = configs === null || configs === void 0 || (_configs$white_label_ = configs.white_label_module) === null || _configs$white_label_ === void 0 ? void 0 : _configs$white_label_.value;
+  var isEnabledWhiteLabelModule = configs === null || configs === void 0 ? void 0 : (_configs$white_label_ = configs.white_label_module) === null || _configs$white_label_ === void 0 ? void 0 : _configs$white_label_.value;
   var _useState = (0, _react.useState)({
       open: false,
       content: []

@@ -134,7 +134,7 @@ var OpenCartList = function OpenCartList(props) {
     id: "cartTable"
   }, /*#__PURE__*/_react.default.createElement(_styles.Table, {
     className: "carts_table",
-    isRelative: (cartList === null || cartList === void 0 || (_cartList$carts = cartList.carts) === null || _cartList$carts === void 0 ? void 0 : _cartList$carts.length) > 5
+    isRelative: (cartList === null || cartList === void 0 ? void 0 : (_cartList$carts = cartList.carts) === null || _cartList$carts === void 0 ? void 0 : _cartList$carts.length) > 5
   }, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", {
     className: "carts-id"
   }, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.id) && /*#__PURE__*/_react.default.createElement("span", {
@@ -208,7 +208,7 @@ var OpenCartList = function OpenCartList(props) {
       width: 60
     }))))));
   }) : cartList.carts.map(function (cart) {
-    var _cart$business, _theme$images, _cart$business2, _cart$city, _cart$user, _cart$user2, _cart$user3, _cart$user4, _cart$user5, _cart$user6;
+    var _cart$business, _theme$images, _theme$images$dummies, _cart$business2, _cart$city, _cart$user, _cart$user2, _cart$user3, _cart$user4, _cart$user5, _cart$user6;
     return /*#__PURE__*/_react.default.createElement(_styles.CartBody, {
       key: cart === null || cart === void 0 ? void 0 : cart.id,
       className: parseInt(cartDetailId) === cart.id ? 'active' : '',
@@ -224,20 +224,20 @@ var OpenCartList = function OpenCartList(props) {
     }, cart === null || cart === void 0 ? void 0 : cart.id)))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.business) && /*#__PURE__*/_react.default.createElement("td", {
       className: "businessInfo"
     }, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles.Image, {
-      bgimage: optimizeImage(((_cart$business = cart.business) === null || _cart$business === void 0 ? void 0 : _cart$business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.dummies) === null || _theme$images === void 0 ? void 0 : _theme$images.businessLogo), 'h_50,c_limit')
+      bgimage: optimizeImage(((_cart$business = cart.business) === null || _cart$business === void 0 ? void 0 : _cart$business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_50,c_limit')
     })), /*#__PURE__*/_react.default.createElement("div", {
       className: "info"
     }, /*#__PURE__*/_react.default.createElement("p", {
       className: "bold"
-    }, cart === null || cart === void 0 || (_cart$business2 = cart.business) === null || _cart$business2 === void 0 ? void 0 : _cart$business2.name), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.city) && /*#__PURE__*/_react.default.createElement("p", null, cart === null || cart === void 0 || (_cart$city = cart.city) === null || _cart$city === void 0 ? void 0 : _cart$city.name)))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.customer) && /*#__PURE__*/_react.default.createElement("td", {
+    }, cart === null || cart === void 0 ? void 0 : (_cart$business2 = cart.business) === null || _cart$business2 === void 0 ? void 0 : _cart$business2.name), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.city) && /*#__PURE__*/_react.default.createElement("p", null, cart === null || cart === void 0 ? void 0 : (_cart$city = cart.city) === null || _cart$city === void 0 ? void 0 : _cart$city.name)))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.customer) && /*#__PURE__*/_react.default.createElement("td", {
       className: "customerInfo"
     }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles.CustomerInfo, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, cart !== null && cart !== void 0 && (_cart$user = cart.user) !== null && _cart$user !== void 0 && _cart$user.photo ? /*#__PURE__*/_react.default.createElement(_styles.Image, {
-      bgimage: optimizeImage(cart === null || cart === void 0 || (_cart$user2 = cart.user) === null || _cart$user2 === void 0 ? void 0 : _cart$user2.photo, 'h_50,c_limit')
+      bgimage: optimizeImage(cart === null || cart === void 0 ? void 0 : (_cart$user2 = cart.user) === null || _cart$user2 === void 0 ? void 0 : _cart$user2.photo, 'h_50,c_limit')
     }) : /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)), /*#__PURE__*/_react.default.createElement("div", {
       className: "info"
     }, /*#__PURE__*/_react.default.createElement("p", {
       className: "bold"
-    }, cart === null || cart === void 0 || (_cart$user3 = cart.user) === null || _cart$user3 === void 0 ? void 0 : _cart$user3.name, " ", cart === null || cart === void 0 || (_cart$user4 = cart.user) === null || _cart$user4 === void 0 ? void 0 : _cart$user4.lastname), /*#__PURE__*/_react.default.createElement("p", null, (cart === null || cart === void 0 || (_cart$user5 = cart.user) === null || _cart$user5 === void 0 ? void 0 : _cart$user5.cellphone) || (cart === null || cart === void 0 || (_cart$user6 = cart.user) === null || _cart$user6 === void 0 ? void 0 : _cart$user6.phone)))))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.last_update) && /*#__PURE__*/_react.default.createElement("td", {
+    }, cart === null || cart === void 0 ? void 0 : (_cart$user3 = cart.user) === null || _cart$user3 === void 0 ? void 0 : _cart$user3.name, " ", cart === null || cart === void 0 ? void 0 : (_cart$user4 = cart.user) === null || _cart$user4 === void 0 ? void 0 : _cart$user4.lastname), /*#__PURE__*/_react.default.createElement("p", null, (cart === null || cart === void 0 ? void 0 : (_cart$user5 = cart.user) === null || _cart$user5 === void 0 ? void 0 : _cart$user5.cellphone) || (cart === null || cart === void 0 ? void 0 : (_cart$user6 = cart.user) === null || _cart$user6 === void 0 ? void 0 : _cart$user6.phone)))))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.last_update) && /*#__PURE__*/_react.default.createElement("td", {
       className: "last-update"
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "info"

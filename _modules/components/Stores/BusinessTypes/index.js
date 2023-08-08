@@ -77,7 +77,7 @@ var BusinessTypes = function BusinessTypes(props) {
     setIsOpenTypeDetail = _useState12[1];
   var handleOpenBusinessTypeDetail = function handleOpenBusinessTypeDetail(category, e) {
     var _e$target;
-    var isInvalid = e === null || e === void 0 || (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.closest('.business-type-checkbox');
+    var isInvalid = e === null || e === void 0 ? void 0 : (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.closest('.business-type-checkbox');
     if (isInvalid) return;
     setSelectedBusinessType(category);
     setIsExtendExtraOpen(true);
@@ -145,7 +145,7 @@ var BusinessTypes = function BusinessTypes(props) {
   (0, _react.useEffect)(function () {
     var updatedBusinessTypes = businessTypes.filter(function (type) {
       var _type$name;
-      return type === null || type === void 0 || (_type$name = type.name) === null || _type$name === void 0 ? void 0 : _type$name.toLowerCase().includes(searchVal === null || searchVal === void 0 ? void 0 : searchVal.toLowerCase());
+      return type === null || type === void 0 ? void 0 : (_type$name = type.name) === null || _type$name === void 0 ? void 0 : _type$name.toLowerCase().includes(searchVal === null || searchVal === void 0 ? void 0 : searchVal.toLowerCase());
     });
     setFilteredBusinessTypes(_toConsumableArray(updatedBusinessTypes));
   }, [businessTypes, searchVal]);

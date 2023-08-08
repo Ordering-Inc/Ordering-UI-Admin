@@ -212,7 +212,7 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
       var _productState$product4, _extrasState$extras2;
       setAlertState({
         open: true,
-        content: (productState === null || productState === void 0 || (_productState$product4 = productState.product) === null || _productState$product4 === void 0 ? void 0 : _productState$product4.error) || (extrasState === null || extrasState === void 0 || (_extrasState$extras2 = extrasState.extras) === null || _extrasState$extras2 === void 0 ? void 0 : _extrasState$extras2.error)
+        content: (productState === null || productState === void 0 ? void 0 : (_productState$product4 = productState.product) === null || _productState$product4 === void 0 ? void 0 : _productState$product4.error) || (extrasState === null || extrasState === void 0 ? void 0 : (_extrasState$extras2 = extrasState.extras) === null || _extrasState$extras2 === void 0 ? void 0 : _extrasState$extras2.error)
       });
     }
   }, [productState, extrasState]);
@@ -340,7 +340,7 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
     onClick: function onClick() {
       var _extraInputRef$curren2;
       return handleChangeExtra(extraSelected === null || extraSelected === void 0 ? void 0 : extraSelected.id, {
-        name: extraInputRef === null || extraInputRef === void 0 || (_extraInputRef$curren2 = extraInputRef.current) === null || _extraInputRef$curren2 === void 0 ? void 0 : _extraInputRef$curren2.value
+        name: extraInputRef === null || extraInputRef === void 0 ? void 0 : (_extraInputRef$curren2 = extraInputRef.current) === null || _extraInputRef$curren2 === void 0 ? void 0 : _extraInputRef$curren2.value
       });
     }
   }, t('SAVE', 'Save')))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
