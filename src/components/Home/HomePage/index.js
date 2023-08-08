@@ -45,7 +45,8 @@ import {
   OrderingButtonWrapper,
   OrderingButtonBlock,
   CloseButtonWrapper,
-  HubspotFormWrapper
+  HubspotFormWrapper,
+  OnboardingLessonsContainer
 } from './styles'
 
 const HomeUI = (props) => {
@@ -95,6 +96,9 @@ const HomeUI = (props) => {
     }
     if (location === 'canny') {
       window.open('https://feedback.ordering.co', '_blank')
+    }
+    if (location === 'onboarding') {
+      window.open(`https://calendly.com/luisana/group-onboarding-conference?month=${moment().format('YYYY-MM')}`, '_blank')
     }
   }
 
@@ -378,6 +382,13 @@ const HomeUI = (props) => {
                 </WidgeBlock>
               </AssistanceBody>
             </AssistanceWidgets>
+            {!isEnabledWhiteLabelModule && (
+              <OnboardingLessonsContainer>
+                <h1>{t('ONBOARDING_LESSONS', 'On-boarding Lessons')}</h1>
+                <p>{t('BOOK_TRAINING_TOTDAY', 'Book your training today')}</p>
+                <Button outline color='primary' onClick={() => goToLink('onboarding')}>{t('SCHEDULE_TODAY', 'Schedule Today')}</Button>
+              </OnboardingLessonsContainer>
+            )}
           </>
         )}
         {sessionState?.user?.level === 0 && (
