@@ -352,7 +352,7 @@ export const BusinessesListing = (props) => {
       pageSize: props.isUseQuery && !isNaN(defaultPage) ? Number(defaultPageSize) : 10,
       controlType: 'pages'
     },
-    defaultActive: defaultActive === 'true'
+    defaultActive: defaultActive ? defaultActive === 'true' : true
   }
   return (
     <BusinessListController {...businessListingProps} />

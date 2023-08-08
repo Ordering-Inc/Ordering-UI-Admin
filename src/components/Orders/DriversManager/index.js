@@ -23,7 +23,9 @@ const DriversManagerUI = (props) => {
     onDriverRedirect,
     handleChangeSearch,
     searchValue,
-    driversIsOnline
+    driversIsOnline,
+    selectedDriver,
+    setSelectedDriver
   } = props
 
   const { drivers, loading } = props.driversList
@@ -35,7 +37,6 @@ const DriversManagerUI = (props) => {
 
   const query = new URLSearchParams(useLocation().search)
   const [isOpenDriverOrders, setIsOpenDriverOrders] = useState(false)
-  const [selectedDriver, setSelectedDriver] = useState(null)
   const [openDriver, setOpenDriver] = useState(null)
 
   const handleBackRedirect = () => {

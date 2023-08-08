@@ -42,7 +42,9 @@ const PaymentOptionSquareUI = (props) => {
     handleSavePaymethod,
     handleChangeDataInput,
     handleChangeSanboxDataInput,
-    handleChangeSandbox
+    handleChangeSandbox,
+    deviceState,
+    EmptyMessage
   } = props
 
   const query = new URLSearchParams(useLocation().search)
@@ -177,6 +179,12 @@ const PaymentOptionSquareUI = (props) => {
           >
             {t('ORDER_TYPE', 'Order type')}
           </Tab>
+          <Tab
+            active={paymentTabs === 3}
+            onClick={() => handleTabClick(3)}
+          >
+            {t('DEVICES', 'Devices')}
+          </Tab>
         </TabsContainer>
         {paymentTabs === 0 && (
           <SquareInfoContainer>
@@ -291,6 +299,28 @@ const PaymentOptionSquareUI = (props) => {
               <TabOptionName>{type.text}</TabOptionName>
             </TabOption>
           ))
+        )}
+        {paymentTabs === 3 && (
+          <>
+            {
+              deviceState?.devices?.length > 0 && deviceState?.devices.map(device => (
+                <TabOption
+                  key={device.id}
+                  onClick={() => setPaymethodInfo({ key: 'devices', value: device.id })}
+                >
+                  {(changesState?.devices ?? businessPaymethod?.devices?.map(s => s.id))?.includes(device.id) ? (
+                    <RiCheckboxFill className='fill' />
+                  ) : (
+                    <RiCheckboxBlankLine />
+                  )}
+                  <TabOptionName>{device.name}</TabOptionName>
+                </TabOption>
+              ))
+            }
+            {deviceState?.devices?.length === 0 && (
+              <EmptyMessage>{t('NO_ASSIGNED_DEVICES', 'There are no assigned devices')}</EmptyMessage>
+            )}
+          </>
         )}
 
         <Confirm

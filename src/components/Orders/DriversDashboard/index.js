@@ -22,7 +22,8 @@ export const DriversDashboard = (props) => {
     handleChangeDriver,
     handleChangeDriverIsOnline,
     handleChangeDriversSubFilter,
-    handleOpenDriverOrders
+    handleOpenDriverOrders,
+    assignedOrders
   } = props
 
   const numberOfonlineDrivers = onlineDrivers.length
@@ -66,6 +67,7 @@ export const DriversDashboard = (props) => {
           onlineDrivers={onlineDrivers}
           offlineDrivers={offlineDrivers}
           driversList={driversList}
+          assignedOrders={assignedOrders}
         />
       </WrapperDriversLocation>
     </DriversDashboardContainer>
