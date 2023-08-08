@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useLanguage, useApi, InvoiceDriverManager as InvoiceDriverManagerController } from 'ordering-components-admin'
 import { DragScroll, SpinnerLoader } from '../../Shared'
 import {
@@ -16,13 +16,13 @@ import { InvoicePayMethods } from '../InvoicePayMethods'
 import { InvoiceDriverPdf } from '../InvoiceDriverPdf'
 import { Download } from 'react-bootstrap-icons'
 import { IconButton } from '../../../styles'
+import { addQueryToUrl } from '../../../utils'
 
 const InvoiceDriverManagerUI = (props) => {
   const {
     exportInvoiceList
   } = props
 
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const [ordering] = useApi()
@@ -35,8 +35,7 @@ const InvoiceDriverManagerUI = (props) => {
     window.scrollTo(0, 0)
     setSelectedDetailType(detailType)
     if (!isInitialRender) {
-      const invoice = query.get('invoice')
-      history.replace(`${location.pathname}?invoice=${invoice}&tab=${detailType}`)
+      addQueryToUrl({ tab: detailType })
     }
   }
 

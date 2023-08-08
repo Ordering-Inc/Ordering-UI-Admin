@@ -5,6 +5,7 @@ import { EnterprisePromotionListing } from '../../../src/components/Marketing'
 export const EnterprisePromotionList = (props) => {
   const enterprisePromotionListProps = {
     ...props,
+    isUseQuery: true,
     isSearchByPromotionName: true,
     isSearchByPromotionDescription: true
   }

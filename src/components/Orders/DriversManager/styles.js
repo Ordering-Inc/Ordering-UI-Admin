@@ -6,7 +6,7 @@ export const DriversContainer = styled.div`
   padding: 20px;
   box-sizing: border-box;
   max-height: 100vh;
-  overflow: auto;
+  overflow-x: hidden;
 
   @media print {
     display: none;

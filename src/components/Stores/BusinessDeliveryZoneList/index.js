@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useLanguage } from 'ordering-components-admin'
 import { BusinessDeliveryZoneDetails } from '../BusinessDeliveryZoneDetails'
 import { SideBar } from '../../Shared'
 import { ChevronRight } from 'react-bootstrap-icons'
 import { Checkbox, LinkButton } from '../../../styles'
+import { addQueryToUrl, removeQueryToUrl } from '../../../utils'
 
 import {
   ZoneContainer,
@@ -24,7 +25,6 @@ export const BusinessDeliveryZoneList = (props) => {
     handleChangeAllZoneState
   } = props
 
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const [isOpenDetails, setIsOpenDetails] = useState(false)
@@ -34,11 +34,7 @@ export const BusinessDeliveryZoneList = (props) => {
     setIsOpenDetails(false)
     setIsExtendExtraOpen(false)
     setCurZone(null)
-
-    const businessId = query.get('id')
-    const section = query.get('section')
-    const tab = query.get('tab')
-    history.replace(`${location.pathname}?id=${businessId}&section=${section}&tab=${tab}`)
+    removeQueryToUrl(['zone', 'zone_tab'])
   }
 
   const handleOpenZone = (e, zone, isInitialRender) => {
@@ -49,10 +45,7 @@ export const BusinessDeliveryZoneList = (props) => {
     setIsOpenDetails(true)
 
     if (!isInitialRender) {
-      const businessId = query.get('id')
-      const section = query.get('section')
-      const tab = query.get('tab')
-      history.replace(`${location.pathname}?id=${businessId}&section=${section}&tab=${tab}&zone=${zone?.id}`)
+      addQueryToUrl({ zone: zone?.id })
     }
   }
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
 import BisDownArrow from '@meronex/icons/bi/BisDownArrow'
 import { useWindowSize } from '../../../hooks/useWindowSize'
@@ -29,6 +29,7 @@ import { ImportersButton } from '../ImportersButton'
 import { AddBusinessForm } from '../AddBusinessForm'
 import { ProductStep } from '../ProductStep'
 import { BusinessAddStore } from '../BusinessAddStore'
+import { addQueryToUrl, removeQueryToUrl, checkSiteUrl } from '../../../utils'
 
 import {
   CategoryProductsContainer,
@@ -47,7 +48,6 @@ import {
   ColumnsAllowWrapper,
   ButtonWrapper
 } from './styles'
-import { checkSiteUrl } from '../../../utils'
 
 const BusinessProductsListingUI = (props) => {
   const {
@@ -82,7 +82,6 @@ const BusinessProductsListingUI = (props) => {
     siteState
   } = props
 
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const { width } = useWindowSize()
@@ -139,7 +138,7 @@ const BusinessProductsListingUI = (props) => {
       setCategorySelected(category)
       setOpenSidebar('category_details')
       if (!isInitialRender) {
-        history.replace(`${location.pathname}?category=${category.id}`)
+        addQueryToUrl({ category: category.id })
       }
     } else {
       setCurrentCategory(null)
@@ -155,7 +154,7 @@ const BusinessProductsListingUI = (props) => {
     })
     setCurrentCategory(null)
     setOpenSidebar(null)
-    history.replace(`${location.pathname}`)
+    removeQueryToUrl(['category'])
   }
 
   const handleOpenProductDetails = (product, isInitialRender) => {
@@ -320,7 +319,7 @@ const BusinessProductsListingUI = (props) => {
                       <span
                         className='business'
                         onClick={() => {
-                          history.replace(`${location.pathname}?id=${businessState?.business?.id}`)
+                          addQueryToUrl({ id: businessState?.business?.id })
                           setOpenSidebar('business_details')
                         }}
                       >
@@ -522,7 +521,10 @@ const BusinessProductsListingUI = (props) => {
           businessId={selectedBusiness?.id || businessState?.business?.id}
           handleSucessRemoveBusiness={() => handleStoresRedirect()}
           // handleSucessUpdateBusiness={handleSucessUpdateBusiness}
-          onClose={() => setOpenSidebar(null)}
+          onClose={() => {
+            setOpenSidebar(null)
+            removeQueryToUrl(['id'])
+          }}
           businessTypes={businessTypes}
           setBusinessTypes={setBusinessTypes}
         />

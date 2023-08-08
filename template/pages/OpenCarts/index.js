@@ -1,18 +1,17 @@
 import React from 'react'
 import { HelmetTags } from '../../components/HelmetTags'
-import { useEvent } from 'ordering-components-admin'
 import { OpenCartListing as OpenCartListingController } from '../../../src/components/CartRecovery'
+import { addQueryToUrl, removeQueryToUrl } from '../../../src/utils'
 
 export const OpenCarts = (props) => {
-  const [events] = useEvent()
-
   const openCartsProps = {
     ...props,
+    isUseQuery: true,
     onCartRedirect: (id) => {
       if (!id) {
-        return events.emit('go_to_page', { page: 'open_carts', replace: true })
+        return removeQueryToUrl(['id'])
       }
-      return events.emit('go_to_page', { page: 'open_carts', search: `?id=${id}` })
+      return addQueryToUrl({ id: id })
     }
   }
 

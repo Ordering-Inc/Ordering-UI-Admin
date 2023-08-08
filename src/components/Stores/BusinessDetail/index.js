@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { BusinessInfoSettingList } from '../BusinessInfoSettingList'
 import { BusinessOwners } from '../BusinessOwners'
 import { BusinessTypes } from '../BusinessTypes'
@@ -9,6 +9,8 @@ import { BusinessImages } from '../BusinessImages'
 import { BusinessVideos } from '../BusinessVideos'
 import { SeoOptions } from '../SeoOptions'
 import { BusinessInformation } from '../BusinessInformation'
+import { addQueryToUrl } from '../../../utils'
+
 import {
   InfoConatiner,
   Container
@@ -32,16 +34,13 @@ export const BusinessDetail = (props) => {
     handleUpdateBusinessState
   } = props
 
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const [selectedInfoItem, setSelctedInfoItem] = useState('information')
 
   const handleSelectInfoItem = (tab) => {
     setSelctedInfoItem(tab)
-    const businessId = query.get('id')
-    const section = query.get('section')
-    history.replace(`${location.pathname}?id=${businessId}&section=${section}&tab=${tab}`)
+    addQueryToUrl({ tab: tab })
   }
 
   useEffect(() => {

@@ -55,7 +55,8 @@ const OrdersManagerUI = (props) => {
     handleCustomOrderDetail,
     setSelectedOrderIds,
     allowColumns,
-    setAllowColumns
+    setAllowColumns,
+    isUseQuery
   } = props
 
   const [, t] = useLanguage()
@@ -215,6 +216,7 @@ const OrdersManagerUI = (props) => {
             </DriversContainer>
             <OrdersContainer>
               <OrderStatusFilterBar
+                isUseQuery={isUseQuery}
                 selectedOrderStatus={ordersStatusGroup}
                 changeOrderStatus={handleOrdersStatusGroupFilter}
                 ordersAmountByStatus={ordersAmountByStatus}
@@ -266,6 +268,7 @@ const OrdersManagerUI = (props) => {
                       allowColumns={allowColumns}
                       setAllowColumns={setAllowColumns}
                       setOrdersAmountByStatus={setOrdersAmountByStatus}
+                      isUseQuery={isUseQuery}
                     />
                   </WrapItemView>
                 </OrdersInnerContent>
@@ -278,6 +281,7 @@ const OrdersManagerUI = (props) => {
               selectedDriver={mapsData.selectedDriver}
               onlineDrivers={mapsData.onlineDrivers}
               offlineDrivers={mapsData.offlineDrivers}
+              selectedOrder={!detailsOrder?.driver_id ? detailsOrder : null}
             />
           </WrapperDriversLocation>
         </MainContentContainer>

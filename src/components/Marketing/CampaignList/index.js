@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { useLanguage } from 'ordering-components-admin'
 import { Switch, LinkButton } from '../../../styles'
 import { ColumnAllowSettingPopover, Pagination, Modal } from '../../Shared'
+import { addQueryToUrl } from '../../../utils'
 
 import {
   Container,
@@ -25,7 +26,8 @@ export const CampaignList = (props) => {
     handleOpenDetail,
     selectedCampaign,
     handleUpdateCampaign,
-    setSelectedCampaign
+    setSelectedCampaign,
+    isUseQuery
   } = props
 
   const [, t] = useLanguage()
@@ -122,6 +124,14 @@ export const CampaignList = (props) => {
     setSelectedCampaign(campaign)
     setOpenModal(true)
   }
+
+  useEffect(() => {
+    if (!isUseQuery || !paginationProps?.currentPage || !paginationProps?.pageSize || !paginationProps?.totalPages) return
+    addQueryToUrl({
+      page: paginationProps.currentPage,
+      pageSize: paginationProps.pageSize
+    })
+  }, [paginationProps?.currentPage, paginationProps?.pageSize, paginationProps?.totalPages])
 
   return (
     <>

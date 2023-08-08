@@ -6,7 +6,8 @@ export const OrderingProducts = (props) => {
   const orderingProductsProps = {
     ...props,
     isSearchByName: true,
-    isSearchByDescription: true
+    isSearchByDescription: true,
+    isUseQuery: true
   }
   return (
     <>

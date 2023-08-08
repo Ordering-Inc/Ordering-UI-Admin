@@ -52,6 +52,6 @@ export const WrapperDriversList = styled.div`
     }
   }
   @media (min-width: 992px) {
-    max-height: min(calc(var(--vh, 1vh) * 100 - 410px), 770px);
+    max-height: calc(var(--vh, 1vh) * 50 - 115px);
   }
 `

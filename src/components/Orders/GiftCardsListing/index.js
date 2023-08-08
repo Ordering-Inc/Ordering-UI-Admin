@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import { useLanguage, GiftCardsList as GiftCardsListController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { List as MenuIcon } from 'react-bootstrap-icons'
 import { IconButton } from '../../../styles'
 import { Pagination, SearchBar } from '../../Shared'
+import { addQueryToUrl } from '../../../utils'
 
 import {
   Container,
@@ -27,11 +29,15 @@ const GiftCardsListingUI = (props) => {
     setActiveStatus,
     getGiftCards,
     searchValue,
-    onSearch
+    onSearch,
+    isUseQuery
   } = props
 
   const [, t] = useLanguage()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
+
+  const query = new URLSearchParams(useLocation().search)
+  const defaultStatus = query.get('status')
 
   const handleChangePage = (page) => {
     getGiftCards(page, paginationProps.pageSize)
@@ -41,6 +47,30 @@ const GiftCardsListingUI = (props) => {
     const expectedPage = Math.ceil(paginationProps.from / pageSize)
     getGiftCards(expectedPage, pageSize)
   }
+
+  const handleChangeStatus = (status) => {
+    setActiveStatus(status)
+    if (isUseQuery) {
+      addQueryToUrl({ status: status })
+    }
+  }
+
+  useEffect(() => {
+    if (!isUseQuery) return
+    if (defaultStatus) {
+      setActiveStatus(defaultStatus)
+      return
+    }
+    addQueryToUrl({ status: 'pending' })
+  }, [])
+
+  useEffect(() => {
+    if (!isUseQuery || !paginationProps?.currentPage || !paginationProps?.pageSize || !paginationProps?.totalPages) return
+    addQueryToUrl({
+      page: paginationProps.currentPage,
+      pageSize: paginationProps.pageSize
+    })
+  }, [paginationProps?.currentPage, paginationProps?.pageSize, paginationProps?.totalPages])
 
   return (
     <Container>
@@ -69,13 +99,13 @@ const GiftCardsListingUI = (props) => {
       <TabsWrapper>
         <Tab
           active={activeStatus === 'pending'}
-          onClick={() => setActiveStatus('pending')}
+          onClick={() => handleChangeStatus('pending')}
         >
           {t('ORDER_PENDING', 'Pending')}
         </Tab>
         <Tab
           active={activeStatus === 'activated'}
-          onClick={() => setActiveStatus('activated')}
+          onClick={() => handleChangeStatus('activated')}
         >
           {t('REDEEMED', 'Redeemed')}
         </Tab>
@@ -166,13 +196,22 @@ const GiftCardsListingUI = (props) => {
 }
 
 export const GiftCardsListing = (props) => {
+  const query = new URLSearchParams(useLocation().search)
+  const defaultStatus = query.get('status')
+  const defaultPage = query.get('page') || 1
+  const defaultPageSize = query.get('pageSize') || 10
   const giftCardsProps = {
     ...props,
     UIComponent: GiftCardsListingUI,
     isSearchById: true,
     isSearchByAuthorName: true,
     isSearchByAuthorEmail: true,
-    isSearchByAuthorPhone: true
+    isSearchByAuthorPhone: true,
+    defaultStatus: defaultStatus,
+    paginationSettings: {
+      initialPage: Number(defaultPage),
+      pageSize: Number(defaultPageSize)
+    }
   }
   return <GiftCardsListController {...giftCardsProps} />
 }

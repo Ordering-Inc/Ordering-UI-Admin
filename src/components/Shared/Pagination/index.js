@@ -79,7 +79,7 @@ export const Pagination = (props) => {
     setActivePage(currentPage)
     const _visiblePages = getVisiblePages(currentPage, totalPages)
     setVisiblePages(filterPages(_visiblePages, totalPages))
-  }, [currentPage])
+  }, [currentPage, totalPages])
 
   return (
     <PaginationContainer>

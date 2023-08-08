@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import {
   useLanguage,
   useUtils,
@@ -13,6 +13,8 @@ import { useTheme } from 'styled-components'
 import { Alert, SearchBar, SideBar } from '../../Shared'
 import { BusinessBrandGENDetail } from '../BusinessBrandGENDetail'
 import { BusinessBrandBUSIDetail } from '../BusinessBrandBUSIDetail'
+import { addQueryToUrl, removeQueryToUrl } from '../../../utils'
+
 import {
   BrandListingContainer,
   HeaderContainer,
@@ -48,7 +50,6 @@ const BusinessBrandListingUI = (props) => {
     setOpenDetail
   } = props
 
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const theme = useTheme()
@@ -67,7 +68,7 @@ const BusinessBrandListingUI = (props) => {
   const handleCloseSidebar = () => {
     setOpenDetail(false)
     setSelectedBrand(null)
-    history.replace(`${location.pathname}`)
+    removeQueryToUrl(['id', 'tab'])
   }
 
   const handleOpenSideBar = (id) => {
@@ -93,7 +94,7 @@ const BusinessBrandListingUI = (props) => {
     if (isInvalid) return
     handleOpenSideBar(brandId)
     if (!isInitialRender) {
-      history.replace(`${location.pathname}?id=${brandId}`)
+      addQueryToUrl({ id: brandId })
     }
   }
 
@@ -144,8 +145,7 @@ const BusinessBrandListingUI = (props) => {
   const handleTabClick = (tab, isInitialRender) => {
     setSelectedType(tab)
     if (!isInitialRender) {
-      const id = query.get('id')
-      history.replace(`${location.pathname}?id=${id}&tab=${tab}`)
+      addQueryToUrl({ tab: tab })
     }
   }
 

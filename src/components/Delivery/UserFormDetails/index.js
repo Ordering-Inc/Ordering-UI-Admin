@@ -164,6 +164,14 @@ export const UserFormDetailsUI = (props) => {
     emailInput.current.value = e.target.value?.toLowerCase().replace(/[&,()%";:ç?<>{}\\[\]\s]/g, '')
   }
 
+  const handleExternalIdPaste = (event) => {
+    event.preventDefault()
+    const pastedData = event.clipboardData.getData('text/plain')
+    const sanitizedData = pastedData.replace(/\s/g, '').replace(/[^\d]/g, '')
+    document.execCommand('insertText', false, sanitizedData)
+    handleChangeSwtich('external_id', sanitizedData)
+  }
+
   useEffect(() => {
     if (Object.keys(formMethods.errors).length > 0) {
       const content = Object.values(formMethods.errors).map(error => error.message)
@@ -289,6 +297,7 @@ export const UserFormDetailsUI = (props) => {
                       e.preventDefault()
                     }
                   }}
+                  onPaste={handleExternalIdPaste}
                 />
                 <InputWrapper isTimezone>
                   <DefaultSelect

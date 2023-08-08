@@ -109,14 +109,18 @@ export const TopContent = styled.div`
   @media (min-width: 992px) {
     flex-direction: row;
     #orderTable {
-      max-height: calc(var(--vh, 1vh) * 100 - 475px);
+      max-height: calc(var(--vh, 1vh) * 50 - 180px);
     }
   }
 `
 export const WrapperDriversLocation = styled.div`
   border-radius: 8px;
   overflow: hidden;
-  height: 700px;
+  height: calc(var(--vh, 1vh) * 100 - 40px);
+
+  @media (min-width: 992px) {
+    height: calc(var(--vh, 1vh) * 50 - 115px);
+  }
 `
 export const DriversContainer = styled.div`
   box-sizing: border-box;
