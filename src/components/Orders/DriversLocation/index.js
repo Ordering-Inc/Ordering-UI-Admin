@@ -3,6 +3,7 @@ import { useConfig } from 'ordering-components-admin'
 import GoogleMapReact, { fitBounds } from 'google-map-react'
 import { DriverMapMarkerAndInfo } from '../DriverMapMarkerAndInfo'
 import { InterActOrderMarker } from '../InterActOrderMarker'
+import { SpinnerLoader } from '../../Shared'
 
 import {
   WrapperMap
@@ -14,7 +15,8 @@ export const DriversLocation = (props) => {
     onlineDrivers,
     offlineDrivers,
     selectedDriver,
-    selectedOrder
+    selectedOrder,
+    assignedOrders
   } = props
 
   const [configState] = useConfig()
@@ -41,7 +43,7 @@ export const DriversLocation = (props) => {
   const mapFit = () => {
     const bounds = new window.google.maps.LatLngBounds()
 
-    if (showDrivers.length === 1 && !selectedOrder) {
+    if (showDrivers.length === 1 && !selectedOrder && !assignedOrders?.orders?.length) {
       setMapCenter(
         (showDrivers[0].location !== null && typeof showDrivers[0].location === 'object' && showDrivers[0].location?.lat && showDrivers[0].location?.lng)
           ? showDrivers[0].location
@@ -69,8 +71,8 @@ export const DriversLocation = (props) => {
       bounds.extend(newPoint)
     }
 
+    let marker, newPoint
     if (selectedDriver && selectedOrder) {
-      let marker, newPoint
       marker = selectedOrder?.business?.location !== null ? selectedOrder?.business?.location : defaultCenter
       newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
       bounds.extend(newPoint)
@@ -78,6 +80,18 @@ export const DriversLocation = (props) => {
       marker = selectedOrder?.customer?.location !== null && selectedOrder?.customer?.location?.lat ? selectedOrder.customer.location : defaultCenter
       newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
       bounds.extend(newPoint)
+    }
+
+    if (selectedDriver && assignedOrders?.orders?.length) {
+      assignedOrders.orders.forEach(order => {
+        marker = order?.business?.location !== null ? order?.business?.location : defaultCenter
+        newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
+        bounds.extend(newPoint)
+
+        marker = order?.customer?.location !== null && order?.customer?.location?.lat ? order.customer.location : defaultCenter
+        newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
+        bounds.extend(newPoint)
+      })
     }
 
     const newBounds = {
@@ -110,14 +124,14 @@ export const DriversLocation = (props) => {
       setMapFitted(false)
       return
     }
-    if (selectedOrder && selectedDriver) {
+    if ((selectedOrder && selectedDriver) || (selectedDriver && assignedOrders?.orders?.length)) {
       mapFit()
       return
     }
     if (!mapFitted) {
       mapFit()
     }
-  }, [showDrivers, mapLoaded, mapFitted, selectedOrder])
+  }, [showDrivers, mapLoaded, mapFitted, selectedOrder, assignedOrders?.orders])
 
   useEffect(() => {
     if (selectedDriver) {
@@ -141,62 +155,89 @@ export const DriversLocation = (props) => {
   }, [selectedDriver?.id])
 
   return (
-    <WrapperMap ref={mapRef} className='drivers-location'>
-      {googleMapsApiKey && (
-        <GoogleMapReact
-          bootstrapURLKeys={{
-            key: window.document.getElementById('__googleMapsScriptId') ? null : googleMapsApiKey,
-            libraries: ['places', 'geometry', 'drawing', 'visualization']
-          }}
-          onGoogleApiLoaded={() => setMapLoaded(false)}
-          defaultCenter={defaultCenter}
-          center={mapCenter}
-          defaultZoom={defaultZoom}
-          zoom={mapZoom}
-          options={{ fullscreenControl: true }}
-          className='map'
-          onChange={(data) => handleMapChange(data)}
-          yesIWantToUseGoogleMapApiInternals
-        >
-          {showDrivers.length !== 0 &&
-            showDrivers.map((driver) => (
-              <DriverMapMarkerAndInfo
-                key={driver.id}
-                driver={driver}
-                lat={
-                  (driver.location !== null && typeof driver.location === 'object' && driver.location?.lat)
-                    ? driver.location.lat
-                    : typeof driver.location === 'string'
-                      ? parseFloat(driver?.location?.split(',')[0].replace(/[^-.0-9]/g, ''))
-                      : defaultCenter.lat
-                }
-                lng={
-                  (driver.location !== null && typeof driver.location === 'object' && driver.location?.lng)
-                    ? driver.location.lng
-                    : typeof driver.location === 'string'
-                      ? parseFloat(driver?.location?.split(',')[1].replace(/[^-.0-9]/g, ''))
-                      : defaultCenter.lng
-                }
-              />
-            ))}
-          {selectedDriver && selectedOrder && (
-            <InterActOrderMarker
-              customer={selectedOrder?.customer}
-              lat={selectedOrder?.customer?.location?.lat ? selectedOrder?.customer?.location?.lat : defaultCenter.lat}
-              lng={selectedOrder?.customer?.location?.lng ? selectedOrder?.customer?.location?.lng : defaultCenter.lng}
-              image={selectedOrder?.customer?.photo}
-            />
-          )}
-          {selectedDriver && selectedOrder && (
-            <InterActOrderMarker
-              business={selectedOrder?.business}
-              lat={selectedOrder?.business?.location?.lat}
-              lng={selectedOrder?.business?.location?.lng}
-              image={selectedOrder?.business?.logo}
-            />
-          )}
-        </GoogleMapReact>
+    <>
+      {selectedDriver && assignedOrders?.loading && (
+        <SpinnerLoader primary />
       )}
-    </WrapperMap>
+      <WrapperMap ref={mapRef} className='drivers-location'>
+        {googleMapsApiKey && (
+          <GoogleMapReact
+            bootstrapURLKeys={{
+              key: window.document.getElementById('__googleMapsScriptId') ? null : googleMapsApiKey,
+              libraries: ['places', 'geometry', 'drawing', 'visualization']
+            }}
+            onGoogleApiLoaded={() => setMapLoaded(false)}
+            defaultCenter={defaultCenter}
+            center={mapCenter}
+            defaultZoom={defaultZoom}
+            zoom={mapZoom}
+            options={{ fullscreenControl: true }}
+            className='map'
+            onChange={(data) => handleMapChange(data)}
+            yesIWantToUseGoogleMapApiInternals
+          >
+            {showDrivers.length !== 0 &&
+              showDrivers.map((driver) => (
+                <DriverMapMarkerAndInfo
+                  key={driver.id}
+                  driver={driver}
+                  lat={
+                    (driver.location !== null && typeof driver.location === 'object' && driver.location?.lat)
+                      ? driver.location.lat
+                      : typeof driver.location === 'string'
+                        ? parseFloat(driver?.location?.split(',')[0].replace(/[^-.0-9]/g, ''))
+                        : defaultCenter.lat
+                  }
+                  lng={
+                    (driver.location !== null && typeof driver.location === 'object' && driver.location?.lng)
+                      ? driver.location.lng
+                      : typeof driver.location === 'string'
+                        ? parseFloat(driver?.location?.split(',')[1].replace(/[^-.0-9]/g, ''))
+                        : defaultCenter.lng
+                  }
+                />
+              ))}
+            {selectedDriver && selectedOrder && (
+              <InterActOrderMarker
+                customer={selectedOrder?.customer}
+                lat={selectedOrder?.customer?.location?.lat ? selectedOrder?.customer?.location?.lat : defaultCenter.lat}
+                lng={selectedOrder?.customer?.location?.lng ? selectedOrder?.customer?.location?.lng : defaultCenter.lng}
+                image={selectedOrder?.customer?.photo}
+              />
+            )}
+            {selectedDriver && selectedOrder && (
+              <InterActOrderMarker
+                business={selectedOrder?.business}
+                lat={selectedOrder?.business?.location?.lat}
+                lng={selectedOrder?.business?.location?.lng}
+                image={selectedOrder?.business?.logo}
+              />
+            )}
+            {selectedDriver && assignedOrders?.orders?.length > 0 && (
+              assignedOrders.orders.map(order => (
+                <InterActOrderMarker
+                  key={order.id}
+                  customer={order?.customer}
+                  lat={order?.customer?.location?.lat ? order?.customer?.location?.lat : defaultCenter.lat}
+                  lng={order?.customer?.location?.lng ? order?.customer?.location?.lng : defaultCenter.lng}
+                  image={order?.customer?.photo}
+                />
+              ))
+            )}
+            {selectedDriver && assignedOrders?.orders?.length > 0 && (
+              assignedOrders.orders.map(order => (
+                <InterActOrderMarker
+                  key={order.id}
+                  business={order?.business}
+                  lat={order?.business?.location?.lat}
+                  lng={order?.business?.location?.lng}
+                  image={order?.business?.logo}
+                />
+              ))
+            )}
+          </GoogleMapReact>
+        )}
+      </WrapperMap>
+    </>
   )
 }
