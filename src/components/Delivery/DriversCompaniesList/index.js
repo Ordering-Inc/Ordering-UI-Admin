@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import { useLanguage } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { Pagination } from '../../Shared'
 import MdCheckBoxOutlineBlank from '@meronex/icons/md/MdCheckBoxOutlineBlank'
 import MdCheckBox from '@meronex/icons/md/MdCheckBox'
 import { Switch, LinkButton } from '../../../styles'
+import { addQueryToUrl } from '../../../utils'
 
 import {
   DriversCompaniesContainer,
@@ -28,14 +30,18 @@ export const DriversCompaniesList = (props) => {
     handleUpdateDriversCompany,
     handleSelectCompany,
     selectedCompanyList,
-    handleAllSelectCompany
+    handleAllSelectCompany,
+    isUseQuery
   } = props
 
   const [, t] = useLanguage()
+  const query = new URLSearchParams(useLocation().search)
+  const defaultPage = query.get('page') || 1
+  const defaultPageSize = query.get('pageSize') || 10
 
   // Change page
-  const [currentPage, setCurrentPage] = useState(1)
-  const [companiesPerPage, setCompaniesPerPage] = useState(10)
+  const [currentPage, setCurrentPage] = useState(Number(defaultPage) || 1)
+  const [companiesPerPage, setCompaniesPerPage] = useState(Number(defaultPageSize) || 10)
 
   // Get current companies
   const [currentCompanies, setCurrentCompanies] = useState([])
@@ -90,6 +96,14 @@ export const DriversCompaniesList = (props) => {
     if (isInvalid) return
     handleOpenDetails(company)
   }
+
+  useEffect(() => {
+    if (!isUseQuery || !currentPage || !companiesPerPage || !totalPages) return
+    addQueryToUrl({
+      page: currentPage,
+      pageSize: companiesPerPage
+    })
+  }, [currentPage, companiesPerPage, totalPages])
 
   return (
     <>

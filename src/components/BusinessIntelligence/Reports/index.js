@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { IconButton } from '../../../styles'
 import { useWindowSize } from '../../../hooks/useWindowSize'
@@ -24,7 +24,8 @@ import {
   CreditCard,
   ShopWindow,
   Bag,
-  Tag
+  Tag,
+  ListTask
 } from 'react-bootstrap-icons'
 import { useLanguage } from 'ordering-components-admin'
 import { SideBar } from '../../Shared'
@@ -49,6 +50,8 @@ import { ReportsPaymethodSales } from '../ReportsPaymethodSales'
 import { ReportsSaleAndCategory } from '../ReportsSaleAndCategory'
 import { ReportsAverageSales } from '../ReportsAverageSales'
 import { ReportsGeneralSales } from '../ReportsGeneralSales'
+import { ReportsSlaOrders } from './ReportsSlaOrders'
+import { addQueryToUrl, removeQueryToUrl } from '../../../utils'
 
 import {
   ReportsContainer,
@@ -57,7 +60,6 @@ import {
 } from './styles'
 
 export const Reports = (props) => {
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
@@ -86,20 +88,21 @@ export const Reports = (props) => {
     { id: 17, name: t('PAYMETHOD_SALES', 'Paymethod sales'), description: t('PAYMETHOD_SALES_DESC', 'Paymethod sales description'), icon: <CreditCard /> },
     { id: 18, name: t('AVERAGE_SALES', 'Average sales'), description: t('AVERAGE_SALES_DESC', 'Average sales description'), icon: <ShopWindow /> },
     { id: 19, name: t('GENERAL_SALES', 'General sales'), description: t('GENERAL_SALES_DESC', 'General sales description'), icon: <Bag /> },
-    { id: 20, name: t('TOP_SELLING_AND_CATEOGRY', 'Top selling and category'), description: t('TOP_SELLING_AND_CATEOGRY_DESC', 'Top selling and category description'), icon: <Tag /> }
+    { id: 20, name: t('TOP_SELLING_AND_CATEOGRY', 'Top selling and category'), description: t('TOP_SELLING_AND_CATEOGRY_DESC', 'Top selling and category description'), icon: <Tag /> },
+    { id: 21, name: t('SLA_ORDERS', 'SLA orders'), description: t('SLA_ORDERS_DESC', 'SLA orders description'), icon: <ListTask /> }
   ]
 
   const handleCloseSidebar = () => {
     setIsOpen(false)
     setSelectedReport(0)
-    history.replace(`${location.pathname}`)
+    removeQueryToUrl(['id'])
   }
 
   const handleOpenSlider = (index, isInitialRender) => {
     setSelectedReport(index)
     setIsOpen(true)
     if (!isInitialRender) {
-      history.replace(`${location.pathname}?id=${index}`)
+      addQueryToUrl({ id: index })
     }
   }
 
@@ -167,6 +170,7 @@ export const Reports = (props) => {
           {selectedReport === 18 && <ReportsAverageSales />}
           {selectedReport === 19 && <ReportsGeneralSales />}
           {selectedReport === 20 && <ReportsSaleAndCategory />}
+          {selectedReport === 21 && <ReportsSlaOrders />}
         </SideBar>
       )}
     </ReportsContainer>

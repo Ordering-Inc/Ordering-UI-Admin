@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import { useLanguage } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import MdCheckBoxOutlineBlank from '@meronex/icons/md/MdCheckBoxOutlineBlank'
@@ -6,6 +7,7 @@ import MdCheckBox from '@meronex/icons/md/MdCheckBox'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import { Switch, LinkButton } from '../../../styles'
 import { Pagination } from '../../Shared'
+import { addQueryToUrl } from '../../../utils'
 
 import {
   DriversGroupsContainer,
@@ -35,14 +37,18 @@ export const DriversGroupsList = (props) => {
     isFromStore,
     handleSelectGroup,
     handleAllSelectGroup,
-    actionDisabled
+    actionDisabled,
+    isUseQuery
   } = props
 
   const [, t] = useLanguage()
+  const query = new URLSearchParams(useLocation().search)
+  const defaultPage = query.get('page') || 1
+  const defaultPageSize = query.get('pageSize') || 10
 
   // Change page
-  const [currentPage, setCurrentPage] = useState(1)
-  const [groupsPerPage, setGroupsPerPage] = useState(10)
+  const [currentPage, setCurrentPage] = useState(Number(defaultPage) || 1)
+  const [groupsPerPage, setGroupsPerPage] = useState(Number(defaultPageSize) || 10)
 
   // Get current groups
   const [currentGroups, setCurrentGroups] = useState([])
@@ -91,6 +97,14 @@ export const DriversGroupsList = (props) => {
         return t('DRIVER_COMPANIES', 'Driver companies')
     }
   }
+
+  useEffect(() => {
+    if (!isUseQuery || !currentPage || !groupsPerPage || !totalPages) return
+    addQueryToUrl({
+      page: currentPage,
+      pageSize: groupsPerPage
+    })
+  }, [currentPage, groupsPerPage, totalPages])
 
   return (
     <>

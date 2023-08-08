@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import React, { useEffect, useState, useRef } from 'react'
+import { useLocation } from 'react-router-dom'
 import { useLanguage } from 'ordering-components-admin'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { List as MenuIcon, CaretDownFill } from 'react-bootstrap-icons'
@@ -9,6 +9,7 @@ import { BusinessReviewList } from '../BusinessReviewList'
 import { UsersReviewList } from '../UsersReviewList'
 import { BusinessSelectHeader } from '../../Stores/BusinessSelectHeader'
 import { ReviewProductsListing } from '../ReviewProductsListing'
+import { addQueryToUrl, removeQueryToUrl } from '../../../utils'
 
 import {
   ReviewsListingContainer,
@@ -22,11 +23,20 @@ import {
 } from './styles'
 
 export const ReviewsListing = (props) => {
-  const history = useHistory()
+  const {
+    isUseQuery
+  } = props
+
   const query = new URLSearchParams(useLocation().search)
+  const defaultTab = query.get('tab')
+  const defaultPage = query.get('page') || 1
+  const defaultPageSize = query.get('pageSize') || 10
+
   const [, t] = useLanguage()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
-  const [showOption, setShowOption] = useState('business')
+
+  const firstRender = useRef(true)
+  const [showOption, setShowOption] = useState(defaultTab || 'business')
   const [searchValue, setSearchValue] = useState(null)
   const [showSelect, setShowSelect] = useState(false)
   const [business, setBusiness] = useState('')
@@ -36,15 +46,18 @@ export const ReviewsListing = (props) => {
     setShowSelect(false)
     setBusiness(business)
     setBusinessId(business.id)
-    const tab = query.get('tab')
-    history.replace(`${location.pathname}?tab=${tab}&business=${business.id}`)
+    addQueryToUrl({ business: business.id })
   }
 
   const handleChangeOption = (option, isInitialRender) => {
-    setShowOption(option)
-    if (option === 'products' && !businessId) setShowSelect(true)
     if (!isInitialRender) {
-      history.replace(`${location.pathname}?tab=${option}`)
+      firstRender.current = false
+      removeQueryToUrl(['page', 'pageSize', 'business', 'category', 'product', 'id'])
+      addQueryToUrl({ tab: option })
+    }
+    setShowOption(option)
+    if (option === 'products' && !businessId) {
+      setShowSelect(true)
     }
   }
 
@@ -144,30 +157,61 @@ export const ReviewsListing = (props) => {
           </Tab>
         </Tabs>
         {showOption === 'business' && (
-          <BusinessReviewList parentSearchValue={searchValue} handleOpenProducts={handleOpenProducts} />
+          <BusinessReviewList
+            parentSearchValue={searchValue}
+            handleOpenProducts={handleOpenProducts}
+            isUseQuery={isUseQuery}
+            paginationSettings={{
+              initialPage: isUseQuery && firstRender.current && !isNaN(defaultPage) ? Number(defaultPage) : 1,
+              pageSize: isUseQuery && firstRender.current && !isNaN(defaultPage) ? Number(defaultPageSize) : 10,
+              controlType: 'pages'
+            }}
+          />
         )}
         {showOption === 'drivers' && (
           <UsersReviewList
             defaultUserTypesSelected={[4]}
             parentSearchValue={searchValue}
+            isUseQuery={isUseQuery}
+            paginationSettings={{
+              initialPage: isUseQuery && firstRender.current && !isNaN(defaultPage) ? Number(defaultPage) : 1,
+              pageSize: isUseQuery && firstRender.current && !isNaN(defaultPage) ? Number(defaultPageSize) : 10,
+              controlType: 'pages'
+            }}
           />
         )}
         {showOption === 'customers' && (
           <UsersReviewList
             defaultUserTypesSelected={[3]}
             parentSearchValue={searchValue}
+            isUseQuery={isUseQuery}
+            paginationSettings={{
+              initialPage: isUseQuery && firstRender.current && !isNaN(defaultPage) ? Number(defaultPage) : 1,
+              pageSize: isUseQuery && firstRender.current && !isNaN(defaultPage) ? Number(defaultPageSize) : 10,
+              controlType: 'pages'
+            }}
           />
         )}
         {showOption === 'professionals' && (
           <UsersReviewList
             defaultUserTypesSelected={[8]}
             parentSearchValue={searchValue}
+            isUseQuery={isUseQuery}
+            paginationSettings={{
+              initialPage: isUseQuery && firstRender.current && !isNaN(defaultPage) ? Number(defaultPage) : 1,
+              pageSize: isUseQuery && firstRender.current && !isNaN(defaultPage) ? Number(defaultPageSize) : 10,
+              controlType: 'pages'
+            }}
           />
         )}
         {showOption === 'products' && businessId && (
           <ReviewProductsListing
             parentSearchValue={searchValue}
             businessId={businessId}
+            isUseQuery={isUseQuery}
+            defaultPage={isUseQuery && firstRender.current && !isNaN(defaultPage) ? Number(defaultPage) : 1}
+            defaultPageSize={isUseQuery && firstRender.current && !isNaN(defaultPage) ? Number(defaultPageSize) : 10}
+            firstRender={firstRender.current}
           />
         )}
       </ReviewsListingContainer>

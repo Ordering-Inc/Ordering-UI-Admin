@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useLanguage, BusinessPlaceGroupList as BusinessPlaceGroupListController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { Button, LinkButton } from '../../../styles'
@@ -7,6 +7,7 @@ import { ChevronRight, CheckSquareFill, Square } from 'react-bootstrap-icons'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import { BusinessPlaceGroup } from '../BusinessPlaceGroup'
 import { Modal } from '../../Shared'
+import { addQueryToUrl, removeQueryToUrl } from '../../../utils'
 
 import {
   Container,
@@ -32,7 +33,6 @@ export const BusinessPlaceGroupListUI = (props) => {
     getMultiCheckStatus
   } = props
 
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const { width } = useWindowSize()
@@ -49,9 +49,7 @@ export const BusinessPlaceGroupListUI = (props) => {
     setOpenDetail(false)
     setSelectedPlace(null)
     setIsExtendExtraOpen(false)
-    const businessId = query.get('id')
-    const section = query.get('section')
-    history.replace(`${location.pathname}?id=${businessId}&section=${section}`)
+    removeQueryToUrl(['place_group'])
   }
 
   const handleUpdateSelectedPlaceGroup = (placeGroup) => {
@@ -62,9 +60,7 @@ export const BusinessPlaceGroupListUI = (props) => {
     if (e?.target?.closest('.check-box')) return
     handleOpenDetail(placeGroup)
     if (!isInitialRender) {
-      const businessId = query.get('id')
-      const section = query.get('section')
-      history.replace(`${location.pathname}?id=${businessId}&section=${section}&place_group=${placeGroup.id}`)
+      addQueryToUrl({ place_group: placeGroup.id })
     }
   }
 

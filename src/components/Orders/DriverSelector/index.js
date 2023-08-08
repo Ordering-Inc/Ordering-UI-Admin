@@ -29,7 +29,8 @@ const DriverSelectorUI = (props) => {
     handleAssignDriver,
     isTourOpen,
     setCurrentTourStep,
-    handleOpenMessages
+    handleOpenMessages,
+    setCommentInfostate
   } = props
 
   const [, t] = useLanguage()
@@ -137,7 +138,12 @@ const DriverSelectorUI = (props) => {
     if (driverId === 'remove') {
       driverId = null
     }
-    handleAssignDriver({ orderId: order.id, driverId: driverId })
+    if (driverId && setCommentInfostate) {
+      setCommentInfostate({ open: true, driverId: driverId })
+    } else {
+      setCommentInfostate && setCommentInfostate({ open: false, driverId: null })
+      handleAssignDriver({ orderId: order.id, driverId: driverId })
+    }
     if (isTourOpen && setCurrentTourStep) {
       handleOpenMessages('chat')
       setTimeout(() => {

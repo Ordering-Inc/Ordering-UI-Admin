@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import React, { useEffect, useState, useRef } from 'react'
+import { useLocation } from 'react-router-dom'
 import {
   UserDetails as UserDetailsController,
   useLanguage,
@@ -13,6 +13,7 @@ import { UserDetails } from '../UserDetails'
 import { CustomerCashWallet } from '../CustomerCashWallet'
 import { Confirm, SideBar } from '../../Shared'
 import { IconButton, Switch } from '../../../styles'
+import { addQueryToUrl, removeQueryToUrl } from '../../../utils'
 
 import {
   DetailsContainer,
@@ -36,16 +37,17 @@ const CustomerDetailsUI = (props) => {
     handleDeleteUser,
     handleParentSidebarMove,
     handleChangeActiveUser,
-    setSideBarWidth
+    setSideBarWidth,
+    userId
   } = props
 
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const theme = useTheme()
   const [, t] = useLanguage()
   const [{ optimizeImage }] = useUtils()
   const { width } = useWindowSize()
 
+  const firstRender = useRef(true)
   const [showOption, setShowOption] = useState(null)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [isOpenMenu, setIsOpenMenu] = useState(false)
@@ -77,10 +79,9 @@ const CustomerDetailsUI = (props) => {
     handleParentSidebarMove(isExpand ? width / 2 : 500)
     setIsOpenMenu(true)
     if (!isInitialRender) {
-      const enabled = query.get('enabled')
-      const id = query.get('id')
-      history.replace(`${location.pathname}?enabled=${enabled}&id=${id}&section=${key}`)
+      addQueryToUrl({ section: key })
     }
+    firstRender.current = false
   }
 
   const handleCloseMenu = () => {
@@ -89,9 +90,7 @@ const CustomerDetailsUI = (props) => {
     setShowOption(null)
     setIsOpenMenu(false)
     setMenuMoveDistance(0)
-    const enabled = query.get('enabled')
-    const id = query.get('id')
-    history.replace(`${location.pathname}?eanbled=${enabled}&id=${id}`)
+    removeQueryToUrl(['section', 'tab'])
   }
 
   const expandSidebar = () => {
@@ -102,10 +101,13 @@ const CustomerDetailsUI = (props) => {
   }
 
   useEffect(() => {
+    if (firstRender.current) return
     handleParentSidebarMove(0)
     setIsOpenMenu(false)
     setShowOption(null)
-  }, [userState?.user?.id])
+    setSideBarWidth(500)
+    removeQueryToUrl(['section', 'tab'])
+  }, [userId])
 
   useEffect(() => {
     if (userState.loading) return

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { Alert, SearchBar, Modal, SideBar } from '../../Shared'
 import { ChevronRight, Square, CheckSquareFill } from 'react-bootstrap-icons'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import BsCardImage from '@meronex/icons/bs/BsCardImage'
+import { addQueryToUrl, removeQueryToUrl } from '../../../utils'
 
 import {
   Container,
@@ -32,7 +33,6 @@ export const BusinessTypes = (props) => {
     setIsExtendExtraOpen
   } = props
 
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const { width } = useWindowSize()
@@ -51,21 +51,14 @@ export const BusinessTypes = (props) => {
     setSelectedBusinessType(category)
     setIsExtendExtraOpen(true)
     setIsOpenTypeDetail(true)
-
-    const businessId = query.get('id')
-    const section = query.get('section')
-    const tab = query.get('tab')
-    history.replace(`${location.pathname}?id=${businessId}&section=${section}&tab=${tab}&business_type=${category?.id}`)
+    addQueryToUrl({ business_type: category?.id })
   }
 
   const handleCloseDetail = () => {
     setIsOpenTypeDetail(false)
     setIsExtendExtraOpen(false)
     setSelectedBusinessType(null)
-    const businessId = query.get('id')
-    const section = query.get('section')
-    const tab = query.get('tab')
-    history.replace(`${location.pathname}?id=${businessId}&section=${section}&tab=${tab}`)
+    removeQueryToUrl(['business_type'])
   }
 
   const handleSelectBusinessTypes = (typeId) => {

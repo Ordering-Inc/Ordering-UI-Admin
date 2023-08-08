@@ -21,7 +21,7 @@ export const SelectFranchise = (props) => {
     const _options = []
     franchisesList.franchises.map(franchise => {
       _options.push({
-        value: franchise?.id,
+        value: franchise?.slug,
         content: (
           <Option>
             <img src={optimizeImage(franchise?.logo || theme.images?.dummies?.businessLogo, 'h_50,c_limit')} alt='' />

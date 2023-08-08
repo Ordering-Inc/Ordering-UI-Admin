@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import {
   useLanguage,
   SitesList as SitesListController
@@ -10,6 +10,7 @@ import { List as MenuIcon, InfoCircle } from 'react-bootstrap-icons'
 import { Button, IconButton, LinkButton } from '../../../styles'
 import Skeleton from 'react-loading-skeleton'
 import { OrderingProductDetails } from '../OrderingProductDetails'
+import { addQueryToUrl, removeQueryToUrl } from '../../../utils'
 
 import {
   OrderingProductsContainer,
@@ -32,10 +33,10 @@ const OrderingProductsUI = (props) => {
     getSites,
     paginationProps,
     setPaginationProps,
-    handleSuccessUpdateSites
+    handleSuccessUpdateSites,
+    isUseQuery
   } = props
 
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
 
@@ -59,14 +60,14 @@ const OrderingProductsUI = (props) => {
     setSelectedSite(product)
     setOpenDetails(true)
     if (product && !isInitialRender) {
-      history.replace(`${location.pathname}?id=${product?.id}`)
+      addQueryToUrl({ id: product?.id })
     }
   }
 
   const handleCloseDetail = () => {
     setOpenDetails(false)
     setSelectedSite(null)
-    history.replace(`${location.pathname}`)
+    removeQueryToUrl(['id'])
   }
 
   useEffect(() => {
@@ -85,6 +86,14 @@ const OrderingProductsUI = (props) => {
       if (initProduct) onClickProduct(initProduct, true)
     }
   }, [sitesListState])
+
+  useEffect(() => {
+    if (!isUseQuery || !paginationProps?.currentPage || !paginationProps?.pageSize || !paginationProps?.totalPages) return
+    addQueryToUrl({
+      page: paginationProps.currentPage,
+      pageSize: paginationProps.pageSize
+    })
+  }, [paginationProps?.currentPage, paginationProps?.pageSize, paginationProps?.totalPages])
 
   return (
     <>
@@ -222,9 +231,17 @@ const OrderingProductsUI = (props) => {
 }
 
 export const OrderingProductsListing = (props) => {
+  const query = new URLSearchParams(useLocation().search)
+  const defaultPage = query.get('page') || 1
+  const defaultPageSize = query.get('pageSize') || 10
   const sitesProps = {
     ...props,
-    UIComponent: OrderingProductsUI
+    UIComponent: OrderingProductsUI,
+    paginationSettings: {
+      initialPage: props.isUseQuery && !isNaN(defaultPage) ? Number(defaultPage) : 1,
+      pageSize: props.isUseQuery && !isNaN(defaultPage) ? Number(defaultPageSize) : 10,
+      controlType: 'pages'
+    }
   }
   return <SitesListController {...sitesProps} />
 }

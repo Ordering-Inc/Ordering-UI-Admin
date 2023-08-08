@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import {
   useLanguage,
   BusinessSharedMenuProducts as BusinessSharedMenuProductsController
@@ -9,6 +9,7 @@ import { Modal, SearchBar, SideBar } from '../../Shared'
 import { BusinessSharedMenuProductDetails } from '../BusinessSharedMenuProductDetails'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import { ChevronRight } from 'react-bootstrap-icons'
+import { addQueryToUrl, removeQueryToUrl } from '../../../utils'
 
 import {
   MenuProductsContainer,
@@ -26,7 +27,6 @@ const BusinessSharedMenuProductsUI = (props) => {
     handleChangeInput
   } = props
 
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const { width } = useWindowSize()
@@ -42,11 +42,7 @@ const BusinessSharedMenuProductsUI = (props) => {
     setIsOpenDetails(true)
 
     if (!isInitialRender) {
-      const businessId = query.get('id')
-      const section = query.get('section')
-      const tab = query.get('tab')
-      const menu = query.get('menu')
-      history.replace(`${location.pathname}?id=${businessId}&section=${section}&tab=${tab}&menu=${menu}&product=${product.id}`)
+      addQueryToUrl({ product: product.id })
     }
   }
 
@@ -54,11 +50,7 @@ const BusinessSharedMenuProductsUI = (props) => {
     setIsOpenDetails(false)
     setCurrentProduct(null)
     setIsOpenSharedProduct(false)
-    const businessId = query.get('id')
-    const section = query.get('section')
-    const tab = query.get('tab')
-    const menu = query.get('menu')
-    history.replace(`${location.pathname}?id=${businessId}&section=${section}&tab=${tab}&menu=${menu}`)
+    removeQueryToUrl(['product'])
   }
 
   useEffect(() => {

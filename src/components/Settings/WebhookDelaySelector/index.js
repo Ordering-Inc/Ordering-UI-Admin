@@ -6,7 +6,7 @@ import { Option } from './styles'
 export const WebhookDelaySelector = (props) => {
   const {
     defaultValue,
-    handleChangeDelay
+    handleChangeDelay 
   } = props
 
   const [, t] = useLanguage()
@@ -17,7 +17,8 @@ export const WebhookDelaySelector = (props) => {
     { value: '600', content: <Option>10 {t('MINUTES', 'Minutes')}</Option> },
     { value: '900', content: <Option>15 {t('MINUTES', 'Minutes')}</Option> },
     { value: 'delivery_time', content: <Option>{t('DELIVERY_TIME', 'Delivery time')}</Option> },
-    { value: 'pickup_time', content: <Option>{t('PICKUP_TIME', 'Pickup time')}</Option> }
+    { value: 'pickup_time', content: <Option>{t('PICKUP_TIME', 'Pickup time')}</Option> },
+    { value: 'preparation_time', content: <Option>{t('PREPARATION_TIME', 'Preparation time')}</Option> },
   ]
   return (
     <>

@@ -39,8 +39,9 @@ export const OrderContactInformation = (props) => {
     handleOpenMessages,
     isServiceOrder,
     handleUpdateCustomerInfo,
-    setIsCommentPopup,
-    setAddressState
+    setAddressState,
+    setCommentInfostate,
+    commentInfoState
   } = props
 
   const [, t] = useLanguage()
@@ -53,8 +54,6 @@ export const OrderContactInformation = (props) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [currentCustomer, setCurrentCustomer] = useState(null)
   const [isEdit, setIsEdit] = useState(false)
-
-  console.log(customerInfoState, 'customerInfoState')
 
   const pastOrderStatuses = [1, 2, 5, 6, 10, 11, 12, 15, 16, 17]
 
@@ -230,6 +229,13 @@ export const OrderContactInformation = (props) => {
                   autoComplete='new-password'
                   countryCode={configs?.country_autocomplete?.value || '*'}
                 />
+                <Input
+                  placeholder={t('NOTES', 'Notes')}
+                  defaultValue={customerInfoState?.customer?.address_notes ?? order?.customer?.address_notes ?? ''}
+                  onChange={(e) => {
+                    handleChangeCustomerInfoState({ address_notes: e.target.value })
+                  }}
+                />
                 {/* <ReviewWrapper>
                   <label>{t('REVIEW_FROM_DRIVER_OR_ADMIN', 'Review from driver or admin')}</label>
                   <TextArea
@@ -325,20 +331,20 @@ export const OrderContactInformation = (props) => {
               />
             </CompanySelectorContainer>
           )}
-          {!order?.driver_company_id && (
+          {!order?.driver_company_id && !commentInfoState?.open && (
             <DriverSelectorContainer>
               <p>{t('DRIVER_ASSIGN', 'Driver assign')}</p>
               <DriverSelector
                 small
                 isPhoneView
-                defaultValue={order?.driver_id ?? 'default'}
+                defaultValue={commentInfoState?.driverId ?? order?.driver_id ?? 'default'}
                 order={order}
                 isTourOpen={isTourOpen}
                 setCurrentTourStep={setCurrentTourStep}
                 handleOpenMessages={handleOpenMessages}
                 isOrderDrivers
                 orderId={order?.id}
-                setIsCommentPopup={setIsCommentPopup}
+                setCommentInfostate={setCommentInfostate}
               />
             </DriverSelectorContainer>
           )}

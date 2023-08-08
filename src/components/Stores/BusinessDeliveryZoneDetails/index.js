@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import {
   useLanguage,
   BusinessDeliveryZone as BusinessDeliveryZoneController
@@ -10,6 +10,7 @@ import { ThreeDots } from 'react-bootstrap-icons'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
 import { Confirm } from '../../Shared'
+import { addQueryToUrl } from '../../../utils'
 
 import {
   Container,
@@ -35,7 +36,6 @@ const BusinessDeliveryZoneDetailsUI = (props) => {
     handleSuccessUpdate
   } = props
 
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const theme = useTheme()
   const [, t] = useLanguage()
@@ -61,11 +61,7 @@ const BusinessDeliveryZoneDetailsUI = (props) => {
   const handleTabClick = (zoneTab, isInitialRender) => {
     setSelectedMenuOption(zoneTab)
     if (!isInitialRender) {
-      const businessId = query.get('id')
-      const section = query.get('section')
-      const tab = query.get('tab')
-      const zone = query.get('zone')
-      history.replace(`${location.pathname}?id=${businessId}&section=${section}&tab=${tab}&zone=${zone}&zone_tab=${zoneTab}`)
+      addQueryToUrl({ zone_tab: zoneTab })
     }
   }
 

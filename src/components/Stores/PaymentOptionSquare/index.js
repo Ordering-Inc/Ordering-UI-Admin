@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useLanguage, PaymentOptionSquare as PaymentOptionSquareController } from 'ordering-components-admin'
 import { Button, IconButton, Input, Checkbox } from '../../../styles'
 import { useWindowSize } from '../../../hooks/useWindowSize'
@@ -12,6 +12,7 @@ import { TabOption, TabOptionName } from '../PaymentOptionStripeDirect/styles'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import SiSquare from '@meronex/icons/si/SiSquare'
+import { addQueryToUrl } from '../../../utils'
 
 import {
   Container,
@@ -46,7 +47,6 @@ const PaymentOptionSquareUI = (props) => {
     EmptyMessage
   } = props
 
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const theme = useTheme()
   const [, t] = useLanguage()
@@ -117,10 +117,7 @@ const PaymentOptionSquareUI = (props) => {
   const handleTabClick = (tab, isInitialRender) => {
     setPaymentTabs(tab)
     if (!isInitialRender) {
-      const businessId = query.get('id')
-      const section = query.get('section')
-      const paymethod = query.get('paymethod')
-      history.replace(`${location.pathname}?id=${businessId}&section=${section}&paymethod=${paymethod}&payemthod_tab=${tab}`)
+      addQueryToUrl({ payemthod_tab: tab })
     }
   }
 

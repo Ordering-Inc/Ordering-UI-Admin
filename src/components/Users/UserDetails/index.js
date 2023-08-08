@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
 import { UserDetails as UserDetailsController, useLanguage, useSession } from 'ordering-components-admin'
 import { UserDetailsMenu } from '../UserDetailsMenu'
@@ -14,6 +14,7 @@ import { Confirm, PushTokens } from '../../Shared'
 import { Personalization } from '../../Shared/Personalization'
 import { UserMetaFields } from '../UserMetaFields'
 import { IconButton, Switch } from '../../../styles'
+import { addQueryToUrl } from '../../../utils'
 
 import {
   DetailsHeader,
@@ -37,7 +38,6 @@ export const UserDetailsUI = (props) => {
     handleChangeActiveUser
   } = props
 
-  const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const theme = useTheme()
   const [adminUserState] = useSession()
@@ -71,14 +71,7 @@ export const UserDetailsUI = (props) => {
   const handleTabClick = (tab, isInitialRender) => {
     setCurrentMenuSelected(tab)
     if (!isInitialRender) {
-      const enabled = query.get('enabled')
-      const id = query.get('id')
-      const section = query.get('section')
-      if (section) {
-        history.replace(`${location.pathname}?enabled=${enabled}&id=${id}&section=${section}&tab=${tab}`)
-      } else {
-        history.replace(`${location.pathname}?enabled=${enabled}&id=${id}&tab=${tab}`)
-      }
+      addQueryToUrl({ tab: tab })
     }
   }
 

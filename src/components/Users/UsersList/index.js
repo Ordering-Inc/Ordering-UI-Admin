@@ -6,6 +6,7 @@ import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import { Envelope, Phone, CheckSquareFill, Square } from 'react-bootstrap-icons'
 import { Switch, LinkButton } from '../../../styles'
 import { ConfirmAdmin, Pagination } from '../../Shared'
+import { addQueryToUrl } from '../../../utils'
 
 import {
   UsersConatiner,
@@ -38,7 +39,8 @@ export const UsersList = (props) => {
     handleOpenUserDetails,
     handleOpenUserAddForm,
     setSelectedUsers,
-    isCustomer
+    isCustomer,
+    isUseQuery
   } = props
 
   const [, t] = useLanguage()
@@ -117,6 +119,14 @@ export const UsersList = (props) => {
       handleChangePage(paginationProps.currentPage - 1)
     }
   }, [usersList.users, paginationProps])
+
+  useEffect(() => {
+    if (!isUseQuery || !paginationProps?.currentPage || !paginationProps?.pageSize || !paginationProps?.totalPages) return
+    addQueryToUrl({
+      page: paginationProps.currentPage,
+      pageSize: paginationProps.pageSize
+    })
+  }, [paginationProps?.currentPage, paginationProps?.pageSize, paginationProps?.totalPages])
 
   return (
     <>

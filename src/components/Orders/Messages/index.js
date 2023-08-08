@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { useUtils, useLanguage, useSession, Messages as MessagesController } from 'ordering-components-admin'
 import { useForm, Controller } from 'react-hook-form'
 import { useTheme } from 'styled-components'
@@ -8,6 +8,7 @@ import AiOutlineInfoCircle from '@meronex/icons/ai/AiOutlineInfoCircle'
 import MdcCloseOctagonOutline from '@meronex/icons/mdc/MdcCloseOctagonOutline'
 import MdClose from '@meronex/icons/md/MdClose'
 import { OverlayTrigger, Tooltip } from 'react-bootstrap'
+import { addQueryToUrl } from '../../../utils'
 
 import {
   MessagesContainer,
@@ -83,7 +84,6 @@ export const MessagesUI = (props) => {
     getHistoryComment
   } = props
 
-  const routerHistory = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const theme = useTheme()
@@ -303,9 +303,9 @@ export const MessagesUI = (props) => {
   const handleTabClick = (tab, isInitialRender) => {
     setTabActive(tab)
     if (!isInitialRender) {
-      const orderId = query.get('id')
-      const section = query.get('section')
-      routerHistory.replace(`${location.pathname}?id=${orderId}&section=${section}&tab=${tab}`)
+      addQueryToUrl({
+        tab: tab
+      })
     }
   }
 
