@@ -17,7 +17,8 @@ import {
   CloseButton,
   TabOption,
   TabOptionName,
-  ActionSelectorWrapper
+  ActionSelectorWrapper,
+  EmptyMessage
 } from './styles'
 
 export const PaymentOption = (props) => {
@@ -26,14 +27,19 @@ export const PaymentOption = (props) => {
     onClose,
     orderTypes,
     sitesState,
+    deviceState,
     changesState,
     handleChangeBusinessPaymentState,
     cleanChangesState,
     actionState,
     handleSaveClick,
     businessPaymethod,
-    handleDeletePaymethod
+    handleDeletePaymethod,
+    selectedPaymethodGateway
   } = props
+
+  console.log(selectedPaymethodGateway, 'selectedPaymethodGateway')
+  const allowDevicesPaymethods = ['cash', 'card_delivery']
 
   const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
@@ -43,7 +49,7 @@ export const PaymentOption = (props) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [paymentTabs, setPaymentTabs] = useState(sitesState?.sites?.length > 0 ? 0 : 1)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
-  const [localState, setLocalState] = useState({ allowed_order_types: businessPaymethod?.allowed_order_types, sites: businessPaymethod?.sites })
+  const [localState, setLocalState] = useState({ allowed_order_types: businessPaymethod?.allowed_order_types, sites: businessPaymethod?.sites, devices: businessPaymethod?.devices })
   const filteredOptions = localState?.sites ?? businessPaymethod?.sites?.filter(a => sitesState?.sites?.find(b => a.id === b.id))
   const [all, setAll] = useState(!filteredOptions?.length)
 
@@ -119,8 +125,9 @@ export const PaymentOption = (props) => {
     const changes = {}
     if (changesState?.allowed_order_types) changes.allowed_order_types = changesState?.allowed_order_types
     if (changesState?.sites) changes.sites = changesState?.sites
+    if (changesState?.devices && allowDevicesPaymethods.includes(selectedPaymethodGateway)) changes.devices = changesState?.devices
     if (Object.keys(changes).length > 0) setLocalState(JSON.parse(JSON.stringify(changes)))
-  }, [changesState?.allowed_order_types, changesState?.sites])
+  }, [changesState?.allowed_order_types, changesState?.sites, changesState?.devices])
 
   const handleTabClick = (tab, isInitialRender) => {
     setPaymentTabs(tab)
@@ -184,6 +191,14 @@ export const PaymentOption = (props) => {
           >
             {t('ORDER_TYPE', 'Order type')}
           </Tab>
+          {allowDevicesPaymethods.includes(selectedPaymethodGateway) && (
+            <Tab
+              active={paymentTabs === 2}
+              onClick={() => handleTabClick(2)}
+            >
+              {t('DEVICES', 'Devices')}
+            </Tab>
+          )}
         </TabsContainer>
         {paymentTabs === 0 && sitesState?.sites?.length > 0 && (
           <>
@@ -228,6 +243,29 @@ export const PaymentOption = (props) => {
               <TabOptionName>{type.text}</TabOptionName>
             </TabOption>
           ))
+        )}
+
+        {paymentTabs === 2 && allowDevicesPaymethods.includes(selectedPaymethodGateway) && (
+          <>
+            {
+              deviceState?.devices?.length > 0 && deviceState?.devices.map(device => (
+                <TabOption
+                  key={device.id}
+                  onClick={() => setPaymethodInfo({ key: 'devices', value: device.id })}
+                >
+                  {(localState?.devices ?? businessPaymethod?.devices?.map(s => s.id))?.includes(device.id) ? (
+                    <RiCheckboxFill className='fill' />
+                  ) : (
+                    <RiCheckboxBlankLine />
+                  )}
+                  <TabOptionName>{device.name}</TabOptionName>
+                </TabOption>
+              ))
+            }
+            {deviceState?.devices?.length === 0 && (
+              <EmptyMessage>{t('NO_ASSIGNED_DEVICES', 'There are no assigned devices')}</EmptyMessage>
+            )}
+          </>
         )}
 
         <Button
