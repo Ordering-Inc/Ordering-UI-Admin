@@ -74,6 +74,7 @@ export const OrdersTable = (props) => {
   }
   const [configState] = useConfig()
   const isEnabledRowInColor = configState?.configs?.row_in_color_enabled?.value === '1'
+  const showExternalId = configState?.configs?.change_order_id?.value === '1'
 
   const optionsDefault = [
     {
@@ -340,8 +341,8 @@ export const OrdersTable = (props) => {
           {!isSelectedOrders && (
             <thead>
               <tr>
-                {allowColumns && (Object.keys(allowColumns).filter(col => allowColumns[col]?.visable && allowColumns[col]?.order !== 0).length === 0 ?
-                  (
+                {allowColumns && (Object.keys(allowColumns).filter(col => allowColumns[col]?.visable && allowColumns[col]?.order !== 0).length === 0
+                  ? (
                     <th className='orderPrice'>
                       <ColumnAllowSettingPopover
                         allowColumns={allowColumns}
@@ -376,7 +377,7 @@ export const OrdersTable = (props) => {
                                     <RiCheckboxBlankLine />
                                   )}
                                 </CheckBox>
-                                {t('ORDER', 'Order')}
+                                {showExternalId ? t('DATE', 'Date') : t('ORDER', 'Order')}
                               </th>
                               {column === [...array].pop() && (
                                 <th className='orderPrice' key={`noDragTh-${i}`}>
@@ -671,7 +672,7 @@ export const OrdersTable = (props) => {
                                 </CheckBox>
                               )}
                               <div className='info'>
-                                {allowColumns?.orderNumber?.visable && (
+                                {allowColumns?.orderNumber?.visable && !showExternalId && (
                                   <p className='bold'>{t('INVOICE_ORDER_NO', 'Order No.')} {order?.id}</p>
                                 )}
                                 {allowColumns?.dateTime?.visable && (
