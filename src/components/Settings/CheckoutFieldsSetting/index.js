@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { useLanguage } from 'ordering-components-admin'
-import { useHistory, useLocation, CheckoutFieldsSetting as CheckoutFieldsSettingController } from 'react-router-dom'
+import { useLanguage, CheckoutFieldsSetting as CheckoutFieldsSettingController } from 'ordering-components-admin'
+import { useHistory, useLocation } from 'react-router-dom'
 import { IconButton, Switch } from '../../../styles'
 import Skeleton from 'react-loading-skeleton'
 import { useWindowSize } from '../../../hooks/useWindowSize'
