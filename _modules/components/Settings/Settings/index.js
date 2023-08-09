@@ -84,10 +84,18 @@ var SettingsUI = function SettingsUI(props) {
     _useState12 = _slicedToArray(_useState11, 2),
     openCheckoutSettings = _useState12[0],
     setOpenCheckoutSettings = _useState12[1];
-  var _useState13 = (0, _react.useState)(0),
+  var _useState13 = (0, _react.useState)(false),
     _useState14 = _slicedToArray(_useState13, 2),
-    moveDistance = _useState14[0],
-    setMoveDistance = _useState14[1];
+    openAddressSettings = _useState14[0],
+    setOpenAddressSettings = _useState14[1];
+  var _useState15 = (0, _react.useState)(false),
+    _useState16 = _slicedToArray(_useState15, 2),
+    openCardSettings = _useState16[0],
+    setOpenCardSettings = _useState16[1];
+  var _useState17 = (0, _react.useState)(0),
+    _useState18 = _slicedToArray(_useState17, 2),
+    moveDistance = _useState18[0],
+    setMoveDistance = _useState18[1];
   var _useEvent = (0, _orderingComponentsAdmin.useEvent)(),
     _useEvent2 = _slicedToArray(_useEvent, 1),
     events = _useEvent2[0];
@@ -117,6 +125,8 @@ var SettingsUI = function SettingsUI(props) {
     setOpenSitesAuthSettings(false);
     setOpenMultiCountrySettings(false);
     setOpenCheckoutSettings(false);
+    setOpenAddressSettings(false);
+    setOpenCardSettings(false);
     setIsOpenDescription(true);
     setSelectedCategory(category);
     handChangeConfig && handChangeConfig(false);
@@ -129,6 +139,8 @@ var SettingsUI = function SettingsUI(props) {
     setOpenSitesAuthSettings(false);
     setOpenCheckoutSettings(false);
     setOpenMultiCountrySettings(false);
+    setOpenCardSettings(false);
+    setOpenAddressSettings(false);
     setSelectedCategory(null);
     setIsOpenSettingDetails(item);
     if (!isInitialRender) {
@@ -155,9 +167,33 @@ var SettingsUI = function SettingsUI(props) {
     setIsOpenDescription(false);
     setIsOpenSettingDetails(null);
     setOpenSitesAuthSettings(false);
+    setOpenAddressSettings(false);
+    setOpenCardSettings(false);
     setOpenCheckoutSettings(true);
     if (!isInitialRender) {
-      history.replace("".concat(location.pathname, "?category=site"));
+      history.replace("".concat(location.pathname, "?category=checkout"));
+    }
+  };
+  var handleOpenAddress = function handleOpenAddress(isInitialRender) {
+    setIsOpenDescription(false);
+    setIsOpenSettingDetails(null);
+    setOpenSitesAuthSettings(false);
+    setOpenCheckoutSettings(false);
+    setOpenCardSettings(false);
+    setOpenAddressSettings(true);
+    if (!isInitialRender) {
+      history.replace("".concat(location.pathname, "?category=address"));
+    }
+  };
+  var handleOpenCard = function handleOpenCard(isInitialRender) {
+    setIsOpenDescription(false);
+    setIsOpenSettingDetails(null);
+    setOpenSitesAuthSettings(false);
+    setOpenCheckoutSettings(false);
+    setOpenAddressSettings(false);
+    setOpenCardSettings(true);
+    if (!isInitialRender) {
+      history.replace("".concat(location.pathname, "?category=card"));
     }
   };
   var handleBackRedirect = function handleBackRedirect() {
@@ -168,6 +204,8 @@ var SettingsUI = function SettingsUI(props) {
     setOpenMultiCountrySettings(false);
     setOpenCheckoutSettings(false);
     setOpenSitesAuthSettings(false);
+    setOpenAddressSettings(false);
+    setOpenCardSettings(false);
     history.replace("".concat(location.pathname));
   };
   (0, _react.useEffect)(function () {
@@ -179,8 +217,12 @@ var SettingsUI = function SettingsUI(props) {
           handleOpenSites(true);
         } else if (categoryId === 'multi_country') {
           handleOpenMultiCountry(true);
-        } else if (categoryId === 'site') {
+        } else if (categoryId === 'checkout') {
           setOpenCheckoutSettings(true);
+        } else if (categoryId === 'address') {
+          setOpenAddressSettings(true);
+        } else if (categoryId === 'card') {
+          setOpenCardSettings(true);
         } else {
           handleOpenSettingDetails(categoryId, true);
         }
@@ -243,23 +285,23 @@ var SettingsUI = function SettingsUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles2.SettingItemWrapper, {
     className: "col-md-4 col-sm-6",
     onClick: function onClick() {
-      return handleOpenSettingDetails('address');
+      return handleOpenAddress();
     }
   }, /*#__PURE__*/_react.default.createElement(_SettingItemUI.SettingItemUI, {
     title: t('ADDRESS_FIELDS', 'Address fields'),
     description: t('ADDRESS_FIELDS_DESC'),
     icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GeoAltFill, null),
-    active: isOpenSettingDetails === 'address'
+    active: openAddressSettings
   })), /*#__PURE__*/_react.default.createElement(_styles2.SettingItemWrapper, {
     className: "col-md-4 col-sm-6",
     onClick: function onClick() {
-      return handleOpenSettingDetails('card');
+      return handleOpenCard();
     }
   }, /*#__PURE__*/_react.default.createElement(_SettingItemUI.SettingItemUI, {
     title: t('CARD_FIELDS', 'Card fields'),
     description: t('CARD_FIELDS_DESC', 'Manage your card fields'),
     icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CreditCard, null),
-    active: isOpenSettingDetails === 'card'
+    active: openCardSettings
   })), /*#__PURE__*/_react.default.createElement(_styles2.SettingItemWrapper, {
     className: "col-md-4 col-sm-6",
     onClick: function onClick() {
@@ -338,6 +380,24 @@ var SettingsUI = function SettingsUI(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_CheckoutFieldsSetting.CheckoutFieldsSetting, {
     setMoveDistance: setMoveDistance
+  })), openAddressSettings && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
+    defaultSideBarWidth: 500 + moveDistance,
+    moveDistance: moveDistance,
+    open: openAddressSettings,
+    onClose: function onClose() {
+      return handleBackRedirect();
+    }
+  }, /*#__PURE__*/_react.default.createElement(_AddressFieldsSetting.AddressFieldsSetting, {
+    setMoveDistance: setMoveDistance
+  })), openCardSettings && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
+    defaultSideBarWidth: 500 + moveDistance,
+    moveDistance: moveDistance,
+    open: openCardSettings,
+    onClose: function onClose() {
+      return handleBackRedirect();
+    }
+  }, /*#__PURE__*/_react.default.createElement(_CardFieldsSetting.CardFieldsSetting, {
+    setMoveDistance: setMoveDistance
   })), isOpenSettingDetails && /*#__PURE__*/_react.default.createElement(_Shared.SideBar, {
     sidebarId: "setting-details",
     defaultSideBarWidth: 550,
@@ -346,7 +406,7 @@ var SettingsUI = function SettingsUI(props) {
       return handleBackRedirect();
     },
     showExpandIcon: true
-  }, isOpenSettingDetails === 'guest_checkout' && /*#__PURE__*/_react.default.createElement(_GuestCheckoutFieldsSetting.GuestCheckoutFieldsSetting, null), isOpenSettingDetails === 'address' && /*#__PURE__*/_react.default.createElement(_AddressFieldsSetting.AddressFieldsSetting, null), isOpenSettingDetails === 'card' && /*#__PURE__*/_react.default.createElement(_CardFieldsSetting.CardFieldsSetting, null), isOpenSettingDetails === 'language' && /*#__PURE__*/_react.default.createElement(_LanguageSetting.LanguageSetting, null)));
+  }, isOpenSettingDetails === 'guest_checkout' && /*#__PURE__*/_react.default.createElement(_GuestCheckoutFieldsSetting.GuestCheckoutFieldsSetting, null), isOpenSettingDetails === 'language' && /*#__PURE__*/_react.default.createElement(_LanguageSetting.LanguageSetting, null)));
 };
 var Settings = function Settings(props) {
   var settingsProps = _objectSpread(_objectSpread({}, props), {}, {
