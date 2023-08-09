@@ -202,7 +202,7 @@ const DriverAnalyticsUI = (props) => {
         </div>
         <div className='col-md-12 col-lg-6'>
           <AnalyticsSpendList
-            title={t('ORDER_COMPLETE_SPEND', 'Time spent since order accepted to pickup and deliver the order')}
+            title={t('ARRIVED_PICKUP_SPEND', 'Time spend since the driver in business until he picks up the order')}
             dataList={arrivedPickUpSpendList}
           />
         </div>

@@ -511,7 +511,7 @@ export const ImporterFormUI = (props) => {
           </MappingFields>
         )}
       </FormInput>
-      {!isAdvanedOptions && importType !== 8 && (
+      {importType !== 8 && (
         <FiledListWrapper disabled={isDefaultImporter}>
           <label>{t('FIELDS', 'Fields')}</label>
           {Object.keys(fieldList).length > 0 && (
