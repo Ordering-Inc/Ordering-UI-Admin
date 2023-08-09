@@ -32,7 +32,7 @@ export const UserDetailsMenu = (props) => {
     // { key: 'personalization', content: t('PERSONALIZATION', 'Personalization') }
   ]
 
-  const menuItemsFiltered = menuItems.filter(item => disableSchedule ? item.key !== 'schedule' : item.key)
+  const menuItemsFiltered = menuItems.filter(item => !disableSchedule ? item.key !== 'schedule' : item.key)
 
   return (
     <UserDetailsMenuContainer>
