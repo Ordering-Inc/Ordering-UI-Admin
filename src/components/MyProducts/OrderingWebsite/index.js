@@ -198,7 +198,9 @@ const OrderingWebsiteUI = (props) => {
   }
 
   const handleChangeFranchise = (value) => {
+    const franchiseId = franchisesList.franchises.find(franchise => franchise?.slug === value)?.id
     handleChangeValue(value, 'website_theme', 'franchise_slug')
+    handleChangeValue(franchiseId, 'website_theme', 'business_slug')
   }
 
   useEffect(() => {
@@ -428,6 +430,11 @@ const OrderingWebsiteUI = (props) => {
                         {themeValues?.website_theme?.components?.type === 'franchise' ? <RecordCircleFill className='active' /> : <Circle />}
                         <span>{t('REPORT_HEADER_FRANCHISES', 'Franchise')}</span>
                       </RadioItem>
+                      {
+                        /**
+                         * usar el businessSlug como el franchise Id
+                         */
+                      }
                       {themeValues?.website_theme?.components?.type === 'franchise' && (
                         <SelectFranchise
                           defaultValue={themeValues?.website_theme?.components?.franchise_slug}
