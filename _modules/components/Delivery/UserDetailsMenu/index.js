@@ -56,7 +56,7 @@ var UserDetailsMenu = function UserDetailsMenu(props) {
   ];
 
   var menuItemsFiltered = menuItems.filter(function (item) {
-    return disableSchedule ? item.key !== 'schedule' : item.key;
+    return !disableSchedule ? item.key !== 'schedule' : item.key;
   });
   return /*#__PURE__*/_react.default.createElement(_styles.UserDetailsMenuContainer, null, /*#__PURE__*/_react.default.createElement(_Shared.DragScroll, null, menuItemsFiltered.map(function (menu) {
     return /*#__PURE__*/_react.default.createElement(_styles.Tab, {
