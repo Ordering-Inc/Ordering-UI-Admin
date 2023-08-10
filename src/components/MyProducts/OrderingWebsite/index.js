@@ -198,7 +198,9 @@ const OrderingWebsiteUI = (props) => {
   }
 
   const handleChangeFranchise = (value) => {
+    const franchiseId = franchisesList.franchises.find(franchise => franchise?.slug === value)?.id
     handleChangeValue(value, 'website_theme', 'franchise_slug')
+    handleChangeValue(franchiseId, 'website_theme', 'business_slug')
   }
 
   useEffect(() => {

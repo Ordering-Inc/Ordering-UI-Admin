@@ -301,7 +301,7 @@ const HomeUI = (props) => {
           </>
         )}
 
-        {width < 997 && (
+        {width < 997 && !isEnabledWhiteLabelModule && (
           <OrderingButtonBlock>
             <h2>
               {t('WHAT_DO_YOU_WANT', 'What do you want to')}

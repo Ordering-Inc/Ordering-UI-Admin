@@ -98,7 +98,7 @@ export const ButtonLink = styled.div`
 export const OrderStatus = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 20px 0;
+  margin: ${({ noMargin }) => noMargin ? '0px' : '20px 0'};
 
   h2 {
     color: ${props => props.theme.colors?.headingColor};
@@ -120,7 +120,7 @@ export const OrderStatus = styled.div`
   @media (min-width: 768px) {
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: ${({ flexEnd }) => flexEnd ? 'flex-end' : 'space-between'};
   }
 `
 export const OrderStatusSelectorWrapper = styled.div`
@@ -288,4 +288,8 @@ export const AssigmentCommentContainer = styled.form`
 export const ErrorMessage = styled.div`
   color: ${props => props.theme.colors.danger};
   font-size: 14px;
+`
+
+export const OrderStatusTime = styled.div`
+
 `
