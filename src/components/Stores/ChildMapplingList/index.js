@@ -13,7 +13,6 @@ import {
 
 export const ChildMapplingList = (props) => {
   const {
-    importypeOptions,
     mappingList,
     openMappingDetails,
     setOpenMappingDetails,
@@ -25,11 +24,6 @@ export const ChildMapplingList = (props) => {
   const [selectedMapping, setSelectedMapping] = useState(null)
   const [selectedIndex, setSelectedIndex] = useState(null)
   const [openAddMapping, setOpenAddMapping] = useState(false)
-
-  const getMappingType = (type) => {
-    const found = importypeOptions.find(option => option.sync_name === type)
-    return found
-  }
 
   const handleEditMapping = (mapping, index) => {
     setOpenAddMapping(false)
@@ -77,7 +71,7 @@ export const ChildMapplingList = (props) => {
                 active={index === selectedIndex}
                 onClick={() => handleEditMapping(item, index)}
               >
-                <span>{getMappingType(item.type)?.content}</span>
+                <span>{t(`${item.type === 'sync_orders' ? item.type?.toUpperCase()?.trim() : item.type.replace('sync_order_', '')?.toUpperCase()?.trim()}`, `${item.type.replace('sync_', '').replaceAll('_', ' ')[0].toUpperCase() + item.type.replace('sync_', '').replaceAll('_', ' ').slice(1)}`)}</span>
                 <ChevronRight />
               </MappingItem>
             ))}
