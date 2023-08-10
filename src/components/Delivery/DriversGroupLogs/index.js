@@ -95,6 +95,8 @@ export const DriversGroupLogsUI = (props) => {
                   <th>{t('CONTROL_PANEL_USERS', 'Users')}</th>
                   <th>{t('EVENTS_TYPE', 'Events type')}</th>
                   <th>{t('DETAILS', 'Details')}</th>
+                  <th>{t('NEW', 'New')}</th>
+                  <th>{t('OLD', 'Old')}</th>
                   <th>{t('EXPORT_DATE', 'Date')}</th>
                   <th>{t('USER_AGENT', 'User agent')}</th>
                 </tr>
@@ -137,8 +139,8 @@ export const DriversGroupLogsUI = (props) => {
                     <tr>
                       <td>
                         <UserInfoContainer>
-                          <p>{log?.user?.name} {log?.user?.lastname}</p>
-                          <p>{log?.user?.email}</p>
+                        <p>{log?.author?.name || log?.user?.name} {log?.author?.lastname || log?.user?.lastname}</p>
+                          <p>{log?.author?.email || log?.user?.email}</p>
                         </UserInfoContainer>
                       </td>
                       <td>
@@ -152,6 +154,17 @@ export const DriversGroupLogsUI = (props) => {
                             <tbody key={i}>
                               <tr>
                                 <td>{getAttributeName(item?.attribute)}</td>
+                              </tr>
+                            </tbody>
+                          ))}
+                        </DataListTable>
+                      </td>
+                      <td>
+                        <DataListTable>
+                          {log?.data && getValidLogData(log?.data).map((item, i) => (
+                            <tbody key={i}>
+                              <tr>
+                                {item.attribute !== 'schedule' ?
                                 <td>
                                   {
                                     (typeof item?.new !== 'undefined' && item?.new !== null)
@@ -159,6 +172,33 @@ export const DriversGroupLogsUI = (props) => {
                                       : item?.added?.length > 0 ? item?.added?.toString() : t('NONE', 'None')
                                   }
                                 </td>
+                                : (
+                                  <td>
+                                    {(!item?.new?.length && item?.new?.length < 1) ? t('NONE', 'None') : item?.new?.map((schedule, i) => {
+                                      const hourOpen = schedule.lapses[0].open.hour < 10 ? `0${schedule.lapses[0].open.hour}` : schedule.lapses[0].open.hour
+                                      const minuteOpen = schedule.lapses[0].open.minute === 0 ? `0${schedule.lapses[0].open.minute}` : schedule.lapses[0].open.minute
+                                      const hourClose = schedule.lapses[0].close.hour < 10 ? `0${schedule.lapses[0].close.hour}` : schedule.lapses[0].close.hour
+                                      const minuteClose = schedule.lapses[0].close.minute === 0 ? `0${schedule.lapses[0].close.minute}` : schedule.lapses[0].close.minute
+                                      return(
+                                      <p key={i}>
+                                        {`${hourOpen}:${minuteOpen} -- ${hourClose}:${minuteClose}`}
+                                      </p>
+                                      )
+                                    })}
+                                  </td>
+                                  )
+                                }
+                              </tr>
+                            </tbody>
+                          ))}
+                        </DataListTable>
+                      </td>
+                      <td>
+                        <DataListTable>
+                          {log?.data && getValidLogData(log?.data).map((item, i) => (
+                            <tbody key={i}>
+                              <tr>
+                                {item.attribute !== 'schedule' ?
                                 <td>
                                   {
                                     (typeof item?.old !== 'undefined' && item?.old !== null)
@@ -166,6 +206,22 @@ export const DriversGroupLogsUI = (props) => {
                                       : item?.removed?.length > 0 ? item?.removed?.toString() : t('NONE', 'None')
                                   }
                                 </td>
+                                : (
+                                  <td>
+                                    {(!item?.old?.length && item?.old?.length < 1) ? <p>{t('NONE', 'None')}</p> : item?.old?.map((schedule, i) => {
+                                      const hourOpen = schedule.lapses[0].open.hour < 10 ? `0${schedule.lapses[0].open.hour}` : schedule.lapses[0].open.hour
+                                      const minuteOpen = schedule.lapses[0].open.minute === 0 ? `0${schedule.lapses[0].open.minute}` : schedule.lapses[0].open.minute
+                                      const hourClose = schedule.lapses[0].close.hour < 10 ? `0${schedule.lapses[0].close.hour}` : schedule.lapses[0].close.hour
+                                      const minuteClose = schedule.lapses[0].close.minute === 0 ? `0${schedule.lapses[0].close.minute}` : schedule.lapses[0].close.minute
+                                      return(
+                                      <p key={i}>
+                                        {`${hourOpen}:${minuteOpen} -- ${hourClose}:${minuteClose}`}
+                                      </p>
+                                      )
+                                    })}
+                                  </td>
+                                  )
+                                }
                               </tr>
                             </tbody>
                           ))}
