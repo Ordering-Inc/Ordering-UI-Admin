@@ -251,6 +251,16 @@ export const OrderDetailsHeader = (props) => {
                 {t('DRIVE_THRU', 'Drive thru')}
               </span>
             )}
+            {order?.delivery_type === 7 && (
+              <span>
+                {t('CATERING_DELIVERY', 'Catering delivery')}
+              </span>
+            )}
+            {order?.delivery_type === 8 && (
+              <span>
+                {t('CATERING_PICKUP', 'Catering pickup')}
+              </span>
+            )}
           </>
         )}
       </p>
