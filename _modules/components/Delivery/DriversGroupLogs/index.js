@@ -9,6 +9,7 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _Shared = require("../../Shared");
 var _styles = require("./styles");
+var _moment = _interopRequireDefault(require("moment"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -29,7 +30,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var DriversGroupLogsUI = function DriversGroupLogsUI(props) {
-  var _logsList$logs;
+  var _configs$general_hour, _logsList$logs;
   var logsList = props.logsList,
     paginationProps = props.paginationProps,
     getDriversGroupLogs = props.getDriversGroupLogs,
@@ -40,6 +41,21 @@ var DriversGroupLogsUI = function DriversGroupLogsUI(props) {
   var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
     _useUtils2 = _slicedToArray(_useUtils, 1),
     parseDate = _useUtils2[0].parseDate;
+  var _React$useState = _react.default.useState(false),
+    _React$useState2 = _slicedToArray(_React$useState, 2),
+    open = _React$useState2[0],
+    setOpen = _React$useState2[1];
+  var _React$useState3 = _react.default.useState({
+      newSchedule: [],
+      oldSchedule: []
+    }),
+    _React$useState4 = _slicedToArray(_React$useState3, 2),
+    schedules = _React$useState4[0],
+    setSchedules = _React$useState4[1];
+  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configs = _useConfig2[0].configs;
+  var formatTime = configs === null || configs === void 0 ? void 0 : (_configs$general_hour = configs.general_hour_format) === null || _configs$general_hour === void 0 ? void 0 : _configs$general_hour.value;
   var getAttributeName = function getAttributeName(key) {
     var attributes = [{
       key: 'autoassign_amount_drivers',
@@ -124,6 +140,16 @@ var DriversGroupLogsUI = function DriversGroupLogsUI(props) {
   var getValidLogData = function getValidLogData(data) {
     return _typeof(data) === 'object' ? Object.values(data) : typeof data === 'string' ? JSON.parse(data) : data;
   };
+  var handleSchedules = function handleSchedules(_schedules) {
+    setSchedules({
+      newSchedule: _schedules === null || _schedules === void 0 ? void 0 : _schedules.new,
+      oldSchedule: _schedules === null || _schedules === void 0 ? void 0 : _schedules.old
+    });
+  };
+  var scheduleModalData = function scheduleModalData(_schedules) {
+    setOpen(true);
+    handleSchedules(_schedules);
+  };
   (0, _react.useEffect)(function () {
     if (logsList.loading || logsList.logs.length > 0 || paginationProps.totalPages <= 1) return;
     if (paginationProps.currentPage !== paginationProps.totalPages) {
@@ -132,6 +158,25 @@ var DriversGroupLogsUI = function DriversGroupLogsUI(props) {
       handleChangePage(paginationProps.currentPage - 1);
     }
   }, [logsList.logs, paginationProps]);
+  var daysOptions = [t('DAY7', 'Sunday'), t('DAY1', 'Monday'), t('DAY2', 'Tuesday'), t('DAY3', 'Wednesday'), t('DAY4', 'Thursday'), t('DAY5', 'Friday'), t('DAY6', 'Saturday')];
+  var checkTime = function checkTime(val) {
+    return val < 10 ? "0".concat(val) : val;
+  };
+  var timeFormated = function timeFormated(time) {
+    return (0, _moment.default)("1900-01-01 ".concat(checkTime(time.hour), ":").concat(checkTime(time.minute))).format(formatTime);
+  };
+  var getSchedule = function getSchedule(_schedules) {
+    return !(_schedules !== null && _schedules !== void 0 && _schedules.length) && (_schedules === null || _schedules === void 0 ? void 0 : _schedules.length) < 1 ? /*#__PURE__*/_react.default.createElement("p", null, t('NONE', 'None')) : _schedules === null || _schedules === void 0 ? void 0 : _schedules.map(function (schedule, i) {
+      var _schedule$lapses;
+      return /*#__PURE__*/_react.default.createElement(_styles.ScheduleDay, {
+        key: i
+      }, /*#__PURE__*/_react.default.createElement("span", null, daysOptions[i]), /*#__PURE__*/_react.default.createElement(_styles.ScheduleLapses, null, schedule === null || schedule === void 0 ? void 0 : (_schedule$lapses = schedule.lapses) === null || _schedule$lapses === void 0 ? void 0 : _schedule$lapses.map(function (item, i) {
+        return /*#__PURE__*/_react.default.createElement("p", {
+          key: i
+        }, "".concat(timeFormated(item === null || item === void 0 ? void 0 : item.open), " - ").concat(timeFormated(item === null || item === void 0 ? void 0 : item.close)));
+      })));
+    });
+  };
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.DriversGroupLogsContainer, {
     disabled: actionDisabled
   }, /*#__PURE__*/_react.default.createElement(_styles.TableWrapper, null, logsList.loading || logsList.logs.length > 0 ? /*#__PURE__*/_react.default.createElement(_styles.Table, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, t('CONTROL_PANEL_USERS', 'Users')), /*#__PURE__*/_react.default.createElement("th", null, t('EVENTS_TYPE', 'Events type')), /*#__PURE__*/_react.default.createElement("th", null, t('DETAILS', 'Details')), /*#__PURE__*/_react.default.createElement("th", null, t('NEW', 'New')), /*#__PURE__*/_react.default.createElement("th", null, t('OLD', 'Old')), /*#__PURE__*/_react.default.createElement("th", null, t('EXPORT_DATE', 'Date')), /*#__PURE__*/_react.default.createElement("th", null, t('USER_AGENT', 'User agent')))), logsList.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
@@ -157,31 +202,23 @@ var DriversGroupLogsUI = function DriversGroupLogsUI(props) {
         key: i
       }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, getAttributeName(item === null || item === void 0 ? void 0 : item.attribute))));
     }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.DataListTable, null, (log === null || log === void 0 ? void 0 : log.data) && getValidLogData(log === null || log === void 0 ? void 0 : log.data).map(function (item, i) {
-      var _item$added, _item$added2, _item$new, _item$new2, _item$new3;
+      var _item$added, _item$added2;
       return /*#__PURE__*/_react.default.createElement("tbody", {
         key: i
-      }, /*#__PURE__*/_react.default.createElement("tr", null, item.attribute !== 'schedule' ? /*#__PURE__*/_react.default.createElement("td", null, typeof (item === null || item === void 0 ? void 0 : item.new) !== 'undefined' && (item === null || item === void 0 ? void 0 : item.new) !== null ? "".concat(item === null || item === void 0 ? void 0 : item.new) : (item === null || item === void 0 ? void 0 : (_item$added = item.added) === null || _item$added === void 0 ? void 0 : _item$added.length) > 0 ? item === null || item === void 0 ? void 0 : (_item$added2 = item.added) === null || _item$added2 === void 0 ? void 0 : _item$added2.toString() : t('NONE', 'None')) : /*#__PURE__*/_react.default.createElement("td", null, !(item !== null && item !== void 0 && (_item$new = item.new) !== null && _item$new !== void 0 && _item$new.length) && (item === null || item === void 0 ? void 0 : (_item$new2 = item.new) === null || _item$new2 === void 0 ? void 0 : _item$new2.length) < 1 ? t('NONE', 'None') : item === null || item === void 0 ? void 0 : (_item$new3 = item.new) === null || _item$new3 === void 0 ? void 0 : _item$new3.map(function (schedule, i) {
-        var hourOpen = schedule.lapses[0].open.hour < 10 ? "0".concat(schedule.lapses[0].open.hour) : schedule.lapses[0].open.hour;
-        var minuteOpen = schedule.lapses[0].open.minute === 0 ? "0".concat(schedule.lapses[0].open.minute) : schedule.lapses[0].open.minute;
-        var hourClose = schedule.lapses[0].close.hour < 10 ? "0".concat(schedule.lapses[0].close.hour) : schedule.lapses[0].close.hour;
-        var minuteClose = schedule.lapses[0].close.minute === 0 ? "0".concat(schedule.lapses[0].close.minute) : schedule.lapses[0].close.minute;
-        return /*#__PURE__*/_react.default.createElement("p", {
-          key: i
-        }, "".concat(hourOpen, ":").concat(minuteOpen, " -- ").concat(hourClose, ":").concat(minuteClose));
-      }))));
+      }, /*#__PURE__*/_react.default.createElement("tr", null, item.attribute !== 'schedule' ? /*#__PURE__*/_react.default.createElement("td", null, typeof (item === null || item === void 0 ? void 0 : item.new) !== 'undefined' && (item === null || item === void 0 ? void 0 : item.new) !== null ? "".concat(item === null || item === void 0 ? void 0 : item.new) : (item === null || item === void 0 ? void 0 : (_item$added = item.added) === null || _item$added === void 0 ? void 0 : _item$added.length) > 0 ? item === null || item === void 0 ? void 0 : (_item$added2 = item.added) === null || _item$added2 === void 0 ? void 0 : _item$added2.toString() : t('NONE', 'None')) : /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.SeeChanges, {
+        onClick: function onClick() {
+          return scheduleModalData(item, 'new');
+        }
+      }, t('SEE_CHANGES', 'See changes')))));
     }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.DataListTable, null, (log === null || log === void 0 ? void 0 : log.data) && getValidLogData(log === null || log === void 0 ? void 0 : log.data).map(function (item, i) {
-      var _item$removed, _item$removed2, _item$old, _item$old2, _item$old3;
+      var _item$removed, _item$removed2;
       return /*#__PURE__*/_react.default.createElement("tbody", {
         key: i
-      }, /*#__PURE__*/_react.default.createElement("tr", null, item.attribute !== 'schedule' ? /*#__PURE__*/_react.default.createElement("td", null, typeof (item === null || item === void 0 ? void 0 : item.old) !== 'undefined' && (item === null || item === void 0 ? void 0 : item.old) !== null ? "".concat(item === null || item === void 0 ? void 0 : item.old) : (item === null || item === void 0 ? void 0 : (_item$removed = item.removed) === null || _item$removed === void 0 ? void 0 : _item$removed.length) > 0 ? item === null || item === void 0 ? void 0 : (_item$removed2 = item.removed) === null || _item$removed2 === void 0 ? void 0 : _item$removed2.toString() : t('NONE', 'None')) : /*#__PURE__*/_react.default.createElement("td", null, !(item !== null && item !== void 0 && (_item$old = item.old) !== null && _item$old !== void 0 && _item$old.length) && (item === null || item === void 0 ? void 0 : (_item$old2 = item.old) === null || _item$old2 === void 0 ? void 0 : _item$old2.length) < 1 ? /*#__PURE__*/_react.default.createElement("p", null, t('NONE', 'None')) : item === null || item === void 0 ? void 0 : (_item$old3 = item.old) === null || _item$old3 === void 0 ? void 0 : _item$old3.map(function (schedule, i) {
-        var hourOpen = schedule.lapses[0].open.hour < 10 ? "0".concat(schedule.lapses[0].open.hour) : schedule.lapses[0].open.hour;
-        var minuteOpen = schedule.lapses[0].open.minute === 0 ? "0".concat(schedule.lapses[0].open.minute) : schedule.lapses[0].open.minute;
-        var hourClose = schedule.lapses[0].close.hour < 10 ? "0".concat(schedule.lapses[0].close.hour) : schedule.lapses[0].close.hour;
-        var minuteClose = schedule.lapses[0].close.minute === 0 ? "0".concat(schedule.lapses[0].close.minute) : schedule.lapses[0].close.minute;
-        return /*#__PURE__*/_react.default.createElement("p", {
-          key: i
-        }, "".concat(hourOpen, ":").concat(minuteOpen, " -- ").concat(hourClose, ":").concat(minuteClose));
-      }))));
+      }, /*#__PURE__*/_react.default.createElement("tr", null, item.attribute !== 'schedule' ? /*#__PURE__*/_react.default.createElement("td", null, typeof (item === null || item === void 0 ? void 0 : item.old) !== 'undefined' && (item === null || item === void 0 ? void 0 : item.old) !== null ? "".concat(item === null || item === void 0 ? void 0 : item.old) : (item === null || item === void 0 ? void 0 : (_item$removed = item.removed) === null || _item$removed === void 0 ? void 0 : _item$removed.length) > 0 ? item === null || item === void 0 ? void 0 : (_item$removed2 = item.removed) === null || _item$removed2 === void 0 ? void 0 : _item$removed2.toString() : t('NONE', 'None')) : /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.SeeChanges, {
+        onClick: function onClick() {
+          return scheduleModalData(item, 'old');
+        }
+      }, t('SEE_CHANGES', 'See changes')))));
     }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.DateTimeWrapper, null, parseDate(log.created_at, {
       utc: false
     }))), /*#__PURE__*/_react.default.createElement("td", null, log === null || log === void 0 ? void 0 : log.user_agent)));
@@ -191,7 +228,19 @@ var DriversGroupLogsUI = function DriversGroupLogsUI(props) {
     totalPages: paginationProps.totalPages,
     handleChangePage: handleChangePage,
     handleChangePageSize: handleChangePageSize
-  }))));
+  }))), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    width: "40%",
+    height: "60vh",
+    style: {
+      overflowY: 'auto'
+    },
+    padding: "30px",
+    title: t('SCHEDULE_CHANGES', 'Schedule changes'),
+    open: open,
+    onClose: function onClose() {
+      return setOpen(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_styles.SchedulesWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Schedules, null, /*#__PURE__*/_react.default.createElement(_styles.ScheduleTitle, null, t('NEW', 'New')), getSchedule(schedules === null || schedules === void 0 ? void 0 : schedules.newSchedule)), /*#__PURE__*/_react.default.createElement(_styles.Schedules, null, /*#__PURE__*/_react.default.createElement(_styles.ScheduleTitle, null, t('OLD', 'Old')), getSchedule(schedules === null || schedules === void 0 ? void 0 : schedules.oldSchedule)))));
 };
 exports.DriversGroupLogsUI = DriversGroupLogsUI;
 var DriversGroupLogs = function DriversGroupLogs(props) {
