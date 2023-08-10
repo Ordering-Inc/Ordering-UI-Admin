@@ -212,7 +212,12 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
     setSelectedSubSetting('');
   };
   var handleChangeFranchise = function handleChangeFranchise(value) {
+    var _franchisesList$franc;
+    var franchiseId = (_franchisesList$franc = franchisesList.franchises.find(function (franchise) {
+      return (franchise === null || franchise === void 0 ? void 0 : franchise.slug) === value;
+    })) === null || _franchisesList$franc === void 0 ? void 0 : _franchisesList$franc.id;
     handleChangeValue(value, 'website_theme', 'franchise_slug');
+    handleChangeValue(franchiseId, 'website_theme', 'business_slug');
   };
   (0, _react.useEffect)(function () {
     var _themeValues$website_, _themeValues$website_2;

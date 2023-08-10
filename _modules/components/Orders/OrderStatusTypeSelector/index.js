@@ -381,6 +381,42 @@ var OrderStatusTypeSelector = function OrderStatusTypeSelector(props) {
             }
             setFilteredOrderStatuses(_filteredOrderStatuses);
             break;
+          case 7:
+            extractOrderStatus = orderStatuses.slice(0, 13);
+            _filteredOrderStatuses = _toConsumableArray(extractOrderStatus);
+            extractOrderStatus = orderStatuses.slice(15, 20);
+            _filteredOrderStatuses = [].concat(_toConsumableArray(_filteredOrderStatuses), _toConsumableArray(extractOrderStatus));
+            extractOrderStatus = orderStatuses.slice(21, 28);
+            _filteredOrderStatuses = [].concat(_toConsumableArray(_filteredOrderStatuses), _toConsumableArray(extractOrderStatus));
+            if (searchValue) {
+              var _filteredOrderStatuse6;
+              _filteredOrderStatuses = _toConsumableArray((_filteredOrderStatuse6 = _filteredOrderStatuses) === null || _filteredOrderStatuse6 === void 0 ? void 0 : _filteredOrderStatuse6.filter(function (orderStatus) {
+                return orderStatus === null || orderStatus === void 0 ? void 0 : orderStatus.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase());
+              }));
+            }
+            setFilteredOrderStatuses(_filteredOrderStatuses);
+            break;
+          case 8:
+            extractOrderStatus = orderStatuses.slice(0, 7);
+            _filteredOrderStatuses = _toConsumableArray(extractOrderStatus);
+            extractOrderStatus = orderStatuses.slice(10, 11);
+            _filteredOrderStatuses = [].concat(_toConsumableArray(_filteredOrderStatuses), _toConsumableArray(extractOrderStatus));
+            extractOrderStatus = orderStatuses.slice(13, 15);
+            _filteredOrderStatuses = [].concat(_toConsumableArray(_filteredOrderStatuses), _toConsumableArray(extractOrderStatus));
+            extractOrderStatus = orderStatuses.slice(17, 19);
+            _filteredOrderStatuses = [].concat(_toConsumableArray(_filteredOrderStatuses), _toConsumableArray(extractOrderStatus));
+            extractOrderStatus = orderStatuses.slice(20, 24);
+            _filteredOrderStatuses = [].concat(_toConsumableArray(_filteredOrderStatuses), _toConsumableArray(extractOrderStatus));
+            extractOrderStatus = orderStatuses.slice(27, 29);
+            _filteredOrderStatuses = [].concat(_toConsumableArray(_filteredOrderStatuses), _toConsumableArray(extractOrderStatus));
+            if (searchValue) {
+              var _filteredOrderStatuse7;
+              _filteredOrderStatuses = _toConsumableArray((_filteredOrderStatuse7 = _filteredOrderStatuses) === null || _filteredOrderStatuse7 === void 0 ? void 0 : _filteredOrderStatuse7.filter(function (orderStatus) {
+                return orderStatus === null || orderStatus === void 0 ? void 0 : orderStatus.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase());
+              }));
+            }
+            setFilteredOrderStatuses(_filteredOrderStatuses);
+            break;
           default:
             if (searchValue) {
               _filteredOrderStatuses = _toConsumableArray(orderStatuses === null || orderStatuses === void 0 ? void 0 : orderStatuses.filter(function (orderStatus) {

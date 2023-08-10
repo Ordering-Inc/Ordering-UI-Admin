@@ -284,7 +284,7 @@ var HomeUI = function HomeUI(props) {
   }, t('VISIT_MY_WEBSITE', 'Visit my Website')))), /*#__PURE__*/_react.default.createElement("img", {
     src: (_project$projectStatu4 = project[(_projectStatus$projec9 = projectStatus.project) === null || _projectStatus$projec9 === void 0 ? void 0 : _projectStatus$projec9.current_status]) === null || _project$projectStatu4 === void 0 ? void 0 : _project$projectStatu4.image,
     alt: ""
-  }))), width < 997 && /*#__PURE__*/_react.default.createElement(_styles.OrderingButtonBlock, null, /*#__PURE__*/_react.default.createElement("h2", null, t('WHAT_DO_YOU_WANT', 'What do you want to'), /*#__PURE__*/_react.default.createElement("span", null, " ".concat(t('SEE_IN_ORDERING', 'see in ordering')), "?")), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  }))), width < 997 && !isEnabledWhiteLabelModule && /*#__PURE__*/_react.default.createElement(_styles.OrderingButtonBlock, null, /*#__PURE__*/_react.default.createElement("h2", null, t('WHAT_DO_YOU_WANT', 'What do you want to'), /*#__PURE__*/_react.default.createElement("span", null, " ".concat(t('SEE_IN_ORDERING', 'see in ordering')), "?")), /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: "primary",
     onClick: function onClick() {
       return setShowForm(true);
