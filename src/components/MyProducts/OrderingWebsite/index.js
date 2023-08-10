@@ -430,11 +430,6 @@ const OrderingWebsiteUI = (props) => {
                         {themeValues?.website_theme?.components?.type === 'franchise' ? <RecordCircleFill className='active' /> : <Circle />}
                         <span>{t('REPORT_HEADER_FRANCHISES', 'Franchise')}</span>
                       </RadioItem>
-                      {
-                        /**
-                         * usar el businessSlug como el franchise Id
-                         */
-                      }
                       {themeValues?.website_theme?.components?.type === 'franchise' && (
                         <SelectFranchise
                           defaultValue={themeValues?.website_theme?.components?.franchise_slug}
