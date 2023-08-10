@@ -421,6 +421,36 @@ export const OrderStatusTypeSelector = (props) => {
             }
             setFilteredOrderStatuses(_filteredOrderStatuses)
             break
+          case 7:
+            extractOrderStatus = orderStatuses.slice(0, 13)
+            _filteredOrderStatuses = [...extractOrderStatus]
+            extractOrderStatus = orderStatuses.slice(15, 20)
+            _filteredOrderStatuses = [..._filteredOrderStatuses, ...extractOrderStatus]
+            extractOrderStatus = orderStatuses.slice(21, 28)
+            _filteredOrderStatuses = [..._filteredOrderStatuses, ...extractOrderStatus]
+            if (searchValue) {
+              _filteredOrderStatuses = [..._filteredOrderStatuses?.filter(orderStatus => orderStatus?.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()))]
+            }
+            setFilteredOrderStatuses(_filteredOrderStatuses)
+            break
+          case 8:
+            extractOrderStatus = orderStatuses.slice(0, 7)
+            _filteredOrderStatuses = [...extractOrderStatus]
+            extractOrderStatus = orderStatuses.slice(10, 11)
+            _filteredOrderStatuses = [..._filteredOrderStatuses, ...extractOrderStatus]
+            extractOrderStatus = orderStatuses.slice(13, 15)
+            _filteredOrderStatuses = [..._filteredOrderStatuses, ...extractOrderStatus]
+            extractOrderStatus = orderStatuses.slice(17, 19)
+            _filteredOrderStatuses = [..._filteredOrderStatuses, ...extractOrderStatus]
+            extractOrderStatus = orderStatuses.slice(20, 24)
+            _filteredOrderStatuses = [..._filteredOrderStatuses, ...extractOrderStatus]
+            extractOrderStatus = orderStatuses.slice(27, 29)
+            _filteredOrderStatuses = [..._filteredOrderStatuses, ...extractOrderStatus]
+            if (searchValue) {
+              _filteredOrderStatuses = [..._filteredOrderStatuses?.filter(orderStatus => orderStatus?.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()))]
+            }
+            setFilteredOrderStatuses(_filteredOrderStatuses)
+            break
           default:
             if (searchValue) {
               _filteredOrderStatuses = [...orderStatuses?.filter(orderStatus => orderStatus?.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()))]
