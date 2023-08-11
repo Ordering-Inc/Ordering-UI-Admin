@@ -14,6 +14,7 @@ import { Line } from 'react-chartjs-2'
 import { useLanguage } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { Modal } from '../../Shared'
+import { GraphLoadingMessage } from '../GraphLoadingMessage'
 
 export const AnalyticsSpendTimes = (props) => {
   const {
@@ -276,7 +277,10 @@ export const AnalyticsSpendTimes = (props) => {
         <ChartContentWrapper>
           {
             chartDataList?.loading ? (
-              <Skeleton height={150} />
+              <div>
+                <Skeleton height={150} />
+                <GraphLoadingMessage />
+              </div>
             ) : (
               chartDataList?.data.length > 0 ? <Line data={defaultData} options={options} ref={chartRef} /> : <EmptyContent>{t('NO_DATA', 'No Data')}</EmptyContent>
             )

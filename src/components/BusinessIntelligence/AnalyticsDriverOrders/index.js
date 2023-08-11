@@ -15,6 +15,7 @@ import {
   ChartFooterContainer,
   EmptyContent
 } from './styles'
+import { GraphLoadingMessage } from '../GraphLoadingMessage'
 
 export const AnalyticsDriverOrders = (props) => {
   const {
@@ -175,7 +176,10 @@ export const AnalyticsDriverOrders = (props) => {
         <ChartContentWrapper>
           {
             chartDataList?.loading ? (
-              <Skeleton height={150} />
+              <div>
+                <Skeleton height={150} />
+                <GraphLoadingMessage />
+              </div>
             ) : (
               ((isOrders ? chartDataList?.data?.dataset?.dataset?.data : chartDataList?.data?.dataset?.dataset[0]?.data)?.length > 0 && dataOptions) ? <Line data={dataOptions} options={options} ref={chartRef} /> : <EmptyContent>{t('NO_DATA', 'No Data')}</EmptyContent>
             )

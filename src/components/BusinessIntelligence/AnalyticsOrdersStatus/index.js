@@ -11,6 +11,7 @@ import {
 import BsDownload from '@meronex/icons/bs/BsDownload'
 import { Bar } from 'react-chartjs-2'
 import Skeleton from 'react-loading-skeleton'
+import { GraphLoadingMessage } from '../GraphLoadingMessage'
 
 export const AnalyticsOrdersStatus = (props) => {
   const {
@@ -160,7 +161,10 @@ export const AnalyticsOrdersStatus = (props) => {
       </OrderStatusHeader>
       {
         orderStatusList?.loading ? (
-          <Skeleton height={150} />
+          <div>
+            <Skeleton height={150} />
+            <GraphLoadingMessage />
+          </div>
         ) : (
           orderStatusList?.data.length > 0 ? (
             <BarChartWrapper>

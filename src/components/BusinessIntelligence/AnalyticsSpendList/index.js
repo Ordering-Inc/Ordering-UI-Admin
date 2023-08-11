@@ -12,6 +12,7 @@ import {
 } from './styles'
 import Skeleton from 'react-loading-skeleton'
 import { convertHMS } from '../../../utils'
+import { GraphLoadingMessage } from '../GraphLoadingMessage'
 
 export const AnalyticsSpendList = (props) => {
   const {
@@ -37,6 +38,7 @@ export const AnalyticsSpendList = (props) => {
               <Skeleton width={80} height={80} />
               <Skeleton width={80} height={20} />
             </ReviewContentWrapper>
+            <GraphLoadingMessage />
           </AnalyticsSpendListContent>
         ) : (
           dataList?.data ? (
