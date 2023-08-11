@@ -6,8 +6,15 @@ import { useLanguage, CampaignDetail as CampaignDetailController } from 'orderin
 import { ArrowsAngleContract, ArrowsAngleExpand, ThreeDots } from 'react-bootstrap-icons'
 import { Confirm, Alert } from '../../Shared'
 import { CampaignDetailGeneral } from '../CampaignDetailGeneral'
-import { CampaignDetailContent } from '../CampaignDetailContent'
+import { CampaignEmail } from '../CampaignEmail'
+import { CampaignSMS } from '../CampaignSMS'
+import { CampaignWhatsapp } from '../CampaignWhatsapp'
+import { CampaignNotification } from '../CampaignNotification'
+import { CampaignPopup } from '../CampaignPopup'
+import { CampaignWebHook } from '../CampaignWebHook'
 import { addQueryToUrl } from '../../../utils'
+import { IconButton, Button } from '../../../styles'
+import { useWindowSize } from '../../../hooks/useWindowSize'
 
 import {
   CampaignDetailContainer,
@@ -17,17 +24,17 @@ import {
   RightHeader,
   ActionSelectorWrapper,
   Tabs,
-  Tab
+  Tab,
+  ContactWrapper
 } from './styles'
-import { IconButton } from '../../../styles'
-import { useWindowSize } from '../../../hooks/useWindowSize'
 
 const CampaignDetailUI = (props) => {
   const {
     isAddMode,
     formState,
     campaignState,
-    handleDeleteCampaign
+    handleDeleteCampaign,
+    contactState
   } = props
 
   const query = new URLSearchParams(useLocation().search)
@@ -144,7 +151,21 @@ const CampaignDetailUI = (props) => {
           ))}
         </Tabs>
         {selectedOption === 'general' && <CampaignDetailGeneral {...props} />}
-        {selectedOption === 'content' && <CampaignDetailContent {...props} />}
+        {selectedOption === 'content' && (
+          <div>
+            <ContactWrapper>
+              <p>{t('IF_YOU_NEED_HELP_WITH_SETUP_CONTACT_SUPPORT_TEAM', 'If you need help with your setup, contact our support team.')}</p>
+              <Button color='primary' outline onClick={() => window.open('https://www.ordering.co/contact-ordering', '_blank')}>{t('TECH_SUPPORT', 'Tech Support')}</Button>
+            </ContactWrapper>
+
+            {contactState?.changes?.contact_type === 'email' && <CampaignEmail {...props} />}
+            {contactState?.changes?.contact_type === 'sms' && <CampaignSMS {...props} />}
+            {contactState?.changes?.contact_type === 'whatsapp' && <CampaignWhatsapp {...props} />}
+            {contactState?.changes?.contact_type === 'notification' && <CampaignNotification {...props} />}
+            {contactState?.changes?.contact_type === 'popup' && <CampaignPopup {...props} />}
+            {contactState?.changes?.contact_type === 'webhook' && <CampaignWebHook {...props} />}
+          </div>
+        )}
       </CampaignDetailContainer>
       <Alert
         title={t('CAMPAIGN', 'Campaign')}

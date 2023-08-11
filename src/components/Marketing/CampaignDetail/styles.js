@@ -128,3 +128,19 @@ export const Tab = styled.div`
     color: #909BA9;
   `}
 `
+
+export const ContactWrapper = styled.div`
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  p {
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 14px;
+  }
+  button {
+    border-radius: 8px;
+    height: 44px;
+  }
+`

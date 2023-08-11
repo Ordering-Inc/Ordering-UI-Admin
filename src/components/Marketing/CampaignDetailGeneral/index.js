@@ -5,6 +5,7 @@ import { Input, Switch, Button } from '../../../styles'
 import { Modal, RangeCalendar, Alert } from '../../Shared'
 import { CampaignAmountOption } from '../CampaignAmountOption'
 import { CampaignSignUpOption } from '../CampaignSignUpOption'
+import { Select } from '../../../styles/Select/FirstSelect'
 
 import {
   Circle as UnCheckIcon,
@@ -31,7 +32,9 @@ import {
   RulesWrapper,
   CheckBoxWrapper,
   EndDateWrapper,
-  CheckBoxListWrapper
+  CheckBoxListWrapper,
+  SelectWrapper,
+  Option
 } from './styles'
 import Skeleton from 'react-loading-skeleton'
 
@@ -45,7 +48,9 @@ export const CampaignDetailGeneral = (props) => {
     handleUpdateClick,
     handleAddCampaign,
     audienceState,
-    handleDeleteCondition
+    handleDeleteCondition,
+    contactState,
+    handleChangeType
   } = props
 
   const [, t] = useLanguage()
@@ -53,6 +58,8 @@ export const CampaignDetailGeneral = (props) => {
   const [isASAP, setIsASAP] = useState(true)
   const [isRuleModal, setIsRuleModal] = useState(false)
   const [selectedRule, setSelectedRule] = useState(null)
+  const [typeOptions, setTypeOptions] = useState(null)
+  const [contactTypeSearchVal, setContactTypeSearchVal] = useState('')
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const ruleList = [
@@ -61,6 +68,28 @@ export const CampaignDetailGeneral = (props) => {
     { key: 'user_last_order_at', title: t('LAST_ORDER_DATE_OPTIONS', 'Last order date options') },
     { key: 'user_last_open_cart_at', title: t('OPEN_CARTS', 'Open Carts') }
   ]
+
+  const typeList = [
+    { value: 'email', content: <Option>{t('EMAIL', 'Email')}</Option> },
+    { value: 'sms', content: <Option>{t('SMS', 'SMS')}</Option> },
+    { value: 'notification', content: <Option>{t('PUSH_NOTIFICATIONS', 'Push notifications')}</Option> },
+    { value: 'webhook', content: <Option>{t('WEBHOOK', 'Webhook')}</Option> }
+    // { value: 'popup', content: <Option>{t('POPUP', 'Popup')}</Option> },
+    // { value: 'whatsapp', content: <Option>{t('WHATSAPP', 'Whatsapp')}</Option> }
+  ]
+
+  useEffect(() => {
+    const options = typeList.filter(option => option?.value.toLocaleLowerCase().includes(contactTypeSearchVal.toLocaleLowerCase()))
+    setTypeOptions(options)
+  }, [contactTypeSearchVal])
+
+  useEffect(() => {
+    if (!contactState?.error || contactState.loading) return
+    setAlertState({
+      open: true,
+      content: contactState?.error
+    })
+  }, [contactState?.error])
 
   const closeAlert = () => {
     setAlertState({
@@ -191,6 +220,22 @@ export const CampaignDetailGeneral = (props) => {
             onChange={handleChangeInput}
           />
         </InputWrapper>
+        <SelectWrapper>
+          <label>{t('CONTACT_TYPE', 'Contact type')}</label>
+          <Select
+            options={typeOptions}
+            className='select'
+            defaultValue={contactState?.changes?.contact_type || ''}
+            placeholder={t('SELECT_OPTION', 'Select an option')}
+            onChange={(value) => handleChangeType('contact_type', value)}
+            // isShowSearchBar
+            searchBarIsCustomLayout
+            searchBarIsNotLazyLoad
+            isDisabled={!isAddMode}
+            searchValue={contactTypeSearchVal}
+            handleChangeSearch={(val) => setContactTypeSearchVal(val)}
+          />
+        </SelectWrapper>
         <AudienceWrapper>
           <h2>{t('AUDIENCE', 'Audience')}</h2>
           <DynamicWrapper>
