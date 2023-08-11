@@ -144,6 +144,7 @@ var ImporterFormUI = function ImporterFormUI(props) {
     document.getElementById('meta-field-form').reset();
   };
   var handleSelectOption = function handleSelectOption(val) {
+    if (!val) return;
     setImportType(val);
   };
   var closeAlert = function closeAlert() {

@@ -11,6 +11,7 @@ var _styles = require("./styles");
 var _BsDownload = _interopRequireDefault(require("@meronex/icons/bs/BsDownload"));
 var _reactChartjs = require("react-chartjs-2");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
+var _GraphLoadingMessage = require("../GraphLoadingMessage");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -242,9 +243,9 @@ var AnalyticsOrdersStatus = function AnalyticsOrdersStatus(props) {
     disabled: (orderStatusList === null || orderStatusList === void 0 ? void 0 : orderStatusList.data.length) === 0
   }, /*#__PURE__*/_react.default.createElement(_BsDownload.default, {
     onClick: downloadCSV
-  }))), orderStatusList !== null && orderStatusList !== void 0 && orderStatusList.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }))), orderStatusList !== null && orderStatusList !== void 0 && orderStatusList.loading ? /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 150
-  }) : (orderStatusList === null || orderStatusList === void 0 ? void 0 : orderStatusList.data.length) > 0 ? /*#__PURE__*/_react.default.createElement(_styles.BarChartWrapper, null, /*#__PURE__*/_react.default.createElement(_reactChartjs.Bar, {
+  }), /*#__PURE__*/_react.default.createElement(_GraphLoadingMessage.GraphLoadingMessage, null)) : (orderStatusList === null || orderStatusList === void 0 ? void 0 : orderStatusList.data.length) > 0 ? /*#__PURE__*/_react.default.createElement(_styles.BarChartWrapper, null, /*#__PURE__*/_react.default.createElement(_reactChartjs.Bar, {
     data: data,
     options: options,
     ref: chartRef

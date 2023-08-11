@@ -24,6 +24,9 @@ var CreateCustomOrder = function CreateCustomOrder(props) {
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
+  var _useSession = (0, _orderingComponentsAdmin.useSession)(),
+    _useSession2 = _slicedToArray(_useSession, 1),
+    user = _useSession2[0].user;
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     openSidebar = _useState2[0],
@@ -32,7 +35,7 @@ var CreateCustomOrder = function CreateCustomOrder(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     moveDistance = _useState4[0],
     setMoveDistance = _useState4[1];
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (user === null || user === void 0 ? void 0 : user.level) === 0 && /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "7.6px",
     color: "lightPrimary",
     onClick: function onClick() {

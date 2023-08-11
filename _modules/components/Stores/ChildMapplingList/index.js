@@ -29,8 +29,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ChildMapplingList = function ChildMapplingList(props) {
-  var importypeOptions = props.importypeOptions,
-    mappingList = props.mappingList,
+  var mappingList = props.mappingList,
     openMappingDetails = props.openMappingDetails,
     setOpenMappingDetails = props.setOpenMappingDetails,
     handleUpdateMultipleMapping = props.handleUpdateMultipleMapping,
@@ -50,12 +49,6 @@ var ChildMapplingList = function ChildMapplingList(props) {
     _useState6 = _slicedToArray(_useState5, 2),
     openAddMapping = _useState6[0],
     setOpenAddMapping = _useState6[1];
-  var getMappingType = function getMappingType(type) {
-    var found = importypeOptions.find(function (option) {
-      return option.sync_name === type;
-    });
-    return found;
-  };
   var handleEditMapping = function handleEditMapping(mapping, index) {
     setOpenAddMapping(false);
     setOpenMappingDetails(true);
@@ -89,14 +82,14 @@ var ChildMapplingList = function ChildMapplingList(props) {
     handleUpdateMultipleMapping(_mappingList);
   };
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.MappingListContainer, null, mappingList.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.MappingWrapper, null, mappingList.map(function (item, index) {
-    var _getMappingType;
+    var _item$type, _item$type$toUpperCas, _item$type$replace, _item$type$replace$to;
     return /*#__PURE__*/_react.default.createElement(_styles.MappingItem, {
       key: index,
       active: index === selectedIndex,
       onClick: function onClick() {
         return handleEditMapping(item, index);
       }
-    }, /*#__PURE__*/_react.default.createElement("span", null, (_getMappingType = getMappingType(item.type)) === null || _getMappingType === void 0 ? void 0 : _getMappingType.content), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null));
+    }, /*#__PURE__*/_react.default.createElement("span", null, t("".concat(item.type === 'sync_orders' ? (_item$type = item.type) === null || _item$type === void 0 ? void 0 : (_item$type$toUpperCas = _item$type.toUpperCase()) === null || _item$type$toUpperCas === void 0 ? void 0 : _item$type$toUpperCas.trim() : (_item$type$replace = item.type.replace('sync_order_', '')) === null || _item$type$replace === void 0 ? void 0 : (_item$type$replace$to = _item$type$replace.toUpperCase()) === null || _item$type$replace$to === void 0 ? void 0 : _item$type$replace$to.trim()), "".concat(item.type.replace('sync_', '').replaceAll('_', ' ')[0].toUpperCase() + item.type.replace('sync_', '').replaceAll('_', ' ').slice(1)))), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null));
   })), !defaultImporter && /*#__PURE__*/_react.default.createElement(_styles.AddNewMappingButton, {
     onClick: function onClick() {
       return handleOpenAddMapping();
