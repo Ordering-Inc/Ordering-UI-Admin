@@ -15,6 +15,7 @@ import {
   EmptyContent,
   CustomerSatisfactionContent
 } from './styles'
+import { GraphLoadingMessage } from '../GraphLoadingMessage'
 
 const Score = ({ star, text }) => (
   <ScoreDiv>
@@ -83,6 +84,7 @@ export const AnalyticsCustomerSatisfaction = (props) => {
                 </div>
               ))
             }
+            <GraphLoadingMessage />
           </SkeletonContainerWrapper>
         ) : (
           <CustomerSatisfactionWrapper>
