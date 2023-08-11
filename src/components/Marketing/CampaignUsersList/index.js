@@ -14,7 +14,10 @@ import {
 
 const CampaignUserListUI = (props) => {
   const {
-    userListState
+    userListState,
+    title,
+    isOpens,
+    isBounces
   } = props
 
   const [, t] = useLanguage()
@@ -54,10 +57,12 @@ const CampaignUserListUI = (props) => {
     <Container>
       <Title>
         <h1>
-          {t('OPENS', 'Opens')}
-          {userListState?.loading
-            ? <Skeleton width={30} height={16} />
-            : <span>{userListState?.users?.length || 0}</span>}
+          {title}
+          {isOpens && (
+            userListState?.loading
+              ? <Skeleton width={30} height={16} />
+              : <span>{userListState?.users?.length || 0}</span>
+          )}
         </h1>
       </Title>
       <TableContainer>
@@ -66,7 +71,7 @@ const CampaignUserListUI = (props) => {
             <tr>
               <th>{t('USER', 'User')}</th>
               <th>{t('EMAIL_ADDRESS', 'Email Address')}</th>
-              <th>{t('OPENS', 'Opens')}</th>
+              <th>{title}</th>
             </tr>
           </THead>
           {userListState?.loading && (
@@ -85,7 +90,11 @@ const CampaignUserListUI = (props) => {
               <tr>
                 <td>{user?.user?.name}</td>
                 <td className='underline'>{user?.user?.email}</td>
-                <td>{user?.open_at ? 1 : 0}</td>
+                <td>
+                  {isOpens
+                    ? (user?.open_at ? 1 : 0)
+                    : (isBounces ? (user?.bounced_at || 0) : (user?.unsubscribed_at || 0))}
+                </td>
               </tr>
             </TBody>
           ))}
