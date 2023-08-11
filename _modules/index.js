@@ -639,12 +639,6 @@ Object.defineProperty(exports, "CampaignDetail", {
     return _Marketing.CampaignDetail;
   }
 });
-Object.defineProperty(exports, "CampaignDetailContent", {
-  enumerable: true,
-  get: function get() {
-    return _Marketing.CampaignDetailContent;
-  }
-});
 Object.defineProperty(exports, "CampaignDetailGeneral", {
   enumerable: true,
   get: function get() {

@@ -12,6 +12,7 @@ var _styles = require("../../../styles");
 var _Shared = require("../../Shared");
 var _CampaignAmountOption = require("../CampaignAmountOption");
 var _CampaignSignUpOption = require("../CampaignSignUpOption");
+var _FirstSelect = require("../../../styles/Select/FirstSelect");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _styles2 = require("./styles");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
@@ -27,7 +28,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var CampaignDetailGeneral = function CampaignDetailGeneral(props) {
-  var _campaignState$campai5, _formState$changes9, _ref, _formState$changes$na, _formState$changes10, _campaignState$campai6, _formState$changes$au, _formState$changes11, _campaignState$campai7, _formState$changes$au2, _formState$changes12, _campaignState$campai8, _ref2, _formState$changes$en, _formState$changes13, _campaignState$campai9, _formState$changes$en2, _formState$changes14, _campaignState$campai10, _formState$changes$au3, _formState$changes15, _campaignState$campai11, _formState$changes$au4, _formState$changes16, _campaignState$campai12, _formState$changes17, _campaignState$campai13, _formState$changes$st, _formState$changes18, _campaignState$campai14, _formState$changes$st2, _formState$changes19, _campaignState$campai15, _formState$changes$sc, _formState$changes20, _campaignState$campai16, _audienceState$pagina;
+  var _campaignState$campai5, _formState$changes9, _ref, _formState$changes$na, _formState$changes10, _campaignState$campai6, _contactState$changes, _formState$changes$au, _formState$changes11, _campaignState$campai7, _formState$changes$au2, _formState$changes12, _campaignState$campai8, _ref2, _formState$changes$en, _formState$changes13, _campaignState$campai9, _formState$changes$en2, _formState$changes14, _campaignState$campai10, _formState$changes$au3, _formState$changes15, _campaignState$campai11, _formState$changes$au4, _formState$changes16, _campaignState$campai12, _formState$changes17, _campaignState$campai13, _formState$changes$st, _formState$changes18, _campaignState$campai14, _formState$changes$st2, _formState$changes19, _campaignState$campai15, _formState$changes$sc, _formState$changes20, _campaignState$campai16, _audienceState$pagina;
   var formState = props.formState,
     campaignState = props.campaignState,
     handleChangeItem = props.handleChangeItem,
@@ -36,7 +37,9 @@ var CampaignDetailGeneral = function CampaignDetailGeneral(props) {
     handleUpdateClick = props.handleUpdateClick,
     handleAddCampaign = props.handleAddCampaign,
     audienceState = props.audienceState,
-    handleDeleteCondition = props.handleDeleteCondition;
+    handleDeleteCondition = props.handleDeleteCondition,
+    contactState = props.contactState,
+    handleChangeType = props.handleChangeType;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -52,13 +55,21 @@ var CampaignDetailGeneral = function CampaignDetailGeneral(props) {
     _useState6 = _slicedToArray(_useState5, 2),
     selectedRule = _useState6[0],
     setSelectedRule = _useState6[1];
-  var _useState7 = (0, _react.useState)({
+  var _useState7 = (0, _react.useState)(null),
+    _useState8 = _slicedToArray(_useState7, 2),
+    typeOptions = _useState8[0],
+    setTypeOptions = _useState8[1];
+  var _useState9 = (0, _react.useState)(''),
+    _useState10 = _slicedToArray(_useState9, 2),
+    contactTypeSearchVal = _useState10[0],
+    setContactTypeSearchVal = _useState10[1];
+  var _useState11 = (0, _react.useState)({
       open: false,
       content: []
     }),
-    _useState8 = _slicedToArray(_useState7, 2),
-    alertState = _useState8[0],
-    setAlertState = _useState8[1];
+    _useState12 = _slicedToArray(_useState11, 2),
+    alertState = _useState12[0],
+    setAlertState = _useState12[1];
   var ruleList = [{
     key: 'orders_count',
     title: t('AMOUNT_OF_ORDERS_OPTIONS', 'Amount of orders options')
@@ -72,6 +83,36 @@ var CampaignDetailGeneral = function CampaignDetailGeneral(props) {
     key: 'user_last_open_cart_at',
     title: t('OPEN_CARTS', 'Open Carts')
   }];
+  var typeList = [{
+    value: 'email',
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, t('EMAIL', 'Email'))
+  }, {
+    value: 'sms',
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, t('SMS', 'SMS'))
+  }, {
+    value: 'notification',
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, t('PUSH_NOTIFICATIONS', 'Push notifications'))
+  }, {
+    value: 'webhook',
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, t('WEBHOOK', 'Webhook'))
+  }
+  // { value: 'popup', content: <Option>{t('POPUP', 'Popup')}</Option> },
+  // { value: 'whatsapp', content: <Option>{t('WHATSAPP', 'Whatsapp')}</Option> }
+  ];
+
+  (0, _react.useEffect)(function () {
+    var options = typeList.filter(function (option) {
+      return option === null || option === void 0 ? void 0 : option.value.toLocaleLowerCase().includes(contactTypeSearchVal.toLocaleLowerCase());
+    });
+    setTypeOptions(options);
+  }, [contactTypeSearchVal]);
+  (0, _react.useEffect)(function () {
+    if (!(contactState !== null && contactState !== void 0 && contactState.error) || contactState.loading) return;
+    setAlertState({
+      open: true,
+      content: contactState === null || contactState === void 0 ? void 0 : contactState.error
+    });
+  }, [contactState === null || contactState === void 0 ? void 0 : contactState.error]);
   var closeAlert = function closeAlert() {
     setAlertState({
       open: false,
@@ -194,6 +235,23 @@ var CampaignDetailGeneral = function CampaignDetailGeneral(props) {
     name: "name",
     value: (_ref = (_formState$changes$na = formState === null || formState === void 0 ? void 0 : (_formState$changes10 = formState.changes) === null || _formState$changes10 === void 0 ? void 0 : _formState$changes10.name) !== null && _formState$changes$na !== void 0 ? _formState$changes$na : campaignState === null || campaignState === void 0 ? void 0 : (_campaignState$campai6 = campaignState.campaign) === null || _campaignState$campai6 === void 0 ? void 0 : _campaignState$campai6.name) !== null && _ref !== void 0 ? _ref : '',
     onChange: handleChangeInput
+  })), /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('CONTACT_TYPE', 'Contact type')), /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
+    options: typeOptions,
+    className: "select",
+    defaultValue: (contactState === null || contactState === void 0 ? void 0 : (_contactState$changes = contactState.changes) === null || _contactState$changes === void 0 ? void 0 : _contactState$changes.contact_type) || '',
+    placeholder: t('SELECT_OPTION', 'Select an option'),
+    onChange: function onChange(value) {
+      return handleChangeType('contact_type', value);
+    }
+    // isShowSearchBar
+    ,
+    searchBarIsCustomLayout: true,
+    searchBarIsNotLazyLoad: true,
+    isDisabled: !isAddMode,
+    searchValue: contactTypeSearchVal,
+    handleChangeSearch: function handleChangeSearch(val) {
+      return setContactTypeSearchVal(val);
+    }
   })), /*#__PURE__*/_react.default.createElement(_styles2.AudienceWrapper, null, /*#__PURE__*/_react.default.createElement("h2", null, t('AUDIENCE', 'Audience')), /*#__PURE__*/_react.default.createElement(_styles2.DynamicWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.RadioCheckWrapper, {
     onClick: function onClick() {
       return handleChangeItem('audience_type', 'dynamic');

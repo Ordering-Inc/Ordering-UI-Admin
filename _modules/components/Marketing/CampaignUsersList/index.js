@@ -30,7 +30,10 @@ function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefine
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var CampaignUserListUI = function CampaignUserListUI(props) {
   var _userListState$users, _userListState$users2;
-  var userListState = props.userListState;
+  var userListState = props.userListState,
+    title = props.title,
+    isOpens = props.isOpens,
+    isBounces = props.isBounces;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -74,10 +77,10 @@ var CampaignUserListUI = function CampaignUserListUI(props) {
     setTotalPages(_totalPages);
     setCurrentPages(_currentBusinessList);
   }, [userListState, currentPage, pagesPerPage]);
-  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, /*#__PURE__*/_react.default.createElement("h1", null, t('OPENS', 'Opens'), userListState !== null && userListState !== void 0 && userListState.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, /*#__PURE__*/_react.default.createElement("h1", null, title, isOpens && (userListState !== null && userListState !== void 0 && userListState.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 30,
     height: 16
-  }) : /*#__PURE__*/_react.default.createElement("span", null, (userListState === null || userListState === void 0 ? void 0 : (_userListState$users = userListState.users) === null || _userListState$users === void 0 ? void 0 : _userListState$users.length) || 0))), /*#__PURE__*/_react.default.createElement(_styles.TableContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Table, null, /*#__PURE__*/_react.default.createElement(_styles.THead, null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, t('USER', 'User')), /*#__PURE__*/_react.default.createElement("th", null, t('EMAIL_ADDRESS', 'Email Address')), /*#__PURE__*/_react.default.createElement("th", null, t('OPENS', 'Opens')))), (userListState === null || userListState === void 0 ? void 0 : userListState.loading) && _toConsumableArray(Array(8).keys()).map(function (i) {
+  }) : /*#__PURE__*/_react.default.createElement("span", null, (userListState === null || userListState === void 0 ? void 0 : (_userListState$users = userListState.users) === null || _userListState$users === void 0 ? void 0 : _userListState$users.length) || 0)))), /*#__PURE__*/_react.default.createElement(_styles.TableContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Table, null, /*#__PURE__*/_react.default.createElement(_styles.THead, null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("th", null, t('USER', 'User')), /*#__PURE__*/_react.default.createElement("th", null, t('EMAIL_ADDRESS', 'Email Address')), /*#__PURE__*/_react.default.createElement("th", null, title))), (userListState === null || userListState === void 0 ? void 0 : userListState.loading) && _toConsumableArray(Array(8).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.TBody, {
       key: i
     }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -93,7 +96,7 @@ var CampaignUserListUI = function CampaignUserListUI(props) {
       key: i
     }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, user === null || user === void 0 ? void 0 : (_user$user = user.user) === null || _user$user === void 0 ? void 0 : _user$user.name), /*#__PURE__*/_react.default.createElement("td", {
       className: "underline"
-    }, user === null || user === void 0 ? void 0 : (_user$user2 = user.user) === null || _user$user2 === void 0 ? void 0 : _user$user2.email), /*#__PURE__*/_react.default.createElement("td", null, user !== null && user !== void 0 && user.open_at ? 1 : 0)));
+    }, user === null || user === void 0 ? void 0 : (_user$user2 = user.user) === null || _user$user2 === void 0 ? void 0 : _user$user2.email), /*#__PURE__*/_react.default.createElement("td", null, isOpens ? user !== null && user !== void 0 && user.open_at ? 1 : 0 : isBounces ? (user === null || user === void 0 ? void 0 : user.bounced_at) || 0 : (user === null || user === void 0 ? void 0 : user.unsubscribed_at) || 0)));
   }))), /*#__PURE__*/_react.default.createElement(_styles.PaginationWrapper, null, (userListState === null || userListState === void 0 ? void 0 : (_userListState$users2 = userListState.users) === null || _userListState$users2 === void 0 ? void 0 : _userListState$users2.length) > 0 && /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
     currentPage: currentPage,
     totalPages: totalPages,
