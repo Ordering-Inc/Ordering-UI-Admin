@@ -109,6 +109,7 @@ export const ImporterFormUI = (props) => {
   }
 
   const handleSelectOption = (val) => {
+    if(!val) return
     setImportType(val)
   }
 
