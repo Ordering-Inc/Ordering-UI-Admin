@@ -13,6 +13,7 @@ import {
 } from './styles'
 import BsDownload from '@meronex/icons/bs/BsDownload'
 import Skeleton from 'react-loading-skeleton'
+import { GraphLoadingMessage } from '../GraphLoadingMessage'
 
 export const AnalyticsProductCategories = (props) => {
   const {
@@ -63,6 +64,7 @@ export const AnalyticsProductCategories = (props) => {
                 </div>
               ))
             }
+            <GraphLoadingMessage />
           </SkeletonContainerWrapper>
         ) : (
           <ProductCategoryContentWrapper>

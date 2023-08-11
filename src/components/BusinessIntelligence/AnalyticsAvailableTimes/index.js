@@ -13,6 +13,7 @@ import { Bar } from 'react-chartjs-2'
 import Skeleton from 'react-loading-skeleton'
 import moment from 'moment'
 import { Modal } from '../../Shared'
+import { GraphLoadingMessage } from '../GraphLoadingMessage'
 
 export const AnalyticsAvailableTimes = (props) => {
   const {
@@ -193,7 +194,10 @@ export const AnalyticsAvailableTimes = (props) => {
         </ChartHeaderContainer>
         {
           availableTimesList?.loading ? (
-            <Skeleton height={150} />
+            <div>
+              <Skeleton height={150} />
+              <GraphLoadingMessage />
+            </div>
           ) : (
             (availableTimesList?.data?.available?.length > 0 || availableTimesList?.data?.not_available?.length > 0) ? (
               <BarChartWrapper>

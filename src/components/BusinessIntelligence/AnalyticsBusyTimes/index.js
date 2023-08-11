@@ -13,6 +13,7 @@ import {
   BarChartWrapper,
   EmptyContent
 } from './styles'
+import { GraphLoadingMessage } from '../GraphLoadingMessage'
 
 export const AnalyticsBusyTimes = (props) => {
   const {
@@ -193,7 +194,10 @@ export const AnalyticsBusyTimes = (props) => {
         </ChartHeaderContainer>
         {
           busyTimesList?.loading ? (
-            <Skeleton height={150} />
+            <div>
+              <Skeleton height={150} />
+              <GraphLoadingMessage />
+            </div>
           ) : (
             (busyTimesList?.data?.busy?.length > 0 || busyTimesList?.data?.not_busy?.length > 0) ? (
               <BarChartWrapper>

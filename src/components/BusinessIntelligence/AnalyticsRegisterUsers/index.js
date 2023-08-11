@@ -14,6 +14,7 @@ import { useLanguage } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import moment from 'moment'
 import { Modal } from '../../Shared'
+import { GraphLoadingMessage } from '../GraphLoadingMessage'
 
 export const AnalyticsRegisterUsers = (props) => {
   const {
@@ -205,7 +206,10 @@ export const AnalyticsRegisterUsers = (props) => {
         <RegisterUserChartWrapper>
           {
             registerUsersList?.loading ? (
-              <Skeleton height={150} />
+              <div>
+                <Skeleton height={150} />
+                <GraphLoadingMessage />
+              </div>
             ) : (
               registerUsersList?.data?.length > 0 ? (
                 <Line data={defaultData} options={options} ref={chartRef} />
