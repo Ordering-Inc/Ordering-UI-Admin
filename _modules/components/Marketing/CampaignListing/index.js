@@ -53,7 +53,7 @@ var CampaignListingUI = function CampaignListingUI(props) {
   var handleCloseDetail = function handleCloseDetail() {
     setIsOpenDetail(false);
     setSelectedCampaign(null);
-    (0, _utils.removeQueryToUrl)(['id']);
+    (0, _utils.removeQueryToUrl)(['id', 'tab']);
   };
   (0, _react.useEffect)(function () {
     var id = query.get('id');

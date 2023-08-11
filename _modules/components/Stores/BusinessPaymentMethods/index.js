@@ -57,6 +57,7 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
     actionState = props.actionState,
     changesState = props.changesState,
     sitesState = props.sitesState,
+    deviceState = props.deviceState,
     stripeConnectData = props.stripeConnectData,
     handleChangeBusinessPaymentState = props.handleChangeBusinessPaymentState,
     handleChangeStripeConnectData = props.handleChangeStripeConnectData,
@@ -299,7 +300,9 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
     handleChangeSandbox: handleChangeSandbox,
     handleChangeInput: handleChangeInput,
     handleSaveClick: handleSaveClick,
-    handleDeletePaymethod: handleDeleteBusinessPaymethodOption
+    handleDeletePaymethod: handleDeleteBusinessPaymethodOption,
+    deviceState: deviceState,
+    selectedPaymethodGateway: selectedPaymethodGateway
   }), selectedPaymethodGateway === 'apple_pay' && /*#__PURE__*/_react.default.createElement(_PaymentOptionMethods.PaymentOptionMethods, {
     sitesState: sitesState,
     open: isEdit,
@@ -422,6 +425,7 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
     business: business,
     changesState: changesState,
     orderTypes: orderTypes,
+    deviceState: deviceState,
     onClose: function onClose() {
       return handleCloseEdit();
     },

@@ -40,7 +40,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PaymentOptionSquareUI = function PaymentOptionSquareUI(props) {
-  var _businessPaymethod$pa2, _businessPaymethod$pa3, _sitesState$sites, _ref2, _squareData$sandbox, _ref3, _squareData$data$appl, _squareData$data, _businessPaymethod$da, _ref4, _squareData$data$loca, _squareData$data2, _businessPaymethod$da2, _ref5, _squareData$data$clie, _squareData$data3, _businessPaymethod$da3, _ref6, _squareData$data_sand, _squareData$data_sand2, _businessPaymethod$da4, _ref7, _squareData$data_sand3, _squareData$data_sand4, _businessPaymethod$da5, _ref8, _squareData$data_sand5, _squareData$data_sand6, _businessPaymethod$da6, _sitesState$sites2;
+  var _businessPaymethod$pa2, _businessPaymethod$pa3, _sitesState$sites, _ref2, _squareData$sandbox, _ref3, _squareData$data$appl, _squareData$data, _businessPaymethod$da, _ref4, _squareData$data$loca, _squareData$data2, _businessPaymethod$da2, _ref5, _squareData$data$clie, _squareData$data3, _businessPaymethod$da3, _ref6, _squareData$data_sand, _squareData$data_sand2, _businessPaymethod$da4, _ref7, _squareData$data_sand3, _squareData$data_sand4, _businessPaymethod$da5, _ref8, _squareData$data_sand5, _squareData$data_sand6, _businessPaymethod$da6, _sitesState$sites2, _deviceState$devices, _deviceState$devices2;
   var open = props.open,
     onClose = props.onClose,
     businessPaymethod = props.businessPaymethod,
@@ -55,7 +55,9 @@ var PaymentOptionSquareUI = function PaymentOptionSquareUI(props) {
     handleSavePaymethod = props.handleSavePaymethod,
     handleChangeDataInput = props.handleChangeDataInput,
     handleChangeSanboxDataInput = props.handleChangeSanboxDataInput,
-    handleChangeSandbox = props.handleChangeSandbox;
+    handleChangeSandbox = props.handleChangeSandbox,
+    deviceState = props.deviceState,
+    EmptyMessage = props.EmptyMessage;
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -183,7 +185,12 @@ var PaymentOptionSquareUI = function PaymentOptionSquareUI(props) {
     onClick: function onClick() {
       return handleTabClick(2);
     }
-  }, t('ORDER_TYPE', 'Order type'))), paymentTabs === 0 && /*#__PURE__*/_react.default.createElement(_styles4.SquareInfoContainer, null, /*#__PURE__*/_react.default.createElement(_styles4.SquareButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }, t('ORDER_TYPE', 'Order type')), /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
+    active: paymentTabs === 3,
+    onClick: function onClick() {
+      return handleTabClick(3);
+    }
+  }, t('DEVICES', 'Devices'))), paymentTabs === 0 && /*#__PURE__*/_react.default.createElement(_styles4.SquareInfoContainer, null, /*#__PURE__*/_react.default.createElement(_styles4.SquareButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "primary",
     onClick: handleConnectSquare
@@ -256,7 +263,22 @@ var PaymentOptionSquareUI = function PaymentOptionSquareUI(props) {
     }, (_ref10 = (_changesState$allowed = changesState === null || changesState === void 0 ? void 0 : changesState.allowed_order_types) !== null && _changesState$allowed !== void 0 ? _changesState$allowed : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : businessPaymethod.allowed_order_types) !== null && _ref10 !== void 0 && _ref10.includes(type.value) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, {
       className: "fill"
     }) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), /*#__PURE__*/_react.default.createElement(_styles3.TabOptionName, null, type.text));
-  }), /*#__PURE__*/_react.default.createElement(_Shared.Confirm, {
+  }), paymentTabs === 3 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (deviceState === null || deviceState === void 0 || (_deviceState$devices = deviceState.devices) === null || _deviceState$devices === void 0 ? void 0 : _deviceState$devices.length) > 0 && (deviceState === null || deviceState === void 0 ? void 0 : deviceState.devices.map(function (device) {
+    var _ref11, _changesState$devices, _businessPaymethod$de;
+    return /*#__PURE__*/_react.default.createElement(_styles3.TabOption, {
+      key: device.id,
+      onClick: function onClick() {
+        return setPaymethodInfo({
+          key: 'devices',
+          value: device.id
+        });
+      }
+    }, (_ref11 = (_changesState$devices = changesState === null || changesState === void 0 ? void 0 : changesState.devices) !== null && _changesState$devices !== void 0 ? _changesState$devices : businessPaymethod === null || businessPaymethod === void 0 || (_businessPaymethod$de = businessPaymethod.devices) === null || _businessPaymethod$de === void 0 ? void 0 : _businessPaymethod$de.map(function (s) {
+      return s.id;
+    })) !== null && _ref11 !== void 0 && _ref11.includes(device.id) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, {
+      className: "fill"
+    }) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), /*#__PURE__*/_react.default.createElement(_styles3.TabOptionName, null, device.name));
+  })), (deviceState === null || deviceState === void 0 || (_deviceState$devices2 = deviceState.devices) === null || _deviceState$devices2 === void 0 ? void 0 : _deviceState$devices2.length) === 0 && /*#__PURE__*/_react.default.createElement(EmptyMessage, null, t('NO_ASSIGNED_DEVICES', 'There are no assigned devices'))), /*#__PURE__*/_react.default.createElement(_Shared.Confirm, {
     width: "700px",
     title: t('WEB_APPNAME', 'Ordering'),
     content: confirm.content,

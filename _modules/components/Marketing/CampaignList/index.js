@@ -49,7 +49,15 @@ var CampaignList = function CampaignList(props) {
     _useState2 = _slicedToArray(_useState, 2),
     openModal = _useState2[0],
     setOpenModal = _useState2[1];
-  var _useState3 = (0, _react.useState)({
+  var _useState3 = (0, _react.useState)(false),
+    _useState4 = _slicedToArray(_useState3, 2),
+    openUnsubscribed = _useState4[0],
+    setOpenUnsubscribed = _useState4[1];
+  var _useState5 = (0, _react.useState)(false),
+    _useState6 = _slicedToArray(_useState5, 2),
+    openBounced = _useState6[0],
+    setOpenBounced = _useState6[1];
+  var _useState7 = (0, _react.useState)({
       campaign: true,
       contact_type: true,
       audience: true,
@@ -61,9 +69,9 @@ var CampaignList = function CampaignList(props) {
       // update: true,
       // actions: true
     }),
-    _useState4 = _slicedToArray(_useState3, 2),
-    allowColumns = _useState4[0],
-    setAllowColumns = _useState4[1];
+    _useState8 = _slicedToArray(_useState7, 2),
+    allowColumns = _useState8[0],
+    setAllowColumns = _useState8[1];
   var optionsDefault = [{
     value: 'campaign',
     content: t('CAMPAIGN', 'Campaign')
@@ -124,6 +132,14 @@ var CampaignList = function CampaignList(props) {
   var handleOpens = function handleOpens(campaign) {
     setSelectedCampaign(campaign);
     setOpenModal(true);
+  };
+  var handleOpenUnsubscribed = function handleOpenUnsubscribed(campaign) {
+    setSelectedCampaign(campaign);
+    setOpenUnsubscribed(true);
+  };
+  var handleOpenBounced = function handleOpenBounced(campaign) {
+    setSelectedCampaign(campaign);
+    setOpenBounced(true);
   };
   (0, _react.useEffect)(function () {
     if (!isUseQuery || !(paginationProps !== null && paginationProps !== void 0 && paginationProps.currentPage) || !(paginationProps !== null && paginationProps !== void 0 && paginationProps.pageSize) || !(paginationProps !== null && paginationProps !== void 0 && paginationProps.totalPages)) return;
@@ -193,7 +209,17 @@ var CampaignList = function CampaignList(props) {
         return handleOpens(campaign);
       },
       className: "opens"
-    }, (campaign === null || campaign === void 0 ? void 0 : campaign.open_count) || 0)), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.unsubscribed_count) && /*#__PURE__*/_react.default.createElement("td", null, (campaign === null || campaign === void 0 ? void 0 : campaign.unsubscribed_count) || 0), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.bounced_count) && /*#__PURE__*/_react.default.createElement("td", null, (campaign === null || campaign === void 0 ? void 0 : campaign.bounced_count) || 0), /*#__PURE__*/_react.default.createElement("td", null, (campaign === null || campaign === void 0 ? void 0 : campaign.audience_type) === 'dynamic' && /*#__PURE__*/_react.default.createElement(_styles2.SwitchWrapper, null, /*#__PURE__*/_react.default.createElement("p", {
+    }, (campaign === null || campaign === void 0 ? void 0 : campaign.open_count) || 0)), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.unsubscribed_count) && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.LinkText, {
+      onClick: function onClick() {
+        return handleOpenUnsubscribed(campaign);
+      },
+      className: "opens"
+    }, (campaign === null || campaign === void 0 ? void 0 : campaign.unsubscribed_count) || 0)), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.bounced_count) && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.LinkText, {
+      onClick: function onClick() {
+        return handleOpenBounced(campaign);
+      },
+      className: "opens"
+    }, (campaign === null || campaign === void 0 ? void 0 : campaign.bounced_count) || 0)), /*#__PURE__*/_react.default.createElement("td", null, (campaign === null || campaign === void 0 ? void 0 : campaign.audience_type) === 'dynamic' && /*#__PURE__*/_react.default.createElement(_styles2.SwitchWrapper, null, /*#__PURE__*/_react.default.createElement("p", {
       className: "campaign-enabled"
     }, t('ENABLE', 'Enable')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
       defaultChecked: campaign === null || campaign === void 0 ? void 0 : campaign.enabled,
@@ -227,6 +253,31 @@ var CampaignList = function CampaignList(props) {
       return setOpenModal(false);
     }
   }, /*#__PURE__*/_react.default.createElement(_CampaignUsersList.CampaignUserList, {
+    isOpens: true,
+    title: t('OPENS', 'Opens'),
+    campaignId: selectedCampaign === null || selectedCampaign === void 0 ? void 0 : selectedCampaign.id
+  })), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    width: "700px",
+    height: "80vh",
+    padding: "30px",
+    open: openUnsubscribed,
+    onClose: function onClose() {
+      return setOpenUnsubscribed(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_CampaignUsersList.CampaignUserList, {
+    title: t('UNSUBSCRIBED', 'Unsubscribed'),
+    campaignId: selectedCampaign === null || selectedCampaign === void 0 ? void 0 : selectedCampaign.id
+  })), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    width: "700px",
+    height: "80vh",
+    padding: "30px",
+    open: openBounced,
+    onClose: function onClose() {
+      return setOpenBounced(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_CampaignUsersList.CampaignUserList, {
+    isBounces: true,
+    title: t('BOUNCES', 'Bounces'),
     campaignId: selectedCampaign === null || selectedCampaign === void 0 ? void 0 : selectedCampaign.id
   })));
 };

@@ -38,18 +38,21 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PaymentOption = function PaymentOption(props) {
-  var _sitesState$sites, _localState$sites, _businessPaymethod$si, _businessPaymethod$pa2, _businessPaymethod$pa3, _sitesState$sites4, _sitesState$sites5;
+  var _sitesState$sites, _localState$sites, _businessPaymethod$si, _businessPaymethod$pa2, _businessPaymethod$pa3, _sitesState$sites4, _sitesState$sites5, _deviceState$devices, _deviceState$devices2;
   var open = props.open,
     onClose = props.onClose,
     orderTypes = props.orderTypes,
     sitesState = props.sitesState,
+    deviceState = props.deviceState,
     changesState = props.changesState,
     handleChangeBusinessPaymentState = props.handleChangeBusinessPaymentState,
     cleanChangesState = props.cleanChangesState,
     actionState = props.actionState,
     handleSaveClick = props.handleSaveClick,
     businessPaymethod = props.businessPaymethod,
-    handleDeletePaymethod = props.handleDeletePaymethod;
+    handleDeletePaymethod = props.handleDeletePaymethod,
+    selectedPaymethodGateway = props.selectedPaymethodGateway;
+  var allowDevicesPaymethods = ['cash', 'card_delivery'];
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -75,7 +78,8 @@ var PaymentOption = function PaymentOption(props) {
     setConfirm = _useState6[1];
   var _useState7 = (0, _react.useState)({
       allowed_order_types: businessPaymethod === null || businessPaymethod === void 0 ? void 0 : businessPaymethod.allowed_order_types,
-      sites: businessPaymethod === null || businessPaymethod === void 0 ? void 0 : businessPaymethod.sites
+      sites: businessPaymethod === null || businessPaymethod === void 0 ? void 0 : businessPaymethod.sites,
+      devices: businessPaymethod === null || businessPaymethod === void 0 ? void 0 : businessPaymethod.devices
     }),
     _useState8 = _slicedToArray(_useState7, 2),
     localState = _useState8[0],
@@ -157,8 +161,9 @@ var PaymentOption = function PaymentOption(props) {
     var changes = {};
     if (changesState !== null && changesState !== void 0 && changesState.allowed_order_types) changes.allowed_order_types = changesState === null || changesState === void 0 ? void 0 : changesState.allowed_order_types;
     if (changesState !== null && changesState !== void 0 && changesState.sites) changes.sites = changesState === null || changesState === void 0 ? void 0 : changesState.sites;
+    if (changesState !== null && changesState !== void 0 && changesState.devices && allowDevicesPaymethods.includes(selectedPaymethodGateway)) changes.devices = changesState === null || changesState === void 0 ? void 0 : changesState.devices;
     if (Object.keys(changes).length > 0) setLocalState(JSON.parse(JSON.stringify(changes)));
-  }, [changesState === null || changesState === void 0 ? void 0 : changesState.allowed_order_types, changesState === null || changesState === void 0 ? void 0 : changesState.sites]);
+  }, [changesState === null || changesState === void 0 ? void 0 : changesState.allowed_order_types, changesState === null || changesState === void 0 ? void 0 : changesState.sites, changesState === null || changesState === void 0 ? void 0 : changesState.devices]);
   var handleTabClick = function handleTabClick(tab, isInitialRender) {
     setPaymentTabs(tab);
     if (!isInitialRender) {
@@ -200,7 +205,12 @@ var PaymentOption = function PaymentOption(props) {
     onClick: function onClick() {
       return handleTabClick(1);
     }
-  }, t('ORDER_TYPE', 'Order type'))), paymentTabs === 0 && (sitesState === null || sitesState === void 0 || (_sitesState$sites5 = sitesState.sites) === null || _sitesState$sites5 === void 0 ? void 0 : _sitesState$sites5.length) > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles3.TabOption, {
+  }, t('ORDER_TYPE', 'Order type')), allowDevicesPaymethods.includes(selectedPaymethodGateway) && /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
+    active: paymentTabs === 2,
+    onClick: function onClick() {
+      return handleTabClick(2);
+    }
+  }, t('DEVICES', 'Devices'))), paymentTabs === 0 && (sitesState === null || sitesState === void 0 || (_sitesState$sites5 = sitesState.sites) === null || _sitesState$sites5 === void 0 ? void 0 : _sitesState$sites5.length) > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles3.TabOption, {
     key: "all",
     onClick: function onClick() {
       return setPaymethodInfo({
@@ -238,7 +248,22 @@ var PaymentOption = function PaymentOption(props) {
     }, (_ref3 = (_localState$allowed_o = localState === null || localState === void 0 ? void 0 : localState.allowed_order_types) !== null && _localState$allowed_o !== void 0 ? _localState$allowed_o : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : businessPaymethod.allowed_order_types) !== null && _ref3 !== void 0 && _ref3.includes(type.value) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, {
       className: "fill"
     }) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), /*#__PURE__*/_react.default.createElement(_styles3.TabOptionName, null, type.text));
-  }), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }), paymentTabs === 2 && allowDevicesPaymethods.includes(selectedPaymethodGateway) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (deviceState === null || deviceState === void 0 || (_deviceState$devices = deviceState.devices) === null || _deviceState$devices === void 0 ? void 0 : _deviceState$devices.length) > 0 && (deviceState === null || deviceState === void 0 ? void 0 : deviceState.devices.map(function (device) {
+    var _ref4, _localState$devices, _businessPaymethod$de;
+    return /*#__PURE__*/_react.default.createElement(_styles3.TabOption, {
+      key: device.id,
+      onClick: function onClick() {
+        return setPaymethodInfo({
+          key: 'devices',
+          value: device.id
+        });
+      }
+    }, (_ref4 = (_localState$devices = localState === null || localState === void 0 ? void 0 : localState.devices) !== null && _localState$devices !== void 0 ? _localState$devices : businessPaymethod === null || businessPaymethod === void 0 || (_businessPaymethod$de = businessPaymethod.devices) === null || _businessPaymethod$de === void 0 ? void 0 : _businessPaymethod$de.map(function (s) {
+      return s.id;
+    })) !== null && _ref4 !== void 0 && _ref4.includes(device.id) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, {
+      className: "fill"
+    }) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), /*#__PURE__*/_react.default.createElement(_styles3.TabOptionName, null, device.name));
+  })), (deviceState === null || deviceState === void 0 || (_deviceState$devices2 = deviceState.devices) === null || _deviceState$devices2 === void 0 ? void 0 : _deviceState$devices2.length) === 0 && /*#__PURE__*/_react.default.createElement(_styles3.EmptyMessage, null, t('NO_ASSIGNED_DEVICES', 'There are no assigned devices'))), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "5px",
     color: "primary",
     disabled: actionState.loading || Object.keys(changesState).length === 0,

@@ -35,7 +35,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrdersTable = function OrdersTable(props) {
-  var _configState$configs, _orderList$orders3;
+  var _configState$configs, _configState$configs2, _orderList$orders3;
   var hidePhoto = props.hidePhoto,
     isSelectedOrders = props.isSelectedOrders,
     orderList = props.orderList,
@@ -90,6 +90,7 @@ var OrdersTable = function OrdersTable(props) {
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configState = _useConfig2[0];
   var isEnabledRowInColor = (configState === null || configState === void 0 || (_configState$configs = configState.configs) === null || _configState$configs === void 0 || (_configState$configs = _configState$configs.row_in_color_enabled) === null || _configState$configs === void 0 ? void 0 : _configState$configs.value) === '1';
+  var showExternalId = (configState === null || configState === void 0 || (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 || (_configState$configs2 = _configState$configs2.change_order_id) === null || _configState$configs2 === void 0 ? void 0 : _configState$configs2.value) === '1';
   var optionsDefault = [{
     value: 'status',
     content: t('STATUS', 'Status')
@@ -412,7 +413,7 @@ var OrdersTable = function OrdersTable(props) {
           return handleSelecteAllOrder();
         },
         className: "orderCheckBox"
-      }, !orderList.loading && isAllChecked ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null)), t('ORDER', 'Order')), column === _toConsumableArray(array).pop() && /*#__PURE__*/_react.default.createElement("th", {
+      }, !orderList.loading && isAllChecked ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null)), showExternalId ? t('DATE', 'Date') : t('ORDER', 'Order')), column === _toConsumableArray(array).pop() && /*#__PURE__*/_react.default.createElement("th", {
         className: "orderPrice",
         key: "noDragTh-".concat(i)
       }, /*#__PURE__*/_react.default.createElement(_Shared.ColumnAllowSettingPopover, {
@@ -690,7 +691,7 @@ var OrdersTable = function OrdersTable(props) {
           className: "orderCheckBox"
         }, selectedOrderIds.includes(order === null || order === void 0 ? void 0 : order.id) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null)), /*#__PURE__*/_react.default.createElement("div", {
           className: "info"
-        }, (allowColumns === null || allowColumns === void 0 || (_allowColumns$orderNu5 = allowColumns.orderNumber) === null || _allowColumns$orderNu5 === void 0 ? void 0 : _allowColumns$orderNu5.visable) && /*#__PURE__*/_react.default.createElement("p", {
+        }, (allowColumns === null || allowColumns === void 0 || (_allowColumns$orderNu5 = allowColumns.orderNumber) === null || _allowColumns$orderNu5 === void 0 ? void 0 : _allowColumns$orderNu5.visable) && !showExternalId && /*#__PURE__*/_react.default.createElement("p", {
           className: "bold"
         }, t('INVOICE_ORDER_NO', 'Order No.'), " ", order === null || order === void 0 ? void 0 : order.id), (allowColumns === null || allowColumns === void 0 || (_allowColumns$dateTim5 = allowColumns.dateTime) === null || _allowColumns$dateTim5 === void 0 ? void 0 : _allowColumns$dateTim5.visable) && /*#__PURE__*/_react.default.createElement("p", {
           className: "date"

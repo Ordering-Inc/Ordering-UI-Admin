@@ -45,7 +45,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var MessagesUI = function MessagesUI(props) {
-  var _order$business, _order$customer, _order$driver, _theme$images, _order$business6, _order$business7, _order$customer6, _order$customer7, _order$customer8, _order$driver6, _order$driver7, _order$driver8;
+  var _configs$change_order, _order$business, _order$customer, _order$driver, _theme$images, _order$business6, _order$business7, _order$customer6, _order$customer7, _order$customer8, _order$driver6, _order$driver7, _order$driver8;
   var isChat = props.isChat,
     order = props.order,
     messages = props.messages,
@@ -119,6 +119,10 @@ var MessagesUI = function MessagesUI(props) {
     setIsChatDisabled = _useState14[1];
   var previousStatus = [1, 2, 5, 6, 10, 11, 12, 16, 17];
   var chatDisabled = previousStatus.includes(order === null || order === void 0 ? void 0 : order.status);
+  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configs = _useConfig2[0].configs;
+  var showExternalId = (configs === null || configs === void 0 || (_configs$change_order = configs.change_order_id) === null || _configs$change_order === void 0 ? void 0 : _configs$change_order.value) === '1';
   var adminMessageList = [{
     key: 'message_1',
     text: t('ADMIN_MESSAGE_1', 'admin_message_1')
@@ -337,7 +341,7 @@ var MessagesUI = function MessagesUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles.HeaderProfile, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperHeader, {
     messageDashboardView: messageDashboardView,
     historyView: history
-  }, /*#__PURE__*/_react.default.createElement(_styles.HeaderInfo, null, isChat && /*#__PURE__*/_react.default.createElement(_styles.ChatHeader, null, /*#__PURE__*/_react.default.createElement(_styles.OrderNumber, null, t('INVOICE_ORDER_NO', 'Order No'), " ", order.id), /*#__PURE__*/_react.default.createElement(_styles.ImageContainer, null, (user === null || user === void 0 ? void 0 : user.level) !== 2 && /*#__PURE__*/_react.default.createElement(_Shared.Image, {
+  }, /*#__PURE__*/_react.default.createElement(_styles.HeaderInfo, null, isChat && /*#__PURE__*/_react.default.createElement(_styles.ChatHeader, null, /*#__PURE__*/_react.default.createElement(_styles.OrderNumber, null, t('INVOICE_ORDER_NO', 'Order No'), " ", showExternalId && !!(order !== null && order !== void 0 && order.external_id) ? order.external_id : order.id), /*#__PURE__*/_react.default.createElement(_styles.ImageContainer, null, (user === null || user === void 0 ? void 0 : user.level) !== 2 && /*#__PURE__*/_react.default.createElement(_Shared.Image, {
     src: optimizeImage((_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo, 'h_40,c_limit'),
     fallback: /*#__PURE__*/_react.default.createElement(_BisBusiness.default, null)
   }), /*#__PURE__*/_react.default.createElement(_Shared.Image, {

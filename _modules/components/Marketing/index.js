@@ -21,12 +21,6 @@ Object.defineProperty(exports, "CampaignDetail", {
     return _CampaignDetail.CampaignDetail;
   }
 });
-Object.defineProperty(exports, "CampaignDetailContent", {
-  enumerable: true,
-  get: function get() {
-    return _CampaignDetailContent.CampaignDetailContent;
-  }
-});
 Object.defineProperty(exports, "CampaignDetailGeneral", {
   enumerable: true,
   get: function get() {
@@ -196,7 +190,6 @@ var _CampaignDetail = require("./CampaignDetail");
 var _CampaignHeader = require("./CampaignHeader");
 var _CampaignList = require("./CampaignList");
 var _CampaignDetailGeneral = require("./CampaignDetailGeneral");
-var _CampaignDetailContent = require("./CampaignDetailContent");
 var _CampaignAmountOption = require("./CampaignAmountOption");
 var _CampaignSignUpOption = require("./CampaignSignUpOption");
 var _CampaignEmail = require("./CampaignEmail");

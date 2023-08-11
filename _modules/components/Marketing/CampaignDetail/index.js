@@ -13,11 +13,16 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _Shared = require("../../Shared");
 var _CampaignDetailGeneral = require("../CampaignDetailGeneral");
-var _CampaignDetailContent = require("../CampaignDetailContent");
+var _CampaignEmail = require("../CampaignEmail");
+var _CampaignSMS = require("../CampaignSMS");
+var _CampaignWhatsapp = require("../CampaignWhatsapp");
+var _CampaignNotification = require("../CampaignNotification");
+var _CampaignPopup = require("../CampaignPopup");
+var _CampaignWebHook = require("../CampaignWebHook");
 var _utils = require("../../../utils");
-var _styles = require("./styles");
-var _styles2 = require("../../../styles");
+var _styles = require("../../../styles");
 var _useWindowSize2 = require("../../../hooks/useWindowSize");
+var _styles2 = require("./styles");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
@@ -32,11 +37,12 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var CampaignDetailUI = function CampaignDetailUI(props) {
-  var _formState$changes, _campaignState$campai, _formState$changes$na, _formState$changes2, _campaignState$campai2;
+  var _formState$changes, _campaignState$campai, _formState$changes$na, _formState$changes2, _campaignState$campai2, _contactState$changes, _contactState$changes2, _contactState$changes3, _contactState$changes4, _contactState$changes5, _contactState$changes6;
   var isAddMode = props.isAddMode,
     formState = props.formState,
     campaignState = props.campaignState,
-    handleDeleteCampaign = props.handleDeleteCampaign;
+    handleDeleteCampaign = props.handleDeleteCampaign,
+    contactState = props.contactState;
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -123,24 +129,30 @@ var CampaignDetailUI = function CampaignDetailUI(props) {
       handleTabClick(selectedOption);
     }
   }, []);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.CampaignDetailContainer, null, /*#__PURE__*/_react.default.createElement(_styles.DetailsHeader, null, /*#__PURE__*/_react.default.createElement(_styles.LeftHeader, null, ((formState === null || formState === void 0 || (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.name) || (campaignState === null || campaignState === void 0 || (_campaignState$campai = campaignState.campaign) === null || _campaignState$campai === void 0 ? void 0 : _campaignState$campai.name)) && /*#__PURE__*/_react.default.createElement(_styles.CampaignName, null, (_formState$changes$na = formState === null || formState === void 0 || (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.name) !== null && _formState$changes$na !== void 0 ? _formState$changes$na : campaignState === null || campaignState === void 0 || (_campaignState$campai2 = campaignState.campaign) === null || _campaignState$campai2 === void 0 ? void 0 : _campaignState$campai2.name)), /*#__PURE__*/_react.default.createElement(_styles.RightHeader, null, width > 576 && /*#__PURE__*/_react.default.createElement(_styles2.IconButton, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.CampaignDetailContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.DetailsHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.LeftHeader, null, ((formState === null || formState === void 0 || (_formState$changes = formState.changes) === null || _formState$changes === void 0 ? void 0 : _formState$changes.name) || (campaignState === null || campaignState === void 0 || (_campaignState$campai = campaignState.campaign) === null || _campaignState$campai === void 0 ? void 0 : _campaignState$campai.name)) && /*#__PURE__*/_react.default.createElement(_styles2.CampaignName, null, (_formState$changes$na = formState === null || formState === void 0 || (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.name) !== null && _formState$changes$na !== void 0 ? _formState$changes$na : campaignState === null || campaignState === void 0 || (_campaignState$campai2 = campaignState.campaign) === null || _campaignState$campai2 === void 0 ? void 0 : _campaignState$campai2.name)), /*#__PURE__*/_react.default.createElement(_styles2.RightHeader, null, width > 576 && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: expandSidebar
-  }, isExpand ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowsAngleContract, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowsAngleExpand, null)), !isAddMode && /*#__PURE__*/_react.default.createElement(_styles.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
+  }, isExpand ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowsAngleContract, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ArrowsAngleExpand, null)), !isAddMode && /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
     menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
     title: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDots, null),
     id: theme !== null && theme !== void 0 && theme.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
     onClick: onClickDeteteCampaign
-  }, t('DELETE', 'Delete')))))), /*#__PURE__*/_react.default.createElement(_styles.Tabs, null, contentOptionList.map(function (option) {
-    return /*#__PURE__*/_react.default.createElement(_styles.Tab, {
+  }, t('DELETE', 'Delete')))))), /*#__PURE__*/_react.default.createElement(_styles2.Tabs, null, contentOptionList.map(function (option) {
+    return /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
       key: option.key,
       active: selectedOption === option.key,
       onClick: function onClick() {
         return handleTabClick(option.key);
       }
     }, option.name);
-  })), selectedOption === 'general' && /*#__PURE__*/_react.default.createElement(_CampaignDetailGeneral.CampaignDetailGeneral, props), selectedOption === 'content' && /*#__PURE__*/_react.default.createElement(_CampaignDetailContent.CampaignDetailContent, props)), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+  })), selectedOption === 'general' && /*#__PURE__*/_react.default.createElement(_CampaignDetailGeneral.CampaignDetailGeneral, props), selectedOption === 'content' && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles2.ContactWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('IF_YOU_NEED_HELP_WITH_SETUP_CONTACT_SUPPORT_TEAM', 'If you need help with your setup, contact our support team.')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    color: "primary",
+    outline: true,
+    onClick: function onClick() {
+      return window.open('https://www.ordering.co/contact-ordering', '_blank');
+    }
+  }, t('TECH_SUPPORT', 'Tech Support'))), (contactState === null || contactState === void 0 || (_contactState$changes = contactState.changes) === null || _contactState$changes === void 0 ? void 0 : _contactState$changes.contact_type) === 'email' && /*#__PURE__*/_react.default.createElement(_CampaignEmail.CampaignEmail, props), (contactState === null || contactState === void 0 || (_contactState$changes2 = contactState.changes) === null || _contactState$changes2 === void 0 ? void 0 : _contactState$changes2.contact_type) === 'sms' && /*#__PURE__*/_react.default.createElement(_CampaignSMS.CampaignSMS, props), (contactState === null || contactState === void 0 || (_contactState$changes3 = contactState.changes) === null || _contactState$changes3 === void 0 ? void 0 : _contactState$changes3.contact_type) === 'whatsapp' && /*#__PURE__*/_react.default.createElement(_CampaignWhatsapp.CampaignWhatsapp, props), (contactState === null || contactState === void 0 || (_contactState$changes4 = contactState.changes) === null || _contactState$changes4 === void 0 ? void 0 : _contactState$changes4.contact_type) === 'notification' && /*#__PURE__*/_react.default.createElement(_CampaignNotification.CampaignNotification, props), (contactState === null || contactState === void 0 || (_contactState$changes5 = contactState.changes) === null || _contactState$changes5 === void 0 ? void 0 : _contactState$changes5.contact_type) === 'popup' && /*#__PURE__*/_react.default.createElement(_CampaignPopup.CampaignPopup, props), (contactState === null || contactState === void 0 || (_contactState$changes6 = contactState.changes) === null || _contactState$changes6 === void 0 ? void 0 : _contactState$changes6.contact_type) === 'webhook' && /*#__PURE__*/_react.default.createElement(_CampaignWebHook.CampaignWebHook, props))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('CAMPAIGN', 'Campaign'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
