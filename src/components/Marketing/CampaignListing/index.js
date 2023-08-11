@@ -27,7 +27,7 @@ export const CampaignListingUI = (props) => {
   const handleCloseDetail = () => {
     setIsOpenDetail(false)
     setSelectedCampaign(null)
-    removeQueryToUrl(['id'])
+    removeQueryToUrl(['id', 'tab'])
   }
 
   useEffect(() => {

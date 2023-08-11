@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { useLanguage, useSession } from 'ordering-components-admin'
+import { useLanguage, useSession, useConfig } from 'ordering-components-admin'
 import EnDotSingle from '@meronex/icons/en/EnDotSingle'
 import ReactToPrint from 'react-to-print'
 import { useWindowSize } from '../../../hooks/useWindowSize'
@@ -47,6 +47,8 @@ export const OrderDetailsHeader = (props) => {
   const { width } = useWindowSize()
   const [showPrinterOptions, setShowPrinterOptions] = useState(false)
   const dropdownReference = useRef()
+  const [{ configs }] = useConfig()
+  const showExternalId = configs?.change_order_id?.value === '1'
 
   const stripePaymethods = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect']
 
@@ -94,7 +96,7 @@ export const OrderDetailsHeader = (props) => {
   return (
     <OrderDetailsHeaderContainer>
       <div>
-        <h1>{isServiceOrder ? t('APPOINTMENT_NO', 'Appointment No.') : t('INVOICE_ORDER_NO', 'Order No')} {order?.id}</h1>
+        <h1>{isServiceOrder ? t('APPOINTMENT_NO', 'Appointment No.') : t('INVOICE_ORDER_NO', 'Order No')} {(showExternalId && !!order?.external_id) ? order.external_id : order.id}</h1>
         <ButtonGroup>
           {user?.level !== 5 && (
             <ButtonLink

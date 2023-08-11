@@ -132,3 +132,7 @@ export const TabOptionName = styled.span`
     margin-left: 10px;
   `}
 `
+
+export const EmptyMessage = styled.div`
+  padding: 15px 0;
+`

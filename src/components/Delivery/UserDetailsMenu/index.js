@@ -11,7 +11,8 @@ export const UserDetailsMenu = (props) => {
   const {
     currentMenuSelected,
     handleChangeMenu,
-    isDriverMenu
+    isDriverMenu,
+    disableSchedule
   } = props
 
   const [, t] = useLanguage()
@@ -31,10 +32,12 @@ export const UserDetailsMenu = (props) => {
     // { key: 'personalization', content: t('PERSONALIZATION', 'Personalization') }
   ]
 
+  const menuItemsFiltered = menuItems.filter(item => !disableSchedule ? item.key !== 'schedule' : item.key)
+
   return (
     <UserDetailsMenuContainer>
       <DragScroll>
-        {menuItems.map(menu => (
+        {menuItemsFiltered.map(menu => (
           <Tab
             key={menu.key}
             active={menu.key === currentMenuSelected}

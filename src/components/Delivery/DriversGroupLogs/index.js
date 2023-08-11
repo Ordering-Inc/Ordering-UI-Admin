@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
-import { useLanguage, useUtils, DriversGroupLogs as DriversGroupLogsController } from 'ordering-components-admin'
+import { useLanguage, useUtils, DriversGroupLogs as DriversGroupLogsController, useConfig } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
-import { Pagination } from '../../Shared'
+import { Modal, Pagination } from '../../Shared'
 
 import {
   DriversGroupLogsContainer,
@@ -12,8 +12,15 @@ import {
   NoData,
   WrapperPagination,
   DataListTable,
-  EventTypeContainer
+  EventTypeContainer,
+  SeeChanges,
+  SchedulesWrapper,
+  Schedules,
+  ScheduleDay,
+  ScheduleLapses,
+  ScheduleTitle
 } from './styles'
+import moment from 'moment'
 
 export const DriversGroupLogsUI = (props) => {
   const {
@@ -25,6 +32,13 @@ export const DriversGroupLogsUI = (props) => {
 
   const [, t] = useLanguage()
   const [{ parseDate }] = useUtils()
+  const [open, setOpen] = React.useState(false)
+  const [schedules, setSchedules] = React.useState({
+    newSchedule: [],
+    oldSchedule: []
+  })
+  const [{ configs }] = useConfig()
+  const formatTime = configs?.general_hour_format?.value
 
   const getAttributeName = (key) => {
     const attributes = [
@@ -73,6 +87,18 @@ export const DriversGroupLogsUI = (props) => {
       : typeof data === 'string' ? JSON.parse(data) : data
   }
 
+  const handleSchedules = (_schedules) => {
+    setSchedules({
+      newSchedule: _schedules?.new,
+      oldSchedule: _schedules?.old
+    })
+  }
+
+  const scheduleModalData = (_schedules) => {
+    setOpen(true)
+    handleSchedules(_schedules)
+  }
+
   useEffect(() => {
     if (logsList.loading || logsList.logs.length > 0 || paginationProps.totalPages <= 1) return
     if (paginationProps.currentPage !== paginationProps.totalPages) {
@@ -81,6 +107,37 @@ export const DriversGroupLogsUI = (props) => {
       handleChangePage(paginationProps.currentPage - 1)
     }
   }, [logsList.logs, paginationProps])
+
+  const daysOptions = [
+    t('DAY7', 'Sunday'),
+    t('DAY1', 'Monday'),
+    t('DAY2', 'Tuesday'),
+    t('DAY3', 'Wednesday'),
+    t('DAY4', 'Thursday'),
+    t('DAY5', 'Friday'),
+    t('DAY6', 'Saturday')
+  ]
+
+  const checkTime = (val) => (val < 10 ? `0${val}` : val)
+  const timeFormated = (time) => {
+    return moment(`1900-01-01 ${checkTime(time.hour)}:${checkTime(time.minute)}`).format(formatTime)
+  }
+
+  const getSchedule = (_schedules) => {
+    return ((!_schedules?.length && _schedules?.length < 1) ? <p>{t('NONE', 'None')}</p> : _schedules?.map((schedule, i) => {
+      return (
+        <ScheduleDay key={i}>
+          <span>{daysOptions[i]}</span>
+          <ScheduleLapses>
+            {schedule?.lapses?.map((item, i) => {
+              return <p key={i}>{`${timeFormated(item?.open)} - ${timeFormated(item?.close)}`}</p>
+            })}
+          </ScheduleLapses>
+        </ScheduleDay>
+      )
+    })
+    )
+  }
 
   return (
     <>
@@ -95,6 +152,8 @@ export const DriversGroupLogsUI = (props) => {
                   <th>{t('CONTROL_PANEL_USERS', 'Users')}</th>
                   <th>{t('EVENTS_TYPE', 'Events type')}</th>
                   <th>{t('DETAILS', 'Details')}</th>
+                  <th>{t('NEW', 'New')}</th>
+                  <th>{t('OLD', 'Old')}</th>
                   <th>{t('EXPORT_DATE', 'Date')}</th>
                   <th>{t('USER_AGENT', 'User agent')}</th>
                 </tr>
@@ -137,8 +196,8 @@ export const DriversGroupLogsUI = (props) => {
                     <tr>
                       <td>
                         <UserInfoContainer>
-                          <p>{log?.user?.name} {log?.user?.lastname}</p>
-                          <p>{log?.user?.email}</p>
+                          <p>{log?.author?.name || log?.user?.name} {log?.author?.lastname || log?.user?.lastname}</p>
+                          <p>{log?.author?.email || log?.user?.email}</p>
                         </UserInfoContainer>
                       </td>
                       <td>
@@ -152,20 +211,56 @@ export const DriversGroupLogsUI = (props) => {
                             <tbody key={i}>
                               <tr>
                                 <td>{getAttributeName(item?.attribute)}</td>
-                                <td>
-                                  {
-                                    (typeof item?.new !== 'undefined' && item?.new !== null)
-                                      ? `${item?.new}`
-                                      : item?.added?.length > 0 ? item?.added?.toString() : t('NONE', 'None')
-                                  }
-                                </td>
-                                <td>
-                                  {
-                                    (typeof item?.old !== 'undefined' && item?.old !== null)
-                                      ? `${item?.old}`
-                                      : item?.removed?.length > 0 ? item?.removed?.toString() : t('NONE', 'None')
-                                  }
-                                </td>
+                              </tr>
+                            </tbody>
+                          ))}
+                        </DataListTable>
+                      </td>
+                      <td>
+                        <DataListTable>
+                          {log?.data && getValidLogData(log?.data).map((item, i) => (
+                            <tbody key={i}>
+                              <tr>
+                                {item.attribute !== 'schedule'
+                                  ? (
+                                    <td>
+                                      {
+                                        (typeof item?.new !== 'undefined' && item?.new !== null)
+                                          ? `${item?.new}`
+                                          : item?.added?.length > 0 ? item?.added?.toString() : t('NONE', 'None')
+                                      }
+                                    </td>
+                                  )
+                                  : (
+                                    <td>
+                                      <SeeChanges onClick={() => scheduleModalData(item, 'new')}>{t('SEE_CHANGES', 'See changes')}</SeeChanges>
+                                    </td>
+                                  )}
+                              </tr>
+                            </tbody>
+                          ))}
+                        </DataListTable>
+                      </td>
+                      <td>
+                        <DataListTable>
+                          {log?.data && getValidLogData(log?.data).map((item, i) => (
+                            <tbody key={i}>
+                              <tr>
+                                {item.attribute !== 'schedule'
+                                  ? (
+                                    <td>
+                                      {
+                                        (typeof item?.old !== 'undefined' && item?.old !== null)
+                                          ? `${item?.old}`
+                                          : item?.removed?.length > 0 ? item?.removed?.toString() : t('NONE', 'None')
+                                      }
+                                    </td>
+                                  )
+                                  : (
+                                    <td>
+                                      <SeeChanges onClick={() => scheduleModalData(item, 'old')}>{t('SEE_CHANGES', 'See changes')}</SeeChanges>
+                                    </td>
+                                  )}
                               </tr>
                             </tbody>
                           ))}
@@ -200,6 +295,26 @@ export const DriversGroupLogsUI = (props) => {
           </WrapperPagination>
         )}
       </DriversGroupLogsContainer>
+      <Modal
+        width='40%'
+        height='60vh'
+        style={{ overflowY: 'auto' }}
+        padding='30px'
+        title={t('SCHEDULE_CHANGES', 'Schedule changes')}
+        open={open}
+        onClose={() => setOpen(false)}
+      >
+        <SchedulesWrapper>
+          <Schedules>
+            <ScheduleTitle>{t('NEW', 'New')}</ScheduleTitle>
+            {getSchedule(schedules?.newSchedule)}
+          </Schedules>
+          <Schedules>
+            <ScheduleTitle>{t('OLD', 'Old')}</ScheduleTitle>
+            {getSchedule(schedules?.oldSchedule)}
+          </Schedules>
+        </SchedulesWrapper>
+      </Modal>
     </>
   )
 }

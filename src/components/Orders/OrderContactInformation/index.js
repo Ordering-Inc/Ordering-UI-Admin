@@ -351,8 +351,8 @@ export const OrderContactInformation = (props) => {
           <DriverInfoContainer>
             <DriverInfo>
               <PhotoWrapper>
-                {order?.driver?.photo ? (
-                  <Photo bgimage={optimizeImage(order?.driver?.photo, 'h_50,c_limit')} />
+                {(order?.driver?.photo || order?.external_driver?.photo) ? (
+                  <Photo bgimage={optimizeImage((order?.driver?.photo || order?.external_driver?.photo), 'h_50,c_limit')} />
                 ) : (
                   <FaUserAlt />
                 )}
@@ -372,11 +372,29 @@ export const OrderContactInformation = (props) => {
                   <p>{t('DRIVER', 'Driver')}</p>
                 </InfoContent>
               ) : (
-                <InfoContent>
-                  <div>
-                    <p>{t('NO_DRIVER', 'No driver')}</p>
-                  </div>
-                </InfoContent>
+                <>
+                  {order.external_driver_id ? (
+                    <InfoContent>
+                      <div>
+                        <p>{order?.external_driver?.name}</p>
+                        {order?.external_driver?.phone && (
+                          <IconButton
+                            onClick={() => window.open(`tel:${order?.external_driver?.phone}`)}
+                          >
+                            <Telephone />
+                          </IconButton>
+                        )}
+                      </div>
+                      <p>{t('DRIVER', 'Driver')}</p>
+                    </InfoContent>
+                  ) : (
+                    <InfoContent>
+                      <div>
+                        <p>{t('NO_DRIVER', 'No driver')}</p>
+                      </div>
+                    </InfoContent>
+                  )}
+                </>
               )}
             </DriverInfo>
           </DriverInfoContainer>

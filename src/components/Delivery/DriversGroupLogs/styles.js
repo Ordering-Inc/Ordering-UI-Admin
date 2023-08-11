@@ -13,6 +13,14 @@ export const TableWrapper = styled.div`
   height: 100%;
 `
 
+export const SeeChanges = styled.span`
+  color: ${props => props.theme.colors.primary};
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+`
+
 export const Table = styled.table`
   width: 100%;
   min-width: 1000px;
@@ -121,7 +129,6 @@ export const WrapperPagination = styled.div`
 
 export const DataListTable = styled.table`
   width: 100%;
-  border-left: 1px solid ${props => props.theme.colors.borderColor};
   border-right: 1px solid ${props => props.theme.colors.borderColor};
 
   tbody {
@@ -155,18 +162,52 @@ export const EventTypeContainer = styled.div`
   min-height: 36px;
   display: flex;
   align-items: center;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-left: 15px;
+  margin-right: 10px;
+  border-right: 1px solid ${props => props.theme.colors.borderColor};
+  border-left: 1px solid ${props => props.theme.colors.borderColor};
   p{
     margin-bottom: 0px;
   }
-  ${props => props.theme?.rtl ? css`
-    padding-right: 15px;
-    margin-right: 15px;
-    margin-left: 10px;
-    border-right: 1px solid ${props => props.theme.colors.borderColor};
-  ` : css`
-    padding-left: 15px;
-    margin-left: 15px;
-    margin-right: 10px;
-    border-left: 1px solid ${props => props.theme.colors.borderColor};
-  `}
+`
+
+export const SchedulesWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  justify-content: center;
+
+  div:first-child {
+    border-right: 1px solid #E9ECEF;
+    padding-right: 30px;
+`
+
+export const Schedules = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`
+
+export const ScheduleDay = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
+`
+
+export const ScheduleLapses = styled.div`
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid #E9ECEF;
+  padding-left: 10px;
+
+  p  {
+    margin: 0px;
+  }
+`
+
+export const ScheduleTitle = styled.h2`
+  text-align: center;
 `

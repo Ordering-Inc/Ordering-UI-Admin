@@ -17,7 +17,6 @@ import { CampaignDetail } from './CampaignDetail'
 import { CampaignHeader } from './CampaignHeader'
 import { CampaignList } from './CampaignList'
 import { CampaignDetailGeneral } from './CampaignDetailGeneral'
-import { CampaignDetailContent } from './CampaignDetailContent'
 import { CampaignAmountOption } from './CampaignAmountOption'
 import { CampaignSignUpOption } from './CampaignSignUpOption'
 import { CampaignEmail } from './CampaignEmail'
@@ -48,7 +47,6 @@ export {
   CampaignHeader,
   CampaignList,
   CampaignDetailGeneral,
-  CampaignDetailContent,
   CampaignAmountOption,
   CampaignSignUpOption,
   CampaignEmail,

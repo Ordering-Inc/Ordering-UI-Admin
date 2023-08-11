@@ -47,6 +47,7 @@ const BusinessPaymentMethodsUI = (props) => {
     actionState,
     changesState,
     sitesState,
+    deviceState,
     stripeConnectData,
     handleChangeBusinessPaymentState,
     handleChangeStripeConnectData,
@@ -287,6 +288,8 @@ const BusinessPaymentMethodsUI = (props) => {
                   handleChangeInput={handleChangeInput}
                   handleSaveClick={handleSaveClick}
                   handleDeletePaymethod={handleDeleteBusinessPaymethodOption}
+                  deviceState={deviceState}
+                  selectedPaymethodGateway={selectedPaymethodGateway}
                 />
               )}
               {selectedPaymethodGateway === 'apple_pay' && (
@@ -419,6 +422,7 @@ const BusinessPaymentMethodsUI = (props) => {
                   business={business}
                   changesState={changesState}
                   orderTypes={orderTypes}
+                  deviceState={deviceState}
                   onClose={() => handleCloseEdit()}
                   businessPaymethod={selectedBusinessPaymethod}
                   handleDeletePaymethod={handleDeleteBusinessPaymethodOption}
