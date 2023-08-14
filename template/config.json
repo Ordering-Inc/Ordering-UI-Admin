@@ -9,7 +9,7 @@
     "version": "v400"
   },
   "socket": {
-    "url": "https://socket.ordering.co"
+    "url": "https://socket-v3.ordering.co"
   },
   "use_project_domain": false
 }
