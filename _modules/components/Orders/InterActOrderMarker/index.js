@@ -78,9 +78,7 @@ var InterActOrderMarker = function InterActOrderMarker(props) {
     }, group.name, ",");
   })), (driver === null || driver === void 0 ? void 0 : driver.last_location_at) && /*#__PURE__*/_react.default.createElement(_styles.TextContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Text, {
     fontWeight: "bold"
-  }, t('LAST_LOCATION', 'Last location'), ":"), /*#__PURE__*/_react.default.createElement(_styles.Text, null, parseDate(driver.last_location_at, {
-    utc: false
-  }))))), /*#__PURE__*/_react.default.createElement(_styles.WrapperMapMarker, {
+  }, t('LAST_LOCATION', 'Last location'), ":"), /*#__PURE__*/_react.default.createElement(_styles.Text, null, parseDate(driver.last_location_at))))), /*#__PURE__*/_react.default.createElement(_styles.WrapperMapMarker, {
     onMouseOver: function onMouseOver() {
       return setInfoShow(true);
     },
