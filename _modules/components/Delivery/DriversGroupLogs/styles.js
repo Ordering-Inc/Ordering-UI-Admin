@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.WrapperPagination = exports.UserInfoContainer = exports.TableWrapper = exports.Table = exports.SeeChanges = exports.SchedulesWrapper = exports.Schedules = exports.ScheduleTitle = exports.ScheduleLapses = exports.ScheduleDay = exports.NoData = exports.EventTypeContainer = exports.DriversGroupLogsContainer = exports.DateTimeWrapper = exports.DataListTable = void 0;
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29;
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
@@ -74,13 +74,15 @@ var EventTypeContainer = _styledComponents.default.div(_templateObject23 || (_te
   return props.theme.colors.borderColor;
 });
 exports.EventTypeContainer = EventTypeContainer;
-var SchedulesWrapper = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: row;\n  gap: 30px;\n  justify-content: center;\n\n  div:first-child {\n    border-right: 1px solid #E9ECEF;\n    padding-right: 30px;\n"])));
+var SchedulesWrapper = _styledComponents.default.div(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: row;\n  gap: 30px;\n  justify-content: center;\n\n  ", "\n"])), function (props) {
+  return (props === null || props === void 0 ? void 0 : props.border) && (0, _styledComponents.css)(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n    div:first-child {\n    border-right: 1px solid #E9ECEF;\n    padding-right: 30px;\n    "])));
+});
 exports.SchedulesWrapper = SchedulesWrapper;
-var Schedules = _styledComponents.default.div(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  gap: 20px;\n"])));
+var Schedules = _styledComponents.default.div(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  gap: 20px;\n"])));
 exports.Schedules = Schedules;
-var ScheduleDay = _styledComponents.default.div(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  gap: 10px;\n  justify-content: space-between;\n"])));
+var ScheduleDay = _styledComponents.default.div(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  gap: 10px;\n  justify-content: space-between;\n"])));
 exports.ScheduleDay = ScheduleDay;
-var ScheduleLapses = _styledComponents.default.div(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  border-left: 1px solid #E9ECEF;\n  padding-left: 10px;\n\n  p  {\n    margin: 0px;\n  }\n"])));
+var ScheduleLapses = _styledComponents.default.div(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  border-left: 1px solid #E9ECEF;\n  padding-left: 10px;\n\n  p  {\n    margin: 0px;\n  }\n"])));
 exports.ScheduleLapses = ScheduleLapses;
-var ScheduleTitle = _styledComponents.default.h2(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  text-align: center;\n"])));
+var ScheduleTitle = _styledComponents.default.h2(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  text-align: center;\n"])));
 exports.ScheduleTitle = ScheduleTitle;
