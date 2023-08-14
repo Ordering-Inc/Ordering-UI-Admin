@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useLanguage } from 'ordering-components-admin'
+import { useLanguage, useSession } from 'ordering-components-admin'
 import { CustomOrderDetails } from './CustomOrderDetails'
 import { SideBar } from '../../Shared'
 import { Button } from '../../../styles'
@@ -11,18 +11,21 @@ export const CreateCustomOrder = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [{ user }] = useSession()
   const [openSidebar, setOpenSidebar] = useState(false)
   const [moveDistance, setMoveDistance] = useState(0)
 
   return (
     <>
-      <Button
-        borderRadius='7.6px'
-        color='lightPrimary'
-        onClick={() => setOpenSidebar(true)}
-      >
-        {t('CREATE_CUSTOM_ORDER', 'Create custom order')}
-      </Button>
+      {user?.level === 0 && (
+        <Button
+          borderRadius='7.6px'
+          color='lightPrimary'
+          onClick={() => setOpenSidebar(true)}
+        >
+          {t('CREATE_CUSTOM_ORDER', 'Create custom order')}
+        </Button>
+      )}
       {openSidebar && (
         <SideBar
           sidebarId='custom_order_details'
