@@ -144,6 +144,7 @@ var ImporterFormUI = function ImporterFormUI(props) {
     document.getElementById('meta-field-form').reset();
   };
   var handleSelectOption = function handleSelectOption(val) {
+    if (!val) return;
     setImportType(val);
   };
   var closeAlert = function closeAlert() {
@@ -421,7 +422,7 @@ var ImporterFormUI = function ImporterFormUI(props) {
     disabled: formState.loading,
     autoComplete: "off",
     value: (mappingState === null || mappingState === void 0 ? void 0 : mappingState['external_extra_option_suboption_id']) || ''
-  })))))), !isAdvanedOptions && importType !== 8 && /*#__PURE__*/_react.default.createElement(_styles2.FiledListWrapper, {
+  })))))), importType !== 8 && /*#__PURE__*/_react.default.createElement(_styles2.FiledListWrapper, {
     disabled: isDefaultImporter
   }, /*#__PURE__*/_react.default.createElement("label", null, t('FIELDS', 'Fields')), Object.keys(fieldList).length > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, Object.entries(fieldList).map(function (value, i) {
     return /*#__PURE__*/_react.default.createElement(_reactBootstrap.Row, {
