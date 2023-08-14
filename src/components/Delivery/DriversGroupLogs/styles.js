@@ -179,9 +179,12 @@ export const SchedulesWrapper = styled.div`
   gap: 30px;
   justify-content: center;
 
-  div:first-child {
+  ${props => props?.border && css`
+    div:first-child {
     border-right: 1px solid #E9ECEF;
     padding-right: 30px;
+    `
+  }
 `
 
 export const Schedules = styled.div`

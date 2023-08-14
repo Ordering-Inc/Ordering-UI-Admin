@@ -304,15 +304,19 @@ export const DriversGroupLogsUI = (props) => {
         open={open}
         onClose={() => setOpen(false)}
       >
-        <SchedulesWrapper>
-          <Schedules>
-            <ScheduleTitle>{t('NEW', 'New')}</ScheduleTitle>
-            {getSchedule(schedules?.newSchedule)}
-          </Schedules>
-          <Schedules>
-            <ScheduleTitle>{t('OLD', 'Old')}</ScheduleTitle>
-            {getSchedule(schedules?.oldSchedule)}
-          </Schedules>
+        <SchedulesWrapper border={!!schedules?.oldSchedule}>
+          {schedules?.newSchedule && (
+            <Schedules>
+              <ScheduleTitle>{t('NEW', 'New')}</ScheduleTitle>
+              {getSchedule(schedules?.newSchedule)}
+            </Schedules>
+          )}
+          {schedules?.oldSchedule && (
+            <Schedules>
+              <ScheduleTitle>{t('OLD', 'Old')}</ScheduleTitle>
+              {getSchedule(schedules?.oldSchedule)}
+            </Schedules>
+          )}
         </SchedulesWrapper>
       </Modal>
     </>
