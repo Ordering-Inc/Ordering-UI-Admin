@@ -113,6 +113,11 @@ export const SelectWrapper = styled.div`
       }
     }
   }
+  ${props => !props.disabled && css`
+    .list {
+      display: none !important;
+    }
+  `}
   .list {
     .options {
       > div {

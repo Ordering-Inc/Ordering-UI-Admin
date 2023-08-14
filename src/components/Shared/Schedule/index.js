@@ -46,7 +46,8 @@ const ScheduleUI = (props) => {
     cleanSelectedCopyDays,
     handleSelectCopyTimes,
     handleApplyScheduleCopyTimes,
-    isShowDate
+    isShowDate,
+    disableSchedule
   } = props
 
   const [, t] = useLanguage()
@@ -170,10 +171,12 @@ const ScheduleUI = (props) => {
             key={daysOfWeekIndex}
           >
             <div>
-              <Checkbox
-                checked={schedule?.enabled}
-                onChange={e => handleEnabledSchedule(daysOfWeekIndex, e.target.checked)}
-              />
+              {!disableSchedule && (
+                <Checkbox
+                  checked={schedule?.enabled}
+                  onChange={e => handleEnabledSchedule(daysOfWeekIndex, e.target.checked)}
+                />
+              )}
               <DateWrapper>
                 <h4>{daysOfWeek[daysOfWeekIndex]}</h4>
                 {isShowDate && (
@@ -187,7 +190,7 @@ const ScheduleUI = (props) => {
                   <div
                     key={index}
                   >
-                    <SelectWrapper>
+                    <SelectWrapper disabled={!disableSchedule}>
                       <DefaultSelect
                         noSelected
                         options={scheduleOptions}
@@ -201,7 +204,7 @@ const ScheduleUI = (props) => {
                       />
                     </SelectWrapper>
                     <SplitLine />
-                    <SelectWrapper>
+                    <SelectWrapper disabled={!disableSchedule}>
                       <DefaultSelect
                         noSelected
                         options={scheduleOptions}
@@ -217,9 +220,11 @@ const ScheduleUI = (props) => {
                     <TrashIconWrapper
                       isHide={schedule?.lapses.length <= 1}
                     >
-                      <Trash
-                        onClick={() => onClickDelete(daysOfWeekIndex, index)}
-                      />
+                      {!disableSchedule && (
+                        <Trash
+                          onClick={() => onClickDelete(daysOfWeekIndex, index)}
+                        />
+                      )}
                     </TrashIconWrapper>
                   </div>
                 ))}
@@ -268,26 +273,28 @@ const ScheduleUI = (props) => {
                 <p>{t('UNAVAILABLE', 'Unavailable')}</p>
               </div>
             )}
-            <div>
-              <IconWrapper
-                isHide={!schedule?.enabled}
-              >
-                <PlusSquare
-                  onClick={() => handleOpenAddSchedule(daysOfWeekIndex)}
+            {!disableSchedule && (
+              <div>
+                <IconWrapper
+                  isHide={!schedule?.enabled}
+                >
+                  <PlusSquare
+                    onClick={() => handleOpenAddSchedule(daysOfWeekIndex)}
+                  />
+                </IconWrapper>
+                <ScheduleCopyTimes
+                  disabled={!schedule?.enabled}
+                  cleanSelectedCopyDays={cleanSelectedCopyDays}
+                  open={isOpenCopytimes === daysOfWeekIndex}
+                  daysOfWeekIndex={daysOfWeekIndex}
+                  onClick={setIsOpenCopytimes}
+                  onClose={() => setIsOpenCopytimes(null)}
+                  selectedCopyDays={selectedCopyDays}
+                  handleSelectDays={(value) => handleSelectCopyTimes(value)}
+                  handleApplyScheduleCopyTimes={handleApplyScheduleCopyTimes}
                 />
-              </IconWrapper>
-              <ScheduleCopyTimes
-                disabled={!schedule?.enabled}
-                cleanSelectedCopyDays={cleanSelectedCopyDays}
-                open={isOpenCopytimes === daysOfWeekIndex}
-                daysOfWeekIndex={daysOfWeekIndex}
-                onClick={setIsOpenCopytimes}
-                onClose={() => setIsOpenCopytimes(null)}
-                selectedCopyDays={selectedCopyDays}
-                handleSelectDays={(value) => handleSelectCopyTimes(value)}
-                handleApplyScheduleCopyTimes={handleApplyScheduleCopyTimes}
-              />
-            </div>
+              </div>
+            )}
           </TimeScheduleItemContainer>
         ))}
       </ScheduleContainer>
