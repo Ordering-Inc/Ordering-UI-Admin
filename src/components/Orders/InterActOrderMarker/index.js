@@ -133,7 +133,7 @@ export const InterActOrderMarker = (props) => {
                   <Text fontWeight='bold'>
                     {t('LAST_LOCATION', 'Last location')}:
                   </Text>
-                  <Text>{parseDate(driver.last_location_at, { utc: false })}</Text>
+                  <Text>{parseDate(driver.last_location_at)}</Text>
                 </TextContainer>
               )}
             </>
