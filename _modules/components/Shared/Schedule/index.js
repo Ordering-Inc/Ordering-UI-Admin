@@ -44,7 +44,8 @@ var ScheduleUI = function ScheduleUI(props) {
     cleanSelectedCopyDays = props.cleanSelectedCopyDays,
     handleSelectCopyTimes = props.handleSelectCopyTimes,
     handleApplyScheduleCopyTimes = props.handleApplyScheduleCopyTimes,
-    isShowDate = props.isShowDate;
+    isShowDate = props.isShowDate,
+    disableSchedule = props.disableSchedule;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -155,7 +156,7 @@ var ScheduleUI = function ScheduleUI(props) {
     var _addScheduleTime$open, _addScheduleTime$open2, _addScheduleTime$open3, _addScheduleTime$open4, _addScheduleTime$open5, _addScheduleTime$open6, _addScheduleTime$clos, _addScheduleTime$clos2, _addScheduleTime$clos3, _addScheduleTime$clos4, _addScheduleTime$clos5, _addScheduleTime$clos6;
     return /*#__PURE__*/_react.default.createElement(_styles2.TimeScheduleItemContainer, {
       key: daysOfWeekIndex
-    }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
+    }, /*#__PURE__*/_react.default.createElement("div", null, !disableSchedule && /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
       checked: schedule === null || schedule === void 0 ? void 0 : schedule.enabled,
       onChange: function onChange(e) {
         return handleEnabledSchedule(daysOfWeekIndex, e.target.checked);
@@ -168,7 +169,9 @@ var ScheduleUI = function ScheduleUI(props) {
       var _lapse$open, _lapse$open2, _lapse$open3, _lapse$open4, _lapse$open5, _lapse$open6, _lapse$close, _lapse$close2, _lapse$close3, _lapse$close4, _lapse$close5, _lapse$close6;
       return /*#__PURE__*/_react.default.createElement("div", {
         key: index
-      }, /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.SecondSelect, {
+      }, /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, {
+        disabled: !disableSchedule
+      }, /*#__PURE__*/_react.default.createElement(_styles.SecondSelect, {
         noSelected: true,
         options: scheduleOptions,
         defaultValue: (lapse === null || lapse === void 0 ? void 0 : (_lapse$open = lapse.open) === null || _lapse$open === void 0 ? void 0 : _lapse$open.hour) === 23 && (lapse === null || lapse === void 0 ? void 0 : (_lapse$open2 = lapse.open) === null || _lapse$open2 === void 0 ? void 0 : _lapse$open2.minute) === 59 ? "".concat(lapse === null || lapse === void 0 ? void 0 : (_lapse$open3 = lapse.open) === null || _lapse$open3 === void 0 ? void 0 : _lapse$open3.hour, ":").concat(lapse === null || lapse === void 0 ? void 0 : (_lapse$open4 = lapse.open) === null || _lapse$open4 === void 0 ? void 0 : _lapse$open4.minute) : "".concat(lapse === null || lapse === void 0 ? void 0 : (_lapse$open5 = lapse.open) === null || _lapse$open5 === void 0 ? void 0 : _lapse$open5.hour, ":").concat(parseInt((lapse === null || lapse === void 0 ? void 0 : (_lapse$open6 = lapse.open) === null || _lapse$open6 === void 0 ? void 0 : _lapse$open6.minute) / 15) * 15),
@@ -176,7 +179,9 @@ var ScheduleUI = function ScheduleUI(props) {
           return handleChangeScheduleTime(val, daysOfWeekIndex, index, true);
         },
         optionInnerMaxHeight: "300px"
-      })), /*#__PURE__*/_react.default.createElement(_styles2.SplitLine, null), /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.SecondSelect, {
+      })), /*#__PURE__*/_react.default.createElement(_styles2.SplitLine, null), /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, {
+        disabled: !disableSchedule
+      }, /*#__PURE__*/_react.default.createElement(_styles.SecondSelect, {
         noSelected: true,
         options: scheduleOptions,
         defaultValue: (lapse === null || lapse === void 0 ? void 0 : (_lapse$close = lapse.close) === null || _lapse$close === void 0 ? void 0 : _lapse$close.hour) === 23 && (lapse === null || lapse === void 0 ? void 0 : (_lapse$close2 = lapse.close) === null || _lapse$close2 === void 0 ? void 0 : _lapse$close2.minute) === 59 ? "".concat(lapse === null || lapse === void 0 ? void 0 : (_lapse$close3 = lapse.close) === null || _lapse$close3 === void 0 ? void 0 : _lapse$close3.hour, ":").concat(lapse === null || lapse === void 0 ? void 0 : (_lapse$close4 = lapse.close) === null || _lapse$close4 === void 0 ? void 0 : _lapse$close4.minute) : "".concat(lapse === null || lapse === void 0 ? void 0 : (_lapse$close5 = lapse.close) === null || _lapse$close5 === void 0 ? void 0 : _lapse$close5.hour, ":").concat(parseInt((lapse === null || lapse === void 0 ? void 0 : (_lapse$close6 = lapse.close) === null || _lapse$close6 === void 0 ? void 0 : _lapse$close6.minute) / 15) * 15),
@@ -186,7 +191,7 @@ var ScheduleUI = function ScheduleUI(props) {
         optionInnerMaxHeight: "300px"
       })), /*#__PURE__*/_react.default.createElement(_styles2.TrashIconWrapper, {
         isHide: (schedule === null || schedule === void 0 ? void 0 : schedule.lapses.length) <= 1
-      }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Trash, {
+      }, !disableSchedule && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Trash, {
         onClick: function onClick() {
           return onClickDelete(daysOfWeekIndex, index);
         }
@@ -215,7 +220,7 @@ var ScheduleUI = function ScheduleUI(props) {
       onClick: function onClick() {
         return handleOpenAddSchedule(null);
       }
-    })))) : /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, t('UNAVAILABLE', 'Unavailable'))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles2.IconWrapper, {
+    })))) : /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, t('UNAVAILABLE', 'Unavailable'))), !disableSchedule && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles2.IconWrapper, {
       isHide: !(schedule !== null && schedule !== void 0 && schedule.enabled)
     }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PlusSquare, {
       onClick: function onClick() {

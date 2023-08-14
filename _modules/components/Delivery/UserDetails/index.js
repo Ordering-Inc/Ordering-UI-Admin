@@ -60,6 +60,9 @@ var UserDetailsUI = function UserDetailsUI(props) {
     t = _useLanguage2[1];
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
     width = _useWindowSize.width;
+  var _useSession = (0, _orderingComponentsAdmin.useSession)(),
+    _useSession2 = _slicedToArray(_useSession, 1),
+    user = _useSession2[0].user;
   var _useState = (0, _react.useState)('profile'),
     _useState2 = _slicedToArray(_useState, 2),
     currentMenuSelected = _useState2[0],
@@ -79,7 +82,7 @@ var UserDetailsUI = function UserDetailsUI(props) {
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configs = _useConfig2[0].configs;
-  var disableSchedule = (configs === null || configs === void 0 ? void 0 : (_configs$allow_driver = configs.allow_driver_manager_update_driver_schedule) === null || _configs$allow_driver === void 0 ? void 0 : _configs$allow_driver.value) === '1';
+  var disableSchedule = (configs === null || configs === void 0 ? void 0 : (_configs$allow_driver = configs.allow_driver_manager_update_driver_schedule) === null || _configs$allow_driver === void 0 ? void 0 : _configs$allow_driver.value) === '0' && (user === null || user === void 0 ? void 0 : user.level) === 5;
   var expandSidebar = function expandSidebar() {
     var element = document.getElementById('user_lateral_bar');
     if (!element) return;
@@ -150,8 +153,7 @@ var UserDetailsUI = function UserDetailsUI(props) {
   }, t('DELETE', 'Delete')))))), /*#__PURE__*/_react.default.createElement(_UserDetailsMenu.UserDetailsMenu, {
     isDriverMenu: isDriversPage,
     currentMenuSelected: currentMenuSelected,
-    handleChangeMenu: handleTabClick,
-    disableSchedule: disableSchedule
+    handleChangeMenu: handleTabClick
   }), !(userState !== null && userState !== void 0 && userState.loading) && (userState === null || userState === void 0 ? void 0 : userState.user) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, currentMenuSelected === 'profile' && /*#__PURE__*/_react.default.createElement(_UserProfileForm.UserProfileForm, {
     isDriversPage: isDriversPage,
     isDriversManagersPage: isDriversManagersPage,
@@ -169,8 +171,9 @@ var UserDetailsUI = function UserDetailsUI(props) {
   }))), currentMenuSelected === 'schedule' && /*#__PURE__*/_react.default.createElement(_styles3.ScheduleSection, null, /*#__PURE__*/_react.default.createElement(_Shared.Schedule, {
     isShowDate: !!isDriversPage,
     scheduleList: userState === null || userState === void 0 ? void 0 : (_userState$user11 = userState.user) === null || _userState$user11 === void 0 ? void 0 : _userState$user11.schedule,
-    handleChangeScheduleState: handleScheduleState
-  }), /*#__PURE__*/_react.default.createElement(_styles2.ActionsForm, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    handleChangeScheduleState: handleScheduleState,
+    disableSchedule: disableSchedule
+  }), !disableSchedule && /*#__PURE__*/_react.default.createElement(_styles2.ActionsForm, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     id: "form-btn",
     color: "primary",
     borderRadius: "5px",
