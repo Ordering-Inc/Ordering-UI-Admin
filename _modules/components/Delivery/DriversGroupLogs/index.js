@@ -240,7 +240,9 @@ var DriversGroupLogsUI = function DriversGroupLogsUI(props) {
     onClose: function onClose() {
       return setOpen(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_styles.SchedulesWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Schedules, null, /*#__PURE__*/_react.default.createElement(_styles.ScheduleTitle, null, t('NEW', 'New')), getSchedule(schedules === null || schedules === void 0 ? void 0 : schedules.newSchedule)), /*#__PURE__*/_react.default.createElement(_styles.Schedules, null, /*#__PURE__*/_react.default.createElement(_styles.ScheduleTitle, null, t('OLD', 'Old')), getSchedule(schedules === null || schedules === void 0 ? void 0 : schedules.oldSchedule)))));
+  }, /*#__PURE__*/_react.default.createElement(_styles.SchedulesWrapper, {
+    border: !!(schedules !== null && schedules !== void 0 && schedules.oldSchedule)
+  }, (schedules === null || schedules === void 0 ? void 0 : schedules.newSchedule) && /*#__PURE__*/_react.default.createElement(_styles.Schedules, null, /*#__PURE__*/_react.default.createElement(_styles.ScheduleTitle, null, t('NEW', 'New')), getSchedule(schedules === null || schedules === void 0 ? void 0 : schedules.newSchedule)), (schedules === null || schedules === void 0 ? void 0 : schedules.oldSchedule) && /*#__PURE__*/_react.default.createElement(_styles.Schedules, null, /*#__PURE__*/_react.default.createElement(_styles.ScheduleTitle, null, t('OLD', 'Old')), getSchedule(schedules === null || schedules === void 0 ? void 0 : schedules.oldSchedule)))));
 };
 exports.DriversGroupLogsUI = DriversGroupLogsUI;
 var DriversGroupLogs = function DriversGroupLogs(props) {
