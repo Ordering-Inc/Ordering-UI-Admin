@@ -18,8 +18,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var UserDetailsMenu = function UserDetailsMenu(props) {
   var currentMenuSelected = props.currentMenuSelected,
     handleChangeMenu = props.handleChangeMenu,
-    isDriverMenu = props.isDriverMenu,
-    disableSchedule = props.disableSchedule;
+    isDriverMenu = props.isDriverMenu;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -55,10 +54,7 @@ var UserDetailsMenu = function UserDetailsMenu(props) {
   // { key: 'personalization', content: t('PERSONALIZATION', 'Personalization') }
   ];
 
-  var menuItemsFiltered = menuItems.filter(function (item) {
-    return !disableSchedule ? item.key !== 'schedule' : item.key;
-  });
-  return /*#__PURE__*/_react.default.createElement(_styles.UserDetailsMenuContainer, null, /*#__PURE__*/_react.default.createElement(_Shared.DragScroll, null, menuItemsFiltered.map(function (menu) {
+  return /*#__PURE__*/_react.default.createElement(_styles.UserDetailsMenuContainer, null, /*#__PURE__*/_react.default.createElement(_Shared.DragScroll, null, menuItems.map(function (menu) {
     return /*#__PURE__*/_react.default.createElement(_styles.Tab, {
       key: menu.key,
       active: menu.key === currentMenuSelected,
