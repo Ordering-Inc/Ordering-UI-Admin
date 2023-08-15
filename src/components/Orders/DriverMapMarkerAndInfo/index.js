@@ -40,7 +40,7 @@ export const DriverMapMarkerAndInfo = (props) => {
               <Text fontWeight='bold'>
                 {t('LAST_ORDER_AT', 'Last order at')}:
               </Text>
-              <Text>{parseDate(driver.last_order_assigned_at, { utc: false })}</Text>
+              <Text>{parseDate(driver.last_order_assigned_at)}</Text>
             </TextContainer>
           )}
           {driver?.drivergroups?.length > 0 && (
