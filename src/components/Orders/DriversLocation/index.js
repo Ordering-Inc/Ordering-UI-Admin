@@ -43,7 +43,7 @@ export const DriversLocation = (props) => {
   const mapFit = () => {
     const bounds = new window.google.maps.LatLngBounds()
 
-    if (!selectedOrder?.driver) {
+    if (!selectedOrder) {
       if (showDrivers.length === 1 && !selectedOrder && !assignedOrders?.orders?.length) {
         setMapCenter(
           (showDrivers[0].location !== null && typeof showDrivers[0].location === 'object' && showDrivers[0].location?.lat && showDrivers[0].location?.lng)
@@ -74,7 +74,7 @@ export const DriversLocation = (props) => {
     }
 
     let marker, newPoint
-    if (selectedDriver && selectedOrder) {
+    if (selectedOrder) {
       marker = selectedOrder?.business?.location !== null ? selectedOrder?.business?.location : defaultCenter
       newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
       bounds.extend(newPoint)
@@ -90,7 +90,7 @@ export const DriversLocation = (props) => {
       bounds.extend(newPoint)
     }
 
-    if (selectedDriver && assignedOrders?.orders?.length) {
+    if (selectedDriver && assignedOrders?.orders?.length && !selectedOrder) {
       assignedOrders.orders.forEach(order => {
         marker = order?.business?.location !== null ? order?.business?.location : defaultCenter
         newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
@@ -184,7 +184,7 @@ export const DriversLocation = (props) => {
             onChange={(data) => handleMapChange(data)}
             yesIWantToUseGoogleMapApiInternals
           >
-            {!selectedOrder?.dirver_id && showDrivers.length !== 0 &&
+            {!selectedOrder && showDrivers.length !== 0 &&
               showDrivers.map((driver) => (
                 <DriverMapMarkerAndInfo
                   key={driver.id}
@@ -205,7 +205,7 @@ export const DriversLocation = (props) => {
                   }
                 />
               ))}
-            {selectedOrder && selectedDriver && (
+            {selectedOrder && (
               <InterActOrderMarker
                 customer={selectedOrder?.customer}
                 lat={selectedOrder?.customer?.location?.lat ? selectedOrder?.customer?.location?.lat : defaultCenter.lat}
@@ -213,7 +213,7 @@ export const DriversLocation = (props) => {
                 image={selectedOrder?.customer?.photo}
               />
             )}
-            {selectedOrder && selectedDriver && (
+            {selectedOrder && (
               <InterActOrderMarker
                 business={selectedOrder?.business}
                 lat={selectedOrder?.business?.location?.lat}
@@ -221,7 +221,7 @@ export const DriversLocation = (props) => {
                 image={selectedOrder?.business?.logo}
               />
             )}
-            {selectedOrder?.driver && selectedDriver && (
+            {selectedOrder?.driver && (
               <DriverMapMarkerAndInfo
                 driver={selectedOrder?.driver}
                 lat={
@@ -240,7 +240,7 @@ export const DriversLocation = (props) => {
                 }
               />
             )}
-            {selectedDriver && assignedOrders?.orders?.length > 0 && (
+            {selectedDriver && assignedOrders?.orders?.length > 0 && !selectedOrder && (
               assignedOrders.orders.map(order => (
                 <InterActOrderMarker
                   key={order.id}
@@ -251,7 +251,7 @@ export const DriversLocation = (props) => {
                 />
               ))
             )}
-            {selectedDriver && assignedOrders?.orders?.length > 0 && (
+            {selectedDriver && assignedOrders?.orders?.length > 0 && !selectedOrder && (
               assignedOrders.orders.map(order => (
                 <InterActOrderMarker
                   key={order.id}
