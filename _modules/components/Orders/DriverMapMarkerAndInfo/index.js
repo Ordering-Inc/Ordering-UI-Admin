@@ -51,9 +51,7 @@ var DriverMapMarkerAndInfo = function DriverMapMarkerAndInfo(props) {
     fontWeight: "bold"
   }, t('NAME', 'Name'), ":"), /*#__PURE__*/_react.default.createElement(_styles.Text, null, driver.name, " ", driver.lastname)), (driver === null || driver === void 0 ? void 0 : driver.last_order_assigned_at) && /*#__PURE__*/_react.default.createElement(_styles.TextContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Text, {
     fontWeight: "bold"
-  }, t('LAST_ORDER_AT', 'Last order at'), ":"), /*#__PURE__*/_react.default.createElement(_styles.Text, null, parseDate(driver.last_order_assigned_at, {
-    utc: false
-  }))), (driver === null || driver === void 0 ? void 0 : (_driver$drivergroups = driver.drivergroups) === null || _driver$drivergroups === void 0 ? void 0 : _driver$drivergroups.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.TextContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Text, {
+  }, t('LAST_ORDER_AT', 'Last order at'), ":"), /*#__PURE__*/_react.default.createElement(_styles.Text, null, parseDate(driver.last_order_assigned_at))), (driver === null || driver === void 0 ? void 0 : (_driver$drivergroups = driver.drivergroups) === null || _driver$drivergroups === void 0 ? void 0 : _driver$drivergroups.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.TextContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Text, {
     fontWeight: "bold"
   }, t('DRIVER_GROUP', 'Driver group'), ":"), driver.drivergroups.map(function (group) {
     return /*#__PURE__*/_react.default.createElement(_styles.Text, {
