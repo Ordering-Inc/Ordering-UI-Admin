@@ -67,6 +67,7 @@ const OrdersManagerUI = (props) => {
   const [orderDetailId, setOrderDetailId] = useState(null)
   const [detailsOrder, setDetailsOrder] = useState(null)
   const [filterModalOpen, setFilterModalOpen] = useState(false)
+  const [assignedOrders, setAssignedOrders] = useState({ loading: false, error: null, orders: [] })
 
   const [isTourOpen, setIsTourOpen] = useState(false)
   const [currentTourStep, setCurrentTourStep] = useState(0)
@@ -147,6 +148,10 @@ const OrdersManagerUI = (props) => {
     handleBackRedirect()
   }
 
+  const handleUpdateAssignedOrders = (_assignedOrders) => {
+    setAssignedOrders(_assignedOrders)
+  }
+
   useEffect(() => {
     if (startMulitOrderStatusChange || startMulitOrderDelete) {
       setTotalSelectedOrder(selectedOrderIds.length)
@@ -212,6 +217,7 @@ const OrdersManagerUI = (props) => {
             <DriversContainer>
               <DriversManager
                 setMapsData={setMapsData}
+                handleUpdateAssignedOrders={handleUpdateAssignedOrders}
               />
             </DriversContainer>
             <OrdersContainer>
@@ -281,7 +287,8 @@ const OrdersManagerUI = (props) => {
               selectedDriver={mapsData.selectedDriver}
               onlineDrivers={mapsData.onlineDrivers}
               offlineDrivers={mapsData.offlineDrivers}
-              selectedOrder={!detailsOrder?.driver_id ? detailsOrder : null}
+              selectedOrder={detailsOrder}
+              assignedOrders={assignedOrders}
             />
           </WrapperDriversLocation>
         </MainContentContainer>
