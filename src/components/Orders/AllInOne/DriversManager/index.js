@@ -25,7 +25,11 @@ const DriversManagerUI = (props) => {
     handleChangeDriversSubFilter,
     onlineDrivers,
     offlineDrivers,
-    setMapsData
+    setMapsData,
+    selectedDriver,
+    setSelectedDriver,
+    assignedOrders,
+    handleUpdateAssignedOrders
   } = props
 
   const [configState] = useConfig()
@@ -37,7 +41,6 @@ const DriversManagerUI = (props) => {
   const numberOfnotBusyDrivers = driversIsOnline ? onlineDrivers.filter(ele => !ele.busy).length : offlineDrivers.filter(ele => !ele.busy).length
 
   const [isOpenDriverOrders, setIsOpenDriverOrders] = useState(false)
-  const [selectedDriver, setSelectedDriver] = useState(null)
   const [openDriver, setOpenDriver] = useState(null)
 
   const handleBackRedirect = () => {
@@ -69,6 +72,10 @@ const DriversManagerUI = (props) => {
       selectedDriver: selectedDriver
     })
   }, [driversIsOnline, selectedDriver, onlineDrivers, offlineDrivers])
+
+  useEffect(() => {
+    handleUpdateAssignedOrders && handleUpdateAssignedOrders(assignedOrders)
+  }, [assignedOrders])
 
   return (
     <>
