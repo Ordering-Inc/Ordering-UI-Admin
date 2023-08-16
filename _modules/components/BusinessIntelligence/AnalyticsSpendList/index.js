@@ -10,6 +10,7 @@ var _GiAlarmClock = _interopRequireDefault(require("@meronex/icons/gi/GiAlarmClo
 var _styles = require("./styles");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _utils = require("../../../utils");
+var _GraphLoadingMessage = require("../GraphLoadingMessage");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -35,6 +36,6 @@ var AnalyticsSpendList = function AnalyticsSpendList(props) {
   }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 80,
     height: 20
-  }))) : dataList !== null && dataList !== void 0 && dataList.data ? /*#__PURE__*/_react.default.createElement(_styles.AnalyticsSpendListContent, null, /*#__PURE__*/_react.default.createElement(_styles.TimeContentWrapper, null, /*#__PURE__*/_react.default.createElement("h1", null, (0, _utils.convertHMS)((dataList === null || dataList === void 0 ? void 0 : dataList.data) * 1))), /*#__PURE__*/_react.default.createElement(_styles.ReviewContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ReviewBlock, null, /*#__PURE__*/_react.default.createElement(_GiAlarmClock.default, null)), /*#__PURE__*/_react.default.createElement("p", null, t('REGULAR', 'Regular')))) : /*#__PURE__*/_react.default.createElement(_styles.EmptyContent, null, t('NO_DATA', 'No Data')));
+  })), /*#__PURE__*/_react.default.createElement(_GraphLoadingMessage.GraphLoadingMessage, null)) : dataList !== null && dataList !== void 0 && dataList.data ? /*#__PURE__*/_react.default.createElement(_styles.AnalyticsSpendListContent, null, /*#__PURE__*/_react.default.createElement(_styles.TimeContentWrapper, null, /*#__PURE__*/_react.default.createElement("h1", null, (0, _utils.convertHMS)((dataList === null || dataList === void 0 ? void 0 : dataList.data) * 1))), /*#__PURE__*/_react.default.createElement(_styles.ReviewContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ReviewBlock, null, /*#__PURE__*/_react.default.createElement(_GiAlarmClock.default, null)), /*#__PURE__*/_react.default.createElement("p", null, t('REGULAR', 'Regular')))) : /*#__PURE__*/_react.default.createElement(_styles.EmptyContent, null, t('NO_DATA', 'No Data')));
 };
 exports.AnalyticsSpendList = AnalyticsSpendList;

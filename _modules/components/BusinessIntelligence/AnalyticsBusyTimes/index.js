@@ -14,6 +14,7 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 var _moment = _interopRequireDefault(require("moment"));
 var _Shared = require("../../Shared");
 var _styles = require("./styles");
+var _GraphLoadingMessage = require("../GraphLoadingMessage");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -253,9 +254,9 @@ var AnalyticsBusyTimes = function AnalyticsBusyTimes(props) {
   }), /*#__PURE__*/_react.default.createElement(_BsDownload.default, {
     className: "download-view",
     onClick: downloadCSV
-  }))), busyTimesList !== null && busyTimesList !== void 0 && busyTimesList.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }))), busyTimesList !== null && busyTimesList !== void 0 && busyTimesList.loading ? /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 150
-  }) : (busyTimesList === null || busyTimesList === void 0 || (_busyTimesList$data13 = busyTimesList.data) === null || _busyTimesList$data13 === void 0 || (_busyTimesList$data13 = _busyTimesList$data13.busy) === null || _busyTimesList$data13 === void 0 ? void 0 : _busyTimesList$data13.length) > 0 || (busyTimesList === null || busyTimesList === void 0 || (_busyTimesList$data14 = busyTimesList.data) === null || _busyTimesList$data14 === void 0 || (_busyTimesList$data14 = _busyTimesList$data14.not_busy) === null || _busyTimesList$data14 === void 0 ? void 0 : _busyTimesList$data14.length) > 0 ? /*#__PURE__*/_react.default.createElement(_styles.BarChartWrapper, null, /*#__PURE__*/_react.default.createElement(_reactChartjs.Bar, {
+  }), /*#__PURE__*/_react.default.createElement(_GraphLoadingMessage.GraphLoadingMessage, null)) : (busyTimesList === null || busyTimesList === void 0 || (_busyTimesList$data13 = busyTimesList.data) === null || _busyTimesList$data13 === void 0 || (_busyTimesList$data13 = _busyTimesList$data13.busy) === null || _busyTimesList$data13 === void 0 ? void 0 : _busyTimesList$data13.length) > 0 || (busyTimesList === null || busyTimesList === void 0 || (_busyTimesList$data14 = busyTimesList.data) === null || _busyTimesList$data14 === void 0 || (_busyTimesList$data14 = _busyTimesList$data14.not_busy) === null || _busyTimesList$data14 === void 0 ? void 0 : _busyTimesList$data14.length) > 0 ? /*#__PURE__*/_react.default.createElement(_styles.BarChartWrapper, null, /*#__PURE__*/_react.default.createElement(_reactChartjs.Bar, {
     data: data,
     options: options,
     ref: chartRef

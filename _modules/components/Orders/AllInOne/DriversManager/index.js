@@ -35,7 +35,11 @@ var DriversManagerUI = function DriversManagerUI(props) {
     handleChangeDriversSubFilter = props.handleChangeDriversSubFilter,
     onlineDrivers = props.onlineDrivers,
     offlineDrivers = props.offlineDrivers,
-    setMapsData = props.setMapsData;
+    setMapsData = props.setMapsData,
+    selectedDriver = props.selectedDriver,
+    setSelectedDriver = props.setSelectedDriver,
+    assignedOrders = props.assignedOrders,
+    handleUpdateAssignedOrders = props.handleUpdateAssignedOrders;
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configState = _useConfig2[0];
@@ -58,12 +62,8 @@ var DriversManagerUI = function DriversManagerUI(props) {
     setIsOpenDriverOrders = _useState2[1];
   var _useState3 = (0, _react.useState)(null),
     _useState4 = _slicedToArray(_useState3, 2),
-    selectedDriver = _useState4[0],
-    setSelectedDriver = _useState4[1];
-  var _useState5 = (0, _react.useState)(null),
-    _useState6 = _slicedToArray(_useState5, 2),
-    openDriver = _useState6[0],
-    setOpenDriver = _useState6[1];
+    openDriver = _useState4[0],
+    setOpenDriver = _useState4[1];
   var handleBackRedirect = function handleBackRedirect() {
     setIsOpenDriverOrders(false);
   };
@@ -89,6 +89,9 @@ var DriversManagerUI = function DriversManagerUI(props) {
       selectedDriver: selectedDriver
     });
   }, [driversIsOnline, selectedDriver, onlineDrivers, offlineDrivers]);
+  (0, _react.useEffect)(function () {
+    handleUpdateAssignedOrders && handleUpdateAssignedOrders(assignedOrders);
+  }, [assignedOrders]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.DriversContainer, null, /*#__PURE__*/_react.default.createElement(_styles.DriversHeader, null, !googleMapsApiKey && /*#__PURE__*/_react.default.createElement(_GoogleMapsApiKeySettingButton.GoogleMapsApiKeySettingButton, null)), /*#__PURE__*/_react.default.createElement(_styles.DriversContent, null, /*#__PURE__*/_react.default.createElement(_styles.DriverListContainer, null, /*#__PURE__*/_react.default.createElement(_styles.FilterContainer, null, /*#__PURE__*/_react.default.createElement(_DriversOnlineOfflineFilter.DriversOnlineOfflineFilter, {
     driversIsOnline: driversIsOnline,
     handleChangeDriverIsOnline: handleChangeDriverIsOnline,

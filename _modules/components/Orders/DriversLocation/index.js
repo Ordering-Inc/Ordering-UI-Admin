@@ -22,7 +22,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var DriversLocation = function DriversLocation(props) {
-  var _configState$configs, _configState$configs2, _configState$configs3, _selectedOrder$custom3, _selectedOrder$custom4, _selectedOrder$custom5, _selectedOrder$custom6, _selectedOrder$custom7, _selectedOrder$busine3, _selectedOrder$busine4, _selectedOrder$busine5, _assignedOrders$order4, _assignedOrders$order5;
+  var _configState$configs, _configState$configs2, _configState$configs3, _selectedOrder$custom3, _selectedOrder$custom4, _selectedOrder$custom5, _selectedOrder$custom6, _selectedOrder$custom7, _selectedOrder$busine3, _selectedOrder$busine4, _selectedOrder$busine5, _selectedOrder$driver3, _selectedOrder$driver4, _selectedOrder$driver5, _selectedOrder$driver6, _selectedOrder$driver7, _selectedOrder$driver8, _selectedOrder$driver9, _selectedOrder$driver10, _selectedOrder$driver11, _selectedOrder$driver12, _selectedOrder$driver13, _selectedOrder$driver14, _assignedOrders$order4, _assignedOrders$order5;
   var driversIsOnline = props.driversIsOnline,
     onlineDrivers = props.onlineDrivers,
     offlineDrivers = props.offlineDrivers,
@@ -63,37 +63,40 @@ var DriversLocation = function DriversLocation(props) {
     showDrivers = _useState10[0],
     setShowDrivers = _useState10[1];
   var mapFit = function mapFit() {
-    var _assignedOrders$order, _assignedOrders$order2;
+    var _assignedOrders$order2;
     var bounds = new window.google.maps.LatLngBounds();
-    if (showDrivers.length === 1 && !selectedOrder && !(assignedOrders !== null && assignedOrders !== void 0 && (_assignedOrders$order = assignedOrders.orders) !== null && _assignedOrders$order !== void 0 && _assignedOrders$order.length)) {
-      var _showDrivers$0$locati, _showDrivers$0$locati2, _showDrivers$, _showDrivers$2;
-      setMapCenter(showDrivers[0].location !== null && _typeof(showDrivers[0].location) === 'object' && (_showDrivers$0$locati = showDrivers[0].location) !== null && _showDrivers$0$locati !== void 0 && _showDrivers$0$locati.lat && (_showDrivers$0$locati2 = showDrivers[0].location) !== null && _showDrivers$0$locati2 !== void 0 && _showDrivers$0$locati2.lng ? showDrivers[0].location : typeof showDrivers[0].location === 'string' ? {
-        lat: parseFloat((_showDrivers$ = showDrivers[0]) === null || _showDrivers$ === void 0 || (_showDrivers$ = _showDrivers$.location) === null || _showDrivers$ === void 0 ? void 0 : _showDrivers$.split(',')[0].replace(/[^-.0-9]/g, '')),
-        lng: parseFloat((_showDrivers$2 = showDrivers[0]) === null || _showDrivers$2 === void 0 || (_showDrivers$2 = _showDrivers$2.location) === null || _showDrivers$2 === void 0 ? void 0 : _showDrivers$2.split(',')[1].replace(/[^-.0-9]/g, ''))
-      } : defaultCenter);
-      setMapZoom(mapZoom);
-      return;
-    }
-    var _iterator = _createForOfIteratorHelper(showDrivers),
-      _step;
-    try {
-      for (_iterator.s(); !(_step = _iterator.n()).done;) {
-        var _driver$location, _driver$location2, _driver$location3, _driver$location4;
-        var driver = _step.value;
-        var _marker = driver.location !== null && _typeof(driver.location) === 'object' && (_driver$location = driver.location) !== null && _driver$location !== void 0 && _driver$location.lat && (_driver$location2 = driver.location) !== null && _driver$location2 !== void 0 && _driver$location2.lng ? driver.location : typeof (driver === null || driver === void 0 ? void 0 : driver.location) === 'string' ? {
-          lat: parseFloat(driver === null || driver === void 0 || (_driver$location3 = driver.location) === null || _driver$location3 === void 0 ? void 0 : _driver$location3.split(',')[0].replace(/[^-.0-9]/g, '')),
-          lng: parseFloat(driver === null || driver === void 0 || (_driver$location4 = driver.location) === null || _driver$location4 === void 0 ? void 0 : _driver$location4.split(',')[1].replace(/[^-.0-9]/g, ''))
-        } : defaultCenter;
-        var _newPoint = new window.google.maps.LatLng(_marker.lat, _marker.lng);
-        bounds.extend(_newPoint);
+    if (!selectedOrder) {
+      var _assignedOrders$order;
+      if (showDrivers.length === 1 && !selectedOrder && !(assignedOrders !== null && assignedOrders !== void 0 && (_assignedOrders$order = assignedOrders.orders) !== null && _assignedOrders$order !== void 0 && _assignedOrders$order.length)) {
+        var _showDrivers$0$locati, _showDrivers$0$locati2, _showDrivers$, _showDrivers$2;
+        setMapCenter(showDrivers[0].location !== null && _typeof(showDrivers[0].location) === 'object' && (_showDrivers$0$locati = showDrivers[0].location) !== null && _showDrivers$0$locati !== void 0 && _showDrivers$0$locati.lat && (_showDrivers$0$locati2 = showDrivers[0].location) !== null && _showDrivers$0$locati2 !== void 0 && _showDrivers$0$locati2.lng ? showDrivers[0].location : typeof showDrivers[0].location === 'string' ? {
+          lat: parseFloat((_showDrivers$ = showDrivers[0]) === null || _showDrivers$ === void 0 || (_showDrivers$ = _showDrivers$.location) === null || _showDrivers$ === void 0 ? void 0 : _showDrivers$.split(',')[0].replace(/[^-.0-9]/g, '')),
+          lng: parseFloat((_showDrivers$2 = showDrivers[0]) === null || _showDrivers$2 === void 0 || (_showDrivers$2 = _showDrivers$2.location) === null || _showDrivers$2 === void 0 ? void 0 : _showDrivers$2.split(',')[1].replace(/[^-.0-9]/g, ''))
+        } : defaultCenter);
+        setMapZoom(mapZoom);
+        return;
       }
-    } catch (err) {
-      _iterator.e(err);
-    } finally {
-      _iterator.f();
+      var _iterator = _createForOfIteratorHelper(showDrivers),
+        _step;
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var _driver$location, _driver$location2, _driver$location3, _driver$location4;
+          var driver = _step.value;
+          var _marker = driver.location !== null && _typeof(driver.location) === 'object' && (_driver$location = driver.location) !== null && _driver$location !== void 0 && _driver$location.lat && (_driver$location2 = driver.location) !== null && _driver$location2 !== void 0 && _driver$location2.lng ? driver.location : typeof (driver === null || driver === void 0 ? void 0 : driver.location) === 'string' ? {
+            lat: parseFloat(driver === null || driver === void 0 || (_driver$location3 = driver.location) === null || _driver$location3 === void 0 ? void 0 : _driver$location3.split(',')[0].replace(/[^-.0-9]/g, '')),
+            lng: parseFloat(driver === null || driver === void 0 || (_driver$location4 = driver.location) === null || _driver$location4 === void 0 ? void 0 : _driver$location4.split(',')[1].replace(/[^-.0-9]/g, ''))
+          } : defaultCenter;
+          var _newPoint = new window.google.maps.LatLng(_marker.lat, _marker.lng);
+          bounds.extend(_newPoint);
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
     }
     var marker, newPoint;
-    if (selectedDriver && selectedOrder) {
+    if (selectedOrder) {
       var _selectedOrder$busine, _selectedOrder$busine2, _selectedOrder$custom, _selectedOrder$custom2;
       marker = (selectedOrder === null || selectedOrder === void 0 || (_selectedOrder$busine = selectedOrder.business) === null || _selectedOrder$busine === void 0 ? void 0 : _selectedOrder$busine.location) !== null ? selectedOrder === null || selectedOrder === void 0 || (_selectedOrder$busine2 = selectedOrder.business) === null || _selectedOrder$busine2 === void 0 ? void 0 : _selectedOrder$busine2.location : defaultCenter;
       newPoint = new window.google.maps.LatLng(marker.lat, marker.lng);
@@ -102,7 +105,13 @@ var DriversLocation = function DriversLocation(props) {
       newPoint = new window.google.maps.LatLng(marker.lat, marker.lng);
       bounds.extend(newPoint);
     }
-    if (selectedDriver && assignedOrders !== null && assignedOrders !== void 0 && (_assignedOrders$order2 = assignedOrders.orders) !== null && _assignedOrders$order2 !== void 0 && _assignedOrders$order2.length) {
+    if (selectedOrder !== null && selectedOrder !== void 0 && selectedOrder.driver) {
+      var _selectedOrder$driver, _selectedOrder$driver2;
+      marker = (selectedOrder === null || selectedOrder === void 0 || (_selectedOrder$driver = selectedOrder.driver) === null || _selectedOrder$driver === void 0 ? void 0 : _selectedOrder$driver.location) !== null && selectedOrder !== null && selectedOrder !== void 0 && (_selectedOrder$driver2 = selectedOrder.driver) !== null && _selectedOrder$driver2 !== void 0 && (_selectedOrder$driver2 = _selectedOrder$driver2.location) !== null && _selectedOrder$driver2 !== void 0 && _selectedOrder$driver2.lat ? selectedOrder.driver.location : defaultCenter;
+      newPoint = new window.google.maps.LatLng(marker.lat, marker.lng);
+      bounds.extend(newPoint);
+    }
+    if (selectedDriver && assignedOrders !== null && assignedOrders !== void 0 && (_assignedOrders$order2 = assignedOrders.orders) !== null && _assignedOrders$order2 !== void 0 && _assignedOrders$order2.length && !selectedOrder) {
       assignedOrders.orders.forEach(function (order) {
         var _order$business, _order$business2, _order$customer, _order$customer2;
         marker = (order === null || order === void 0 || (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.location) !== null ? order === null || order === void 0 || (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.location : defaultCenter;
@@ -196,7 +205,7 @@ var DriversLocation = function DriversLocation(props) {
       return handleMapChange(data);
     },
     yesIWantToUseGoogleMapApiInternals: true
-  }, showDrivers.length !== 0 && showDrivers.map(function (driver) {
+  }, !selectedOrder && showDrivers.length !== 0 && showDrivers.map(function (driver) {
     var _driver$location5, _driver$location6, _driver$location7, _driver$location8;
     return /*#__PURE__*/_react.default.createElement(_DriverMapMarkerAndInfo.DriverMapMarkerAndInfo, {
       key: driver.id,
@@ -204,17 +213,21 @@ var DriversLocation = function DriversLocation(props) {
       lat: driver.location !== null && _typeof(driver.location) === 'object' && (_driver$location5 = driver.location) !== null && _driver$location5 !== void 0 && _driver$location5.lat ? driver.location.lat : typeof driver.location === 'string' ? parseFloat(driver === null || driver === void 0 || (_driver$location6 = driver.location) === null || _driver$location6 === void 0 ? void 0 : _driver$location6.split(',')[0].replace(/[^-.0-9]/g, '')) : defaultCenter.lat,
       lng: driver.location !== null && _typeof(driver.location) === 'object' && (_driver$location7 = driver.location) !== null && _driver$location7 !== void 0 && _driver$location7.lng ? driver.location.lng : typeof driver.location === 'string' ? parseFloat(driver === null || driver === void 0 || (_driver$location8 = driver.location) === null || _driver$location8 === void 0 ? void 0 : _driver$location8.split(',')[1].replace(/[^-.0-9]/g, '')) : defaultCenter.lng
     });
-  }), selectedDriver && selectedOrder && /*#__PURE__*/_react.default.createElement(_InterActOrderMarker.InterActOrderMarker, {
+  }), selectedOrder && /*#__PURE__*/_react.default.createElement(_InterActOrderMarker.InterActOrderMarker, {
     customer: selectedOrder === null || selectedOrder === void 0 ? void 0 : selectedOrder.customer,
     lat: selectedOrder !== null && selectedOrder !== void 0 && (_selectedOrder$custom3 = selectedOrder.customer) !== null && _selectedOrder$custom3 !== void 0 && (_selectedOrder$custom3 = _selectedOrder$custom3.location) !== null && _selectedOrder$custom3 !== void 0 && _selectedOrder$custom3.lat ? selectedOrder === null || selectedOrder === void 0 || (_selectedOrder$custom4 = selectedOrder.customer) === null || _selectedOrder$custom4 === void 0 || (_selectedOrder$custom4 = _selectedOrder$custom4.location) === null || _selectedOrder$custom4 === void 0 ? void 0 : _selectedOrder$custom4.lat : defaultCenter.lat,
     lng: selectedOrder !== null && selectedOrder !== void 0 && (_selectedOrder$custom5 = selectedOrder.customer) !== null && _selectedOrder$custom5 !== void 0 && (_selectedOrder$custom5 = _selectedOrder$custom5.location) !== null && _selectedOrder$custom5 !== void 0 && _selectedOrder$custom5.lng ? selectedOrder === null || selectedOrder === void 0 || (_selectedOrder$custom6 = selectedOrder.customer) === null || _selectedOrder$custom6 === void 0 || (_selectedOrder$custom6 = _selectedOrder$custom6.location) === null || _selectedOrder$custom6 === void 0 ? void 0 : _selectedOrder$custom6.lng : defaultCenter.lng,
     image: selectedOrder === null || selectedOrder === void 0 || (_selectedOrder$custom7 = selectedOrder.customer) === null || _selectedOrder$custom7 === void 0 ? void 0 : _selectedOrder$custom7.photo
-  }), selectedDriver && selectedOrder && /*#__PURE__*/_react.default.createElement(_InterActOrderMarker.InterActOrderMarker, {
+  }), selectedOrder && /*#__PURE__*/_react.default.createElement(_InterActOrderMarker.InterActOrderMarker, {
     business: selectedOrder === null || selectedOrder === void 0 ? void 0 : selectedOrder.business,
     lat: selectedOrder === null || selectedOrder === void 0 || (_selectedOrder$busine3 = selectedOrder.business) === null || _selectedOrder$busine3 === void 0 || (_selectedOrder$busine3 = _selectedOrder$busine3.location) === null || _selectedOrder$busine3 === void 0 ? void 0 : _selectedOrder$busine3.lat,
     lng: selectedOrder === null || selectedOrder === void 0 || (_selectedOrder$busine4 = selectedOrder.business) === null || _selectedOrder$busine4 === void 0 || (_selectedOrder$busine4 = _selectedOrder$busine4.location) === null || _selectedOrder$busine4 === void 0 ? void 0 : _selectedOrder$busine4.lng,
     image: selectedOrder === null || selectedOrder === void 0 || (_selectedOrder$busine5 = selectedOrder.business) === null || _selectedOrder$busine5 === void 0 ? void 0 : _selectedOrder$busine5.logo
-  }), selectedDriver && (assignedOrders === null || assignedOrders === void 0 || (_assignedOrders$order4 = assignedOrders.orders) === null || _assignedOrders$order4 === void 0 ? void 0 : _assignedOrders$order4.length) > 0 && assignedOrders.orders.map(function (order) {
+  }), (selectedOrder === null || selectedOrder === void 0 ? void 0 : selectedOrder.driver) && /*#__PURE__*/_react.default.createElement(_DriverMapMarkerAndInfo.DriverMapMarkerAndInfo, {
+    driver: selectedOrder === null || selectedOrder === void 0 ? void 0 : selectedOrder.driver,
+    lat: (selectedOrder === null || selectedOrder === void 0 || (_selectedOrder$driver3 = selectedOrder.driver) === null || _selectedOrder$driver3 === void 0 ? void 0 : _selectedOrder$driver3.location) !== null && _typeof(selectedOrder === null || selectedOrder === void 0 || (_selectedOrder$driver4 = selectedOrder.driver) === null || _selectedOrder$driver4 === void 0 ? void 0 : _selectedOrder$driver4.location) === 'object' && selectedOrder !== null && selectedOrder !== void 0 && (_selectedOrder$driver5 = selectedOrder.driver) !== null && _selectedOrder$driver5 !== void 0 && (_selectedOrder$driver5 = _selectedOrder$driver5.location) !== null && _selectedOrder$driver5 !== void 0 && _selectedOrder$driver5.lat ? selectedOrder === null || selectedOrder === void 0 || (_selectedOrder$driver6 = selectedOrder.driver) === null || _selectedOrder$driver6 === void 0 ? void 0 : _selectedOrder$driver6.location.lat : typeof (selectedOrder === null || selectedOrder === void 0 || (_selectedOrder$driver7 = selectedOrder.driver) === null || _selectedOrder$driver7 === void 0 ? void 0 : _selectedOrder$driver7.location) === 'string' ? parseFloat(selectedOrder === null || selectedOrder === void 0 || (_selectedOrder$driver8 = selectedOrder.driver) === null || _selectedOrder$driver8 === void 0 || (_selectedOrder$driver8 = _selectedOrder$driver8.location) === null || _selectedOrder$driver8 === void 0 ? void 0 : _selectedOrder$driver8.split(',')[0].replace(/[^-.0-9]/g, '')) : defaultCenter.lat,
+    lng: (selectedOrder === null || selectedOrder === void 0 || (_selectedOrder$driver9 = selectedOrder.driver) === null || _selectedOrder$driver9 === void 0 ? void 0 : _selectedOrder$driver9.location) !== null && _typeof(selectedOrder === null || selectedOrder === void 0 || (_selectedOrder$driver10 = selectedOrder.driver) === null || _selectedOrder$driver10 === void 0 ? void 0 : _selectedOrder$driver10.location) === 'object' && selectedOrder !== null && selectedOrder !== void 0 && (_selectedOrder$driver11 = selectedOrder.driver) !== null && _selectedOrder$driver11 !== void 0 && (_selectedOrder$driver11 = _selectedOrder$driver11.location) !== null && _selectedOrder$driver11 !== void 0 && _selectedOrder$driver11.lng ? selectedOrder === null || selectedOrder === void 0 || (_selectedOrder$driver12 = selectedOrder.driver) === null || _selectedOrder$driver12 === void 0 ? void 0 : _selectedOrder$driver12.location.lng : typeof (selectedOrder === null || selectedOrder === void 0 || (_selectedOrder$driver13 = selectedOrder.driver) === null || _selectedOrder$driver13 === void 0 ? void 0 : _selectedOrder$driver13.location) === 'string' ? parseFloat(selectedOrder === null || selectedOrder === void 0 || (_selectedOrder$driver14 = selectedOrder.driver) === null || _selectedOrder$driver14 === void 0 || (_selectedOrder$driver14 = _selectedOrder$driver14.location) === null || _selectedOrder$driver14 === void 0 ? void 0 : _selectedOrder$driver14.split(',')[1].replace(/[^-.0-9]/g, '')) : defaultCenter.lng
+  }), selectedDriver && (assignedOrders === null || assignedOrders === void 0 || (_assignedOrders$order4 = assignedOrders.orders) === null || _assignedOrders$order4 === void 0 ? void 0 : _assignedOrders$order4.length) > 0 && !selectedOrder && assignedOrders.orders.map(function (order) {
     var _order$customer3, _order$customer4, _order$customer5, _order$customer6, _order$customer7;
     return /*#__PURE__*/_react.default.createElement(_InterActOrderMarker.InterActOrderMarker, {
       key: order.id,
@@ -223,7 +236,7 @@ var DriversLocation = function DriversLocation(props) {
       lng: order !== null && order !== void 0 && (_order$customer5 = order.customer) !== null && _order$customer5 !== void 0 && (_order$customer5 = _order$customer5.location) !== null && _order$customer5 !== void 0 && _order$customer5.lng ? order === null || order === void 0 || (_order$customer6 = order.customer) === null || _order$customer6 === void 0 || (_order$customer6 = _order$customer6.location) === null || _order$customer6 === void 0 ? void 0 : _order$customer6.lng : defaultCenter.lng,
       image: order === null || order === void 0 || (_order$customer7 = order.customer) === null || _order$customer7 === void 0 ? void 0 : _order$customer7.photo
     });
-  }), selectedDriver && (assignedOrders === null || assignedOrders === void 0 || (_assignedOrders$order5 = assignedOrders.orders) === null || _assignedOrders$order5 === void 0 ? void 0 : _assignedOrders$order5.length) > 0 && assignedOrders.orders.map(function (order) {
+  }), selectedDriver && (assignedOrders === null || assignedOrders === void 0 || (_assignedOrders$order5 = assignedOrders.orders) === null || _assignedOrders$order5 === void 0 ? void 0 : _assignedOrders$order5.length) > 0 && !selectedOrder && assignedOrders.orders.map(function (order) {
     var _order$business3, _order$business4, _order$business5;
     return /*#__PURE__*/_react.default.createElement(_InterActOrderMarker.InterActOrderMarker, {
       key: order.id,
