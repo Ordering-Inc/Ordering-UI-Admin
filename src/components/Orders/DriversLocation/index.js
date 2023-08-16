@@ -43,36 +43,38 @@ export const DriversLocation = (props) => {
   const mapFit = () => {
     const bounds = new window.google.maps.LatLngBounds()
 
-    if (showDrivers.length === 1 && !selectedOrder && !assignedOrders?.orders?.length) {
-      setMapCenter(
-        (showDrivers[0].location !== null && typeof showDrivers[0].location === 'object' && showDrivers[0].location?.lat && showDrivers[0].location?.lng)
-          ? showDrivers[0].location
-          : typeof showDrivers[0].location === 'string'
+    if (!selectedOrder) {
+      if (showDrivers.length === 1 && !selectedOrder && !assignedOrders?.orders?.length) {
+        setMapCenter(
+          (showDrivers[0].location !== null && typeof showDrivers[0].location === 'object' && showDrivers[0].location?.lat && showDrivers[0].location?.lng)
+            ? showDrivers[0].location
+            : typeof showDrivers[0].location === 'string'
+              ? {
+                lat: parseFloat(showDrivers[0]?.location?.split(',')[0].replace(/[^-.0-9]/g, '')),
+                lng: parseFloat(showDrivers[0]?.location?.split(',')[1].replace(/[^-.0-9]/g, ''))
+              }
+              : defaultCenter
+        )
+        setMapZoom(mapZoom)
+        return
+      }
+
+      for (const driver of showDrivers) {
+        const marker = (driver.location !== null && typeof driver.location === 'object' && driver.location?.lat && driver.location?.lng)
+          ? driver.location
+          : typeof driver?.location === 'string'
             ? {
-              lat: parseFloat(showDrivers[0]?.location?.split(',')[0].replace(/[^-.0-9]/g, '')),
-              lng: parseFloat(showDrivers[0]?.location?.split(',')[1].replace(/[^-.0-9]/g, ''))
+              lat: parseFloat(driver?.location?.split(',')[0].replace(/[^-.0-9]/g, '')),
+              lng: parseFloat(driver?.location?.split(',')[1].replace(/[^-.0-9]/g, ''))
             }
             : defaultCenter
-      )
-      setMapZoom(mapZoom)
-      return
-    }
-
-    for (const driver of showDrivers) {
-      const marker = (driver.location !== null && typeof driver.location === 'object' && driver.location?.lat && driver.location?.lng)
-        ? driver.location
-        : typeof driver?.location === 'string'
-          ? {
-            lat: parseFloat(driver?.location?.split(',')[0].replace(/[^-.0-9]/g, '')),
-            lng: parseFloat(driver?.location?.split(',')[1].replace(/[^-.0-9]/g, ''))
-          }
-          : defaultCenter
-      const newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
-      bounds.extend(newPoint)
+        const newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
+        bounds.extend(newPoint)
+      }
     }
 
     let marker, newPoint
-    if (selectedDriver && selectedOrder) {
+    if (selectedOrder) {
       marker = selectedOrder?.business?.location !== null ? selectedOrder?.business?.location : defaultCenter
       newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
       bounds.extend(newPoint)
@@ -82,7 +84,13 @@ export const DriversLocation = (props) => {
       bounds.extend(newPoint)
     }
 
-    if (selectedDriver && assignedOrders?.orders?.length) {
+    if (selectedOrder?.driver) {
+      marker = selectedOrder?.driver?.location !== null && selectedOrder?.driver?.location?.lat ? selectedOrder.driver.location : defaultCenter
+      newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
+      bounds.extend(newPoint)
+    }
+
+    if (selectedDriver && assignedOrders?.orders?.length && !selectedOrder) {
       assignedOrders.orders.forEach(order => {
         marker = order?.business?.location !== null ? order?.business?.location : defaultCenter
         newPoint = new window.google.maps.LatLng(marker.lat, marker.lng)
@@ -176,7 +184,7 @@ export const DriversLocation = (props) => {
             onChange={(data) => handleMapChange(data)}
             yesIWantToUseGoogleMapApiInternals
           >
-            {showDrivers.length !== 0 &&
+            {!selectedOrder && showDrivers.length !== 0 &&
               showDrivers.map((driver) => (
                 <DriverMapMarkerAndInfo
                   key={driver.id}
@@ -197,7 +205,7 @@ export const DriversLocation = (props) => {
                   }
                 />
               ))}
-            {selectedDriver && selectedOrder && (
+            {selectedOrder && (
               <InterActOrderMarker
                 customer={selectedOrder?.customer}
                 lat={selectedOrder?.customer?.location?.lat ? selectedOrder?.customer?.location?.lat : defaultCenter.lat}
@@ -205,7 +213,7 @@ export const DriversLocation = (props) => {
                 image={selectedOrder?.customer?.photo}
               />
             )}
-            {selectedDriver && selectedOrder && (
+            {selectedOrder && (
               <InterActOrderMarker
                 business={selectedOrder?.business}
                 lat={selectedOrder?.business?.location?.lat}
@@ -213,7 +221,26 @@ export const DriversLocation = (props) => {
                 image={selectedOrder?.business?.logo}
               />
             )}
-            {selectedDriver && assignedOrders?.orders?.length > 0 && (
+            {selectedOrder?.driver && (
+              <DriverMapMarkerAndInfo
+                driver={selectedOrder?.driver}
+                lat={
+                  (selectedOrder?.driver?.location !== null && typeof selectedOrder?.driver?.location === 'object' && selectedOrder?.driver?.location?.lat)
+                    ? selectedOrder?.driver?.location.lat
+                    : typeof selectedOrder?.driver?.location === 'string'
+                      ? parseFloat(selectedOrder?.driver?.location?.split(',')[0].replace(/[^-.0-9]/g, ''))
+                      : defaultCenter.lat
+                }
+                lng={
+                  (selectedOrder?.driver?.location !== null && typeof selectedOrder?.driver?.location === 'object' && selectedOrder?.driver?.location?.lng)
+                    ? selectedOrder?.driver?.location.lng
+                    : typeof selectedOrder?.driver?.location === 'string'
+                      ? parseFloat(selectedOrder?.driver?.location?.split(',')[1].replace(/[^-.0-9]/g, ''))
+                      : defaultCenter.lng
+                }
+              />
+            )}
+            {selectedDriver && assignedOrders?.orders?.length > 0 && !selectedOrder && (
               assignedOrders.orders.map(order => (
                 <InterActOrderMarker
                   key={order.id}
@@ -224,7 +251,7 @@ export const DriversLocation = (props) => {
                 />
               ))
             )}
-            {selectedDriver && assignedOrders?.orders?.length > 0 && (
+            {selectedDriver && assignedOrders?.orders?.length > 0 && !selectedOrder && (
               assignedOrders.orders.map(order => (
                 <InterActOrderMarker
                   key={order.id}

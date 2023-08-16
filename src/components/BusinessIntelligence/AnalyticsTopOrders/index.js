@@ -15,6 +15,7 @@ import {
 } from './styles'
 import BsDownload from '@meronex/icons/bs/BsDownload'
 import Skeleton from 'react-loading-skeleton'
+import { GraphLoadingMessage } from '../GraphLoadingMessage'
 
 export const AnalyticsTopOrders = (props) => {
   const {
@@ -60,6 +61,7 @@ export const AnalyticsTopOrders = (props) => {
                 </div>
               ))
             }
+            <GraphLoadingMessage />
           </SkeletonContainerWrapper>
         ) : (
           <TopOrdersContainerWrapper>
