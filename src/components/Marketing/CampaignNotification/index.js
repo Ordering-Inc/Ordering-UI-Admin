@@ -14,7 +14,8 @@ import {
   SmsPreviewContentWrapper,
   SmsPreviewContent,
   Description,
-  BottomSpace
+  BottomSpace,
+  ContactWrapper
 } from './styles'
 
 export const CampaignNotification = (props) => {
@@ -147,6 +148,10 @@ export const CampaignNotification = (props) => {
         </>
       ) : (
         <>
+          <ContactWrapper>
+            <p>{t('IF_YOU_NEED_HELP_WITH_SETUP_CONTACT_SUPPORT_TEAM', 'If you need help with your setup, contact our support team.')}</p>
+            <Button color='primary' outline onClick={() => window.open('https://www.ordering.co/contact-ordering', '_blank')}>{t('TECH_SUPPORT', 'Tech Support')}</Button>
+          </ContactWrapper>
           <Description>
             <span>
               {t('NOTIFICATION_SETTINGS_LINK_DESC', 'You need to complete One signal configuration first')}
