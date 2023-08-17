@@ -3,10 +3,10 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.SmsPreviewWrapper = exports.SmsPreviewContentWrapper = exports.SmsPreviewContent = exports.SmsContentLayout = exports.InputWrapper = exports.Description = exports.Container = exports.ButtonWrapper = exports.BottomSpace = void 0;
+exports.SmsPreviewWrapper = exports.SmsPreviewContentWrapper = exports.SmsPreviewContent = exports.SmsContentLayout = exports.InputWrapper = exports.Description = exports.Container = exports.ContactWrapper = exports.ButtonWrapper = exports.BottomSpace = void 0;
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 var _react = _interopRequireDefault(require("react"));
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10;
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
@@ -45,3 +45,5 @@ var Description = _styledComponents.default.div(_templateObject8 || (_templateOb
 exports.Description = Description;
 var BottomSpace = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  height: 1px;\n"])));
 exports.BottomSpace = BottomSpace;
+var ContactWrapper = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  margin-bottom: 15px;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  p {\n    font-size: 14px;\n    text-align: center;\n    margin-bottom: 14px;\n  }\n  button {\n    border-radius: 8px;\n    height: 44px;\n  }\n"])));
+exports.ContactWrapper = ContactWrapper;
