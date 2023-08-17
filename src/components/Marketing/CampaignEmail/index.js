@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { useLanguage, CampaignEmail as CampaignEmailController } from 'ordering-components-admin'
 import { Input, Button } from '../../../styles'
 import $ from 'jquery'
@@ -21,7 +21,8 @@ import {
   ButtonWrapper,
   WrapperEditor,
   Preview,
-  Description
+  Description,
+  ContactWrapper
 } from './styles'
 
 const CampaignEmailUI = (props) => {
@@ -38,8 +39,8 @@ const CampaignEmailUI = (props) => {
     handleInsertImage,
     handleDeleteImage,
     selectedImageUrl,
-    setSelectedImageUrl
-    // categoryList
+    setSelectedImageUrl,
+    categoryList
   } = props
 
   const [, t] = useLanguage()
@@ -47,20 +48,20 @@ const CampaignEmailUI = (props) => {
   const [openModal, setOpenModal] = useState(null)
   const [editorContext, setEditorContext] = useState(null)
   const [emailBody, setEmailBody] = useState(null)
-  // const [category, setCategory] = useState()
+  const [category, setCategory] = useState()
 
-  // const generalList = [
-  //   'email_smtp_use_default',
-  //   'email_smtp_host',
-  //   'email_smtp_username',
-  //   'email_smtp_password',
-  //   'email_smtp_encryption',
-  //   'email_smtp_port'
-  // ]
+  const generalList = [
+    'email_smtp_use_default',
+    'email_smtp_host',
+    'email_smtp_username',
+    'email_smtp_password',
+    'email_smtp_encryption',
+    'email_smtp_port'
+  ]
 
-  // const isEnableConfig = useMemo(() => {
-  //   return category?.configs?.filter(config => generalList.includes(config.key)).every(config => !!config?.value)
-  // }, [category])
+  const isEnableConfig = useMemo(() => {
+    return category?.configs?.filter(config => generalList.includes(config.key)).every(config => !!config?.value)
+  }, [category])
 
   const handleCloseModal = () => {
     setOpenModal(false)
@@ -152,94 +153,106 @@ const CampaignEmailUI = (props) => {
     handleChangeContact('body', emailBody)
   }, [emailBody])
 
-  // useEffect(() => {
-  //   if (categoryList?.categories?.length > 0) {
-  //     const selectedCategory = categoryList?.categories.find(item => item.key === 'email_configs')
-  //     const configs = selectedCategory?.configs.filter(config => generalList.includes(config.key))
-  //     setCategory({ ...selectedCategory, configs: configs })
-  //   }
-  // }, [categoryList])
+  useEffect(() => {
+    if (categoryList?.categories?.length > 0) {
+      const selectedCategory = categoryList?.categories.find(item => item.key === 'email_configs')
+      const configs = selectedCategory?.configs.filter(config => generalList.includes(config.key))
+      setCategory({ ...selectedCategory, configs: configs })
+    }
+  }, [categoryList])
 
   return (
     <>
       <>
         <Container>
-          {isAddMode && (
-            <Description>
-              <span onClick={() => window.open('https://support.ordering.co/hc/en-us/articles/360056355111-Simple-Mail-Transfer-Protocol-Set-up-SMTP-')}>
-                {t('SMTP_SETTINGS_LINK_DESC', 'You need to complete SMTP configuration first')}
-              </span>
-            </Description>
+          {!isEnableConfig && (
+            <>
+              <ContactWrapper>
+                <p>{t('IF_YOU_NEED_HELP_WITH_SETUP_CONTACT_SUPPORT_TEAM', 'If you need help with your setup, contact our support team.')}</p>
+                <Button color='primary' outline onClick={() => window.open('https://www.ordering.co/contact-ordering', '_blank')}>{t('TECH_SUPPORT', 'Tech Support')}</Button>
+              </ContactWrapper>
+              <Description>
+                <span onClick={() => window.open('https://support.ordering.co/hc/en-us/articles/360056355111-Simple-Mail-Transfer-Protocol-Set-up-SMTP-')}>
+                  {t('SMTP_SETTINGS_LINK_DESC', 'You need to complete SMTP configuration first')}
+                </span>
+              </Description>
+            </>
           )}
-          <InputWrapper>
-            <label>{t('TITLE', 'Title')}</label>
-            <Input
-              name='title'
-              placeholder={t('TITLE', 'Title')}
-              value={contactState?.changes?.contact_data?.title || ''}
-              onChange={handleChangeData}
-            />
-          </InputWrapper>
-          <InputWrapper>
-            <label>{t('MESSAGES', 'Messages')}</label>
-            <WrapperEditor>
-              <ReactSummernote
-                value={contactState?.changes?.contact_data?.body ?? '<p><br></p>'}
-                placeholder={t('EMAIL_CONTENT', 'Email content')}
-                onInit={({ summernote }) => summernote('code', (contactState?.changes?.contact_data?.body ?? '<p><br></p>'))}
-                options={{
-                  height: 350,
-                  fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New'],
-                  toolbar: [
-                    ['style', ['style']],
-                    ['font', ['bold', 'italic', 'underline', 'clear']],
-                    ['fontsize', ['fontsize']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'paragraph']],
-                    ['table', ['table']],
-                    ['insert', ['insertLink', 'insertImage']],
-                    ['codeview', ['codeview']]
-                  ],
-                  buttons: {
-                    insertLink: insertLink,
-                    insertImage: insertImage
-                  },
-                  popover: {
-                    link: [
-                      ['link', ['linkDialogShow']]
-                    ]
-                  }
-                }}
-                onChange={content => setEmailBody(content)}
-              />
-            </WrapperEditor>
-          </InputWrapper>
-          <EmailPreviewWrapper>
-            <EmailPreviewHeader>
-              <PointGroup>
-                <div />
-                <div />
-                <div />
-              </PointGroup>
-            </EmailPreviewHeader>
-            <EmailPreviewContent>
-              <h2>{contactState?.changes?.contact_data?.title || ''}</h2>
-              <Preview
-                dangerouslySetInnerHTML={{ __html: contactState?.changes?.contact_data?.body || '' }}
-              />
-              {/* <p>{contactState?.changes?.contact_data?.body || ''}</p> */}
-            </EmailPreviewContent>
-          </EmailPreviewWrapper>
+          {isEnableConfig && (
+            <>
+              <InputWrapper>
+                <label>{t('TITLE', 'Title')}</label>
+                <Input
+                  name='title'
+                  placeholder={t('TITLE', 'Title')}
+                  value={contactState?.changes?.contact_data?.title || ''}
+                  onChange={handleChangeData}
+                />
+              </InputWrapper>
+              <InputWrapper>
+                <label>{t('MESSAGES', 'Messages')}</label>
+                <WrapperEditor>
+                  <ReactSummernote
+                    value={contactState?.changes?.contact_data?.body ?? '<p><br></p>'}
+                    placeholder={t('EMAIL_CONTENT', 'Email content')}
+                    onInit={({ summernote }) => summernote('code', (contactState?.changes?.contact_data?.body ?? '<p><br></p>'))}
+                    options={{
+                      height: 350,
+                      fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New'],
+                      toolbar: [
+                        ['style', ['style']],
+                        ['font', ['bold', 'italic', 'underline', 'clear']],
+                        ['fontsize', ['fontsize']],
+                        ['color', ['color']],
+                        ['para', ['ul', 'paragraph']],
+                        ['table', ['table']],
+                        ['insert', ['insertLink', 'insertImage']],
+                        ['codeview', ['codeview']]
+                      ],
+                      buttons: {
+                        insertLink: insertLink,
+                        insertImage: insertImage
+                      },
+                      popover: {
+                        link: [
+                          ['link', ['linkDialogShow']]
+                        ]
+                      }
+                    }}
+                    onChange={content => setEmailBody(content)}
+                  />
+                </WrapperEditor>
+              </InputWrapper>
+              <EmailPreviewWrapper>
+                <EmailPreviewHeader>
+                  <PointGroup>
+                    <div />
+                    <div />
+                    <div />
+                  </PointGroup>
+                </EmailPreviewHeader>
+                <EmailPreviewContent>
+                  <h2>{contactState?.changes?.contact_data?.title || ''}</h2>
+                  <Preview
+                    dangerouslySetInnerHTML={{ __html: contactState?.changes?.contact_data?.body || '' }}
+                  />
+                  {/* <p>{contactState?.changes?.contact_data?.body || ''}</p> */}
+                </EmailPreviewContent>
+              </EmailPreviewWrapper>
+            </>
+          )}
         </Container>
-        <ButtonWrapper>
-          <Button
-            color='primary'
-            onClick={handleSaveEmail}
-            disabled={contactState.loading}
-          >
-            {isAddMode ? t('ADD', 'Add') : t('SAVE', 'Save')}
-          </Button>
-        </ButtonWrapper>
+        {isEnableConfig && (
+          <ButtonWrapper>
+            <Button
+              color='primary'
+              onClick={handleSaveEmail}
+              disabled={contactState.loading}
+            >
+              {isAddMode ? t('ADD', 'Add') : t('SAVE', 'Save')}
+            </Button>
+          </ButtonWrapper>
+        )}
       </>
       <Modal
         width='60%'

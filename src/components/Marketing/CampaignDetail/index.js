@@ -13,7 +13,7 @@ import { CampaignNotification } from '../CampaignNotification'
 import { CampaignPopup } from '../CampaignPopup'
 import { CampaignWebHook } from '../CampaignWebHook'
 import { addQueryToUrl } from '../../../utils'
-import { IconButton, Button } from '../../../styles'
+import { IconButton } from '../../../styles'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 
 import {
@@ -24,8 +24,7 @@ import {
   RightHeader,
   ActionSelectorWrapper,
   Tabs,
-  Tab,
-  ContactWrapper
+  Tab
 } from './styles'
 
 const CampaignDetailUI = (props) => {
@@ -153,11 +152,6 @@ const CampaignDetailUI = (props) => {
         {selectedOption === 'general' && <CampaignDetailGeneral {...props} />}
         {selectedOption === 'content' && (
           <div>
-            <ContactWrapper>
-              <p>{t('IF_YOU_NEED_HELP_WITH_SETUP_CONTACT_SUPPORT_TEAM', 'If you need help with your setup, contact our support team.')}</p>
-              <Button color='primary' outline onClick={() => window.open('https://www.ordering.co/contact-ordering', '_blank')}>{t('TECH_SUPPORT', 'Tech Support')}</Button>
-            </ContactWrapper>
-
             {contactState?.changes?.contact_type === 'email' && <CampaignEmail {...props} />}
             {contactState?.changes?.contact_type === 'sms' && <CampaignSMS {...props} />}
             {contactState?.changes?.contact_type === 'whatsapp' && <CampaignWhatsapp {...props} />}
