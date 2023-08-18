@@ -155,7 +155,13 @@ var CampaignNotification = function CampaignNotification(props) {
       return handleSaveNotification();
     },
     disabled: contactState.loading
-  }, isAddMode ? t('ADD', 'Add') : t('SAVE', 'Save')))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Description, null, /*#__PURE__*/_react.default.createElement("span", null, t('NOTIFICATION_SETTINGS_LINK_DESC', 'You need to complete One signal configuration first'))), (categoryList === null || categoryList === void 0 ? void 0 : categoryList.loading) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, _toConsumableArray(Array(5).keys()).map(function (i) {
+  }, isAddMode ? t('ADD', 'Add') : t('SAVE', 'Save')))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.ContactWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('IF_YOU_NEED_HELP_WITH_SETUP_CONTACT_SUPPORT_TEAM', 'If you need help with your setup, contact our support team.')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    color: "primary",
+    outline: true,
+    onClick: function onClick() {
+      return window.open('https://www.ordering.co/contact-ordering', '_blank');
+    }
+  }, t('TECH_SUPPORT', 'Tech Support'))), /*#__PURE__*/_react.default.createElement(_styles2.Description, null, /*#__PURE__*/_react.default.createElement("span", null, t('NOTIFICATION_SETTINGS_LINK_DESC', 'You need to complete One signal configuration first'))), (categoryList === null || categoryList === void 0 ? void 0 : categoryList.loading) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, _toConsumableArray(Array(5).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement("p", {
       key: i
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {

@@ -48,7 +48,8 @@ var CampaignEmailUI = function CampaignEmailUI(props) {
     handleInsertImage = props.handleInsertImage,
     handleDeleteImage = props.handleDeleteImage,
     selectedImageUrl = props.selectedImageUrl,
-    setSelectedImageUrl = props.setSelectedImageUrl;
+    setSelectedImageUrl = props.setSelectedImageUrl,
+    categoryList = props.categoryList;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -71,21 +72,19 @@ var CampaignEmailUI = function CampaignEmailUI(props) {
     _useState8 = _slicedToArray(_useState7, 2),
     emailBody = _useState8[0],
     setEmailBody = _useState8[1];
-  // const [category, setCategory] = useState()
-
-  // const generalList = [
-  //   'email_smtp_use_default',
-  //   'email_smtp_host',
-  //   'email_smtp_username',
-  //   'email_smtp_password',
-  //   'email_smtp_encryption',
-  //   'email_smtp_port'
-  // ]
-
-  // const isEnableConfig = useMemo(() => {
-  //   return category?.configs?.filter(config => generalList.includes(config.key)).every(config => !!config?.value)
-  // }, [category])
-
+  var _useState9 = (0, _react.useState)(),
+    _useState10 = _slicedToArray(_useState9, 2),
+    category = _useState10[0],
+    setCategory = _useState10[1];
+  var generalList = ['email_smtp_use_default', 'email_smtp_host', 'email_smtp_username', 'email_smtp_password', 'email_smtp_encryption', 'email_smtp_port'];
+  var isEnableConfig = (0, _react.useMemo)(function () {
+    var _category$configs;
+    return category === null || category === void 0 || (_category$configs = category.configs) === null || _category$configs === void 0 ? void 0 : _category$configs.filter(function (config) {
+      return generalList.includes(config.key);
+    }).every(function (config) {
+      return !!(config !== null && config !== void 0 && config.value);
+    });
+  }, [category]);
   var handleCloseModal = function handleCloseModal() {
     setOpenModal(false);
     setEditorContext(null);
@@ -182,20 +181,31 @@ var CampaignEmailUI = function CampaignEmailUI(props) {
     if (!emailBody) return;
     handleChangeContact('body', emailBody);
   }, [emailBody]);
-
-  // useEffect(() => {
-  //   if (categoryList?.categories?.length > 0) {
-  //     const selectedCategory = categoryList?.categories.find(item => item.key === 'email_configs')
-  //     const configs = selectedCategory?.configs.filter(config => generalList.includes(config.key))
-  //     setCategory({ ...selectedCategory, configs: configs })
-  //   }
-  // }, [categoryList])
-
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, isAddMode && /*#__PURE__*/_react.default.createElement(_styles2.Description, null, /*#__PURE__*/_react.default.createElement("span", {
+  (0, _react.useEffect)(function () {
+    var _categoryList$categor;
+    if ((categoryList === null || categoryList === void 0 || (_categoryList$categor = categoryList.categories) === null || _categoryList$categor === void 0 ? void 0 : _categoryList$categor.length) > 0) {
+      var selectedCategory = categoryList === null || categoryList === void 0 ? void 0 : categoryList.categories.find(function (item) {
+        return item.key === 'email_configs';
+      });
+      var configs = selectedCategory === null || selectedCategory === void 0 ? void 0 : selectedCategory.configs.filter(function (config) {
+        return generalList.includes(config.key);
+      });
+      setCategory(_objectSpread(_objectSpread({}, selectedCategory), {}, {
+        configs: configs
+      }));
+    }
+  }, [categoryList]);
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, !isEnableConfig && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.ContactWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('IF_YOU_NEED_HELP_WITH_SETUP_CONTACT_SUPPORT_TEAM', 'If you need help with your setup, contact our support team.')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    color: "primary",
+    outline: true,
+    onClick: function onClick() {
+      return window.open('https://www.ordering.co/contact-ordering', '_blank');
+    }
+  }, t('TECH_SUPPORT', 'Tech Support'))), /*#__PURE__*/_react.default.createElement(_styles2.Description, null, /*#__PURE__*/_react.default.createElement("span", {
     onClick: function onClick() {
       return window.open('https://support.ordering.co/hc/en-us/articles/360056355111-Simple-Mail-Transfer-Protocol-Set-up-SMTP-');
     }
-  }, t('SMTP_SETTINGS_LINK_DESC', 'You need to complete SMTP configuration first'))), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('TITLE', 'Title')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  }, t('SMTP_SETTINGS_LINK_DESC', 'You need to complete SMTP configuration first')))), isEnableConfig && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('TITLE', 'Title')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "title",
     placeholder: t('TITLE', 'Title'),
     value: (contactState === null || contactState === void 0 || (_contactState$changes3 = contactState.changes) === null || _contactState$changes3 === void 0 || (_contactState$changes3 = _contactState$changes3.contact_data) === null || _contactState$changes3 === void 0 ? void 0 : _contactState$changes3.title) || '',
@@ -227,7 +237,7 @@ var CampaignEmailUI = function CampaignEmailUI(props) {
     dangerouslySetInnerHTML: {
       __html: (contactState === null || contactState === void 0 || (_contactState$changes9 = contactState.changes) === null || _contactState$changes9 === void 0 || (_contactState$changes9 = _contactState$changes9.contact_data) === null || _contactState$changes9 === void 0 ? void 0 : _contactState$changes9.body) || ''
     }
-  })))), /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }))))), isEnableConfig && /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     onClick: handleSaveEmail,
     disabled: contactState.loading
