@@ -338,7 +338,17 @@ const OrderDetailsUI = (props) => {
             isExpand={isExpand}
             setIsExpand={setIsExpand}
           />
-          <OrderStatus isDisabled={isTourOpen && currentTourStep === 1} flexEnd>
+          <OrderStatus isDisabled={isTourOpen && currentTourStep === 1}>
+            <div>
+              <h2>{t('ORDER_STATUS_TEXT', 'Order status')}</h2>
+              {order?.delivery_datetime_utc && (
+                <p>{parseDate(order?.delivery_datetime_utc)}</p>
+              )}
+              {order?.delivery_datetime && (
+                <p>{parseDate(order?.delivery_datetime, { utc: false })}  {`(${t('BUSINESS_TIME', 'Business time')})`}</p>
+              )}
+              <p>{order?.eta_time} {t('MIN', 'min')}</p>
+            </div>
             <OrderStatusSelectorWrapper>
               <OrderStatusTypeSelector
                 isFirstSelect
@@ -417,18 +427,6 @@ const OrderDetailsUI = (props) => {
               handleOrderRefund={handleOrderRefund}
             />
           </div>
-          <OrderStatus noMargin>
-            <div>
-              <h2>{t('ORDER_STATUS_TEXT', 'Order status')}</h2>
-              {order?.delivery_datetime_utc && (
-                <p>{parseDate(order?.delivery_datetime_utc)}</p>
-              )}
-              {order?.delivery_datetime && (
-                <p>{parseDate(order?.delivery_datetime, { utc: false })}  {`(${t('BUSINESS_TIME', 'Business time')})`}</p>
-              )}
-              <p>{order?.eta_time} {t('MIN', 'min')}</p>
-            </div>
-          </OrderStatus>
           <DetailBottom />
         </OrderDetailsContent>
       )}
