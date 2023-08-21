@@ -56,7 +56,7 @@ export const OrderContactInformation = (props) => {
   const [isEdit, setIsEdit] = useState(false)
 
   const pastOrderStatuses = [1, 2, 5, 6, 10, 11, 12, 15, 16, 17]
-
+  const deliveryTypes = [1, 7]
   const handleReviewCustomer = (customer) => {
     setCurrentCustomer(customer)
     setIsModalOpen(true)
@@ -313,7 +313,7 @@ export const OrderContactInformation = (props) => {
           </CutsomerDetail>
         </Accordion.Collapse>
       </Accordion>
-      {order?.delivery_type === 1 && !isServiceOrder && (
+      {deliveryTypes.includes(order?.delivery_type) && !isServiceOrder && (
         <>
           {!order?.driver_id && (
             <CompanySelectorContainer>
