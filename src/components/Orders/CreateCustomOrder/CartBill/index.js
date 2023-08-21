@@ -241,14 +241,14 @@ export const CartBill = (props) => {
         open={openTaxModal.open}
         padding='20px'
         closeOnBackdrop
-        title={`${openTaxModal.data?.name ||
-          t('INHERIT_FROM_BUSINESS', 'Inherit from business')} ${openTaxModal.data?.rate_type !== 2 ? `(${typeof openTaxModal.data?.rate === 'number' ? `${openTaxModal.data?.rate}%` : `${parsePrice(openTaxModal.data?.fixed ?? 0)} + ${openTaxModal.data?.percentage}%`})` : ''}  `}
+        title={`${openTaxModal?.data?.name ||
+          t('INHERIT_FROM_BUSINESS', 'Inherit from business')} ${openTaxModal?.data?.rate_type !== 2 ? `(${typeof openTaxModal?.data?.rate === 'number' ? `${openTaxModal.data?.rate}%` : `${parsePrice(openTaxModal.data?.fixed ?? 0)} + ${openTaxModal.data?.percentage}%`})` : ''}  `}
         onClose={() => setOpenTaxModal({ open: false, data: null, type: '' })}
         modalTitleStyle={{ display: 'flex', justifyContent: 'center' }}
       >
         <TaxInformation
           type={openTaxModal.type}
-          data={openTaxModal.data}
+          data={openTaxModal?.data}
           products={cart?.products}
         />
       </Modal>

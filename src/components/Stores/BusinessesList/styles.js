@@ -69,7 +69,7 @@ export const BusinessCardContainer = styled.div`
 export const BusinessListBottomContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: ${({ allowBusinessRegister }) => allowBusinessRegister ? 'space-between' : 'flex-end'};
   align-items: center;
   margin-top: 10px;
 `

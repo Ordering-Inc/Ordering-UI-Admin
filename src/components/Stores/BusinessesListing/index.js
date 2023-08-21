@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useLanguage, useEvent, DashboardBusinessList as BusinessListController } from 'ordering-components-admin'
+import { useLanguage, useEvent, DashboardBusinessList as BusinessListController, useConfig, useSession } from 'ordering-components-admin'
 import BsGrid from '@meronex/icons/bs/BsGrid'
 import BsViewList from '@meronex/icons/bs/BsViewList'
 import { getStorageItem, setStorageItem, removeQueryToUrl, addQueryToUrl } from '../../../utils'
@@ -61,6 +61,8 @@ const BusinessesListingUI = (props) => {
   const theme = useTheme()
   const [, t] = useLanguage()
   const [events] = useEvent()
+  const [{ configs }] = useConfig()
+  const [{ user }] = useSession()
 
   const [isTutorialMode, setIsTutorialMode] = useState(false)
   const [openTutorialSidebarState, setOpenTutorialSidebarState] = useState(null)
@@ -74,13 +76,14 @@ const BusinessesListingUI = (props) => {
   const [openSync, setOpenSync] = useState(false)
   const [moveDistance, setMoveDistance] = useState(0)
   const [isAdd, setIsAdd] = useState(false)
+  const allowBusinessRegister = (!configs?.allow_business_owner_register_business || user?.level !== 2 || (configs?.allow_business_owner_register_business?.value === '1' && user?.level === 2))
 
   const noBusinesses = useMemo(() => {
     return !businessList?.loading &&
       businessList?.businesses?.length === 0 &&
       pagination?.currentPage === 1 &&
       !searchValue &&
-      Object.keys(filterValues).length === 0 &&
+      (!filterValues || Object.keys(filterValues).length === 0) &&
       selectedBusinessActiveState &&
       !businessTypeSelected &&
       inActiveBusinesses?.length === 0
@@ -200,6 +203,7 @@ const BusinessesListingUI = (props) => {
           openAddBusiness={openAddBusiness}
           handleChangeFilterValues={handleChangeFilterValues}
           filterValues={filterValues}
+          allowBusinessRegister={allowBusinessRegister}
         />
         {!noBusinesses && (
           <ViewContainer>
@@ -242,13 +246,15 @@ const BusinessesListingUI = (props) => {
         {noBusinesses ? (
           <EmptyBusinessWrapper>
             <img src={theme.images.dummies.noBusinesses} alt='' />
-            <Button
-              color='primary'
-              borderRadius='7.6px'
-              onClick={() => handleGotToAdd()}
-            >
-              {t('ADD_NEW_STORE', 'Add new store')}
-            </Button>
+            {allowBusinessRegister && (
+              <Button
+                color='primary'
+                borderRadius='7.6px'
+                onClick={() => handleGotToAdd()}
+              >
+                {t('ADD_NEW_STORE', 'Add new store')}
+              </Button>
+            )}
           </EmptyBusinessWrapper>
         ) : (
           <BusinessesList
@@ -272,6 +278,7 @@ const BusinessesListingUI = (props) => {
             handleGotToAdd={handleGotToAdd}
             citiesList={citiesList}
             isUseQuery={isUseQuery && viewMethod === 'list'}
+            allowBusinessRegister={allowBusinessRegister}
           />
         )}
       </BusinessListingContainer>
