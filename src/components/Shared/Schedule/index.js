@@ -6,7 +6,6 @@ import {
   Schedule as ScheduleController
 } from 'ordering-components-admin'
 import {
-  Trash,
   PlusSquare,
   PlusCircleFill,
   DashCircleFill
@@ -190,7 +189,7 @@ const ScheduleUI = (props) => {
                   <div
                     key={index}
                   >
-                    <SelectWrapper disabled={!disableSchedule}>
+                    <SelectWrapper>
                       <DefaultSelect
                         noSelected
                         options={scheduleOptions}
@@ -204,7 +203,7 @@ const ScheduleUI = (props) => {
                       />
                     </SelectWrapper>
                     <SplitLine />
-                    <SelectWrapper disabled={!disableSchedule}>
+                    <SelectWrapper>
                       <DefaultSelect
                         noSelected
                         options={scheduleOptions}
