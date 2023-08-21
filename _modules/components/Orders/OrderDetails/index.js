@@ -409,9 +409,10 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     isExpand: isExpand,
     setIsExpand: setIsExpand
   }), /*#__PURE__*/_react.default.createElement(_styles2.OrderStatus, {
-    isDisabled: isTourOpen && currentTourStep === 1,
-    flexEnd: true
-  }, /*#__PURE__*/_react.default.createElement(_styles2.OrderStatusSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_OrderStatusTypeSelector.OrderStatusTypeSelector, {
+    isDisabled: isTourOpen && currentTourStep === 1
+  }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, t('ORDER_STATUS_TEXT', 'Order status')), (order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) && /*#__PURE__*/_react.default.createElement("p", null, parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc)), (order === null || order === void 0 ? void 0 : order.delivery_datetime) && /*#__PURE__*/_react.default.createElement("p", null, parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
+    utc: false
+  }), "  ", "(".concat(t('BUSINESS_TIME', 'Business time'), ")")), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : order.eta_time, " ", t('MIN', 'min'))), /*#__PURE__*/_react.default.createElement(_styles2.OrderStatusSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_OrderStatusTypeSelector.OrderStatusTypeSelector, {
     isFirstSelect: true,
     noPadding: true,
     orderId: order.id,
@@ -447,11 +448,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     actionStatus: actionStatus,
     handleRefundPaymentsStripe: handleRefundPaymentsStripe,
     handleOrderRefund: handleOrderRefund
-  })), /*#__PURE__*/_react.default.createElement(_styles2.OrderStatus, {
-    noMargin: true
-  }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, t('ORDER_STATUS_TEXT', 'Order status')), (order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) && /*#__PURE__*/_react.default.createElement("p", null, parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc)), (order === null || order === void 0 ? void 0 : order.delivery_datetime) && /*#__PURE__*/_react.default.createElement("p", null, parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
-    utc: false
-  }), "  ", "(".concat(t('BUSINESS_TIME', 'Business time'), ")")), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : order.eta_time, " ", t('MIN', 'min')))), /*#__PURE__*/_react.default.createElement(_styles2.DetailBottom, null)), extraOpen && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, width >= 1000 ? /*#__PURE__*/_react.default.createElement(_styles2.OrderDetailsExtraContent, null, /*#__PURE__*/_react.default.createElement(_styles2.CloseButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.DetailBottom, null)), extraOpen && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, width >= 1000 ? /*#__PURE__*/_react.default.createElement(_styles2.OrderDetailsExtraContent, null, /*#__PURE__*/_react.default.createElement(_styles2.CloseButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {
       return handleCloseMoreDetails();
@@ -462,7 +459,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     orderId: order === null || order === void 0 ? void 0 : order.id,
     order: order,
     isChat: openMessages === null || openMessages === void 0 ? void 0 : openMessages.chat,
-    history: openMessages.history,
+    history: openMessages === null || openMessages === void 0 ? void 0 : openMessages.history,
     handleUpdateOrderForUnreadCount: handleUpdateOrderForUnreadCount,
     onClose: function onClose() {
       return handleCloseMessages();
@@ -494,7 +491,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     orderId: order === null || order === void 0 ? void 0 : order.id,
     order: order,
     isChat: openMessages === null || openMessages === void 0 ? void 0 : openMessages.chat,
-    history: openMessages.history,
+    history: openMessages === null || openMessages === void 0 ? void 0 : openMessages.history,
     handleUpdateOrderForUnreadCount: handleUpdateOrderForUnreadCount,
     onClose: function onClose() {
       return handleCloseMessages();
@@ -508,14 +505,14 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   }))), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "70%",
     height: "70vh",
-    open: openMessages.history,
+    open: openMessages === null || openMessages === void 0 ? void 0 : openMessages.history,
     onClose: function onClose() {
       return handleCloseMessages();
     }
   }, /*#__PURE__*/_react.default.createElement(_Messages.Messages, {
     orderId: order === null || order === void 0 ? void 0 : order.id,
     order: order,
-    history: openMessages.history,
+    history: openMessages === null || openMessages === void 0 ? void 0 : openMessages.history,
     handleUpdateOrderForUnreadCount: handleUpdateOrderForUnreadCount,
     messages: messages
   })), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {

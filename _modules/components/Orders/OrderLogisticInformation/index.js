@@ -144,7 +144,7 @@ var LogisticInformationUI = function LogisticInformationUI(props) {
     }
   }, t('RELOAD', 'Reload')), /*#__PURE__*/_react.default.createElement(_styles2.BubbleConsole, null, /*#__PURE__*/_react.default.createElement(_styles2.UppercaseText, null, /*#__PURE__*/_react.default.createElement("strong", null, t('DISTANCE_CUSTOMER_FROM_BUSINESS', 'DISTANCE FROM CUSTOMER TO BUSINESS'))), ": ", parseDistance((logisticInformation === null || logisticInformation === void 0 ? void 0 : (_logisticInformation$ = logisticInformation.data) === null || _logisticInformation$ === void 0 ? void 0 : _logisticInformation$.distance_customer_from_business) / 1000)), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.BubbleConsole, null, /*#__PURE__*/_react.default.createElement(_styles2.UppercaseText, {
     title: "title"
-  }, t('QUEUES', 'Queues'))), logisticInformation.data.queues.length > 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, logisticInformation.data.queues.map(function (queue, i) {
+  }, t('QUEUES', 'Queues'))), (logisticInformation === null || logisticInformation === void 0 ? void 0 : logisticInformation.data.queues.length) > 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, logisticInformation === null || logisticInformation === void 0 ? void 0 : logisticInformation.data.queues.map(function (queue, i) {
     var _getOrderStatus;
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: queue.id
@@ -155,7 +155,7 @@ var LogisticInformationUI = function LogisticInformationUI(props) {
     })) : /*#__PURE__*/_react.default.createElement(_styles2.BubbleConsole, null, t('WITHOUT_ORDERS', 'without orders')));
   })) : /*#__PURE__*/_react.default.createElement(_styles2.BubbleConsole, null, /*#__PURE__*/_react.default.createElement(_styles2.UppercaseText, null, t('WITHOUT_QUEUES', 'Without Queues')))), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.BubbleConsole, null, /*#__PURE__*/_react.default.createElement(_styles2.UppercaseText, {
     title: "title"
-  }, t('HISTORY_ATTEMPTS', 'Attempts history'))), logisticInformation.data.logistic_attempts.length > 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, logisticInformation.data.logistic_attempts.map(function (attempt) {
+  }, t('HISTORY_ATTEMPTS', 'Attempts history'))), (logisticInformation === null || logisticInformation === void 0 ? void 0 : logisticInformation.data.logistic_attempts.length) > 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, logisticInformation === null || logisticInformation === void 0 ? void 0 : logisticInformation.data.logistic_attempts.map(function (attempt) {
     return /*#__PURE__*/_react.default.createElement(_styles2.BubbleConsole, {
       key: attempt.id
     }, /*#__PURE__*/_react.default.createElement("strong", null, t('DRIVER_GROUP', 'Driver group')), ": ", /*#__PURE__*/_react.default.createElement("strong", null, attempt === null || attempt === void 0 ? void 0 : attempt.driver_group_id), " ", t('AT', 'at'), " ", parseDate(attempt === null || attempt === void 0 ? void 0 : attempt.created_at));

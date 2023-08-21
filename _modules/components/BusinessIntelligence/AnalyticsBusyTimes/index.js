@@ -44,8 +44,10 @@ var AnalyticsBusyTimes = function AnalyticsBusyTimes(props) {
     var _busyTimesList$data;
     var labels = [];
     if (busyTimesList !== null && busyTimesList !== void 0 && (_busyTimesList$data = busyTimesList.data) !== null && _busyTimesList$data !== void 0 && _busyTimesList$data.busy) {
-      var _busyTimesList$data2;
-      var _iterator = _createForOfIteratorHelper(busyTimesList === null || busyTimesList === void 0 ? void 0 : (_busyTimesList$data2 = busyTimesList.data) === null || _busyTimesList$data2 === void 0 ? void 0 : _busyTimesList$data2.busy),
+      var _busyTimesList$data2, _busyTimesList$data2$;
+      var _iterator = _createForOfIteratorHelper(busyTimesList === null || busyTimesList === void 0 ? void 0 : (_busyTimesList$data2 = busyTimesList.data) === null || _busyTimesList$data2 === void 0 ? void 0 : (_busyTimesList$data2$ = _busyTimesList$data2.busy) === null || _busyTimesList$data2$ === void 0 ? void 0 : _busyTimesList$data2$.sort(function (a, b) {
+          return new Date(a.at) - new Date(b.at);
+        })),
         _step;
       try {
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
@@ -99,8 +101,10 @@ var AnalyticsBusyTimes = function AnalyticsBusyTimes(props) {
     var _busyTimesList$data3;
     var datasets = [];
     if (busyTimesList !== null && busyTimesList !== void 0 && (_busyTimesList$data3 = busyTimesList.data) !== null && _busyTimesList$data3 !== void 0 && _busyTimesList$data3.busy) {
-      var _busyTimesList$data4;
-      var _iterator2 = _createForOfIteratorHelper(busyTimesList === null || busyTimesList === void 0 ? void 0 : (_busyTimesList$data4 = busyTimesList.data) === null || _busyTimesList$data4 === void 0 ? void 0 : _busyTimesList$data4.busy),
+      var _busyTimesList$data4, _busyTimesList$data4$;
+      var _iterator2 = _createForOfIteratorHelper(busyTimesList === null || busyTimesList === void 0 ? void 0 : (_busyTimesList$data4 = busyTimesList.data) === null || _busyTimesList$data4 === void 0 ? void 0 : (_busyTimesList$data4$ = _busyTimesList$data4.busy) === null || _busyTimesList$data4$ === void 0 ? void 0 : _busyTimesList$data4$.sort(function (a, b) {
+          return new Date(a.at) - new Date(b.at);
+        })),
         _step2;
       try {
         for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
@@ -119,9 +123,11 @@ var AnalyticsBusyTimes = function AnalyticsBusyTimes(props) {
     return datasets;
   };
   var generateNotBusyData = function generateNotBusyData() {
-    var _busyTimesList$data5;
+    var _busyTimesList$data5, _busyTimesList$data5$;
     var datasets = [];
-    if (busyTimesList !== null && busyTimesList !== void 0 && (_busyTimesList$data5 = busyTimesList.data) !== null && _busyTimesList$data5 !== void 0 && _busyTimesList$data5.not_busy) {
+    if (busyTimesList !== null && busyTimesList !== void 0 && (_busyTimesList$data5 = busyTimesList.data) !== null && _busyTimesList$data5 !== void 0 && (_busyTimesList$data5$ = _busyTimesList$data5.not_busy) !== null && _busyTimesList$data5$ !== void 0 && _busyTimesList$data5$.sort(function (a, b) {
+      return new Date(a.at) - new Date(b.at);
+    })) {
       var _busyTimesList$data6;
       var _iterator3 = _createForOfIteratorHelper(busyTimesList === null || busyTimesList === void 0 ? void 0 : (_busyTimesList$data6 = busyTimesList.data) === null || _busyTimesList$data6 === void 0 ? void 0 : _busyTimesList$data6.not_busy),
         _step3;

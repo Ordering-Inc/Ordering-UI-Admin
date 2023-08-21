@@ -35,7 +35,8 @@ var BusinessesListingHeader = function BusinessesListingHeader(props) {
     noBusinesses = props.noBusinesses,
     handleGotToAdd = props.handleGotToAdd,
     handleChangeFilterValues = props.handleChangeFilterValues,
-    filterValues = props.filterValues;
+    filterValues = props.filterValues,
+    allowBusinessRegister = props.allowBusinessRegister;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -82,7 +83,7 @@ var BusinessesListingHeader = function BusinessesListingHeader(props) {
     }
   })), /*#__PURE__*/_react.default.createElement(_ImportersButton.ImportersButton, {
     customClass: "importerGroup"
-  }), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }), allowBusinessRegister && /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "lightPrimary",
     borderRadius: "8px",
     onClick: function onClick() {
