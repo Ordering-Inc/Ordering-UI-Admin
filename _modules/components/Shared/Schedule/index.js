@@ -169,9 +169,7 @@ var ScheduleUI = function ScheduleUI(props) {
       var _lapse$open, _lapse$open2, _lapse$open3, _lapse$open4, _lapse$open5, _lapse$open6, _lapse$close, _lapse$close2, _lapse$close3, _lapse$close4, _lapse$close5, _lapse$close6;
       return /*#__PURE__*/_react.default.createElement("div", {
         key: index
-      }, /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, {
-        disabled: !disableSchedule
-      }, /*#__PURE__*/_react.default.createElement(_styles.SecondSelect, {
+      }, /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.SecondSelect, {
         noSelected: true,
         options: scheduleOptions,
         defaultValue: (lapse === null || lapse === void 0 || (_lapse$open = lapse.open) === null || _lapse$open === void 0 ? void 0 : _lapse$open.hour) === 23 && (lapse === null || lapse === void 0 || (_lapse$open2 = lapse.open) === null || _lapse$open2 === void 0 ? void 0 : _lapse$open2.minute) === 59 ? "".concat(lapse === null || lapse === void 0 || (_lapse$open3 = lapse.open) === null || _lapse$open3 === void 0 ? void 0 : _lapse$open3.hour, ":").concat(lapse === null || lapse === void 0 || (_lapse$open4 = lapse.open) === null || _lapse$open4 === void 0 ? void 0 : _lapse$open4.minute) : "".concat(lapse === null || lapse === void 0 || (_lapse$open5 = lapse.open) === null || _lapse$open5 === void 0 ? void 0 : _lapse$open5.hour, ":").concat(parseInt((lapse === null || lapse === void 0 || (_lapse$open6 = lapse.open) === null || _lapse$open6 === void 0 ? void 0 : _lapse$open6.minute) / 15) * 15),
@@ -179,9 +177,7 @@ var ScheduleUI = function ScheduleUI(props) {
           return handleChangeScheduleTime(val, daysOfWeekIndex, index, true);
         },
         optionInnerMaxHeight: "300px"
-      })), /*#__PURE__*/_react.default.createElement(_styles2.SplitLine, null), /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, {
-        disabled: !disableSchedule
-      }, /*#__PURE__*/_react.default.createElement(_styles.SecondSelect, {
+      })), /*#__PURE__*/_react.default.createElement(_styles2.SplitLine, null), /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.SecondSelect, {
         noSelected: true,
         options: scheduleOptions,
         defaultValue: (lapse === null || lapse === void 0 || (_lapse$close = lapse.close) === null || _lapse$close === void 0 ? void 0 : _lapse$close.hour) === 23 && (lapse === null || lapse === void 0 || (_lapse$close2 = lapse.close) === null || _lapse$close2 === void 0 ? void 0 : _lapse$close2.minute) === 59 ? "".concat(lapse === null || lapse === void 0 || (_lapse$close3 = lapse.close) === null || _lapse$close3 === void 0 ? void 0 : _lapse$close3.hour, ":").concat(lapse === null || lapse === void 0 || (_lapse$close4 = lapse.close) === null || _lapse$close4 === void 0 ? void 0 : _lapse$close4.minute) : "".concat(lapse === null || lapse === void 0 || (_lapse$close5 = lapse.close) === null || _lapse$close5 === void 0 ? void 0 : _lapse$close5.hour, ":").concat(parseInt((lapse === null || lapse === void 0 || (_lapse$close6 = lapse.close) === null || _lapse$close6 === void 0 ? void 0 : _lapse$close6.minute) / 15) * 15),
