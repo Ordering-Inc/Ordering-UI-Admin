@@ -187,7 +187,7 @@ var ScheduleUI = function ScheduleUI(props) {
         optionInnerMaxHeight: "300px"
       })), /*#__PURE__*/_react.default.createElement(_styles2.TrashIconWrapper, {
         isHide: (schedule === null || schedule === void 0 ? void 0 : schedule.lapses.length) <= 1
-      }, !disableSchedule && /*#__PURE__*/_react.default.createElement(Trash, {
+      }, !disableSchedule && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Trash, {
         onClick: function onClick() {
           return onClickDelete(daysOfWeekIndex, index);
         }
