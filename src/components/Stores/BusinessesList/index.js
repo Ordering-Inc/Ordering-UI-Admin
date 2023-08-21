@@ -41,7 +41,8 @@ export const BusinessesList = (props) => {
     setBusinessIds,
     handleGotToAdd,
     citiesList,
-    isUseQuery
+    isUseQuery,
+    allowBusinessRegister
   } = props
 
   const theme = useTheme()
@@ -225,12 +226,14 @@ export const BusinessesList = (props) => {
             </BusinessListTable>
           </BusinessListContainer>
 
-          <BusinessListBottomContainer>
-            <LinkButton
-              onClick={() => handleGotToAdd()}
-            >
-              {t('ADD_NEW_STORE', 'Add new store')}
-            </LinkButton>
+          <BusinessListBottomContainer allowBusinessRegister={allowBusinessRegister}>
+            {allowBusinessRegister && (
+              <LinkButton
+                onClick={() => handleGotToAdd()}
+              >
+                {t('ADD_NEW_STORE', 'Add new store')}
+              </LinkButton>
+            )}
             {pagination && (
               <WrapperPagination>
                 {pagination?.total > 0 && (
@@ -278,7 +281,7 @@ export const BusinessesList = (props) => {
         </BusinessCardContainer>
       )}
 
-      {isTutorialMode && !businessList.loading && businessList.businesses.length === 0 && (
+      {isTutorialMode && allowBusinessRegister && !businessList.loading && businessList.businesses.length === 0 && (
         <AddFirstStoreContainer>
           <img src={theme.images.tutorials.businessTutorial1} alt='' />
           <Button
