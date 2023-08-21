@@ -8,7 +8,8 @@ import {
 import {
   PlusSquare,
   PlusCircleFill,
-  DashCircleFill
+  DashCircleFill,
+  Trash
 } from 'react-bootstrap-icons'
 import { Alert, Confirm } from '../Confirm'
 import { ScheduleCopyTimes } from '../ScheduleCopyTimes'
