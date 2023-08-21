@@ -446,7 +446,7 @@ const OrderDetailsUI = (props) => {
                     orderId={order?.id}
                     order={order}
                     isChat={openMessages?.chat}
-                    history={openMessages.history}
+                    history={openMessages?.history}
                     handleUpdateOrderForUnreadCount={handleUpdateOrderForUnreadCount}
                     onClose={() => handleCloseMessages()}
                     messages={messages}
@@ -489,7 +489,7 @@ const OrderDetailsUI = (props) => {
                       orderId={order?.id}
                       order={order}
                       isChat={openMessages?.chat}
-                      history={openMessages.history}
+                      history={openMessages?.history}
                       handleUpdateOrderForUnreadCount={handleUpdateOrderForUnreadCount}
                       onClose={() => handleCloseMessages()}
                       messages={messages}
@@ -504,13 +504,13 @@ const OrderDetailsUI = (props) => {
               <Modal
                 width='70%'
                 height='70vh'
-                open={openMessages.history}
+                open={openMessages?.history}
                 onClose={() => handleCloseMessages()}
               >
                 <Messages
                   orderId={order?.id}
                   order={order}
-                  history={openMessages.history}
+                  history={openMessages?.history}
                   handleUpdateOrderForUnreadCount={handleUpdateOrderForUnreadCount}
                   messages={messages}
                 />
