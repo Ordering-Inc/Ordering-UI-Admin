@@ -6,10 +6,10 @@ import {
   Schedule as ScheduleController
 } from 'ordering-components-admin'
 import {
-  Trash,
   PlusSquare,
   PlusCircleFill,
-  DashCircleFill
+  DashCircleFill,
+  Trash
 } from 'react-bootstrap-icons'
 import { Alert, Confirm } from '../Confirm'
 import { ScheduleCopyTimes } from '../ScheduleCopyTimes'
@@ -190,7 +190,7 @@ const ScheduleUI = (props) => {
                   <div
                     key={index}
                   >
-                    <SelectWrapper disabled={!disableSchedule}>
+                    <SelectWrapper>
                       <DefaultSelect
                         noSelected
                         options={scheduleOptions}
@@ -204,7 +204,7 @@ const ScheduleUI = (props) => {
                       />
                     </SelectWrapper>
                     <SplitLine />
-                    <SelectWrapper disabled={!disableSchedule}>
+                    <SelectWrapper>
                       <DefaultSelect
                         noSelected
                         options={scheduleOptions}
