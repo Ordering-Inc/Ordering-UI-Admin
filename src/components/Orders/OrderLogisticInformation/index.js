@@ -80,9 +80,9 @@ const LogisticInformationUI = (props) => {
                 <BubbleConsole>
                   <UppercaseText title='title'>{t('QUEUES', 'Queues')}</UppercaseText>
                 </BubbleConsole>
-                {logisticInformation.data.queues.length > 0 ? (
+                {logisticInformation?.data.queues.length > 0 ? (
                   <>
-                    {logisticInformation.data.queues.map((queue, i) => (
+                    {logisticInformation?.data.queues.map((queue, i) => (
                       <React.Fragment key={queue.id}>
                         {queue?.name && (
                           <BubbleConsole>
@@ -127,9 +127,9 @@ const LogisticInformationUI = (props) => {
                 <BubbleConsole>
                   <UppercaseText title='title'>{t('HISTORY_ATTEMPTS', 'Attempts history')}</UppercaseText>
                 </BubbleConsole>
-                {logisticInformation.data.logistic_attempts.length > 0 ? (
+                {logisticInformation?.data.logistic_attempts.length > 0 ? (
                   <>
-                    {logisticInformation.data.logistic_attempts.map(attempt => (
+                    {logisticInformation?.data.logistic_attempts.map(attempt => (
                       <BubbleConsole key={attempt.id}>
                         <strong>{t('DRIVER_GROUP', 'Driver group')}</strong>: <strong>{attempt?.driver_group_id}</strong> {t('AT', 'at')} {parseDate(attempt?.created_at)}
                       </BubbleConsole>
