@@ -83,7 +83,7 @@ const BusinessesListingUI = (props) => {
       businessList?.businesses?.length === 0 &&
       pagination?.currentPage === 1 &&
       !searchValue &&
-      Object.keys(filterValues).length === 0 &&
+      (!filterValues || Object.keys(filterValues).length === 0) &&
       selectedBusinessActiveState &&
       !businessTypeSelected &&
       inActiveBusinesses?.length === 0
