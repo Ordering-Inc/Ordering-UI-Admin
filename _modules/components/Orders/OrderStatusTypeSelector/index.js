@@ -178,6 +178,20 @@ var OrderStatusTypeSelector = function OrderStatusTypeSelector(props) {
     }, /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_DRIVER_ON_WAY', 'Driver on way'))),
     color: 'primary'
   }, {
+    value: 24,
+    name: t('ORDER_STATUS_DRIVER_WAITING_FOR_ORDER', 'Driver waiting for order'),
+    content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
+      noPadding: noPadding
+    }, /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_STATUS_DRIVER_WAITING_FOR_ORDER', 'Driver waiting for order'))),
+    color: 'primary'
+  }, {
+    value: 25,
+    name: t('ORDER_STATUS_ACCEPTED_BY_DRIVER_COMPANY', 'Accepted by driver company'),
+    content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
+      noPadding: noPadding
+    }, /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_STATUS_ACCEPTED_BY_DRIVER_COMPANY', 'Accepted by driver company'))),
+    color: 'primary'
+  }, {
     value: null,
     name: t('COMPLETED', 'Completed'),
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
