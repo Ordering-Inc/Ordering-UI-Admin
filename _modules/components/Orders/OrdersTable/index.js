@@ -150,7 +150,7 @@ var OrdersTable = function OrdersTable(props) {
     var restHours = Math.floor(restMinOfTargetedMin / 60);
     var restMins = restMinOfTargetedMin - 60 * restHours;
     // make standard time format
-    day = day === 0 ? '' : day + 'day  ';
+    day = day === 0 ? '' : "".concat(day + ' ' + t('DAY', 'day') + ' ');
     restHours = restHours < 10 ? '0' + restHours : restHours;
     restMins = restMins < 10 ? '0' + restMins : restMins;
     var finalTaget = sign + day + restHours + ':' + restMins;
