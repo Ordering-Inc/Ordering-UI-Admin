@@ -153,7 +153,7 @@ export const OrdersTable = (props) => {
     let restHours = Math.floor(restMinOfTargetedMin / 60)
     let restMins = restMinOfTargetedMin - 60 * restHours
     // make standard time format
-    day = day === 0 ? '' : day + 'day  '
+    day = day === 0 ? '' : `${day + ' ' + t('DAY', 'day') + ' '}`
     restHours = restHours < 10 ? '0' + restHours : restHours
     restMins = restMins < 10 ? '0' + restMins : restMins
 
