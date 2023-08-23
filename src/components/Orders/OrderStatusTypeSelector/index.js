@@ -200,6 +200,26 @@ export const OrderStatusTypeSelector = (props) => {
       color: 'primary'
     },
     {
+      value: 24,
+      name: t('ORDER_STATUS_DRIVER_WAITING_FOR_ORDER', 'Driver waiting for order'),
+      content: (
+        <Option noPadding={noPadding}>
+          <p>{t('ORDER_STATUS_DRIVER_WAITING_FOR_ORDER', 'Driver waiting for order')}</p>
+        </Option>
+      ),
+      color: 'primary'
+    },
+    {
+      value: 25,
+      name: t('ORDER_STATUS_ACCEPTED_BY_DRIVER_COMPANY', 'Accepted by driver company'),
+      content: (
+        <Option noPadding={noPadding}>
+          <p>{t('ORDER_STATUS_ACCEPTED_BY_DRIVER_COMPANY', 'Accepted by driver company')}</p>
+        </Option>
+      ),
+      color: 'primary'
+    },
+    {
       value: null,
       name: t('COMPLETED', 'Completed'),
       content: (
