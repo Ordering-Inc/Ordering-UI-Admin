@@ -96,7 +96,7 @@ var paypalBtnStyle = {
   size: 'responsive'
 };
 var PaymentOptionsUI = function PaymentOptionsUI(props) {
-  var _list$filter, _paymethodsList$error, _cart$balance, _paymethodSelected$da2, _isOpenMethod$paymeth2, _isOpenMethod$paymeth3, _isOpenMethod$paymeth4, _isOpenMethod$paymeth5, _paymethodSelected$da3, _isOpenMethod$paymeth6, _isOpenMethod$paymeth7, _isOpenMethod$paymeth8, _isOpenMethod$paymeth9, _isOpenMethod$paymeth10, _paymethodSelected$da4, _paymethodData$card, _paymethodData$card2, _paymethodData$card3, _isOpenMethod$paymeth11, _isOpenMethod$paymeth12, _isOpenMethod$paymeth13, _isOpenMethod$paymeth14, _isOpenMethod$paymeth15, _cart$balance2, _isOpenMethod$paymeth16, _isOpenMethod$paymeth17, _isOpenMethod$paymeth18, _isOpenMethod$paymeth19, _isOpenMethod$paymeth20, _isOpenMethod$paymeth21, _isOpenMethod$paymeth22, _isOpenMethod$paymeth23, _isOpenMethod$paymeth24, _isOpenMethod$paymeth25, _isOpenMethod$paymeth26, _isOpenMethod$paymeth27, _isOpenMethod$paymeth28, _isOpenMethod$paymeth29, _isOpenMethod$paymeth30, _isOpenMethod$paymeth31, _isOpenMethod$paymeth32, _isOpenMethod$paymeth33, _isOpenMethod$paymeth34, _isOpenMethod$paymeth35, _isOpenMethod$paymeth36, _isOpenMethod$paymeth37;
+  var _paymethodsList$error, _cart$balance, _paymethodSelected$da2, _isOpenMethod$paymeth2, _isOpenMethod$paymeth3, _isOpenMethod$paymeth4, _isOpenMethod$paymeth5, _paymethodSelected$da3, _isOpenMethod$paymeth6, _isOpenMethod$paymeth7, _isOpenMethod$paymeth8, _isOpenMethod$paymeth9, _isOpenMethod$paymeth10, _paymethodSelected$da4, _paymethodData$card, _paymethodData$card2, _paymethodData$card3, _isOpenMethod$paymeth11, _isOpenMethod$paymeth12, _isOpenMethod$paymeth13, _isOpenMethod$paymeth14, _isOpenMethod$paymeth15, _cart$balance2, _isOpenMethod$paymeth16, _isOpenMethod$paymeth17, _isOpenMethod$paymeth18, _isOpenMethod$paymeth19, _isOpenMethod$paymeth20, _isOpenMethod$paymeth21, _isOpenMethod$paymeth22, _isOpenMethod$paymeth23, _isOpenMethod$paymeth24, _isOpenMethod$paymeth25, _isOpenMethod$paymeth26, _isOpenMethod$paymeth27, _isOpenMethod$paymeth28, _isOpenMethod$paymeth29, _isOpenMethod$paymeth30, _isOpenMethod$paymeth31, _isOpenMethod$paymeth32, _isOpenMethod$paymeth33, _isOpenMethod$paymeth34, _isOpenMethod$paymeth35, _isOpenMethod$paymeth36, _isOpenMethod$paymeth37;
   var cart = props.cart,
     errorCash = props.errorCash,
     isLoading = props.isLoading,
@@ -144,16 +144,13 @@ var PaymentOptionsUI = function PaymentOptionsUI(props) {
   var paymethodSelected = props.paySelected || props.paymethodSelected;
   var methodsPay = ['google_pay', 'apple_pay'];
   var stripeDirectMethods = ['stripe_direct'].concat(methodsPay);
-  var includeKioskPaymethods = ['cash', 'card_delivery'];
-  var multiCheckoutMethods = ['global_google_pay', 'global_apple_pay'];
+  var includeCustomPaymethods = ['cash', 'card_delivery'];
   var list = paymethodsList ? paymethodsList === null || paymethodsList === void 0 ? void 0 : paymethodsList.paymethods : paymethods === null || paymethods === void 0 ? void 0 : paymethods.map(function (pay) {
     return pay.paymethod;
   });
   var popupMethods = ['stripe', 'stripe_direct', 'stripe_connect', 'stripe_redirect', 'paypal', 'square', 'google_pay', 'apple_pay'];
-  var supportedMethods = list === null || list === void 0 ? void 0 : (_list$filter = list.filter(function (p) {
-    return !multiCheckoutMethods.includes(p.gateway);
-  })) === null || _list$filter === void 0 ? void 0 : _list$filter.filter(function (p) {
-    return useKioskApp ? includeKioskPaymethods.includes(p.gateway) : p;
+  var supportedMethods = list === null || list === void 0 ? void 0 : list.filter(function (p) {
+    return includeCustomPaymethods.includes(p.gateway);
   });
   var paymethodsFieldRequired = ['paypal', 'apple_pay', 'global_apple_pay'];
   var handlePaymentMethodClick = function handlePaymentMethodClick(paymethod) {
