@@ -195,7 +195,7 @@ const CustomOrderDetailsUI = (props) => {
               <Checkout
                 cartUuid={cart.uuid}
                 onPlaceOrderClick={(data, paymethod, cart) => {
-                  cart?.uuid && handleOpenCustomOrderDetail(cart.uuid)
+                  cart?.order_id && handleOpenCustomOrderDetail(cart.order_id)
                   onClose()
                 }}
                 extraFields={extraFields}
