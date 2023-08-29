@@ -29,7 +29,7 @@ export const AnalyticsBusyTimes = (props) => {
   const generateLabels = () => {
     const labels = []
     if (busyTimesList?.data?.busy) {
-      for (const label of busyTimesList?.data?.busy) {
+      for (const label of busyTimesList?.data?.busy?.sort((a, b) => new Date(a.at) - new Date(b.at))) {
         const timeConvert = getTimeFormat(label.at, filterList?.lapse)
         labels.push(timeConvert)
       }
@@ -75,7 +75,7 @@ export const AnalyticsBusyTimes = (props) => {
   const generateBusyData = () => {
     const datasets = []
     if (busyTimesList?.data?.busy) {
-      for (const data of busyTimesList?.data?.busy) {
+      for (const data of busyTimesList?.data?.busy?.sort((a, b) => new Date(a.at) - new Date(b.at))) {
         const _time = parseNumber((data.time / 3600), { separator: '.' })
         datasets.push(_time)
       }
@@ -86,7 +86,7 @@ export const AnalyticsBusyTimes = (props) => {
 
   const generateNotBusyData = () => {
     const datasets = []
-    if (busyTimesList?.data?.not_busy) {
+    if (busyTimesList?.data?.not_busy?.sort((a, b) => new Date(a.at) - new Date(b.at))) {
       for (const data of busyTimesList?.data?.not_busy) {
         const _time = parseNumber((data.time / 3600), { separator: '.' })
         datasets.push(_time)
