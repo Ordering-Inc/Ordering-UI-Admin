@@ -27,7 +27,8 @@ export const BusinessesListingHeader = (props) => {
     noBusinesses,
     handleGotToAdd,
     handleChangeFilterValues,
-    filterValues
+    filterValues,
+    allowBusinessRegister
   } = props
   const [, t] = useLanguage()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
@@ -81,13 +82,15 @@ export const BusinessesListingHeader = (props) => {
             <ArrowRepeat size={16} style={{ marginLeft: 5 }} />
           </Button>
           <ImportersButton customClass='importerGroup' />
-          <Button
-            color='lightPrimary'
-            borderRadius='8px'
-            onClick={() => handleGotToAdd()}
-          >
-            {t('ADD_NEW_STORE', 'Add new store')}
-          </Button>
+          {allowBusinessRegister && (
+            <Button
+              color='lightPrimary'
+              borderRadius='8px'
+              onClick={() => handleGotToAdd()}
+            >
+              {t('ADD_NEW_STORE', 'Add new store')}
+            </Button>
+          )}
           <Button
             color='lightPrimary'
             borderRadius='8px'
