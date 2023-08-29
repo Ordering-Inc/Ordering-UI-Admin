@@ -459,7 +459,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     orderId: order === null || order === void 0 ? void 0 : order.id,
     order: order,
     isChat: openMessages === null || openMessages === void 0 ? void 0 : openMessages.chat,
-    history: openMessages.history,
+    history: openMessages === null || openMessages === void 0 ? void 0 : openMessages.history,
     handleUpdateOrderForUnreadCount: handleUpdateOrderForUnreadCount,
     onClose: function onClose() {
       return handleCloseMessages();
@@ -491,7 +491,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     orderId: order === null || order === void 0 ? void 0 : order.id,
     order: order,
     isChat: openMessages === null || openMessages === void 0 ? void 0 : openMessages.chat,
-    history: openMessages.history,
+    history: openMessages === null || openMessages === void 0 ? void 0 : openMessages.history,
     handleUpdateOrderForUnreadCount: handleUpdateOrderForUnreadCount,
     onClose: function onClose() {
       return handleCloseMessages();
@@ -505,14 +505,14 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
   }))), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "70%",
     height: "70vh",
-    open: openMessages.history,
+    open: openMessages === null || openMessages === void 0 ? void 0 : openMessages.history,
     onClose: function onClose() {
       return handleCloseMessages();
     }
   }, /*#__PURE__*/_react.default.createElement(_Messages.Messages, {
     orderId: order === null || order === void 0 ? void 0 : order.id,
     order: order,
-    history: openMessages.history,
+    history: openMessages === null || openMessages === void 0 ? void 0 : openMessages.history,
     handleUpdateOrderForUnreadCount: handleUpdateOrderForUnreadCount,
     messages: messages
   })), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {

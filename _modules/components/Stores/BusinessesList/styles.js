@@ -31,7 +31,10 @@ var BusinessCardContainer = _styledComponents.default.div(_templateObject4 || (_
   return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    transform: translateX(10px);\n  "]))) : (0, _styledComponents.css)(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    transform: translateX(-10px);\n  "])));
 });
 exports.BusinessCardContainer = BusinessCardContainer;
-var BusinessListBottomContainer = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  align-items: center;\n  margin-top: 10px;\n"])));
+var BusinessListBottomContainer = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: ", ";\n  align-items: center;\n  margin-top: 10px;\n"])), function (_ref) {
+  var allowBusinessRegister = _ref.allowBusinessRegister;
+  return allowBusinessRegister ? 'space-between' : 'flex-end';
+});
 exports.BusinessListBottomContainer = BusinessListBottomContainer;
 var AddFirstStoreContainer = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  padding: 50px 0 20px 0;\n\n  > img {\n    width: 200px;\n    margin-bottom: 12px;\n  }\n\n  > button {\n    height: 44px;\n  }\n\n  @media (min-width: 768px) {\n    > img {\n      width: 370px;\n    }\n  }\n"])));
 exports.AddFirstStoreContainer = AddFirstStoreContainer;
@@ -40,8 +43,8 @@ var CheckBoxWrapper = _styledComponents.default.div(_templateObject9 || (_templa
   return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    margin-left: 10px;\n  "]))) : (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n    margin-right: 10px;\n  "])));
 }, function (props) {
   return props.theme.colors.secundaryLight;
-}, function (_ref) {
-  var isChecked = _ref.isChecked;
+}, function (_ref2) {
+  var isChecked = _ref2.isChecked;
   return isChecked && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    svg {\n      color: ", ";\n    }\n  "])), function (props) {
     var _props$theme$colors3;
     return (_props$theme$colors3 = props.theme.colors) === null || _props$theme$colors3 === void 0 ? void 0 : _props$theme$colors3.primary;

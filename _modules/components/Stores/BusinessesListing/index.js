@@ -42,6 +42,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessesListingUI = function BusinessesListingUI(props) {
+  var _configs$allow_busine;
   var businessList = props.businessList,
     pagination = props.pagination,
     searchValue = props.searchValue,
@@ -76,6 +77,12 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
   var _useEvent = (0, _orderingComponentsAdmin.useEvent)(),
     _useEvent2 = _slicedToArray(_useEvent, 1),
     events = _useEvent2[0];
+  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configs = _useConfig2[0].configs;
+  var _useSession = (0, _orderingComponentsAdmin.useSession)(),
+    _useSession2 = _slicedToArray(_useSession, 1),
+    user = _useSession2[0].user;
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     isTutorialMode = _useState2[0],
@@ -120,6 +127,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     _useState22 = _slicedToArray(_useState21, 2),
     isAdd = _useState22[0],
     setIsAdd = _useState22[1];
+  var allowBusinessRegister = !(configs !== null && configs !== void 0 && configs.allow_business_owner_register_business) || (user === null || user === void 0 ? void 0 : user.level) !== 2 || (configs === null || configs === void 0 || (_configs$allow_busine = configs.allow_business_owner_register_business) === null || _configs$allow_busine === void 0 ? void 0 : _configs$allow_busine.value) === '1' && (user === null || user === void 0 ? void 0 : user.level) === 2;
   var noBusinesses = (0, _react.useMemo)(function () {
     var _businessList$busines;
     return !(businessList !== null && businessList !== void 0 && businessList.loading) && (businessList === null || businessList === void 0 || (_businessList$busines = businessList.businesses) === null || _businessList$busines === void 0 ? void 0 : _businessList$busines.length) === 0 && (pagination === null || pagination === void 0 ? void 0 : pagination.currentPage) === 1 && !searchValue && Object.keys(filterValues).length === 0 && selectedBusinessActiveState && !businessTypeSelected && (inActiveBusinesses === null || inActiveBusinesses === void 0 ? void 0 : inActiveBusinesses.length) === 0;
@@ -247,7 +255,8 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     noBusinesses: noBusinesses,
     openAddBusiness: openAddBusiness,
     handleChangeFilterValues: handleChangeFilterValues,
-    filterValues: filterValues
+    filterValues: filterValues,
+    allowBusinessRegister: allowBusinessRegister
   }), !noBusinesses && /*#__PURE__*/_react.default.createElement(_styles.ViewContainer, null, /*#__PURE__*/_react.default.createElement(_BusinessActiveStateFilter.BusinessActiveStateFilter, {
     isUseQuery: isUseQuery,
     selectedBusinessActiveState: selectedBusinessActiveState,
@@ -274,7 +283,7 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
   })), noBusinesses ? /*#__PURE__*/_react.default.createElement(_styles.EmptyBusinessWrapper, null, /*#__PURE__*/_react.default.createElement("img", {
     src: theme.images.dummies.noBusinesses,
     alt: ""
-  }), /*#__PURE__*/_react.default.createElement(_styles2.Button, {
+  }), allowBusinessRegister && /*#__PURE__*/_react.default.createElement(_styles2.Button, {
     color: "primary",
     borderRadius: "7.6px",
     onClick: function onClick() {
@@ -300,7 +309,8 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     selectedBusinessActiveState: selectedBusinessActiveState,
     handleGotToAdd: handleGotToAdd,
     citiesList: citiesList,
-    isUseQuery: isUseQuery && viewMethod === 'list'
+    isUseQuery: isUseQuery && viewMethod === 'list',
+    allowBusinessRegister: allowBusinessRegister
   })), openBusinessDetails && /*#__PURE__*/_react.default.createElement(_BusinessDetails.BusinessDetails, {
     open: openBusinessDetails
     // business={detailsBusiness}

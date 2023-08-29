@@ -197,7 +197,7 @@ var CustomOrderDetailsUI = function CustomOrderDetailsUI(props) {
   }), cart && (cart === null || cart === void 0 ? void 0 : cart.products.length) > 0 && isOrderByProducts && /*#__PURE__*/_react.default.createElement(_Checkout.Checkout, {
     cartUuid: cart.uuid,
     onPlaceOrderClick: function onPlaceOrderClick(data, paymethod, cart) {
-      (cart === null || cart === void 0 ? void 0 : cart.uuid) && handleOpenCustomOrderDetail(cart.uuid);
+      (cart === null || cart === void 0 ? void 0 : cart.order_id) && handleOpenCustomOrderDetail(cart.order_id);
       onClose();
     },
     extraFields: extraFields

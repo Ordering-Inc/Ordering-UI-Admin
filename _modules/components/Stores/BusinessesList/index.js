@@ -51,7 +51,8 @@ var BusinessesList = function BusinessesList(props) {
     setBusinessIds = props.setBusinessIds,
     handleGotToAdd = props.handleGotToAdd,
     citiesList = props.citiesList,
-    isUseQuery = props.isUseQuery;
+    isUseQuery = props.isUseQuery,
+    allowBusinessRegister = props.allowBusinessRegister;
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -194,7 +195,9 @@ var BusinessesList = function BusinessesList(props) {
       handleChangeBusinessIds: handleChangeBusinessIds,
       citiesList: citiesList
     });
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.BusinessListBottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles.LinkButton, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.BusinessListBottomContainer, {
+    allowBusinessRegister: allowBusinessRegister
+  }, allowBusinessRegister && /*#__PURE__*/_react.default.createElement(_styles.LinkButton, {
     onClick: function onClick() {
       return handleGotToAdd();
     }
@@ -224,7 +227,7 @@ var BusinessesList = function BusinessesList(props) {
       handleOpenBusinessDetails: handleOpenBusinessDetails,
       citiesList: citiesList
     });
-  })), isTutorialMode && !businessList.loading && businessList.businesses.length === 0 && /*#__PURE__*/_react.default.createElement(_styles2.AddFirstStoreContainer, null, /*#__PURE__*/_react.default.createElement("img", {
+  })), isTutorialMode && allowBusinessRegister && !businessList.loading && businessList.businesses.length === 0 && /*#__PURE__*/_react.default.createElement(_styles2.AddFirstStoreContainer, null, /*#__PURE__*/_react.default.createElement("img", {
     src: theme.images.tutorials.businessTutorial1,
     alt: ""
   }), /*#__PURE__*/_react.default.createElement(_styles.Button, {
