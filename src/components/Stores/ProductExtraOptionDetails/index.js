@@ -148,23 +148,6 @@ const ProductExtraOptionDetailsUI = (props) => {
     })
   }
 
-  const handleEnterAddSuboption = (e) => {
-    if (e.key === 'Enter' && e.shiftKey === false) {
-      handleSubmit(handleAddOption)()
-    }
-  }
-
-  const onChangeAddModifierName = (e) => {
-    e.persist()
-    clearTimeout(timer)
-    const _timer = setTimeout(function () {
-      if (e.target.value) {
-        handleSubmit(handleAddOption)()
-      }
-    }, 750)
-    setTimer(_timer)
-  }
-
   const handleUpdateExternalId = () => {
     handleUpdateOption({ external_id: externalId })
     setOpenModal({ ...openModal, externalId: false })
@@ -342,10 +325,16 @@ const ProductExtraOptionDetailsUI = (props) => {
                   defaultValue={
                     ((editSubOptionId === null) && changesState?.changes?.name) || ''
                   }
+                  onKeyDown={(e) => {
+                    const code = e.keyCode || e.which
+                    if (code === 13) {
+                      e.preventDefault()
+                      return false
+                    }
+                  }}
                   ref={register({
                     required: t('NAME_REQUIRED', 'The name is required.')
                   })}
-                  onChange={(e) => onChangeAddModifierName(e)}
                   readOnly={optionState?.loading}
                 />
               </InputWrapper>
@@ -360,10 +349,14 @@ const ProductExtraOptionDetailsUI = (props) => {
                   }
                   ref={register()}
                   onKeyPress={(e) => {
+                    const code = e.keyCode || e.which
+                    if (code === 13) {
+                      e.preventDefault()
+                      return false
+                    }
                     if (!/^[0-9.]$/.test(e.key)) {
                       e.preventDefault()
                     }
-                    handleEnterAddSuboption(e)
                   }}
                 />
               </InputWrapper>
@@ -377,10 +370,14 @@ const ProductExtraOptionDetailsUI = (props) => {
                     }
                     ref={register()}
                     onKeyPress={(e) => {
+                      const code = e.keyCode || e.which
+                      if (code === 13) {
+                        e.preventDefault()
+                        return false
+                      }
                       if (!/^[0-9.]$/.test(e.key)) {
                         e.preventDefault()
                       }
-                      handleEnterAddSuboption(e)
                     }}
                   />
                 </InputWrapper>
@@ -395,10 +392,14 @@ const ProductExtraOptionDetailsUI = (props) => {
                     }
                     ref={register()}
                     onKeyPress={(e) => {
+                      const code = e.keyCode || e.which
+                      if (code === 13) {
+                        e.preventDefault()
+                        return false
+                      }
                       if (!/^[0-9.]$/.test(e.key)) {
                         e.preventDefault()
                       }
-                      handleEnterAddSuboption(e)
                     }}
                   />
                 </InputWrapper>
