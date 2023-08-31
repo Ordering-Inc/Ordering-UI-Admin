@@ -184,21 +184,6 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
       }
     });
   };
-  var handleEnterAddSuboption = function handleEnterAddSuboption(e) {
-    if (e.key === 'Enter' && e.shiftKey === false) {
-      handleSubmit(handleAddOption)();
-    }
-  };
-  var onChangeAddModifierName = function onChangeAddModifierName(e) {
-    e.persist();
-    clearTimeout(timer);
-    var _timer = setTimeout(function () {
-      if (e.target.value) {
-        handleSubmit(handleAddOption)();
-      }
-    }, 750);
-    setTimer(_timer);
-  };
   var handleUpdateExternalId = function handleUpdateExternalId() {
     handleUpdateOption({
       external_id: externalId
@@ -346,12 +331,16 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
     autoComplete: "off",
     placeholder: t('NAME', 'Name'),
     defaultValue: editSubOptionId === null && (changesState === null || changesState === void 0 ? void 0 : (_changesState$changes3 = changesState.changes) === null || _changesState$changes3 === void 0 ? void 0 : _changesState$changes3.name) || '',
+    onKeyDown: function onKeyDown(e) {
+      var code = e.keyCode || e.which;
+      if (code === 13) {
+        e.preventDefault();
+        return false;
+      }
+    },
     ref: register({
       required: t('NAME_REQUIRED', 'The name is required.')
     }),
-    onChange: function onChange(e) {
-      return onChangeAddModifierName(e);
-    },
     readOnly: optionState === null || optionState === void 0 ? void 0 : optionState.loading
   }))), /*#__PURE__*/_react.default.createElement(_styles2.RightSubOptionContent, null, /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, {
     primary: (optionState === null || optionState === void 0 ? void 0 : (_optionState$option8 = optionState.option) === null || _optionState$option8 === void 0 ? void 0 : (_optionState$option8$ = _optionState$option8.suboptions) === null || _optionState$option8$ === void 0 ? void 0 : _optionState$option8$.length) === 0
@@ -361,10 +350,14 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
     defaultValue: editSubOptionId === null && (changesState === null || changesState === void 0 ? void 0 : (_changesState$changes4 = changesState.changes) === null || _changesState$changes4 === void 0 ? void 0 : _changesState$changes4.price) || 0,
     ref: register(),
     onKeyPress: function onKeyPress(e) {
+      var code = e.keyCode || e.which;
+      if (code === 13) {
+        e.preventDefault();
+        return false;
+      }
       if (!/^[0-9.]$/.test(e.key)) {
         e.preventDefault();
       }
-      handleEnterAddSuboption(e);
     }
   })), (typeof (settingChangeState === null || settingChangeState === void 0 ? void 0 : (_settingChangeState$c5 = settingChangeState.changes) === null || _settingChangeState$c5 === void 0 ? void 0 : _settingChangeState$c5.with_half_option) !== 'undefined' ? settingChangeState === null || settingChangeState === void 0 ? void 0 : (_settingChangeState$c6 = settingChangeState.changes) === null || _settingChangeState$c6 === void 0 ? void 0 : _settingChangeState$c6.with_half_option : optionState === null || optionState === void 0 ? void 0 : (_optionState$option9 = optionState.option) === null || _optionState$option9 === void 0 ? void 0 : _optionState$option9.with_half_option) && /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, {
     primary: (optionState === null || optionState === void 0 ? void 0 : (_optionState$option10 = optionState.option) === null || _optionState$option10 === void 0 ? void 0 : (_optionState$option11 = _optionState$option10.suboptions) === null || _optionState$option11 === void 0 ? void 0 : _optionState$option11.length) === 0
@@ -374,10 +367,14 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
     defaultValue: editSubOptionId === null && (changesState === null || changesState === void 0 ? void 0 : (_changesState$changes5 = changesState.changes) === null || _changesState$changes5 === void 0 ? void 0 : _changesState$changes5.half_price) || '',
     ref: register(),
     onKeyPress: function onKeyPress(e) {
+      var code = e.keyCode || e.which;
+      if (code === 13) {
+        e.preventDefault();
+        return false;
+      }
       if (!/^[0-9.]$/.test(e.key)) {
         e.preventDefault();
       }
-      handleEnterAddSuboption(e);
     }
   })), (typeof (settingChangeState === null || settingChangeState === void 0 ? void 0 : (_settingChangeState$c7 = settingChangeState.changes) === null || _settingChangeState$c7 === void 0 ? void 0 : _settingChangeState$c7.allow_suboption_quantity) !== 'undefined' ? settingChangeState === null || settingChangeState === void 0 ? void 0 : (_settingChangeState$c8 = settingChangeState.changes) === null || _settingChangeState$c8 === void 0 ? void 0 : _settingChangeState$c8.allow_suboption_quantity : optionState === null || optionState === void 0 ? void 0 : (_optionState$option12 = optionState.option) === null || _optionState$option12 === void 0 ? void 0 : _optionState$option12.allow_suboption_quantity) && /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, {
     primary: (optionState === null || optionState === void 0 ? void 0 : (_optionState$option13 = optionState.option) === null || _optionState$option13 === void 0 ? void 0 : (_optionState$option14 = _optionState$option13.suboptions) === null || _optionState$option14 === void 0 ? void 0 : _optionState$option14.length) === 0
@@ -387,10 +384,14 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
     defaultValue: editSubOptionId === null && (changesState === null || changesState === void 0 ? void 0 : (_changesState$changes6 = changesState.changes) === null || _changesState$changes6 === void 0 ? void 0 : _changesState$changes6.max) || '',
     ref: register(),
     onKeyPress: function onKeyPress(e) {
+      var code = e.keyCode || e.which;
+      if (code === 13) {
+        e.preventDefault();
+        return false;
+      }
       if (!/^[0-9.]$/.test(e.key)) {
         e.preventDefault();
       }
-      handleEnterAddSuboption(e);
     }
   })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, {
     maxHeight: true

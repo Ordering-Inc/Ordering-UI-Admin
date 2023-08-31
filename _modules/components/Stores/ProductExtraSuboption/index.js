@@ -256,6 +256,13 @@ var ProductExtraSuboption = function ProductExtraSuboption(props) {
         onChange: function onChange(e) {
           _onChange(e.target.vaue);
           handleChangeInput(e);
+        },
+        onKeyDown: function onKeyDown(e) {
+          var code = e.keyCode || e.which;
+          if (code === 13) {
+            e.preventDefault();
+            return false;
+          }
         }
       });
     },
@@ -278,6 +285,11 @@ var ProductExtraSuboption = function ProductExtraSuboption(props) {
           handleChangeInput(e);
         },
         onKeyPress: function onKeyPress(e) {
+          var code = e.keyCode || e.which;
+          if (code === 13) {
+            e.preventDefault();
+            return false;
+          }
           if (!/^[0-9.]$/.test(e.key)) {
             e.preventDefault();
           }
@@ -302,6 +314,11 @@ var ProductExtraSuboption = function ProductExtraSuboption(props) {
           handleChangeInput(e);
         },
         onKeyPress: function onKeyPress(e) {
+          var code = e.keyCode || e.which;
+          if (code === 13) {
+            e.preventDefault();
+            return false;
+          }
           if (!/^[0-9.]$/.test(e.key)) {
             e.preventDefault();
           }
@@ -323,6 +340,11 @@ var ProductExtraSuboption = function ProductExtraSuboption(props) {
           handleChangeInput(e);
         },
         onKeyPress: function onKeyPress(e) {
+          var code = e.keyCode || e.which;
+          if (code === 13) {
+            e.preventDefault();
+            return false;
+          }
           if (!/^[0-9.]$/.test(e.key)) {
             e.preventDefault();
           }
