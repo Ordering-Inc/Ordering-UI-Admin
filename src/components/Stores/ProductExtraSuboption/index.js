@@ -214,6 +214,13 @@ export const ProductExtraSuboption = (props) => {
                   onChange(e.target.vaue)
                   handleChangeInput(e)
                 }}
+                onKeyDown={(e) => {
+                  const code = e.keyCode || e.which
+                  if (code === 13) {
+                    e.preventDefault()
+                    return false
+                  }
+                }}
               />
             )}
             defaultValue={subOption.name}
@@ -236,6 +243,11 @@ export const ProductExtraSuboption = (props) => {
                   handleChangeInput(e)
                 }}
                 onKeyPress={(e) => {
+                  const code = e.keyCode || e.which
+                  if (code === 13) {
+                    e.preventDefault()
+                    return false
+                  }
                   if (!/^[0-9.]$/.test(e.key)) {
                     e.preventDefault()
                   }
@@ -260,6 +272,11 @@ export const ProductExtraSuboption = (props) => {
                     handleChangeInput(e)
                   }}
                   onKeyPress={(e) => {
+                    const code = e.keyCode || e.which
+                    if (code === 13) {
+                      e.preventDefault()
+                      return false
+                    }
                     if (!/^[0-9.]$/.test(e.key)) {
                       e.preventDefault()
                     }
@@ -284,6 +301,11 @@ export const ProductExtraSuboption = (props) => {
                     handleChangeInput(e)
                   }}
                   onKeyPress={(e) => {
+                    const code = e.keyCode || e.which
+                    if (code === 13) {
+                      e.preventDefault()
+                      return false
+                    }
                     if (!/^[0-9.]$/.test(e.key)) {
                       e.preventDefault()
                     }
