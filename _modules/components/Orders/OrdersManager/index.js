@@ -276,6 +276,7 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     slaSettingTime: slaSettingTime,
     allowColumns: allowColumns,
     setAllowColumns: setAllowColumns,
+    ordersAmountByStatus: ordersAmountByStatus,
     setOrdersAmountByStatus: setOrdersAmountByStatus
   }))))), isOpenOrderDetail && /*#__PURE__*/_react.default.createElement(_OrderDetails.OrderDetails, {
     isSelectedOrders: isSelectedOrders,

@@ -20,6 +20,7 @@ var OrdersDashboardList = function OrdersDashboardList(props) {
   var selectedSubOrderStatus = props.selectedSubOrderStatus,
     isMessagesView = props.isMessagesView,
     orderByOption = props.orderByOption,
+    ordersAmountByStatus = props.ordersAmountByStatus,
     setOrdersAmountByStatus = props.setOrdersAmountByStatus,
     isUseQuery = props.isUseQuery;
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
@@ -57,11 +58,9 @@ var OrdersDashboardList = function OrdersDashboardList(props) {
     groupStatus: "pending",
     orderStatus: selectedSubOrderStatus === null || selectedSubOrderStatus === void 0 ? void 0 : selectedSubOrderStatus.pending,
     setOrdersTotalAmount: function setOrdersTotalAmount(total) {
-      return setOrdersAmountByStatus(function (prevState) {
-        return _objectSpread(_objectSpread({}, prevState), {}, {
-          pending: total
-        });
-      });
+      return setOrdersAmountByStatus(_objectSpread(_objectSpread({}, ordersAmountByStatus), {}, {
+        pending: total
+      }));
     }
   })), /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DashboardOrdersList, _extends({
     groupStatus: "inProgress"
@@ -73,11 +72,9 @@ var OrdersDashboardList = function OrdersDashboardList(props) {
     },
     orderStatus: selectedSubOrderStatus === null || selectedSubOrderStatus === void 0 ? void 0 : selectedSubOrderStatus.inProgress,
     setOrdersTotalAmount: function setOrdersTotalAmount(total) {
-      return setOrdersAmountByStatus(function (prevState) {
-        return _objectSpread(_objectSpread({}, prevState), {}, {
-          inProgress: total
-        });
-      });
+      return setOrdersAmountByStatus(_objectSpread(_objectSpread({}, ordersAmountByStatus), {}, {
+        inProgress: total
+      }));
     }
   })), /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DashboardOrdersList, _extends({
     groupStatus: "completed"
@@ -89,11 +86,9 @@ var OrdersDashboardList = function OrdersDashboardList(props) {
     },
     orderStatus: selectedSubOrderStatus === null || selectedSubOrderStatus === void 0 ? void 0 : selectedSubOrderStatus.completed,
     setOrdersTotalAmount: function setOrdersTotalAmount(total) {
-      return setOrdersAmountByStatus(function (prevState) {
-        return _objectSpread(_objectSpread({}, prevState), {}, {
-          completed: total
-        });
-      });
+      return setOrdersAmountByStatus(_objectSpread(_objectSpread({}, ordersAmountByStatus), {}, {
+        completed: total
+      }));
     }
   })), /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DashboardOrdersList, _extends({
     groupStatus: "cancelled"
@@ -105,11 +100,9 @@ var OrdersDashboardList = function OrdersDashboardList(props) {
     },
     orderStatus: selectedSubOrderStatus === null || selectedSubOrderStatus === void 0 ? void 0 : selectedSubOrderStatus.cancelled,
     setOrdersTotalAmount: function setOrdersTotalAmount(total) {
-      return setOrdersAmountByStatus(function (prevState) {
-        return _objectSpread(_objectSpread({}, prevState), {}, {
-          cancelled: total
-        });
-      });
+      return setOrdersAmountByStatus(_objectSpread(_objectSpread({}, ordersAmountByStatus), {}, {
+        cancelled: total
+      }));
     }
   }))));
 };
