@@ -8,6 +8,7 @@ export const OrdersDashboardList = (props) => {
     selectedSubOrderStatus,
     isMessagesView,
     orderByOption,
+    ordersAmountByStatus,
     setOrdersAmountByStatus,
     isUseQuery
   } = props
@@ -16,7 +17,7 @@ export const OrdersDashboardList = (props) => {
   const defaultStatus = query.get('status')
   const defaultPage = query.get('page') || 1
   const defaultPageSize = query.get('pageSize') || 10
-
+  
   const OrdersCommonControlProps = {
     ...props,
     UIComponent: OrdersListing,
@@ -58,7 +59,7 @@ export const OrdersDashboardList = (props) => {
             }}
             groupStatus='pending'
             orderStatus={selectedSubOrderStatus?.pending}
-            setOrdersTotalAmount={total => setOrdersAmountByStatus(prevState => ({ ...prevState, pending: total }))}
+            setOrdersTotalAmount={total => setOrdersAmountByStatus({ ...ordersAmountByStatus, pending: total })}
           />
 
           <OrdersListController
@@ -70,7 +71,7 @@ export const OrdersDashboardList = (props) => {
               controlType: 'pages'
             }}
             orderStatus={selectedSubOrderStatus?.inProgress}
-            setOrdersTotalAmount={total => setOrdersAmountByStatus(prevState => ({ ...prevState, inProgress: total }))}
+            setOrdersTotalAmount={total => setOrdersAmountByStatus({ ...ordersAmountByStatus, inProgress: total })}
           />
 
           <OrdersListController
@@ -82,7 +83,7 @@ export const OrdersDashboardList = (props) => {
               controlType: 'pages'
             }}
             orderStatus={selectedSubOrderStatus?.completed}
-            setOrdersTotalAmount={total => setOrdersAmountByStatus(prevState => ({ ...prevState, completed: total }))}
+            setOrdersTotalAmount={total => setOrdersAmountByStatus({ ...ordersAmountByStatus, completed: total })}
           />
 
           <OrdersListController
@@ -94,7 +95,7 @@ export const OrdersDashboardList = (props) => {
               controlType: 'pages'
             }}
             orderStatus={selectedSubOrderStatus?.cancelled}
-            setOrdersTotalAmount={total => setOrdersAmountByStatus(prevState => ({ ...prevState, cancelled: total }))}
+            setOrdersTotalAmount={total => setOrdersAmountByStatus({ ...ordersAmountByStatus, cancelled: total })}
           />
         </>
       )}
