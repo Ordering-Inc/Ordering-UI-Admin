@@ -22,8 +22,6 @@ export const SpoonityApiKey = (props) => {
   const [spoonityKey, setSpoonityKey] = useState(spoonityConfig?.value)
   const [alertState, setAlertState] = useState({ open: false, content: [], success: false })
 
-  console.log('spoonityKey', spoonityKey)
-
   const changeSpoonityKey = () => {
     if (spoonityKey === '') {
       setAlertState({
@@ -47,11 +45,6 @@ export const SpoonityApiKey = (props) => {
   useEffect(() => {
     if (spoonityKeyState?.key && !spoonityKeyState?.loading) setSpoonityKey(spoonityKey)
   }, [spoonityKeyState?.key, spoonityKeyState?.loading])
-
-  // useEffect(() => {
-  //   if (!spoonityKeyState?.key) return
-  //   setSpoonityKey(spoonityKeyState?.key)
-  // }, [spoonityKeyState?.key])
 
   return (
     <>
