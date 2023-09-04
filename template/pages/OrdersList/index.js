@@ -7,6 +7,7 @@ export const OrdersList = (props) => {
   const ordersListProps = {
     ...props,
     isUseQuery: true,
+    disableSocketRoomDriver: true,
     onOrderRedirect: (orderId) => {
       if (!orderId) {
         return removeQueryToUrl(['id', 'section', 'tab'])
