@@ -250,6 +250,7 @@ const OrdersManagerUI = (props) => {
                 slaSettingTime={slaSettingTime}
                 allowColumns={allowColumns}
                 setAllowColumns={setAllowColumns}
+                ordersAmountByStatus={ordersAmountByStatus}
                 setOrdersAmountByStatus={setOrdersAmountByStatus}
               />
             </WrapItemView>
