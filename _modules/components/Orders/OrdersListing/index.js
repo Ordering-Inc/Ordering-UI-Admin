@@ -4,7 +4,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.OrdersListing = exports.MemoizedOrdersListing = void 0;
+exports.OrdersListing = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _styledComponents = require("styled-components");
@@ -20,7 +20,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-var OrdersListing = function OrdersListing(props) {
+var OrdersListing = /*#__PURE__*/(0, _react.memo)(function (props) {
   var _theme$images, _theme$images$dummies;
   var hidePhoto = props.hidePhoto,
     isSelectedOrders = props.isSelectedOrders,
@@ -107,7 +107,7 @@ var OrdersListing = function OrdersListing(props) {
     }
   }, t('FILTERS', 'Filters'))) : /*#__PURE__*/_react.default.createElement("p", null, t('MOBILE_NO_ORDERS', 'No Orders yet.')))) : /*#__PURE__*/_react.default.createElement(_styles2.WrapperOrderListContent, {
     maxHeight: orderListView !== 'table'
-  }, orderListView === 'table' ? /*#__PURE__*/_react.default.createElement(_OrdersTable.MemoizedOrdersTable, {
+  }, orderListView === 'table' ? /*#__PURE__*/_react.default.createElement(_OrdersTable.OrdersTable, {
     hidePhoto: hidePhoto,
     setSelectedOrderIds: setSelectedOrderIds,
     isSelectedOrders: isSelectedOrders,
@@ -148,7 +148,5 @@ var OrdersListing = function OrdersListing(props) {
     isDelivery: isDelivery,
     isUseQuery: isUseQuery
   }))));
-};
+});
 exports.OrdersListing = OrdersListing;
-var MemoizedOrdersListing = /*#__PURE__*/_react.default.memo(OrdersListing);
-exports.MemoizedOrdersListing = MemoizedOrdersListing;
