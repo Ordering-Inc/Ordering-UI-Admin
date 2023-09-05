@@ -1,7 +1,7 @@
 import React from 'react'
 import { useLocation } from 'react-router-dom'
 import { DashboardOrdersList as OrdersListController } from 'ordering-components-admin'
-import { OrdersListing } from '../OrdersListing'
+import { MemoizedOrdersListing } from '../OrdersListing'
 
 export const OrdersDashboardList = (props) => {
   const {
@@ -17,10 +17,10 @@ export const OrdersDashboardList = (props) => {
   const defaultStatus = query.get('status')
   const defaultPage = query.get('page') || 1
   const defaultPageSize = query.get('pageSize') || 10
-  
+
   const OrdersCommonControlProps = {
     ...props,
-    UIComponent: OrdersListing,
+    UIComponent: MemoizedOrdersListing,
     useDefualtSessionManager: true,
     orderBy: isMessagesView ? orderByOption : 'id',
     orderDirection: isMessagesView
