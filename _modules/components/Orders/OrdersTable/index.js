@@ -4,7 +4,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.OrdersTable = exports.MemoizedOrdersTable = void 0;
+exports.OrdersTable = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _moment = _interopRequireDefault(require("moment"));
 var _RiCheckboxBlankLine = _interopRequireDefault(require("@meronex/icons/ri/RiCheckboxBlankLine"));
@@ -34,7 +34,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-var OrdersTable = function OrdersTable(props) {
+var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
   var _configState$configs, _configState$configs2, _orderList$orders3;
   var hidePhoto = props.hidePhoto,
     isSelectedOrders = props.isSelectedOrders,
@@ -842,7 +842,5 @@ var OrdersTable = function OrdersTable(props) {
     defaultPageSize: pagination.pageSize,
     handleChangePageSize: handleChangePageSize
   })));
-};
+});
 exports.OrdersTable = OrdersTable;
-var MemoizedOrdersTable = /*#__PURE__*/_react.default.memo(OrdersTable);
-exports.MemoizedOrdersTable = MemoizedOrdersTable;

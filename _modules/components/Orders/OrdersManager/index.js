@@ -66,6 +66,9 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
   var _useSession = (0, _orderingComponentsAdmin.useSession)(),
     _useSession2 = _slicedToArray(_useSession, 1),
     user = _useSession2[0].user;
+  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configs = _useConfig2[0].configs;
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
@@ -136,12 +139,13 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     });
   };
   var handleOpenOrderDetail = function handleOpenOrderDetail(order) {
+    var _configs$optimize_ord;
     var isKeydown = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
     if (isTourOpen && currentTourStep === 4 && !isKeydown) {
       setIsTourOpen(false);
       return;
     }
-    setDetailsOrder(order);
+    (!(configs !== null && configs !== void 0 && configs.optimize_order_data) || (configs === null || configs === void 0 || (_configs$optimize_ord = configs.optimize_order_data) === null || _configs$optimize_ord === void 0 ? void 0 : _configs$optimize_ord.value) === '0') && setDetailsOrder(order);
     setOrderDetailId(order.id);
     setIsOpenOrderDetail(true);
     if (!isSelectedOrders) {
