@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
+import { useConfig } from 'ordering-components-admin'
 import { DeliveriesLocation } from '../DeliveriesLocation'
 import { OrdersDashboardList } from '../OrdersDashboardList'
 import { OrderStatusFilterBar } from '../OrderStatusFilterBar'
 import { OrderStatusSubFilter } from '../OrderStatusSubFilter'
+
 import {
   DeliveryDashboardContainer,
   OrdersContainer,
@@ -10,6 +12,7 @@ import {
   WrapperOrderlist,
   WrapperDeliveriesLocation
 } from './styles'
+
 export const DeliveryDashboard = (props) => {
   const {
     driversList,
@@ -21,6 +24,16 @@ export const DeliveryDashboard = (props) => {
     setOrdersAmountByStatus,
     isUseQuery
   } = props
+
+  const ordersDashboardListProps = {
+    ...props
+  }
+
+  const [{ configs }] = useConfig()
+
+  if ((configs?.optimize_order_data && (configs?.optimize_order_data?.value === '1'))) {
+    ordersDashboardListProps.propsToFetch = ['app_id', 'business', 'business_id', 'created_at', 'customer', 'customer_id', 'delivery_type', 'driver_group_id', 'driver_id', 'driver', 'delivery_datetime', 'delivery_datetime_utc', 'external_id', 'eta_time', 'id', 'logistic_status', 'logistic_attemps', 'uuid', 'order_group', 'order_group_id', 'priority', 'summary', 'status', 'time_status', 'total']
+  }
 
   const [interActionMapOrder, setInterActionMapOrder] = useState(null)
 
@@ -54,7 +67,7 @@ export const DeliveryDashboard = (props) => {
         </FilterContainer>
         <WrapperOrderlist id='cardOrders'>
           <OrdersDashboardList
-            {...props}
+            {...ordersDashboardListProps}
             isUseQuery={isUseQuery}
             orderListView='card'
             selectedOrderCard={interActionMapOrder}
