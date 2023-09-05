@@ -61,10 +61,6 @@ var SpoonityApiKey = function SpoonityApiKey(props) {
   (0, _react.useEffect)(function () {
     if (spoonityKeyState !== null && spoonityKeyState !== void 0 && spoonityKeyState.key && !(spoonityKeyState !== null && spoonityKeyState !== void 0 && spoonityKeyState.loading)) setSpoonityKey(spoonityKey);
   }, [spoonityKeyState === null || spoonityKeyState === void 0 ? void 0 : spoonityKeyState.key, spoonityKeyState === null || spoonityKeyState === void 0 ? void 0 : spoonityKeyState.loading]);
-  (0, _react.useEffect)(function () {
-    if (!(spoonityKeyState !== null && spoonityKeyState !== void 0 && spoonityKeyState.key)) return;
-    setSpoonityKey(spoonityKeyState === null || spoonityKeyState === void 0 ? void 0 : spoonityKeyState.key);
-  }, [spoonityKeyState === null || spoonityKeyState === void 0 ? void 0 : spoonityKeyState.key]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.BusinessOrderingChannelsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Title, null, t('SPOONITY_KEY', 'Spoonity key')), /*#__PURE__*/_react.default.createElement(_styles2.BusinessCustomSlugContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement(_styles2.Label, null, t('API_KEY', 'Api key')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     type: "text",
     value: spoonityKey,
