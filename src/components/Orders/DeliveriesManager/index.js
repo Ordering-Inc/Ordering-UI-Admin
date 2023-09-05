@@ -36,6 +36,7 @@ const DeliveriesManagerUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+
   const query = new URLSearchParams(useLocation().search)
   const [isOpenOrderDetail, setIsOpenOrderDetail] = useState(false)
   const [orderDetailId, setOrderDetailId] = useState(null)
@@ -58,7 +59,7 @@ const DeliveriesManagerUI = (props) => {
   }
 
   const handleOpenOrderDetail = (order) => {
-    setDetailsOrder(order)
+    (!configState?.configs?.optimize_order_data || (configState?.configs?.optimize_order_data?.value === '0')) && setDetailsOrder(order)
     setOrderDetailId(order.id)
     onOrderRedirect(order.id)
     setIsOpenOrderDetail(true)
