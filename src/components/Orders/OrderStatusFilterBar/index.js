@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { memo, useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { DragScroll } from '../../Shared'
 import CgSpinnerTwoAlt from '@meronex/icons/cg/CgSpinnerTwoAlt'
@@ -10,7 +10,7 @@ import {
   Tab
 } from './styles'
 
-export const OrderStatusFilterBar = (props) => {
+export const OrderStatusFilterBar = memo((props) => {
   const {
     isUseQuery,
     selectedOrderStatus,
@@ -106,4 +106,4 @@ export const OrderStatusFilterBar = (props) => {
       </OrderStatusFilterContainer>
     </>
   )
-}
+})
