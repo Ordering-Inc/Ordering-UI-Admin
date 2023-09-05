@@ -4,7 +4,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.OrdersListing = void 0;
+exports.OrdersListing = exports.MemoizedOrdersListing = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _styledComponents = require("styled-components");
@@ -107,7 +107,7 @@ var OrdersListing = function OrdersListing(props) {
     }
   }, t('FILTERS', 'Filters'))) : /*#__PURE__*/_react.default.createElement("p", null, t('MOBILE_NO_ORDERS', 'No Orders yet.')))) : /*#__PURE__*/_react.default.createElement(_styles2.WrapperOrderListContent, {
     maxHeight: orderListView !== 'table'
-  }, orderListView === 'table' ? /*#__PURE__*/_react.default.createElement(_OrdersTable.OrdersTable, {
+  }, orderListView === 'table' ? /*#__PURE__*/_react.default.createElement(_OrdersTable.MemoizedOrdersTable, {
     hidePhoto: hidePhoto,
     setSelectedOrderIds: setSelectedOrderIds,
     isSelectedOrders: isSelectedOrders,
@@ -150,3 +150,5 @@ var OrdersListing = function OrdersListing(props) {
   }))));
 };
 exports.OrdersListing = OrdersListing;
+var MemoizedOrdersListing = /*#__PURE__*/_react.default.memo(OrdersListing);
+exports.MemoizedOrdersListing = MemoizedOrdersListing;
