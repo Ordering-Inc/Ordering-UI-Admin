@@ -8,7 +8,7 @@ import {
   Title,
   BusinessCustomSlugContainer,
   FormControl,
-  Label,
+  Label
 } from './styles'
 
 export const SpoonityApiKey = (props) => {
@@ -45,11 +45,6 @@ export const SpoonityApiKey = (props) => {
   useEffect(() => {
     if (spoonityKeyState?.key && !spoonityKeyState?.loading) setSpoonityKey(spoonityKey)
   }, [spoonityKeyState?.key, spoonityKeyState?.loading])
-
-  useEffect(() => {
-    if(!spoonityKeyState?.key) return
-    setSpoonityKey(spoonityKeyState?.key)
-  }, [spoonityKeyState?.key])
 
   return (
     <>
