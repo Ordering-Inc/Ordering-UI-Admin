@@ -89,7 +89,8 @@ var DeliveriesManagerUI = function DeliveriesManagerUI(props) {
     onOrderRedirect();
   };
   var handleOpenOrderDetail = function handleOpenOrderDetail(order) {
-    setDetailsOrder(order);
+    var _configState$configs2, _configState$configs3;
+    (!(configState !== null && configState !== void 0 && (_configState$configs2 = configState.configs) !== null && _configState$configs2 !== void 0 && _configState$configs2.optimize_order_data) || (configState === null || configState === void 0 || (_configState$configs3 = configState.configs) === null || _configState$configs3 === void 0 || (_configState$configs3 = _configState$configs3.optimize_order_data) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value) === '0') && setDetailsOrder(order);
     setOrderDetailId(order.id);
     onOrderRedirect(order.id);
     setIsOpenOrderDetail(true);
