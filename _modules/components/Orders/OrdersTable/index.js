@@ -4,7 +4,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.OrdersTable = void 0;
+exports.OrdersTable = exports.MemoizedOrdersTable = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _moment = _interopRequireDefault(require("moment"));
 var _RiCheckboxBlankLine = _interopRequireDefault(require("@meronex/icons/ri/RiCheckboxBlankLine"));
@@ -834,3 +834,5 @@ var OrdersTable = function OrdersTable(props) {
   })));
 };
 exports.OrdersTable = OrdersTable;
+var MemoizedOrdersTable = /*#__PURE__*/_react.default.memo(OrdersTable);
+exports.MemoizedOrdersTable = MemoizedOrdersTable;

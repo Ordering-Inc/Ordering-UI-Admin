@@ -28,7 +28,7 @@ var OrdersDashboardList = function OrdersDashboardList(props) {
   var defaultPage = query.get('page') || 1;
   var defaultPageSize = query.get('pageSize') || 10;
   var OrdersCommonControlProps = _objectSpread(_objectSpread({}, props), {}, {
-    UIComponent: _OrdersListing.OrdersListing,
+    UIComponent: _OrdersListing.MemoizedOrdersListing,
     useDefualtSessionManager: true,
     orderBy: isMessagesView ? orderByOption : 'id',
     orderDirection: isMessagesView ? orderByOption === 'id' ? 'desc' : 'asc' : 'desc',
