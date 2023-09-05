@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
-import { OrdersTable } from '../OrdersTable'
+import { MemoizedOrdersTable } from '../OrdersTable'
 import { OrdersCards } from '../OrdersCards'
 import { Button } from '../../../styles'
 
@@ -119,7 +119,7 @@ export const OrdersListing = (props) => {
               maxHeight={orderListView !== 'table'}
             >
               {orderListView === 'table' ? (
-                <OrdersTable
+                <MemoizedOrdersTable
                   hidePhoto={hidePhoto}
                   setSelectedOrderIds={setSelectedOrderIds}
                   isSelectedOrders={isSelectedOrders}
@@ -171,3 +171,5 @@ export const OrdersListing = (props) => {
     </>
   )
 }
+
+export const MemoizedOrdersListing = React.memo(OrdersListing);
