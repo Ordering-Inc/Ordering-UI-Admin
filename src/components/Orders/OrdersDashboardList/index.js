@@ -2,7 +2,7 @@ import React from 'react'
 import { useLocation } from 'react-router-dom'
 // import { DashboardOrdersList as OrdersListController } from 'ordering-components-admin'
 import { DashboardOrdersList as OrdersListController } from './test'
-import { MemoizedOrdersListing } from '../OrdersListing'
+import { OrdersListing } from '../OrdersListing'
 
 export const OrdersDashboardList = (props) => {
   const {

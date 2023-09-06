@@ -875,6 +875,4 @@ export const OrdersTable = memo((props) => {
       )}
     </>
   )
-}
-
-export const MemoizedOrdersTable = React.memo(OrdersTable)
+})
