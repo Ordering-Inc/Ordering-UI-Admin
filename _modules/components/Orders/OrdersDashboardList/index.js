@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.OrdersDashboardList = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _reactRouterDom = require("react-router-dom");
-var _test = require("./test");
+var _orderingComponentsAdmin = require("ordering-components-admin");
 var _OrdersListing = require("../OrdersListing");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -15,7 +15,7 @@ function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbol
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); } // import { DashboardOrdersList as OrdersListController } from 'ordering-components-admin'
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 var OrdersDashboardList = function OrdersDashboardList(props) {
   var selectedSubOrderStatus = props.selectedSubOrderStatus,
     isMessagesView = props.isMessagesView,
@@ -38,9 +38,10 @@ var OrdersDashboardList = function OrdersDashboardList(props) {
     isSearchByCustomerPhone: true,
     isSearchByBusinessName: true,
     isSearchByDriverName: true,
-    driverId: props.driverId
+    driverId: props.driverId,
+    orderListView: 'cards'
   });
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isMessagesView ? /*#__PURE__*/_react.default.createElement(_test.DashboardOrdersList, _extends({
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isMessagesView ? /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DashboardOrdersList, _extends({
     isMessagesView: true
   }, OrdersCommonControlProps, {
     paginationSettings: {
@@ -49,7 +50,7 @@ var OrdersDashboardList = function OrdersDashboardList(props) {
       controlType: 'pages'
     },
     orderStatus: selectedSubOrderStatus === null || selectedSubOrderStatus === void 0 ? void 0 : selectedSubOrderStatus.all
-  })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_test.DashboardOrdersList, _extends({}, OrdersCommonControlProps, {
+  })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DashboardOrdersList, _extends({}, OrdersCommonControlProps, {
     paginationSettings: {
       initialPage: isUseQuery && defaultStatus === 'pending' && !isNaN(defaultPage) ? Number(defaultPage) : 1,
       pageSize: isUseQuery && defaultStatus === 'pending' && !isNaN(defaultPage) ? Number(defaultPageSize) : 10,
@@ -62,7 +63,7 @@ var OrdersDashboardList = function OrdersDashboardList(props) {
         pending: total
       }));
     }
-  })), /*#__PURE__*/_react.default.createElement(_test.DashboardOrdersList, _extends({
+  })), /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DashboardOrdersList, _extends({
     groupStatus: "inProgress"
   }, OrdersCommonControlProps, {
     paginationSettings: {
@@ -76,7 +77,7 @@ var OrdersDashboardList = function OrdersDashboardList(props) {
         inProgress: total
       }));
     }
-  })), /*#__PURE__*/_react.default.createElement(_test.DashboardOrdersList, _extends({
+  })), /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DashboardOrdersList, _extends({
     groupStatus: "completed"
   }, OrdersCommonControlProps, {
     paginationSettings: {
@@ -90,7 +91,7 @@ var OrdersDashboardList = function OrdersDashboardList(props) {
         completed: total
       }));
     }
-  })), /*#__PURE__*/_react.default.createElement(_test.DashboardOrdersList, _extends({
+  })), /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DashboardOrdersList, _extends({
     groupStatus: "cancelled"
   }, OrdersCommonControlProps, {
     paginationSettings: {

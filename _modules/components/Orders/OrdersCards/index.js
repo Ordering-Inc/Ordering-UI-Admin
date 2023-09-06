@@ -34,7 +34,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrdersCards = function OrdersCards(props) {
-  var _configState$configs, _Object$values;
+  var _configState$configs, _orderList$orders;
   var isMessagesView = props.isMessagesView,
     orderList = props.orderList,
     pagination = props.pagination,
@@ -211,9 +211,10 @@ var OrdersCards = function OrdersCards(props) {
     };
   }, []);
   (0, _react.useEffect)(function () {
-    var _orderList$orders$sel, _orderList$orders;
     if (orderList.loading || !selectedOrderCard) return;
-    var updatedOrder = (_orderList$orders$sel = orderList === null || orderList === void 0 || (_orderList$orders = orderList.orders) === null || _orderList$orders === void 0 ? void 0 : _orderList$orders[selectedOrderCard === null || selectedOrderCard === void 0 ? void 0 : selectedOrderCard.id]) !== null && _orderList$orders$sel !== void 0 ? _orderList$orders$sel : null;
+    var updatedOrder = orderList === null || orderList === void 0 ? void 0 : orderList.orders.find(function (order) {
+      return order.id === (selectedOrderCard === null || selectedOrderCard === void 0 ? void 0 : selectedOrderCard.id);
+    });
     if (updatedOrder) {
       handleUpdateDriverLocation && handleUpdateDriverLocation(updatedOrder);
     }
@@ -266,7 +267,7 @@ var OrdersCards = function OrdersCards(props) {
     })), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100
     }))))));
-  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_Object$values = Object.values(orderList.orders)) === null || _Object$values === void 0 ? void 0 : _Object$values.map(function (order) {
+  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_orderList$orders = orderList.orders) === null || _orderList$orders === void 0 ? void 0 : _orderList$orders.map(function (order) {
     var _getOrderStatus, _order$business, _theme$images, _order$business2, _order$business3, _order$driver, _order$driver2, _order$driver3, _order$driver4;
     return /*#__PURE__*/_react.default.createElement(_styles.OrderCard, {
       key: order.id,

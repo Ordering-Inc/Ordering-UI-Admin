@@ -35,7 +35,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
-  var _configState$configs, _configState$configs2, _orderList$orders, _orderList$orders2;
+  var _configState$configs, _configState$configs2, _orderList$orders3;
   var hidePhoto = props.hidePhoto,
     isSelectedOrders = props.isSelectedOrders,
     orderList = props.orderList,
@@ -296,16 +296,18 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
     handleOpenOrderDetail(order);
   };
   var handleSelecteAllOrder = function handleSelecteAllOrder() {
-    var orderIds = Object.keys(orderList.orders);
+    var _orderList$orders;
+    var orderIds = (_orderList$orders = orderList.orders) === null || _orderList$orders === void 0 ? void 0 : _orderList$orders.reduce(function (ids, order) {
+      return [].concat(_toConsumableArray(ids), [order.id]);
+    }, []);
     if (!isAllChecked) {
-      var updatedSelectedOrderIds = new Set([].concat(_toConsumableArray(selectedOrderIds), orderIds));
-      setSelectedOrderIds(_toConsumableArray(updatedSelectedOrderIds));
+      setSelectedOrderIds([].concat(_toConsumableArray(selectedOrderIds), _toConsumableArray(orderIds)));
     } else {
       var orderIdsToDeleteSet = new Set(orderIds);
-      var _updatedSelectedOrderIds = selectedOrderIds.filter(function (id) {
-        return !orderIdsToDeleteSet.has(id);
+      var updatedSelectedOrderIds = selectedOrderIds.filter(function (name) {
+        return !orderIdsToDeleteSet.has(name);
       });
-      setSelectedOrderIds(_updatedSelectedOrderIds);
+      setSelectedOrderIds(updatedSelectedOrderIds);
     }
   };
   /**
@@ -339,8 +341,11 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
     setDragOverd('');
   };
   (0, _react.useEffect)(function () {
+    var _orderList$orders2;
     if (orderList.loading) return;
-    var orderIds = Object.keys(orderList.orders);
+    var orderIds = (_orderList$orders2 = orderList.orders) === null || _orderList$orders2 === void 0 ? void 0 : _orderList$orders2.reduce(function (ids, order) {
+      return [].concat(_toConsumableArray(ids), [order.id]);
+    }, []);
     var _isAllChecked = orderIds.every(function (elem) {
       return selectedOrderIds.includes(elem);
     });
@@ -349,8 +354,8 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
   var handleChangeKeyboard = function handleChangeKeyboard(evt) {
     if (evt.code === 'Escape') setIsTourOpen && setIsTourOpen(false);
     if (evt.keyCode === 37 && currentTourStep === 1) handleOpenTour();
-    if (evt.keyCode === 37 && currentTourStep === 4) handleOpenOrderDetail(Object.values(orderList === null || orderList === void 0 ? void 0 : orderList.orders)[0], true);
-    if (evt.keyCode === 39 && currentTourStep === 0) handleOpenOrderDetail(Object.values(orderList === null || orderList === void 0 ? void 0 : orderList.orders)[0]);
+    if (evt.keyCode === 37 && currentTourStep === 4) handleOpenOrderDetail(orderList === null || orderList === void 0 ? void 0 : orderList.orders[0], true);
+    if (evt.keyCode === 39 && currentTourStep === 0) handleOpenOrderDetail(orderList === null || orderList === void 0 ? void 0 : orderList.orders[0]);
   };
   (0, _react.useEffect)(function () {
     if (!isTourOpen) return;
@@ -372,7 +377,7 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
     noScroll: isTourOpen && currentTourStep === 0
   }, /*#__PURE__*/_react.default.createElement(_styles.Table, {
     className: "orders_table",
-    noFixedHeader: !orderList.loading && Object.keys((_orderList$orders = orderList === null || orderList === void 0 ? void 0 : orderList.orders) !== null && _orderList$orders !== void 0 ? _orderList$orders : {}).length <= 5
+    noFixedHeader: !orderList.loading && ((_orderList$orders3 = orderList.orders) === null || _orderList$orders3 === void 0 ? void 0 : _orderList$orders3.length) <= 5
   }, !isSelectedOrders && /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, allowColumns && (Object.keys(allowColumns).filter(function (col) {
     var _allowColumns$col, _allowColumns$col2;
     return ((_allowColumns$col = allowColumns[col]) === null || _allowColumns$col === void 0 ? void 0 : _allowColumns$col.visable) && ((_allowColumns$col2 = allowColumns[col]) === null || _allowColumns$col2 === void 0 ? void 0 : _allowColumns$col2.order) !== 0;
@@ -642,7 +647,7 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
     })), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100
     }))))));
-  }) : Object.values((_orderList$orders2 = orderList === null || orderList === void 0 ? void 0 : orderList.orders) !== null && _orderList$orders2 !== void 0 ? _orderList$orders2 : {}).map(function (order, i) {
+  }) : orderList.orders.map(function (order, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.OrderTbody, {
       key: i,
       className: parseInt(orderDetailId) === order.id ? 'active' : '',

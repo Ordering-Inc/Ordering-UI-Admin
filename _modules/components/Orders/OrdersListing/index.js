@@ -21,7 +21,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrdersListing = /*#__PURE__*/(0, _react.memo)(function (props) {
-  var _orderList$orders, _theme$images;
+  var _theme$images;
   var hidePhoto = props.hidePhoto,
     isSelectedOrders = props.isSelectedOrders,
     orderList = props.orderList,
@@ -67,16 +67,15 @@ var OrdersListing = /*#__PURE__*/(0, _react.memo)(function (props) {
     _useState2 = _slicedToArray(_useState, 2),
     filterApplied = _useState2[0],
     setFilterApplied = _useState2[1];
-  var orders = Object.values((_orderList$orders = orderList === null || orderList === void 0 ? void 0 : orderList.orders) !== null && _orderList$orders !== void 0 ? _orderList$orders : {});
   (0, _react.useEffect)(function () {
     if (orderList.loading || !messageListView) return;
-    if (orders.length === 0 || messageOrder) return;
-    handleOpenMessage && handleOpenMessage(orders[0], messageType);
+    if (orderList.orders.length === 0 || messageOrder) return;
+    handleOpenMessage && handleOpenMessage(orderList.orders[0], messageType);
   }, [orderList.loading, messageListView]);
   (0, _react.useEffect)(function () {
     if (!isMessagesView || orderList.loading || selectedOrderCard) return;
-    if (orders.length > 0) {
-      handleOrderCardClick(orders[0]);
+    if ((orderList === null || orderList === void 0 ? void 0 : orderList.orders.length) > 0) {
+      handleOrderCardClick(orderList.orders[0]);
     }
   }, [isMessagesView, orderList, selectedOrderCard]);
   (0, _react.useEffect)(function () {
