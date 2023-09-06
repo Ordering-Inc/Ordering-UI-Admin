@@ -93,7 +93,7 @@ var OrderNotificationUI = function OrderNotificationUI(props) {
   var toastNotify = function toastNotify(orderId) {
     var _configState$configs2;
     var toastConfigure = {
-      position: 'top-right',
+      position: 'bottom-right',
       autoClose: 3000,
       hideProgressBar: false,
       closeOnClick: true,
