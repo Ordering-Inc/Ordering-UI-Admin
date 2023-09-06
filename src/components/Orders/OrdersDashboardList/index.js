@@ -21,7 +21,7 @@ export const OrdersDashboardList = (props) => {
 
   const OrdersCommonControlProps = {
     ...props,
-    UIComponent: MemoizedOrdersListing,
+    UIComponent: OrdersListing,
     useDefualtSessionManager: true,
     orderBy: isMessagesView ? orderByOption : 'id',
     orderDirection: isMessagesView

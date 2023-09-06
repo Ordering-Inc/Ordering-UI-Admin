@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import moment from 'moment'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
@@ -35,7 +35,7 @@ import {
   DragTh
 } from './styles'
 
-export const OrdersTable = (props) => {
+export const OrdersTable = memo((props) => {
   const {
     hidePhoto,
     isSelectedOrders,

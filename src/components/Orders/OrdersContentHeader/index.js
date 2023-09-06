@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { useLanguage, useConfig } from 'ordering-components-admin'
 import { SearchBar } from '../../Shared'
 import { OrdersFilterGroup } from '../OrdersFilterGroup'
@@ -21,7 +21,7 @@ import {
   WrapperSearchAndFilter
 } from './styles'
 
-export const OrdersContentHeader = (props) => {
+export const OrdersContentHeader = memo((props) => {
   const {
     isDisableTitle,
     isSelectedOrders,
@@ -130,4 +130,4 @@ export const OrdersContentHeader = (props) => {
       </OrderContentHeaderContainer>
     </>
   )
-}
+})
