@@ -32,8 +32,7 @@ export const OrdersDashboardList = (props) => {
     isSearchByCustomerPhone: true,
     isSearchByBusinessName: true,
     isSearchByDriverName: true,
-    driverId: props.driverId,
-    orderListView: 'cards'
+    driverId: props.driverId
   }
 
   return (

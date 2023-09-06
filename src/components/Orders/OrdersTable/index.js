@@ -630,7 +630,25 @@ export const OrdersTable = memo((props) => {
                 data-status={isEnabledRowInColor && order?.time_status}
               >
                 <tr>
-                  {Object.keys(allowColumns).filter(col => allowColumns[col]?.visable)
+                  <td className='statusInfo' key={`statusInfo${i}-${1}`}>
+                    <StatusInfo>
+                      <p className='bold'>{getOrderStatus(order.status)?.value}</p>
+                    </StatusInfo>
+                  </td>
+                  <td className='businessInfo' key={`businessInfo${i}-${1}`}>
+                    <BusinessInfo>
+                      {/* {!hidePhoto && (
+                        <WrapperImage>
+                          <img src={optimizeImage(order.business?.logo || theme.images?.dummies?.businessLogo, 'h_50,c_limit')} loading='lazy' alt='' />
+                        </WrapperImage>
+                      )} */}
+                      <div className='info'>
+                        <p className='bold'>{order?.business?.name}</p>
+                        <p>{order?.business?.city?.name}</p>
+                      </div>
+                    </BusinessInfo>
+                  </td>
+                  {/* {Object.keys(allowColumns).filter(col => allowColumns[col]?.visable)
                     .sort((col1, col2) => allowColumns[col1]?.order - allowColumns[col2]?.order)
                     .map((column, index) => {
                       if (column === 'slaBar') {
@@ -854,8 +872,7 @@ export const OrdersTable = memo((props) => {
                           </td>
                         )
                       }
-                    })}
-                  <td />
+                    })} */}
                 </tr>
               </OrderTbody>
             ))
