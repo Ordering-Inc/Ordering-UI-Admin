@@ -38,8 +38,7 @@ var OrdersDashboardList = function OrdersDashboardList(props) {
     isSearchByCustomerPhone: true,
     isSearchByBusinessName: true,
     isSearchByDriverName: true,
-    driverId: props.driverId,
-    orderListView: 'cards'
+    driverId: props.driverId
   });
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isMessagesView ? /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DashboardOrdersList, _extends({
     isMessagesView: true
