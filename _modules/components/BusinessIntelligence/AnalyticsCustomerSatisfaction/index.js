@@ -1,6 +1,6 @@
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -18,7 +18,7 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -76,20 +76,20 @@ var AnalyticsCustomerSatisfaction = function AnalyticsCustomerSatisfaction(props
     }));
   }), /*#__PURE__*/_react.default.createElement(_GraphLoadingMessage.GraphLoadingMessage, null)) : /*#__PURE__*/_react.default.createElement(_styles.CustomerSatisfactionWrapper, null, !(dataList !== null && dataList !== void 0 && (_dataList$data6 = dataList.data) !== null && _dataList$data6 !== void 0 && _dataList$data6.general) && !(dataList !== null && dataList !== void 0 && (_dataList$data7 = dataList.data) !== null && _dataList$data7 !== void 0 && _dataList$data7.quality) && !(dataList !== null && dataList !== void 0 && (_dataList$data8 = dataList.data) !== null && _dataList$data8 !== void 0 && _dataList$data8.delivery) && !(dataList !== null && dataList !== void 0 && (_dataList$data9 = dataList.data) !== null && _dataList$data9 !== void 0 && _dataList$data9.service) && !(dataList !== null && dataList !== void 0 && (_dataList$data10 = dataList.data) !== null && _dataList$data10 !== void 0 && _dataList$data10.package) ? /*#__PURE__*/_react.default.createElement(_styles.EmptyContent, null, t('NO_DATA', 'No Data')) : /*#__PURE__*/_react.default.createElement(_styles.CustomerSatisfactionContent, {
     ref: downloadElementRef
-  }, (dataList === null || dataList === void 0 ? void 0 : (_dataList$data11 = dataList.data) === null || _dataList$data11 === void 0 ? void 0 : _dataList$data11.general) && /*#__PURE__*/_react.default.createElement(Score, {
-    star: dataList === null || dataList === void 0 ? void 0 : (_dataList$data12 = dataList.data) === null || _dataList$data12 === void 0 ? void 0 : _dataList$data12.general,
+  }, (dataList === null || dataList === void 0 || (_dataList$data11 = dataList.data) === null || _dataList$data11 === void 0 ? void 0 : _dataList$data11.general) && /*#__PURE__*/_react.default.createElement(Score, {
+    star: dataList === null || dataList === void 0 || (_dataList$data12 = dataList.data) === null || _dataList$data12 === void 0 ? void 0 : _dataList$data12.general,
     text: t('GENERAL', 'General')
-  }), (dataList === null || dataList === void 0 ? void 0 : (_dataList$data13 = dataList.data) === null || _dataList$data13 === void 0 ? void 0 : _dataList$data13.quality) && /*#__PURE__*/_react.default.createElement(Score, {
-    star: dataList === null || dataList === void 0 ? void 0 : (_dataList$data14 = dataList.data) === null || _dataList$data14 === void 0 ? void 0 : _dataList$data14.quality,
+  }), (dataList === null || dataList === void 0 || (_dataList$data13 = dataList.data) === null || _dataList$data13 === void 0 ? void 0 : _dataList$data13.quality) && /*#__PURE__*/_react.default.createElement(Score, {
+    star: dataList === null || dataList === void 0 || (_dataList$data14 = dataList.data) === null || _dataList$data14 === void 0 ? void 0 : _dataList$data14.quality,
     text: t('QUALITY', 'Quality')
-  }), (dataList === null || dataList === void 0 ? void 0 : (_dataList$data15 = dataList.data) === null || _dataList$data15 === void 0 ? void 0 : _dataList$data15.delivery) && /*#__PURE__*/_react.default.createElement(Score, {
-    star: dataList === null || dataList === void 0 ? void 0 : (_dataList$data16 = dataList.data) === null || _dataList$data16 === void 0 ? void 0 : _dataList$data16.delivery,
+  }), (dataList === null || dataList === void 0 || (_dataList$data15 = dataList.data) === null || _dataList$data15 === void 0 ? void 0 : _dataList$data15.delivery) && /*#__PURE__*/_react.default.createElement(Score, {
+    star: dataList === null || dataList === void 0 || (_dataList$data16 = dataList.data) === null || _dataList$data16 === void 0 ? void 0 : _dataList$data16.delivery,
     text: t('DELIVERY', 'Delivery')
-  }), (dataList === null || dataList === void 0 ? void 0 : (_dataList$data17 = dataList.data) === null || _dataList$data17 === void 0 ? void 0 : _dataList$data17.service) && /*#__PURE__*/_react.default.createElement(Score, {
-    star: dataList === null || dataList === void 0 ? void 0 : (_dataList$data18 = dataList.data) === null || _dataList$data18 === void 0 ? void 0 : _dataList$data18.service,
+  }), (dataList === null || dataList === void 0 || (_dataList$data17 = dataList.data) === null || _dataList$data17 === void 0 ? void 0 : _dataList$data17.service) && /*#__PURE__*/_react.default.createElement(Score, {
+    star: dataList === null || dataList === void 0 || (_dataList$data18 = dataList.data) === null || _dataList$data18 === void 0 ? void 0 : _dataList$data18.service,
     text: t('SERVICE', 'Service')
-  }), (dataList === null || dataList === void 0 ? void 0 : (_dataList$data19 = dataList.data) === null || _dataList$data19 === void 0 ? void 0 : _dataList$data19.package) && /*#__PURE__*/_react.default.createElement(Score, {
-    star: dataList === null || dataList === void 0 ? void 0 : (_dataList$data20 = dataList.data) === null || _dataList$data20 === void 0 ? void 0 : _dataList$data20.package,
+  }), (dataList === null || dataList === void 0 || (_dataList$data19 = dataList.data) === null || _dataList$data19 === void 0 ? void 0 : _dataList$data19.package) && /*#__PURE__*/_react.default.createElement(Score, {
+    star: dataList === null || dataList === void 0 || (_dataList$data20 = dataList.data) === null || _dataList$data20 === void 0 ? void 0 : _dataList$data20.package,
     text: t('PACKAGE', 'Package')
   }))));
 };

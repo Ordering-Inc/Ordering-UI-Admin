@@ -1,6 +1,6 @@
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -20,7 +20,7 @@ exports.InnerNoneOrdersContainer = InnerNoneOrdersContainer;
 var OrderStatusTitle = _styledComponents.default.p(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    display: flex;\n    font-size: 20px;\n    color: ", ";\n    margin-top: 10px;\n    margin-bottom: 10px;\n    font-weight: 500;\n    padding: 0 5px;\n\n    .rotate {\n        transform: rotate(-90deg);\n    }\n    .collapse_icon {\n        transition: transform 0.3s ease;\n        padding: 5px;\n        cursor: pointer;\n    }\n"])), function (_ref2) {
   var _theme$colors;
   var theme = _ref2.theme;
-  return (theme === null || theme === void 0 ? void 0 : (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.textBlackContrast) || '#000';
+  return (theme === null || theme === void 0 || (_theme$colors = theme.colors) === null || _theme$colors === void 0 ? void 0 : _theme$colors.textBlackContrast) || '#000';
 });
 exports.OrderStatusTitle = OrderStatusTitle;
 var SkeletonOrder = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    text-align: center;\n    display: flex;\n    flex-direction: column;\n    width: auto;\n    margin: 0 auto;\n"])));

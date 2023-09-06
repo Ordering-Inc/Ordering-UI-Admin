@@ -1,6 +1,6 @@
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -18,15 +18,15 @@ var _GraphLoadingMessage = require("../GraphLoadingMessage");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
-function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var AnalyticsAvailableTimes = function AnalyticsAvailableTimes(props) {
-  var _availableTimesList$d13, _availableTimesList$d14, _availableTimesList$d15, _availableTimesList$d16, _availableTimesList$d17, _availableTimesList$d18, _availableTimesList$d19, _availableTimesList$d20;
+  var _availableTimesList$d11, _availableTimesList$d12, _availableTimesList$d13, _availableTimesList$d14;
   var filterList = props.filterList,
     availableTimesList = props.availableTimesList;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -45,7 +45,7 @@ var AnalyticsAvailableTimes = function AnalyticsAvailableTimes(props) {
     var labels = [];
     if (availableTimesList !== null && availableTimesList !== void 0 && (_availableTimesList$d = availableTimesList.data) !== null && _availableTimesList$d !== void 0 && _availableTimesList$d.available) {
       var _availableTimesList$d2;
-      var _iterator = _createForOfIteratorHelper(availableTimesList === null || availableTimesList === void 0 ? void 0 : (_availableTimesList$d2 = availableTimesList.data) === null || _availableTimesList$d2 === void 0 ? void 0 : _availableTimesList$d2.available),
+      var _iterator = _createForOfIteratorHelper(availableTimesList === null || availableTimesList === void 0 || (_availableTimesList$d2 = availableTimesList.data) === null || _availableTimesList$d2 === void 0 ? void 0 : _availableTimesList$d2.available),
         _step;
       try {
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
@@ -100,7 +100,7 @@ var AnalyticsAvailableTimes = function AnalyticsAvailableTimes(props) {
     var datasets = [];
     if (availableTimesList !== null && availableTimesList !== void 0 && (_availableTimesList$d3 = availableTimesList.data) !== null && _availableTimesList$d3 !== void 0 && _availableTimesList$d3.available) {
       var _availableTimesList$d4;
-      var _iterator2 = _createForOfIteratorHelper(availableTimesList === null || availableTimesList === void 0 ? void 0 : (_availableTimesList$d4 = availableTimesList.data) === null || _availableTimesList$d4 === void 0 ? void 0 : _availableTimesList$d4.available),
+      var _iterator2 = _createForOfIteratorHelper(availableTimesList === null || availableTimesList === void 0 || (_availableTimesList$d4 = availableTimesList.data) === null || _availableTimesList$d4 === void 0 ? void 0 : _availableTimesList$d4.available),
         _step2;
       try {
         for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
@@ -123,7 +123,7 @@ var AnalyticsAvailableTimes = function AnalyticsAvailableTimes(props) {
     var datasets = [];
     if (availableTimesList !== null && availableTimesList !== void 0 && (_availableTimesList$d5 = availableTimesList.data) !== null && _availableTimesList$d5 !== void 0 && _availableTimesList$d5.not_available) {
       var _availableTimesList$d6;
-      var _iterator3 = _createForOfIteratorHelper(availableTimesList === null || availableTimesList === void 0 ? void 0 : (_availableTimesList$d6 = availableTimesList.data) === null || _availableTimesList$d6 === void 0 ? void 0 : _availableTimesList$d6.not_available),
+      var _iterator3 = _createForOfIteratorHelper(availableTimesList === null || availableTimesList === void 0 || (_availableTimesList$d6 = availableTimesList.data) === null || _availableTimesList$d6 === void 0 ? void 0 : _availableTimesList$d6.not_available),
         _step3;
       try {
         for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
@@ -144,7 +144,7 @@ var AnalyticsAvailableTimes = function AnalyticsAvailableTimes(props) {
   var downloadCSV = function downloadCSV() {
     var _availableTimesList$d7;
     var csv = "".concat(t('TIME', 'Time'), ", ").concat(t('AVAILABLE', 'Available'), "(h), ").concat(t('NOT_AVAILABLE', 'Not Available'), "(h)\n");
-    var _iterator4 = _createForOfIteratorHelper(availableTimesList === null || availableTimesList === void 0 ? void 0 : (_availableTimesList$d7 = availableTimesList.data) === null || _availableTimesList$d7 === void 0 ? void 0 : _availableTimesList$d7.available),
+    var _iterator4 = _createForOfIteratorHelper(availableTimesList === null || availableTimesList === void 0 || (_availableTimesList$d7 = availableTimesList.data) === null || _availableTimesList$d7 === void 0 ? void 0 : _availableTimesList$d7.available),
       _step4;
     try {
       var _loop = function _loop() {
@@ -154,7 +154,7 @@ var AnalyticsAvailableTimes = function AnalyticsAvailableTimes(props) {
         csv += "".concat(parseNumber(row.time / 3600, {
           separator: '.'
         }), ",");
-        var notAvailable = availableTimesList === null || availableTimesList === void 0 ? void 0 : (_availableTimesList$d8 = availableTimesList.data) === null || _availableTimesList$d8 === void 0 ? void 0 : _availableTimesList$d8.not_available.find(function (item) {
+        var notAvailable = availableTimesList === null || availableTimesList === void 0 || (_availableTimesList$d8 = availableTimesList.data) === null || _availableTimesList$d8 === void 0 ? void 0 : _availableTimesList$d8.not_available.find(function (item) {
           return item.at === row.at;
         });
         csv += notAvailable ? "".concat(parseNumber(notAvailable.time / 3600, {
@@ -244,11 +244,11 @@ var AnalyticsAvailableTimes = function AnalyticsAvailableTimes(props) {
     pointRadius: 0
   };
   var previewChart = function previewChart() {
-    var _availableTimesList$d9, _availableTimesList$d10, _availableTimesList$d11, _availableTimesList$d12;
-    if ((availableTimesList === null || availableTimesList === void 0 ? void 0 : (_availableTimesList$d9 = availableTimesList.data) === null || _availableTimesList$d9 === void 0 ? void 0 : (_availableTimesList$d10 = _availableTimesList$d9.available) === null || _availableTimesList$d10 === void 0 ? void 0 : _availableTimesList$d10.length) > 0 || (availableTimesList === null || availableTimesList === void 0 ? void 0 : (_availableTimesList$d11 = availableTimesList.data) === null || _availableTimesList$d11 === void 0 ? void 0 : (_availableTimesList$d12 = _availableTimesList$d11.not_available) === null || _availableTimesList$d12 === void 0 ? void 0 : _availableTimesList$d12.length) > 0) setIsShowPreview(true);
+    var _availableTimesList$d9, _availableTimesList$d10;
+    if ((availableTimesList === null || availableTimesList === void 0 || (_availableTimesList$d9 = availableTimesList.data) === null || _availableTimesList$d9 === void 0 || (_availableTimesList$d9 = _availableTimesList$d9.available) === null || _availableTimesList$d9 === void 0 ? void 0 : _availableTimesList$d9.length) > 0 || (availableTimesList === null || availableTimesList === void 0 || (_availableTimesList$d10 = availableTimesList.data) === null || _availableTimesList$d10 === void 0 || (_availableTimesList$d10 = _availableTimesList$d10.not_available) === null || _availableTimesList$d10 === void 0 ? void 0 : _availableTimesList$d10.length) > 0) setIsShowPreview(true);
   };
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.ChartHeaderContainer, null, /*#__PURE__*/_react.default.createElement("p", null, t('AVAILABLE_TIMES', 'Available Times')), /*#__PURE__*/_react.default.createElement(_styles.ActionBlock, {
-    disabled: !((availableTimesList === null || availableTimesList === void 0 ? void 0 : (_availableTimesList$d13 = availableTimesList.data) === null || _availableTimesList$d13 === void 0 ? void 0 : (_availableTimesList$d14 = _availableTimesList$d13.available) === null || _availableTimesList$d14 === void 0 ? void 0 : _availableTimesList$d14.length) > 0 || (availableTimesList === null || availableTimesList === void 0 ? void 0 : (_availableTimesList$d15 = availableTimesList.data) === null || _availableTimesList$d15 === void 0 ? void 0 : (_availableTimesList$d16 = _availableTimesList$d15.not_available) === null || _availableTimesList$d16 === void 0 ? void 0 : _availableTimesList$d16.length) > 0)
+    disabled: !((availableTimesList === null || availableTimesList === void 0 || (_availableTimesList$d11 = availableTimesList.data) === null || _availableTimesList$d11 === void 0 || (_availableTimesList$d11 = _availableTimesList$d11.available) === null || _availableTimesList$d11 === void 0 ? void 0 : _availableTimesList$d11.length) > 0 || (availableTimesList === null || availableTimesList === void 0 || (_availableTimesList$d12 = availableTimesList.data) === null || _availableTimesList$d12 === void 0 || (_availableTimesList$d12 = _availableTimesList$d12.not_available) === null || _availableTimesList$d12 === void 0 ? void 0 : _availableTimesList$d12.length) > 0)
   }, /*#__PURE__*/_react.default.createElement(_BsArrowsAngleExpand.default, {
     onClick: previewChart
   }), /*#__PURE__*/_react.default.createElement(_BsDownload.default, {
@@ -256,7 +256,7 @@ var AnalyticsAvailableTimes = function AnalyticsAvailableTimes(props) {
     onClick: downloadCSV
   }))), availableTimesList !== null && availableTimesList !== void 0 && availableTimesList.loading ? /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 150
-  }), /*#__PURE__*/_react.default.createElement(_GraphLoadingMessage.GraphLoadingMessage, null)) : (availableTimesList === null || availableTimesList === void 0 ? void 0 : (_availableTimesList$d17 = availableTimesList.data) === null || _availableTimesList$d17 === void 0 ? void 0 : (_availableTimesList$d18 = _availableTimesList$d17.available) === null || _availableTimesList$d18 === void 0 ? void 0 : _availableTimesList$d18.length) > 0 || (availableTimesList === null || availableTimesList === void 0 ? void 0 : (_availableTimesList$d19 = availableTimesList.data) === null || _availableTimesList$d19 === void 0 ? void 0 : (_availableTimesList$d20 = _availableTimesList$d19.not_available) === null || _availableTimesList$d20 === void 0 ? void 0 : _availableTimesList$d20.length) > 0 ? /*#__PURE__*/_react.default.createElement(_styles.BarChartWrapper, null, /*#__PURE__*/_react.default.createElement(_reactChartjs.Bar, {
+  }), /*#__PURE__*/_react.default.createElement(_GraphLoadingMessage.GraphLoadingMessage, null)) : (availableTimesList === null || availableTimesList === void 0 || (_availableTimesList$d13 = availableTimesList.data) === null || _availableTimesList$d13 === void 0 || (_availableTimesList$d13 = _availableTimesList$d13.available) === null || _availableTimesList$d13 === void 0 ? void 0 : _availableTimesList$d13.length) > 0 || (availableTimesList === null || availableTimesList === void 0 || (_availableTimesList$d14 = availableTimesList.data) === null || _availableTimesList$d14 === void 0 || (_availableTimesList$d14 = _availableTimesList$d14.not_available) === null || _availableTimesList$d14 === void 0 ? void 0 : _availableTimesList$d14.length) > 0 ? /*#__PURE__*/_react.default.createElement(_styles.BarChartWrapper, null, /*#__PURE__*/_react.default.createElement(_reactChartjs.Bar, {
     data: data,
     options: options,
     ref: chartRef

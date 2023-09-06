@@ -1,6 +1,6 @@
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -19,12 +19,12 @@ var _GraphLoadingMessage = require("../GraphLoadingMessage");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
-function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var AnalyticsSpendTimes = function AnalyticsSpendTimes(props) {
   var chartDataList = props.chartDataList,
@@ -45,14 +45,14 @@ var AnalyticsSpendTimes = function AnalyticsSpendTimes(props) {
     var values = [];
     timeAxes.forEach(function (axe) {
       var _chartDataList$data;
-      var index = chartDataList === null || chartDataList === void 0 ? void 0 : (_chartDataList$data = chartDataList.data) === null || _chartDataList$data === void 0 ? void 0 : _chartDataList$data.findIndex(function (history) {
+      var index = chartDataList === null || chartDataList === void 0 || (_chartDataList$data = chartDataList.data) === null || _chartDataList$data === void 0 ? void 0 : _chartDataList$data.findIndex(function (history) {
         return axe === (history === null || history === void 0 ? void 0 : history.time);
       });
       if (index !== -1) {
         var _chartDataList$data$i, _chartDataList$data$i2, _chartDataList$data$i3;
         values.push({
-          x: chartDataList === null || chartDataList === void 0 ? void 0 : (_chartDataList$data$i = chartDataList.data[index]) === null || _chartDataList$data$i === void 0 ? void 0 : _chartDataList$data$i.time,
-          y: chartDataList !== null && chartDataList !== void 0 && (_chartDataList$data$i2 = chartDataList.data[index]) !== null && _chartDataList$data$i2 !== void 0 && _chartDataList$data$i2.accept_spend ? (chartDataList === null || chartDataList === void 0 ? void 0 : (_chartDataList$data$i3 = chartDataList.data[index]) === null || _chartDataList$data$i3 === void 0 ? void 0 : _chartDataList$data$i3.accept_spend) / 60 : 0
+          x: chartDataList === null || chartDataList === void 0 || (_chartDataList$data$i = chartDataList.data[index]) === null || _chartDataList$data$i === void 0 ? void 0 : _chartDataList$data$i.time,
+          y: chartDataList !== null && chartDataList !== void 0 && (_chartDataList$data$i2 = chartDataList.data[index]) !== null && _chartDataList$data$i2 !== void 0 && _chartDataList$data$i2.accept_spend ? (chartDataList === null || chartDataList === void 0 || (_chartDataList$data$i3 = chartDataList.data[index]) === null || _chartDataList$data$i3 === void 0 ? void 0 : _chartDataList$data$i3.accept_spend) / 60 : 0
         });
       } else {
         values.push({
@@ -67,14 +67,14 @@ var AnalyticsSpendTimes = function AnalyticsSpendTimes(props) {
     var values = [];
     timeAxes.forEach(function (axe) {
       var _chartDataList$data2;
-      var index = chartDataList === null || chartDataList === void 0 ? void 0 : (_chartDataList$data2 = chartDataList.data) === null || _chartDataList$data2 === void 0 ? void 0 : _chartDataList$data2.findIndex(function (history) {
+      var index = chartDataList === null || chartDataList === void 0 || (_chartDataList$data2 = chartDataList.data) === null || _chartDataList$data2 === void 0 ? void 0 : _chartDataList$data2.findIndex(function (history) {
         return axe === (history === null || history === void 0 ? void 0 : history.time);
       });
       if (index !== -1) {
         var _chartDataList$data$i4, _chartDataList$data$i5, _chartDataList$data$i6;
         values.push({
-          x: chartDataList === null || chartDataList === void 0 ? void 0 : (_chartDataList$data$i4 = chartDataList.data[index]) === null || _chartDataList$data$i4 === void 0 ? void 0 : _chartDataList$data$i4.time,
-          y: chartDataList !== null && chartDataList !== void 0 && (_chartDataList$data$i5 = chartDataList.data[index]) !== null && _chartDataList$data$i5 !== void 0 && _chartDataList$data$i5.pickup_spend ? (chartDataList === null || chartDataList === void 0 ? void 0 : (_chartDataList$data$i6 = chartDataList.data[index]) === null || _chartDataList$data$i6 === void 0 ? void 0 : _chartDataList$data$i6.pickup_spend) / 60 : 0
+          x: chartDataList === null || chartDataList === void 0 || (_chartDataList$data$i4 = chartDataList.data[index]) === null || _chartDataList$data$i4 === void 0 ? void 0 : _chartDataList$data$i4.time,
+          y: chartDataList !== null && chartDataList !== void 0 && (_chartDataList$data$i5 = chartDataList.data[index]) !== null && _chartDataList$data$i5 !== void 0 && _chartDataList$data$i5.pickup_spend ? (chartDataList === null || chartDataList === void 0 || (_chartDataList$data$i6 = chartDataList.data[index]) === null || _chartDataList$data$i6 === void 0 ? void 0 : _chartDataList$data$i6.pickup_spend) / 60 : 0
         });
       } else {
         values.push({
@@ -89,14 +89,14 @@ var AnalyticsSpendTimes = function AnalyticsSpendTimes(props) {
     var values = [];
     timeAxes.forEach(function (axe) {
       var _chartDataList$data3;
-      var index = chartDataList === null || chartDataList === void 0 ? void 0 : (_chartDataList$data3 = chartDataList.data) === null || _chartDataList$data3 === void 0 ? void 0 : _chartDataList$data3.findIndex(function (history) {
+      var index = chartDataList === null || chartDataList === void 0 || (_chartDataList$data3 = chartDataList.data) === null || _chartDataList$data3 === void 0 ? void 0 : _chartDataList$data3.findIndex(function (history) {
         return axe === (history === null || history === void 0 ? void 0 : history.time);
       });
       if (index !== -1) {
         var _chartDataList$data$i7, _chartDataList$data$i8, _chartDataList$data$i9;
         values.push({
-          x: chartDataList === null || chartDataList === void 0 ? void 0 : (_chartDataList$data$i7 = chartDataList.data[index]) === null || _chartDataList$data$i7 === void 0 ? void 0 : _chartDataList$data$i7.time,
-          y: chartDataList !== null && chartDataList !== void 0 && (_chartDataList$data$i8 = chartDataList.data[index]) !== null && _chartDataList$data$i8 !== void 0 && _chartDataList$data$i8.delivery_spend ? (chartDataList === null || chartDataList === void 0 ? void 0 : (_chartDataList$data$i9 = chartDataList.data[index]) === null || _chartDataList$data$i9 === void 0 ? void 0 : _chartDataList$data$i9.delivery_spend) / 60 : 0
+          x: chartDataList === null || chartDataList === void 0 || (_chartDataList$data$i7 = chartDataList.data[index]) === null || _chartDataList$data$i7 === void 0 ? void 0 : _chartDataList$data$i7.time,
+          y: chartDataList !== null && chartDataList !== void 0 && (_chartDataList$data$i8 = chartDataList.data[index]) !== null && _chartDataList$data$i8 !== void 0 && _chartDataList$data$i8.delivery_spend ? (chartDataList === null || chartDataList === void 0 || (_chartDataList$data$i9 = chartDataList.data[index]) === null || _chartDataList$data$i9 === void 0 ? void 0 : _chartDataList$data$i9.delivery_spend) / 60 : 0
         });
       } else {
         values.push({
@@ -111,14 +111,14 @@ var AnalyticsSpendTimes = function AnalyticsSpendTimes(props) {
     var values = [];
     timeAxes.forEach(function (axe) {
       var _chartDataList$data4;
-      var index = chartDataList === null || chartDataList === void 0 ? void 0 : (_chartDataList$data4 = chartDataList.data) === null || _chartDataList$data4 === void 0 ? void 0 : _chartDataList$data4.findIndex(function (history) {
+      var index = chartDataList === null || chartDataList === void 0 || (_chartDataList$data4 = chartDataList.data) === null || _chartDataList$data4 === void 0 ? void 0 : _chartDataList$data4.findIndex(function (history) {
         return axe === (history === null || history === void 0 ? void 0 : history.time);
       });
       if (index !== -1) {
         var _chartDataList$data$i10, _chartDataList$data$i11, _chartDataList$data$i12;
         values.push({
-          x: chartDataList === null || chartDataList === void 0 ? void 0 : (_chartDataList$data$i10 = chartDataList.data[index]) === null || _chartDataList$data$i10 === void 0 ? void 0 : _chartDataList$data$i10.time,
-          y: chartDataList !== null && chartDataList !== void 0 && (_chartDataList$data$i11 = chartDataList.data[index]) !== null && _chartDataList$data$i11 !== void 0 && _chartDataList$data$i11.complete_spend ? (chartDataList === null || chartDataList === void 0 ? void 0 : (_chartDataList$data$i12 = chartDataList.data[index]) === null || _chartDataList$data$i12 === void 0 ? void 0 : _chartDataList$data$i12.complete_spend) / 60 : 0
+          x: chartDataList === null || chartDataList === void 0 || (_chartDataList$data$i10 = chartDataList.data[index]) === null || _chartDataList$data$i10 === void 0 ? void 0 : _chartDataList$data$i10.time,
+          y: chartDataList !== null && chartDataList !== void 0 && (_chartDataList$data$i11 = chartDataList.data[index]) !== null && _chartDataList$data$i11 !== void 0 && _chartDataList$data$i11.complete_spend ? (chartDataList === null || chartDataList === void 0 || (_chartDataList$data$i12 = chartDataList.data[index]) === null || _chartDataList$data$i12 === void 0 ? void 0 : _chartDataList$data$i12.complete_spend) / 60 : 0
         });
       } else {
         values.push({

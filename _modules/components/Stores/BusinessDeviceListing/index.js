@@ -1,6 +1,6 @@
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -23,8 +23,8 @@ function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableTo
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
@@ -32,7 +32,7 @@ function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArra
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
-function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessDeviceListingUI = function BusinessDeviceListingUI(props) {
   var searchValue = props.searchValue,
@@ -107,7 +107,7 @@ var BusinessDeviceListingUI = function BusinessDeviceListingUI(props) {
   };
   var handleClickBrand = function handleClickBrand(e, brandId, isInitialRender) {
     var _e$target;
-    var isInvalid = e === null || e === void 0 ? void 0 : (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.closest('.brand_enable_control');
+    var isInvalid = e === null || e === void 0 || (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.closest('.brand_enable_control');
     if (isInvalid) return;
     handleOpenSideBar(brandId);
     if (!isInitialRender) {
@@ -121,11 +121,11 @@ var BusinessDeviceListingUI = function BusinessDeviceListingUI(props) {
   };
   (0, _react.useEffect)(function () {
     var _deviceListState$devi;
-    if ((deviceListState === null || deviceListState === void 0 ? void 0 : (_deviceListState$devi = deviceListState.devices) === null || _deviceListState$devi === void 0 ? void 0 : _deviceListState$devi.length) > 0) {
+    if ((deviceListState === null || deviceListState === void 0 || (_deviceListState$devi = deviceListState.devices) === null || _deviceListState$devi === void 0 ? void 0 : _deviceListState$devi.length) > 0) {
       var devices = [];
       if (searchValue) {
         var _deviceListState$devi2;
-        devices = deviceListState === null || deviceListState === void 0 ? void 0 : (_deviceListState$devi2 = deviceListState.devices) === null || _deviceListState$devi2 === void 0 ? void 0 : _deviceListState$devi2.filter(function (device) {
+        devices = deviceListState === null || deviceListState === void 0 || (_deviceListState$devi2 = deviceListState.devices) === null || _deviceListState$devi2 === void 0 ? void 0 : _deviceListState$devi2.filter(function (device) {
           var _device$name;
           return (_device$name = device.name) === null || _device$name === void 0 ? void 0 : _device$name.toLowerCase().includes(searchValue === null || searchValue === void 0 ? void 0 : searchValue.toLowerCase());
         });
@@ -138,7 +138,7 @@ var BusinessDeviceListingUI = function BusinessDeviceListingUI(props) {
   (0, _react.useEffect)(function () {
     if ((deviceList === null || deviceList === void 0 ? void 0 : deviceList.length) > 0 && selectedDevice) {
       var _deviceListState$devi3;
-      var device = deviceListState === null || deviceListState === void 0 ? void 0 : (_deviceListState$devi3 = deviceListState.devices) === null || _deviceListState$devi3 === void 0 ? void 0 : _deviceListState$devi3.find(function (item) {
+      var device = deviceListState === null || deviceListState === void 0 || (_deviceListState$devi3 = deviceListState.devices) === null || _deviceListState$devi3 === void 0 ? void 0 : _deviceListState$devi3.find(function (item) {
         return item.id === (selectedDevice === null || selectedDevice === void 0 ? void 0 : selectedDevice.id);
       });
       setSelectedDevice(device);
@@ -185,7 +185,7 @@ var BusinessDeviceListingUI = function BusinessDeviceListingUI(props) {
       height: 20
     }))))), /*#__PURE__*/_react.default.createElement("td", null)));
   }) : deviceList.map(function (device) {
-    var _device$business, _theme$images, _theme$images$dummies, _device$business2, _device$business3;
+    var _device$business, _theme$images, _device$business2, _device$business3;
     return /*#__PURE__*/_react.default.createElement(_styles2.BrandBody, {
       key: device.id,
       active: device.id === (selectedDevice === null || selectedDevice === void 0 ? void 0 : selectedDevice.id),
@@ -193,8 +193,8 @@ var BusinessDeviceListingUI = function BusinessDeviceListingUI(props) {
         return handleClickBrand(e, device.id);
       }
     }, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.device_name) && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", null, device === null || device === void 0 ? void 0 : device.name))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.business) && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.BrandGeneralInfo, null, /*#__PURE__*/_react.default.createElement(_styles2.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles2.Image, {
-      bgimage: optimizeImage((device === null || device === void 0 ? void 0 : (_device$business = device.business) === null || _device$business === void 0 ? void 0 : _device$business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_50,c_limit')
-    })), /*#__PURE__*/_react.default.createElement(_styles2.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", null, device === null || device === void 0 ? void 0 : (_device$business2 = device.business) === null || _device$business2 === void 0 ? void 0 : _device$business2.name), /*#__PURE__*/_react.default.createElement("span", null, device === null || device === void 0 ? void 0 : (_device$business3 = device.business) === null || _device$business3 === void 0 ? void 0 : _device$business3.address)))), /*#__PURE__*/_react.default.createElement("td", null)));
+      bgimage: optimizeImage((device === null || device === void 0 || (_device$business = device.business) === null || _device$business === void 0 ? void 0 : _device$business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.dummies) === null || _theme$images === void 0 ? void 0 : _theme$images.businessLogo), 'h_50,c_limit')
+    })), /*#__PURE__*/_react.default.createElement(_styles2.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", null, device === null || device === void 0 || (_device$business2 = device.business) === null || _device$business2 === void 0 ? void 0 : _device$business2.name), /*#__PURE__*/_react.default.createElement("span", null, device === null || device === void 0 || (_device$business3 = device.business) === null || _device$business3 === void 0 ? void 0 : _device$business3.address)))), /*#__PURE__*/_react.default.createElement("td", null)));
   }))), /*#__PURE__*/_react.default.createElement(_styles2.BrandListBottomContainer, null, /*#__PURE__*/_react.default.createElement(_styles.LinkButton, {
     onClick: function onClick() {
       return handleOpenSideBar();

@@ -1,6 +1,6 @@
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -24,8 +24,8 @@ var _styles4 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
@@ -37,10 +37,10 @@ function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArra
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
-function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var PaymentOptionSquareUI = function PaymentOptionSquareUI(props) {
-  var _businessPaymethod$pa2, _businessPaymethod$pa3, _businessPaymethod$pa4, _sitesState$sites, _ref2, _squareData$sandbox, _ref3, _squareData$data$appl, _squareData$data, _businessPaymethod$da, _ref4, _squareData$data$loca, _squareData$data2, _businessPaymethod$da2, _ref5, _squareData$data$clie, _squareData$data3, _businessPaymethod$da3, _ref6, _squareData$data_sand, _squareData$data_sand2, _businessPaymethod$da4, _ref7, _squareData$data_sand3, _squareData$data_sand4, _businessPaymethod$da5, _ref8, _squareData$data_sand5, _squareData$data_sand6, _businessPaymethod$da6, _sitesState$sites2, _deviceState$devices, _deviceState$devices2;
+  var _businessPaymethod$pa2, _businessPaymethod$pa3, _sitesState$sites, _ref2, _squareData$sandbox, _ref3, _squareData$data$appl, _squareData$data, _businessPaymethod$da, _ref4, _squareData$data$loca, _squareData$data2, _businessPaymethod$da2, _ref5, _squareData$data$clie, _squareData$data3, _businessPaymethod$da3, _ref6, _squareData$data_sand, _squareData$data_sand2, _businessPaymethod$da4, _ref7, _squareData$data_sand3, _squareData$data_sand4, _businessPaymethod$da5, _ref8, _squareData$data_sand5, _squareData$data_sand6, _businessPaymethod$da6, _sitesState$sites2, _deviceState$devices, _deviceState$devices2;
   var open = props.open,
     onClose = props.onClose,
     businessPaymethod = props.businessPaymethod,
@@ -97,7 +97,7 @@ var PaymentOptionSquareUI = function PaymentOptionSquareUI(props) {
   var setPaymethodInfo = function setPaymethodInfo(values) {
     var _ref, _changesState$values$, _businessPaymethod$va;
     var data = {};
-    var array = (_ref = (_changesState$values$ = changesState === null || changesState === void 0 ? void 0 : changesState[values.key]) !== null && _changesState$values$ !== void 0 ? _changesState$values$ : values.key === 'allowed_order_types' ? businessPaymethod === null || businessPaymethod === void 0 ? void 0 : businessPaymethod[values.key] : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$va = businessPaymethod[values.key]) === null || _businessPaymethod$va === void 0 ? void 0 : _businessPaymethod$va.map(function (i) {
+    var array = (_ref = (_changesState$values$ = changesState === null || changesState === void 0 ? void 0 : changesState[values.key]) !== null && _changesState$values$ !== void 0 ? _changesState$values$ : values.key === 'allowed_order_types' ? businessPaymethod === null || businessPaymethod === void 0 ? void 0 : businessPaymethod[values.key] : businessPaymethod === null || businessPaymethod === void 0 || (_businessPaymethod$va = businessPaymethod[values.key]) === null || _businessPaymethod$va === void 0 ? void 0 : _businessPaymethod$va.map(function (i) {
       return i.id;
     })) !== null && _ref !== void 0 ? _ref : [];
     array = _toConsumableArray(new Set(array.includes(values.value) ? array.filter(function (item) {
@@ -115,7 +115,7 @@ var PaymentOptionSquareUI = function PaymentOptionSquareUI(props) {
         setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
           open: false
         }));
-        handleDeletePaymethod(businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$pa = businessPaymethod.paymethod) === null || _businessPaymethod$pa === void 0 ? void 0 : _businessPaymethod$pa.id);
+        handleDeletePaymethod(businessPaymethod === null || businessPaymethod === void 0 || (_businessPaymethod$pa = businessPaymethod.paymethod) === null || _businessPaymethod$pa === void 0 ? void 0 : _businessPaymethod$pa.id);
       }
     });
   };
@@ -157,7 +157,7 @@ var PaymentOptionSquareUI = function PaymentOptionSquareUI(props) {
   }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles4.Container, {
     id: "payment_method_square"
-  }, /*#__PURE__*/_react.default.createElement(_styles4.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t(businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$pa2 = businessPaymethod.paymethod) === null || _businessPaymethod$pa2 === void 0 ? void 0 : (_businessPaymethod$pa3 = _businessPaymethod$pa2.gateway) === null || _businessPaymethod$pa3 === void 0 ? void 0 : _businessPaymethod$pa3.toUpperCase(), businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$pa4 = businessPaymethod.paymethod) === null || _businessPaymethod$pa4 === void 0 ? void 0 : _businessPaymethod$pa4.name)), /*#__PURE__*/_react.default.createElement(_styles4.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
+  }, /*#__PURE__*/_react.default.createElement(_styles4.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t(businessPaymethod === null || businessPaymethod === void 0 || (_businessPaymethod$pa2 = businessPaymethod.paymethod) === null || _businessPaymethod$pa2 === void 0 || (_businessPaymethod$pa2 = _businessPaymethod$pa2.gateway) === null || _businessPaymethod$pa2 === void 0 ? void 0 : _businessPaymethod$pa2.toUpperCase(), businessPaymethod === null || businessPaymethod === void 0 || (_businessPaymethod$pa3 = businessPaymethod.paymethod) === null || _businessPaymethod$pa3 === void 0 ? void 0 : _businessPaymethod$pa3.name)), /*#__PURE__*/_react.default.createElement(_styles4.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
     menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
     title: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDots, null),
     id: theme !== null && theme !== void 0 && theme.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
@@ -175,7 +175,7 @@ var PaymentOptionSquareUI = function PaymentOptionSquareUI(props) {
     onClick: function onClick() {
       return handleTabClick(0);
     }
-  }, t('GENERAL', 'General')), (sitesState === null || sitesState === void 0 ? void 0 : (_sitesState$sites = sitesState.sites) === null || _sitesState$sites === void 0 ? void 0 : _sitesState$sites.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
+  }, t('GENERAL', 'General')), (sitesState === null || sitesState === void 0 || (_sitesState$sites = sitesState.sites) === null || _sitesState$sites === void 0 ? void 0 : _sitesState$sites.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
     active: paymentTabs === 1,
     onClick: function onClick() {
       return handleTabClick(1);
@@ -202,32 +202,32 @@ var PaymentOptionSquareUI = function PaymentOptionSquareUI(props) {
   }), /*#__PURE__*/_react.default.createElement("span", null, t('SANDBOX', 'Sandbox'))), /*#__PURE__*/_react.default.createElement(_styles4.FormController, null, /*#__PURE__*/_react.default.createElement("label", null, t('APPLICATION_ID', 'Application Id')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "application_id",
     disabled: actionState === null || actionState === void 0 ? void 0 : actionState.loading,
-    value: (_ref3 = (_squareData$data$appl = squareData === null || squareData === void 0 ? void 0 : (_squareData$data = squareData.data) === null || _squareData$data === void 0 ? void 0 : _squareData$data.application_id) !== null && _squareData$data$appl !== void 0 ? _squareData$data$appl : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$da = businessPaymethod.data) === null || _businessPaymethod$da === void 0 ? void 0 : _businessPaymethod$da.application_id) !== null && _ref3 !== void 0 ? _ref3 : '',
+    value: (_ref3 = (_squareData$data$appl = squareData === null || squareData === void 0 || (_squareData$data = squareData.data) === null || _squareData$data === void 0 ? void 0 : _squareData$data.application_id) !== null && _squareData$data$appl !== void 0 ? _squareData$data$appl : businessPaymethod === null || businessPaymethod === void 0 || (_businessPaymethod$da = businessPaymethod.data) === null || _businessPaymethod$da === void 0 ? void 0 : _businessPaymethod$da.application_id) !== null && _ref3 !== void 0 ? _ref3 : '',
     onChange: handleChangeDataInput
   })), /*#__PURE__*/_react.default.createElement(_styles4.FormController, null, /*#__PURE__*/_react.default.createElement("label", null, t('LOCATION_ID', 'Location Id')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "location_id",
     disabled: actionState === null || actionState === void 0 ? void 0 : actionState.loading,
-    value: (_ref4 = (_squareData$data$loca = squareData === null || squareData === void 0 ? void 0 : (_squareData$data2 = squareData.data) === null || _squareData$data2 === void 0 ? void 0 : _squareData$data2.location_id) !== null && _squareData$data$loca !== void 0 ? _squareData$data$loca : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$da2 = businessPaymethod.data) === null || _businessPaymethod$da2 === void 0 ? void 0 : _businessPaymethod$da2.location_id) !== null && _ref4 !== void 0 ? _ref4 : '',
+    value: (_ref4 = (_squareData$data$loca = squareData === null || squareData === void 0 || (_squareData$data2 = squareData.data) === null || _squareData$data2 === void 0 ? void 0 : _squareData$data2.location_id) !== null && _squareData$data$loca !== void 0 ? _squareData$data$loca : businessPaymethod === null || businessPaymethod === void 0 || (_businessPaymethod$da2 = businessPaymethod.data) === null || _businessPaymethod$da2 === void 0 ? void 0 : _businessPaymethod$da2.location_id) !== null && _ref4 !== void 0 ? _ref4 : '',
     onChange: handleChangeDataInput
   })), /*#__PURE__*/_react.default.createElement(_styles4.FormController, null, /*#__PURE__*/_react.default.createElement("label", null, t('CLIENT_SECRET', 'Client secret')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "client_secret",
     disabled: actionState === null || actionState === void 0 ? void 0 : actionState.loading,
-    value: (_ref5 = (_squareData$data$clie = squareData === null || squareData === void 0 ? void 0 : (_squareData$data3 = squareData.data) === null || _squareData$data3 === void 0 ? void 0 : _squareData$data3.client_secret) !== null && _squareData$data$clie !== void 0 ? _squareData$data$clie : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$da3 = businessPaymethod.data) === null || _businessPaymethod$da3 === void 0 ? void 0 : _businessPaymethod$da3.client_secret) !== null && _ref5 !== void 0 ? _ref5 : '',
+    value: (_ref5 = (_squareData$data$clie = squareData === null || squareData === void 0 || (_squareData$data3 = squareData.data) === null || _squareData$data3 === void 0 ? void 0 : _squareData$data3.client_secret) !== null && _squareData$data$clie !== void 0 ? _squareData$data$clie : businessPaymethod === null || businessPaymethod === void 0 || (_businessPaymethod$da3 = businessPaymethod.data) === null || _businessPaymethod$da3 === void 0 ? void 0 : _businessPaymethod$da3.client_secret) !== null && _ref5 !== void 0 ? _ref5 : '',
     onChange: handleChangeDataInput
   })), /*#__PURE__*/_react.default.createElement(_styles4.FormController, null, /*#__PURE__*/_react.default.createElement("label", null, t('APPLICATION_ID', 'Application Id'), " (", t('SANDBOX', 'Sandbox'), ")"), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "application_id",
     disabled: actionState === null || actionState === void 0 ? void 0 : actionState.loading,
-    value: (_ref6 = (_squareData$data_sand = squareData === null || squareData === void 0 ? void 0 : (_squareData$data_sand2 = squareData.data_sandbox) === null || _squareData$data_sand2 === void 0 ? void 0 : _squareData$data_sand2.application_id) !== null && _squareData$data_sand !== void 0 ? _squareData$data_sand : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$da4 = businessPaymethod.data_sandbox) === null || _businessPaymethod$da4 === void 0 ? void 0 : _businessPaymethod$da4.application_id) !== null && _ref6 !== void 0 ? _ref6 : '',
+    value: (_ref6 = (_squareData$data_sand = squareData === null || squareData === void 0 || (_squareData$data_sand2 = squareData.data_sandbox) === null || _squareData$data_sand2 === void 0 ? void 0 : _squareData$data_sand2.application_id) !== null && _squareData$data_sand !== void 0 ? _squareData$data_sand : businessPaymethod === null || businessPaymethod === void 0 || (_businessPaymethod$da4 = businessPaymethod.data_sandbox) === null || _businessPaymethod$da4 === void 0 ? void 0 : _businessPaymethod$da4.application_id) !== null && _ref6 !== void 0 ? _ref6 : '',
     onChange: handleChangeSanboxDataInput
   })), /*#__PURE__*/_react.default.createElement(_styles4.FormController, null, /*#__PURE__*/_react.default.createElement("label", null, t('LOCATION_ID', 'Location Id'), " (", t('SANDBOX', 'Sandbox'), ")"), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "location_id",
     disabled: actionState === null || actionState === void 0 ? void 0 : actionState.loading,
-    value: (_ref7 = (_squareData$data_sand3 = squareData === null || squareData === void 0 ? void 0 : (_squareData$data_sand4 = squareData.data_sandbox) === null || _squareData$data_sand4 === void 0 ? void 0 : _squareData$data_sand4.location_id) !== null && _squareData$data_sand3 !== void 0 ? _squareData$data_sand3 : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$da5 = businessPaymethod.data_sandbox) === null || _businessPaymethod$da5 === void 0 ? void 0 : _businessPaymethod$da5.location_id) !== null && _ref7 !== void 0 ? _ref7 : '',
+    value: (_ref7 = (_squareData$data_sand3 = squareData === null || squareData === void 0 || (_squareData$data_sand4 = squareData.data_sandbox) === null || _squareData$data_sand4 === void 0 ? void 0 : _squareData$data_sand4.location_id) !== null && _squareData$data_sand3 !== void 0 ? _squareData$data_sand3 : businessPaymethod === null || businessPaymethod === void 0 || (_businessPaymethod$da5 = businessPaymethod.data_sandbox) === null || _businessPaymethod$da5 === void 0 ? void 0 : _businessPaymethod$da5.location_id) !== null && _ref7 !== void 0 ? _ref7 : '',
     onChange: handleChangeSanboxDataInput
   })), /*#__PURE__*/_react.default.createElement(_styles4.FormController, null, /*#__PURE__*/_react.default.createElement("label", null, t('CLIENT_SECRET', 'Client secret'), " (", t('SANDBOX', 'Sandbox'), ")"), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "client_secret",
     disabled: actionState === null || actionState === void 0 ? void 0 : actionState.loading,
-    value: (_ref8 = (_squareData$data_sand5 = squareData === null || squareData === void 0 ? void 0 : (_squareData$data_sand6 = squareData.data_sandbox) === null || _squareData$data_sand6 === void 0 ? void 0 : _squareData$data_sand6.client_secret) !== null && _squareData$data_sand5 !== void 0 ? _squareData$data_sand5 : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$da6 = businessPaymethod.data_sandbox) === null || _businessPaymethod$da6 === void 0 ? void 0 : _businessPaymethod$da6.client_secret) !== null && _ref8 !== void 0 ? _ref8 : '',
+    value: (_ref8 = (_squareData$data_sand5 = squareData === null || squareData === void 0 || (_squareData$data_sand6 = squareData.data_sandbox) === null || _squareData$data_sand6 === void 0 ? void 0 : _squareData$data_sand6.client_secret) !== null && _squareData$data_sand5 !== void 0 ? _squareData$data_sand5 : businessPaymethod === null || businessPaymethod === void 0 || (_businessPaymethod$da6 = businessPaymethod.data_sandbox) === null || _businessPaymethod$da6 === void 0 ? void 0 : _businessPaymethod$da6.client_secret) !== null && _ref8 !== void 0 ? _ref8 : '',
     onChange: handleChangeSanboxDataInput
   })), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
@@ -235,7 +235,7 @@ var PaymentOptionSquareUI = function PaymentOptionSquareUI(props) {
     onClick: function onClick() {
       return handleSavePaymethod(businessPaymethod === null || businessPaymethod === void 0 ? void 0 : businessPaymethod.id);
     }
-  }, t('SAVE', 'Save')))), paymentTabs === 1 && (sitesState === null || sitesState === void 0 ? void 0 : (_sitesState$sites2 = sitesState.sites) === null || _sitesState$sites2 === void 0 ? void 0 : _sitesState$sites2.length) > 0 && (sitesState === null || sitesState === void 0 ? void 0 : sitesState.sites.map(function (site) {
+  }, t('SAVE', 'Save')))), paymentTabs === 1 && (sitesState === null || sitesState === void 0 || (_sitesState$sites2 = sitesState.sites) === null || _sitesState$sites2 === void 0 ? void 0 : _sitesState$sites2.length) > 0 && (sitesState === null || sitesState === void 0 ? void 0 : sitesState.sites.map(function (site) {
     var _ref9, _changesState$sites, _businessPaymethod$si;
     return /*#__PURE__*/_react.default.createElement(_styles3.TabOption, {
       key: site.id,
@@ -245,7 +245,7 @@ var PaymentOptionSquareUI = function PaymentOptionSquareUI(props) {
           value: site.id
         });
       }
-    }, (_ref9 = (_changesState$sites = changesState === null || changesState === void 0 ? void 0 : changesState.sites) !== null && _changesState$sites !== void 0 ? _changesState$sites : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$si = businessPaymethod.sites) === null || _businessPaymethod$si === void 0 ? void 0 : _businessPaymethod$si.map(function (s) {
+    }, (_ref9 = (_changesState$sites = changesState === null || changesState === void 0 ? void 0 : changesState.sites) !== null && _changesState$sites !== void 0 ? _changesState$sites : businessPaymethod === null || businessPaymethod === void 0 || (_businessPaymethod$si = businessPaymethod.sites) === null || _businessPaymethod$si === void 0 ? void 0 : _businessPaymethod$si.map(function (s) {
       return s.id;
     })) !== null && _ref9 !== void 0 && _ref9.includes(site.id) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, {
       className: "fill"
@@ -263,7 +263,7 @@ var PaymentOptionSquareUI = function PaymentOptionSquareUI(props) {
     }, (_ref10 = (_changesState$allowed = changesState === null || changesState === void 0 ? void 0 : changesState.allowed_order_types) !== null && _changesState$allowed !== void 0 ? _changesState$allowed : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : businessPaymethod.allowed_order_types) !== null && _ref10 !== void 0 && _ref10.includes(type.value) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, {
       className: "fill"
     }) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), /*#__PURE__*/_react.default.createElement(_styles3.TabOptionName, null, type.text));
-  }), paymentTabs === 3 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (deviceState === null || deviceState === void 0 ? void 0 : (_deviceState$devices = deviceState.devices) === null || _deviceState$devices === void 0 ? void 0 : _deviceState$devices.length) > 0 && (deviceState === null || deviceState === void 0 ? void 0 : deviceState.devices.map(function (device) {
+  }), paymentTabs === 3 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (deviceState === null || deviceState === void 0 || (_deviceState$devices = deviceState.devices) === null || _deviceState$devices === void 0 ? void 0 : _deviceState$devices.length) > 0 && (deviceState === null || deviceState === void 0 ? void 0 : deviceState.devices.map(function (device) {
     var _ref11, _changesState$devices, _businessPaymethod$de;
     return /*#__PURE__*/_react.default.createElement(_styles3.TabOption, {
       key: device.id,
@@ -273,12 +273,12 @@ var PaymentOptionSquareUI = function PaymentOptionSquareUI(props) {
           value: device.id
         });
       }
-    }, (_ref11 = (_changesState$devices = changesState === null || changesState === void 0 ? void 0 : changesState.devices) !== null && _changesState$devices !== void 0 ? _changesState$devices : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : (_businessPaymethod$de = businessPaymethod.devices) === null || _businessPaymethod$de === void 0 ? void 0 : _businessPaymethod$de.map(function (s) {
+    }, (_ref11 = (_changesState$devices = changesState === null || changesState === void 0 ? void 0 : changesState.devices) !== null && _changesState$devices !== void 0 ? _changesState$devices : businessPaymethod === null || businessPaymethod === void 0 || (_businessPaymethod$de = businessPaymethod.devices) === null || _businessPaymethod$de === void 0 ? void 0 : _businessPaymethod$de.map(function (s) {
       return s.id;
     })) !== null && _ref11 !== void 0 && _ref11.includes(device.id) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, {
       className: "fill"
     }) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), /*#__PURE__*/_react.default.createElement(_styles3.TabOptionName, null, device.name));
-  })), (deviceState === null || deviceState === void 0 ? void 0 : (_deviceState$devices2 = deviceState.devices) === null || _deviceState$devices2 === void 0 ? void 0 : _deviceState$devices2.length) === 0 && /*#__PURE__*/_react.default.createElement(EmptyMessage, null, t('NO_ASSIGNED_DEVICES', 'There are no assigned devices'))), /*#__PURE__*/_react.default.createElement(_Shared.Confirm, {
+  })), (deviceState === null || deviceState === void 0 || (_deviceState$devices2 = deviceState.devices) === null || _deviceState$devices2 === void 0 ? void 0 : _deviceState$devices2.length) === 0 && /*#__PURE__*/_react.default.createElement(EmptyMessage, null, t('NO_ASSIGNED_DEVICES', 'There are no assigned devices'))), /*#__PURE__*/_react.default.createElement(_Shared.Confirm, {
     width: "700px",
     title: t('WEB_APPNAME', 'Ordering'),
     content: confirm.content,

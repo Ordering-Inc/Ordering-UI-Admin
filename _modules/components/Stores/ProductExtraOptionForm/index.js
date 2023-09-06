@@ -1,6 +1,6 @@
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -20,7 +20,7 @@ function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArra
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
-function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ProductExtraOptionForm = function ProductExtraOptionForm(props) {
   var _optionState$option7, _optionState$option9, _optionState$option12, _optionState$option13, _optionState$option14, _optionState$option15, _optionState$option16, _optionState$option17;
@@ -63,8 +63,8 @@ var ProductExtraOptionForm = function ProductExtraOptionForm(props) {
   };
   var handleMaxValidate = function handleMaxValidate() {
     var _optionChangesState$c, _optionChangesState$c2, _optionState$option, _optionChangesState$c3, _optionChangesState$c4, _optionState$option2;
-    var max = (_optionChangesState$c = optionChangesState === null || optionChangesState === void 0 ? void 0 : (_optionChangesState$c2 = optionChangesState.changes) === null || _optionChangesState$c2 === void 0 ? void 0 : _optionChangesState$c2.max) !== null && _optionChangesState$c !== void 0 ? _optionChangesState$c : optionState === null || optionState === void 0 ? void 0 : (_optionState$option = optionState.option) === null || _optionState$option === void 0 ? void 0 : _optionState$option.max;
-    var min = (_optionChangesState$c3 = optionChangesState === null || optionChangesState === void 0 ? void 0 : (_optionChangesState$c4 = optionChangesState.changes) === null || _optionChangesState$c4 === void 0 ? void 0 : _optionChangesState$c4.min) !== null && _optionChangesState$c3 !== void 0 ? _optionChangesState$c3 : optionState === null || optionState === void 0 ? void 0 : (_optionState$option2 = optionState.option) === null || _optionState$option2 === void 0 ? void 0 : _optionState$option2.min;
+    var max = (_optionChangesState$c = optionChangesState === null || optionChangesState === void 0 || (_optionChangesState$c2 = optionChangesState.changes) === null || _optionChangesState$c2 === void 0 ? void 0 : _optionChangesState$c2.max) !== null && _optionChangesState$c !== void 0 ? _optionChangesState$c : optionState === null || optionState === void 0 || (_optionState$option = optionState.option) === null || _optionState$option === void 0 ? void 0 : _optionState$option.max;
+    var min = (_optionChangesState$c3 = optionChangesState === null || optionChangesState === void 0 || (_optionChangesState$c4 = optionChangesState.changes) === null || _optionChangesState$c4 === void 0 ? void 0 : _optionChangesState$c4.min) !== null && _optionChangesState$c3 !== void 0 ? _optionChangesState$c3 : optionState === null || optionState === void 0 || (_optionState$option2 = optionState.option) === null || _optionState$option2 === void 0 ? void 0 : _optionState$option2.min;
     if (parseFloat(min) <= parseFloat(max)) return true;else {
       return t('ERROR_MATCH_MAX_DEFAULT_SUBOPTIONS', 'Max default suboptions length is less than preselected suboptions');
     }
@@ -84,7 +84,7 @@ var ProductExtraOptionForm = function ProductExtraOptionForm(props) {
     if (!Object.keys((optionChangesState === null || optionChangesState === void 0 ? void 0 : optionChangesState.changes) || {}).length) return;
     if (optionChangesState !== null && optionChangesState !== void 0 && (_optionChangesState$c5 = optionChangesState.changes) !== null && _optionChangesState$c5 !== void 0 && _optionChangesState$c5.image) {
       var _optionChangesState$c6;
-      setValue('image', optionChangesState === null || optionChangesState === void 0 ? void 0 : (_optionChangesState$c6 = optionChangesState.changes) === null || _optionChangesState$c6 === void 0 ? void 0 : _optionChangesState$c6.image);
+      setValue('image', optionChangesState === null || optionChangesState === void 0 || (_optionChangesState$c6 = optionChangesState.changes) === null || _optionChangesState$c6 === void 0 ? void 0 : _optionChangesState$c6.image);
     }
     clearTimeout(timer);
     var _timer = setTimeout(function () {
@@ -121,15 +121,15 @@ var ProductExtraOptionForm = function ProductExtraOptionForm(props) {
         accept: "image/png, image/jpeg, image/jpg",
         disabled: optionState.loading
       }, optionChangesState !== null && optionChangesState !== void 0 && (_optionChangesState$r = optionChangesState.result) !== null && _optionChangesState$r !== void 0 && _optionChangesState$r.image ? /*#__PURE__*/_react.default.createElement("img", {
-        src: optionChangesState === null || optionChangesState === void 0 ? void 0 : (_optionChangesState$r2 = optionChangesState.result) === null || _optionChangesState$r2 === void 0 ? void 0 : _optionChangesState$r2.image,
+        src: optionChangesState === null || optionChangesState === void 0 || (_optionChangesState$r2 = optionChangesState.result) === null || _optionChangesState$r2 === void 0 ? void 0 : _optionChangesState$r2.image,
         alt: "sub option image",
         loading: "lazy"
       }) : optionChangesState !== null && optionChangesState !== void 0 && (_optionChangesState$c7 = optionChangesState.changes) !== null && _optionChangesState$c7 !== void 0 && _optionChangesState$c7.image ? /*#__PURE__*/_react.default.createElement("img", {
-        src: optionChangesState === null || optionChangesState === void 0 ? void 0 : (_optionChangesState$c8 = optionChangesState.changes) === null || _optionChangesState$c8 === void 0 ? void 0 : _optionChangesState$c8.image,
+        src: optionChangesState === null || optionChangesState === void 0 || (_optionChangesState$c8 = optionChangesState.changes) === null || _optionChangesState$c8 === void 0 ? void 0 : _optionChangesState$c8.image,
         alt: "product image",
         loading: "lazy"
-      }) : (optionState === null || optionState === void 0 ? void 0 : (_optionState$option3 = optionState.option) === null || _optionState$option3 === void 0 ? void 0 : _optionState$option3.image) && /*#__PURE__*/_react.default.createElement("img", {
-        src: optionState === null || optionState === void 0 ? void 0 : (_optionState$option4 = optionState.option) === null || _optionState$option4 === void 0 ? void 0 : _optionState$option4.image,
+      }) : (optionState === null || optionState === void 0 || (_optionState$option3 = optionState.option) === null || _optionState$option3 === void 0 ? void 0 : _optionState$option3.image) && /*#__PURE__*/_react.default.createElement("img", {
+        src: optionState === null || optionState === void 0 || (_optionState$option4 = optionState.option) === null || _optionState$option4 === void 0 ? void 0 : _optionState$option4.image,
         alt: "product image",
         loading: "lazy"
       }), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIconContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIcon, null, /*#__PURE__*/_react.default.createElement(_BiImage.default, null))))));
@@ -182,7 +182,7 @@ var ProductExtraOptionForm = function ProductExtraOptionForm(props) {
         }
       });
     },
-    defaultValue: optionState === null || optionState === void 0 ? void 0 : (_optionState$option7 = optionState.option) === null || _optionState$option7 === void 0 ? void 0 : _optionState$option7.min,
+    defaultValue: optionState === null || optionState === void 0 || (_optionState$option7 = optionState.option) === null || _optionState$option7 === void 0 ? void 0 : _optionState$option7.min,
     rules: {
       required: t('MIN_PURCHASED_REQUIRED', 'The min is required.'),
       validate: handleMaxValidate
@@ -212,7 +212,7 @@ var ProductExtraOptionForm = function ProductExtraOptionForm(props) {
         }
       });
     },
-    defaultValue: optionState === null || optionState === void 0 ? void 0 : (_optionState$option9 = optionState.option) === null || _optionState$option9 === void 0 ? void 0 : _optionState$option9.max,
+    defaultValue: optionState === null || optionState === void 0 || (_optionState$option9 = optionState.option) === null || _optionState$option9 === void 0 ? void 0 : _optionState$option9.max,
     rules: {
       required: t('MAX_PURCHASED_REQUIRED', 'The max is required.')
     }
@@ -236,7 +236,7 @@ var ProductExtraOptionForm = function ProductExtraOptionForm(props) {
     }
   }))))), /*#__PURE__*/_react.default.createElement(_styles2.OptionSettings, null, /*#__PURE__*/_react.default.createElement(_styles2.OptionSettingItem, null, /*#__PURE__*/_react.default.createElement(_styles2.CheckboxWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
     id: "with_half_option",
-    defaultChecked: (optionState === null || optionState === void 0 ? void 0 : (_optionState$option12 = optionState.option) === null || _optionState$option12 === void 0 ? void 0 : _optionState$option12.with_half_option) || false,
+    defaultChecked: (optionState === null || optionState === void 0 || (_optionState$option12 = optionState.option) === null || _optionState$option12 === void 0 ? void 0 : _optionState$option12.with_half_option) || false,
     onClick: function onClick(e) {
       return handleOptionSetting('with_half_option', e.target.checked);
     }
@@ -244,15 +244,15 @@ var ProductExtraOptionForm = function ProductExtraOptionForm(props) {
     htmlFor: "with_half_option"
   }, t('WITH_HALF_PRICE', 'Allow half option & price')))), /*#__PURE__*/_react.default.createElement(_styles2.OptionSettingItem, null, /*#__PURE__*/_react.default.createElement(_styles2.CheckboxWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
     id: "allow_suboption_quantity",
-    defaultChecked: (optionState === null || optionState === void 0 ? void 0 : (_optionState$option13 = optionState.option) === null || _optionState$option13 === void 0 ? void 0 : _optionState$option13.allow_suboption_quantity) || false,
+    defaultChecked: (optionState === null || optionState === void 0 || (_optionState$option13 = optionState.option) === null || _optionState$option13 === void 0 ? void 0 : _optionState$option13.allow_suboption_quantity) || false,
     onClick: function onClick(e) {
       return handleOptionSetting('allow_suboption_quantity', e.target.checked);
     }
   }), /*#__PURE__*/_react.default.createElement("label", {
     htmlFor: "allow_suboption_quantity"
-  }, t('SUBOPTION_QUANTITY', 'Allow suboptions quantity'))), (optionState === null || optionState === void 0 ? void 0 : (_optionState$option14 = optionState.option) === null || _optionState$option14 === void 0 ? void 0 : _optionState$option14.allow_suboption_quantity) && /*#__PURE__*/_react.default.createElement(_styles2.CheckboxWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
+  }, t('SUBOPTION_QUANTITY', 'Allow suboptions quantity'))), (optionState === null || optionState === void 0 || (_optionState$option14 = optionState.option) === null || _optionState$option14 === void 0 ? void 0 : _optionState$option14.allow_suboption_quantity) && /*#__PURE__*/_react.default.createElement(_styles2.CheckboxWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
     id: "limit_suboptions_by_max",
-    defaultChecked: (optionState === null || optionState === void 0 ? void 0 : (_optionState$option15 = optionState.option) === null || _optionState$option15 === void 0 ? void 0 : _optionState$option15.limit_suboptions_by_max) || false,
+    defaultChecked: (optionState === null || optionState === void 0 || (_optionState$option15 = optionState.option) === null || _optionState$option15 === void 0 ? void 0 : _optionState$option15.limit_suboptions_by_max) || false,
     onClick: function onClick(e) {
       return handleOptionSetting('limit_suboptions_by_max', e.target.checked);
     }
@@ -260,13 +260,13 @@ var ProductExtraOptionForm = function ProductExtraOptionForm(props) {
     htmlFor: "limit_suboptions_by_max"
   }, t('LIMIT_SUBOPTIONS_BY_MAX', 'Limit suboptions by maximum option')))), (conditionalOptions === null || conditionalOptions === void 0 ? void 0 : conditionalOptions.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.OptionSettingItem, null, /*#__PURE__*/_react.default.createElement(_styles2.CheckboxWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
     id: "conditioned",
-    defaultChecked: (optionState === null || optionState === void 0 ? void 0 : (_optionState$option16 = optionState.option) === null || _optionState$option16 === void 0 ? void 0 : _optionState$option16.conditioned) || false,
+    defaultChecked: (optionState === null || optionState === void 0 || (_optionState$option16 = optionState.option) === null || _optionState$option16 === void 0 ? void 0 : _optionState$option16.conditioned) || false,
     onClick: function onClick(e) {
       return handleOptionSetting('conditioned', e.target.checked);
     }
   }), /*#__PURE__*/_react.default.createElement("label", {
     htmlFor: "conditioned"
-  }, t('CONDITIONAL', 'Conditional'))), (optionState === null || optionState === void 0 ? void 0 : (_optionState$option17 = optionState.option) === null || _optionState$option17 === void 0 ? void 0 : _optionState$option17.conditioned) && /*#__PURE__*/_react.default.createElement(_styles2.SelectboxGroup, null, conditionalOptions.length > 0 && /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
+  }, t('CONDITIONAL', 'Conditional'))), (optionState === null || optionState === void 0 || (_optionState$option17 = optionState.option) === null || _optionState$option17 === void 0 ? void 0 : _optionState$option17.conditioned) && /*#__PURE__*/_react.default.createElement(_styles2.SelectboxGroup, null, conditionalOptions.length > 0 && /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
     options: conditionalOptions,
     defaultValue: conditionalOptionId,
     placeholder: t('SELECT_OPTION', 'Select option'),

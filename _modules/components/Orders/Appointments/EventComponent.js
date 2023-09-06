@@ -13,7 +13,7 @@ function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArra
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
-function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var EventComponent = function EventComponent(props) {
   var _event$professional, _event$professional2, _event$professional3, _event$professional4;
@@ -29,17 +29,17 @@ var EventComponent = function EventComponent(props) {
   var getTime = function getTime(time) {
     var _configs$format_time;
     return parseDate(time, {
-      outputFormat: (configs === null || configs === void 0 ? void 0 : (_configs$format_time = configs.format_time) === null || _configs$format_time === void 0 ? void 0 : _configs$format_time.value) === '12' ? 'hh:mm a' : 'HH:mm'
+      outputFormat: (configs === null || configs === void 0 || (_configs$format_time = configs.format_time) === null || _configs$format_time === void 0 ? void 0 : _configs$format_time.value) === '12' ? 'hh:mm a' : 'HH:mm'
     });
   };
   return /*#__PURE__*/_react.default.createElement(_styles.EventContainer, null, /*#__PURE__*/_react.default.createElement(_styles.EventProfessionalPhoto, null, event !== null && event !== void 0 && (_event$professional = event.professional) !== null && _event$professional !== void 0 && _event$professional.photo ? /*#__PURE__*/_react.default.createElement("img", {
-    src: optimizeImage(event === null || event === void 0 ? void 0 : (_event$professional2 = event.professional) === null || _event$professional2 === void 0 ? void 0 : _event$professional2.photo, 'h_40,c_limit'),
+    src: optimizeImage(event === null || event === void 0 || (_event$professional2 = event.professional) === null || _event$professional2 === void 0 ? void 0 : _event$professional2.photo, 'h_40,c_limit'),
     alt: ""
   }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PersonFill, null)), /*#__PURE__*/_react.default.createElement("div", {
     className: "info"
   }, /*#__PURE__*/_react.default.createElement("p", {
     className: "name"
-  }, event === null || event === void 0 ? void 0 : (_event$professional3 = event.professional) === null || _event$professional3 === void 0 ? void 0 : _event$professional3.name, " ", event === null || event === void 0 ? void 0 : (_event$professional4 = event.professional) === null || _event$professional4 === void 0 ? void 0 : _event$professional4.lastname), /*#__PURE__*/_react.default.createElement("p", {
+  }, event === null || event === void 0 || (_event$professional3 = event.professional) === null || _event$professional3 === void 0 ? void 0 : _event$professional3.name, " ", event === null || event === void 0 || (_event$professional4 = event.professional) === null || _event$professional4 === void 0 ? void 0 : _event$professional4.lastname), /*#__PURE__*/_react.default.createElement("p", {
     className: "date"
   }, getTime(event.start), " - ", getTime(event.end))));
 };

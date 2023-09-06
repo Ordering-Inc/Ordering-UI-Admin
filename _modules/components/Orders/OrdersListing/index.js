@@ -1,6 +1,6 @@
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -18,10 +18,10 @@ function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArra
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
-function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrdersListing = /*#__PURE__*/(0, _react.memo)(function (props) {
-  var _theme$images, _theme$images$dummies;
+  var _orderList$orders, _theme$images;
   var hidePhoto = props.hidePhoto,
     isSelectedOrders = props.isSelectedOrders,
     orderList = props.orderList,
@@ -67,15 +67,16 @@ var OrdersListing = /*#__PURE__*/(0, _react.memo)(function (props) {
     _useState2 = _slicedToArray(_useState, 2),
     filterApplied = _useState2[0],
     setFilterApplied = _useState2[1];
+  var orders = Object.values((_orderList$orders = orderList === null || orderList === void 0 ? void 0 : orderList.orders) !== null && _orderList$orders !== void 0 ? _orderList$orders : {});
   (0, _react.useEffect)(function () {
     if (orderList.loading || !messageListView) return;
-    if (orderList.orders.length === 0 || messageOrder) return;
-    handleOpenMessage && handleOpenMessage(orderList.orders[0], messageType);
+    if (orders.length === 0 || messageOrder) return;
+    handleOpenMessage && handleOpenMessage(orders[0], messageType);
   }, [orderList.loading, messageListView]);
   (0, _react.useEffect)(function () {
     if (!isMessagesView || orderList.loading || selectedOrderCard) return;
-    if ((orderList === null || orderList === void 0 ? void 0 : orderList.orders.length) > 0) {
-      handleOrderCardClick(orderList.orders[0]);
+    if (orders.length > 0) {
+      handleOrderCardClick(orders[0]);
     }
   }, [isMessagesView, orderList, selectedOrderCard]);
   (0, _react.useEffect)(function () {
@@ -84,7 +85,7 @@ var OrdersListing = /*#__PURE__*/(0, _react.memo)(function (props) {
       _filterApplied = false;
     } else {
       var _filterValues$groupTy, _filterValues$busines, _filterValues$cityIds, _filterValues$deliver, _filterValues$driverI, _filterValues$paymeth, _filterValues$statuse;
-      _filterApplied = (filterValues === null || filterValues === void 0 ? void 0 : (_filterValues$groupTy = filterValues.groupTypes) === null || _filterValues$groupTy === void 0 ? void 0 : _filterValues$groupTy.length) || (filterValues === null || filterValues === void 0 ? void 0 : (_filterValues$busines = filterValues.businessIds) === null || _filterValues$busines === void 0 ? void 0 : _filterValues$busines.length) > 0 || (filterValues === null || filterValues === void 0 ? void 0 : (_filterValues$cityIds = filterValues.cityIds) === null || _filterValues$cityIds === void 0 ? void 0 : _filterValues$cityIds.length) > 0 || (filterValues === null || filterValues === void 0 ? void 0 : filterValues.deliveryEndDatetime) !== null || (filterValues === null || filterValues === void 0 ? void 0 : filterValues.deliveryFromDatetime) !== null || (filterValues === null || filterValues === void 0 ? void 0 : (_filterValues$deliver = filterValues.deliveryTypes) === null || _filterValues$deliver === void 0 ? void 0 : _filterValues$deliver.length) > 0 || (filterValues === null || filterValues === void 0 ? void 0 : (_filterValues$driverI = filterValues.driverIds) === null || _filterValues$driverI === void 0 ? void 0 : _filterValues$driverI.length) > 0 || (filterValues === null || filterValues === void 0 ? void 0 : (_filterValues$paymeth = filterValues.paymethodIds) === null || _filterValues$paymeth === void 0 ? void 0 : _filterValues$paymeth.length) > 0 || (filterValues === null || filterValues === void 0 ? void 0 : (_filterValues$statuse = filterValues.statuses) === null || _filterValues$statuse === void 0 ? void 0 : _filterValues$statuse.length) > 0;
+      _filterApplied = (filterValues === null || filterValues === void 0 || (_filterValues$groupTy = filterValues.groupTypes) === null || _filterValues$groupTy === void 0 ? void 0 : _filterValues$groupTy.length) || (filterValues === null || filterValues === void 0 || (_filterValues$busines = filterValues.businessIds) === null || _filterValues$busines === void 0 ? void 0 : _filterValues$busines.length) > 0 || (filterValues === null || filterValues === void 0 || (_filterValues$cityIds = filterValues.cityIds) === null || _filterValues$cityIds === void 0 ? void 0 : _filterValues$cityIds.length) > 0 || (filterValues === null || filterValues === void 0 ? void 0 : filterValues.deliveryEndDatetime) !== null || (filterValues === null || filterValues === void 0 ? void 0 : filterValues.deliveryFromDatetime) !== null || (filterValues === null || filterValues === void 0 || (_filterValues$deliver = filterValues.deliveryTypes) === null || _filterValues$deliver === void 0 ? void 0 : _filterValues$deliver.length) > 0 || (filterValues === null || filterValues === void 0 || (_filterValues$driverI = filterValues.driverIds) === null || _filterValues$driverI === void 0 ? void 0 : _filterValues$driverI.length) > 0 || (filterValues === null || filterValues === void 0 || (_filterValues$paymeth = filterValues.paymethodIds) === null || _filterValues$paymeth === void 0 ? void 0 : _filterValues$paymeth.length) > 0 || (filterValues === null || filterValues === void 0 || (_filterValues$statuse = filterValues.statuses) === null || _filterValues$statuse === void 0 ? void 0 : _filterValues$statuse.length) > 0;
     }
     setFilterApplied(_filterApplied);
   }, [filterValues]);
@@ -96,7 +97,7 @@ var OrdersListing = /*#__PURE__*/(0, _react.memo)(function (props) {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (ordersStatusGroup === groupStatus || isMessagesView) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !orderList.loading && (pagination === null || pagination === void 0 ? void 0 : pagination.total) === 0 ? /*#__PURE__*/_react.default.createElement(_styles2.WrapperNoneOrders, null, /*#__PURE__*/_react.default.createElement(_styles2.InnerNoneOrdersContainer, {
     small: orderListView === 'small'
   }, /*#__PURE__*/_react.default.createElement("img", {
-    src: theme === null || theme === void 0 ? void 0 : (_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.noOrders,
+    src: theme === null || theme === void 0 || (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.dummies) === null || _theme$images === void 0 ? void 0 : _theme$images.noOrders,
     alt: "none"
   }), filterApplied ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("p", null, t('NOT_FOUND_FILTERED_ORDERS', 'No orders with the current filters applied.')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     outline: true,

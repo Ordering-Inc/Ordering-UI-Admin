@@ -1,6 +1,6 @@
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -21,7 +21,7 @@ function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArra
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
-function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var EnterprisePromotionSpecficCategory = function EnterprisePromotionSpecficCategory(props) {
   var formState = props.formState,
@@ -47,33 +47,33 @@ var EnterprisePromotionSpecficCategory = function EnterprisePromotionSpecficCate
     selectedBusinessSlug = _useState4[0],
     setSelectedBusinessSlug = _useState4[1];
   (0, _react.useEffect)(function () {
-    var _promotionState$promo2, _promotionState$promo3;
+    var _promotionState$promo2;
     var businessIds = [];
     if (Object.keys(promotionState === null || promotionState === void 0 ? void 0 : promotionState.promotion).length) {
       var _promotionState$promo;
-      businessIds = promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo = promotionState.promotion.businesses) === null || _promotionState$promo === void 0 ? void 0 : _promotionState$promo.reduce(function (ids, business) {
+      businessIds = promotionState === null || promotionState === void 0 || (_promotionState$promo = promotionState.promotion.businesses) === null || _promotionState$promo === void 0 ? void 0 : _promotionState$promo.reduce(function (ids, business) {
         return [].concat(_toConsumableArray(ids), [business.id]);
       }, []);
     } else {
       var _formState$changes, _formState$changes2;
-      businessIds = formState !== null && formState !== void 0 && (_formState$changes = formState.changes) !== null && _formState$changes !== void 0 && _formState$changes.businesses ? _toConsumableArray(formState === null || formState === void 0 ? void 0 : (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.businesses) : [];
+      businessIds = formState !== null && formState !== void 0 && (_formState$changes = formState.changes) !== null && _formState$changes !== void 0 && _formState$changes.businesses ? _toConsumableArray(formState === null || formState === void 0 || (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.businesses) : [];
     }
     var _businessOptions = businessesList.businesses.filter(function (business) {
       return businessIds.includes(business.id);
     }).map(function (business) {
-      var _theme$images, _theme$images$dummies, _business$city;
+      var _theme$images, _business$city;
       return {
         value: business.slug,
         content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, /*#__PURE__*/_react.default.createElement("img", {
-          src: optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_50,c_limit'),
+          src: optimizeImage((business === null || business === void 0 ? void 0 : business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.dummies) === null || _theme$images === void 0 ? void 0 : _theme$images.businessLogo), 'h_50,c_limit'),
           alt: ""
-        }), /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement("b", null, business === null || business === void 0 ? void 0 : business.name), business === null || business === void 0 ? void 0 : (_business$city = business.city) === null || _business$city === void 0 ? void 0 : _business$city.name))
+        }), /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement("b", null, business === null || business === void 0 ? void 0 : business.name), business === null || business === void 0 || (_business$city = business.city) === null || _business$city === void 0 ? void 0 : _business$city.name))
       };
     });
     setBusinessOptions(_businessOptions);
-    if ((promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo2 = promotionState.promotion) === null || _promotionState$promo2 === void 0 ? void 0 : (_promotionState$promo3 = _promotionState$promo2.categories) === null || _promotionState$promo3 === void 0 ? void 0 : _promotionState$promo3.length) > 0) {
-      var _promotionState$promo4, _promotionState$promo5;
-      var businessId = promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo4 = promotionState.promotion) === null || _promotionState$promo4 === void 0 ? void 0 : (_promotionState$promo5 = _promotionState$promo4.categories[0]) === null || _promotionState$promo5 === void 0 ? void 0 : _promotionState$promo5.business_id;
+    if ((promotionState === null || promotionState === void 0 || (_promotionState$promo2 = promotionState.promotion) === null || _promotionState$promo2 === void 0 || (_promotionState$promo2 = _promotionState$promo2.categories) === null || _promotionState$promo2 === void 0 ? void 0 : _promotionState$promo2.length) > 0) {
+      var _promotionState$promo3;
+      var businessId = promotionState === null || promotionState === void 0 || (_promotionState$promo3 = promotionState.promotion) === null || _promotionState$promo3 === void 0 || (_promotionState$promo3 = _promotionState$promo3.categories[0]) === null || _promotionState$promo3 === void 0 ? void 0 : _promotionState$promo3.business_id;
       var foundBusiness = businessesList.businesses.find(function (business) {
         return business.id === businessId;
       });
@@ -99,9 +99,9 @@ var EnterprisePromotionSpecficCategory = function EnterprisePromotionSpecficCate
     });
   }, [selectedCategoryIds]);
   (0, _react.useEffect)(function () {
-    var _promotionState$promo6, _promotionState$promo7, _promotionState$promo8;
-    if (!(promotionState !== null && promotionState !== void 0 && (_promotionState$promo6 = promotionState.promotion) !== null && _promotionState$promo6 !== void 0 && _promotionState$promo6.categories)) return;
-    var _selectedCategoryIds = promotionState === null || promotionState === void 0 ? void 0 : (_promotionState$promo7 = promotionState.promotion) === null || _promotionState$promo7 === void 0 ? void 0 : (_promotionState$promo8 = _promotionState$promo7.categories) === null || _promotionState$promo8 === void 0 ? void 0 : _promotionState$promo8.reduce(function (ids, category) {
+    var _promotionState$promo4, _promotionState$promo5;
+    if (!(promotionState !== null && promotionState !== void 0 && (_promotionState$promo4 = promotionState.promotion) !== null && _promotionState$promo4 !== void 0 && _promotionState$promo4.categories)) return;
+    var _selectedCategoryIds = promotionState === null || promotionState === void 0 || (_promotionState$promo5 = promotionState.promotion) === null || _promotionState$promo5 === void 0 || (_promotionState$promo5 = _promotionState$promo5.categories) === null || _promotionState$promo5 === void 0 ? void 0 : _promotionState$promo5.reduce(function (ids, category) {
       ids[category.id] = {
         id: category.id,
         include: category.pivot.include

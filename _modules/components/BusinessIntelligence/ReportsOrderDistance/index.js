@@ -1,6 +1,6 @@
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -27,8 +27,8 @@ function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableTo
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
@@ -36,10 +36,10 @@ function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArra
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
-function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ReportsOrderDistanceUI = function ReportsOrderDistanceUI(props) {
-  var _filterList$franchise, _reportData$content8, _reportData$content8$, _reportData$content8$2, _reportData$content9, _reportData$content9$, _reportData$content9$2, _reportData$content10, _reportData$content11, _reportData$content12, _reportData$content13, _reportData$content14, _reportData$content15, _reportData$content16, _reportData$content17, _reportData$content18, _reportData$content19;
+  var _filterList$franchise, _reportData$content8, _reportData$content9, _reportData$content10, _reportData$content11, _reportData$content12, _reportData$content13, _reportData$content14;
   var filterList = props.filterList,
     handleChangeFilterList = props.handleChangeFilterList,
     reportData = props.reportData;
@@ -74,29 +74,29 @@ var ReportsOrderDistanceUI = function ReportsOrderDistanceUI(props) {
     }));
   };
   var generateChartValues = function generateChartValues() {
-    var _reportData$content, _reportData$content$h, _reportData$content$h2;
-    if ((reportData === null || reportData === void 0 ? void 0 : (_reportData$content = reportData.content) === null || _reportData$content === void 0 ? void 0 : (_reportData$content$h = _reportData$content.header) === null || _reportData$content$h === void 0 ? void 0 : (_reportData$content$h2 = _reportData$content$h.rows[0]) === null || _reportData$content$h2 === void 0 ? void 0 : _reportData$content$h2.length) > 1) {
+    var _reportData$content;
+    if ((reportData === null || reportData === void 0 || (_reportData$content = reportData.content) === null || _reportData$content === void 0 || (_reportData$content = _reportData$content.header) === null || _reportData$content === void 0 || (_reportData$content = _reportData$content.rows[0]) === null || _reportData$content === void 0 ? void 0 : _reportData$content.length) > 1) {
       var chartValues = [];
       var _loop = function _loop(i) {
-        var _reportData$content3, _reportData$content3$, _reportData$content3$2;
-        var values = reportData === null || reportData === void 0 ? void 0 : (_reportData$content3 = reportData.content) === null || _reportData$content3 === void 0 ? void 0 : (_reportData$content3$ = _reportData$content3.body) === null || _reportData$content3$ === void 0 ? void 0 : (_reportData$content3$2 = _reportData$content3$.rows) === null || _reportData$content3$2 === void 0 ? void 0 : _reportData$content3$2.reduce(function (prev, cur) {
+        var _reportData$content3;
+        var values = reportData === null || reportData === void 0 || (_reportData$content3 = reportData.content) === null || _reportData$content3 === void 0 || (_reportData$content3 = _reportData$content3.body) === null || _reportData$content3 === void 0 || (_reportData$content3 = _reportData$content3.rows) === null || _reportData$content3 === void 0 ? void 0 : _reportData$content3.reduce(function (prev, cur) {
           return [].concat(_toConsumableArray(prev), [cur[i * 2].value]);
         }, []);
         chartValues.push(_toConsumableArray(values));
       };
-      for (var i = 1; i < (reportData === null || reportData === void 0 ? void 0 : (_reportData$content2 = reportData.content) === null || _reportData$content2 === void 0 ? void 0 : (_reportData$content2$ = _reportData$content2.header) === null || _reportData$content2$ === void 0 ? void 0 : (_reportData$content2$2 = _reportData$content2$.rows[0]) === null || _reportData$content2$2 === void 0 ? void 0 : _reportData$content2$2.length); i++) {
-        var _reportData$content2, _reportData$content2$, _reportData$content2$2;
+      for (var i = 1; i < (reportData === null || reportData === void 0 || (_reportData$content2 = reportData.content) === null || _reportData$content2 === void 0 || (_reportData$content2 = _reportData$content2.header) === null || _reportData$content2 === void 0 || (_reportData$content2 = _reportData$content2.rows[0]) === null || _reportData$content2 === void 0 ? void 0 : _reportData$content2.length); i++) {
+        var _reportData$content2;
         _loop(i);
       }
       return chartValues;
     }
   };
   var generateChartLabels = function generateChartLabels() {
-    var _reportData$content4, _reportData$content4$, _reportData$content4$2;
+    var _reportData$content4;
     var labels = [];
-    if ((reportData === null || reportData === void 0 ? void 0 : (_reportData$content4 = reportData.content) === null || _reportData$content4 === void 0 ? void 0 : (_reportData$content4$ = _reportData$content4.header) === null || _reportData$content4$ === void 0 ? void 0 : (_reportData$content4$2 = _reportData$content4$.rows[0]) === null || _reportData$content4$2 === void 0 ? void 0 : _reportData$content4$2.length) > 1) {
-      var _reportData$content5, _reportData$content5$, _reportData$content5$2;
-      labels = _toConsumableArray(reportData === null || reportData === void 0 ? void 0 : (_reportData$content5 = reportData.content) === null || _reportData$content5 === void 0 ? void 0 : (_reportData$content5$ = _reportData$content5.body) === null || _reportData$content5$ === void 0 ? void 0 : (_reportData$content5$2 = _reportData$content5$.rows) === null || _reportData$content5$2 === void 0 ? void 0 : _reportData$content5$2.reduce(function (prev, cur) {
+    if ((reportData === null || reportData === void 0 || (_reportData$content4 = reportData.content) === null || _reportData$content4 === void 0 || (_reportData$content4 = _reportData$content4.header) === null || _reportData$content4 === void 0 || (_reportData$content4 = _reportData$content4.rows[0]) === null || _reportData$content4 === void 0 ? void 0 : _reportData$content4.length) > 1) {
+      var _reportData$content5;
+      labels = _toConsumableArray(reportData === null || reportData === void 0 || (_reportData$content5 = reportData.content) === null || _reportData$content5 === void 0 || (_reportData$content5 = _reportData$content5.body) === null || _reportData$content5 === void 0 || (_reportData$content5 = _reportData$content5.rows) === null || _reportData$content5 === void 0 ? void 0 : _reportData$content5.reduce(function (prev, cur) {
         return [].concat(_toConsumableArray(prev), [cur[0].value]);
       }, []));
     }
@@ -106,9 +106,9 @@ var ReportsOrderDistanceUI = function ReportsOrderDistanceUI(props) {
     var chartValues = generateChartValues();
     var chartData = [];
     chartValues && chartValues.forEach(function (value, i) {
-      var _reportData$content$h3, _reportData$content6, _reportData$content6$;
+      var _reportData$content$h, _reportData$content6;
       chartData.push({
-        label: (_reportData$content$h3 = reportData === null || reportData === void 0 ? void 0 : (_reportData$content6 = reportData.content) === null || _reportData$content6 === void 0 ? void 0 : (_reportData$content6$ = _reportData$content6.header) === null || _reportData$content6$ === void 0 ? void 0 : _reportData$content6$.rows[0][i + 1].value) !== null && _reportData$content$h3 !== void 0 ? _reportData$content$h3 : '',
+        label: (_reportData$content$h = reportData === null || reportData === void 0 || (_reportData$content6 = reportData.content) === null || _reportData$content6 === void 0 || (_reportData$content6 = _reportData$content6.header) === null || _reportData$content6 === void 0 ? void 0 : _reportData$content6.rows[0][i + 1].value) !== null && _reportData$content$h !== void 0 ? _reportData$content$h : '',
         data: value,
         fill: true,
         borderColor: (0, _polished.lighten)(i / 10, '#2C7BE5'),
@@ -121,8 +121,8 @@ var ReportsOrderDistanceUI = function ReportsOrderDistanceUI(props) {
     return chartData;
   };
   var downloadCSV = function downloadCSV() {
-    var _reportData$content7, _reportData$content7$, _reportData$content7$2;
-    if ((reportData === null || reportData === void 0 ? void 0 : (_reportData$content7 = reportData.content) === null || _reportData$content7 === void 0 ? void 0 : (_reportData$content7$ = _reportData$content7.body) === null || _reportData$content7$ === void 0 ? void 0 : (_reportData$content7$2 = _reportData$content7$.rows) === null || _reportData$content7$2 === void 0 ? void 0 : _reportData$content7$2.length) === 0) return;
+    var _reportData$content7;
+    if ((reportData === null || reportData === void 0 || (_reportData$content7 = reportData.content) === null || _reportData$content7 === void 0 || (_reportData$content7 = _reportData$content7.body) === null || _reportData$content7 === void 0 || (_reportData$content7 = _reportData$content7.rows) === null || _reportData$content7 === void 0 ? void 0 : _reportData$content7.length) === 0) return;
     var csv = '';
     reportData.content.header.rows.forEach(function (tr) {
       tr.forEach(function (th) {
@@ -175,7 +175,7 @@ var ReportsOrderDistanceUI = function ReportsOrderDistanceUI(props) {
     onClick: function onClick() {
       return setIsBrandFilter(true);
     }
-  }, t('BRAND', 'Brand'), " (", filterList !== null && filterList !== void 0 && filterList.franchises_id ? filterList === null || filterList === void 0 ? void 0 : (_filterList$franchise = filterList.franchises_id) === null || _filterList$franchise === void 0 ? void 0 : _filterList$franchise.length : t('ALL', 'All'), ")"), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }, t('BRAND', 'Brand'), " (", filterList !== null && filterList !== void 0 && filterList.franchises_id ? filterList === null || filterList === void 0 || (_filterList$franchise = filterList.franchises_id) === null || _filterList$franchise === void 0 ? void 0 : _filterList$franchise.length : t('ALL', 'All'), ")"), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     onClick: function onClick() {
       return setIsBusinessFilter(true);
     }
@@ -187,7 +187,7 @@ var ReportsOrderDistanceUI = function ReportsOrderDistanceUI(props) {
     handleChangeDate: handleChangeDate,
     defaultValue: filterList
   })))), /*#__PURE__*/_react.default.createElement(_styles2.DistancePerBrandWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.DistanceTitleBlock, {
-    active: (reportData === null || reportData === void 0 ? void 0 : (_reportData$content8 = reportData.content) === null || _reportData$content8 === void 0 ? void 0 : (_reportData$content8$ = _reportData$content8.body) === null || _reportData$content8$ === void 0 ? void 0 : (_reportData$content8$2 = _reportData$content8$.rows) === null || _reportData$content8$2 === void 0 ? void 0 : _reportData$content8$2.length) > 0
+    active: (reportData === null || reportData === void 0 || (_reportData$content8 = reportData.content) === null || _reportData$content8 === void 0 || (_reportData$content8 = _reportData$content8.body) === null || _reportData$content8 === void 0 || (_reportData$content8 = _reportData$content8.rows) === null || _reportData$content8 === void 0 ? void 0 : _reportData$content8.length) > 0
   }, /*#__PURE__*/_react.default.createElement("h2", null, t('ORDERS_DELIVERY', 'Orders delivery')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Download, {
     onClick: function onClick() {
       return downloadCSV();
@@ -199,9 +199,9 @@ var ReportsOrderDistanceUI = function ReportsOrderDistanceUI(props) {
       className: "col-md-3 col-sm-3 col-3",
       key: i
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null));
-  })) : /*#__PURE__*/_react.default.createElement(_styles2.TableWrapper, null, (reportData === null || reportData === void 0 ? void 0 : (_reportData$content9 = reportData.content) === null || _reportData$content9 === void 0 ? void 0 : (_reportData$content9$ = _reportData$content9.body) === null || _reportData$content9$ === void 0 ? void 0 : (_reportData$content9$2 = _reportData$content9$.rows) === null || _reportData$content9$2 === void 0 ? void 0 : _reportData$content9$2.length) > 0 ? /*#__PURE__*/_react.default.createElement(_styles2.DistanceTable, {
+  })) : /*#__PURE__*/_react.default.createElement(_styles2.TableWrapper, null, (reportData === null || reportData === void 0 || (_reportData$content9 = reportData.content) === null || _reportData$content9 === void 0 || (_reportData$content9 = _reportData$content9.body) === null || _reportData$content9 === void 0 || (_reportData$content9 = _reportData$content9.rows) === null || _reportData$content9 === void 0 ? void 0 : _reportData$content9.length) > 0 ? /*#__PURE__*/_react.default.createElement(_styles2.DistanceTable, {
     ref: tableRef
-  }, (reportData === null || reportData === void 0 ? void 0 : (_reportData$content10 = reportData.content) === null || _reportData$content10 === void 0 ? void 0 : (_reportData$content11 = _reportData$content10.header) === null || _reportData$content11 === void 0 ? void 0 : _reportData$content11.rows.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.Thead, null, reportData === null || reportData === void 0 ? void 0 : (_reportData$content12 = reportData.content) === null || _reportData$content12 === void 0 ? void 0 : (_reportData$content13 = _reportData$content12.header) === null || _reportData$content13 === void 0 ? void 0 : _reportData$content13.rows.map(function (tr, i) {
+  }, (reportData === null || reportData === void 0 || (_reportData$content10 = reportData.content) === null || _reportData$content10 === void 0 || (_reportData$content10 = _reportData$content10.header) === null || _reportData$content10 === void 0 ? void 0 : _reportData$content10.rows.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.Thead, null, reportData === null || reportData === void 0 || (_reportData$content11 = reportData.content) === null || _reportData$content11 === void 0 || (_reportData$content11 = _reportData$content11.header) === null || _reportData$content11 === void 0 ? void 0 : _reportData$content11.rows.map(function (tr, i) {
     return /*#__PURE__*/_react.default.createElement("tr", {
       key: i
     }, tr === null || tr === void 0 ? void 0 : tr.map(function (th, j) {
@@ -210,7 +210,7 @@ var ReportsOrderDistanceUI = function ReportsOrderDistanceUI(props) {
         colSpan: th.colspan
       }, i === 0 && j === 0 ? '' : th.value);
     }));
-  })), reportData === null || reportData === void 0 ? void 0 : (_reportData$content14 = reportData.content) === null || _reportData$content14 === void 0 ? void 0 : (_reportData$content15 = _reportData$content14.body) === null || _reportData$content15 === void 0 ? void 0 : _reportData$content15.rows.map(function (tbody, i) {
+  })), reportData === null || reportData === void 0 || (_reportData$content12 = reportData.content) === null || _reportData$content12 === void 0 || (_reportData$content12 = _reportData$content12.body) === null || _reportData$content12 === void 0 ? void 0 : _reportData$content12.rows.map(function (tbody, i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.Tbody, {
       key: i
     }, /*#__PURE__*/_react.default.createElement("tr", null, tbody.map(function (td, j) {
@@ -219,7 +219,7 @@ var ReportsOrderDistanceUI = function ReportsOrderDistanceUI(props) {
         colSpan: td.colspan
       }, td.value, j !== 0 && j % 2 === 0 && '%');
     })));
-  }), (reportData === null || reportData === void 0 ? void 0 : (_reportData$content16 = reportData.content) === null || _reportData$content16 === void 0 ? void 0 : (_reportData$content17 = _reportData$content16.footer) === null || _reportData$content17 === void 0 ? void 0 : _reportData$content17.rows.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.Tfoot, null, reportData === null || reportData === void 0 ? void 0 : (_reportData$content18 = reportData.content) === null || _reportData$content18 === void 0 ? void 0 : (_reportData$content19 = _reportData$content18.footer) === null || _reportData$content19 === void 0 ? void 0 : _reportData$content19.rows.map(function (tr, i) {
+  }), (reportData === null || reportData === void 0 || (_reportData$content13 = reportData.content) === null || _reportData$content13 === void 0 || (_reportData$content13 = _reportData$content13.footer) === null || _reportData$content13 === void 0 ? void 0 : _reportData$content13.rows.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.Tfoot, null, reportData === null || reportData === void 0 || (_reportData$content14 = reportData.content) === null || _reportData$content14 === void 0 || (_reportData$content14 = _reportData$content14.footer) === null || _reportData$content14 === void 0 ? void 0 : _reportData$content14.rows.map(function (tr, i) {
     return /*#__PURE__*/_react.default.createElement("tr", {
       key: i
     }, tr === null || tr === void 0 ? void 0 : tr.map(function (td, j) {

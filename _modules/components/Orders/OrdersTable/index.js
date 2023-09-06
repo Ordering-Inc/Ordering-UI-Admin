@@ -1,6 +1,6 @@
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -23,8 +23,8 @@ function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableTo
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
@@ -32,10 +32,10 @@ function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArra
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
-function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
-  var _configState$configs, _configState$configs$, _configState$configs2, _configState$configs3, _orderList$orders3;
+  var _configState$configs, _configState$configs2, _orderList$orders, _orderList$orders2;
   var hidePhoto = props.hidePhoto,
     isSelectedOrders = props.isSelectedOrders,
     orderList = props.orderList,
@@ -89,8 +89,8 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configState = _useConfig2[0];
-  var isEnabledRowInColor = (configState === null || configState === void 0 ? void 0 : (_configState$configs = configState.configs) === null || _configState$configs === void 0 ? void 0 : (_configState$configs$ = _configState$configs.row_in_color_enabled) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value) === '1';
-  var showExternalId = (configState === null || configState === void 0 ? void 0 : (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 ? void 0 : (_configState$configs3 = _configState$configs2.change_order_id) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value) === '1';
+  var isEnabledRowInColor = (configState === null || configState === void 0 || (_configState$configs = configState.configs) === null || _configState$configs === void 0 || (_configState$configs = _configState$configs.row_in_color_enabled) === null || _configState$configs === void 0 ? void 0 : _configState$configs.value) === '1';
+  var showExternalId = (configState === null || configState === void 0 || (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 || (_configState$configs2 = _configState$configs2.change_order_id) === null || _configState$configs2 === void 0 ? void 0 : _configState$configs2.value) === '1';
   var optionsDefault = [{
     value: 'status',
     content: t('STATUS', 'Status')
@@ -206,70 +206,70 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
     var status = parseInt(s);
     var orderStatus = [{
       key: 0,
-      value: t('PENDING', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.PENDING) || 'Pending')
+      value: t('PENDING', (theme === null || theme === void 0 || (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.PENDING) || 'Pending')
     }, {
       key: 1,
-      value: t('COMPLETED_BY_ADMIN', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.COMPLETED) || 'Completed by admin')
+      value: t('COMPLETED_BY_ADMIN', (theme === null || theme === void 0 || (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.COMPLETED) || 'Completed by admin')
     }, {
       key: 2,
-      value: t('REJECTED', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag3 = theme.defaultLanguages) === null || _theme$defaultLanguag3 === void 0 ? void 0 : _theme$defaultLanguag3.REJECTED) || 'Rejected')
+      value: t('REJECTED', (theme === null || theme === void 0 || (_theme$defaultLanguag3 = theme.defaultLanguages) === null || _theme$defaultLanguag3 === void 0 ? void 0 : _theme$defaultLanguag3.REJECTED) || 'Rejected')
     }, {
       key: 3,
-      value: t('ORDER_STATUS_IN_BUSINESS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag4 = theme.defaultLanguages) === null || _theme$defaultLanguag4 === void 0 ? void 0 : _theme$defaultLanguag4.DRIVER_IN_BUSINESS) || 'Driver arrived to business')
+      value: t('ORDER_STATUS_IN_BUSINESS', (theme === null || theme === void 0 || (_theme$defaultLanguag4 = theme.defaultLanguages) === null || _theme$defaultLanguag4 === void 0 ? void 0 : _theme$defaultLanguag4.DRIVER_IN_BUSINESS) || 'Driver arrived to business')
     }, {
       key: 4,
-      value: t('PREPARATION_COMPLETED', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag5 = theme.defaultLanguages) === null || _theme$defaultLanguag5 === void 0 ? void 0 : _theme$defaultLanguag5.PREPARATION_COMPLETED) || 'Preparation Completed')
+      value: t('PREPARATION_COMPLETED', (theme === null || theme === void 0 || (_theme$defaultLanguag5 = theme.defaultLanguages) === null || _theme$defaultLanguag5 === void 0 ? void 0 : _theme$defaultLanguag5.PREPARATION_COMPLETED) || 'Preparation Completed')
     }, {
       key: 5,
-      value: t('REJECTED_BY_BUSINESS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag6 = theme.defaultLanguages) === null || _theme$defaultLanguag6 === void 0 ? void 0 : _theme$defaultLanguag6.REJECTED_BY_BUSINESS) || 'Rejected by business')
+      value: t('REJECTED_BY_BUSINESS', (theme === null || theme === void 0 || (_theme$defaultLanguag6 = theme.defaultLanguages) === null || _theme$defaultLanguag6 === void 0 ? void 0 : _theme$defaultLanguag6.REJECTED_BY_BUSINESS) || 'Rejected by business')
     }, {
       key: 6,
-      value: t('REJECTED_BY_DRIVER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag7 = theme.defaultLanguages) === null || _theme$defaultLanguag7 === void 0 ? void 0 : _theme$defaultLanguag7.REJECTED_BY_DRIVER) || 'Rejected by Driver')
+      value: t('REJECTED_BY_DRIVER', (theme === null || theme === void 0 || (_theme$defaultLanguag7 = theme.defaultLanguages) === null || _theme$defaultLanguag7 === void 0 ? void 0 : _theme$defaultLanguag7.REJECTED_BY_DRIVER) || 'Rejected by Driver')
     }, {
       key: 7,
-      value: t('ACCEPTED_BY_BUSINESS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag8 = theme.defaultLanguages) === null || _theme$defaultLanguag8 === void 0 ? void 0 : _theme$defaultLanguag8.ACCEPTED_BY_BUSINESS) || 'Accepted by business')
+      value: t('ACCEPTED_BY_BUSINESS', (theme === null || theme === void 0 || (_theme$defaultLanguag8 = theme.defaultLanguages) === null || _theme$defaultLanguag8 === void 0 ? void 0 : _theme$defaultLanguag8.ACCEPTED_BY_BUSINESS) || 'Accepted by business')
     }, {
       key: 8,
-      value: t('ACCEPTED_BY_DRIVER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag9 = theme.defaultLanguages) === null || _theme$defaultLanguag9 === void 0 ? void 0 : _theme$defaultLanguag9.ACCEPTED_BY_DRIVER) || 'Accepted by driver')
+      value: t('ACCEPTED_BY_DRIVER', (theme === null || theme === void 0 || (_theme$defaultLanguag9 = theme.defaultLanguages) === null || _theme$defaultLanguag9 === void 0 ? void 0 : _theme$defaultLanguag9.ACCEPTED_BY_DRIVER) || 'Accepted by driver')
     }, {
       key: 9,
-      value: t('PICK_UP_COMPLETED_BY_DRIVER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag10 = theme.defaultLanguages) === null || _theme$defaultLanguag10 === void 0 ? void 0 : _theme$defaultLanguag10.PICK_UP_COMPLETED_BY_DRIVER) || 'Pick up completed by driver')
+      value: t('PICK_UP_COMPLETED_BY_DRIVER', (theme === null || theme === void 0 || (_theme$defaultLanguag10 = theme.defaultLanguages) === null || _theme$defaultLanguag10 === void 0 ? void 0 : _theme$defaultLanguag10.PICK_UP_COMPLETED_BY_DRIVER) || 'Pick up completed by driver')
     }, {
       key: 10,
-      value: t('PICK_UP_FAILED_BY_DRIVER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag11 = theme.defaultLanguages) === null || _theme$defaultLanguag11 === void 0 ? void 0 : _theme$defaultLanguag11.PICK_UP_FAILED_BY_DRIVER) || 'Pick up Failed by driver')
+      value: t('PICK_UP_FAILED_BY_DRIVER', (theme === null || theme === void 0 || (_theme$defaultLanguag11 = theme.defaultLanguages) === null || _theme$defaultLanguag11 === void 0 ? void 0 : _theme$defaultLanguag11.PICK_UP_FAILED_BY_DRIVER) || 'Pick up Failed by driver')
     }, {
       key: 11,
-      value: t('DELIVERY_COMPLETED_BY_DRIVER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag12 = theme.defaultLanguages) === null || _theme$defaultLanguag12 === void 0 ? void 0 : _theme$defaultLanguag12.DELIVERY_COMPLETED_BY_DRIVER) || 'Delivery completed by driver')
+      value: t('DELIVERY_COMPLETED_BY_DRIVER', (theme === null || theme === void 0 || (_theme$defaultLanguag12 = theme.defaultLanguages) === null || _theme$defaultLanguag12 === void 0 ? void 0 : _theme$defaultLanguag12.DELIVERY_COMPLETED_BY_DRIVER) || 'Delivery completed by driver')
     }, {
       key: 12,
-      value: t('DELIVERY_FAILED_BY_DRIVER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag13 = theme.defaultLanguages) === null || _theme$defaultLanguag13 === void 0 ? void 0 : _theme$defaultLanguag13.DELIVERY_FAILED_BY_DRIVER) || 'Delivery Failed by driver')
+      value: t('DELIVERY_FAILED_BY_DRIVER', (theme === null || theme === void 0 || (_theme$defaultLanguag13 = theme.defaultLanguages) === null || _theme$defaultLanguag13 === void 0 ? void 0 : _theme$defaultLanguag13.DELIVERY_FAILED_BY_DRIVER) || 'Delivery Failed by driver')
     }, {
       key: 13,
-      value: t('PREORDER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag14 = theme.defaultLanguages) === null || _theme$defaultLanguag14 === void 0 ? void 0 : _theme$defaultLanguag14.PREORDER) || 'PreOrder')
+      value: t('PREORDER', (theme === null || theme === void 0 || (_theme$defaultLanguag14 = theme.defaultLanguages) === null || _theme$defaultLanguag14 === void 0 ? void 0 : _theme$defaultLanguag14.PREORDER) || 'PreOrder')
     }, {
       key: 14,
-      value: t('ORDER_NOT_READY', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag15 = theme.defaultLanguages) === null || _theme$defaultLanguag15 === void 0 ? void 0 : _theme$defaultLanguag15.ORDER_NOT_READY) || 'Order not ready')
+      value: t('ORDER_NOT_READY', (theme === null || theme === void 0 || (_theme$defaultLanguag15 = theme.defaultLanguages) === null || _theme$defaultLanguag15 === void 0 ? void 0 : _theme$defaultLanguag15.ORDER_NOT_READY) || 'Order not ready')
     }, {
       key: 15,
-      value: t('ORDER_PICKEDUP_COMPLETED_BY_CUSTOMER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag16 = theme.defaultLanguages) === null || _theme$defaultLanguag16 === void 0 ? void 0 : _theme$defaultLanguag16.ORDER_PICKEDUP_COMPLETED_BY_CUSTOMER) || 'Order picked up completed by customer')
+      value: t('ORDER_PICKEDUP_COMPLETED_BY_CUSTOMER', (theme === null || theme === void 0 || (_theme$defaultLanguag16 = theme.defaultLanguages) === null || _theme$defaultLanguag16 === void 0 ? void 0 : _theme$defaultLanguag16.ORDER_PICKEDUP_COMPLETED_BY_CUSTOMER) || 'Order picked up completed by customer')
     }, {
       key: 16,
-      value: t('ORDER_STATUS_CANCELLED_BY_CUSTOMER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag17 = theme.defaultLanguages) === null || _theme$defaultLanguag17 === void 0 ? void 0 : _theme$defaultLanguag17.ORDER_STATUS_CANCELLED_BY_CUSTOMER) || 'Order cancelled by customer')
+      value: t('ORDER_STATUS_CANCELLED_BY_CUSTOMER', (theme === null || theme === void 0 || (_theme$defaultLanguag17 = theme.defaultLanguages) === null || _theme$defaultLanguag17 === void 0 ? void 0 : _theme$defaultLanguag17.ORDER_STATUS_CANCELLED_BY_CUSTOMER) || 'Order cancelled by customer')
     }, {
       key: 17,
-      value: t('ORDER_NOT_PICKEDUP_BY_CUSTOMER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag18 = theme.defaultLanguages) === null || _theme$defaultLanguag18 === void 0 ? void 0 : _theme$defaultLanguag18.ORDER_NOT_PICKEDUP_BY_CUSTOMER) || 'Order not picked up by customer')
+      value: t('ORDER_NOT_PICKEDUP_BY_CUSTOMER', (theme === null || theme === void 0 || (_theme$defaultLanguag18 = theme.defaultLanguages) === null || _theme$defaultLanguag18 === void 0 ? void 0 : _theme$defaultLanguag18.ORDER_NOT_PICKEDUP_BY_CUSTOMER) || 'Order not picked up by customer')
     }, {
       key: 18,
-      value: t('ORDER_DRIVER_ALMOST_ARRIVED_BUSINESS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag19 = theme.defaultLanguages) === null || _theme$defaultLanguag19 === void 0 ? void 0 : _theme$defaultLanguag19.ORDER_DRIVER_ALMOST_ARRIVED_BUSINESS) || 'Driver almost arrived to business')
+      value: t('ORDER_DRIVER_ALMOST_ARRIVED_BUSINESS', (theme === null || theme === void 0 || (_theme$defaultLanguag19 = theme.defaultLanguages) === null || _theme$defaultLanguag19 === void 0 ? void 0 : _theme$defaultLanguag19.ORDER_DRIVER_ALMOST_ARRIVED_BUSINESS) || 'Driver almost arrived to business')
     }, {
       key: 19,
-      value: t('ORDER_DRIVER_ALMOST_ARRIVED_CUSTOMER', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag20 = theme.defaultLanguages) === null || _theme$defaultLanguag20 === void 0 ? void 0 : _theme$defaultLanguag20.ORDER_DRIVER_ALMOST_ARRIVED_CUSTOMER) || 'Driver almost arrived to customer')
+      value: t('ORDER_DRIVER_ALMOST_ARRIVED_CUSTOMER', (theme === null || theme === void 0 || (_theme$defaultLanguag20 = theme.defaultLanguages) === null || _theme$defaultLanguag20 === void 0 ? void 0 : _theme$defaultLanguag20.ORDER_DRIVER_ALMOST_ARRIVED_CUSTOMER) || 'Driver almost arrived to customer')
     }, {
       key: 20,
-      value: t('ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag21 = theme.defaultLanguages) === null || _theme$defaultLanguag21 === void 0 ? void 0 : _theme$defaultLanguag21.ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS) || 'Customer almost arrived to business')
+      value: t('ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS', (theme === null || theme === void 0 || (_theme$defaultLanguag21 = theme.defaultLanguages) === null || _theme$defaultLanguag21 === void 0 ? void 0 : _theme$defaultLanguag21.ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS) || 'Customer almost arrived to business')
     }, {
       key: 21,
-      value: t('ORDER_CUSTOMER_ARRIVED_BUSINESS', (theme === null || theme === void 0 ? void 0 : (_theme$defaultLanguag22 = theme.defaultLanguages) === null || _theme$defaultLanguag22 === void 0 ? void 0 : _theme$defaultLanguag22.ORDER_CUSTOMER_ARRIVED_BUSINESS) || 'Customer arrived to business')
+      value: t('ORDER_CUSTOMER_ARRIVED_BUSINESS', (theme === null || theme === void 0 || (_theme$defaultLanguag22 = theme.defaultLanguages) === null || _theme$defaultLanguag22 === void 0 ? void 0 : _theme$defaultLanguag22.ORDER_CUSTOMER_ARRIVED_BUSINESS) || 'Customer arrived to business')
     }, {
       key: 22,
       value: t('ORDER_LOOKING_FOR_DRIVER', 'Looking for driver')
@@ -296,18 +296,16 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
     handleOpenOrderDetail(order);
   };
   var handleSelecteAllOrder = function handleSelecteAllOrder() {
-    var _orderList$orders;
-    var orderIds = (_orderList$orders = orderList.orders) === null || _orderList$orders === void 0 ? void 0 : _orderList$orders.reduce(function (ids, order) {
-      return [].concat(_toConsumableArray(ids), [order.id]);
-    }, []);
+    var orderIds = Object.keys(orderList.orders);
     if (!isAllChecked) {
-      setSelectedOrderIds([].concat(_toConsumableArray(selectedOrderIds), _toConsumableArray(orderIds)));
+      var updatedSelectedOrderIds = new Set([].concat(_toConsumableArray(selectedOrderIds), orderIds));
+      setSelectedOrderIds(_toConsumableArray(updatedSelectedOrderIds));
     } else {
       var orderIdsToDeleteSet = new Set(orderIds);
-      var updatedSelectedOrderIds = selectedOrderIds.filter(function (name) {
-        return !orderIdsToDeleteSet.has(name);
+      var _updatedSelectedOrderIds = selectedOrderIds.filter(function (id) {
+        return !orderIdsToDeleteSet.has(id);
       });
-      setSelectedOrderIds(updatedSelectedOrderIds);
+      setSelectedOrderIds(_updatedSelectedOrderIds);
     }
   };
   /**
@@ -341,11 +339,8 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
     setDragOverd('');
   };
   (0, _react.useEffect)(function () {
-    var _orderList$orders2;
     if (orderList.loading) return;
-    var orderIds = (_orderList$orders2 = orderList.orders) === null || _orderList$orders2 === void 0 ? void 0 : _orderList$orders2.reduce(function (ids, order) {
-      return [].concat(_toConsumableArray(ids), [order.id]);
-    }, []);
+    var orderIds = Object.keys(orderList.orders);
     var _isAllChecked = orderIds.every(function (elem) {
       return selectedOrderIds.includes(elem);
     });
@@ -354,8 +349,8 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
   var handleChangeKeyboard = function handleChangeKeyboard(evt) {
     if (evt.code === 'Escape') setIsTourOpen && setIsTourOpen(false);
     if (evt.keyCode === 37 && currentTourStep === 1) handleOpenTour();
-    if (evt.keyCode === 37 && currentTourStep === 4) handleOpenOrderDetail(orderList === null || orderList === void 0 ? void 0 : orderList.orders[0], true);
-    if (evt.keyCode === 39 && currentTourStep === 0) handleOpenOrderDetail(orderList === null || orderList === void 0 ? void 0 : orderList.orders[0]);
+    if (evt.keyCode === 37 && currentTourStep === 4) handleOpenOrderDetail(Object.values(orderList === null || orderList === void 0 ? void 0 : orderList.orders)[0], true);
+    if (evt.keyCode === 39 && currentTourStep === 0) handleOpenOrderDetail(Object.values(orderList === null || orderList === void 0 ? void 0 : orderList.orders)[0]);
   };
   (0, _react.useEffect)(function () {
     if (!isTourOpen) return;
@@ -377,7 +372,7 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
     noScroll: isTourOpen && currentTourStep === 0
   }, /*#__PURE__*/_react.default.createElement(_styles.Table, {
     className: "orders_table",
-    noFixedHeader: !orderList.loading && ((_orderList$orders3 = orderList.orders) === null || _orderList$orders3 === void 0 ? void 0 : _orderList$orders3.length) <= 5
+    noFixedHeader: !orderList.loading && Object.keys((_orderList$orders = orderList === null || orderList === void 0 ? void 0 : orderList.orders) !== null && _orderList$orders !== void 0 ? _orderList$orders : {}).length <= 5
   }, !isSelectedOrders && /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, allowColumns && (Object.keys(allowColumns).filter(function (col) {
     var _allowColumns$col, _allowColumns$col2;
     return ((_allowColumns$col = allowColumns[col]) === null || _allowColumns$col === void 0 ? void 0 : _allowColumns$col.visable) && ((_allowColumns$col2 = allowColumns[col]) === null || _allowColumns$col2 === void 0 ? void 0 : _allowColumns$col2.order) !== 0;
@@ -512,7 +507,7 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
     var _allowColumns$slaBar2, _allowColumns$orderNu2, _allowColumns$dateTim2, _allowColumns$orderNu3, _allowColumns$dateTim3, _allowColumns$externa, _allowColumns$cartGro, _allowColumns$driverG, _allowColumns$status, _allowColumns$busines, _allowColumns$custome, _allowColumns$driver, _allowColumns$deliver, _allowColumns$status2, _allowColumns$advance, _allowColumns$advance2, _allowColumns$advance3, _allowColumns$total;
     return /*#__PURE__*/_react.default.createElement(_styles.OrderTbody, {
       key: i
-    }, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$slaBar2 = allowColumns.slaBar) === null || _allowColumns$slaBar2 === void 0 ? void 0 : _allowColumns$slaBar2.visable) && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.Timestatus, null)), /*#__PURE__*/_react.default.createElement("td", {
+    }, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 || (_allowColumns$slaBar2 = allowColumns.slaBar) === null || _allowColumns$slaBar2 === void 0 ? void 0 : _allowColumns$slaBar2.visable) && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.Timestatus, null)), /*#__PURE__*/_react.default.createElement("td", {
       className: !(allowColumns !== null && allowColumns !== void 0 && (_allowColumns$orderNu2 = allowColumns.orderNumber) !== null && _allowColumns$orderNu2 !== void 0 && _allowColumns$orderNu2.visable || allowColumns !== null && allowColumns !== void 0 && (_allowColumns$dateTim2 = allowColumns.dateTime) !== null && _allowColumns$dateTim2 !== void 0 && _allowColumns$dateTim2.visable) ? 'orderNo small' : 'orderNo'
     }, /*#__PURE__*/_react.default.createElement(_styles.OrderNumberContainer, null, /*#__PURE__*/_react.default.createElement(_styles.CheckBox, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 25,
@@ -522,11 +517,11 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
       }
     })), /*#__PURE__*/_react.default.createElement("div", {
       className: "info"
-    }, (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$orderNu3 = allowColumns.orderNumber) === null || _allowColumns$orderNu3 === void 0 ? void 0 : _allowColumns$orderNu3.visable) && /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    }, (allowColumns === null || allowColumns === void 0 || (_allowColumns$orderNu3 = allowColumns.orderNumber) === null || _allowColumns$orderNu3 === void 0 ? void 0 : _allowColumns$orderNu3.visable) && /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100
-    })), (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$dateTim3 = allowColumns.dateTime) === null || _allowColumns$dateTim3 === void 0 ? void 0 : _allowColumns$dateTim3.visable) && /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    })), (allowColumns === null || allowColumns === void 0 || (_allowColumns$dateTim3 = allowColumns.dateTime) === null || _allowColumns$dateTim3 === void 0 ? void 0 : _allowColumns$dateTim3.visable) && /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 120
-    })))), (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$externa = allowColumns.externalId) === null || _allowColumns$externa === void 0 ? void 0 : _allowColumns$externa.visable) && /*#__PURE__*/_react.default.createElement("td", {
+    })))), (allowColumns === null || allowColumns === void 0 || (_allowColumns$externa = allowColumns.externalId) === null || _allowColumns$externa === void 0 ? void 0 : _allowColumns$externa.visable) && /*#__PURE__*/_react.default.createElement("td", {
       className: "externalId"
     }, /*#__PURE__*/_react.default.createElement(_styles.StatusInfo, null, /*#__PURE__*/_react.default.createElement("div", {
       className: "info"
@@ -534,7 +529,7 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
       className: "bold"
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100
-    }))))), (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$cartGro = allowColumns.cartGroupId) === null || _allowColumns$cartGro === void 0 ? void 0 : _allowColumns$cartGro.visable) && /*#__PURE__*/_react.default.createElement("td", {
+    }))))), (allowColumns === null || allowColumns === void 0 || (_allowColumns$cartGro = allowColumns.cartGroupId) === null || _allowColumns$cartGro === void 0 ? void 0 : _allowColumns$cartGro.visable) && /*#__PURE__*/_react.default.createElement("td", {
       className: "statusInfo"
     }, /*#__PURE__*/_react.default.createElement(_styles.StatusInfo, null, /*#__PURE__*/_react.default.createElement("div", {
       className: "info"
@@ -542,7 +537,7 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
       className: "bold"
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100
-    }))))), (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$driverG = allowColumns.driverGroupId) === null || _allowColumns$driverG === void 0 ? void 0 : _allowColumns$driverG.visable) && /*#__PURE__*/_react.default.createElement("td", {
+    }))))), (allowColumns === null || allowColumns === void 0 || (_allowColumns$driverG = allowColumns.driverGroupId) === null || _allowColumns$driverG === void 0 ? void 0 : _allowColumns$driverG.visable) && /*#__PURE__*/_react.default.createElement("td", {
       className: "statusInfo"
     }, /*#__PURE__*/_react.default.createElement(_styles.StatusInfo, null, /*#__PURE__*/_react.default.createElement("div", {
       className: "info"
@@ -550,7 +545,7 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
       className: "bold"
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100
-    }))))), (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$status = allowColumns.status) === null || _allowColumns$status === void 0 ? void 0 : _allowColumns$status.visable) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
+    }))))), (allowColumns === null || allowColumns === void 0 || (_allowColumns$status = allowColumns.status) === null || _allowColumns$status === void 0 ? void 0 : _allowColumns$status.visable) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
       className: "statusInfo"
     }, /*#__PURE__*/_react.default.createElement(_styles.StatusInfo, null, /*#__PURE__*/_react.default.createElement("div", {
       className: "info"
@@ -558,7 +553,7 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
       className: "bold"
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100
-    }))))), (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$busines = allowColumns.business) === null || _allowColumns$busines === void 0 ? void 0 : _allowColumns$busines.visable) && /*#__PURE__*/_react.default.createElement("td", {
+    }))))), (allowColumns === null || allowColumns === void 0 || (_allowColumns$busines = allowColumns.business) === null || _allowColumns$busines === void 0 ? void 0 : _allowColumns$busines.visable) && /*#__PURE__*/_react.default.createElement("td", {
       className: "businessInfo"
     }, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, null, !hidePhoto && /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 45,
@@ -571,7 +566,7 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
       width: 80
     })), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100
-    }))))), (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$custome = allowColumns.customer) === null || _allowColumns$custome === void 0 ? void 0 : _allowColumns$custome.visable) && /*#__PURE__*/_react.default.createElement("td", {
+    }))))), (allowColumns === null || allowColumns === void 0 || (_allowColumns$custome = allowColumns.customer) === null || _allowColumns$custome === void 0 ? void 0 : _allowColumns$custome.visable) && /*#__PURE__*/_react.default.createElement("td", {
       className: "customerInfo"
     }, /*#__PURE__*/_react.default.createElement(_styles.CustomerInfo, null, !hidePhoto && /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 45,
@@ -584,7 +579,7 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
       width: 100
     })), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100
-    }))))), (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$driver = allowColumns.driver) === null || _allowColumns$driver === void 0 ? void 0 : _allowColumns$driver.visable) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
+    }))))), (allowColumns === null || allowColumns === void 0 || (_allowColumns$driver = allowColumns.driver) === null || _allowColumns$driver === void 0 ? void 0 : _allowColumns$driver.visable) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
       className: "driverInfo"
     }, /*#__PURE__*/_react.default.createElement(_styles.DriversInfo, {
       className: "d-flex align-items-center"
@@ -596,17 +591,17 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
       style: {
         margin: '10px'
       }
-    }))), (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$deliver = allowColumns.deliveryType) === null || _allowColumns$deliver === void 0 ? void 0 : _allowColumns$deliver.visable) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
+    }))), (allowColumns === null || allowColumns === void 0 || (_allowColumns$deliver = allowColumns.deliveryType) === null || _allowColumns$deliver === void 0 ? void 0 : _allowColumns$deliver.visable) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
       className: "orderType"
     }, /*#__PURE__*/_react.default.createElement(_styles.OrderType, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 35,
       height: 35
-    }))), (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$status2 = allowColumns.status) === null || _allowColumns$status2 === void 0 ? void 0 : _allowColumns$status2.visable) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
+    }))), (allowColumns === null || allowColumns === void 0 || (_allowColumns$status2 = allowColumns.status) === null || _allowColumns$status2 === void 0 ? void 0 : _allowColumns$status2.visable) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
       className: "orderStatusTitle"
     }, /*#__PURE__*/_react.default.createElement(_styles.WrapOrderStatusSelector, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100,
       height: 30
-    }))), (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$advance = allowColumns.advanced) === null || _allowColumns$advance === void 0 ? void 0 : _allowColumns$advance.visable) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
+    }))), (allowColumns === null || allowColumns === void 0 || (_allowColumns$advance = allowColumns.advanced) === null || _allowColumns$advance === void 0 ? void 0 : _allowColumns$advance.visable) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
       className: "logistic"
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "info"
@@ -616,7 +611,7 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
       width: 60
     })), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 60
-    })))), (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$advance2 = allowColumns.advanced) === null || _allowColumns$advance2 === void 0 ? void 0 : _allowColumns$advance2.visable) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
+    })))), (allowColumns === null || allowColumns === void 0 || (_allowColumns$advance2 = allowColumns.advanced) === null || _allowColumns$advance2 === void 0 ? void 0 : _allowColumns$advance2.visable) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
       className: "attempts"
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "info"
@@ -626,7 +621,7 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
       width: 60
     })), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 60
-    })))), (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$advance3 = allowColumns.advanced) === null || _allowColumns$advance3 === void 0 ? void 0 : _allowColumns$advance3.visable) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
+    })))), (allowColumns === null || allowColumns === void 0 || (_allowColumns$advance3 = allowColumns.advanced) === null || _allowColumns$advance3 === void 0 ? void 0 : _allowColumns$advance3.visable) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
       className: "priority"
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "info"
@@ -640,14 +635,14 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
       className: "orderPrice"
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "info"
-    }, (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$total = allowColumns.total) === null || _allowColumns$total === void 0 ? void 0 : _allowColumns$total.visable) && /*#__PURE__*/_react.default.createElement("p", {
+    }, (allowColumns === null || allowColumns === void 0 || (_allowColumns$total = allowColumns.total) === null || _allowColumns$total === void 0 ? void 0 : _allowColumns$total.visable) && /*#__PURE__*/_react.default.createElement("p", {
       className: "bold"
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 60
     })), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100
     }))))));
-  }) : orderList.orders.map(function (order, i) {
+  }) : Object.values((_orderList$orders2 = orderList === null || orderList === void 0 ? void 0 : orderList.orders) !== null && _orderList$orders2 !== void 0 ? _orderList$orders2 : {}).map(function (order, i) {
     return /*#__PURE__*/_react.default.createElement(_styles.OrderTbody, {
       key: i,
       className: parseInt(orderDetailId) === order.id ? 'active' : '',
@@ -691,9 +686,9 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
           className: "orderCheckBox"
         }, selectedOrderIds.includes(order === null || order === void 0 ? void 0 : order.id) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, null) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null)), /*#__PURE__*/_react.default.createElement("div", {
           className: "info"
-        }, (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$orderNu5 = allowColumns.orderNumber) === null || _allowColumns$orderNu5 === void 0 ? void 0 : _allowColumns$orderNu5.visable) && !showExternalId && /*#__PURE__*/_react.default.createElement("p", {
+        }, (allowColumns === null || allowColumns === void 0 || (_allowColumns$orderNu5 = allowColumns.orderNumber) === null || _allowColumns$orderNu5 === void 0 ? void 0 : _allowColumns$orderNu5.visable) && !showExternalId && /*#__PURE__*/_react.default.createElement("p", {
           className: "bold"
-        }, t('INVOICE_ORDER_NO', 'Order No.'), " ", order === null || order === void 0 ? void 0 : order.id), (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$dateTim5 = allowColumns.dateTime) === null || _allowColumns$dateTim5 === void 0 ? void 0 : _allowColumns$dateTim5.visable) && /*#__PURE__*/_react.default.createElement("p", {
+        }, t('INVOICE_ORDER_NO', 'Order No.'), " ", order === null || order === void 0 ? void 0 : order.id), (allowColumns === null || allowColumns === void 0 || (_allowColumns$dateTim5 = allowColumns.dateTime) === null || _allowColumns$dateTim5 === void 0 ? void 0 : _allowColumns$dateTim5.visable) && /*#__PURE__*/_react.default.createElement("p", {
           className: "date"
         }, order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
           utc: false
@@ -725,19 +720,19 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
         }, t('No', 'No'), ". ", order === null || order === void 0 ? void 0 : order.driver_group_id)));
       }
       if (column === 'business') {
-        var _order$business, _theme$images, _theme$images$dummies, _order$business2, _order$business3, _order$business3$city;
+        var _order$business, _theme$images, _order$business2, _order$business3;
         return /*#__PURE__*/_react.default.createElement("td", {
           className: "businessInfo",
           key: "businessInfo".concat(i, "-").concat(index)
         }, /*#__PURE__*/_react.default.createElement(_styles.BusinessInfo, null, !hidePhoto && /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, /*#__PURE__*/_react.default.createElement("img", {
-          src: optimizeImage(((_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 ? void 0 : (_theme$images$dummies = _theme$images.dummies) === null || _theme$images$dummies === void 0 ? void 0 : _theme$images$dummies.businessLogo), 'h_50,c_limit'),
+          src: optimizeImage(((_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.dummies) === null || _theme$images === void 0 ? void 0 : _theme$images.businessLogo), 'h_50,c_limit'),
           loading: "lazy",
           alt: ""
         })), /*#__PURE__*/_react.default.createElement("div", {
           className: "info"
         }, /*#__PURE__*/_react.default.createElement("p", {
           className: "bold"
-        }, order === null || order === void 0 ? void 0 : (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.name), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$business3 = order.business) === null || _order$business3 === void 0 ? void 0 : (_order$business3$city = _order$business3.city) === null || _order$business3$city === void 0 ? void 0 : _order$business3$city.name))));
+        }, order === null || order === void 0 || (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.name), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 || (_order$business3 = order.business) === null || _order$business3 === void 0 || (_order$business3 = _order$business3.city) === null || _order$business3 === void 0 ? void 0 : _order$business3.name))));
       }
       if (column === 'customer') {
         var _order$customer, _order$customer2, _order$customer3, _order$customer4, _order$customer5, _order$customer6, _order$customer7, _order$customer8, _order$customer9;
@@ -745,30 +740,30 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
           className: "customerInfo",
           key: "customerInfo".concat(i, "-").concat(index)
         }, /*#__PURE__*/_react.default.createElement(_styles.CustomerInfo, null, !hidePhoto && /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, order !== null && order !== void 0 && (_order$customer = order.customer) !== null && _order$customer !== void 0 && _order$customer.photo ? /*#__PURE__*/_react.default.createElement("img", {
-          src: optimizeImage(order === null || order === void 0 ? void 0 : (_order$customer2 = order.customer) === null || _order$customer2 === void 0 ? void 0 : _order$customer2.photo, 'h_50,c_limit'),
+          src: optimizeImage(order === null || order === void 0 || (_order$customer2 = order.customer) === null || _order$customer2 === void 0 ? void 0 : _order$customer2.photo, 'h_50,c_limit'),
           loading: "lazy",
           alt: ""
         }) : /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null), /*#__PURE__*/_react.default.createElement(_styles.OrdersCountWrapper, {
-          isNew: (order === null || order === void 0 ? void 0 : (_order$customer3 = order.customer) === null || _order$customer3 === void 0 ? void 0 : _order$customer3.orders_count) === 0
-        }, (order === null || order === void 0 ? void 0 : (_order$customer4 = order.customer) === null || _order$customer4 === void 0 ? void 0 : _order$customer4.orders_count) || t('NEW', 'New'))), /*#__PURE__*/_react.default.createElement("div", {
+          isNew: (order === null || order === void 0 || (_order$customer3 = order.customer) === null || _order$customer3 === void 0 ? void 0 : _order$customer3.orders_count) === 0
+        }, (order === null || order === void 0 || (_order$customer4 = order.customer) === null || _order$customer4 === void 0 ? void 0 : _order$customer4.orders_count) || t('NEW', 'New'))), /*#__PURE__*/_react.default.createElement("div", {
           className: "info"
         }, /*#__PURE__*/_react.default.createElement("p", {
           className: "bold"
-        }, !(order !== null && order !== void 0 && (_order$customer5 = order.customer) !== null && _order$customer5 !== void 0 && _order$customer5.email) && !(order !== null && order !== void 0 && (_order$customer6 = order.customer) !== null && _order$customer6 !== void 0 && _order$customer6.cellphone) && !(order !== null && order !== void 0 && (_order$customer7 = order.customer) !== null && _order$customer7 !== void 0 && _order$customer7.name) ? t('GUEST_USER', 'Guest user') : order === null || order === void 0 ? void 0 : (_order$customer8 = order.customer) === null || _order$customer8 === void 0 ? void 0 : _order$customer8.name), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$customer9 = order.customer) === null || _order$customer9 === void 0 ? void 0 : _order$customer9.cellphone))));
+        }, !(order !== null && order !== void 0 && (_order$customer5 = order.customer) !== null && _order$customer5 !== void 0 && _order$customer5.email) && !(order !== null && order !== void 0 && (_order$customer6 = order.customer) !== null && _order$customer6 !== void 0 && _order$customer6.cellphone) && !(order !== null && order !== void 0 && (_order$customer7 = order.customer) !== null && _order$customer7 !== void 0 && _order$customer7.name) ? t('GUEST_USER', 'Guest user') : order === null || order === void 0 || (_order$customer8 = order.customer) === null || _order$customer8 === void 0 ? void 0 : _order$customer8.name), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 || (_order$customer9 = order.customer) === null || _order$customer9 === void 0 ? void 0 : _order$customer9.cellphone))));
       }
       if (column === 'driver' && !isSelectedOrders) {
         var _order$driver, _order$driver2, _order$driver3, _order$driver4;
         return /*#__PURE__*/_react.default.createElement("td", {
           key: "driver".concat(i, "-").concat(index)
         }, (order === null || order === void 0 ? void 0 : order.delivery_type) === 1 && /*#__PURE__*/_react.default.createElement(_styles.CustomerInfo, null, !hidePhoto && /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, order !== null && order !== void 0 && (_order$driver = order.driver) !== null && _order$driver !== void 0 && _order$driver.photo ? /*#__PURE__*/_react.default.createElement("img", {
-          src: optimizeImage(order === null || order === void 0 ? void 0 : (_order$driver2 = order.driver) === null || _order$driver2 === void 0 ? void 0 : _order$driver2.photo, 'h_50,c_limit'),
+          src: optimizeImage(order === null || order === void 0 || (_order$driver2 = order.driver) === null || _order$driver2 === void 0 ? void 0 : _order$driver2.photo, 'h_50,c_limit'),
           loading: "lazy",
           alt: ""
         }) : /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)), /*#__PURE__*/_react.default.createElement("div", {
           className: "info"
         }, order !== null && order !== void 0 && order.driver ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("p", {
           className: "bold"
-        }, order === null || order === void 0 ? void 0 : (_order$driver3 = order.driver) === null || _order$driver3 === void 0 ? void 0 : _order$driver3.name), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : (_order$driver4 = order.driver) === null || _order$driver4 === void 0 ? void 0 : _order$driver4.cellphone)) : /*#__PURE__*/_react.default.createElement("p", {
+        }, order === null || order === void 0 || (_order$driver3 = order.driver) === null || _order$driver3 === void 0 ? void 0 : _order$driver3.name), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 || (_order$driver4 = order.driver) === null || _order$driver4 === void 0 ? void 0 : _order$driver4.cellphone)) : /*#__PURE__*/_react.default.createElement("p", {
           className: "bold"
         }, t('NO_DRIVER', 'No Driver')))));
       }
@@ -816,9 +811,9 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
           key: "total".concat(i, "-").concat(index)
         }, /*#__PURE__*/_react.default.createElement("div", {
           className: "info"
-        }, (allowColumns === null || allowColumns === void 0 ? void 0 : (_allowColumns$total2 = allowColumns.total) === null || _allowColumns$total2 === void 0 ? void 0 : _allowColumns$total2.visable) && /*#__PURE__*/_react.default.createElement("p", {
+        }, (allowColumns === null || allowColumns === void 0 || (_allowColumns$total2 = allowColumns.total) === null || _allowColumns$total2 === void 0 ? void 0 : _allowColumns$total2.visable) && /*#__PURE__*/_react.default.createElement("p", {
           className: "bold"
-        }, parsePrice(order === null || order === void 0 ? void 0 : (_order$summary = order.summary) === null || _order$summary === void 0 ? void 0 : _order$summary.total, {
+        }, parsePrice(order === null || order === void 0 || (_order$summary = order.summary) === null || _order$summary === void 0 ? void 0 : _order$summary.total, {
           currency: (0, _utils.getCurrenySymbol)(order === null || order === void 0 ? void 0 : order.currency)
         })), !((order === null || order === void 0 ? void 0 : order.status) === 1 || (order === null || order === void 0 ? void 0 : order.status) === 11 || (order === null || order === void 0 ? void 0 : order.status) === 2 || (order === null || order === void 0 ? void 0 : order.status) === 5 || (order === null || order === void 0 ? void 0 : order.status) === 6 || (order === null || order === void 0 ? void 0 : order.status) === 10 || order.status === 12) && /*#__PURE__*/_react.default.createElement("p", null, order !== null && order !== void 0 && order.delivery_datetime_utc ? getTimeAgo(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : getTimeAgo(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
           utc: false

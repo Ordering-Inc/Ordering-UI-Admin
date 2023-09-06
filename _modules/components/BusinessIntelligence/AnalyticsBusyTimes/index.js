@@ -1,6 +1,6 @@
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -18,15 +18,15 @@ var _GraphLoadingMessage = require("../GraphLoadingMessage");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
-function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var AnalyticsBusyTimes = function AnalyticsBusyTimes(props) {
-  var _busyTimesList$data12, _busyTimesList$data13, _busyTimesList$data14, _busyTimesList$data15, _busyTimesList$data16, _busyTimesList$data17, _busyTimesList$data18, _busyTimesList$data19;
+  var _busyTimesList$data11, _busyTimesList$data12, _busyTimesList$data13, _busyTimesList$data14;
   var filterList = props.filterList,
     busyTimesList = props.busyTimesList;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -44,8 +44,8 @@ var AnalyticsBusyTimes = function AnalyticsBusyTimes(props) {
     var _busyTimesList$data;
     var labels = [];
     if (busyTimesList !== null && busyTimesList !== void 0 && (_busyTimesList$data = busyTimesList.data) !== null && _busyTimesList$data !== void 0 && _busyTimesList$data.busy) {
-      var _busyTimesList$data2, _busyTimesList$data2$;
-      var _iterator = _createForOfIteratorHelper(busyTimesList === null || busyTimesList === void 0 ? void 0 : (_busyTimesList$data2 = busyTimesList.data) === null || _busyTimesList$data2 === void 0 ? void 0 : (_busyTimesList$data2$ = _busyTimesList$data2.busy) === null || _busyTimesList$data2$ === void 0 ? void 0 : _busyTimesList$data2$.sort(function (a, b) {
+      var _busyTimesList$data2;
+      var _iterator = _createForOfIteratorHelper(busyTimesList === null || busyTimesList === void 0 || (_busyTimesList$data2 = busyTimesList.data) === null || _busyTimesList$data2 === void 0 || (_busyTimesList$data2 = _busyTimesList$data2.busy) === null || _busyTimesList$data2 === void 0 ? void 0 : _busyTimesList$data2.sort(function (a, b) {
           return new Date(a.at) - new Date(b.at);
         })),
         _step;
@@ -101,8 +101,8 @@ var AnalyticsBusyTimes = function AnalyticsBusyTimes(props) {
     var _busyTimesList$data3;
     var datasets = [];
     if (busyTimesList !== null && busyTimesList !== void 0 && (_busyTimesList$data3 = busyTimesList.data) !== null && _busyTimesList$data3 !== void 0 && _busyTimesList$data3.busy) {
-      var _busyTimesList$data4, _busyTimesList$data4$;
-      var _iterator2 = _createForOfIteratorHelper(busyTimesList === null || busyTimesList === void 0 ? void 0 : (_busyTimesList$data4 = busyTimesList.data) === null || _busyTimesList$data4 === void 0 ? void 0 : (_busyTimesList$data4$ = _busyTimesList$data4.busy) === null || _busyTimesList$data4$ === void 0 ? void 0 : _busyTimesList$data4$.sort(function (a, b) {
+      var _busyTimesList$data4;
+      var _iterator2 = _createForOfIteratorHelper(busyTimesList === null || busyTimesList === void 0 || (_busyTimesList$data4 = busyTimesList.data) === null || _busyTimesList$data4 === void 0 || (_busyTimesList$data4 = _busyTimesList$data4.busy) === null || _busyTimesList$data4 === void 0 ? void 0 : _busyTimesList$data4.sort(function (a, b) {
           return new Date(a.at) - new Date(b.at);
         })),
         _step2;
@@ -123,13 +123,13 @@ var AnalyticsBusyTimes = function AnalyticsBusyTimes(props) {
     return datasets;
   };
   var generateNotBusyData = function generateNotBusyData() {
-    var _busyTimesList$data5, _busyTimesList$data5$;
+    var _busyTimesList$data5;
     var datasets = [];
-    if (busyTimesList !== null && busyTimesList !== void 0 && (_busyTimesList$data5 = busyTimesList.data) !== null && _busyTimesList$data5 !== void 0 && (_busyTimesList$data5$ = _busyTimesList$data5.not_busy) !== null && _busyTimesList$data5$ !== void 0 && _busyTimesList$data5$.sort(function (a, b) {
+    if (busyTimesList !== null && busyTimesList !== void 0 && (_busyTimesList$data5 = busyTimesList.data) !== null && _busyTimesList$data5 !== void 0 && (_busyTimesList$data5 = _busyTimesList$data5.not_busy) !== null && _busyTimesList$data5 !== void 0 && _busyTimesList$data5.sort(function (a, b) {
       return new Date(a.at) - new Date(b.at);
     })) {
       var _busyTimesList$data6;
-      var _iterator3 = _createForOfIteratorHelper(busyTimesList === null || busyTimesList === void 0 ? void 0 : (_busyTimesList$data6 = busyTimesList.data) === null || _busyTimesList$data6 === void 0 ? void 0 : _busyTimesList$data6.not_busy),
+      var _iterator3 = _createForOfIteratorHelper(busyTimesList === null || busyTimesList === void 0 || (_busyTimesList$data6 = busyTimesList.data) === null || _busyTimesList$data6 === void 0 ? void 0 : _busyTimesList$data6.not_busy),
         _step3;
       try {
         for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
@@ -150,7 +150,7 @@ var AnalyticsBusyTimes = function AnalyticsBusyTimes(props) {
   var downloadCSV = function downloadCSV() {
     var _busyTimesList$data7;
     var csv = "".concat(t('TIME', 'Time'), ", ").concat(t('BUSY', 'Busy'), "(h), ").concat(t('NOT_BUSY', 'Not busy'), "(h)\n");
-    var _iterator4 = _createForOfIteratorHelper(busyTimesList === null || busyTimesList === void 0 ? void 0 : (_busyTimesList$data7 = busyTimesList.data) === null || _busyTimesList$data7 === void 0 ? void 0 : _busyTimesList$data7.busy),
+    var _iterator4 = _createForOfIteratorHelper(busyTimesList === null || busyTimesList === void 0 || (_busyTimesList$data7 = busyTimesList.data) === null || _busyTimesList$data7 === void 0 ? void 0 : _busyTimesList$data7.busy),
       _step4;
     try {
       var _loop = function _loop() {
@@ -160,7 +160,7 @@ var AnalyticsBusyTimes = function AnalyticsBusyTimes(props) {
         csv += "".concat(parseNumber(row.time / 3600, {
           separator: '.'
         }), ",");
-        var notBusy = busyTimesList === null || busyTimesList === void 0 ? void 0 : (_busyTimesList$data8 = busyTimesList.data) === null || _busyTimesList$data8 === void 0 ? void 0 : _busyTimesList$data8.not_busy.find(function (item) {
+        var notBusy = busyTimesList === null || busyTimesList === void 0 || (_busyTimesList$data8 = busyTimesList.data) === null || _busyTimesList$data8 === void 0 ? void 0 : _busyTimesList$data8.not_busy.find(function (item) {
           return item.at === row.at;
         });
         csv += notBusy ? "".concat(parseNumber(notBusy.time / 3600, {
@@ -250,11 +250,11 @@ var AnalyticsBusyTimes = function AnalyticsBusyTimes(props) {
     pointRadius: 0
   };
   var previewChart = function previewChart() {
-    var _busyTimesList$data9, _busyTimesList$data9$, _busyTimesList$data10, _busyTimesList$data11;
-    if ((busyTimesList === null || busyTimesList === void 0 ? void 0 : (_busyTimesList$data9 = busyTimesList.data) === null || _busyTimesList$data9 === void 0 ? void 0 : (_busyTimesList$data9$ = _busyTimesList$data9.busy) === null || _busyTimesList$data9$ === void 0 ? void 0 : _busyTimesList$data9$.length) > 0 || (busyTimesList === null || busyTimesList === void 0 ? void 0 : (_busyTimesList$data10 = busyTimesList.data) === null || _busyTimesList$data10 === void 0 ? void 0 : (_busyTimesList$data11 = _busyTimesList$data10.not_busy) === null || _busyTimesList$data11 === void 0 ? void 0 : _busyTimesList$data11.length) > 0) setIsShowPreview(true);
+    var _busyTimesList$data9, _busyTimesList$data10;
+    if ((busyTimesList === null || busyTimesList === void 0 || (_busyTimesList$data9 = busyTimesList.data) === null || _busyTimesList$data9 === void 0 || (_busyTimesList$data9 = _busyTimesList$data9.busy) === null || _busyTimesList$data9 === void 0 ? void 0 : _busyTimesList$data9.length) > 0 || (busyTimesList === null || busyTimesList === void 0 || (_busyTimesList$data10 = busyTimesList.data) === null || _busyTimesList$data10 === void 0 || (_busyTimesList$data10 = _busyTimesList$data10.not_busy) === null || _busyTimesList$data10 === void 0 ? void 0 : _busyTimesList$data10.length) > 0) setIsShowPreview(true);
   };
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.ChartHeaderContainer, null, /*#__PURE__*/_react.default.createElement("p", null, t('BUSY_TIMES', 'Busy Times')), /*#__PURE__*/_react.default.createElement(_styles.ActionBlock, {
-    disabled: !((busyTimesList === null || busyTimesList === void 0 ? void 0 : (_busyTimesList$data12 = busyTimesList.data) === null || _busyTimesList$data12 === void 0 ? void 0 : (_busyTimesList$data13 = _busyTimesList$data12.busy) === null || _busyTimesList$data13 === void 0 ? void 0 : _busyTimesList$data13.length) > 0 || (busyTimesList === null || busyTimesList === void 0 ? void 0 : (_busyTimesList$data14 = busyTimesList.data) === null || _busyTimesList$data14 === void 0 ? void 0 : (_busyTimesList$data15 = _busyTimesList$data14.not_busy) === null || _busyTimesList$data15 === void 0 ? void 0 : _busyTimesList$data15.length) > 0)
+    disabled: !((busyTimesList === null || busyTimesList === void 0 || (_busyTimesList$data11 = busyTimesList.data) === null || _busyTimesList$data11 === void 0 || (_busyTimesList$data11 = _busyTimesList$data11.busy) === null || _busyTimesList$data11 === void 0 ? void 0 : _busyTimesList$data11.length) > 0 || (busyTimesList === null || busyTimesList === void 0 || (_busyTimesList$data12 = busyTimesList.data) === null || _busyTimesList$data12 === void 0 || (_busyTimesList$data12 = _busyTimesList$data12.not_busy) === null || _busyTimesList$data12 === void 0 ? void 0 : _busyTimesList$data12.length) > 0)
   }, /*#__PURE__*/_react.default.createElement(_BsArrowsAngleExpand.default, {
     onClick: previewChart
   }), /*#__PURE__*/_react.default.createElement(_BsDownload.default, {
@@ -262,7 +262,7 @@ var AnalyticsBusyTimes = function AnalyticsBusyTimes(props) {
     onClick: downloadCSV
   }))), busyTimesList !== null && busyTimesList !== void 0 && busyTimesList.loading ? /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 150
-  }), /*#__PURE__*/_react.default.createElement(_GraphLoadingMessage.GraphLoadingMessage, null)) : (busyTimesList === null || busyTimesList === void 0 ? void 0 : (_busyTimesList$data16 = busyTimesList.data) === null || _busyTimesList$data16 === void 0 ? void 0 : (_busyTimesList$data17 = _busyTimesList$data16.busy) === null || _busyTimesList$data17 === void 0 ? void 0 : _busyTimesList$data17.length) > 0 || (busyTimesList === null || busyTimesList === void 0 ? void 0 : (_busyTimesList$data18 = busyTimesList.data) === null || _busyTimesList$data18 === void 0 ? void 0 : (_busyTimesList$data19 = _busyTimesList$data18.not_busy) === null || _busyTimesList$data19 === void 0 ? void 0 : _busyTimesList$data19.length) > 0 ? /*#__PURE__*/_react.default.createElement(_styles.BarChartWrapper, null, /*#__PURE__*/_react.default.createElement(_reactChartjs.Bar, {
+  }), /*#__PURE__*/_react.default.createElement(_GraphLoadingMessage.GraphLoadingMessage, null)) : (busyTimesList === null || busyTimesList === void 0 || (_busyTimesList$data13 = busyTimesList.data) === null || _busyTimesList$data13 === void 0 || (_busyTimesList$data13 = _busyTimesList$data13.busy) === null || _busyTimesList$data13 === void 0 ? void 0 : _busyTimesList$data13.length) > 0 || (busyTimesList === null || busyTimesList === void 0 || (_busyTimesList$data14 = busyTimesList.data) === null || _busyTimesList$data14 === void 0 || (_busyTimesList$data14 = _busyTimesList$data14.not_busy) === null || _busyTimesList$data14 === void 0 ? void 0 : _busyTimesList$data14.length) > 0 ? /*#__PURE__*/_react.default.createElement(_styles.BarChartWrapper, null, /*#__PURE__*/_react.default.createElement(_reactChartjs.Bar, {
     data: data,
     options: options,
     ref: chartRef
