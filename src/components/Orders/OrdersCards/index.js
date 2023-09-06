@@ -147,7 +147,7 @@ export const OrdersCards = (props) => {
 
   useEffect(() => {
     if (orderList.loading || !selectedOrderCard) return
-    const updatedOrder = orderList?.orders.find(order => order.id === selectedOrderCard?.id)
+    const updatedOrder = orderList?.orders?.[selectedOrderCard?.id] ?? null
     if (updatedOrder) {
       handleUpdateDriverLocation && handleUpdateDriverLocation(updatedOrder)
     }
@@ -209,7 +209,7 @@ export const OrdersCards = (props) => {
           ))
         ) : (
           <>
-            {orderList.orders?.map(order => (
+            {Object.values(orderList.orders)?.map(order => (
               <OrderCard
                 key={order.id}
                 active={selectedOrderCard?.id === order.id}

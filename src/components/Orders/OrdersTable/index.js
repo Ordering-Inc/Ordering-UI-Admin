@@ -258,14 +258,13 @@ export const OrdersTable = memo((props) => {
   }
 
   const handleSelecteAllOrder = () => {
-    const orderIds = orderList.orders?.reduce((ids, order) => [...ids, order.id], [])
+    const orderIds = Object.keys(orderList.orders)
     if (!isAllChecked) {
-      setSelectedOrderIds([...selectedOrderIds, ...orderIds])
+      const updatedSelectedOrderIds = new Set([...selectedOrderIds, ...orderIds])
+      setSelectedOrderIds([...updatedSelectedOrderIds])
     } else {
       const orderIdsToDeleteSet = new Set(orderIds)
-      const updatedSelectedOrderIds = selectedOrderIds.filter((name) => {
-        return !orderIdsToDeleteSet.has(name)
-      })
+      const updatedSelectedOrderIds = selectedOrderIds.filter((id) => !orderIdsToDeleteSet.has(id))
       setSelectedOrderIds(updatedSelectedOrderIds)
     }
   }
@@ -301,7 +300,7 @@ export const OrdersTable = memo((props) => {
 
   useEffect(() => {
     if (orderList.loading) return
-    const orderIds = orderList.orders?.reduce((ids, order) => [...ids, order.id], [])
+    const orderIds = Object.keys(orderList.orders)
     const _isAllChecked = orderIds.every(elem => selectedOrderIds.includes(elem))
     setIsAllChecked(_isAllChecked)
   }, [orderList.orders, selectedOrderIds])
@@ -309,8 +308,8 @@ export const OrdersTable = memo((props) => {
   const handleChangeKeyboard = (evt) => {
     if (evt.code === 'Escape') setIsTourOpen && setIsTourOpen(false)
     if (evt.keyCode === 37 && currentTourStep === 1) handleOpenTour()
-    if (evt.keyCode === 37 && currentTourStep === 4) handleOpenOrderDetail(orderList?.orders[0], true)
-    if (evt.keyCode === 39 && currentTourStep === 0) handleOpenOrderDetail(orderList?.orders[0])
+    if (evt.keyCode === 37 && currentTourStep === 4) handleOpenOrderDetail(Object.values(orderList?.orders)[0], true)
+    if (evt.keyCode === 39 && currentTourStep === 0) handleOpenOrderDetail(Object.values(orderList?.orders)[0])
   }
 
   useEffect(() => {
@@ -336,7 +335,7 @@ export const OrdersTable = memo((props) => {
       >
         <Table
           className='orders_table'
-          noFixedHeader={!orderList.loading && orderList.orders?.length <= 5}
+          noFixedHeader={!orderList.loading && Object.keys(orderList?.orders ?? {}).length <= 5}
         >
           {!isSelectedOrders && (
             <thead>
@@ -621,7 +620,7 @@ export const OrdersTable = memo((props) => {
               </OrderTbody>
             ))
           ) : (
-            orderList.orders.map((order, i) => (
+            Object.values(orderList?.orders ?? {}).map((order, i) => (
               <OrderTbody
                 key={i}
                 className={parseInt(orderDetailId) === order.id ? 'active' : ''}
