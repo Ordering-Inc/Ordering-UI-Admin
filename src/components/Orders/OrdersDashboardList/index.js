@@ -1,7 +1,6 @@
 import React from 'react'
 import { useLocation } from 'react-router-dom'
-// import { DashboardOrdersList as OrdersListController } from 'ordering-components-admin'
-import { DashboardOrdersList as OrdersListController } from './test'
+import { DashboardOrdersList as OrdersListController } from 'ordering-components-admin'
 import { OrdersListing } from '../OrdersListing'
 
 export const OrdersDashboardList = (props) => {
@@ -33,7 +32,8 @@ export const OrdersDashboardList = (props) => {
     isSearchByCustomerPhone: true,
     isSearchByBusinessName: true,
     isSearchByDriverName: true,
-    driverId: props.driverId
+    driverId: props.driverId,
+    orderListView: 'cards'
   }
 
   return (
