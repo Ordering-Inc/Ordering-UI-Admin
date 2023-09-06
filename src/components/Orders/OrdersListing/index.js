@@ -58,18 +58,16 @@ export const OrdersListing = memo((props) => {
   const [, t] = useLanguage()
   const [filterApplied, setFilterApplied] = useState(false)
 
-  const orders = Object.values(orderList?.orders ?? {})
-
   useEffect(() => {
     if (orderList.loading || !messageListView) return
-    if (orders.length === 0 || messageOrder) return
-    handleOpenMessage && handleOpenMessage(orders[0], messageType)
+    if (orderList.orders.length === 0 || messageOrder) return
+    handleOpenMessage && handleOpenMessage(orderList.orders[0], messageType)
   }, [orderList.loading, messageListView])
 
   useEffect(() => {
     if (!isMessagesView || orderList.loading || selectedOrderCard) return
-    if (orders.length > 0) {
-      handleOrderCardClick(orders[0])
+    if (orderList?.orders.length > 0) {
+      handleOrderCardClick(orderList.orders[0])
     }
   }, [isMessagesView, orderList, selectedOrderCard])
 
