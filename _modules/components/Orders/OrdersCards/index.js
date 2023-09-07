@@ -202,14 +202,14 @@ var OrdersCards = function OrdersCards(props) {
   //   return minutes > 0 ? 'in_time' : Math.abs(minutes) <= delayTime ? 'at_risk' : 'delayed'
   // }
 
-  (0, _react.useEffect)(function () {
-    var interval = setInterval(function () {
-      setCurrentTime(Date.now());
-    }, slaSettingTime);
-    return function () {
-      return clearInterval(interval);
-    };
-  }, []);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setCurrentTime(Date.now())
+  //   }, slaSettingTime)
+
+  //   return () => clearInterval(interval)
+  // }, [])
+
   (0, _react.useEffect)(function () {
     if (orderList.loading || !selectedOrderCard) return;
     var updatedOrder = orderList === null || orderList === void 0 ? void 0 : orderList.orders.find(function (order) {
