@@ -137,13 +137,13 @@ export const OrdersCards = (props) => {
   //   return minutes > 0 ? 'in_time' : Math.abs(minutes) <= delayTime ? 'at_risk' : 'delayed'
   // }
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTime(Date.now())
-    }, slaSettingTime)
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setCurrentTime(Date.now())
+  //   }, slaSettingTime)
 
-    return () => clearInterval(interval)
-  }, [])
+  //   return () => clearInterval(interval)
+  // }, [])
 
   useEffect(() => {
     if (orderList.loading || !selectedOrderCard) return
