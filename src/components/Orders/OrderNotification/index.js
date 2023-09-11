@@ -61,7 +61,7 @@ const OrderNotificationUI = (props) => {
 
   const toastNotify = (orderId) => {
     const toastConfigure = {
-      position: 'top-right',
+      position: 'bottom-right',
       autoClose: 3000,
       hideProgressBar: false,
       closeOnClick: true,
