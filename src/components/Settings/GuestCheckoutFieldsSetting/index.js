@@ -62,6 +62,7 @@ const GuestCheckoutFieldsSettingUI = (props) => {
           <div className='name'>{t('FIELD', 'Field')}</div>
           <div className='required'>{t('REQUIRED', 'Required')}</div>
           <div className='status'>{t('STATE', 'Status')}</div>
+          <div className='guest'>{t('REQUIRED_WITH_GUEST', 'Required with guest')}</div>
         </FieldContainer>
         {checkoutFieldsState?.loading ? (
           [...Array(10).keys()].map(i => (
@@ -71,6 +72,9 @@ const GuestCheckoutFieldsSettingUI = (props) => {
                 <Skeleton width={30} style={{ borderRadius: 20 }} />
               </div>
               <div className='status'>
+                <Skeleton width={30} style={{ borderRadius: 20 }} />
+              </div>
+              <div className='guest'>
                 <Skeleton width={30} style={{ borderRadius: 20 }} />
               </div>
             </FieldContainer>
@@ -97,6 +101,12 @@ const GuestCheckoutFieldsSettingUI = (props) => {
                     <Switch
                       defaultChecked={field?.enabled}
                       onChange={(val) => handleChangeCheckoutFieldSetting(field?.validation_field_id, field?.order_type_id, { enabled: val })}
+                    />
+                  </div>
+                  <div className='guest'>
+                    <Switch
+                      defaultChecked={field?.required_with_guest}
+                      onChange={(val) => handleChangeCheckoutFieldSetting(field?.validation_field_id, field?.order_type_id, { required_with_guest: val })}
                     />
                   </div>
                 </FieldContainer>

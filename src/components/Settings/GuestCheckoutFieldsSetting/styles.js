@@ -92,6 +92,13 @@ export const FieldContainer = styled.div`
     justify-content: center;
     align-items: center;
   }
+
+  .guest {
+    width: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `
 
 export const TitleWrapper = styled.div`
