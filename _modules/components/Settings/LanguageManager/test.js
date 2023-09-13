@@ -30,6 +30,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
  * Component to manage LanguageManager behavior without UI component
  */
 var LanguageManager = function LanguageManager(props) {
+  var _ref, _ref2;
   var UIComponent = props.UIComponent;
   var _useApi = (0, _orderingComponentsAdmin.useApi)(),
     _useApi2 = _slicedToArray(_useApi, 2),
@@ -105,8 +106,8 @@ var LanguageManager = function LanguageManager(props) {
   /**
    * Method to update translation from API
    */
-  var updateTranslation = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+  var updateTranslation = function updateTranslation() {
+    return (_ref = _ref || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       var _formState$changes, _formState$changes2, _formState$changes3, changes, _yield$ordering$trans, _yield$ordering$trans2, error, result;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
@@ -153,17 +154,14 @@ var LanguageManager = function LanguageManager(props) {
             return _context.stop();
         }
       }, _callee, null, [[0, 13]]);
-    }));
-    return function updateTranslation() {
-      return _ref.apply(this, arguments);
-    };
-  }();
+    }))).apply(this, arguments);
+  };
 
   /**
    * Method to get translation list from API
    */
-  var getTranslations = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+  var getTranslations = function getTranslations() {
+    return (_ref2 = _ref2 || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
       var _JSON$parse, language, _yield$ordering$trans3, _yield$ordering$trans4, error, result;
       return _regeneratorRuntime().wrap(function _callee2$(_context2) {
         while (1) switch (_context2.prev = _context2.next) {
@@ -215,11 +213,8 @@ var LanguageManager = function LanguageManager(props) {
             return _context2.stop();
         }
       }, _callee2, null, [[2, 16]]);
-    }));
-    return function getTranslations() {
-      return _ref2.apply(this, arguments);
-    };
-  }();
+    }))).apply(this, arguments);
+  };
   (0, _react.useEffect)(function () {
     getTranslations();
   }, []);

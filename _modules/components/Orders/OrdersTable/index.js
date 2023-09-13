@@ -59,6 +59,7 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
     isUseQuery = props.isUseQuery;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
+    dictionary = _useLanguage2[0].dictionary,
     t = _useLanguage2[1];
   var theme = (0, _styledComponents.useTheme)();
   var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
@@ -202,85 +203,35 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
     }
   };
   var getOrderStatus = function getOrderStatus(s) {
-    var _theme$defaultLanguag, _theme$defaultLanguag2, _theme$defaultLanguag3, _theme$defaultLanguag4, _theme$defaultLanguag5, _theme$defaultLanguag6, _theme$defaultLanguag7, _theme$defaultLanguag8, _theme$defaultLanguag9, _theme$defaultLanguag10, _theme$defaultLanguag11, _theme$defaultLanguag12, _theme$defaultLanguag13, _theme$defaultLanguag14, _theme$defaultLanguag15, _theme$defaultLanguag16, _theme$defaultLanguag17, _theme$defaultLanguag18, _theme$defaultLanguag19, _theme$defaultLanguag20, _theme$defaultLanguag21, _theme$defaultLanguag22;
-    var status = parseInt(s);
-    var orderStatus = [{
-      key: 0,
-      value: t('PENDING', (theme === null || theme === void 0 || (_theme$defaultLanguag = theme.defaultLanguages) === null || _theme$defaultLanguag === void 0 ? void 0 : _theme$defaultLanguag.PENDING) || 'Pending')
-    }, {
-      key: 1,
-      value: t('COMPLETED_BY_ADMIN', (theme === null || theme === void 0 || (_theme$defaultLanguag2 = theme.defaultLanguages) === null || _theme$defaultLanguag2 === void 0 ? void 0 : _theme$defaultLanguag2.COMPLETED) || 'Completed by admin')
-    }, {
-      key: 2,
-      value: t('REJECTED', (theme === null || theme === void 0 || (_theme$defaultLanguag3 = theme.defaultLanguages) === null || _theme$defaultLanguag3 === void 0 ? void 0 : _theme$defaultLanguag3.REJECTED) || 'Rejected')
-    }, {
-      key: 3,
-      value: t('ORDER_STATUS_IN_BUSINESS', (theme === null || theme === void 0 || (_theme$defaultLanguag4 = theme.defaultLanguages) === null || _theme$defaultLanguag4 === void 0 ? void 0 : _theme$defaultLanguag4.DRIVER_IN_BUSINESS) || 'Driver arrived to business')
-    }, {
-      key: 4,
-      value: t('PREPARATION_COMPLETED', (theme === null || theme === void 0 || (_theme$defaultLanguag5 = theme.defaultLanguages) === null || _theme$defaultLanguag5 === void 0 ? void 0 : _theme$defaultLanguag5.PREPARATION_COMPLETED) || 'Preparation Completed')
-    }, {
-      key: 5,
-      value: t('REJECTED_BY_BUSINESS', (theme === null || theme === void 0 || (_theme$defaultLanguag6 = theme.defaultLanguages) === null || _theme$defaultLanguag6 === void 0 ? void 0 : _theme$defaultLanguag6.REJECTED_BY_BUSINESS) || 'Rejected by business')
-    }, {
-      key: 6,
-      value: t('REJECTED_BY_DRIVER', (theme === null || theme === void 0 || (_theme$defaultLanguag7 = theme.defaultLanguages) === null || _theme$defaultLanguag7 === void 0 ? void 0 : _theme$defaultLanguag7.REJECTED_BY_DRIVER) || 'Rejected by Driver')
-    }, {
-      key: 7,
-      value: t('ACCEPTED_BY_BUSINESS', (theme === null || theme === void 0 || (_theme$defaultLanguag8 = theme.defaultLanguages) === null || _theme$defaultLanguag8 === void 0 ? void 0 : _theme$defaultLanguag8.ACCEPTED_BY_BUSINESS) || 'Accepted by business')
-    }, {
-      key: 8,
-      value: t('ACCEPTED_BY_DRIVER', (theme === null || theme === void 0 || (_theme$defaultLanguag9 = theme.defaultLanguages) === null || _theme$defaultLanguag9 === void 0 ? void 0 : _theme$defaultLanguag9.ACCEPTED_BY_DRIVER) || 'Accepted by driver')
-    }, {
-      key: 9,
-      value: t('PICK_UP_COMPLETED_BY_DRIVER', (theme === null || theme === void 0 || (_theme$defaultLanguag10 = theme.defaultLanguages) === null || _theme$defaultLanguag10 === void 0 ? void 0 : _theme$defaultLanguag10.PICK_UP_COMPLETED_BY_DRIVER) || 'Pick up completed by driver')
-    }, {
-      key: 10,
-      value: t('PICK_UP_FAILED_BY_DRIVER', (theme === null || theme === void 0 || (_theme$defaultLanguag11 = theme.defaultLanguages) === null || _theme$defaultLanguag11 === void 0 ? void 0 : _theme$defaultLanguag11.PICK_UP_FAILED_BY_DRIVER) || 'Pick up Failed by driver')
-    }, {
-      key: 11,
-      value: t('DELIVERY_COMPLETED_BY_DRIVER', (theme === null || theme === void 0 || (_theme$defaultLanguag12 = theme.defaultLanguages) === null || _theme$defaultLanguag12 === void 0 ? void 0 : _theme$defaultLanguag12.DELIVERY_COMPLETED_BY_DRIVER) || 'Delivery completed by driver')
-    }, {
-      key: 12,
-      value: t('DELIVERY_FAILED_BY_DRIVER', (theme === null || theme === void 0 || (_theme$defaultLanguag13 = theme.defaultLanguages) === null || _theme$defaultLanguag13 === void 0 ? void 0 : _theme$defaultLanguag13.DELIVERY_FAILED_BY_DRIVER) || 'Delivery Failed by driver')
-    }, {
-      key: 13,
-      value: t('PREORDER', (theme === null || theme === void 0 || (_theme$defaultLanguag14 = theme.defaultLanguages) === null || _theme$defaultLanguag14 === void 0 ? void 0 : _theme$defaultLanguag14.PREORDER) || 'PreOrder')
-    }, {
-      key: 14,
-      value: t('ORDER_NOT_READY', (theme === null || theme === void 0 || (_theme$defaultLanguag15 = theme.defaultLanguages) === null || _theme$defaultLanguag15 === void 0 ? void 0 : _theme$defaultLanguag15.ORDER_NOT_READY) || 'Order not ready')
-    }, {
-      key: 15,
-      value: t('ORDER_PICKEDUP_COMPLETED_BY_CUSTOMER', (theme === null || theme === void 0 || (_theme$defaultLanguag16 = theme.defaultLanguages) === null || _theme$defaultLanguag16 === void 0 ? void 0 : _theme$defaultLanguag16.ORDER_PICKEDUP_COMPLETED_BY_CUSTOMER) || 'Order picked up completed by customer')
-    }, {
-      key: 16,
-      value: t('ORDER_STATUS_CANCELLED_BY_CUSTOMER', (theme === null || theme === void 0 || (_theme$defaultLanguag17 = theme.defaultLanguages) === null || _theme$defaultLanguag17 === void 0 ? void 0 : _theme$defaultLanguag17.ORDER_STATUS_CANCELLED_BY_CUSTOMER) || 'Order cancelled by customer')
-    }, {
-      key: 17,
-      value: t('ORDER_NOT_PICKEDUP_BY_CUSTOMER', (theme === null || theme === void 0 || (_theme$defaultLanguag18 = theme.defaultLanguages) === null || _theme$defaultLanguag18 === void 0 ? void 0 : _theme$defaultLanguag18.ORDER_NOT_PICKEDUP_BY_CUSTOMER) || 'Order not picked up by customer')
-    }, {
-      key: 18,
-      value: t('ORDER_DRIVER_ALMOST_ARRIVED_BUSINESS', (theme === null || theme === void 0 || (_theme$defaultLanguag19 = theme.defaultLanguages) === null || _theme$defaultLanguag19 === void 0 ? void 0 : _theme$defaultLanguag19.ORDER_DRIVER_ALMOST_ARRIVED_BUSINESS) || 'Driver almost arrived to business')
-    }, {
-      key: 19,
-      value: t('ORDER_DRIVER_ALMOST_ARRIVED_CUSTOMER', (theme === null || theme === void 0 || (_theme$defaultLanguag20 = theme.defaultLanguages) === null || _theme$defaultLanguag20 === void 0 ? void 0 : _theme$defaultLanguag20.ORDER_DRIVER_ALMOST_ARRIVED_CUSTOMER) || 'Driver almost arrived to customer')
-    }, {
-      key: 20,
-      value: t('ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS', (theme === null || theme === void 0 || (_theme$defaultLanguag21 = theme.defaultLanguages) === null || _theme$defaultLanguag21 === void 0 ? void 0 : _theme$defaultLanguag21.ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS) || 'Customer almost arrived to business')
-    }, {
-      key: 21,
-      value: t('ORDER_CUSTOMER_ARRIVED_BUSINESS', (theme === null || theme === void 0 || (_theme$defaultLanguag22 = theme.defaultLanguages) === null || _theme$defaultLanguag22 === void 0 ? void 0 : _theme$defaultLanguag22.ORDER_CUSTOMER_ARRIVED_BUSINESS) || 'Customer arrived to business')
-    }, {
-      key: 22,
-      value: t('ORDER_LOOKING_FOR_DRIVER', 'Looking for driver')
-    }, {
-      key: 23,
-      value: t('ORDER_DRIVER_ON_WAY', 'Driver on way')
-    }];
-    var objectStatus = orderStatus.find(function (o) {
-      return o.key === status;
-    });
-    return objectStatus && objectStatus;
+    var _dictionary$PENDING, _dictionary$COMPLETED, _dictionary$REJECTED, _dictionary$ORDER_STA, _dictionary$PREPARATI, _dictionary$REJECTED_, _dictionary$REJECTED_2, _dictionary$ACCEPTED_, _dictionary$ACCEPTED_2, _dictionary$PICK_UP_C, _dictionary$PICK_UP_F, _dictionary$DELIVERY_, _dictionary$DELIVERY_2, _dictionary$PREORDER, _dictionary$ORDER_NOT, _dictionary$ORDER_PIC, _dictionary$ORDER_STA2, _dictionary$ORDER_NOT2, _dictionary$ORDER_DRI, _dictionary$ORDER_DRI2, _dictionary$ORDER_CUS, _dictionary$ORDER_CUS2, _dictionary$ORDER_LOO, _dictionary$ORDER_DRI3, _orderStatus$Number;
+    if (!dictionary) return s;
+    var orderStatus = {
+      0: (_dictionary$PENDING = dictionary === null || dictionary === void 0 ? void 0 : dictionary.PENDING) !== null && _dictionary$PENDING !== void 0 ? _dictionary$PENDING : 'Pending',
+      1: (_dictionary$COMPLETED = dictionary === null || dictionary === void 0 ? void 0 : dictionary.COMPLETED_BY_ADMIN) !== null && _dictionary$COMPLETED !== void 0 ? _dictionary$COMPLETED : 'Completed by admin',
+      2: (_dictionary$REJECTED = dictionary === null || dictionary === void 0 ? void 0 : dictionary.REJECTED) !== null && _dictionary$REJECTED !== void 0 ? _dictionary$REJECTED : 'Rejected',
+      3: (_dictionary$ORDER_STA = dictionary === null || dictionary === void 0 ? void 0 : dictionary.ORDER_STATUS_IN_BUSINESS) !== null && _dictionary$ORDER_STA !== void 0 ? _dictionary$ORDER_STA : 'Driver arrived to business',
+      4: (_dictionary$PREPARATI = dictionary === null || dictionary === void 0 ? void 0 : dictionary.PREPARATION_COMPLETED) !== null && _dictionary$PREPARATI !== void 0 ? _dictionary$PREPARATI : 'Preparation Completed',
+      5: (_dictionary$REJECTED_ = dictionary === null || dictionary === void 0 ? void 0 : dictionary.REJECTED_BY_BUSINESS) !== null && _dictionary$REJECTED_ !== void 0 ? _dictionary$REJECTED_ : 'Rejected by business',
+      6: (_dictionary$REJECTED_2 = dictionary === null || dictionary === void 0 ? void 0 : dictionary.REJECTED_BY_DRIVER) !== null && _dictionary$REJECTED_2 !== void 0 ? _dictionary$REJECTED_2 : 'Rejected by Driver',
+      7: (_dictionary$ACCEPTED_ = dictionary === null || dictionary === void 0 ? void 0 : dictionary.ACCEPTED_BY_BUSINESS) !== null && _dictionary$ACCEPTED_ !== void 0 ? _dictionary$ACCEPTED_ : 'Accepted by business',
+      8: (_dictionary$ACCEPTED_2 = dictionary === null || dictionary === void 0 ? void 0 : dictionary.ACCEPTED_BY_DRIVER) !== null && _dictionary$ACCEPTED_2 !== void 0 ? _dictionary$ACCEPTED_2 : 'Accepted by driver',
+      9: (_dictionary$PICK_UP_C = dictionary === null || dictionary === void 0 ? void 0 : dictionary.PICK_UP_COMPLETED_BY_DRIVER) !== null && _dictionary$PICK_UP_C !== void 0 ? _dictionary$PICK_UP_C : 'Pick up completed by driver',
+      10: (_dictionary$PICK_UP_F = dictionary === null || dictionary === void 0 ? void 0 : dictionary.PICK_UP_FAILED_BY_DRIVER) !== null && _dictionary$PICK_UP_F !== void 0 ? _dictionary$PICK_UP_F : 'Pick up Failed by driver',
+      11: (_dictionary$DELIVERY_ = dictionary === null || dictionary === void 0 ? void 0 : dictionary.DELIVERY_COMPLETED_BY_DRIVER) !== null && _dictionary$DELIVERY_ !== void 0 ? _dictionary$DELIVERY_ : 'Delivery completed by driver',
+      12: (_dictionary$DELIVERY_2 = dictionary === null || dictionary === void 0 ? void 0 : dictionary.DELIVERY_FAILED_BY_DRIVER) !== null && _dictionary$DELIVERY_2 !== void 0 ? _dictionary$DELIVERY_2 : 'Delivery Failed by driver',
+      13: (_dictionary$PREORDER = dictionary === null || dictionary === void 0 ? void 0 : dictionary.PREORDER) !== null && _dictionary$PREORDER !== void 0 ? _dictionary$PREORDER : 'PreOrder',
+      14: (_dictionary$ORDER_NOT = dictionary === null || dictionary === void 0 ? void 0 : dictionary.ORDER_NOT_READY) !== null && _dictionary$ORDER_NOT !== void 0 ? _dictionary$ORDER_NOT : 'Order not ready',
+      15: (_dictionary$ORDER_PIC = dictionary === null || dictionary === void 0 ? void 0 : dictionary.ORDER_PICKEDUP_COMPLETED_BY_CUSTOMER) !== null && _dictionary$ORDER_PIC !== void 0 ? _dictionary$ORDER_PIC : 'Order picked up completed by customer',
+      16: (_dictionary$ORDER_STA2 = dictionary === null || dictionary === void 0 ? void 0 : dictionary.ORDER_STATUS_CANCELLED_BY_CUSTOMER) !== null && _dictionary$ORDER_STA2 !== void 0 ? _dictionary$ORDER_STA2 : 'Order cancelled by customer',
+      17: (_dictionary$ORDER_NOT2 = dictionary === null || dictionary === void 0 ? void 0 : dictionary.ORDER_NOT_PICKEDUP_BY_CUSTOMER) !== null && _dictionary$ORDER_NOT2 !== void 0 ? _dictionary$ORDER_NOT2 : 'Order not picked up by customer',
+      18: (_dictionary$ORDER_DRI = dictionary === null || dictionary === void 0 ? void 0 : dictionary.ORDER_DRIVER_ALMOST_ARRIVED_BUSINESS) !== null && _dictionary$ORDER_DRI !== void 0 ? _dictionary$ORDER_DRI : 'Driver almost arrived to business',
+      19: (_dictionary$ORDER_DRI2 = dictionary === null || dictionary === void 0 ? void 0 : dictionary.ORDER_DRIVER_ALMOST_ARRIVED_CUSTOMER) !== null && _dictionary$ORDER_DRI2 !== void 0 ? _dictionary$ORDER_DRI2 : 'Driver almost arrived to customer',
+      20: (_dictionary$ORDER_CUS = dictionary === null || dictionary === void 0 ? void 0 : dictionary.ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS) !== null && _dictionary$ORDER_CUS !== void 0 ? _dictionary$ORDER_CUS : 'Customer almost arrived to business',
+      21: (_dictionary$ORDER_CUS2 = dictionary === null || dictionary === void 0 ? void 0 : dictionary.ORDER_CUSTOMER_ARRIVED_BUSINESS) !== null && _dictionary$ORDER_CUS2 !== void 0 ? _dictionary$ORDER_CUS2 : 'Customer arrived to business',
+      22: (_dictionary$ORDER_LOO = dictionary === null || dictionary === void 0 ? void 0 : dictionary.ORDER_LOOKING_FOR_DRIVER) !== null && _dictionary$ORDER_LOO !== void 0 ? _dictionary$ORDER_LOO : 'Looking for driver',
+      23: (_dictionary$ORDER_DRI3 = dictionary === null || dictionary === void 0 ? void 0 : dictionary.ORDER_DRIVER_ON_WAY) !== null && _dictionary$ORDER_DRI3 !== void 0 ? _dictionary$ORDER_DRI3 : 'Driver on way'
+    };
+    return (_orderStatus$Number = orderStatus === null || orderStatus === void 0 ? void 0 : orderStatus[Number(s)]) !== null && _orderStatus$Number !== void 0 ? _orderStatus$Number : s;
   };
   var handleChangeAllowColumns = function handleChangeAllowColumns(type) {
     var _column = allowColumns[type];
@@ -647,16 +598,16 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
     })), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100
     }))))));
-  }) : orderList.orders.map(function (order, i) {
-    return /*#__PURE__*/_react.default.createElement(_styles.OrderTbody, {
+  }) : /*#__PURE__*/_react.default.createElement(_styles.OrderTbody, null, orderList.orders.map(function (order, i) {
+    return /*#__PURE__*/_react.default.createElement("tr", {
       key: i,
       className: parseInt(orderDetailId) === order.id ? 'active' : '',
+      "data-tour": i === 0 ? 'tour_start' : '',
+      "data-status": isEnabledRowInColor && (order === null || order === void 0 ? void 0 : order.time_status),
       onClick: function onClick(e) {
         return handleClickOrder(order, e);
-      },
-      "data-tour": i === 0 ? 'tour_start' : '',
-      "data-status": isEnabledRowInColor && (order === null || order === void 0 ? void 0 : order.time_status)
-    }, /*#__PURE__*/_react.default.createElement("tr", null, Object.keys(allowColumns).filter(function (col) {
+      }
+    }, Object.keys(allowColumns).filter(function (col) {
       var _allowColumns$col7;
       return (_allowColumns$col7 = allowColumns[col]) === null || _allowColumns$col7 === void 0 ? void 0 : _allowColumns$col7.visable;
     }).sort(function (col1, col2) {
@@ -700,13 +651,12 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
         })))));
       }
       if (column === 'status' && !isSelectedOrders) {
-        var _getOrderStatus;
         return /*#__PURE__*/_react.default.createElement("td", {
           className: "statusInfo",
           key: "statusInfo".concat(i, "-").concat(index)
         }, /*#__PURE__*/_react.default.createElement(_styles.StatusInfo, null, /*#__PURE__*/_react.default.createElement("p", {
           className: "bold"
-        }, (_getOrderStatus = getOrderStatus(order.status)) === null || _getOrderStatus === void 0 ? void 0 : _getOrderStatus.value)));
+        }, getOrderStatus(order.status))));
       }
       if (column === 'cartGroupId') {
         return /*#__PURE__*/_react.default.createElement("td", {
@@ -824,8 +774,8 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
           utc: false
         }))));
       }
-    })));
-  }))), pagination && /*#__PURE__*/_react.default.createElement(_styles.WrapperPagination, null, /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
+    }));
+  })))), pagination && /*#__PURE__*/_react.default.createElement(_styles.WrapperPagination, null, /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
     currentPage: pagination.currentPage,
     totalPages: Math.ceil((pagination === null || pagination === void 0 ? void 0 : pagination.total) / pagination.pageSize),
     handleChangePage: handleChangePage,
