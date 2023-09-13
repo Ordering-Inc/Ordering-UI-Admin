@@ -34,7 +34,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var SidebarMenuUI = function SidebarMenuUI(props) {
-  var _configs$powered_by_o, _configs$appointments, _sessionState$user, _sessionState$user2, _sessionState$user3, _sessionState$user4, _sessionState$user5, _sessionState$user6, _sessionState$user7, _configs$dashboard_lo, _theme$images, _sessionState$user8, _sessionState$user9, _sessionState$user10, _sessionState$user11, _sessionState$user16, _sessionState$user17, _sessionState$user18, _sessionState$user19, _sessionState$user21, _sessionState$user22, _sessionState$user23, _sessionState$user24, _sessionState$user25, _sessionState$user26, _sessionState$user27, _sessionState$user28, _sessionState$user29, _sessionState$user30, _sessionState$user31, _sessionState$user32, _sessionState$user33, _sessionState$user34, _sessionState$user35, _sessionState$user36, _sessionState$user37, _sessionState$user38, _sessionState$user39, _sessionState$user40;
+  var _configs$powered_by_o, _configs$appointments, _sessionState$user, _sessionState$user2, _sessionState$user3, _sessionState$user4, _sessionState$user5, _sessionState$user6, _sessionState$user7, _ref, _configs$dashboard_lo, _theme$images, _sessionState$user8, _sessionState$user9, _sessionState$user10, _sessionState$user11, _sessionState$user16, _sessionState$user17, _sessionState$user18, _sessionState$user19, _sessionState$user21, _sessionState$user22, _sessionState$user23, _sessionState$user24, _sessionState$user25, _sessionState$user26, _sessionState$user27, _sessionState$user28, _sessionState$user29, _sessionState$user30, _sessionState$user31, _sessionState$user32, _sessionState$user33, _sessionState$user34, _sessionState$user35, _sessionState$user36, _sessionState$user37, _sessionState$user38, _sessionState$user39, _sessionState$user40;
   var getBillingToken = props.getBillingToken,
     billingUrl = props.billingUrl;
   var location = (0, _reactRouterDom.useLocation)();
@@ -337,8 +337,8 @@ var SidebarMenuUI = function SidebarMenuUI(props) {
       handleMenuCollapse(true);
     }
   }, [windowSize.width]);
-  var handleClickBilling = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+  var handleClickBilling = function handleClickBilling() {
+    return (_ref = _ref || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       var _billingState$result;
       var billingState, _billingState$result2;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -356,11 +356,8 @@ var SidebarMenuUI = function SidebarMenuUI(props) {
             return _context.stop();
         }
       }, _callee);
-    }));
-    return function handleClickBilling() {
-      return _ref.apply(this, arguments);
-    };
-  }();
+    }))).apply(this, arguments);
+  };
   (0, _react.useEffect)(function () {
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
       setShowMessage(true);

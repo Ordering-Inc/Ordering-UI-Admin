@@ -34,6 +34,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessServiceProfessionalDetail = function BusinessServiceProfessionalDetail(props) {
+  var _ref;
   var open = props.open,
     _onClose = props.onClose,
     professional = props.professional,
@@ -73,16 +74,17 @@ var BusinessServiceProfessionalDetail = function BusinessServiceProfessionalDeta
     setIsMenuOpen(value);
     document.getElementById('business_service').style.width = value ? width > 1000 ? '500px' : '100%' : '0';
   };
-  var onDeleteCustomer = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+  var onDeleteCustomer = function onDeleteCustomer() {
+    return (_ref = _ref || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+      var _handleOnAccept;
       return _regeneratorRuntime().wrap(function _callee2$(_context2) {
         while (1) switch (_context2.prev = _context2.next) {
           case 0:
             setConfirm({
               open: true,
               content: t('QUESTION_DELETE_USER', 'Are you sure that you want to delete this user?'),
-              handleOnAccept: function () {
-                var _handleOnAccept = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+              handleOnAccept: function handleOnAccept() {
+                return (_handleOnAccept = _handleOnAccept || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
                   return _regeneratorRuntime().wrap(function _callee$(_context) {
                     while (1) switch (_context.prev = _context.next) {
                       case 0:
@@ -98,23 +100,16 @@ var BusinessServiceProfessionalDetail = function BusinessServiceProfessionalDeta
                         return _context.stop();
                     }
                   }, _callee);
-                }));
-                function handleOnAccept() {
-                  return _handleOnAccept.apply(this, arguments);
-                }
-                return handleOnAccept;
-              }()
+                }))).apply(this, arguments);
+              }
             });
           case 1:
           case "end":
             return _context2.stop();
         }
       }, _callee2);
-    }));
-    return function onDeleteCustomer() {
-      return _ref.apply(this, arguments);
-    };
-  }();
+    }))).apply(this, arguments);
+  };
   var closeAlert = function closeAlert() {
     setAlertState({
       open: false,

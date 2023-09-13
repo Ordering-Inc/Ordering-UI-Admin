@@ -35,6 +35,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var DeliveryUsersListingUI = function DeliveryUsersListingUI(props) {
+  var _ref, _ref2;
   var defaultUserTypesSelected = props.defaultUserTypesSelected,
     disabledActiveStateCondition = props.disabledActiveStateCondition,
     headerTitle = props.headerTitle,
@@ -163,8 +164,8 @@ var DeliveryUsersListingUI = function DeliveryUsersListingUI(props) {
       setIsTourOpen(false);
     }
   };
-  var handleSetStorage = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+  var handleSetStorage = function handleSetStorage() {
+    return (_ref = _ref || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       var preVisited, visited;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
@@ -191,13 +192,10 @@ var DeliveryUsersListingUI = function DeliveryUsersListingUI(props) {
             return _context.stop();
         }
       }, _callee);
-    }));
-    return function handleSetStorage() {
-      return _ref.apply(this, arguments);
-    };
-  }();
-  var getDataFromStorage = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+    }))).apply(this, arguments);
+  };
+  var getDataFromStorage = function getDataFromStorage() {
+    return (_ref2 = _ref2 || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
       var value;
       return _regeneratorRuntime().wrap(function _callee2$(_context2) {
         while (1) switch (_context2.prev = _context2.next) {
@@ -215,11 +213,8 @@ var DeliveryUsersListingUI = function DeliveryUsersListingUI(props) {
             return _context2.stop();
         }
       }, _callee2);
-    }));
-    return function getDataFromStorage() {
-      return _ref2.apply(this, arguments);
-    };
-  }();
+    }))).apply(this, arguments);
+  };
   (0, _react.useEffect)(function () {
     if (usersList.loading) return;
     handleSetStorage();

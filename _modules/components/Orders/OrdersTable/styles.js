@@ -45,7 +45,7 @@ var Table = _styledComponents.default.table(_templateObject5 || (_templateObject
   return (_props$theme$colors4 = props.theme.colors) === null || _props$theme$colors4 === void 0 ? void 0 : _props$theme$colors4.headingColor;
 });
 exports.Table = Table;
-var OrderTbody = _styledComponents.default.tbody(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  border-bottom: 1px solid ", ";\n  cursor: pointer;\n\n  &[data-status=\"delayed\"] {\n    background-color: ", ";\n    td {\n      border-top: 1px solid ", " !important;\n      border-bottom: 1px solid ", " !important;\n    }\n  }\n  &[data-status=\"at_risk\"] {\n    background-color: ", ";\n    td {\n      border-top: 1px solid ", " !important;\n      border-bottom: 1px solid ", " !important;\n    }\n  }\n  &:hover {\n    background-color: ", ";\n  }\n  &.active {\n    background-color: ", ";\n    td {\n      border-top: 1px solid ", " !important;\n      border-bottom: 1px solid ", " !important;\n    }\n  }\n"])), function (props) {
+var OrderTbody = _styledComponents.default.tbody(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  tr {\n    border-bottom: 1px solid ", ";\n    cursor: pointer;\n\n    &[data-status=\"delayed\"] {\n      background-color: ", ";\n      td {\n        border-top: 1px solid ", " !important;\n        border-bottom: 1px solid ", " !important;\n      }\n    }\n    &[data-status=\"at_risk\"] {\n      background-color: ", ";\n      td {\n        border-top: 1px solid ", " !important;\n        border-bottom: 1px solid ", " !important;\n      }\n    }\n    &:hover {\n      background-color: ", ";\n    }\n    &.active {\n      background-color: ", ";\n      td {\n        border-top: 1px solid ", " !important;\n        border-bottom: 1px solid ", " !important;\n      }\n    }\n  }\n"])), function (props) {
   return props.theme.colors.borderColor;
 }, function (props) {
   return props.theme.colors.danger100;
@@ -184,7 +184,7 @@ var Timestatus = _styledComponents.default.div(_templateObject45 || (_templateOb
   return timeState === 'delayed' && (0, _styledComponents.css)(_templateObject48 || (_templateObject48 = _taggedTemplateLiteral(["\n    background-color: #E63757;\n  "])));
 });
 exports.Timestatus = Timestatus;
-var Timer = _styledComponents.default.div(_templateObject49 || (_templateObject49 = _taggedTemplateLiteral(["\n  min-width: 65px;\n  p {\n    margin: 0px;\n    color: ", ";\n    font-size: 12px;\n  }\n\n  .bold {\n    font-size: 14px;\n    font-weight: 600;\n    color: ", ";\n  }\n\n  .in_time{\n    color: #00D27A;\n  }\n\n  .at_risk {\n    color: #FFC700;\n  }\n  \n  .delayed {\n    color: #E63757;\n  }\n"])), function (props) {
+var Timer = _styledComponents.default.div(_templateObject49 || (_templateObject49 = _taggedTemplateLiteral(["\n  min-width: 65px;\n  p {\n    margin: 0px;\n    color: ", ";\n    font-size: 12px;\n  }\n\n  .bold {\n    font-size: 14px;\n    font-weight: 600;\n    color: ", ";\n  }\n\n  .in_time{\n    color: #00D27A;\n  }\n\n  .at_risk {\n    color: #FFC700;\n  }\n\n  .delayed {\n    color: #E63757;\n  }\n"])), function (props) {
   var _props$theme$colors8;
   return (_props$theme$colors8 = props.theme.colors) === null || _props$theme$colors8 === void 0 ? void 0 : _props$theme$colors8.lightGray;
 }, function (props) {
