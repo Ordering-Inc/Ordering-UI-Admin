@@ -38,7 +38,7 @@ export const OrdersCards = (props) => {
     isDelivery,
     isUseQuery
   } = props
-  const [, t] = useLanguage()
+  const [{ dictionary }, t] = useLanguage()
   const theme = useTheme()
   const { width } = useWindowSize()
   const [{ parseDate, optimizeImage }] = useUtils()
@@ -68,37 +68,36 @@ export const OrdersCards = (props) => {
   }
 
   const getOrderStatus = (s) => {
-    const status = parseInt(s)
-    const orderStatus = [
-      { key: 0, value: t('PENDING', theme?.defaultLanguages?.PENDING || 'Pending') },
-      { key: 1, value: t('COMPLETED', theme?.defaultLanguages?.COMPLETED || 'Completed') },
-      { key: 2, value: t('REJECTED', theme?.defaultLanguages?.REJECTED || 'Rejected') },
-      { key: 3, value: t('DRIVER_IN_BUSINESS', theme?.defaultLanguages?.DRIVER_IN_BUSINESS || 'Driver in business') },
-      { key: 4, value: t('PREPARATION_COMPLETED', theme?.defaultLanguages?.PREPARATION_COMPLETED || 'Preparation Completed') },
-      { key: 5, value: t('REJECTED_BY_BUSINESS', theme?.defaultLanguages?.REJECTED_BY_BUSINESS || 'Rejected by business') },
-      { key: 6, value: t('REJECTED_BY_DRIVER', theme?.defaultLanguages?.REJECTED_BY_DRIVER || 'Rejected by Driver') },
-      { key: 7, value: t('ACCEPTED_BY_BUSINESS', theme?.defaultLanguages?.ACCEPTED_BY_BUSINESS || 'Accepted by business') },
-      { key: 8, value: t('ACCEPTED_BY_DRIVER', theme?.defaultLanguages?.ACCEPTED_BY_DRIVER || 'Accepted by driver') },
-      { key: 9, value: t('PICK_UP_COMPLETED_BY_DRIVER', theme?.defaultLanguages?.PICK_UP_COMPLETED_BY_DRIVER || 'Pick up completed by driver') },
-      { key: 10, value: t('PICK_UP_FAILED_BY_DRIVER', theme?.defaultLanguages?.PICK_UP_FAILED_BY_DRIVER || 'Pick up Failed by driver') },
-      { key: 11, value: t('DELIVERY_COMPLETED_BY_DRIVER', theme?.defaultLanguages?.DELIVERY_COMPLETED_BY_DRIVER || 'Delivery completed by driver') },
-      { key: 12, value: t('DELIVERY_FAILED_BY_DRIVER', theme?.defaultLanguages?.DELIVERY_FAILED_BY_DRIVER || 'Delivery Failed by driver') },
-      { key: 13, value: t('PREORDER', theme?.defaultLanguages?.PREORDER || 'PreOrder') },
-      { key: 14, value: t('ORDER_NOT_READY', theme?.defaultLanguages?.ORDER_NOT_READY || 'Order not ready') },
-      { key: 15, value: t('ORDER_PICKEDUP_COMPLETED_BY_CUSTOMER', theme?.defaultLanguages?.ORDER_PICKEDUP_COMPLETED_BY_CUSTOMER || 'Order picked up completed by customer') },
-      { key: 16, value: t('ORDER_STATUS_CANCELLED_BY_CUSTOMER', theme?.defaultLanguages?.ORDER_STATUS_CANCELLED_BY_CUSTOMER || 'Order cancelled by customer') },
-      { key: 17, value: t('ORDER_NOT_PICKEDUP_BY_CUSTOMER', theme?.defaultLanguages?.ORDER_NOT_PICKEDUP_BY_CUSTOMER || 'Order not picked up by customer') },
-      { key: 18, value: t('ORDER_DRIVER_ALMOST_ARRIVED_BUSINESS', theme?.defaultLanguages?.ORDER_DRIVER_ALMOST_ARRIVED_BUSINESS || 'Driver almost arrived to business') },
-      { key: 19, value: t('ORDER_DRIVER_ALMOST_ARRIVED_CUSTOMER', theme?.defaultLanguages?.ORDER_DRIVER_ALMOST_ARRIVED_CUSTOMER || 'Driver almost arrived to customer') },
-      { key: 20, value: t('ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS', theme?.defaultLanguages?.ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS || 'Customer almost arrived to business') },
-      { key: 21, value: t('ORDER_CUSTOMER_ARRIVED_BUSINESS', theme?.defaultLanguages?.ORDER_CUSTOMER_ARRIVED_BUSINESS || 'Customer arrived to business') },
-      { key: 22, value: t('ORDER_LOOKING_FOR_DRIVER', 'Looking for driver') },
-      { key: 23, value: t('ORDER_DRIVER_ON_WAY', 'Driver on way') }
-    ]
+    if (!dictionary) return s
 
-    const objectStatus = orderStatus.find((o) => o.key === status)
+    const orderStatus = {
+      0: dictionary?.PENDING ?? 'Pending',
+      1: dictionary?.COMPLETED_BY_ADMIN ?? 'Completed by admin',
+      2: dictionary?.REJECTED ?? 'Rejected',
+      3: dictionary?.ORDER_STATUS_IN_BUSINESS ?? 'Driver arrived to business',
+      4: dictionary?.PREPARATION_COMPLETED ?? 'Preparation Completed',
+      5: dictionary?.REJECTED_BY_BUSINESS ?? 'Rejected by business',
+      6: dictionary?.REJECTED_BY_DRIVER ?? 'Rejected by Driver',
+      7: dictionary?.ACCEPTED_BY_BUSINESS ?? 'Accepted by business',
+      8: dictionary?.ACCEPTED_BY_DRIVER ?? 'Accepted by driver',
+      9: dictionary?.PICK_UP_COMPLETED_BY_DRIVER ?? 'Pick up completed by driver',
+      10: dictionary?.PICK_UP_FAILED_BY_DRIVER ?? 'Pick up Failed by driver',
+      11: dictionary?.DELIVERY_COMPLETED_BY_DRIVER ?? 'Delivery completed by driver',
+      12: dictionary?.DELIVERY_FAILED_BY_DRIVER ?? 'Delivery Failed by driver',
+      13: dictionary?.PREORDER ?? 'PreOrder',
+      14: dictionary?.ORDER_NOT_READY ?? 'Order not ready',
+      15: dictionary?.ORDER_PICKEDUP_COMPLETED_BY_CUSTOMER ?? 'Order picked up completed by customer',
+      16: dictionary?.ORDER_STATUS_CANCELLED_BY_CUSTOMER ?? 'Order cancelled by customer',
+      17: dictionary?.ORDER_NOT_PICKEDUP_BY_CUSTOMER ?? 'Order not picked up by customer',
+      18: dictionary?.ORDER_DRIVER_ALMOST_ARRIVED_BUSINESS ?? 'Driver almost arrived to business',
+      19: dictionary?.ORDER_DRIVER_ALMOST_ARRIVED_CUSTOMER ?? 'Driver almost arrived to customer',
+      20: dictionary?.ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS ?? 'Customer almost arrived to business',
+      21: dictionary?.ORDER_CUSTOMER_ARRIVED_BUSINESS ?? 'Customer arrived to business',
+      22: dictionary?.ORDER_LOOKING_FOR_DRIVER ?? 'Looking for driver',
+      23: dictionary?.ORDER_DRIVER_ON_WAY ?? 'Driver on way'
+    }
 
-    return objectStatus && objectStatus
+    return orderStatus?.[Number(s)] ?? s
   }
 
   const getDelayMinutes = (order) => {
@@ -220,7 +219,7 @@ export const OrdersCards = (props) => {
                     <h2>
                       <span>{t('INVOICE_ORDER_NO', 'Order No.')} {(showExternalId && !!order?.external_id) ? order.external_id : order.id}</span>
                     </h2>
-                    <p>{getOrderStatus(order.status)?.value}</p>
+                    <p>{getOrderStatus(order.status)}</p>
                     <div>
                       <p>
                         {
