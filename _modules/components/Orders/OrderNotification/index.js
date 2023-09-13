@@ -33,7 +33,7 @@ function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" !=
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 _reactToastify.toast.configure();
 var OrderNotificationUI = function OrderNotificationUI(props) {
-  var _configState$configs4;
+  var _configState$configs7;
   var isOnlyDelivery = props.isOnlyDelivery,
     customerId = props.customerId;
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
@@ -76,13 +76,16 @@ var OrderNotificationUI = function OrderNotificationUI(props) {
     if (isOnlyDelivery && (order === null || order === void 0 ? void 0 : order.delivery_type) !== 1) return;
     var _registerOrderIds = _toConsumableArray(registerOrderIds);
     if (!_registerOrderIds.includes(order.id)) {
-      var _configState$configs;
+      var _configState$configs, _configState$configs2;
       _registerOrderIds.push(order.id);
       setRegisterOrderIds(_registerOrderIds);
-      if ((configState === null || configState === void 0 || (_configState$configs = configState.configs) === null || _configState$configs === void 0 || (_configState$configs = _configState$configs.notification_toast) === null || _configState$configs === void 0 ? void 0 : _configState$configs.value) === 'true') {
-        toastNotify(order.id);
-      } else {
-        setNotificationModalOpen(true);
+      if (!(configState !== null && configState !== void 0 && (_configState$configs = configState.configs) !== null && _configState$configs !== void 0 && _configState$configs.notification_in_app_enabled) || (configState === null || configState === void 0 || (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 || (_configState$configs2 = _configState$configs2.notification_in_app_enabled) === null || _configState$configs2 === void 0 ? void 0 : _configState$configs2.value) === '1') {
+        var _configState$configs3;
+        if ((configState === null || configState === void 0 || (_configState$configs3 = configState.configs) === null || _configState$configs3 === void 0 || (_configState$configs3 = _configState$configs3.notification_toast) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value) === 'true') {
+          toastNotify(order.id);
+        } else {
+          setNotificationModalOpen(true);
+        }
       }
     }
   };
@@ -91,9 +94,10 @@ var OrderNotificationUI = function OrderNotificationUI(props) {
     setRegisterOrderIds([]);
   };
   var toastNotify = function toastNotify(orderId) {
-    var _configState$configs2;
+    var _configState$configs$, _configState$configs4, _configState$configs5;
+    var positionConfig = (_configState$configs$ = configState === null || configState === void 0 || (_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 || (_configState$configs4 = _configState$configs4.notification_in_app_position) === null || _configState$configs4 === void 0 ? void 0 : _configState$configs4.value) !== null && _configState$configs$ !== void 0 ? _configState$configs$ : 'bottom-right';
     var toastConfigure = {
-      position: 'bottom-right',
+      position: positionConfig,
       autoClose: 3000,
       hideProgressBar: false,
       closeOnClick: true,
@@ -108,7 +112,7 @@ var OrderNotificationUI = function OrderNotificationUI(props) {
       }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("span", null, t('WEB_DASHBOARD_APPNAME', 'Ordering Dashboard')), /*#__PURE__*/_react.default.createElement("span", null, t('ORDER_N_ORDERED', 'Order #_order_id_ has been ordered.').replace('_order_id_', "".concat(orderId)))));
     };
     (0, _reactToastify.toast)(content, toastConfigure);
-    if (!(configState !== null && configState !== void 0 && (_configState$configs2 = configState.configs) !== null && _configState$configs2 !== void 0 && _configState$configs2.disable_sound_notification)) {
+    if (!(configState !== null && configState !== void 0 && (_configState$configs5 = configState.configs) !== null && _configState$configs5 !== void 0 && _configState$configs5.disable_sound_notification)) {
       var sound = document.getElementById('notification-sound');
       sound.muted = false;
       sound.play();
@@ -120,8 +124,8 @@ var OrderNotificationUI = function OrderNotificationUI(props) {
     setNotificationModalOpen(false);
   }, [registerOrderIds]);
   (0, _react.useEffect)(function () {
-    var _configState$configs3;
-    if (!notificationModalOpen || configState !== null && configState !== void 0 && (_configState$configs3 = configState.configs) !== null && _configState$configs3 !== void 0 && _configState$configs3.disable_sound_notification) return;
+    var _configState$configs6;
+    if (!notificationModalOpen || configState !== null && configState !== void 0 && (_configState$configs6 = configState.configs) !== null && _configState$configs6 !== void 0 && _configState$configs6.disable_sound_notification) return;
     var sound = document.getElementById('notification-sound');
     var interval = setInterval(function () {
       if (notificationModalOpen) {
@@ -136,7 +140,7 @@ var OrderNotificationUI = function OrderNotificationUI(props) {
     return function () {
       return clearInterval(interval);
     };
-  }, [notificationModalOpen, configState === null || configState === void 0 || (_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 ? void 0 : _configState$configs4.disable_sound_notification]);
+  }, [notificationModalOpen, configState === null || configState === void 0 || (_configState$configs7 = configState.configs) === null || _configState$configs7 === void 0 ? void 0 : _configState$configs7.disable_sound_notification]);
   (0, _react.useEffect)(function () {
     if (configState.loading) return;
     events.on('order_added', handleNotification);
