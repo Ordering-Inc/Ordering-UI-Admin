@@ -72,7 +72,9 @@ var GuestCheckoutFieldsSettingUI = function GuestCheckoutFieldsSettingUI(props) 
     className: "required"
   }, t('REQUIRED', 'Required')), /*#__PURE__*/_react.default.createElement("div", {
     className: "status"
-  }, t('STATE', 'Status'))), checkoutFieldsState !== null && checkoutFieldsState !== void 0 && checkoutFieldsState.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
+  }, t('STATE', 'Status')), /*#__PURE__*/_react.default.createElement("div", {
+    className: "guest"
+  }, t('REQUIRED_WITH_GUEST', 'Required with guest'))), checkoutFieldsState !== null && checkoutFieldsState !== void 0 && checkoutFieldsState.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.FieldContainer, {
       key: i
     }, /*#__PURE__*/_react.default.createElement("div", {
@@ -88,6 +90,13 @@ var GuestCheckoutFieldsSettingUI = function GuestCheckoutFieldsSettingUI(props) 
       }
     })), /*#__PURE__*/_react.default.createElement("div", {
       className: "status"
+    }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      width: 30,
+      style: {
+        borderRadius: 20
+      }
+    })), /*#__PURE__*/_react.default.createElement("div", {
+      className: "guest"
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 30,
       style: {
@@ -121,6 +130,15 @@ var GuestCheckoutFieldsSettingUI = function GuestCheckoutFieldsSettingUI(props) 
       onChange: function onChange(val) {
         return handleChangeCheckoutFieldSetting(field === null || field === void 0 ? void 0 : field.validation_field_id, field === null || field === void 0 ? void 0 : field.order_type_id, {
           enabled: val
+        });
+      }
+    })), /*#__PURE__*/_react.default.createElement("div", {
+      className: "guest"
+    }, /*#__PURE__*/_react.default.createElement(_styles.Switch, {
+      defaultChecked: field === null || field === void 0 ? void 0 : field.required_with_guest,
+      onChange: function onChange(val) {
+        return handleChangeCheckoutFieldSetting(field === null || field === void 0 ? void 0 : field.validation_field_id, field === null || field === void 0 ? void 0 : field.order_type_id, {
+          required_with_guest: val
         });
       }
     })));
