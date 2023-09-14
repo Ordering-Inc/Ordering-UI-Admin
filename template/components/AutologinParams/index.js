@@ -2,10 +2,11 @@ import React, { cloneElement, useEffect, useState } from 'react'
 
 import { SpinnerLoader } from '../../../src/components/Shared'
 import settings from '../../config.json'
-import theme from '../../theme.json'
+import { useLanguage } from 'ordering-components-admin'
 
 export const AutologinParams = (props) => {
   const [userState, setUserState] = useState({ loading: true, result: null, error: null })
+  const [, t] = useLanguage()
 
   const allowedLevels = [0, 2, 5]
   const search = window.location.search
@@ -63,7 +64,7 @@ export const AutologinParams = (props) => {
 
   return (
     userState.loading
-      ? <SpinnerLoader content={theme?.defaultLanguages?.LOADING_DELICIOUS_FOOD} />
+      ? <SpinnerLoader />
       : cloneElement(props.children, {
         settings: {
           ...settings,
