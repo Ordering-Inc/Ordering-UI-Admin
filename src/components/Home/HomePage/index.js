@@ -237,12 +237,6 @@ const HomeUI = (props) => {
   return (
     <>
       <HomeContainer>
-        {width > 997 && !isEnabledWhiteLabelModule && (
-          <OrderingButtonWrapper>
-            <span>{t('WHAT_DO_YOU_WANT_SEE_ORDERING', 'What do you want to see in ordering?')}</span>
-            <Button color='primary' onClick={() => setShowForm(true)}>{t('CLICK_HERE', 'Click here')}</Button>
-          </OrderingButtonWrapper>
-        )}
         <Breadcrumb>
           {isCollapse && (
             <IconButton
@@ -300,17 +294,6 @@ const HomeUI = (props) => {
             )}
           </>
         )}
-
-        {width < 997 && !isEnabledWhiteLabelModule && (
-          <OrderingButtonBlock>
-            <h2>
-              {t('WHAT_DO_YOU_WANT', 'What do you want to')}
-              <span>{` ${t('SEE_IN_ORDERING', 'see in ordering')}`}?</span>
-            </h2>
-            <Button color='primary' onClick={() => setShowForm(true)}>{t('CLICK_HERE', 'Click here')}</Button>
-          </OrderingButtonBlock>
-        )}
-
         <ParagraphHeaders>
           <p>{t('REPORTS', 'Reports')}</p>
           <Button
