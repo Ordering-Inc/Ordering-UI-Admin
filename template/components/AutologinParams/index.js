@@ -2,11 +2,9 @@ import React, { cloneElement, useEffect, useState } from 'react'
 
 import { SpinnerLoader } from '../../../src/components/Shared'
 import settings from '../../config.json'
-import { useLanguage } from 'ordering-components-admin'
 
 export const AutologinParams = (props) => {
   const [userState, setUserState] = useState({ loading: true, result: null, error: null })
-  const [, t] = useLanguage()
 
   const allowedLevels = [0, 2, 5]
   const search = window.location.search
