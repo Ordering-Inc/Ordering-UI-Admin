@@ -19,7 +19,7 @@ const QueryLoginUI = (props) => {
   }, [project])
 
   return (
-    <SpinnerLoader content={t('LOADING_DELICIOUS_FOOD', 'Loading Ordering Dashboard...')} />
+    <SpinnerLoader  />
   )
 }
 

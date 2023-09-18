@@ -193,7 +193,7 @@ export const App = () => {
       <ListenPageChanges />
       {
         !loaded && (
-          <SpinnerLoader content={t('LOADING_DELICIOUS_FOOD', 'Loading Ordering Dashboard...')} />
+          <SpinnerLoader />
         )
       }
       {
