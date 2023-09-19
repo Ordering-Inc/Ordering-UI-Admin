@@ -129,7 +129,7 @@ export const OrderNumberContainer = styled.div`
   align-items: center;
 
   p {
-    max-width: 130px;
+    max-width: 180px;
   }
 
   ${props => props.theme?.rtl ? css`
