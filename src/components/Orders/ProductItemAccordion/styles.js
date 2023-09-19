@@ -99,7 +99,7 @@ export const ContentInfo = styled.div`
   width: 55%;
 
   @media (min-width: 411px) {
-    width: calc(65% - 60px);
+    width: 80%;
   }
 
   ${props => props.theme?.rtl && css`
