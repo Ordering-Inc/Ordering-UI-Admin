@@ -23,7 +23,9 @@ export const DriverApp = () => {
     downloads: [
       { id: 1, icon: theme.images.myProducts.appStoreSmall, link: 'https://apps.apple.com/us/app/driver-app-2-0/id1606257815' },
       { id: 2, icon: theme.images.myProducts.playStoreSmall, link: 'https://play.google.com/store/apps/details?id=com.ordering.deliveryv5' }
-    ]
+    ],
+    purchase_link: 'https://buy.stripe.com/dR6g151tdcn0g9y3d3',
+    demo_link: 'https://www.ordering.co/platform-demo-and-pricing'
   }
 
   return (
