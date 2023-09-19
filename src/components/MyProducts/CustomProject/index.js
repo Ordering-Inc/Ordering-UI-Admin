@@ -42,7 +42,7 @@ export const CustomProject = () => {
           <Button
             color='primary'
             borderRadius='8px'
-            onClick={() => showMessage('I\'m interested in a custom project, can you please provide more information?')}
+            onClick={() => window.open('https://www.ordering.co/quote-project-request', '_blank')}
           >
             {t('CONTACT_US', 'Contact us')}
           </Button>
