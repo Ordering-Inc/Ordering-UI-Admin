@@ -41,7 +41,9 @@ var DriverApp = function DriverApp() {
       id: 2,
       icon: theme.images.myProducts.playStoreSmall,
       link: 'https://play.google.com/store/apps/details?id=com.ordering.deliveryv5'
-    }]
+    }],
+    purchase_link: 'https://buy.stripe.com/dR6g151tdcn0g9y3d3',
+    demo_link: 'https://www.ordering.co/platform-demo-and-pricing'
   };
   return /*#__PURE__*/_react.default.createElement(_AppLayout.AppLayout, {
     appInfo: appInfo,

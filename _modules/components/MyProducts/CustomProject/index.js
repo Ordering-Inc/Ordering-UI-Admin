@@ -39,7 +39,7 @@ var CustomProject = function CustomProject() {
     color: "primary",
     borderRadius: "8px",
     onClick: function onClick() {
-      return showMessage('I\'m interested in a custom project, can you please provide more information?');
+      return window.open('https://www.ordering.co/quote-project-request', '_blank');
     }
   }, t('CONTACT_US', 'Contact us'))), /*#__PURE__*/_react.default.createElement(_styles2.ImageBlock, null, /*#__PURE__*/_react.default.createElement("img", {
     src: theme.images.myProducts.customProject,

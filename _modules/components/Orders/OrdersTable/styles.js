@@ -69,7 +69,7 @@ var OrderTbody = _styledComponents.default.tbody(_templateObject9 || (_templateO
   return props.theme.colors.primary;
 });
 exports.OrderTbody = OrderTbody;
-var OrderNumberContainer = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  p {\n    max-width: 130px;\n  }\n\n  ", "\n"])), function (props) {
+var OrderNumberContainer = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  p {\n    max-width: 180px;\n  }\n\n  ", "\n"])), function (props) {
   var _props$theme2;
   return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n    border-left: 1px solid #E9ECEF;\n    padding-left: 15px;\n  "]))) : (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    border-right: 1px solid #E9ECEF;\n    padding-right: 15px;\n  "])));
 });

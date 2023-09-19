@@ -41,7 +41,9 @@ var StoreApp = function StoreApp() {
       id: 2,
       icon: theme.images.myProducts.playStoreSmall,
       link: 'https://play.google.com/store/apps/details?id=com.ordering.storeappv5&pli=1'
-    }]
+    }],
+    purchase_link: 'https://buy.stripe.com/aEU5mr2xhgDg4qQcNC',
+    demo_link: 'https://www.ordering.co/platform-demo-and-pricing'
   };
   return /*#__PURE__*/_react.default.createElement(_AppLayout.AppLayout, {
     appInfo: appInfo
