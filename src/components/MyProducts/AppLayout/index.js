@@ -24,10 +24,6 @@ export const AppLayout = (props) => {
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const location = useLocation()
 
-  const showMessage = (message) => {
-    window.Intercom && window.Intercom('showNewMessage', message)
-  }
-
   return (
     <Container>
       <HeaderTitleContainer>
@@ -86,7 +82,7 @@ export const AppLayout = (props) => {
                 <Button
                   color='primary'
                   borderRadius='8px'
-                  onClick={() => showMessage(appInfo?.purchase_message)}
+                  onClick={() => window.open(appInfo?.purchase_link, '_blank')}
                 >
                   {t('PURCHASE_NOW', 'Purchase Now')}
                 </Button>
@@ -95,7 +91,7 @@ export const AppLayout = (props) => {
                     color='primary'
                     outline
                     borderRadius='8px'
-                    onClick={() => showMessage(appInfo?.demo_book_message)}
+                    onClick={() => window.open(appInfo?.demo_link, '_blank')}
                   >
                     {t('BOOK_A_DEMO', 'Book a demo')}
                   </Button>
@@ -113,7 +109,7 @@ export const AppLayout = (props) => {
               <Button
                 color='primary'
                 borderRadius='8px'
-                onClick={() => showMessage(appInfo?.purchase_message)}
+                onClick={() => window.open(appInfo?.purchase_link, '_blank')}
               >
                 {t('PURCHASE_NOW', 'Purchase Now')}
               </Button>
