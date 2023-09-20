@@ -25,6 +25,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var DriverSelectorUI = function DriverSelectorUI(props) {
+  var _configs$manual_drive;
   var driverActionStatus = props.driverActionStatus,
     companyActionStatus = props.companyActionStatus,
     isFirstSelect = props.isFirstSelect,
@@ -55,12 +56,16 @@ var DriverSelectorUI = function DriverSelectorUI(props) {
     _useState6 = _slicedToArray(_useState5, 2),
     searchValue = _useState6[0],
     setSearchValue = _useState6[1];
+  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configs = _useConfig2[0].configs;
   var driversLoading = [{
     value: 'default',
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
       small: small
     }, /*#__PURE__*/_react.default.createElement("span", null, t('LOADING', 'loading'), "..."))
   }];
+  var showDriverAssignmentComment = (configs === null || configs === void 0 || (_configs$manual_drive = configs.manual_driver_assignment_comment_enabled) === null || _configs$manual_drive === void 0 ? void 0 : _configs$manual_drive.value) === '1';
   var getOption = function getOption(driver) {
     var _theme$images$icons;
     return {
@@ -165,7 +170,7 @@ var DriverSelectorUI = function DriverSelectorUI(props) {
     if (driverId === 'remove') {
       driverId = null;
     }
-    if (driverId && setCommentInfostate) {
+    if (driverId && setCommentInfostate && showDriverAssignmentComment) {
       setCommentInfostate({
         open: true,
         driverId: driverId
