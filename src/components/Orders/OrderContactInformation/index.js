@@ -50,6 +50,7 @@ export const OrderContactInformation = (props) => {
   const [{ configs }] = useConfig()
 
   const googleMapsApiKey = configs?.google_maps_api_key?.value
+  const isDisableDriverCompanies = configs?.disable_companies_order_details?.value === '1'
 
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [currentCustomer, setCurrentCustomer] = useState(null)
@@ -315,7 +316,7 @@ export const OrderContactInformation = (props) => {
       </Accordion>
       {deliveryTypes.includes(order?.delivery_type) && !isServiceOrder && (
         <>
-          {!order?.driver_id && (
+          {!order?.driver_id && !isDisableDriverCompanies && (
             <CompanySelectorContainer>
               <p>{t('DRIVER_COMPANY', 'Driver company')}</p>
               <CompanySelector
