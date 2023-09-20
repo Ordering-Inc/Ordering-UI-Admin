@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useLanguage, DriversList as DriversController } from 'ordering-components-admin'
+import { useLanguage, useConfig, DriversList as DriversController,  } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import { Select } from '../../../styles/Select'
 import { Select as FirstSelect } from '../../../styles/Select/FirstSelect'
@@ -38,7 +38,10 @@ const DriverSelectorUI = (props) => {
   const [defaultOption, setDefaultOption] = useState(null)
   const [driversOptionList, setDriversOptionList] = useState([])
   const [searchValue, setSearchValue] = useState(null)
+  const [{ configs }] = useConfig()
+
   const driversLoading = [{ value: 'default', content: <Option small={small}><span>{t('LOADING', 'loading')}...</span></Option> }]
+  const showDriverAssignmentComment = configs?.manual_driver_assignment_comment_enabled?.value === '1'
 
   const getOption = (driver) => {
     return {
@@ -138,7 +141,7 @@ const DriverSelectorUI = (props) => {
     if (driverId === 'remove') {
       driverId = null
     }
-    if (driverId && setCommentInfostate) {
+    if (driverId && setCommentInfostate && showDriverAssignmentComment) {
       setCommentInfostate({ open: true, driverId: driverId })
     } else {
       setCommentInfostate && setCommentInfostate({ open: false, driverId: null })
