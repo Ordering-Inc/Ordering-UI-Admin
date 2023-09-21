@@ -167,29 +167,6 @@ export const DeliveriesLocation = (props) => {
           onChange={(data) => handleMapChange(data)}
           yesIWantToUseGoogleMapApiInternals
         >
-
-          {interActionMapOrder === null && driversList.drivers.length !== 0 &&
-            driversList.drivers.filter(driver => driver?.enabled).map((driver) => (
-              <DriverMapMarkerAndInfo
-                key={driver.id}
-                driver={driver}
-                lat={
-                  (driver.location !== null && typeof driver.location === 'object' && driver.location?.lat)
-                    ? driver.location.lat
-                    : typeof driver.location === 'string'
-                      ? parseFloat(driver?.location?.split(',')[0].replace(/[^-.0-9]/g, ''))
-                      : defaultCenter.lat
-                }
-                lng={
-                  (driver.location !== null && typeof driver.location === 'object' && driver.location?.lng)
-                    ? driver.location.lng
-                    : typeof driver.location === 'string'
-                      ? parseFloat(driver?.location?.split(',')[1].replace(/[^-.0-9]/g, ''))
-                      : defaultCenter.lng
-                }
-              />
-            ))}
-
           {interActionMapOrder !== null && (
             <InterActOrderMarker
               business={interActionMapOrder?.business}
@@ -198,6 +175,7 @@ export const DeliveriesLocation = (props) => {
               image={interActionMapOrder?.business?.logo}
             />
           )}
+
           {interActionMapOrder !== null && (
             <InterActOrderMarker
               customer={interActionMapOrder?.customer}
@@ -227,6 +205,7 @@ export const DeliveriesLocation = (props) => {
               image={interActionMapOrder?.driver?.photo}
             />
           )}
+
           {interActionMapOrder !== null && interActionMapOrder?.driver === null && activeDrivers.length > 0 && (
             activeDrivers.map((driver) => (
               <InterActOrderMarker
