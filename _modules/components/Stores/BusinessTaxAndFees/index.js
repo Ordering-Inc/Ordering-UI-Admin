@@ -63,21 +63,6 @@ var BusinessTaxAndFees = function BusinessTaxAndFees(props) {
         service_fee: e.target.value
       });
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles2.SwitchWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('DELIVERY_TAX_INCLUDED_ON_DELIVERY_FEE', 'Delivery tax included on delivery fee')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
-    defaultChecked: (business === null || business === void 0 ? void 0 : business.tax_type) === 1,
-    onChange: function onChange(checked) {
-      return handleChangeFormState({
-        tax_type: checked ? 1 : 2
-      });
-    }
-  })), /*#__PURE__*/_react.default.createElement(_styles2.FormController, null, /*#__PURE__*/_react.default.createElement("label", null, t('DELIVERY_TAX_PERCENTAGE', 'Delivery tax porcentage %')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    placeholder: "0.00%",
-    defaultValue: business === null || business === void 0 ? void 0 : business.service_fee,
-    onChange: function onChange(e) {
-      return handleChangeFormState({
-        service_fee: e.target.value
-      });
-    }
   })), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "primary",
