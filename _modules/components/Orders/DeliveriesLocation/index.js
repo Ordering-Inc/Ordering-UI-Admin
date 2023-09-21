@@ -209,17 +209,7 @@ var DeliveriesLocation = function DeliveriesLocation(props) {
       return handleMapChange(data);
     },
     yesIWantToUseGoogleMapApiInternals: true
-  }, interActionMapOrder === null && driversList.drivers.length !== 0 && driversList.drivers.filter(function (driver) {
-    return driver === null || driver === void 0 ? void 0 : driver.enabled;
-  }).map(function (driver) {
-    var _driver$location5, _driver$location6, _driver$location7, _driver$location8;
-    return /*#__PURE__*/_react.default.createElement(_DriverMapMarkerAndInfo.DriverMapMarkerAndInfo, {
-      key: driver.id,
-      driver: driver,
-      lat: driver.location !== null && _typeof(driver.location) === 'object' && (_driver$location5 = driver.location) !== null && _driver$location5 !== void 0 && _driver$location5.lat ? driver.location.lat : typeof driver.location === 'string' ? parseFloat(driver === null || driver === void 0 || (_driver$location6 = driver.location) === null || _driver$location6 === void 0 ? void 0 : _driver$location6.split(',')[0].replace(/[^-.0-9]/g, '')) : defaultCenter.lat,
-      lng: driver.location !== null && _typeof(driver.location) === 'object' && (_driver$location7 = driver.location) !== null && _driver$location7 !== void 0 && _driver$location7.lng ? driver.location.lng : typeof driver.location === 'string' ? parseFloat(driver === null || driver === void 0 || (_driver$location8 = driver.location) === null || _driver$location8 === void 0 ? void 0 : _driver$location8.split(',')[1].replace(/[^-.0-9]/g, '')) : defaultCenter.lng
-    });
-  }), interActionMapOrder !== null && /*#__PURE__*/_react.default.createElement(_InterActOrderMarker.InterActOrderMarker, {
+  }, interActionMapOrder !== null && /*#__PURE__*/_react.default.createElement(_InterActOrderMarker.InterActOrderMarker, {
     business: interActionMapOrder === null || interActionMapOrder === void 0 ? void 0 : interActionMapOrder.business,
     lat: interActionMapOrder === null || interActionMapOrder === void 0 || (_interActionMapOrder$6 = interActionMapOrder.business) === null || _interActionMapOrder$6 === void 0 || (_interActionMapOrder$6 = _interActionMapOrder$6.location) === null || _interActionMapOrder$6 === void 0 ? void 0 : _interActionMapOrder$6.lat,
     lng: interActionMapOrder === null || interActionMapOrder === void 0 || (_interActionMapOrder$7 = interActionMapOrder.business) === null || _interActionMapOrder$7 === void 0 || (_interActionMapOrder$7 = _interActionMapOrder$7.location) === null || _interActionMapOrder$7 === void 0 ? void 0 : _interActionMapOrder$7.lng,
@@ -235,12 +225,12 @@ var DeliveriesLocation = function DeliveriesLocation(props) {
     lng: interActionOrderDriverLocation !== null && _typeof(interActionOrderDriverLocation) === 'object' && interActionOrderDriverLocation !== null && interActionOrderDriverLocation !== void 0 && interActionOrderDriverLocation.lng ? interActionOrderDriverLocation.lng : typeof interActionOrderDriverLocation === 'string' ? parseFloat(interActionOrderDriverLocation === null || interActionOrderDriverLocation === void 0 ? void 0 : interActionOrderDriverLocation.split(',')[1].replace(/[^-.0-9]/g, '')) : defaultCenter.lng,
     image: interActionMapOrder === null || interActionMapOrder === void 0 || (_interActionMapOrder$14 = interActionMapOrder.driver) === null || _interActionMapOrder$14 === void 0 ? void 0 : _interActionMapOrder$14.photo
   }), interActionMapOrder !== null && (interActionMapOrder === null || interActionMapOrder === void 0 ? void 0 : interActionMapOrder.driver) === null && activeDrivers.length > 0 && activeDrivers.map(function (driver) {
-    var _driver$location9, _driver$location10, _driver$location11, _driver$location12;
+    var _driver$location5, _driver$location6, _driver$location7, _driver$location8;
     return /*#__PURE__*/_react.default.createElement(_InterActOrderMarker.InterActOrderMarker, {
       key: driver.id,
       driver: driver,
-      lat: driver.location !== null && _typeof(driver.location) === 'object' && (_driver$location9 = driver.location) !== null && _driver$location9 !== void 0 && _driver$location9.lat ? driver.location.lat : typeof driver.location === 'string' ? parseFloat(driver === null || driver === void 0 || (_driver$location10 = driver.location) === null || _driver$location10 === void 0 ? void 0 : _driver$location10.split(',')[0].replace(/[^-.0-9]/g, '')) : defaultCenter.lat,
-      lng: driver.location !== null && _typeof(driver.location) === 'object' && (_driver$location11 = driver.location) !== null && _driver$location11 !== void 0 && _driver$location11.lng ? driver.location.lng : typeof driver.location === 'string' ? parseFloat(driver === null || driver === void 0 || (_driver$location12 = driver.location) === null || _driver$location12 === void 0 ? void 0 : _driver$location12.split(',')[1].replace(/[^-.0-9]/g, '')) : defaultCenter.lng,
+      lat: driver.location !== null && _typeof(driver.location) === 'object' && (_driver$location5 = driver.location) !== null && _driver$location5 !== void 0 && _driver$location5.lat ? driver.location.lat : typeof driver.location === 'string' ? parseFloat(driver === null || driver === void 0 || (_driver$location6 = driver.location) === null || _driver$location6 === void 0 ? void 0 : _driver$location6.split(',')[0].replace(/[^-.0-9]/g, '')) : defaultCenter.lat,
+      lng: driver.location !== null && _typeof(driver.location) === 'object' && (_driver$location7 = driver.location) !== null && _driver$location7 !== void 0 && _driver$location7.lng ? driver.location.lng : typeof driver.location === 'string' ? parseFloat(driver === null || driver === void 0 || (_driver$location8 = driver.location) === null || _driver$location8 === void 0 ? void 0 : _driver$location8.split(',')[1].replace(/[^-.0-9]/g, '')) : defaultCenter.lng,
       image: driver === null || driver === void 0 ? void 0 : driver.photo
     });
   })), interActionMapOrder !== null && (interActionMapOrder === null || interActionMapOrder === void 0 ? void 0 : interActionMapOrder.driver) === null && activeDrivers.length > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperOnlineDrivers, null, /*#__PURE__*/_react.default.createElement("p", null, t('ACTIVE_DRIVERS', 'Drivers online')), /*#__PURE__*/_react.default.createElement(_styles.OnlineDrivers, null, /*#__PURE__*/_react.default.createElement(_Shared.AutoScroll, {
