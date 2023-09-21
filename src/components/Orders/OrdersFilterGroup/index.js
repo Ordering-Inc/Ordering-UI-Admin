@@ -2,11 +2,8 @@ import React, { useState, useEffect, useRef } from 'react'
 import { PlusCircle, Trash3, Funnel } from 'react-bootstrap-icons'
 import MdcFilterOff from '@meronex/icons/mdc/MdcFilterOff'
 import TiWarningOutline from '@meronex/icons/ti/TiWarningOutline'
-import { useLanguage, 
-  // OrdersFilter as OrdersFilterController
- } from 'ordering-components-admin'
- import {OrdersFilter as OrdersFilterController} from './test'
-import { BusinessesSelector } from '../BusinessesSelector'
+import { useLanguage, OrdersFilter as OrdersFilterController } from 'ordering-components-admin'
+ import { BusinessesSelector } from '../BusinessesSelector'
 import { DriversGroupTypeSelector } from '../DriversGroupTypeSelector'
 import { DateTypeSelector } from '../DateTypeSelector'
 import { DriverMultiSelector } from '../DriverMultiSelector'
@@ -144,8 +141,6 @@ const OrdersFilterGroupUI = (props) => {
     }
     setFilterApplied(_filterApplied)
   }, [filterValues])
-
-  // console.log('filterValues', filterValues)
 
   return (
     <>
