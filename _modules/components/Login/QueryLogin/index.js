@@ -36,9 +36,7 @@ var QueryLoginUI = function QueryLoginUI(props) {
       project: project
     }));
   }, [project]);
-  return /*#__PURE__*/_react.default.createElement(_Shared.SpinnerLoader, {
-    content: t('LOADING_DELICIOUS_FOOD', 'Loading Ordering Dashboard...')
-  });
+  return /*#__PURE__*/_react.default.createElement(_Shared.SpinnerLoader, null);
 };
 var QueryLogin = function QueryLogin(props) {
   var queryProps = _objectSpread(_objectSpread({}, props), {}, {

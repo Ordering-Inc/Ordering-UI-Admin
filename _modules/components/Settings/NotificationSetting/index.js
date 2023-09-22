@@ -48,7 +48,7 @@ var NotificationSettingUI = function NotificationSettingUI(props) {
     _useState2 = _slicedToArray(_useState, 2),
     alertState = _useState2[0],
     setAlertState = _useState2[1];
-  var generalList = ['onesignal_user_auth', 'onesignal_orderingapp_id', 'onesignal_businessapp_id', 'onesignal_deliveryapp_id', 'onesignal_orderingweb_id', 'onesignal_dashboardweb_id', 'driver_close_distance', 'notification_toast', 'notification_times_repeat', 'notification_each_time_repeat', 'notification_superadmin_repeat', 'notification_business_repeat', 'notification_driver_repeat'];
+  var generalList = ['onesignal_user_auth', 'onesignal_orderingapp_id', 'onesignal_businessapp_id', 'onesignal_deliveryapp_id', 'onesignal_orderingweb_id', 'onesignal_dashboardweb_id', 'driver_close_distance', 'notification_toast', 'notification_times_repeat', 'notification_each_time_repeat', 'notification_superadmin_repeat', 'notification_business_repeat', 'notification_driver_repeat', 'notification_in_app_enabled', 'notification_in_app_position'];
   var tooltips = {
     notification_times_repeat: t('MAX_TIMES_TO_REPEAT_15', 'Max times to repeat = 15'),
     notification_each_time_repeat: t('EACH_TIME_SETTING_SET_IN_SECONDS', 'Each time setting set in seconds'),
