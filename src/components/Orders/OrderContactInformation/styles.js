@@ -99,7 +99,6 @@ export const ActionIconWrapper = styled.div`
   display: flex;
   align-items: center;
   height: 100%;
-  position: absolute;
   right: 0;
   top: 0;
   > .down-arrow {
