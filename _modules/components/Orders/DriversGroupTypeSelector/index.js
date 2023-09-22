@@ -21,7 +21,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var DriversGroupTypeSelector = function DriversGroupTypeSelector(props) {
   var driverGroupList = props.driverGroupList,
     filterValues = props.filterValues,
-    handleChangeGroup = props.handleChangeGroup;
+    handleChangeGroup = props.handleChangeGroup,
+    title = props.title;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -29,7 +30,7 @@ var DriversGroupTypeSelector = function DriversGroupTypeSelector(props) {
     _useState2 = _slicedToArray(_useState, 2),
     searchValue = _useState2[0],
     setSearchValue = _useState2[1];
-  var placeholder = /*#__PURE__*/_react.default.createElement(_styles.PlaceholderTitle, null, t('DRIVER_GROUP', 'Driver group'));
+  var placeholder = /*#__PURE__*/_react.default.createElement(_styles.PlaceholderTitle, null, title);
   var _useState3 = (0, _react.useState)([]),
     _useState4 = _slicedToArray(_useState3, 2),
     groupTypes = _useState4[0],
@@ -66,7 +67,7 @@ var DriversGroupTypeSelector = function DriversGroupTypeSelector(props) {
   }, [driverGroupList, searchValue]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !driverGroupList.loading ? /*#__PURE__*/_react.default.createElement(_MultiSelect.MultiSelect, {
     placeholder: placeholder,
-    defaultValue: filterValues.groupTypes,
+    defaultValue: filterValues,
     options: groupTypes,
     onChange: function onChange(groupType) {
       return handleChangeGroup(groupType);

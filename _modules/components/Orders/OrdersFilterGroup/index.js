@@ -68,7 +68,8 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
     handleAddMetaField = props.handleAddMetaField,
     handleDeleteMetafield = props.handleDeleteMetafield,
     handleChangeExternalId = props.handleChangeExternalId,
-    handleChangeChildFilterValue = props.handleChangeChildFilterValue;
+    handleChangeChildFilterValue = props.handleChangeChildFilterValue,
+    handleChangeGroupUnassigned = props.handleChangeGroupUnassigned;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -213,12 +214,13 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_DriversGroupTypeSelector.DriversGroupTypeSelector, {
     driverGroupList: driverGroupList,
     handleChangeGroup: handleChangeGroup,
-    filterValues: filterValues
-  }), /*#__PURE__*/_react.default.createElement(_DateTypeSelector.DateTypeSelector, {
-    filterValues: filterValues,
-    handleChangeDateType: handleChangeDateType,
-    handleChangeFromDate: handleChangeFromDate,
-    handleChangeEndDate: handleChangeEndDate
+    filterValues: filterValues.groupTypes,
+    title: t('DRIVER_GROUP_ASSIGNED', 'Driver group (assigned)')
+  }), /*#__PURE__*/_react.default.createElement(_DriversGroupTypeSelector.DriversGroupTypeSelector, {
+    driverGroupList: driverGroupList,
+    handleChangeGroup: handleChangeGroupUnassigned,
+    filterValues: filterValues.groupTypesUnassigned,
+    title: t('DRIVER_GROUP_NOT_ASSIGNED', 'Driver group (general)')
   })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_BusinessesSelector.BusinessesSelector, {
     filterValues: filterValues,
     businessesList: businessesList,
@@ -264,7 +266,12 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
         assigned: value
       });
     }
-  }))), filterValues === null || filterValues === void 0 ? void 0 : filterValues.metafield.map(function (item) {
+  })), /*#__PURE__*/_react.default.createElement(_DateTypeSelector.DateTypeSelector, {
+    filterValues: filterValues,
+    handleChangeDateType: handleChangeDateType,
+    handleChangeFromDate: handleChangeFromDate,
+    handleChangeEndDate: handleChangeEndDate
+  })), filterValues === null || filterValues === void 0 ? void 0 : filterValues.metafield.map(function (item) {
     return /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, {
       key: item.id
     }, /*#__PURE__*/_react.default.createElement(_styles.Input, {
