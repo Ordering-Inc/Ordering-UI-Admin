@@ -46,10 +46,12 @@ const OrderNotificationUI = (props) => {
     if (!_registerOrderIds.includes(order.id)) {
       _registerOrderIds.push(order.id)
       setRegisterOrderIds(_registerOrderIds)
-      if (configState?.configs?.notification_toast?.value === 'true') {
-        toastNotify(order.id)
-      } else {
-        setNotificationModalOpen(true)
+      if (!configState?.configs?.notification_in_app_enabled || configState?.configs?.notification_in_app_enabled?.value === '1') {
+        if (configState?.configs?.notification_toast?.value === 'true') {
+          toastNotify(order.id)
+        } else {
+          setNotificationModalOpen(true)
+        }
       }
     }
   }
@@ -60,8 +62,9 @@ const OrderNotificationUI = (props) => {
   }
 
   const toastNotify = (orderId) => {
+    const positionConfig = configState?.configs?.notification_in_app_position?.value ?? 'bottom-right'
     const toastConfigure = {
-      position: 'bottom-right',
+      position: positionConfig,
       autoClose: 3000,
       hideProgressBar: false,
       closeOnClick: true,

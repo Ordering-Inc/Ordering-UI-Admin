@@ -2,7 +2,6 @@ import React, { cloneElement, useEffect, useState } from 'react'
 
 import { SpinnerLoader } from '../../../src/components/Shared'
 import settings from '../../config.json'
-import theme from '../../theme.json'
 
 export const AutologinParams = (props) => {
   const [userState, setUserState] = useState({ loading: true, result: null, error: null })
@@ -63,7 +62,7 @@ export const AutologinParams = (props) => {
 
   return (
     userState.loading
-      ? <SpinnerLoader content={theme?.defaultLanguages?.LOADING_DELICIOUS_FOOD} />
+      ? <SpinnerLoader />
       : cloneElement(props.children, {
         settings: {
           ...settings,

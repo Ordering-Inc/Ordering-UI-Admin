@@ -48,7 +48,9 @@ const NotificationSettingUI = (props) => {
     'notification_each_time_repeat',
     'notification_superadmin_repeat',
     'notification_business_repeat',
-    'notification_driver_repeat'
+    'notification_driver_repeat',
+    'notification_in_app_enabled',
+    'notification_in_app_position'
   ]
 
   const tooltips = {
