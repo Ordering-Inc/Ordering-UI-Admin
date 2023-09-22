@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useConfig, useLanguage } from 'ordering-components-admin'
+import { useConfig, useLanguage, useApi, useSession } from 'ordering-components-admin'
 import GoogleMapReact, { fitBounds } from 'google-map-react'
 import { DriverMapMarkerAndInfo } from '../DriverMapMarkerAndInfo'
 import { InterActOrderMarker } from '../InterActOrderMarker'
@@ -23,8 +23,11 @@ export const DeliveriesLocation = (props) => {
   } = props
 
   const theme = useTheme()
+  const [ordering] = useApi()
   const [, t] = useLanguage()
+  const [session] = useSession()
   const [configState] = useConfig()
+
   const googleMapsApiKey = configState?.configs?.google_maps_api_key?.value
 
   const defaultLatitude = Number(configState?.configs?.location_default_latitude?.value)
@@ -124,10 +127,6 @@ export const DeliveriesLocation = (props) => {
   // Fit bounds on mount, and when the markers change
   useEffect(() => {
     if (driversList.loading || driversList.drivers.length === 0 || mapLoaded) return
-    const _onlineDrivers = driversList.drivers.filter(
-      (driver) => driver.enabled && driver.available && !driver.busy
-    )
-    setActiveDrivers(_onlineDrivers)
     if (interActionMapOrder !== null) {
       for (const driver of driversList.drivers) {
         if (driver.id === interActionMapOrder?.driver?.id) {
@@ -139,6 +138,33 @@ export const DeliveriesLocation = (props) => {
       mapFit()
     }
   }, [interActionMapOrder, mapLoaded, driversList, mapFitted])
+
+  useEffect(() => {
+    if (!interActionMapOrder || interActionMapOrder?.driver) return
+    const getControls = async (order) => {
+      const { content: { error: errorResponse, result: response } } = await ordering.setAccessToken(session?.token).controls(order?.id).get()
+      const error = await errorResponse
+      const result = await response
+      if (!error) {
+        let driversControls = []
+        if (Array.isArray(result?.drivers) && result?.drivers.length > 0) {
+          driversControls = (result?.drivers?.filter((driver) => driver.available && !driver.busy))
+        }
+        return driversControls
+      }
+      return error
+    }
+
+    const fetchData = async () => {
+      if (interActionMapOrder !== null) {
+        setActiveDrivers([])
+        const driversControls = await getControls(interActionMapOrder)
+        setActiveDrivers(driversControls)
+      }
+    }
+
+    fetchData()
+  }, [interActionMapOrder?.id])
 
   useEffect(() => {
     setMapFitted(false)
@@ -232,28 +258,26 @@ export const DeliveriesLocation = (props) => {
         </GoogleMapReact>
       )}
 
-      {interActionMapOrder !== null && interActionMapOrder?.driver === null && activeDrivers.length > 0 && (
+      {interActionMapOrder !== null && interActionMapOrder?.driver === null && activeDrivers.length >= 0 && (
         <WrapperOnlineDrivers>
-          <p>{t('ACTIVE_DRIVERS', 'Drivers online')}</p>
-          <OnlineDrivers>
-            <AutoScroll innerScroll>
-              {activeDrivers.length > 0 && (
-                <>
-                  {activeDrivers.map(driver => (
-                    <WrapDriverInfo key={driver.id}>
-                      <WrapperDriverImage>
-                        <DriverImage bgimage={driver?.photo || theme?.images?.icons?.noDriver} />
-                      </WrapperDriverImage>
-                      <DriverInfo>
-                        <p>{driver.name} {driver.lastname}</p>
-                        <p>{t('DRIVER', 'Driver')}</p>
-                      </DriverInfo>
-                    </WrapDriverInfo>
-                  ))}
-                </>
-              )}
-            </AutoScroll>
-          </OnlineDrivers>
+          <p>{activeDrivers.length === 0 ? t('NO_DRIVERS_AVAILABLE_FOR_ORDER', 'No Drivers Available for Order') : t('ACTIVE_DRIVERS', 'Drivers online')}</p>
+          {activeDrivers.length > 0 && (
+            <OnlineDrivers>
+              <AutoScroll innerScroll>
+                {activeDrivers.map(driver => (
+                  <WrapDriverInfo key={driver.id}>
+                    <WrapperDriverImage>
+                      <DriverImage bgimage={driver?.photo || theme?.images?.icons?.noDriver} />
+                    </WrapperDriverImage>
+                    <DriverInfo>
+                      <p>{driver.name} {driver.lastname}</p>
+                      <p>{t('DRIVER', 'Driver')}</p>
+                    </DriverInfo>
+                  </WrapDriverInfo>
+                ))}
+              </AutoScroll>
+            </OnlineDrivers>
+          )}
         </WrapperOnlineDrivers>
       )}
     </WrapperMap>
