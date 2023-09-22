@@ -8,7 +8,8 @@ export const DriversGroupTypeSelector = (props) => {
   const {
     driverGroupList,
     filterValues,
-    handleChangeGroup
+    handleChangeGroup,
+    title
   } = props
 
   const [, t] = useLanguage()
@@ -17,7 +18,7 @@ export const DriversGroupTypeSelector = (props) => {
 
   const placeholder = (
     <PlaceholderTitle>
-      {t('DRIVER_GROUP', 'Driver group')}
+      {title}
     </PlaceholderTitle>
   )
   const [groupTypes, setGroupTypes] = useState([])
@@ -49,7 +50,7 @@ export const DriversGroupTypeSelector = (props) => {
       {!driverGroupList.loading ? (
         <MultiSelect
           placeholder={placeholder}
-          defaultValue={filterValues.groupTypes}
+          defaultValue={filterValues}
           options={groupTypes}
           onChange={(groupType) => handleChangeGroup(groupType)}
           isShowSearchBar

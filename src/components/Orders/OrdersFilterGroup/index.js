@@ -3,7 +3,7 @@ import { PlusCircle, Trash3, Funnel } from 'react-bootstrap-icons'
 import MdcFilterOff from '@meronex/icons/mdc/MdcFilterOff'
 import TiWarningOutline from '@meronex/icons/ti/TiWarningOutline'
 import { useLanguage, OrdersFilter as OrdersFilterController } from 'ordering-components-admin'
-import { BusinessesSelector } from '../BusinessesSelector'
+ import { BusinessesSelector } from '../BusinessesSelector'
 import { DriversGroupTypeSelector } from '../DriversGroupTypeSelector'
 import { DateTypeSelector } from '../DateTypeSelector'
 import { DriverMultiSelector } from '../DriverMultiSelector'
@@ -61,7 +61,8 @@ const OrdersFilterGroupUI = (props) => {
     handleAddMetaField,
     handleDeleteMetafield,
     handleChangeExternalId,
-    handleChangeChildFilterValue
+    handleChangeChildFilterValue,
+    handleChangeGroupUnassigned
   } = props
 
   const [, t] = useLanguage()
@@ -185,13 +186,14 @@ const OrdersFilterGroupUI = (props) => {
             <DriversGroupTypeSelector
               driverGroupList={driverGroupList}
               handleChangeGroup={handleChangeGroup}
-              filterValues={filterValues}
+              filterValues={filterValues.groupTypes}
+              title={t('DRIVER_GROUP_ASSIGNED', 'Driver group (assigned)')}
             />
-            <DateTypeSelector
-              filterValues={filterValues}
-              handleChangeDateType={handleChangeDateType}
-              handleChangeFromDate={handleChangeFromDate}
-              handleChangeEndDate={handleChangeEndDate}
+            <DriversGroupTypeSelector
+              driverGroupList={driverGroupList}
+              handleChangeGroup={handleChangeGroupUnassigned}
+              filterValues={filterValues.groupTypesUnassigned}
+              title={t('DRIVER_GROUP_NOT_ASSIGNED', 'Driver group (general)')}
             />
           </WrapperRow>
           <WrapperRow>
@@ -260,6 +262,12 @@ const OrdersFilterGroupUI = (props) => {
                 onChange={(value) => handleChangeChildFilterValue({ assigned: value })}
               />
             </SelectWrapper>
+            <DateTypeSelector
+              filterValues={filterValues}
+              handleChangeDateType={handleChangeDateType}
+              handleChangeFromDate={handleChangeFromDate}
+              handleChangeEndDate={handleChangeEndDate}
+            />
           </WrapperRow>
           {filterValues?.metafield.map(item => (
             <WrapperRow key={item.id}>
