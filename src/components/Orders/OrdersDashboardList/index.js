@@ -8,7 +8,6 @@ export const OrdersDashboardList = (props) => {
     selectedSubOrderStatus,
     isMessagesView,
     orderByOption,
-    ordersAmountByStatus,
     setOrdersAmountByStatus,
     isUseQuery
   } = props
@@ -59,7 +58,7 @@ export const OrdersDashboardList = (props) => {
             }}
             groupStatus='pending'
             orderStatus={selectedSubOrderStatus?.pending}
-            setOrdersTotalAmount={total => setOrdersAmountByStatus({ ...ordersAmountByStatus, pending: total })}
+            setOrdersTotalAmount={total => setOrdersAmountByStatus(prevState => ({ ...prevState, pending: total }))}
           />
 
           <OrdersListController
@@ -71,7 +70,7 @@ export const OrdersDashboardList = (props) => {
               controlType: 'pages'
             }}
             orderStatus={selectedSubOrderStatus?.inProgress}
-            setOrdersTotalAmount={total => setOrdersAmountByStatus({ ...ordersAmountByStatus, inProgress: total })}
+            setOrdersTotalAmount={total => setOrdersAmountByStatus(prevState => ({ ...prevState, inProgress: total }))}
           />
 
           <OrdersListController
@@ -83,7 +82,7 @@ export const OrdersDashboardList = (props) => {
               controlType: 'pages'
             }}
             orderStatus={selectedSubOrderStatus?.completed}
-            setOrdersTotalAmount={total => setOrdersAmountByStatus({ ...ordersAmountByStatus, completed: total })}
+            setOrdersTotalAmount={total => setOrdersAmountByStatus(prevState => ({ ...prevState, completed: total }))}
           />
 
           <OrdersListController
@@ -95,7 +94,7 @@ export const OrdersDashboardList = (props) => {
               controlType: 'pages'
             }}
             orderStatus={selectedSubOrderStatus?.cancelled}
-            setOrdersTotalAmount={total => setOrdersAmountByStatus({ ...ordersAmountByStatus, cancelled: total })}
+            setOrdersTotalAmount={total => setOrdersAmountByStatus(prevState => ({ ...prevState, cancelled: total }))}
           />
         </>
       )}
