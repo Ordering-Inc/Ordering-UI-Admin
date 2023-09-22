@@ -167,6 +167,20 @@ export const DeliveriesLocation = (props) => {
   }, [interActionMapOrder?.id])
 
   useEffect(() => {
+    if (activeDrivers.length === 0) return
+    const _driverAvailableList = driversList.drivers.filter((driver) => driver.enabled && driver.available && !driver.busy)
+    const _onlineDrivers = activeDrivers.map((controlDriver) => {
+      const matchingDriver = _driverAvailableList.find((driver) => driver.id === controlDriver.id)
+      if (matchingDriver?.location) {
+        return { ...controlDriver, location: matchingDriver?.location }
+      } else {
+        return controlDriver
+      }
+    })
+    setActiveDrivers(_onlineDrivers)
+  }, [driversList])
+
+  useEffect(() => {
     setMapFitted(false)
   }, [interActionMapOrder])
 
