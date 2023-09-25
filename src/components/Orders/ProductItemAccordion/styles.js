@@ -96,10 +96,10 @@ export const ContentInfo = styled.div`
   justify-content: center;
   text-transform: capitalize;
   margin-left: 10px;
-  width: 55%;
+  width: 100%;
 
   @media (min-width: 411px) {
-    width: calc(65% - 60px);
+    width: 80%;
   }
 
   ${props => props.theme?.rtl && css`
@@ -202,13 +202,10 @@ export const ProductComment = styled.div`
 export const ProductInfo = styled.div`
   display: flex;
   align-items: center;
-  width: 100%;
+  flex: 1;
 
   h1,
   h3 {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
     font-size: 15px;
   }
 
@@ -275,7 +272,6 @@ export const ProductActionsDelete = styled(ProductActionsEdit)`
 `
 
 export const ProductPriceSection = styled.div`
-  width: 25%;
   display: flex;
   flex-direction: column;
   align-items: flex-end;

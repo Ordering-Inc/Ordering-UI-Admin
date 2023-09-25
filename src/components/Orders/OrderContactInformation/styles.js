@@ -65,17 +65,10 @@ export const InfoContent = styled.div`
     align-items: center;
 
     > p {
+      display: flex;
       margin: 0px;
-      font-weight: 600;
+      font-weight: 400;
       color: ${props => props.theme.colors?.headingColor};
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 1;
-      overflow: hidden;
-
-      &.name {
-        max-width: 70%;
-      }
     }
 
     > button {
