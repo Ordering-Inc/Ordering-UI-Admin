@@ -2,6 +2,7 @@ import React from 'react'
 import { HelmetTags } from '../../components/HelmetTags'
 import { useEvent } from 'ordering-components-admin'
 import { DriversManager as DriversManagerController } from '../../../src/components/Orders'
+import settings from '../../config.json'
 
 export const DriversList = (props) => {
   const [events] = useEvent()
@@ -9,6 +10,7 @@ export const DriversList = (props) => {
     ...props,
     isSearchByName: true,
     isSearchByCellphone: true,
+    useBatchSockets: settings?.use_batch_sockets,
     propsToFetch: ['id', 'name', 'lastname', 'location', 'enabled', 'available', 'busy', 'driver_groups', 'assigned_orders_count', 'last_order_assigned_at', 'last_location_at', 'cellphone', 'photo', 'qualification'],
     onDriverRedirect: (driverId) => {
       if (!driverId) {
