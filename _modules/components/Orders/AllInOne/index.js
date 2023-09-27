@@ -252,7 +252,8 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     setSlaSettingTime: setSlaSettingTime
   }), /*#__PURE__*/_react.default.createElement(_styles.MainContentContainer, null, /*#__PURE__*/_react.default.createElement(_styles.TopContent, null, /*#__PURE__*/_react.default.createElement(_styles.DriversContainer, null, /*#__PURE__*/_react.default.createElement(_DriversManager.DriversManager, {
     setMapsData: setMapsData,
-    handleUpdateAssignedOrders: handleUpdateAssignedOrders
+    handleUpdateAssignedOrders: handleUpdateAssignedOrders,
+    disableSocketRoomDriver: true
   })), /*#__PURE__*/_react.default.createElement(_styles.OrdersContainer, null, /*#__PURE__*/_react.default.createElement(_OrderStatusFilterBar.OrderStatusFilterBar, {
     isUseQuery: isUseQuery,
     selectedOrderStatus: ordersStatusGroup,
@@ -322,7 +323,8 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     isTourFlag: isTourFlag,
     setIsTourFlag: setIsTourFlag,
     setIsTourOpen: setIsTourOpen,
-    drivers: driversList.drivers
+    drivers: driversList.drivers,
+    disableSocketRoomDriver: true
   }), /*#__PURE__*/_react.default.createElement(_OrderNotification.OrderNotification, {
     customerId: props.customerId
   }), totalSelectedOrder > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperIndicator, null, selectedOrderIds.length, "/", totalSelectedOrder), /*#__PURE__*/_react.default.createElement(_WizardOrders.WizardOrders, {
