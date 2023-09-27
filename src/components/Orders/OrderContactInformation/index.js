@@ -106,17 +106,22 @@ export const OrderContactInformation = (props) => {
                 <InfoContent>
                   <div>
                     <p className='name'>{order?.business?.name}</p>
-                    {order?.business?.phone && (
-                      <IconButton
-                        onClick={() => window.open(`tel:${order.business.phone}`)}
-                      >
-                        <Telephone />
-                      </IconButton>
-                    )}
+                    <ActionIconWrapper>
+                      {order?.business?.phone && (
+                        <IconButton
+                          onClick={() => window.open(`tel:${order.business.phone}`)}
+                        >
+                          <Telephone />
+                        </IconButton>
+                      )}
+                    </ActionIconWrapper>
                   </div>
                   <p>{order?.business?.phone}</p>
                 </InfoContent>
-                <ChevronDown className='down-arrow' />
+                <ActionIconWrapper>
+                  <ChevronDown className='down-arrow' />
+                </ActionIconWrapper>
+
               </BusinessInfo>
             </ContextAwareToggle>
             <Accordion.Collapse eventKey='0'>
@@ -329,6 +334,7 @@ export const OrderContactInformation = (props) => {
                 handleOpenMessages={handleOpenMessages}
                 isOrderDrivers
                 orderId={order?.id}
+                disableSocketRoomDriver
               />
             </CompanySelectorContainer>
           )}
@@ -346,6 +352,7 @@ export const OrderContactInformation = (props) => {
                 isOrderDrivers
                 orderId={order?.id}
                 setCommentInfostate={setCommentInfostate}
+                disableSocketRoomDriver
               />
             </DriverSelectorContainer>
           )}

@@ -49,6 +49,8 @@ export const OrdersContentHeader = memo((props) => {
 
   const [configState] = useConfig()
 
+  const isShowSearchFilters = !configState?.configs?.search_box_enabled || configState?.configs?.search_box_enabled?.value === '1'
+
   return (
     <>
       <OrderContentHeaderContainer
@@ -103,29 +105,31 @@ export const OrdersContentHeader = memo((props) => {
               />
             </SLAControlsWrapper>
           )}
-          <WrapperSearchAndFilter
-            fullWidth={isDisableTitle}
-          >
-            <SearchBar
-              isCustomLayout
-              lazyLoad
-              onSearch={handleChangeSearch}
-              search={searchValue}
-              placeholder={t('SEARCH', 'Search')}
-            />
-            <OrdersFilterGroup
-              filterModalOpen={filterModalOpen}
-              setFilterModalOpen={setFilterModalOpen}
-              driverGroupList={driverGroupList}
-              driversList={driversList}
-              paymethodsList={paymethodsList}
-              businessesList={businessesList}
-              citiesList={citiesList}
-              handleChangeFilterValues={handleChangeFilterValues}
-              searchValue={searchValue}
-              handleChangeSearch={handleChangeSearch}
-            />
-          </WrapperSearchAndFilter>
+          {isShowSearchFilters && (
+            <WrapperSearchAndFilter
+              fullWidth={isDisableTitle}
+            >
+              <SearchBar
+                isCustomLayout
+                lazyLoad
+                onSearch={handleChangeSearch}
+                search={searchValue}
+                placeholder={t('SEARCH', 'Search')}
+              />
+              <OrdersFilterGroup
+                filterModalOpen={filterModalOpen}
+                setFilterModalOpen={setFilterModalOpen}
+                driverGroupList={driverGroupList}
+                driversList={driversList}
+                paymethodsList={paymethodsList}
+                businessesList={businessesList}
+                citiesList={citiesList}
+                handleChangeFilterValues={handleChangeFilterValues}
+                searchValue={searchValue}
+                handleChangeSearch={handleChangeSearch}
+              />
+            </WrapperSearchAndFilter>
+          )}
         </TopRightSection>
       </OrderContentHeaderContainer>
     </>
