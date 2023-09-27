@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useLanguage, useConfig, DriversList as DriversController,  } from 'ordering-components-admin'
+import { useLanguage, useConfig, DriversList as DriversController } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import { Select } from '../../../styles/Select'
 import { Select as FirstSelect } from '../../../styles/Select/FirstSelect'
