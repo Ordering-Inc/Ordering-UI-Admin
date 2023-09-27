@@ -119,8 +119,8 @@ export const OrderContactInformation = (props) => {
                   <p>{order?.business?.phone}</p>
                 </InfoContent>
                 <ActionIconWrapper>
-                      <ChevronDown className='down-arrow' />
-                    </ActionIconWrapper>
+                  <ChevronDown className='down-arrow' />
+                </ActionIconWrapper>
 
               </BusinessInfo>
             </ContextAwareToggle>
@@ -334,6 +334,7 @@ export const OrderContactInformation = (props) => {
                 handleOpenMessages={handleOpenMessages}
                 isOrderDrivers
                 orderId={order?.id}
+                disableSocketRoomDriver
               />
             </CompanySelectorContainer>
           )}
@@ -351,6 +352,7 @@ export const OrderContactInformation = (props) => {
                 isOrderDrivers
                 orderId={order?.id}
                 setCommentInfostate={setCommentInfostate}
+                disableSocketRoomDriver
               />
             </DriverSelectorContainer>
           )}
