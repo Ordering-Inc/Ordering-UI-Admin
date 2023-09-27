@@ -218,6 +218,7 @@ const OrdersManagerUI = (props) => {
               <DriversManager
                 setMapsData={setMapsData}
                 handleUpdateAssignedOrders={handleUpdateAssignedOrders}
+                disableSocketRoomDriver
               />
             </DriversContainer>
             <OrdersContainer>
@@ -308,6 +309,7 @@ const OrdersManagerUI = (props) => {
           setIsTourFlag={setIsTourFlag}
           setIsTourOpen={setIsTourOpen}
           drivers={driversList.drivers}
+          disableSocketRoomDriver
         />
       )}
 

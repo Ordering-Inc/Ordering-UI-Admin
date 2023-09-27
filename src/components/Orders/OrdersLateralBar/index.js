@@ -147,6 +147,7 @@ export const OrdersLateralBar = (props) => {
           customerId={isCustomer ? user.id : null}
           businessId={isBusiness ? business.id : null}
           handleCustomOrderDetail={handleCustomOrderDetail}
+          disableSocketRoomDriver
         />
       </OrdersContainer>
     </LateralBarContainer>
