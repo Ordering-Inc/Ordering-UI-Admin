@@ -43,7 +43,7 @@ var InfoContent = _styledComponents.default.div(_templateObject4 || (_templateOb
 exports.InfoContent = InfoContent;
 var CustomerInfo = (0, _styledComponents.default)(BusinessInfo)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral([""])));
 exports.CustomerInfo = CustomerInfo;
-var ActionIconWrapper = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  height: 100%;\n  position: absolute;\n  right: 0;\n  top: 0;\n  > .down-arrow {\n    transition: all 0.3s;\n    margin: 0 10px;\n  }\n  .edit-icon {\n    color: ", ";\n    cursor: pointer;\n  }\n"])), function (props) {
+var ActionIconWrapper = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  height: 100%;\n  right: 0;\n  top: 0;\n  > .down-arrow {\n    transition: all 0.3s;\n    margin: 0 10px;\n  }\n  .edit-icon {\n    color: ", ";\n    cursor: pointer;\n  }\n"])), function (props) {
   return props.theme.colors.secundaryLight;
 });
 exports.ActionIconWrapper = ActionIconWrapper;

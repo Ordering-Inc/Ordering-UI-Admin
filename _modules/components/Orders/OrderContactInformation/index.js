@@ -116,13 +116,13 @@ var OrderContactInformation = function OrderContactInformation(props) {
     bgimage: optimizeImage(order === null || order === void 0 || (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.logo, 'h_50,c_limit')
   }) : /*#__PURE__*/_react.default.createElement(_BisBusiness.default, null)), /*#__PURE__*/_react.default.createElement(_styles2.InfoContent, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", {
     className: "name"
-  }, order === null || order === void 0 || (_order$business3 = order.business) === null || _order$business3 === void 0 ? void 0 : _order$business3.name), (order === null || order === void 0 || (_order$business4 = order.business) === null || _order$business4 === void 0 ? void 0 : _order$business4.phone) && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+  }, order === null || order === void 0 || (_order$business3 = order.business) === null || _order$business3 === void 0 ? void 0 : _order$business3.name), /*#__PURE__*/_react.default.createElement(_styles2.ActionIconWrapper, null, (order === null || order === void 0 || (_order$business4 = order.business) === null || _order$business4 === void 0 ? void 0 : _order$business4.phone) && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     onClick: function onClick() {
       return window.open("tel:".concat(order.business.phone));
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Telephone, null))), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 || (_order$business5 = order.business) === null || _order$business5 === void 0 ? void 0 : _order$business5.phone)), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronDown, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Telephone, null)))), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 || (_order$business5 = order.business) === null || _order$business5 === void 0 ? void 0 : _order$business5.phone)), /*#__PURE__*/_react.default.createElement(_styles2.ActionIconWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronDown, {
     className: "down-arrow"
-  }))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
+  })))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion.Collapse, {
     eventKey: "0"
   }, /*#__PURE__*/_react.default.createElement(_styles2.CutsomerDetail, null, /*#__PURE__*/_react.default.createElement(_styles2.CustomerInfoTable, null, /*#__PURE__*/_react.default.createElement("tbody", null, (order === null || order === void 0 || (_order$business6 = order.business) === null || _order$business6 === void 0 ? void 0 : _order$business6.email) && /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('EMAIL', 'Email')), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement("a", {
     href: "mailto: ".concat(order === null || order === void 0 || (_order$business7 = order.business) === null || _order$business7 === void 0 ? void 0 : _order$business7.email)
@@ -218,7 +218,8 @@ var OrderContactInformation = function OrderContactInformation(props) {
     setCurrentTourStep: setCurrentTourStep,
     handleOpenMessages: handleOpenMessages,
     isOrderDrivers: true,
-    orderId: order === null || order === void 0 ? void 0 : order.id
+    orderId: order === null || order === void 0 ? void 0 : order.id,
+    disableSocketRoomDriver: true
   })), !(order !== null && order !== void 0 && order.driver_company_id) && !(commentInfoState !== null && commentInfoState !== void 0 && commentInfoState.open) && /*#__PURE__*/_react.default.createElement(_styles2.DriverSelectorContainer, null, /*#__PURE__*/_react.default.createElement("p", null, t('DRIVER_ASSIGN', 'Driver assign')), /*#__PURE__*/_react.default.createElement(_DriverSelector.DriverSelector, {
     small: true,
     isPhoneView: true,
@@ -229,7 +230,8 @@ var OrderContactInformation = function OrderContactInformation(props) {
     handleOpenMessages: handleOpenMessages,
     isOrderDrivers: true,
     orderId: order === null || order === void 0 ? void 0 : order.id,
-    setCommentInfostate: setCommentInfostate
+    setCommentInfostate: setCommentInfostate,
+    disableSocketRoomDriver: true
   })), /*#__PURE__*/_react.default.createElement(_styles2.DriverInfoContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.DriverInfo, null, /*#__PURE__*/_react.default.createElement(_styles2.PhotoWrapper, null, order !== null && order !== void 0 && (_order$driver = order.driver) !== null && _order$driver !== void 0 && _order$driver.photo || order !== null && order !== void 0 && (_order$external_drive = order.external_driver) !== null && _order$external_drive !== void 0 && _order$external_drive.photo ? /*#__PURE__*/_react.default.createElement(_styles2.Photo, {
     bgimage: optimizeImage((order === null || order === void 0 || (_order$driver2 = order.driver) === null || _order$driver2 === void 0 ? void 0 : _order$driver2.photo) || (order === null || order === void 0 || (_order$external_drive2 = order.external_driver) === null || _order$external_drive2 === void 0 ? void 0 : _order$external_drive2.photo), 'h_50,c_limit')
   }) : /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)), order.driver_id ? /*#__PURE__*/_react.default.createElement(_styles2.InfoContent, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 || (_order$driver3 = order.driver) === null || _order$driver3 === void 0 ? void 0 : _order$driver3.name, " ", order === null || order === void 0 || (_order$driver4 = order.driver) === null || _order$driver4 === void 0 ? void 0 : _order$driver4.middle_name, " ", order === null || order === void 0 || (_order$driver5 = order.driver) === null || _order$driver5 === void 0 ? void 0 : _order$driver5.lastname, " ", order === null || order === void 0 || (_order$driver6 = order.driver) === null || _order$driver6 === void 0 ? void 0 : _order$driver6.second_lastname), (order === null || order === void 0 || (_order$driver7 = order.driver) === null || _order$driver7 === void 0 ? void 0 : _order$driver7.cellphone) && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
