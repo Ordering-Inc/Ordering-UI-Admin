@@ -128,7 +128,8 @@ var OrdersLateralBar = function OrdersLateralBar(props) {
     driverId: isDriver ? user.id : null,
     customerId: isCustomer ? user.id : null,
     businessId: isBusiness ? business.id : null,
-    handleCustomOrderDetail: handleCustomOrderDetail
+    handleCustomOrderDetail: handleCustomOrderDetail,
+    disableSocketRoomDriver: true
   })));
 };
 exports.OrdersLateralBar = OrdersLateralBar;
