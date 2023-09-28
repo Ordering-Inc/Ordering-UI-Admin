@@ -2,7 +2,7 @@ import React from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { SearchBar } from '../../Shared'
 import { List as MenuIcon, LifePreserver } from 'react-bootstrap-icons'
-import { Button, IconButton } from '../../../styles'
+import { Button, IconButton, LinkButton } from '../../../styles'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { UsersDeleteButton, UsersExportCSV } from '../../Users'
 import { OverlayTrigger, Tooltip } from 'react-bootstrap'
@@ -10,8 +10,10 @@ import { OverlayTrigger, Tooltip } from 'react-bootstrap'
 import {
   HeaderContainer,
   HeaderTitleContainer,
-  ActionContainer
+  ActionContainer,
+  WarningMessage
 } from './styles'
+import TiWarningOutline from '@meronex/icons/ti/TiWarningOutline'
 
 export const UsersListingHeader = (props) => {
   const {
@@ -35,6 +37,9 @@ export const UsersListingHeader = (props) => {
 
   const [, t] = useLanguage()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
+  const handleClearFilters = () => {
+    if (searchValue) onSearch('')
+  }
 
   return (
     <HeaderContainer>
@@ -96,6 +101,13 @@ export const UsersListingHeader = (props) => {
           handleDeleteSeveralUsers={handleDeleteSeveralUsers}
           disabled={actionDisabled}
         />
+        {(!!searchValue) && (
+          <WarningMessage>
+            <TiWarningOutline />
+            <span>{t('WARNING_FILTER_APPLIED', 'Filters applied. You may miss new orders.')}</span>
+            <LinkButton onClick={() => handleClearFilters()}>{t('CLEAR_FILTERS', 'Clear filters')}</LinkButton>
+          </WarningMessage>
+        )}
         <SearchBar
           lazyLoad
           isCustomLayout
