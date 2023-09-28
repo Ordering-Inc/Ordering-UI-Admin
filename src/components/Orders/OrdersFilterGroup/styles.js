@@ -198,8 +198,8 @@ export const WarningMessage = styled.div`
   position: absolute;
   display: flex;
   align-items: center;
-  z-index: 10;
-  top: 100%;
+  z-index: 100;
+  bottom: 45px;
   background: ${props => props.theme.colors.warning100};
   border: 1px solid ${props => props.theme.colors.warning};
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
@@ -237,6 +237,9 @@ export const WarningMessage = styled.div`
     font-size: 14px;
     line-height: 24px;
     right: 0px;
+    top: 100%;
+    bottom: 0;
+    z-index: 10;
     ${props => props.theme?.rtl && css`
       left: 0px;
       right: initial;

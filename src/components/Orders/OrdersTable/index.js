@@ -2,7 +2,6 @@ import React, { memo, useEffect, useState } from 'react'
 import moment from 'moment'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
-import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import Skeleton from 'react-loading-skeleton'
 import {
   useLanguage,
@@ -19,7 +18,6 @@ import {
   OrderTbody,
   OrderNumberContainer,
   CheckBox,
-  WrapperImage,
   BusinessInfo,
   CustomerInfo,
   DriversInfo,
@@ -27,13 +25,21 @@ import {
   WrapOrderStatusSelector,
   WrapperPagination,
   StatusInfo,
-  LogisticStatusDot,
-  PriorityDot,
   Timestatus,
-  Timer,
-  OrdersCountWrapper,
   DragTh
 } from './styles'
+import { Order } from './Order'
+
+const OrderTablePropsAreEqual = (prevProps, nextProps) => {
+  return prevProps.isSelectedOrders === nextProps.isSelectedOrders &&
+    JSON.stringify(prevProps.orderList) === JSON.stringify(nextProps.orderList) &&
+    JSON.stringify(prevProps.pagination) === JSON.stringify(nextProps.pagination) &&
+    JSON.stringify(prevProps.selectedOrderIds) === JSON.stringify(nextProps.selectedOrderIds) &&
+    JSON.stringify(prevProps.isTourOpen) === JSON.stringify(nextProps.isTourOpen) &&
+    prevProps.groupStatus === nextProps.groupStatus &&
+    JSON.stringify(prevProps.allowColumns) === JSON.stringify(nextProps.allowColumns) &&
+    prevProps.isUseQuery === nextProps.isUseQuery
+}
 
 export const OrdersTable = memo((props) => {
   const {
@@ -51,7 +57,6 @@ export const OrdersTable = memo((props) => {
     isTourOpen,
     handleOpenTour,
     setIsTourOpen,
-    slaSettingTime,
     groupStatus,
     allowColumns,
     setAllowColumns,
@@ -61,9 +66,8 @@ export const OrdersTable = memo((props) => {
   } = props
   const [{ dictionary }, t] = useLanguage()
   const theme = useTheme()
-  const [{ parseDate, optimizeImage, getTimeAgo, parsePrice }] = useUtils()
+  const [{ parseDate }] = useUtils()
   const [isAllChecked, setIsAllChecked] = useState(false)
-  const [, setCurrentTime] = useState()
   const [dragOverd, setDragOverd] = useState('')
   const handleChangePage = (page) => {
     getPageOrders(pagination.pageSize, page)
@@ -622,239 +626,26 @@ export const OrdersTable = memo((props) => {
           ) : (
             <OrderTbody>
               {orderList.orders.map((order, i) => (
-                <tr
-                  key={i}
-                  className={parseInt(orderDetailId) === order.id ? 'active' : ''}
-                  data-tour={i === 0 ? 'tour_start' : ''}
-                  data-status={isEnabledRowInColor && order?.time_status}
-                  onClick={(e) => handleClickOrder(order, e)}
-                >
-                  {Object.keys(allowColumns).filter(col => allowColumns[col]?.visable)
-                    .sort((col1, col2) => allowColumns[col1]?.order - allowColumns[col2]?.order)
-                    .map((column, index) => {
-                      if (column === 'slaBar') {
-                        return (
-                          <td key={`slaBar${i}-${index}`}>
-                            <Timestatus
-                              timeState={order?.time_status}
-                            />
-                          </td>
-                        )
-                      }
-                      if (column === 'externalId' && !isSelectedOrders) {
-                        return (
-                          <td className='externalId' key={`externalId${i}-${index}`}>
-                            <StatusInfo>
-                              <p className='bold'>{order?.external_id}</p>
-                            </StatusInfo>
-                          </td>
-                        )
-                      }
-                      if (column === 'orderNumber') {
-                        return (
-                          <td
-                            className={!(allowColumns?.orderNumber?.visable || allowColumns?.dateTime?.visable) ? 'small' : ''}
-                            key={`orderNumber${i}-${index}`}
-                          >
-                            <OrderNumberContainer>
-                              {!isSelectedOrders && (
-                                <CheckBox
-                                  isChecked={selectedOrderIds.includes(order?.id)}
-                                  onClick={() => handleSelectedOrderIds(order.id)}
-                                  className='orderCheckBox'
-                                >
-                                  {selectedOrderIds.includes(order?.id) ? (
-                                    <RiCheckboxFill />
-                                  ) : (
-                                    <RiCheckboxBlankLine />
-                                  )}
-                                </CheckBox>
-                              )}
-                              <div className='info'>
-                                {allowColumns?.orderNumber?.visable && !showExternalId && (
-                                  <p className='bold'>{t('INVOICE_ORDER_NO', 'Order No.')} {order?.id}</p>
-                                )}
-                                {allowColumns?.dateTime?.visable && (
-                                  <p className='date'>
-                                    {
-                                      order?.delivery_datetime_utc
-                                        ? parseDate(order?.delivery_datetime_utc)
-                                        : parseDate(order?.delivery_datetime, { utc: false })
-                                    }
-                                  </p>
-                                )}
-                              </div>
-                            </OrderNumberContainer>
-                          </td>
-                        )
-                      }
-                      if (column === 'status' && !isSelectedOrders) {
-                        return (
-                          <td className='statusInfo' key={`statusInfo${i}-${index}`}>
-                            <StatusInfo>
-                              <p className='bold'>{getOrderStatus(order.status)}</p>
-                            </StatusInfo>
-                          </td>
-                        )
-                      }
-                      if (column === 'cartGroupId') {
-                        return (
-                          <td className='orderGroupId' key={`cart_group_id${i}-${index}`}>
-                            <StatusInfo>
-                              {order?.cart_group_id && (
-                                <p className='bold'>{t('No', 'No')}. {order?.cart_group_id}</p>
-                              )}
-                            </StatusInfo>
-                          </td>
-                        )
-                      }
-                      if (column === 'driverGroupId') {
-                        return (
-                          <td className='orderGroupId' key={`cart_group_id${i}-${index}`}>
-                            <StatusInfo>
-                              {order?.driver_group_id && (
-                                <p className='bold'>{t('No', 'No')}. {order?.driver_group_id}</p>
-                              )}
-                            </StatusInfo>
-                          </td>
-                        )
-                      }
-                      if (column === 'business') {
-                        return (
-                          <td className='businessInfo' key={`businessInfo${i}-${index}`}>
-                            <BusinessInfo>
-                              {!hidePhoto && (
-                                <WrapperImage>
-                                  <img src={optimizeImage(order.business?.logo || theme.images?.dummies?.businessLogo, 'h_50,c_limit')} loading='lazy' alt='' />
-                                </WrapperImage>
-                              )}
-                              <div className='info'>
-                                <p className='bold'>{order?.business?.name}</p>
-                                <p>{order?.business?.city?.name}</p>
-                              </div>
-                            </BusinessInfo>
-                          </td>
-                        )
-                      }
-                      if (column === 'customer') {
-                        return (
-                          <td className='customerInfo' key={`customerInfo${i}-${index}`}>
-                            <CustomerInfo>
-                              {!hidePhoto && (
-                                <WrapperImage>
-                                  {order?.customer?.photo ? (
-                                    <img src={optimizeImage(order?.customer?.photo, 'h_50,c_limit')} loading='lazy' alt='' />
-                                  ) : (
-                                    <FaUserAlt />
-                                  )}
-                                  <OrdersCountWrapper isNew={order?.customer?.orders_count === 0}>
-                                    {order?.customer?.orders_count || t('NEW', 'New')}
-                                  </OrdersCountWrapper>
-                                </WrapperImage>
-                              )}
-                              <div className='info'>
-                                <p className='bold'>
-                                  {(!order?.customer?.email && !order?.customer?.cellphone && !order?.customer?.name) ? t('GUEST_USER', 'Guest user') : order?.customer?.name}
-                                </p>
-                                <p>{order?.customer?.cellphone}</p>
-                              </div>
-                            </CustomerInfo>
-                          </td>
-                        )
-                      }
-                      if (column === 'driver' && !isSelectedOrders) {
-                        return (
-                          <td key={`driver${i}-${index}`}>
-                            {order?.delivery_type === 1 && (
-                              <CustomerInfo>
-                                {!hidePhoto && (
-                                  <WrapperImage>
-                                    {order?.driver?.photo ? (
-                                      <img src={optimizeImage(order?.driver?.photo, 'h_50,c_limit')} loading='lazy' alt='' />
-                                    ) : (
-                                      <FaUserAlt />
-                                    )}
-                                  </WrapperImage>
-                                )}
-                                <div className='info'>
-                                  {order?.driver ? (
-                                    <>
-                                      <p className='bold'>{order?.driver?.name}</p>
-                                      <p>{order?.driver?.cellphone}</p>
-                                    </>
-                                  ) : (
-                                    <p className='bold'>{t('NO_DRIVER', 'No Driver')}</p>
-                                  )}
-                                </div>
-                              </CustomerInfo>
-                            )}
-                          </td>
-                        )
-                      }
-                      if (column === 'advanced' && !isSelectedOrders) {
-                        return (
-                          <React.Fragment key={`advanced${i}-${index}`}>
-                            <td className='logistic'>
-                              <div className='info'>
-                                <p className='bold'>{t('LOGISTIC', 'Logistic')}</p>
-                                <p>
-                                  {getLogisticTag(order?.logistic_status)}
-                                  <LogisticStatusDot
-                                    status={order?.logistic_status}
-                                  />
-                                </p>
-                              </div>
-                            </td>
-                            <td className='attempts'>
-                              <div className='info'>
-                                <p className='bold'>{t('ATTEMPTS', 'Attempts')}</p>
-                                <p>{order?.logistic_attemps}</p>
-                              </div>
-                            </td>
-                            <td className='priority'>
-                              <div className='info'>
-                                <p className='bold'>{t('PRIORITY', 'Priority')}</p>
-                                <p>
-                                  {getPriorityTag(order?.priority)}
-                                  <PriorityDot priority={order?.priority} />
-                                </p>
-                              </div>
-                            </td>
-                          </React.Fragment>
-                        )
-                      }
-                      if (column === 'timer' && (groupStatus === 'pending' || groupStatus === 'inProgress')) {
-                        return (
-                          <td className='timer' key={`timer${i}-${index}`}>
-                            <Timer>
-                              <p className='bold'>{t('TIMER', 'Timer')}</p>
-                              <p className={order?.time_status}>{displayDelayedTime(order)}</p>
-                            </Timer>
-                          </td>
-                        )
-                      }
-                      if (column === 'total') {
-                        return (
-                          <td className='orderPrice' key={`total${i}-${index}`}>
-                            <div className='info'>
-                              {allowColumns?.total?.visable && (
-                                <p className='bold'>{parsePrice(order?.summary?.total, { currency: getCurrenySymbol(order?.currency) })}</p>
-                              )}
-                              {!(order?.status === 1 || order?.status === 11 || order?.status === 2 || order?.status === 5 || order?.status === 6 || order?.status === 10 || order.status === 12) && (
-                                <p>
-                                  {
-                                    order?.delivery_datetime_utc
-                                      ? getTimeAgo(order?.delivery_datetime_utc)
-                                      : getTimeAgo(order?.delivery_datetime, { utc: false })
-                                  }
-                                </p>
-                              )}
-                            </div>
-                          </td>
-                        )
-                      }
-                    })}
-                </tr>
+                <Order
+                  key={order?.id}
+                  i={i}
+                  order={order}
+                  orderDetailId={orderDetailId}
+                  isEnabledRowInColor={isEnabledRowInColor}
+                  handleClickOrder={handleClickOrder}
+                  allowColumns={allowColumns}
+                  isSelectedOrders={isSelectedOrders}
+                  selectedOrderIds={selectedOrderIds}
+                  handleSelectedOrderIds={handleSelectedOrderIds}
+                  showExternalId={showExternalId}
+                  getOrderStatus={getOrderStatus}
+                  hidePhoto={hidePhoto}
+                  getLogisticTag={getLogisticTag}
+                  getPriorityTag={getPriorityTag}
+                  groupStatus={groupStatus}
+                  displayDelayedTime={displayDelayedTime}
+                  getCurrenySymbol={getCurrenySymbol}
+                />
               ))}
             </OrderTbody>
           )}
@@ -874,4 +665,4 @@ export const OrdersTable = memo((props) => {
       )}
     </>
   )
-})
+}, OrderTablePropsAreEqual)
