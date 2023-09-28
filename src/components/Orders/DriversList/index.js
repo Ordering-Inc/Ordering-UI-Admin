@@ -1,19 +1,14 @@
 import React from 'react'
-import { useUtils, useLanguage } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
-import BsDot from '@meronex/icons/bs/BsDot'
-import { useTheme } from 'styled-components'
 import { getStarWidth } from '../../../utils'
 import { useWindowSize } from '../../../hooks/useWindowSize'
-import { LinkButton } from '../../../styles'
 import {
   DriversListContainer,
   DriverCard,
   WrapperImage,
-  Image,
   DriverInfo,
-  WrapperStar
 } from './styles'
+import { Driver } from './Driver'
 
 export const DriversList = (props) => {
   const {
@@ -27,9 +22,6 @@ export const DriversList = (props) => {
     hidePhoto
   } = props
 
-  const theme = useTheme()
-  const [, t] = useLanguage()
-  const [{ optimizeImage }] = useUtils()
   const { width } = useWindowSize()
 
   const handleClickDriver = (e, driver) => {
@@ -72,36 +64,15 @@ export const DriversList = (props) => {
       ) : (
         <>
           {(driversIsOnline ? onlineDrivers : offlineDrivers).map(driver => (
-            <DriverCard
-              key={driver.id}
-              onClick={(e) => handleClickDriver(e, driver)}
-              active={selectedDriver?.id === driver.id}
-            >
-              {!hidePhoto && (
-                <WrapperImage>
-                  <Image bgimage={optimizeImage(driver?.photo || theme.images?.icons?.noDriver, 'h_50,c_limit')} />
-                </WrapperImage>
-              )}
-              <DriverInfo hidePhoto={hidePhoto}>
-                <div className='driver-info-container'>
-                  <p className='name'>{driver.name} {driver.lastname}</p>
-                  <BsDot />
-                  <div>
-                    <LinkButton
-                      className='driver-orders'
-                      disabled={!driver?.assigned_orders_count || driver?.assigned_orders_count === 0}
-                      onClick={() => onOpenDriverOrdersDetail(driver)}
-                    >
-                      {driver?.assigned_orders_count} {t('ORDERS', 'Orders')}
-                    </LinkButton>
-                    <span className='text-red'>{(driver?.busy && `(${t('BUSY', 'Busy')})`)}</span>
-                  </div>
-                </div>
-                {driver?.qualification && (
-                  <WrapperStar width={getStarWidth(driver?.qualification)} />
-                )}
-              </DriverInfo>
-            </DriverCard>
+            <Driver
+              key={driver?.id}
+              driver={driver}
+              handleClickDriver={handleClickDriver}
+              selectedDriver={selectedDriver}
+              hidePhoto={hidePhoto}
+              onOpenDriverOrdersDetail={onOpenDriverOrdersDetail}
+              getStarWidth={getStarWidth}
+            />
           ))}
         </>
       )}

@@ -41,7 +41,19 @@ import {
   ErrorMessage
 } from './styles'
 
-const OrderDetailsUI = (props) => {
+const OrderDetailsPropsAreEqual = (prevProps, nextProps) => {
+  return prevProps.isSelectedOrders === nextProps.isSelectedOrders &&
+    prevProps.open === nextProps.open &&
+    prevProps.isTourOpen === nextProps.isTourOpen &&
+    JSON.stringify(prevProps.messages) === JSON.stringify(nextProps.messages) &&
+    JSON.stringify(prevProps.order) === JSON.stringify(nextProps.order) &&
+    prevProps.loading === nextProps.loading &&
+    prevProps.isTourFlag === nextProps.isTourFlag &&
+    prevProps.isServiceOrder === nextProps.isServiceOrder &&
+    prevProps.currentTourStep === nextProps.currentTourStep
+}
+
+const OrderDetailsUI = React.memo((props) => {
   const {
     isSelectedOrders,
     handleChangeCustomerInfoState,
@@ -591,7 +603,8 @@ const OrderDetailsUI = (props) => {
       </Modal>
     </Container>
   )
-}
+}, OrderDetailsPropsAreEqual)
+
 export const OrderDetails = (props) => {
   const orderDetailsProps = {
     ...props,
