@@ -6,7 +6,7 @@ import { OrdersLateralBar } from '../OrdersLateralBar'
 import { SearchBar } from '../../Shared'
 import { OrderNotification } from '../OrderNotification'
 import { List as MenuIcon } from 'react-bootstrap-icons'
-import { IconButton } from '../../../styles/Buttons'
+import { IconButton, LinkButton } from '../../../styles/Buttons'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { GoogleMapsApiKeySettingButton } from '../GoogleMapsApiKeySettingButton'
 import { WebsocketStatus } from '../WebsocketStatus'
@@ -15,8 +15,10 @@ import {
   DriversHeader,
   HeaderTitleContainer,
   DriversContainer,
-  DriversContent
+  DriversContent,
+  WarningMessage
 } from './styles'
+import TiWarningOutline from '@meronex/icons/ti/TiWarningOutline'
 
 const DriversManagerUI = (props) => {
   const {
@@ -58,6 +60,10 @@ const DriversManagerUI = (props) => {
     setIsOpenDriverOrders(true)
   }
 
+  const handleClearFilters = () => {
+    if (searchValue) handleChangeSearch('')
+  }
+
   useEffect(() => {
     if (loading) return
     const id = query.get('id')
@@ -91,6 +97,13 @@ const DriversManagerUI = (props) => {
           <WebsocketStatus />
           {!googleMapsApiKey && (
             <GoogleMapsApiKeySettingButton />
+          )}
+          {(!!searchValue) && (
+            <WarningMessage>
+              <TiWarningOutline />
+              <span>{t('WARNING_FILTER_APPLIED', 'Filters applied. You may miss new orders.')}</span>
+              <LinkButton onClick={() => handleClearFilters()}>{t('CLEAR_FILTERS', 'Clear filters')}</LinkButton>
+            </WarningMessage>
           )}
           <SearchBar
             isCustomLayout
