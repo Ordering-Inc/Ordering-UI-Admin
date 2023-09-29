@@ -32,6 +32,7 @@ import { LogisticStatusDot } from '../OrdersTable/styles'
 
 const OrdersFilterGroupUI = (props) => {
   const {
+    isLateralBar,
     filterModalOpen,
     setFilterModalOpen,
     searchValue,
@@ -152,7 +153,7 @@ const OrdersFilterGroupUI = (props) => {
         {filterApplied ? <Funnel /> : <MdcFilterOff />}
       </IconButton>
       {(filterApplied || !!searchValue) && (
-        <WarningMessage>
+        <WarningMessage isLateralBar={isLateralBar}>
           <TiWarningOutline />
           <span>{t('WARNING_FILTER_APPLIED', 'Filters applied. You may miss new orders.')}</span>
           <LinkButton onClick={() => handleClearFilters()}>{t('CLEAR_FILTERS', 'Clear filters')}</LinkButton>

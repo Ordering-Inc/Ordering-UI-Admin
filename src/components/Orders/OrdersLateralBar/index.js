@@ -142,6 +142,7 @@ export const OrdersLateralBar = (props) => {
           </Name>
         </Info>
         <OrdersManager
+          isLateralBar
           isSelectedOrders
           driverId={isDriver ? user.id : null}
           customerId={isCustomer ? user.id : null}
