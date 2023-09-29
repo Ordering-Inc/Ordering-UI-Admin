@@ -124,6 +124,7 @@ var OrdersLateralBar = function OrdersLateralBar(props) {
   }) : /*#__PURE__*/_react.default.createElement(_styles.Image, {
     bgimage: optimizeImage((user === null || user === void 0 ? void 0 : user.photo) || ((_theme$images2 = theme.images) === null || _theme$images2 === void 0 || (_theme$images2 = _theme$images2.icons) === null || _theme$images2 === void 0 ? void 0 : _theme$images2.noDriver), 'h_50,c_limit')
   })), /*#__PURE__*/_react.default.createElement(_styles.Name, null, /*#__PURE__*/_react.default.createElement("p", null, isBusiness ? business.name : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, user === null || user === void 0 ? void 0 : user.name, " ", user === null || user === void 0 ? void 0 : user.lastname)), /*#__PURE__*/_react.default.createElement("p", null, isDriver && t('DRIVER', 'Driver'), isCustomer && t('CUSTOMER', 'Customer'), isBusiness && t('BUSINESS', 'Business')))), /*#__PURE__*/_react.default.createElement(_OrdersManager.OrdersManager, {
+    isLateralBar: true,
     isSelectedOrders: true,
     driverId: isDriver ? user.id : null,
     customerId: isCustomer ? user.id : null,

@@ -29,7 +29,8 @@ function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" !=
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrdersContentHeader = /*#__PURE__*/(0, _react.memo)(function (props) {
   var _configState$configs, _configState$configs2, _configState$configs3;
-  var isDisableTitle = props.isDisableTitle,
+  var isLateralBar = props.isLateralBar,
+    isDisableTitle = props.isDisableTitle,
     isSelectedOrders = props.isSelectedOrders,
     title = props.title,
     handleChangeSearch = props.handleChangeSearch,
@@ -91,6 +92,7 @@ var OrdersContentHeader = /*#__PURE__*/(0, _react.memo)(function (props) {
     search: searchValue,
     placeholder: t('SEARCH', 'Search')
   }), /*#__PURE__*/_react.default.createElement(_OrdersFilterGroup.OrdersFilterGroup, {
+    isLateralBar: isLateralBar,
     filterModalOpen: filterModalOpen,
     setFilterModalOpen: setFilterModalOpen,
     driverGroupList: driverGroupList,
