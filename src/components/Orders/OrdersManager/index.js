@@ -22,6 +22,7 @@ import { WizardOrders } from '../WizardOrders'
 
 const OrdersManagerUI = (props) => {
   const {
+    isLateralBar,
     isSelectedOrders,
     searchValue,
     driverGroupList,
@@ -191,6 +192,7 @@ const OrdersManagerUI = (props) => {
           setFilterModalOpen={setFilterModalOpen}
           setTimeStatus={setTimeStatus}
           setSlaSettingTime={setSlaSettingTime}
+          isLateralBar={isLateralBar}
         />
         <OrderStatusFilterBar
           isUseQuery={isUseQuery}

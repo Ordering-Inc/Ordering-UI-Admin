@@ -23,6 +23,7 @@ import {
 
 export const OrdersContentHeader = memo((props) => {
   const {
+    isLateralBar,
     isDisableTitle,
     isSelectedOrders,
     title,
@@ -117,6 +118,7 @@ export const OrdersContentHeader = memo((props) => {
                 placeholder={t('SEARCH', 'Search')}
               />
               <OrdersFilterGroup
+                isLateralBar={isLateralBar}
                 filterModalOpen={filterModalOpen}
                 setFilterModalOpen={setFilterModalOpen}
                 driverGroupList={driverGroupList}
