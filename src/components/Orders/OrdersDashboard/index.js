@@ -5,7 +5,7 @@ import {
   OrdersManageContainer
 } from './styles'
 
-export const OrdersDashboard = memo((props) => {
+export const OrdersDashboard = (props) => {
   const [{ configs }] = useConfig()
   const ordersDashboardListProps = {
     ...props
@@ -21,4 +21,4 @@ export const OrdersDashboard = memo((props) => {
       />
     </OrdersManageContainer>
   )
-})
+}

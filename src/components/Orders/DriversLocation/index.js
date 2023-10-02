@@ -9,7 +9,16 @@ import {
   WrapperMap
 } from './styles'
 
-export const DriversLocation = (props) => {
+const DriversLocationPropsAreEqual = (prevProps, nextProps) => {
+  return JSON.stringify(prevProps.selectedDriver) === JSON.stringify(nextProps.selectedDriver) &&
+    JSON.stringify(prevProps.assignedOrders) === JSON.stringify(nextProps.assignedOrders) &&
+    prevProps.driversIsOnline === nextProps.driversIsOnline &&
+    prevProps.onlineDrivers?.length === nextProps.onlineDrivers?.length &&
+    prevProps.offlineDrivers?.length === nextProps.offlineDrivers?.length &&
+    JSON.stringify(prevProps.selectedOrder) === JSON.stringify(nextProps.selectedOrder)
+}
+
+export const DriversLocation = React.memo((props) => {
   const {
     driversIsOnline,
     onlineDrivers,
@@ -267,4 +276,4 @@ export const DriversLocation = (props) => {
       </WrapperMap>
     </>
   )
-}
+}, DriversLocationPropsAreEqual)

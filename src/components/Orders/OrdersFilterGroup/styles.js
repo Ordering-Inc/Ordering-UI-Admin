@@ -198,8 +198,8 @@ export const WarningMessage = styled.div`
   position: absolute;
   display: flex;
   align-items: center;
-  z-index: 10;
-  top: 100%;
+  z-index: 100;
+  bottom: 40px;
   background: ${props => props.theme.colors.warning100};
   border: 1px solid ${props => props.theme.colors.warning};
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
@@ -236,7 +236,16 @@ export const WarningMessage = styled.div`
     padding: 8px 20px;
     font-size: 14px;
     line-height: 24px;
-    right: 0px;
+    ${({ isLateralBar }) => isLateralBar ? css`
+      right: 0px;
+    ` : css`
+      right: 270px;
+    `}
+    ${({ isLateralBar }) => isLateralBar ? css`
+      bottom: 40px;
+    ` : css`
+      bottom: 0;
+    `}
     ${props => props.theme?.rtl && css`
       left: 0px;
       right: initial;
