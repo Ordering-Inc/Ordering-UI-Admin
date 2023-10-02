@@ -20,6 +20,7 @@ import { PaymethodOptionStripeConnect } from '../PaymethodOptionStripeConnect'
 import { PaymentOptionPaypal } from '../PaymentOptionPaypal'
 import { PaymentOptionSquare } from '../PaymentOptionSquare'
 import { PaymentOptionMethods } from '../PaymentOptionMethods'
+import { PaymentOptionCredomatic } from '../PaymentOptionCredomatic'
 import { BusinessWalletsList } from '../BusinessWalletsList'
 import { addQueryToUrl, removeQueryToUrl } from '../../../utils'
 
@@ -266,32 +267,35 @@ const BusinessPaymentMethodsUI = (props) => {
         <>
           {isEdit && (
             <>
-              {!['stripe_direct',
-                'paypal',
-                'paypal_express',
-                'stripe_redirect',
-                'stripe_connect',
-                'square',
-                ...methodsPay
-              ].includes(selectedPaymethodGateway) && (
-                <PaymentOption
-                  sitesState={sitesState}
-                  open={isEdit}
-                  onClose={() => handleCloseEdit()}
-                  businessPaymethod={selectedBusinessPaymethod}
-                  changesState={changesState}
-                  orderTypes={orderTypes}
-                  handleChangeBusinessPaymentState={handleChangeBusinessPaymentState}
-                  cleanChangesState={cleanChangesState}
-                  actionState={actionState}
-                  handleChangeSandbox={handleChangeSandbox}
-                  handleChangeInput={handleChangeInput}
-                  handleSaveClick={handleSaveClick}
-                  handleDeletePaymethod={handleDeleteBusinessPaymethodOption}
-                  deviceState={deviceState}
-                  selectedPaymethodGateway={selectedPaymethodGateway}
-                />
-              )}
+              {
+                !['stripe_direct',
+                  'paypal',
+                  'paypal_express',
+                  'stripe_redirect',
+                  'stripe_connect',
+                  'square',
+                  'credomatic',
+                  ...methodsPay
+                ].includes(selectedPaymethodGateway) && (
+                  <PaymentOption
+                    sitesState={sitesState}
+                    open={isEdit}
+                    onClose={() => handleCloseEdit()}
+                    businessPaymethod={selectedBusinessPaymethod}
+                    changesState={changesState}
+                    orderTypes={orderTypes}
+                    handleChangeBusinessPaymentState={handleChangeBusinessPaymentState}
+                    cleanChangesState={cleanChangesState}
+                    actionState={actionState}
+                    handleChangeSandbox={handleChangeSandbox}
+                    handleChangeInput={handleChangeInput}
+                    handleSaveClick={handleSaveClick}
+                    handleDeletePaymethod={handleDeleteBusinessPaymethodOption}
+                    deviceState={deviceState}
+                    selectedPaymethodGateway={selectedPaymethodGateway}
+                  />
+                )
+              }
               {selectedPaymethodGateway === 'apple_pay' && (
                 <PaymentOptionMethods
                   sitesState={sitesState}
@@ -431,6 +435,23 @@ const BusinessPaymentMethodsUI = (props) => {
                   handleSuccessPaymethodUpdate={handleSuccessPaymethodUpdate}
                 />
               )}
+              {selectedPaymethodGateway === 'credomatic' && (
+                <PaymentOptionCredomatic
+                  open={isEdit}
+                  sitesState={sitesState}
+                  onClose={() => handleCloseEdit()}
+                  businessPaymethod={selectedBusinessPaymethod}
+                  changesState={changesState}
+                  orderTypes={orderTypes}
+                  handleChangeBusinessPaymentState={handleChangeBusinessPaymentState}
+                  cleanChangesState={cleanChangesState}
+                  actionState={actionState}
+                  handleChangeSandbox={handleChangeSandbox}
+                  handleChangeInput={handleChangeInput}
+                  handleSaveClick={handleSaveClick}
+                  handleDeletePaymethod={handleDeleteBusinessPaymethodOption}
+                />
+              )}
             </>
           )}
         </>
@@ -443,28 +464,32 @@ const BusinessPaymentMethodsUI = (props) => {
                 open={isEdit}
                 onClose={() => handleCloseEdit()}
               >
-                {!['stripe_direct',
-                  'paypal',
-                  'paypal_express',
-                  'stripe_redirect',
-                  'stripe_connect'
-                ].includes(selectedPaymethodGateway) && (
-                  <PaymentOption
-                    sitesState={sitesState}
-                    open={isEdit}
-                    onClose={() => handleCloseEdit()}
-                    businessPaymethod={selectedBusinessPaymethod}
-                    changesState={changesState}
-                    orderTypes={orderTypes}
-                    handleChangeBusinessPaymentState={handleChangeBusinessPaymentState}
-                    cleanChangesState={cleanChangesState}
-                    actionState={actionState}
-                    handleChangeSandbox={handleChangeSandbox}
-                    handleChangeInput={handleChangeInput}
-                    handleSaveClick={handleSaveClick}
-                    handleDeletePaymethod={handleDeleteBusinessPaymethodOption}
-                  />
-                )}
+                {
+                  !['stripe_direct',
+                    'paypal',
+                    'paypal_express',
+                    'stripe_redirect',
+                    'stripe_connect',
+                    'square',
+                    'credomatic'
+                  ].includes(selectedPaymethodGateway) && (
+                    <PaymentOption
+                      sitesState={sitesState}
+                      open={isEdit}
+                      onClose={() => handleCloseEdit()}
+                      businessPaymethod={selectedBusinessPaymethod}
+                      changesState={changesState}
+                      orderTypes={orderTypes}
+                      handleChangeBusinessPaymentState={handleChangeBusinessPaymentState}
+                      cleanChangesState={cleanChangesState}
+                      actionState={actionState}
+                      handleChangeSandbox={handleChangeSandbox}
+                      handleChangeInput={handleChangeInput}
+                      handleSaveClick={handleSaveClick}
+                      handleDeletePaymethod={handleDeleteBusinessPaymethodOption}
+                    />
+                  )
+                }
                 {selectedPaymethodGateway === 'stripe_direct' && (
                   <PaymentOptionStripeDirect
                     sitesState={sitesState}
@@ -564,6 +589,23 @@ const BusinessPaymentMethodsUI = (props) => {
                     handleChangeBusinessPaymentState={handleChangeBusinessPaymentState}
                     businessPaymethods={businessPaymethodsState?.paymethods}
                     handleSuccessPaymethodUpdate={handleSuccessPaymethodUpdate}
+                  />
+                )}
+                {selectedPaymethodGateway === 'credomatic' && (
+                  <PaymentOptionCredomatic
+                    open={isEdit}
+                    sitesState={sitesState}
+                    onClose={() => handleCloseEdit()}
+                    businessPaymethod={selectedBusinessPaymethod}
+                    changesState={changesState}
+                    orderTypes={orderTypes}
+                    handleChangeBusinessPaymentState={handleChangeBusinessPaymentState}
+                    cleanChangesState={cleanChangesState}
+                    actionState={actionState}
+                    handleChangeSandbox={handleChangeSandbox}
+                    handleChangeInput={handleChangeInput}
+                    handleSaveClick={handleSaveClick}
+                    handleDeletePaymethod={handleDeleteBusinessPaymethodOption}
                   />
                 )}
               </Modal>
