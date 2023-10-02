@@ -23,6 +23,7 @@ var _PaymethodOptionStripeConnect = require("../PaymethodOptionStripeConnect");
 var _PaymentOptionPaypal = require("../PaymentOptionPaypal");
 var _PaymentOptionSquare = require("../PaymentOptionSquare");
 var _PaymentOptionMethods = require("../PaymentOptionMethods");
+var _PaymentOptionCredomatic = require("../PaymentOptionCredomatic");
 var _BusinessWalletsList = require("../BusinessWalletsList");
 var _utils = require("../../../utils");
 var _styles2 = require("./styles");
@@ -278,7 +279,7 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
     onClick: function onClick() {
       return handleTutorialContinue();
     }
-  }, t('CONTINUE', 'Continue'))), width >= 1000 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isEdit && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !['stripe_direct', 'paypal', 'paypal_express', 'stripe_redirect', 'stripe_connect', 'square'].concat(methodsPay).includes(selectedPaymethodGateway) && /*#__PURE__*/_react.default.createElement(_PaymentOption.PaymentOption, {
+  }, t('CONTINUE', 'Continue'))), width >= 1000 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isEdit && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !['stripe_direct', 'paypal', 'paypal_express', 'stripe_redirect', 'stripe_connect', 'square', 'credomatic'].concat(methodsPay).includes(selectedPaymethodGateway) && /*#__PURE__*/_react.default.createElement(_PaymentOption.PaymentOption, {
     sitesState: sitesState,
     open: isEdit,
     onClose: function onClose() {
@@ -427,13 +428,29 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
     handleChangeBusinessPaymentState: handleChangeBusinessPaymentState,
     businessPaymethods: businessPaymethodsState === null || businessPaymethodsState === void 0 ? void 0 : businessPaymethodsState.paymethods,
     handleSuccessPaymethodUpdate: handleSuccessPaymethodUpdate
+  }), selectedPaymethodGateway === 'credomatic' && /*#__PURE__*/_react.default.createElement(_PaymentOptionCredomatic.PaymentOptionCredomatic, {
+    open: isEdit,
+    sitesState: sitesState,
+    onClose: function onClose() {
+      return handleCloseEdit();
+    },
+    businessPaymethod: selectedBusinessPaymethod,
+    changesState: changesState,
+    orderTypes: orderTypes,
+    handleChangeBusinessPaymentState: handleChangeBusinessPaymentState,
+    cleanChangesState: cleanChangesState,
+    actionState: actionState,
+    handleChangeSandbox: handleChangeSandbox,
+    handleChangeInput: handleChangeInput,
+    handleSaveClick: handleSaveClick,
+    handleDeletePaymethod: handleDeleteBusinessPaymethodOption
   }))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isEdit && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "80%",
     open: isEdit,
     onClose: function onClose() {
       return handleCloseEdit();
     }
-  }, !['stripe_direct', 'paypal', 'paypal_express', 'stripe_redirect', 'stripe_connect'].includes(selectedPaymethodGateway) && /*#__PURE__*/_react.default.createElement(_PaymentOption.PaymentOption, {
+  }, !['stripe_direct', 'paypal', 'paypal_express', 'stripe_redirect', 'stripe_connect', 'square', 'credomatic'].includes(selectedPaymethodGateway) && /*#__PURE__*/_react.default.createElement(_PaymentOption.PaymentOption, {
     sitesState: sitesState,
     open: isEdit,
     onClose: function onClose() {
@@ -544,6 +561,22 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
     handleChangeBusinessPaymentState: handleChangeBusinessPaymentState,
     businessPaymethods: businessPaymethodsState === null || businessPaymethodsState === void 0 ? void 0 : businessPaymethodsState.paymethods,
     handleSuccessPaymethodUpdate: handleSuccessPaymethodUpdate
+  }), selectedPaymethodGateway === 'credomatic' && /*#__PURE__*/_react.default.createElement(_PaymentOptionCredomatic.PaymentOptionCredomatic, {
+    open: isEdit,
+    sitesState: sitesState,
+    onClose: function onClose() {
+      return handleCloseEdit();
+    },
+    businessPaymethod: selectedBusinessPaymethod,
+    changesState: changesState,
+    orderTypes: orderTypes,
+    handleChangeBusinessPaymentState: handleChangeBusinessPaymentState,
+    cleanChangesState: cleanChangesState,
+    actionState: actionState,
+    handleChangeSandbox: handleChangeSandbox,
+    handleChangeInput: handleChangeInput,
+    handleSaveClick: handleSaveClick,
+    handleDeletePaymethod: handleDeleteBusinessPaymethodOption
   })))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('PAYMETHODS', 'Payment methods'),
     content: alertState.content,
