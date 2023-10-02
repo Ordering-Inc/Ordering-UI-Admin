@@ -253,7 +253,8 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.MainContentContainer, null, /*#__PURE__*/_react.default.createElement(_styles.TopContent, null, /*#__PURE__*/_react.default.createElement(_styles.DriversContainer, null, /*#__PURE__*/_react.default.createElement(_DriversManager.DriversManager, {
     setMapsData: setMapsData,
     handleUpdateAssignedOrders: handleUpdateAssignedOrders,
-    disableSocketRoomDriver: true
+    disableSocketRoomDriver: true,
+    drivers: driversList.drivers
   })), /*#__PURE__*/_react.default.createElement(_styles.OrdersContainer, null, /*#__PURE__*/_react.default.createElement(_OrderStatusFilterBar.OrderStatusFilterBar, {
     isUseQuery: isUseQuery,
     selectedOrderStatus: ordersStatusGroup,

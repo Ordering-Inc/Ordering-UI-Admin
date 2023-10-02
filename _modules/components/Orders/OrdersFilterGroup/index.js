@@ -40,7 +40,8 @@ function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" !=
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; } // import { OrderStatusTypeSelector } from '../OrderStatusTypeSelector'
 var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
   var _filterValues$logisti, _filterValues$assigne;
-  var filterModalOpen = props.filterModalOpen,
+  var isLateralBar = props.isLateralBar,
+    filterModalOpen = props.filterModalOpen,
     setFilterModalOpen = props.setFilterModalOpen,
     searchValue = props.searchValue,
     handleChangeSearch = props.handleChangeSearch,
@@ -184,7 +185,9 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
       return setFilterModalOpen && setFilterModalOpen(true);
     },
     name: "filter-btn"
-  }, filterApplied ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Funnel, null) : /*#__PURE__*/_react.default.createElement(_MdcFilterOff.default, null)), (filterApplied || !!searchValue) && /*#__PURE__*/_react.default.createElement(_styles2.WarningMessage, null, /*#__PURE__*/_react.default.createElement(_TiWarningOutline.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('WARNING_FILTER_APPLIED', 'Filters applied. You may miss new orders.')), /*#__PURE__*/_react.default.createElement(_styles.LinkButton, {
+  }, filterApplied ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Funnel, null) : /*#__PURE__*/_react.default.createElement(_MdcFilterOff.default, null)), (filterApplied || !!searchValue) && /*#__PURE__*/_react.default.createElement(_styles2.WarningMessage, {
+    isLateralBar: isLateralBar
+  }, /*#__PURE__*/_react.default.createElement(_TiWarningOutline.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('WARNING_FILTER_APPLIED', 'Filters applied. You may miss new orders.')), /*#__PURE__*/_react.default.createElement(_styles.LinkButton, {
     onClick: function onClick() {
       return handleClearFilters();
     }

@@ -13,6 +13,7 @@ var _InfoShareContext = require("../../../contexts/InfoShareContext");
 var _Users = require("../../Users");
 var _reactBootstrap = require("react-bootstrap");
 var _styles2 = require("./styles");
+var _TiWarningOutline = _interopRequireDefault(require("@meronex/icons/ti/TiWarningOutline"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -43,6 +44,9 @@ var UsersListingHeader = function UsersListingHeader(props) {
     _useInfoShare2 = _slicedToArray(_useInfoShare, 2),
     isCollapse = _useInfoShare2[0].isCollapse,
     handleMenuCollapse = _useInfoShare2[1].handleMenuCollapse;
+  var handleClearFilters = function handleClearFilters() {
+    if (searchValue) onSearch('');
+  };
   return /*#__PURE__*/_react.default.createElement(_styles2.HeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderTitleContainer, null, isCollapse && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {
@@ -76,7 +80,11 @@ var UsersListingHeader = function UsersListingHeader(props) {
     deleteUsersActionState: deleteUsersActionState,
     handleDeleteSeveralUsers: handleDeleteSeveralUsers,
     disabled: actionDisabled
-  }), /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
+  }), !!searchValue && /*#__PURE__*/_react.default.createElement(_styles2.WarningMessage, null, /*#__PURE__*/_react.default.createElement(_TiWarningOutline.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('WARNING_FILTER_APPLIED', 'Filters applied. You may miss new orders.')), /*#__PURE__*/_react.default.createElement(_styles.LinkButton, {
+    onClick: function onClick() {
+      return handleClearFilters();
+    }
+  }, t('CLEAR_FILTERS', 'Clear filters'))), /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
     lazyLoad: true,
     isCustomLayout: true,
     onSearch: onSearch,
