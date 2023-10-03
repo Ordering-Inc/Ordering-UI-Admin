@@ -115,6 +115,7 @@ const DeliveriesManagerUI = (props) => {
               setOrdersAmountByStatus={setOrdersAmountByStatus}
               numberOfOrdersBySubstatus={numberOfOrdersBySubstatus}
               isUseQuery={isUseQuery}
+              franchisesList={props.franchisesList}
             />
           </WrapItemView>
         </OrdersContent>
