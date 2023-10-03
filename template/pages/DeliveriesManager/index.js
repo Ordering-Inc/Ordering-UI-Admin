@@ -9,6 +9,7 @@ export const DeliveriesManager = (props) => {
     ...props,
     isUseQuery: true,
     useBatchSockets: settings?.use_batch_sockets,
+    useFranchiseImages: settings?.use_franchise_images,
     onOrderRedirect: (orderId) => {
       if (!orderId) {
         return removeQueryToUrl(['id'])
