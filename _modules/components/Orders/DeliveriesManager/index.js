@@ -138,7 +138,8 @@ var DeliveriesManagerUI = function DeliveriesManagerUI(props) {
     ordersAmountByStatus: ordersAmountByStatus,
     setOrdersAmountByStatus: setOrdersAmountByStatus,
     numberOfOrdersBySubstatus: numberOfOrdersBySubstatus,
-    isUseQuery: isUseQuery
+    isUseQuery: isUseQuery,
+    franchisesList: props.franchisesList
   })))), isOpenOrderDetail && /*#__PURE__*/_react.default.createElement(_OrderDetails.OrderDetails, {
     open: isOpenOrderDetail,
     order: detailsOrder,
