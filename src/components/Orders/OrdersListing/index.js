@@ -143,6 +143,7 @@ export const OrdersListing = memo((props) => {
                   handleDrop={handleDrop}
                   saveUserSettings={saveUserSettings}
                   isUseQuery={isUseQuery}
+                  franchisesList={props.franchisesList}
                 />
               ) : (
                 <OrdersCards
@@ -162,6 +163,7 @@ export const OrdersListing = memo((props) => {
                   slaSettingTime={slaSettingTime}
                   isDelivery={isDelivery}
                   isUseQuery={isUseQuery}
+                  franchisesList={props.franchisesList}
                 />
               )}
             </WrapperOrderListContent>

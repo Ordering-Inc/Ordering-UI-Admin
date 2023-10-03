@@ -12,5 +12,6 @@
     "url": "https://socket-v3.ordering.co"
   },
   "use_project_domain": false,
-  "use_batch_sockets": false
+  "use_batch_sockets": false,
+  "use_franchise_images": false
 }

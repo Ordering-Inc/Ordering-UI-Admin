@@ -36,7 +36,8 @@ export const OrdersCards = (props) => {
     handleUpdateDriverLocation,
     slaSettingTime,
     isDelivery,
-    isUseQuery
+    isUseQuery,
+    franchisesList
   } = props
   const [{ dictionary }, t] = useLanguage()
   const theme = useTheme()
@@ -49,6 +50,11 @@ export const OrdersCards = (props) => {
     slaBar: true
   })
   const showExternalId = configState?.configs?.change_order_id?.value === '1'
+
+  const franchiseImages = !franchisesList?.error && franchisesList?.franchises?.reduce((imageKeys, franchise) => {
+    imageKeys[franchise.id] = franchise.logo
+    return imageKeys
+  }, {})
 
   const handleChangePage = (page) => {
     getPageOrders(pagination.pageSize, page)
@@ -251,7 +257,7 @@ export const OrdersCards = (props) => {
                 <CardContent>
                   <InfoItemContainer>
                     <WrapperImage>
-                      <img src={optimizeImage(order.business?.logo || theme.images?.dummies?.businessLogo, 'h_50,c_limit')} loading='lazy' alt='' />
+                      <img src={optimizeImage(franchiseImages[order?.business?.franchise_id] || order.business?.logo || theme.images?.dummies?.businessLogo, 'h_50,c_limit')} loading='lazy' alt='' />
                     </WrapperImage>
                     <div className='info'>
                       <p className='bold'>{order?.business?.name}</p>
