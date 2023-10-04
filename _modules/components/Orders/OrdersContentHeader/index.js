@@ -83,9 +83,9 @@ var OrdersContentHeader = /*#__PURE__*/(0, _react.memo)(function (props) {
     setSlaSettingTime: setSlaSettingTime
   }), /*#__PURE__*/_react.default.createElement(_OrdersDashboardSLAControls.OrdersDashboardSLAControls, {
     setTimeStatus: setTimeStatus
-  })), isShowSearchFilters && /*#__PURE__*/_react.default.createElement(_styles2.WrapperSearchAndFilter, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperSearchAndFilter, {
     fullWidth: isDisableTitle
-  }, /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
+  }, isShowSearchFilters && /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
     isCustomLayout: true,
     lazyLoad: true,
     onSearch: handleChangeSearch,
