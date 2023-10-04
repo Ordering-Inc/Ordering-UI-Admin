@@ -11,10 +11,16 @@ var _AnalyticsCalendar = require("../../AnalyticsCalendar");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _AnalyticsFilterTimeZone = require("../../AnalyticsFilterTimeZone");
-var _styles = require("./styles");
+var _styles = require("../../../../styles");
+var _styles2 = require("./styles");
+var _Shared = require("../../../Shared");
+var _ReportsDriverGroupFilter = require("../../ReportsDriverGroupFilter");
+var _ReportsBrandFilter = require("../../ReportsBrandFilter");
+var _ReportsDriverFilter = require("../../ReportsDriverFilter");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
@@ -31,7 +37,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ReportsSlaOrdersUI = function ReportsSlaOrdersUI(props) {
-  var _reportData$content2, _reportData$content3, _reportData$content4, _reportData$content5, _reportData$content6, _reportData$content7, _reportData$content8;
+  var _filterList$franchise, _reportData$content2, _reportData$content3, _reportData$content4, _reportData$content5, _reportData$content6, _reportData$content7, _reportData$content8;
   var filterList = props.filterList,
     handleChangeFilterList = props.handleChangeFilterList,
     reportData = props.reportData;
@@ -41,6 +47,22 @@ var ReportsSlaOrdersUI = function ReportsSlaOrdersUI(props) {
   var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
     _useUtils2 = _slicedToArray(_useUtils, 1),
     parsePrice = _useUtils2[0].parsePrice;
+  var _useState = (0, _react.useState)(false),
+    _useState2 = _slicedToArray(_useState, 2),
+    isDriverGroupFilter = _useState2[0],
+    setIsDriverGroupFilter = _useState2[1];
+  var _useState3 = (0, _react.useState)(false),
+    _useState4 = _slicedToArray(_useState3, 2),
+    isBrandFilter = _useState4[0],
+    setIsBrandFilter = _useState4[1];
+  var _useState5 = (0, _react.useState)(false),
+    _useState6 = _slicedToArray(_useState5, 2),
+    isDriverFilter = _useState6[0],
+    setIsDriverFilter = _useState6[1];
+  var _useState7 = (0, _react.useState)(null),
+    _useState8 = _slicedToArray(_useState7, 2),
+    availableDriverIds = _useState8[0],
+    setAvailableDriverIds = _useState8[1];
   var tableRef = (0, _react.useRef)(null);
   var handleChangeDate = function handleChangeDate(date1, date2) {
     handleChangeFilterList(_objectSpread(_objectSpread({}, filterList), {}, {
@@ -116,10 +138,22 @@ var ReportsSlaOrdersUI = function ReportsSlaOrdersUI(props) {
     REPORT_HEADER_DELAYED: t('DELAYED', 'Delayed'),
     REPORT_HEADER_STATUS: t('STATUS', 'Status')
   };
-  return /*#__PURE__*/_react.default.createElement(_styles.ReportsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Title, null, t('SLA_ORDERS', 'SLA orders')), /*#__PURE__*/_react.default.createElement(_styles.ButtonActionList, null, /*#__PURE__*/_react.default.createElement(_styles.TimeZoneAndCalendar, null, /*#__PURE__*/_react.default.createElement(_styles.AnalyticsTimeZoneWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsFilterTimeZone.AnalyticsFilterTimeZone, props)), /*#__PURE__*/_react.default.createElement(_styles.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, {
+  return /*#__PURE__*/_react.default.createElement(_styles2.ReportsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Title, null, t('SLA_ORDERS', 'SLA orders')), /*#__PURE__*/_react.default.createElement(_styles2.ButtonActionList, null, /*#__PURE__*/_react.default.createElement(_styles2.BrandBusinessWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    onClick: function onClick() {
+      return setIsDriverGroupFilter(true);
+    }
+  }, t('DRIVER_GROUP', 'Driver group'), " (", filterList !== null && filterList !== void 0 && filterList.driver_groups_ids ? filterList === null || filterList === void 0 ? void 0 : filterList.driver_groups_ids.length : t('ALL', 'All'), ")"), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    onClick: function onClick() {
+      return setIsDriverFilter(true);
+    }
+  }, t('DRIVER', 'Driver'), " (", filterList !== null && filterList !== void 0 && filterList.drivers_ids ? filterList === null || filterList === void 0 ? void 0 : filterList.drivers_ids.length : t('ALL', 'All'), ")"), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    onClick: function onClick() {
+      return setIsBrandFilter(true);
+    }
+  }, t('BRAND', 'Brand'), " (", filterList !== null && filterList !== void 0 && filterList.franchises_id ? filterList === null || filterList === void 0 || (_filterList$franchise = filterList.franchises_id) === null || _filterList$franchise === void 0 ? void 0 : _filterList$franchise.length : t('ALL', 'All'), ")")), /*#__PURE__*/_react.default.createElement(_styles2.TimeZoneAndCalendar, null, /*#__PURE__*/_react.default.createElement(_styles2.AnalyticsTimeZoneWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsFilterTimeZone.AnalyticsFilterTimeZone, props)), /*#__PURE__*/_react.default.createElement(_styles2.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, {
     handleChangeDate: handleChangeDate,
     defaultValue: filterList
-  })))), /*#__PURE__*/_react.default.createElement(_styles.ReportsTableContainer, null, /*#__PURE__*/_react.default.createElement(_styles.TitleBlock, {
+  })))), /*#__PURE__*/_react.default.createElement(_styles2.ReportsTableContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.TitleBlock, {
     active: (reportData === null || reportData === void 0 || (_reportData$content2 = reportData.content) === null || _reportData$content2 === void 0 || (_reportData$content2 = _reportData$content2.body) === null || _reportData$content2 === void 0 || (_reportData$content2 = _reportData$content2.rows) === null || _reportData$content2 === void 0 ? void 0 : _reportData$content2.length) > 0
   }, /*#__PURE__*/_react.default.createElement("h2", null, t('SLA_ORDERS', 'SLA orders')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Download, {
     onClick: function onClick() {
@@ -132,9 +166,9 @@ var ReportsSlaOrdersUI = function ReportsSlaOrdersUI(props) {
       className: "col-md-3 col-sm-3 col-3",
       key: i
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null));
-  })) : /*#__PURE__*/_react.default.createElement(_styles.TableWrapper, null, (reportData === null || reportData === void 0 || (_reportData$content3 = reportData.content) === null || _reportData$content3 === void 0 || (_reportData$content3 = _reportData$content3.body) === null || _reportData$content3 === void 0 || (_reportData$content3 = _reportData$content3.rows) === null || _reportData$content3 === void 0 ? void 0 : _reportData$content3.length) > 0 ? /*#__PURE__*/_react.default.createElement(_styles.ReportsTable, {
+  })) : /*#__PURE__*/_react.default.createElement(_styles2.TableWrapper, null, (reportData === null || reportData === void 0 || (_reportData$content3 = reportData.content) === null || _reportData$content3 === void 0 || (_reportData$content3 = _reportData$content3.body) === null || _reportData$content3 === void 0 || (_reportData$content3 = _reportData$content3.rows) === null || _reportData$content3 === void 0 ? void 0 : _reportData$content3.length) > 0 ? /*#__PURE__*/_react.default.createElement(_styles2.ReportsTable, {
     ref: tableRef
-  }, (reportData === null || reportData === void 0 || (_reportData$content4 = reportData.content) === null || _reportData$content4 === void 0 || (_reportData$content4 = _reportData$content4.header) === null || _reportData$content4 === void 0 ? void 0 : _reportData$content4.rows.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.Thead, null, reportData === null || reportData === void 0 || (_reportData$content5 = reportData.content) === null || _reportData$content5 === void 0 || (_reportData$content5 = _reportData$content5.header) === null || _reportData$content5 === void 0 ? void 0 : _reportData$content5.rows.map(function (tr, i) {
+  }, (reportData === null || reportData === void 0 || (_reportData$content4 = reportData.content) === null || _reportData$content4 === void 0 || (_reportData$content4 = _reportData$content4.header) === null || _reportData$content4 === void 0 ? void 0 : _reportData$content4.rows.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.Thead, null, reportData === null || reportData === void 0 || (_reportData$content5 = reportData.content) === null || _reportData$content5 === void 0 || (_reportData$content5 = _reportData$content5.header) === null || _reportData$content5 === void 0 ? void 0 : _reportData$content5.rows.map(function (tr, i) {
     return /*#__PURE__*/_react.default.createElement("tr", {
       key: i
     }, tr === null || tr === void 0 ? void 0 : tr.map(function (th, j) {
@@ -144,7 +178,7 @@ var ReportsSlaOrdersUI = function ReportsSlaOrdersUI(props) {
       }, t(th.value.toUpperCase(), thObj[th.value]));
     }));
   })), reportData === null || reportData === void 0 || (_reportData$content6 = reportData.content) === null || _reportData$content6 === void 0 || (_reportData$content6 = _reportData$content6.body) === null || _reportData$content6 === void 0 ? void 0 : _reportData$content6.rows.map(function (tbody, i) {
-    return /*#__PURE__*/_react.default.createElement(_styles.Tbody, {
+    return /*#__PURE__*/_react.default.createElement(_styles2.Tbody, {
       key: i
     }, /*#__PURE__*/_react.default.createElement("tr", null, tbody.map(function (td, j) {
       return /*#__PURE__*/_react.default.createElement("td", {
@@ -152,7 +186,7 @@ var ReportsSlaOrdersUI = function ReportsSlaOrdersUI(props) {
         colSpan: td.colspan
       }, td.value_unit === 'seconds' && td.value ? convertHMS(td.value) : td.value_unit === 'currency' ? parsePrice(td.value) : td.value);
     })));
-  }), (reportData === null || reportData === void 0 || (_reportData$content7 = reportData.content) === null || _reportData$content7 === void 0 || (_reportData$content7 = _reportData$content7.footer) === null || _reportData$content7 === void 0 ? void 0 : _reportData$content7.rows.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.Tfoot, null, reportData === null || reportData === void 0 || (_reportData$content8 = reportData.content) === null || _reportData$content8 === void 0 || (_reportData$content8 = _reportData$content8.footer) === null || _reportData$content8 === void 0 ? void 0 : _reportData$content8.rows.map(function (tr, i) {
+  }), (reportData === null || reportData === void 0 || (_reportData$content7 = reportData.content) === null || _reportData$content7 === void 0 || (_reportData$content7 = _reportData$content7.footer) === null || _reportData$content7 === void 0 ? void 0 : _reportData$content7.rows.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.Tfoot, null, reportData === null || reportData === void 0 || (_reportData$content8 = reportData.content) === null || _reportData$content8 === void 0 || (_reportData$content8 = _reportData$content8.footer) === null || _reportData$content8 === void 0 ? void 0 : _reportData$content8.rows.map(function (tr, i) {
     return /*#__PURE__*/_react.default.createElement("tr", {
       key: i
     }, tr === null || tr === void 0 ? void 0 : tr.map(function (td, j) {
@@ -161,7 +195,48 @@ var ReportsSlaOrdersUI = function ReportsSlaOrdersUI(props) {
         colSpan: td.colspan
       }, td.value);
     }));
-  }))) : /*#__PURE__*/_react.default.createElement(_styles.EmptyContent, null, t('NO_DATA', 'No Data')))));
+  }))) : /*#__PURE__*/_react.default.createElement(_styles2.EmptyContent, null, t('NO_DATA', 'No Data')))), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    width: "50%",
+    height: "80vh",
+    padding: "30px",
+    title: t('DRIVER_GROUP', 'Driver group'),
+    open: isDriverGroupFilter,
+    onClose: function onClose() {
+      return setIsDriverGroupFilter(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_ReportsDriverGroupFilter.ReportsDriverGroupFilter, _extends({}, props, {
+    onClose: function onClose() {
+      return setIsDriverGroupFilter(false);
+    },
+    setAvailableDriverIds: setAvailableDriverIds
+  }))), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    width: "50%",
+    height: "80vh",
+    padding: "30px",
+    title: t('BRAND', 'Brand'),
+    open: isBrandFilter,
+    onClose: function onClose() {
+      return setIsBrandFilter(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_ReportsBrandFilter.ReportsBrandFilter, _extends({}, props, {
+    onClose: function onClose() {
+      return setIsBrandFilter(false);
+    }
+  }))), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    width: "50%",
+    height: "80vh",
+    padding: "30px",
+    title: t('DRIVER', 'Driver'),
+    open: isDriverFilter,
+    onClose: function onClose() {
+      return setIsDriverFilter(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_ReportsDriverFilter.ReportsDriverFilter, _extends({}, props, {
+    onClose: function onClose() {
+      return setIsDriverFilter(false);
+    },
+    availableDriverIds: availableDriverIds
+  }))));
 };
 var ReportsSlaOrders = function ReportsSlaOrders(props) {
   var reportsSlaOrdersProps = _objectSpread(_objectSpread({}, props), {}, {
