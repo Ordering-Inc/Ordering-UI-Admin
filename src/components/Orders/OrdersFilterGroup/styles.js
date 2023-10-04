@@ -204,7 +204,7 @@ export const WarningMessage = styled.div`
   border: 1px solid ${props => props.theme.colors.warning};
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
   border-radius: 7.6px;
-  padding: 6px 15px;
+  padding: 0px 15px;
   box-sizing: border-box;
   margin: 10px 0px 0px 0px !important;
 
@@ -233,18 +233,18 @@ export const WarningMessage = styled.div`
   }
 
   @media (min-width: 768px) {
-    padding: 8px 20px;
+    padding: 0px 20px;
     font-size: 14px;
     line-height: 24px;
     ${({ isLateralBar }) => isLateralBar ? css`
       right: 0px;
     ` : css`
-      right: 270px;
+      right: 0px;
     `}
     ${({ isLateralBar }) => isLateralBar ? css`
-      bottom: 40px;
+      bottom: -25px;
     ` : css`
-      bottom: 0;
+      bottom: -20px;
     `}
     ${props => props.theme?.rtl && css`
       left: 0px;
