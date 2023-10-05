@@ -12,11 +12,11 @@ var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _AnalyticsFilterTimeZone = require("../../AnalyticsFilterTimeZone");
 var _styles = require("../../../../styles");
-var _styles2 = require("./styles");
 var _Shared = require("../../../Shared");
 var _ReportsDriverGroupFilter = require("../../ReportsDriverGroupFilter");
-var _ReportsBrandFilter = require("../../ReportsBrandFilter");
 var _ReportsDriverFilter = require("../../ReportsDriverFilter");
+var _AnalyticsBusinessFilter = require("../../AnalyticsBusinessFilter");
+var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -37,7 +37,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ReportsSlaOrdersUI = function ReportsSlaOrdersUI(props) {
-  var _filterList$franchise, _reportData$content2, _reportData$content3, _reportData$content4, _reportData$content5, _reportData$content6, _reportData$content7, _reportData$content8;
+  var _reportData$content2, _reportData$content3, _reportData$content4, _reportData$content5, _reportData$content6, _reportData$content7, _reportData$content8;
   var filterList = props.filterList,
     handleChangeFilterList = props.handleChangeFilterList,
     reportData = props.reportData;
@@ -53,12 +53,12 @@ var ReportsSlaOrdersUI = function ReportsSlaOrdersUI(props) {
     setIsDriverGroupFilter = _useState2[1];
   var _useState3 = (0, _react.useState)(false),
     _useState4 = _slicedToArray(_useState3, 2),
-    isBrandFilter = _useState4[0],
-    setIsBrandFilter = _useState4[1];
+    isDriverFilter = _useState4[0],
+    setIsDriverFilter = _useState4[1];
   var _useState5 = (0, _react.useState)(false),
     _useState6 = _slicedToArray(_useState5, 2),
-    isDriverFilter = _useState6[0],
-    setIsDriverFilter = _useState6[1];
+    isBusinessFilter = _useState6[0],
+    setIsBusinessFilter = _useState6[1];
   var _useState7 = (0, _react.useState)(null),
     _useState8 = _slicedToArray(_useState7, 2),
     availableDriverIds = _useState8[0],
@@ -148,9 +148,9 @@ var ReportsSlaOrdersUI = function ReportsSlaOrdersUI(props) {
     }
   }, t('DRIVER', 'Driver'), " (", filterList !== null && filterList !== void 0 && filterList.drivers_ids ? filterList === null || filterList === void 0 ? void 0 : filterList.drivers_ids.length : t('ALL', 'All'), ")"), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     onClick: function onClick() {
-      return setIsBrandFilter(true);
+      return setIsBusinessFilter(true);
     }
-  }, t('BRAND', 'Brand'), " (", filterList !== null && filterList !== void 0 && filterList.franchises_id ? filterList === null || filterList === void 0 || (_filterList$franchise = filterList.franchises_id) === null || _filterList$franchise === void 0 ? void 0 : _filterList$franchise.length : t('ALL', 'All'), ")")), /*#__PURE__*/_react.default.createElement(_styles2.TimeZoneAndCalendar, null, /*#__PURE__*/_react.default.createElement(_styles2.AnalyticsTimeZoneWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsFilterTimeZone.AnalyticsFilterTimeZone, props)), /*#__PURE__*/_react.default.createElement(_styles2.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, {
+  }, t('BUSINESS', 'Business'), " (", filterList !== null && filterList !== void 0 && filterList.businessIds ? filterList === null || filterList === void 0 ? void 0 : filterList.businessIds.length : t('ALL', 'All'), ")")), /*#__PURE__*/_react.default.createElement(_styles2.TimeZoneAndCalendar, null, /*#__PURE__*/_react.default.createElement(_styles2.AnalyticsTimeZoneWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsFilterTimeZone.AnalyticsFilterTimeZone, props)), /*#__PURE__*/_react.default.createElement(_styles2.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, {
     handleChangeDate: handleChangeDate,
     defaultValue: filterList
   })))), /*#__PURE__*/_react.default.createElement(_styles2.ReportsTableContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.TitleBlock, {
@@ -213,19 +213,6 @@ var ReportsSlaOrdersUI = function ReportsSlaOrdersUI(props) {
     width: "50%",
     height: "80vh",
     padding: "30px",
-    title: t('BRAND', 'Brand'),
-    open: isBrandFilter,
-    onClose: function onClose() {
-      return setIsBrandFilter(false);
-    }
-  }, /*#__PURE__*/_react.default.createElement(_ReportsBrandFilter.ReportsBrandFilter, _extends({}, props, {
-    onClose: function onClose() {
-      return setIsBrandFilter(false);
-    }
-  }))), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
-    width: "50%",
-    height: "80vh",
-    padding: "30px",
     title: t('DRIVER', 'Driver'),
     open: isDriverFilter,
     onClose: function onClose() {
@@ -236,6 +223,20 @@ var ReportsSlaOrdersUI = function ReportsSlaOrdersUI(props) {
       return setIsDriverFilter(false);
     },
     availableDriverIds: availableDriverIds
+  }))), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    width: "50%",
+    height: "80vh",
+    padding: "30px",
+    title: t('BUSINESSES', 'Businesses'),
+    open: isBusinessFilter,
+    onClose: function onClose() {
+      return setIsBusinessFilter(false);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_AnalyticsBusinessFilter.AnalyticsBusinessFilter, _extends({}, props, {
+    onClose: function onClose() {
+      return setIsBusinessFilter(false);
+    },
+    isFranchise: true
   }))));
 };
 var ReportsSlaOrders = function ReportsSlaOrders(props) {
