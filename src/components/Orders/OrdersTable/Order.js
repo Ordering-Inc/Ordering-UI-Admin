@@ -34,7 +34,8 @@ export const Order = React.memo((props) => {
     getPriorityTag,
     groupStatus,
     displayDelayedTime,
-    getCurrenySymbol
+    getCurrenySymbol,
+    franchiseImages
   } = props
 
   const [, t] = useLanguage()
@@ -146,7 +147,7 @@ export const Order = React.memo((props) => {
                 <BusinessInfo>
                   {!hidePhoto && (
                     <WrapperImage>
-                      <img src={optimizeImage(order.business?.logo || theme.images?.dummies?.businessLogo, 'h_50,c_limit')} loading='lazy' alt='' />
+                      <img src={optimizeImage(franchiseImages[order?.business?.franchise_id] || order.business?.logo || theme.images?.dummies?.businessLogo, 'h_50,c_limit')} loading='lazy' alt='' />
                     </WrapperImage>
                   )}
                   <div className='info'>

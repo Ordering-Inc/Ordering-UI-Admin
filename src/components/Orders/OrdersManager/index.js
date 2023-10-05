@@ -255,6 +255,7 @@ const OrdersManagerUI = (props) => {
                 setAllowColumns={setAllowColumns}
                 ordersAmountByStatus={ordersAmountByStatus}
                 setOrdersAmountByStatus={setOrdersAmountByStatus}
+                franchisesList={props.franchisesList}
               />
             </WrapItemView>
           </OrdersInnerContent>
