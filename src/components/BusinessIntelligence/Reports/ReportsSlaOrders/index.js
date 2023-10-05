@@ -10,6 +10,10 @@ import { Download } from 'react-bootstrap-icons'
 import Skeleton from 'react-loading-skeleton'
 import { AnalyticsFilterTimeZone } from '../../AnalyticsFilterTimeZone'
 import { Button } from '../../../../styles'
+import { Modal } from '../../../Shared'
+import { ReportsDriverGroupFilter } from '../../ReportsDriverGroupFilter'
+import { ReportsDriverFilter } from '../../ReportsDriverFilter'
+import { AnalyticsBusinessFilter } from '../../AnalyticsBusinessFilter'
 
 import {
   ReportsContainer,
@@ -28,10 +32,6 @@ import {
   TimeZoneAndCalendar,
   BrandBusinessWrapper
 } from './styles'
-import { Modal } from '../../../Shared'
-import { ReportsDriverGroupFilter } from '../../ReportsDriverGroupFilter'
-import { ReportsBrandFilter } from '../../ReportsBrandFilter'
-import { ReportsDriverFilter } from '../../ReportsDriverFilter'
 
 const ReportsSlaOrdersUI = (props) => {
   const {
@@ -43,8 +43,8 @@ const ReportsSlaOrdersUI = (props) => {
   const [, t] = useLanguage()
   const [{ parsePrice }] = useUtils()
   const [isDriverGroupFilter, setIsDriverGroupFilter] = useState(false)
-  const [isBrandFilter, setIsBrandFilter] = useState(false)
   const [isDriverFilter, setIsDriverFilter] = useState(false)
+  const [isBusinessFilter, setIsBusinessFilter] = useState(false)
   const [availableDriverIds, setAvailableDriverIds] = useState(null)
 
   const tableRef = useRef(null)
@@ -131,10 +131,10 @@ const ReportsSlaOrdersUI = (props) => {
             >
               {t('DRIVER', 'Driver')} ({filterList?.drivers_ids ? filterList?.drivers_ids.length : t('ALL', 'All')})
             </Button>
-          <Button
-            onClick={() => setIsBrandFilter(true)}
+            <Button
+            onClick={() => setIsBusinessFilter(true)}
           >
-            {t('BRAND', 'Brand')} ({filterList?.franchises_id ? filterList?.franchises_id?.length : t('ALL', 'All')})
+            {t('BUSINESS', 'Business')} ({filterList?.businessIds ? filterList?.businessIds.length : t('ALL', 'All')})
           </Button>
         </BrandBusinessWrapper>
         <TimeZoneAndCalendar>
@@ -231,18 +231,6 @@ const ReportsSlaOrdersUI = (props) => {
           width='50%'
           height='80vh'
           padding='30px'
-          title={t('BRAND', 'Brand')}
-          open={isBrandFilter}
-          onClose={() => setIsBrandFilter(false)}
-        >
-          <ReportsBrandFilter
-            {...props} onClose={() => setIsBrandFilter(false)}
-          />
-        </Modal>
-        <Modal
-          width='50%'
-          height='80vh'
-          padding='30px'
           title={t('DRIVER', 'Driver')}
           open={isDriverFilter}
           onClose={() => setIsDriverFilter(false)}
@@ -253,6 +241,20 @@ const ReportsSlaOrdersUI = (props) => {
             availableDriverIds={availableDriverIds}
           />
         </Modal>
+        <Modal
+        width='50%'
+        height='80vh'
+        padding='30px'
+        title={t('BUSINESSES', 'Businesses')}
+        open={isBusinessFilter}
+        onClose={() => setIsBusinessFilter(false)}
+      >
+        <AnalyticsBusinessFilter
+          {...props}
+          onClose={() => setIsBusinessFilter(false)}
+          isFranchise
+        />
+      </Modal>
     </ReportsContainer>
   )
 }
