@@ -130,7 +130,8 @@ var OrdersListing = /*#__PURE__*/(0, _react.memo)(function (props) {
     setAllowColumns: setAllowColumns,
     handleDrop: handleDrop,
     saveUserSettings: saveUserSettings,
-    isUseQuery: isUseQuery
+    isUseQuery: isUseQuery,
+    franchisesList: props.franchisesList
   }) : /*#__PURE__*/_react.default.createElement(_OrdersCards.OrdersCards, {
     isMessagesView: isMessagesView,
     orderList: orderList,
@@ -146,7 +147,8 @@ var OrdersListing = /*#__PURE__*/(0, _react.memo)(function (props) {
     handleUpdateDriverLocation: handleUpdateDriverLocation,
     slaSettingTime: slaSettingTime,
     isDelivery: isDelivery,
-    isUseQuery: isUseQuery
+    isUseQuery: isUseQuery,
+    franchisesList: props.franchisesList
   }))));
 });
 exports.OrdersListing = OrdersListing;

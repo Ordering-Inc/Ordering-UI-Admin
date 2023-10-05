@@ -38,7 +38,7 @@ var OrderTablePropsAreEqual = function OrderTablePropsAreEqual(prevProps, nextPr
   return prevProps.isSelectedOrders === nextProps.isSelectedOrders && JSON.stringify(prevProps.orderList) === JSON.stringify(nextProps.orderList) && JSON.stringify(prevProps.pagination) === JSON.stringify(nextProps.pagination) && JSON.stringify(prevProps.selectedOrderIds) === JSON.stringify(nextProps.selectedOrderIds) && JSON.stringify(prevProps.isTourOpen) === JSON.stringify(nextProps.isTourOpen) && prevProps.groupStatus === nextProps.groupStatus && JSON.stringify(prevProps.allowColumns) === JSON.stringify(nextProps.allowColumns) && prevProps.isUseQuery === nextProps.isUseQuery;
 };
 var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
-  var _configState$configs, _configState$configs2, _orderList$orders3;
+  var _configState$configs, _configState$configs2, _franchisesList$franc, _orderList$orders3;
   var hidePhoto = props.hidePhoto,
     isSelectedOrders = props.isSelectedOrders,
     orderList = props.orderList,
@@ -58,7 +58,8 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
     setAllowColumns = props.setAllowColumns,
     handleDrop = props.handleDrop,
     saveUserSettings = props.saveUserSettings,
-    isUseQuery = props.isUseQuery;
+    isUseQuery = props.isUseQuery,
+    franchisesList = props.franchisesList;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     dictionary = _useLanguage2[0].dictionary,
@@ -87,6 +88,10 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
     configState = _useConfig2[0];
   var isEnabledRowInColor = (configState === null || configState === void 0 || (_configState$configs = configState.configs) === null || _configState$configs === void 0 || (_configState$configs = _configState$configs.row_in_color_enabled) === null || _configState$configs === void 0 ? void 0 : _configState$configs.value) === '1';
   var showExternalId = (configState === null || configState === void 0 || (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 || (_configState$configs2 = _configState$configs2.change_order_id) === null || _configState$configs2 === void 0 ? void 0 : _configState$configs2.value) === '1';
+  var franchiseImages = !(franchisesList !== null && franchisesList !== void 0 && franchisesList.error) && (franchisesList === null || franchisesList === void 0 || (_franchisesList$franc = franchisesList.franchises) === null || _franchisesList$franc === void 0 ? void 0 : _franchisesList$franc.reduce(function (imageKeys, franchise) {
+    imageKeys[franchise.id] = franchise.logo;
+    return imageKeys;
+  }, {}));
   var optionsDefault = [{
     value: 'status',
     content: t('STATUS', 'Status')
@@ -612,7 +617,8 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
       getPriorityTag: getPriorityTag,
       groupStatus: groupStatus,
       displayDelayedTime: displayDelayedTime,
-      getCurrenySymbol: _utils.getCurrenySymbol
+      getCurrenySymbol: _utils.getCurrenySymbol,
+      franchiseImages: franchiseImages
     });
   })))), pagination && /*#__PURE__*/_react.default.createElement(_styles.WrapperPagination, null, /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
     currentPage: pagination.currentPage,

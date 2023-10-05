@@ -283,7 +283,8 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     allowColumns: allowColumns,
     setAllowColumns: setAllowColumns,
     ordersAmountByStatus: ordersAmountByStatus,
-    setOrdersAmountByStatus: setOrdersAmountByStatus
+    setOrdersAmountByStatus: setOrdersAmountByStatus,
+    franchisesList: props.franchisesList
   }))))), isOpenOrderDetail && /*#__PURE__*/_react.default.createElement(_OrderDetails.OrderDetails, {
     isSelectedOrders: isSelectedOrders,
     open: isOpenOrderDetail,

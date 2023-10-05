@@ -34,7 +34,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrdersCards = function OrdersCards(props) {
-  var _configState$configs, _orderList$orders;
+  var _configState$configs, _franchisesList$franc, _orderList$orders;
   var isMessagesView = props.isMessagesView,
     orderList = props.orderList,
     pagination = props.pagination,
@@ -45,7 +45,8 @@ var OrdersCards = function OrdersCards(props) {
     handleUpdateDriverLocation = props.handleUpdateDriverLocation,
     slaSettingTime = props.slaSettingTime,
     isDelivery = props.isDelivery,
-    isUseQuery = props.isUseQuery;
+    isUseQuery = props.isUseQuery,
+    franchisesList = props.franchisesList;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     dictionary = _useLanguage2[0].dictionary,
@@ -72,6 +73,10 @@ var OrdersCards = function OrdersCards(props) {
     allowColumns = _useState4[0],
     setAllowColumns = _useState4[1];
   var showExternalId = (configState === null || configState === void 0 || (_configState$configs = configState.configs) === null || _configState$configs === void 0 || (_configState$configs = _configState$configs.change_order_id) === null || _configState$configs === void 0 ? void 0 : _configState$configs.value) === '1';
+  var franchiseImages = !(franchisesList !== null && franchisesList !== void 0 && franchisesList.error) && (franchisesList === null || franchisesList === void 0 || (_franchisesList$franc = franchisesList.franchises) === null || _franchisesList$franc === void 0 ? void 0 : _franchisesList$franc.reduce(function (imageKeys, franchise) {
+    imageKeys[franchise.id] = franchise.logo;
+    return imageKeys;
+  }, {}));
   var handleChangePage = function handleChangePage(page) {
     getPageOrders(pagination.pageSize, page);
   };
@@ -219,7 +224,7 @@ var OrdersCards = function OrdersCards(props) {
       width: 100
     }))))));
   }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (_orderList$orders = orderList.orders) === null || _orderList$orders === void 0 ? void 0 : _orderList$orders.map(function (order) {
-    var _order$business, _theme$images, _order$business2, _order$business3, _order$driver, _order$driver2, _order$driver3, _order$driver4;
+    var _order$business, _order$business2, _theme$images, _order$business3, _order$business4, _order$driver, _order$driver2, _order$driver3, _order$driver4;
     return /*#__PURE__*/_react.default.createElement(_styles.OrderCard, {
       key: order.id,
       active: (selectedOrderCard === null || selectedOrderCard === void 0 ? void 0 : selectedOrderCard.id) === order.id,
@@ -238,14 +243,14 @@ var OrdersCards = function OrdersCards(props) {
     }, "Timer"), /*#__PURE__*/_react.default.createElement("p", {
       className: order === null || order === void 0 ? void 0 : order.time_status
     }, displayDelayedTime(order)))), isMessagesView && (order === null || order === void 0 ? void 0 : order.unread_count) > 0 && /*#__PURE__*/_react.default.createElement(_styles.UnreadMessageCounter, null, order === null || order === void 0 ? void 0 : order.unread_count), /*#__PURE__*/_react.default.createElement(_styles.CardContent, null, /*#__PURE__*/_react.default.createElement(_styles.InfoItemContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, /*#__PURE__*/_react.default.createElement("img", {
-      src: optimizeImage(((_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.dummies) === null || _theme$images === void 0 ? void 0 : _theme$images.businessLogo), 'h_50,c_limit'),
+      src: optimizeImage(franchiseImages[order === null || order === void 0 || (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.franchise_id] || ((_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.dummies) === null || _theme$images === void 0 ? void 0 : _theme$images.businessLogo), 'h_50,c_limit'),
       loading: "lazy",
       alt: ""
     })), /*#__PURE__*/_react.default.createElement("div", {
       className: "info"
     }, /*#__PURE__*/_react.default.createElement("p", {
       className: "bold"
-    }, order === null || order === void 0 || (_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.name), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 || (_order$business3 = order.business) === null || _order$business3 === void 0 || (_order$business3 = _order$business3.city) === null || _order$business3 === void 0 ? void 0 : _order$business3.name))), /*#__PURE__*/_react.default.createElement(_styles.InfoItemContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, order !== null && order !== void 0 && (_order$driver = order.driver) !== null && _order$driver !== void 0 && _order$driver.photo ? /*#__PURE__*/_react.default.createElement("img", {
+    }, order === null || order === void 0 || (_order$business3 = order.business) === null || _order$business3 === void 0 ? void 0 : _order$business3.name), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 || (_order$business4 = order.business) === null || _order$business4 === void 0 || (_order$business4 = _order$business4.city) === null || _order$business4 === void 0 ? void 0 : _order$business4.name))), /*#__PURE__*/_react.default.createElement(_styles.InfoItemContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, order !== null && order !== void 0 && (_order$driver = order.driver) !== null && _order$driver !== void 0 && _order$driver.photo ? /*#__PURE__*/_react.default.createElement("img", {
       src: optimizeImage(order === null || order === void 0 || (_order$driver2 = order.driver) === null || _order$driver2 === void 0 ? void 0 : _order$driver2.photo, 'h_50,c_limit'),
       loading: "lazy",
       alt: ""
