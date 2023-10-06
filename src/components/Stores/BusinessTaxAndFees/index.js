@@ -61,6 +61,21 @@ export const BusinessTaxAndFees = (props) => {
           onChange={e => handleChangeFormState({ service_fee: e.target.value })}
         />
       </FormController>
+      <SwitchWrapper>
+        <p>{t('DELIVERY_TAX_INCLUDED_ON_DELIVERY_FEE', 'Delivery tax included on delivery fee')}</p>
+        <Switch
+          defaultChecked={business?.delivery_tax_type === 1}
+          onChange={checked => handleChangeFormState({ delivery_tax_type: checked ? 1 : 2 })}
+        />
+      </SwitchWrapper>
+      <FormController>
+        <label>{t('DELIVERY_TAX_PERCENTAGE', 'Delivery tax porcentage %')}</label>
+        <Input
+          placeholder='0.00%'
+          defaultValue={business?.delivery_tax_rate}
+          onChange={e => handleChangeFormState({ delivery_tax_rate: e.target.value })}
+        />
+      </FormController>
       <Button
         borderRadius='8px'
         color='primary'
