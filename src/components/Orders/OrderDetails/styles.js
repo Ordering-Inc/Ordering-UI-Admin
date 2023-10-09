@@ -97,7 +97,6 @@ export const ButtonLink = styled.div`
 
 export const OrderStatus = styled.div`
   display: flex;
-  flex-direction: column;
   margin: ${({ noMargin }) => noMargin ? '0px' : '20px 0'};
 
   h2 {
