@@ -30,7 +30,7 @@ export const AdvancedSettings = (props) => {
   const [themeStructure, setThemeStructure] = useState({})
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const themeValuesRef = useRef({})
-
+  
   const [isOpenSound, setIsOpenSound] = useState(false)
 
   const headerList = [
@@ -65,6 +65,11 @@ export const AdvancedSettings = (props) => {
     { name: t('DEFAULT_BACKGROUND_COLOR', 'Default Background color'), type: 'color', path: 'business_view.components.style.backgroundColor' },
     { name: t('PRODUCTS_FROM_PREVIOUS_ORDERS_BLOCK', 'Products from previous orders block'), type: 'hidden', path: 'business_view.components.products_ordered.hidden' },
     { name: t('NEAR_BUSINESS_BLOCK', 'Near business block'), type: 'hidden', path: 'business_view.components.near_business.hidden' },
+    { name: t('REVIEWS', 'Reviews'), type: 'hidden', path: 'business_view.components.reviews.hidden' },
+    { name: t('CUSTOMER_COMMENTS', 'Customer comments'), type: 'hidden', path: 'business_view.components.reviews.components.customer_comments.hidden' },
+    { name: t('RANKING', 'Ranking'), type: 'hidden', path: 'business_view.components.reviews.components.ranking.hidden' },
+    { name: t('REVIEWS_DATE', 'Reviews date'), type: 'hidden', path: 'business_view.components.reviews.components.review_date.hidden' },
+    { name: t('SEARCH', 'Search'), type: 'hidden', path: 'business_view.components.reviews.components.search.hidden' },
     { name: t('BUSINESS_LOGO', 'Business logo'), type: 'hidden', path: 'business_view.components.header.components.logo.hidden' },
     { name: t('BUSINESS_INFO_ICON', 'Business info icon'), type: 'hidden', path: 'business_view.components.header.components.business_info.hidden' },
     { name: t('BUSINESS_HEADER', 'Business header'), type: 'hidden', path: 'business_view.components.header.hidden' }
