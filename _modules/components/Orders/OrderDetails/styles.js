@@ -58,7 +58,7 @@ var ButtonLink = _styledComponents.default.div(_templateObject15 || (_templateOb
   return (_props$theme$colors3 = props.theme.colors) === null || _props$theme$colors3 === void 0 ? void 0 : _props$theme$colors3.secundaryContrast;
 });
 exports.ButtonLink = ButtonLink;
-var OrderStatus = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  margin: ", ";\n\n  h2 {\n    color: ", ";\n    margin: 0px;\n    font-size: 16px;\n  }\n\n  p {\n    color: ", ";\n    font-size: 14px;\n    margin: 0px;\n  }\n\n\n  ", "\n\n  @media (min-width: 768px) {\n    flex-direction: row;\n    align-items: center;\n    justify-content: ", ";\n  }\n"])), function (_ref4) {
+var OrderStatus = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  display: flex;\n  margin: ", ";\n\n  h2 {\n    color: ", ";\n    margin: 0px;\n    font-size: 16px;\n  }\n\n  p {\n    color: ", ";\n    font-size: 14px;\n    margin: 0px;\n  }\n\n\n  ", "\n\n  @media (min-width: 768px) {\n    flex-direction: row;\n    align-items: center;\n    justify-content: ", ";\n  }\n"])), function (_ref4) {
   var noMargin = _ref4.noMargin;
   return noMargin ? '0px' : '20px 0';
 }, function (props) {
