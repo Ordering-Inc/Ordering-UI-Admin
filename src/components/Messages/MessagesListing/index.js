@@ -185,6 +185,7 @@ const MessagesListingUI = (props) => {
                 handleOrderCardClick={handleOrderCardClick}
                 timeStatus={timeStatus}
                 isUseQuery={isUseQuery}
+                franchisesList={props.franchisesList}
               />
             )}
             {selectedOption === 'contacts' && (
