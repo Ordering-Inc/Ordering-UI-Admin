@@ -180,7 +180,8 @@ var MessagesListingUI = function MessagesListingUI(props) {
     handleOpenOrderDetail: handleOpenOrderDetail,
     handleOrderCardClick: handleOrderCardClick,
     timeStatus: timeStatus,
-    isUseQuery: isUseQuery
+    isUseQuery: isUseQuery,
+    franchisesList: props.franchisesList
   }), selectedOption === 'contacts' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, contactsOption === 'drivers' && /*#__PURE__*/_react.default.createElement(_ChatContactList.ChatContactList, {
     isDriver: true
   }), contactsOption === 'customers' && /*#__PURE__*/_react.default.createElement(_ChatContactList.ChatContactList, {
