@@ -24,18 +24,18 @@ export const OpenCartBill = (props) => {
     }
   }
 
-  const getIncludedTaxes = () => {
+  const getIncludedTaxes = (isDeliveryFee) => {
     if (cart?.taxes === null) {
-      return cart.business.tax_type === 1 ? cart?.tax : 0
+      return cart?.business.tax_type === 1 ? cart?.tax : 0
     } else {
-      return cart?.taxes?.reduce((taxIncluded, tax) => {
-        return taxIncluded + (tax.type === 1 ? tax.summary?.tax : 0)
+      return cart?.taxes.reduce((taxIncluded, tax) => {
+        return taxIncluded + (((!isDeliveryFee && tax.type === 1 && tax.target === 'product') || (isDeliveryFee && tax.type === 1 && tax.target === 'delivery_fee')) ? tax.summary?.tax : 0)
       }, 0)
     }
   }
 
   const getIncludedTaxesDiscounts = () => {
-    return cart?.taxes?.filter(tax => tax?.type === 1)?.reduce((carry, tax) => carry + (tax?.summary?.tax_after_discount ?? tax?.summary?.tax), 0)
+    return cart?.taxes?.filter(tax => (tax?.type === 1 && tax?.target === 'product'))?.reduce((carry, tax) => carry + (tax?.summary?.tax_after_discount ?? tax?.summary?.tax), 0)
   }
 
   return (
@@ -87,7 +87,7 @@ export const OpenCartBill = (props) => {
             </tr>
           )}
           {
-            cart?.taxes?.length > 0 && cart?.taxes?.filter(tax => tax?.type === 2 && tax?.rate !== 0).map(tax => (
+            cart?.taxes?.length > 0 && cart?.taxes?.filter(tax => tax?.type === 2 && tax?.rate !== 0 && tax?.target === 'product').map(tax => (
               <tr key={tax?.id}>
                 <td>
                   {tax.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
@@ -126,9 +126,20 @@ export const OpenCartBill = (props) => {
           {cart?.delivery_price > 0 && (
             <tr>
               <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
-              <td>{parsePrice(cart?.delivery_price)}</td>
+              <td>{parsePrice(cart?.delivery_price_with_discount + getIncludedTaxes(true))}</td>
             </tr>
           )}
+          {
+            cart?.taxes?.length > 0 && cart?.taxes?.filter(tax => tax?.type === 2 && tax?.rate !== 0 && tax?.target === 'delivery_fee').map(tax => (
+              <tr key={tax?.id}>
+                <td className='icon'>
+                  {tax.name || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
+                  <span>{`(${verifyDecimals(tax?.rate, parseNumber)}%)`}</span>
+                </td>
+                <td>{parsePrice(tax?.summary?.tax_after_discount ?? tax?.summary?.tax ?? 0)}</td>
+              </tr>
+            ))
+          }
           {
             cart?.offers?.length > 0 && cart?.offers?.filter(offer => offer?.target === 2)?.map(offer => (
               <tr key={offer.id}>
