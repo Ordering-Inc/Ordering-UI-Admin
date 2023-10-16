@@ -43,6 +43,7 @@ var BusinessLocation = function BusinessLocation(props) {
     _useState2 = _slicedToArray(_useState, 2),
     location = _useState2[0],
     setLocation = _useState2[1];
+  var googleInputRef = (0, _react.useRef)(null);
   var googleMapsControls = {
     defaultZoom: 15,
     zoomControl: true,
@@ -108,9 +109,10 @@ var BusinessLocation = function BusinessLocation(props) {
           case 9:
             result = _context.sent;
             setFormState(function (prevState) {
+              var _googleInputRef$curre;
               return _objectSpread(_objectSpread({}, prevState), {}, {
                 changes: _objectSpread(_objectSpread({}, prevState === null || prevState === void 0 ? void 0 : prevState.changes), {}, {
-                  address: address === null || address === void 0 ? void 0 : address.address,
+                  address: (googleInputRef === null || googleInputRef === void 0 || (_googleInputRef$curre = googleInputRef.current) === null || _googleInputRef$curre === void 0 ? void 0 : _googleInputRef$curre.value) || (address === null || address === void 0 ? void 0 : address.address),
                   location: _objectSpread(_objectSpread({}, address === null || address === void 0 ? void 0 : address.location), {}, {
                     zipcode: address !== null && address !== void 0 && address.zipcode ? address.zipcode : -1,
                     zoom: 15
@@ -170,6 +172,9 @@ var BusinessLocation = function BusinessLocation(props) {
       handleChangeInput(e.target.value);
     },
     defaultValue: formState !== null && formState !== void 0 && (_formState$result = formState.result) !== null && _formState$result !== void 0 && _formState$result.result ? formState === null || formState === void 0 || (_formState$result2 = formState.result) === null || _formState$result2 === void 0 || (_formState$result2 = _formState$result2.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.address : (_ref3 = (_formState$changes$ad = formState === null || formState === void 0 || (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.address) !== null && _formState$changes$ad !== void 0 ? _formState$changes$ad : business === null || business === void 0 ? void 0 : business.address) !== null && _ref3 !== void 0 ? _ref3 : '',
+    childRef: function childRef(ref) {
+      googleInputRef.current = ref;
+    },
     autoComplete: "new-password",
     countryCode: (configs === null || configs === void 0 || (_configs$country_auto = configs.country_autocomplete) === null || _configs$country_auto === void 0 ? void 0 : _configs$country_auto.value) || '*'
   })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperAddressnotes, null, /*#__PURE__*/_react.default.createElement("label", null, t('ADDRESS_NOTES', 'Address notes')), /*#__PURE__*/_react.default.createElement(_styles.TextArea, {
