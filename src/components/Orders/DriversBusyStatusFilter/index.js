@@ -12,11 +12,12 @@ export const DriversBusyStatusFilter = (props) => {
     driversSubfilter,
     handleChangeDriversSubFilter,
     numberOfbusyDrivers,
-    numberOfnotBusyDrivers
+    numberOfnotBusyDrivers,
+    showCompressedInfo
   } = props
   const [, t] = useLanguage()
   return (
-    <Container>
+    <Container showCompressedInfo={showCompressedInfo}>
       <Button
         color={driversSubfilter.busy ? 'primary' : 'secundary'}
         onClick={() => handleChangeDriversSubFilter({ ...driversSubfilter, busy: !driversSubfilter.busy })}

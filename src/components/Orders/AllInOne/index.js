@@ -115,7 +115,7 @@ const OrdersManagerUI = (props) => {
     }
     setDetailsOrder(order)
     setOrderDetailId(order.id)
-    setIsOpenOrderDetail(true)
+    // setIsOpenOrderDetail(true)
     if (!isSelectedOrders) {
       onOrderRedirect(order.id)
     } else {
@@ -129,6 +129,10 @@ const OrdersManagerUI = (props) => {
         setCurrentTourStep(1)
       }, 1)
     }
+  }
+
+  const handleSetOpenOrderDetail = (state) => {
+    setIsOpenOrderDetail(state)
   }
 
   const handleOpenTour = () => {
@@ -220,9 +224,10 @@ const OrdersManagerUI = (props) => {
                 handleUpdateAssignedOrders={handleUpdateAssignedOrders}
                 disableSocketRoomDriver
                 drivers={driversList.drivers}
+                showCompressedInfo
               />
             </DriversContainer>
-            <OrdersContainer>
+            <OrdersContainer showCompressedInfo>
               <OrderStatusFilterBar
                 isUseQuery={isUseQuery}
                 selectedOrderStatus={ordersStatusGroup}
@@ -277,6 +282,7 @@ const OrdersManagerUI = (props) => {
                       setAllowColumns={setAllowColumns}
                       setOrdersAmountByStatus={setOrdersAmountByStatus}
                       isUseQuery={isUseQuery}
+                      handleSetOpenOrderDetail={handleSetOpenOrderDetail}
                     />
                   </WrapItemView>
                 </OrdersInnerContent>

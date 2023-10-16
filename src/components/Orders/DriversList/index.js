@@ -19,7 +19,8 @@ export const DriversList = (props) => {
     selectedDriver,
     handleChangeDriver,
     handleOpenDriverOrders,
-    hidePhoto
+    hidePhoto,
+    showCompressedInfo
   } = props
 
   const { width } = useWindowSize()
@@ -40,7 +41,7 @@ export const DriversList = (props) => {
   }
 
   return (
-    <DriversListContainer>
+    <DriversListContainer showCompressedInfo={showCompressedInfo}>
       {loading ? (
         <>
           {[...Array(10).keys()].map(i => (
@@ -72,6 +73,7 @@ export const DriversList = (props) => {
               hidePhoto={hidePhoto}
               onOpenDriverOrdersDetail={onOpenDriverOrdersDetail}
               getStarWidth={getStarWidth}
+              showCompressedInfo={showCompressedInfo}
             />
           ))}
         </>

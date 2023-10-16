@@ -17,7 +17,8 @@ export const Driver = React.memo((props) => {
     selectedDriver,
     hidePhoto,
     onOpenDriverOrdersDetail,
-    getStarWidth
+    getStarWidth,
+    showCompressedInfo
   } = props
 
   const theme = useTheme()
@@ -29,13 +30,14 @@ export const Driver = React.memo((props) => {
       key={driver.id}
       onClick={(e) => handleClickDriver(e, driver)}
       active={selectedDriver?.id === driver.id}
+      showCompressedInfo={showCompressedInfo}
     >
       {!hidePhoto && (
         <WrapperImage>
           <Image bgimage={optimizeImage(driver?.photo || theme.images?.icons?.noDriver, 'h_50,c_limit')} />
         </WrapperImage>
       )}
-      <DriverInfo hidePhoto={hidePhoto}>
+      <DriverInfo hidePhoto={hidePhoto} showCompressedInfo={showCompressedInfo}>
         <div className='driver-info-container'>
           <p className='name'>{driver.name} {driver.lastname}</p>
           <BsDot />

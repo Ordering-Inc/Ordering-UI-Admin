@@ -3,6 +3,11 @@ import styled, { css } from 'styled-components'
 
 export const DriversListContainer = styled.div`
   padding: 15px 0px;
+  @media (min-width: 992px) {
+    ${({ showCompressedInfo }) => showCompressedInfo && css`
+      padding: 0px 0px;
+    `}
+  }
 `
 
 export const DriverCard = styled.div`
@@ -25,6 +30,12 @@ export const DriverCard = styled.div`
     background-color: ${props => props.theme.colors.lightPrimary};
     border: 1px solid ${props => props.theme.colors.primary};
   `}
+
+  @media (min-width: 992px) {
+    ${({ showCompressedInfo }) => showCompressedInfo && css`
+      margin-bottom: 5px;
+    `}
+  }
 `
 
 export const WrapperImage = styled.div`
@@ -74,7 +85,7 @@ export const WrapperStar = styled.div`
   position: relative;
   width: fit-content;
 
-  &::before { 
+  &::before {
     content: '★★★★★';
     opacity: .3;
   }
@@ -124,6 +135,19 @@ export const DriverInfo = styled.div`
         margin-right: 2px;
       ` : css`
         margin-left: 2px;
+      `}
+    }
+    @media (min-width: 992px) {
+      ${({ showCompressedInfo }) => showCompressedInfo && css`
+        p.name {
+          font-size: 12px;
+        }
+        .text-red {
+          font-size: 11px;
+        }
+        .driver-orders {
+          font-size: 11px;
+        }
       `}
     }
   }
