@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useRef } from 'react'
 import { useLanguage, useSession, useUtils, useConfig, GoogleAutocompleteInput } from 'ordering-components-admin'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import BisBusiness from '@meronex/icons/bi/BisBusiness'
@@ -48,6 +48,7 @@ export const OrderContactInformation = (props) => {
   const [{ user }] = useSession()
   const [{ optimizeImage }] = useUtils()
   const [{ configs }] = useConfig()
+  const googleInputRef = useRef(null)
 
   const googleMapsApiKey = configs?.google_maps_api_key?.value
   const isDisableDriverCompanies = configs?.disable_companies_order_details?.value === '1'
@@ -78,7 +79,7 @@ export const OrderContactInformation = (props) => {
 
   const handleChangeAddress = (e) => {
     setAddressState({
-      address: e?.address,
+      address: googleInputRef?.current?.value || e?.address,
       location: e?.location,
       zipcode: e?.zipcode
     })
@@ -232,6 +233,9 @@ export const OrderContactInformation = (props) => {
                     handleChangeAddress(e)
                   }}
                   defaultValue={order?.customer?.address ?? ''}
+                  childRef={(ref) => {
+                    googleInputRef.current = ref
+                  }}
                   autoComplete='new-password'
                   countryCode={configs?.country_autocomplete?.value || '*'}
                 />
