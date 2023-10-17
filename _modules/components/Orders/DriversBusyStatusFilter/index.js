@@ -26,11 +26,14 @@ var DriversBusyStatusFilter = function DriversBusyStatusFilter(props) {
   var driversSubfilter = props.driversSubfilter,
     handleChangeDriversSubFilter = props.handleChangeDriversSubFilter,
     numberOfbusyDrivers = props.numberOfbusyDrivers,
-    numberOfnotBusyDrivers = props.numberOfnotBusyDrivers;
+    numberOfnotBusyDrivers = props.numberOfnotBusyDrivers,
+    showCompressedInfo = props.showCompressedInfo;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
-  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+  return /*#__PURE__*/_react.default.createElement(_styles.Container, {
+    showCompressedInfo: showCompressedInfo
+  }, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
     color: driversSubfilter.busy ? 'primary' : 'secundary',
     onClick: function onClick() {
       return handleChangeDriversSubFilter(_objectSpread(_objectSpread({}, driversSubfilter), {}, {

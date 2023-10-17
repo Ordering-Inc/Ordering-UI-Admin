@@ -181,9 +181,8 @@ var DriversLocation = /*#__PURE__*/_react.default.memo(function (props) {
     setMapZoom(data === null || data === void 0 ? void 0 : data.zoom);
   };
   (0, _react.useEffect)(function () {
-    if (!(selectedDriver !== null && selectedDriver !== void 0 && selectedDriver.id)) return;
     setMapFitted(false);
-  }, [selectedDriver === null || selectedDriver === void 0 ? void 0 : selectedDriver.id]);
+  }, [selectedOrder]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, selectedDriver && (assignedOrders === null || assignedOrders === void 0 ? void 0 : assignedOrders.loading) && /*#__PURE__*/_react.default.createElement(_Shared.SpinnerLoader, {
     primary: true
   }), /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, {
@@ -209,15 +208,7 @@ var DriversLocation = /*#__PURE__*/_react.default.memo(function (props) {
       return handleMapChange(data);
     },
     yesIWantToUseGoogleMapApiInternals: true
-  }, !selectedOrder && showDrivers.length !== 0 && showDrivers.map(function (driver) {
-    var _driver$location5, _driver$location6, _driver$location7, _driver$location8;
-    return /*#__PURE__*/_react.default.createElement(_DriverMapMarkerAndInfo.DriverMapMarkerAndInfo, {
-      key: driver.id,
-      driver: driver,
-      lat: driver.location !== null && _typeof(driver.location) === 'object' && (_driver$location5 = driver.location) !== null && _driver$location5 !== void 0 && _driver$location5.lat ? driver.location.lat : typeof driver.location === 'string' ? parseFloat(driver === null || driver === void 0 || (_driver$location6 = driver.location) === null || _driver$location6 === void 0 ? void 0 : _driver$location6.split(',')[0].replace(/[^-.0-9]/g, '')) : defaultCenter.lat,
-      lng: driver.location !== null && _typeof(driver.location) === 'object' && (_driver$location7 = driver.location) !== null && _driver$location7 !== void 0 && _driver$location7.lng ? driver.location.lng : typeof driver.location === 'string' ? parseFloat(driver === null || driver === void 0 || (_driver$location8 = driver.location) === null || _driver$location8 === void 0 ? void 0 : _driver$location8.split(',')[1].replace(/[^-.0-9]/g, '')) : defaultCenter.lng
-    });
-  }), selectedOrder && /*#__PURE__*/_react.default.createElement(_InterActOrderMarker.InterActOrderMarker, {
+  }, selectedOrder && /*#__PURE__*/_react.default.createElement(_InterActOrderMarker.InterActOrderMarker, {
     customer: selectedOrder === null || selectedOrder === void 0 ? void 0 : selectedOrder.customer,
     lat: selectedOrder !== null && selectedOrder !== void 0 && (_selectedOrder$custom3 = selectedOrder.customer) !== null && _selectedOrder$custom3 !== void 0 && (_selectedOrder$custom3 = _selectedOrder$custom3.location) !== null && _selectedOrder$custom3 !== void 0 && _selectedOrder$custom3.lat ? selectedOrder === null || selectedOrder === void 0 || (_selectedOrder$custom4 = selectedOrder.customer) === null || _selectedOrder$custom4 === void 0 || (_selectedOrder$custom4 = _selectedOrder$custom4.location) === null || _selectedOrder$custom4 === void 0 ? void 0 : _selectedOrder$custom4.lat : defaultCenter.lat,
     lng: selectedOrder !== null && selectedOrder !== void 0 && (_selectedOrder$custom5 = selectedOrder.customer) !== null && _selectedOrder$custom5 !== void 0 && (_selectedOrder$custom5 = _selectedOrder$custom5.location) !== null && _selectedOrder$custom5 !== void 0 && _selectedOrder$custom5.lng ? selectedOrder === null || selectedOrder === void 0 || (_selectedOrder$custom6 = selectedOrder.customer) === null || _selectedOrder$custom6 === void 0 || (_selectedOrder$custom6 = _selectedOrder$custom6.location) === null || _selectedOrder$custom6 === void 0 ? void 0 : _selectedOrder$custom6.lng : defaultCenter.lng,

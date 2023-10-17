@@ -165,7 +165,7 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     }
     setDetailsOrder(order);
     setOrderDetailId(order.id);
-    setIsOpenOrderDetail(true);
+    // setIsOpenOrderDetail(true)
     if (!isSelectedOrders) {
       onOrderRedirect(order.id);
     } else {
@@ -179,6 +179,9 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
         setCurrentTourStep(1);
       }, 1);
     }
+  };
+  var handleSetOpenOrderDetail = function handleSetOpenOrderDetail(state) {
+    setIsOpenOrderDetail(state);
   };
   var _handleOpenTour = function handleOpenTour() {
     var tourElement = document.querySelector('[data-tour="tour_start"]');
@@ -254,8 +257,11 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     setMapsData: setMapsData,
     handleUpdateAssignedOrders: handleUpdateAssignedOrders,
     disableSocketRoomDriver: true,
-    drivers: driversList.drivers
-  })), /*#__PURE__*/_react.default.createElement(_styles.OrdersContainer, null, /*#__PURE__*/_react.default.createElement(_OrderStatusFilterBar.OrderStatusFilterBar, {
+    drivers: driversList.drivers,
+    showCompressedInfo: true
+  })), /*#__PURE__*/_react.default.createElement(_styles.OrdersContainer, {
+    showCompressedInfo: true
+  }, /*#__PURE__*/_react.default.createElement(_OrderStatusFilterBar.OrderStatusFilterBar, {
     isUseQuery: isUseQuery,
     selectedOrderStatus: ordersStatusGroup,
     changeOrderStatus: handleOrdersStatusGroupFilter,
@@ -302,7 +308,8 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     allowColumns: allowColumns,
     setAllowColumns: setAllowColumns,
     setOrdersAmountByStatus: setOrdersAmountByStatus,
-    isUseQuery: isUseQuery
+    isUseQuery: isUseQuery,
+    handleSetOpenOrderDetail: handleSetOpenOrderDetail
   })))))), /*#__PURE__*/_react.default.createElement(_styles.WrapperDriversLocation, null, /*#__PURE__*/_react.default.createElement(_DriversLocation.DriversLocation, {
     driversIsOnline: mapsData.driversIsOnline,
     selectedDriver: mapsData.selectedDriver,
