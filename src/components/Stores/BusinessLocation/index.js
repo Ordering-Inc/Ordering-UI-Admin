@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { GoogleMapsMap, GoogleAutocompleteInput, useConfig, useLanguage } from 'ordering-components-admin'
 import { CitySelector } from '../../Shared'
 import { Button, TextArea } from '../../../styles'
@@ -24,6 +24,7 @@ export const BusinessLocation = (props) => {
   const googleMapsApiKey = configs?.google_maps_api_key?.value
 
   const [location, setLocation] = useState()
+  const googleInputRef = useRef(null)
 
   const googleMapsControls = {
     defaultZoom: 15,
@@ -67,7 +68,7 @@ export const BusinessLocation = (props) => {
       ...prevState,
       changes: {
         ...prevState?.changes,
-        address: address?.address,
+        address: googleInputRef?.current?.value || address?.address,
         location: { ...address?.location, zipcode: address?.zipcode ? address.zipcode : -1, zoom: 15 },
         timezone: result?.timeZoneId
       }
@@ -139,6 +140,9 @@ export const BusinessLocation = (props) => {
               ? formState?.result?.result?.address
               : formState?.changes?.address ?? business?.address ?? ''
           }
+          childRef={(ref) => {
+            googleInputRef.current = ref
+          }}
           autoComplete='new-password'
           countryCode={configs?.country_autocomplete?.value || '*'}
         />

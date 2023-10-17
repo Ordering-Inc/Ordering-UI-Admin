@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import BiCurrentLocation from '@meronex/icons/bi/BiCurrentLocation'
 import HiOutlineLocationMarker from '@meronex/icons/hi/HiOutlineLocationMarker'
@@ -71,6 +71,7 @@ const AddressFormUI = (props) => {
   const [, t] = useLanguage()
   const formMethods = useForm()
   const [{ auth }] = useSession()
+  const googleInputRef = useRef(null)
 
   const [state, setState] = useState({ selectedFromAutocomplete: true })
   const [addressTag, setAddressTag] = useState(addressState?.address?.tag)
@@ -240,7 +241,10 @@ const AddressFormUI = (props) => {
       ...state,
       selectedFromAutocomplete: true
     })
-    updateChanges(address)
+    updateChanges({
+      ...address,
+      address: googleInputRef?.current?.value || address.address
+    })
   }
 
   const setMapErrors = (errKey) => {
@@ -427,7 +431,14 @@ const AddressFormUI = (props) => {
                         handleChangeInput({ target: { name: 'address', value: e.target.value } })
                         setAddressValue(e.target.value)
                       }}
-                      value={addressValue}
+                      defaultValue={
+                        formState?.result?.result
+                          ? formState?.result?.result?.address
+                          : formState?.changes?.address ?? addressValue
+                      }
+                      childRef={(ref) => {
+                        googleInputRef.current = ref
+                      }}
                       autoComplete='new-password'
                       countryCode={configState?.configs?.country_autocomplete?.value || '*'}
                     />

@@ -27,7 +27,7 @@ export const ButtonActionList = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
 `
 
 export const CalendarWrapper = styled.div`
@@ -235,5 +235,19 @@ export const TimeZoneAndCalendar = styled.div`
   @media (min-width: 600px) {
     flex-direction: row;
     width: fit-content;
+  }
+`
+
+export const BrandBusinessWrapper = styled(CalendarWrapper)`
+  display: flex;
+
+  > button {
+    margin-right: 10px;
+    margin-left: 0;
+
+  ${props => props.theme?.rtl && css`
+    margin-left: 10px;
+    margin-right: 0;
+  `}
   }
 `

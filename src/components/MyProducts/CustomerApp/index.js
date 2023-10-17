@@ -23,7 +23,9 @@ export const CustomerApp = () => {
     downloads: [
       { id: 1, icon: theme.images.myProducts.appStoreSmall, link: 'https://apps.apple.com/us/app/customer-app-2-0/id1607414555' },
       { id: 2, icon: theme.images.myProducts.playStoreSmall, link: 'https://play.google.com/store/apps/details?id=com.ordering.onlineorderingappv5&hl=en&gl=US' }
-    ]
+    ],
+    purchase_link: 'https://buy.stripe.com/5kA4in4Fp86Kg9yfZN',
+    demo_link: 'https://www.ordering.co/platform-demo-and-pricing'
   }
 
   return (
