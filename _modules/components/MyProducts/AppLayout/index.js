@@ -29,8 +29,61 @@ var AppLayout = function AppLayout(props) {
     isCollapse = _useInfoShare2[0].isCollapse,
     handleMenuCollapse = _useInfoShare2[1].handleMenuCollapse;
   var location = (0, _reactRouterDom.useLocation)();
-  var showMessage = function showMessage(message) {
-    window.Intercom && window.Intercom('showNewMessage', message);
+  var LeftContent = function LeftContent() {
+    return /*#__PURE__*/_react.default.createElement(_styles2.AppInfoContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.ImageWrapper, {
+      isDriver: isDriver
+    }, /*#__PURE__*/_react.default.createElement("img", {
+      src: appInfo.images.live,
+      alt: ""
+    })), /*#__PURE__*/_react.default.createElement("h2", null, appInfo.live_title), (appInfo === null || appInfo === void 0 ? void 0 : appInfo.downloads) && /*#__PURE__*/_react.default.createElement(_styles2.DownLoadWrapper, null, appInfo.downloads.map(function (item) {
+      return /*#__PURE__*/_react.default.createElement("img", {
+        src: item.icon,
+        alt: "",
+        key: item.id,
+        onClick: function onClick() {
+          return window.open(item.link, '_blank');
+        }
+      });
+    })), (appInfo === null || appInfo === void 0 ? void 0 : appInfo.web_url) && /*#__PURE__*/_react.default.createElement(_styles2.DownloadLink, {
+      href: appInfo.web_url,
+      target: "_blank",
+      isSingle: true,
+      className: "download-link"
+    }, appInfo.web_link_title), /*#__PURE__*/_react.default.createElement("p", null, appInfo.live_description), (appInfo === null || appInfo === void 0 ? void 0 : appInfo.purchase_message) && /*#__PURE__*/_react.default.createElement(_styles2.ButtonWRapper, null, (appInfo === null || appInfo === void 0 ? void 0 : appInfo.purchase_link) && /*#__PURE__*/_react.default.createElement(_styles.Button, {
+      color: "primary",
+      borderRadius: "8px",
+      onClick: function onClick() {
+        return window.open(appInfo === null || appInfo === void 0 ? void 0 : appInfo.purchase_link, '_blank');
+      }
+    }, t('PURCHASE_NOW', 'Purchase Now')), (appInfo === null || appInfo === void 0 ? void 0 : appInfo.demo_link) && /*#__PURE__*/_react.default.createElement(_styles.Button, {
+      color: "primary",
+      outline: true,
+      borderRadius: "8px",
+      onClick: function onClick() {
+        return window.open(appInfo === null || appInfo === void 0 ? void 0 : appInfo.demo_link, '_blank');
+      }
+    }, t('BOOK_A_DEMO', 'Book a demo'))));
+  };
+  var RightContent = function RightContent() {
+    return /*#__PURE__*/_react.default.createElement(_styles2.AppInfoContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.ImageWrapper, {
+      isDriver: isDriver
+    }, /*#__PURE__*/_react.default.createElement("img", {
+      src: appInfo.images.brand,
+      alt: ""
+    })), /*#__PURE__*/_react.default.createElement("h2", null, appInfo.brand_title), /*#__PURE__*/_react.default.createElement("p", null, appInfo.brand_description), /*#__PURE__*/_react.default.createElement(_styles2.ButtonWRapper, null, (appInfo === null || appInfo === void 0 ? void 0 : appInfo.purchase_link) && /*#__PURE__*/_react.default.createElement(_styles.Button, {
+      color: "primary",
+      borderRadius: "8px",
+      onClick: function onClick() {
+        return window.open(appInfo === null || appInfo === void 0 ? void 0 : appInfo.purchase_link, '_blank');
+      }
+    }, t('PURCHASE_NOW', 'Purchase Now')), !(appInfo !== null && appInfo !== void 0 && appInfo.purchase_link) && (appInfo === null || appInfo === void 0 ? void 0 : appInfo.demo_link) && /*#__PURE__*/_react.default.createElement(_styles.Button, {
+      color: "primary",
+      outline: true,
+      borderRadius: "8px",
+      onClick: function onClick() {
+        return window.open(appInfo === null || appInfo === void 0 ? void 0 : appInfo.demo_link, '_blank');
+      }
+    }, t('BOOK_A_DEMO', 'Book a demo'))));
   };
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderTitleContainer, null, isCollapse && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
@@ -43,49 +96,6 @@ var AppLayout = function AppLayout(props) {
     href: "https://www.ordering.co/support",
     rel: "noopener noreferrer",
     target: "_blank"
-  }, "https://www.ordering.co/support")))), /*#__PURE__*/_react.default.createElement(_styles2.ContentWrapper, null, /*#__PURE__*/_react.default.createElement("h1", null, appInfo.title), /*#__PURE__*/_react.default.createElement("p", null, appInfo.description), /*#__PURE__*/_react.default.createElement(_styles2.BoxWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.AppInfoContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.ImageWrapper, {
-    isDriver: isDriver
-  }, /*#__PURE__*/_react.default.createElement("img", {
-    src: appInfo.images.live,
-    alt: ""
-  })), /*#__PURE__*/_react.default.createElement("h2", null, appInfo.live_title), (appInfo === null || appInfo === void 0 ? void 0 : appInfo.downloads) && /*#__PURE__*/_react.default.createElement(_styles2.DownLoadWrapper, null, appInfo.downloads.map(function (item) {
-    return /*#__PURE__*/_react.default.createElement("img", {
-      src: item.icon,
-      alt: "",
-      key: item.id,
-      onClick: function onClick() {
-        return window.open(item.link, '_blank');
-      }
-    });
-  })), (appInfo === null || appInfo === void 0 ? void 0 : appInfo.web_url) && /*#__PURE__*/_react.default.createElement(_styles2.DownloadLink, {
-    href: appInfo.web_url,
-    target: "_blank",
-    isSingle: true,
-    className: "download-link"
-  }, appInfo.web_link_title), /*#__PURE__*/_react.default.createElement("p", null, appInfo.live_description), (appInfo === null || appInfo === void 0 ? void 0 : appInfo.purchase_message) && /*#__PURE__*/_react.default.createElement(_styles2.ButtonWRapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
-    color: "primary",
-    borderRadius: "8px",
-    onClick: function onClick() {
-      return showMessage(appInfo === null || appInfo === void 0 ? void 0 : appInfo.purchase_message);
-    }
-  }, t('PURCHASE_NOW', 'Purchase Now')), (appInfo === null || appInfo === void 0 ? void 0 : appInfo.demo_book_message) && /*#__PURE__*/_react.default.createElement(_styles.Button, {
-    color: "primary",
-    outline: true,
-    borderRadius: "8px",
-    onClick: function onClick() {
-      return showMessage(appInfo === null || appInfo === void 0 ? void 0 : appInfo.demo_book_message);
-    }
-  }, t('BOOK_A_DEMO', 'Book a demo')))), /*#__PURE__*/_react.default.createElement(_styles2.AppInfoContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.ImageWrapper, {
-    isDriver: isDriver
-  }, /*#__PURE__*/_react.default.createElement("img", {
-    src: appInfo.images.brand,
-    alt: ""
-  })), /*#__PURE__*/_react.default.createElement("h2", null, appInfo.brand_title), /*#__PURE__*/_react.default.createElement("p", null, appInfo.brand_description), /*#__PURE__*/_react.default.createElement(_styles2.ButtonWRapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
-    color: "primary",
-    borderRadius: "8px",
-    onClick: function onClick() {
-      return showMessage(appInfo === null || appInfo === void 0 ? void 0 : appInfo.purchase_message);
-    }
-  }, t('PURCHASE_NOW', 'Purchase Now')))))));
+  }, "https://www.ordering.co/support")))), /*#__PURE__*/_react.default.createElement(_styles2.ContentWrapper, null, /*#__PURE__*/_react.default.createElement("h1", null, appInfo.title), /*#__PURE__*/_react.default.createElement("p", null, appInfo.description), /*#__PURE__*/_react.default.createElement(_styles2.BoxWrapper, null, (appInfo === null || appInfo === void 0 ? void 0 : appInfo.live_title) && /*#__PURE__*/_react.default.createElement(LeftContent, null), /*#__PURE__*/_react.default.createElement(RightContent, null))));
 };
 exports.AppLayout = AppLayout;

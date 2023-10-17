@@ -54,6 +54,7 @@ var OrderContactInformation = function OrderContactInformation(props) {
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configs = _useConfig2[0].configs;
+  var googleInputRef = (0, _react.useRef)(null);
   var googleMapsApiKey = configs === null || configs === void 0 || (_configs$google_maps_ = configs.google_maps_api_key) === null || _configs$google_maps_ === void 0 ? void 0 : _configs$google_maps_.value;
   var isDisableDriverCompanies = (configs === null || configs === void 0 || (_configs$disable_comp = configs.disable_companies_order_details) === null || _configs$disable_comp === void 0 ? void 0 : _configs$disable_comp.value) === '1';
   var _useState = (0, _react.useState)(false),
@@ -88,8 +89,9 @@ var OrderContactInformation = function OrderContactInformation(props) {
     }
   };
   var handleChangeAddress = function handleChangeAddress(e) {
+    var _googleInputRef$curre;
     setAddressState({
-      address: e === null || e === void 0 ? void 0 : e.address,
+      address: (googleInputRef === null || googleInputRef === void 0 || (_googleInputRef$curre = googleInputRef.current) === null || _googleInputRef$curre === void 0 ? void 0 : _googleInputRef$curre.value) || (e === null || e === void 0 ? void 0 : e.address),
       location: e === null || e === void 0 ? void 0 : e.location,
       zipcode: e === null || e === void 0 ? void 0 : e.zipcode
     });
@@ -184,6 +186,9 @@ var OrderContactInformation = function OrderContactInformation(props) {
       handleChangeAddress(e);
     },
     defaultValue: (_order$customer$addre = order === null || order === void 0 || (_order$customer19 = order.customer) === null || _order$customer19 === void 0 ? void 0 : _order$customer19.address) !== null && _order$customer$addre !== void 0 ? _order$customer$addre : '',
+    childRef: function childRef(ref) {
+      googleInputRef.current = ref;
+    },
     autoComplete: "new-password",
     countryCode: (configs === null || configs === void 0 || (_configs$country_auto = configs.country_autocomplete) === null || _configs$country_auto === void 0 ? void 0 : _configs$country_auto.value) || '*'
   }), /*#__PURE__*/_react.default.createElement(_styles.Input, {

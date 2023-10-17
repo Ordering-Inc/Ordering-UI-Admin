@@ -140,6 +140,26 @@ var AdvancedSettings = function AdvancedSettings(props) {
     type: 'hidden',
     path: 'business_view.components.near_business.hidden'
   }, {
+    name: t('REVIEWS', 'Reviews'),
+    type: 'hidden',
+    path: 'business_view.components.reviews.hidden'
+  }, {
+    name: t('CUSTOMER_COMMENTS', 'Customer comments'),
+    type: 'hidden',
+    path: 'business_view.components.reviews.components.customer_comments.hidden'
+  }, {
+    name: t('RANKING', 'Ranking'),
+    type: 'hidden',
+    path: 'business_view.components.reviews.components.ranking.hidden'
+  }, {
+    name: t('REVIEWS_DATE', 'Reviews date'),
+    type: 'hidden',
+    path: 'business_view.components.reviews.components.review_date.hidden'
+  }, {
+    name: t('SEARCH', 'Search'),
+    type: 'hidden',
+    path: 'business_view.components.reviews.components.search.hidden'
+  }, {
     name: t('BUSINESS_LOGO', 'Business logo'),
     type: 'hidden',
     path: 'business_view.components.header.components.logo.hidden'
