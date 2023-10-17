@@ -1,14 +1,16 @@
-import React, { memo, useState, useEffect } from 'react'
+import React, { memo, useState, useEffect, useRef } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import { OrdersTable } from '../OrdersTable'
 import { OrdersCards } from '../OrdersCards'
-import { Button } from '../../../styles'
+import { Button, LinkButton } from '../../../styles'
+import AiOutlineInfoCircle from '@meronex/icons/ai/AiOutlineInfoCircle'
 
 import {
   WrapperNoneOrders,
   WrapperOrderListContent,
-  InnerNoneOrdersContainer
+  InnerNoneOrdersContainer,
+  InfoMessage
 } from './styles'
 
 export const OrdersListing = memo((props) => {
@@ -51,12 +53,19 @@ export const OrdersListing = memo((props) => {
     handleDrop,
     isDelivery,
     saveUserSettings,
-    isUseQuery
+    isUseQuery,
+    handleSetOpenOrderDetail
   } = props
 
   const theme = useTheme()
   const [, t] = useLanguage()
   const [filterApplied, setFilterApplied] = useState(false)
+
+  const handleDobleClick = () => {
+    if (handleSetOpenOrderDetail && orderDetailId) {
+      handleSetOpenOrderDetail(true)
+    }
+  }
 
   useEffect(() => {
     if (orderList.loading || !messageListView) return
@@ -117,6 +126,7 @@ export const OrdersListing = memo((props) => {
           ) : (
             <WrapperOrderListContent
               maxHeight={orderListView !== 'table'}
+              onDoubleClick={handleDobleClick}
             >
               {orderListView === 'table' ? (
                 <OrdersTable
@@ -167,6 +177,12 @@ export const OrdersListing = memo((props) => {
                 />
               )}
             </WrapperOrderListContent>
+          )}
+          {(handleSetOpenOrderDetail && orderDetailId) && (
+            <InfoMessage>
+              <AiOutlineInfoCircle />
+              <span>{t('DOBLE_CLICK_OPEN_ORDER_INFO', 'Doble click order to open details')}</span>
+            </InfoMessage>
           )}
         </>
       )}

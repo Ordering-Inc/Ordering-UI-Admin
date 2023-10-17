@@ -22,5 +22,10 @@ export const Container = styled.div`
         margin-left: 10px;
       `}
     }
+    @media (min-width: 992px) {
+      ${({ showCompressedInfo }) => showCompressedInfo && css`
+        font-size: 12px;
+      `}
+    }
   }
 `
