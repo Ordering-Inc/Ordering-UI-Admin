@@ -30,7 +30,8 @@ const DriversManagerUI = (props) => {
     setSelectedDriver,
     assignedOrders,
     handleUpdateAssignedOrders,
-    showCompressedInfo
+    showCompressedInfo,
+    handleEmtpyOrderSelected
   } = props
 
   const [configState] = useConfig()
@@ -49,6 +50,7 @@ const DriversManagerUI = (props) => {
   }
 
   const handleChangeDriver = (driver) => {
+    handleEmtpyOrderSelected && handleEmtpyOrderSelected()
     if (selectedDriver?.id === driver.id) {
       setSelectedDriver(null)
     } else {

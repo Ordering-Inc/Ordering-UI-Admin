@@ -225,6 +225,7 @@ const OrdersManagerUI = (props) => {
                 disableSocketRoomDriver
                 drivers={driversList.drivers}
                 showCompressedInfo
+                handleEmtpyOrderSelected={handleBackRedirect}
               />
             </DriversContainer>
             <OrdersContainer showCompressedInfo>
