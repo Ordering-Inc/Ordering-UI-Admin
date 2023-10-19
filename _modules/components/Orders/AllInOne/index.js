@@ -258,7 +258,8 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     handleUpdateAssignedOrders: handleUpdateAssignedOrders,
     disableSocketRoomDriver: true,
     drivers: driversList.drivers,
-    showCompressedInfo: true
+    showCompressedInfo: true,
+    handleEmtpyOrderSelected: handleBackRedirect
   })), /*#__PURE__*/_react.default.createElement(_styles.OrdersContainer, {
     showCompressedInfo: true
   }, /*#__PURE__*/_react.default.createElement(_OrderStatusFilterBar.OrderStatusFilterBar, {

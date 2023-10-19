@@ -40,7 +40,8 @@ var DriversManagerUI = function DriversManagerUI(props) {
     setSelectedDriver = props.setSelectedDriver,
     assignedOrders = props.assignedOrders,
     handleUpdateAssignedOrders = props.handleUpdateAssignedOrders,
-    showCompressedInfo = props.showCompressedInfo;
+    showCompressedInfo = props.showCompressedInfo,
+    handleEmtpyOrderSelected = props.handleEmtpyOrderSelected;
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configState = _useConfig2[0];
@@ -69,6 +70,7 @@ var DriversManagerUI = function DriversManagerUI(props) {
     setIsOpenDriverOrders(false);
   };
   var handleChangeDriver = function handleChangeDriver(driver) {
+    handleEmtpyOrderSelected && handleEmtpyOrderSelected();
     if ((selectedDriver === null || selectedDriver === void 0 ? void 0 : selectedDriver.id) === driver.id) {
       setSelectedDriver(null);
     } else {
