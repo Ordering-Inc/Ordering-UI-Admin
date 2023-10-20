@@ -18,11 +18,14 @@ var DriversOnlineOfflineFilter = function DriversOnlineOfflineFilter(props) {
   var driversIsOnline = props.driversIsOnline,
     handleChangeDriverIsOnline = props.handleChangeDriverIsOnline,
     numberOfonlineDrivers = props.numberOfonlineDrivers,
-    numberOfofflineDrivers = props.numberOfofflineDrivers;
+    numberOfofflineDrivers = props.numberOfofflineDrivers,
+    showCompressedInfo = props.showCompressedInfo;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
-  return /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.Tab, {
+  return /*#__PURE__*/_react.default.createElement(_styles.Container, {
+    showCompressedInfo: showCompressedInfo
+  }, /*#__PURE__*/_react.default.createElement(_styles.Tab, {
     active: driversIsOnline,
     onClick: function onClick() {
       return handleChangeDriverIsOnline(true);

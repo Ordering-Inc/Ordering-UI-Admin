@@ -39,7 +39,9 @@ var DriversManagerUI = function DriversManagerUI(props) {
     selectedDriver = props.selectedDriver,
     setSelectedDriver = props.setSelectedDriver,
     assignedOrders = props.assignedOrders,
-    handleUpdateAssignedOrders = props.handleUpdateAssignedOrders;
+    handleUpdateAssignedOrders = props.handleUpdateAssignedOrders,
+    showCompressedInfo = props.showCompressedInfo,
+    handleEmtpyOrderSelected = props.handleEmtpyOrderSelected;
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configState = _useConfig2[0];
@@ -68,6 +70,7 @@ var DriversManagerUI = function DriversManagerUI(props) {
     setIsOpenDriverOrders(false);
   };
   var handleChangeDriver = function handleChangeDriver(driver) {
+    handleEmtpyOrderSelected && handleEmtpyOrderSelected();
     if ((selectedDriver === null || selectedDriver === void 0 ? void 0 : selectedDriver.id) === driver.id) {
       setSelectedDriver(null);
     } else {
@@ -92,16 +95,20 @@ var DriversManagerUI = function DriversManagerUI(props) {
   (0, _react.useEffect)(function () {
     handleUpdateAssignedOrders && handleUpdateAssignedOrders(assignedOrders);
   }, [assignedOrders]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.DriversContainer, null, /*#__PURE__*/_react.default.createElement(_styles.DriversHeader, null, !googleMapsApiKey && /*#__PURE__*/_react.default.createElement(_GoogleMapsApiKeySettingButton.GoogleMapsApiKeySettingButton, null)), /*#__PURE__*/_react.default.createElement(_styles.DriversContent, null, /*#__PURE__*/_react.default.createElement(_styles.DriverListContainer, null, /*#__PURE__*/_react.default.createElement(_styles.FilterContainer, null, /*#__PURE__*/_react.default.createElement(_DriversOnlineOfflineFilter.DriversOnlineOfflineFilter, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.DriversContainer, null, /*#__PURE__*/_react.default.createElement(_styles.DriversHeader, null, !googleMapsApiKey && /*#__PURE__*/_react.default.createElement(_GoogleMapsApiKeySettingButton.GoogleMapsApiKeySettingButton, null)), /*#__PURE__*/_react.default.createElement(_styles.DriversContent, null, /*#__PURE__*/_react.default.createElement(_styles.DriverListContainer, {
+    showCompressedInfo: showCompressedInfo
+  }, /*#__PURE__*/_react.default.createElement(_styles.FilterContainer, null, /*#__PURE__*/_react.default.createElement(_DriversOnlineOfflineFilter.DriversOnlineOfflineFilter, {
     driversIsOnline: driversIsOnline,
     handleChangeDriverIsOnline: handleChangeDriverIsOnline,
     numberOfonlineDrivers: numberOfonlineDrivers,
-    numberOfofflineDrivers: numberOfofflineDrivers
+    numberOfofflineDrivers: numberOfofflineDrivers,
+    showCompressedInfo: showCompressedInfo
   }), /*#__PURE__*/_react.default.createElement(_DriversBusyStatusFilter.DriversBusyStatusFilter, {
     driversSubfilter: driversSubfilter,
     handleChangeDriversSubFilter: handleChangeDriversSubFilter,
     numberOfbusyDrivers: numberOfbusyDrivers,
-    numberOfnotBusyDrivers: numberOfnotBusyDrivers
+    numberOfnotBusyDrivers: numberOfnotBusyDrivers,
+    showCompressedInfo: showCompressedInfo
   })), /*#__PURE__*/_react.default.createElement(_styles.WrapperDriversList, null, /*#__PURE__*/_react.default.createElement(_DriversList.DriversList, {
     hidePhoto: true,
     loading: driversList.loading,
@@ -110,7 +117,8 @@ var DriversManagerUI = function DriversManagerUI(props) {
     offlineDrivers: offlineDrivers,
     selectedDriver: selectedDriver,
     handleChangeDriver: handleChangeDriver,
-    handleOpenDriverOrders: handleOpenDriverOrders
+    handleOpenDriverOrders: handleOpenDriverOrders,
+    showCompressedInfo: showCompressedInfo
   })))), isOpenDriverOrders && openDriver && /*#__PURE__*/_react.default.createElement(_OrdersLateralBar.OrdersLateralBar, {
     isDriver: true,
     open: isOpenDriverOrders,

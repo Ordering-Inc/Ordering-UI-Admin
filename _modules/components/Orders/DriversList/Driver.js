@@ -28,7 +28,8 @@ var Driver = /*#__PURE__*/_react.default.memo(function (props) {
     selectedDriver = props.selectedDriver,
     hidePhoto = props.hidePhoto,
     onOpenDriverOrdersDetail = props.onOpenDriverOrdersDetail,
-    getStarWidth = props.getStarWidth;
+    getStarWidth = props.getStarWidth,
+    showCompressedInfo = props.showCompressedInfo;
   var theme = (0, _styledComponents.useTheme)();
   var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
     _useUtils2 = _slicedToArray(_useUtils, 1),
@@ -41,11 +42,13 @@ var Driver = /*#__PURE__*/_react.default.memo(function (props) {
     onClick: function onClick(e) {
       return handleClickDriver(e, driver);
     },
-    active: (selectedDriver === null || selectedDriver === void 0 ? void 0 : selectedDriver.id) === driver.id
+    active: (selectedDriver === null || selectedDriver === void 0 ? void 0 : selectedDriver.id) === driver.id,
+    showCompressedInfo: showCompressedInfo
   }, !hidePhoto && /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_styles.Image, {
     bgimage: optimizeImage((driver === null || driver === void 0 ? void 0 : driver.photo) || ((_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.icons) === null || _theme$images === void 0 ? void 0 : _theme$images.noDriver), 'h_50,c_limit')
   })), /*#__PURE__*/_react.default.createElement(_styles.DriverInfo, {
-    hidePhoto: hidePhoto
+    hidePhoto: hidePhoto,
+    showCompressedInfo: showCompressedInfo
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "driver-info-container"
   }, /*#__PURE__*/_react.default.createElement("p", {

@@ -25,7 +25,8 @@ var DriversList = function DriversList(props) {
     selectedDriver = props.selectedDriver,
     handleChangeDriver = props.handleChangeDriver,
     handleOpenDriverOrders = props.handleOpenDriverOrders,
-    hidePhoto = props.hidePhoto;
+    hidePhoto = props.hidePhoto,
+    showCompressedInfo = props.showCompressedInfo;
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
     width = _useWindowSize.width;
   var handleClickDriver = function handleClickDriver(e, driver) {
@@ -45,7 +46,9 @@ var DriversList = function DriversList(props) {
     }
     handleOpenDriverOrders(driver);
   };
-  return /*#__PURE__*/_react.default.createElement(_styles.DriversListContainer, null, loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, _toConsumableArray(Array(10).keys()).map(function (i) {
+  return /*#__PURE__*/_react.default.createElement(_styles.DriversListContainer, {
+    showCompressedInfo: showCompressedInfo
+  }, loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, _toConsumableArray(Array(10).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.DriverCard, {
       key: i
     }, !hidePhoto && /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -64,7 +67,8 @@ var DriversList = function DriversList(props) {
       selectedDriver: selectedDriver,
       hidePhoto: hidePhoto,
       onOpenDriverOrdersDetail: onOpenDriverOrdersDetail,
-      getStarWidth: _utils.getStarWidth
+      getStarWidth: _utils.getStarWidth,
+      showCompressedInfo: showCompressedInfo
     });
   })));
 };
