@@ -10,11 +10,12 @@ export const DriversOnlineOfflineFilter = (props) => {
     driversIsOnline,
     handleChangeDriverIsOnline,
     numberOfonlineDrivers,
-    numberOfofflineDrivers
+    numberOfofflineDrivers,
+    showCompressedInfo
   } = props
   const [, t] = useLanguage()
   return (
-    <Container>
+    <Container showCompressedInfo={showCompressedInfo}>
       <Tab
         active={driversIsOnline}
         onClick={() => handleChangeDriverIsOnline(true)}

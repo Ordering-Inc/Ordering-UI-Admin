@@ -167,9 +167,8 @@ export const DriversLocation = React.memo((props) => {
   }
 
   useEffect(() => {
-    if (!selectedDriver?.id) return
     setMapFitted(false)
-  }, [selectedDriver?.id])
+  }, [selectedOrder])
 
   return (
     <>
@@ -193,27 +192,6 @@ export const DriversLocation = React.memo((props) => {
             onChange={(data) => handleMapChange(data)}
             yesIWantToUseGoogleMapApiInternals
           >
-            {!selectedOrder && showDrivers.length !== 0 &&
-              showDrivers.map((driver) => (
-                <DriverMapMarkerAndInfo
-                  key={driver.id}
-                  driver={driver}
-                  lat={
-                    (driver.location !== null && typeof driver.location === 'object' && driver.location?.lat)
-                      ? driver.location.lat
-                      : typeof driver.location === 'string'
-                        ? parseFloat(driver?.location?.split(',')[0].replace(/[^-.0-9]/g, ''))
-                        : defaultCenter.lat
-                  }
-                  lng={
-                    (driver.location !== null && typeof driver.location === 'object' && driver.location?.lng)
-                      ? driver.location.lng
-                      : typeof driver.location === 'string'
-                        ? parseFloat(driver?.location?.split(',')[1].replace(/[^-.0-9]/g, ''))
-                        : defaultCenter.lng
-                  }
-                />
-              ))}
             {selectedOrder && (
               <InterActOrderMarker
                 customer={selectedOrder?.customer}

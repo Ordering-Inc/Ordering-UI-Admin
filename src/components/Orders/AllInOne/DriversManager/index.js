@@ -29,7 +29,9 @@ const DriversManagerUI = (props) => {
     selectedDriver,
     setSelectedDriver,
     assignedOrders,
-    handleUpdateAssignedOrders
+    handleUpdateAssignedOrders,
+    showCompressedInfo,
+    handleEmtpyOrderSelected
   } = props
 
   const [configState] = useConfig()
@@ -48,6 +50,7 @@ const DriversManagerUI = (props) => {
   }
 
   const handleChangeDriver = (driver) => {
+    handleEmtpyOrderSelected && handleEmtpyOrderSelected()
     if (selectedDriver?.id === driver.id) {
       setSelectedDriver(null)
     } else {
@@ -86,19 +89,21 @@ const DriversManagerUI = (props) => {
           )}
         </DriversHeader>
         <DriversContent>
-          <DriverListContainer>
+          <DriverListContainer showCompressedInfo={showCompressedInfo}>
             <FilterContainer>
               <DriversOnlineOfflineFilter
                 driversIsOnline={driversIsOnline}
                 handleChangeDriverIsOnline={handleChangeDriverIsOnline}
                 numberOfonlineDrivers={numberOfonlineDrivers}
                 numberOfofflineDrivers={numberOfofflineDrivers}
+                showCompressedInfo={showCompressedInfo}
               />
               <DriversBusyStatusFilter
                 driversSubfilter={driversSubfilter}
                 handleChangeDriversSubFilter={handleChangeDriversSubFilter}
                 numberOfbusyDrivers={numberOfbusyDrivers}
                 numberOfnotBusyDrivers={numberOfnotBusyDrivers}
+                showCompressedInfo={showCompressedInfo}
               />
             </FilterContainer>
             <WrapperDriversList>
@@ -111,6 +116,7 @@ const DriversManagerUI = (props) => {
                 selectedDriver={selectedDriver}
                 handleChangeDriver={handleChangeDriver}
                 handleOpenDriverOrders={handleOpenDriverOrders}
+                showCompressedInfo={showCompressedInfo}
               />
             </WrapperDriversList>
           </DriverListContainer>

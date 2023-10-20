@@ -4,6 +4,17 @@ export const Container = styled.div`
   width: 100%;
   display: flex;
   border-bottom: 1px solid #CCC;
+  ${({ showCompressedInfo }) => showCompressedInfo && css`
+    justify-content: space-around;
+    @media (min-width: 992px) {
+      max-width: 350px;
+    }
+    > div {
+      max-width: 150px;
+      overflow-x: hidden;
+      text-overflow: ellipsis;
+    }
+  `}
 `
 
 export const Tab = styled.div`
