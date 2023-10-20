@@ -17,7 +17,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessDetails = function BusinessDetails(props) {
-  var _configs$google_maps_, _formState$changes$na, _formState$changes, _formState$changes$ad, _formState$changes2, _configs$country_auto, _configs$google_maps_2, _configs$google_maps_3, _formState$changes$lo, _formState$changes3, _formState$changes$ce, _formState$changes4;
+  var _configs$google_maps_, _formState$changes$na, _formState$changes, _formState$changes$ad, _formState$changes2, _configs$country_auto, _configs$google_maps_2, _configs$google_maps_3, _formState$changes$lo, _formState$changes3, _formState$changes$sl, _formState$changes4, _formState$changes$ce, _formState$changes5;
   var formState = props.formState,
     handleChangeAddress = props.handleChangeAddress,
     handleChangeInput = props.handleChangeInput,
@@ -80,12 +80,17 @@ var BusinessDetails = function BusinessDetails(props) {
     // handleChangeCenter={handleChangeCenter}
     ,
     isFitCenter: true
-  }))), /*#__PURE__*/_react.default.createElement(_styles.FormControl, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('SLUG', 'Slug')), /*#__PURE__*/_react.default.createElement(_styles2.Input, {
+    name: "slug",
+    placeholder: t('SLUG', 'Slug'),
+    value: (_formState$changes$sl = formState === null || formState === void 0 || (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.slug) !== null && _formState$changes$sl !== void 0 ? _formState$changes$sl : '',
+    onChange: handleChangeInput
+  })), /*#__PURE__*/_react.default.createElement(_styles.FormControl, {
     noBottom: true
   }, /*#__PURE__*/_react.default.createElement("label", null, t('PHONE_NUMBER', 'Phone number')), /*#__PURE__*/_react.default.createElement(_styles2.Input, {
     name: "cellphone",
     placeholder: t('PHONE_NUMBER', 'Phone number'),
-    value: (_formState$changes$ce = formState === null || formState === void 0 || (_formState$changes4 = formState.changes) === null || _formState$changes4 === void 0 ? void 0 : _formState$changes4.cellphone) !== null && _formState$changes$ce !== void 0 ? _formState$changes$ce : '',
+    value: (_formState$changes$ce = formState === null || formState === void 0 || (_formState$changes5 = formState.changes) === null || _formState$changes5 === void 0 ? void 0 : _formState$changes5.cellphone) !== null && _formState$changes$ce !== void 0 ? _formState$changes$ce : '',
     onChange: handleChangeInput
   }))));
 };
