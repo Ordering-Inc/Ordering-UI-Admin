@@ -287,6 +287,12 @@ const SidebarMenuUI = (props) => {
       title: t('LANGUAGE_MANAGER', 'Language manager'),
       pageName: 'language',
       url: '/settings/language'
+    },
+    {
+      id: 8,
+      title: t('SETTINGS_LOGS', 'Settings logs'),
+      pageName: 'logs',
+      url: '/settings/logs'
     }
   ]
 
@@ -378,6 +384,7 @@ const SidebarMenuUI = (props) => {
   ]
 
   const handleGoToPage = (data) => {
+    console.log('data', data)
     if (windowSize.width < 768) {
       handleMenuCollapse(true)
     }
@@ -841,7 +848,8 @@ const SidebarMenuUI = (props) => {
                           location.pathname === '/settings/integrations' ||
                           location.pathname === '/settings/places' ||
                           location.pathname === '/settings/advanced' ||
-                          location.pathname === '/settings/language'
+                          location.pathname === '/settings/language' ||
+                          location.pathname === '/settings/logs'
                         }
                       >
                         <GearIcon />
