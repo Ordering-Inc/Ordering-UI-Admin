@@ -28,8 +28,6 @@ const SettingsLogsUI = (props) => {
 
   const { logsList, paginationProps, getSettingsLogs } = props
 
-  console.log('logsList', logsList)
-
   const [, t] = useLanguage()
   const [{ parseDate }] = useUtils()
   const [open, setOpen] = React.useState(false)
