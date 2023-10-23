@@ -183,6 +183,12 @@ Object.defineProperty(exports, "SettingsList", {
     return _SettingsList.SettingsList;
   }
 });
+Object.defineProperty(exports, "SettingsLogs", {
+  enumerable: true,
+  get: function get() {
+    return _SettingsLogs.SettingsLogs;
+  }
+});
 Object.defineProperty(exports, "SettingsSelectUI", {
   enumerable: true,
   get: function get() {
@@ -226,6 +232,7 @@ var _LalaMoveConnect = require("./LalaMoveConnect");
 var _SettingsDetail = require("./SettingsDetail");
 var _EmailSetting = require("./EmailSetting");
 var _SettingsList = require("./SettingsList");
+var _SettingsLogs = require("./SettingsLogs");
 var _NotificationSetting = require("./NotificationSetting");
 var _SettingsSelectUI = require("./SettingsSelectUI");
 var _SettingsCountryFilter = require("./SettingsCountryFilter");
