@@ -85,6 +85,7 @@ import { BusinessAdd } from './pages/BusinessAdd'
 import { CustomProject } from './pages/CustomProject'
 import { OrderingWidgets } from './pages/OrderingWidgets'
 import { BusinessDevicesList } from './pages/BusinessDevicesList'
+import { SettingsLogs } from './pages/SettingsLogs'
 
 export const App = () => {
   const history = useHistory()
@@ -430,6 +431,9 @@ export const App = () => {
                     </ProtectedRoute>
                     <ProtectedRoute path='/settings/language' allowedLevels={[0]}>
                       <LanguageManager />
+                    </ProtectedRoute>
+                    <ProtectedRoute path='/settings/logs' allowedLevels={[0]}>
+                      <SettingsLogs />
                     </ProtectedRoute>
 
                     <ProtectedRoute path='/support' allowedLevels={[0]}>

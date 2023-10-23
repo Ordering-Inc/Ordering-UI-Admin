@@ -11,6 +11,7 @@ import { LalaMoveConnect } from './LalaMoveConnect'
 import { SettingsDetail } from './SettingsDetail'
 import { EmailSetting } from './EmailSetting'
 import { SettingsList } from './SettingsList'
+import { SettingsLogs } from './SettingsLogs'
 import { NotificationSetting } from './NotificationSetting'
 import { SettingsSelectUI } from './SettingsSelectUI'
 import { SettingsCountryFilter } from './SettingsCountryFilter'
@@ -47,6 +48,7 @@ export {
   SettingsDetail,
   EmailSetting,
   SettingsList,
+  SettingsLogs,
   NotificationSetting,
   SettingsSelectUI,
   SettingsCountryFilter,

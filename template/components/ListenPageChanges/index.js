@@ -34,6 +34,7 @@ export const ListenPageChanges = ({ children }) => {
     places: '/settings/places',
     integrations: '/settings/integrations',
     language: '/settings/language',
+    logs: '/settings/logs',
     business_analytics: '/intelligence/business',
     drivers_analytics: '/intelligence/drivers',
     invoice: '/intelligence/invoice',
