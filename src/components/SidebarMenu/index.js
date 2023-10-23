@@ -384,7 +384,6 @@ const SidebarMenuUI = (props) => {
   ]
 
   const handleGoToPage = (data) => {
-    console.log('data', data)
     if (windowSize.width < 768) {
       handleMenuCollapse(true)
     }
