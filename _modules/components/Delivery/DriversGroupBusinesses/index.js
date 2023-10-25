@@ -11,6 +11,8 @@ var _reactHookForm = require("react-hook-form");
 var _styles = require("../../../styles");
 var _Shared = require("../../Shared");
 var _styles2 = require("./styles");
+var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
@@ -33,7 +35,8 @@ var DriversGroupBusinesses = function DriversGroupBusinesses(props) {
     handleAddDriversGroup = props.handleAddDriversGroup,
     handleSelectAllBusiness = props.handleSelectAllBusiness,
     selectedBusinessIds = props.selectedBusinessIds,
-    actionDisabled = props.actionDisabled;
+    actionDisabled = props.actionDisabled,
+    businessesLoading = props.businessesLoading;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -58,7 +61,7 @@ var DriversGroupBusinesses = function DriversGroupBusinesses(props) {
       _filteredBusinesses = _toConsumableArray(businesses);
     }
     setFilteredBusinesses(_filteredBusinesses);
-  }, [searchValue]);
+  }, [searchValue, businesses]);
   var onSubmit = function onSubmit() {
     if (driversGroupState.driversGroup) {
       handleUpdateDriversGroup(changesState);
@@ -90,7 +93,23 @@ var DriversGroupBusinesses = function DriversGroupBusinesses(props) {
     onClick: function onClick() {
       return handleSelectAllBusiness(false);
     }
-  }, t('SELECT_NONE', 'Select none'))), /*#__PURE__*/_react.default.createElement(_styles2.BusinessesContainer, null, filteredBusinesses.map(function (business) {
+  }, t('SELECT_NONE', 'Select none'))), /*#__PURE__*/_react.default.createElement(_styles2.BusinessesContainer, null, businessesLoading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, _toConsumableArray(Array(9).keys()).map(function (i) {
+    return /*#__PURE__*/_react.default.createElement(_styles2.SkeletonWrapper, {
+      key: i
+    }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.SkeletonContainer, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      width: 18,
+      height: 18
+    }), /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      width: 35,
+      height: 35,
+      style: {
+        margin: '0px 5px',
+        borderRadius: '100%'
+      }
+    }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      width: 250
+    }))));
+  })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, filteredBusinesses.map(function (business) {
     return /*#__PURE__*/_react.default.createElement(_styles2.BusinessWrapper, {
       key: business.id,
       isDisabed: actionState.loading
@@ -103,7 +122,7 @@ var DriversGroupBusinesses = function DriversGroupBusinesses(props) {
       bgimage: business === null || business === void 0 ? void 0 : business.logo,
       alt: "logo"
     })), /*#__PURE__*/_react.default.createElement("p", null, business === null || business === void 0 ? void 0 : business.name));
-  })), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "primary",
     disabled: Object.keys(changesState).length === 0

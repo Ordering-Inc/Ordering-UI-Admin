@@ -291,6 +291,7 @@ var InvoiceDriverPdf = function InvoiceDriverPdf(props) {
   }, t('SUBTOTAL', 'Subtotal')), /*#__PURE__*/_react.default.createElement("th", {
     style: styles.table.thead.th
   }, t('TOTAL', 'Total')))), /*#__PURE__*/_react.default.createElement("tbody", null, (exportInvoiceList === null || exportInvoiceList === void 0 || (_exportInvoiceList$in7 = exportInvoiceList.invoice) === null || _exportInvoiceList$in7 === void 0 ? void 0 : _exportInvoiceList$in7.orders) && (exportInvoiceList === null || exportInvoiceList === void 0 || (_exportInvoiceList$in8 = exportInvoiceList.invoice) === null || _exportInvoiceList$in8 === void 0 || (_exportInvoiceList$in8 = _exportInvoiceList$in8.orders) === null || _exportInvoiceList$in8 === void 0 ? void 0 : _exportInvoiceList$in8.map(function (order, i) {
+    var _getOrderStatus;
     return /*#__PURE__*/_react.default.createElement("tr", {
       key: i
     }, /*#__PURE__*/_react.default.createElement("td", {
@@ -301,7 +302,7 @@ var InvoiceDriverPdf = function InvoiceDriverPdf(props) {
       utc: false
     })), /*#__PURE__*/_react.default.createElement("td", {
       style: styles.table.tbody.tr.td
-    }, getOrderStatus(order.status).value), /*#__PURE__*/_react.default.createElement("td", {
+    }, (_getOrderStatus = getOrderStatus(order.status)) === null || _getOrderStatus === void 0 ? void 0 : _getOrderStatus.value), /*#__PURE__*/_react.default.createElement("td", {
       style: styles.table.tbody.tr.tdNumber
     }, parsePrice(getSubtotal(order))), /*#__PURE__*/_react.default.createElement("td", {
       style: styles.table.tbody.tr.tdNumber
