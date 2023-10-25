@@ -219,6 +219,7 @@ const DriversGroupsListingUI = (props) => {
             driversGroupId={curDriversGroupId}
             driversManagers={driversManagersList?.managers}
             businesses={businessesList?.businesses}
+            businessesLoading={businessesList?.loading}
             paymethods={paymethodsList?.paymethods}
             drivers={driversList?.drivers}
             companies={driversCompanyList?.companies}
@@ -246,6 +247,7 @@ const DriversGroupsListingUI = (props) => {
             driversGroupId={curDriversGroupId}
             driversManagers={driversManagersList?.managers}
             businesses={businessesList?.businesses}
+            businessesLoading={businessesList?.loading}
             paymethods={paymethodsList?.paymethods}
             drivers={driversList?.drivers}
             companies={driversCompanyList?.companies}
