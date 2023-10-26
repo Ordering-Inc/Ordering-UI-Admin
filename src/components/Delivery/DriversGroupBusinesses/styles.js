@@ -97,3 +97,15 @@ export const Image = (props) => {
     </ImageStyled>
   )
 }
+
+export const SkeletonWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid ${props => props.theme.colors.borderColor};
+`
+
+export const SkeletonContainer = styled.div`
+  display: flex;
+  align-items: center;
+`

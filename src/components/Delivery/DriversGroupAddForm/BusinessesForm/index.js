@@ -11,8 +11,11 @@ import {
   BusinessesContainer,
   BusinessWrapper,
   WrapperImage,
-  Image
+  Image,
+  SkeletonContainer,
+  SkeletonWrapper
 } from './styles'
+import Skeleton from 'react-loading-skeleton'
 
 export const BusinessesForm = (props) => {
   const {
@@ -20,7 +23,8 @@ export const BusinessesForm = (props) => {
     handleSelectBusiness,
     actionState,
     handleSelectAllBusiness,
-    selectedBusinessIds
+    selectedBusinessIds,
+    businessesLoading
   } = props
 
   const [, t] = useLanguage()
@@ -35,7 +39,7 @@ export const BusinessesForm = (props) => {
       _filteredBusinesses = [...businesses]
     }
     setFilteredBusinesses(_filteredBusinesses)
-  }, [searchValue])
+  }, [searchValue, businesses])
 
   return (
     <Container>
@@ -66,21 +70,45 @@ export const BusinessesForm = (props) => {
         </Button>
       </ButtonGroup>
       <BusinessesContainer>
-        {filteredBusinesses.map(business => (
-          <BusinessWrapper
-            key={business.id}
-            isDisabed={actionState.loading}
-          >
-            <Checkbox
-              checked={selectedBusinessIds.includes(business.id)}
-              onChange={e => handleSelectBusiness(business.id, e.target.checked)}
-            />
-            <WrapperImage>
-              <Image bgimage={business?.logo} alt='logo' />
-            </WrapperImage>
-            <p>{business?.name}</p>
-          </BusinessWrapper>
-        ))}
+        {businessesLoading ? (
+          <>
+            {
+              [...Array(9).keys()].map(i => (
+                <SkeletonWrapper key={i}>
+                  <tr>
+                    <td>
+                      <SkeletonContainer>
+                        <Skeleton width={18} height={18} />
+                        <Skeleton width={35} height={35} style={{ margin: '0px 5px', borderRadius: '100%' }} />
+                      </SkeletonContainer>
+                    </td>
+                    <td>
+                      <Skeleton width={250} />
+                    </td>
+                  </tr>
+                </SkeletonWrapper>
+              ))
+            }
+          </>
+        ) : (
+          <>
+            {filteredBusinesses.map(business => (
+              <BusinessWrapper
+                key={business.id}
+                isDisabed={actionState.loading}
+              >
+                <Checkbox
+                  checked={selectedBusinessIds.includes(business.id)}
+                  onChange={e => handleSelectBusiness(business.id, e.target.checked)}
+                />
+                <WrapperImage>
+                  <Image bgimage={business?.logo} alt='logo' />
+                </WrapperImage>
+                <p>{business?.name}</p>
+              </BusinessWrapper>
+            ))}
+          </>
+        )}
       </BusinessesContainer>
     </Container>
   )
