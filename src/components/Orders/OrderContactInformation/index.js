@@ -42,7 +42,8 @@ export const OrderContactInformation = (props) => {
     handleUpdateCustomerInfo,
     setAddressState,
     setCommentInfostate,
-    commentInfoState
+    commentInfoState,
+    addressState
   } = props
 
   const [, t] = useLanguage()
@@ -257,7 +258,7 @@ export const OrderContactInformation = (props) => {
                 <WrapperMap>
                   <GoogleMapsMap
                     apiKey={configs?.google_maps_api_key?.value}
-                    location={order?.customer?.location ?? defaultPosition}
+                    location={addressState?.location ?? order?.customer?.location ?? defaultPosition}
                     mapControls={googleMapsControls}
                   />
                 </WrapperMap>

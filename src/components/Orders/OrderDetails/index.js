@@ -64,6 +64,7 @@ const OrderDetailsUI = React.memo((props) => {
     open,
     handleBackRedirect,
     handleUpdateOrderStatus,
+    addressState,
     setAddressState,
     isTourOpen,
     handleUpdateOrderForUnreadCount,
@@ -423,6 +424,7 @@ const OrderDetailsUI = React.memo((props) => {
               handleShowOption={handleShowOption}
               setCommentInfostate={setCommentInfostate}
               commentInfoState={commentInfoState}
+              addressState={addressState}
             />
             <OrderProducts>
               <h2>{t('EXPORT_SUMMARY', 'Summary')}</h2>
