@@ -181,7 +181,7 @@ export const InvoiceDriverPdf = (props) => {
               <tr key={i}>
                 <td style={styles.table.tbody.tr.td}>{order.id}</td>
                 <td style={styles.table.tbody.tr.td}>{parseDate(order.delivery_datetime, { utc: false })}</td>
-                <td style={styles.table.tbody.tr.td}>{getOrderStatus(order.status).value}</td>
+                <td style={styles.table.tbody.tr.td}>{getOrderStatus(order.status)?.value}</td>
                 <td style={styles.table.tbody.tr.tdNumber}>{parsePrice(getSubtotal(order))}</td>
                 <td style={styles.table.tbody.tr.tdNumber}>{parsePrice(getTotal(order))}</td>
               </tr>
