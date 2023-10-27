@@ -50,7 +50,9 @@ const OrderDetailsPropsAreEqual = (prevProps, nextProps) => {
     prevProps.loading === nextProps.loading &&
     prevProps.isTourFlag === nextProps.isTourFlag &&
     prevProps.isServiceOrder === nextProps.isServiceOrder &&
-    prevProps.currentTourStep === nextProps.currentTourStep
+    prevProps.currentTourStep === nextProps.currentTourStep &&
+    prevProps.customerInfoState === nextProps.customerInfoState &&
+    JSON.stringify(prevProps.addressState) === JSON.stringify(nextProps.addressState)
 }
 
 const OrderDetailsUI = React.memo((props) => {

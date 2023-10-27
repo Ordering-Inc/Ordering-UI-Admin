@@ -268,3 +268,19 @@ export const CustomerEditWrapper = styled.div`
     margin-left: auto;
   }
 `
+export const WrapperMap = styled.div`
+  width: 100%;
+  height: 150px;
+  margin-bottom: 10px;
+
+  > div {
+    position: relative !important;
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 8px;
+  }
+
+  @media (min-width: 768px) {
+    height: 200px;
+  }
+`
