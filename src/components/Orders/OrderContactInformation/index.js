@@ -1,5 +1,5 @@
 import React, { useContext, useState, useRef } from 'react'
-import { useLanguage, useSession, useUtils, useConfig, GoogleAutocompleteInput } from 'ordering-components-admin'
+import { useLanguage, useSession, useUtils, useConfig, GoogleAutocompleteInput, GoogleMapsMap } from 'ordering-components-admin'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import BisBusiness from '@meronex/icons/bi/BisBusiness'
 import { DriverSelector } from '../DriverSelector'
@@ -26,7 +26,8 @@ import {
   ReviewButton,
   CustomerEditWrapper,
   ActionIconWrapper,
-  ReviewWrapper
+  ReviewWrapper,
+  WrapperMap
 } from './styles'
 
 export const OrderContactInformation = (props) => {
@@ -41,7 +42,8 @@ export const OrderContactInformation = (props) => {
     handleUpdateCustomerInfo,
     setAddressState,
     setCommentInfostate,
-    commentInfoState
+    commentInfoState,
+    addressState
   } = props
 
   const [, t] = useLanguage()
@@ -52,6 +54,20 @@ export const OrderContactInformation = (props) => {
 
   const googleMapsApiKey = configs?.google_maps_api_key?.value
   const isDisableDriverCompanies = configs?.disable_companies_order_details?.value === '1'
+
+  const googleMapsControls = {
+    defaultZoom: 15,
+    zoomControl: true,
+    streetViewControl: false,
+    fullscreenControl: false,
+    mapTypeId: 'roadmap', // 'roadmap', 'satellite', 'hybrid', 'terrain'
+    mapTypeControl: false,
+    mapTypeControlOptions: {
+      mapTypeIds: ['roadmap', 'satellite']
+    }
+  }
+
+  const defaultPosition = { lat: 40.77473399999999, lng: -73.9653844 }
 
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [currentCustomer, setCurrentCustomer] = useState(null)
@@ -239,6 +255,13 @@ export const OrderContactInformation = (props) => {
                   autoComplete='new-password'
                   countryCode={configs?.country_autocomplete?.value || '*'}
                 />
+                <WrapperMap>
+                  <GoogleMapsMap
+                    apiKey={configs?.google_maps_api_key?.value}
+                    location={addressState?.location ?? order?.customer?.location ?? defaultPosition}
+                    mapControls={googleMapsControls}
+                  />
+                </WrapperMap>
                 <Input
                   placeholder={t('NOTES', 'Notes')}
                   defaultValue={customerInfoState?.customer?.address_notes ?? order?.customer?.address_notes ?? ''}
