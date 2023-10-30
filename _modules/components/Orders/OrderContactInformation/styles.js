@@ -4,11 +4,11 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ToggleItemWrapper = exports.ReviewWrapper = exports.ReviewButton = exports.PhotoWrapper = exports.Photo = exports.InfoContent = exports.DriverSelectorContainer = exports.DriverInfoContainer = exports.DriverInfo = exports.CutsomerDetail = exports.CustomerInfoTable = exports.CustomerInfo = exports.CustomerEditWrapper = exports.CompanySelectorContainer = exports.BusinessInfo = exports.ActionIconWrapper = void 0;
+exports.WrapperMap = exports.ToggleItemWrapper = exports.ReviewWrapper = exports.ReviewButton = exports.PhotoWrapper = exports.Photo = exports.InfoContent = exports.DriverSelectorContainer = exports.DriverInfoContainer = exports.DriverInfo = exports.CutsomerDetail = exports.CustomerInfoTable = exports.CustomerInfo = exports.CustomerEditWrapper = exports.CompanySelectorContainer = exports.BusinessInfo = exports.ActionIconWrapper = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 var _polished = require("polished");
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22;
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -115,3 +115,5 @@ var CustomerEditWrapper = _styledComponents.default.div(_templateObject21 || (_t
   return (0, _polished.darken)(0.07, '#CCC');
 });
 exports.CustomerEditWrapper = CustomerEditWrapper;
+var WrapperMap = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  width: 100%;\n  height: 150px;\n  margin-bottom: 10px;\n\n  > div {\n    position: relative !important;\n    width: 100% !important;\n    height: 100% !important;\n    border-radius: 8px;\n  }\n\n  @media (min-width: 768px) {\n    height: 200px;\n  }\n"])));
+exports.WrapperMap = WrapperMap;
