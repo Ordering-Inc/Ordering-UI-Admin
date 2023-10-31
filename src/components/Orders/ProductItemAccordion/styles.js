@@ -187,12 +187,8 @@ export const ProductComment = styled.div`
     font-weight: normal;
     text-transform: capitalize;
     margin: 0px 20px 0px 40px;
-    text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
     line-height: 1.5;
-    overflow: hidden;
     ${props => props.theme?.rtl && css`
       margin: 0px 40px 0px 20px;
     `}
