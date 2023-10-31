@@ -2157,6 +2157,12 @@ Object.defineProperty(exports, "SettingsList", {
     return _Settings.SettingsList;
   }
 });
+Object.defineProperty(exports, "SettingsLogs", {
+  enumerable: true,
+  get: function get() {
+    return _Settings.SettingsLogs;
+  }
+});
 Object.defineProperty(exports, "SettingsSelectUI", {
   enumerable: true,
   get: function get() {
