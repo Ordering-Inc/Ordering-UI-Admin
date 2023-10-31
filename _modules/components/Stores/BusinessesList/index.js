@@ -161,7 +161,7 @@ var BusinessesList = function BusinessesList(props) {
     onChange: function onChange(value) {
       return handleEnableAllBusiness(value, true);
     }
-  }), t('FEATURED', 'Featured'))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.ratings) && /*#__PURE__*/_react.default.createElement("th", null, t('RATINGS', 'Ratings')), /*#__PURE__*/_react.default.createElement("th", {
+  }), t('FEATURED', 'Featured'))), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.ratings) && /*#__PURE__*/_react.default.createElement("th", null, t('RATINGS', 'Ratings')), !selectedBusinessActiveState && /*#__PURE__*/_react.default.createElement("th", null, t('DISABLED_REASON', 'Disabled reason')), /*#__PURE__*/_react.default.createElement("th", {
     className: "action"
   }, /*#__PURE__*/_react.default.createElement(_styles2.ActionWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.ColumnAllowSettingPopover, {
     allowColumns: allowColumns,
