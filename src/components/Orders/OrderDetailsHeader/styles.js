@@ -10,12 +10,14 @@ export const OrderDetailsHeaderContainer = styled.div`
       font-size: 20px;
       margin: 0px;
       font-weight: 700;
+      word-break: break-word;
     }
     h2 {
       width: 100%;
       font-size: 18px;
       margin: 0px;
       font-weight: 700;
+      word-break: break-word;
     }
     > div {
       display: flex;
@@ -34,7 +36,7 @@ export const OrderDetailsHeaderContainer = styled.div`
   @media (min-width: 768px) {
     > div {
       flex-direction: row;
-      align-items: center;
+      align-items: flex-start;
     }
     > div {
       > div {
