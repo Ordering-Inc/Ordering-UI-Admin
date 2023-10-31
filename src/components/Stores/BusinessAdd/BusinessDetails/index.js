@@ -87,6 +87,15 @@ export const BusinessDetails = (props) => {
             </WrapperMap>
           )}
         </GoogleMapContainer>
+        <FormControl>
+          <label>{t('SLUG', 'Slug')}</label>
+          <Input
+            name='slug'
+            placeholder={t('SLUG', 'Slug')}
+            value={formState?.changes?.slug ?? ''}
+            onChange={handleChangeInput}
+          />
+        </FormControl>
         <FormControl noBottom>
           <label>{t('PHONE_NUMBER', 'Phone number')}</label>
           <Input

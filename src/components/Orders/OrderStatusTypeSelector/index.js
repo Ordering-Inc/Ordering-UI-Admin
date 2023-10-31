@@ -360,12 +360,7 @@ export const OrderStatusTypeSelector = (props) => {
         let extractOrderStatus = []
         switch (deliveryType) {
           case 1:
-            extractOrderStatus = orderStatuses.slice(0, 13)
-            _filteredOrderStatuses = [...extractOrderStatus]
-            extractOrderStatus = orderStatuses.slice(15, 20)
-            _filteredOrderStatuses = [..._filteredOrderStatuses, ...extractOrderStatus]
-            extractOrderStatus = orderStatuses.slice(21, 28)
-            _filteredOrderStatuses = [..._filteredOrderStatuses, ...extractOrderStatus]
+            _filteredOrderStatuses = orderStatuses
             if (searchValue) {
               _filteredOrderStatuses = [..._filteredOrderStatuses?.filter(orderStatus => orderStatus?.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()))]
             }
@@ -378,11 +373,11 @@ export const OrderStatusTypeSelector = (props) => {
             _filteredOrderStatuses = [..._filteredOrderStatuses, ...extractOrderStatus]
             extractOrderStatus = orderStatuses.slice(13, 15)
             _filteredOrderStatuses = [..._filteredOrderStatuses, ...extractOrderStatus]
-            extractOrderStatus = orderStatuses.slice(17, 19)
+            extractOrderStatus = orderStatuses.slice(19, 21)
             _filteredOrderStatuses = [..._filteredOrderStatuses, ...extractOrderStatus]
-            extractOrderStatus = orderStatuses.slice(20, 24)
+            extractOrderStatus = orderStatuses.slice(22, 26)
             _filteredOrderStatuses = [..._filteredOrderStatuses, ...extractOrderStatus]
-            extractOrderStatus = orderStatuses.slice(27, 29)
+            extractOrderStatus = orderStatuses.slice(29, 31)
             _filteredOrderStatuses = [..._filteredOrderStatuses, ...extractOrderStatus]
             if (searchValue) {
               _filteredOrderStatuses = [..._filteredOrderStatuses?.filter(orderStatus => orderStatus?.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()))]
@@ -394,11 +389,13 @@ export const OrderStatusTypeSelector = (props) => {
             _filteredOrderStatuses = [...extractOrderStatus]
             extractOrderStatus = orderStatuses.slice(4, 7)
             _filteredOrderStatuses = [..._filteredOrderStatuses, ...extractOrderStatus]
-            extractOrderStatus = orderStatuses.slice(17, 19)
+            extractOrderStatus = orderStatuses.slice(10, 11)
             _filteredOrderStatuses = [..._filteredOrderStatuses, ...extractOrderStatus]
-            extractOrderStatus = orderStatuses.slice(20, 24)
+            extractOrderStatus = orderStatuses.slice(19, 21)
             _filteredOrderStatuses = [..._filteredOrderStatuses, ...extractOrderStatus]
-            extractOrderStatus = orderStatuses.slice(27, 29)
+            extractOrderStatus = orderStatuses.slice(22, 26)
+            _filteredOrderStatuses = [..._filteredOrderStatuses, ...extractOrderStatus]
+            extractOrderStatus = orderStatuses.slice(29, 31)
             _filteredOrderStatuses = [..._filteredOrderStatuses, ...extractOrderStatus]
             if (searchValue) {
               _filteredOrderStatuses = [..._filteredOrderStatuses?.filter(orderStatus => orderStatus?.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()))]
@@ -412,11 +409,11 @@ export const OrderStatusTypeSelector = (props) => {
             _filteredOrderStatuses = [..._filteredOrderStatuses, ...extractOrderStatus]
             extractOrderStatus = orderStatuses.slice(13, 15)
             _filteredOrderStatuses = [..._filteredOrderStatuses, ...extractOrderStatus]
-            extractOrderStatus = orderStatuses.slice(17, 19)
+            extractOrderStatus = orderStatuses.slice(19, 21)
             _filteredOrderStatuses = [..._filteredOrderStatuses, ...extractOrderStatus]
-            extractOrderStatus = orderStatuses.slice(20, 24)
+            extractOrderStatus = orderStatuses.slice(22, 26)
             _filteredOrderStatuses = [..._filteredOrderStatuses, ...extractOrderStatus]
-            extractOrderStatus = orderStatuses.slice(27, 29)
+            extractOrderStatus = orderStatuses.slice(29, 31)
             _filteredOrderStatuses = [..._filteredOrderStatuses, ...extractOrderStatus]
             if (searchValue) {
               _filteredOrderStatuses = [..._filteredOrderStatuses?.filter(orderStatus => orderStatus?.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()))]
@@ -430,11 +427,11 @@ export const OrderStatusTypeSelector = (props) => {
             _filteredOrderStatuses = [..._filteredOrderStatuses, ...extractOrderStatus]
             extractOrderStatus = orderStatuses.slice(13, 15)
             _filteredOrderStatuses = [..._filteredOrderStatuses, ...extractOrderStatus]
-            extractOrderStatus = orderStatuses.slice(17, 19)
+            extractOrderStatus = orderStatuses.slice(19, 21)
             _filteredOrderStatuses = [..._filteredOrderStatuses, ...extractOrderStatus]
-            extractOrderStatus = orderStatuses.slice(20, 24)
+            extractOrderStatus = orderStatuses.slice(22, 26)
             _filteredOrderStatuses = [..._filteredOrderStatuses, ...extractOrderStatus]
-            extractOrderStatus = orderStatuses.slice(27, 29)
+            extractOrderStatus = orderStatuses.slice(29, 31)
             _filteredOrderStatuses = [..._filteredOrderStatuses, ...extractOrderStatus]
             if (searchValue) {
               _filteredOrderStatuses = [..._filteredOrderStatuses?.filter(orderStatus => orderStatus?.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()))]
@@ -442,12 +439,7 @@ export const OrderStatusTypeSelector = (props) => {
             setFilteredOrderStatuses(_filteredOrderStatuses)
             break
           case 7:
-            extractOrderStatus = orderStatuses.slice(0, 13)
-            _filteredOrderStatuses = [...extractOrderStatus]
-            extractOrderStatus = orderStatuses.slice(15, 20)
-            _filteredOrderStatuses = [..._filteredOrderStatuses, ...extractOrderStatus]
-            extractOrderStatus = orderStatuses.slice(21, 28)
-            _filteredOrderStatuses = [..._filteredOrderStatuses, ...extractOrderStatus]
+            _filteredOrderStatuses = orderStatuses
             if (searchValue) {
               _filteredOrderStatuses = [..._filteredOrderStatuses?.filter(orderStatus => orderStatus?.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()))]
             }
@@ -460,11 +452,11 @@ export const OrderStatusTypeSelector = (props) => {
             _filteredOrderStatuses = [..._filteredOrderStatuses, ...extractOrderStatus]
             extractOrderStatus = orderStatuses.slice(13, 15)
             _filteredOrderStatuses = [..._filteredOrderStatuses, ...extractOrderStatus]
-            extractOrderStatus = orderStatuses.slice(17, 19)
+            extractOrderStatus = orderStatuses.slice(19, 21)
             _filteredOrderStatuses = [..._filteredOrderStatuses, ...extractOrderStatus]
-            extractOrderStatus = orderStatuses.slice(20, 24)
+            extractOrderStatus = orderStatuses.slice(22, 26)
             _filteredOrderStatuses = [..._filteredOrderStatuses, ...extractOrderStatus]
-            extractOrderStatus = orderStatuses.slice(27, 29)
+            extractOrderStatus = orderStatuses.slice(29, 31)
             _filteredOrderStatuses = [..._filteredOrderStatuses, ...extractOrderStatus]
             if (searchValue) {
               _filteredOrderStatuses = [..._filteredOrderStatuses?.filter(orderStatus => orderStatus?.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()))]
