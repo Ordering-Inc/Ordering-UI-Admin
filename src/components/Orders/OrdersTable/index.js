@@ -96,6 +96,10 @@ export const OrdersTable = memo((props) => {
       content: t('INVOICE_ORDER_NO', 'Order No.')
     },
     {
+      value: 'agent',
+      content: t('AGENT', 'Agent')
+    },
+    {
       value: 'cartGroupId',
       content: t('GROUP_ORDER', 'Group Order')
     },
