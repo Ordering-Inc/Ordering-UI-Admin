@@ -161,7 +161,7 @@ const SingleBusinessUI = (props) => {
                     )}
                   </td>
                 )}
-                {allowColumns?.ratings && (
+                {(businessState?.business?.enabled === false) && (
                   <td>
                     <InfoBlock width={200}>
                       <p>{businessState?.business?.disabled_reason}</p>
