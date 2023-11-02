@@ -373,13 +373,14 @@ const BusinessInformationUI = (props) => {
         }
         {(businessState?.business?.enabled === false) && (
           <InputWrapper>
-            <label>{t('DISABLED_REASON', 'Disabled reason')}</label>
+            <label>{t('DISABLED_REASON', 'Disabled reason')} <span>({t('MAX_60_CHAR', 'Max 60 Characters')})</span></label>
             <Input
               name='disabled_reason'
               defaultValue={formState?.changes?.disabled_reason ?? businessState?.business?.disabled_reason}
               onChange={handleChangeInput}
               disabled={formState.loading}
               autoComplete='off'
+              maxLength={60}
             />
           </InputWrapper>
         )}
