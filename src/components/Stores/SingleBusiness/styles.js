@@ -104,6 +104,10 @@ export const InfoBlock = styled.div`
   > span {
     font-size: 14px;
   }
+
+  ${({ width }) => width && css`
+    width: ${width}px
+  `}
 `
 
 export const BusinessEnableWrapper = styled.div`

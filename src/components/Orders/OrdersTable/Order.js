@@ -1,5 +1,5 @@
 import React from 'react'
-import { BusinessInfo, CheckBox, CustomerInfo, LogisticStatusDot, OrderNumberContainer, OrdersCountWrapper, PriorityDot, StatusInfo, Timer, Timestatus, WrapperImage } from './styles'
+import { BusinessInfo, CheckBox, CustomerInfo, LogisticStatusDot, OrderNumberContainer, OrdersCountWrapper, PriorityDot, StatusInfo, Timer, Timestatus, WrapperImage, InfoWrapper } from './styles'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import { useLanguage, useUtils } from 'ordering-components-admin'
@@ -116,6 +116,18 @@ export const Order = React.memo((props) => {
                 <StatusInfo>
                   <p className='bold'>{getOrderStatus(order.status)}</p>
                 </StatusInfo>
+              </td>
+            )
+          }
+          if (column === 'agent') {
+            return (
+              <td className='statusInfo' key={`agentInfo${i}-${index}`}>
+                <InfoWrapper>
+                  <div className='info'>
+                    <p className='bold'>{order?.agent?.name}</p>
+                    <p>{order?.agent?.email}</p>
+                  </div>
+                </InfoWrapper>
               </td>
             )
           }

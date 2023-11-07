@@ -190,9 +190,9 @@ const BusinessInformationUI = (props) => {
                 ? (<SkeletonWrapper><Skeleton /></SkeletonWrapper>)
                 : ((!formState.changes?.header || formState.result?.result === 'Network Error' || formState.result.error)
                   ? businessState?.business?.header &&
-                    (<img src={businessState?.business?.header} alt='header image' loading='lazy' />)
+                  (<img src={businessState?.business?.header} alt='header image' loading='lazy' />)
                   : formState?.changes?.header &&
-                    <img src={formState?.changes?.header} alt='header image' loading='lazy' />
+                  <img src={formState?.changes?.header} alt='header image' loading='lazy' />
                 )}
               <UploadImageIconContainer>
                 <UploadImageIcon>
@@ -222,9 +222,9 @@ const BusinessInformationUI = (props) => {
                 ? (<SkeletonWrapper><Skeleton /></SkeletonWrapper>)
                 : ((!formState.changes?.logo || formState.result?.result === 'Network Error' || formState.result.error)
                   ? businessState?.business?.logo &&
-                    (<img src={businessState?.business?.logo} alt='logo image' loading='lazy' />)
+                  (<img src={businessState?.business?.logo} alt='logo image' loading='lazy' />)
                   : formState?.changes?.logo &&
-                    <img src={formState?.changes?.logo} alt='logo image' loading='lazy' />
+                  <img src={formState?.changes?.logo} alt='logo image' loading='lazy' />
                 )}
               <UploadImageIconContainer small>
                 <UploadImageIcon small>
@@ -371,6 +371,19 @@ const BusinessInformationUI = (props) => {
             </>
           )
         }
+        {(businessState?.business?.enabled === false) && (
+          <InputWrapper>
+            <label>{t('DISABLED_REASON', 'Disabled reason')} <span>({t('MAX_60_CHAR', 'Max 60 Characters')})</span></label>
+            <Input
+              name='disabled_reason'
+              defaultValue={formState?.changes?.disabled_reason ?? businessState?.business?.disabled_reason}
+              onChange={handleChangeInput}
+              disabled={formState.loading}
+              autoComplete='off'
+              maxLength={60}
+            />
+          </InputWrapper>
+        )}
         <PriceFilterWrapper>
           <label>{t('PRICE_FILTER', 'Price filter')}</label>
           <PriceFilterListWrapper>

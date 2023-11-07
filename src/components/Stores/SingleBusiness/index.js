@@ -99,6 +99,9 @@ const SingleBusinessUI = (props) => {
                 <td>
                   <Skeleton width={100} />
                 </td>
+                <td>
+                  <Skeleton width={100} />
+                </td>
               </tr>
             </SingleBusinessContainer>
           ) : (
@@ -156,6 +159,13 @@ const SingleBusinessUI = (props) => {
                         </p>
                       </InfoBlock>
                     )}
+                  </td>
+                )}
+                {(businessState?.business?.enabled === false) && (
+                  <td>
+                    <InfoBlock width={200}>
+                      <p>{businessState?.business?.disabled_reason}</p>
+                    </InfoBlock>
                   </td>
                 )}
                 <td>

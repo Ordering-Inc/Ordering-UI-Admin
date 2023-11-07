@@ -178,6 +178,9 @@ export const BusinessesList = (props) => {
                   {allowColumns?.ratings && (
                     <th>{t('RATINGS', 'Ratings')}</th>
                   )}
+                  {!selectedBusinessActiveState && (
+                    <th>{t('DISABLED_REASON', 'Disabled reason')}</th>
+                  )}
                   <th className='action'>
                     <ActionWrapper>
                       <ColumnAllowSettingPopover
