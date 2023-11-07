@@ -153,7 +153,7 @@ const ProductExtrasUI = (props) => {
   useEffect(() => {
     const extraId = query.get('extra')
     if (extraId) {
-      const initExtra = extrasState?.extras.find(extra => extra.id === Number(extraId))
+      const initExtra = extrasState?.extras?.find(extra => extra.id === Number(extraId))
       initExtra && handleOpenExtraDetails(null, initExtra, true)
     }
   }, [])
@@ -171,7 +171,7 @@ const ProductExtrasUI = (props) => {
             {t('ADD_PRODUCT_OPTION', 'Add product option')}
           </Button>
         </Header>
-        {extrasState?.extras && extrasState?.extras.sort((a, b) => a.rank - b.rank).map((extra, index) => {
+        {extrasState?.extras && extrasState?.extras?.sort((a, b) => a.rank - b.rank).map((extra, index) => {
           const isLastExtra = index === extrasState.extras.length - 1
           return (
             <ExtraOption
