@@ -1179,6 +1179,12 @@ Object.defineProperty(exports, "GoogleGpsButton", {
     return _Delivery.GoogleGpsButton;
   }
 });
+Object.defineProperty(exports, "GuestCheckoutFieldsSetting", {
+  enumerable: true,
+  get: function get() {
+    return _Settings.GuestCheckoutFieldsSetting;
+  }
+});
 Object.defineProperty(exports, "HomePage", {
   enumerable: true,
   get: function get() {
@@ -2151,6 +2157,12 @@ Object.defineProperty(exports, "SettingsDetail", {
     return _Settings.SettingsDetail;
   }
 });
+Object.defineProperty(exports, "SettingsImage", {
+  enumerable: true,
+  get: function get() {
+    return _Settings.SettingsImage;
+  }
+});
 Object.defineProperty(exports, "SettingsList", {
   enumerable: true,
   get: function get() {
@@ -2203,6 +2215,12 @@ Object.defineProperty(exports, "SingleBusinessSubCateogries", {
   enumerable: true,
   get: function get() {
     return _Stores.SingleBusinessSubCateogries;
+  }
+});
+Object.defineProperty(exports, "SitesAuthSettings", {
+  enumerable: true,
+  get: function get() {
+    return _Settings.SitesAuthSettings;
   }
 });
 Object.defineProperty(exports, "SpinnerLoader", {
