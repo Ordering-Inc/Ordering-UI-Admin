@@ -35,6 +35,7 @@ import { MultiCountrySettings } from './MultiCountrySettings'
 import { CardFieldsSetting } from './CardFieldsSetting'
 import { GuestCheckoutFieldsSetting } from './GuestCheckoutFieldsSetting'
 import { SitesAuthSettings } from './SitesAuthSettings'
+import { SettingsImage } from './SettingsImage'
 export {
   Cms,
   IntegrationListing,
@@ -72,5 +73,6 @@ export {
   MultiCountrySettings,
   CardFieldsSetting,
   GuestCheckoutFieldsSetting,
-  SitesAuthSettings
+  SitesAuthSettings,
+  SettingsImage
 }

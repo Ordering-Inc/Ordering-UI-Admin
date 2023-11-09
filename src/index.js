@@ -207,7 +207,8 @@ import {
   MultiCountrySettings,
   CardFieldsSetting,
   GuestCheckoutFieldsSetting,
-  SitesAuthSettings
+  SitesAuthSettings,
+  SettingsImage
 } from './components/Settings'
 import {
   BusinessBrandListing,
@@ -630,6 +631,7 @@ export {
   CardFieldsSetting,
   GuestCheckoutFieldsSetting,
   SitesAuthSettings,
+  SettingsImage,
 
   Support,
 
