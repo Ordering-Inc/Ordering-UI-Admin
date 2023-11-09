@@ -205,7 +205,10 @@ import {
   LanguageTransSpread,
   LanguageTransTable,
   MultiCountrySettings,
-  CardFieldsSetting
+  CardFieldsSetting,
+  GuestCheckoutFieldsSetting,
+  SitesAuthSettings,
+  SettingsImage
 } from './components/Settings'
 import {
   BusinessBrandListing,
@@ -626,6 +629,10 @@ export {
   LanguageTransTable,
   MultiCountrySettings,
   CardFieldsSetting,
+  GuestCheckoutFieldsSetting,
+  SitesAuthSettings,
+  SettingsImage,
+
   Support,
 
   BusinessBrandListing,
