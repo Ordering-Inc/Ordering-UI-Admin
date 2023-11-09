@@ -47,6 +47,9 @@ const SettingsUI = (props) => {
   const [isOpenSettingDetails, setIsOpenSettingDetails] = useState(null)
   const [openSitesAuthSettings, setOpenSitesAuthSettings] = useState(false)
   const [openMultiCountrySettings, setOpenMultiCountrySettings] = useState(false)
+  const [openCheckoutSettings, setOpenCheckoutSettings] = useState(false)
+  const [openAddressSettings, setOpenAddressSettings] = useState(false)
+  const [openCardSettings, setOpenCardSettings] = useState(false)
   const [moveDistance, setMoveDistance] = useState(0)
 
   const [events] = useEvent()
@@ -74,6 +77,9 @@ const SettingsUI = (props) => {
     setIsOpenSettingDetails(null)
     setOpenSitesAuthSettings(false)
     setOpenMultiCountrySettings(false)
+    setOpenCheckoutSettings(false)
+    setOpenAddressSettings(false)
+    setOpenCardSettings(false)
     setIsOpenDescription(true)
     setSelectedCategory(category)
     handChangeConfig && handChangeConfig(false)
@@ -85,7 +91,10 @@ const SettingsUI = (props) => {
   const handleOpenSettingDetails = (item, isInitialRender) => {
     setIsOpenDescription(false)
     setOpenSitesAuthSettings(false)
+    setOpenCheckoutSettings(false)
     setOpenMultiCountrySettings(false)
+    setOpenCardSettings(false)
+    setOpenAddressSettings(false)
     setSelectedCategory(null)
     setIsOpenSettingDetails(item)
     if (!isInitialRender) {
@@ -111,13 +120,52 @@ const SettingsUI = (props) => {
     }
   }
 
+  const handleOpenCheckout = (isInitialRender) => {
+    setIsOpenDescription(false)
+    setIsOpenSettingDetails(null)
+    setOpenSitesAuthSettings(false)
+    setOpenAddressSettings(false)
+    setOpenCardSettings(false)
+    setOpenCheckoutSettings(true)
+    if (!isInitialRender) {
+      history.replace(`${location.pathname}?category=checkout`)
+    }
+  }
+
+  const handleOpenAddress = (isInitialRender) => {
+    setIsOpenDescription(false)
+    setIsOpenSettingDetails(null)
+    setOpenSitesAuthSettings(false)
+    setOpenCheckoutSettings(false)
+    setOpenCardSettings(false)
+    setOpenAddressSettings(true)
+    if (!isInitialRender) {
+      history.replace(`${location.pathname}?category=address`)
+    }
+  }
+
+  const handleOpenCard = (isInitialRender) => {
+    setIsOpenDescription(false)
+    setIsOpenSettingDetails(null)
+    setOpenSitesAuthSettings(false)
+    setOpenCheckoutSettings(false)
+    setOpenAddressSettings(false)
+    setOpenCardSettings(true)
+    if (!isInitialRender) {
+      history.replace(`${location.pathname}?category=card`)
+    }
+  }
+
   const handleBackRedirect = () => {
     setIsOpenDescription(false)
     setSelectedCategory(null)
     setIsOpenSettingDetails(null)
     setMoveDistance(0)
     setOpenMultiCountrySettings(false)
+    setOpenCheckoutSettings(false)
     setOpenSitesAuthSettings(false)
+    setOpenAddressSettings(false)
+    setOpenCardSettings(false)
     history.replace(`${location.pathname}`)
   }
 
@@ -130,6 +178,12 @@ const SettingsUI = (props) => {
           handleOpenSites(true)
         } else if (categoryId === 'multi_country') {
           handleOpenMultiCountry(true)
+        } else if (categoryId === 'checkout') {
+          setOpenCheckoutSettings(true)
+        } else if (categoryId === 'address') {
+          setOpenAddressSettings(true)
+        } else if (categoryId === 'card') {
+          setOpenCardSettings(true)
         } else {
           handleOpenSettingDetails(categoryId, true)
         }
@@ -190,13 +244,13 @@ const SettingsUI = (props) => {
               </SettingItemWrapper>
               <SettingItemWrapper
                 className='col-md-4 col-sm-6'
-                onClick={() => handleOpenSettingDetails('checkout')}
+                onClick={() => handleOpenCheckout()}
               >
                 <SettingItemUI
                   title={t('CHECKOUT_FIELDS', 'Checkout fields')}
                   description={t('CHECKOUT_FIELDS_DESC')}
                   icon={<CheckCircleFill />}
-                  active={isOpenSettingDetails === 'checkout'}
+                  active={openCheckoutSettings}
                 />
               </SettingItemWrapper>
               <SettingItemWrapper
@@ -212,24 +266,24 @@ const SettingsUI = (props) => {
               </SettingItemWrapper>
               <SettingItemWrapper
                 className='col-md-4 col-sm-6'
-                onClick={() => handleOpenSettingDetails('address')}
+                onClick={() => handleOpenAddress()}
               >
                 <SettingItemUI
                   title={t('ADDRESS_FIELDS', 'Address fields')}
                   description={t('ADDRESS_FIELDS_DESC')}
                   icon={<GeoAltFill />}
-                  active={isOpenSettingDetails === 'address'}
+                  active={openAddressSettings}
                 />
               </SettingItemWrapper>
               <SettingItemWrapper
                 className='col-md-4 col-sm-6'
-                onClick={() => handleOpenSettingDetails('card')}
+                onClick={() => handleOpenCard()}
               >
                 <SettingItemUI
                   title={t('CARD_FIELDS', 'Card fields')}
                   description={t('CARD_FIELDS_DESC', 'Manage your card fields')}
                   icon={<CreditCard />}
-                  active={isOpenSettingDetails === 'card'}
+                  active={openCardSettings}
                 />
               </SettingItemWrapper>
               <SettingItemWrapper
@@ -324,6 +378,36 @@ const SettingsUI = (props) => {
           <MultiCountrySettings setMoveDistance={setMoveDistance} />
         </SideBar>
       )}
+      {openCheckoutSettings && (
+        <SideBar
+          defaultSideBarWidth={500 + moveDistance}
+          moveDistance={moveDistance}
+          open={openCheckoutSettings}
+          onClose={() => handleBackRedirect()}
+        >
+          <CheckoutFieldsSetting setMoveDistance={setMoveDistance} />
+        </SideBar>
+      )}
+      {openAddressSettings && (
+        <SideBar
+          defaultSideBarWidth={500 + moveDistance}
+          moveDistance={moveDistance}
+          open={openAddressSettings}
+          onClose={() => handleBackRedirect()}
+        >
+          <AddressFieldsSetting setMoveDistance={setMoveDistance} />
+        </SideBar>
+      )}
+      {openCardSettings && (
+        <SideBar
+          defaultSideBarWidth={500 + moveDistance}
+          moveDistance={moveDistance}
+          open={openCardSettings}
+          onClose={() => handleBackRedirect()}
+        >
+          <CardFieldsSetting setMoveDistance={setMoveDistance} />
+        </SideBar>
+      )}
       {
         isOpenSettingDetails && (
           <SideBar
@@ -333,17 +417,8 @@ const SettingsUI = (props) => {
             onClose={() => handleBackRedirect()}
             showExpandIcon
           >
-            {isOpenSettingDetails === 'checkout' && (
-              <CheckoutFieldsSetting />
-            )}
             {isOpenSettingDetails === 'guest_checkout' && (
               <GuestCheckoutFieldsSetting />
-            )}
-            {isOpenSettingDetails === 'address' && (
-              <AddressFieldsSetting />
-            )}
-            {isOpenSettingDetails === 'card' && (
-              <CardFieldsSetting />
             )}
             {isOpenSettingDetails === 'language' && (
               <LanguageSetting />
