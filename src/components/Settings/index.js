@@ -34,6 +34,7 @@ import { LanguageTransTable } from './LanguageTransTable'
 import { MultiCountrySettings } from './MultiCountrySettings'
 import { CardFieldsSetting } from './CardFieldsSetting'
 import { GuestCheckoutFieldsSetting } from './GuestCheckoutFieldsSetting'
+import { SitesAuthSettings } from './SitesAuthSettings'
 export {
   Cms,
   IntegrationListing,
@@ -70,5 +71,6 @@ export {
   LanguageTransTable,
   MultiCountrySettings,
   CardFieldsSetting,
-  GuestCheckoutFieldsSetting
+  GuestCheckoutFieldsSetting,
+  SitesAuthSettings
 }
