@@ -37,7 +37,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ProductExtrasUI = function ProductExtrasUI(props) {
-  var _ref;
+  var _ref, _extrasState$extras4;
   var productState = props.productState,
     extrasState = props.extrasState,
     isAddMode = props.isAddMode,
@@ -217,7 +217,8 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
   (0, _react.useEffect)(function () {
     var extraId = query.get('extra');
     if (extraId) {
-      var initExtra = extrasState === null || extrasState === void 0 ? void 0 : extrasState.extras.find(function (extra) {
+      var _extrasState$extras3;
+      var initExtra = extrasState === null || extrasState === void 0 || (_extrasState$extras3 = extrasState.extras) === null || _extrasState$extras3 === void 0 ? void 0 : _extrasState$extras3.find(function (extra) {
         return extra.id === Number(extraId);
       });
       initExtra && handleOpenExtraDetails(null, initExtra, true);
@@ -229,7 +230,7 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
     onClick: function onClick() {
       return handleOpenAddForm();
     }
-  }, t('ADD_PRODUCT_OPTION', 'Add product option'))), (extrasState === null || extrasState === void 0 ? void 0 : extrasState.extras) && (extrasState === null || extrasState === void 0 ? void 0 : extrasState.extras.sort(function (a, b) {
+  }, t('ADD_PRODUCT_OPTION', 'Add product option'))), (extrasState === null || extrasState === void 0 ? void 0 : extrasState.extras) && (extrasState === null || extrasState === void 0 || (_extrasState$extras4 = extrasState.extras) === null || _extrasState$extras4 === void 0 ? void 0 : _extrasState$extras4.sort(function (a, b) {
     return a.rank - b.rank;
   }).map(function (extra, index) {
     var _theme$images$icons, _extraIds$includes;
