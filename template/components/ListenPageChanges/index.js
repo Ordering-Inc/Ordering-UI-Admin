@@ -55,6 +55,7 @@ export const ListenPageChanges = ({ children }) => {
     drivers_managers: '/delivery/drivers-managers',
     drivers_companies: '/delivery/drivers-companies',
     drivers_groups: '/delivery/drivers-groups',
+    drivers_time_display: '/delivery/drivers-time-display',
     enterprise_promotions: '/marketing/promotions-enterprise',
     campaign: '/marketing/campaign',
     ad_banners: '/marketing/ad-banners',

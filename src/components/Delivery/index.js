@@ -23,12 +23,14 @@ import { DriversGroupOrders } from './DriversGroupOrders'
 import { DriversGroupAutoassign } from './DriversGroupAutoassign'
 import { DriversMarkAsBusy } from './DriversMarkAsBusy'
 import { GoogleGpsButton } from './GoogleGpsButton'
+import { DriversTimeDisplay } from './DriversTimeDisplay'
 
 export {
   AddressList,
   AddressForm,
   DeliveryUsersListing,
   DriversCompaniesListing,
+  DriversTimeDisplay,
   DriversGroupsListing,
   WizardDelivery,
   DriverGroupSetting,
