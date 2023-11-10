@@ -134,8 +134,6 @@ const DriversTimeDisplayUI = (props) => {
     }
   }
 
-  console.log('scheduleState', scheduleState)
-
   const handleUntilDate = (_date) => {
     const diff = moment(_date).diff(selectedDate, 'months', true)
     console.log('diff', diff)
