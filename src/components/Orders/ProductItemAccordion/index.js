@@ -107,7 +107,7 @@ export const ProductItemAccordion = (props) => {
       if (product.options?.length > 0) {
         for (const option of product.options) {
           for (const suboption of option.suboptions) {
-            subOptionPrice += suboption.quantity * suboption.price
+            subOptionPrice += suboption.quantity * ((['left', 'right'].includes(suboption.position)) ? (suboption.half_price ?? suboption.price) : suboption.price)
           }
         }
       }
@@ -292,8 +292,8 @@ export const ProductItemAccordion = (props) => {
                           {getFormattedSubOptionName({
                             quantity: suboption.quantity,
                             name: suboption.name,
-                            position: (suboption.position !== 'whole') ? t(suboption.position.toUpperCase(), suboption.position) : '',
-                            price: suboption.price
+                            position: (suboption?.position !== 'whole') ? t(suboption.position.toUpperCase(), suboption.position) : '',
+                            price: (['left', 'right'].includes(suboption.position)) ? (suboption.half_price ?? suboption.price) : suboption.price
                           })}
                         </span>
                       </li>
