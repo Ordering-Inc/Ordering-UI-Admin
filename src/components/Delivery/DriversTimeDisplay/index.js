@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useLanguage, useConfig, CalendarDriversList as CalendarDriversListController } from 'ordering-components-admin'
-import { List as MenuIcon, ChevronRight } from 'react-bootstrap-icons'
+ import { List as MenuIcon, ChevronRight } from 'react-bootstrap-icons'
 import { Button, IconButton } from '../../../styles'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { Alert, Modal, SpinnerLoader } from '../../Shared'
@@ -53,7 +53,7 @@ const DriversTimeDisplayUI = (props) => {
     openModal,
     setOpenModal,
     handleAddBlockTime,
-    DeleteBlockTime,
+    deleteBlockTime,
     setOpenDeleteModal,
     openDeleteModal,
     setPropagation,
@@ -61,7 +61,7 @@ const DriversTimeDisplayUI = (props) => {
     setShowBreakBlock,
     showBreakBlock,
     date,
-    EditBlockTime,
+    editBlockTime,
     setOpenEditModal,
     openEditModal,
     setStackEventsState,
@@ -338,7 +338,7 @@ const DriversTimeDisplayUI = (props) => {
           isEdit={!!selectedBlock?.block}
           handleUntilDate={handleUntilDate}
           scheduleOptions={scheduleOptions}
-          DeleteBlockTime={DeleteBlockTime}
+          deleteBlockTime={deleteBlockTime}
           setScheduleState={setScheduleState}
           setOpenEditModal={setOpenEditModal}
           selectedBlock={selectedBlock?.block}
@@ -386,7 +386,7 @@ const DriversTimeDisplayUI = (props) => {
             color='primary'
             borderRadius='8px'
             disabled={scheduleState.loading}
-            onClick={() => openDeleteModal ? DeleteBlockTime() : EditBlockTime()}
+            onClick={() => openDeleteModal ? deleteBlockTime() : editBlockTime()}
           >
             {scheduleState.loading ? t('LOADING', 'Loading') : openDeleteModal ? t('DELETE', 'Delete') : t('EDIT', 'Edit')}
           </Button>

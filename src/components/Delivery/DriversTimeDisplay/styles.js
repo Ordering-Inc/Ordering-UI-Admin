@@ -421,7 +421,7 @@ export const UserMainInfo = styled.div`
     margin-left: 20px;
     padding-left: 10px;
   ` : css`
-    padding-right: 10px;
+    padding: 0px 5px;
   `}
 
   > div:last-child {
@@ -586,6 +586,7 @@ export const VerifiedItemsContainer = styled.div`
 export const UserIdWrapper = styled.div`
   display: flex;
   align-items: center;
+  font-size: 12px;
 `
 export const ActionsContainer = styled.div`
   display: flex;
