@@ -86,6 +86,7 @@ import { CustomProject } from './pages/CustomProject'
 import { OrderingWidgets } from './pages/OrderingWidgets'
 import { BusinessDevicesList } from './pages/BusinessDevicesList'
 import { SettingsLogs } from './pages/SettingsLogs'
+import { DriversTimeDisplay } from './pages/DriverTimeDisplay'
 
 export const App = () => {
   const history = useHistory()
@@ -361,7 +362,9 @@ export const App = () => {
                     <ProtectedRoute path='/delivery/drivers-groups' allowedLevels={[0, 5]}>
                       <DriversGroupsList />
                     </ProtectedRoute>
-
+                    <ProtectedRoute path='/delivery/drivers-time-display' allowedLevels={[0, 5]}>
+                      <DriversTimeDisplay />
+                    </ProtectedRoute>
                     <ProtectedRoute path='/marketing/promotions-enterprise' allowedLevels={[0]}>
                       <EnterprisePromotionList />
                     </ProtectedRoute>

@@ -237,6 +237,13 @@
     "robots": "index, follow",
     "canonicalUrl": ""
   },
+  "drivers_time_display": {
+    "title": "Driver time display",
+    "description": "a dummy description about this page",
+    "keywords": "test, dummy, data",
+    "robots": "index, follow",
+    "canonicalUrl": ""
+  },
   "ordering_products": {
     "title": "Ordering Products",
     "description": "a dummy description about this page",

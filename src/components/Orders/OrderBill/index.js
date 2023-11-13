@@ -29,6 +29,7 @@ export const OrderBill = (props) => {
     4: t('SPOT_NUMBER_CURBSIDE', 'Spot number'),
     5: t('SPOT_NUMBER_DRIVE_THRU', 'Drive thru lane')
   }
+  const isPickupOrder = order?.delivery_type === 2
 
   const walletName = {
     cash: {
@@ -189,7 +190,7 @@ export const OrderBill = (props) => {
               </tr>
             ))
           }
-          {typeof order?.summary?.delivery_price === 'number' && (
+          {typeof order?.summary?.delivery_price === 'number' && !isPickupOrder && (
             <tr>
               <td>{t('DELIVERY_FEE', 'Delivery Fee')}</td>
               <td>{parsePrice(order?.summary?.delivery_price + getIncludedTaxes(true), { currency: getCurrenySymbol(order?.currency) })}</td>
