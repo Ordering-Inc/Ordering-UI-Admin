@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.widgetURL = exports.verifyDecimals = exports.stringToSlug = exports.sortInputFields = exports.shape = exports.setStorageItem = exports.scrollTo = exports.ribbonValues = exports.reviewCommentList = exports.removeStorageItem = exports.removeQueryToUrl = exports.queryStringToObject = exports.orderRejectCommentList = exports.optimizeImage = exports.getUniqueId = exports.getStorageItem = exports.getStarWidth = exports.getSeconds = exports.getOrderStatus = exports.getOrderStatuPickUp = exports.getMinutes = exports.getLocale = exports.getIconCard = exports.getHours = exports.getCurrenySymbol = exports.getCurrentDiffDays = exports.getAgoMinutes = exports.formatUrlVideo = exports.formatSeconds = exports.firstLetterCapital = exports.findExitingCountryPhoneCode = exports.findExitingCode = exports.fieldsToSort = exports.convertHoursToMinutes = exports.convertHMS = exports.checkValidUrlFormat = exports.checkSiteUrl = exports.checkPreSiteUrl = exports.capitalize = exports.bytesConverter = exports.addQueryToUrl = exports.DriverTipsOptions = void 0;
+exports.widgetURL = exports.verifyDecimals = exports.stringToSlug = exports.sortInputFields = exports.shape = exports.setStorageItem = exports.scrollTo = exports.ribbonValues = exports.reviewCommentList = exports.removeStorageItem = exports.removeQueryToUrl = exports.queryStringToObject = exports.orderStatus = exports.orderRejectCommentList = exports.optimizeImage = exports.getUniqueId = exports.getStorageItem = exports.getStarWidth = exports.getSeconds = exports.getOrderStatus = exports.getOrderStatuPickUp = exports.getMinutes = exports.getLocale = exports.getIconCard = exports.getHours = exports.getCurrenySymbol = exports.getCurrentDiffDays = exports.getAgoMinutes = exports.formatUrlVideo = exports.formatSeconds = exports.firstLetterCapital = exports.findExitingCountryPhoneCode = exports.findExitingCode = exports.fieldsToSort = exports.convertHoursToMinutes = exports.convertHMS = exports.checkValidUrlFormat = exports.checkSiteUrl = exports.checkPreSiteUrl = exports.capitalize = exports.bytesConverter = exports.addQueryToUrl = exports.TwentyFourHours = exports.TwelveHours = exports.DriverTipsOptions = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _FaCcMastercard = _interopRequireDefault(require("@meronex/icons/fa/FaCcMastercard"));
 var _FaCcVisa = _interopRequireDefault(require("@meronex/icons/fa/FaCcVisa"));
@@ -564,128 +564,144 @@ var reviewCommentList = function reviewCommentList(type) {
   return reviews[type];
 };
 exports.reviewCommentList = reviewCommentList;
+var orderStatus = [{
+  key: 0,
+  value: 'Pending Order',
+  slug: 'PENDING_ORDER',
+  percentage: 10
+}, {
+  key: 1,
+  value: 'Completed by admin',
+  slug: 'COMPLETED_BY_ADMIN',
+  percentage: 100
+}, {
+  key: 2,
+  value: 'Reject by admin',
+  slug: 'REJECT_BY_ADMIN',
+  percentage: 0
+}, {
+  key: 3,
+  value: 'Driver arrived by business',
+  slug: 'DRIVER_IN_BUSINESS',
+  percentage: 60
+}, {
+  key: 4,
+  value: 'Preparation Completed',
+  slug: 'PREPARATION_COMPLETED',
+  percentage: 20
+}, {
+  key: 5,
+  value: 'Reject by business',
+  slug: 'REJECT_BY_BUSINESS',
+  percentage: 0
+}, {
+  key: 6,
+  value: 'Reject by driver',
+  slug: 'REJECT_BY_DRIVER',
+  percentage: 0
+}, {
+  key: 7,
+  value: 'Accepted by business',
+  slug: 'ACCEPTED_BY_BUSINESS',
+  percentage: 15
+}, {
+  key: 8,
+  value: 'Accepted by driver',
+  slug: 'ACCEPTED_BY_DRIVER',
+  percentage: 40
+}, {
+  key: 9,
+  value: 'Pick up completed by driver',
+  slug: 'PICK_UP_COMPLETED_BY_DRIVER',
+  percentage: 70
+}, {
+  key: 10,
+  value: 'Pick up Failed by driver',
+  slug: 'PICK_UP_FAILED_BY_DRIVER',
+  percentage: 0
+}, {
+  key: 11,
+  value: 'Delivery completed by driver',
+  slug: 'DELIVERY_COMPLETED_BY_DRIVER',
+  percentage: 100
+}, {
+  key: 12,
+  value: 'Delivery Failed by driver',
+  slug: 'DELIVERY_FAILED_BY_DRIVER',
+  percentage: 0
+}, {
+  key: 13,
+  value: 'Preorder',
+  slug: 'PREORDER',
+  percentage: 0
+}, {
+  key: 14,
+  value: 'Order not ready',
+  slug: 'ORDER_NOT_READY',
+  percentage: 15
+}, {
+  key: 15,
+  value: 'Pickup completed by customer',
+  slug: 'PICKUP_COMPLETED_BY_CUSTOMER',
+  percentage: 100
+}, {
+  key: 16,
+  value: 'Canceled by customer',
+  slug: 'CANCELED_BY_CUSTOMER',
+  percentage: 0
+}, {
+  key: 17,
+  value: 'Not picked by customer',
+  slug: 'NOT_PICKED_BY_CUSTOMER',
+  percentage: 0
+}, {
+  key: 18,
+  value: 'Driver almost arrived to business',
+  slug: 'DRIVER_ALMOST_ARRIVED_TO_BUSINESS',
+  percentage: 50
+}, {
+  key: 19,
+  value: 'Driver almost arrived to customer',
+  slug: 'DRIVER_ALMOST_ARRIVED_TO_CUSTOMER',
+  percentage: 90
+}, {
+  key: 20,
+  value: 'Customer almost arrived to business',
+  slug: 'CUSTOMER_ALMOST_ARRIVED_TO_BUSINESS',
+  percentage: 90
+}, {
+  key: 21,
+  value: 'Customer arrived to business',
+  slug: 'CUSTOMER_ARRIVED_TO_BUSINESS',
+  percentage: 90
+}, {
+  key: 22,
+  value: 'Looking for driver',
+  slug: 'ORDER_LOOKING_FOR_DRIVER',
+  percentage: 30
+}, {
+  key: 23,
+  value: 'Driver on way',
+  slug: 'ORDER_DRIVER_ON_WAY',
+  percentage: 80
+}, {
+  key: 24,
+  value: 'Driver waiting for order',
+  slug: 'ORDER_STATUS_DRIVER_WAITING_FOR_ORDER',
+  percentage: 25
+}, {
+  key: 25,
+  value: 'Accepted by driver company',
+  slug: 'ORDER_STATUS_ACCEPTED_BY_DRIVER_COMPANY',
+  percentage: 15
+}, {
+  key: 26,
+  value: 'Driver arrived to customer',
+  slug: 'ORDER_DRIVER_ARRIVED_CUSTOMER',
+  percentage: 80
+}];
+exports.orderStatus = orderStatus;
 var getOrderStatus = function getOrderStatus(status) {
-  var orderStatus = [{
-    key: 0,
-    value: 'Pending Order',
-    slug: 'PENDING_ORDER',
-    percentage: 10
-  }, {
-    key: 1,
-    value: 'Completed by admin',
-    slug: 'COMPLETED_BY_ADMIN',
-    percentage: 100
-  }, {
-    key: 2,
-    value: 'Reject by admin',
-    slug: 'REJECT_BY_ADMIN',
-    percentage: 0
-  }, {
-    key: 3,
-    value: 'Driver arrived by business',
-    slug: 'DRIVER_IN_BUSINESS',
-    percentage: 60
-  }, {
-    key: 4,
-    value: 'Preparation Completed',
-    slug: 'PREPARATION_COMPLETED',
-    percentage: 20
-  }, {
-    key: 5,
-    value: 'Reject by business',
-    slug: 'REJECT_BY_BUSINESS',
-    percentage: 0
-  }, {
-    key: 6,
-    value: 'Reject by driver',
-    slug: 'REJECT_BY_DRIVER',
-    percentage: 0
-  }, {
-    key: 7,
-    value: 'Accepted by business',
-    slug: 'ACCEPTED_BY_BUSINESS',
-    percentage: 15
-  }, {
-    key: 8,
-    value: 'Accepted by driver',
-    slug: 'ACCEPTED_BY_DRIVER',
-    percentage: 40
-  }, {
-    key: 9,
-    value: 'Pick up completed by driver',
-    slug: 'PICK_UP_COMPLETED_BY_DRIVER',
-    percentage: 70
-  }, {
-    key: 10,
-    value: 'Pick up Failed by driver',
-    slug: 'PICK_UP_FAILED_BY_DRIVER',
-    percentage: 0
-  }, {
-    key: 11,
-    value: 'Delivery completed by driver',
-    slug: 'DELIVERY_COMPLETED_BY_DRIVER',
-    percentage: 100
-  }, {
-    key: 12,
-    value: 'Delivery Failed by driver',
-    slug: 'DELIVERY_FAILED_BY_DRIVER',
-    percentage: 0
-  }, {
-    key: 13,
-    value: 'Preorder',
-    slug: 'PREORDER',
-    percentage: 0
-  }, {
-    key: 14,
-    value: 'Order not ready',
-    slug: 'ORDER_NOT_READY',
-    percentage: 15
-  }, {
-    key: 15,
-    value: 'Pickup completed by customer',
-    slug: 'PICKUP_COMPLETED_BY_CUSTOMER',
-    percentage: 100
-  }, {
-    key: 16,
-    value: 'Canceled by customer',
-    slug: 'CANCELED_BY_CUSTOMER',
-    percentage: 0
-  }, {
-    key: 17,
-    value: 'Not picked by customer',
-    slug: 'NOT_PICKED_BY_CUSTOMER',
-    percentage: 0
-  }, {
-    key: 18,
-    value: 'Driver almost arrived to business',
-    slug: 'DRIVER_ALMOST_ARRIVED_TO_BUSINESS',
-    percentage: 50
-  }, {
-    key: 19,
-    value: 'Driver almost arrived to customer',
-    slug: 'DRIVER_ALMOST_ARRIVED_TO_CUSTOMER',
-    percentage: 90
-  }, {
-    key: 20,
-    value: 'Customer almost arrived to business',
-    slug: 'CUSTOMER_ALMOST_ARRIVED_TO_BUSINESS',
-    percentage: 90
-  }, {
-    key: 21,
-    value: 'Customer arrived to business',
-    slug: 'CUSTOMER_ARRIVED_TO_BUSINESS',
-    percentage: 90
-  }, {
-    key: 22,
-    value: 'Looking for driver',
-    slug: 'ORDER_LOOKING_FOR_DRIVER',
-    percentage: 30
-  }, {
-    key: 23,
-    value: 'Driver on way',
-    slug: 'ORDER_DRIVER_ON_WAY',
-    percentage: 80
-  }];
   var objectStatus = orderStatus.find(function (o) {
     return o.key === status;
   });
@@ -876,3 +892,7 @@ var removeQueryToUrl = function removeQueryToUrl(removeKeys) {
   }
 };
 exports.removeQueryToUrl = removeQueryToUrl;
+var TwelveHours = ['12:00 AM', '01:00 AM', '02:00 AM', '03:00 AM', '04:00 AM', '05:00 AM', '06:00 AM', '07:00 AM', '08:00 AM', '09:00 AM', '10:00 AM', '11:00 AM', '12:00 PM', '01:00 PM', '02:00 PM', '03:00 PM', '04:00 PM', '05:00 PM', '06:00 PM', '07:00 PM', '08:00 PM', '09:00 PM', '10:00 PM', '11:00 PM'];
+exports.TwelveHours = TwelveHours;
+var TwentyFourHours = ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'];
+exports.TwentyFourHours = TwentyFourHours;
