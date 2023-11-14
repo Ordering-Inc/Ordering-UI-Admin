@@ -15,6 +15,7 @@ export const InterActOrderMarker = (props) => {
     image,
     customer,
     business,
+    timeStatus,
     driver
   } = props
   const [, t] = useLanguage()
@@ -143,6 +144,13 @@ export const InterActOrderMarker = (props) => {
       <WrapperMapMarker
         onMouseOver={() => setInfoShow(true)}
         onMouseLeave={() => setInfoShow(false)}
+        borderColor={timeStatus === 'delayed'
+          ? '#E63757'
+          : !driver?.available
+            ? '#6c757d'
+            : driver.busy
+              ? '#007bff'
+              : '#28a745'}
       >
         {image ? (
           <MapMarkerImg bgimage={image} />
