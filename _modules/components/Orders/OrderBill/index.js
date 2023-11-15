@@ -63,6 +63,7 @@ var OrderBill = function OrderBill(props) {
     4: t('SPOT_NUMBER_CURBSIDE', 'Spot number'),
     5: t('SPOT_NUMBER_DRIVE_THRU', 'Drive thru lane')
   };
+  var isPickupOrder = (order === null || order === void 0 ? void 0 : order.delivery_type) === 2;
   var walletName = {
     cash: {
       name: t('CASH_WALLET', 'Cash Wallet')
@@ -169,7 +170,7 @@ var OrderBill = function OrderBill(props) {
     }, /*#__PURE__*/_react.default.createElement("td", null, t(offer === null || offer === void 0 || (_offer$name2 = offer.name) === null || _offer$name2 === void 0 || (_offer$name2 = _offer$name2.toUpperCase()) === null || _offer$name2 === void 0 ? void 0 : _offer$name2.replaceAll(' ', '_'), offer.name), offer.rate_type === 1 && /*#__PURE__*/_react.default.createElement("span", null, "(".concat((0, _utils.verifyDecimals)(offer === null || offer === void 0 ? void 0 : offer.rate, parsePrice), "%)"))), /*#__PURE__*/_react.default.createElement("td", null, "- ", parsePrice(offer === null || offer === void 0 || (_offer$summary2 = offer.summary) === null || _offer$summary2 === void 0 ? void 0 : _offer$summary2.discount, {
       currency: (0, _utils.getCurrenySymbol)(order === null || order === void 0 ? void 0 : order.currency)
     })));
-  })), typeof (order === null || order === void 0 || (_order$summary12 = order.summary) === null || _order$summary12 === void 0 ? void 0 : _order$summary12.delivery_price) === 'number' && /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('DELIVERY_FEE', 'Delivery Fee')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice((order === null || order === void 0 || (_order$summary13 = order.summary) === null || _order$summary13 === void 0 ? void 0 : _order$summary13.delivery_price) + getIncludedTaxes(true), {
+  })), typeof (order === null || order === void 0 || (_order$summary12 = order.summary) === null || _order$summary12 === void 0 ? void 0 : _order$summary12.delivery_price) === 'number' && !isPickupOrder && /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('DELIVERY_FEE', 'Delivery Fee')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice((order === null || order === void 0 || (_order$summary13 = order.summary) === null || _order$summary13 === void 0 ? void 0 : _order$summary13.delivery_price) + getIncludedTaxes(true), {
     currency: (0, _utils.getCurrenySymbol)(order === null || order === void 0 ? void 0 : order.currency)
   }))), (order === null || order === void 0 || (_order$taxes6 = order.taxes) === null || _order$taxes6 === void 0 ? void 0 : _order$taxes6.length) > 0 && (order === null || order === void 0 || (_order$taxes7 = order.taxes) === null || _order$taxes7 === void 0 ? void 0 : _order$taxes7.filter(function (tax) {
     return (tax === null || tax === void 0 ? void 0 : tax.type) === 2 && (tax === null || tax === void 0 ? void 0 : tax.rate) !== 0 && (tax === null || tax === void 0 ? void 0 : tax.target) === 'delivery_fee';
