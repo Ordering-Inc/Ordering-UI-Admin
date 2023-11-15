@@ -44,6 +44,7 @@ export const UsersList = (props) => {
     actionDisabled,
     setSelectedUsers,
     handleChangeAvailable,
+    handleChangeBusyUser,
     isUseQuery
   } = props
 
@@ -77,6 +78,20 @@ export const UsersList = (props) => {
         handleOnConfirm: () => {
           setConfirmAdmin({ ...confirmAdmin, open: false })
           handleChangeActiveUser({ id: user.id, enabled: enabled })
+        }
+      })
+    }
+  }
+
+  const handleBusy = (user, busy) => {
+    if (user.level !== 0) {
+      handleChangeBusyUser({ id: user.id, busy: busy })
+    } else {
+      setConfirmAdmin({
+        open: true,
+        handleOnConfirm: () => {
+          setConfirmAdmin({ ...confirmAdmin, open: false })
+          handleChangeBusyUser({ id: user.id, busy: busy })
         }
       })
     }
@@ -266,6 +281,15 @@ export const UsersList = (props) => {
                     </td>
                     <td>
                       <ActionsContainer>
+                        <UserEnableWrapper className='user_busy_control'>
+                          <span>{t('BUSY', 'Busy')}</span>
+                          <Switch
+                            disabled={actionDisabled || !user?.busy}
+                            notAsync={user.level === 0}
+                            defaultChecked={user?.busy}
+                            onChange={busy => handleBusy(user, busy)}
+                          />
+                        </UserEnableWrapper>
                         <UserEnableWrapper className='user_enable_control'>
                           <span>{t('ENABLE', 'Enable')}</span>
                           <Switch
