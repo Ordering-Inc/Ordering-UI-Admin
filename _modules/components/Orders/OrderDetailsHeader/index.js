@@ -94,7 +94,7 @@ var OrderDetailsHeader = function OrderDetailsHeader(props) {
       return document.removeEventListener('click', closeSelect);
     };
   }, [showPrinterOptions]);
-  return /*#__PURE__*/_react.default.createElement(_styles2.OrderDetailsHeaderContainer, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, isServiceOrder ? t('APPOINTMENT_NO', 'Appointment No.') : t('INVOICE_ORDER_NO', 'Order No'), " ", showExternalId && !!(order !== null && order !== void 0 && order.external_id) ? order.external_id : order.id), /*#__PURE__*/_react.default.createElement(_styles2.ButtonGroup, null, (user === null || user === void 0 ? void 0 : user.level) !== 5 && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+  return /*#__PURE__*/_react.default.createElement(_styles2.OrderDetailsHeaderContainer, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, isServiceOrder ? t('APPOINTMENT_NO', 'Appointment No.') : t('INVOICE_ORDER_NO', 'Order No'), " ", order.id), /*#__PURE__*/_react.default.createElement(_styles2.ButtonGroup, null, (user === null || user === void 0 ? void 0 : user.level) !== 5 && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     active: openMessage === null || openMessage === void 0 ? void 0 : openMessage.chat,
     onClick: function onClick() {
@@ -161,7 +161,7 @@ var OrderDetailsHeader = function OrderDetailsHeader(props) {
     onClick: function onClick() {
       return closeSideBar();
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)))), (order === null || order === void 0 ? void 0 : order.external_id) && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, t('EXTERNAL_ID', 'External ID :'), " ", order === null || order === void 0 ? void 0 : order.external_id)), /*#__PURE__*/_react.default.createElement("p", null, (order === null || order === void 0 || (_order$payment_events = order.payment_events) === null || _order$payment_events === void 0 ? void 0 : _order$payment_events.length) > 0 ? order === null || order === void 0 || (_order$payment_events2 = order.payment_events) === null || _order$payment_events2 === void 0 ? void 0 : _order$payment_events2.filter(function (item) {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)))), showExternalId && (order === null || order === void 0 ? void 0 : order.external_id) && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, t('EXTERNAL_ID', 'External ID :'), " ", order === null || order === void 0 ? void 0 : order.external_id)), /*#__PURE__*/_react.default.createElement("p", null, (order === null || order === void 0 || (_order$payment_events = order.payment_events) === null || _order$payment_events === void 0 ? void 0 : _order$payment_events.length) > 0 ? order === null || order === void 0 || (_order$payment_events2 = order.payment_events) === null || _order$payment_events2 === void 0 ? void 0 : _order$payment_events2.filter(function (item) {
     return item.event === 'payment';
   }).map(function (event, i) {
     var _walletName$event$wal, _event$wallet_event, _event$paymethod, _event$paymethod2, _event$data, _event$paymethod3, _event$data2, _event$data3, _event$data4, _event$data5;
