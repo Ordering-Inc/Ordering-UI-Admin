@@ -24,6 +24,7 @@ var InterActOrderMarker = function InterActOrderMarker(props) {
   var image = props.image,
     customer = props.customer,
     business = props.business,
+    timeStatus = props.timeStatus,
     driver = props.driver;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -84,7 +85,8 @@ var InterActOrderMarker = function InterActOrderMarker(props) {
     },
     onMouseLeave: function onMouseLeave() {
       return setInfoShow(false);
-    }
+    },
+    borderColor: timeStatus === 'delayed' ? '#E63757' : !(driver !== null && driver !== void 0 && driver.available) ? '#6c757d' : driver.busy ? '#007bff' : '#28a745'
   }, image ? /*#__PURE__*/_react.default.createElement(_styles.MapMarkerImg, {
     bgimage: image
   }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, customer && /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null), driver && /*#__PURE__*/_react.default.createElement(_styles.MapMarkerImg, {
