@@ -60,7 +60,7 @@ var SideBar = function SideBar(props) {
     actionSidebar(true);
   }, [open, defaultSideBarWidth]);
   var onCloseSidebar = function onCloseSidebar(e) {
-    if (e.code === 'Escape') {
+    if (e.code === 'Escape' && width >= 1000) {
       props.onClose && props.onClose();
       handleCloseWizard && handleCloseWizard();
     }
