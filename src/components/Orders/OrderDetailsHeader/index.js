@@ -96,7 +96,7 @@ export const OrderDetailsHeader = (props) => {
   return (
     <OrderDetailsHeaderContainer>
       <div>
-        <h1>{isServiceOrder ? t('APPOINTMENT_NO', 'Appointment No.') : t('INVOICE_ORDER_NO', 'Order No')} {(showExternalId && !!order?.external_id) ? order.external_id : order.id}</h1>
+        <h1>{isServiceOrder ? t('APPOINTMENT_NO', 'Appointment No.') : t('INVOICE_ORDER_NO', 'Order No')} {order.id}</h1>
         <ButtonGroup>
           {user?.level !== 5 && (
             <ButtonLink
@@ -184,7 +184,7 @@ export const OrderDetailsHeader = (props) => {
           </ButtonLink>
         </ButtonGroup>
       </div>
-      {order?.external_id && (
+      {showExternalId && order?.external_id && (
         <div>
           <h2>
             {t('EXTERNAL_ID', 'External ID :')} {order?.external_id}
