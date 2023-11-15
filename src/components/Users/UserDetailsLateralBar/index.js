@@ -62,7 +62,7 @@ export const UserDetailsLateralBar = (props) => {
   }, [extraOpen])
 
   const onCloseSidebar = (e) => {
-    if (e.code === 'Escape') {
+    if (e.code === 'Escape' && width >= 1000) {
       props.onClose() && props.onClose()
     }
   }

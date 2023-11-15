@@ -68,7 +68,7 @@ const OpenCartsDetailUI = (props) => {
   }, [open])
 
   const onCloseSidebar = (e) => {
-    if (e.code === 'Escape') {
+    if (e.code === 'Escape' && width >= 1000) {
       props.onClose() && props.onClose()
     }
   }
