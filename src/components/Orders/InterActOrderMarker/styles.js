@@ -5,7 +5,7 @@ export const WrapperMapMarker = styled.div`
   width: 50px;
   height: 50px;
   background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
-  border: 3px solid ${props => props.theme.colors.primary};
+  border: 3px solid ${props => props.borderColor};
   border-radius: 100%;
   position: absolute;
   transform: translate(-50%, -100%);
@@ -28,7 +28,7 @@ export const WrapperMapMarker = styled.div`
     margin-left: -22px;
     width: 0;
     height: 0;
-    border-top: solid 22px ${props => props.theme.colors.primary};
+    border-top: solid 22px ${props => props.borderColor};
     border-left: solid 22px transparent;
     border-right: solid 22px transparent;
     z-index: -1;
