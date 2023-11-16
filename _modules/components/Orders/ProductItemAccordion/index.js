@@ -133,8 +133,9 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
               _step2;
             try {
               for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+                var _suboption$half_price;
                 var suboption = _step2.value;
-                subOptionPrice += suboption.quantity * suboption.price;
+                subOptionPrice += suboption.quantity * (['left', 'right'].includes(suboption.position) ? (_suboption$half_price = suboption.half_price) !== null && _suboption$half_price !== void 0 ? _suboption$half_price : suboption.price : suboption.price);
               }
             } catch (err) {
               _iterator2.e(err);
@@ -254,13 +255,14 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
     }, /*#__PURE__*/_react.default.createElement("p", null, option.name), /*#__PURE__*/_react.default.createElement(_styles.ProductOptionsList, {
       className: "suboption"
     }, option.suboptions.map(function (suboption) {
+      var _suboption$half_price2;
       return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
         key: suboption.id
       }, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("span", null, getFormattedSubOptionName({
         quantity: suboption.quantity,
         name: suboption.name,
-        position: suboption.position !== 'whole' ? t(suboption.position.toUpperCase(), suboption.position) : '',
-        price: suboption.price
+        position: (suboption === null || suboption === void 0 ? void 0 : suboption.position) !== 'whole' ? t(suboption.position.toUpperCase(), suboption.position) : '',
+        price: ['left', 'right'].includes(suboption.position) ? (_suboption$half_price2 = suboption.half_price) !== null && _suboption$half_price2 !== void 0 ? _suboption$half_price2 : suboption.price : suboption.price
       }))));
     })));
   })), product.comment && /*#__PURE__*/_react.default.createElement(_styles.ProductComment, null, /*#__PURE__*/_react.default.createElement("p", null, t('COMMENT', 'Comment')), /*#__PURE__*/_react.default.createElement("h3", null, product.comment))));
