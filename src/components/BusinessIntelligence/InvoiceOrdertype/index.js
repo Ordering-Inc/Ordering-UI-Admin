@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react'
 import { Button, Checkbox } from '../../../styles'
 import { useLanguage, useToast, ToastType } from 'ordering-components-admin'
@@ -6,26 +7,26 @@ import {
   CheckboxWrapper,
   ActionBtnWrapper
 } from './styles'
-
 export const InvoiceOrderType = (props) => {
   const {
     handleChangeOrderTypes,
     orderTypes,
     invocing,
-    handleChangeInvocing
-  } = props
-
+    handleChangeInvocing,
+    handleChangeDeliveryTypes
+ } = props
   const [, { showToast }] = useToast()
   const [, t] = useLanguage()
   const [orderStatus, setOrderStatus] = useState(orderTypes)
   const [invoiceState, setInvoiceState] = useState(null)
-
   const saveFormData = () => {
+    
+    let orderTypesIDS =  orderStatus.filter((_orderTypes) => _orderTypes.enabled).map((_orderTypess) => _orderTypess.value)
+    handleChangeDeliveryTypes(orderTypesIDS)
     handleChangeOrderTypes(orderStatus)
     handleChangeInvocing(invoiceState)
     showToast(ToastType.Success, t('INVOICE_DATA_SAVED', 'Invoice data saved'))
   }
-
   const handleChangeCheckBox = (value, checked) => {
     const _orderStatus = orderStatus.map(item => {
       if (item.value === value) {
@@ -38,19 +39,15 @@ export const InvoiceOrderType = (props) => {
     })
     setOrderStatus(_orderStatus)
   }
-
   const handleChangeInvocingCheckBox = (key, checked) => {
     setInvoiceState({ ...invoiceState, [key]: checked })
   }
-
   useEffect(() => {
     if (orderTypes) setOrderStatus(orderTypes)
   }, [orderTypes])
-
   useEffect(() => {
     setInvoiceState(invocing)
   }, [invocing])
-
   return (
     <InvoiceOrderTypeContainer>
       {
@@ -91,5 +88,5 @@ export const InvoiceOrderType = (props) => {
         </Button>
       </ActionBtnWrapper>
     </InvoiceOrderTypeContainer>
-  )
-}
+     )
+    }

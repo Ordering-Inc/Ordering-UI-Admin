@@ -11,7 +11,6 @@ import {
   InvoicePdfWrapper,
   LoadingWrapper
 } from './styles'
-
 import { InvoiceGeneral } from '../InvoiceGeneral'
 import { InvoicePayMethods } from '../InvoicePayMethods'
 import { InvoiceOrderType } from '../InvoiceOrdertype'
@@ -19,21 +18,18 @@ import { InvoiceBusinessPdf } from '../InvoiceBusinessPdf'
 import { IconButton } from '../../../styles'
 import { Download } from 'react-bootstrap-icons'
 import { addQueryToUrl } from '../../../utils'
-
 const InvoiceBusinessManagerUI = (props) => {
   const {
-    exportInvoiceList
-  } = props
-
+    exportInvoiceList,
+    handleChangeDeliveryTypes
+ } = props
   const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const [ordering] = useApi()
   const inputRef = useRef(null)
   const submitBtnRef = useRef(null)
   const invoicePdfRef = useRef(null)
-
   const [selectedDetailType, setSelectedDetailType] = useState('general')
-
   const changeSelectedAnalyticsStatus = (detailType, isInitialRender) => {
     window.scrollTo(0, 0)
     setSelectedDetailType(detailType)
@@ -41,13 +37,11 @@ const InvoiceBusinessManagerUI = (props) => {
       addQueryToUrl({ tab: detailType })
     }
   }
-
   useEffect(() => {
     if (!exportInvoiceList?.loading && exportInvoiceList?.invoice) {
       inputRef.current.value = invoicePdfRef?.current.innerHTML
     }
   }, [exportInvoiceList?.loading])
-
   useEffect(() => {
     const tab = query.get('tab')
     if (tab) {
@@ -56,7 +50,6 @@ const InvoiceBusinessManagerUI = (props) => {
       changeSelectedAnalyticsStatus(selectedDetailType)
     }
   }, [])
-
   return (
     <InvoiceDriversContainer>
       <DetailsHeader>
@@ -77,14 +70,12 @@ const InvoiceBusinessManagerUI = (props) => {
           >
             {t('GENERAL', 'General')}
           </Tab>
-
           <Tab
             active={selectedDetailType === 'payment_methods'}
             onClick={() => changeSelectedAnalyticsStatus('payment_methods')}
           >
             {t('PAYMENT_METHODS', 'Payment methods')}
           </Tab>
-
           <Tab
             active={selectedDetailType === 'order_type'}
             onClick={() => changeSelectedAnalyticsStatus('order_type')}
@@ -103,6 +94,7 @@ const InvoiceBusinessManagerUI = (props) => {
         selectedDetailType === 'order_type' && (
           <InvoiceOrderType
             {...props}
+            handleChangeDeliveryTypes={handleChangeDeliveryTypes}
           />
         )
       }
@@ -123,7 +115,6 @@ const InvoiceBusinessManagerUI = (props) => {
     </InvoiceDriversContainer>
   )
 }
-
 export const InvoiceBusinessManager = (props) => {
   const invoiceBusinessManagerProps = {
     ...props,
