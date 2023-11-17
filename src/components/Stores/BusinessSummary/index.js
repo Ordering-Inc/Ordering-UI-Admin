@@ -57,7 +57,6 @@ export const BusinessSummary = (props) => {
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
   const isEnabledWhiteLabelModule = configs?.white_label_module?.value
-  const isAllowRegisteredBusiness = ((sessionState?.user?.level === 0) || (sessionState?.user?.level === 2 && configs?.allow_business_owner_register_business?.value === '1'))
 
   const handleOpenCategory = () => {
     events.emit('go_to_page', { page: 'store', params: { store: businessState?.business?.slug } })
@@ -217,13 +216,11 @@ export const BusinessSummary = (props) => {
                 >
                   {t('PREVIEW', 'Preview')}
                 </Dropdown.Item>
-                { isAllowRegisteredBusiness &&
                 <Dropdown.Item
                   onClick={() => handleDuplicateBusiness()}
                 >
                   {t('DUPLICATE', 'Duplicate')}
                 </Dropdown.Item>
-               }
                 {!isEnabledWhiteLabelModule && (
                   <Dropdown.Item
                     onClick={() => handleSelectedItem('personalization')}
