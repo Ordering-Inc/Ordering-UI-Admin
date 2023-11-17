@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
-import { useLanguage, useUtils, useEvent, useApi, useConfig, useSession } from 'ordering-components-admin'
+import { useLanguage, useUtils, useEvent, useApi, useConfig } from 'ordering-components-admin'
 import BsChevronRight from '@meronex/icons/bs/BsChevronRight'
 import { useTheme } from 'styled-components'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
@@ -53,7 +53,6 @@ export const BusinessSummary = (props) => {
   const { width } = useWindowSize()
   const [isBusinessPreview, setIsBusinessPreview] = useState(false)
   const [selectedView, setSelectedView] = useState('desktop')
-  const [sessionState] = useSession()
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
   const isEnabledWhiteLabelModule = configs?.white_label_module?.value
