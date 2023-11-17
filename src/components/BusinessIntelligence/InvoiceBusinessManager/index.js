@@ -22,7 +22,8 @@ import { addQueryToUrl } from '../../../utils'
 
 const InvoiceBusinessManagerUI = (props) => {
   const {
-    exportInvoiceList
+    exportInvoiceList,
+    handleChangeDeliveryTypes
   } = props
 
   const query = new URLSearchParams(useLocation().search)
@@ -103,6 +104,7 @@ const InvoiceBusinessManagerUI = (props) => {
         selectedDetailType === 'order_type' && (
           <InvoiceOrderType
             {...props}
+            handleChangeDeliveryTypes={handleChangeDeliveryTypes}
           />
         )
       }
