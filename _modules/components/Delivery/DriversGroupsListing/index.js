@@ -346,9 +346,17 @@ var DriversGroupsListingUI = function DriversGroupsListingUI(props) {
   }));
 };
 var DriversGroupsListing = function DriversGroupsListing(props) {
+  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
+  var defaultPage = query.get('page') || 1;
+  var defaultPageSize = query.get('pageSize') || 10;
   var driversGroupsListProps = _objectSpread(_objectSpread({}, props), {}, {
     isDriversMangersRequired: true,
-    UIComponent: DriversGroupsListingUI
+    UIComponent: DriversGroupsListingUI,
+    paginationSettings: {
+      initialPage: props.isUseQuery && !isNaN(defaultPage) ? Number(defaultPage) : 1,
+      pageSize: props.isUseQuery && !isNaN(defaultPage) ? Number(defaultPageSize) : 10,
+      controlType: 'pages'
+    }
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DriversGroupsList, driversGroupsListProps);
 };
