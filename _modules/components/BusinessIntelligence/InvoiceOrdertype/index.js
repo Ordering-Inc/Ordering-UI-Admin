@@ -26,7 +26,8 @@ var InvoiceOrderType = function InvoiceOrderType(props) {
   var handleChangeOrderTypes = props.handleChangeOrderTypes,
     orderTypes = props.orderTypes,
     invocing = props.invocing,
-    handleChangeInvocing = props.handleChangeInvocing;
+    handleChangeInvocing = props.handleChangeInvocing,
+    handleChangeDeliveryTypes = props.handleChangeDeliveryTypes;
   var _useToast = (0, _orderingComponentsAdmin.useToast)(),
     _useToast2 = _slicedToArray(_useToast, 2),
     showToast = _useToast2[1].showToast;
@@ -42,6 +43,12 @@ var InvoiceOrderType = function InvoiceOrderType(props) {
     invoiceState = _useState4[0],
     setInvoiceState = _useState4[1];
   var saveFormData = function saveFormData() {
+    var orderTypesIDS = orderStatus.filter(function (_orderTypes) {
+      return _orderTypes.enabled;
+    }).map(function (_orderTypess) {
+      return _orderTypess.value;
+    });
+    handleChangeDeliveryTypes(orderTypesIDS);
     handleChangeOrderTypes(orderStatus);
     handleChangeInvocing(invoiceState);
     showToast(_orderingComponentsAdmin.ToastType.Success, t('INVOICE_DATA_SAVED', 'Invoice data saved'));
