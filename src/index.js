@@ -119,6 +119,7 @@ import {
   DeliveryUsersListing,
   DriversCompaniesListing,
   DriversGroupsListing,
+  DriversTimeDisplay,
   WizardDelivery,
   DriverGroupSetting,
   DriversCompaniesList,
@@ -205,7 +206,10 @@ import {
   LanguageTransSpread,
   LanguageTransTable,
   MultiCountrySettings,
-  CardFieldsSetting
+  CardFieldsSetting,
+  GuestCheckoutFieldsSetting,
+  SitesAuthSettings,
+  SettingsImage
 } from './components/Settings'
 import {
   BusinessBrandListing,
@@ -533,6 +537,7 @@ export {
   DeliveryUsersListing,
   DriversCompaniesListing,
   DriversGroupsListing,
+  DriversTimeDisplay,
   WizardDelivery,
   DriverGroupSetting,
   DriversCompaniesList,
@@ -626,6 +631,10 @@ export {
   LanguageTransTable,
   MultiCountrySettings,
   CardFieldsSetting,
+  GuestCheckoutFieldsSetting,
+  SitesAuthSettings,
+  SettingsImage,
+
   Support,
 
   BusinessBrandListing,

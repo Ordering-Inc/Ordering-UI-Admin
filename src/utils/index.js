@@ -295,11 +295,11 @@ export const checkPreSiteUrl = (url, fallback) => {
 export const checkValidUrlFormat = (url) => {
   if (!url) return
   const pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
-                      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
-                      '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
-                      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
-                      '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
-                      '(\\#[-a-z\\d_]*)?$', 'i') // fragment locator
+    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
+    '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+    '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+    '(\\#[-a-z\\d_]*)?$', 'i') // fragment locator
 
   return pattern.test(url)
 }
@@ -411,58 +411,61 @@ export const reviewCommentList = (type) => {
   return reviews[type]
 }
 
- export const getOrderStatus = (status) => {
-    const orderStatus = [
-      { key: 0, value: 'Pending Order', slug: 'PENDING_ORDER', percentage: 10 },
-      { key: 1, value: 'Completed by admin', slug: 'COMPLETED_BY_ADMIN', percentage: 100 },
-      { key: 2, value: 'Reject by admin', slug: 'REJECT_BY_ADMIN', percentage: 0 },
-      { key: 3, value: 'Driver arrived by business', slug: 'DRIVER_IN_BUSINESS', percentage: 60 },
-      { key: 4, value: 'Preparation Completed', slug: 'PREPARATION_COMPLETED', percentage: 20 },
-      { key: 5, value: 'Reject by business', slug: 'REJECT_BY_BUSINESS', percentage: 0 },
-      { key: 6, value: 'Reject by driver', slug: 'REJECT_BY_DRIVER', percentage: 0 },
-      { key: 7, value: 'Accepted by business', slug: 'ACCEPTED_BY_BUSINESS', percentage: 15 },
-      { key: 8, value: 'Accepted by driver', slug: 'ACCEPTED_BY_DRIVER', percentage: 40 },
-      { key: 9, value: 'Pick up completed by driver', slug: 'PICK_UP_COMPLETED_BY_DRIVER', percentage: 70 },
-      { key: 10, value: 'Pick up Failed by driver', slug: 'PICK_UP_FAILED_BY_DRIVER', percentage: 0 },
-      { key: 11, value: 'Delivery completed by driver', slug: 'DELIVERY_COMPLETED_BY_DRIVER', percentage: 100 },
-      { key: 12, value: 'Delivery Failed by driver', slug: 'DELIVERY_FAILED_BY_DRIVER', percentage: 0 },
-      { key: 13, value: 'Preorder', slug: 'PREORDER', percentage: 0 },
-      { key: 14, value: 'Order not ready', slug: 'ORDER_NOT_READY', percentage: 15 },
-      { key: 15, value: 'Pickup completed by customer', slug: 'PICKUP_COMPLETED_BY_CUSTOMER', percentage: 100 },
-      { key: 16, value: 'Canceled by customer', slug: 'CANCELED_BY_CUSTOMER', percentage: 0 },
-      { key: 17, value: 'Not picked by customer', slug: 'NOT_PICKED_BY_CUSTOMER', percentage: 0 },
-      { key: 18, value: 'Driver almost arrived to business', slug: 'DRIVER_ALMOST_ARRIVED_TO_BUSINESS', percentage: 50 },
-      { key: 19, value: 'Driver almost arrived to customer', slug: 'DRIVER_ALMOST_ARRIVED_TO_CUSTOMER', percentage: 90 },
-      { key: 20, value: 'Customer almost arrived to business', slug: 'CUSTOMER_ALMOST_ARRIVED_TO_BUSINESS', percentage: 90 },
-      { key: 21, value: 'Customer arrived to business', slug: 'CUSTOMER_ARRIVED_TO_BUSINESS', percentage: 90 },
-      { key: 22, value: 'Looking for driver', slug: 'ORDER_LOOKING_FOR_DRIVER', percentage: 30 },
-      { key: 23, value: 'Driver on way', slug: 'ORDER_DRIVER_ON_WAY', percentage: 80 }
-    ]
+export const orderStatus = [
+  { key: 0, value: 'Pending Order', slug: 'PENDING_ORDER', percentage: 10 },
+  { key: 1, value: 'Completed by admin', slug: 'COMPLETED_BY_ADMIN', percentage: 100 },
+  { key: 2, value: 'Reject by admin', slug: 'REJECT_BY_ADMIN', percentage: 0 },
+  { key: 3, value: 'Driver arrived by business', slug: 'DRIVER_IN_BUSINESS', percentage: 60 },
+  { key: 4, value: 'Preparation Completed', slug: 'PREPARATION_COMPLETED', percentage: 20 },
+  { key: 5, value: 'Reject by business', slug: 'REJECT_BY_BUSINESS', percentage: 0 },
+  { key: 6, value: 'Reject by driver', slug: 'REJECT_BY_DRIVER', percentage: 0 },
+  { key: 7, value: 'Accepted by business', slug: 'ACCEPTED_BY_BUSINESS', percentage: 15 },
+  { key: 8, value: 'Accepted by driver', slug: 'ACCEPTED_BY_DRIVER', percentage: 40 },
+  { key: 9, value: 'Pick up completed by driver', slug: 'PICK_UP_COMPLETED_BY_DRIVER', percentage: 70 },
+  { key: 10, value: 'Pick up Failed by driver', slug: 'PICK_UP_FAILED_BY_DRIVER', percentage: 0 },
+  { key: 11, value: 'Delivery completed by driver', slug: 'DELIVERY_COMPLETED_BY_DRIVER', percentage: 100 },
+  { key: 12, value: 'Delivery Failed by driver', slug: 'DELIVERY_FAILED_BY_DRIVER', percentage: 0 },
+  { key: 13, value: 'Preorder', slug: 'PREORDER', percentage: 0 },
+  { key: 14, value: 'Order not ready', slug: 'ORDER_NOT_READY', percentage: 15 },
+  { key: 15, value: 'Pickup completed by customer', slug: 'PICKUP_COMPLETED_BY_CUSTOMER', percentage: 100 },
+  { key: 16, value: 'Canceled by customer', slug: 'CANCELED_BY_CUSTOMER', percentage: 0 },
+  { key: 17, value: 'Not picked by customer', slug: 'NOT_PICKED_BY_CUSTOMER', percentage: 0 },
+  { key: 18, value: 'Driver almost arrived to business', slug: 'DRIVER_ALMOST_ARRIVED_TO_BUSINESS', percentage: 50 },
+  { key: 19, value: 'Driver almost arrived to customer', slug: 'DRIVER_ALMOST_ARRIVED_TO_CUSTOMER', percentage: 90 },
+  { key: 20, value: 'Customer almost arrived to business', slug: 'CUSTOMER_ALMOST_ARRIVED_TO_BUSINESS', percentage: 90 },
+  { key: 21, value: 'Customer arrived to business', slug: 'CUSTOMER_ARRIVED_TO_BUSINESS', percentage: 90 },
+  { key: 22, value: 'Looking for driver', slug: 'ORDER_LOOKING_FOR_DRIVER', percentage: 30 },
+  { key: 23, value: 'Driver on way', slug: 'ORDER_DRIVER_ON_WAY', percentage: 80 },
+  { key: 24, value: 'Driver waiting for order', slug: 'ORDER_STATUS_DRIVER_WAITING_FOR_ORDER', percentage: 25 },
+  { key: 25, value: 'Accepted by driver company', slug: 'ORDER_STATUS_ACCEPTED_BY_DRIVER_COMPANY', percentage: 15 },
+  { key: 26, value: 'Driver arrived to customer', slug: 'ORDER_DRIVER_ARRIVED_CUSTOMER', percentage: 80 }
+]
 
-    const objectStatus = orderStatus.find((o) => o.key === status)
-    return objectStatus && objectStatus
-  }
+export const getOrderStatus = (status) => {
+  const objectStatus = orderStatus.find((o) => o.key === status)
+  return objectStatus && objectStatus
+}
 
 export const getOrderStatuPickUp = (status) => {
-    const orderStatus = [
-      { key: 0, value: 'Pending Order', slug: 'PENDING_ORDER', percentage: 10 },
-      { key: 1, value: 'Completed by admin', slug: 'COMPLETED_BY_ADMIN', percentage: 100 },
-      { key: 2, value: 'Reject by admin', slug: 'REJECT_BY_ADMIN', percentage: 0 },
-      { key: 4, value: 'Preparation Completed', slug: 'PREPARATION_COMPLETED', percentage: 50 },
-      { key: 5, value: 'Reject by business', slug: 'REJECT_BY_BUSINESS', percentage: 0 },
-      { key: 7, value: 'Accepted by business', slug: 'ACCEPTED_BY_BUSINESS', percentage: 30 },
-      { key: 13, value: 'Preorder', slug: 'PREORDER', percentage: 0 },
-      { key: 14, value: 'Order not ready', slug: 'ORDER_NOT_READY', percentage: 30 },
-      { key: 15, value: 'Pickup completed by customer', slug: 'PICKUP_COMPLETED_BY_CUSTOMER', percentage: 100 },
-      { key: 16, value: 'Canceled by customer', slug: 'CANCELED_BY_CUSTOMER', percentage: 0 },
-      { key: 17, value: 'Not picked by customer', slug: 'NOT_PICKED_BY_CUSTOMER', percentage: 0 },
-      { key: 20, value: 'Customer almost arrived to business', slug: 'CUSTOMER_ALMOST_ARRIVED_TO_BUSINESS', percentage: 70 },
-      { key: 21, value: 'Customer arrived to business', slug: 'CUSTOMER_ARRIVED_TO_BUSINESS', percentage: 90 },
-    ]
+  const orderStatus = [
+    { key: 0, value: 'Pending Order', slug: 'PENDING_ORDER', percentage: 10 },
+    { key: 1, value: 'Completed by admin', slug: 'COMPLETED_BY_ADMIN', percentage: 100 },
+    { key: 2, value: 'Reject by admin', slug: 'REJECT_BY_ADMIN', percentage: 0 },
+    { key: 4, value: 'Preparation Completed', slug: 'PREPARATION_COMPLETED', percentage: 50 },
+    { key: 5, value: 'Reject by business', slug: 'REJECT_BY_BUSINESS', percentage: 0 },
+    { key: 7, value: 'Accepted by business', slug: 'ACCEPTED_BY_BUSINESS', percentage: 30 },
+    { key: 13, value: 'Preorder', slug: 'PREORDER', percentage: 0 },
+    { key: 14, value: 'Order not ready', slug: 'ORDER_NOT_READY', percentage: 30 },
+    { key: 15, value: 'Pickup completed by customer', slug: 'PICKUP_COMPLETED_BY_CUSTOMER', percentage: 100 },
+    { key: 16, value: 'Canceled by customer', slug: 'CANCELED_BY_CUSTOMER', percentage: 0 },
+    { key: 17, value: 'Not picked by customer', slug: 'NOT_PICKED_BY_CUSTOMER', percentage: 0 },
+    { key: 20, value: 'Customer almost arrived to business', slug: 'CUSTOMER_ALMOST_ARRIVED_TO_BUSINESS', percentage: 70 },
+    { key: 21, value: 'Customer arrived to business', slug: 'CUSTOMER_ARRIVED_TO_BUSINESS', percentage: 90 },
+  ]
 
-    const objectStatus = orderStatus.find((o) => o.key === status)
-    return objectStatus && objectStatus
-  }
+  const objectStatus = orderStatus.find((o) => o.key === status)
+  return objectStatus && objectStatus
+}
 
 /**
  * function to manage order reject comment list
@@ -583,3 +586,57 @@ export const removeQueryToUrl = (removeKeys) => {
     history.replaceState(null, '', `${location.pathname}`)
   }
 }
+
+export const TwelveHours = [
+  '12:00 AM',
+  '01:00 AM',
+  '02:00 AM',
+  '03:00 AM',
+  '04:00 AM',
+  '05:00 AM',
+  '06:00 AM',
+  '07:00 AM',
+  '08:00 AM',
+  '09:00 AM',
+  '10:00 AM',
+  '11:00 AM',
+  '12:00 PM',
+  '01:00 PM',
+  '02:00 PM',
+  '03:00 PM',
+  '04:00 PM',
+  '05:00 PM',
+  '06:00 PM',
+  '07:00 PM',
+  '08:00 PM',
+  '09:00 PM',
+  '10:00 PM',
+  '11:00 PM'
+]
+
+export const TwentyFourHours = [
+  '00:00',
+  '01:00',
+  '02:00',
+  '03:00',
+  '04:00',
+  '05:00',
+  '06:00',
+  '07:00',
+  '08:00',
+  '09:00',
+  '10:00',
+  '11:00',
+  '12:00',
+  '13:00',
+  '14:00',
+  '15:00',
+  '16:00',
+  '17:00',
+  '18:00',
+  '19:00',
+  '20:00',
+  '21:00',
+  '22:00',
+  '23:00'
+]

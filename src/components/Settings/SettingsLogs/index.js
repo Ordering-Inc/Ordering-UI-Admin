@@ -2,6 +2,10 @@ import React, { useEffect } from 'react'
 import { useLanguage, useUtils, useConfig, SettingsLogs as SettingsLogsController } from 'ordering-components-admin'
  import Skeleton from 'react-loading-skeleton'
  import { Modal, Pagination } from '../../Shared'
+ import { IconButton } from '../../../styles'
+ import { useInfoShare } from '../../../contexts/InfoShareContext'
+import { List as MenuIcon } from 'react-bootstrap-icons'
+
 
  import {
   DriversGroupLogsContainer,
@@ -30,6 +34,7 @@ const SettingsLogsUI = (props) => {
 
   const [, t] = useLanguage()
   const [{ parseDate }] = useUtils()
+  const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const [open, setOpen] = React.useState(false)
   const [schedules, setSchedules] = React.useState({
     newSchedule: [],
@@ -108,6 +113,14 @@ const SettingsLogsUI = (props) => {
   return (
     <>
     <DriversGroupLogsContainer>
+      {isCollapse && (
+        <IconButton
+          color='black'
+          onClick={() => handleMenuCollapse(false)}
+        >
+          <MenuIcon />
+        </IconButton>
+      )}
       <HeaderContainer>
         <HeaderTitleContainer>
           <h1>{t('SETTINGS_LOGS', 'Settings Logs')}</h1>

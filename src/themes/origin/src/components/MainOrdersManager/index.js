@@ -8,6 +8,7 @@ import { OrderContentHeader } from '../OrderContentHeader'
 import { OrderDetails } from '../OrderDetails'
 import { Modal } from '../Modal'
 import { Button } from '../../styles/Buttons'
+import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import { useTheme } from 'styled-components'
 import {
   OrdersListContainer,
@@ -49,6 +50,7 @@ const MainOrdersManagerUI = (props) => {
   const [configState] = useConfig()
   const [events] = useEvent()
   const history = useHistory()
+  const { width } = useWindowSize()
   const query = new URLSearchParams(useLocation().search)
   const [deliveryDashboardLoaded, setDeliveryDashboardLoaded] = useState(false)
   const [messagesDashboardLoaded, setMessagesDashboardLoaded] = useState(false)
@@ -122,13 +124,13 @@ const MainOrdersManagerUI = (props) => {
   }
 
   const closeOrderDetailModal = (e) => {
-    if (e.code === 'Escape') {
+    if (e.code === 'Escape' && width >= 1000) {
       handleBackRedirect()
     }
   }
 
   const closeNotificationModal = (e) => {
-    if (e.code === 'Escape') {
+    if (e.code === 'Escape' && width >= 1000) {
       handleCloseNotificationModal()
     }
   }

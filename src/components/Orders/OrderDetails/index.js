@@ -41,21 +41,21 @@ import {
   ErrorMessage
 } from './styles'
 
-const OrderDetailsPropsAreEqual = (prevProps, nextProps) => {
-  return prevProps.isSelectedOrders === nextProps.isSelectedOrders &&
-    prevProps.open === nextProps.open &&
-    prevProps.isTourOpen === nextProps.isTourOpen &&
-    JSON.stringify(prevProps.messages) === JSON.stringify(nextProps.messages) &&
-    JSON.stringify(prevProps.order) === JSON.stringify(nextProps.order) &&
-    prevProps.loading === nextProps.loading &&
-    prevProps.isTourFlag === nextProps.isTourFlag &&
-    prevProps.isServiceOrder === nextProps.isServiceOrder &&
-    prevProps.currentTourStep === nextProps.currentTourStep &&
-    prevProps.customerInfoState === nextProps.customerInfoState &&
-    JSON.stringify(prevProps.addressState) === JSON.stringify(nextProps.addressState)
-}
+// const OrderDetailsPropsAreEqual = (prevProps, nextProps) => {
+//   return prevProps.isSelectedOrders === nextProps.isSelectedOrders &&
+//     prevProps.open === nextProps.open &&
+//     prevProps.isTourOpen === nextProps.isTourOpen &&
+//     JSON.stringify(prevProps.messages) === JSON.stringify(nextProps.messages) &&
+//     JSON.stringify(prevProps.order) === JSON.stringify(nextProps.order) &&
+//     prevProps.loading === nextProps.loading &&
+//     prevProps.isTourFlag === nextProps.isTourFlag &&
+//     prevProps.isServiceOrder === nextProps.isServiceOrder &&
+//     prevProps.currentTourStep === nextProps.currentTourStep &&
+//     prevProps.customerInfoState === nextProps.customerInfoState &&
+//     JSON.stringify(prevProps.addressState) === JSON.stringify(nextProps.addressState)
+// }
 
-const OrderDetailsUI = React.memo((props) => {
+const OrderDetailsUI = (props) => {
   const {
     isSelectedOrders,
     handleChangeCustomerInfoState,
@@ -272,7 +272,7 @@ const OrderDetailsUI = React.memo((props) => {
   }, [isTourFlag])
 
   const onCloseSidebar = (e) => {
-    if (e.code === 'Escape') {
+    if (e.code === 'Escape' && width >= 1000) {
       props.onClose() && props.onClose()
       setIsTourOpen && setIsTourOpen(false)
     }
@@ -610,7 +610,7 @@ const OrderDetailsUI = React.memo((props) => {
       </Modal>
     </Container>
   )
-}, OrderDetailsPropsAreEqual)
+}
 
 export const OrderDetails = (props) => {
   const orderDetailsProps = {

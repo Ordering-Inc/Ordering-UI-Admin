@@ -3,6 +3,7 @@ import { useLanguage } from 'ordering-components-admin'
 
 import { SearchBar } from '../SearchBar'
 import { Modal } from '../Modal'
+import { useWindowSize } from '../../../../../hooks/useWindowSize'
 // import { DeadlinesTypeSelector } from '../DeadlinesTypeSelector'
 import { OrdersDashboardSwitch } from '../OrdersDashboardSwitch'
 import { FilterGroupList } from '../FilterGroupList'
@@ -37,6 +38,7 @@ export const OrderContentHeader = (props) => {
   const [, t] = useLanguage()
   const [filterModalOpen, setFilterModalOpen] = useState(false)
   const [filterApplied, setFilterApplied] = useState(false)
+  const { width } = useWindowSize()
 
   const [deadlineSettingModalOpen, setDeadlineSettingModalOpen] = useState(false)
   // const [deadlineType, setDeadlineType] = useState(0)
@@ -58,7 +60,7 @@ export const OrderContentHeader = (props) => {
   }
 
   const closeModal = (e) => {
-    if (e.code === 'Escape') setFilterModalOpen(false)
+    if (e.code === 'Escape' && width >= 1000) setFilterModalOpen(false)
   }
 
   useEffect(() => {
