@@ -8,12 +8,12 @@ import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 
 const OrderPropsAreEqual = (prevProps, nextProps) => {
   return JSON.stringify(prevProps.order) === JSON.stringify(nextProps.order) &&
-  JSON.stringify(prevProps.allowColumns) === JSON.stringify(nextProps.allowColumns) &&
-  prevProps.isEnabledRowInColor === nextProps.isEnabledRowInColor &&
-  JSON.stringify(prevProps.selectedOrderIds) === JSON.stringify(nextProps.selectedOrderIds) &&
-  JSON.stringify(prevProps.isSelectedOrders) === JSON.stringify(nextProps.isSelectedOrders) &&
-  prevProps.showExternalId === nextProps.showExternalId &&
-  prevProps.groupStatus === nextProps.groupStatus
+    JSON.stringify(prevProps.allowColumns) === JSON.stringify(nextProps.allowColumns) &&
+    prevProps.isEnabledRowInColor === nextProps.isEnabledRowInColor &&
+    JSON.stringify(prevProps.selectedOrderIds) === JSON.stringify(nextProps.selectedOrderIds) &&
+    JSON.stringify(prevProps.isSelectedOrders) === JSON.stringify(nextProps.isSelectedOrders) &&
+    prevProps.showExternalId === nextProps.showExternalId &&
+    prevProps.groupStatus === nextProps.groupStatus
 }
 
 export const Order = React.memo((props) => {
@@ -42,7 +42,7 @@ export const Order = React.memo((props) => {
   const theme = useTheme()
 
   const [{ parseDate, optimizeImage, getTimeAgo, parsePrice }] = useUtils()
-
+  const cateringTypes = [7, 8]
   return (
     <tr
       key={i}
@@ -97,13 +97,20 @@ export const Order = React.memo((props) => {
                       <p className='bold'>{t('INVOICE_ORDER_NO', 'Order No.')} {order?.id}</p>
                     )}
                     {allowColumns?.dateTime?.visable && (
-                      <p className='date'>
-                        {
-                          order?.delivery_datetime_utc
-                            ? parseDate(order?.delivery_datetime_utc)
-                            : parseDate(order?.delivery_datetime, { utc: false })
-                        }
-                      </p>
+                      <>
+                        {cateringTypes.includes(order?.delivery_type) && (
+                          <p className='date'>
+                            {
+                              `${t('CREATED_AT', 'Created at')}: ${parseDate(order?.created_at)}`
+                            }
+                          </p>
+                        )}
+                        <p className='date'>
+                          {
+                            `${cateringTypes.includes(order?.delivery_type) ? `${t('PLACED_TO', 'Placed to')}:` : ''} ${order?.delivery_datetime_utc ? parseDate(order?.delivery_datetime_utc) : parseDate(order?.delivery_datetime, { utc: false })}`
+                          }
+                        </p>
+                      </>
                     )}
                   </div>
                 </OrderNumberContainer>

@@ -102,7 +102,7 @@ const OrderDetailsUI = React.memo((props) => {
   const [isExpand, setIsExpand] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [commentInfoState, setCommentInfostate] = useState({ open: false, driverId: null })
-
+  const cateringTypes = [7, 8]
   const placeSpotEnabled = [3, 4]
   const {
     order,
@@ -356,11 +356,14 @@ const OrderDetailsUI = React.memo((props) => {
           <OrderStatus isDisabled={isTourOpen && currentTourStep === 1}>
             <div>
               <h2>{t('ORDER_STATUS_TEXT', 'Order status')}</h2>
+              {cateringTypes.includes(order?.delivery_type) && order?.created_at && (
+                <p>{t('CREATED_AT', 'Created at')}: {parseDate(order?.created_at)}</p>
+              )}
               {order?.delivery_datetime_utc && (
-                <p>{parseDate(order?.delivery_datetime_utc)}</p>
+                <p>{cateringTypes.includes(order?.delivery_type) ? `${t('PLACED_TO', 'Placed to')}:` : ''} {parseDate(order?.delivery_datetime_utc)}</p>
               )}
               {order?.delivery_datetime && (
-                <p>{parseDate(order?.delivery_datetime, { utc: false })}  {`(${t('BUSINESS_TIME', 'Business time')})`}</p>
+                <p>{cateringTypes.includes(order?.delivery_type) ? `${t('PLACED_TO', 'Placed to')}:` : ''} {parseDate(order?.delivery_datetime, { utc: false })}  {`(${t('BUSINESS_TIME', 'Business time')})`}</p>
               )}
               <p>{order?.eta_time} {t('MIN', 'min')}</p>
             </div>

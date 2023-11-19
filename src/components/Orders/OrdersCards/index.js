@@ -50,7 +50,7 @@ export const OrdersCards = (props) => {
     slaBar: true
   })
   const showExternalId = configState?.configs?.change_order_id?.value === '1'
-
+  const cateringTypes = [7, 8]
   const franchiseImages = !franchisesList?.error && franchisesList?.franchises?.reduce((imageKeys, franchise) => {
     imageKeys[franchise.id] = franchise.logo
     return imageKeys
@@ -227,11 +227,16 @@ export const OrdersCards = (props) => {
                     </h2>
                     <p>{getOrderStatus(order.status)}</p>
                     <div>
+                      {cateringTypes.includes(order?.delivery_type) && (
+                        <p className='date'>
+                          {
+                            `${t('CREATED_AT', 'Created at')}: ${parseDate(order?.created_at)}`
+                          }
+                        </p>
+                      )}
                       <p>
                         {
-                          order?.delivery_datetime_utc
-                            ? parseDate(order?.delivery_datetime_utc)
-                            : parseDate(order?.delivery_datetime, { utc: false })
+                          `${cateringTypes.includes(order?.delivery_type) ? `${t('PLACED_TO', 'Placed to')}:` : ''} ${order?.delivery_datetime_utc ? parseDate(order?.delivery_datetime_utc) : parseDate(order?.delivery_datetime, { utc: false })}`
                         }
                       </p>
                       <ViewDetails
