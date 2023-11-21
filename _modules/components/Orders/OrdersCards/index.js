@@ -73,6 +73,7 @@ var OrdersCards = function OrdersCards(props) {
     allowColumns = _useState4[0],
     setAllowColumns = _useState4[1];
   var showExternalId = (configState === null || configState === void 0 || (_configState$configs = configState.configs) === null || _configState$configs === void 0 || (_configState$configs = _configState$configs.change_order_id) === null || _configState$configs === void 0 ? void 0 : _configState$configs.value) === '1';
+  var cateringTypes = [7, 8];
   var franchiseImages = !(franchisesList !== null && franchisesList !== void 0 && franchisesList.error) && (franchisesList === null || franchisesList === void 0 || (_franchisesList$franc = franchisesList.franchises) === null || _franchisesList$franc === void 0 ? void 0 : _franchisesList$franc.reduce(function (imageKeys, franchise) {
     imageKeys[franchise.id] = franchise.logo;
     return imageKeys;
@@ -234,9 +235,11 @@ var OrdersCards = function OrdersCards(props) {
       onClick: function onClick(e) {
         return handleOrderClick(e, order);
       }
-    }, /*#__PURE__*/_react.default.createElement(_styles.CardHeading, null, /*#__PURE__*/_react.default.createElement(_styles.OrderHeader, null, /*#__PURE__*/_react.default.createElement("h2", null, /*#__PURE__*/_react.default.createElement("span", null, t('INVOICE_ORDER_NO', 'Order No.'), " ", showExternalId && !!(order !== null && order !== void 0 && order.external_id) ? order.external_id : order.id)), /*#__PURE__*/_react.default.createElement("p", null, getOrderStatus(order.status)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
+    }, /*#__PURE__*/_react.default.createElement(_styles.CardHeading, null, /*#__PURE__*/_react.default.createElement(_styles.OrderHeader, null, /*#__PURE__*/_react.default.createElement("h2", null, /*#__PURE__*/_react.default.createElement("span", null, t('INVOICE_ORDER_NO', 'Order No.'), " ", showExternalId && !!(order !== null && order !== void 0 && order.external_id) ? order.external_id : order.id)), /*#__PURE__*/_react.default.createElement("p", null, getOrderStatus(order.status)), /*#__PURE__*/_react.default.createElement("div", null, cateringTypes.includes(order === null || order === void 0 ? void 0 : order.delivery_type) && /*#__PURE__*/_react.default.createElement("p", {
+      className: "date"
+    }, "".concat(t('CREATED_AT', 'Created at'), ": ").concat(parseDate(order === null || order === void 0 ? void 0 : order.created_at))), /*#__PURE__*/_react.default.createElement("p", null, "".concat(cateringTypes.includes(order === null || order === void 0 ? void 0 : order.delivery_type) ? "".concat(t('PLACED_TO', 'Placed to'), ":") : '', " ").concat(order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
       utc: false
-    })), /*#__PURE__*/_react.default.createElement(_styles.ViewDetails, {
+    }))), /*#__PURE__*/_react.default.createElement(_styles.ViewDetails, {
       className: "view-details",
       onClick: function onClick() {
         return handleOpenOrderDetail(order);

@@ -139,6 +139,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     _useState16 = _slicedToArray(_useState15, 2),
     commentInfoState = _useState16[0],
     setCommentInfostate = _useState16[1];
+  var cateringTypes = [7, 8];
   var placeSpotEnabled = [3, 4];
   var _props$order = props.order,
     order = _props$order.order,
@@ -424,7 +425,7 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     setIsExpand: setIsExpand
   }), /*#__PURE__*/_react.default.createElement(_styles2.OrderStatus, {
     isDisabled: isTourOpen && currentTourStep === 1
-  }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, t('ORDER_STATUS_TEXT', 'Order status')), (order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) && /*#__PURE__*/_react.default.createElement("p", null, parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc)), (order === null || order === void 0 ? void 0 : order.delivery_datetime) && /*#__PURE__*/_react.default.createElement("p", null, parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
+  }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, t('ORDER_STATUS_TEXT', 'Order status')), cateringTypes.includes(order === null || order === void 0 ? void 0 : order.delivery_type) && (order === null || order === void 0 ? void 0 : order.created_at) && /*#__PURE__*/_react.default.createElement("p", null, t('CREATED_AT', 'Created at'), ": ", parseDate(order === null || order === void 0 ? void 0 : order.created_at)), (order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) && /*#__PURE__*/_react.default.createElement("p", null, cateringTypes.includes(order === null || order === void 0 ? void 0 : order.delivery_type) ? "".concat(t('PLACED_TO', 'Placed to'), ":") : '', " ", parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc)), (order === null || order === void 0 ? void 0 : order.delivery_datetime) && /*#__PURE__*/_react.default.createElement("p", null, cateringTypes.includes(order === null || order === void 0 ? void 0 : order.delivery_type) ? "".concat(t('PLACED_TO', 'Placed to'), ":") : '', " ", parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
     utc: false
   }), "  ", "(".concat(t('BUSINESS_TIME', 'Business time'), ")")), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : order.eta_time, " ", t('MIN', 'min'))), /*#__PURE__*/_react.default.createElement(_styles2.OrderStatusSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_OrderStatusTypeSelector.OrderStatusTypeSelector, {
     isFirstSelect: true,
