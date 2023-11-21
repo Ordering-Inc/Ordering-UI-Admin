@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage, useUtils } from 'ordering-components-admin'
 import { getStarWidth } from '../../utils'
+import { useWindowSize } from '../../../../../hooks/useWindowSize'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 
 import {
@@ -27,6 +28,7 @@ export const DriverCard = (props) => {
 
   const [, t] = useLanguage()
   const [{ getTimeAgo }] = useUtils()
+  const { width } = useWindowSize()
 
   const [ordersAndDriverModalOpen, setOrdersAndDriverModalOpen] = useState(false)
 
@@ -37,7 +39,7 @@ export const DriverCard = (props) => {
   }
 
   const closeModal = (e) => {
-    if (e.code === 'Escape') setOrdersAndDriverModalOpen(false)
+    if (e.code === 'Escape' && width >= 1000) setOrdersAndDriverModalOpen(false)
   }
 
   useEffect(() => {

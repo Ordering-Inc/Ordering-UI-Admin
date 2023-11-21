@@ -234,6 +234,7 @@ export const DeliveriesLocation = React.memo((props) => {
           {interActionMapOrder !== null && interActionMapOrder?.driver !== null && (
             <InterActOrderMarker
               driver={interActionMapOrder?.driver}
+              timeStatus={interActionMapOrder?.time_status}
               lat={
                 (interActionOrderDriverLocation !== null && typeof interActionOrderDriverLocation === 'object' && interActionOrderDriverLocation?.lat)
                   ? interActionOrderDriverLocation.lat
@@ -257,6 +258,7 @@ export const DeliveriesLocation = React.memo((props) => {
               <InterActOrderMarker
                 key={driver.id}
                 driver={driver}
+                timeStatus={interActionMapOrder?.time_status}
                 lat={
                   (driver.location !== null && typeof driver.location === 'object' && driver.location?.lat)
                     ? driver.location.lat

@@ -272,7 +272,7 @@ const OrderDetailsUI = React.memo((props) => {
   }, [isTourFlag])
 
   const onCloseSidebar = (e) => {
-    if (e.code === 'Escape') {
+    if (e.code === 'Escape' && width >= 1000) {
       props.onClose() && props.onClose()
       setIsTourOpen && setIsTourOpen(false)
     }

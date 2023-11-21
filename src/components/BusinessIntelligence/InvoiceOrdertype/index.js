@@ -12,7 +12,8 @@ export const InvoiceOrderType = (props) => {
     handleChangeOrderTypes,
     orderTypes,
     invocing,
-    handleChangeInvocing
+    handleChangeInvocing,
+    handleChangeDeliveryTypes
   } = props
 
   const [, { showToast }] = useToast()
@@ -21,6 +22,8 @@ export const InvoiceOrderType = (props) => {
   const [invoiceState, setInvoiceState] = useState(null)
 
   const saveFormData = () => {
+    let orderTypesIDS =  orderStatus.filter((_orderTypes) => _orderTypes.enabled).map((_orderTypess) => _orderTypess.value)
+    handleChangeDeliveryTypes(orderTypesIDS)
     handleChangeOrderTypes(orderStatus)
     handleChangeInvocing(invoiceState)
     showToast(ToastType.Success, t('INVOICE_DATA_SAVED', 'Invoice data saved'))

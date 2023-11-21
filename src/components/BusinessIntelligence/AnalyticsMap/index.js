@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useConfig, useSession, useLanguage, GoogleMapsMap } from 'ordering-components-admin'
+import { useConfig, useLanguage, GoogleMapsMap } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import {
   Container,
@@ -13,12 +13,14 @@ export const AnalyticsMap = (props) => {
     locationList
   } = props
   const [configState] = useConfig()
-  const [{ user }] = useSession()
   const [, t] = useLanguage()
   const theme = useTheme()
   const [isHeat, setIsHeat] = useState(false)
-  // const defaultCenter = { lat: 37.775, lng: -122.434 }
-  const defaultCenter = { lat: 40.77473399999999, lng: -73.9653844 }
+
+  const defaultCenter = {
+    lat: Number(configState.configs?.location_default_latitude?.value) ?? 40.77473399999999,
+    lng: Number(configState.configs?.location_default_longitude?.value) ?? -73.9653844
+  }
 
   const googleMapsControls = {
     defaultZoom: 15,
@@ -47,7 +49,7 @@ export const AnalyticsMap = (props) => {
               <>
                 <GoogleMapsMap
                   apiKey={configState?.configs?.google_maps_api_key?.value}
-                  location={user?.location || defaultCenter}
+                  location={defaultCenter}
                   locations={locationList?.locations}
                   mapControls={googleMapsControls}
                   isHeatMap
