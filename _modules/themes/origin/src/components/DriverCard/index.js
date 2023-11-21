@@ -8,6 +8,7 @@ exports.DriverCard = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _utils = require("../../utils");
+var _useWindowSize2 = require("../../../../../hooks/useWindowSize");
 var _FaUserAlt = _interopRequireDefault(require("@meronex/icons/fa/FaUserAlt"));
 var _styles = require("./styles");
 var _Modal = require("../Modal");
@@ -33,6 +34,8 @@ var DriverCard = function DriverCard(props) {
   var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
     _useUtils2 = _slicedToArray(_useUtils, 1),
     getTimeAgo = _useUtils2[0].getTimeAgo;
+  var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
+    width = _useWindowSize.width;
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     ordersAndDriverModalOpen = _useState2[0],
@@ -43,7 +46,7 @@ var DriverCard = function DriverCard(props) {
     }
   };
   var closeModal = function closeModal(e) {
-    if (e.code === 'Escape') setOrdersAndDriverModalOpen(false);
+    if (e.code === 'Escape' && width >= 1000) setOrdersAndDriverModalOpen(false);
   };
   (0, _react.useEffect)(function () {
     if (!ordersAndDriverModalOpen) return;

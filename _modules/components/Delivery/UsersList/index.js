@@ -49,6 +49,7 @@ var UsersList = function UsersList(props) {
     actionDisabled = props.actionDisabled,
     setSelectedUsers = props.setSelectedUsers,
     handleChangeAvailable = props.handleChangeAvailable,
+    handleChangeBusyUser = props.handleChangeBusyUser,
     isUseQuery = props.isUseQuery;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -95,6 +96,27 @@ var UsersList = function UsersList(props) {
           handleChangeActiveUser({
             id: user.id,
             enabled: enabled
+          });
+        }
+      });
+    }
+  };
+  var handleBusy = function handleBusy(user, busy) {
+    if (user.level !== 0) {
+      handleChangeBusyUser({
+        id: user.id,
+        busy: busy
+      });
+    } else {
+      setConfirmAdmin({
+        open: true,
+        handleOnConfirm: function handleOnConfirm() {
+          setConfirmAdmin(_objectSpread(_objectSpread({}, confirmAdmin), {}, {
+            open: false
+          }));
+          handleChangeBusyUser({
+            id: user.id,
+            busy: busy
           });
         }
       });
@@ -206,6 +228,15 @@ var UsersList = function UsersList(props) {
     }, user.name, " ", user === null || user === void 0 ? void 0 : user.lastname), /*#__PURE__*/_react.default.createElement("p", null, user === null || user === void 0 ? void 0 : user.email)), ((user === null || user === void 0 ? void 0 : user.phone_verified) || (user === null || user === void 0 ? void 0 : user.email_verified)) && /*#__PURE__*/_react.default.createElement(_styles2.VerifiedItemsContainer, null, !!(user !== null && user !== void 0 && user.phone_verified) && /*#__PURE__*/_react.default.createElement(_styles2.VerifiedItem, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Phone, null), t('VERIFIED', 'Verified')), !!(user !== null && user !== void 0 && user.email_verified) && /*#__PURE__*/_react.default.createElement(_styles2.VerifiedItem, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Envelope, null), t('VERIFIED', 'Verified'))))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.InfoBlock, null, /*#__PURE__*/_react.default.createElement("p", {
       className: "bold"
     }, t('PHONE')), /*#__PURE__*/_react.default.createElement("p", null, user === null || user === void 0 ? void 0 : user.cellphone))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.ActionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.UserEnableWrapper, {
+      className: "user_busy_control"
+    }, /*#__PURE__*/_react.default.createElement("span", null, t('BUSY', 'Busy')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
+      disabled: actionDisabled || !(user !== null && user !== void 0 && user.busy),
+      notAsync: user.level === 0,
+      defaultChecked: user === null || user === void 0 ? void 0 : user.busy,
+      onChange: function onChange(busy) {
+        return handleBusy(user, busy);
+      }
+    })), /*#__PURE__*/_react.default.createElement(_styles2.UserEnableWrapper, {
       className: "user_enable_control"
     }, /*#__PURE__*/_react.default.createElement("span", null, t('ENABLE', 'Enable')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
       disabled: actionDisabled,

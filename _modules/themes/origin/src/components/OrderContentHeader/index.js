@@ -9,6 +9,7 @@ var _react = _interopRequireWildcard(require("react"));
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _SearchBar = require("../SearchBar");
 var _Modal = require("../Modal");
+var _useWindowSize2 = require("../../../../../hooks/useWindowSize");
 var _OrdersDashboardSwitch = require("../OrdersDashboardSwitch");
 var _FilterGroupList = require("../FilterGroupList");
 var _DeadlineSettingInterface = require("../DeadlineSettingInterface");
@@ -46,6 +47,8 @@ var OrderContentHeader = function OrderContentHeader(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     filterApplied = _useState4[0],
     setFilterApplied = _useState4[1];
+  var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
+    width = _useWindowSize.width;
   var _useState5 = (0, _react.useState)(false),
     _useState6 = _slicedToArray(_useState5, 2),
     deadlineSettingModalOpen = _useState6[0],
@@ -67,7 +70,7 @@ var OrderContentHeader = function OrderContentHeader(props) {
     setFilterModalOpen(false);
   };
   var closeModal = function closeModal(e) {
-    if (e.code === 'Escape') setFilterModalOpen(false);
+    if (e.code === 'Escape' && width >= 1000) setFilterModalOpen(false);
   };
   (0, _react.useEffect)(function () {
     var _filterApplied = false;

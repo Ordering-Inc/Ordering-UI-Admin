@@ -88,7 +88,7 @@ var OrdersLateralBar = function OrdersLateralBar(props) {
     }
   }, [isOpenDriverOrderDetails]);
   var onCloseSidebar = function onCloseSidebar(e) {
-    if (e.code === 'Escape') {
+    if (e.code === 'Escape' && width >= 1000) {
       props.onClose() && props.onClose();
     }
   };

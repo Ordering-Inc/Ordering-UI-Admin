@@ -21,14 +21,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var AnalyticsMap = function AnalyticsMap(props) {
-  var _configState$configs, _configState$configs2, _theme$images;
+  var _Number, _configState$configs, _Number2, _configState$configs2, _configState$configs3, _configState$configs4, _theme$images;
   var locationList = props.locationList;
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configState = _useConfig2[0];
-  var _useSession = (0, _orderingComponentsAdmin.useSession)(),
-    _useSession2 = _slicedToArray(_useSession, 1),
-    user = _useSession2[0].user;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -37,10 +34,9 @@ var AnalyticsMap = function AnalyticsMap(props) {
     _useState2 = _slicedToArray(_useState, 2),
     isHeat = _useState2[0],
     setIsHeat = _useState2[1];
-  // const defaultCenter = { lat: 37.775, lng: -122.434 }
   var defaultCenter = {
-    lat: 40.77473399999999,
-    lng: -73.9653844
+    lat: (_Number = Number((_configState$configs = configState.configs) === null || _configState$configs === void 0 || (_configState$configs = _configState$configs.location_default_latitude) === null || _configState$configs === void 0 ? void 0 : _configState$configs.value)) !== null && _Number !== void 0 ? _Number : 40.77473399999999,
+    lng: (_Number2 = Number((_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 || (_configState$configs2 = _configState$configs2.location_default_longitude) === null || _configState$configs2 === void 0 ? void 0 : _configState$configs2.value)) !== null && _Number2 !== void 0 ? _Number2 : -73.9653844
   };
   var googleMapsControls = {
     defaultZoom: 15,
@@ -59,9 +55,9 @@ var AnalyticsMap = function AnalyticsMap(props) {
   }, [locationList]);
   return /*#__PURE__*/_react.default.createElement(_styles.Container, null, locationList !== null && locationList !== void 0 && locationList.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 320
-  }) : /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, null, (configState === null || configState === void 0 || (_configState$configs = configState.configs) === null || _configState$configs === void 0 || (_configState$configs = _configState$configs.google_maps_api_key) === null || _configState$configs === void 0 ? void 0 : _configState$configs.value) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.GoogleMapsMap, {
-    apiKey: configState === null || configState === void 0 || (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 || (_configState$configs2 = _configState$configs2.google_maps_api_key) === null || _configState$configs2 === void 0 ? void 0 : _configState$configs2.value,
-    location: (user === null || user === void 0 ? void 0 : user.location) || defaultCenter,
+  }) : /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, null, (configState === null || configState === void 0 || (_configState$configs3 = configState.configs) === null || _configState$configs3 === void 0 || (_configState$configs3 = _configState$configs3.google_maps_api_key) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.GoogleMapsMap, {
+    apiKey: configState === null || configState === void 0 || (_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 || (_configState$configs4 = _configState$configs4.google_maps_api_key) === null || _configState$configs4 === void 0 ? void 0 : _configState$configs4.value,
+    location: defaultCenter,
     locations: locationList === null || locationList === void 0 ? void 0 : locationList.locations,
     mapControls: googleMapsControls,
     isHeatMap: true,

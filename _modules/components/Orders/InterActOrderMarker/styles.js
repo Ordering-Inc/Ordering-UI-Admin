@@ -17,12 +17,12 @@ var WrapperMapMarker = _styledComponents.default.div(_templateObject || (_templa
   var _props$theme$colors;
   return ((_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.backgroundPage) || '#FFF';
 }, function (props) {
-  return props.theme.colors.primary;
+  return props.borderColor;
 }, function (props) {
   var _props$theme$colors2;
   return ((_props$theme$colors2 = props.theme.colors) === null || _props$theme$colors2 === void 0 ? void 0 : _props$theme$colors2.backgroundPage) || '#FFF';
 }, function (props) {
-  return props.theme.colors.primary;
+  return props.borderColor;
 });
 exports.WrapperMapMarker = WrapperMapMarker;
 var MapMarkerImgStyled = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  background: ", ";\n  display: flex;\n  width: 100%;\n  height: 100%;\n  box-sizing: border-box;\n  position: relative;\n  background-repeat: no-repeat, repeat;\n  background-size: cover;\n  object-fit: cover;\n  background-position: center;\n  border-radius: 100%;\n  z-index: 100;\n"])), function (props) {

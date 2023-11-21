@@ -69,7 +69,8 @@ var DeliveryUsersListingUI = function DeliveryUsersListingUI(props) {
     driversGroupsState = props.driversGroupsState,
     setSelectedUsers = props.setSelectedUsers,
     actionStatus = props.actionStatus,
-    isUseQuery = props.isUseQuery;
+    isUseQuery = props.isUseQuery,
+    handleChangeBusyUser = props.handleChangeBusyUser;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -268,7 +269,8 @@ var DeliveryUsersListingUI = function DeliveryUsersListingUI(props) {
     handleOpenUserAddForm: handleOpenUserAddForm,
     actionDisabled: actionDisabled,
     setSelectedUsers: setSelectedUsers,
-    isUseQuery: isUseQuery
+    isUseQuery: isUseQuery,
+    handleChangeBusyUser: handleChangeBusyUser
   })), isOpenUserDetails && /*#__PURE__*/_react.default.createElement(_UserDetailsLateralBar.UserDetailsLateralBar, {
     isDriversPage: isDriversPage,
     isDriversManagersPage: isDriversManagersPage,

@@ -33,7 +33,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessSummary = function BusinessSummary(props) {
-  var _configs$white_label_, _businessState$busine5, _businessState$busine6, _businessState$busine7, _businessState$busine8, _theme$images, _businessState$busine9;
+  var _configs$white_label_, _sessionState$user, _sessionState$user2, _configs$allow_busine, _businessState$busine5, _businessState$busine6, _businessState$busine7, _businessState$busine8, _theme$images, _businessState$busine9;
   var isAdmin = props.isAdmin,
     businessState = props.businessState,
     actionSidebar = props.actionSidebar,
@@ -73,6 +73,9 @@ var BusinessSummary = function BusinessSummary(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     selectedView = _useState4[0],
     setSelectedView = _useState4[1];
+  var _useSession = (0, _orderingComponentsAdmin.useSession)(),
+    _useSession2 = _slicedToArray(_useSession, 1),
+    sessionState = _useSession2[0];
   var _useState5 = (0, _react.useState)({
       open: false,
       content: null,
@@ -82,6 +85,7 @@ var BusinessSummary = function BusinessSummary(props) {
     confirm = _useState6[0],
     setConfirm = _useState6[1];
   var isEnabledWhiteLabelModule = configs === null || configs === void 0 || (_configs$white_label_ = configs.white_label_module) === null || _configs$white_label_ === void 0 ? void 0 : _configs$white_label_.value;
+  var isAllowRegisteredBusiness = (sessionState === null || sessionState === void 0 || (_sessionState$user = sessionState.user) === null || _sessionState$user === void 0 ? void 0 : _sessionState$user.level) === 0 || (sessionState === null || sessionState === void 0 || (_sessionState$user2 = sessionState.user) === null || _sessionState$user2 === void 0 ? void 0 : _sessionState$user2.level) === 2 && (configs === null || configs === void 0 || (_configs$allow_busine = configs.allow_business_owner_register_business) === null || _configs$allow_busine === void 0 ? void 0 : _configs$allow_busine.value) === '1';
   var handleOpenCategory = function handleOpenCategory() {
     var _businessState$busine;
     events.emit('go_to_page', {
@@ -195,7 +199,7 @@ var BusinessSummary = function BusinessSummary(props) {
     onClick: function onClick() {
       return setIsBusinessPreview(true);
     }
-  }, t('PREVIEW', 'Preview')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+  }, t('PREVIEW', 'Preview')), isAllowRegisteredBusiness && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
     onClick: function onClick() {
       return handleDuplicateBusiness();
     }

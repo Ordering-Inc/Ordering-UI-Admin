@@ -87,7 +87,7 @@ var OpenCartsDetailUI = function OpenCartsDetailUI(props) {
     actionSidebar(true);
   }, [open]);
   var onCloseSidebar = function onCloseSidebar(e) {
-    if (e.code === 'Escape') {
+    if (e.code === 'Escape' && width >= 1000) {
       props.onClose() && props.onClose();
     }
   };

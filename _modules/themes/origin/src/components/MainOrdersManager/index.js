@@ -15,6 +15,7 @@ var _OrderContentHeader = require("../OrderContentHeader");
 var _OrderDetails = require("../OrderDetails");
 var _Modal = require("../Modal");
 var _Buttons = require("../../styles/Buttons");
+var _useWindowSize2 = require("../../../../../hooks/useWindowSize");
 var _styledComponents = require("styled-components");
 var _styles = require("./styles");
 var _OrdersDashboard = require("../OrdersDashboard");
@@ -67,6 +68,8 @@ var MainOrdersManagerUI = function MainOrdersManagerUI(props) {
     _useEvent2 = _slicedToArray(_useEvent, 1),
     events = _useEvent2[0];
   var history = (0, _reactRouterDom.useHistory)();
+  var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
+    width = _useWindowSize.width;
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
@@ -176,12 +179,12 @@ var MainOrdersManagerUI = function MainOrdersManagerUI(props) {
     setRegisterOrderIds([]);
   };
   var closeOrderDetailModal = function closeOrderDetailModal(e) {
-    if (e.code === 'Escape') {
+    if (e.code === 'Escape' && width >= 1000) {
       handleBackRedirect();
     }
   };
   var closeNotificationModal = function closeNotificationModal(e) {
-    if (e.code === 'Escape') {
+    if (e.code === 'Escape' && width >= 1000) {
       handleCloseNotificationModal();
     }
   };
