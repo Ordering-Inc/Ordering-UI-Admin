@@ -270,7 +270,7 @@ export const SettingsListUI = (props) => {
                         <>
                           <FormGroupText className='form-group'>
                             <label>{config?.name}</label>
-                            {config?.description && <Description>{config?.description}</Description>}
+                            {config?.description && <Description>{config?.description} {[1312, 1315, 1316].includes(config?.id) && `(${t('MINUTES', 'Minutes')})`}</Description>}
                             {config?.value?.split('|')?.filter(value => valuesTypeSix.includes(value?.split(',')[0]))?.map((value, i, hash) => (
                               <React.Fragment key={`${config?.id} ${value}`}>
                                 <Description typeSix>{t(value?.split(',')[0], value?.split(',')[0].replace('_', ' '))}</Description>
