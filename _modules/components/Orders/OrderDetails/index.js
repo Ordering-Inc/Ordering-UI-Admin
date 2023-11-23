@@ -454,10 +454,12 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     commentInfoState: commentInfoState,
     addressState: addressState
   }), /*#__PURE__*/_react.default.createElement(_styles2.OrderProducts, null, /*#__PURE__*/_react.default.createElement("h2", null, t('EXPORT_SUMMARY', 'Summary')), (order === null || order === void 0 || (_order$products = order.products) === null || _order$products === void 0 ? void 0 : _order$products.length) && (order === null || order === void 0 ? void 0 : order.products.map(function (product) {
+    var _order$toppings_remov;
     return /*#__PURE__*/_react.default.createElement(_ProductItemAccordion.ProductItemAccordion, {
       key: product.id,
       product: product,
-      currency: (0, _utils.getCurrenySymbol)(order === null || order === void 0 ? void 0 : order.currency)
+      currency: (0, _utils.getCurrenySymbol)(order === null || order === void 0 ? void 0 : order.currency),
+      toppingsRemoved: order === null || order === void 0 || (_order$toppings_remov = order.toppings_removed) === null || _order$toppings_remov === void 0 ? void 0 : _order$toppings_remov[product === null || product === void 0 ? void 0 : product.code]
     });
   }))), /*#__PURE__*/_react.default.createElement(_OrderBill.OrderBill, {
     order: order,

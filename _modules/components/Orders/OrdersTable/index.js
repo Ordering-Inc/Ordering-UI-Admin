@@ -406,7 +406,7 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
         alt: "six dots"
       }), /*#__PURE__*/_react.default.createElement("span", null, (_allowColumns$column3 = allowColumns[column]) === null || _allowColumns$column3 === void 0 ? void 0 : _allowColumns$column3.title)));
     }
-    if (column === 'total' || column !== 'total' && column === _toConsumableArray(array).pop()) {
+    if (column === 'channel' || column !== 'channel' && column === _toConsumableArray(array).pop()) {
       var _allowColumns$column$2, _allowColumns$column4, _allowColumns$column5, _theme$images$icons2, _allowColumns$column6;
       return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
         key: i

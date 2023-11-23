@@ -225,6 +225,14 @@ var Order = /*#__PURE__*/_react.default.memo(function (props) {
         className: order === null || order === void 0 ? void 0 : order.time_status
       }, displayDelayedTime(order))));
     }
+    if (column === 'channel') {
+      return /*#__PURE__*/_react.default.createElement("td", {
+        className: "channelInfo",
+        key: "channelInfo".concat(i, "-").concat(index)
+      }, /*#__PURE__*/_react.default.createElement(_styles.StatusInfo, null, /*#__PURE__*/_react.default.createElement("p", {
+        className: "bold"
+      }, getOrderStatus(order.app_id))));
+    }
     if (column === 'total') {
       var _allowColumns$total, _order$summary;
       return /*#__PURE__*/_react.default.createElement("td", {
