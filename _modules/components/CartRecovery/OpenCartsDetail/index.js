@@ -180,9 +180,11 @@ var OpenCartsDetailUI = function OpenCartsDetailUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_OpenCartsContactInformation.OpenCartsContactInformation, {
     cart: cartState === null || cartState === void 0 ? void 0 : cartState.cart
   }), /*#__PURE__*/_react.default.createElement(_styles2.OrderProducts, null, /*#__PURE__*/_react.default.createElement("h2", null, t('ORDER_DETAILS', 'Order details')), (cartState === null || cartState === void 0 || (_cartState$cart4 = cartState.cart) === null || _cartState$cart4 === void 0 || (_cartState$cart4 = _cartState$cart4.products) === null || _cartState$cart4 === void 0 ? void 0 : _cartState$cart4.length) && (cartState === null || cartState === void 0 || (_cartState$cart5 = cartState.cart) === null || _cartState$cart5 === void 0 ? void 0 : _cartState$cart5.products.map(function (product) {
+    var _cartState$cart6;
     return /*#__PURE__*/_react.default.createElement(_ProductItemAccordion.ProductItemAccordion, {
       key: product.id,
-      product: product
+      product: product,
+      toppingsRemoved: cartState === null || cartState === void 0 || (_cartState$cart6 = cartState.cart) === null || _cartState$cart6 === void 0 || (_cartState$cart6 = _cartState$cart6.toppings_removed) === null || _cartState$cart6 === void 0 ? void 0 : _cartState$cart6[product === null || product === void 0 ? void 0 : product.code]
     });
   }))), /*#__PURE__*/_react.default.createElement(_OpenCartBill.OpenCartBill, {
     cart: cartState === null || cartState === void 0 ? void 0 : cartState.cart

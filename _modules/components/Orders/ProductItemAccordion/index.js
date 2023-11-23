@@ -32,7 +32,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ProductItemAccordion = function ProductItemAccordion(props) {
-  var _product$valid, _product$calendar_eve, _configs$format_time, _product$calendar_eve2, _configs$format_time2, _productInfo$ingredie, _productInfo$options, _productInfo$ingredie2, _productInfo$options2;
+  var _product$valid, _product$calendar_eve, _configs$format_time, _product$calendar_eve2, _configs$format_time2, _productInfo$ingredie, _productInfo$options, _productInfo$ingredie2, _productInfo$options2, _toppingsRemoved$remo;
   var isCartProduct = props.isCartProduct,
     product = props.product,
     changeQuantity = props.changeQuantity,
@@ -40,7 +40,8 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
     offsetDisabled = props.offsetDisabled,
     onDeleteProduct = props.onDeleteProduct,
     onEditProduct = props.onEditProduct,
-    currency = props.currency;
+    currency = props.currency,
+    toppingsRemoved = props.toppingsRemoved;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -265,6 +266,12 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
         price: ['left', 'right'].includes(suboption.position) ? (_suboption$half_price2 = suboption.half_price) !== null && _suboption$half_price2 !== void 0 ? _suboption$half_price2 : suboption.price : suboption.price
       }))));
     })));
-  })), product.comment && /*#__PURE__*/_react.default.createElement(_styles.ProductComment, null, /*#__PURE__*/_react.default.createElement("p", null, t('COMMENT', 'Comment')), /*#__PURE__*/_react.default.createElement("h3", null, product.comment))));
+  })), (toppingsRemoved === null || toppingsRemoved === void 0 || (_toppingsRemoved$remo = toppingsRemoved.removed) === null || _toppingsRemoved$remo === void 0 ? void 0 : _toppingsRemoved$remo.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.ProductOptionsList, null, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("p", null, t('TOPPINGS_REMOVED', 'Toppings removed')), /*#__PURE__*/_react.default.createElement(_styles.ProductOptionsList, {
+    className: "suboption"
+  }, toppingsRemoved === null || toppingsRemoved === void 0 ? void 0 : toppingsRemoved.removed.map(function (topping) {
+    return /*#__PURE__*/_react.default.createElement("li", {
+      key: topping.code
+    }, /*#__PURE__*/_react.default.createElement("span", null, topping.name));
+  })))), product.comment && /*#__PURE__*/_react.default.createElement(_styles.ProductComment, null, /*#__PURE__*/_react.default.createElement("p", null, t('COMMENT', 'Comment')), /*#__PURE__*/_react.default.createElement("h3", null, product.comment))));
 };
 exports.ProductItemAccordion = ProductItemAccordion;
