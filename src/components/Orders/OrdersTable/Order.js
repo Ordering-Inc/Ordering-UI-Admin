@@ -274,6 +274,15 @@ export const Order = React.memo((props) => {
               </td>
             )
           }
+          if (column === 'channel') {
+            return (
+              <td className='channelInfo' key={`channelInfo${i}-${index}`}>
+                <StatusInfo>
+                  <p className='bold'>{getOrderStatus(order.app_id)}</p>
+                </StatusInfo>
+              </td>
+            )
+          }
           if (column === 'total') {
             return (
               <td className='orderPrice' key={`total${i}-${index}`}>
