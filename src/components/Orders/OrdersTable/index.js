@@ -142,6 +142,10 @@ export const OrdersTable = memo((props) => {
     {
       value: 'externalId',
       content: t('EXTERNAL_ID', 'External id')
+    },
+    {
+      value: 'channel',
+      content: t('CHANNEL', 'Channel')
     }
   ]
 
