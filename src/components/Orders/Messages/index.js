@@ -100,7 +100,7 @@ export const MessagesUI = (props) => {
   const [load, setLoad] = useState(0)
   const [messageList, setMessageList] = useState([])
   const [isChatDisabled, setIsChatDisabled] = useState(false)
-  const previousStatus = [1, 2, 5, 6, 10, 11, 12, 16, 17]
+  const previousStatus = [1, 2, 5, 6, 10, 11, 12, 15, 16, 17]
   const chatDisabled = previousStatus.includes(order?.status)
   const [{ configs }] = useConfig()
   const showExternalId = configs?.change_order_id?.value === '1'
