@@ -134,6 +134,9 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
   }, {
     value: 'externalId',
     content: t('EXTERNAL_ID', 'External id')
+  }, {
+    value: 'channel',
+    content: t('CHANNEL', 'Channel')
   }];
   var getDelayMinutes = function getDelayMinutes(order) {
     // targetMin = delivery_datetime  + eta_time - now()
