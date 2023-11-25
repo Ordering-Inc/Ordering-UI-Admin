@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useLanguage, useSession, useOrder, useUtils, useConfig } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import { GeoAlt, Cart3, List, PersonFill, StarFill, ArrowLeft, Search } from 'react-bootstrap-icons'
@@ -6,6 +6,7 @@ import BsInfoCircle from '@meronex/icons/bs/BsInfoCircle'
 import { SearchBar, DragScroll } from '../../Shared'
 import { Button } from '../../../styles'
 import { useWindowSize } from '../../../hooks/useWindowSize'
+import { ConfigFileContext } from '../../../contexts/ConfigFileContext'
 
 import {
   Container,
@@ -68,6 +69,7 @@ export const BusinessPreview = (props) => {
   const [{ parsePrice, parseDistance, optimizeImage }] = useUtils()
   const [searchValue, setSearchValue] = useState('')
   const [selectedCategory, setSelectedCateogry] = useState({ id: 'all' })
+  const [configFile] = useContext(ConfigFileContext)
 
   let pos = { top: 0, left: 0, x: 0, y: 0 }
   const ele = document.getElementById('product_mobile_view')
@@ -146,9 +148,11 @@ export const BusinessPreview = (props) => {
             {
               (!isMobileView && width > 650) && (
                 <Contentheader>
-                  <HeaderLogo>
-                    <img alt='Logotype' width='100px' height='30px' src={theme?.images?.logos?.logotype} loading='lazy' />
-                  </HeaderLogo>
+                  {!configFile?.is_white_label && (
+                    <HeaderLogo>
+                      <img alt='Logotype' width='100px' height='30px' src={theme?.images?.logos?.logotype} loading='lazy' />
+                    </HeaderLogo>
+                  )}
                   <HeaderInfo>
                     <AddressWrapper>
                       <GeoAlt />

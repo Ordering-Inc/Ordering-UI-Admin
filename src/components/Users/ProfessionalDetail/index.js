@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { useLocation } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
 import { ThreeDots, Calendar4Event, ArrowsAngleContract, ArrowsAngleExpand } from 'react-bootstrap-icons'
@@ -23,6 +23,7 @@ import {
   RightHeader
 } from './styles'
 import { useWindowSize } from '../../../hooks/useWindowSize'
+import { ConfigFileContext } from '../../../contexts/ConfigFileContext'
 
 export const ProfessionalDetailUI = (props) => {
   const {
@@ -46,6 +47,7 @@ export const ProfessionalDetailUI = (props) => {
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [isExpand, setIsExpand] = useState(false)
+  const [configFile] = useContext(ConfigFileContext)
 
   const onDeleteCustomer = () => {
     setConfirm({
@@ -157,9 +159,11 @@ export const ProfessionalDetailUI = (props) => {
                 <Dropdown.Item onClick={() => handleOpenExtra('custom_fields')}>
                   {t('CUSTOM_FIELDS', 'Custom fields')}
                 </Dropdown.Item>
-                <Dropdown.Item onClick={() => handleOpenExtra('personalization')}>
-                  {t('PERSONALIZATION', 'Personalization')}
-                </Dropdown.Item>
+                {!configFile?.is_white_label && (
+                  <Dropdown.Item onClick={() => handleOpenExtra('personalization')}>
+                    {t('PERSONALIZATION', 'Personalization')}
+                  </Dropdown.Item>
+                )}
                 {adminUserState?.user?.level === 0 && (
                   <Dropdown.Item onClick={() => onDeleteCustomer()}>
                     {t('DELETE', 'Delete')}
