@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useLanguage, useUtils } from 'ordering-components-admin'
 import BsChevronRight from '@meronex/icons/bs/BsChevronRight'
 import BiImage from '@meronex/icons/bi/BiImage'
@@ -9,6 +9,7 @@ import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
 import { Confirm, Modal, ProgressRing } from '../../Shared'
 import { ProductDesktopPreview } from '../ProductDesktopPreview'
+import { ConfigFileContext } from '../../../contexts/ConfigFileContext'
 
 import {
   ProductDetailsContainer,
@@ -56,6 +57,7 @@ export const ProductSummary = (props) => {
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [isProductPreview, setIsProductPreview] = useState(false)
   const [selectedView, setSelectedView] = useState('desktop')
+  const [configFile] = useContext(ConfigFileContext)
 
   const productConfigOptions = [
     {
@@ -181,11 +183,13 @@ export const ProductSummary = (props) => {
                 >
                   {t('CUSTOM_FIELDS', 'Custom fields')}
                 </Dropdown.Item>
-                <Dropdown.Item
-                  onClick={() => handleShowOption('personalization')}
-                >
-                  {t('PERSONALIZATION', 'Personalization')}
-                </Dropdown.Item>
+                {!configFile?.is_white_label && (
+                  <Dropdown.Item
+                    onClick={() => handleShowOption('personalization')}
+                  >
+                    {t('PERSONALIZATION', 'Personalization')}
+                  </Dropdown.Item>
+                )}
                 <Dropdown.Item
                   onClick={() => handleDeleteClick()}
                 >

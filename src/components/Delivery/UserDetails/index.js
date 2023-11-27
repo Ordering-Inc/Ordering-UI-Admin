@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import Skeleton from 'react-loading-skeleton'
 import { useTheme } from 'styled-components'
@@ -28,6 +28,7 @@ import {
   RightHeader
 } from './styles'
 import { useWindowSize } from '../../../hooks/useWindowSize'
+import { ConfigFileContext } from '../../../contexts/ConfigFileContext'
 
 export const UserDetailsUI = (props) => {
   const {
@@ -55,6 +56,7 @@ export const UserDetailsUI = (props) => {
   const [isExpand, setIsExpand] = useState(false)
   const [{ configs }] = useConfig()
   const disableSchedule = configs?.allow_driver_manager_update_driver_schedule?.value === '0' && user?.level === 5
+  const [configFile] = useContext(ConfigFileContext)
 
   const expandSidebar = () => {
     const element = document.getElementById('user_lateral_bar')
@@ -126,9 +128,11 @@ export const UserDetailsUI = (props) => {
                 <Dropdown.Item onClick={() => setIsCustomField(true)} disabled={actionDisabled}>
                   {t('CUSTOM_FIELDS', 'Custom fields')}
                 </Dropdown.Item>
-                <Dropdown.Item onClick={() => setIsPersonalization(true)} disabled={actionDisabled}>
-                  {t('PERSONALIZATION', 'Personalization')}
-                </Dropdown.Item>
+                {!configFile?.is_white_label && (
+                  <Dropdown.Item onClick={() => setIsPersonalization(true)} disabled={actionDisabled}>
+                    {t('PERSONALIZATION', 'Personalization')}
+                  </Dropdown.Item>
+                )}
                 <Dropdown.Item onClick={() => handleDeleteUser(userState.user?.id)} disabled={actionDisabled}>
                   {t('DELETE', 'Delete')}
                 </Dropdown.Item>
