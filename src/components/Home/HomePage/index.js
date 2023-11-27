@@ -4,6 +4,7 @@ import { Line } from 'react-chartjs-2'
 import moment from 'moment'
 import { IconButton, Button } from '../../../styles/Buttons'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
+import { useProjectState } from '../../../contexts/ProjectContext'
 import Skeleton from 'react-loading-skeleton'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import { useTheme } from 'styled-components'
@@ -51,7 +52,6 @@ import {
 
 const HomeUI = (props) => {
   const {
-    projectStatus,
     ordersList,
     todaySalelsList,
     monthSalesList,
@@ -65,6 +65,7 @@ const HomeUI = (props) => {
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const [timeAxes, setTimeAxes] = useState([])
   const [events] = useEvent()
+  const [projectStatus] = useProjectState()
   const { width } = useWindowSize()
   const [{ parsePrice }] = useUtils()
   const [sessionState] = useSession()

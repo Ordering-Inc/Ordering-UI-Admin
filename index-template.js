@@ -6,6 +6,7 @@ import { Alert } from './src/components/Shared'
 import { ThemeProvider } from './src/contexts/ThemeContext'
 import { ConfigFileContext } from './src/contexts/ConfigFileContext'
 import { InfoShareProvider } from './src/contexts/InfoShareContext'
+import { ProjectProvider } from './src/contexts/ProjectContext'
 import { Toast } from './src/styles/Toast'
 import theme from './template/theme.json'
 import settings from './template/config.json'
@@ -578,8 +579,10 @@ const RouteApp = () => {
         <AutologinParams configFile={configFile}>
           <OrderingProvider Alert={Alert}>
             <InfoShareProvider>
-              <Router />
-              <Toast />
+              <ProjectProvider>
+                <Router />
+                <Toast />
+              </ProjectProvider>
             </InfoShareProvider>
           </OrderingProvider>
         </AutologinParams>
