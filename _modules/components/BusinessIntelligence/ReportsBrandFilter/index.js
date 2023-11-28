@@ -67,11 +67,10 @@ var ReportsBrandFilterUI = function ReportsBrandFilterUI(props) {
     onClick: handleClickFilterButton
   }, t('FILTER', 'Filter'))));
 };
-var ReportsBrandFilter = function ReportsBrandFilter(props) {
+var ReportsBrandFilter = exports.ReportsBrandFilter = function ReportsBrandFilter(props) {
   var reportsBrandFilterProps = _objectSpread(_objectSpread({}, props), {}, {
     propsToFetch: ['id', 'name', 'enabled'],
     UIComponent: ReportsBrandFilterUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.ReportsBrandFilter, reportsBrandFilterProps);
 };
-exports.ReportsBrandFilter = ReportsBrandFilter;

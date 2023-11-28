@@ -91,10 +91,9 @@ var LanguageSettingUI = function LanguageSettingUI(props) {
     })));
   }))));
 };
-var LanguageSetting = function LanguageSetting(props) {
+var LanguageSetting = exports.LanguageSetting = function LanguageSetting(props) {
   var languageSettingProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: LanguageSettingUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.LanguageSetting, languageSettingProps);
 };
-exports.LanguageSetting = LanguageSetting;

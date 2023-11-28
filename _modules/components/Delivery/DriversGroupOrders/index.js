@@ -125,10 +125,9 @@ var DriversGroupOrdersUI = function DriversGroupOrdersUI(props) {
     maxlength: "2"
   }))))));
 };
-var DriversGroupOrders = function DriversGroupOrders(props) {
+var DriversGroupOrders = exports.DriversGroupOrders = function DriversGroupOrders(props) {
   var drivesGroupOrdersProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: DriversGroupOrdersUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DriversGroupOrders, drivesGroupOrdersProps);
 };
-exports.DriversGroupOrders = DriversGroupOrders;

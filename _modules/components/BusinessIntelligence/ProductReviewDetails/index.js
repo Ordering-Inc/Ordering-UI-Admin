@@ -52,10 +52,9 @@ var ProductReviewDetailsUI = function ProductReviewDetailsUI(props) {
     }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.HandThumbsUp, null), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.HandThumbsDown, null))), /*#__PURE__*/_react.default.createElement(_styles.ReviewComment, null, review === null || review === void 0 ? void 0 : review.comment));
   }), !productReviewList.loading && productReviewList.reviews.length === 0 && /*#__PURE__*/_react.default.createElement(_styles.NotReviewed, null, t('ERROR_REVIEW_FIND', 'The review does not exist.'))));
 };
-var ProductReviewDetails = function ProductReviewDetails(props) {
+var ProductReviewDetails = exports.ProductReviewDetails = function ProductReviewDetails(props) {
   var productReviewProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: ProductReviewDetailsUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.ProductReviews, productReviewProps);
 };
-exports.ProductReviewDetails = ProductReviewDetails;

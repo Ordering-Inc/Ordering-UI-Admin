@@ -78,11 +78,10 @@ var ReportsAppIdFilterUI = function ReportsAppIdFilterUI(props) {
     onClick: handleClickFilterButton
   }, t('FILTER', 'Filter'))));
 };
-var ReportsAppIdFilter = function ReportsAppIdFilter(props) {
+var ReportsAppIdFilter = exports.ReportsAppIdFilter = function ReportsAppIdFilter(props) {
   var reportsAppIdFilterProps = _objectSpread(_objectSpread({}, props), {}, {
     propsToFetch: ['id', 'name', 'code'],
     UIComponent: ReportsAppIdFilterUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.ReportsAppIdFilter, reportsAppIdFilterProps);
 };
-exports.ReportsAppIdFilter = ReportsAppIdFilter;

@@ -123,11 +123,10 @@ var LogisticsUI = function LogisticsUI(props) {
     }, getEventName(log), log.event === 'logistic_expired' && /*#__PURE__*/_react.default.createElement(_styles.Reason, null, "Reason: ", log === null || log === void 0 || (_log$data5 = log.data) === null || _log$data5 === void 0 ? void 0 : _log$data5.reason), /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(log.updated_at)));
   })));
 };
-var Logistics = function Logistics(props) {
+var Logistics = exports.Logistics = function Logistics(props) {
   var logisticsProps = _objectSpread(_objectSpread({}, props), {}, {
     orderId: props.orderId,
     UIComponent: LogisticsUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.Logistics, logisticsProps);
 };
-exports.Logistics = Logistics;
