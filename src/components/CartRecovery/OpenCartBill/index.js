@@ -175,7 +175,7 @@ export const OpenCartBill = (props) => {
               <td>
                 {t(extraValueAdjustment?.key?.toUpperCase(), extraValueAdjustment?.key)}{' '}
               </td>
-              <td>{parsePrice(parseFloat(extraValueAdjustment?.value))}</td>
+              <td>{parseFloat(extraValueAdjustment?.value) > 0 ? parsePrice(parseFloat(extraValueAdjustment?.value)) : `- ${parsePrice(parseFloat(extraValueAdjustment?.value) * -1)}`}</td>
             </tr>
           )}
         </tbody>
