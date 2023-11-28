@@ -33,10 +33,9 @@ var LogoutButtonUI = function LogoutButtonUI(props) {
     size: 20
   }), /*#__PURE__*/_react.default.createElement("span", null, t('LOGOUT', 'Logout')));
 };
-var LogoutButton = function LogoutButton(props) {
+var LogoutButton = exports.LogoutButton = function LogoutButton(props) {
   var logoutButtonProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: LogoutButtonUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.LogoutAction, logoutButtonProps);
 };
-exports.LogoutButton = LogoutButton;

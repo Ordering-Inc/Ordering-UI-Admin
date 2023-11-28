@@ -89,11 +89,10 @@ var ReportsDriverGroupFilterUI = function ReportsDriverGroupFilterUI(props) {
     onClick: handleClickFilterButton
   }, t('FILTER', 'Filter'))));
 };
-var ReportsDriverGroupFilter = function ReportsDriverGroupFilter(props) {
+var ReportsDriverGroupFilter = exports.ReportsDriverGroupFilter = function ReportsDriverGroupFilter(props) {
   var reportsDriverGroupFilterProps = _objectSpread(_objectSpread({}, props), {}, {
     propsToFetch: ['id', 'name', 'enabled', 'drivers'],
     UIComponent: ReportsDriverGroupFilterUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.ReportsDriverGroupFilter, reportsDriverGroupFilterProps);
 };
-exports.ReportsDriverGroupFilter = ReportsDriverGroupFilter;

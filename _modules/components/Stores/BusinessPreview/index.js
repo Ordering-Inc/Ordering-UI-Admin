@@ -13,11 +13,10 @@ var _BsInfoCircle = _interopRequireDefault(require("@meronex/icons/bs/BsInfoCirc
 var _Shared = require("../../Shared");
 var _styles = require("../../../styles");
 var _useWindowSize2 = require("../../../hooks/useWindowSize");
-var _ConfigFileContext = require("../../../contexts/ConfigFileContext");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
@@ -28,7 +27,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-var BusinessPreview = function BusinessPreview(props) {
+var BusinessPreview = exports.BusinessPreview = function BusinessPreview(props) {
   var _theme$images, _sessionState$user, _sessionState$user2, _orderState$options, _business$reviews, _business$reviews2, _theme$images2, _theme$images3, _orderState$options2, _business$reviews3, _business$reviews4, _business$categories, _selectedCategory$pro, _business$categories2;
   var business = props.business,
     isMobileView = props.isMobileView;
@@ -60,9 +59,6 @@ var BusinessPreview = function BusinessPreview(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     selectedCategory = _useState4[0],
     setSelectedCateogry = _useState4[1];
-  var _useContext = (0, _react.useContext)(_ConfigFileContext.ConfigFileContext),
-    _useContext2 = _slicedToArray(_useContext, 1),
-    configFile = _useContext2[0];
   var pos = {
     top: 0,
     left: 0,
@@ -129,7 +125,7 @@ var BusinessPreview = function BusinessPreview(props) {
     src: theme.images.general.mobileMask,
     id: "product_mobile_view",
     onMouseDown: mouseDownHandler
-  }, !isMobileView && width > 650 && /*#__PURE__*/_react.default.createElement(_styles2.Contentheader, null, !(configFile !== null && configFile !== void 0 && configFile.is_white_label) && /*#__PURE__*/_react.default.createElement(_styles2.HeaderLogo, null, /*#__PURE__*/_react.default.createElement("img", {
+  }, !isMobileView && width > 650 && /*#__PURE__*/_react.default.createElement(_styles2.Contentheader, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderLogo, null, /*#__PURE__*/_react.default.createElement("img", {
     alt: "Logotype",
     width: "100px",
     height: "30px",
@@ -251,7 +247,6 @@ var BusinessPreview = function BusinessPreview(props) {
     color: "primary"
   }, t('VIEW_CART', 'View cart')))))));
 };
-exports.BusinessPreview = BusinessPreview;
 var SingleProductCard = function SingleProductCard(props) {
   var _orderState$carts, _cart$products, _cart$products2, _theme$images4;
   var product = props.product,

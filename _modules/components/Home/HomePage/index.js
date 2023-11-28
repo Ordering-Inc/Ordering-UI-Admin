@@ -11,7 +11,6 @@ var _reactChartjs = require("react-chartjs-2");
 var _moment = _interopRequireDefault(require("moment"));
 var _Buttons = require("../../../styles/Buttons");
 var _InfoShareContext = require("../../../contexts/InfoShareContext");
-var _ProjectContext = require("../../../contexts/ProjectContext");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _useWindowSize2 = require("../../../hooks/useWindowSize");
 var _styledComponents = require("styled-components");
@@ -21,8 +20,8 @@ var _reactHubspotForm = _interopRequireDefault(require("react-hubspot-form"));
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _styles = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -41,7 +40,8 @@ function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" !=
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var HomeUI = function HomeUI(props) {
   var _configs$white_label_, _projectStatus$projec, _sessionState$user, _projectStatus$projec2, _projectStatus$projec3, _project$projectStatu, _projectStatus$projec4, _projectStatus$projec5, _project$projectStatu2, _projectStatus$projec6, _projectStatus$projec7, _project$projectStatu3, _projectStatus$projec8, _project$projectStatu4, _projectStatus$projec9, _sessionState$user2, _sessionState$user3;
-  var ordersList = props.ordersList,
+  var projectStatus = props.projectStatus,
+    ordersList = props.ordersList,
     todaySalelsList = props.todaySalelsList,
     monthSalesList = props.monthSalesList,
     getCurrentDateRange = props.getCurrentDateRange;
@@ -66,9 +66,6 @@ var HomeUI = function HomeUI(props) {
   var _useEvent = (0, _orderingComponentsAdmin.useEvent)(),
     _useEvent2 = _slicedToArray(_useEvent, 1),
     events = _useEvent2[0];
-  var _useProjectState = (0, _ProjectContext.useProjectState)(),
-    _useProjectState2 = _slicedToArray(_useProjectState, 1),
-    projectStatus = _useProjectState2[0];
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
     width = _useWindowSize.width;
   var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
@@ -362,10 +359,9 @@ var HomeUI = function HomeUI(props) {
     }
   }, t('CLOSE', 'Close'))))));
 };
-var HomePage = function HomePage(props) {
+var HomePage = exports.HomePage = function HomePage(props) {
   var homeProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: HomeUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.Home, homeProps);
 };
-exports.HomePage = HomePage;

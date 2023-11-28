@@ -11,7 +11,7 @@ var _DriversOnlineOfflineFilter = require("../DriversOnlineOfflineFilter");
 var _DriversBusyStatusFilter = require("../DriversBusyStatusFilter");
 var _styles = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-var DriversDashboard = function DriversDashboard(props) {
+var DriversDashboard = exports.DriversDashboard = function DriversDashboard(props) {
   var driversList = props.driversList,
     onlineDrivers = props.onlineDrivers,
     offlineDrivers = props.offlineDrivers,
@@ -64,4 +64,3 @@ var DriversDashboard = function DriversDashboard(props) {
     assignedOrders: assignedOrders
   })));
 };
-exports.DriversDashboard = DriversDashboard;

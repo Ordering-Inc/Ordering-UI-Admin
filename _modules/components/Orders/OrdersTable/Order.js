@@ -21,7 +21,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrderPropsAreEqual = function OrderPropsAreEqual(prevProps, nextProps) {
   return JSON.stringify(prevProps.order) === JSON.stringify(nextProps.order) && JSON.stringify(prevProps.allowColumns) === JSON.stringify(nextProps.allowColumns) && prevProps.isEnabledRowInColor === nextProps.isEnabledRowInColor && JSON.stringify(prevProps.selectedOrderIds) === JSON.stringify(nextProps.selectedOrderIds) && JSON.stringify(prevProps.isSelectedOrders) === JSON.stringify(nextProps.isSelectedOrders) && prevProps.showExternalId === nextProps.showExternalId && prevProps.groupStatus === nextProps.groupStatus;
 };
-var Order = /*#__PURE__*/_react.default.memo(function (props) {
+var Order = exports.Order = /*#__PURE__*/_react.default.memo(function (props) {
   var orderDetailId = props.orderDetailId,
     order = props.order,
     i = props.i,
@@ -51,10 +51,6 @@ var Order = /*#__PURE__*/_react.default.memo(function (props) {
     optimizeImage = _useUtils2$.optimizeImage,
     getTimeAgo = _useUtils2$.getTimeAgo,
     parsePrice = _useUtils2$.parsePrice;
-<<<<<<< HEAD
-=======
-  var cateringTypes = [7, 8];
->>>>>>> cbc5aa30 (Merge branch 'master' into development)
   return /*#__PURE__*/_react.default.createElement("tr", {
     key: i,
     className: parseInt(orderDetailId) === order.id ? 'active' : '',
@@ -100,21 +96,11 @@ var Order = /*#__PURE__*/_react.default.memo(function (props) {
         className: "info"
       }, (allowColumns === null || allowColumns === void 0 || (_allowColumns$orderNu2 = allowColumns.orderNumber) === null || _allowColumns$orderNu2 === void 0 ? void 0 : _allowColumns$orderNu2.visable) && !showExternalId && /*#__PURE__*/_react.default.createElement("p", {
         className: "bold"
-<<<<<<< HEAD
       }, t('INVOICE_ORDER_NO', 'Order No.'), " ", order === null || order === void 0 ? void 0 : order.id), (allowColumns === null || allowColumns === void 0 || (_allowColumns$dateTim2 = allowColumns.dateTime) === null || _allowColumns$dateTim2 === void 0 ? void 0 : _allowColumns$dateTim2.visable) && /*#__PURE__*/_react.default.createElement("p", {
         className: "date"
       }, order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
         utc: false
       })))));
-=======
-      }, t('INVOICE_ORDER_NO', 'Order No.'), " ", order === null || order === void 0 ? void 0 : order.id), (allowColumns === null || allowColumns === void 0 || (_allowColumns$dateTim2 = allowColumns.dateTime) === null || _allowColumns$dateTim2 === void 0 ? void 0 : _allowColumns$dateTim2.visable) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, cateringTypes.includes(order === null || order === void 0 ? void 0 : order.delivery_type) && /*#__PURE__*/_react.default.createElement("p", {
-        className: "date"
-      }, "".concat(t('CREATED_AT', 'Created at'), ": ").concat(parseDate(order === null || order === void 0 ? void 0 : order.created_at))), /*#__PURE__*/_react.default.createElement("p", {
-        className: "date"
-      }, "".concat(cateringTypes.includes(order === null || order === void 0 ? void 0 : order.delivery_type) ? "".concat(t('PLACED_TO', 'Placed to'), ":") : '', " ").concat(order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
-        utc: false
-      })))))));
->>>>>>> cbc5aa30 (Merge branch 'master' into development)
     }
     if (column === 'status' && !isSelectedOrders) {
       return /*#__PURE__*/_react.default.createElement("td", {
@@ -236,17 +222,6 @@ var Order = /*#__PURE__*/_react.default.memo(function (props) {
         className: order === null || order === void 0 ? void 0 : order.time_status
       }, displayDelayedTime(order))));
     }
-<<<<<<< HEAD
-=======
-    if (column === 'channel') {
-      return /*#__PURE__*/_react.default.createElement("td", {
-        className: "channelInfo",
-        key: "channelInfo".concat(i, "-").concat(index)
-      }, /*#__PURE__*/_react.default.createElement(_styles.StatusInfo, null, /*#__PURE__*/_react.default.createElement("p", {
-        className: "bold"
-      }, getOrderStatus(order.app_id))));
-    }
->>>>>>> cbc5aa30 (Merge branch 'master' into development)
     if (column === 'total') {
       var _allowColumns$total, _order$summary;
       return /*#__PURE__*/_react.default.createElement("td", {
@@ -264,4 +239,3 @@ var Order = /*#__PURE__*/_react.default.memo(function (props) {
     }
   }));
 }, OrderPropsAreEqual);
-exports.Order = Order;

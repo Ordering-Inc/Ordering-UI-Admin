@@ -9,7 +9,7 @@ var _styledComponents = require("styled-components");
 var _Buttons = require("../../styles/Buttons");
 var _styles = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-var NotFoundSource = function NotFoundSource(props) {
+var NotFoundSource = exports.NotFoundSource = function NotFoundSource(props) {
   var _theme$images;
   var content = props.content,
     btnTitle = props.btnTitle,
@@ -27,4 +27,3 @@ var NotFoundSource = function NotFoundSource(props) {
     }
   }, btnTitle)));
 };
-exports.NotFoundSource = NotFoundSource;

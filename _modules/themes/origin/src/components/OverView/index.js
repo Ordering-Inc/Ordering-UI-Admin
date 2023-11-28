@@ -48,10 +48,9 @@ var OrdersOverViewUI = function OrdersOverViewUI(props) {
     }));
   })));
 };
-var OverView = function OverView(props) {
+var OverView = exports.OverView = function OverView(props) {
   var OrdersOverviewControlProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: OrdersOverViewUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.OrdersOverview, OrdersOverviewControlProps);
 };
-exports.OverView = OverView;

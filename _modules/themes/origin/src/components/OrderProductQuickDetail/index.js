@@ -183,11 +183,10 @@ var OrderProductsQuickDetailUI = function OrderProductsQuickDetailUI(props) {
     className: "totalFee"
   }, /*#__PURE__*/_react.default.createElement("td", null), /*#__PURE__*/_react.default.createElement("td", null), /*#__PURE__*/_react.default.createElement("td", null), /*#__PURE__*/_react.default.createElement("td", null, t('TOTAL', 'Total')), /*#__PURE__*/_react.default.createElement("td", null, parsePrice(order === null || order === void 0 || (_order$summary11 = order.summary) === null || _order$summary11 === void 0 ? void 0 : _order$summary11.total))))))));
 };
-var OrderProductsQuickDetail = function OrderProductsQuickDetail(props) {
+var OrderProductsQuickDetail = exports.OrderProductsQuickDetail = function OrderProductsQuickDetail(props) {
   var orderDetailsProps = _objectSpread(_objectSpread({}, props), {}, {
     asDashboard: true,
     UIComponent: OrderProductsQuickDetailUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.OrderDetails, orderDetailsProps);
 };
-exports.OrderProductsQuickDetail = OrderProductsQuickDetail;

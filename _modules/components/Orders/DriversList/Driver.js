@@ -21,7 +21,7 @@ var DriverPropsAreEqual = function DriverPropsAreEqual(prevProps, nextProps) {
   var _prevProps$selectedDr, _nextProps$selectedDr;
   return JSON.stringify(prevProps.driver) === JSON.stringify(nextProps.driver) && (prevProps === null || prevProps === void 0 || (_prevProps$selectedDr = prevProps.selectedDriver) === null || _prevProps$selectedDr === void 0 ? void 0 : _prevProps$selectedDr.id) === (nextProps === null || nextProps === void 0 || (_nextProps$selectedDr = nextProps.selectedDriver) === null || _nextProps$selectedDr === void 0 ? void 0 : _nextProps$selectedDr.id);
 };
-var Driver = /*#__PURE__*/_react.default.memo(function (props) {
+var Driver = exports.Driver = /*#__PURE__*/_react.default.memo(function (props) {
   var _theme$images;
   var driver = props.driver,
     handleClickDriver = props.handleClickDriver,
@@ -65,4 +65,3 @@ var Driver = /*#__PURE__*/_react.default.memo(function (props) {
     width: getStarWidth(driver === null || driver === void 0 ? void 0 : driver.qualification)
   })));
 }, DriverPropsAreEqual);
-exports.Driver = Driver;

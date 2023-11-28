@@ -111,15 +111,6 @@ var LogisticInformationUI = function LogisticInformationUI(props) {
     }, {
       key: 23,
       value: t('ORDER_DRIVER_ON_WAY', 'Driver on way')
-    }, {
-      key: 24,
-      value: t('ORDER_STATUS_DRIVER_WAITING_FOR_ORDER', 'Driver waiting for order')
-    }, {
-      key: 25,
-      value: t('ORDER_STATUS_ACCEPTED_BY_DRIVER_COMPANY', 'Accepted by driver company')
-    }, {
-      key: 26,
-      value: t('ORDER_DRIVER_ARRIVED_CUSTOMER', 'Driver arrived to customer')
     }];
     var objectStatus = orderStatus.find(function (o) {
       return o.key === status;
@@ -170,11 +161,10 @@ var LogisticInformationUI = function LogisticInformationUI(props) {
     }, /*#__PURE__*/_react.default.createElement("strong", null, t('DRIVER_GROUP', 'Driver group')), ": ", /*#__PURE__*/_react.default.createElement("strong", null, attempt === null || attempt === void 0 ? void 0 : attempt.driver_group_id), " ", t('AT', 'at'), " ", parseDate(attempt === null || attempt === void 0 ? void 0 : attempt.created_at));
   })) : /*#__PURE__*/_react.default.createElement(_styles2.BubbleConsole, null, /*#__PURE__*/_react.default.createElement(_styles2.UppercaseText, null, t('WITHOUT_HISTORY_ATTEMPTS', 'without history attempts'))))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, logisticInformation.error)));
 };
-var OrderLogisticInformation = function OrderLogisticInformation(props) {
+var OrderLogisticInformation = exports.OrderLogisticInformation = function OrderLogisticInformation(props) {
   var logisticsProps = _objectSpread(_objectSpread({}, props), {}, {
     orderId: props.orderId,
     UIComponent: LogisticInformationUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.LogisticInformation, logisticsProps);
 };
-exports.OrderLogisticInformation = OrderLogisticInformation;

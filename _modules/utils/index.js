@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.widgetURL = exports.verifyDecimals = exports.stringToSlug = exports.sortInputFields = exports.shape = exports.setStorageItem = exports.scrollTo = exports.ribbonValues = exports.reviewCommentList = exports.removeStorageItem = exports.removeQueryToUrl = exports.queryStringToObject = exports.orderStatus = exports.orderRejectCommentList = exports.optimizeImage = exports.getUniqueId = exports.getStorageItem = exports.getStarWidth = exports.getSeconds = exports.getOrderStatus = exports.getOrderStatuPickUp = exports.getMinutes = exports.getLocale = exports.getIconCard = exports.getHours = exports.getCurrenySymbol = exports.getCurrentDiffDays = exports.getAgoMinutes = exports.formatUrlVideo = exports.formatSeconds = exports.firstLetterCapital = exports.findExitingCountryPhoneCode = exports.findExitingCode = exports.fieldsToSort = exports.convertHoursToMinutes = exports.convertHMS = exports.checkValidUrlFormat = exports.checkSiteUrl = exports.checkPreSiteUrl = exports.capitalize = exports.bytesConverter = exports.addQueryToUrl = exports.TwentyFourHours = exports.TwelveHours = exports.DriverTipsOptions = void 0;
+exports.widgetURL = exports.verifyDecimals = exports.stringToSlug = exports.sortInputFields = exports.shape = exports.setStorageItem = exports.scrollTo = exports.ribbonValues = exports.reviewCommentList = exports.removeStorageItem = exports.removeQueryToUrl = exports.queryStringToObject = exports.orderRejectCommentList = exports.optimizeImage = exports.getUniqueId = exports.getStorageItem = exports.getStarWidth = exports.getSeconds = exports.getOrderStatus = exports.getOrderStatuPickUp = exports.getMinutes = exports.getLocale = exports.getIconCard = exports.getHours = exports.getCurrenySymbol = exports.getCurrentDiffDays = exports.getAgoMinutes = exports.formatUrlVideo = exports.formatSeconds = exports.firstLetterCapital = exports.findExitingCountryPhoneCode = exports.findExitingCode = exports.fieldsToSort = exports.convertHoursToMinutes = exports.convertHMS = exports.checkValidUrlFormat = exports.checkSiteUrl = exports.checkPreSiteUrl = exports.capitalize = exports.bytesConverter = exports.addQueryToUrl = exports.DriverTipsOptions = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _FaCcMastercard = _interopRequireDefault(require("@meronex/icons/fa/FaCcMastercard"));
 var _FaCcVisa = _interopRequireDefault(require("@meronex/icons/fa/FaCcVisa"));
@@ -11,7 +11,6 @@ var _FaCreditCard = _interopRequireDefault(require("@meronex/icons/fa/FaCreditCa
 var _moment = _interopRequireDefault(require("moment"));
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _currency = require("../config/currency.js");
-var _ref2, _ref3, _ref4;
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw new Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator.return && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw new Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, catch: function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
@@ -24,7 +23,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-var optimizeImage = function optimizeImage(url, params, fallback) {
+var optimizeImage = exports.optimizeImage = function optimizeImage(url, params, fallback) {
   if (!url && fallback) return fallback;
   params = params && params.length > 0 ? ",".concat(params) : '';
   if (url != null && url.indexOf('res.cloudinary.com') !== -1) {
@@ -33,8 +32,7 @@ var optimizeImage = function optimizeImage(url, params, fallback) {
   }
   return url;
 };
-exports.optimizeImage = optimizeImage;
-var getIconCard = function getIconCard() {
+var getIconCard = exports.getIconCard = function getIconCard() {
   var brand = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
   var value = brand === null || brand === void 0 ? void 0 : brand.toLowerCase();
   switch (value) {
@@ -49,8 +47,7 @@ var getIconCard = function getIconCard() {
 /**
  * Function to get unique id
  */
-exports.getIconCard = getIconCard;
-var getUniqueId = function getUniqueId() {
+var getUniqueId = exports.getUniqueId = function getUniqueId() {
   var dateString = Date.now().toString(36);
   var randomness = Math.random().toString(36).substr(2);
   return dateString + randomness;
@@ -60,12 +57,10 @@ var getUniqueId = function getUniqueId() {
  * Function to convert a string in string capitalized
  * @param {string} str string to capitalize
  */
-exports.getUniqueId = getUniqueId;
-var capitalize = function capitalize(str) {
+var capitalize = exports.capitalize = function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 };
-exports.capitalize = capitalize;
-var DriverTipsOptions = [0, 10, 15, 20, 25];
+var DriverTipsOptions = exports.DriverTipsOptions = [0, 10, 15, 20, 25];
 
 /**
  * Function to calculate time to scroll element
@@ -74,7 +69,6 @@ var DriverTipsOptions = [0, 10, 15, 20, 25];
  * @param {*} c = change in value
  * @param {*} d = duration
  */
-exports.DriverTipsOptions = DriverTipsOptions;
 var easeInOutQuad = function easeInOutQuad(t, b, c, d) {
   t /= d / 2;
   if (t < 1) return c / 2 * t * t + b;
@@ -88,7 +82,7 @@ var easeInOutQuad = function easeInOutQuad(t, b, c, d) {
  * @param {*} to = position Top of child element
  * @param {*} duration = time to animation
  */
-var scrollTo = function scrollTo(element, to, duration) {
+var scrollTo = exports.scrollTo = function scrollTo(element, to, duration) {
   var start = element.scrollTop;
   var change = to - start;
   var currentTime = 0;
@@ -108,8 +102,7 @@ var scrollTo = function scrollTo(element, to, duration) {
  * Function to get formatted link to include in iframes
  * @param {string} url = youtube - vimeo link video
  */
-exports.scrollTo = scrollTo;
-var formatUrlVideo = function formatUrlVideo(url) {
+var formatUrlVideo = exports.formatUrlVideo = function formatUrlVideo(url) {
   var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
   var match = url.match(regExp);
   var id = match && match[7].length === 11 ? match[7] : false;
@@ -120,8 +113,7 @@ var formatUrlVideo = function formatUrlVideo(url) {
  * Function to convert delivery time in minutes
  * @param {string} time business delivery time
  */
-exports.formatUrlVideo = formatUrlVideo;
-var convertHoursToMinutes = function convertHoursToMinutes(time) {
+var convertHoursToMinutes = exports.convertHoursToMinutes = function convertHoursToMinutes(time) {
   if (!time) return '0min';
   var _time$split = time.split(':'),
     _time$split2 = _slicedToArray(_time$split, 2),
@@ -135,8 +127,7 @@ var convertHoursToMinutes = function convertHoursToMinutes(time) {
  * Function to convert star rate in width to display
  * @param {int} qualification star rate or qualification
  */
-exports.convertHoursToMinutes = convertHoursToMinutes;
-var getStarWidth = function getStarWidth(qualification) {
+var getStarWidth = exports.getStarWidth = function getStarWidth(qualification) {
   if (qualification) {
     return qualification / 5 * 100 + '%';
   } else {
@@ -148,8 +139,7 @@ var getStarWidth = function getStarWidth(qualification) {
  * Function to calculate differnece with current time in minutes
  * @param {string} time past time
  */
-exports.getStarWidth = getStarWidth;
-var getAgoMinutes = function getAgoMinutes(time) {
+var getAgoMinutes = exports.getAgoMinutes = function getAgoMinutes(time) {
   var totalMinutes = (((0, _moment.default)().utc() - (0, _moment.default)(time)) / 1000 / 60).toFixed(0);
   var totalHours = Math.floor(totalMinutes / 60);
   var minutes = totalMinutes - totalHours * 60;
@@ -167,8 +157,7 @@ var getAgoMinutes = function getAgoMinutes(time) {
  * @param {number} bytes for transform
  *
  */
-exports.getAgoMinutes = getAgoMinutes;
-var bytesConverter = function bytesConverter(bytes) {
+var bytesConverter = exports.bytesConverter = function bytesConverter(bytes) {
   return Math.floor(bytes / 1024);
 };
 
@@ -177,8 +166,7 @@ var bytesConverter = function bytesConverter(bytes) {
  * @param {string} code // language code
  * @param {any} locales // language settings
  */
-exports.bytesConverter = bytesConverter;
-var getLocale = function getLocale(code, locales) {
+var getLocale = exports.getLocale = function getLocale(code, locales) {
   var locale = locales === null || locales === void 0 ? void 0 : locales[code];
   if (code === 'es-419-1' || code === 'es-419-2') locale = locales === null || locales === void 0 ? void 0 : locales.es;
   if (code === 'zh-CN') locale = locales === null || locales === void 0 ? void 0 : locales.zhCN;
@@ -192,16 +180,14 @@ var getLocale = function getLocale(code, locales) {
 /**
  * List of fields with correct order
  */
-exports.getLocale = getLocale;
-var fieldsToSort = ['name', 'middle_name', 'lastname', 'second_lastname', 'email'];
+var fieldsToSort = exports.fieldsToSort = ['name', 'middle_name', 'lastname', 'second_lastname', 'email'];
 
 /**
   * Function to return a array sorted by certain fields
   * @param fields Array with right order
   * @param array Array to sort
   */
-exports.fieldsToSort = fieldsToSort;
-var sortInputFields = function sortInputFields(_ref) {
+var sortInputFields = exports.sortInputFields = function sortInputFields(_ref) {
   var fields = _ref.fields,
     values = _ref.values;
   var fieldsBase = fields;
@@ -224,8 +210,7 @@ var sortInputFields = function sortInputFields(_ref) {
  * Function to covert seconds into remain hours
  * @param {Number} seconds
  */
-exports.sortInputFields = sortInputFields;
-var getHours = function getHours(seconds) {
+var getHours = exports.getHours = function getHours(seconds) {
   return seconds * 1 / 3600 > 1 ? Math.floor(seconds * 1 / 3600) : 0;
 };
 
@@ -233,8 +218,7 @@ var getHours = function getHours(seconds) {
  * Function to covert seconds into remain Minutes
  * @param {Number} seconds
  */
-exports.getHours = getHours;
-var getMinutes = function getMinutes(seconds) {
+var getMinutes = exports.getMinutes = function getMinutes(seconds) {
   return Math.floor((seconds - Math.floor(seconds / 3600) * 3600) / 60);
 };
 
@@ -242,20 +226,17 @@ var getMinutes = function getMinutes(seconds) {
  * Function to covert seconds into remain Seconds
  * @param {Number} seconds
  */
-exports.getMinutes = getMinutes;
-var getSeconds = function getSeconds(seconds) {
+var getSeconds = exports.getSeconds = function getSeconds(seconds) {
   var remain = seconds - Math.floor(seconds / 3600) * 3600;
   return Math.floor(remain - Math.floor(remain / 60) * 60);
 };
-exports.getSeconds = getSeconds;
-var findExitingCode = function findExitingCode(countryCode) {
+var findExitingCode = exports.findExitingCode = function findExitingCode(countryCode) {
   var code = _orderingComponentsAdmin.CODES.find(function (code) {
     return code.countryCode === (countryCode || '').toUpperCase();
   });
   return code === null || code === void 0 ? void 0 : code.countryCode;
 };
-exports.findExitingCode = findExitingCode;
-var findExitingCountryPhoneCode = function findExitingCountryPhoneCode(countryCode) {
+var findExitingCountryPhoneCode = exports.findExitingCountryPhoneCode = function findExitingCountryPhoneCode(countryCode) {
   var code = _orderingComponentsAdmin.CODES.find(function (code) {
     return code.countryCode === (countryCode || '').toUpperCase();
   });
@@ -268,8 +249,7 @@ var findExitingCountryPhoneCode = function findExitingCountryPhoneCode(countryCo
  * @param {*} parser function fallback when is decimal
  * @returns string
  */
-exports.findExitingCountryPhoneCode = findExitingCountryPhoneCode;
-var verifyDecimals = function verifyDecimals(value, parser) {
+var verifyDecimals = exports.verifyDecimals = function verifyDecimals(value, parser) {
   if (value % 1 === 0) {
     return value;
   } else {
@@ -280,9 +260,8 @@ var verifyDecimals = function verifyDecimals(value, parser) {
 /**
  * Fuctions to control the local storage
  */
-exports.verifyDecimals = verifyDecimals;
-var getStorageItem = function getStorageItem(_x, _x2) {
-  return (_ref2 = _ref2 || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(storageKey, isJson) {
+var getStorageItem = exports.getStorageItem = /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(storageKey, isJson) {
     var value;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
@@ -303,11 +282,13 @@ var getStorageItem = function getStorageItem(_x, _x2) {
           return _context.stop();
       }
     }, _callee);
-  }))).apply(this, arguments);
-};
-exports.getStorageItem = getStorageItem;
-var setStorageItem = function setStorageItem(_x3, _x4, _x5) {
-  return (_ref3 = _ref3 || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(key, val, isJson) {
+  }));
+  return function getStorageItem(_x, _x2) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+var setStorageItem = exports.setStorageItem = /*#__PURE__*/function () {
+  var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(key, val, isJson) {
     var value;
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
       while (1) switch (_context2.prev = _context2.next) {
@@ -320,11 +301,13 @@ var setStorageItem = function setStorageItem(_x3, _x4, _x5) {
           return _context2.stop();
       }
     }, _callee2);
-  }))).apply(this, arguments);
-};
-exports.setStorageItem = setStorageItem;
-var removeStorageItem = function removeStorageItem(_x6) {
-  return (_ref4 = _ref4 || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(key) {
+  }));
+  return function setStorageItem(_x3, _x4, _x5) {
+    return _ref3.apply(this, arguments);
+  };
+}();
+var removeStorageItem = exports.removeStorageItem = /*#__PURE__*/function () {
+  var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(key) {
     return _regeneratorRuntime().wrap(function _callee3$(_context3) {
       while (1) switch (_context3.prev = _context3.next) {
         case 0:
@@ -335,14 +318,16 @@ var removeStorageItem = function removeStorageItem(_x6) {
           return _context3.stop();
       }
     }, _callee3);
-  }))).apply(this, arguments);
-};
+  }));
+  return function removeStorageItem(_x6) {
+    return _ref4.apply(this, arguments);
+  };
+}();
 
 /**
  * Fuctions to convert formatted time from seconds
  */
-exports.removeStorageItem = removeStorageItem;
-var convertHMS = function convertHMS(value) {
+var convertHMS = exports.convertHMS = function convertHMS(value) {
   var sec = parseInt(value, 10); // convert value to number if it's string
   var absSec = Math.abs(sec);
   var hours = Math.floor(absSec / 3600); // get hours
@@ -364,8 +349,7 @@ var convertHMS = function convertHMS(value) {
 /**
  * List shape for ribbon
  */
-exports.convertHMS = convertHMS;
-var shape = {
+var shape = exports.shape = {
   rectangle: 'rectangle',
   rectangleRound: 'rectangle_round',
   capsuleShape: 'capsule_shape'
@@ -376,8 +360,7 @@ var shape = {
  * @param {string} url URL of page
  * @param {string} fallback default URL
  */
-exports.shape = shape;
-var checkPreSiteUrl = function checkPreSiteUrl(url, fallback) {
+var checkPreSiteUrl = exports.checkPreSiteUrl = function checkPreSiteUrl(url, fallback) {
   if (!url) return fallback;
   return url[0] === '/' ? url : "/".concat(url);
 };
@@ -386,8 +369,7 @@ var checkPreSiteUrl = function checkPreSiteUrl(url, fallback) {
  * Function to validate URL
  * @param {string} url URL of page
  */
-exports.checkPreSiteUrl = checkPreSiteUrl;
-var checkValidUrlFormat = function checkValidUrlFormat(url) {
+var checkValidUrlFormat = exports.checkValidUrlFormat = function checkValidUrlFormat(url) {
   if (!url) return;
   var pattern = new RegExp('^(https?:\\/\\/)?' +
   // protocol
@@ -407,8 +389,7 @@ var checkValidUrlFormat = function checkValidUrlFormat(url) {
 /**
  * default value for bitton
  */
-exports.checkValidUrlFormat = checkValidUrlFormat;
-var ribbonValues = {
+var ribbonValues = exports.ribbonValues = {
   color: '#0083FE',
   text: 'ribbon',
   shape: 'rectangle',
@@ -418,8 +399,7 @@ var ribbonValues = {
  * Format seconds to hh:mm:ss
  * @param {number} seconds
  */
-exports.ribbonValues = ribbonValues;
-var formatSeconds = function formatSeconds(seconds) {
+var formatSeconds = exports.formatSeconds = function formatSeconds(seconds) {
   // Hours, minutes and seconds
   var hrs = Math.floor(seconds / 3600);
   var mins = Math.floor(seconds % 3600 / 60);
@@ -440,8 +420,7 @@ var formatSeconds = function formatSeconds(seconds) {
  * @param {string} url URL of page
  * @param {string} fallback default URL
  */
-exports.formatSeconds = formatSeconds;
-var checkSiteUrl = function checkSiteUrl(url, fallback) {
+var checkSiteUrl = exports.checkSiteUrl = function checkSiteUrl(url, fallback) {
   if (!url) return fallback;
   return url[(url === null || url === void 0 ? void 0 : url.length) - 1] === '/' ? url : "".concat(url, "/");
 };
@@ -451,8 +430,7 @@ var checkSiteUrl = function checkSiteUrl(url, fallback) {
  * @param {number} param0 type of reviews to return
  * @returns object with reviews dictionary
  */
-exports.checkSiteUrl = checkSiteUrl;
-var reviewCommentList = function reviewCommentList(type) {
+var reviewCommentList = exports.reviewCommentList = function reviewCommentList(type) {
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -563,152 +541,134 @@ var reviewCommentList = function reviewCommentList(type) {
   };
   return reviews[type];
 };
-exports.reviewCommentList = reviewCommentList;
-var orderStatus = [{
-  key: 0,
-  value: 'Pending Order',
-  slug: 'PENDING_ORDER',
-  percentage: 10
-}, {
-  key: 1,
-  value: 'Completed by admin',
-  slug: 'COMPLETED_BY_ADMIN',
-  percentage: 100
-}, {
-  key: 2,
-  value: 'Reject by admin',
-  slug: 'REJECT_BY_ADMIN',
-  percentage: 0
-}, {
-  key: 3,
-  value: 'Driver arrived by business',
-  slug: 'DRIVER_IN_BUSINESS',
-  percentage: 60
-}, {
-  key: 4,
-  value: 'Preparation Completed',
-  slug: 'PREPARATION_COMPLETED',
-  percentage: 20
-}, {
-  key: 5,
-  value: 'Reject by business',
-  slug: 'REJECT_BY_BUSINESS',
-  percentage: 0
-}, {
-  key: 6,
-  value: 'Reject by driver',
-  slug: 'REJECT_BY_DRIVER',
-  percentage: 0
-}, {
-  key: 7,
-  value: 'Accepted by business',
-  slug: 'ACCEPTED_BY_BUSINESS',
-  percentage: 15
-}, {
-  key: 8,
-  value: 'Accepted by driver',
-  slug: 'ACCEPTED_BY_DRIVER',
-  percentage: 40
-}, {
-  key: 9,
-  value: 'Pick up completed by driver',
-  slug: 'PICK_UP_COMPLETED_BY_DRIVER',
-  percentage: 70
-}, {
-  key: 10,
-  value: 'Pick up Failed by driver',
-  slug: 'PICK_UP_FAILED_BY_DRIVER',
-  percentage: 0
-}, {
-  key: 11,
-  value: 'Delivery completed by driver',
-  slug: 'DELIVERY_COMPLETED_BY_DRIVER',
-  percentage: 100
-}, {
-  key: 12,
-  value: 'Delivery Failed by driver',
-  slug: 'DELIVERY_FAILED_BY_DRIVER',
-  percentage: 0
-}, {
-  key: 13,
-  value: 'Preorder',
-  slug: 'PREORDER',
-  percentage: 0
-}, {
-  key: 14,
-  value: 'Order not ready',
-  slug: 'ORDER_NOT_READY',
-  percentage: 15
-}, {
-  key: 15,
-  value: 'Pickup completed by customer',
-  slug: 'PICKUP_COMPLETED_BY_CUSTOMER',
-  percentage: 100
-}, {
-  key: 16,
-  value: 'Canceled by customer',
-  slug: 'CANCELED_BY_CUSTOMER',
-  percentage: 0
-}, {
-  key: 17,
-  value: 'Not picked by customer',
-  slug: 'NOT_PICKED_BY_CUSTOMER',
-  percentage: 0
-}, {
-  key: 18,
-  value: 'Driver almost arrived to business',
-  slug: 'DRIVER_ALMOST_ARRIVED_TO_BUSINESS',
-  percentage: 50
-}, {
-  key: 19,
-  value: 'Driver almost arrived to customer',
-  slug: 'DRIVER_ALMOST_ARRIVED_TO_CUSTOMER',
-  percentage: 90
-}, {
-  key: 20,
-  value: 'Customer almost arrived to business',
-  slug: 'CUSTOMER_ALMOST_ARRIVED_TO_BUSINESS',
-  percentage: 90
-}, {
-  key: 21,
-  value: 'Customer arrived to business',
-  slug: 'CUSTOMER_ARRIVED_TO_BUSINESS',
-  percentage: 90
-}, {
-  key: 22,
-  value: 'Looking for driver',
-  slug: 'ORDER_LOOKING_FOR_DRIVER',
-  percentage: 30
-}, {
-  key: 23,
-  value: 'Driver on way',
-  slug: 'ORDER_DRIVER_ON_WAY',
-  percentage: 80
-}, {
-  key: 24,
-  value: 'Driver waiting for order',
-  slug: 'ORDER_STATUS_DRIVER_WAITING_FOR_ORDER',
-  percentage: 25
-}, {
-  key: 25,
-  value: 'Accepted by driver company',
-  slug: 'ORDER_STATUS_ACCEPTED_BY_DRIVER_COMPANY',
-  percentage: 15
-}, {
-  key: 26,
-  value: 'Driver arrived to customer',
-  slug: 'ORDER_DRIVER_ARRIVED_CUSTOMER',
-  percentage: 80
-}];
-exports.orderStatus = orderStatus;
-var getOrderStatus = function getOrderStatus(status) {
+var getOrderStatus = exports.getOrderStatus = function getOrderStatus(status) {
+  var orderStatus = [{
+    key: 0,
+    value: 'Pending Order',
+    slug: 'PENDING_ORDER',
+    percentage: 10
+  }, {
+    key: 1,
+    value: 'Completed by admin',
+    slug: 'COMPLETED_BY_ADMIN',
+    percentage: 100
+  }, {
+    key: 2,
+    value: 'Reject by admin',
+    slug: 'REJECT_BY_ADMIN',
+    percentage: 0
+  }, {
+    key: 3,
+    value: 'Driver arrived by business',
+    slug: 'DRIVER_IN_BUSINESS',
+    percentage: 60
+  }, {
+    key: 4,
+    value: 'Preparation Completed',
+    slug: 'PREPARATION_COMPLETED',
+    percentage: 20
+  }, {
+    key: 5,
+    value: 'Reject by business',
+    slug: 'REJECT_BY_BUSINESS',
+    percentage: 0
+  }, {
+    key: 6,
+    value: 'Reject by driver',
+    slug: 'REJECT_BY_DRIVER',
+    percentage: 0
+  }, {
+    key: 7,
+    value: 'Accepted by business',
+    slug: 'ACCEPTED_BY_BUSINESS',
+    percentage: 15
+  }, {
+    key: 8,
+    value: 'Accepted by driver',
+    slug: 'ACCEPTED_BY_DRIVER',
+    percentage: 40
+  }, {
+    key: 9,
+    value: 'Pick up completed by driver',
+    slug: 'PICK_UP_COMPLETED_BY_DRIVER',
+    percentage: 70
+  }, {
+    key: 10,
+    value: 'Pick up Failed by driver',
+    slug: 'PICK_UP_FAILED_BY_DRIVER',
+    percentage: 0
+  }, {
+    key: 11,
+    value: 'Delivery completed by driver',
+    slug: 'DELIVERY_COMPLETED_BY_DRIVER',
+    percentage: 100
+  }, {
+    key: 12,
+    value: 'Delivery Failed by driver',
+    slug: 'DELIVERY_FAILED_BY_DRIVER',
+    percentage: 0
+  }, {
+    key: 13,
+    value: 'Preorder',
+    slug: 'PREORDER',
+    percentage: 0
+  }, {
+    key: 14,
+    value: 'Order not ready',
+    slug: 'ORDER_NOT_READY',
+    percentage: 15
+  }, {
+    key: 15,
+    value: 'Pickup completed by customer',
+    slug: 'PICKUP_COMPLETED_BY_CUSTOMER',
+    percentage: 100
+  }, {
+    key: 16,
+    value: 'Canceled by customer',
+    slug: 'CANCELED_BY_CUSTOMER',
+    percentage: 0
+  }, {
+    key: 17,
+    value: 'Not picked by customer',
+    slug: 'NOT_PICKED_BY_CUSTOMER',
+    percentage: 0
+  }, {
+    key: 18,
+    value: 'Driver almost arrived to business',
+    slug: 'DRIVER_ALMOST_ARRIVED_TO_BUSINESS',
+    percentage: 50
+  }, {
+    key: 19,
+    value: 'Driver almost arrived to customer',
+    slug: 'DRIVER_ALMOST_ARRIVED_TO_CUSTOMER',
+    percentage: 90
+  }, {
+    key: 20,
+    value: 'Customer almost arrived to business',
+    slug: 'CUSTOMER_ALMOST_ARRIVED_TO_BUSINESS',
+    percentage: 90
+  }, {
+    key: 21,
+    value: 'Customer arrived to business',
+    slug: 'CUSTOMER_ARRIVED_TO_BUSINESS',
+    percentage: 90
+  }, {
+    key: 22,
+    value: 'Looking for driver',
+    slug: 'ORDER_LOOKING_FOR_DRIVER',
+    percentage: 30
+  }, {
+    key: 23,
+    value: 'Driver on way',
+    slug: 'ORDER_DRIVER_ON_WAY',
+    percentage: 80
+  }];
   var objectStatus = orderStatus.find(function (o) {
     return o.key === status;
   });
   return objectStatus && objectStatus;
 };
-exports.getOrderStatus = getOrderStatus;
-var getOrderStatuPickUp = function getOrderStatuPickUp(status) {
+var getOrderStatuPickUp = exports.getOrderStatuPickUp = function getOrderStatuPickUp(status) {
   var orderStatus = [{
     key: 0,
     value: 'Pending Order',
@@ -786,8 +746,7 @@ var getOrderStatuPickUp = function getOrderStatuPickUp(status) {
  * @param {string} param0 type of orders to return
  * @returns object with orders dictionary
  */
-exports.getOrderStatuPickUp = getOrderStatuPickUp;
-var orderRejectCommentList = function orderRejectCommentList(status) {
+var orderRejectCommentList = exports.orderRejectCommentList = function orderRejectCommentList(status) {
   var messages = {
     6: [
     // on reject order
@@ -818,20 +777,16 @@ var orderRejectCommentList = function orderRejectCommentList(status) {
   });
   return list;
 };
-exports.orderRejectCommentList = orderRejectCommentList;
-var widgetURL = 'https://orderingweb.ordering.co/';
-exports.widgetURL = widgetURL;
-var getCurrentDiffDays = function getCurrentDiffDays(time) {
+var widgetURL = exports.widgetURL = 'https://orderingweb.ordering.co/';
+var getCurrentDiffDays = exports.getCurrentDiffDays = function getCurrentDiffDays(time) {
   var current = (0, _moment.default)().utc();
   var compared = (0, _moment.default)(time);
   return compared.diff(current, 'days');
 };
-exports.getCurrentDiffDays = getCurrentDiffDays;
-var firstLetterCapital = function firstLetterCapital(text) {
+var firstLetterCapital = exports.firstLetterCapital = function firstLetterCapital(text) {
   return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
 };
-exports.firstLetterCapital = firstLetterCapital;
-var stringToSlug = function stringToSlug(str) {
+var stringToSlug = exports.stringToSlug = function stringToSlug(str) {
   var _str;
   str = str.replace(/^\s+|\s+$/g, ''); // trim
   str = (_str = str) === null || _str === void 0 ? void 0 : _str.toLowerCase();
@@ -850,18 +805,15 @@ var stringToSlug = function stringToSlug(str) {
 
   return str;
 };
-exports.stringToSlug = stringToSlug;
-var getCurrenySymbol = function getCurrenySymbol(code) {
+var getCurrenySymbol = exports.getCurrenySymbol = function getCurrenySymbol(code) {
   var _CURRENCY$code$symbol, _CURRENCY$code;
   return (_CURRENCY$code$symbol = _currency.CURRENCY === null || _currency.CURRENCY === void 0 || (_CURRENCY$code = _currency.CURRENCY[code]) === null || _CURRENCY$code === void 0 ? void 0 : _CURRENCY$code.symbol) !== null && _CURRENCY$code$symbol !== void 0 ? _CURRENCY$code$symbol : code;
 };
-exports.getCurrenySymbol = getCurrenySymbol;
-var queryStringToObject = function queryStringToObject(url) {
+var queryStringToObject = exports.queryStringToObject = function queryStringToObject(url) {
   var params = new URLSearchParams(url.split('?')[1]);
   return Object.fromEntries(params);
 };
-exports.queryStringToObject = queryStringToObject;
-var addQueryToUrl = function addQueryToUrl(newObj) {
+var addQueryToUrl = exports.addQueryToUrl = function addQueryToUrl(newObj) {
   var queryObj = queryStringToObject(location.href);
   for (var key in newObj) {
     queryObj[key] = newObj[key];
@@ -869,8 +821,7 @@ var addQueryToUrl = function addQueryToUrl(newObj) {
   var query = new URLSearchParams(queryObj);
   history.replaceState(null, '', "".concat(location.pathname, "?").concat(query));
 };
-exports.addQueryToUrl = addQueryToUrl;
-var removeQueryToUrl = function removeQueryToUrl(removeKeys) {
+var removeQueryToUrl = exports.removeQueryToUrl = function removeQueryToUrl(removeKeys) {
   var queryObj = queryStringToObject(location.href);
   var _iterator = _createForOfIteratorHelper(removeKeys),
     _step;
@@ -891,8 +842,3 @@ var removeQueryToUrl = function removeQueryToUrl(removeKeys) {
     history.replaceState(null, '', "".concat(location.pathname));
   }
 };
-exports.removeQueryToUrl = removeQueryToUrl;
-var TwelveHours = ['12:00 AM', '01:00 AM', '02:00 AM', '03:00 AM', '04:00 AM', '05:00 AM', '06:00 AM', '07:00 AM', '08:00 AM', '09:00 AM', '10:00 AM', '11:00 AM', '12:00 PM', '01:00 PM', '02:00 PM', '03:00 PM', '04:00 PM', '05:00 PM', '06:00 PM', '07:00 PM', '08:00 PM', '09:00 PM', '10:00 PM', '11:00 PM'];
-exports.TwelveHours = TwelveHours;
-var TwentyFourHours = ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'];
-exports.TwentyFourHours = TwentyFourHours;

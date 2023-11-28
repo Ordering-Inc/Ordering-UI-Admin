@@ -14,8 +14,8 @@ var _styledComponents = require("styled-components");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _styles = require("./styles");
 var _styles2 = require("../../../styles");
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -33,10 +33,6 @@ function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" !=
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 _reactToastify.toast.configure();
 var OrderNotificationUI = function OrderNotificationUI(props) {
-<<<<<<< HEAD
-=======
-  var _configState$configs7;
->>>>>>> cbc5aa30 (Merge branch 'master' into development)
   var isOnlyDelivery = props.isOnlyDelivery,
     customerId = props.customerId;
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
@@ -97,11 +93,7 @@ var OrderNotificationUI = function OrderNotificationUI(props) {
     setRegisterOrderIds([]);
   };
   var toastNotify = function toastNotify(orderId) {
-<<<<<<< HEAD
     var _configState$configs$, _configState$configs4;
-=======
-    var _configState$configs$, _configState$configs4, _configState$configs5;
->>>>>>> cbc5aa30 (Merge branch 'master' into development)
     var positionConfig = (_configState$configs$ = configState === null || configState === void 0 || (_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 || (_configState$configs4 = _configState$configs4.notification_in_app_position) === null || _configState$configs4 === void 0 ? void 0 : _configState$configs4.value) !== null && _configState$configs$ !== void 0 ? _configState$configs$ : 'bottom-right';
     var toastConfigure = {
       position: positionConfig,
@@ -119,17 +111,9 @@ var OrderNotificationUI = function OrderNotificationUI(props) {
       }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("span", null, t('WEB_DASHBOARD_APPNAME', 'Ordering Dashboard')), /*#__PURE__*/_react.default.createElement("span", null, t('ORDER_N_ORDERED', 'Order #_order_id_ has been ordered.').replace('_order_id_', "".concat(orderId)))));
     };
     (0, _reactToastify.toast)(content, toastConfigure);
-<<<<<<< HEAD
     var sound = document.getElementById('notification-sound');
     sound.muted = false;
     sound.play();
-=======
-    if (!(configState !== null && configState !== void 0 && (_configState$configs5 = configState.configs) !== null && _configState$configs5 !== void 0 && _configState$configs5.disable_sound_notification)) {
-      var sound = document.getElementById('notification-sound');
-      sound.muted = false;
-      sound.play();
-    }
->>>>>>> cbc5aa30 (Merge branch 'master' into development)
     setRegisterOrderIds([]);
   };
   (0, _react.useEffect)(function () {
@@ -137,11 +121,6 @@ var OrderNotificationUI = function OrderNotificationUI(props) {
     setNotificationModalOpen(false);
   }, [registerOrderIds]);
   (0, _react.useEffect)(function () {
-<<<<<<< HEAD
-=======
-    var _configState$configs6;
-    if (!notificationModalOpen || configState !== null && configState !== void 0 && (_configState$configs6 = configState.configs) !== null && _configState$configs6 !== void 0 && _configState$configs6.disable_sound_notification) return;
->>>>>>> cbc5aa30 (Merge branch 'master' into development)
     var sound = document.getElementById('notification-sound');
     var interval = setInterval(function () {
       if (notificationModalOpen) {
@@ -156,11 +135,7 @@ var OrderNotificationUI = function OrderNotificationUI(props) {
     return function () {
       return clearInterval(interval);
     };
-<<<<<<< HEAD
   }, [notificationModalOpen]);
-=======
-  }, [notificationModalOpen, configState === null || configState === void 0 || (_configState$configs7 = configState.configs) === null || _configState$configs7 === void 0 ? void 0 : _configState$configs7.disable_sound_notification]);
->>>>>>> cbc5aa30 (Merge branch 'master' into development)
   (0, _react.useEffect)(function () {
     if (configState.loading) return;
     events.on('order_added', handleNotification);
@@ -234,10 +209,9 @@ var OrderNotificationUI = function OrderNotificationUI(props) {
     onClick: handleClose
   }, t('ACCEPT', 'Accept')))));
 };
-var OrderNotification = function OrderNotification(props) {
+var OrderNotification = exports.OrderNotification = function OrderNotification(props) {
   var orderNotificationProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: OrderNotificationUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.OrderNotification, orderNotificationProps);
 };
-exports.OrderNotification = OrderNotification;

@@ -9,7 +9,7 @@ var _styledComponents = require("styled-components");
 var _useOnlineStatus = require("../../hooks/useOnlineStatus");
 var _styles = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-var NotNetworkConnectivity = function NotNetworkConnectivity() {
+var NotNetworkConnectivity = exports.NotNetworkConnectivity = function NotNetworkConnectivity() {
   var _theme$images;
   var onlineStatus = (0, _useOnlineStatus.useOnlineStatus)();
   var theme = (0, _styledComponents.useTheme)();
@@ -24,4 +24,3 @@ var NotNetworkConnectivity = function NotNetworkConnectivity() {
     alt: "Not network"
   })));
 };
-exports.NotNetworkConnectivity = NotNetworkConnectivity;

@@ -82,10 +82,9 @@ var UserReviewDetailsUI = function UserReviewDetailsUI(props) {
     })), /*#__PURE__*/_react.default.createElement(_styles.ReviewQualityTextContainer, null, /*#__PURE__*/_react.default.createElement("p", null, t('TERRIBLE', 'Terrible')), /*#__PURE__*/_react.default.createElement("p", null, t('BAD', 'Bad')), /*#__PURE__*/_react.default.createElement("p", null, t('OKAY', 'Okay')), /*#__PURE__*/_react.default.createElement("p", null, t('GOOD', 'Good')), /*#__PURE__*/_react.default.createElement("p", null, t('GREAT', 'Great')))), /*#__PURE__*/_react.default.createElement(_styles.Comment, null, review === null || review === void 0 ? void 0 : review.comment));
   }), !userReviewState.loading && userReviewState.reviews.length === 0 && /*#__PURE__*/_react.default.createElement(_styles.NotReviewed, null, t('ERROR_REVIEW_FIND', 'The review does not exist.'))));
 };
-var UserReviewDetails = function UserReviewDetails(props) {
+var UserReviewDetails = exports.UserReviewDetails = function UserReviewDetails(props) {
   var userReivewDetailsProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: UserReviewDetailsUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.UserReviewDetails, userReivewDetailsProps);
 };
-exports.UserReviewDetails = UserReviewDetails;
