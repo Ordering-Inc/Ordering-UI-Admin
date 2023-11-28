@@ -378,15 +378,33 @@ const SidebarMenuUI = (props) => {
     },
     {
       id: 2,
-      title: t('CAMPAIGN', 'Campaign'),
-      pageName: 'campaign',
-      url: '/marketing/campaign'
-    },
-    {
-      id: 3,
       title: t('AD_BANNERS', 'Ad banners'),
       pageName: 'ad_banners',
       url: '/marketing/ad-banners'
+    },
+    {
+      id: 3,
+      title: t('LOYALTY_AUTOMATION', 'Loyalty automation'),
+      pageName: 'rewards_programs',
+      url: '/loyalty/rewards-programs'
+    },
+    {
+      id: 4,
+      title: t('OPEN_CARTS', 'Open carts'),
+      pageName: 'open_carts',
+      url: '/cart-recovery/open-carts'
+    },
+    {
+      id: 5,
+      title: t('CART_RECOVERY_AUTOMATION', 'Cart recovery automation'),
+      pageName: 'recovery_actions',
+      url: '/cart-recovery/recovery-actions'
+    },
+    {
+      id: 6,
+      title: t('CAMPAIGN', 'Campaign'),
+      pageName: 'campaign',
+      url: '/marketing/campaign'
     }
   ]
 
@@ -724,11 +742,16 @@ const SidebarMenuUI = (props) => {
                         active={
                           location.pathname === '/marketing/promotions-enterprise' ||
                           location.pathname === '/marketing/campaign' ||
-                          location.pathname === '/marketing/ad-banners'
+                          location.pathname === '/marketing/ad-banners'||
+                          location.pathname === '/loyalty/rewards-programs' ||
+                          location.pathname === '/loyalty/levels' ||
+                          location.pathname === '/loyalty/reports' ||
+                          location.pathname === '/cart-recovery/open-carts' ||
+                          location.pathname === '/cart-recovery/recovery-actions'
                         }
                       >
                         <GraphUp />
-                        <span>{t('MARKETING', 'Marketing')}</span>
+                        <span>{t('MARKETING_LOYALTY', 'Marketing & Loyalty')}</span>
                       </ContextAwareToggle>
                       <Accordion.Collapse eventKey='8'>
                         <MenuContent>
@@ -746,7 +769,7 @@ const SidebarMenuUI = (props) => {
                     </MenuContainer>
                   )}
 
-                  {sessionState?.user?.level === 0 && (
+                  {/* {sessionState?.user?.level === 0 && (
                     <MenuContainer>
                       <ContextAwareToggle
                         eventKey='9'
@@ -801,7 +824,7 @@ const SidebarMenuUI = (props) => {
                         </MenuContent>
                       </Accordion.Collapse>
                     </MenuContainer>
-                  )}
+                  )} */}
                   {sessionState?.user?.level === 0 && (
                     <MenuContainer>
                       <span>{t('SALES_CHANNELS_AND_PRODUCTS', 'Sales channels and products')}</span>
