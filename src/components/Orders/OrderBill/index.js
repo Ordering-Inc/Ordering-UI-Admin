@@ -242,7 +242,10 @@ export const OrderBill = (props) => {
               <td>
                 {t(extraValueAdjustment?.key?.toUpperCase(), extraValueAdjustment?.key)}{' '}
               </td>
-              <td>{parsePrice(parseFloat(extraValueAdjustment?.value), { currency: getCurrenySymbol(order?.currency) })}</td>
+              <td>{parseFloat(extraValueAdjustment?.value) > 0
+                ? parsePrice(parseFloat(extraValueAdjustment?.value), { currency: getCurrenySymbol(order?.currency) })
+                : `- ${parsePrice(parseFloat(extraValueAdjustment?.value) * -1, { currency: getCurrenySymbol(order?.currency) })}`}
+              </td>
             </tr>
           )}
         </tbody>
