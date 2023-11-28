@@ -11,6 +11,7 @@ var _reactChartjs = require("react-chartjs-2");
 var _moment = _interopRequireDefault(require("moment"));
 var _Buttons = require("../../../styles/Buttons");
 var _InfoShareContext = require("../../../contexts/InfoShareContext");
+var _ProjectContext = require("../../../contexts/ProjectContext");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _useWindowSize2 = require("../../../hooks/useWindowSize");
 var _styledComponents = require("styled-components");
@@ -40,8 +41,7 @@ function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" !=
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var HomeUI = function HomeUI(props) {
   var _configs$white_label_, _projectStatus$projec, _sessionState$user, _projectStatus$projec2, _projectStatus$projec3, _project$projectStatu, _projectStatus$projec4, _projectStatus$projec5, _project$projectStatu2, _projectStatus$projec6, _projectStatus$projec7, _project$projectStatu3, _projectStatus$projec8, _project$projectStatu4, _projectStatus$projec9, _sessionState$user2, _sessionState$user3;
-  var projectStatus = props.projectStatus,
-    ordersList = props.ordersList,
+  var ordersList = props.ordersList,
     todaySalelsList = props.todaySalelsList,
     monthSalesList = props.monthSalesList,
     getCurrentDateRange = props.getCurrentDateRange;
@@ -66,6 +66,9 @@ var HomeUI = function HomeUI(props) {
   var _useEvent = (0, _orderingComponentsAdmin.useEvent)(),
     _useEvent2 = _slicedToArray(_useEvent, 1),
     events = _useEvent2[0];
+  var _useProjectState = (0, _ProjectContext.useProjectState)(),
+    _useProjectState2 = _slicedToArray(_useProjectState, 1),
+    projectStatus = _useProjectState2[0];
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
     width = _useWindowSize.width;
   var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
