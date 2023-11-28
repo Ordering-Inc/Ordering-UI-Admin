@@ -87,14 +87,18 @@ import { OrderingWidgets } from './pages/OrderingWidgets'
 import { BusinessDevicesList } from './pages/BusinessDevicesList'
 import { SettingsLogs } from './pages/SettingsLogs'
 import { DriversTimeDisplay } from './pages/DriverTimeDisplay'
+import { Banners } from '../src/components/Banners'
+import { useProjectState } from '../src/contexts/ProjectContext'
 
 export const App = () => {
   const history = useHistory()
   const [events] = useEvent()
   const [{ auth, loading, user }] = useSession()
   const [orderStatus] = useOrder()
+  const [projectStatus] = useProjectState()
   const [{ configs, loading: configLoading }] = useConfig()
   const [loaded, setLoaded] = useState(false)
+  const [layoutPT, setLayoutPT] = useState(0)
   const [oneSignalState, setOneSignalState] = useState({
     notification_app: settings.notification_app
   })
@@ -103,6 +107,8 @@ export const App = () => {
   const { height } = useWindowSize()
 
   const cannyAppId = '5b05e5e2d3f6c47201694ad4'
+  const isPastDue = projectStatus.project?.current_status === 'past_due'
+  const showBanner = auth && isPastDue
 
   const { search } = useLocation()
   let queryProject
@@ -208,7 +214,14 @@ export const App = () => {
             {cannyAppId && (
               <CannyIdentification appId={cannyAppId} />
             )}
-            <Layout>
+            {showBanner && (
+              <Banners
+                type={projectStatus.project?.current_status}
+                urlToGo={settings?.billing_url}
+                setLayoutPT={setLayoutPT}
+              />
+            )}
+            <Layout pt={showBanner && `${layoutPT}px`}>
               {auth && (
                 <SidebarMenu billingUrl={settings?.billing_url} />
               )}

@@ -8,6 +8,7 @@ import {
   OrderingProductDetails
 } from './components/OrderingProducts'
 import { PageNotFound } from './components/PageNotFound'
+import { Banners } from './components/Banners'
 import {
   AllInOne,
   Appointments,
@@ -409,6 +410,7 @@ import { capitalize, verifyDecimals, setStorageItem, getStorageItem, addQueryToU
 // contexts
 import { ThemeContext, ThemeProvider, useTheme } from './contexts/ThemeContext'
 import { ConfigFileContext } from './contexts/ConfigFileContext'
+import { ProjectContext, ProjectProvider, useProjectState } from './contexts/ProjectContext'
 import { InfoShareContext, InfoShareProvider, useInfoShare } from './contexts/InfoShareContext'
 
 // hooks
@@ -436,6 +438,7 @@ export {
   ChatBusinessesList,
   OrdersManager,
   PageNotFound,
+  Banners,
   Messages,
   OrdersContentHeader,
   OrdersDashboardList,
@@ -841,6 +844,9 @@ export {
   InfoShareContext,
   InfoShareProvider,
   useInfoShare,
+  ProjectContext,
+  ProjectProvider,
+  useProjectState,
 
   // hooks
   useOnlineStatus,

@@ -219,6 +219,17 @@ export const Button = styled.button`
       background: ${props => darken(0.1, props.theme.colors.lightPrimary)};
     }
   `}
+  ${({ color }) => color === 'warning' && css`
+    background: ${props => props.theme.colors.warning};
+    color: #FFF;
+    border-color: ${props => props.theme.colors.warning};
+    &:hover {
+      background: ${props => darken(0.04, props.theme.colors.warning)};
+    }
+    &:active {
+      background: ${props => darken(0.1, props.theme.colors.warning)};
+    }
+  `}
   ${({ color }) => color === 'secundaryDark' && css`
     background: ${props => props.theme.colors.secundaryDarkContrast};
     color: ${props => props.theme.colors.secundaryDark};
