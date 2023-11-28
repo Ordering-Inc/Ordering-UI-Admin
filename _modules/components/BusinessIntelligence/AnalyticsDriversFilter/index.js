@@ -112,10 +112,11 @@ var AnalyticsDriversFilterUI = function AnalyticsDriversFilterUI(props) {
     onClick: handleClickFilterButton
   }, t('FILTER', 'Filter'))));
 };
-var AnalyticsDriversFilter = exports.AnalyticsDriversFilter = function AnalyticsDriversFilter(props) {
+var AnalyticsDriversFilter = function AnalyticsDriversFilter(props) {
   var analyticsDriversFilterProps = _objectSpread(_objectSpread({}, props), {}, {
     propsToFetch: ['id', 'name', 'driver_groups'],
     UIComponent: AnalyticsDriversFilterUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.AnalyticsDriversFilter, analyticsDriversFilterProps);
 };
+exports.AnalyticsDriversFilter = AnalyticsDriversFilter;

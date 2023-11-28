@@ -16,7 +16,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // import { Button } from '../../styles/Buttons'
 // import MdcBasket from '@meronex/icons/mdc/MdcBasket'
 
-var OrdersDashboardControls = exports.OrdersDashboardControls = function OrdersDashboardControls(props) {
+var OrdersDashboardControls = function OrdersDashboardControls(props) {
   var selectedOrderNumber = props.selectedOrderNumber,
     filterValues = props.filterValues,
     handleDeleteMultiOrders = props.handleDeleteMultiOrders,
@@ -37,3 +37,4 @@ var OrdersDashboardControls = exports.OrdersDashboardControls = function OrdersD
     handleChangeMultiOrdersStatus: handleChangeMultiOrdersStatus
   })))));
 };
+exports.OrdersDashboardControls = OrdersDashboardControls;

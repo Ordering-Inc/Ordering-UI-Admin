@@ -114,10 +114,11 @@ var LogisticInformationUI = function LogisticInformationUI(props) {
     }));
   })) : /*#__PURE__*/_react.default.createElement(_styles.BubbleConsole, null, /*#__PURE__*/_react.default.createElement(_styles.UppercaseText, null, t('WITHOUT_HISTORY_ATTEMPTS', 'without_history_attempts'))))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, logisticInformation.error)));
 };
-var LogisticInformation = exports.LogisticInformation = function LogisticInformation(props) {
+var LogisticInformation = function LogisticInformation(props) {
   var logisticsProps = _objectSpread(_objectSpread({}, props), {}, {
     orderId: props.orderId,
     UIComponent: LogisticInformationUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.LogisticInformation, logisticsProps);
 };
+exports.LogisticInformation = LogisticInformation;

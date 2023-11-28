@@ -15,7 +15,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-var OpenCartBill = exports.OpenCartBill = function OpenCartBill(props) {
+var OpenCartBill = function OpenCartBill(props) {
   var _cart$metafields, _cart$metafields$find, _cart$offers, _cart$offers2, _cart$offers3, _cart$business, _ref, _cart$subtotal_with_d, _cart$taxes2, _cart$taxes3, _cart$fees, _cart$fees2, _cart$offers4, _cart$offers5, _cart$taxes4, _cart$taxes5, _cart$offers6, _cart$offers7, _configs$driver_tip_t, _configs$driver_tip_u, _extraValueAdjustment, _cart$payment_events, _cart$payment_events2;
   var cart = props.cart;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -118,3 +118,4 @@ var OpenCartBill = exports.OpenCartBill = function OpenCartBill(props) {
     className: "comments"
   }, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, t('COMMENT', 'Comment')), /*#__PURE__*/_react.default.createElement("td", null, cart === null || cart === void 0 ? void 0 : cart.comment)))));
 };
+exports.OpenCartBill = OpenCartBill;

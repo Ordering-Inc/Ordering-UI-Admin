@@ -123,10 +123,11 @@ var FilterGroupListUI = function FilterGroupListUI(props) {
     handleChangePaymethodType: handleChangePaymethodType
   })));
 };
-var FilterGroupList = exports.FilterGroupList = function FilterGroupList(props) {
+var FilterGroupList = function FilterGroupList(props) {
   var FilterControlProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: FilterGroupListUI,
     driverGroupList: props.driverGroupList
   });
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.OrdersFilter, FilterControlProps));
 };
+exports.FilterGroupList = FilterGroupList;

@@ -108,9 +108,10 @@ var BusinessReviewDetailsUI = function BusinessReviewDetailsUI(props) {
     })), /*#__PURE__*/_react.default.createElement(_styles2.ReviewQualityTextContainer, null, /*#__PURE__*/_react.default.createElement("p", null, t('TERRIBLE', 'Terrible')), /*#__PURE__*/_react.default.createElement("p", null, t('BAD', 'Bad')), /*#__PURE__*/_react.default.createElement("p", null, t('OKAY', 'Okay')), /*#__PURE__*/_react.default.createElement("p", null, t('GOOD', 'Good')), /*#__PURE__*/_react.default.createElement("p", null, t('GREAT', 'Great')))), /*#__PURE__*/_react.default.createElement(_styles2.Comment, null, review === null || review === void 0 ? void 0 : review.comment));
   }), !(reviewsList !== null && reviewsList !== void 0 && reviewsList.loading) && (reviewsList === null || reviewsList === void 0 ? void 0 : reviewsList.reviews.length) === 0 && /*#__PURE__*/_react.default.createElement(_styles2.NotReviewed, null, t('ERROR_REVIEW_FIND', 'The review does not exist.'))));
 };
-var BusinessReviewDetails = exports.BusinessReviewDetails = function BusinessReviewDetails(props) {
+var BusinessReviewDetails = function BusinessReviewDetails(props) {
   var businessReviewDetailsProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessReviewDetailsUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.BusinessReviews, businessReviewDetailsProps);
 };
+exports.BusinessReviewDetails = BusinessReviewDetails;

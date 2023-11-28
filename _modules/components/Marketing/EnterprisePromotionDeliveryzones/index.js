@@ -134,9 +134,10 @@ var EnterprisePromotionDeliveryzonesUI = function EnterprisePromotionDeliveryzon
     }
   }, t('DONE', 'Done')));
 };
-var EnterprisePromotionDeliveryzones = exports.EnterprisePromotionDeliveryzones = function EnterprisePromotionDeliveryzones(props) {
+var EnterprisePromotionDeliveryzones = function EnterprisePromotionDeliveryzones(props) {
   var deliveryzonesProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: EnterprisePromotionDeliveryzonesUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DeliveryzoneList, deliveryzonesProps);
 };
+exports.EnterprisePromotionDeliveryzones = EnterprisePromotionDeliveryzones;
