@@ -13,6 +13,7 @@ var _BsInfoCircle = _interopRequireDefault(require("@meronex/icons/bs/BsInfoCirc
 var _Shared = require("../../Shared");
 var _styles = require("../../../styles");
 var _useWindowSize2 = require("../../../hooks/useWindowSize");
+var _ConfigFileContext = require("../../../contexts/ConfigFileContext");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -59,6 +60,9 @@ var BusinessPreview = function BusinessPreview(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     selectedCategory = _useState4[0],
     setSelectedCateogry = _useState4[1];
+  var _useContext = (0, _react.useContext)(_ConfigFileContext.ConfigFileContext),
+    _useContext2 = _slicedToArray(_useContext, 1),
+    configFile = _useContext2[0];
   var pos = {
     top: 0,
     left: 0,
@@ -125,7 +129,7 @@ var BusinessPreview = function BusinessPreview(props) {
     src: theme.images.general.mobileMask,
     id: "product_mobile_view",
     onMouseDown: mouseDownHandler
-  }, !isMobileView && width > 650 && /*#__PURE__*/_react.default.createElement(_styles2.Contentheader, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderLogo, null, /*#__PURE__*/_react.default.createElement("img", {
+  }, !isMobileView && width > 650 && /*#__PURE__*/_react.default.createElement(_styles2.Contentheader, null, !(configFile !== null && configFile !== void 0 && configFile.is_white_label) && /*#__PURE__*/_react.default.createElement(_styles2.HeaderLogo, null, /*#__PURE__*/_react.default.createElement("img", {
     alt: "Logotype",
     width: "100px",
     height: "30px",

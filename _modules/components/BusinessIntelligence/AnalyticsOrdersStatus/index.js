@@ -12,6 +12,7 @@ var _BsDownload = _interopRequireDefault(require("@meronex/icons/bs/BsDownload")
 var _reactChartjs = require("react-chartjs-2");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _GraphLoadingMessage = require("../GraphLoadingMessage");
+var _utils = require("../../../utils");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -28,79 +29,6 @@ var AnalyticsOrdersStatus = function AnalyticsOrdersStatus(props) {
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
   var chartRef = (0, _react.useRef)(null);
-  var orderStatus = [{
-    key: 0,
-    value: t('PENDING', 'Pending')
-  }, {
-    key: 1,
-    value: t('COMPLETED', 'Completed')
-  }, {
-    key: 2,
-    value: t('REJECTED', 'Rejected')
-  }, {
-    key: 3,
-    value: t('DRIVER_IN_BUSINESS', 'Driver in business')
-  }, {
-    key: 4,
-    value: t('PREPARATION_COMPLETED', 'Preparation Completed')
-  }, {
-    key: 5,
-    value: t('REJECTED_BY_BUSINESS', 'Rejected by business')
-  }, {
-    key: 6,
-    value: t('REJECTED_BY_DRIVER', 'Rejected by Driver')
-  }, {
-    key: 7,
-    value: t('ACCEPTED_BY_BUSINESS', 'Accepted by business')
-  }, {
-    key: 8,
-    value: t('ACCEPTED_BY_DRIVER', 'Accepted by driver')
-  }, {
-    key: 9,
-    value: t('PICK_UP_COMPLETED_BY_DRIVER', 'Pick up completed by driver')
-  }, {
-    key: 10,
-    value: t('PICK_UP_FAILED_BY_DRIVER', 'Pick up Failed by driver')
-  }, {
-    key: 11,
-    value: t('DELIVERY_COMPLETED_BY_DRIVER', 'Delivery completed by driver')
-  }, {
-    key: 12,
-    value: t('DELIVERY_FAILED_BY_DRIVER', 'Delivery Failed by driver')
-  }, {
-    key: 13,
-    value: t('PREORDER', 'PreOrder')
-  }, {
-    key: 14,
-    value: t('ORDER_NOT_READY', 'Order not ready')
-  }, {
-    key: 15,
-    value: t('ORDER_PICKEDUP_COMPLETED_BY_CUSTOMER', 'Order picked up completed by customer')
-  }, {
-    key: 16,
-    value: t('ORDER_STATUS_CANCELLED_BY_CUSTOMER', 'Order cancelled by customer')
-  }, {
-    key: 17,
-    value: t('ORDER_NOT_PICKEDUP_BY_CUSTOMER', 'Order not picked up by customer')
-  }, {
-    key: 18,
-    value: t('ORDER_DRIVER_ALMOST_ARRIVED_BUSINESS', 'Driver almost arrived to business')
-  }, {
-    key: 19,
-    value: t('ORDER_DRIVER_ALMOST_ARRIVED_CUSTOMER', 'Driver almost arrived to customer')
-  }, {
-    key: 20,
-    value: t('ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS', 'Customer almost arrived to business')
-  }, {
-    key: 21,
-    value: t('ORDER_CUSTOMER_ARRIVED_BUSINESS', 'Customer arrived to business')
-  }, {
-    key: 22,
-    value: t('ORDER_LOOKING_FOR_DRIVER', 'Looking for driver')
-  }, {
-    key: 23,
-    value: t('ORDER_DRIVER_ON_WAY', 'Driver on way')
-  }];
   var generateLabels = function generateLabels() {
     var labels = [t('ALL', 'All')];
     var _iterator = _createForOfIteratorHelper(orderStatusList === null || orderStatusList === void 0 ? void 0 : orderStatusList.data),
@@ -109,7 +37,7 @@ var AnalyticsOrdersStatus = function AnalyticsOrdersStatus(props) {
       for (_iterator.s(); !(_step = _iterator.n()).done;) {
         var _orderStatus$label$st;
         var label = _step.value;
-        labels.push(orderStatus === null || orderStatus === void 0 || (_orderStatus$label$st = orderStatus[label.status]) === null || _orderStatus$label$st === void 0 ? void 0 : _orderStatus$label$st.value);
+        labels.push(_utils.orderStatus === null || _utils.orderStatus === void 0 || (_orderStatus$label$st = _utils.orderStatus[label.status]) === null || _orderStatus$label$st === void 0 ? void 0 : _orderStatus$label$st.value);
       }
     } catch (err) {
       _iterator.e(err);
@@ -158,7 +86,7 @@ var AnalyticsOrdersStatus = function AnalyticsOrdersStatus(props) {
     try {
       var _loop = function _loop() {
         var row = _step4.value;
-        var selectedStatus = orderStatus.find(function (order) {
+        var selectedStatus = _utils.orderStatus.find(function (order) {
           return order.key === row.status;
         });
         csv += selectedStatus.value + ',';

@@ -33,6 +33,10 @@ function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" !=
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 _reactToastify.toast.configure();
 var OrderNotificationUI = function OrderNotificationUI(props) {
+<<<<<<< HEAD
+=======
+  var _configState$configs7;
+>>>>>>> cbc5aa30 (Merge branch 'master' into development)
   var isOnlyDelivery = props.isOnlyDelivery,
     customerId = props.customerId;
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
@@ -93,7 +97,11 @@ var OrderNotificationUI = function OrderNotificationUI(props) {
     setRegisterOrderIds([]);
   };
   var toastNotify = function toastNotify(orderId) {
+<<<<<<< HEAD
     var _configState$configs$, _configState$configs4;
+=======
+    var _configState$configs$, _configState$configs4, _configState$configs5;
+>>>>>>> cbc5aa30 (Merge branch 'master' into development)
     var positionConfig = (_configState$configs$ = configState === null || configState === void 0 || (_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 || (_configState$configs4 = _configState$configs4.notification_in_app_position) === null || _configState$configs4 === void 0 ? void 0 : _configState$configs4.value) !== null && _configState$configs$ !== void 0 ? _configState$configs$ : 'bottom-right';
     var toastConfigure = {
       position: positionConfig,
@@ -111,9 +119,17 @@ var OrderNotificationUI = function OrderNotificationUI(props) {
       }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("span", null, t('WEB_DASHBOARD_APPNAME', 'Ordering Dashboard')), /*#__PURE__*/_react.default.createElement("span", null, t('ORDER_N_ORDERED', 'Order #_order_id_ has been ordered.').replace('_order_id_', "".concat(orderId)))));
     };
     (0, _reactToastify.toast)(content, toastConfigure);
+<<<<<<< HEAD
     var sound = document.getElementById('notification-sound');
     sound.muted = false;
     sound.play();
+=======
+    if (!(configState !== null && configState !== void 0 && (_configState$configs5 = configState.configs) !== null && _configState$configs5 !== void 0 && _configState$configs5.disable_sound_notification)) {
+      var sound = document.getElementById('notification-sound');
+      sound.muted = false;
+      sound.play();
+    }
+>>>>>>> cbc5aa30 (Merge branch 'master' into development)
     setRegisterOrderIds([]);
   };
   (0, _react.useEffect)(function () {
@@ -121,6 +137,11 @@ var OrderNotificationUI = function OrderNotificationUI(props) {
     setNotificationModalOpen(false);
   }, [registerOrderIds]);
   (0, _react.useEffect)(function () {
+<<<<<<< HEAD
+=======
+    var _configState$configs6;
+    if (!notificationModalOpen || configState !== null && configState !== void 0 && (_configState$configs6 = configState.configs) !== null && _configState$configs6 !== void 0 && _configState$configs6.disable_sound_notification) return;
+>>>>>>> cbc5aa30 (Merge branch 'master' into development)
     var sound = document.getElementById('notification-sound');
     var interval = setInterval(function () {
       if (notificationModalOpen) {
@@ -135,7 +156,11 @@ var OrderNotificationUI = function OrderNotificationUI(props) {
     return function () {
       return clearInterval(interval);
     };
+<<<<<<< HEAD
   }, [notificationModalOpen]);
+=======
+  }, [notificationModalOpen, configState === null || configState === void 0 || (_configState$configs7 = configState.configs) === null || _configState$configs7 === void 0 ? void 0 : _configState$configs7.disable_sound_notification]);
+>>>>>>> cbc5aa30 (Merge branch 'master' into development)
   (0, _react.useEffect)(function () {
     if (configState.loading) return;
     events.on('order_added', handleNotification);

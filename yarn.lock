@@ -8255,9 +8255,15 @@ optionator@^0.8.3:
   dependencies:
     "@babel/runtime" "^7.10.4"
 
+<<<<<<< HEAD
 "ordering-components-admin@github:Ordering-Inc/ordering-components-admin#release":
   version "0.0.2"
   resolved "https://codeload.github.com/Ordering-Inc/ordering-components-admin/tar.gz/b50f958a02ab38b88373adb454f2cedd577f5396"
+=======
+"ordering-components-admin@github:Ordering-Inc/ordering-components-admin#development":
+  version "0.0.1"
+  resolved "https://codeload.github.com/Ordering-Inc/ordering-components-admin/tar.gz/0c16d12c20a7b76b3b94dc9d2ca3521112e54f91"
+>>>>>>> cbc5aa30 (Merge branch 'master' into development)
   dependencies:
     "@babel/runtime" "^7.10.4"
     "@react-native-async-storage/async-storage" "^1.13.1"
@@ -9810,6 +9816,13 @@ rrule@^2.7.1:
   version "2.7.2"
   resolved "https://registry.yarnpkg.com/rrule/-/rrule-2.7.2.tgz#cb899cb21bbe6c71b587107956604173b69f9143"
   integrity sha512-NkBsEEB6FIZOZ3T8frvEBOB243dm46SPufpDckY/Ap/YH24V1zLeMmDY8OA10lk452NdrF621+ynDThE7FQU2A==
+  dependencies:
+    tslib "^2.4.0"
+
+rrule@^2.7.2:
+  version "2.8.1"
+  resolved "https://registry.yarnpkg.com/rrule/-/rrule-2.8.1.tgz#e8341a9ce3e68ce5b8da4d502e893cd9f286805e"
+  integrity sha512-hM3dHSBMeaJ0Ktp7W38BJZ7O1zOgaFEsn41PDk+yHoEtfLV+PoJt9E9xAlZiWgf/iqEqionN0ebHFZIDAp+iGw==
   dependencies:
     tslib "^2.4.0"
 

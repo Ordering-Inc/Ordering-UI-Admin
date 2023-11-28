@@ -69,7 +69,7 @@ var UsersList = function UsersList(props) {
     isAllChecked = _useState4[0],
     setIsAllChecked = _useState4[1];
   var onChangeUserDetails = function onChangeUserDetails(e, user) {
-    var isInvalid = e.target.closest('.user_checkbox') || e.target.closest('.user_type_selector') || e.target.closest('.user_enable_control') || e.target.closest('.user_action') || e.target.closest('.user_available_control');
+    var isInvalid = e.target.closest('.user_checkbox') || e.target.closest('.user_type_selector') || e.target.closest('.user_enable_control') || e.target.closest('.user_action') || e.target.closest('.user_available_control') || e.target.closest('.user_busy_control');
     if (isInvalid) return;
     handleOpenUserDetails(user);
   };

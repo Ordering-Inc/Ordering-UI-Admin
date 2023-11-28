@@ -26,6 +26,7 @@ var _styles2 = require("../UserFormDetails/styles");
 var _utils = require("../../../utils");
 var _styles3 = require("./styles");
 var _useWindowSize2 = require("../../../hooks/useWindowSize");
+var _ConfigFileContext = require("../../../contexts/ConfigFileContext");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -83,6 +84,9 @@ var UserDetailsUI = function UserDetailsUI(props) {
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configs = _useConfig2[0].configs;
   var disableSchedule = (configs === null || configs === void 0 || (_configs$allow_driver = configs.allow_driver_manager_update_driver_schedule) === null || _configs$allow_driver === void 0 ? void 0 : _configs$allow_driver.value) === '0' && (user === null || user === void 0 ? void 0 : user.level) === 5;
+  var _useContext = (0, _react.useContext)(_ConfigFileContext.ConfigFileContext),
+    _useContext2 = _slicedToArray(_useContext, 1),
+    configFile = _useContext2[0];
   var expandSidebar = function expandSidebar() {
     var element = document.getElementById('user_lateral_bar');
     if (!element) return;
@@ -139,7 +143,7 @@ var UserDetailsUI = function UserDetailsUI(props) {
       return setIsCustomField(true);
     },
     disabled: actionDisabled
-  }, t('CUSTOM_FIELDS', 'Custom fields')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+  }, t('CUSTOM_FIELDS', 'Custom fields')), !(configFile !== null && configFile !== void 0 && configFile.is_white_label) && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
     onClick: function onClick() {
       return setIsPersonalization(true);
     },

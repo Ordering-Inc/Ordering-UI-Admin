@@ -16,6 +16,7 @@ var _reactBootstrap = require("react-bootstrap");
 var _styledComponents = require("styled-components");
 var _Shared = require("../../Shared");
 var _ProductDesktopPreview = require("../ProductDesktopPreview");
+var _ConfigFileContext = require("../../../contexts/ConfigFileContext");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -73,6 +74,9 @@ var ProductSummary = function ProductSummary(props) {
     _useState8 = _slicedToArray(_useState7, 2),
     selectedView = _useState8[0],
     setSelectedView = _useState8[1];
+  var _useContext = (0, _react.useContext)(_ConfigFileContext.ConfigFileContext),
+    _useContext2 = _slicedToArray(_useContext, 1),
+    configFile = _useContext2[0];
   var productConfigOptions = [{
     key: 'product_details',
     value: t('PRODUCT_DETAILS', 'Product details')
@@ -170,7 +174,7 @@ var ProductSummary = function ProductSummary(props) {
     onClick: function onClick() {
       return handleShowOption('custom_fields');
     }
-  }, t('CUSTOM_FIELDS', 'Custom fields')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+  }, t('CUSTOM_FIELDS', 'Custom fields')), !(configFile !== null && configFile !== void 0 && configFile.is_white_label) && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
     onClick: function onClick() {
       return handleShowOption('personalization');
     }

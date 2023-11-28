@@ -96,6 +96,10 @@ var AppLayout = function AppLayout(props) {
     href: "https://www.ordering.co/support",
     rel: "noopener noreferrer",
     target: "_blank"
+<<<<<<< HEAD
   }, "https://www.ordering.co/support")))), /*#__PURE__*/_react.default.createElement(_styles2.ContentWrapper, null, /*#__PURE__*/_react.default.createElement("h1", null, appInfo.title), /*#__PURE__*/_react.default.createElement("p", null, appInfo.description), /*#__PURE__*/_react.default.createElement(_styles2.BoxWrapper, null, (appInfo === null || appInfo === void 0 ? void 0 : appInfo.live_title) && /*#__PURE__*/_react.default.createElement(LeftContent, null), /*#__PURE__*/_react.default.createElement(RightContent, null))));
+=======
+  }, "https://www.ordering.co/support")))), /*#__PURE__*/_react.default.createElement(_styles2.ContentWrapper, null, /*#__PURE__*/_react.default.createElement("h1", null, appInfo.title), /*#__PURE__*/_react.default.createElement("p", null, appInfo.description), /*#__PURE__*/_react.default.createElement(_styles2.BoxWrapper, null, (appInfo === null || appInfo === void 0 ? void 0 : appInfo.live_title) && /*#__PURE__*/_react.default.createElement(LeftContent, null), /*#__PURE__*/_react.default.createElement(RightContent, null)), children && children));
+>>>>>>> cbc5aa30 (Merge branch 'master' into development)
 };
 exports.AppLayout = AppLayout;

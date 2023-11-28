@@ -134,6 +134,9 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
   }, {
     value: 'externalId',
     content: t('EXTERNAL_ID', 'External id')
+  }, {
+    value: 'channel',
+    content: t('CHANNEL', 'Channel')
   }];
   var getDelayMinutes = function getDelayMinutes(order) {
     // targetMin = delivery_datetime  + eta_time - now()
@@ -206,7 +209,11 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
     }
   };
   var getOrderStatus = function getOrderStatus(s) {
+<<<<<<< HEAD
     var _dictionary$PENDING, _dictionary$COMPLETED, _dictionary$REJECTED, _dictionary$ORDER_STA, _dictionary$PREPARATI, _dictionary$REJECTED_, _dictionary$REJECTED_2, _dictionary$ACCEPTED_, _dictionary$ACCEPTED_2, _dictionary$PICK_UP_C, _dictionary$PICK_UP_F, _dictionary$DELIVERY_, _dictionary$DELIVERY_2, _dictionary$PREORDER, _dictionary$ORDER_NOT, _dictionary$ORDER_PIC, _dictionary$ORDER_STA2, _dictionary$ORDER_NOT2, _dictionary$ORDER_DRI, _dictionary$ORDER_DRI2, _dictionary$ORDER_CUS, _dictionary$ORDER_CUS2, _dictionary$ORDER_LOO, _dictionary$ORDER_DRI3, _orderStatus$Number;
+=======
+    var _dictionary$PENDING, _dictionary$COMPLETED, _dictionary$REJECTED, _dictionary$ORDER_STA, _dictionary$PREPARATI, _dictionary$REJECTED_, _dictionary$REJECTED_2, _dictionary$ACCEPTED_, _dictionary$ACCEPTED_2, _dictionary$PICK_UP_C, _dictionary$PICK_UP_F, _dictionary$DELIVERY_, _dictionary$DELIVERY_2, _dictionary$PREORDER, _dictionary$ORDER_NOT, _dictionary$ORDER_PIC, _dictionary$ORDER_STA2, _dictionary$ORDER_NOT2, _dictionary$ORDER_DRI, _dictionary$ORDER_DRI2, _dictionary$ORDER_CUS, _dictionary$ORDER_CUS2, _dictionary$ORDER_LOO, _dictionary$ORDER_DRI3, _dictionary$ORDER_STA3, _dictionary$ORDER_STA4, _dictionary$ORDER_DRI4, _orderStatus$Number;
+>>>>>>> cbc5aa30 (Merge branch 'master' into development)
     if (!dictionary) return s;
     var orderStatus = {
       0: (_dictionary$PENDING = dictionary === null || dictionary === void 0 ? void 0 : dictionary.PENDING) !== null && _dictionary$PENDING !== void 0 ? _dictionary$PENDING : 'Pending',
@@ -232,7 +239,14 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
       20: (_dictionary$ORDER_CUS = dictionary === null || dictionary === void 0 ? void 0 : dictionary.ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS) !== null && _dictionary$ORDER_CUS !== void 0 ? _dictionary$ORDER_CUS : 'Customer almost arrived to business',
       21: (_dictionary$ORDER_CUS2 = dictionary === null || dictionary === void 0 ? void 0 : dictionary.ORDER_CUSTOMER_ARRIVED_BUSINESS) !== null && _dictionary$ORDER_CUS2 !== void 0 ? _dictionary$ORDER_CUS2 : 'Customer arrived to business',
       22: (_dictionary$ORDER_LOO = dictionary === null || dictionary === void 0 ? void 0 : dictionary.ORDER_LOOKING_FOR_DRIVER) !== null && _dictionary$ORDER_LOO !== void 0 ? _dictionary$ORDER_LOO : 'Looking for driver',
+<<<<<<< HEAD
       23: (_dictionary$ORDER_DRI3 = dictionary === null || dictionary === void 0 ? void 0 : dictionary.ORDER_DRIVER_ON_WAY) !== null && _dictionary$ORDER_DRI3 !== void 0 ? _dictionary$ORDER_DRI3 : 'Driver on way'
+=======
+      23: (_dictionary$ORDER_DRI3 = dictionary === null || dictionary === void 0 ? void 0 : dictionary.ORDER_DRIVER_ON_WAY) !== null && _dictionary$ORDER_DRI3 !== void 0 ? _dictionary$ORDER_DRI3 : 'Driver on way',
+      24: (_dictionary$ORDER_STA3 = dictionary === null || dictionary === void 0 ? void 0 : dictionary.ORDER_STATUS_DRIVER_WAITING_FOR_ORDER) !== null && _dictionary$ORDER_STA3 !== void 0 ? _dictionary$ORDER_STA3 : 'Driver waiting for order',
+      25: (_dictionary$ORDER_STA4 = dictionary === null || dictionary === void 0 ? void 0 : dictionary.ORDER_STATUS_ACCEPTED_BY_DRIVER_COMPANY) !== null && _dictionary$ORDER_STA4 !== void 0 ? _dictionary$ORDER_STA4 : 'Accepted by driver company',
+      26: (_dictionary$ORDER_DRI4 = dictionary === null || dictionary === void 0 ? void 0 : dictionary.ORDER_DRIVER_ARRIVED_CUSTOMER) !== null && _dictionary$ORDER_DRI4 !== void 0 ? _dictionary$ORDER_DRI4 : 'Driver arrived to customer'
+>>>>>>> cbc5aa30 (Merge branch 'master' into development)
     };
     return (_orderStatus$Number = orderStatus === null || orderStatus === void 0 ? void 0 : orderStatus[Number(s)]) !== null && _orderStatus$Number !== void 0 ? _orderStatus$Number : s;
   };
@@ -403,7 +417,7 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
         alt: "six dots"
       }), /*#__PURE__*/_react.default.createElement("span", null, (_allowColumns$column3 = allowColumns[column]) === null || _allowColumns$column3 === void 0 ? void 0 : _allowColumns$column3.title)));
     }
-    if (column === 'total' || column !== 'total' && column === _toConsumableArray(array).pop()) {
+    if (column === 'channel' || column !== 'channel' && column === _toConsumableArray(array).pop()) {
       var _allowColumns$column$2, _allowColumns$column4, _allowColumns$column5, _theme$images$icons2, _allowColumns$column6;
       return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
         key: i

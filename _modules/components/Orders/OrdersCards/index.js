@@ -73,6 +73,10 @@ var OrdersCards = function OrdersCards(props) {
     allowColumns = _useState4[0],
     setAllowColumns = _useState4[1];
   var showExternalId = (configState === null || configState === void 0 || (_configState$configs = configState.configs) === null || _configState$configs === void 0 || (_configState$configs = _configState$configs.change_order_id) === null || _configState$configs === void 0 ? void 0 : _configState$configs.value) === '1';
+<<<<<<< HEAD
+=======
+  var cateringTypes = [7, 8];
+>>>>>>> cbc5aa30 (Merge branch 'master' into development)
   var franchiseImages = !(franchisesList !== null && franchisesList !== void 0 && franchisesList.error) && (franchisesList === null || franchisesList === void 0 || (_franchisesList$franc = franchisesList.franchises) === null || _franchisesList$franc === void 0 ? void 0 : _franchisesList$franc.reduce(function (imageKeys, franchise) {
     imageKeys[franchise.id] = franchise.logo;
     return imageKeys;
@@ -96,7 +100,11 @@ var OrdersCards = function OrdersCards(props) {
     });
   };
   var getOrderStatus = function getOrderStatus(s) {
+<<<<<<< HEAD
     var _dictionary$PENDING, _dictionary$COMPLETED, _dictionary$REJECTED, _dictionary$ORDER_STA, _dictionary$PREPARATI, _dictionary$REJECTED_, _dictionary$REJECTED_2, _dictionary$ACCEPTED_, _dictionary$ACCEPTED_2, _dictionary$PICK_UP_C, _dictionary$PICK_UP_F, _dictionary$DELIVERY_, _dictionary$DELIVERY_2, _dictionary$PREORDER, _dictionary$ORDER_NOT, _dictionary$ORDER_PIC, _dictionary$ORDER_STA2, _dictionary$ORDER_NOT2, _dictionary$ORDER_DRI, _dictionary$ORDER_DRI2, _dictionary$ORDER_CUS, _dictionary$ORDER_CUS2, _dictionary$ORDER_LOO, _dictionary$ORDER_DRI3, _orderStatus$Number;
+=======
+    var _dictionary$PENDING, _dictionary$COMPLETED, _dictionary$REJECTED, _dictionary$ORDER_STA, _dictionary$PREPARATI, _dictionary$REJECTED_, _dictionary$REJECTED_2, _dictionary$ACCEPTED_, _dictionary$ACCEPTED_2, _dictionary$PICK_UP_C, _dictionary$PICK_UP_F, _dictionary$DELIVERY_, _dictionary$DELIVERY_2, _dictionary$PREORDER, _dictionary$ORDER_NOT, _dictionary$ORDER_PIC, _dictionary$ORDER_STA2, _dictionary$ORDER_NOT2, _dictionary$ORDER_DRI, _dictionary$ORDER_DRI2, _dictionary$ORDER_CUS, _dictionary$ORDER_CUS2, _dictionary$ORDER_LOO, _dictionary$ORDER_DRI3, _dictionary$ORDER_STA3, _dictionary$ORDER_STA4, _dictionary$ORDER_DRI4, _orderStatus$Number;
+>>>>>>> cbc5aa30 (Merge branch 'master' into development)
     if (!dictionary) return s;
     var orderStatus = {
       0: (_dictionary$PENDING = dictionary === null || dictionary === void 0 ? void 0 : dictionary.PENDING) !== null && _dictionary$PENDING !== void 0 ? _dictionary$PENDING : 'Pending',
@@ -122,7 +130,14 @@ var OrdersCards = function OrdersCards(props) {
       20: (_dictionary$ORDER_CUS = dictionary === null || dictionary === void 0 ? void 0 : dictionary.ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS) !== null && _dictionary$ORDER_CUS !== void 0 ? _dictionary$ORDER_CUS : 'Customer almost arrived to business',
       21: (_dictionary$ORDER_CUS2 = dictionary === null || dictionary === void 0 ? void 0 : dictionary.ORDER_CUSTOMER_ARRIVED_BUSINESS) !== null && _dictionary$ORDER_CUS2 !== void 0 ? _dictionary$ORDER_CUS2 : 'Customer arrived to business',
       22: (_dictionary$ORDER_LOO = dictionary === null || dictionary === void 0 ? void 0 : dictionary.ORDER_LOOKING_FOR_DRIVER) !== null && _dictionary$ORDER_LOO !== void 0 ? _dictionary$ORDER_LOO : 'Looking for driver',
+<<<<<<< HEAD
       23: (_dictionary$ORDER_DRI3 = dictionary === null || dictionary === void 0 ? void 0 : dictionary.ORDER_DRIVER_ON_WAY) !== null && _dictionary$ORDER_DRI3 !== void 0 ? _dictionary$ORDER_DRI3 : 'Driver on way'
+=======
+      23: (_dictionary$ORDER_DRI3 = dictionary === null || dictionary === void 0 ? void 0 : dictionary.ORDER_DRIVER_ON_WAY) !== null && _dictionary$ORDER_DRI3 !== void 0 ? _dictionary$ORDER_DRI3 : 'Driver on way',
+      24: (_dictionary$ORDER_STA3 = dictionary === null || dictionary === void 0 ? void 0 : dictionary.ORDER_STATUS_DRIVER_WAITING_FOR_ORDER) !== null && _dictionary$ORDER_STA3 !== void 0 ? _dictionary$ORDER_STA3 : 'Driver waiting for order',
+      25: (_dictionary$ORDER_STA4 = dictionary === null || dictionary === void 0 ? void 0 : dictionary.ORDER_STATUS_ACCEPTED_BY_DRIVER_COMPANY) !== null && _dictionary$ORDER_STA4 !== void 0 ? _dictionary$ORDER_STA4 : 'Accepted by driver company',
+      26: (_dictionary$ORDER_DRI4 = dictionary === null || dictionary === void 0 ? void 0 : dictionary.ORDER_DRIVER_ARRIVED_CUSTOMER) !== null && _dictionary$ORDER_DRI4 !== void 0 ? _dictionary$ORDER_DRI4 : 'Driver arrived to customer'
+>>>>>>> cbc5aa30 (Merge branch 'master' into development)
     };
     return (_orderStatus$Number = orderStatus === null || orderStatus === void 0 ? void 0 : orderStatus[Number(s)]) !== null && _orderStatus$Number !== void 0 ? _orderStatus$Number : s;
   };
@@ -231,9 +246,15 @@ var OrdersCards = function OrdersCards(props) {
       onClick: function onClick(e) {
         return handleOrderClick(e, order);
       }
+<<<<<<< HEAD
     }, /*#__PURE__*/_react.default.createElement(_styles.CardHeading, null, /*#__PURE__*/_react.default.createElement(_styles.OrderHeader, null, /*#__PURE__*/_react.default.createElement("h2", null, /*#__PURE__*/_react.default.createElement("span", null, t('INVOICE_ORDER_NO', 'Order No.'), " ", showExternalId && !!(order !== null && order !== void 0 && order.external_id) ? order.external_id : order.id)), /*#__PURE__*/_react.default.createElement("p", null, getOrderStatus(order.status)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
+=======
+    }, /*#__PURE__*/_react.default.createElement(_styles.CardHeading, null, /*#__PURE__*/_react.default.createElement(_styles.OrderHeader, null, /*#__PURE__*/_react.default.createElement("h2", null, /*#__PURE__*/_react.default.createElement("span", null, t('INVOICE_ORDER_NO', 'Order No.'), " ", showExternalId && !!(order !== null && order !== void 0 && order.external_id) ? order.external_id : order.id)), /*#__PURE__*/_react.default.createElement("p", null, getOrderStatus(order.status)), /*#__PURE__*/_react.default.createElement("div", null, cateringTypes.includes(order === null || order === void 0 ? void 0 : order.delivery_type) && /*#__PURE__*/_react.default.createElement("p", {
+      className: "date"
+    }, "".concat(t('CREATED_AT', 'Created at'), ": ").concat(parseDate(order === null || order === void 0 ? void 0 : order.created_at))), /*#__PURE__*/_react.default.createElement("p", null, "".concat(cateringTypes.includes(order === null || order === void 0 ? void 0 : order.delivery_type) ? "".concat(t('PLACED_TO', 'Placed to'), ":") : '', " ").concat(order !== null && order !== void 0 && order.delivery_datetime_utc ? parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) : parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
+>>>>>>> cbc5aa30 (Merge branch 'master' into development)
       utc: false
-    })), /*#__PURE__*/_react.default.createElement(_styles.ViewDetails, {
+    }))), /*#__PURE__*/_react.default.createElement(_styles.ViewDetails, {
       className: "view-details",
       onClick: function onClick() {
         return handleOpenOrderDetail(order);

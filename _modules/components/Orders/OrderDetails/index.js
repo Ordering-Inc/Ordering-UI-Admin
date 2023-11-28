@@ -39,10 +39,27 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+<<<<<<< HEAD
 var OrderDetailsPropsAreEqual = function OrderDetailsPropsAreEqual(prevProps, nextProps) {
   return prevProps.isSelectedOrders === nextProps.isSelectedOrders && prevProps.open === nextProps.open && prevProps.isTourOpen === nextProps.isTourOpen && JSON.stringify(prevProps.messages) === JSON.stringify(nextProps.messages) && JSON.stringify(prevProps.order) === JSON.stringify(nextProps.order) && prevProps.loading === nextProps.loading && prevProps.isTourFlag === nextProps.isTourFlag && prevProps.isServiceOrder === nextProps.isServiceOrder && prevProps.currentTourStep === nextProps.currentTourStep && prevProps.customerInfoState === nextProps.customerInfoState && JSON.stringify(prevProps.addressState) === JSON.stringify(nextProps.addressState);
 };
 var OrderDetailsUI = /*#__PURE__*/_react.default.memo(function (props) {
+=======
+// const OrderDetailsPropsAreEqual = (prevProps, nextProps) => {
+//   return prevProps.isSelectedOrders === nextProps.isSelectedOrders &&
+//     prevProps.open === nextProps.open &&
+//     prevProps.isTourOpen === nextProps.isTourOpen &&
+//     JSON.stringify(prevProps.messages) === JSON.stringify(nextProps.messages) &&
+//     JSON.stringify(prevProps.order) === JSON.stringify(nextProps.order) &&
+//     prevProps.loading === nextProps.loading &&
+//     prevProps.isTourFlag === nextProps.isTourFlag &&
+//     prevProps.isServiceOrder === nextProps.isServiceOrder &&
+//     prevProps.currentTourStep === nextProps.currentTourStep &&
+//     prevProps.customerInfoState === nextProps.customerInfoState &&
+//     JSON.stringify(prevProps.addressState) === JSON.stringify(nextProps.addressState)
+// }
+var OrderDetailsUI = function OrderDetailsUI(props) {
+>>>>>>> cbc5aa30 (Merge branch 'master' into development)
   var _order$place, _progressBarObjt, _order$products;
   var isSelectedOrders = props.isSelectedOrders,
     handleChangeCustomerInfoState = props.handleChangeCustomerInfoState,
@@ -129,6 +146,7 @@ var OrderDetailsUI = /*#__PURE__*/_react.default.memo(function (props) {
     _useState16 = _slicedToArray(_useState15, 2),
     commentInfoState = _useState16[0],
     setCommentInfostate = _useState16[1];
+  var cateringTypes = [7, 8];
   var placeSpotEnabled = [3, 4];
   var _props$order = props.order,
     order = _props$order.order,
@@ -414,7 +432,7 @@ var OrderDetailsUI = /*#__PURE__*/_react.default.memo(function (props) {
     setIsExpand: setIsExpand
   }), /*#__PURE__*/_react.default.createElement(_styles2.OrderStatus, {
     isDisabled: isTourOpen && currentTourStep === 1
-  }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, t('ORDER_STATUS_TEXT', 'Order status')), (order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) && /*#__PURE__*/_react.default.createElement("p", null, parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc)), (order === null || order === void 0 ? void 0 : order.delivery_datetime) && /*#__PURE__*/_react.default.createElement("p", null, parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
+  }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, t('ORDER_STATUS_TEXT', 'Order status')), cateringTypes.includes(order === null || order === void 0 ? void 0 : order.delivery_type) && (order === null || order === void 0 ? void 0 : order.created_at) && /*#__PURE__*/_react.default.createElement("p", null, t('CREATED_AT', 'Created at'), ": ", parseDate(order === null || order === void 0 ? void 0 : order.created_at)), (order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) && /*#__PURE__*/_react.default.createElement("p", null, cateringTypes.includes(order === null || order === void 0 ? void 0 : order.delivery_type) ? "".concat(t('PLACED_TO', 'Placed to'), ":") : '', " ", parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc)), (order === null || order === void 0 ? void 0 : order.delivery_datetime) && /*#__PURE__*/_react.default.createElement("p", null, cateringTypes.includes(order === null || order === void 0 ? void 0 : order.delivery_type) ? "".concat(t('PLACED_TO', 'Placed to'), ":") : '', " ", parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
     utc: false
   }), "  ", "(".concat(t('BUSINESS_TIME', 'Business time'), ")")), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : order.eta_time, " ", t('MIN', 'min'))), /*#__PURE__*/_react.default.createElement(_styles2.OrderStatusSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_OrderStatusTypeSelector.OrderStatusTypeSelector, {
     isFirstSelect: true,
