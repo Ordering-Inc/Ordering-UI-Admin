@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useLanguage, useConfig } from 'ordering-components-admin'
 import AiOutlineShoppingCart from '@meronex/icons/ai/AiOutlineShoppingCart'
 import BsCardImage from '@meronex/icons/bs/BsCardImage'
-import { ConfigFileContext } from '../../../contexts/ConfigFileContext'
 
 import { Button } from '../../../styles'
 import {
@@ -52,7 +51,7 @@ export const BusinessFrontLayout = (props) => {
 
   const [, t] = useLanguage()
   const [configState] = useConfig()
-  const [configFile] = useContext(ConfigFileContext)
+  const isWhiteLabel = configState?.configs?.white_label_module?.value
 
   const useParentCategory = configState?.configs?.use_parent_category?.value
   const [selectedOption, setSelectedOption] = useState('')
@@ -203,7 +202,7 @@ export const BusinessFrontLayout = (props) => {
             </LayoutBoxWrapper>
           )}
         </LayoutContentWrappper>
-        {!configFile?.is_white_label && (
+        {!isWhiteLabel && (
           <SendCustomLayoutWrapper>
             <p>{t('SEND_CUSTOM_LAYOUT_IDEA_DESCRIPTION', 'Would you like another kind of layout for your business menu? Send us your idea! We will take at it and help you make your idea a reality.')}</p>
             <Button
