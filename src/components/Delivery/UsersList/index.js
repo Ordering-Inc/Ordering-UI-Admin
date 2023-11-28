@@ -55,7 +55,7 @@ export const UsersList = (props) => {
   const [isAllChecked, setIsAllChecked] = useState(false)
 
   const onChangeUserDetails = (e, user) => {
-    const isInvalid = e.target.closest('.user_checkbox') || e.target.closest('.user_type_selector') || e.target.closest('.user_enable_control') || e.target.closest('.user_action') || e.target.closest('.user_available_control')
+    const isInvalid = e.target.closest('.user_checkbox') || e.target.closest('.user_type_selector') || e.target.closest('.user_enable_control') || e.target.closest('.user_action') || e.target.closest('.user_available_control') || e.target.closest('.user_busy_control')
     if (isInvalid) return
     handleOpenUserDetails(user)
   }
