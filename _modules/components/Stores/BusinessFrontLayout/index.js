@@ -9,7 +9,6 @@ var _react = _interopRequireWildcard(require("react"));
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _AiOutlineShoppingCart = _interopRequireDefault(require("@meronex/icons/ai/AiOutlineShoppingCart"));
 var _BsCardImage = _interopRequireDefault(require("@meronex/icons/bs/BsCardImage"));
-var _ConfigFileContext = require("../../../contexts/ConfigFileContext");
 var _styles = require("../../../styles");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -31,7 +30,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessFrontLayout = exports.BusinessFrontLayout = function BusinessFrontLayout(props) {
-  var _configState$configs;
+  var _configState$configs, _configState$configs2;
   var formState = props.formState,
     handleUpdateBusinessClick = props.handleUpdateBusinessClick,
     business = props.business,
@@ -42,10 +41,8 @@ var BusinessFrontLayout = exports.BusinessFrontLayout = function BusinessFrontLa
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configState = _useConfig2[0];
-  var _useContext = (0, _react.useContext)(_ConfigFileContext.ConfigFileContext),
-    _useContext2 = _slicedToArray(_useContext, 1),
-    configFile = _useContext2[0];
-  var useParentCategory = configState === null || configState === void 0 || (_configState$configs = configState.configs) === null || _configState$configs === void 0 || (_configState$configs = _configState$configs.use_parent_category) === null || _configState$configs === void 0 ? void 0 : _configState$configs.value;
+  var isWhiteLabel = configState === null || configState === void 0 || (_configState$configs = configState.configs) === null || _configState$configs === void 0 || (_configState$configs = _configState$configs.white_label_module) === null || _configState$configs === void 0 ? void 0 : _configState$configs.value;
+  var useParentCategory = configState === null || configState === void 0 || (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 || (_configState$configs2 = _configState$configs2.use_parent_category) === null || _configState$configs2 === void 0 ? void 0 : _configState$configs2.value;
   var _useState = (0, _react.useState)(''),
     _useState2 = _slicedToArray(_useState, 2),
     selectedOption = _useState2[0],
@@ -98,7 +95,7 @@ var BusinessFrontLayout = exports.BusinessFrontLayout = function BusinessFrontLa
         key: i
       });
     })));
-  })))), /*#__PURE__*/_react.default.createElement(_styles2.LayoutBoxFooter, null)), /*#__PURE__*/_react.default.createElement(_styles2.LayoutTitle, null, t('GROCERIES', 'Groceries')))), !(configFile !== null && configFile !== void 0 && configFile.is_white_label) && /*#__PURE__*/_react.default.createElement(_styles2.SendCustomLayoutWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('SEND_CUSTOM_LAYOUT_IDEA_DESCRIPTION', 'Would you like another kind of layout for your business menu? Send us your idea! We will take at it and help you make your idea a reality.')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  })))), /*#__PURE__*/_react.default.createElement(_styles2.LayoutBoxFooter, null)), /*#__PURE__*/_react.default.createElement(_styles2.LayoutTitle, null, t('GROCERIES', 'Groceries')))), !isWhiteLabel && /*#__PURE__*/_react.default.createElement(_styles2.SendCustomLayoutWrapper, null, /*#__PURE__*/_react.default.createElement("p", null, t('SEND_CUSTOM_LAYOUT_IDEA_DESCRIPTION', 'Would you like another kind of layout for your business menu? Send us your idea! We will take at it and help you make your idea a reality.')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     outline: true,
     borderRadius: "8px",
     color: "primary",

@@ -22,7 +22,6 @@ var _styles = require("../../../styles");
 var _utils = require("../../../utils");
 var _styles2 = require("./styles");
 var _useWindowSize2 = require("../../../hooks/useWindowSize");
-var _ConfigFileContext = require("../../../contexts/ConfigFileContext");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
@@ -38,7 +37,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ProfessionalDetailUI = exports.ProfessionalDetailUI = function ProfessionalDetailUI(props) {
-  var _userState$user, _userState$user2, _userState$user3, _adminUserState$user, _userState$user4, _adminUserState$user2, _userState$user5;
+  var _configs$white_label_, _userState$user, _userState$user2, _userState$user3, _adminUserState$user, _userState$user4, _adminUserState$user2, _userState$user5;
   var userState = props.userState,
     occupations = props.occupations,
     setExtraOpen = props.setExtraOpen,
@@ -55,6 +54,9 @@ var ProfessionalDetailUI = exports.ProfessionalDetailUI = function ProfessionalD
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
+  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configs = _useConfig2[0].configs;
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
     width = _useWindowSize.width;
   var _useState = (0, _react.useState)('profile'),
@@ -84,9 +86,7 @@ var ProfessionalDetailUI = exports.ProfessionalDetailUI = function ProfessionalD
     _useState10 = _slicedToArray(_useState9, 2),
     isExpand = _useState10[0],
     setIsExpand = _useState10[1];
-  var _useContext = (0, _react.useContext)(_ConfigFileContext.ConfigFileContext),
-    _useContext2 = _slicedToArray(_useContext, 1),
-    configFile = _useContext2[0];
+  var isWhiteLabel = configs === null || configs === void 0 || (_configs$white_label_ = configs.white_label_module) === null || _configs$white_label_ === void 0 ? void 0 : _configs$white_label_.value;
   var onDeleteCustomer = function onDeleteCustomer() {
     setConfirm({
       open: true,
@@ -174,7 +174,7 @@ var ProfessionalDetailUI = exports.ProfessionalDetailUI = function ProfessionalD
     onClick: function onClick() {
       return handleOpenExtra('custom_fields');
     }
-  }, t('CUSTOM_FIELDS', 'Custom fields')), !(configFile !== null && configFile !== void 0 && configFile.is_white_label) && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+  }, t('CUSTOM_FIELDS', 'Custom fields')), !isWhiteLabel && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
     onClick: function onClick() {
       return handleOpenExtra('personalization');
     }

@@ -326,7 +326,7 @@ var OrderStatusTypeSelector = exports.OrderStatusTypeSelector = function OrderSt
             _filteredOrderStatuses = [].concat(_toConsumableArray(_filteredOrderStatuses), _toConsumableArray(extractOrderStatus));
             extractOrderStatus = orderStatuses.slice(23, 26);
             _filteredOrderStatuses = [].concat(_toConsumableArray(_filteredOrderStatuses), _toConsumableArray(extractOrderStatus));
-            extractOrderStatus = orderStatuses.slice(29, 31);
+            extractOrderStatus = orderStatuses.slice(30, 31);
             _filteredOrderStatuses = [].concat(_toConsumableArray(_filteredOrderStatuses), _toConsumableArray(extractOrderStatus));
             if (searchValue) {
               var _filteredOrderStatuse2;
@@ -347,7 +347,7 @@ var OrderStatusTypeSelector = exports.OrderStatusTypeSelector = function OrderSt
             _filteredOrderStatuses = [].concat(_toConsumableArray(_filteredOrderStatuses), _toConsumableArray(extractOrderStatus));
             extractOrderStatus = orderStatuses.slice(23, 26);
             _filteredOrderStatuses = [].concat(_toConsumableArray(_filteredOrderStatuses), _toConsumableArray(extractOrderStatus));
-            extractOrderStatus = orderStatuses.slice(29, 31);
+            extractOrderStatus = orderStatuses.slice(30, 31);
             _filteredOrderStatuses = [].concat(_toConsumableArray(_filteredOrderStatuses), _toConsumableArray(extractOrderStatus));
             if (searchValue) {
               var _filteredOrderStatuse3;
@@ -368,7 +368,7 @@ var OrderStatusTypeSelector = exports.OrderStatusTypeSelector = function OrderSt
             _filteredOrderStatuses = [].concat(_toConsumableArray(_filteredOrderStatuses), _toConsumableArray(extractOrderStatus));
             extractOrderStatus = orderStatuses.slice(23, 26);
             _filteredOrderStatuses = [].concat(_toConsumableArray(_filteredOrderStatuses), _toConsumableArray(extractOrderStatus));
-            extractOrderStatus = orderStatuses.slice(29, 31);
+            extractOrderStatus = orderStatuses.slice(30, 31);
             _filteredOrderStatuses = [].concat(_toConsumableArray(_filteredOrderStatuses), _toConsumableArray(extractOrderStatus));
             if (searchValue) {
               var _filteredOrderStatuse4;
@@ -389,7 +389,7 @@ var OrderStatusTypeSelector = exports.OrderStatusTypeSelector = function OrderSt
             _filteredOrderStatuses = [].concat(_toConsumableArray(_filteredOrderStatuses), _toConsumableArray(extractOrderStatus));
             extractOrderStatus = orderStatuses.slice(23, 26);
             _filteredOrderStatuses = [].concat(_toConsumableArray(_filteredOrderStatuses), _toConsumableArray(extractOrderStatus));
-            extractOrderStatus = orderStatuses.slice(29, 31);
+            extractOrderStatus = orderStatuses.slice(30, 31);
             _filteredOrderStatuses = [].concat(_toConsumableArray(_filteredOrderStatuses), _toConsumableArray(extractOrderStatus));
             if (searchValue) {
               var _filteredOrderStatuse5;
@@ -420,7 +420,7 @@ var OrderStatusTypeSelector = exports.OrderStatusTypeSelector = function OrderSt
             _filteredOrderStatuses = [].concat(_toConsumableArray(_filteredOrderStatuses), _toConsumableArray(extractOrderStatus));
             extractOrderStatus = orderStatuses.slice(23, 26);
             _filteredOrderStatuses = [].concat(_toConsumableArray(_filteredOrderStatuses), _toConsumableArray(extractOrderStatus));
-            extractOrderStatus = orderStatuses.slice(29, 31);
+            extractOrderStatus = orderStatuses.slice(30, 31);
             _filteredOrderStatuses = [].concat(_toConsumableArray(_filteredOrderStatuses), _toConsumableArray(extractOrderStatus));
             if (searchValue) {
               var _filteredOrderStatuse7;

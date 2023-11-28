@@ -13,7 +13,6 @@ var _BsInfoCircle = _interopRequireDefault(require("@meronex/icons/bs/BsInfoCirc
 var _Shared = require("../../Shared");
 var _styles = require("../../../styles");
 var _useWindowSize2 = require("../../../hooks/useWindowSize");
-var _ConfigFileContext = require("../../../contexts/ConfigFileContext");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
@@ -29,7 +28,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessPreview = exports.BusinessPreview = function BusinessPreview(props) {
-  var _theme$images, _sessionState$user, _sessionState$user2, _orderState$options, _business$reviews, _business$reviews2, _theme$images2, _theme$images3, _orderState$options2, _business$reviews3, _business$reviews4, _business$categories, _selectedCategory$pro, _business$categories2;
+  var _configs$white_label_, _theme$images, _sessionState$user, _sessionState$user2, _orderState$options, _business$reviews, _business$reviews2, _theme$images2, _theme$images3, _orderState$options2, _business$reviews3, _business$reviews4, _business$categories, _selectedCategory$pro, _business$categories2;
   var business = props.business,
     isMobileView = props.isMobileView;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -42,6 +41,9 @@ var BusinessPreview = exports.BusinessPreview = function BusinessPreview(props) 
   var _useOrder = (0, _orderingComponentsAdmin.useOrder)(),
     _useOrder2 = _slicedToArray(_useOrder, 1),
     orderState = _useOrder2[0];
+  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configs = _useConfig2[0].configs;
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
     width = _useWindowSize.width;
   var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
@@ -60,9 +62,7 @@ var BusinessPreview = exports.BusinessPreview = function BusinessPreview(props) 
     _useState4 = _slicedToArray(_useState3, 2),
     selectedCategory = _useState4[0],
     setSelectedCateogry = _useState4[1];
-  var _useContext = (0, _react.useContext)(_ConfigFileContext.ConfigFileContext),
-    _useContext2 = _slicedToArray(_useContext, 1),
-    configFile = _useContext2[0];
+  var isWhiteLabel = configs === null || configs === void 0 || (_configs$white_label_ = configs.white_label_module) === null || _configs$white_label_ === void 0 ? void 0 : _configs$white_label_.value;
   var pos = {
     top: 0,
     left: 0,
@@ -129,7 +129,7 @@ var BusinessPreview = exports.BusinessPreview = function BusinessPreview(props) 
     src: theme.images.general.mobileMask,
     id: "product_mobile_view",
     onMouseDown: mouseDownHandler
-  }, !isMobileView && width > 650 && /*#__PURE__*/_react.default.createElement(_styles2.Contentheader, null, !(configFile !== null && configFile !== void 0 && configFile.is_white_label) && /*#__PURE__*/_react.default.createElement(_styles2.HeaderLogo, null, /*#__PURE__*/_react.default.createElement("img", {
+  }, !isMobileView && width > 650 && /*#__PURE__*/_react.default.createElement(_styles2.Contentheader, null, !isWhiteLabel && /*#__PURE__*/_react.default.createElement(_styles2.HeaderLogo, null, /*#__PURE__*/_react.default.createElement("img", {
     alt: "Logotype",
     width: "100px",
     height: "30px",
@@ -261,9 +261,9 @@ var SingleProductCard = function SingleProductCard(props) {
   var _useLanguage5 = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage6 = _slicedToArray(_useLanguage5, 2),
     t = _useLanguage6[1];
-  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
-    _useConfig2 = _slicedToArray(_useConfig, 1),
-    stateConfig = _useConfig2[0];
+  var _useConfig3 = (0, _orderingComponentsAdmin.useConfig)(),
+    _useConfig4 = _slicedToArray(_useConfig3, 1),
+    stateConfig = _useConfig4[0];
   var _useOrder3 = (0, _orderingComponentsAdmin.useOrder)(),
     _useOrder4 = _slicedToArray(_useOrder3, 1),
     orderState = _useOrder4[0];
