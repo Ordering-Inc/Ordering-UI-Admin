@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.ProgressRing = void 0;
 var _react = _interopRequireDefault(require("react"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-var ProgressRing = exports.ProgressRing = function ProgressRing(props) {
+var ProgressRing = function ProgressRing(props) {
   var percent = props.percent,
     size = props.size,
     lineWidth = props.lineWidth,
@@ -85,3 +85,4 @@ var ProgressRing = exports.ProgressRing = function ProgressRing(props) {
   trackColor?: string;
   transitionDuration?: number;
 */
+exports.ProgressRing = ProgressRing;

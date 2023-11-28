@@ -26,10 +26,9 @@ var _styles2 = require("../UserFormDetails/styles");
 var _utils = require("../../../utils");
 var _styles3 = require("./styles");
 var _useWindowSize2 = require("../../../hooks/useWindowSize");
-var _ConfigFileContext = require("../../../contexts/ConfigFileContext");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -41,8 +40,8 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-var UserDetailsUI = exports.UserDetailsUI = function UserDetailsUI(props) {
-  var _configs$allow_driver, _userState$user, _userState$user2, _userState$user3, _userState$user5, _userState$user7, _userState$user8, _userState$user9, _userState$user10, _userState$user11, _scheduleState$change, _userState$user12, _userState$user13, _userState$user14, _userState$user15, _userState$user16;
+var UserDetailsUI = function UserDetailsUI(props) {
+  var _configs$allow_driver, _configs$white_label_, _userState$user, _userState$user2, _userState$user3, _userState$user5, _userState$user7, _userState$user8, _userState$user9, _userState$user10, _userState$user11, _scheduleState$change, _userState$user12, _userState$user13, _userState$user14, _userState$user15, _userState$user16;
   var isDriversPage = props.isDriversPage,
     isDriversManagersPage = props.isDriversManagersPage,
     userState = props.userState,
@@ -84,9 +83,7 @@ var UserDetailsUI = exports.UserDetailsUI = function UserDetailsUI(props) {
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configs = _useConfig2[0].configs;
   var disableSchedule = (configs === null || configs === void 0 || (_configs$allow_driver = configs.allow_driver_manager_update_driver_schedule) === null || _configs$allow_driver === void 0 ? void 0 : _configs$allow_driver.value) === '0' && (user === null || user === void 0 ? void 0 : user.level) === 5;
-  var _useContext = (0, _react.useContext)(_ConfigFileContext.ConfigFileContext),
-    _useContext2 = _slicedToArray(_useContext, 1),
-    configFile = _useContext2[0];
+  var isWhiteLabel = configs === null || configs === void 0 || (_configs$white_label_ = configs.white_label_module) === null || _configs$white_label_ === void 0 ? void 0 : _configs$white_label_.value;
   var expandSidebar = function expandSidebar() {
     var element = document.getElementById('user_lateral_bar');
     if (!element) return;
@@ -143,7 +140,7 @@ var UserDetailsUI = exports.UserDetailsUI = function UserDetailsUI(props) {
       return setIsCustomField(true);
     },
     disabled: actionDisabled
-  }, t('CUSTOM_FIELDS', 'Custom fields')), !(configFile !== null && configFile !== void 0 && configFile.is_white_label) && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+  }, t('CUSTOM_FIELDS', 'Custom fields')), !isWhiteLabel && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
     onClick: function onClick() {
       return setIsPersonalization(true);
     },
@@ -220,9 +217,11 @@ var UserDetailsUI = exports.UserDetailsUI = function UserDetailsUI(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_styles3.PersonalizationWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.Personalization, null))));
 };
-var UserDetails = exports.UserDetails = function UserDetails(props) {
+exports.UserDetailsUI = UserDetailsUI;
+var UserDetails = function UserDetails(props) {
   var userDetailsControlProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: UserDetailsUI
   });
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.UserDetails, userDetailsControlProps));
 };
+exports.UserDetails = UserDetails;

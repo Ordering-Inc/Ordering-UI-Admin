@@ -74,9 +74,10 @@ var StripeRedirectFormUI = function StripeRedirectFormUI(props) {
     disabled: formState.isSubmitting
   }, formState.isSubmitting ? t('LOADING', 'Loading...') : t('OK', 'OK'))));
 };
-var StripeRedirectForm = exports.StripeRedirectForm = function StripeRedirectForm(props) {
+var StripeRedirectForm = function StripeRedirectForm(props) {
   var stripeRedirectFormProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: StripeRedirectFormUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.StripeRedirectForm, stripeRedirectFormProps);
 };
+exports.StripeRedirectForm = StripeRedirectForm;

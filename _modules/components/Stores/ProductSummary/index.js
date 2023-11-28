@@ -16,11 +16,10 @@ var _reactBootstrap = require("react-bootstrap");
 var _styledComponents = require("styled-components");
 var _Shared = require("../../Shared");
 var _ProductDesktopPreview = require("../ProductDesktopPreview");
-var _ConfigFileContext = require("../../../contexts/ConfigFileContext");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -32,8 +31,8 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-var ProductSummary = exports.ProductSummary = function ProductSummary(props) {
-  var _productState$product5, _productState$product6, _productState$product7, _productState$product8, _productState$product9, _productState$product10, _productState$product11, _productState$product12, _productState$product13, _productState$product14, _productState$product15, _productState$product16, _productState$product17, _productState$product18, _productState$product19, _productState$product20, _productState$product21, _productState$product22, _productState$product23, _productState$product24, _productState$product25;
+var ProductSummary = function ProductSummary(props) {
+  var _configs$white_label_, _productState$product5, _productState$product6, _productState$product7, _productState$product8, _productState$product9, _productState$product10, _productState$product11, _productState$product12, _productState$product13, _productState$product14, _productState$product15, _productState$product16, _productState$product17, _productState$product18, _productState$product19, _productState$product20, _productState$product21, _productState$product22, _productState$product23, _productState$product24, _productState$product25;
   var actionSidebar = props.actionSidebar,
     showOption = props.showOption,
     handleShowOption = props.handleShowOption,
@@ -54,6 +53,9 @@ var ProductSummary = exports.ProductSummary = function ProductSummary(props) {
     _useUtils2$ = _useUtils2[0],
     optimizeImage = _useUtils2$.optimizeImage,
     parsePrice = _useUtils2$.parsePrice;
+  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configs = _useConfig2[0].configs;
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     isEditMode = _useState2[0],
@@ -74,9 +76,7 @@ var ProductSummary = exports.ProductSummary = function ProductSummary(props) {
     _useState8 = _slicedToArray(_useState7, 2),
     selectedView = _useState8[0],
     setSelectedView = _useState8[1];
-  var _useContext = (0, _react.useContext)(_ConfigFileContext.ConfigFileContext),
-    _useContext2 = _slicedToArray(_useContext, 1),
-    configFile = _useContext2[0];
+  var isWhiteLabel = configs === null || configs === void 0 || (_configs$white_label_ = configs.white_label_module) === null || _configs$white_label_ === void 0 ? void 0 : _configs$white_label_.value;
   var productConfigOptions = [{
     key: 'product_details',
     value: t('PRODUCT_DETAILS', 'Product details')
@@ -174,7 +174,7 @@ var ProductSummary = exports.ProductSummary = function ProductSummary(props) {
     onClick: function onClick() {
       return handleShowOption('custom_fields');
     }
-  }, t('CUSTOM_FIELDS', 'Custom fields')), !(configFile !== null && configFile !== void 0 && configFile.is_white_label) && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+  }, t('CUSTOM_FIELDS', 'Custom fields')), !isWhiteLabel && /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
     onClick: function onClick() {
       return handleShowOption('personalization');
     }
@@ -252,3 +252,4 @@ var ProductSummary = exports.ProductSummary = function ProductSummary(props) {
     showProductOption: showProductOption
   })));
 };
+exports.ProductSummary = ProductSummary;

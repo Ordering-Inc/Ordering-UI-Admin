@@ -14,7 +14,7 @@ function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t =
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-var BusinessDeliveryZoneShareUI = exports.BusinessDeliveryZoneShareUI = function BusinessDeliveryZoneShareUI(props) {
+var BusinessDeliveryZoneShareUI = function BusinessDeliveryZoneShareUI(props) {
   var actionState = props.actionState,
     selectedBusinessIds = props.selectedBusinessIds,
     businessesState = props.businessesState,
@@ -36,9 +36,11 @@ var BusinessDeliveryZoneShareUI = exports.BusinessDeliveryZoneShareUI = function
     handleUpdateClick: handleShareBusinesses
   }));
 };
-var BusinessDeliveryZoneShare = exports.BusinessDeliveryZoneShare = function BusinessDeliveryZoneShare(props) {
+exports.BusinessDeliveryZoneShareUI = BusinessDeliveryZoneShareUI;
+var BusinessDeliveryZoneShare = function BusinessDeliveryZoneShare(props) {
   var BusinessDeliveryZoneShareProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessDeliveryZoneShareUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.BusinessDeliveryZoneShare, BusinessDeliveryZoneShareProps);
 };
+exports.BusinessDeliveryZoneShare = BusinessDeliveryZoneShare;
