@@ -14,6 +14,7 @@ export const OpenCartBill = (props) => {
   const [, t] = useLanguage()
   const [{ parsePrice, parseNumber }] = useUtils()
   const [{ configs }] = useConfig()
+  const extraValueAdjustment = cart?.metafields?.find?.(meta => meta?.key === 'extra_value_adjustment_amount')
 
   const walletName = {
     cash: {
@@ -167,6 +168,14 @@ export const OpenCartBill = (props) => {
                   )}
               </td>
               <td>{parsePrice(cart?.driver_tip)}</td>
+            </tr>
+          )}
+          {extraValueAdjustment && !!parseFloat(extraValueAdjustment?.value) && (
+            <tr>
+              <td>
+                {t(extraValueAdjustment?.key?.toUpperCase(), extraValueAdjustment?.key)}{' '}
+              </td>
+              <td>{parsePrice(parseFloat(extraValueAdjustment?.value))}</td>
             </tr>
           )}
         </tbody>

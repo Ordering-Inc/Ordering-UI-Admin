@@ -30,6 +30,7 @@ export const OrderBill = (props) => {
     5: t('SPOT_NUMBER_DRIVE_THRU', 'Drive thru lane')
   }
   const isPickupOrder = order?.delivery_type === 2
+  const extraValueAdjustment = order?.metafields?.find?.(meta => meta?.key === 'extra_value_adjustment_amount')
 
   const walletName = {
     cash: {
@@ -234,6 +235,14 @@ export const OrderBill = (props) => {
                   )}
               </td>
               <td>{parsePrice(order?.summary?.driver_tip ?? order?.totalDriverTip, { currency: getCurrenySymbol(order?.currency) })}</td>
+            </tr>
+          )}
+          {extraValueAdjustment && !!parseFloat(extraValueAdjustment?.value) && (
+            <tr>
+              <td>
+                {t(extraValueAdjustment?.key?.toUpperCase(), extraValueAdjustment?.key)}{' '}
+              </td>
+              <td>{parsePrice(parseFloat(extraValueAdjustment?.value), { currency: getCurrenySymbol(order?.currency) })}</td>
             </tr>
           )}
         </tbody>
