@@ -13,6 +13,5 @@
   },
   "use_project_domain": false,
   "use_batch_sockets": false,
-  "use_franchise_images": false,
-  "is_white_label": false
+  "use_franchise_images": false
 }
