@@ -48,10 +48,9 @@ var BusinessScheduleUI = function BusinessScheduleUI(props) {
     }
   }, formState !== null && formState !== void 0 && formState.loading ? t('LOADING', 'Loading') : isTutorialMode ? t('SAVE_AND_CONTINUE', 'Save and continue') : t('SAVE', 'Save'))))));
 };
-var BusinessSchedule = function BusinessSchedule(props) {
+var BusinessSchedule = exports.BusinessSchedule = function BusinessSchedule(props) {
   var businessScheduleProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessScheduleUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.BusinessSchedule, businessScheduleProps);
 };
-exports.BusinessSchedule = BusinessSchedule;

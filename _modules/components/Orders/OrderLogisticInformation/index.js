@@ -170,11 +170,10 @@ var LogisticInformationUI = function LogisticInformationUI(props) {
     }, /*#__PURE__*/_react.default.createElement("strong", null, t('DRIVER_GROUP', 'Driver group')), ": ", /*#__PURE__*/_react.default.createElement("strong", null, attempt === null || attempt === void 0 ? void 0 : attempt.driver_group_id), " ", t('AT', 'at'), " ", parseDate(attempt === null || attempt === void 0 ? void 0 : attempt.created_at));
   })) : /*#__PURE__*/_react.default.createElement(_styles2.BubbleConsole, null, /*#__PURE__*/_react.default.createElement(_styles2.UppercaseText, null, t('WITHOUT_HISTORY_ATTEMPTS', 'without history attempts'))))) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, logisticInformation.error)));
 };
-var OrderLogisticInformation = function OrderLogisticInformation(props) {
+var OrderLogisticInformation = exports.OrderLogisticInformation = function OrderLogisticInformation(props) {
   var logisticsProps = _objectSpread(_objectSpread({}, props), {}, {
     orderId: props.orderId,
     UIComponent: LogisticInformationUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.LogisticInformation, logisticsProps);
 };
-exports.OrderLogisticInformation = OrderLogisticInformation;

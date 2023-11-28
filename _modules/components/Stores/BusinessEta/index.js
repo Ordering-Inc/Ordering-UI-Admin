@@ -74,10 +74,9 @@ var BusinessEtaUI = function BusinessEtaUI(props) {
     onClick: hanldeUpdateBusinessEtaTimes
   }, t('SAVE', 'Save')));
 };
-var BusinessEta = function BusinessEta(props) {
+var BusinessEta = exports.BusinessEta = function BusinessEta(props) {
   var businessEtaProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessEtaUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.BusinessEta, businessEtaProps);
 };
-exports.BusinessEta = BusinessEta;

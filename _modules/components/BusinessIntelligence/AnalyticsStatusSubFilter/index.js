@@ -24,7 +24,7 @@ function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t =
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-var AnalyticsStatusSubFilterUI = function AnalyticsStatusSubFilterUI(props) {
+var AnalyticsStatusSubFilterUI = exports.AnalyticsStatusSubFilterUI = function AnalyticsStatusSubFilterUI(props) {
   var appIdList = props.appIdList,
     filterList = props.filterList,
     handleChangeFilterList = props.handleChangeFilterList;
@@ -51,11 +51,9 @@ var AnalyticsStatusSubFilterUI = function AnalyticsStatusSubFilterUI(props) {
     }, appId, (filterList === null || filterList === void 0 ? void 0 : filterList.app_id) === appId && /*#__PURE__*/_react.default.createElement(_MdClose.default, null));
   })));
 };
-exports.AnalyticsStatusSubFilterUI = AnalyticsStatusSubFilterUI;
-var AnalyticsStatusSubFilter = function AnalyticsStatusSubFilter(props) {
+var AnalyticsStatusSubFilter = exports.AnalyticsStatusSubFilter = function AnalyticsStatusSubFilter(props) {
   var analyticsStatusSubFilterProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: AnalyticsStatusSubFilterUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.AnalyticsStatusSubFilter, analyticsStatusSubFilterProps);
 };
-exports.AnalyticsStatusSubFilter = AnalyticsStatusSubFilter;
