@@ -214,6 +214,50 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
     autoComplete: "off",
     value: (filterValues === null || filterValues === void 0 ? void 0 : filterValues.externalId) || '',
     onChange: handleChangeExternalId
+  })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    type: "text",
+    placeholder: t('CUSTOMER_NAME', 'Customer Name'),
+    autoComplete: "off",
+    value: (filterValues === null || filterValues === void 0 ? void 0 : filterValues.customerName) || '',
+    onChange: function onChange(e) {
+      var _e$target;
+      return handleChangeChildFilterValue({
+        customerName: e === null || e === void 0 || (_e$target = e.target) === null || _e$target === void 0 ? void 0 : _e$target.value
+      });
+    }
+  }), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    type: "text",
+    placeholder: t('CUSTOMER_LASTNAME', 'Customer Lastname'),
+    autoComplete: "off",
+    value: (filterValues === null || filterValues === void 0 ? void 0 : filterValues.customerLastname) || '',
+    onChange: function onChange(e) {
+      var _e$target2;
+      return handleChangeChildFilterValue({
+        customerLastname: e === null || e === void 0 || (_e$target2 = e.target) === null || _e$target2 === void 0 ? void 0 : _e$target2.value
+      });
+    }
+  })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    type: "text",
+    placeholder: t('CUSTOMER_EMAIL', 'Customer Email'),
+    autoComplete: "off",
+    value: (filterValues === null || filterValues === void 0 ? void 0 : filterValues.customerEmail) || '',
+    onChange: function onChange(e) {
+      var _e$target3;
+      return handleChangeChildFilterValue({
+        customerEmail: e === null || e === void 0 || (_e$target3 = e.target) === null || _e$target3 === void 0 ? void 0 : _e$target3.value
+      });
+    }
+  }), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    type: "text",
+    placeholder: t('CUSTOMER_CELLPHONE', 'Customer Cellphone'),
+    autoComplete: "off",
+    value: (filterValues === null || filterValues === void 0 ? void 0 : filterValues.customerCellphone) || '',
+    onChange: function onChange(e) {
+      var _e$target4;
+      return handleChangeChildFilterValue({
+        customerCellphone: e === null || e === void 0 || (_e$target4 = e.target) === null || _e$target4 === void 0 ? void 0 : _e$target4.value
+      });
+    }
   })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_DriversGroupTypeSelector.DriversGroupTypeSelector, {
     driverGroupList: driverGroupList,
     handleChangeGroup: handleChangeGroup,
