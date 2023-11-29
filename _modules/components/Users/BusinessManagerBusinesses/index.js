@@ -36,9 +36,10 @@ var BusinessManagerBusinessesUI = function BusinessManagerBusinessesUI(props) {
     handleUpdateClick: handleUpdateBusinesses
   }));
 };
-var BusinessManagerBusinesses = exports.BusinessManagerBusinesses = function BusinessManagerBusinesses(props) {
+var BusinessManagerBusinesses = function BusinessManagerBusinesses(props) {
   var businessMenuShareProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessManagerBusinessesUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.BusinessManagerBusinesses, businessMenuShareProps);
 };
+exports.BusinessManagerBusinesses = BusinessManagerBusinesses;

@@ -90,9 +90,10 @@ var SingleProductCardUI = function SingleProductCardUI(props) {
     isBottom: product === null || product === void 0 || (_product$ribbon6 = product.ribbon) === null || _product$ribbon6 === void 0 ? void 0 : _product$ribbon6.enabled
   }, t('SOLD_OUT', 'SOLD OUT')))));
 };
-var SingleProductCard = exports.SingleProductCard = function SingleProductCard(props) {
+var SingleProductCard = function SingleProductCard(props) {
   var singleProductCardProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: SingleProductCardUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.SingleProductCard, singleProductCardProps);
 };
+exports.SingleProductCard = SingleProductCard;

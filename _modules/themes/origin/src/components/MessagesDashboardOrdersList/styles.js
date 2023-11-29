@@ -8,4 +8,5 @@ var _styledComponents = _interopRequireDefault(require("styled-components"));
 var _templateObject;
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-var WrapperOrderlist = exports.WrapperOrderlist = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral([""])));
+var WrapperOrderlist = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral([""])));
+exports.WrapperOrderlist = WrapperOrderlist;

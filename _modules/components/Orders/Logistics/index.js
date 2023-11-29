@@ -93,10 +93,11 @@ var LogisticsUI = function LogisticsUI(props) {
     }, /*#__PURE__*/_react.default.createElement(_styles2.TimeofSent, null, getTimeAgo(log.updated_at))));
   })));
 };
-var Logistics = exports.Logistics = function Logistics(props) {
+var Logistics = function Logistics(props) {
   var logisticsProps = _objectSpread(_objectSpread({}, props), {}, {
     orderId: props.orderId,
     UIComponent: LogisticsUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.Logistics, logisticsProps);
 };
+exports.Logistics = Logistics;

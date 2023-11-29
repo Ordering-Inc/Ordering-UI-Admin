@@ -21,7 +21,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrderPropsAreEqual = function OrderPropsAreEqual(prevProps, nextProps) {
   return JSON.stringify(prevProps.order) === JSON.stringify(nextProps.order) && JSON.stringify(prevProps.allowColumns) === JSON.stringify(nextProps.allowColumns) && prevProps.isEnabledRowInColor === nextProps.isEnabledRowInColor && JSON.stringify(prevProps.selectedOrderIds) === JSON.stringify(nextProps.selectedOrderIds) && JSON.stringify(prevProps.isSelectedOrders) === JSON.stringify(nextProps.isSelectedOrders) && prevProps.showExternalId === nextProps.showExternalId && prevProps.groupStatus === nextProps.groupStatus;
 };
-var Order = exports.Order = /*#__PURE__*/_react.default.memo(function (props) {
+var Order = /*#__PURE__*/_react.default.memo(function (props) {
   var orderDetailId = props.orderDetailId,
     order = props.order,
     i = props.i,
@@ -250,3 +250,4 @@ var Order = exports.Order = /*#__PURE__*/_react.default.memo(function (props) {
     }
   }));
 }, OrderPropsAreEqual);
+exports.Order = Order;

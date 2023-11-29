@@ -36,9 +36,10 @@ var BusinessMenuShareUI = function BusinessMenuShareUI(props) {
     handleUpdateClick: handleShareBusinesses
   }));
 };
-var BusinessMenuShare = exports.BusinessMenuShare = function BusinessMenuShare(props) {
+var BusinessMenuShare = function BusinessMenuShare(props) {
   var businessMenuShareProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessMenuShareUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.BusinessMenuShare, businessMenuShareProps);
 };
+exports.BusinessMenuShare = BusinessMenuShare;

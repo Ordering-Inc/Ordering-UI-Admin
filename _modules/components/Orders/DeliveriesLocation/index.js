@@ -12,8 +12,8 @@ var _InterActOrderMarker = require("../InterActOrderMarker");
 var _Shared = require("../../Shared");
 var _styledComponents = require("styled-components");
 var _styles = require("./styles");
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -31,10 +31,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var DeliveriesLocationPropsAreEqual = function DeliveriesLocationPropsAreEqual(prevProps, nextProps) {
-  var _prevProps$interActio, _nextProps$interActio, _prevProps$interActio2, _nextProps$interActio2, _prevProps$interActio3;
-  return ((_prevProps$interActio = prevProps.interActionMapOrder) === null || _prevProps$interActio === void 0 ? void 0 : _prevProps$interActio.id) === ((_nextProps$interActio = nextProps.interActionMapOrder) === null || _nextProps$interActio === void 0 ? void 0 : _nextProps$interActio.id) && JSON.stringify((_prevProps$interActio2 = prevProps.interActionMapOrder) === null || _prevProps$interActio2 === void 0 ? void 0 : _prevProps$interActio2.driver) === JSON.stringify((_nextProps$interActio2 = nextProps.interActionMapOrder) === null || _nextProps$interActio2 === void 0 ? void 0 : _nextProps$interActio2.driver) && (JSON.stringify(prevProps.driversList) === JSON.stringify(nextProps.driversList) || !((_prevProps$interActio3 = prevProps.interActionMapOrder) !== null && _prevProps$interActio3 !== void 0 && _prevProps$interActio3.id));
+  var _prevProps$interActio, _nextProps$interActio, _prevProps$interActio2, _nextProps$interActio2;
+  return ((_prevProps$interActio = prevProps.interActionMapOrder) === null || _prevProps$interActio === void 0 ? void 0 : _prevProps$interActio.id) === ((_nextProps$interActio = nextProps.interActionMapOrder) === null || _nextProps$interActio === void 0 ? void 0 : _nextProps$interActio.id) && JSON.stringify((_prevProps$interActio2 = prevProps.interActionMapOrder) === null || _prevProps$interActio2 === void 0 ? void 0 : _prevProps$interActio2.driver) === JSON.stringify((_nextProps$interActio2 = nextProps.interActionMapOrder) === null || _nextProps$interActio2 === void 0 ? void 0 : _nextProps$interActio2.driver) && JSON.stringify(prevProps.driversList) === JSON.stringify(nextProps.driversList);
 };
-var DeliveriesLocation = exports.DeliveriesLocation = /*#__PURE__*/_react.default.memo(function (props) {
+var DeliveriesLocation = /*#__PURE__*/_react.default.memo(function (props) {
   var _configState$configs, _configState$configs2, _configState$configs3, _interActionMapOrder$6, _interActionMapOrder$7, _interActionMapOrder$8, _interActionMapOrder$9, _interActionMapOrder$10, _interActionMapOrder$11, _interActionMapOrder$12, _interActionMapOrder$13, _interActionMapOrder$14;
   var driversList = props.driversList,
     interActionMapOrder = props.interActionMapOrder;
@@ -195,9 +195,10 @@ var DeliveriesLocation = exports.DeliveriesLocation = /*#__PURE__*/_react.defaul
     }
   }, [interActionMapOrder, mapLoaded, driversList, mapFitted]);
   (0, _react.useEffect)(function () {
+    var _ref, _ref2;
     if (!interActionMapOrder || interActionMapOrder !== null && interActionMapOrder !== void 0 && interActionMapOrder.driver) return;
-    var getControls = /*#__PURE__*/function () {
-      var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(order) {
+    var getControls = function getControls(_x) {
+      return (_ref = _ref || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(order) {
         var _yield$ordering$setAc, _yield$ordering$setAc2, errorResponse, response, error, result, driversControls, _result$drivers;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
@@ -235,13 +236,10 @@ var DeliveriesLocation = exports.DeliveriesLocation = /*#__PURE__*/_react.defaul
               return _context.stop();
           }
         }, _callee);
-      }));
-      return function getControls(_x) {
-        return _ref.apply(this, arguments);
-      };
-    }();
-    var fetchData = /*#__PURE__*/function () {
-      var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+      }))).apply(this, arguments);
+    };
+    var fetchData = function fetchData() {
+      return (_ref2 = _ref2 || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
         var driversControls;
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) switch (_context2.prev = _context2.next) {
@@ -261,18 +259,19 @@ var DeliveriesLocation = exports.DeliveriesLocation = /*#__PURE__*/_react.defaul
               return _context2.stop();
           }
         }, _callee2);
-      }));
-      return function fetchData() {
-        return _ref2.apply(this, arguments);
-      };
-    }();
+      }))).apply(this, arguments);
+    };
     fetchData();
   }, [interActionMapOrder === null || interActionMapOrder === void 0 ? void 0 : interActionMapOrder.id]);
   (0, _react.useEffect)(function () {
-    if (activeDrivers.length === 0) return;
+    if (activeDrivers.length === 0 && interActionMapOrder) return;
     var _driverAvailableList = driversList.drivers.filter(function (driver) {
       return driver.enabled && driver.available && !driver.busy;
     });
+    if (!interActionMapOrder) {
+      setActiveDrivers(_driverAvailableList);
+      return;
+    }
     var _onlineDrivers = activeDrivers.map(function (controlDriver) {
       var matchingDriver = _driverAvailableList.find(function (driver) {
         return driver.id === controlDriver.id;
@@ -333,7 +332,7 @@ var DeliveriesLocation = exports.DeliveriesLocation = /*#__PURE__*/_react.defaul
     lat: interActionOrderDriverLocation !== null && _typeof(interActionOrderDriverLocation) === 'object' && interActionOrderDriverLocation !== null && interActionOrderDriverLocation !== void 0 && interActionOrderDriverLocation.lat ? interActionOrderDriverLocation.lat : typeof interActionOrderDriverLocation === 'string' ? parseFloat(interActionOrderDriverLocation === null || interActionOrderDriverLocation === void 0 ? void 0 : interActionOrderDriverLocation.split(',')[0].replace(/[^-.0-9]/g, '')) : defaultCenter.lat,
     lng: interActionOrderDriverLocation !== null && _typeof(interActionOrderDriverLocation) === 'object' && interActionOrderDriverLocation !== null && interActionOrderDriverLocation !== void 0 && interActionOrderDriverLocation.lng ? interActionOrderDriverLocation.lng : typeof interActionOrderDriverLocation === 'string' ? parseFloat(interActionOrderDriverLocation === null || interActionOrderDriverLocation === void 0 ? void 0 : interActionOrderDriverLocation.split(',')[1].replace(/[^-.0-9]/g, '')) : defaultCenter.lng,
     image: interActionMapOrder === null || interActionMapOrder === void 0 || (_interActionMapOrder$14 = interActionMapOrder.driver) === null || _interActionMapOrder$14 === void 0 ? void 0 : _interActionMapOrder$14.photo
-  }), interActionMapOrder !== null && (interActionMapOrder === null || interActionMapOrder === void 0 ? void 0 : interActionMapOrder.driver) === null && activeDrivers.length > 0 && activeDrivers.map(function (driver) {
+  }), interActionMapOrder === null && activeDrivers.length > 0 && activeDrivers.map(function (driver) {
     var _driver$location5, _driver$location6, _driver$location7, _driver$location8;
     return /*#__PURE__*/_react.default.createElement(_InterActOrderMarker.InterActOrderMarker, {
       key: driver.id,
@@ -354,3 +353,4 @@ var DeliveriesLocation = exports.DeliveriesLocation = /*#__PURE__*/_react.defaul
     })), /*#__PURE__*/_react.default.createElement(_styles.DriverInfo, null, /*#__PURE__*/_react.default.createElement("p", null, driver.name, " ", driver.lastname), /*#__PURE__*/_react.default.createElement("p", null, t('DRIVER', 'Driver'))));
   })))));
 }, DeliveriesLocationPropsAreEqual);
+exports.DeliveriesLocation = DeliveriesLocation;

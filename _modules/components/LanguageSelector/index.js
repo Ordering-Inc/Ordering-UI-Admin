@@ -44,7 +44,7 @@ var LanguageSelectorUI = function LanguageSelectorUI(props) {
     minWidth: "200px"
   })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, _languages && _languages.length === 1 ? /*#__PURE__*/_react.default.createElement(_styles.LanguageItem, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Globe2, null), /*#__PURE__*/_react.default.createElement(_styles.LanguageText, null, (_languages$ = _languages[0]) === null || _languages$ === void 0 ? void 0 : _languages$.content)) : null);
 };
-var LanguageSelector = exports.LanguageSelector = function LanguageSelector(props) {
+var LanguageSelector = function LanguageSelector(props) {
   var DefaultChangeLanguage = function DefaultChangeLanguage() {};
   var langProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: LanguageSelectorUI,
@@ -58,3 +58,4 @@ var LanguageSelector = exports.LanguageSelector = function LanguageSelector(prop
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.LanguageSelector, langProps);
 };
+exports.LanguageSelector = LanguageSelector;

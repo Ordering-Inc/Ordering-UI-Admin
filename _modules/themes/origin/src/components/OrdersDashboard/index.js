@@ -9,7 +9,7 @@ var _OrdersDashboardControls = require("../OrdersDashboardControls");
 var _OrdersDashboardList = require("../OrdersDashboardList");
 var _styles = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-var OrdersDashboard = exports.OrdersDashboard = function OrdersDashboard(props) {
+var OrdersDashboard = function OrdersDashboard(props) {
   var searchValue = props.searchValue,
     filterValues = props.filterValues,
     selectedOrderIds = props.selectedOrderIds,
@@ -39,3 +39,4 @@ var OrdersDashboard = exports.OrdersDashboard = function OrdersDashboard(props) 
     handleOpenOrderDetail: handleOpenOrderDetail
   }));
 };
+exports.OrdersDashboard = OrdersDashboard;

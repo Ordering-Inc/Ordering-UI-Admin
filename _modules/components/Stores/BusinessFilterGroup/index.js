@@ -101,9 +101,10 @@ var BusinessFilterGroupUI = function BusinessFilterGroupUI(props) {
     }
   }, t('CLEAR', 'Clear')))));
 };
-var BusinessFilterGroup = exports.BusinessFilterGroup = function BusinessFilterGroup(props) {
+var BusinessFilterGroup = function BusinessFilterGroup(props) {
   var businessFilterGroupProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessFilterGroupUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.BusinessFilter, businessFilterGroupProps);
 };
+exports.BusinessFilterGroup = BusinessFilterGroup;

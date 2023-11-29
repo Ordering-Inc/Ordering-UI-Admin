@@ -31,7 +31,7 @@ var PaymentOptionPaypalUI = function PaymentOptionPaypalUI(props) {
     height: 55
   }))));
 };
-var PaymentOptionPaypal = exports.PaymentOptionPaypal = function PaymentOptionPaypal(props) {
+var PaymentOptionPaypal = function PaymentOptionPaypal(props) {
   var _configs$stripe_curre;
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
@@ -42,3 +42,4 @@ var PaymentOptionPaypal = exports.PaymentOptionPaypal = function PaymentOptionPa
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.PaymentOptionPaypal, paymentPaypalProps);
 };
+exports.PaymentOptionPaypal = PaymentOptionPaypal;
