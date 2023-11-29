@@ -42,9 +42,10 @@ var ProductOptionUI = function ProductOptionUI(props) {
     required: (option === null || option === void 0 ? void 0 : option.min) > 0
   }, maxMin)), children));
 };
-var ProductOption = exports.ProductOption = function ProductOption(props) {
+var ProductOption = function ProductOption(props) {
   var productOptionProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: ProductOptionUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.ProductOption, productOptionProps);
 };
+exports.ProductOption = ProductOption;

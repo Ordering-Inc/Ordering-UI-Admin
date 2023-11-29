@@ -68,7 +68,7 @@ var ProfilePageUI = function ProfilePageUI(props) {
     alt: "Google Calendar Icon"
   }), t('SYNC_WITH_GOOGLE_CALENDAR', 'Sync with Google calendar'))))), /*#__PURE__*/_react.default.createElement(_Sessions.Sessions, null));
 };
-var ProfilePage = exports.ProfilePage = function ProfilePage(props) {
+var ProfilePage = function ProfilePage(props) {
   var _useSession3 = (0, _orderingComponentsAdmin.useSession)(),
     _useSession4 = _slicedToArray(_useSession3, 1),
     user = _useSession4[0].user;
@@ -78,3 +78,4 @@ var ProfilePage = exports.ProfilePage = function ProfilePage(props) {
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.UserDetails, profileProps);
 };
+exports.ProfilePage = ProfilePage;

@@ -29,9 +29,10 @@ var LogoutButtonUI = function LogoutButtonUI(props) {
     onClick: props.handleLogoutClick
   }, /*#__PURE__*/_react.default.createElement(_styles.WrappContent, null, /*#__PURE__*/_react.default.createElement(_styles.MenuLinkIcon, null, /*#__PURE__*/_react.default.createElement(_FaSignOutAlt.default, null)), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkText, null, /*#__PURE__*/_react.default.createElement(_styles.TextInfo, null, t('LOGOUT', 'Logout'))), /*#__PURE__*/_react.default.createElement(_styles.MenuLinkSeparator, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("hr", null)))));
 };
-var LogoutButton = exports.LogoutButton = function LogoutButton(props) {
+var LogoutButton = function LogoutButton(props) {
   var logoutButtonProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: LogoutButtonUI
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.LogoutAction, logoutButtonProps);
 };
+exports.LogoutButton = LogoutButton;

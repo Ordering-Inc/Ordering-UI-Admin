@@ -157,10 +157,11 @@ var SingleBusinessUI = function SingleBusinessUI(props) {
     onChange: handleChangeActiveBusiness
   })))))));
 };
-var SingleBusiness = exports.SingleBusiness = function SingleBusiness(props) {
+var SingleBusiness = function SingleBusiness(props) {
   var isSkeleton = props.isSkeleton;
   var singleBusinessProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: SingleBusinessUI
   });
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isSkeleton ? /*#__PURE__*/_react.default.createElement(SingleBusinessUI, props) : /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.BusinessDetails, singleBusinessProps));
 };
+exports.SingleBusiness = SingleBusiness;

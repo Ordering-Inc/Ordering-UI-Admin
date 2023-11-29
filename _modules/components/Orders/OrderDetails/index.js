@@ -26,8 +26,8 @@ var _utils = require("../../../utils");
 var _reactHookForm = require("react-hook-form");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -39,10 +39,20 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-var OrderDetailsPropsAreEqual = function OrderDetailsPropsAreEqual(prevProps, nextProps) {
-  return prevProps.isSelectedOrders === nextProps.isSelectedOrders && prevProps.open === nextProps.open && prevProps.isTourOpen === nextProps.isTourOpen && JSON.stringify(prevProps.messages) === JSON.stringify(nextProps.messages) && JSON.stringify(prevProps.order) === JSON.stringify(nextProps.order) && prevProps.loading === nextProps.loading && prevProps.isTourFlag === nextProps.isTourFlag && prevProps.isServiceOrder === nextProps.isServiceOrder && prevProps.currentTourStep === nextProps.currentTourStep && prevProps.customerInfoState === nextProps.customerInfoState && JSON.stringify(prevProps.addressState) === JSON.stringify(nextProps.addressState);
-};
-var OrderDetailsUI = /*#__PURE__*/_react.default.memo(function (props) {
+// const OrderDetailsPropsAreEqual = (prevProps, nextProps) => {
+//   return prevProps.isSelectedOrders === nextProps.isSelectedOrders &&
+//     prevProps.open === nextProps.open &&
+//     prevProps.isTourOpen === nextProps.isTourOpen &&
+//     JSON.stringify(prevProps.messages) === JSON.stringify(nextProps.messages) &&
+//     JSON.stringify(prevProps.order) === JSON.stringify(nextProps.order) &&
+//     prevProps.loading === nextProps.loading &&
+//     prevProps.isTourFlag === nextProps.isTourFlag &&
+//     prevProps.isServiceOrder === nextProps.isServiceOrder &&
+//     prevProps.currentTourStep === nextProps.currentTourStep &&
+//     prevProps.customerInfoState === nextProps.customerInfoState &&
+//     JSON.stringify(prevProps.addressState) === JSON.stringify(nextProps.addressState)
+// }
+var OrderDetailsUI = function OrderDetailsUI(props) {
   var _order$place, _progressBarObjt, _order$products;
   var isSelectedOrders = props.isSelectedOrders,
     handleChangeCustomerInfoState = props.handleChangeCustomerInfoState,
@@ -129,6 +139,7 @@ var OrderDetailsUI = /*#__PURE__*/_react.default.memo(function (props) {
     _useState16 = _slicedToArray(_useState15, 2),
     commentInfoState = _useState16[0],
     setCommentInfostate = _useState16[1];
+  var cateringTypes = [7, 8];
   var placeSpotEnabled = [3, 4];
   var _props$order = props.order,
     order = _props$order.order,
@@ -414,7 +425,7 @@ var OrderDetailsUI = /*#__PURE__*/_react.default.memo(function (props) {
     setIsExpand: setIsExpand
   }), /*#__PURE__*/_react.default.createElement(_styles2.OrderStatus, {
     isDisabled: isTourOpen && currentTourStep === 1
-  }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, t('ORDER_STATUS_TEXT', 'Order status')), (order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) && /*#__PURE__*/_react.default.createElement("p", null, parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc)), (order === null || order === void 0 ? void 0 : order.delivery_datetime) && /*#__PURE__*/_react.default.createElement("p", null, parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
+  }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, t('ORDER_STATUS_TEXT', 'Order status')), cateringTypes.includes(order === null || order === void 0 ? void 0 : order.delivery_type) && (order === null || order === void 0 ? void 0 : order.created_at) && /*#__PURE__*/_react.default.createElement("p", null, t('CREATED_AT', 'Created at'), ": ", parseDate(order === null || order === void 0 ? void 0 : order.created_at)), (order === null || order === void 0 ? void 0 : order.delivery_datetime_utc) && /*#__PURE__*/_react.default.createElement("p", null, cateringTypes.includes(order === null || order === void 0 ? void 0 : order.delivery_type) ? "".concat(t('PLACED_TO', 'Placed to'), ":") : '', " ", parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime_utc)), (order === null || order === void 0 ? void 0 : order.delivery_datetime) && /*#__PURE__*/_react.default.createElement("p", null, cateringTypes.includes(order === null || order === void 0 ? void 0 : order.delivery_type) ? "".concat(t('PLACED_TO', 'Placed to'), ":") : '', " ", parseDate(order === null || order === void 0 ? void 0 : order.delivery_datetime, {
     utc: false
   }), "  ", "(".concat(t('BUSINESS_TIME', 'Business time'), ")")), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : order.eta_time, " ", t('MIN', 'min'))), /*#__PURE__*/_react.default.createElement(_styles2.OrderStatusSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_OrderStatusTypeSelector.OrderStatusTypeSelector, {
     isFirstSelect: true,
@@ -588,8 +599,8 @@ var OrderDetailsUI = /*#__PURE__*/_react.default.memo(function (props) {
     color: "primary",
     type: "submit"
   }, t('ACCEPT', 'Accept')))));
-}, OrderDetailsPropsAreEqual);
-var OrderDetails = exports.OrderDetails = function OrderDetails(props) {
+};
+var OrderDetails = function OrderDetails(props) {
   var orderDetailsProps = _objectSpread(_objectSpread({}, props), {}, {
     asDashboard: true,
     isDisableLoadMessages: true,
@@ -597,3 +608,4 @@ var OrderDetails = exports.OrderDetails = function OrderDetails(props) {
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.OrderDetails, orderDetailsProps);
 };
+exports.OrderDetails = OrderDetails;
