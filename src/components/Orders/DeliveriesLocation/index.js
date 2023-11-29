@@ -19,7 +19,7 @@ import {
 const DeliveriesLocationPropsAreEqual = (prevProps, nextProps) => {
   return prevProps.interActionMapOrder?.id === nextProps.interActionMapOrder?.id &&
     JSON.stringify(prevProps.interActionMapOrder?.driver) === JSON.stringify(nextProps.interActionMapOrder?.driver) &&
-    (JSON.stringify(prevProps.driversList) === JSON.stringify(nextProps.driversList) || !prevProps.interActionMapOrder?.id)
+    JSON.stringify(prevProps.driversList) === JSON.stringify(nextProps.driversList)
 }
 
 export const DeliveriesLocation = React.memo((props) => {
@@ -173,8 +173,12 @@ export const DeliveriesLocation = React.memo((props) => {
   }, [interActionMapOrder?.id])
 
   useEffect(() => {
-    if (activeDrivers.length === 0) return
+    if (activeDrivers.length === 0 && interActionMapOrder) return
     const _driverAvailableList = driversList.drivers.filter((driver) => driver.enabled && driver.available && !driver.busy)
+    if (!interActionMapOrder) {
+      setActiveDrivers(_driverAvailableList)
+      return
+    }
     const _onlineDrivers = activeDrivers.map((controlDriver) => {
       const matchingDriver = _driverAvailableList.find((driver) => driver.id === controlDriver.id)
       if (matchingDriver?.location) {
@@ -253,7 +257,7 @@ export const DeliveriesLocation = React.memo((props) => {
             />
           )}
 
-          {interActionMapOrder !== null && interActionMapOrder?.driver === null && activeDrivers.length > 0 && (
+          {interActionMapOrder === null && activeDrivers.length > 0 && (
             activeDrivers.map((driver) => (
               <InterActOrderMarker
                 key={driver.id}

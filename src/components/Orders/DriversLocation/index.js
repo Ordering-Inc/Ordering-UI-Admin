@@ -192,7 +192,7 @@ export const DriversLocation = React.memo((props) => {
             onChange={(data) => handleMapChange(data)}
             yesIWantToUseGoogleMapApiInternals
           >
-            {!selectedOrder && selectedDriver && (showDrivers.length !== 0) &&
+            {!selectedOrder && (showDrivers.length !== 0) &&
               showDrivers.map((driver) => (
                 <DriverMapMarkerAndInfo
                   key={driver.id}
