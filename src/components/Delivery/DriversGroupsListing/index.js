@@ -299,10 +299,19 @@ const DriversGroupsListingUI = (props) => {
 }
 
 export const DriversGroupsListing = (props) => {
+  const query = new URLSearchParams(useLocation().search)
+  const defaultPage = query.get('page') || 1
+  const defaultPageSize = query.get('pageSize') || 10
+
   const driversGroupsListProps = {
     ...props,
     isDriversMangersRequired: true,
-    UIComponent: DriversGroupsListingUI
+    UIComponent: DriversGroupsListingUI,
+    paginationSettings: {
+      initialPage: props.isUseQuery && !isNaN(defaultPage) ? Number(defaultPage) : 1,
+      pageSize: props.isUseQuery && !isNaN(defaultPage) ? Number(defaultPageSize) : 10,
+      controlType: 'pages'
+    }
   }
   return (
     <DriversGroupsListController {...driversGroupsListProps} />

@@ -50,7 +50,7 @@ export const OrdersCards = (props) => {
     slaBar: true
   })
   const showExternalId = configState?.configs?.change_order_id?.value === '1'
-
+  const cateringTypes = [7, 8]
   const franchiseImages = !franchisesList?.error && franchisesList?.franchises?.reduce((imageKeys, franchise) => {
     imageKeys[franchise.id] = franchise.logo
     return imageKeys
@@ -100,7 +100,10 @@ export const OrdersCards = (props) => {
       20: dictionary?.ORDER_CUSTOMER_ALMOST_ARRIVED_BUSINESS ?? 'Customer almost arrived to business',
       21: dictionary?.ORDER_CUSTOMER_ARRIVED_BUSINESS ?? 'Customer arrived to business',
       22: dictionary?.ORDER_LOOKING_FOR_DRIVER ?? 'Looking for driver',
-      23: dictionary?.ORDER_DRIVER_ON_WAY ?? 'Driver on way'
+      23: dictionary?.ORDER_DRIVER_ON_WAY ?? 'Driver on way',
+      24: dictionary?.ORDER_STATUS_DRIVER_WAITING_FOR_ORDER ?? 'Driver waiting for order',
+      25: dictionary?.ORDER_STATUS_ACCEPTED_BY_DRIVER_COMPANY ?? 'Accepted by driver company',
+      26: dictionary?.ORDER_DRIVER_ARRIVED_CUSTOMER ?? 'Driver arrived to customer'
     }
 
     return orderStatus?.[Number(s)] ?? s
@@ -227,11 +230,16 @@ export const OrdersCards = (props) => {
                     </h2>
                     <p>{getOrderStatus(order.status)}</p>
                     <div>
+                      {cateringTypes.includes(order?.delivery_type) && (
+                        <p className='date'>
+                          {
+                            `${t('CREATED_AT', 'Created at')}: ${parseDate(order?.created_at)}`
+                          }
+                        </p>
+                      )}
                       <p>
                         {
-                          order?.delivery_datetime_utc
-                            ? parseDate(order?.delivery_datetime_utc)
-                            : parseDate(order?.delivery_datetime, { utc: false })
+                          `${cateringTypes.includes(order?.delivery_type) ? `${t('PLACED_TO', 'Placed to')}:` : ''} ${order?.delivery_datetime_utc ? parseDate(order?.delivery_datetime_utc) : parseDate(order?.delivery_datetime, { utc: false })}`
                         }
                       </p>
                       <ViewDetails

@@ -2,7 +2,7 @@ import { useLanguage, useUtils } from 'ordering-components-admin'
 import React, { useState, useEffect } from 'react'
 import { Image } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
-
+import { getOrderStatus } from '../../../utils'
 export const InvoiceDriverPdf = (props) => {
   const {
     exportInvoiceList,
@@ -85,37 +85,6 @@ export const InvoiceDriverPdf = (props) => {
       width: '150px',
       marginBottom: '15px'
     }
-  }
-
-  const getOrderStatus = (status) => {
-    const orderStatus = [
-      { key: 0, value: 'Pending Order', slug: 'PENDING_ORDER', percentage: 25 },
-      { key: 1, value: 'Completed by admin', slug: 'COMPLETED_BY_ADMIN', percentage: 100 },
-      { key: 2, value: 'Reject by admin', slug: 'REJECT_BY_ADMIN', percentage: 0 },
-      { key: 3, value: 'Driver arrived by business', slug: 'DRIVER_IN_BUSINESS', percentage: 60 },
-      { key: 4, value: 'Preparation Completed', slug: 'PREPARATION_COMPLETED', percentage: 70 },
-      { key: 5, value: 'Reject by business', slug: 'REJECT_BY_BUSINESS', percentage: 0 },
-      { key: 6, value: 'Reject by driver', slug: 'REJECT_BY_DRIVER', percentage: 0 },
-      { key: 7, value: 'Accepted by business', slug: 'ACCEPTED_BY_BUSINESS', percentage: 35 },
-      { key: 8, value: 'Accepted by driver', slug: 'ACCEPTED_BY_DRIVER', percentage: 45 },
-      { key: 9, value: 'Pick up completed by driver', slug: 'PICK_UP_COMPLETED_BY_DRIVER', percentage: 80 },
-      { key: 10, value: 'Pick up Failed by driver', slug: 'PICK_UP_FAILED_BY_DRIVER', percentage: 0 },
-      { key: 11, value: 'Delivery completed by driver', slug: 'DELIVERY_COMPLETED_BY_DRIVER', percentage: 100 },
-      { key: 12, value: 'Delivery Failed by driver', slug: 'DELIVERY_FAILED_BY_DRIVER', percentage: 0 },
-      { key: 13, value: 'Preorder', slug: 'PREORDER', percentage: 25 },
-      { key: 14, value: 'Order not ready', slug: 'ORDER_NOT_READY', percentage: 65 },
-      { key: 15, value: 'Pickup completed by customer', slug: 'PICKUP_COMPLETED_BY_CUSTOMER', percentage: 100 },
-      { key: 16, value: 'Canceled by customer', slug: 'CANCELED_BY_CUSTOMER', percentage: 0 },
-      { key: 17, value: 'Not picked by customer', slug: 'NOT_PICKED_BY_CUSTOMER', percentage: 0 },
-      { key: 18, value: 'Driver almost arrived to business', slug: 'DRIVER_ALMOST_ARRIVED_TO_BUSINESS', percentage: 50 },
-      { key: 19, value: 'Driver almost arrived to customer', slug: 'DRIVER_ALMOST_ARRIVED_TO_CUSTOMER', percentage: 90 },
-      { key: 20, value: 'Customer almost arrived to business', slug: 'CUSTOMER_ALMOST_ARRIVED_TO_BUSINESS', percentage: 50 },
-      { key: 21, value: 'Customer arrived to business', slug: 'CUSTOMER_ARRIVED_TO_BUSINESS', percentage: 60 }
-    ]
-
-    const objectStatus = orderStatus.find((o) => o.key === status)
-
-    return objectStatus && objectStatus
   }
 
   const logoImage = theme?.images?.logos?.logoPdf
