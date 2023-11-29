@@ -31,8 +31,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var DeliveriesLocationPropsAreEqual = function DeliveriesLocationPropsAreEqual(prevProps, nextProps) {
-  var _prevProps$interActio, _nextProps$interActio, _prevProps$interActio2, _nextProps$interActio2, _prevProps$interActio3;
-  return ((_prevProps$interActio = prevProps.interActionMapOrder) === null || _prevProps$interActio === void 0 ? void 0 : _prevProps$interActio.id) === ((_nextProps$interActio = nextProps.interActionMapOrder) === null || _nextProps$interActio === void 0 ? void 0 : _nextProps$interActio.id) && JSON.stringify((_prevProps$interActio2 = prevProps.interActionMapOrder) === null || _prevProps$interActio2 === void 0 ? void 0 : _prevProps$interActio2.driver) === JSON.stringify((_nextProps$interActio2 = nextProps.interActionMapOrder) === null || _nextProps$interActio2 === void 0 ? void 0 : _nextProps$interActio2.driver) && (JSON.stringify(prevProps.driversList) === JSON.stringify(nextProps.driversList) || !((_prevProps$interActio3 = prevProps.interActionMapOrder) !== null && _prevProps$interActio3 !== void 0 && _prevProps$interActio3.id));
+  var _prevProps$interActio, _nextProps$interActio, _prevProps$interActio2, _nextProps$interActio2;
+  return ((_prevProps$interActio = prevProps.interActionMapOrder) === null || _prevProps$interActio === void 0 ? void 0 : _prevProps$interActio.id) === ((_nextProps$interActio = nextProps.interActionMapOrder) === null || _nextProps$interActio === void 0 ? void 0 : _nextProps$interActio.id) && JSON.stringify((_prevProps$interActio2 = prevProps.interActionMapOrder) === null || _prevProps$interActio2 === void 0 ? void 0 : _prevProps$interActio2.driver) === JSON.stringify((_nextProps$interActio2 = nextProps.interActionMapOrder) === null || _nextProps$interActio2 === void 0 ? void 0 : _nextProps$interActio2.driver) && JSON.stringify(prevProps.driversList) === JSON.stringify(nextProps.driversList);
 };
 var DeliveriesLocation = /*#__PURE__*/_react.default.memo(function (props) {
   var _configState$configs, _configState$configs2, _configState$configs3, _interActionMapOrder$6, _interActionMapOrder$7, _interActionMapOrder$8, _interActionMapOrder$9, _interActionMapOrder$10, _interActionMapOrder$11, _interActionMapOrder$12, _interActionMapOrder$13, _interActionMapOrder$14;
@@ -263,10 +263,14 @@ var DeliveriesLocation = /*#__PURE__*/_react.default.memo(function (props) {
     fetchData();
   }, [interActionMapOrder === null || interActionMapOrder === void 0 ? void 0 : interActionMapOrder.id]);
   (0, _react.useEffect)(function () {
-    if (activeDrivers.length === 0) return;
+    if (activeDrivers.length === 0 && interActionMapOrder) return;
     var _driverAvailableList = driversList.drivers.filter(function (driver) {
       return driver.enabled && driver.available && !driver.busy;
     });
+    if (!interActionMapOrder) {
+      setActiveDrivers(_driverAvailableList);
+      return;
+    }
     var _onlineDrivers = activeDrivers.map(function (controlDriver) {
       var matchingDriver = _driverAvailableList.find(function (driver) {
         return driver.id === controlDriver.id;
@@ -327,7 +331,7 @@ var DeliveriesLocation = /*#__PURE__*/_react.default.memo(function (props) {
     lat: interActionOrderDriverLocation !== null && _typeof(interActionOrderDriverLocation) === 'object' && interActionOrderDriverLocation !== null && interActionOrderDriverLocation !== void 0 && interActionOrderDriverLocation.lat ? interActionOrderDriverLocation.lat : typeof interActionOrderDriverLocation === 'string' ? parseFloat(interActionOrderDriverLocation === null || interActionOrderDriverLocation === void 0 ? void 0 : interActionOrderDriverLocation.split(',')[0].replace(/[^-.0-9]/g, '')) : defaultCenter.lat,
     lng: interActionOrderDriverLocation !== null && _typeof(interActionOrderDriverLocation) === 'object' && interActionOrderDriverLocation !== null && interActionOrderDriverLocation !== void 0 && interActionOrderDriverLocation.lng ? interActionOrderDriverLocation.lng : typeof interActionOrderDriverLocation === 'string' ? parseFloat(interActionOrderDriverLocation === null || interActionOrderDriverLocation === void 0 ? void 0 : interActionOrderDriverLocation.split(',')[1].replace(/[^-.0-9]/g, '')) : defaultCenter.lng,
     image: interActionMapOrder === null || interActionMapOrder === void 0 || (_interActionMapOrder$14 = interActionMapOrder.driver) === null || _interActionMapOrder$14 === void 0 ? void 0 : _interActionMapOrder$14.photo
-  }), interActionMapOrder !== null && (interActionMapOrder === null || interActionMapOrder === void 0 ? void 0 : interActionMapOrder.driver) === null && activeDrivers.length > 0 && activeDrivers.map(function (driver) {
+  }), interActionMapOrder === null && activeDrivers.length > 0 && activeDrivers.map(function (driver) {
     var _driver$location5, _driver$location6, _driver$location7, _driver$location8;
     return /*#__PURE__*/_react.default.createElement(_InterActOrderMarker.InterActOrderMarker, {
       key: driver.id,

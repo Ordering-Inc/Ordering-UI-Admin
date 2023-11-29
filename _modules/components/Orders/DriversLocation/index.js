@@ -208,7 +208,7 @@ var DriversLocation = /*#__PURE__*/_react.default.memo(function (props) {
       return handleMapChange(data);
     },
     yesIWantToUseGoogleMapApiInternals: true
-  }, !selectedOrder && selectedDriver && showDrivers.length !== 0 && showDrivers.map(function (driver) {
+  }, !selectedOrder && showDrivers.length !== 0 && showDrivers.map(function (driver) {
     var _driver$location5, _driver$location6, _driver$location7, _driver$location8;
     return /*#__PURE__*/_react.default.createElement(_DriverMapMarkerAndInfo.DriverMapMarkerAndInfo, {
       key: driver.id,
