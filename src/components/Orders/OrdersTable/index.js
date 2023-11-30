@@ -433,7 +433,7 @@ export const OrdersTable = memo((props) => {
                             </DragTh>
                           )
                         }
-                        if (column === 'channel' || (column !== 'channel' && column === [...array].pop())) {
+                        if (column === 'total' || (column !== 'total' && column === [...array].pop())) {
                           return (
                             <React.Fragment key={i}>
                               {(column !== 'total' && column === [...array].pop()) && (
@@ -623,6 +623,13 @@ export const OrdersTable = memo((props) => {
                         <p className='bold'><Skeleton width={60} /></p>
                         <p><Skeleton width={60} /></p>
                       </div>
+                    </td>
+                  )}
+                  {allowColumns?.channel?.visable && !isSelectedOrders && (
+                    <td className='orderStatusTitle'>
+                      <WrapOrderStatusSelector>
+                        <Skeleton width={100} height={30} />
+                      </WrapOrderStatusSelector>
                     </td>
                   )}
                   {!isSelectedOrders && (

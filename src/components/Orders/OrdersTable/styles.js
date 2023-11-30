@@ -185,6 +185,20 @@ export const StatusInfo = styled.div`
     margin: 0;
   }
 `
+export const channelInfo = styled.div`
+  .bold {
+    max-width: 150px;
+    font-weight: 600;
+    margin: 0;
+  }
+`
+export const etaInfo = styled.div`
+  .bold {
+    max-width: 150px;
+    font-weight: 600;
+    margin: 0;
+  }
+`
 
 export const DriversInfo = styled.div`
   .select {
