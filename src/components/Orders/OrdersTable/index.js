@@ -625,6 +625,13 @@ export const OrdersTable = memo((props) => {
                       </div>
                     </td>
                   )}
+                  {allowColumns?.channel?.visable && !isSelectedOrders && (
+                    <td className='orderStatusTitle'>
+                      <WrapOrderStatusSelector>
+                        <Skeleton width={100} height={30} />
+                      </WrapOrderStatusSelector>
+                    </td>
+                  )}
                   {!isSelectedOrders && (
                     <td className='orderPrice'>
                       <div className='info'>
