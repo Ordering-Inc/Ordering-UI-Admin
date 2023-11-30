@@ -163,6 +163,7 @@ const OpenCartsDetailUI = (props) => {
                     <ProductItemAccordion
                       key={product.id}
                       product={product}
+                      toppingsRemoved={cartState?.cart?.toppings_removed?.[product?.code]}
                     />
                   ))}
                 </OrderProducts>

@@ -31,6 +31,7 @@ export const CartBill = (props) => {
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
   const isCouponEnabled = validationFields?.fields?.checkout?.coupon?.enabled
+  const extraValueAdjustment = cart?.metafields?.find?.(meta => meta?.key === 'extra_value_adjustment_amount')
 
   const getIncludedTaxes = (isDeliveryFee) => {
     if (cart?.taxes === null) {
@@ -228,6 +229,14 @@ export const CartBill = (props) => {
                   )}
               </td>
               <td>{parsePrice(cart?.driver_tip)}</td>
+            </tr>
+          )}
+          {extraValueAdjustment && !!parseFloat(extraValueAdjustment?.value) && (
+            <tr>
+              <td>
+                {t(extraValueAdjustment?.key?.toUpperCase(), extraValueAdjustment?.key)}{' '}
+              </td>
+              <td>{parseFloat(extraValueAdjustment?.value) > 0 ? parsePrice(parseFloat(extraValueAdjustment?.value)) : `- ${parsePrice(parseFloat(extraValueAdjustment?.value) * -1)}`}</td>
             </tr>
           )}
         </tbody>

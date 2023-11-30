@@ -436,6 +436,7 @@ const OrderDetailsUI = (props) => {
                   key={product.id}
                   product={product}
                   currency={getCurrenySymbol(order?.currency)}
+                  toppingsRemoved={order?.toppings_removed?.[product?.code]}
                 />
               ))}
             </OrderProducts>

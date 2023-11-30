@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useLanguage, useUtils } from 'ordering-components-admin'
+import { useConfig, useLanguage, useUtils } from 'ordering-components-admin'
 import BsChevronRight from '@meronex/icons/bs/BsChevronRight'
 import BiImage from '@meronex/icons/bi/BiImage'
 import { XLg, ThreeDots, Laptop, Phone, ArrowsAngleContract, ArrowsAngleExpand } from 'react-bootstrap-icons'
@@ -51,11 +51,13 @@ export const ProductSummary = (props) => {
   const [, t] = useLanguage()
   const theme = useTheme()
   const [{ optimizeImage, parsePrice }] = useUtils()
+  const [{ configs }] = useConfig()
 
   const [isEditMode, setIsEditMode] = useState(false)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [isProductPreview, setIsProductPreview] = useState(false)
   const [selectedView, setSelectedView] = useState('desktop')
+  const isWhiteLabel = configs?.white_label_module?.value
 
   const productConfigOptions = [
     {
@@ -181,11 +183,13 @@ export const ProductSummary = (props) => {
                 >
                   {t('CUSTOM_FIELDS', 'Custom fields')}
                 </Dropdown.Item>
-                <Dropdown.Item
-                  onClick={() => handleShowOption('personalization')}
-                >
-                  {t('PERSONALIZATION', 'Personalization')}
-                </Dropdown.Item>
+                {!isWhiteLabel && (
+                  <Dropdown.Item
+                    onClick={() => handleShowOption('personalization')}
+                  >
+                    {t('PERSONALIZATION', 'Personalization')}
+                  </Dropdown.Item>
+                )}
                 <Dropdown.Item
                   onClick={() => handleDeleteClick()}
                 >

@@ -64,10 +64,12 @@ export const BusinessPreview = (props) => {
   const theme = useTheme()
   const [sessionState] = useSession()
   const [orderState] = useOrder()
+  const [{ configs }] = useConfig()
   const { width } = useWindowSize()
   const [{ parsePrice, parseDistance, optimizeImage }] = useUtils()
   const [searchValue, setSearchValue] = useState('')
   const [selectedCategory, setSelectedCateogry] = useState({ id: 'all' })
+  const isWhiteLabel = configs?.white_label_module?.value
 
   let pos = { top: 0, left: 0, x: 0, y: 0 }
   const ele = document.getElementById('product_mobile_view')
@@ -146,9 +148,11 @@ export const BusinessPreview = (props) => {
             {
               (!isMobileView && width > 650) && (
                 <Contentheader>
-                  <HeaderLogo>
-                    <img alt='Logotype' width='100px' height='30px' src={theme?.images?.logos?.logotype} loading='lazy' />
-                  </HeaderLogo>
+                  {!isWhiteLabel && (
+                    <HeaderLogo>
+                      <img alt='Logotype' width='100px' height='30px' src={theme?.images?.logos?.logotype} loading='lazy' />
+                    </HeaderLogo>
+                  )}
                   <HeaderInfo>
                     <AddressWrapper>
                       <GeoAlt />
