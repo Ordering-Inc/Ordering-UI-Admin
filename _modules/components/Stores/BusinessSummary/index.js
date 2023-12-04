@@ -249,7 +249,7 @@ var BusinessSummary = function BusinessSummary(props) {
   }) : businessConfigs.filter(function (c) {
     return !itemsExcluded.includes(c.key);
   })).filter(function (item) {
-    return isEnabledWhiteLabelModule ? item.key !== 'personalization' : true;
+    return isEnabledWhiteLabelModule ? !['personalization', 'sales_channels'].includes(item.key) : true;
   }).map(function (config) {
     return /*#__PURE__*/_react.default.createElement(_styles2.BusinessConfigItem, {
       key: config.key,
