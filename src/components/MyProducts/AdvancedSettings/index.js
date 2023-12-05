@@ -92,7 +92,8 @@ export const AdvancedSettings = (props) => {
     { name: t('DESCRIPTION', 'Description'), type: 'hidden', path: 'business_view.components.products.components.product.components.description.hidden' },
     { name: t('IMAGE', 'Image'), type: 'hidden', path: 'business_view.components.products.components.product.components.image.hidden' },
     { name: t('POSITION', 'Position'), type: 'position', path: 'business_view.components.products.components.product.components.image.position' },
-    { name: t('ADD_TO_CART_BUTTON', 'Add to cart button'), type: 'hidden', path: 'business_view.components.products.components.add_to_cart_button.hidden' }
+    { name: t('ADD_TO_CART_BUTTON', 'Add to cart button'), type: 'hidden', path: 'business_view.components.products.components.add_to_cart_button.hidden' },
+    { name: t('FAVORITE', 'Favorite'), type: 'hidden', path: 'business_view.components.products.components.product.components.favorite' }
   ]
 
   const reviewsPopups = [
