@@ -298,7 +298,7 @@ export const BusinessSummary = (props) => {
                 ? businessConfigs
                 : businessConfigs.filter(configs => configs.key !== 'spoonity_key')
               : businessConfigs.filter(c => !itemsExcluded.includes(c.key))
-            ).filter(item => isEnabledWhiteLabelModule ? item.key !== 'personalization' : true).map(config => (
+            ).filter(item => isEnabledWhiteLabelModule ? !['personalization', 'sales_channels'].includes(item.key) : true).map(config => (
               <BusinessConfigItem
                 key={config.key}
                 active={selectedItem === config.key}

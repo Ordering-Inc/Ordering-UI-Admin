@@ -4,7 +4,7 @@ import Skeleton from 'react-loading-skeleton'
 import { ThreeDots, Calendar4Event, ArrowsAngleContract, ArrowsAngleExpand } from 'react-bootstrap-icons'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
-import { useLanguage, useSession, UserDetails as UserDetailsController } from 'ordering-components-admin'
+import { useLanguage, useSession, UserDetails as UserDetailsController, useConfig } from 'ordering-components-admin'
 import { Confirm, Personalization, SideBar, Alert } from '../../Shared'
 import { UserDetailsMenu } from '../UserDetailsMenu'
 import { UserProfileForm } from '../UserProfileForm'
@@ -40,12 +40,14 @@ export const ProfessionalDetailUI = (props) => {
   const theme = useTheme()
   const [adminUserState] = useSession()
   const [, t] = useLanguage()
+  const [{ configs }] = useConfig()
   const { width } = useWindowSize()
   const [currentMenuSelected, setCurrentMenuSelected] = useState('profile')
   const [extraSelected, setExtraSelected] = useState(null)
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [isExpand, setIsExpand] = useState(false)
+  const isWhiteLabel = configs?.white_label_module?.value
 
   const onDeleteCustomer = () => {
     setConfirm({
@@ -157,9 +159,11 @@ export const ProfessionalDetailUI = (props) => {
                 <Dropdown.Item onClick={() => handleOpenExtra('custom_fields')}>
                   {t('CUSTOM_FIELDS', 'Custom fields')}
                 </Dropdown.Item>
-                <Dropdown.Item onClick={() => handleOpenExtra('personalization')}>
-                  {t('PERSONALIZATION', 'Personalization')}
-                </Dropdown.Item>
+                {!isWhiteLabel && (
+                  <Dropdown.Item onClick={() => handleOpenExtra('personalization')}>
+                    {t('PERSONALIZATION', 'Personalization')}
+                  </Dropdown.Item>
+                )}
                 {adminUserState?.user?.level === 0 && (
                   <Dropdown.Item onClick={() => onDeleteCustomer()}>
                     {t('DELETE', 'Delete')}
