@@ -225,6 +225,10 @@ var AdvancedSettings = function AdvancedSettings(props) {
     name: t('ADD_TO_CART_BUTTON', 'Add to cart button'),
     type: 'hidden',
     path: 'business_view.components.products.components.add_to_cart_button.hidden'
+  }, {
+    name: t('FAVORITE', 'Favorite'),
+    type: 'hidden',
+    path: 'business_view.components.products.components.product.components.favorite'
   }];
   var reviewsPopups = [{
     name: t('REVIEW_DATE', 'Review date'),
