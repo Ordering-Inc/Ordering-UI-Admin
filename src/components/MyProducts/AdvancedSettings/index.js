@@ -72,7 +72,10 @@ export const AdvancedSettings = (props) => {
     { name: t('SEARCH', 'Search'), type: 'hidden', path: 'business_view.components.reviews.components.search.hidden' },
     { name: t('BUSINESS_LOGO', 'Business logo'), type: 'hidden', path: 'business_view.components.header.components.logo.hidden' },
     { name: t('BUSINESS_INFO_ICON', 'Business info icon'), type: 'hidden', path: 'business_view.components.header.components.business_info.hidden' },
-    { name: t('BUSINESS_HEADER', 'Business header'), type: 'hidden', path: 'business_view.components.header.hidden' }
+    { name: t('BUSINESS_HEADER', 'Business header'), type: 'hidden', path: 'business_view.components.header.hidden' },
+    { name: t('BUSINESS_HEADER_REVIEWS', 'Business header reviews'), type: 'hidden', path: 'business_view.components.header.components.business.components.reviews.hidden' },
+    { name: t('BUSINESS_POPUP_REVIEWS', 'Business popup reviews'), type: 'hidden', path: 'business_view.components.header.components.reviews.hidden' }
+
   ]
 
   const businessInfoList = [
