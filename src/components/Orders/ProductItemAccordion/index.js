@@ -37,7 +37,8 @@ export const ProductItemAccordion = (props) => {
     offsetDisabled,
     onDeleteProduct,
     onEditProduct,
-    currency
+    currency,
+    toppingsRemoved
   } = props
   const [, t] = useLanguage()
   const [orderState] = useOrder()
@@ -302,6 +303,20 @@ export const ProductItemAccordion = (props) => {
                 </ProductOptionsList>
               </li>
             ))}
+          </ProductOptionsList>
+        )}
+        {toppingsRemoved?.removed?.length > 0 && (
+          <ProductOptionsList>
+            <li>
+              <p>{t('TOPPINGS_REMOVED', 'Toppings removed')}</p>
+              <ProductOptionsList className='suboption'>
+                {toppingsRemoved?.removed.map(topping => (
+                  <li key={topping.code}>
+                    <span>{topping.name}</span>
+                  </li>
+                ))}
+              </ProductOptionsList>
+            </li>
           </ProductOptionsList>
         )}
         {product.comment && (

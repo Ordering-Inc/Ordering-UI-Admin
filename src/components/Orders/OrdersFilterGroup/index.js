@@ -3,7 +3,7 @@ import { PlusCircle, Trash3, Funnel } from 'react-bootstrap-icons'
 import MdcFilterOff from '@meronex/icons/mdc/MdcFilterOff'
 import TiWarningOutline from '@meronex/icons/ti/TiWarningOutline'
 import { useLanguage, OrdersFilter as OrdersFilterController } from 'ordering-components-admin'
- import { BusinessesSelector } from '../BusinessesSelector'
+import { BusinessesSelector } from '../BusinessesSelector'
 import { DriversGroupTypeSelector } from '../DriversGroupTypeSelector'
 import { DateTypeSelector } from '../DateTypeSelector'
 import { DriverMultiSelector } from '../DriverMultiSelector'
@@ -181,6 +181,38 @@ const OrdersFilterGroupUI = (props) => {
               autoComplete='off'
               value={filterValues?.externalId || ''}
               onChange={handleChangeExternalId}
+            />
+          </WrapperRow>
+          <WrapperRow>
+            <Input
+              type='text'
+              placeholder={t('CUSTOMER_NAME', 'Customer Name')}
+              autoComplete='off'
+              value={filterValues?.customerName || ''}
+              onChange={(e) => handleChangeChildFilterValue({ customerName: e?.target?.value })}
+            />
+            <Input
+              type='text'
+              placeholder={t('CUSTOMER_LASTNAME', 'Customer Lastname')}
+              autoComplete='off'
+              value={filterValues?.customerLastname || ''}
+              onChange={(e) => handleChangeChildFilterValue({ customerLastname: e?.target?.value })}
+            />
+          </WrapperRow>
+          <WrapperRow>
+            <Input
+              type='text'
+              placeholder={t('CUSTOMER_EMAIL', 'Customer Email')}
+              autoComplete='off'
+              value={filterValues?.customerEmail || ''}
+              onChange={(e) => handleChangeChildFilterValue({ customerEmail: e?.target?.value })}
+            />
+            <Input
+              type='text'
+              placeholder={t('CUSTOMER_CELLPHONE', 'Customer Cellphone')}
+              autoComplete='off'
+              value={filterValues?.customerCellphone || ''}
+              onChange={(e) => handleChangeChildFilterValue({ customerCellphone: e?.target?.value })}
             />
           </WrapperRow>
           <WrapperRow>

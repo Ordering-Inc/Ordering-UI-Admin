@@ -280,7 +280,7 @@ export const Order = React.memo((props) => {
                 <EtaInfo>
                   <p className='bold'>{''}</p>
                 </EtaInfo>
-              </td>
+             </td>
             )
           }
           if (column === 'channel') {

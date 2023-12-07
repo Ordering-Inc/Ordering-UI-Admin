@@ -379,7 +379,6 @@ export const OrderContactInformation = (props) => {
                 isOrderDrivers
                 orderId={order?.id}
                 setCommentInfostate={setCommentInfostate}
-                disableSocketRoomDriver
               />
             </DriverSelectorContainer>
           )}

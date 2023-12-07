@@ -32,7 +32,7 @@ const UsersExportCSVUI = (props) => {
   }
 
   const handleCSV = () => {
-    getCSV(false)
+    getCSV(true)
   }
 
   useEffect(() => {

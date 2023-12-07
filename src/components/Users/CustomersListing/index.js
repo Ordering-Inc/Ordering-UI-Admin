@@ -159,6 +159,7 @@ const CustomersListingUI = (props) => {
               disabledActiveStateCondition={disabledActiveStateCondition}
               userTypesSelected={userTypesSelected}
               selectedUserActiveState={selectedUserActiveState}
+              multiFilterValues={multiFilterValues}
             />
             <UsersDeleteButton
               selectedUsers={selectedUsers}

@@ -72,7 +72,10 @@ export const AdvancedSettings = (props) => {
     { name: t('SEARCH', 'Search'), type: 'hidden', path: 'business_view.components.reviews.components.search.hidden' },
     { name: t('BUSINESS_LOGO', 'Business logo'), type: 'hidden', path: 'business_view.components.header.components.logo.hidden' },
     { name: t('BUSINESS_INFO_ICON', 'Business info icon'), type: 'hidden', path: 'business_view.components.header.components.business_info.hidden' },
-    { name: t('BUSINESS_HEADER', 'Business header'), type: 'hidden', path: 'business_view.components.header.hidden' }
+    { name: t('BUSINESS_HEADER', 'Business header'), type: 'hidden', path: 'business_view.components.header.hidden' },
+    { name: t('BUSINESS_HEADER_REVIEWS', 'Business header reviews'), type: 'hidden', path: 'business_view.components.header.components.business.components.reviews.hidden' },
+    { name: t('BUSINESS_POPUP_REVIEWS', 'Business popup reviews'), type: 'hidden', path: 'business_view.components.header.components.reviews.hidden' }
+
   ]
 
   const businessInfoList = [
@@ -89,7 +92,8 @@ export const AdvancedSettings = (props) => {
     { name: t('DESCRIPTION', 'Description'), type: 'hidden', path: 'business_view.components.products.components.product.components.description.hidden' },
     { name: t('IMAGE', 'Image'), type: 'hidden', path: 'business_view.components.products.components.product.components.image.hidden' },
     { name: t('POSITION', 'Position'), type: 'position', path: 'business_view.components.products.components.product.components.image.position' },
-    { name: t('ADD_TO_CART_BUTTON', 'Add to cart button'), type: 'hidden', path: 'business_view.components.products.components.add_to_cart_button.hidden' }
+    { name: t('ADD_TO_CART_BUTTON', 'Add to cart button'), type: 'hidden', path: 'business_view.components.products.components.add_to_cart_button.hidden' },
+    { name: t('FAVORITE', 'Favorite'), type: 'hidden', path: 'business_view.components.products.components.product.components.favorite' }
   ]
 
   const reviewsPopups = [

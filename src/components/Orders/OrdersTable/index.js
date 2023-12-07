@@ -438,7 +438,7 @@ export const OrdersTable = memo((props) => {
                             </DragTh>
                           )
                         }
-                        if (column === 'total' || (column !== 'total' && column === [...array].pop())) {
+                        if (column === 'channel' || (column !== 'channel' && column === [...array].pop())) {
                           return (
                             <React.Fragment key={i}>
                               {(column !== 'total' && column === [...array].pop()) && (
