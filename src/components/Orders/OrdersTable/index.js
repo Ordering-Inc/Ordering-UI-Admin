@@ -262,7 +262,12 @@ export const OrdersTable = memo((props) => {
   }
 
   const handleChangeAllowColumns = (type) => {
-    const _column = allowColumns[type]
+    let _column = {}
+    if (type === 'channel'){
+      _column = { visable:allowColumns[type].visable ,title: t('CHANNEL', 'Channel'), className: 'channelInfo', draggable: true, colSpan: 1, order: 12 }
+     }else{
+      _column = allowColumns[type]
+     }
     const updatedAllowColumns = {
       ...allowColumns,
       [type]: { ..._column, visable: !_column?.visable }
