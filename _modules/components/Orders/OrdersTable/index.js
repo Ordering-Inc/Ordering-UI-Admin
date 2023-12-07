@@ -243,9 +243,22 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
     return (_orderStatus$Number = orderStatus === null || orderStatus === void 0 ? void 0 : orderStatus[Number(s)]) !== null && _orderStatus$Number !== void 0 ? _orderStatus$Number : s;
   };
   var handleChangeAllowColumns = function handleChangeAllowColumns(type) {
-    var _column = allowColumns[type];
+    var _column2;
+    var _column = {};
+    if (type === 'channel') {
+      _column = {
+        visable: allowColumns[type].visable,
+        title: t('CHANNEL', 'Channel'),
+        className: 'channelInfo',
+        draggable: true,
+        colSpan: 1,
+        order: 12
+      };
+    } else {
+      _column = allowColumns[type];
+    }
     var updatedAllowColumns = _objectSpread(_objectSpread({}, allowColumns), {}, _defineProperty({}, type, _objectSpread(_objectSpread({}, _column), {}, {
-      visable: !(_column !== null && _column !== void 0 && _column.visable)
+      visable: !((_column2 = _column) !== null && _column2 !== void 0 && _column2.visable)
     })));
     setAllowColumns(updatedAllowColumns);
     saveUserSettings(JSON.parse(JSON.stringify(updatedAllowColumns)));

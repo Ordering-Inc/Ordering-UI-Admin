@@ -229,7 +229,7 @@ var Order = /*#__PURE__*/_react.default.memo(function (props) {
       return /*#__PURE__*/_react.default.createElement("td", {
         className: "eta",
         key: "eta".concat(i, "-").concat(index)
-      }, /*#__PURE__*/_react.default.createElement("etaInfo", null, /*#__PURE__*/_react.default.createElement("p", {
+      }, /*#__PURE__*/_react.default.createElement(_styles.EtaInfo, null, /*#__PURE__*/_react.default.createElement("p", {
         className: "bold"
       }, '')));
     }
@@ -237,7 +237,7 @@ var Order = /*#__PURE__*/_react.default.memo(function (props) {
       return /*#__PURE__*/_react.default.createElement("td", {
         className: "channelInfo",
         key: "channelInfo".concat(i, "-").concat(index)
-      }, /*#__PURE__*/_react.default.createElement(_styles.StatusInfo, null, /*#__PURE__*/_react.default.createElement("p", {
+      }, /*#__PURE__*/_react.default.createElement(_styles.ChannelInfo, null, /*#__PURE__*/_react.default.createElement("p", {
         className: "bold"
       }, order.app_id)));
     }
