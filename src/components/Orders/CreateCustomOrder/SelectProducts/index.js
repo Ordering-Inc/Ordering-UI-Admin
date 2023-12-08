@@ -23,7 +23,8 @@ export const SelectProducts = (props) => {
     productList,
     handeUpdateProductCart,
     cart,
-    business
+    business,
+    getProducts
   } = props
 
   const [, t] = useLanguage()
@@ -112,6 +113,15 @@ export const SelectProducts = (props) => {
     })
     setProductsOptions(_productsOptions)
   }, [productList, searchValue])
+
+  useEffect(() => {
+    if (productList?.products) {
+      const productsExist = productList?.products?.filter(product => (product?.name || '').toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()))
+      if (productsExist.length <= 3) {
+        getProducts(searchValue)
+      }
+    }
+  }, [searchValue])
 
   return (
     <Container>
