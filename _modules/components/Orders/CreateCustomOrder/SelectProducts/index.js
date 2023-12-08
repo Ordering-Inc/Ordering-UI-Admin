@@ -32,7 +32,8 @@ var SelectProducts = function SelectProducts(props) {
   var productList = props.productList,
     handeUpdateProductCart = props.handeUpdateProductCart,
     cart = props.cart,
-    business = props.business;
+    business = props.business,
+    getProducts = props.getProducts;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -147,6 +148,17 @@ var SelectProducts = function SelectProducts(props) {
     });
     setProductsOptions(_productsOptions);
   }, [productList, searchValue]);
+  (0, _react.useEffect)(function () {
+    if (productList !== null && productList !== void 0 && productList.products) {
+      var _productList$products2;
+      var productsExist = productList === null || productList === void 0 || (_productList$products2 = productList.products) === null || _productList$products2 === void 0 ? void 0 : _productList$products2.filter(function (product) {
+        return ((product === null || product === void 0 ? void 0 : product.name) || '').toLocaleLowerCase().includes(searchValue.toLocaleLowerCase());
+      });
+      if (productsExist.length <= 3) {
+        getProducts(searchValue);
+      }
+    }
+  }, [searchValue]);
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement("h3", null, t('WAHT_WANT_TO_BUY', 'What do you want us to buy?')), /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
     noSelected: true,
     placeholder: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, t('SELECT_PRODUCT', 'Select product')),
