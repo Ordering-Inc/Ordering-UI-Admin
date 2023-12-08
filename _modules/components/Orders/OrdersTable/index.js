@@ -243,9 +243,22 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
     return (_orderStatus$Number = orderStatus === null || orderStatus === void 0 ? void 0 : orderStatus[Number(s)]) !== null && _orderStatus$Number !== void 0 ? _orderStatus$Number : s;
   };
   var handleChangeAllowColumns = function handleChangeAllowColumns(type) {
-    var _column = allowColumns[type];
+    var _column2;
+    var _column = {};
+    if (type === 'channel') {
+      _column = {
+        visable: allowColumns[type].visable,
+        title: t('CHANNEL', 'Channel'),
+        className: 'channelInfo',
+        draggable: true,
+        colSpan: 1,
+        order: 12
+      };
+    } else {
+      _column = allowColumns[type];
+    }
     var updatedAllowColumns = _objectSpread(_objectSpread({}, allowColumns), {}, _defineProperty({}, type, _objectSpread(_objectSpread({}, _column), {}, {
-      visable: !(_column !== null && _column !== void 0 && _column.visable)
+      visable: !((_column2 = _column) !== null && _column2 !== void 0 && _column2.visable)
     })));
     setAllowColumns(updatedAllowColumns);
     saveUserSettings(JSON.parse(JSON.stringify(updatedAllowColumns)));
@@ -469,7 +482,7 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
       alt: "six dots"
     }), /*#__PURE__*/_react.default.createElement("span", null, (_allowColumns$column9 = allowColumns[column]) === null || _allowColumns$column9 === void 0 ? void 0 : _allowColumns$column9.title)));
   })))), orderList.loading || !allowColumns ? _toConsumableArray(Array(10).keys()).map(function (i) {
-    var _allowColumns$slaBar2, _allowColumns$orderNu2, _allowColumns$dateTim2, _allowColumns$orderNu3, _allowColumns$dateTim3, _allowColumns$externa, _allowColumns$cartGro, _allowColumns$driverG, _allowColumns$status, _allowColumns$busines, _allowColumns$custome, _allowColumns$driver, _allowColumns$deliver, _allowColumns$status2, _allowColumns$advance, _allowColumns$advance2, _allowColumns$advance3, _allowColumns$total;
+    var _allowColumns$slaBar2, _allowColumns$orderNu2, _allowColumns$dateTim2, _allowColumns$orderNu3, _allowColumns$dateTim3, _allowColumns$externa, _allowColumns$cartGro, _allowColumns$driverG, _allowColumns$status, _allowColumns$busines, _allowColumns$custome, _allowColumns$driver, _allowColumns$deliver, _allowColumns$status2, _allowColumns$advance, _allowColumns$advance2, _allowColumns$advance3, _allowColumns$channel, _allowColumns$total;
     return /*#__PURE__*/_react.default.createElement(_styles.OrderTbody, {
       key: i
     }, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 || (_allowColumns$slaBar2 = allowColumns.slaBar) === null || _allowColumns$slaBar2 === void 0 ? void 0 : _allowColumns$slaBar2.visable) && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.Timestatus, null)), /*#__PURE__*/_react.default.createElement("td", {
@@ -596,7 +609,12 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
       width: 60
     })), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 60
-    })))), !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
+    })))), (allowColumns === null || allowColumns === void 0 || (_allowColumns$channel = allowColumns.channel) === null || _allowColumns$channel === void 0 ? void 0 : _allowColumns$channel.visable) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
+      className: "orderStatusTitle"
+    }, /*#__PURE__*/_react.default.createElement(_styles.WrapOrderStatusSelector, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      width: 100,
+      height: 30
+    }))), !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
       className: "orderPrice"
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "info"
