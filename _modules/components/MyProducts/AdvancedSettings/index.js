@@ -228,7 +228,7 @@ var AdvancedSettings = function AdvancedSettings(props) {
   }, {
     name: t('FAVORITE', 'Favorite'),
     type: 'hidden',
-    path: 'business_view.components.products.components.product.components.favorite'
+    path: 'business_view.components.products.components.product.components.favorite.hidden'
   }];
   var reviewsPopups = [{
     name: t('REVIEW_DATE', 'Review date'),
