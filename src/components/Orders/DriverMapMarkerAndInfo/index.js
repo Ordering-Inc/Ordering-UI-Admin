@@ -11,7 +11,8 @@ import {
 } from './styles'
 export const DriverMapMarkerAndInfo = (props) => {
   const {
-    driver
+    driver,
+    timeStatus
   } = props
   const [, t] = useLanguage()
   const theme = useTheme()
@@ -67,6 +68,13 @@ export const DriverMapMarkerAndInfo = (props) => {
         offline={!(driver.enabled && driver.available && !driver.busy)}
         onMouseOver={() => setInfoShow(true)}
         onMouseLeave={() => setInfoShow(false)}
+        borderColor={timeStatus === 'delayed'
+          ? '#E63757'
+          : !driver?.available
+            ? '#6c757d'
+            : driver.busy
+              ? '#007bff'
+              : '#28a745'}
       >
         {driver.photo ? (
           <MapMarkerImg bgimage={optimizeImage(driver.photo, 'h_50,c_limit')} />
