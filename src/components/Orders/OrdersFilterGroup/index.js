@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { PlusCircle, Trash3, Funnel } from 'react-bootstrap-icons'
 import MdcFilterOff from '@meronex/icons/mdc/MdcFilterOff'
 import TiWarningOutline from '@meronex/icons/ti/TiWarningOutline'
-import { useLanguage, OrdersFilter as OrdersFilterController } from 'ordering-components-admin'
+import { useLanguage, useConfig, OrdersFilter as OrdersFilterController } from 'ordering-components-admin'
 import { BusinessesSelector } from '../BusinessesSelector'
 import { DriversGroupTypeSelector } from '../DriversGroupTypeSelector'
 import { DateTypeSelector } from '../DateTypeSelector'
@@ -71,6 +71,8 @@ const OrdersFilterGroupUI = (props) => {
   const [isShow, setIsShow] = useState(false)
   const [filterApplied, setFilterApplied] = useState(false)
   const metafieldRef = useRef()
+  const [{ configs }] = useConfig()
+  const configFilter = configs?.filter_order_options?.value.split('|').map(value =>(value)) || []
 
   const logisticStatusList = [
     { value: 0, content: <Option>{t('PENDING', 'Pending')}<LogisticStatusDot status={0} /></Option> },
@@ -168,20 +170,22 @@ const OrdersFilterGroupUI = (props) => {
         <FilterGroupListContainer className='filter-modal'>
           <h1>{t('FILTER', 'Filter')}</h1>
           <WrapperRow>
+          { configFilter.includes('id') && (
             <Input
               type='text'
               placeholder='ID'
               autoComplete='off'
               value={filterValues?.orderId || ''}
               onChange={(e) => handleChangeOrderId(e)}
-            />
-            <Input
+            /> )
+          }
+          {/* <Input
               type='text'
               placeholder={t('EXTERNAL_ID', 'External Id')}
               autoComplete='off'
               value={filterValues?.externalId || ''}
               onChange={handleChangeExternalId}
-            />
+            /> */}
           </WrapperRow>
           <WrapperRow>
             <Input
@@ -216,20 +220,29 @@ const OrdersFilterGroupUI = (props) => {
             />
           </WrapperRow>
           <WrapperRow>
+          { configFilter.includes('driver_group') && (
             <DriversGroupTypeSelector
               driverGroupList={driverGroupList}
               handleChangeGroup={handleChangeGroup}
               filterValues={filterValues.groupTypes}
               title={t('DRIVER_GROUP_ASSIGNED', 'Driver group (assigned)')}
-            />
-            <DriversGroupTypeSelector
+            />)
+          }
+          { configFilter.includes('business') && (
+            <BusinessesSelector
+              filterValues={filterValues}
+              businessesList={businessesList}
+              handleChangeBusinesses={handleChangeBusinesses}
+            />)
+          }
+            {/* <DriversGroupTypeSelector
               driverGroupList={driverGroupList}
               handleChangeGroup={handleChangeGroupUnassigned}
               filterValues={filterValues.groupTypesUnassigned}
               title={t('DRIVER_GROUP_NOT_ASSIGNED', 'Driver group (general)')}
-            />
+            /> */}
           </WrapperRow>
-          <WrapperRow>
+          {/* <WrapperRow>
             <BusinessesSelector
               filterValues={filterValues}
               businessesList={businessesList}
@@ -240,17 +253,21 @@ const OrdersFilterGroupUI = (props) => {
               filterValues={filterValues}
               handleChangeDriver={handleChangeDriver}
             />
-          </WrapperRow>
+          </WrapperRow> */}
           <WrapperRow>
+          { configFilter.includes('country_code') && (
             <CountryFilter
               filterValues={filterValues}
               handleChangeCountryCode={handleChangeCountryCode}
-            />
+            />)
+          }
+          { configFilter.includes('city') && (
             <CitySelector
               cities={citiesList}
               filterValues={filterValues}
               handleChangeCity={handleChangeCity}
-            />
+            />)
+          }
             {/* <MultiSelectContainer>
               <OrderStatusTypeSelector
                 isFilterView
@@ -260,21 +277,28 @@ const OrdersFilterGroupUI = (props) => {
             </MultiSelectContainer> */}
           </WrapperRow>
           <WrapperRow>
+          { configFilter.includes('delivery_type') && (
             <DeliveryTypeSelector
               filterValues={filterValues}
               handleChangeDeliveryType={handleChangeDeliveryType}
-            />
+            />)
+          }
+          { configFilter.includes('paymethod') && (
             <PaymethodTypeSelector
               paymethodsList={paymethodsList}
               filterValues={filterValues}
               handleChangePaymethodType={handleChangePaymethodType}
-            />
+            />)
+          }
           </WrapperRow>
           <WrapperRow>
+          { configFilter.includes('currency') && (
             <CurrencyFilter
               filterValues={filterValues}
               handleChangeCurrency={handleChangeCurrency}
-            />
+            />)
+          }
+          { configFilter.includes('logistic_status') && (
             <SelectWrapper>
               <Select
                 options={logisticStatusList}
@@ -283,9 +307,11 @@ const OrdersFilterGroupUI = (props) => {
                 placeholder={t('SELECT_LOGISTIC_STATUS', 'Select a logistic status')}
                 onChange={(value) => handleChangeChildFilterValue({ logisticStatus: value })}
               />
-            </SelectWrapper>
+            </SelectWrapper>)
+          }
           </WrapperRow>
           <WrapperRow>
+          { configFilter.includes('driver_status') && (
             <SelectWrapper>
               <Select
                 options={assignedFilterOptions}
@@ -294,76 +320,83 @@ const OrdersFilterGroupUI = (props) => {
                 placeholder={t('SELECT_DRIVER_STATUS', 'Select a driver status')}
                 onChange={(value) => handleChangeChildFilterValue({ assigned: value })}
               />
-            </SelectWrapper>
+            </SelectWrapper>)
+          }
+          { configFilter.includes('date') && (
             <DateTypeSelector
               filterValues={filterValues}
               handleChangeDateType={handleChangeDateType}
               handleChangeFromDate={handleChangeFromDate}
               handleChangeEndDate={handleChangeEndDate}
-            />
+            />)
+          }
           </WrapperRow>
-          {filterValues?.metafield.map(item => (
-            <WrapperRow key={item.id}>
-              <Input
-                type='text'
-                name='key'
-                placeholder={t('METAFIELD_NAME', 'Metafield name')}
-                autoComplete='off'
-                value={item.key || ''}
-                onChange={(e) => handleChangeMetaFieldValue(e, item.id)}
-              />
-              {item?.key && (
-                <AddInputWrapper>
+          { configFilter.includes('metafields') && (
+            <>
+              {filterValues?.metafield.map(item => (
+                <WrapperRow key={item.id}>
                   <Input
                     type='text'
-                    name='value'
-                    placeholder={t('METAFIELD_VALUE', 'Metafield value')}
+                    name='key'
+                    placeholder={t('METAFIELD_NAME', 'Metafield name')}
                     autoComplete='off'
-                    value={item?.value || ''}
+                    value={item.key || ''}
                     onChange={(e) => handleChangeMetaFieldValue(e, item.id)}
                   />
-                  <IconButton
-                    color='black'
-                    onClick={() => handleDeleteMetafieldValue(item.id)}
-                  >
-                    <Trash3 />
-                  </IconButton>
-                </AddInputWrapper>
+                  {item?.key && (
+                    <AddInputWrapper>
+                      <Input
+                        type='text'
+                        name='value'
+                        placeholder={t('METAFIELD_VALUE', 'Metafield value')}
+                        autoComplete='off'
+                        value={item?.value || ''}
+                        onChange={(e) => handleChangeMetaFieldValue(e, item.id)}
+                      />
+                      <IconButton
+                        color='black'
+                        onClick={() => handleDeleteMetafieldValue(item.id)}
+                      >
+                        <Trash3 />
+                      </IconButton>
+                    </AddInputWrapper>
+                  )}
+                </WrapperRow>
+              ))}
+              {!isShow && (
+                <AddMetaFiled onClick={() => setIsShow(true)}>{t('ADD_METAFIELD', 'Add a metafield')}</AddMetaFiled>
               )}
-            </WrapperRow>
-          ))}
-          {!isShow && (
-            <AddMetaFiled onClick={() => setIsShow(true)}>{t('ADD_METAFIELD', 'Add a metafield')}</AddMetaFiled>
-          )}
-          {isShow && (
-            <WrapperRow ref={metafieldRef}>
-              <Input
-                type='text'
-                name='key'
-                placeholder={t('METAFIELD_NAME', 'Metafield name')}
-                autoComplete='off'
-                value={metafield.key || ''}
-                onChange={(e) => setMetaField({ ...metafield, key: e.target.value })}
-              />
-              {metafield?.key && (
-                <AddInputWrapper>
+              {isShow && (
+                <WrapperRow ref={metafieldRef}>
                   <Input
                     type='text'
-                    name='value'
-                    placeholder={t('METAFIELD_VALUE', 'Metafield value')}
+                    name='key'
+                    placeholder={t('METAFIELD_NAME', 'Metafield name')}
                     autoComplete='off'
-                    value={metafield.value || ''}
-                    onChange={(e) => setMetaField({ ...metafield, value: e.target.value })}
+                    value={metafield.key || ''}
+                    onChange={(e) => setMetaField({ ...metafield, key: e.target.value })}
                   />
-                  <IconButton
-                    color='primary'
-                    onClick={handleAddMetafieldValue}
-                  >
-                    <PlusCircle />
-                  </IconButton>
-                </AddInputWrapper>
+                  {metafield?.key && (
+                    <AddInputWrapper>
+                      <Input
+                        type='text'
+                        name='value'
+                        placeholder={t('METAFIELD_VALUE', 'Metafield value')}
+                        autoComplete='off'
+                        value={metafield.value || ''}
+                        onChange={(e) => setMetaField({ ...metafield, value: e.target.value })}
+                      />
+                      <IconButton
+                        color='primary'
+                        onClick={handleAddMetafieldValue}
+                      >
+                        <PlusCircle />
+                      </IconButton>
+                    </AddInputWrapper>
+                  )}
+                </WrapperRow>
               )}
-            </WrapperRow>
+            </>
           )}
           <ButtonGroup>
             <Button
