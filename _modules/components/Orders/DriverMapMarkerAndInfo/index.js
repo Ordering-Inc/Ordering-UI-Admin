@@ -19,7 +19,8 @@ function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" !=
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var DriverMapMarkerAndInfo = function DriverMapMarkerAndInfo(props) {
   var _driver$drivergroups, _theme$images;
-  var driver = props.driver;
+  var driver = props.driver,
+    timeStatus = props.timeStatus;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -66,7 +67,8 @@ var DriverMapMarkerAndInfo = function DriverMapMarkerAndInfo(props) {
     },
     onMouseLeave: function onMouseLeave() {
       return setInfoShow(false);
-    }
+    },
+    borderColor: timeStatus === 'delayed' ? '#E63757' : !(driver !== null && driver !== void 0 && driver.available) ? '#6c757d' : driver.busy ? '#007bff' : '#28a745'
   }, driver.photo ? /*#__PURE__*/_react.default.createElement(_styles.MapMarkerImg, {
     bgimage: optimizeImage(driver.photo, 'h_50,c_limit')
   }) : /*#__PURE__*/_react.default.createElement(_styles.MapMarkerImg, {
