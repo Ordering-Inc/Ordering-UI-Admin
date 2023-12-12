@@ -39,7 +39,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; } // import { OrderStatusTypeSelector } from '../OrderStatusTypeSelector'
 var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
-  var _filterValues$logisti, _filterValues$assigne;
+  var _configs$filter_order, _filterValues$logisti, _filterValues$assigne;
   var isLateralBar = props.isLateralBar,
     filterModalOpen = props.filterModalOpen,
     setFilterModalOpen = props.setFilterModalOpen,
@@ -90,6 +90,12 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
     filterApplied = _useState6[0],
     setFilterApplied = _useState6[1];
   var metafieldRef = (0, _react.useRef)();
+  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configs = _useConfig2[0].configs;
+  var configFilter = (configs === null || configs === void 0 || (_configs$filter_order = configs.filter_order_options) === null || _configs$filter_order === void 0 ? void 0 : _configs$filter_order.value.split('|').map(function (value) {
+    return value;
+  })) || [];
   var logisticStatusList = [{
     value: 0,
     content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, t('PENDING', 'Pending'), /*#__PURE__*/_react.default.createElement(_styles3.LogisticStatusDot, {
@@ -200,7 +206,7 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_styles2.FilterGroupListContainer, {
     className: "filter-modal"
-  }, /*#__PURE__*/_react.default.createElement("h1", null, t('FILTER', 'Filter')), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  }, /*#__PURE__*/_react.default.createElement("h1", null, t('FILTER', 'Filter')), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, configFilter.includes('id') && /*#__PURE__*/_react.default.createElement(_styles.Input, {
     type: "text",
     placeholder: "ID",
     autoComplete: "off",
@@ -208,12 +214,6 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
     onChange: function onChange(e) {
       return handleChangeOrderId(e);
     }
-  }), /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    type: "text",
-    placeholder: t('EXTERNAL_ID', 'External Id'),
-    autoComplete: "off",
-    value: (filterValues === null || filterValues === void 0 ? void 0 : filterValues.externalId) || '',
-    onChange: handleChangeExternalId
   })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
     type: "text",
     placeholder: t('CUSTOMER_NAME', 'Customer Name'),
@@ -258,42 +258,33 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
         customerCellphone: e === null || e === void 0 || (_e$target4 = e.target) === null || _e$target4 === void 0 ? void 0 : _e$target4.value
       });
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_DriversGroupTypeSelector.DriversGroupTypeSelector, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, configFilter.includes('driver_group') && /*#__PURE__*/_react.default.createElement(_DriversGroupTypeSelector.DriversGroupTypeSelector, {
     driverGroupList: driverGroupList,
     handleChangeGroup: handleChangeGroup,
     filterValues: filterValues.groupTypes,
     title: t('DRIVER_GROUP_ASSIGNED', 'Driver group (assigned)')
-  }), /*#__PURE__*/_react.default.createElement(_DriversGroupTypeSelector.DriversGroupTypeSelector, {
-    driverGroupList: driverGroupList,
-    handleChangeGroup: handleChangeGroupUnassigned,
-    filterValues: filterValues.groupTypesUnassigned,
-    title: t('DRIVER_GROUP_NOT_ASSIGNED', 'Driver group (general)')
-  })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_BusinessesSelector.BusinessesSelector, {
+  }), configFilter.includes('business') && /*#__PURE__*/_react.default.createElement(_BusinessesSelector.BusinessesSelector, {
     filterValues: filterValues,
     businessesList: businessesList,
     handleChangeBusinesses: handleChangeBusinesses
-  }), /*#__PURE__*/_react.default.createElement(_DriverMultiSelector.DriverMultiSelector, {
-    drivers: driversList.drivers,
-    filterValues: filterValues,
-    handleChangeDriver: handleChangeDriver
-  })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_CountryFilter.CountryFilter, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, configFilter.includes('country_code') && /*#__PURE__*/_react.default.createElement(_CountryFilter.CountryFilter, {
     filterValues: filterValues,
     handleChangeCountryCode: handleChangeCountryCode
-  }), /*#__PURE__*/_react.default.createElement(_Shared.CitySelector, {
+  }), configFilter.includes('city') && /*#__PURE__*/_react.default.createElement(_Shared.CitySelector, {
     cities: citiesList,
     filterValues: filterValues,
     handleChangeCity: handleChangeCity
-  })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_DeliveryTypeSelector.DeliveryTypeSelector, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, configFilter.includes('delivery_type') && /*#__PURE__*/_react.default.createElement(_DeliveryTypeSelector.DeliveryTypeSelector, {
     filterValues: filterValues,
     handleChangeDeliveryType: handleChangeDeliveryType
-  }), /*#__PURE__*/_react.default.createElement(_PaymethodTypeSelector.PaymethodTypeSelector, {
+  }), configFilter.includes('paymethod') && /*#__PURE__*/_react.default.createElement(_PaymethodTypeSelector.PaymethodTypeSelector, {
     paymethodsList: paymethodsList,
     filterValues: filterValues,
     handleChangePaymethodType: handleChangePaymethodType
-  })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_CurrencyFilter.CurrencyFilter, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, configFilter.includes('currency') && /*#__PURE__*/_react.default.createElement(_CurrencyFilter.CurrencyFilter, {
     filterValues: filterValues,
     handleChangeCurrency: handleChangeCurrency
-  }), /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
+  }), configFilter.includes('logistic_status') && /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
     options: logisticStatusList,
     className: "select",
     defaultValue: (_filterValues$logisti = filterValues === null || filterValues === void 0 ? void 0 : filterValues.logisticStatus) !== null && _filterValues$logisti !== void 0 ? _filterValues$logisti : '',
@@ -303,7 +294,7 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
         logisticStatus: value
       });
     }
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, configFilter.includes('driver_status') && /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
     options: assignedFilterOptions,
     className: "select",
     defaultValue: (_filterValues$assigne = filterValues === null || filterValues === void 0 ? void 0 : filterValues.assigned) !== null && _filterValues$assigne !== void 0 ? _filterValues$assigne : '',
@@ -313,12 +304,12 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
         assigned: value
       });
     }
-  })), /*#__PURE__*/_react.default.createElement(_DateTypeSelector.DateTypeSelector, {
+  })), configFilter.includes('date') && /*#__PURE__*/_react.default.createElement(_DateTypeSelector.DateTypeSelector, {
     filterValues: filterValues,
     handleChangeDateType: handleChangeDateType,
     handleChangeFromDate: handleChangeFromDate,
     handleChangeEndDate: handleChangeEndDate
-  })), filterValues === null || filterValues === void 0 ? void 0 : filterValues.metafield.map(function (item) {
+  })), configFilter.includes('metafields') && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, filterValues === null || filterValues === void 0 ? void 0 : filterValues.metafield.map(function (item) {
     return /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, {
       key: item.id
     }, /*#__PURE__*/_react.default.createElement(_styles.Input, {
@@ -376,7 +367,7 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "primary",
     onClick: handleAddMetafieldValue
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PlusCircle, null)))), /*#__PURE__*/_react.default.createElement(_styles2.ButtonGroup, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PlusCircle, null))))), /*#__PURE__*/_react.default.createElement(_styles2.ButtonGroup, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     borderRadius: "8px",
     onClick: function onClick() {
