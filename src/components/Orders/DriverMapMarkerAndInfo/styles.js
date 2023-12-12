@@ -5,15 +5,11 @@ export const WrapperMapMarker = styled.div`
   width: 50px;
   height: 50px;
   background: #9D9B9B;
-  border: 3px solid #F79B16;
+  border: 3px solid ${props => props.borderColor};
   border-radius: 100%;
   position: absolute;
   transform: translate(-50%, -100%);
   z-index: 1;
-
-  ${({ offline }) => offline && css`
-    border: 3px solid #9D9B9B;
-  `}
 
   &:after {
     content:'';
@@ -23,10 +19,7 @@ export const WrapperMapMarker = styled.div`
     margin-left: -22px;
     width: 0;
     height: 0;
-    border-top: solid 22px #F79B16;
-    ${({ offline }) => offline && css`
-      border-top: solid 22px #9D9B9B;
-    `}
+    border-top: solid 22px  ${props => props.borderColor};
     border-left: solid 22px transparent;
     border-right: solid 22px transparent;
     z-index: 10;

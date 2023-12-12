@@ -197,6 +197,7 @@ export const DriversLocation = React.memo((props) => {
                 <DriverMapMarkerAndInfo
                   key={driver.id}
                   driver={driver}
+                  timeStatus={selectedOrder?.time_status}
                   lat={
                     (driver.location !== null && typeof driver.location === 'object' && driver.location?.lat)
                       ? driver.location.lat
@@ -232,6 +233,7 @@ export const DriversLocation = React.memo((props) => {
             {selectedOrder?.driver && (
               <DriverMapMarkerAndInfo
                 driver={selectedOrder?.driver}
+                timeStatus={selectedOrder?.time_status}
                 lat={
                   (selectedOrder?.driver?.location !== null && typeof selectedOrder?.driver?.location === 'object' && selectedOrder?.driver?.location?.lat)
                     ? selectedOrder?.driver?.location.lat
