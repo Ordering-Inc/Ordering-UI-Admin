@@ -192,6 +192,7 @@ export const DriversLocation = (props) => {
             <DriverMapMarkerAndInfo
               key={driver.id}
               driver={driver}
+              timeStatus={interActionMapOrder?.time_status}
               lat={driver.location !== null ? driver.location.lat : defaultCenter.lat}
               lng={driver.location !== null ? driver.location.lng : defaultCenter.lng}
             />
@@ -201,6 +202,7 @@ export const DriversLocation = (props) => {
             <DriverMapMarkerAndInfo
               key={driver.id}
               driver={driver}
+              timeStatus={interActionMapOrder?.time_status}
               lat={driver.location !== null ? driver.location.lat : defaultCenter.lat}
               lng={driver.location !== null ? driver.location.lng : defaultCenter.lng}
             />
@@ -210,6 +212,7 @@ export const DriversLocation = (props) => {
             <DriverMapMarkerAndInfo
               key={driver.id}
               driver={driver}
+              timeStatus={interActionMapOrder?.time_status}
               lat={driver.location !== null ? driver.location.lat : defaultCenter.lat}
               lng={driver.location !== null ? driver.location.lng : defaultCenter.lng}
             />
@@ -235,6 +238,7 @@ export const DriversLocation = (props) => {
         {!(driverAvailable === 'online' || driverAvailable === 'offline') && interActionMapOrder !== null && interActionMapOrder?.driver !== null && (
           <InterActOrderMarker
             driver={interActionMapOrder?.driver}
+            timeStatus={interActionMapOrder?.time_status}
             lat={interActionOrderDriverLocation ? interActionOrderDriverLocation?.lat : defaultCenter.lat}
             lng={interActionOrderDriverLocation ? interActionOrderDriverLocation?.lng : defaultCenter.lng}
             image={interActionMapOrder?.driver?.photo}

@@ -4,16 +4,12 @@ export const WrapperMapMarker = styled.div`
   width: 40px;
   height: 40px;
   background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
-  border: 5px solid #F79B16;
+  border: 5px solid ${props => props.borderColor};
   box-shadow: 0px 3px 6px #00000029;
   border-radius: 6px;
   position: absolute;
   transform: translate(-50%, -50%);
   z-index: 1;
-
-  ${({ offline }) => offline && css`
-    border: 5px solid #9D9B9B;
-  `}
 `
 const MapMarkerImgStyled = styled.div`
   display: flex;
