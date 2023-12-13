@@ -408,6 +408,7 @@ import { capitalize, verifyDecimals, setStorageItem, getStorageItem, addQueryToU
 // contexts
 import { ThemeContext, ThemeProvider, useTheme } from './contexts/ThemeContext'
 import { ConfigFileContext } from './contexts/ConfigFileContext'
+import { ProjectContext, ProjectProvider, useProjectState } from './contexts/ProjectContext'
 import { InfoShareContext, InfoShareProvider, useInfoShare } from './contexts/InfoShareContext'
 
 // hooks
@@ -839,6 +840,9 @@ export {
   InfoShareContext,
   InfoShareProvider,
   useInfoShare,
+  ProjectContext,
+  ProjectProvider,
+  useProjectState,
 
   // hooks
   useOnlineStatus,
