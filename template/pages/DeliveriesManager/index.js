@@ -8,6 +8,7 @@ export const DeliveriesManager = (props) => {
   const deliveriesManagerProps = {
     ...props,
     isUseQuery: true,
+    franchiseId: settings?.franchiseId,
     useBatchSockets: settings?.use_batch_sockets,
     useFranchiseImages: settings?.use_franchise_images,
     onOrderRedirect: (orderId) => {
