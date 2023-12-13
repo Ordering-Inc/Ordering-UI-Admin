@@ -176,7 +176,8 @@ var CustomersListingUI = function CustomersListingUI(props) {
     defaultUserTypesSelected: defaultUserTypesSelected,
     disabledActiveStateCondition: disabledActiveStateCondition,
     userTypesSelected: userTypesSelected,
-    selectedUserActiveState: selectedUserActiveState
+    selectedUserActiveState: selectedUserActiveState,
+    multiFilterValues: multiFilterValues
   }), /*#__PURE__*/_react.default.createElement(_UsersDeleteButton.UsersDeleteButton, {
     selectedUsers: selectedUsers,
     deleteUsersActionState: deleteUsersActionState,

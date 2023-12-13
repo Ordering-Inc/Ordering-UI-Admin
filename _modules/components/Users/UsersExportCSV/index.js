@@ -57,7 +57,7 @@ var UsersExportCSVUI = function UsersExportCSVUI(props) {
     setPopoverOpen(false);
   };
   var handleCSV = function handleCSV() {
-    getCSV(false);
+    getCSV(true);
   };
   (0, _react.useEffect)(function () {
     if (!popoverOpen) return;
