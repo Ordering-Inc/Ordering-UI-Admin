@@ -1881,6 +1881,18 @@ Object.defineProperty(exports, "ProfilePage", {
     return _Profile.ProfilePage;
   }
 });
+Object.defineProperty(exports, "ProjectContext", {
+  enumerable: true,
+  get: function get() {
+    return _ProjectContext.ProjectContext;
+  }
+});
+Object.defineProperty(exports, "ProjectProvider", {
+  enumerable: true,
+  get: function get() {
+    return _ProjectContext.ProjectProvider;
+  }
+});
 Object.defineProperty(exports, "ProtectedRoute", {
   enumerable: true,
   get: function get() {
@@ -2475,6 +2487,12 @@ Object.defineProperty(exports, "useOnlineStatus", {
     return _useOnlineStatus.useOnlineStatus;
   }
 });
+Object.defineProperty(exports, "useProjectState", {
+  enumerable: true,
+  get: function get() {
+    return _ProjectContext.useProjectState;
+  }
+});
 Object.defineProperty(exports, "useTheme", {
   enumerable: true,
   get: function get() {
@@ -2520,6 +2538,7 @@ var _LanguageSelector = require("./components/LanguageSelector");
 var _utils = require("./utils");
 var _ThemeContext = require("./contexts/ThemeContext");
 var _ConfigFileContext = require("./contexts/ConfigFileContext");
+var _ProjectContext = require("./contexts/ProjectContext");
 var _InfoShareContext = require("./contexts/InfoShareContext");
 var _useOnlineStatus = require("./hooks/useOnlineStatus");
 var _useWindowSize = require("./hooks/useWindowSize");
