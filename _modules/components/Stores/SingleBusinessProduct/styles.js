@@ -71,7 +71,7 @@ var UploadWrapper = _styledComponents.default.div(_templateObject18 || (_templat
 exports.UploadWrapper = UploadWrapper;
 var DragableContainer = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n"])));
 exports.DragableContainer = DragableContainer;
-var DragImageWrapper = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  img {\n    ", "\n    &:hover {\n      cursor: grab;\n    }\n  }\n"])), function (props) {
+var DragImageWrapper = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  ", "\n\n  img {\n    &:hover {\n      cursor: grab;\n    }\n  }\n"])), function (props) {
   var _props$theme4;
   return (_props$theme4 = props.theme) !== null && _props$theme4 !== void 0 && _props$theme4.rtl ? (0, _styledComponents.css)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n      margin-left: 14px;\n    "]))) : (0, _styledComponents.css)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n      margin-right: 14px;\n    "])));
 });
