@@ -116,6 +116,8 @@ const DeliveriesManagerUI = (props) => {
               numberOfOrdersBySubstatus={numberOfOrdersBySubstatus}
               isUseQuery={isUseQuery}
               franchisesList={props.franchisesList}
+              driverGroupList={driverGroupList}
+              handleChangeFilterValues={handleChangeFilterValues}
             />
           </WrapItemView>
         </OrdersContent>

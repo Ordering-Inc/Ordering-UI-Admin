@@ -190,7 +190,25 @@ export const SettingsListUI = (props) => {
                               <p>{config?.description}</p>
                             )}
                             {
-                              config?.options?.length > 0 && config?.options?.map((item, j) => (
+                              config?.key !== 'filter_order_options' && config?.options?.length > 0 && config?.options?.map((item, j) => (
+                                <FormGroupWrapper key={j}>
+                                  <FormGroupCheck className='checkbox'>
+                                    <label>
+                                      <input
+                                        type='checkbox'
+                                        name={item?.value}
+                                        data-id={config?.id}
+                                        defaultChecked={config?.value.split('|').includes(item?.value)}
+                                        onChange={(e) => handleCheckBoxChange(e, true, config?.value)}
+                                      />
+                                      {t(item.text.toUpperCase(), item.text.replace(/_/g, ' ').toLowerCase())}
+                                    </label>
+                                  </FormGroupCheck>
+                                </FormGroupWrapper>
+                              ))
+                            }
+                            {
+                              config?.key === 'filter_order_options' && config?.options?.length > 0 && config?.options?.filter(option => ((option.value === 'external_id') || (option.value === 'driver') || (option.value === 'driver_group_general'))).map((item, j) => (
                                 <FormGroupWrapper key={j}>
                                   <FormGroupCheck className='checkbox'>
                                     <label>
