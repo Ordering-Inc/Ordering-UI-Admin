@@ -7,6 +7,7 @@ import settings from '../../config.json'
 export const OrdersList = (props) => {
   const ordersListProps = {
     ...props,
+    franchiseId: settings?.franchiseId,
     isUseQuery: true,
     disableSocketRoomDriver: true,
     useFranchiseImages: settings?.use_franchise_images,

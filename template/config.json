@@ -13,5 +13,6 @@
   },
   "use_project_domain": false,
   "use_batch_sockets": false,
-  "use_franchise_images": false
+  "use_franchise_images": false,
+  "franchiseId": null
 }

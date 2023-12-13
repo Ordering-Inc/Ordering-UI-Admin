@@ -218,6 +218,7 @@ const OrdersManagerUI = (props) => {
             <OrdersDashboardControls
               selectedOrderNumber={selectedOrderIds?.length}
               filterValues={filterValues}
+              franchiseId={props.franchiseId}
               handleChangeMultiOrdersStatus={handleChangeMultiOrdersStatus}
               handleDeleteMultiOrders={handleDeleteMultiOrders}
               handleOpenCustomOrderDetail={(id) => {
@@ -239,6 +240,7 @@ const OrdersManagerUI = (props) => {
                 driverId={props.driverId}
                 customerId={props.customerId}
                 businessId={props.businessId}
+                franchiseId={props.franchiseId}
                 searchValue={searchValue}
                 filterValues={filterValues}
                 selectedOrderIds={selectedOrderIds}
