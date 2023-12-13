@@ -19,7 +19,8 @@ export const OrdersDashboardControls = (props) => {
     handleOpenCustomOrderDetail,
     handleOpenOrderDetail,
     ordersStatusGroup,
-    selectedSubOrderStatus
+    selectedSubOrderStatus,
+    franchiseId
   } = props
 
   const [{ user }] = useSession()
@@ -33,6 +34,7 @@ export const OrdersDashboardControls = (props) => {
             filterValues={filterValues}
             ordersStatusGroup={ordersStatusGroup}
             selectedSubOrderStatus={selectedSubOrderStatus}
+            franchiseId={franchiseId}
           />
           {selectedOrderNumber > 0 && (
             <>

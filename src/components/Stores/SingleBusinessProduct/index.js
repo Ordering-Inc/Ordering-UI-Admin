@@ -45,7 +45,8 @@ const SingleBusinessProductUI = (props) => {
     handleDrop,
     handleDragEnd,
     isLastProduct,
-    isProductsBottom
+    isProductsBottom,
+    hasSubcategories
   } = props
 
   const theme = useTheme()
@@ -189,7 +190,7 @@ const SingleBusinessProductUI = (props) => {
               onDragOver={e => handleDragOver?.(e, isLastProduct)}
               onDrop={e => handleDrop(e)}
               onDragEnd={e => handleDragEnd(e)}
-              className='draggable-product'
+              className={!hasSubcategories ? 'draggable-product' : ''}
               data-index={product.id}
               isAccept={dataSelected && dataSelected === product?.id?.toString()}
               isBorderBottom={isProductsBottom && isLastProduct}
@@ -199,12 +200,14 @@ const SingleBusinessProductUI = (props) => {
                   <td className='products'>
                     <DragableContainer className='product_info'>
                       <DragImageWrapper>
-                        <img
-                          src={theme.images.icons?.sixDots}
-                          alt='six dots'
-                          draggable
-                          onDragStart={e => handleDragStart?.(e, product.id)}
-                        />
+                        {!hasSubcategories && (
+                          <img
+                            src={theme.images.icons?.sixDots}
+                            alt='six dots'
+                            draggable={!hasSubcategories}
+                            onDragStart={e => handleDragStart?.(e, product)}
+                          />
+                        )}
                       </DragImageWrapper>
                       <BusinessGeneralInfo>
                         <ProductTypeImage
