@@ -206,7 +206,7 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
     }
   }, /*#__PURE__*/_react.default.createElement(_styles2.FilterGroupListContainer, {
     className: "filter-modal"
-  }, /*#__PURE__*/_react.default.createElement("h1", null, t('FILTER', 'Filter')), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, configFilter.includes('id') && /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  }, /*#__PURE__*/_react.default.createElement("h1", null, t('FILTER', 'Filter')), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
     type: "text",
     placeholder: "ID",
     autoComplete: "off",
@@ -258,33 +258,33 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
         customerCellphone: e === null || e === void 0 || (_e$target4 = e.target) === null || _e$target4 === void 0 ? void 0 : _e$target4.value
       });
     }
-  })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, configFilter.includes('driver_group') && /*#__PURE__*/_react.default.createElement(_DriversGroupTypeSelector.DriversGroupTypeSelector, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_DriversGroupTypeSelector.DriversGroupTypeSelector, {
     driverGroupList: driverGroupList,
     handleChangeGroup: handleChangeGroup,
     filterValues: filterValues.groupTypes,
     title: t('DRIVER_GROUP_ASSIGNED', 'Driver group (assigned)')
-  }), configFilter.includes('business') && /*#__PURE__*/_react.default.createElement(_BusinessesSelector.BusinessesSelector, {
+  }), /*#__PURE__*/_react.default.createElement(_BusinessesSelector.BusinessesSelector, {
     filterValues: filterValues,
     businessesList: businessesList,
     handleChangeBusinesses: handleChangeBusinesses
-  })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, configFilter.includes('country_code') && /*#__PURE__*/_react.default.createElement(_CountryFilter.CountryFilter, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_CountryFilter.CountryFilter, {
     filterValues: filterValues,
     handleChangeCountryCode: handleChangeCountryCode
-  }), configFilter.includes('city') && /*#__PURE__*/_react.default.createElement(_Shared.CitySelector, {
+  }), /*#__PURE__*/_react.default.createElement(_Shared.CitySelector, {
     cities: citiesList,
     filterValues: filterValues,
     handleChangeCity: handleChangeCity
-  })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, configFilter.includes('delivery_type') && /*#__PURE__*/_react.default.createElement(_DeliveryTypeSelector.DeliveryTypeSelector, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_DeliveryTypeSelector.DeliveryTypeSelector, {
     filterValues: filterValues,
     handleChangeDeliveryType: handleChangeDeliveryType
-  }), configFilter.includes('paymethod') && /*#__PURE__*/_react.default.createElement(_PaymethodTypeSelector.PaymethodTypeSelector, {
+  }), /*#__PURE__*/_react.default.createElement(_PaymethodTypeSelector.PaymethodTypeSelector, {
     paymethodsList: paymethodsList,
     filterValues: filterValues,
     handleChangePaymethodType: handleChangePaymethodType
-  })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, configFilter.includes('currency') && /*#__PURE__*/_react.default.createElement(_CurrencyFilter.CurrencyFilter, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_CurrencyFilter.CurrencyFilter, {
     filterValues: filterValues,
     handleChangeCurrency: handleChangeCurrency
-  }), configFilter.includes('logistic_status') && /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
+  }), /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
     options: logisticStatusList,
     className: "select",
     defaultValue: (_filterValues$logisti = filterValues === null || filterValues === void 0 ? void 0 : filterValues.logisticStatus) !== null && _filterValues$logisti !== void 0 ? _filterValues$logisti : '',
@@ -294,7 +294,7 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
         logisticStatus: value
       });
     }
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, configFilter.includes('driver_status') && /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
     options: assignedFilterOptions,
     className: "select",
     defaultValue: (_filterValues$assigne = filterValues === null || filterValues === void 0 ? void 0 : filterValues.assigned) !== null && _filterValues$assigne !== void 0 ? _filterValues$assigne : '',
@@ -304,12 +304,12 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
         assigned: value
       });
     }
-  })), configFilter.includes('date') && /*#__PURE__*/_react.default.createElement(_DateTypeSelector.DateTypeSelector, {
+  })), /*#__PURE__*/_react.default.createElement(_DateTypeSelector.DateTypeSelector, {
     filterValues: filterValues,
     handleChangeDateType: handleChangeDateType,
     handleChangeFromDate: handleChangeFromDate,
     handleChangeEndDate: handleChangeEndDate
-  })), configFilter.includes('metafields') && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, filterValues === null || filterValues === void 0 ? void 0 : filterValues.metafield.map(function (item) {
+  })), filterValues === null || filterValues === void 0 ? void 0 : filterValues.metafield.map(function (item) {
     return /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, {
       key: item.id
     }, /*#__PURE__*/_react.default.createElement(_styles.Input, {
@@ -367,7 +367,7 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "primary",
     onClick: handleAddMetafieldValue
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PlusCircle, null))))), /*#__PURE__*/_react.default.createElement(_styles2.ButtonGroup, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PlusCircle, null)))), /*#__PURE__*/_react.default.createElement(_styles2.ButtonGroup, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     borderRadius: "8px",
     onClick: function onClick() {

@@ -155,7 +155,7 @@ var SettingsListUI = function SettingsListUI(props) {
     width: 70,
     height: 44
   })), !settingsState.error && !settingsState.loading && configs && !settingsState.API && /*#__PURE__*/_react.default.createElement(_styles2.GeneralContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.FormContainer, null, configs.length > 0 && configs.map(function (config, i) {
-    var _config$options, _config$options2, _config$options3, _config$options4, _config$value;
+    var _config$options, _config$options2, _config$options3, _config$options4, _config$options5, _config$options6, _config$value;
     return /*#__PURE__*/_react.default.createElement("div", {
       key: i
     }, config.type === 1 && /*#__PURE__*/_react.default.createElement(_styles2.FormGroupText, {
@@ -184,7 +184,23 @@ var SettingsListUI = function SettingsListUI(props) {
       handleSelectChange: function handleSelectChange(value) {
         return handleInputChange(value, config === null || config === void 0 ? void 0 : config.id);
       }
-    })), config.type === 3 && /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, null, (config === null || config === void 0 ? void 0 : config.name) && /*#__PURE__*/_react.default.createElement("label", null, config === null || config === void 0 ? void 0 : config.name), (config === null || config === void 0 ? void 0 : config.description) && /*#__PURE__*/_react.default.createElement("p", null, config === null || config === void 0 ? void 0 : config.description), (config === null || config === void 0 || (_config$options = config.options) === null || _config$options === void 0 ? void 0 : _config$options.length) > 0 && (config === null || config === void 0 || (_config$options2 = config.options) === null || _config$options2 === void 0 ? void 0 : _config$options2.map(function (item, j) {
+    })), config.type === 3 && /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, null, (config === null || config === void 0 ? void 0 : config.name) && /*#__PURE__*/_react.default.createElement("label", null, config === null || config === void 0 ? void 0 : config.name), (config === null || config === void 0 ? void 0 : config.description) && /*#__PURE__*/_react.default.createElement("p", null, config === null || config === void 0 ? void 0 : config.description), (config === null || config === void 0 ? void 0 : config.key) !== 'filter_order_options' && (config === null || config === void 0 || (_config$options = config.options) === null || _config$options === void 0 ? void 0 : _config$options.length) > 0 && (config === null || config === void 0 || (_config$options2 = config.options) === null || _config$options2 === void 0 ? void 0 : _config$options2.map(function (item, j) {
+      return /*#__PURE__*/_react.default.createElement(_styles2.FormGroupWrapper, {
+        key: j
+      }, /*#__PURE__*/_react.default.createElement(_styles2.FormGroupCheck, {
+        className: "checkbox"
+      }, /*#__PURE__*/_react.default.createElement("label", null, /*#__PURE__*/_react.default.createElement("input", {
+        type: "checkbox",
+        name: item === null || item === void 0 ? void 0 : item.value,
+        "data-id": config === null || config === void 0 ? void 0 : config.id,
+        defaultChecked: config === null || config === void 0 ? void 0 : config.value.split('|').includes(item === null || item === void 0 ? void 0 : item.value),
+        onChange: function onChange(e) {
+          return handleCheckBoxChange(e, true, config === null || config === void 0 ? void 0 : config.value);
+        }
+      }), t(item.text.toUpperCase(), item.text.replace(/_/g, ' ').toLowerCase()))));
+    })), (config === null || config === void 0 ? void 0 : config.key) === 'filter_order_options' && (config === null || config === void 0 || (_config$options3 = config.options) === null || _config$options3 === void 0 ? void 0 : _config$options3.length) > 0 && (config === null || config === void 0 || (_config$options4 = config.options) === null || _config$options4 === void 0 ? void 0 : _config$options4.filter(function (option) {
+      return option.value === 'external_id' || option.value === 'driver' || option.value === 'driver_group_general';
+    }).map(function (item, j) {
       return /*#__PURE__*/_react.default.createElement(_styles2.FormGroupWrapper, {
         key: j
       }, /*#__PURE__*/_react.default.createElement(_styles2.FormGroupCheck, {
@@ -208,7 +224,7 @@ var SettingsListUI = function SettingsListUI(props) {
       },
       className: "form-control",
       placeholder: "placeholder"
-    })) : /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, null, (config === null || config === void 0 ? void 0 : config.name) && /*#__PURE__*/_react.default.createElement("label", null, config === null || config === void 0 ? void 0 : config.name), (config === null || config === void 0 ? void 0 : config.description) && /*#__PURE__*/_react.default.createElement("p", null, config === null || config === void 0 ? void 0 : config.description), (config === null || config === void 0 || (_config$options3 = config.options) === null || _config$options3 === void 0 ? void 0 : _config$options3.length) > 0 && (config === null || config === void 0 || (_config$options4 = config.options) === null || _config$options4 === void 0 ? void 0 : _config$options4.map(function (item, j) {
+    })) : /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, null, (config === null || config === void 0 ? void 0 : config.name) && /*#__PURE__*/_react.default.createElement("label", null, config === null || config === void 0 ? void 0 : config.name), (config === null || config === void 0 ? void 0 : config.description) && /*#__PURE__*/_react.default.createElement("p", null, config === null || config === void 0 ? void 0 : config.description), (config === null || config === void 0 || (_config$options5 = config.options) === null || _config$options5 === void 0 ? void 0 : _config$options5.length) > 0 && (config === null || config === void 0 || (_config$options6 = config.options) === null || _config$options6 === void 0 ? void 0 : _config$options6.map(function (item, j) {
       return /*#__PURE__*/_react.default.createElement(_styles2.FormGroupWrapper, {
         key: j
       }, /*#__PURE__*/_react.default.createElement(_styles2.FormGroupCheck, {
