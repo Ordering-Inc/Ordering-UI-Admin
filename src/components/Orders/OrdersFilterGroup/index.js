@@ -170,15 +170,13 @@ const OrdersFilterGroupUI = (props) => {
         <FilterGroupListContainer className='filter-modal'>
           <h1>{t('FILTER', 'Filter')}</h1>
           <WrapperRow>
-          { configFilter.includes('id') && (
             <Input
               type='text'
               placeholder='ID'
               autoComplete='off'
               value={filterValues?.orderId || ''}
               onChange={(e) => handleChangeOrderId(e)}
-            /> )
-          }
+            /> 
           {/* <Input
               type='text'
               placeholder={t('EXTERNAL_ID', 'External Id')}
@@ -220,21 +218,17 @@ const OrdersFilterGroupUI = (props) => {
             />
           </WrapperRow>
           <WrapperRow>
-          { configFilter.includes('driver_group') && (
             <DriversGroupTypeSelector
               driverGroupList={driverGroupList}
               handleChangeGroup={handleChangeGroup}
               filterValues={filterValues.groupTypes}
               title={t('DRIVER_GROUP_ASSIGNED', 'Driver group (assigned)')}
-            />)
-          }
-          { configFilter.includes('business') && (
+            />
             <BusinessesSelector
               filterValues={filterValues}
               businessesList={businessesList}
               handleChangeBusinesses={handleChangeBusinesses}
-            />)
-          }
+            />
             {/* <DriversGroupTypeSelector
               driverGroupList={driverGroupList}
               handleChangeGroup={handleChangeGroupUnassigned}
@@ -255,19 +249,15 @@ const OrdersFilterGroupUI = (props) => {
             />
           </WrapperRow> */}
           <WrapperRow>
-          { configFilter.includes('country_code') && (
             <CountryFilter
               filterValues={filterValues}
               handleChangeCountryCode={handleChangeCountryCode}
-            />)
-          }
-          { configFilter.includes('city') && (
+            />
             <CitySelector
               cities={citiesList}
               filterValues={filterValues}
               handleChangeCity={handleChangeCity}
-            />)
-          }
+            />
             {/* <MultiSelectContainer>
               <OrderStatusTypeSelector
                 isFilterView
@@ -277,28 +267,21 @@ const OrdersFilterGroupUI = (props) => {
             </MultiSelectContainer> */}
           </WrapperRow>
           <WrapperRow>
-          { configFilter.includes('delivery_type') && (
             <DeliveryTypeSelector
               filterValues={filterValues}
               handleChangeDeliveryType={handleChangeDeliveryType}
-            />)
-          }
-          { configFilter.includes('paymethod') && (
+            />
             <PaymethodTypeSelector
               paymethodsList={paymethodsList}
               filterValues={filterValues}
               handleChangePaymethodType={handleChangePaymethodType}
-            />)
-          }
+            />
           </WrapperRow>
           <WrapperRow>
-          { configFilter.includes('currency') && (
             <CurrencyFilter
               filterValues={filterValues}
               handleChangeCurrency={handleChangeCurrency}
-            />)
-          }
-          { configFilter.includes('logistic_status') && (
+            />
             <SelectWrapper>
               <Select
                 options={logisticStatusList}
@@ -307,11 +290,9 @@ const OrdersFilterGroupUI = (props) => {
                 placeholder={t('SELECT_LOGISTIC_STATUS', 'Select a logistic status')}
                 onChange={(value) => handleChangeChildFilterValue({ logisticStatus: value })}
               />
-            </SelectWrapper>)
-          }
+            </SelectWrapper>
           </WrapperRow>
           <WrapperRow>
-          { configFilter.includes('driver_status') && (
             <SelectWrapper>
               <Select
                 options={assignedFilterOptions}
@@ -320,19 +301,14 @@ const OrdersFilterGroupUI = (props) => {
                 placeholder={t('SELECT_DRIVER_STATUS', 'Select a driver status')}
                 onChange={(value) => handleChangeChildFilterValue({ assigned: value })}
               />
-            </SelectWrapper>)
-          }
-          { configFilter.includes('date') && (
+            </SelectWrapper>
             <DateTypeSelector
               filterValues={filterValues}
               handleChangeDateType={handleChangeDateType}
               handleChangeFromDate={handleChangeFromDate}
               handleChangeEndDate={handleChangeEndDate}
-            />)
-          }
+            />
           </WrapperRow>
-          { configFilter.includes('metafields') && (
-            <>
               {filterValues?.metafield.map(item => (
                 <WrapperRow key={item.id}>
                   <Input
@@ -396,8 +372,6 @@ const OrdersFilterGroupUI = (props) => {
                   )}
                 </WrapperRow>
               )}
-            </>
-          )}
           <ButtonGroup>
             <Button
               color='primary'
