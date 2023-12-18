@@ -187,6 +187,7 @@ export const BusinessProductList = (props) => {
                         setDataSelected={setDataSelected}
                         category={categoryState}
                         isLastProduct={currentProducts.length - 1 === i}
+                        hasSubcategories={categorySelected?.subcategories?.some(subcategory => subcategory?.products?.length > 0)}
                       />
                     ))
                   }

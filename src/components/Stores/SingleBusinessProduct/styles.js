@@ -160,12 +160,13 @@ export const DragableContainer = styled.div`
 `
 
 export const DragImageWrapper = styled.div`
-  img {
-    ${props => props.theme?.rtl ? css`
+  ${props => props.theme?.rtl ? css`
       margin-left: 14px;
     ` : css`
       margin-right: 14px;
     `}
+
+  img {
     &:hover {
       cursor: grab;
     }
