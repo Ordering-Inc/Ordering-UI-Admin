@@ -166,6 +166,7 @@ var BusinessProductList = function BusinessProductList(props) {
   }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (isLazyLoadProducts ? categoryState.products : currentProducts).sort(function (a, b) {
     return a.rank - b.rank;
   }).map(function (product, i) {
+    var _categorySelected$sub;
     return /*#__PURE__*/_react.default.createElement(_SingleBusinessProduct.SingleBusinessProduct, _extends({}, props, {
       key: "".concat(product === null || product === void 0 ? void 0 : product.id, "_").concat(i),
       productDetailsId: productDetailsId,
@@ -176,7 +177,11 @@ var BusinessProductList = function BusinessProductList(props) {
       dataSelected: dataSelected,
       setDataSelected: setDataSelected,
       category: categoryState,
-      isLastProduct: currentProducts.length - 1 === i
+      isLastProduct: currentProducts.length - 1 === i,
+      hasSubcategories: categorySelected === null || categorySelected === void 0 || (_categorySelected$sub = categorySelected.subcategories) === null || _categorySelected$sub === void 0 ? void 0 : _categorySelected$sub.some(function (subcategory) {
+        var _subcategory$products;
+        return (subcategory === null || subcategory === void 0 || (_subcategory$products = subcategory.products) === null || _subcategory$products === void 0 ? void 0 : _subcategory$products.length) > 0;
+      })
     }));
   })))), /*#__PURE__*/_react.default.createElement(_styles2.ProductListBottom, null, !businessState.loading && (businessState === null || businessState === void 0 || (_businessState$busine2 = businessState.business) === null || _businessState$busine2 === void 0 || (_businessState$busine2 = _businessState$busine2.categories) === null || _businessState$busine2 === void 0 ? void 0 : _businessState$busine2.length) > 0 && categorySelected && /*#__PURE__*/_react.default.createElement(_styles2.AddProductBtnWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.LinkButton, {
     onClick: function onClick() {

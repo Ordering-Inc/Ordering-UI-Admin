@@ -48,7 +48,8 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
     handleDrop = props.handleDrop,
     handleDragEnd = props.handleDragEnd,
     isLastProduct = props.isLastProduct,
-    isProductsBottom = props.isProductsBottom;
+    isProductsBottom = props.isProductsBottom,
+    hasSubcategories = props.hasSubcategories;
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -171,7 +172,7 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
     onDragEnd: function onDragEnd(e) {
       return handleDragEnd(e);
     },
-    className: "draggable-product",
+    className: !hasSubcategories ? 'draggable-product' : '',
     "data-index": product.id,
     isAccept: dataSelected && dataSelected === (product === null || product === void 0 || (_product$id = product.id) === null || _product$id === void 0 ? void 0 : _product$id.toString()),
     isBorderBottom: isProductsBottom && isLastProduct
@@ -179,12 +180,12 @@ var SingleBusinessProductUI = function SingleBusinessProductUI(props) {
     className: "products"
   }, /*#__PURE__*/_react.default.createElement(_styles.DragableContainer, {
     className: "product_info"
-  }, /*#__PURE__*/_react.default.createElement(_styles.DragImageWrapper, null, /*#__PURE__*/_react.default.createElement("img", {
+  }, /*#__PURE__*/_react.default.createElement(_styles.DragImageWrapper, null, !hasSubcategories && /*#__PURE__*/_react.default.createElement("img", {
     src: (_theme$images$icons = theme.images.icons) === null || _theme$images$icons === void 0 ? void 0 : _theme$images$icons.sixDots,
     alt: "six dots",
-    draggable: true,
+    draggable: !hasSubcategories,
     onDragStart: function onDragStart(e) {
-      return handleDragStart === null || handleDragStart === void 0 ? void 0 : handleDragStart(e, product.id);
+      return handleDragStart === null || handleDragStart === void 0 ? void 0 : handleDragStart(e, product);
     }
   })), /*#__PURE__*/_react.default.createElement(_styles.BusinessGeneralInfo, null, /*#__PURE__*/_react.default.createElement(_styles.ProductTypeImage, {
     onClick: function onClick() {
