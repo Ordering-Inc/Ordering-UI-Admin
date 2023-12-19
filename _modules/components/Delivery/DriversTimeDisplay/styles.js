@@ -226,7 +226,7 @@ var ThName = _styledComponents.default.th(_templateObject77 || (_templateObject7
 exports.ThName = ThName;
 var WeekHeader = _styledComponents.default.th(_templateObject78 || (_templateObject78 = _taggedTemplateLiteral(["\n  max-width: 160px;\n  min-width: 160px;\n\n  span {\n    text-transform: uppercase;\n    font-weight: 300;\n  }\n\n  h4 {\n    font-weight: bold;\n  }\n"])));
 exports.WeekHeader = WeekHeader;
-var FormWrapper = _styledComponents.default.div(_templateObject79 || (_templateObject79 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: flex-start;\n  justify-content: center;\n  gap: 10px;\n\n  .react-datepicker-popper {\n    z-index: 1000;\n  }\n\n  span {\n    font-weight: 600;\n  }\n\n  input {\n    margin: 5px 0 10px 0;\n    border: 1px solid #DEE2E6;\n    color: ", ";\n    width: 100%;\n    &:focus {\n      border: 1px solid #B1BCCC;\n    }\n  }\n\n  textarea {\n    margin-bottom: 10px;\n    width: 100%;\n  }\n"])), function (props) {
+var FormWrapper = _styledComponents.default.div(_templateObject79 || (_templateObject79 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: flex-start;\n  justify-content: center;\n  gap: 10px;\n  position: relative;\n  margin-bottom: 20px;\n  min-height: 500px;\n  .react-datepicker-popper {\n    z-index: 1000;\n  }\n\n  span {\n    font-weight: 600;\n  }\n\n  input {\n    margin: 5px 0 10px 0;\n    border: 1px solid #DEE2E6;\n    color: ", ";\n    width: 100%;\n    &:focus {\n      border: 1px solid #B1BCCC;\n    }\n  }\n\n  textarea {\n    margin-bottom: 10px;\n    width: 100%;\n  }\n"])), function (props) {
   return props.theme.colors.headingColor;
 });
 exports.FormWrapper = FormWrapper;
@@ -242,7 +242,7 @@ var RrulesItem = _styledComponents.default.div(_templateObject82 || (_templateOb
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject83 || (_templateObject83 = _taggedTemplateLiteral(["\n      margin-left: 20px;\n      margin-right: 0px;\n    "])));
 });
 exports.RrulesItem = RrulesItem;
-var ButtonsWrapper = _styledComponents.default.div(_templateObject84 || (_templateObject84 = _taggedTemplateLiteral(["\n  width: 50%;\n  display: flex;\n  justify-content: flex-end;\n  gap: 10px;\n  position: absolute;\n  bottom: 20px;\n  right: 20px;\n"])));
+var ButtonsWrapper = _styledComponents.default.div(_templateObject84 || (_templateObject84 = _taggedTemplateLiteral(["\n  width: 50%;\n  display: flex;\n  justify-content: flex-end;\n  gap: 10px;\n  position: absolute;\n  bottom: -20px;\n  right: 20px;\n"])));
 exports.ButtonsWrapper = ButtonsWrapper;
 var WeekDayCheckWrapper = _styledComponents.default.div(_templateObject85 || (_templateObject85 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-bottom: 15px;\n  gap: 10px;\n\n  > input {\n    ", "\n  }\n  h4 {\n    font-size: 12px;\n    margin: 0px;\n    text-transform: capitalize;\n  }\n"])), function (props) {
   var _props$theme10;

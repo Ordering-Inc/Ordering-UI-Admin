@@ -59,7 +59,7 @@ var DriverBlockAddFormUI = function DriverBlockAddFormUI(props) {
     }
     var hour = (0, _moment.default)(block).hour();
     var minute = (0, _moment.default)(block).minute();
-    var time = hour === 23 && minute === 59 ? "".concat(hour, ":").concat(minute) : "".concat(hour < 10 ? "0".concat(hour) : hour, ":").concat(minute != 0 ? parseInt(minute / 15 * 15) : '00');
+    var time = hour === 23 && minute === 59 ? "".concat(hour, ":").concat(minute) : "".concat(hour < 10 ? "0".concat(hour) : hour, ":").concat(minute !== 0 ? parseInt(minute / 15 * 15) : '00');
     return time;
   };
   var handleChangeFrequency = function handleChangeFrequency(value) {
@@ -114,7 +114,9 @@ var DriverBlockAddFormUI = function DriverBlockAddFormUI(props) {
     }
   }))), /*#__PURE__*/_react.default.createElement(_styles2.SelectsWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.SelectTitleWrappre, null, /*#__PURE__*/_react.default.createElement(_styles2.SelectTitle, null, t('START_BLOCK_DATE', 'Start block date:')), /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
     noSelected: true,
-    options: scheduleOptions,
+    options: scheduleOptions.filter(function (option) {
+      return !['break_start', 'end', 'break_end'].includes(option === null || option === void 0 ? void 0 : option.name);
+    }),
     defaultValue: getHourOrMinute((_scheduleState$state$ = scheduleState === null || scheduleState === void 0 || (_scheduleState$state4 = scheduleState.state) === null || _scheduleState$state4 === void 0 ? void 0 : _scheduleState$state4.start) !== null && _scheduleState$state$ !== void 0 ? _scheduleState$state$ : selectedBlock === null || selectedBlock === void 0 ? void 0 : selectedBlock.start, true),
     onChange: function onChange(val) {
       return handleChangeScheduleTime(val, true);
@@ -122,7 +124,9 @@ var DriverBlockAddFormUI = function DriverBlockAddFormUI(props) {
     optionInnerMaxHeight: "300px"
   }))), /*#__PURE__*/_react.default.createElement(_styles2.SelectTitleWrappre, null, /*#__PURE__*/_react.default.createElement(_styles2.SelectTitle, null, t('END_BLOCK_DATE', 'End block date:')), /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
     noSelected: true,
-    options: scheduleOptions,
+    options: scheduleOptions.filter(function (option) {
+      return !['break_start', 'start', 'break_end'].includes(option === null || option === void 0 ? void 0 : option.name);
+    }),
     defaultValue: getHourOrMinute((_scheduleState$state$2 = scheduleState === null || scheduleState === void 0 || (_scheduleState$state5 = scheduleState.state) === null || _scheduleState$state5 === void 0 ? void 0 : _scheduleState$state5.end) !== null && _scheduleState$state$2 !== void 0 ? _scheduleState$state$2 : selectedBlock === null || selectedBlock === void 0 ? void 0 : selectedBlock.end),
     onChange: function onChange(val) {
       return handleChangeScheduleTime(val, false);
@@ -130,7 +134,9 @@ var DriverBlockAddFormUI = function DriverBlockAddFormUI(props) {
     optionInnerMaxHeight: "300px"
   }))), showBreakBlock && /*#__PURE__*/_react.default.createElement(_styles2.SelectTitleWrappre, null, /*#__PURE__*/_react.default.createElement(_styles2.SelectTitle, null, t('START_BREAK_BLOCK_DATE', 'Start break block date:')), /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
     noSelected: true,
-    options: scheduleOptions,
+    options: scheduleOptions.filter(function (option) {
+      return !['start', 'end', 'break_end'].includes(option === null || option === void 0 ? void 0 : option.name);
+    }),
     defaultValue: getHourOrMinute((_scheduleState$state$3 = scheduleState === null || scheduleState === void 0 || (_scheduleState$state6 = scheduleState.state) === null || _scheduleState$state6 === void 0 ? void 0 : _scheduleState$state6.break_start) !== null && _scheduleState$state$3 !== void 0 ? _scheduleState$state$3 : selectedBlock === null || selectedBlock === void 0 ? void 0 : selectedBlock.break_start, true),
     onChange: function onChange(val) {
       return handleChangeScheduleTime(val, true, true);
@@ -138,7 +144,9 @@ var DriverBlockAddFormUI = function DriverBlockAddFormUI(props) {
     optionInnerMaxHeight: "300px"
   }))), showBreakBlock && /*#__PURE__*/_react.default.createElement(_styles2.SelectTitleWrappre, null, /*#__PURE__*/_react.default.createElement(_styles2.SelectTitle, null, t('END_BREAK_BLOCK_DATE', 'End break block date:')), /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
     noSelected: true,
-    options: scheduleOptions,
+    options: scheduleOptions.filter(function (option) {
+      return !['break_start', 'end', 'start'].includes(option === null || option === void 0 ? void 0 : option.name);
+    }),
     defaultValue: getHourOrMinute((_scheduleState$state$4 = scheduleState === null || scheduleState === void 0 || (_scheduleState$state7 = scheduleState.state) === null || _scheduleState$state7 === void 0 ? void 0 : _scheduleState$state7.break_end) !== null && _scheduleState$state$4 !== void 0 ? _scheduleState$state$4 : selectedBlock === null || selectedBlock === void 0 ? void 0 : selectedBlock.break_end),
     onChange: function onChange(val) {
       return handleChangeScheduleTime(val, false, true);
@@ -181,7 +189,7 @@ var DriverBlockAddFormUI = function DriverBlockAddFormUI(props) {
   }, t('DELETE', 'Delete')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     borderRadius: "8px",
-    disabled: scheduleState.loading || (isEdit ? false : !(scheduleState !== null && scheduleState !== void 0 && (_scheduleState$state8 = scheduleState.state) !== null && _scheduleState$state8 !== void 0 && _scheduleState$state8.until)),
+    disabled: scheduleState.loading || (isEdit ? false : !(scheduleState !== null && scheduleState !== void 0 && (_scheduleState$state8 = scheduleState.state) !== null && _scheduleState$state8 !== void 0 && _scheduleState$state8.until) && scheduleState.rrule),
     onClick: function onClick() {
       return isEdit ? setOpenEditModal(true) : handleAddBlockTime();
     }

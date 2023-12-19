@@ -71,7 +71,9 @@ var DriversTimeDisplayUI = function DriversTimeDisplayUI(props) {
     setStackEventsState = props.setStackEventsState,
     stackEventsState = props.stackEventsState,
     setAlertState = props.setAlertState,
-    alertState = props.alertState;
+    alertState = props.alertState,
+    handleSelectedUntilDate = props.handleSelectedUntilDate,
+    actualDate = props.actualDate;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -158,18 +160,18 @@ var DriversTimeDisplayUI = function DriversTimeDisplayUI(props) {
         error: 4
       });
     } else {
-      setDate([(0, _moment.default)(date1).startOf('day').format('YYYY-MM-DD HH:mm:ss'), (0, _moment.default)(date2).endOf('day').format('YYYY-MM-DD HH:mm:ss')]);
+      setDate([(0, _moment.default)(date1).startOf('day').utc().format('YYYY-MM-DD HH:mm:ss'), (0, _moment.default)(date2).endOf('day').utc().format('YYYY-MM-DD HH:mm:ss')]);
     }
   };
   var handleUntilDate = function handleUntilDate(_date) {
     var diff = (0, _moment.default)(_date).diff(selectedDate, 'months', true);
-    console.log('diff', diff);
     if ((0, _moment.default)(_date) < (0, _moment.default)(selectedDate) || diff > 2) {
       setIsTimeChangeError({
         state: true,
         error: 5
       });
     } else {
+      handleSelectedUntilDate(_date);
       setSelectedUntilDate(_date);
     }
   };
@@ -183,16 +185,16 @@ var DriversTimeDisplayUI = function DriversTimeDisplayUI(props) {
       content: []
     });
   };
-  (0, _react.useEffect)(function () {
-    if (!(isTimeChangeError !== null && isTimeChangeError !== void 0 && isTimeChangeError.state)) return;
-    setAlertState({
-      open: true,
-      content: timeErrorList[isTimeChangeError.error]
-    });
-  }, [isTimeChangeError === null || isTimeChangeError === void 0 ? void 0 : isTimeChangeError.state]);
-  (0, _react.useEffect)(function () {
+  var generateHourList = function generateHourList() {
+    var _selectedBlock$block, _selectedBlock$block2, _selectedBlock$block3, _selectedBlock$block4, _selectedBlock$block5, _selectedBlock$block9, _selectedBlock$block10, _selectedBlock$block11;
     var _scheduleOptions = [];
+    var isTodayOrPastDate = (0, _moment.default)(selectedDate).format('YYYY-MM-DD') <= (0, _moment.default)().format('YYYY-MM-DD');
+    var now = new Date();
     for (var hour = 0; hour < 24; hour++) {
+      /**
+         * Continue if is today and hour is smaller than current hour
+        */
+      if (isTodayOrPastDate && hour < (now === null || now === void 0 ? void 0 : now.getHours())) continue;
       var hh = '';
       var meridian = '';
       if (!is12Hours) hh = hour < 10 ? "0".concat(hour) : hour;else {
@@ -211,6 +213,10 @@ var DriversTimeDisplayUI = function DriversTimeDisplayUI(props) {
         }
       }
       for (var min = 0; min < 4; min++) {
+        /**
+           * Continue if is today and hour is equal to current hour and minutes is smaller than current minute
+          */
+        if (isTodayOrPastDate && hour === (now === null || now === void 0 ? void 0 : now.getHours()) && min * 15 <= now.getMinutes()) continue;
         _scheduleOptions.push({
           value: (hour < 10 ? "0".concat(hour) : hour) + ':' + (min === 0 ? '00' : min * 15),
           content: /*#__PURE__*/_react.default.createElement(_styles2.TimeOptions, null, is12Hours ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, hh, ":", min === 0 ? '00' : min * 15, " ", meridian) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, hh, " : ", min === 0 ? '00' : min * 15))
@@ -221,8 +227,87 @@ var DriversTimeDisplayUI = function DriversTimeDisplayUI(props) {
       value: '23:59',
       content: /*#__PURE__*/_react.default.createElement(_styles2.TimeOptions, null, is12Hours ? '11:59 PM' : '23 : 59')
     });
+    var breakEnd = (selectedBlock === null || selectedBlock === void 0 || (_selectedBlock$block = selectedBlock.block) === null || _selectedBlock$block === void 0 ? void 0 : _selectedBlock$block.break_end) || (selectedBlock === null || selectedBlock === void 0 || (_selectedBlock$block2 = selectedBlock.block) === null || _selectedBlock$block2 === void 0 ? void 0 : _selectedBlock$block2.end);
+    var breakStart = (selectedBlock === null || selectedBlock === void 0 || (_selectedBlock$block3 = selectedBlock.block) === null || _selectedBlock$block3 === void 0 ? void 0 : _selectedBlock$block3.break_start) || (selectedBlock === null || selectedBlock === void 0 || (_selectedBlock$block4 = selectedBlock.block) === null || _selectedBlock$block4 === void 0 ? void 0 : _selectedBlock$block4.start);
+    if (selectedBlock !== null && selectedBlock !== void 0 && (_selectedBlock$block5 = selectedBlock.block) !== null && _selectedBlock$block5 !== void 0 && _selectedBlock$block5.end && !_scheduleOptions.some(function (option) {
+      return (option === null || option === void 0 ? void 0 : option.name) === 'end';
+    })) {
+      var _selectedBlock$block6, _selectedBlock$block7, _selectedBlock$block8;
+      _scheduleOptions.unshift({
+        value: (0, _moment.default)(selectedBlock === null || selectedBlock === void 0 || (_selectedBlock$block6 = selectedBlock.block) === null || _selectedBlock$block6 === void 0 ? void 0 : _selectedBlock$block6.end).format('HH:mm'),
+        name: 'end',
+        content: /*#__PURE__*/_react.default.createElement(_styles2.TimeOptions, null, is12Hours ? "".concat((0, _moment.default)(selectedBlock === null || selectedBlock === void 0 || (_selectedBlock$block7 = selectedBlock.block) === null || _selectedBlock$block7 === void 0 ? void 0 : _selectedBlock$block7.end).format('hh:mm A')) : "".concat((0, _moment.default)(selectedBlock === null || selectedBlock === void 0 || (_selectedBlock$block8 = selectedBlock.block) === null || _selectedBlock$block8 === void 0 ? void 0 : _selectedBlock$block8.end).format('HH : mm')))
+      });
+    }
+    if (showBreakBlock && selectedBlock !== null && selectedBlock !== void 0 && (_selectedBlock$block9 = selectedBlock.block) !== null && _selectedBlock$block9 !== void 0 && _selectedBlock$block9.end && !_scheduleOptions.some(function (option) {
+      return (option === null || option === void 0 ? void 0 : option.name) === 'break_end';
+    })) {
+      _scheduleOptions.unshift({
+        value: (0, _moment.default)(breakEnd).format('HH:mm'),
+        name: 'break_end',
+        content: /*#__PURE__*/_react.default.createElement(_styles2.TimeOptions, null, is12Hours ? "".concat((0, _moment.default)(breakEnd).format('hh:mm A')) : "".concat((0, _moment.default)(breakEnd).format('HH : mm')))
+      });
+    }
+    // posible invalid date? puede reemplazar a start
+    if (showBreakBlock && selectedBlock !== null && selectedBlock !== void 0 && (_selectedBlock$block10 = selectedBlock.block) !== null && _selectedBlock$block10 !== void 0 && _selectedBlock$block10.start) {
+      _scheduleOptions.unshift({
+        value: (0, _moment.default)(breakStart).format('HH:mm'),
+        name: 'break_start',
+        content: /*#__PURE__*/_react.default.createElement(_styles2.TimeOptions, null, is12Hours ? "".concat((0, _moment.default)(breakStart).format('hh:mm A')) : "".concat((0, _moment.default)(breakStart).format('HH : mm')))
+      });
+    }
+    if (selectedBlock !== null && selectedBlock !== void 0 && (_selectedBlock$block11 = selectedBlock.block) !== null && _selectedBlock$block11 !== void 0 && _selectedBlock$block11.start && !_scheduleOptions.some(function (option) {
+      return (option === null || option === void 0 ? void 0 : option.name) === 'start';
+    })) {
+      var _selectedBlock$block12, _selectedBlock$block13, _selectedBlock$block14;
+      _scheduleOptions.unshift({
+        value: (0, _moment.default)(selectedBlock === null || selectedBlock === void 0 || (_selectedBlock$block12 = selectedBlock.block) === null || _selectedBlock$block12 === void 0 ? void 0 : _selectedBlock$block12.start).format('HH:mm'),
+        name: 'start',
+        content: /*#__PURE__*/_react.default.createElement(_styles2.TimeOptions, null, is12Hours ? "".concat((0, _moment.default)(selectedBlock === null || selectedBlock === void 0 || (_selectedBlock$block13 = selectedBlock.block) === null || _selectedBlock$block13 === void 0 ? void 0 : _selectedBlock$block13.start).format('hh:mm A')) : "".concat((0, _moment.default)(selectedBlock === null || selectedBlock === void 0 || (_selectedBlock$block14 = selectedBlock.block) === null || _selectedBlock$block14 === void 0 ? void 0 : _selectedBlock$block14.start).format('HH : mm')))
+      });
+    }
     setScheduleOptions(_scheduleOptions);
-  }, []);
+  };
+  (0, _react.useEffect)(function () {
+    var isTodayOrPastDate = (0, _moment.default)(selectedDate).format('YYYY-MM-DD') <= (0, _moment.default)().format('YYYY-MM-DD');
+    var date = (0, _moment.default)(selectedDate).format('YYYY-MM-DD');
+    if ((scheduleOptions === null || scheduleOptions === void 0 ? void 0 : scheduleOptions.length) > 0 && isTodayOrPastDate) {
+      var _scheduleOptions$find, _scheduleOptions$find2, _scheduleOptions$;
+      var state = _objectSpread(_objectSpread({}, scheduleState.state), {}, {
+        start: "".concat(date, " ").concat((_scheduleOptions$find = scheduleOptions === null || scheduleOptions === void 0 || (_scheduleOptions$find2 = scheduleOptions.find(function (option) {
+          return (option === null || option === void 0 ? void 0 : option.name) === 'start';
+        })) === null || _scheduleOptions$find2 === void 0 ? void 0 : _scheduleOptions$find2.value) !== null && _scheduleOptions$find !== void 0 ? _scheduleOptions$find : (_scheduleOptions$ = scheduleOptions[0]) === null || _scheduleOptions$ === void 0 ? void 0 : _scheduleOptions$.value, ":00")
+      });
+      if (showBreakBlock) {
+        var _scheduleOptions$find3, _scheduleOptions$find4, _scheduleOptions$2;
+        state.break_start = "".concat(date, " ").concat((_scheduleOptions$find3 = scheduleOptions === null || scheduleOptions === void 0 || (_scheduleOptions$find4 = scheduleOptions.find(function (option) {
+          return (option === null || option === void 0 ? void 0 : option.name) === 'break_start';
+        })) === null || _scheduleOptions$find4 === void 0 ? void 0 : _scheduleOptions$find4.value) !== null && _scheduleOptions$find3 !== void 0 ? _scheduleOptions$find3 : (_scheduleOptions$2 = scheduleOptions[0]) === null || _scheduleOptions$2 === void 0 ? void 0 : _scheduleOptions$2.value, ":00");
+      }
+      setScheduleState(_objectSpread(_objectSpread({}, scheduleState), {}, {
+        state: state
+      }));
+    }
+  }, [scheduleOptions === null || scheduleOptions === void 0 ? void 0 : scheduleOptions.length, selectedDate, showBreakBlock, selectedBlock]);
+  (0, _react.useEffect)(function () {
+    if (!(isTimeChangeError !== null && isTimeChangeError !== void 0 && isTimeChangeError.state)) return;
+    setAlertState({
+      open: true,
+      content: timeErrorList[isTimeChangeError.error]
+    });
+  }, [isTimeChangeError === null || isTimeChangeError === void 0 ? void 0 : isTimeChangeError.state]);
+  (0, _react.useEffect)(function () {
+    var interval = setInterval(function () {
+      var _selectedBlock$block15, _selectedBlock$block16;
+      var diff = (0, _moment.default)(selectedDate).diff((0, _moment.default)(), 'day');
+      if (diff <= 0 || selectedBlock !== null && selectedBlock !== void 0 && (_selectedBlock$block15 = selectedBlock.block) !== null && _selectedBlock$block15 !== void 0 && _selectedBlock$block15.start || selectedBlock !== null && selectedBlock !== void 0 && (_selectedBlock$block16 = selectedBlock.block) !== null && _selectedBlock$block16 !== void 0 && _selectedBlock$block16.end) {
+        generateHourList();
+      }
+    }, 1000);
+    return function () {
+      return clearInterval(interval);
+    };
+  }, [selectedDate, selectedBlock, showBreakBlock]);
   (0, _react.useEffect)(function () {
     setScheduleState(_objectSpread(_objectSpread({}, scheduleState), {}, {
       state: _objectSpread(_objectSpread({}, scheduleState.state), {}, {
@@ -231,11 +316,11 @@ var DriversTimeDisplayUI = function DriversTimeDisplayUI(props) {
     }));
   }, [rule]);
   (0, _react.useEffect)(function () {
-    var _selectedBlock$block;
+    var _selectedBlock$block17;
     if (!(selectedBlock !== null && selectedBlock !== void 0 && selectedBlock.block)) return;
-    if (selectedBlock !== null && selectedBlock !== void 0 && (_selectedBlock$block = selectedBlock.block) !== null && _selectedBlock$block !== void 0 && _selectedBlock$block.rrule) {
-      var _selectedBlock$block2, _selectedBlock$block3, _selectedBlock$block4, _selectedBlock$block5;
-      var _date = _rrule.RRule.fromString("DTSTART:".concat((0, _moment.default)(selectedBlock === null || selectedBlock === void 0 || (_selectedBlock$block2 = selectedBlock.block) === null || _selectedBlock$block2 === void 0 ? void 0 : _selectedBlock$block2.start).toISOString().replaceAll('-', '').replaceAll(':', '').replaceAll('.', '')) + '\n' + (selectedBlock === null || selectedBlock === void 0 || (_selectedBlock$block3 = selectedBlock.block) === null || _selectedBlock$block3 === void 0 || (_selectedBlock$block3 = _selectedBlock$block3.rrule) === null || _selectedBlock$block3 === void 0 ? void 0 : _selectedBlock$block3.includes('RRULE:')) ? selectedBlock === null || selectedBlock === void 0 || (_selectedBlock$block4 = selectedBlock.block) === null || _selectedBlock$block4 === void 0 ? void 0 : _selectedBlock$block4.rrule : "RRULE:".concat(selectedBlock === null || selectedBlock === void 0 || (_selectedBlock$block5 = selectedBlock.block) === null || _selectedBlock$block5 === void 0 ? void 0 : _selectedBlock$block5.rrule));
+    if (selectedBlock !== null && selectedBlock !== void 0 && (_selectedBlock$block17 = selectedBlock.block) !== null && _selectedBlock$block17 !== void 0 && _selectedBlock$block17.rrule) {
+      var _selectedBlock$block18, _selectedBlock$block19, _selectedBlock$block20, _selectedBlock$block21;
+      var _date = _rrule.RRule.fromString("DTSTART:".concat((0, _moment.default)(selectedBlock === null || selectedBlock === void 0 || (_selectedBlock$block18 = selectedBlock.block) === null || _selectedBlock$block18 === void 0 ? void 0 : _selectedBlock$block18.start).toISOString().replaceAll('-', '').replaceAll(':', '').replaceAll('.', '')) + '\n' + (selectedBlock === null || selectedBlock === void 0 || (_selectedBlock$block19 = selectedBlock.block) === null || _selectedBlock$block19 === void 0 || (_selectedBlock$block19 = _selectedBlock$block19.rrule) === null || _selectedBlock$block19 === void 0 ? void 0 : _selectedBlock$block19.includes('RRULE:')) ? selectedBlock === null || selectedBlock === void 0 || (_selectedBlock$block20 = selectedBlock.block) === null || _selectedBlock$block20 === void 0 ? void 0 : _selectedBlock$block20.rrule : "RRULE:".concat(selectedBlock === null || selectedBlock === void 0 || (_selectedBlock$block21 = selectedBlock.block) === null || _selectedBlock$block21 === void 0 ? void 0 : _selectedBlock$block21.rrule));
       setRuleState({
         freq: _date.options.freq,
         byweekday: _date.options.byweekday
@@ -248,17 +333,34 @@ var DriversTimeDisplayUI = function DriversTimeDisplayUI(props) {
       block: _block
     });
     _block && setSelectedDate(new Date(_block.start));
+    _block && setScheduleState(_objectSpread(_objectSpread({}, scheduleState), {}, {
+      state: _objectSpread(_objectSpread({}, scheduleState.state), {}, {
+        start: _block.start,
+        end: _block.end
+      })
+    }));
     setOpenModal(true);
   };
   var onCloseModal = function onCloseModal() {
+    var _scheduleOptions$3;
     setOpenModal(false);
     setSelectedBlock({
       user: null,
       block: null
     });
+    var initialState = _objectSpread(_objectSpread({}, scheduleState.state), {}, {
+      start: "".concat(actualDate, " ").concat((_scheduleOptions$3 = scheduleOptions[0]) === null || _scheduleOptions$3 === void 0 ? void 0 : _scheduleOptions$3.value, ":00"),
+      end: "".concat(actualDate, " 23:59:00"),
+      rrule: null,
+      until: null
+    });
+    delete initialState.break_start;
+    delete initialState.break_end;
     setScheduleState(_objectSpread(_objectSpread({}, scheduleState), {}, {
-      state: {}
+      state: initialState
     }));
+    setShowBreakBlock(false);
+    setRuleState();
     setRuleState({
       freq: null,
       byweekday: []
@@ -307,7 +409,7 @@ var DriversTimeDisplayUI = function DriversTimeDisplayUI(props) {
     width: "700px",
     height: "80vh",
     padding: "30px",
-    title: !!(selectedBlock !== null && selectedBlock !== void 0 && selectedBlock.block) ? t('EDIT_BLOCK', 'Edit block') : t('ADD_NEW_BLOCK', 'Add new block'),
+    title: selectedBlock !== null && selectedBlock !== void 0 && selectedBlock.block ? t('EDIT_BLOCK', 'Edit block') : t('ADD_NEW_BLOCK', 'Add new block'),
     open: openModal,
     onClose: onCloseModal
   }, /*#__PURE__*/_react.default.createElement(_DriverBlockAddForm.DriverBlockAddFormUI, {
@@ -366,8 +468,9 @@ var DriversTimeDisplayUI = function DriversTimeDisplayUI(props) {
     title: t('STACKED_BLOCKS', 'Stacked blocks'),
     open: stackEventsState === null || stackEventsState === void 0 ? void 0 : stackEventsState.open,
     onClose: onCloseModal
-  }, /*#__PURE__*/_react.default.createElement(_styles2.DeleteWrapper, null, stackEventsState === null || stackEventsState === void 0 || (_stackEventsState$eve = stackEventsState.events) === null || _stackEventsState$eve === void 0 ? void 0 : _stackEventsState$eve.map(function (event) {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.DeleteWrapper, null, stackEventsState === null || stackEventsState === void 0 || (_stackEventsState$eve = stackEventsState.events) === null || _stackEventsState$eve === void 0 ? void 0 : _stackEventsState$eve.map(function (event, i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.StackedBlock, {
+      key: i,
       onClick: function onClick() {
         return handleSelectDriver(stackEventsState === null || stackEventsState === void 0 ? void 0 : stackEventsState.user, event);
       }
