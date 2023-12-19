@@ -724,7 +724,9 @@ export const FormWrapper = styled.div`
   align-items: flex-start;
   justify-content: center;
   gap: 10px;
-
+  position: relative;
+  margin-bottom: 20px;
+  min-height: 500px;
   .react-datepicker-popper {
     z-index: 1000;
   }
@@ -798,7 +800,7 @@ export const ButtonsWrapper = styled.div`
   justify-content: flex-end;
   gap: 10px;
   position: absolute;
-  bottom: 20px;
+  bottom: -20px;
   right: 20px;
 `
 
