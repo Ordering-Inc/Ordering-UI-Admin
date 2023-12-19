@@ -30,9 +30,8 @@ import {
   WeekHeader,
   ThId,
   ThName,
-  ButtonWrapper,
- } from './styles'
-
+  ButtonWrapper
+} from './styles'
 
 export const DeliveryUsersListing = (props) => {
   const {
@@ -77,14 +76,14 @@ export const DeliveryUsersListing = (props) => {
   }
 
   const handleHourBlockWidth = (block) => {
-    if(!block) return
+    if (!block) return
     let width = 0
     const startHour = moment(block?.start).hour()
     const endHour = moment(block?.end).hour()
     const startMinutes = moment(block?.start).minutes() / 15
     const endMinutes = moment(block?.end).minutes() / 15
     const minutesDiff = startMinutes < endMinutes ? endMinutes - startMinutes : startMinutes - endMinutes
-    if(startMinutes !== endMinutes) {
+    if (startMinutes !== endMinutes) {
       width = ((startHour === 0 ? (endHour - 1 - startHour) : (endHour - startHour)) * 86) + (minutesDiff * 21.5)
     } else {
       width = (startHour === 0 ? (endHour - 1 - startHour) : (endHour - startHour)) * 86
@@ -93,7 +92,7 @@ export const DeliveryUsersListing = (props) => {
   }
 
   const handleBlockHourToShow = (block, user) => {
-    if(!block) return
+    if (!block) return
     return block.start && block.end &&
       <td>
         <Block
@@ -111,7 +110,7 @@ export const DeliveryUsersListing = (props) => {
   }
 
   const handleBlockWeekToShow = (block, user, allBlocks, blockByDay) => {
-    if(!block) return
+    if (!block) return
     return block.start && block.end && (
       blockByDay?.length === 1 ?
         <Block
@@ -124,21 +123,21 @@ export const DeliveryUsersListing = (props) => {
         >
           <p>{moment(block.start).format(hourFormat)} - {moment(block.end).format(hourFormat)}</p>
         </Block>
-      :
-      <ButtonWrapper
-        rowPosition={allBlocks.indexOf(moment(block?.start).format('YYYY-MM-DD'))}
-        cellPosition={moment(block?.start).hour()}
-        cellWidth={160}
-        cellSections={6.67}
-      >
-        <Button
-          color='lightPrimary'
-          borderRadius='8px'
-          onClick={() => setStackEventsState({ open: true, events: blockByDay, user: user})}
+        :
+        <ButtonWrapper
+          rowPosition={allBlocks.indexOf(moment(block?.start).format('YYYY-MM-DD'))}
+          cellPosition={moment(block?.start).hour()}
+          cellWidth={160}
+          cellSections={6.67}
         >
-          {blockByDay?.length} {t('BLOCKS', 'Blocks')}
-        </Button>
-      </ButtonWrapper>
+          <Button
+            color='lightPrimary'
+            borderRadius='8px'
+            onClick={() => setStackEventsState({ open: true, events: blockByDay, user: user })}
+          >
+            {blockByDay?.length} {t('BLOCKS', 'Blocks')}
+          </Button>
+        </ButtonWrapper>
     )
   }
 
@@ -159,7 +158,7 @@ export const DeliveryUsersListing = (props) => {
   }, [driversList?.users, paginationProps])
 
   return (
-      <UsersListingContainer>
+    <UsersListingContainer>
       <UsersConatiner>
         <UserTableWrapper>
           <UsersTable>
@@ -182,11 +181,11 @@ export const DeliveryUsersListing = (props) => {
               [...Array(10).keys()].map(i => (
                 <tbody key={i}>
                   <tr>
-                      <td>
-                        <UserIdWrapper>
-                          <Skeleton width={40} />
-                        </UserIdWrapper>
-                      </td>
+                    <td>
+                      <UserIdWrapper>
+                        <Skeleton width={40} />
+                      </UserIdWrapper>
+                    </td>
                     <td>
                       <UserMainInfo>
                         <WrapperImage isSkeleton>
@@ -258,7 +257,7 @@ export const DeliveryUsersListing = (props) => {
                           {getBlocksByDate(user?.delivery_blocks, _date)?.map((block, j) => {
                             return j === 0 && handleBlockWeekToShow(block, user, getDatesInRange(date), getBlocksByDate(user?.delivery_blocks, _date))
                           })}
-                          <EmptyBlock onClick={() => handleSelectDriver(user, null)}/>
+                          <EmptyBlock onClick={() => handleSelectDriver(user, null)} />
                         </td>
                       </React.Fragment>
                     ))}
@@ -288,6 +287,6 @@ export const DeliveryUsersListing = (props) => {
         onClose={() => setConfirmAdmin({ ...confirmAdmin, open: false })}
         onConfirm={confirmAdmin.handleOnConfirm}
       />
-      </UsersListingContainer>
+    </UsersListingContainer>
   )
 }
