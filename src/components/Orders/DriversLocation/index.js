@@ -197,7 +197,7 @@ export const DriversLocation = React.memo((props) => {
                 <DriverMapMarkerAndInfo
                   key={driver.id}
                   driver={driver}
-                  timeStatus={selectedOrder?.time_status}
+                  timeStatus={selectedOrder?.time_status || (assignedOrders?.orders?.length && assignedOrders?.orders?.some(order => order.time_status === 'delayed') && 'delayed')}
                   lat={
                     (driver.location !== null && typeof driver.location === 'object' && driver.location?.lat)
                       ? driver.location.lat
