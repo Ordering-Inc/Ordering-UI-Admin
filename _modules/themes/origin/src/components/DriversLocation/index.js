@@ -251,6 +251,7 @@ var DriversLocation = function DriversLocation(props) {
     return /*#__PURE__*/_react.default.createElement(_DriverMapMarkerAndInfo.DriverMapMarkerAndInfo, {
       key: driver.id,
       driver: driver,
+      timeStatus: interActionMapOrder === null || interActionMapOrder === void 0 ? void 0 : interActionMapOrder.time_status,
       lat: driver.location !== null ? driver.location.lat : defaultCenter.lat,
       lng: driver.location !== null ? driver.location.lng : defaultCenter.lng
     });
@@ -258,6 +259,7 @@ var DriversLocation = function DriversLocation(props) {
     return /*#__PURE__*/_react.default.createElement(_DriverMapMarkerAndInfo.DriverMapMarkerAndInfo, {
       key: driver.id,
       driver: driver,
+      timeStatus: interActionMapOrder === null || interActionMapOrder === void 0 ? void 0 : interActionMapOrder.time_status,
       lat: driver.location !== null ? driver.location.lat : defaultCenter.lat,
       lng: driver.location !== null ? driver.location.lng : defaultCenter.lng
     });
@@ -265,6 +267,7 @@ var DriversLocation = function DriversLocation(props) {
     return /*#__PURE__*/_react.default.createElement(_DriverMapMarkerAndInfo.DriverMapMarkerAndInfo, {
       key: driver.id,
       driver: driver,
+      timeStatus: interActionMapOrder === null || interActionMapOrder === void 0 ? void 0 : interActionMapOrder.time_status,
       lat: driver.location !== null ? driver.location.lat : defaultCenter.lat,
       lng: driver.location !== null ? driver.location.lng : defaultCenter.lng
     });
@@ -280,6 +283,7 @@ var DriversLocation = function DriversLocation(props) {
     image: interActionMapOrder === null || interActionMapOrder === void 0 || (_interActionMapOrder$13 = interActionMapOrder.customer) === null || _interActionMapOrder$13 === void 0 ? void 0 : _interActionMapOrder$13.photo
   }), !(driverAvailable === 'online' || driverAvailable === 'offline') && interActionMapOrder !== null && (interActionMapOrder === null || interActionMapOrder === void 0 ? void 0 : interActionMapOrder.driver) !== null && /*#__PURE__*/_react.default.createElement(_InterActOrderMarker.InterActOrderMarker, {
     driver: interActionMapOrder === null || interActionMapOrder === void 0 ? void 0 : interActionMapOrder.driver,
+    timeStatus: interActionMapOrder === null || interActionMapOrder === void 0 ? void 0 : interActionMapOrder.time_status,
     lat: interActionOrderDriverLocation ? interActionOrderDriverLocation === null || interActionOrderDriverLocation === void 0 ? void 0 : interActionOrderDriverLocation.lat : defaultCenter.lat,
     lng: interActionOrderDriverLocation ? interActionOrderDriverLocation === null || interActionOrderDriverLocation === void 0 ? void 0 : interActionOrderDriverLocation.lng : defaultCenter.lng,
     image: interActionMapOrder === null || interActionMapOrder === void 0 || (_interActionMapOrder$14 = interActionMapOrder.driver) === null || _interActionMapOrder$14 === void 0 ? void 0 : _interActionMapOrder$14.photo
