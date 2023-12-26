@@ -146,6 +146,10 @@ export const OrdersTable = memo((props) => {
     {
       value: 'channel',
       content: t('CHANNEL', 'Channel')
+    },
+    {
+      value: 'pod',
+      content: t('PODS', 'Pod')
     }
   ]
 
@@ -265,6 +269,8 @@ export const OrdersTable = memo((props) => {
     let _column = {}
     if (type === 'channel'){
       _column = { visable:allowColumns[type].visable ,title: t('CHANNEL', 'Channel'), className: 'channelInfo', draggable: true, colSpan: 1, order: 12 }
+     }else if (type === 'pod'){
+      _column = { visable: allowColumns[type].visable ,title: t('PODS', 'Pod'), className: 'podInfo', draggable: true, colSpan: 1, order: 13 }
      }else{
       _column = allowColumns[type]
      }
