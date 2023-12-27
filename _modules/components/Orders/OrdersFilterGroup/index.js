@@ -22,6 +22,7 @@ var _styles = require("../../../styles");
 var _CurrencyFilter = require("../CurrencyFilter");
 var _utils = require("../../../utils");
 var _FirstSelect = require("../../../styles/Select/FirstSelect");
+var _FilterValuesContext = require("../../../contexts/FilterValuesContext");
 var _styles2 = require("./styles");
 var _styles3 = require("../OrdersTable/styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -382,9 +383,15 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
   }, t('CLEAR', 'Clear'))))));
 };
 var OrdersFilterGroup = function OrdersFilterGroup(props) {
+  var _useFilterValues = (0, _FilterValuesContext.useFilterValues)(),
+    _useFilterValues2 = _slicedToArray(_useFilterValues, 2),
+    filterValues = _useFilterValues2[0],
+    handleFilterValues = _useFilterValues2[1].handleFilterValues;
   var FilterControlProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: OrdersFilterGroupUI,
-    driverGroupList: props.driverGroupList
+    driverGroupList: props.driverGroupList,
+    filterValues: filterValues,
+    setFilterValues: handleFilterValues
   });
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.OrdersFilter, FilterControlProps));
 };

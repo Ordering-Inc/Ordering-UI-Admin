@@ -11,6 +11,7 @@ var _DriversGroupTypeSelector = require("../DriversGroupTypeSelector");
 var _DriverMultiSelector = require("../DriverMultiSelector");
 var _styles = require("../../../styles");
 var _styles2 = require("./styles");
+var _FilterValuesContext = require("../../../contexts/FilterValuesContext");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
@@ -40,10 +41,6 @@ var OrdersHeaderFilterGroupUI = function OrdersHeaderFilterGroupUI(props) {
     _useState2 = _slicedToArray(_useState, 2),
     isShow = _useState2[0],
     setIsShow = _useState2[1];
-  var _useState3 = (0, _react.useState)(false),
-    _useState4 = _slicedToArray(_useState3, 2),
-    filterApplied = _useState4[0],
-    setFilterApplied = _useState4[1];
   var metafieldRef = (0, _react.useRef)();
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
@@ -66,20 +63,9 @@ var OrdersHeaderFilterGroupUI = function OrdersHeaderFilterGroupUI(props) {
     };
   }, [isShow]);
   (0, _react.useEffect)(function () {
-    var _filterApplied = false;
-    if (Object.keys(filterValues).length === 0) {
-      _filterApplied = false;
-    } else {
-      Object.values(filterValues).forEach(function (value) {
-        if (Array.isArray(value)) {
-          if (value.length > 0) _filterApplied = true;
-        } else {
-          if (value) _filterApplied = true;
-        }
-      });
+    if (Object.keys(filterValues).length > 0) {
       handleChangeFilterValues(filterValues);
     }
-    setFilterApplied(_filterApplied);
   }, [filterValues]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, configFilter.includes('external_id') && /*#__PURE__*/_react.default.createElement(_styles.Input, {
     type: "text",
@@ -99,9 +85,15 @@ var OrdersHeaderFilterGroupUI = function OrdersHeaderFilterGroupUI(props) {
   })));
 };
 var OrdersHeaderFilterGroup = function OrdersHeaderFilterGroup(props) {
+  var _useFilterValues = (0, _FilterValuesContext.useFilterValues)(),
+    _useFilterValues2 = _slicedToArray(_useFilterValues, 2),
+    filterValues = _useFilterValues2[0],
+    handleFilterValues = _useFilterValues2[1].handleFilterValues;
   var FilterControlProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: OrdersHeaderFilterGroupUI,
-    driverGroupList: props.driverGroupList
+    driverGroupList: props.driverGroupList,
+    filterValues: filterValues,
+    setFilterValues: handleFilterValues
   });
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.OrdersFilter, FilterControlProps));
 };
