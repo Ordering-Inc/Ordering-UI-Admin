@@ -6,6 +6,7 @@ import { Alert } from './src/components/Shared'
 import { ThemeProvider } from './src/contexts/ThemeContext'
 import { ConfigFileContext } from './src/contexts/ConfigFileContext'
 import { InfoShareProvider } from './src/contexts/InfoShareContext'
+import { FilterValuesProvider } from './src/contexts/FilterValuesContext'
 import { ProjectProvider } from './src/contexts/ProjectContext'
 import { Toast } from './src/styles/Toast'
 import theme from './template/theme.json'
@@ -580,8 +581,10 @@ const RouteApp = () => {
           <OrderingProvider Alert={Alert}>
             <InfoShareProvider>
               <ProjectProvider>
-                <Router />
-                <Toast />
+                <FilterValuesProvider>
+                  <Router />
+                  <Toast />
+                </FilterValuesProvider>
               </ProjectProvider>
             </InfoShareProvider>
           </OrderingProvider>
