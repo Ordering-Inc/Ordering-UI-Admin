@@ -287,7 +287,7 @@ export const Order = React.memo((props) => {
             return (
               <td className='channelInfo' key={`channelInfo${i}-${index}`}>
                 <ChannelInfo>
-                  <p className='bold'>{order.app_id}</p>
+                  <p className='bold'>{order?.app_id}</p>
                 </ChannelInfo>
               </td>
             )
@@ -296,7 +296,7 @@ export const Order = React.memo((props) => {
             return (
               <td className='podInfo' key={`podInfo${i}-${index}`}>
                 <PodInfo>
-                  <p className='bold'>{order.codigoPod}</p>
+                  <p className='bold'>{order?.codigoPod}</p>
                 </PodInfo>
               </td>
             )
