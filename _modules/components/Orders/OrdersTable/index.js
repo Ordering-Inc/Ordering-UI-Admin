@@ -137,6 +137,9 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
   }, {
     value: 'channel',
     content: t('CHANNEL', 'Channel')
+  }, {
+    value: 'pod',
+    content: t('PODS', 'Pod')
   }];
   var getDelayMinutes = function getDelayMinutes(order) {
     // targetMin = delivery_datetime  + eta_time - now()
@@ -253,6 +256,15 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
         draggable: true,
         colSpan: 1,
         order: 12
+      };
+    } else if (type === 'pod') {
+      _column = {
+        visable: allowColumns[type].visable,
+        title: t('PODS', 'Pod'),
+        className: 'podInfo',
+        draggable: true,
+        colSpan: 1,
+        order: 13
       };
     } else {
       _column = allowColumns[type];

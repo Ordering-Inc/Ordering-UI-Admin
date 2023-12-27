@@ -73,7 +73,9 @@ var DriversTimeDisplayUI = function DriversTimeDisplayUI(props) {
     setAlertState = props.setAlertState,
     alertState = props.alertState,
     handleSelectedUntilDate = props.handleSelectedUntilDate,
-    actualDate = props.actualDate;
+    ruleState = props.ruleState,
+    setRuleState = props.setRuleState,
+    handleSetInitialStates = props.handleSetInitialStates;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -92,13 +94,6 @@ var DriversTimeDisplayUI = function DriversTimeDisplayUI(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     scheduleOptions = _useState4[0],
     setScheduleOptions = _useState4[1];
-  var _useState5 = (0, _react.useState)({
-      freq: null,
-      byweekday: []
-    }),
-    _useState6 = _slicedToArray(_useState5, 2),
-    ruleState = _useState6[0],
-    setRuleState = _useState6[1];
   var rule = ruleState !== null && ruleState !== void 0 && ruleState.freq ? new _rrule.RRule(ruleState).toString() : null;
   var isEnabledAppointmentsFeature = configs === null || configs === void 0 || (_configs$appointments = configs.appointments) === null || _configs$appointments === void 0 ? void 0 : _configs$appointments.value;
   var is12Hours = configs === null || configs === void 0 || (_configs$general_hour = configs.general_hour_format) === null || _configs$general_hour === void 0 || (_configs$general_hour = _configs$general_hour.value) === null || _configs$general_hour === void 0 ? void 0 : _configs$general_hour.includes('hh:mm');
@@ -248,7 +243,6 @@ var DriversTimeDisplayUI = function DriversTimeDisplayUI(props) {
         content: /*#__PURE__*/_react.default.createElement(_styles2.TimeOptions, null, is12Hours ? "".concat((0, _moment.default)(breakEnd).format('hh:mm A')) : "".concat((0, _moment.default)(breakEnd).format('HH : mm')))
       });
     }
-    // posible invalid date? puede reemplazar a start
     if (showBreakBlock && selectedBlock !== null && selectedBlock !== void 0 && (_selectedBlock$block10 = selectedBlock.block) !== null && _selectedBlock$block10 !== void 0 && _selectedBlock$block10.start) {
       _scheduleOptions.unshift({
         value: (0, _moment.default)(breakStart).format('HH:mm'),
@@ -272,7 +266,7 @@ var DriversTimeDisplayUI = function DriversTimeDisplayUI(props) {
     var isTodayOrPastDate = (0, _moment.default)(selectedDate).format('YYYY-MM-DD') <= (0, _moment.default)().format('YYYY-MM-DD');
     var date = (0, _moment.default)(selectedDate).format('YYYY-MM-DD');
     if ((scheduleOptions === null || scheduleOptions === void 0 ? void 0 : scheduleOptions.length) > 0 && isTodayOrPastDate) {
-      var _scheduleOptions$find, _scheduleOptions$find2, _scheduleOptions$;
+      var _scheduleOptions$find, _scheduleOptions$find2, _scheduleOptions$, _scheduleState$block, _scheduleState$block2;
       var state = _objectSpread(_objectSpread({}, scheduleState.state), {}, {
         start: "".concat(date, " ").concat((_scheduleOptions$find = scheduleOptions === null || scheduleOptions === void 0 || (_scheduleOptions$find2 = scheduleOptions.find(function (option) {
           return (option === null || option === void 0 ? void 0 : option.name) === 'start';
@@ -284,8 +278,16 @@ var DriversTimeDisplayUI = function DriversTimeDisplayUI(props) {
           return (option === null || option === void 0 ? void 0 : option.name) === 'break_start';
         })) === null || _scheduleOptions$find4 === void 0 ? void 0 : _scheduleOptions$find4.value) !== null && _scheduleOptions$find3 !== void 0 ? _scheduleOptions$find3 : (_scheduleOptions$2 = scheduleOptions[0]) === null || _scheduleOptions$2 === void 0 ? void 0 : _scheduleOptions$2.value, ":00");
       }
+      if (!(scheduleState !== null && scheduleState !== void 0 && (_scheduleState$block = scheduleState.block) !== null && _scheduleState$block !== void 0 && _scheduleState$block.end)) {
+        state.end = "".concat(date, " 23:59:00");
+      }
+      if (!(scheduleState !== null && scheduleState !== void 0 && (_scheduleState$block2 = scheduleState.block) !== null && _scheduleState$block2 !== void 0 && _scheduleState$block2.rrule)) {
+        delete state.until;
+      }
       setScheduleState(_objectSpread(_objectSpread({}, scheduleState), {}, {
-        state: state
+        state: state,
+        loading: false,
+        error: null
       }));
     }
   }, [scheduleOptions === null || scheduleOptions === void 0 ? void 0 : scheduleOptions.length, selectedDate, showBreakBlock, selectedBlock]);
@@ -309,9 +311,11 @@ var DriversTimeDisplayUI = function DriversTimeDisplayUI(props) {
     };
   }, [selectedDate, selectedBlock, showBreakBlock]);
   (0, _react.useEffect)(function () {
+    var _scheduleState$state;
     setScheduleState(_objectSpread(_objectSpread({}, scheduleState), {}, {
       state: _objectSpread(_objectSpread({}, scheduleState.state), {}, {
-        rrule: rule
+        rrule: rule,
+        until: (scheduleState === null || scheduleState === void 0 || (_scheduleState$state = scheduleState.state) === null || _scheduleState$state === void 0 ? void 0 : _scheduleState$state.until) || "".concat((0, _moment.default)(selectedDate).format('YYYY-MM-DD'), " 23:59:00")
       })
     }));
   }, [rule]);
@@ -334,45 +338,16 @@ var DriversTimeDisplayUI = function DriversTimeDisplayUI(props) {
     });
     _block && setSelectedDate(new Date(_block.start));
     _block && setScheduleState(_objectSpread(_objectSpread({}, scheduleState), {}, {
-      state: _objectSpread(_objectSpread({}, scheduleState.state), {}, {
+      state: {
         start: _block.start,
         end: _block.end
-      })
+      }
     }));
     setOpenModal(true);
   };
   var onCloseModal = function onCloseModal() {
-    var _scheduleOptions$3;
     setOpenModal(false);
-    setSelectedBlock({
-      user: null,
-      block: null
-    });
-    var initialState = _objectSpread(_objectSpread({}, scheduleState.state), {}, {
-      start: "".concat(actualDate, " ").concat((_scheduleOptions$3 = scheduleOptions[0]) === null || _scheduleOptions$3 === void 0 ? void 0 : _scheduleOptions$3.value, ":00"),
-      end: "".concat(actualDate, " 23:59:00"),
-      rrule: null,
-      until: null
-    });
-    delete initialState.break_start;
-    delete initialState.break_end;
-    setScheduleState(_objectSpread(_objectSpread({}, scheduleState), {}, {
-      state: initialState
-    }));
-    setShowBreakBlock(false);
-    setRuleState();
-    setRuleState({
-      freq: null,
-      byweekday: []
-    });
-    setPropagation('none');
-    setSelectedDate(new Date());
-    setSelectedUntilDate(new Date());
-    setStackEventsState({
-      open: false,
-      events: [],
-      user: null
-    });
+    handleSetInitialStates();
   };
   var handleCloseSecondModal = function handleCloseSecondModal() {
     setOpenDeleteModal(false);
@@ -432,7 +407,8 @@ var DriversTimeDisplayUI = function DriversTimeDisplayUI(props) {
     handleChangeStartDate: setSelectedDate,
     setOpenDeleteModal: setOpenDeleteModal,
     handleAddBlockTime: handleAddBlockTime,
-    handleChangeScheduleTime: handleChangeScheduleTime
+    handleChangeScheduleTime: handleChangeScheduleTime,
+    onCloseModal: onCloseModal
   })), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "500px",
     height: "40vh",

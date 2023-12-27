@@ -111,7 +111,8 @@ var DriverBlockAddFormUI = function DriverBlockAddFormUI(props) {
     defaultChecked: showBreakBlock,
     onChange: function onChange(enabled) {
       return setShowBreakBlock(enabled);
-    }
+    },
+    disabled: showBreakBlock && isEdit
   }))), /*#__PURE__*/_react.default.createElement(_styles2.SelectsWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.SelectTitleWrappre, null, /*#__PURE__*/_react.default.createElement(_styles2.SelectTitle, null, t('START_BLOCK_DATE', 'Start block date:')), /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
     noSelected: true,
     options: scheduleOptions.filter(function (option) {
