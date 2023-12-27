@@ -268,9 +268,9 @@ export const OrdersTable = memo((props) => {
   const handleChangeAllowColumns = (type) => {
     let _column = {}
     if (type === 'channel') {
-      _column = { visable:allowColumns[type].visable ,title: t('CHANNEL', 'Channel'), className: 'channelInfo', draggable: true, colSpan: 1, order: 12 }
+      _column = { visable: allowColumns[type]?.visable ?? false, title: t('CHANNEL', 'Channel'), className: 'channelInfo', draggable: true, colSpan: 1, order: 12 }
      } else if (type === 'pod') {
-      _column = { visable: allowColumns[type].visable ,title: t('PODS', 'Pod'), className: 'podInfo', draggable: true, colSpan: 1, order: 13 }
+      _column = { visable: allowColumns[type]?.visable ?? false, title: t('PODS', 'Pod'), className: 'podInfo', draggable: true, colSpan: 1, order: 13 }
      } else {
       _column = allowColumns[type]
      }
@@ -637,6 +637,13 @@ export const OrdersTable = memo((props) => {
                     </td>
                   )}
                   {allowColumns?.channel?.visable && !isSelectedOrders && (
+                    <td className='orderStatusTitle'>
+                      <WrapOrderStatusSelector>
+                        <Skeleton width={100} height={30} />
+                      </WrapOrderStatusSelector>
+                    </td>
+                  )}
+                  {allowColumns?.pod?.visable && !isSelectedOrders && (
                     <td className='orderStatusTitle'>
                       <WrapOrderStatusSelector>
                         <Skeleton width={100} height={30} />
