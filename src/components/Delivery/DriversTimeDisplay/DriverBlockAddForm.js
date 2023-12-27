@@ -113,6 +113,7 @@ export const DriverBlockAddFormUI = (props) => {
           <Switch
             defaultChecked={showBreakBlock}
             onChange={enabled => setShowBreakBlock(enabled)}
+            disabled={showBreakBlock && isEdit}
           />
         </ShowBreakBlocksWrapper>
       </BlocksWrapper>
