@@ -1,5 +1,5 @@
 import React from 'react'
-import { BusinessInfo, CheckBox, CustomerInfo, LogisticStatusDot, OrderNumberContainer, OrdersCountWrapper, PriorityDot, StatusInfo, Timer, Timestatus, WrapperImage, InfoWrapper, ChannelInfo, EtaInfo } from './styles'
+import { BusinessInfo, CheckBox, CustomerInfo, LogisticStatusDot, OrderNumberContainer, OrdersCountWrapper, PriorityDot, StatusInfo, Timer, Timestatus, WrapperImage, InfoWrapper, ChannelInfo, EtaInfo, PodInfo } from './styles'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import { useLanguage, useUtils } from 'ordering-components-admin'
@@ -287,8 +287,17 @@ export const Order = React.memo((props) => {
             return (
               <td className='channelInfo' key={`channelInfo${i}-${index}`}>
                 <ChannelInfo>
-                  <p className='bold'>{order.app_id}</p>
+                  <p className='bold'>{order?.app_id}</p>
                 </ChannelInfo>
+              </td>
+            )
+          }
+          if (column === 'pod') {
+            return (
+              <td className='podInfo' key={`podInfo${i}-${index}`}>
+                <PodInfo>
+                  <p className='bold'>{order?.codigoPod}</p>
+                </PodInfo>
               </td>
             )
           }
