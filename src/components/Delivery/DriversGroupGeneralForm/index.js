@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage, useSession } from 'ordering-components-admin'
 import { useForm } from 'react-hook-form'
-import { Input, Button, SecondSelect as DefaultSelect } from '../../../styles'
+import { Input, Button, SecondSelect as DefaultSelect, Checkbox } from '../../../styles'
 import { Alert } from '../../Shared'
 import { DriversGroupDrivers } from '../DriversGroupDrivers'
 import { DriversGroupCompanies } from '../DriversGroupCompanies'
 
 import {
   Container,
-  InputWrapper
+  DriverManagerContainer,
+  DriverManagerWrapper,
+  Image,
+  InputWrapper,
+  ManagerInfoContainer,
+  WrapperImage
 } from './styles'
+import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 
 export const DriversGroupGeneralForm = (props) => {
   const {
@@ -21,7 +27,9 @@ export const DriversGroupGeneralForm = (props) => {
     handleAddDriversGroup,
     actionDisabled,
     isTourOpen,
-    handleNextClick
+    handleNextClick,
+    selectedDriverManager,
+    handleSelectDriverManager
   } = props
 
   const [, t] = useLanguage()
@@ -33,13 +41,6 @@ export const DriversGroupGeneralForm = (props) => {
     { value: 0, content: t('IN_HOUSE_DRIVERS', 'In house drivers') },
     { value: 1, content: t('DRIVER_COMPANIES', 'Driver companies') }
   ]
-
-  const driversManagersOptions = driversManagers.map(manager => {
-    return {
-      value: manager.id,
-      content: <div>{manager?.name} {manager?.lastname}</div>
-    }
-  })
 
   const priorityOptions = [
     { value: -1, content: t('LOW', 'Low') },
@@ -127,17 +128,34 @@ export const DriversGroupGeneralForm = (props) => {
           autoComplete='off'
         />
       </InputWrapper>
+
       {user?.level !== 5 && (
         <InputWrapper>
           <label>{t('DRIVER_MANAGER', 'Driver manager')}</label>
-          <DefaultSelect
-            isSecondIcon
-            placeholder={t('SELECT_MANAGER', 'Select driver manager')}
-            options={driversManagersOptions}
-            defaultValue={changesState?.administrator_id ?? driversGroupState.driversGroup?.administrator_id}
-            optionInnerMaxHeight='60vh'
-            onChange={val => handleChangesState({ administrator_id: val })}
-          />
+          <DriverManagerContainer>
+            {driversManagers.map(driverManager => (
+              <DriverManagerWrapper
+                key={driverManager.id}
+              >
+                <Checkbox
+                  value={driverManager?.id}
+                  checked={selectedDriverManager.includes(driverManager.id)}
+                  onChange={e => handleSelectDriverManager(driverManager.id, e.target.checked)}
+                />
+                <WrapperImage>
+                  {driverManager?.photo ? (
+                    <Image bgimage={driverManager?.photo} alt='driverManager' />
+                  ) : (
+                    <FaUserAlt />
+                  )}
+                </WrapperImage>
+                <ManagerInfoContainer>
+                  <p>{driverManager?.name}</p>
+                  <p>{driverManager?.email}</p>
+                </ManagerInfoContainer>
+              </DriverManagerWrapper>
+            ))}
+          </DriverManagerContainer>
         </InputWrapper>
       )}
       <InputWrapper>

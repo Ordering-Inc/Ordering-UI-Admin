@@ -68,7 +68,9 @@ const DriversTimeDisplayUI = (props) => {
     setAlertState,
     alertState,
     handleSelectedUntilDate,
-    actualDate
+    ruleState,
+    setRuleState,
+    handleSetInitialStates
   } = props
 
   const [, t] = useLanguage()
@@ -77,7 +79,6 @@ const DriversTimeDisplayUI = (props) => {
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
   const [showSelectHeader, setShowSelectHeader] = useState(false)
   const [scheduleOptions, setScheduleOptions] = useState([])
-  const [ruleState, setRuleState] = useState({ freq: null, byweekday: [] })
   const rule = ruleState?.freq ? new RRule(ruleState).toString() : null
   const isEnabledAppointmentsFeature = configs?.appointments?.value
   const is12Hours = configs?.general_hour_format?.value?.includes('hh:mm')
@@ -236,7 +237,7 @@ const DriversTimeDisplayUI = (props) => {
         )
       })
     }
-    // posible invalid date? puede reemplazar a start
+
     if (showBreakBlock && selectedBlock?.block?.start) {
       _scheduleOptions.unshift({
         value: moment(breakStart).format('HH:mm'),
@@ -271,9 +272,18 @@ const DriversTimeDisplayUI = (props) => {
       if (showBreakBlock) {
         state.break_start = `${date} ${scheduleOptions?.find(option => option?.name === 'break_start')?.value ?? scheduleOptions[0]?.value}:00`
       }
+      if (!scheduleState?.block?.end) {
+        state.end = `${date} 23:59:00`
+      }
+      if (!scheduleState?.block?.rrule) {
+        delete state.until
+      }
+
       setScheduleState({
         ...scheduleState,
-        state: state
+        state: state,
+        loading: false,
+        error: null
       })
     }
   }, [scheduleOptions?.length, selectedDate, showBreakBlock, selectedBlock])
@@ -301,7 +311,8 @@ const DriversTimeDisplayUI = (props) => {
       ...scheduleState,
       state: {
         ...scheduleState.state,
-        rrule: rule
+        rrule: rule,
+        until: scheduleState?.state?.until || `${moment(selectedDate).format('YYYY-MM-DD')} 23:59:00`
       }
     })
   }, [rule])
@@ -327,7 +338,6 @@ const DriversTimeDisplayUI = (props) => {
     _block && setScheduleState({
       ...scheduleState,
       state: {
-        ...scheduleState.state,
         start: _block.start,
         end: _block.end
       }
@@ -337,31 +347,7 @@ const DriversTimeDisplayUI = (props) => {
 
   const onCloseModal = () => {
     setOpenModal(false)
-    setSelectedBlock({
-      user: null,
-      block: null
-    })
-    const initialState = {
-      ...scheduleState.state,
-      start: `${actualDate} ${scheduleOptions[0]?.value}:00`,
-      end: `${actualDate} 23:59:00`,
-      rrule: null,
-      until: null
-    }
-    delete initialState.break_start
-    delete initialState.break_end
-
-    setScheduleState({
-      ...scheduleState,
-      state: initialState
-    })
-    setShowBreakBlock(false)
-    setRuleState()
-    setRuleState({ freq: null, byweekday: [] })
-    setPropagation('none')
-    setSelectedDate(new Date())
-    setSelectedUntilDate(new Date())
-    setStackEventsState({ open: false, events: [], user: null })
+    handleSetInitialStates()
   }
 
   const handleCloseSecondModal = () => {
@@ -452,6 +438,7 @@ const DriversTimeDisplayUI = (props) => {
           setOpenDeleteModal={setOpenDeleteModal}
           handleAddBlockTime={handleAddBlockTime}
           handleChangeScheduleTime={handleChangeScheduleTime}
+          onCloseModal={onCloseModal}
         />
       </Modal>
       <Modal
