@@ -263,11 +263,11 @@ export const OrdersTable = memo((props) => {
 
   const handleChangeAllowColumns = (type) => {
     let _column = {}
-    if (type === 'channel'){
-      _column = { visable:allowColumns[type].visable ,title: t('CHANNEL', 'Channel'), className: 'channelInfo', draggable: true, colSpan: 1, order: 12 }
-     }else{
+    if (type === 'channel') {
+      _column = { visable: allowColumns[type].visable, title: t('CHANNEL', 'Channel'), className: 'channelInfo', draggable: true, colSpan: 1, order: 12 }
+    } else {
       _column = allowColumns[type]
-     }
+    }
     const updatedAllowColumns = {
       ...allowColumns,
       [type]: { ..._column, visable: !_column?.visable }
@@ -460,14 +460,6 @@ export const OrdersTable = memo((props) => {
                                   </div>
                                 </DragTh>
                               )}
-                              <th className='orderPrice' key={`noDragTh-${i}`}>
-                                <ColumnAllowSettingPopover
-                                  allowColumns={allowColumns}
-                                  optionsDefault={optionsDefault}
-                                  handleChangeAllowColumns={handleChangeAllowColumns}
-                                  isOrder
-                                />
-                              </th>
                             </React.Fragment>
                           )
                         }
