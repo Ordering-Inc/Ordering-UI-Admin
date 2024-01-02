@@ -290,7 +290,7 @@ var DriversTimeDisplayUI = function DriversTimeDisplayUI(props) {
         error: null
       }));
     }
-  }, [scheduleOptions === null || scheduleOptions === void 0 ? void 0 : scheduleOptions.length, selectedDate, showBreakBlock, selectedBlock]);
+  }, [scheduleOptions === null || scheduleOptions === void 0 ? void 0 : scheduleOptions.length, selectedDate, showBreakBlock, selectedBlock, date]);
   (0, _react.useEffect)(function () {
     if (!(isTimeChangeError !== null && isTimeChangeError !== void 0 && isTimeChangeError.state)) return;
     setAlertState({

@@ -54,7 +54,8 @@ var BusinessLocation = function BusinessLocation(props) {
     mapTypeControl: false,
     mapTypeControlOptions: {
       mapTypeIds: ['roadmap', 'satellite']
-    }
+    },
+    isMarkerDraggable: true
   };
   var handleChangeBusinessCity = function handleChangeBusinessCity(cityId) {
     setFormState(function (prevState) {
@@ -154,7 +155,7 @@ var BusinessLocation = function BusinessLocation(props) {
     location: location,
     mapControls: googleMapsControls,
     handleChangeCenter: handleChangeCenter,
-    isFitCenter: true
+    onlyMarkerChangeCenter: true
   })), /*#__PURE__*/_react.default.createElement(_styles2.Section, null, /*#__PURE__*/_react.default.createElement(_styles2.WrapperCitySelector, null, /*#__PURE__*/_react.default.createElement("p", null, t('CITY', 'City')), /*#__PURE__*/_react.default.createElement(_Shared.CitySelector, {
     isDefault: true,
     position: "left",
