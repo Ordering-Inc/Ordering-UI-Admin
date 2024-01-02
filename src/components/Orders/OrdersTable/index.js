@@ -273,7 +273,7 @@ export const OrdersTable = memo((props) => {
       _column = { visable: allowColumns[type].visable ,title: t('PODS', 'Pod'), className: 'podInfo', draggable: true, colSpan: 1, order: 13 }
      } else {
       _column = allowColumns[type]
-     }
+    }
     const updatedAllowColumns = {
       ...allowColumns,
       [type]: { ..._column, visable: !_column?.visable }
@@ -466,14 +466,6 @@ export const OrdersTable = memo((props) => {
                                   </div>
                                 </DragTh>
                               )}
-                              <th className='orderPrice' key={`noDragTh-${i}`}>
-                                <ColumnAllowSettingPopover
-                                  allowColumns={allowColumns}
-                                  optionsDefault={optionsDefault}
-                                  handleChangeAllowColumns={handleChangeAllowColumns}
-                                  isOrder
-                                />
-                              </th>
                             </React.Fragment>
                           )
                         }

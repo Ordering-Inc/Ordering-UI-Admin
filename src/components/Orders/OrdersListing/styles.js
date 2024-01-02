@@ -107,3 +107,15 @@ export const InfoMessage = styled.div`
     }
   }
 `
+
+export const ColumnPopoverContainer = styled.div`
+  position: relative;
+  button {
+    right: 0px;
+    position: absolute;
+    transform: translateY(-3px);
+    z-index: 1000;
+    background: white;
+    padding: 0 10px;
+  }
+`

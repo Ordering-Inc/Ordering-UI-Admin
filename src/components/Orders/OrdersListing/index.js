@@ -10,8 +10,10 @@ import {
   WrapperNoneOrders,
   WrapperOrderListContent,
   InnerNoneOrdersContainer,
-  InfoMessage
+  InfoMessage,
+  ColumnPopoverContainer
 } from './styles'
+import { ColumnAllowSettingPopover } from '../../Shared'
 
 export const OrdersListing = memo((props) => {
   const {
@@ -65,6 +67,84 @@ export const OrdersListing = memo((props) => {
     if (handleSetOpenOrderDetail && orderDetailId) {
       handleSetOpenOrderDetail(true)
     }
+  }
+
+  const optionsDefault = [
+    {
+      value: 'status',
+      content: t('STATUS', 'Status')
+    },
+    {
+      value: 'orderNumber',
+      content: t('INVOICE_ORDER_NO', 'Order No.')
+    },
+    {
+      value: 'agent',
+      content: t('AGENT', 'Agent')
+    },
+    {
+      value: 'cartGroupId',
+      content: t('GROUP_ORDER', 'Group Order')
+    },
+    {
+      value: 'driverGroupId',
+      content: t('EXPORT_DRIVER_GROUP_ID', 'Driver Group Id')
+    },
+    {
+      value: 'dateTime',
+      content: t('DATE_TIME', 'Date and time')
+    },
+    {
+      value: 'business',
+      content: t('BUSINESS', 'Business')
+    },
+    {
+      value: 'customer',
+      content: t('CUSTOMER', 'Customer')
+    },
+    {
+      value: 'driver',
+      content: t('DRIVER', 'Driver')
+    },
+    {
+      value: 'advanced',
+      content: t('ADVANCED_LOGISTICS', 'Advance Logistics')
+    },
+    {
+      value: 'timer',
+      content: t('SLA_TIMER', 'SLA’s timer')
+    },
+    {
+      value: 'eta',
+      content: t('ETA', 'ETA')
+    },
+    {
+      value: 'total',
+      content: t('EXPORT_TOTAL', 'Total')
+    },
+    {
+      value: 'externalId',
+      content: t('EXTERNAL_ID', 'External id')
+    },
+    {
+      value: 'channel',
+      content: t('CHANNEL', 'Channel')
+    }
+  ]
+
+  const handleChangeAllowColumns = (type) => {
+    let _column = {}
+    if (type === 'channel') {
+      _column = { visable: allowColumns[type].visable, title: t('CHANNEL', 'Channel'), className: 'channelInfo', draggable: true, colSpan: 1, order: 12 }
+    } else {
+      _column = allowColumns[type]
+    }
+    const updatedAllowColumns = {
+      ...allowColumns,
+      [type]: { ..._column, visable: !_column?.visable }
+    }
+    setAllowColumns(updatedAllowColumns)
+    saveUserSettings(JSON.parse(JSON.stringify(updatedAllowColumns)))
   }
 
   useEffect(() => {
@@ -128,33 +208,46 @@ export const OrdersListing = memo((props) => {
               maxHeight={orderListView !== 'table'}
               onDoubleClick={handleDobleClick}
             >
+
               {orderListView === 'table' ? (
-                <OrdersTable
-                  hidePhoto={hidePhoto}
-                  setSelectedOrderIds={setSelectedOrderIds}
-                  isSelectedOrders={isSelectedOrders}
-                  orderList={orderList}
-                  pagination={pagination}
-                  selectedOrderIds={selectedOrderIds}
-                  orderDetailId={orderDetailId}
-                  loadMoreOrders={loadMoreOrders}
-                  getPageOrders={getPageOrders}
-                  handleUpdateOrderStatus={handleUpdateOrderStatus}
-                  handleSelectedOrderIds={handleSelectedOrderIds}
-                  handleOpenOrderDetail={handleOpenOrderDetail}
-                  currentTourStep={currentTourStep}
-                  isTourOpen={isTourOpen}
-                  handleOpenTour={handleOpenTour}
-                  setIsTourOpen={setIsTourOpen}
-                  slaSettingTime={slaSettingTime}
-                  groupStatus={groupStatus}
-                  allowColumns={allowColumns}
-                  setAllowColumns={setAllowColumns}
-                  handleDrop={handleDrop}
-                  saveUserSettings={saveUserSettings}
-                  isUseQuery={isUseQuery}
-                  franchisesList={props.franchisesList}
-                />
+                <>
+                  {allowColumns && !(Object.keys(allowColumns).filter(col => allowColumns[col]?.visable && allowColumns[col]?.order !== 0).length === 0) && (
+                    <ColumnPopoverContainer>
+                      <ColumnAllowSettingPopover
+                        allowColumns={allowColumns}
+                        optionsDefault={optionsDefault}
+                        handleChangeAllowColumns={handleChangeAllowColumns}
+                        isOrder
+                      />
+                    </ColumnPopoverContainer>
+                  )}
+                  <OrdersTable
+                    hidePhoto={hidePhoto}
+                    setSelectedOrderIds={setSelectedOrderIds}
+                    isSelectedOrders={isSelectedOrders}
+                    orderList={orderList}
+                    pagination={pagination}
+                    selectedOrderIds={selectedOrderIds}
+                    orderDetailId={orderDetailId}
+                    loadMoreOrders={loadMoreOrders}
+                    getPageOrders={getPageOrders}
+                    handleUpdateOrderStatus={handleUpdateOrderStatus}
+                    handleSelectedOrderIds={handleSelectedOrderIds}
+                    handleOpenOrderDetail={handleOpenOrderDetail}
+                    currentTourStep={currentTourStep}
+                    isTourOpen={isTourOpen}
+                    handleOpenTour={handleOpenTour}
+                    setIsTourOpen={setIsTourOpen}
+                    slaSettingTime={slaSettingTime}
+                    groupStatus={groupStatus}
+                    allowColumns={allowColumns}
+                    setAllowColumns={setAllowColumns}
+                    handleDrop={handleDrop}
+                    saveUserSettings={saveUserSettings}
+                    isUseQuery={isUseQuery}
+                    franchisesList={props.franchisesList}
+                  />
+                </>
               ) : (
                 <OrdersCards
                   isMessagesView={isMessagesView}

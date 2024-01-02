@@ -286,7 +286,7 @@ const DriversTimeDisplayUI = (props) => {
         error: null
       })
     }
-  }, [scheduleOptions?.length, selectedDate, showBreakBlock, selectedBlock])
+  }, [scheduleOptions?.length, selectedDate, showBreakBlock, selectedBlock, date])
 
   useEffect(() => {
     if (!isTimeChangeError?.state) return
