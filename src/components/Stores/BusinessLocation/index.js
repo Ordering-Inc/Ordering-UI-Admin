@@ -35,7 +35,8 @@ export const BusinessLocation = (props) => {
     mapTypeControl: false,
     mapTypeControlOptions: {
       mapTypeIds: ['roadmap', 'satellite']
-    }
+    },
+    isMarkerDraggable: true
   }
 
   const handleChangeBusinessCity = (cityId) => {
@@ -102,7 +103,7 @@ export const BusinessLocation = (props) => {
             location={location}
             mapControls={googleMapsControls}
             handleChangeCenter={handleChangeCenter}
-            isFitCenter
+            onlyMarkerChangeCenter
           />
         </WrapperMap>
       )}
