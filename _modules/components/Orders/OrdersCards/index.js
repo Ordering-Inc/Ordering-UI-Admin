@@ -34,7 +34,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrdersCards = function OrdersCards(props) {
-  var _configState$configs, _franchisesList$franc, _orderList$orders;
+  var _configState$configs, _franchisesList$franc, _configState$configs2, _orderList$orders;
   var isMessagesView = props.isMessagesView,
     orderList = props.orderList,
     pagination = props.pagination,
@@ -78,6 +78,9 @@ var OrdersCards = function OrdersCards(props) {
     imageKeys[franchise.id] = franchise.logo;
     return imageKeys;
   }, {}));
+  var isShowFiltersOptions = ((configState === null || configState === void 0 || (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 || (_configState$configs2 = _configState$configs2.filter_order_options) === null || _configState$configs2 === void 0 ? void 0 : _configState$configs2.value.split('|').map(function (value) {
+    return value;
+  })) || []).length > 0;
   var handleChangePage = function handleChangePage(page) {
     getPageOrders(pagination.pageSize, page);
   };
@@ -180,8 +183,8 @@ var OrdersCards = function OrdersCards(props) {
     }
   }, [orderList === null || orderList === void 0 ? void 0 : orderList.orders]);
   (0, _react.useEffect)(function () {
-    var _configState$configs2;
-    var slaSettings = (configState === null || configState === void 0 || (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 || (_configState$configs2 = _configState$configs2.order_deadlines_enabled) === null || _configState$configs2 === void 0 ? void 0 : _configState$configs2.value) === '1';
+    var _configState$configs3;
+    var slaSettings = (configState === null || configState === void 0 || (_configState$configs3 = configState.configs) === null || _configState$configs3 === void 0 || (_configState$configs3 = _configState$configs3.order_deadlines_enabled) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value) === '1';
     setAllowColumns(_objectSpread(_objectSpread({}, allowColumns), {}, {
       timer: slaSettings,
       slaBar: slaSettings
@@ -194,7 +197,9 @@ var OrdersCards = function OrdersCards(props) {
       pageSize: pagination.pageSize
     });
   }, [pagination === null || pagination === void 0 ? void 0 : pagination.currentPage, pagination === null || pagination === void 0 ? void 0 : pagination.pageSize, pagination === null || pagination === void 0 ? void 0 : pagination.total]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OrdersListContainer, null, orderList.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OrdersListContainer, {
+    isShowFiltersOptions: isShowFiltersOptions
+  }, orderList.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.OrderCard, {
       key: i
     }, /*#__PURE__*/_react.default.createElement(_styles.OrderHeader, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {

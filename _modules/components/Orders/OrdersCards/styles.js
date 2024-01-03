@@ -10,7 +10,13 @@ var _templateObject, _templateObject2, _templateObject3, _templateObject4, _temp
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-var OrdersListContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  height: calc(100% - 200px);\n  padding: 0 12px 15px 12px;\n  box-sizing: border-box;\n  overflow-x: hidden;\n\n  @media (min-width: 1024px) and (max-width: 1300px) {\n    height: calc(100% - 230px);\n  }\n"])));
+var OrdersListContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  height: ", ";\n  padding: 0 12px 15px 12px;\n  box-sizing: border-box;\n  overflow-x: hidden;\n\n  @media (min-width: 1024px) and (max-width: 1300px) {\n    height: ", ";\n  }\n"])), function (_ref) {
+  var isShowFiltersOptions = _ref.isShowFiltersOptions;
+  return isShowFiltersOptions ? 'calc(100% - 250px)' : 'calc(100% - 200px)';
+}, function (_ref2) {
+  var isShowFiltersOptions = _ref2.isShowFiltersOptions;
+  return isShowFiltersOptions ? 'calc(100% - 270px)' : 'calc(100% - 230px)';
+});
 exports.OrdersListContainer = OrdersListContainer;
 var OrderNunberContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n\n"])));
 exports.OrderNunberContainer = OrderNunberContainer;
@@ -22,8 +28,8 @@ var OrderCard = _styledComponents.default.div(_templateObject3 || (_templateObje
   return ((_props$theme = props.theme) === null || _props$theme === void 0 ? void 0 : _props$theme.rtl) && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    padding-left: 0px;\n    padding-right: 25px;\n "])));
 }, function (props) {
   return props.theme.colors.lightPrimary;
-}, function (_ref) {
-  var active = _ref.active;
+}, function (_ref3) {
+  var active = _ref3.active;
   return active && (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    background-color: ", ";\n    border: 1px solid ", ";\n  "])), function (props) {
     return props.theme.colors.lightPrimary;
   }, function (props) {
@@ -53,8 +59,8 @@ var InfoItemContainer = _styledComponents.default.div(_templateObject10 || (_tem
   return (_props$theme$colors2 = props.theme.colors) === null || _props$theme$colors2 === void 0 ? void 0 : _props$theme$colors2.headingColor;
 });
 exports.InfoItemContainer = InfoItemContainer;
-var WrapperImage = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  max-width: 45px;\n  max-height: 45px;\n  height: 45px;\n  width: 45px;\n  ", "\n\n  img {\n    width: 100%;\n    height: 100%;\n    border-radius: 7.6px;\n    object-fit: cover;\n  }\n\n  svg {\n    width: 100%;\n    height: 100%;\n    padding: 7px;\n    box-sizing: border-box;\n    border-radius: 50%;\n  }\n"])), function (_ref2) {
-  var isSkeleton = _ref2.isSkeleton;
+var WrapperImage = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  max-width: 45px;\n  max-height: 45px;\n  height: 45px;\n  width: 45px;\n  ", "\n\n  img {\n    width: 100%;\n    height: 100%;\n    border-radius: 7.6px;\n    object-fit: cover;\n  }\n\n  svg {\n    width: 100%;\n    height: 100%;\n    padding: 7px;\n    box-sizing: border-box;\n    border-radius: 50%;\n  }\n"])), function (_ref4) {
+  var isSkeleton = _ref4.isSkeleton;
   return !isSkeleton && (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n    border: 1px solid #E3E3E3;\n    border-radius: 10px;\n  "])));
 });
 exports.WrapperImage = WrapperImage;
@@ -74,14 +80,14 @@ exports.UnreadMessageCounter = UnreadMessageCounter;
 var Timestatus = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  position: absolute;\n  width: 4px;\n  height: 130px;\n  border-radius: 20px;\n  left: 10px;\n  top: 17px;\n  ", "\n ", "\n  ", "\n  ", "\n"])), function (props) {
   var _props$theme4;
   return ((_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.rtl) && (0, _styledComponents.css)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n    left: unset;\n    right: 10px;\n "])));
-}, function (_ref3) {
-  var timeState = _ref3.timeState;
-  return timeState === 'in_time' && (0, _styledComponents.css)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n    background-color: #00D27A;\n  "])));
-}, function (_ref4) {
-  var timeState = _ref4.timeState;
-  return timeState === 'at_risk' && (0, _styledComponents.css)(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n    background-color: #FFC700;\n  "])));
 }, function (_ref5) {
   var timeState = _ref5.timeState;
+  return timeState === 'in_time' && (0, _styledComponents.css)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n    background-color: #00D27A;\n  "])));
+}, function (_ref6) {
+  var timeState = _ref6.timeState;
+  return timeState === 'at_risk' && (0, _styledComponents.css)(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n    background-color: #FFC700;\n  "])));
+}, function (_ref7) {
+  var timeState = _ref7.timeState;
   return timeState === 'delayed' && (0, _styledComponents.css)(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n    background-color: #E63757;\n  "])));
 });
 exports.Timestatus = Timestatus;

@@ -215,6 +215,11 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
     onChange: function onChange(e) {
       return handleChangeOrderId(e);
     }
+  }), /*#__PURE__*/_react.default.createElement(_DateTypeSelector.DateTypeSelector, {
+    filterValues: filterValues,
+    handleChangeDateType: handleChangeDateType,
+    handleChangeFromDate: handleChangeFromDate,
+    handleChangeEndDate: handleChangeEndDate
   })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
     type: "text",
     placeholder: t('CUSTOMER_NAME', 'Customer Name'),
@@ -305,12 +310,7 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
         assigned: value
       });
     }
-  })), /*#__PURE__*/_react.default.createElement(_DateTypeSelector.DateTypeSelector, {
-    filterValues: filterValues,
-    handleChangeDateType: handleChangeDateType,
-    handleChangeFromDate: handleChangeFromDate,
-    handleChangeEndDate: handleChangeEndDate
-  })), filterValues === null || filterValues === void 0 ? void 0 : filterValues.metafield.map(function (item) {
+  }))), filterValues === null || filterValues === void 0 ? void 0 : filterValues.metafield.map(function (item) {
     return /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, {
       key: item.id
     }, /*#__PURE__*/_react.default.createElement(_styles.Input, {
