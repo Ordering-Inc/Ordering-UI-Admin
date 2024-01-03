@@ -281,6 +281,30 @@ export const DeliveriesLocation = React.memo((props) => {
               />
             ))
           )}
+          {interActionMapOrder !== null && interActionMapOrder?.driver === null && activeDrivers.length > 0 && (
+            activeDrivers.map((driver) => (
+              <InterActOrderMarker
+                key={driver.id}
+                driver={driver}
+                timeStatus={interActionMapOrder?.time_status}
+                lat={
+                  (driver.location !== null && typeof driver.location === 'object' && driver.location?.lat)
+                    ? driver.location.lat
+                    : typeof driver.location === 'string'
+                      ? parseFloat(driver?.location?.split(',')[0].replace(/[^-.0-9]/g, ''))
+                      : defaultCenter.lat
+                }
+                lng={
+                  (driver.location !== null && typeof driver.location === 'object' && driver.location?.lng)
+                    ? driver.location.lng
+                    : typeof driver.location === 'string'
+                      ? parseFloat(driver?.location?.split(',')[1].replace(/[^-.0-9]/g, ''))
+                      : defaultCenter.lng
+                }
+                image={driver?.photo}
+              />
+            ))
+          )}
         </GoogleMapReact>
       )}
 

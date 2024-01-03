@@ -106,32 +106,32 @@ export const OrdersContentHeader = memo((props) => {
               />
             </SLAControlsWrapper>
           )}
-            <WrapperSearchAndFilter
-              fullWidth={isDisableTitle}
-              >
-              {isShowSearchFilters && (
-                <SearchBar
-                  isCustomLayout
-                  lazyLoad
-                  onSearch={handleChangeSearch}
-                  search={searchValue}
-                  placeholder={t('SEARCH', 'Search')}
-                />
-              )}
-              <OrdersFilterGroup
-                isLateralBar={isLateralBar}
-                filterModalOpen={filterModalOpen}
-                setFilterModalOpen={setFilterModalOpen}
-                driverGroupList={driverGroupList}
-                driversList={driversList}
-                paymethodsList={paymethodsList}
-                businessesList={businessesList}
-                citiesList={citiesList}
-                handleChangeFilterValues={handleChangeFilterValues}
-                searchValue={searchValue}
-                handleChangeSearch={handleChangeSearch}
+          <WrapperSearchAndFilter
+            fullWidth={isDisableTitle}
+          >
+            {isShowSearchFilters && (
+              <SearchBar
+                isCustomLayout
+                lazyLoad
+                onSearch={handleChangeSearch}
+                search={searchValue}
+                placeholder={t('SEARCH', 'Search')}
               />
-            </WrapperSearchAndFilter>
+            )}
+            <OrdersFilterGroup
+              isLateralBar={isLateralBar}
+              filterModalOpen={filterModalOpen}
+              setFilterModalOpen={setFilterModalOpen}
+              driverGroupList={driverGroupList}
+              driversList={driversList}
+              paymethodsList={paymethodsList}
+              businessesList={businessesList}
+              citiesList={citiesList}
+              handleChangeFilterValues={handleChangeFilterValues}
+              searchValue={searchValue}
+              handleChangeSearch={handleChangeSearch}
+            />
+          </WrapperSearchAndFilter>
         </TopRightSection>
       </OrderContentHeaderContainer>
     </>

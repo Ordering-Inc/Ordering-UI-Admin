@@ -1,13 +1,13 @@
 import styled, { css } from 'styled-components'
 
 export const OrdersListContainer = styled.div`
-  height: calc(100% - 200px);
+  height: ${({ isShowFiltersOptions }) => isShowFiltersOptions ? 'calc(100% - 250px)' : 'calc(100% - 200px)'};
   padding: 0 12px 15px 12px;
   box-sizing: border-box;
   overflow-x: hidden;
 
   @media (min-width: 1024px) and (max-width: 1300px) {
-    height: calc(100% - 230px);
+    height: ${({ isShowFiltersOptions }) => isShowFiltersOptions ? 'calc(100% - 270px)' : 'calc(100% - 230px)'};
   }
 `
 export const OrderNunberContainer = styled.div`
