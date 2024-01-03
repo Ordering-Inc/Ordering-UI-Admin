@@ -178,6 +178,12 @@ const OrdersFilterGroupUI = (props) => {
               value={filterValues?.orderId || ''}
               onChange={(e) => handleChangeOrderId(e)}
             />
+            <DateTypeSelector
+              filterValues={filterValues}
+              handleChangeDateType={handleChangeDateType}
+              handleChangeFromDate={handleChangeFromDate}
+              handleChangeEndDate={handleChangeEndDate}
+            />
             {/* <Input
                 type='text'
                 placeholder={t('EXTERNAL_ID', 'External Id')}
@@ -303,12 +309,6 @@ const OrdersFilterGroupUI = (props) => {
                 onChange={(value) => handleChangeChildFilterValue({ assigned: value })}
               />
             </SelectWrapper>
-            <DateTypeSelector
-              filterValues={filterValues}
-              handleChangeDateType={handleChangeDateType}
-              handleChangeFromDate={handleChangeFromDate}
-              handleChangeEndDate={handleChangeEndDate}
-            />
           </WrapperRow>
           {filterValues?.metafield.map(item => (
             <WrapperRow key={item.id}>
