@@ -13,9 +13,15 @@ var _OrdersCards = require("../OrdersCards");
 var _styles = require("../../../styles");
 var _AiOutlineInfoCircle = _interopRequireDefault(require("@meronex/icons/ai/AiOutlineInfoCircle"));
 var _styles2 = require("./styles");
+var _Shared = require("../../Shared");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -75,6 +81,73 @@ var OrdersListing = /*#__PURE__*/(0, _react.memo)(function (props) {
       handleSetOpenOrderDetail(true);
     }
   };
+  var optionsDefault = [{
+    value: 'status',
+    content: t('STATUS', 'Status')
+  }, {
+    value: 'orderNumber',
+    content: t('INVOICE_ORDER_NO', 'Order No.')
+  }, {
+    value: 'agent',
+    content: t('AGENT', 'Agent')
+  }, {
+    value: 'cartGroupId',
+    content: t('GROUP_ORDER', 'Group Order')
+  }, {
+    value: 'driverGroupId',
+    content: t('EXPORT_DRIVER_GROUP_ID', 'Driver Group Id')
+  }, {
+    value: 'dateTime',
+    content: t('DATE_TIME', 'Date and time')
+  }, {
+    value: 'business',
+    content: t('BUSINESS', 'Business')
+  }, {
+    value: 'customer',
+    content: t('CUSTOMER', 'Customer')
+  }, {
+    value: 'driver',
+    content: t('DRIVER', 'Driver')
+  }, {
+    value: 'advanced',
+    content: t('ADVANCED_LOGISTICS', 'Advance Logistics')
+  }, {
+    value: 'timer',
+    content: t('SLA_TIMER', 'SLA’s timer')
+  }, {
+    value: 'eta',
+    content: t('ETA', 'ETA')
+  }, {
+    value: 'total',
+    content: t('EXPORT_TOTAL', 'Total')
+  }, {
+    value: 'externalId',
+    content: t('EXTERNAL_ID', 'External id')
+  }, {
+    value: 'channel',
+    content: t('CHANNEL', 'Channel')
+  }];
+  var handleChangeAllowColumns = function handleChangeAllowColumns(type) {
+    var _column2;
+    var _column = {};
+    if (type === 'channel') {
+      _column = {
+        visable: allowColumns[type].visable,
+        title: t('CHANNEL', 'Channel'),
+        className: 'channelInfo',
+        draggable: true,
+        colSpan: 1,
+        order: 12
+      };
+    } else {
+      _column = allowColumns[type];
+    }
+    var updatedAllowColumns = _objectSpread(_objectSpread({}, allowColumns), {}, _defineProperty({}, type, _objectSpread(_objectSpread({}, _column), {}, {
+      visable: !((_column2 = _column) !== null && _column2 !== void 0 && _column2.visable)
+    })));
+    setAllowColumns(updatedAllowColumns);
+    saveUserSettings(JSON.parse(JSON.stringify(updatedAllowColumns)));
+  };
   (0, _react.useEffect)(function () {
     if (orderList.loading || !messageListView) return;
     if (orderList.orders.length === 0 || messageOrder) return;
@@ -116,7 +189,15 @@ var OrdersListing = /*#__PURE__*/(0, _react.memo)(function (props) {
   }, t('FILTERS', 'Filters'))) : /*#__PURE__*/_react.default.createElement("p", null, t('MOBILE_NO_ORDERS', 'No Orders yet.')))) : /*#__PURE__*/_react.default.createElement(_styles2.WrapperOrderListContent, {
     maxHeight: orderListView !== 'table',
     onDoubleClick: handleDobleClick
-  }, orderListView === 'table' ? /*#__PURE__*/_react.default.createElement(_OrdersTable.OrdersTable, {
+  }, orderListView === 'table' ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, allowColumns && !(Object.keys(allowColumns).filter(function (col) {
+    var _allowColumns$col, _allowColumns$col2;
+    return ((_allowColumns$col = allowColumns[col]) === null || _allowColumns$col === void 0 ? void 0 : _allowColumns$col.visable) && ((_allowColumns$col2 = allowColumns[col]) === null || _allowColumns$col2 === void 0 ? void 0 : _allowColumns$col2.order) !== 0;
+  }).length === 0) && /*#__PURE__*/_react.default.createElement(_styles2.ColumnPopoverContainer, null, /*#__PURE__*/_react.default.createElement(_Shared.ColumnAllowSettingPopover, {
+    allowColumns: allowColumns,
+    optionsDefault: optionsDefault,
+    handleChangeAllowColumns: handleChangeAllowColumns,
+    isOrder: true
+  })), /*#__PURE__*/_react.default.createElement(_OrdersTable.OrdersTable, {
     hidePhoto: hidePhoto,
     setSelectedOrderIds: setSelectedOrderIds,
     isSelectedOrders: isSelectedOrders,
@@ -141,7 +222,7 @@ var OrdersListing = /*#__PURE__*/(0, _react.memo)(function (props) {
     saveUserSettings: saveUserSettings,
     isUseQuery: isUseQuery,
     franchisesList: props.franchisesList
-  }) : /*#__PURE__*/_react.default.createElement(_OrdersCards.OrdersCards, {
+  })) : /*#__PURE__*/_react.default.createElement(_OrdersCards.OrdersCards, {
     isMessagesView: isMessagesView,
     orderList: orderList,
     pagination: pagination,

@@ -448,15 +448,7 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
       }, /*#__PURE__*/_react.default.createElement("img", {
         src: (_theme$images$icons2 = theme.images.icons) === null || _theme$images$icons2 === void 0 ? void 0 : _theme$images$icons2.sixDots,
         alt: "six dots"
-      }), /*#__PURE__*/_react.default.createElement("span", null, (_allowColumns$column6 = allowColumns[column]) === null || _allowColumns$column6 === void 0 ? void 0 : _allowColumns$column6.title))), /*#__PURE__*/_react.default.createElement("th", {
-        className: "orderPrice",
-        key: "noDragTh-".concat(i)
-      }, /*#__PURE__*/_react.default.createElement(_Shared.ColumnAllowSettingPopover, {
-        allowColumns: allowColumns,
-        optionsDefault: optionsDefault,
-        handleChangeAllowColumns: handleChangeAllowColumns,
-        isOrder: true
-      })));
+      }), /*#__PURE__*/_react.default.createElement("span", null, (_allowColumns$column6 = allowColumns[column]) === null || _allowColumns$column6 === void 0 ? void 0 : _allowColumns$column6.title))));
     }
     return (column !== 'timer' || column === 'timer' && (groupStatus === 'pending' || groupStatus === 'inProgress')) && /*#__PURE__*/_react.default.createElement(_styles.DragTh, {
       key: "dragTh-".concat(i),
