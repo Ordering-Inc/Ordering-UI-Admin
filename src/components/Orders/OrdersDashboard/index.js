@@ -11,7 +11,7 @@ export const OrdersDashboard = (props) => {
     ...props
   }
   if ((configs?.optimize_order_data && (configs?.optimize_order_data?.value === '1'))) {
-    ordersDashboardListProps.propsToFetch = ['app_id', 'business', 'business_id', 'created_at', 'customer', 'customer_id', 'delivery_type', 'driver_group_id', 'driver_id', 'driver', 'delivery_datetime', 'delivery_datetime_utc', 'external_id', 'eta_time', 'id', 'logistic_status', 'logistic_attemps', 'uuid', 'order_group', 'order_group_id', 'priority', 'summary', 'status', 'time_status', 'total', 'driver_group_business']
+    ordersDashboardListProps.propsToFetch = ['app_id', 'business', 'business_id', 'created_at', 'customer', 'customer_id', 'delivery_type', 'driver_group_id', 'driver_id', 'driver', 'delivery_datetime', 'delivery_datetime_utc', 'external_id', 'eta_time', 'id', 'logistic_status', 'logistic_attemps', 'uuid', 'order_group', 'order_group_id', 'priority', 'summary', 'status', 'time_status', 'total', 'driver_group_business', 'metadata']
   }
   return (
     <OrdersManageContainer>
