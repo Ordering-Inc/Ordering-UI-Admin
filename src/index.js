@@ -8,6 +8,7 @@ import {
   OrderingProductDetails
 } from './components/OrderingProducts'
 import { PageNotFound } from './components/PageNotFound'
+import { Banners } from './components/Banners'
 import {
   AllInOne,
   Appointments,
@@ -436,6 +437,7 @@ export {
   ChatBusinessesList,
   OrdersManager,
   PageNotFound,
+  Banners,
   Messages,
   OrdersContentHeader,
   OrdersDashboardList,

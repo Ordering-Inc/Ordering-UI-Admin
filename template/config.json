@@ -2,7 +2,7 @@
   "app_id": "ordering-admin-react",
   "notification_app": "dashboardweb",
   "app_name": "Ordering Admin",
-  "billing_url": "https://billing-dashboard.tryordering.com",
+  "billing_url": "https://start-free.tryordering.com",
   "api": {
     "url": "https://apiv4.ordering.co",
     "language": "en",
