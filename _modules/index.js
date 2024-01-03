@@ -171,6 +171,12 @@ Object.defineProperty(exports, "AutoScroll", {
     return _Shared.AutoScroll;
   }
 });
+Object.defineProperty(exports, "Banners", {
+  enumerable: true,
+  get: function get() {
+    return _Banners.Banners;
+  }
+});
 Object.defineProperty(exports, "BatchImageForm", {
   enumerable: true,
   get: function get() {
@@ -2514,6 +2520,7 @@ Object.defineProperty(exports, "verifyDecimals", {
 var _Messages = require("./components/Messages");
 var _OrderingProducts = require("./components/OrderingProducts");
 var _PageNotFound = require("./components/PageNotFound");
+var _Banners = require("./components/Banners");
 var _Orders = require("./components/Orders");
 var _Support = require("./components/Support");
 var _BusinessIntelligence = require("./components/BusinessIntelligence");

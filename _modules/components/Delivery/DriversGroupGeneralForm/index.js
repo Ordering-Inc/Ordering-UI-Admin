@@ -13,6 +13,8 @@ var _Shared = require("../../Shared");
 var _DriversGroupDrivers = require("../DriversGroupDrivers");
 var _DriversGroupCompanies = require("../DriversGroupCompanies");
 var _styles2 = require("./styles");
+var _FaUserAlt = _interopRequireDefault(require("@meronex/icons/fa/FaUserAlt"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -22,7 +24,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var DriversGroupGeneralForm = function DriversGroupGeneralForm(props) {
-  var _ref, _changesState$name, _driversGroupState$dr, _changesState$adminis, _driversGroupState$dr2, _changesState$type, _driversGroupState$dr3, _driversGroupState$dr4, _changesState$priorit, _driversGroupState$dr5;
+  var _ref, _changesState$name, _driversGroupState$dr, _changesState$type, _driversGroupState$dr2, _driversGroupState$dr3, _changesState$priorit, _driversGroupState$dr4;
   var driversGroupState = props.driversGroupState,
     driversManagers = props.driversManagers,
     changesState = props.changesState,
@@ -31,7 +33,9 @@ var DriversGroupGeneralForm = function DriversGroupGeneralForm(props) {
     handleAddDriversGroup = props.handleAddDriversGroup,
     actionDisabled = props.actionDisabled,
     isTourOpen = props.isTourOpen,
-    handleNextClick = props.handleNextClick;
+    handleNextClick = props.handleNextClick,
+    selectedDriverManager = props.selectedDriverManager,
+    handleSelectDriverManager = props.handleSelectDriverManager;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -56,12 +60,6 @@ var DriversGroupGeneralForm = function DriversGroupGeneralForm(props) {
     value: 1,
     content: t('DRIVER_COMPANIES', 'Driver companies')
   }];
-  var driversManagersOptions = driversManagers.map(function (manager) {
-    return {
-      value: manager.id,
-      content: /*#__PURE__*/_react.default.createElement("div", null, manager === null || manager === void 0 ? void 0 : manager.name, " ", manager === null || manager === void 0 ? void 0 : manager.lastname)
-    };
-  });
   var priorityOptions = [{
     value: -1,
     content: t('LOW', 'Low')
@@ -148,32 +146,34 @@ var DriversGroupGeneralForm = function DriversGroupGeneralForm(props) {
       required: t('VALIDATION_ERROR_REQUIRED', 'Project is required').replace('_attribute_', t('NAME', 'Name'))
     }),
     autoComplete: "off"
-  })), (user === null || user === void 0 ? void 0 : user.level) !== 5 && /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('DRIVER_MANAGER', 'Driver manager')), /*#__PURE__*/_react.default.createElement(_styles.SecondSelect, {
-    isSecondIcon: true,
-    placeholder: t('SELECT_MANAGER', 'Select driver manager'),
-    options: driversManagersOptions,
-    defaultValue: (_changesState$adminis = changesState === null || changesState === void 0 ? void 0 : changesState.administrator_id) !== null && _changesState$adminis !== void 0 ? _changesState$adminis : (_driversGroupState$dr2 = driversGroupState.driversGroup) === null || _driversGroupState$dr2 === void 0 ? void 0 : _driversGroupState$dr2.administrator_id,
-    optionInnerMaxHeight: "60vh",
-    onChange: function onChange(val) {
-      return handleChangesState({
-        administrator_id: val
-      });
-    }
-  })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('TYPE', 'Type')), /*#__PURE__*/_react.default.createElement(_styles.SecondSelect, {
+  })), (user === null || user === void 0 ? void 0 : user.level) !== 5 && /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('DRIVER_MANAGER', 'Driver manager')), /*#__PURE__*/_react.default.createElement(_styles2.DriverManagerContainer, null, driversManagers.map(function (driverManager) {
+    return /*#__PURE__*/_react.default.createElement(_styles2.DriverManagerWrapper, {
+      key: driverManager.id
+    }, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
+      value: driverManager === null || driverManager === void 0 ? void 0 : driverManager.id,
+      checked: selectedDriverManager.includes(driverManager.id),
+      onChange: function onChange(e) {
+        return handleSelectDriverManager(driverManager.id, e.target.checked);
+      }
+    }), /*#__PURE__*/_react.default.createElement(_styles2.WrapperImage, null, driverManager !== null && driverManager !== void 0 && driverManager.photo ? /*#__PURE__*/_react.default.createElement(_styles2.Image, {
+      bgimage: driverManager === null || driverManager === void 0 ? void 0 : driverManager.photo,
+      alt: "driverManager"
+    }) : /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)), /*#__PURE__*/_react.default.createElement(_styles2.ManagerInfoContainer, null, /*#__PURE__*/_react.default.createElement("p", null, driverManager === null || driverManager === void 0 ? void 0 : driverManager.name), /*#__PURE__*/_react.default.createElement("p", null, driverManager === null || driverManager === void 0 ? void 0 : driverManager.email)));
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('TYPE', 'Type')), /*#__PURE__*/_react.default.createElement(_styles.SecondSelect, {
     isSecondIcon: true,
     placeholder: t('SELECT_TYPE', 'Select type'),
     options: typeOptions,
-    defaultValue: (_changesState$type = changesState === null || changesState === void 0 ? void 0 : changesState.type) !== null && _changesState$type !== void 0 ? _changesState$type : (_driversGroupState$dr3 = driversGroupState.driversGroup) === null || _driversGroupState$dr3 === void 0 ? void 0 : _driversGroupState$dr3.type,
+    defaultValue: (_changesState$type = changesState === null || changesState === void 0 ? void 0 : changesState.type) !== null && _changesState$type !== void 0 ? _changesState$type : (_driversGroupState$dr2 = driversGroupState.driversGroup) === null || _driversGroupState$dr2 === void 0 ? void 0 : _driversGroupState$dr2.type,
     onChange: function onChange(val) {
       return handleChangesState({
         type: val
       });
     }
-  })), (changesState === null || changesState === void 0 ? void 0 : changesState.type) === 0 || typeof (changesState === null || changesState === void 0 ? void 0 : changesState.type) === 'undefined' && ((_driversGroupState$dr4 = driversGroupState.driversGroup) === null || _driversGroupState$dr4 === void 0 ? void 0 : _driversGroupState$dr4.type) === 0 ? /*#__PURE__*/_react.default.createElement(_DriversGroupDrivers.DriversGroupDrivers, props) : /*#__PURE__*/_react.default.createElement(_DriversGroupCompanies.DriversGroupCompanies, props), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('PRIORITY', 'Priority')), /*#__PURE__*/_react.default.createElement(_styles.SecondSelect, {
+  })), (changesState === null || changesState === void 0 ? void 0 : changesState.type) === 0 || typeof (changesState === null || changesState === void 0 ? void 0 : changesState.type) === 'undefined' && ((_driversGroupState$dr3 = driversGroupState.driversGroup) === null || _driversGroupState$dr3 === void 0 ? void 0 : _driversGroupState$dr3.type) === 0 ? /*#__PURE__*/_react.default.createElement(_DriversGroupDrivers.DriversGroupDrivers, props) : /*#__PURE__*/_react.default.createElement(_DriversGroupCompanies.DriversGroupCompanies, props), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('PRIORITY', 'Priority')), /*#__PURE__*/_react.default.createElement(_styles.SecondSelect, {
     isSecondIcon: true,
     placeholder: t('SELECT_PRIORITY', 'Select priority'),
     options: priorityOptions,
-    defaultValue: (_changesState$priorit = changesState === null || changesState === void 0 ? void 0 : changesState.priority) !== null && _changesState$priorit !== void 0 ? _changesState$priorit : (_driversGroupState$dr5 = driversGroupState.driversGroup) === null || _driversGroupState$dr5 === void 0 ? void 0 : _driversGroupState$dr5.priority,
+    defaultValue: (_changesState$priorit = changesState === null || changesState === void 0 ? void 0 : changesState.priority) !== null && _changesState$priorit !== void 0 ? _changesState$priorit : (_driversGroupState$dr4 = driversGroupState.driversGroup) === null || _driversGroupState$dr4 === void 0 ? void 0 : _driversGroupState$dr4.priority,
     onChange: function onChange(val) {
       return handleChangesState({
         priority: val
