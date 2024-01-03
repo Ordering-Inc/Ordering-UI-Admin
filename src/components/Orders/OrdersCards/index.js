@@ -56,6 +56,8 @@ export const OrdersCards = (props) => {
     return imageKeys
   }, {})
 
+  const isShowFiltersOptions = (configState?.configs?.filter_order_options?.value.split('|').map(value => (value)) || []).length > 0
+
   const handleChangePage = (page) => {
     getPageOrders(pagination.pageSize, page)
   }
@@ -180,7 +182,7 @@ export const OrdersCards = (props) => {
 
   return (
     <>
-      <OrdersListContainer>
+      <OrdersListContainer isShowFiltersOptions={isShowFiltersOptions}>
         {orderList.loading ? (
           [...Array(10).keys()].map(i => (
             <OrderCard key={i}>

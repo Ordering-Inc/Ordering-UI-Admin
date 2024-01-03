@@ -24,7 +24,7 @@ const OrdersHeaderFilterGroupUI = (props) => {
   const [isShow, setIsShow] = useState(false)
   const metafieldRef = useRef()
   const [{ configs }] = useConfig()
-  const configFilter = configs?.filter_order_options?.value.split('|').map(value =>(value)) || []
+  const configFilter = configs?.filter_order_options?.value.split('|').map(value => (value)) || []
 
   const handleClickOutside = (e) => {
     if (!isShow) return
