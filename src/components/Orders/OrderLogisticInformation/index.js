@@ -1,5 +1,5 @@
 import React from 'react'
-import { LogisticInformation as LogisticInformationController, useLanguage, useUtils } from 'ordering-components-admin'
+import { LogisticInformation as LogisticInformationController, useLanguage, useUtils, useConfig } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { Button } from '../../../styles'
 import {
@@ -13,7 +13,8 @@ const LogisticInformationUI = (props) => {
   const { logisticInformation, getLogistics } = props
   const [, t] = useLanguage()
 
-  const [{ parseDate, parseDistance }] = useUtils()
+  const [{ parseDate, parseNumber }] = useUtils()
+  const [configState] = useConfig()
 
   const getOrderStatus = (status) => {
     const orderStatus = [
@@ -50,6 +51,23 @@ const LogisticInformationUI = (props) => {
     return objectStatus && objectStatus
   }
 
+  const calculateDistanceParse = (distance, options = {}) => {
+    distance = parseFloat(distance) || 0
+    let unit = options?.unit || 'KM'
+    if (configState.configs.distance_unit_km?.value === '1') {
+      unit = 'KM'
+    }
+    if (configState.configs.distance_unit?.value) {
+      unit = configState.configs.distance_unit?.value
+    }
+    if (unit.toUpperCase() === 'MI') {
+      const dist = distance * 0.621371 / 1000
+      return `${parseNumber(dist, options)} ${t('MI', 'mi')}`
+    } else {
+      return `${parseNumber(distance / 1000, options)} ${t('KM', 'km')}`
+    }
+  }
+
   return (
     <>
       {logisticInformation.loading ? (
@@ -77,7 +95,7 @@ const LogisticInformationUI = (props) => {
               </Button>
               <BubbleConsole>
                 <UppercaseText><strong>{t('DISTANCE_CUSTOMER_FROM_BUSINESS', 'DISTANCE FROM CUSTOMER TO BUSINESS')}</strong></UppercaseText>
-                : {parseDistance((logisticInformation?.data?.distance_customer_from_business / 1000))}
+                : {calculateDistanceParse((logisticInformation?.data?.distance_customer_from_business))}
               </BubbleConsole>
               <>
                 <BubbleConsole>
