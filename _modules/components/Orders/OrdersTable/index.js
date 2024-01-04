@@ -137,6 +137,9 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
   }, {
     value: 'channel',
     content: t('CHANNEL', 'Channel')
+  }, {
+    value: 'pod',
+    content: t('PODS', 'Pod')
   }];
   var getDelayMinutes = function getDelayMinutes(order) {
     // targetMin = delivery_datetime  + eta_time - now()
@@ -246,13 +249,24 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
     var _column2;
     var _column = {};
     if (type === 'channel') {
+      var _allowColumns$type$vi, _allowColumns$type;
       _column = {
-        visable: allowColumns[type].visable,
+        visable: (_allowColumns$type$vi = (_allowColumns$type = allowColumns[type]) === null || _allowColumns$type === void 0 ? void 0 : _allowColumns$type.visable) !== null && _allowColumns$type$vi !== void 0 ? _allowColumns$type$vi : false,
         title: t('CHANNEL', 'Channel'),
         className: 'channelInfo',
         draggable: true,
         colSpan: 1,
         order: 12
+      };
+    } else if (type === 'pod') {
+      var _allowColumns$type$vi2, _allowColumns$type2;
+      _column = {
+        visable: (_allowColumns$type$vi2 = (_allowColumns$type2 = allowColumns[type]) === null || _allowColumns$type2 === void 0 ? void 0 : _allowColumns$type2.visable) !== null && _allowColumns$type$vi2 !== void 0 ? _allowColumns$type$vi2 : false,
+        title: t('PODS', 'Pod'),
+        className: 'podInfo',
+        draggable: true,
+        colSpan: 1,
+        order: 13
       };
     } else {
       _column = allowColumns[type];
@@ -474,7 +488,7 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
       alt: "six dots"
     }), /*#__PURE__*/_react.default.createElement("span", null, (_allowColumns$column9 = allowColumns[column]) === null || _allowColumns$column9 === void 0 ? void 0 : _allowColumns$column9.title)));
   })))), orderList.loading || !allowColumns ? _toConsumableArray(Array(10).keys()).map(function (i) {
-    var _allowColumns$slaBar2, _allowColumns$orderNu2, _allowColumns$dateTim2, _allowColumns$orderNu3, _allowColumns$dateTim3, _allowColumns$externa, _allowColumns$cartGro, _allowColumns$driverG, _allowColumns$status, _allowColumns$busines, _allowColumns$custome, _allowColumns$driver, _allowColumns$deliver, _allowColumns$status2, _allowColumns$advance, _allowColumns$advance2, _allowColumns$advance3, _allowColumns$channel, _allowColumns$total;
+    var _allowColumns$slaBar2, _allowColumns$orderNu2, _allowColumns$dateTim2, _allowColumns$orderNu3, _allowColumns$dateTim3, _allowColumns$externa, _allowColumns$cartGro, _allowColumns$driverG, _allowColumns$status, _allowColumns$busines, _allowColumns$custome, _allowColumns$driver, _allowColumns$deliver, _allowColumns$status2, _allowColumns$advance, _allowColumns$advance2, _allowColumns$advance3, _allowColumns$channel, _allowColumns$pod, _allowColumns$total;
     return /*#__PURE__*/_react.default.createElement(_styles.OrderTbody, {
       key: i
     }, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 || (_allowColumns$slaBar2 = allowColumns.slaBar) === null || _allowColumns$slaBar2 === void 0 ? void 0 : _allowColumns$slaBar2.visable) && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.Timestatus, null)), /*#__PURE__*/_react.default.createElement("td", {
@@ -602,6 +616,11 @@ var OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
     })), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 60
     })))), (allowColumns === null || allowColumns === void 0 || (_allowColumns$channel = allowColumns.channel) === null || _allowColumns$channel === void 0 ? void 0 : _allowColumns$channel.visable) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
+      className: "orderStatusTitle"
+    }, /*#__PURE__*/_react.default.createElement(_styles.WrapOrderStatusSelector, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+      width: 100,
+      height: 30
+    }))), (allowColumns === null || allowColumns === void 0 || (_allowColumns$pod = allowColumns.pod) === null || _allowColumns$pod === void 0 ? void 0 : _allowColumns$pod.visable) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
       className: "orderStatusTitle"
     }, /*#__PURE__*/_react.default.createElement(_styles.WrapOrderStatusSelector, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100,

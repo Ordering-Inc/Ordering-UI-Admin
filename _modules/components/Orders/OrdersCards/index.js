@@ -248,7 +248,11 @@ var OrdersCards = function OrdersCards(props) {
       className: "bold"
     }, "Timer"), /*#__PURE__*/_react.default.createElement("p", {
       className: order === null || order === void 0 ? void 0 : order.time_status
-    }, displayDelayedTime(order)))), isMessagesView && (order === null || order === void 0 ? void 0 : order.unread_count) > 0 && /*#__PURE__*/_react.default.createElement(_styles.UnreadMessageCounter, null, order === null || order === void 0 ? void 0 : order.unread_count), /*#__PURE__*/_react.default.createElement(_styles.CardContent, null, /*#__PURE__*/_react.default.createElement(_styles.InfoItemContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, /*#__PURE__*/_react.default.createElement("img", {
+    }, displayDelayedTime(order))), (order === null || order === void 0 ? void 0 : order.codigoPod) && /*#__PURE__*/_react.default.createElement("div", {
+      style: {
+        paddingTop: 50
+      }
+    }, /*#__PURE__*/_react.default.createElement("p", null, "".concat(t('PODS', 'Pod'), ": ").concat(order === null || order === void 0 ? void 0 : order.codigoPod)))), isMessagesView && (order === null || order === void 0 ? void 0 : order.unread_count) > 0 && /*#__PURE__*/_react.default.createElement(_styles.UnreadMessageCounter, null, order === null || order === void 0 ? void 0 : order.unread_count), /*#__PURE__*/_react.default.createElement(_styles.CardContent, null, /*#__PURE__*/_react.default.createElement(_styles.InfoItemContainer, null, /*#__PURE__*/_react.default.createElement(_styles.WrapperImage, null, /*#__PURE__*/_react.default.createElement("img", {
       src: optimizeImage(franchiseImages[order === null || order === void 0 || (_order$business = order.business) === null || _order$business === void 0 ? void 0 : _order$business.franchise_id] || ((_order$business2 = order.business) === null || _order$business2 === void 0 ? void 0 : _order$business2.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.dummies) === null || _theme$images === void 0 ? void 0 : _theme$images.businessLogo), 'h_50,c_limit'),
       loading: "lazy",
       alt: ""

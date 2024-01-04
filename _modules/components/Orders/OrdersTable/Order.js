@@ -239,7 +239,15 @@ var Order = /*#__PURE__*/_react.default.memo(function (props) {
         key: "channelInfo".concat(i, "-").concat(index)
       }, /*#__PURE__*/_react.default.createElement(_styles.ChannelInfo, null, /*#__PURE__*/_react.default.createElement("p", {
         className: "bold"
-      }, order.app_id)));
+      }, order === null || order === void 0 ? void 0 : order.app_id)));
+    }
+    if (column === 'pod') {
+      return /*#__PURE__*/_react.default.createElement("td", {
+        className: "podInfo",
+        key: "podInfo".concat(i, "-").concat(index)
+      }, /*#__PURE__*/_react.default.createElement(_styles.PodInfo, null, /*#__PURE__*/_react.default.createElement("p", {
+        className: "bold"
+      }, order === null || order === void 0 ? void 0 : order.codigoPod)));
     }
     if (column === 'total') {
       var _allowColumns$total, _order$summary;
