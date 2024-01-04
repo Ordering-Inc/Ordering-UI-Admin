@@ -25,6 +25,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var DriverMultiSelectorUI = function DriverMultiSelectorUI(props) {
+  var _dictionary$LOADING, _dictionary$SELECT_DR2;
   var driversList = props.driversList,
     defaultValue = props.defaultValue,
     small = props.small,
@@ -32,8 +33,8 @@ var DriverMultiSelectorUI = function DriverMultiSelectorUI(props) {
     handleChangeDriver = props.handleChangeDriver,
     filterValues = props.filterValues;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
-    _useLanguage2 = _slicedToArray(_useLanguage, 2),
-    t = _useLanguage2[1];
+    _useLanguage2 = _slicedToArray(_useLanguage, 1),
+    dictionary = _useLanguage2[0].dictionary;
   var theme = (0, _styledComponents.useTheme)();
   var _useState = (0, _react.useState)([]),
     _useState2 = _slicedToArray(_useState, 2),
@@ -47,14 +48,15 @@ var DriverMultiSelectorUI = function DriverMultiSelectorUI(props) {
     value: 'default',
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
       small: small
-    }, t('LOADING', 'loading'), "...")
+    }, (_dictionary$LOADING = dictionary === null || dictionary === void 0 ? void 0 : dictionary.LOADING) !== null && _dictionary$LOADING !== void 0 ? _dictionary$LOADING : 'loading', "...")
   }];
   (0, _react.useEffect)(function () {
+    var _dictionary$SELECT_DR;
     var _driversOptionList = [{
       value: 'default',
       content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
         padding: "0px"
-      }, /*#__PURE__*/_react.default.createElement("span", null, t('SELECT_DRIVER', 'Select driver'))),
+      }, /*#__PURE__*/_react.default.createElement("span", null, (_dictionary$SELECT_DR = dictionary === null || dictionary === void 0 ? void 0 : dictionary.SELECT_DRIVER) !== null && _dictionary$SELECT_DR !== void 0 ? _dictionary$SELECT_DR : 'Select driver')),
       color: 'primary',
       showDisable: true
     }];
@@ -68,7 +70,7 @@ var DriverMultiSelectorUI = function DriverMultiSelectorUI(props) {
         _driverList = driversList.drivers;
       }
       var _driversOptionListTemp = _driverList.map(function (driver, i) {
-        var _theme$images$icons;
+        var _theme$images$icons, _dictionary$DRIVER;
         return {
           value: driver.id,
           showDisable: true,
@@ -87,7 +89,7 @@ var DriverMultiSelectorUI = function DriverMultiSelectorUI(props) {
             small: small
           }, driver.name, " ", driver.lastname), /*#__PURE__*/_react.default.createElement(_styles.DriverText, {
             small: small
-          }, t('DRIVER', 'Driver')))))
+          }, (_dictionary$DRIVER = dictionary === null || dictionary === void 0 ? void 0 : dictionary.DRIVER) !== null && _dictionary$DRIVER !== void 0 ? _dictionary$DRIVER : 'Driver'))))
         };
       });
       setDriversMultiOptionList(_driversOptionListTemp);
@@ -105,7 +107,7 @@ var DriverMultiSelectorUI = function DriverMultiSelectorUI(props) {
       }
     }
   }, [driversList, defaultValue, searchValue]);
-  var Placeholder = /*#__PURE__*/_react.default.createElement(_styles.PlaceholderTitle, null, t('SELECT_DRIVER', 'Select driver'));
+  var Placeholder = /*#__PURE__*/_react.default.createElement(_styles.PlaceholderTitle, null, (_dictionary$SELECT_DR2 = dictionary === null || dictionary === void 0 ? void 0 : dictionary.SELECT_DRIVER) !== null && _dictionary$SELECT_DR2 !== void 0 ? _dictionary$SELECT_DR2 : 'Select driver');
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !driversList.loading ? /*#__PURE__*/_react.default.createElement(_MultiSelect.MultiSelect, {
     defaultValue: filterValues.driverIds,
     placeholder: Placeholder,

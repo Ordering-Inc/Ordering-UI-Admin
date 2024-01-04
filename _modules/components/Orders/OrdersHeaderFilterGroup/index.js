@@ -26,7 +26,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrdersHeaderFilterGroupUI = function OrdersHeaderFilterGroupUI(props) {
-  var _configs$filter_order;
+  var _configs$filter_order, _dictionary$EXTERNAL_, _dictionary$DRIVER_GR;
   var filterValues = props.filterValues,
     driverGroupList = props.driverGroupList,
     driversList = props.driversList,
@@ -35,8 +35,8 @@ var OrdersHeaderFilterGroupUI = function OrdersHeaderFilterGroupUI(props) {
     handleChangeExternalId = props.handleChangeExternalId,
     handleChangeGroupUnassigned = props.handleChangeGroupUnassigned;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
-    _useLanguage2 = _slicedToArray(_useLanguage, 2),
-    t = _useLanguage2[1];
+    _useLanguage2 = _slicedToArray(_useLanguage, 1),
+    dictionary = _useLanguage2[0].dictionary;
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     isShow = _useState2[0],
@@ -44,7 +44,9 @@ var OrdersHeaderFilterGroupUI = function OrdersHeaderFilterGroupUI(props) {
   var metafieldRef = (0, _react.useRef)();
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
-    configs = _useConfig2[0].configs;
+    _useConfig2$ = _useConfig2[0],
+    configs = _useConfig2$.configs,
+    loading = _useConfig2$.loading;
   var configFilter = (configs === null || configs === void 0 || (_configs$filter_order = configs.filter_order_options) === null || _configs$filter_order === void 0 ? void 0 : _configs$filter_order.value.split('|').map(function (value) {
     return value;
   })) || [];
@@ -67,21 +69,21 @@ var OrdersHeaderFilterGroupUI = function OrdersHeaderFilterGroupUI(props) {
       handleChangeFilterValues(filterValues);
     }
   }, [filterValues]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, configFilter.includes('external_id') && /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, !loading && configFilter.includes('external_id') && /*#__PURE__*/_react.default.createElement(_styles.Input, {
     type: "text",
-    placeholder: t('EXTERNAL_ID', 'External Id'),
+    placeholder: (_dictionary$EXTERNAL_ = dictionary === null || dictionary === void 0 ? void 0 : dictionary.EXTERNAL_ID) !== null && _dictionary$EXTERNAL_ !== void 0 ? _dictionary$EXTERNAL_ : 'External Id',
     autoComplete: "off",
     value: (filterValues === null || filterValues === void 0 ? void 0 : filterValues.externalId) || '',
     onChange: handleChangeExternalId
-  }), configFilter.includes('driver') && /*#__PURE__*/_react.default.createElement(_DriverMultiSelector.DriverMultiSelector, {
+  }), !loading && configFilter.includes('driver') && /*#__PURE__*/_react.default.createElement(_DriverMultiSelector.DriverMultiSelector, {
     drivers: driversList.drivers,
     filterValues: filterValues,
     handleChangeDriver: handleChangeDriver
-  }), configFilter.includes('driver_group_general') && /*#__PURE__*/_react.default.createElement(_DriversGroupTypeSelector.DriversGroupTypeSelector, {
+  }), !loading && configFilter.includes('driver_group_general') && /*#__PURE__*/_react.default.createElement(_DriversGroupTypeSelector.DriversGroupTypeSelector, {
     driverGroupList: driverGroupList,
     handleChangeGroup: handleChangeGroupUnassigned,
     filterValues: filterValues.groupTypesUnassigned,
-    title: t('DRIVER_GROUP_NOT_ASSIGNED', 'Driver group (general)')
+    title: (_dictionary$DRIVER_GR = dictionary === null || dictionary === void 0 ? void 0 : dictionary.DRIVER_GROUP_NOT_ASSIGNED) !== null && _dictionary$DRIVER_GR !== void 0 ? _dictionary$DRIVER_GR : 'Driver group (general)'
   })));
 };
 var OrdersHeaderFilterGroup = function OrdersHeaderFilterGroup(props) {

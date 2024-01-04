@@ -37,7 +37,10 @@ var LogisticInformationUI = function LogisticInformationUI(props) {
     _useUtils2 = _slicedToArray(_useUtils, 1),
     _useUtils2$ = _useUtils2[0],
     parseDate = _useUtils2$.parseDate,
-    parseDistance = _useUtils2$.parseDistance;
+    parseNumber = _useUtils2$.parseNumber;
+  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configState = _useConfig2[0];
   var getOrderStatus = function getOrderStatus(status) {
     var orderStatus = [{
       key: 0,
@@ -126,6 +129,25 @@ var LogisticInformationUI = function LogisticInformationUI(props) {
     });
     return objectStatus && objectStatus;
   };
+  var calculateDistanceParse = function calculateDistanceParse(distance) {
+    var _configState$configs$, _configState$configs$2;
+    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    distance = parseFloat(distance) || 0;
+    var unit = (options === null || options === void 0 ? void 0 : options.unit) || 'KM';
+    if (((_configState$configs$ = configState.configs.distance_unit_km) === null || _configState$configs$ === void 0 ? void 0 : _configState$configs$.value) === '1') {
+      unit = 'KM';
+    }
+    if ((_configState$configs$2 = configState.configs.distance_unit) !== null && _configState$configs$2 !== void 0 && _configState$configs$2.value) {
+      var _configState$configs$3;
+      unit = (_configState$configs$3 = configState.configs.distance_unit) === null || _configState$configs$3 === void 0 ? void 0 : _configState$configs$3.value;
+    }
+    if (unit.toUpperCase() === 'MI') {
+      var dist = distance * 0.621371 / 1000;
+      return "".concat(parseNumber(dist, options), " ").concat(t('MI', 'mi'));
+    } else {
+      return "".concat(parseNumber(distance / 1000, options), " ").concat(t('KM', 'km'));
+    }
+  };
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, logisticInformation.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, _toConsumableArray(Array(3)).map(function (item, i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.SkeletonHitory, {
       key: i
@@ -151,7 +173,7 @@ var LogisticInformationUI = function LogisticInformationUI(props) {
     onClick: function onClick() {
       return getLogistics();
     }
-  }, t('RELOAD', 'Reload')), /*#__PURE__*/_react.default.createElement(_styles2.BubbleConsole, null, /*#__PURE__*/_react.default.createElement(_styles2.UppercaseText, null, /*#__PURE__*/_react.default.createElement("strong", null, t('DISTANCE_CUSTOMER_FROM_BUSINESS', 'DISTANCE FROM CUSTOMER TO BUSINESS'))), ": ", parseDistance((logisticInformation === null || logisticInformation === void 0 || (_logisticInformation$ = logisticInformation.data) === null || _logisticInformation$ === void 0 ? void 0 : _logisticInformation$.distance_customer_from_business) / 1000)), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.BubbleConsole, null, /*#__PURE__*/_react.default.createElement(_styles2.UppercaseText, {
+  }, t('RELOAD', 'Reload')), /*#__PURE__*/_react.default.createElement(_styles2.BubbleConsole, null, /*#__PURE__*/_react.default.createElement(_styles2.UppercaseText, null, /*#__PURE__*/_react.default.createElement("strong", null, t('DISTANCE_CUSTOMER_FROM_BUSINESS', 'DISTANCE FROM CUSTOMER TO BUSINESS'))), ": ", calculateDistanceParse(logisticInformation === null || logisticInformation === void 0 || (_logisticInformation$ = logisticInformation.data) === null || _logisticInformation$ === void 0 ? void 0 : _logisticInformation$.distance_customer_from_business)), /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.BubbleConsole, null, /*#__PURE__*/_react.default.createElement(_styles2.UppercaseText, {
     title: "title"
   }, t('QUEUES', 'Queues'))), (logisticInformation === null || logisticInformation === void 0 ? void 0 : logisticInformation.data.queues.length) > 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, logisticInformation === null || logisticInformation === void 0 ? void 0 : logisticInformation.data.queues.map(function (queue, i) {
     var _getOrderStatus;
