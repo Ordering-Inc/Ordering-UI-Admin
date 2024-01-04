@@ -256,6 +256,15 @@ export const OrdersCards = (props) => {
                       <p className={order?.time_status}>{displayDelayedTime(order)}</p>
                     </Timer>
                   )}
+                  { order?.codigoPod && (
+                    <div style={{paddingTop: 50}}>
+                      <p>
+                        {
+                          `${t('PODS', 'Pod')}: ${order?.codigoPod}` 
+                        }
+                      </p>
+                    </div>
+                   )}
                 </CardHeading>
                 {isMessagesView && order?.unread_count > 0 && (
                   <UnreadMessageCounter>

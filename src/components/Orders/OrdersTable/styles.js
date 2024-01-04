@@ -178,6 +178,7 @@ export const CustomerInfo = styled(BusinessInfo)`
     max-width: 125px;
   }
 `
+
 export const StatusInfo = styled.div`
   .bold {
     max-width: 150px;
@@ -185,6 +186,7 @@ export const StatusInfo = styled.div`
     margin: 0;
   }
 `
+
 export const ChannelInfo = styled.div`
   .bold {
     max-width: 150px;
@@ -192,7 +194,16 @@ export const ChannelInfo = styled.div`
     margin: 0;
   }
 `
+
 export const EtaInfo = styled.div`
+  .bold {
+    max-width: 150px;
+    font-weight: 600;
+    margin: 0;
+  }
+`
+
+export const PodInfo = styled.div`
   .bold {
     max-width: 150px;
     font-weight: 600;
