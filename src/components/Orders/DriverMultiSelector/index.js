@@ -24,16 +24,17 @@ const DriverMultiSelectorUI = (props) => {
     filterValues
   } = props
 
-  const [, t] = useLanguage()
+  const [{ dictionary }] = useLanguage()
   const theme = useTheme()
   const [driversMultiOptionList, setDriversMultiOptionList] = useState([])
   const [searchValue, setSearchValue] = useState(null)
-  const driversLoading = [{ value: 'default', content: <Option small={small}>{t('LOADING', 'loading')}...</Option> }]
+  const driversLoading = [{ value: 'default', content: <Option small={small}>{dictionary?.LOADING ?? 'loading'}...</Option> }]
+
   useEffect(() => {
     const _driversOptionList = [
       {
         value: 'default',
-        content: <Option padding='0px'><span>{t('SELECT_DRIVER', 'Select driver')}</span></Option>,
+        content: <Option padding='0px'><span>{dictionary?.SELECT_DRIVER ?? 'Select driver'}</span></Option>,
         color: 'primary',
         showDisable: true
       }
@@ -57,7 +58,7 @@ const DriverMultiSelectorUI = (props) => {
               <OptionContent>
                 <DriverNameContainer className='driver-info'>
                   <DriverName small={small}>{driver.name} {driver.lastname}</DriverName>
-                  <DriverText small={small}>{t('DRIVER', 'Driver')}</DriverText>
+                  <DriverText small={small}>{dictionary?.DRIVER ?? 'Driver'}</DriverText>
                 </DriverNameContainer>
               </OptionContent>
             </Option>
@@ -73,7 +74,7 @@ const DriverMultiSelectorUI = (props) => {
     }
   }, [driversList, defaultValue, searchValue])
 
-  const Placeholder = <PlaceholderTitle>{t('SELECT_DRIVER', 'Select driver')}</PlaceholderTitle>
+  const Placeholder = <PlaceholderTitle>{dictionary?.SELECT_DRIVER ?? 'Select driver'}</PlaceholderTitle>
 
   return (
     <>
