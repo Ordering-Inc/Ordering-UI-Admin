@@ -4,8 +4,7 @@ import { DriversGroupTypeSelector } from '../DriversGroupTypeSelector'
 import { DriverMultiSelector } from '../DriverMultiSelector'
 import { Input } from '../../../styles'
 import {
-  WrapperRow,
-  Option
+  WrapperRow
 } from './styles'
 import { useFilterValues } from '../../../contexts/FilterValuesContext'
 
@@ -20,10 +19,10 @@ const OrdersHeaderFilterGroupUI = (props) => {
     handleChangeGroupUnassigned
   } = props
 
-  const [, t] = useLanguage()
+  const [{ dictionary }] = useLanguage()
   const [isShow, setIsShow] = useState(false)
   const metafieldRef = useRef()
-  const [{ configs }] = useConfig()
+  const [{ configs, loading }] = useConfig()
   const configFilter = configs?.filter_order_options?.value.split('|').map(value => (value)) || []
 
   const handleClickOutside = (e) => {
@@ -48,28 +47,28 @@ const OrdersHeaderFilterGroupUI = (props) => {
   return (
     <>
       <WrapperRow>
-        {configFilter.includes('external_id') && (
+        {!loading && configFilter.includes('external_id') && (
           <Input
             type='text'
-            placeholder={t('EXTERNAL_ID', 'External Id')}
+            placeholder={dictionary?.EXTERNAL_ID ?? 'External Id'}
             autoComplete='off'
             value={filterValues?.externalId || ''}
             onChange={handleChangeExternalId}
           />
         )}
-        {configFilter.includes('driver') && (
+        {!loading && configFilter.includes('driver') && (
           <DriverMultiSelector
             drivers={driversList.drivers}
             filterValues={filterValues}
             handleChangeDriver={handleChangeDriver}
           />
         )}
-        {configFilter.includes('driver_group_general') && (
+        {!loading && configFilter.includes('driver_group_general') && (
           <DriversGroupTypeSelector
             driverGroupList={driverGroupList}
             handleChangeGroup={handleChangeGroupUnassigned}
             filterValues={filterValues.groupTypesUnassigned}
-            title={t('DRIVER_GROUP_NOT_ASSIGNED', 'Driver group (general)')}
+            title={dictionary?.DRIVER_GROUP_NOT_ASSIGNED ?? 'Driver group (general)'}
           />
         )}
       </WrapperRow>

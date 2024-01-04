@@ -12,7 +12,7 @@ export const DriversGroupTypeSelector = (props) => {
     title
   } = props
 
-  const [, t] = useLanguage()
+  const [{ dictionary }] = useLanguage()
 
   const [searchValue, setSearchValue] = useState('')
 
@@ -22,7 +22,7 @@ export const DriversGroupTypeSelector = (props) => {
     </PlaceholderTitle>
   )
   const [groupTypes, setGroupTypes] = useState([])
-  const groupTypesLoading = [{ value: 'default', content: <Option>{t('GROUP_LOADING', 'Group loading')}...</Option> }]
+  const groupTypesLoading = [{ value: 'default', content: <Option>{dictionary?.GROUP_LOADING ?? 'Group loading'}...</Option> }]
 
   useEffect(() => {
     const _groupList = []
