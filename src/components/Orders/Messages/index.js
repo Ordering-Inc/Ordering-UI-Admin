@@ -104,7 +104,6 @@ export const MessagesUI = (props) => {
   const chatDisabled = previousStatus.includes(order?.status)
   const [{ configs }] = useConfig()
   const showExternalId = configs?.change_order_id?.value === '1'
-  const hideLogBookMessages = configs?.order_logbook_enabled?.value === '0'
 
   const adminMessageList = [
     { key: 'message_1', text: t('ADMIN_MESSAGE_1', 'admin_message_1') },
@@ -472,7 +471,7 @@ export const MessagesUI = (props) => {
                   <React.Fragment key={message.id}>
                     {history && tabActive === 'order_history' && (
                       <>
-                        {message.type === 0 && !hideLogBookMessages && (
+                        {message.type === 0 && (
                           <MessageConsole key={message.id}>
                             <BubbleConsole>
                               <p
@@ -492,7 +491,7 @@ export const MessagesUI = (props) => {
                             </BubbleConsole>
                           </MessageConsole>
                         )}
-                        {message.type === 1 && !hideLogBookMessages && (
+                        {message.type === 1 && (
                           <MessageConsole key={message.id} style={{ display: `${tabActive === 'order_history' ? 'inline-flex' : 'none'}` }}>
                             {getHistoryComment(message) && (
                               <BubbleConsole>
@@ -515,7 +514,7 @@ export const MessagesUI = (props) => {
                     )}
                     {isChat && (
                       <>
-                        {message.type === 0 && !hideLogBookMessages && (
+                        {message.type === 0 && (
                           <MessageConsole key={message.id}>
                             <BubbleConsole>
                               <p>
@@ -534,7 +533,7 @@ export const MessagesUI = (props) => {
                             </BubbleConsole>
                           </MessageConsole>
                         )}
-                        {message.type === 1 && !hideLogBookMessages && (
+                        {message.type === 1 && (
                           <MessageConsole key={message.id} style={{ display: `${tabActive === 'order_history' ? 'inline-flex' : 'none'}` }}>
                             {getHistoryComment(message) && (
                               <BubbleConsole>
