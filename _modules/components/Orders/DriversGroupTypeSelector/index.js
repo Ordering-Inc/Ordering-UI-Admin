@@ -19,13 +19,14 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var DriversGroupTypeSelector = function DriversGroupTypeSelector(props) {
+  var _dictionary$GROUP_LOA;
   var driverGroupList = props.driverGroupList,
     filterValues = props.filterValues,
     handleChangeGroup = props.handleChangeGroup,
     title = props.title;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
-    _useLanguage2 = _slicedToArray(_useLanguage, 2),
-    t = _useLanguage2[1];
+    _useLanguage2 = _slicedToArray(_useLanguage, 1),
+    dictionary = _useLanguage2[0].dictionary;
   var _useState = (0, _react.useState)(''),
     _useState2 = _slicedToArray(_useState, 2),
     searchValue = _useState2[0],
@@ -37,7 +38,7 @@ var DriversGroupTypeSelector = function DriversGroupTypeSelector(props) {
     setGroupTypes = _useState4[1];
   var groupTypesLoading = [{
     value: 'default',
-    content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('GROUP_LOADING', 'Group loading'), "...")
+    content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, (_dictionary$GROUP_LOA = dictionary === null || dictionary === void 0 ? void 0 : dictionary.GROUP_LOADING) !== null && _dictionary$GROUP_LOA !== void 0 ? _dictionary$GROUP_LOA : 'Group loading', "...")
   }];
   (0, _react.useEffect)(function () {
     var _groupList = [];
