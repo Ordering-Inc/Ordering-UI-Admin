@@ -238,7 +238,10 @@ export const CustomersListing = (props) => {
       initialPage: props.isUseQuery && !isNaN(defaultPage) ? Number(defaultPage) : 1,
       pageSize: props.isUseQuery && !isNaN(defaultPage) ? Number(defaultPageSize) : 10,
       controlType: 'pages'
-    }
+    },
+    propsToFetch: [
+      'name', 'lastname', 'email', 'phone', 'photo', 'cellphone', 'loyalty_level', 'loyalty_level_id', 'country_phone_code', 'city_id', 'city', 'address', 'addresses', 'address_notes', 'dropdown_option_id', 'dropdown_option', 'location', 'zipcode', 'level', 'enabled', 'middle_name', 'second_lastname', 'birthdate', 'phone_verified', 'email_verified', 'wallets', 'orders_count', 'push_tokens'
+    ]
   }
   return (
     <UsersListController {...customersProps} />
