@@ -22,6 +22,7 @@ var _styles = require("../../../styles");
 var _CurrencyFilter = require("../CurrencyFilter");
 var _utils = require("../../../utils");
 var _FirstSelect = require("../../../styles/Select/FirstSelect");
+var _FilterValuesContext = require("../../../contexts/FilterValuesContext");
 var _styles2 = require("./styles");
 var _styles3 = require("../OrdersTable/styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -39,7 +40,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; } // import { OrderStatusTypeSelector } from '../OrderStatusTypeSelector'
 var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
-  var _filterValues$logisti, _filterValues$assigne;
+  var _configs$filter_order, _filterValues$logisti, _filterValues$assigne;
   var isLateralBar = props.isLateralBar,
     filterModalOpen = props.filterModalOpen,
     setFilterModalOpen = props.setFilterModalOpen,
@@ -90,6 +91,12 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
     filterApplied = _useState6[0],
     setFilterApplied = _useState6[1];
   var metafieldRef = (0, _react.useRef)();
+  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configs = _useConfig2[0].configs;
+  var configFilter = (configs === null || configs === void 0 || (_configs$filter_order = configs.filter_order_options) === null || _configs$filter_order === void 0 ? void 0 : _configs$filter_order.value.split('|').map(function (value) {
+    return value;
+  })) || [];
   var logisticStatusList = [{
     value: 0,
     content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, t('PENDING', 'Pending'), /*#__PURE__*/_react.default.createElement(_styles3.LogisticStatusDot, {
@@ -208,12 +215,11 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
     onChange: function onChange(e) {
       return handleChangeOrderId(e);
     }
-  }), /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    type: "text",
-    placeholder: t('EXTERNAL_ID', 'External Id'),
-    autoComplete: "off",
-    value: (filterValues === null || filterValues === void 0 ? void 0 : filterValues.externalId) || '',
-    onChange: handleChangeExternalId
+  }), /*#__PURE__*/_react.default.createElement(_DateTypeSelector.DateTypeSelector, {
+    filterValues: filterValues,
+    handleChangeDateType: handleChangeDateType,
+    handleChangeFromDate: handleChangeFromDate,
+    handleChangeEndDate: handleChangeEndDate
   })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
     type: "text",
     placeholder: t('CUSTOMER_NAME', 'Customer Name'),
@@ -263,19 +269,10 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
     handleChangeGroup: handleChangeGroup,
     filterValues: filterValues.groupTypes,
     title: t('DRIVER_GROUP_ASSIGNED', 'Driver group (assigned)')
-  }), /*#__PURE__*/_react.default.createElement(_DriversGroupTypeSelector.DriversGroupTypeSelector, {
-    driverGroupList: driverGroupList,
-    handleChangeGroup: handleChangeGroupUnassigned,
-    filterValues: filterValues.groupTypesUnassigned,
-    title: t('DRIVER_GROUP_NOT_ASSIGNED', 'Driver group (general)')
-  })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_BusinessesSelector.BusinessesSelector, {
+  }), /*#__PURE__*/_react.default.createElement(_BusinessesSelector.BusinessesSelector, {
     filterValues: filterValues,
     businessesList: businessesList,
     handleChangeBusinesses: handleChangeBusinesses
-  }), /*#__PURE__*/_react.default.createElement(_DriverMultiSelector.DriverMultiSelector, {
-    drivers: driversList.drivers,
-    filterValues: filterValues,
-    handleChangeDriver: handleChangeDriver
   })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_CountryFilter.CountryFilter, {
     filterValues: filterValues,
     handleChangeCountryCode: handleChangeCountryCode
@@ -313,12 +310,7 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
         assigned: value
       });
     }
-  })), /*#__PURE__*/_react.default.createElement(_DateTypeSelector.DateTypeSelector, {
-    filterValues: filterValues,
-    handleChangeDateType: handleChangeDateType,
-    handleChangeFromDate: handleChangeFromDate,
-    handleChangeEndDate: handleChangeEndDate
-  })), filterValues === null || filterValues === void 0 ? void 0 : filterValues.metafield.map(function (item) {
+  }))), filterValues === null || filterValues === void 0 ? void 0 : filterValues.metafield.map(function (item) {
     return /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, {
       key: item.id
     }, /*#__PURE__*/_react.default.createElement(_styles.Input, {
@@ -391,9 +383,15 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
   }, t('CLEAR', 'Clear'))))));
 };
 var OrdersFilterGroup = function OrdersFilterGroup(props) {
+  var _useFilterValues = (0, _FilterValuesContext.useFilterValues)(),
+    _useFilterValues2 = _slicedToArray(_useFilterValues, 2),
+    filterValues = _useFilterValues2[0],
+    handleFilterValues = _useFilterValues2[1].handleFilterValues;
   var FilterControlProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: OrdersFilterGroupUI,
-    driverGroupList: props.driverGroupList
+    driverGroupList: props.driverGroupList,
+    filterValues: filterValues,
+    setFilterValues: handleFilterValues
   });
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.OrdersFilter, FilterControlProps));
 };

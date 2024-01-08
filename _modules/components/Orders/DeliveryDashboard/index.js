@@ -8,6 +8,7 @@ var _react = _interopRequireWildcard(require("react"));
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _DeliveriesLocation = require("../DeliveriesLocation");
 var _OrdersDashboardList = require("../OrdersDashboardList");
+var _OrdersHeaderFilterGroup = require("../OrdersHeaderFilterGroup");
 var _OrderStatusFilterBar = require("../OrderStatusFilterBar");
 var _OrderStatusSubFilter = require("../OrderStatusSubFilter");
 var _styles = require("./styles");
@@ -35,7 +36,9 @@ var DeliveryDashboard = function DeliveryDashboard(props) {
     handleSelectedSubOrderStatus = props.handleSelectedSubOrderStatus,
     ordersAmountByStatus = props.ordersAmountByStatus,
     setOrdersAmountByStatus = props.setOrdersAmountByStatus,
-    isUseQuery = props.isUseQuery;
+    isUseQuery = props.isUseQuery,
+    driverGroupList = props.driverGroupList,
+    handleChangeFilterValues = props.handleChangeFilterValues;
   var ordersDashboardListProps = _objectSpread({}, props);
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
@@ -57,7 +60,11 @@ var DeliveryDashboard = function DeliveryDashboard(props) {
       setInterActionMapOrder(_objectSpread({}, order));
     }
   };
-  return /*#__PURE__*/_react.default.createElement(_styles.DeliveryDashboardContainer, null, /*#__PURE__*/_react.default.createElement(_styles.OrdersContainer, null, /*#__PURE__*/_react.default.createElement(_styles.FilterContainer, null, /*#__PURE__*/_react.default.createElement(_OrderStatusFilterBar.OrderStatusFilterBar, {
+  return /*#__PURE__*/_react.default.createElement(_styles.DeliveryDashboardContainer, null, /*#__PURE__*/_react.default.createElement(_styles.OrdersContainer, null, /*#__PURE__*/_react.default.createElement(_OrdersHeaderFilterGroup.OrdersHeaderFilterGroup, {
+    driverGroupList: driverGroupList,
+    driversList: driversList,
+    handleChangeFilterValues: handleChangeFilterValues
+  }), /*#__PURE__*/_react.default.createElement(_styles.FilterContainer, null, /*#__PURE__*/_react.default.createElement(_OrderStatusFilterBar.OrderStatusFilterBar, {
     isUseQuery: isUseQuery,
     selectedOrderStatus: ordersStatusGroup,
     changeOrderStatus: handleOrdersStatusGroupFilter,
