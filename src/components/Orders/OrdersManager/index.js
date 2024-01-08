@@ -19,6 +19,7 @@ import { OrdersDashboard } from '../OrdersDashboard'
 import { OrderStatusSubFilter } from '../OrderStatusSubFilter'
 import { OrderNotification } from '../OrderNotification'
 import { WizardOrders } from '../WizardOrders'
+import { OrdersHeaderFilterGroup } from '../OrdersHeaderFilterGroup'
 
 const OrdersManagerUI = (props) => {
   const {
@@ -193,6 +194,11 @@ const OrdersManagerUI = (props) => {
           setTimeStatus={setTimeStatus}
           setSlaSettingTime={setSlaSettingTime}
           isLateralBar={isLateralBar}
+        />
+        <OrdersHeaderFilterGroup
+          driverGroupList={driverGroupList}
+          driversList={driversList}
+          handleChangeFilterValues={handleChangeFilterValues}
         />
         <OrderStatusFilterBar
           isUseQuery={isUseQuery}

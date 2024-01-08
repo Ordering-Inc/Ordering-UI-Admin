@@ -411,6 +411,7 @@ import { ThemeContext, ThemeProvider, useTheme } from './contexts/ThemeContext'
 import { ConfigFileContext } from './contexts/ConfigFileContext'
 import { ProjectContext, ProjectProvider, useProjectState } from './contexts/ProjectContext'
 import { InfoShareContext, InfoShareProvider, useInfoShare } from './contexts/InfoShareContext'
+import { FilterValuesContext, FilterValuesProvider, useFilterValues } from './contexts/FilterValuesContext'
 
 // hooks
 import { useOnlineStatus } from './hooks/useOnlineStatus'
@@ -842,6 +843,9 @@ export {
   InfoShareContext,
   InfoShareProvider,
   useInfoShare,
+  FilterValuesContext,
+  FilterValuesProvider,
+  useFilterValues,
   ProjectContext,
   ProjectProvider,
   useProjectState,

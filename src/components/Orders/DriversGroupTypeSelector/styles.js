@@ -4,6 +4,8 @@ export const PlaceholderTitle = styled.div`
   display: flex;
   align-items: center;
   padding: 10px;
+  line-height:15px;
+  font-size:14px;
 `
 
 export const Option = styled.div`

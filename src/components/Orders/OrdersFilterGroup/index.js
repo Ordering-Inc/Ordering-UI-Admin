@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { PlusCircle, Trash3, Funnel } from 'react-bootstrap-icons'
 import MdcFilterOff from '@meronex/icons/mdc/MdcFilterOff'
 import TiWarningOutline from '@meronex/icons/ti/TiWarningOutline'
-import { useLanguage, OrdersFilter as OrdersFilterController } from 'ordering-components-admin'
+import { useLanguage, useConfig, OrdersFilter as OrdersFilterController } from 'ordering-components-admin'
 import { BusinessesSelector } from '../BusinessesSelector'
 import { DriversGroupTypeSelector } from '../DriversGroupTypeSelector'
 import { DateTypeSelector } from '../DateTypeSelector'
@@ -16,6 +16,7 @@ import { Button, IconButton, Input, LinkButton } from '../../../styles'
 import { CurrencyFilter } from '../CurrencyFilter'
 import { getUniqueId } from '../../../utils'
 import { Select } from '../../../styles/Select/FirstSelect'
+import { useFilterValues } from '../../../contexts/FilterValuesContext'
 
 import {
   FilterGroupListContainer,
@@ -71,6 +72,8 @@ const OrdersFilterGroupUI = (props) => {
   const [isShow, setIsShow] = useState(false)
   const [filterApplied, setFilterApplied] = useState(false)
   const metafieldRef = useRef()
+  const [{ configs }] = useConfig()
+  const configFilter = configs?.filter_order_options?.value.split('|').map(value =>(value)) || []
 
   const logisticStatusList = [
     { value: 0, content: <Option>{t('PENDING', 'Pending')}<LogisticStatusDot status={0} /></Option> },
@@ -175,13 +178,19 @@ const OrdersFilterGroupUI = (props) => {
               value={filterValues?.orderId || ''}
               onChange={(e) => handleChangeOrderId(e)}
             />
-            <Input
-              type='text'
-              placeholder={t('EXTERNAL_ID', 'External Id')}
-              autoComplete='off'
-              value={filterValues?.externalId || ''}
-              onChange={handleChangeExternalId}
+            <DateTypeSelector
+              filterValues={filterValues}
+              handleChangeDateType={handleChangeDateType}
+              handleChangeFromDate={handleChangeFromDate}
+              handleChangeEndDate={handleChangeEndDate}
             />
+            {/* <Input
+                type='text'
+                placeholder={t('EXTERNAL_ID', 'External Id')}
+                autoComplete='off'
+                value={filterValues?.externalId || ''}
+                onChange={handleChangeExternalId}
+              /> */}
           </WrapperRow>
           <WrapperRow>
             <Input
@@ -222,14 +231,19 @@ const OrdersFilterGroupUI = (props) => {
               filterValues={filterValues.groupTypes}
               title={t('DRIVER_GROUP_ASSIGNED', 'Driver group (assigned)')}
             />
-            <DriversGroupTypeSelector
+            <BusinessesSelector
+              filterValues={filterValues}
+              businessesList={businessesList}
+              handleChangeBusinesses={handleChangeBusinesses}
+            />
+            {/* <DriversGroupTypeSelector
               driverGroupList={driverGroupList}
               handleChangeGroup={handleChangeGroupUnassigned}
               filterValues={filterValues.groupTypesUnassigned}
               title={t('DRIVER_GROUP_NOT_ASSIGNED', 'Driver group (general)')}
-            />
+            /> */}
           </WrapperRow>
-          <WrapperRow>
+          {/* <WrapperRow>
             <BusinessesSelector
               filterValues={filterValues}
               businessesList={businessesList}
@@ -240,7 +254,7 @@ const OrdersFilterGroupUI = (props) => {
               filterValues={filterValues}
               handleChangeDriver={handleChangeDriver}
             />
-          </WrapperRow>
+          </WrapperRow> */}
           <WrapperRow>
             <CountryFilter
               filterValues={filterValues}
@@ -295,12 +309,6 @@ const OrdersFilterGroupUI = (props) => {
                 onChange={(value) => handleChangeChildFilterValue({ assigned: value })}
               />
             </SelectWrapper>
-            <DateTypeSelector
-              filterValues={filterValues}
-              handleChangeDateType={handleChangeDateType}
-              handleChangeFromDate={handleChangeFromDate}
-              handleChangeEndDate={handleChangeEndDate}
-            />
           </WrapperRow>
           {filterValues?.metafield.map(item => (
             <WrapperRow key={item.id}>
@@ -388,10 +396,14 @@ const OrdersFilterGroupUI = (props) => {
 }
 
 export const OrdersFilterGroup = (props) => {
+  const [filterValues, { handleFilterValues }] = useFilterValues()
+
   const FilterControlProps = {
     ...props,
     UIComponent: OrdersFilterGroupUI,
-    driverGroupList: props.driverGroupList
+    driverGroupList: props.driverGroupList,
+    filterValues: filterValues,
+    setFilterValues: handleFilterValues
   }
   return (
     <>
