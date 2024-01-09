@@ -139,8 +139,8 @@ export const DriversGroupGeneralForm = (props) => {
               >
                 <Checkbox
                   value={driverManager?.id}
-                  checked={selectedDriverManager.includes(driverManager.id)}
-                  onChange={e => handleSelectDriverManager(driverManager.id, e.target.checked)}
+                  checked={selectedDriverManager?.includes(driverManager?.id)}
+                  onChange={e => handleSelectDriverManager(driverManager?.id, e.target.checked)}
                 />
                 <WrapperImage>
                   {driverManager?.photo ? (
