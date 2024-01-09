@@ -151,9 +151,9 @@ var DriversGroupGeneralForm = function DriversGroupGeneralForm(props) {
       key: driverManager.id
     }, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
       value: driverManager === null || driverManager === void 0 ? void 0 : driverManager.id,
-      checked: selectedDriverManager.includes(driverManager.id),
+      checked: selectedDriverManager === null || selectedDriverManager === void 0 ? void 0 : selectedDriverManager.includes(driverManager === null || driverManager === void 0 ? void 0 : driverManager.id),
       onChange: function onChange(e) {
-        return handleSelectDriverManager(driverManager.id, e.target.checked);
+        return handleSelectDriverManager(driverManager === null || driverManager === void 0 ? void 0 : driverManager.id, e.target.checked);
       }
     }), /*#__PURE__*/_react.default.createElement(_styles2.WrapperImage, null, driverManager !== null && driverManager !== void 0 && driverManager.photo ? /*#__PURE__*/_react.default.createElement(_styles2.Image, {
       bgimage: driverManager === null || driverManager === void 0 ? void 0 : driverManager.photo,
