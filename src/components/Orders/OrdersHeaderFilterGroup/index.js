@@ -7,6 +7,7 @@ import {
   WrapperRow
 } from './styles'
 import { useFilterValues } from '../../../contexts/FilterValuesContext'
+import { SearchBar } from '../../Shared'
 
 const OrdersHeaderFilterGroupUI = (props) => {
   const {
@@ -48,12 +49,15 @@ const OrdersHeaderFilterGroupUI = (props) => {
     <>
       <WrapperRow>
         {!loading && configFilter.includes('external_id') && (
-          <Input
-            type='text'
+          <SearchBar
             placeholder={dictionary?.EXTERNAL_ID ?? 'External Id'}
-            autoComplete='off'
-            value={filterValues?.externalId || ''}
             onChange={handleChangeExternalId}
+            search={filterValues?.externalId || ''}
+            isCustomLayout
+            hideSearchIcon
+            lazyLoad
+            CustomInput={Input}
+            onSearch={(value) => handleChangeExternalId({ target: { value } })}
           />
         )}
         {!loading && configFilter.includes('driver') && (
