@@ -64,7 +64,8 @@ const OrdersFilterGroupUI = (props) => {
     handleDeleteMetafield,
     handleChangeExternalId,
     handleChangeChildFilterValue,
-    handleChangeGroupUnassigned
+    handleChangeGroupUnassigned,
+    handleFilterValues
   } = props
 
   const [, t] = useLanguage()
@@ -73,7 +74,8 @@ const OrdersFilterGroupUI = (props) => {
   const [filterApplied, setFilterApplied] = useState(false)
   const metafieldRef = useRef()
   const [{ configs }] = useConfig()
-  const configFilter = configs?.filter_order_options?.value.split('|').map(value =>(value)) || []
+  const [_filterValues] = useFilterValues()
+  const configFilter = configs?.filter_order_options?.value.split('|').map(value => (value)) || []
 
   const logisticStatusList = [
     { value: 0, content: <Option>{t('PENDING', 'Pending')}<LogisticStatusDot status={0} /></Option> },
@@ -90,6 +92,7 @@ const OrdersFilterGroupUI = (props) => {
 
   const handleAcceptFilter = () => {
     handleChangeFilterValues(filterValues)
+    handleFilterValues(filterValues)
     setFilterModalOpen(false)
   }
 
@@ -132,10 +135,10 @@ const OrdersFilterGroupUI = (props) => {
 
   useEffect(() => {
     let _filterApplied = false
-    if (Object.keys(filterValues).length === 0) {
+    if (Object.keys(_filterValues).length === 0) {
       _filterApplied = false
     } else {
-      Object.values(filterValues).forEach(value => {
+      Object.values(_filterValues).forEach(value => {
         if (Array.isArray(value)) {
           if (value.length > 0) _filterApplied = true
         } else {
@@ -144,7 +147,7 @@ const OrdersFilterGroupUI = (props) => {
       })
     }
     setFilterApplied(_filterApplied)
-  }, [filterValues])
+  }, [_filterValues])
 
   return (
     <>
@@ -397,13 +400,19 @@ const OrdersFilterGroupUI = (props) => {
 
 export const OrdersFilterGroup = (props) => {
   const [filterValues, { handleFilterValues }] = useFilterValues()
+  const [savedFilterValues, setSavedFilterValues] = useState(filterValues)
+
+  useEffect(() => {
+    setSavedFilterValues(filterValues)
+  }, [filterValues])
 
   const FilterControlProps = {
     ...props,
     UIComponent: OrdersFilterGroupUI,
     driverGroupList: props.driverGroupList,
-    filterValues: filterValues,
-    setFilterValues: handleFilterValues
+    filterValues: savedFilterValues,
+    setFilterValues: setSavedFilterValues,
+    handleFilterValues: handleFilterValues
   }
   return (
     <>
