@@ -32,10 +32,9 @@ export const WrapperRow = styled.div`
     z-index: 100;
   }
 
-  > input {
+  input {
     width: 100%;
     height: 47px;
-    margin-bottom: 20px;
     padding: 10px 25px;
     box-sizing: border-box;
     &::-webkit-outer-spin-button,

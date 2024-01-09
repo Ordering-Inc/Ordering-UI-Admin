@@ -6,23 +6,25 @@ export const SearchContainer = styled.div`
   align-items: center;
 
   > input {
-    width: 100%;
-    border: 1px solid ${props => props.theme.colors.borderColor} !important;
-    background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
-    outline: none;
-    padding: 10px 15px;
-    border-radius: 8px;
-    ${props => props.theme?.rtl ? css`
-      padding-left: 40px;
-    ` : css`
-      padding-right: 40px;
-    `}
-    font-size: 14px;
-    color: ${props => props.theme.colors.headingColor};
+    ${({ isCustomInput }) => !isCustomInput && css`
+      width: 100%;
+      border: 1px solid ${props => props.theme.colors.borderColor} !important;
+      background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
+      outline: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      ${props => props.theme?.rtl ? css`
+        padding-left: 40px;
+      ` : css`
+        padding-right: 40px;
+      `}
+      font-size: 14px;
+      color: ${props => props.theme.colors.headingColor};
 
-    &::placeholder {
-      color: #909BA9;
-    }
+      &::placeholder {
+        color: #909BA9;
+      }
+    `}
   }
 
   svg {

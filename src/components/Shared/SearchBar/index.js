@@ -10,7 +10,9 @@ export const SearchBar = (props) => {
     search,
     placeholder,
     lazyLoad,
-    customClass
+    customClass,
+    hideSearchIcon,
+    CustomInput
   } = props
 
   let timeout = null
@@ -52,12 +54,23 @@ export const SearchBar = (props) => {
     }
   }, [search])
 
+  const inputProps = {
+    type: 'text',
+    ref: el,
+    name: 'search',
+    placeholder: placeholder,
+    autoComplete: 'off'
+  }
   return (
-    <SearchContainer className={customClass || ''}>
-      <input type='text' ref={el} name='search' placeholder={placeholder} autoComplete='off' />
+    <SearchContainer className={customClass || ''} isCustomInput={!!CustomInput}>
+      {CustomInput ? (
+        <CustomInput {...inputProps} />
+      ) : (
+        <input {...inputProps} />
+      )}
       {el.current?.value
         ? <XCircle className='close' onClick={handleClear} />
-        : <Search />}
+        : !hideSearchIcon && <Search />}
     </SearchContainer>
   )
 }
