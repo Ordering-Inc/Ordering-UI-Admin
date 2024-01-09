@@ -255,6 +255,7 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     setTimeStatus: setTimeStatus,
     setSlaSettingTime: setSlaSettingTime
   }), /*#__PURE__*/_react.default.createElement(_styles.MainContentContainer, null, /*#__PURE__*/_react.default.createElement(_styles.TopContent, null, /*#__PURE__*/_react.default.createElement(_styles.DriversContainer, null, /*#__PURE__*/_react.default.createElement(_DriversManager.DriversManager, {
+    filterValues: filterValues,
     setMapsData: setMapsData,
     handleUpdateAssignedOrders: handleUpdateAssignedOrders,
     disableSocketRoomDriver: true,

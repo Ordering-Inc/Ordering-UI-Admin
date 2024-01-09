@@ -16,7 +16,9 @@ var SearchBar = function SearchBar(props) {
     search = props.search,
     placeholder = props.placeholder,
     lazyLoad = props.lazyLoad,
-    customClass = props.customClass;
+    customClass = props.customClass,
+    hideSearchIcon = props.hideSearchIcon,
+    CustomInput = props.CustomInput;
   var timeout = null;
   var previousSearch;
   var el = (0, _react.useRef)();
@@ -49,17 +51,19 @@ var SearchBar = function SearchBar(props) {
       el.current.value = '';
     }
   }, [search]);
-  return /*#__PURE__*/_react.default.createElement(_styles.SearchContainer, {
-    className: customClass || ''
-  }, /*#__PURE__*/_react.default.createElement("input", {
-    type: "text",
+  var inputProps = {
+    type: 'text',
     ref: el,
-    name: "search",
+    name: 'search',
     placeholder: placeholder,
-    autoComplete: "off"
-  }), (_el$current = el.current) !== null && _el$current !== void 0 && _el$current.value ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XCircle, {
+    autoComplete: 'off'
+  };
+  return /*#__PURE__*/_react.default.createElement(_styles.SearchContainer, {
+    className: customClass || '',
+    isCustomInput: !!CustomInput
+  }, CustomInput ? /*#__PURE__*/_react.default.createElement(CustomInput, inputProps) : /*#__PURE__*/_react.default.createElement("input", inputProps), (_el$current = el.current) !== null && _el$current !== void 0 && _el$current.value ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XCircle, {
     className: "close",
     onClick: handleClear
-  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Search, null));
+  }) : !hideSearchIcon && /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Search, null));
 };
 exports.SearchBar = SearchBar;

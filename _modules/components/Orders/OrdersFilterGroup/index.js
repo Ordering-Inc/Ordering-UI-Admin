@@ -71,7 +71,8 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
     handleDeleteMetafield = props.handleDeleteMetafield,
     handleChangeExternalId = props.handleChangeExternalId,
     handleChangeChildFilterValue = props.handleChangeChildFilterValue,
-    handleChangeGroupUnassigned = props.handleChangeGroupUnassigned;
+    handleChangeGroupUnassigned = props.handleChangeGroupUnassigned,
+    handleFilterValues = props.handleFilterValues;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -94,6 +95,9 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configs = _useConfig2[0].configs;
+  var _useFilterValues = (0, _FilterValuesContext.useFilterValues)(),
+    _useFilterValues2 = _slicedToArray(_useFilterValues, 1),
+    _filterValues = _useFilterValues2[0];
   var configFilter = (configs === null || configs === void 0 || (_configs$filter_order = configs.filter_order_options) === null || _configs$filter_order === void 0 ? void 0 : _configs$filter_order.value.split('|').map(function (value) {
     return value;
   })) || [];
@@ -132,6 +136,7 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
   }];
   var handleAcceptFilter = function handleAcceptFilter() {
     handleChangeFilterValues(filterValues);
+    handleFilterValues(filterValues);
     setFilterModalOpen(false);
   };
   var handleClearFilter = function handleClearFilter() {
@@ -173,10 +178,10 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
   }, [isShow]);
   (0, _react.useEffect)(function () {
     var _filterApplied = false;
-    if (Object.keys(filterValues).length === 0) {
+    if (Object.keys(_filterValues).length === 0) {
       _filterApplied = false;
     } else {
-      Object.values(filterValues).forEach(function (value) {
+      Object.values(_filterValues).forEach(function (value) {
         if (Array.isArray(value)) {
           if (value.length > 0) _filterApplied = true;
         } else {
@@ -185,7 +190,7 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
       });
     }
     setFilterApplied(_filterApplied);
-  }, [filterValues]);
+  }, [_filterValues]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {
@@ -383,15 +388,23 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
   }, t('CLEAR', 'Clear'))))));
 };
 var OrdersFilterGroup = function OrdersFilterGroup(props) {
-  var _useFilterValues = (0, _FilterValuesContext.useFilterValues)(),
-    _useFilterValues2 = _slicedToArray(_useFilterValues, 2),
-    filterValues = _useFilterValues2[0],
-    handleFilterValues = _useFilterValues2[1].handleFilterValues;
+  var _useFilterValues3 = (0, _FilterValuesContext.useFilterValues)(),
+    _useFilterValues4 = _slicedToArray(_useFilterValues3, 2),
+    filterValues = _useFilterValues4[0],
+    handleFilterValues = _useFilterValues4[1].handleFilterValues;
+  var _useState7 = (0, _react.useState)(filterValues),
+    _useState8 = _slicedToArray(_useState7, 2),
+    savedFilterValues = _useState8[0],
+    setSavedFilterValues = _useState8[1];
+  (0, _react.useEffect)(function () {
+    setSavedFilterValues(filterValues);
+  }, [filterValues]);
   var FilterControlProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: OrdersFilterGroupUI,
     driverGroupList: props.driverGroupList,
-    filterValues: filterValues,
-    setFilterValues: handleFilterValues
+    filterValues: savedFilterValues,
+    setFilterValues: setSavedFilterValues,
+    handleFilterValues: handleFilterValues
   });
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.OrdersFilter, FilterControlProps));
 };
