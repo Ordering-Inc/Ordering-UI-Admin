@@ -221,6 +221,7 @@ const OrdersManagerUI = (props) => {
           <TopContent>
             <DriversContainer>
               <DriversManager
+                filterValues={filterValues}
                 setMapsData={setMapsData}
                 handleUpdateAssignedOrders={handleUpdateAssignedOrders}
                 disableSocketRoomDriver
