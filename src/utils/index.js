@@ -640,3 +640,39 @@ export const TwentyFourHours = [
   '22:00',
   '23:00'
 ]
+
+export const disableReasons = () => {
+  const [, t] = useLanguage()
+  const disableReasonDictionary = {
+    SALE_DIVIATION: t('SALE_DIVIATION', 'Sale Diviation'),
+    MOTORCYCLE_FAILURE: t('MOTORCYCLE_FAILURE', 'Motorcycle failure'),
+    NO_DRIVERS: t('NO_DRIVERS', 'No drivers'),
+    OVEN_FAILURE: t('OVEN_FAILURE', 'Oven failure'),
+    EXCESS_ORDERS: t('EXCESS_ORDERS', 'Excess orders'),
+    NO_ELECTRIC_POWER: t('NO_ELECTRIC_POWER', 'No electric power'),
+    NO_GAS: t('NO_GAS', 'No gas'),
+    CONECTION_FAILURE: t('CONECTION_FAILURE', 'Conection failure'),
+    NO_WATER: t('NO_WATER', 'No water'),
+    SYSTEM_FAILURE: t('SYSTEM_FAILURE', 'System failure'),
+    STREETS_CLOSED: t('STREETS_CLOSED', 'Streets closed'),
+    NO_SERVICE: t('NO_SERVICE', 'No service'),
+    UNSAFETY: t('UNSAFETY', 'Unsafety'),
+    MAINTENANCE_IN_STORE: t('MAINTENANCE_IN_STORE', 'Maintenance in store'),
+    RAINING: t('RAINING', 'Raining'),
+    STORE_EVENT: t('STORE_EVENT', 'Store event'),
+    PROBLEM_WITH_POWER: t('PROBLEM_WITH_POWER', 'Problem with power'),
+    DRIVER_ACCIDENT: t('DRIVER_ACCIDENT', 'Driver accident'),
+    MAINTENANCE_SYSTEM_IN_STORE: t('MAINTENANCE_SYSTEM_IN_STORE', 'Maintenance system in store'),
+    PROBLEM_WITH_GAS: t('PROBLEM_WITH_GAS', 'Problem with gas'),
+    ROLLER_FAILURE: t('ROLLER_FAILURE', 'Roller failure'),
+    WEATHER: t('WEATHER', 'Weather'),
+    GAS_LEAK: t('GAS_LEAK', 'Gas leak'),
+    MANIFESTATION: t('MANIFESTATION', 'Manifestation'),
+    LACK_OF_STAFF: t('LACK_OF_STAFF', 'Lack of Staff'),
+    MIXER_FAILURE: t('MIXER_FAILURE', 'Mixer failure'),
+    AUTOMATICS: t('AUTOMATICS', 'Automatics'),
+    PRODUCT_SHORTAGE: t('PRODUCT_SHORTAGE', 'Product shortage'),
+    TERMINAL_FAILURES: t('TERMINAL_FAILURES', 'Terminal failures')
+  }
+  return disableReasonDictionary
+}
