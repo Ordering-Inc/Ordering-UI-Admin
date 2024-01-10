@@ -3,9 +3,9 @@ import { useForm } from 'react-hook-form'
 import { useLanguage, DragAndDrop, ExamineClick, BusinessFormDetails as BusinessFormDetailsController, useConfig } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { Alert, Modal, ImageCrop, ColorPicker } from '../../Shared'
-import { bytesConverter, shape, ribbonValues } from '../../../utils'
+import { bytesConverter, shape, ribbonValues, disableReasons } from '../../../utils'
 import BiImage from '@meronex/icons/bi/BiImage'
-import { Button, Input, Switch } from '../../../styles'
+import { Button, Input, Switch, SecondSelect } from '../../../styles'
 import { RecordCircleFill, Circle, Facebook, Instagram, Tiktok, Pinterest, Whatsapp, Snapchat } from 'react-bootstrap-icons'
 
 import {
@@ -31,7 +31,8 @@ import {
   SocialWrapper,
   SocialItemWrapper,
   SocialItemHeader,
-  SocialItemContent
+  SocialItemContent,
+  Option
 } from './styles'
 
 const BusinessInformationUI = (props) => {
@@ -42,7 +43,8 @@ const BusinessInformationUI = (props) => {
     handleChangeInput,
     handleButtonUpdateClick,
     handleChangeSwtich,
-    handleChangeRibbon
+    handleChangeRibbon,
+    handleChangeSelectedOption
   } = props
 
   const formMethods = useForm()
@@ -53,6 +55,7 @@ const BusinessInformationUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [cropState, setCropState] = useState({ name: null, data: null, open: false })
   const priceSymbol = configs?.format_number_currency?.value?.trim()
+  const disableReasonDictionary = disableReasons()
 
   const priceList = [
     { key: '1', value: `${priceSymbol}` },
@@ -60,6 +63,156 @@ const BusinessInformationUI = (props) => {
     { key: '3', value: `${Array(3).fill(priceSymbol).join('')}` },
     { key: '4', value: `${Array(4).fill(priceSymbol).join('')}` },
     { key: '5', value: `${Array(5).fill(priceSymbol).join('')}` }
+  ]
+
+  const reasonOptionList = [
+    {
+      value: 'default',
+      content: <Option padding='0px'><span>{t('SELECT_OPTION', 'Select option')}</span></Option>,
+      color: 'primary',
+      disabled: true,
+      showDisable: true
+    },
+    {
+      value: disableReasonDictionary.SALE_DIVIATION,
+      content: <Option padding='0px'><span>{disableReasonDictionary.SALE_DIVIATION}</span></Option>,
+      color: 'primary'
+    },
+    {
+      value: disableReasonDictionary.MOTORCYCLE_FAILURE,
+      content: <Option padding='0px'><span>{disableReasonDictionary.MOTORCYCLE_FAILURE}</span></Option>,
+      color: 'primary'
+    },
+    {
+      value: disableReasonDictionary.NO_DRIVERS,
+      content: <Option padding='0px'><span>{disableReasonDictionary.NO_DRIVERS}</span></Option>,
+      color: 'primary'
+    },
+    {
+      value: disableReasonDictionary.EXCESS_ORDERS,
+      content: <Option padding='0px'><span>{disableReasonDictionary.EXCESS_ORDERS}</span></Option>,
+      color: 'primary'
+    },
+    {
+      value: disableReasonDictionary.NO_ELECTRIC_POWER,
+      content: <Option padding='0px'><span>{disableReasonDictionary.NO_ELECTRIC_POWER}</span></Option>,
+      color: 'primary'
+    },
+    {
+      value: disableReasonDictionary.NO_GAS,
+      content: <Option padding='0px'><span>{disableReasonDictionary.NO_GAS}</span></Option>,
+      color: 'primary'
+    },
+    {
+      value: disableReasonDictionary.CONECTION_FAILURE,
+      content: <Option padding='0px'><span>{disableReasonDictionary.CONECTION_FAILURE}</span></Option>,
+      color: 'primary'
+    },
+    {
+      value: disableReasonDictionary.NO_WATER,
+      content: <Option padding='0px'><span>{disableReasonDictionary.NO_WATER}</span></Option>,
+      color: 'primary'
+    },
+    {
+      value: disableReasonDictionary.SYSTEM_FAILURE,
+      content: <Option padding='0px'><span>{disableReasonDictionary.SYSTEM_FAILURE}</span></Option>,
+      color: 'primary'
+    },
+    {
+      value: disableReasonDictionary.STREETS_CLOSED,
+      content: <Option padding='0px'><span>{disableReasonDictionary.STREETS_CLOSED}</span></Option>,
+      color: 'primary'
+    },
+    {
+      value: disableReasonDictionary.NO_SERVICE,
+      content: <Option padding='0px'><span>{disableReasonDictionary.NO_SERVICE}</span></Option>,
+      color: 'primary'
+    },
+    {
+      value: disableReasonDictionary.UNSAFETY,
+      content: <Option padding='0px'><span>{disableReasonDictionary.UNSAFETY}</span></Option>,
+      color: 'primary'
+    },
+    {
+      value: disableReasonDictionary.MAINTENANCE_IN_STORE,
+      content: <Option padding='0px'><span>{disableReasonDictionary.MAINTENANCE_IN_STORE}</span></Option>,
+      color: 'primary'
+    },
+    {
+      value: disableReasonDictionary.RAINING,
+      content: <Option padding='0px'><span>{disableReasonDictionary.RAINING}</span></Option>,
+      color: 'primary'
+    },
+    {
+      value: disableReasonDictionary.STORE_EVENT,
+      content: <Option padding='0px'><span>{disableReasonDictionary.STORE_EVENT}</span></Option>,
+      color: 'primary'
+    },
+    {
+      value: disableReasonDictionary.PROBLEM_WITH_POWER,
+      content: <Option padding='0px'><span>{disableReasonDictionary.PROBLEM_WITH_POWER}</span></Option>,
+      color: 'primary'
+    },
+    {
+      value: disableReasonDictionary.DRIVER_ACCIDENT,
+      content: <Option padding='0px'><span>{disableReasonDictionary.DRIVER_ACCIDENT}</span></Option>,
+      color: 'primary'
+    },
+    {
+      value: disableReasonDictionary.MAINTENANCE_SYSTEM_IN_STORE,
+      content: <Option padding='0px'><span>{disableReasonDictionary.MAINTENANCE_SYSTEM_IN_STORE}</span></Option>,
+      color: 'primary'
+    },
+    {
+      value: disableReasonDictionary.PROBLEM_WITH_GAS,
+      content: <Option padding='0px'><span>{disableReasonDictionary.PROBLEM_WITH_GAS}</span></Option>,
+      color: 'primary'
+    },
+    {
+      value: disableReasonDictionary.ROLLER_FAILURE,
+      content: <Option padding='0px'><span>{disableReasonDictionary.ROLLER_FAILURE}</span></Option>,
+      color: 'primary'
+    },
+    {
+      value: disableReasonDictionary.WEATHER,
+      content: <Option padding='0px'><span>{disableReasonDictionary.WEATHER}</span></Option>,
+      color: 'primary'
+    },
+    {
+      value: disableReasonDictionary.GAS_LEAK,
+      content: <Option padding='0px'><span>{disableReasonDictionary.GAS_LEAK}</span></Option>,
+      color: 'primary'
+    },
+    {
+      value: disableReasonDictionary.MANIFESTATION,
+      content: <Option padding='0px'><span>{disableReasonDictionary.MANIFESTATION}</span></Option>,
+      color: 'primary'
+    },
+    {
+      value: disableReasonDictionary.LACK_OF_STAFF,
+      content: <Option padding='0px'><span>{disableReasonDictionary.LACK_OF_STAFF}</span></Option>,
+      color: 'primary'
+    },
+    {
+      value: disableReasonDictionary.MIXER_FAILURE,
+      content: <Option padding='0px'><span>{disableReasonDictionary.MIXER_FAILURE}</span></Option>,
+      color: 'primary'
+    },
+    {
+      value: disableReasonDictionary.AUTOMATICS,
+      content: <Option padding='0px'><span>{disableReasonDictionary.AUTOMATICS}</span></Option>,
+      color: 'primary'
+    },
+    {
+      value: disableReasonDictionary.PRODUCT_SHORTAGE,
+      content: <Option padding='0px'><span>{disableReasonDictionary.PRODUCT_SHORTAGE}</span></Option>,
+      color: 'primary'
+    },
+    {
+      value: disableReasonDictionary.TERMINAL_FAILURES,
+      content: <Option padding='0px'><span>{disableReasonDictionary.TERMINAL_FAILURES}</span></Option>,
+      color: 'primary'
+    }
   ]
 
   const socialOriginalURL = {
@@ -192,7 +345,7 @@ const BusinessInformationUI = (props) => {
                   ? businessState?.business?.header &&
                   (<img src={businessState?.business?.header} alt='header image' loading='lazy' />)
                   : formState?.changes?.header &&
-                  <img src={formState?.changes?.header} alt='header image' loading='lazy' />
+                    <img src={formState?.changes?.header} alt='header image' loading='lazy' />
                 )}
               <UploadImageIconContainer>
                 <UploadImageIcon>
@@ -224,7 +377,7 @@ const BusinessInformationUI = (props) => {
                   ? businessState?.business?.logo &&
                   (<img src={businessState?.business?.logo} alt='logo image' loading='lazy' />)
                   : formState?.changes?.logo &&
-                  <img src={formState?.changes?.logo} alt='logo image' loading='lazy' />
+                    <img src={formState?.changes?.logo} alt='logo image' loading='lazy' />
                 )}
               <UploadImageIconContainer small>
                 <UploadImageIcon small>
@@ -373,14 +526,25 @@ const BusinessInformationUI = (props) => {
         }
         {(businessState?.business?.enabled === false) && (
           <InputWrapper>
-            <label>{t('DISABLED_REASON', 'Disabled reason')} <span>({t('MAX_60_CHAR', 'Max 60 Characters')})</span></label>
-            <Input
+            <label>{t('DISABLED_REASON', 'Disabled reason')}</label>
+            {/* <span>({t('MAX_60_CHAR', 'Max 60 Characters')})</span> */}
+            {/* <Input
               name='disabled_reason'
               defaultValue={formState?.changes?.disabled_reason ?? businessState?.business?.disabled_reason}
               onChange={handleChangeInput}
               disabled={formState.loading}
               autoComplete='off'
               maxLength={60}
+            /> */}
+            <SecondSelect
+              defaultValue={formState?.changes?.disabled_reason ?? businessState?.business?.disabled_reason ?? 'default'}
+              options={reasonOptionList}
+              optionInnerMaxHeight='200px'
+              onChange={(value) => handleChangeSelectedOption('disabled_reason', value)}
+              // isShowSearchBar
+              // searchBarPlaceholder={t('SEARCH', 'Search')}
+              // searchValue={searchValue}
+              // handleChangeSearch={handleSearch}
             />
           </InputWrapper>
         )}
