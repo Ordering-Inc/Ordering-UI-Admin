@@ -30,14 +30,15 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessInformationUI = function BusinessInformationUI(props) {
-  var _configs$format_numbe, _formState$changes5, _formState$result3, _businessState$busine2, _businessState$busine3, _formState$changes6, _formState$changes7, _formState$changes8, _formState$result4, _businessState$busine4, _businessState$busine5, _formState$changes9, _formState$changes10, _formState$changes$na, _formState$changes11, _businessState$busine6, _formState$changes$ex, _formState$changes12, _businessState$busine7, _formState$changes$de, _formState$changes13, _businessState$busine8, _formState$changes$ph, _formState$changes14, _businessState$busine9, _formState$changes$ce, _formState$changes15, _businessState$busine10, _businessState$busine11, _businessState$busine12, _formState$changes16, _formState$changes17, _businessState$busine13, _formState$changes$ri, _formState$changes18, _businessState$busine14, _businessState$busine15, _formState$changes19, _formState$changes20, _businessState$busine16, _formState$changes$ri2, _formState$changes21, _businessState$busine17, _businessState$busine20, _formState$changes$di, _formState$changes26, _businessState$busine21, _formState$changes$fa, _formState$changes29, _businessState$busine24, _formState$changes$in, _formState$changes30, _businessState$busine25, _formState$changes$ti, _formState$changes31, _businessState$busine26, _formState$changes$pi, _formState$changes32, _businessState$busine27, _formState$changes$wh, _formState$changes33, _businessState$busine28, _formState$changes$sn, _formState$changes34, _businessState$busine29;
+  var _configs$format_numbe, _formState$changes5, _formState$result3, _businessState$busine2, _businessState$busine3, _formState$changes6, _formState$changes7, _formState$changes8, _formState$result4, _businessState$busine4, _businessState$busine5, _formState$changes9, _formState$changes10, _formState$changes$na, _formState$changes11, _businessState$busine6, _formState$changes$ex, _formState$changes12, _businessState$busine7, _formState$changes$de, _formState$changes13, _businessState$busine8, _formState$changes$ph, _formState$changes14, _businessState$busine9, _formState$changes$ce, _formState$changes15, _businessState$busine10, _businessState$busine11, _businessState$busine12, _formState$changes16, _formState$changes17, _businessState$busine13, _formState$changes$ri, _formState$changes18, _businessState$busine14, _businessState$busine15, _formState$changes19, _formState$changes20, _businessState$busine16, _formState$changes$ri2, _formState$changes21, _businessState$busine17, _businessState$busine20, _ref, _formState$changes$di, _formState$changes26, _businessState$busine21, _formState$changes$fa, _formState$changes29, _businessState$busine24, _formState$changes$in, _formState$changes30, _businessState$busine25, _formState$changes$ti, _formState$changes31, _businessState$busine26, _formState$changes$pi, _formState$changes32, _businessState$busine27, _formState$changes$wh, _formState$changes33, _businessState$busine28, _formState$changes$sn, _formState$changes34, _businessState$busine29;
   var formState = props.formState,
     businessState = props.businessState,
     handlechangeImage = props.handlechangeImage,
     handleChangeInput = props.handleChangeInput,
     handleButtonUpdateClick = props.handleButtonUpdateClick,
     handleChangeSwtich = props.handleChangeSwtich,
-    handleChangeRibbon = props.handleChangeRibbon;
+    handleChangeRibbon = props.handleChangeRibbon,
+    handleChangeSelectedOption = props.handleChangeSelectedOption;
   var formMethods = (0, _reactHookForm.useForm)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -63,6 +64,7 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
     cropState = _useState4[0],
     setCropState = _useState4[1];
   var priceSymbol = configs === null || configs === void 0 || (_configs$format_numbe = configs.format_number_currency) === null || _configs$format_numbe === void 0 || (_configs$format_numbe = _configs$format_numbe.value) === null || _configs$format_numbe === void 0 ? void 0 : _configs$format_numbe.trim();
+  var disableReasonDictionary = (0, _utils.disableReasons)();
   var priceList = [{
     key: '1',
     value: "".concat(priceSymbol)
@@ -78,6 +80,183 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
   }, {
     key: '5',
     value: "".concat(Array(5).fill(priceSymbol).join(''))
+  }];
+  var reasonOptionList = [{
+    value: 'default',
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, {
+      padding: "0px"
+    }, /*#__PURE__*/_react.default.createElement("span", null, t('SELECT_OPTION', 'Select option'))),
+    color: 'primary',
+    disabled: true,
+    showDisable: true
+  }, {
+    value: disableReasonDictionary.SALE_DIVIATION,
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, {
+      padding: "0px"
+    }, /*#__PURE__*/_react.default.createElement("span", null, disableReasonDictionary.SALE_DIVIATION)),
+    color: 'primary'
+  }, {
+    value: disableReasonDictionary.MOTORCYCLE_FAILURE,
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, {
+      padding: "0px"
+    }, /*#__PURE__*/_react.default.createElement("span", null, disableReasonDictionary.MOTORCYCLE_FAILURE)),
+    color: 'primary'
+  }, {
+    value: disableReasonDictionary.NO_DRIVERS,
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, {
+      padding: "0px"
+    }, /*#__PURE__*/_react.default.createElement("span", null, disableReasonDictionary.NO_DRIVERS)),
+    color: 'primary'
+  }, {
+    value: disableReasonDictionary.EXCESS_ORDERS,
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, {
+      padding: "0px"
+    }, /*#__PURE__*/_react.default.createElement("span", null, disableReasonDictionary.EXCESS_ORDERS)),
+    color: 'primary'
+  }, {
+    value: disableReasonDictionary.NO_ELECTRIC_POWER,
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, {
+      padding: "0px"
+    }, /*#__PURE__*/_react.default.createElement("span", null, disableReasonDictionary.NO_ELECTRIC_POWER)),
+    color: 'primary'
+  }, {
+    value: disableReasonDictionary.NO_GAS,
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, {
+      padding: "0px"
+    }, /*#__PURE__*/_react.default.createElement("span", null, disableReasonDictionary.NO_GAS)),
+    color: 'primary'
+  }, {
+    value: disableReasonDictionary.CONECTION_FAILURE,
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, {
+      padding: "0px"
+    }, /*#__PURE__*/_react.default.createElement("span", null, disableReasonDictionary.CONECTION_FAILURE)),
+    color: 'primary'
+  }, {
+    value: disableReasonDictionary.NO_WATER,
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, {
+      padding: "0px"
+    }, /*#__PURE__*/_react.default.createElement("span", null, disableReasonDictionary.NO_WATER)),
+    color: 'primary'
+  }, {
+    value: disableReasonDictionary.SYSTEM_FAILURE,
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, {
+      padding: "0px"
+    }, /*#__PURE__*/_react.default.createElement("span", null, disableReasonDictionary.SYSTEM_FAILURE)),
+    color: 'primary'
+  }, {
+    value: disableReasonDictionary.STREETS_CLOSED,
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, {
+      padding: "0px"
+    }, /*#__PURE__*/_react.default.createElement("span", null, disableReasonDictionary.STREETS_CLOSED)),
+    color: 'primary'
+  }, {
+    value: disableReasonDictionary.NO_SERVICE,
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, {
+      padding: "0px"
+    }, /*#__PURE__*/_react.default.createElement("span", null, disableReasonDictionary.NO_SERVICE)),
+    color: 'primary'
+  }, {
+    value: disableReasonDictionary.UNSAFETY,
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, {
+      padding: "0px"
+    }, /*#__PURE__*/_react.default.createElement("span", null, disableReasonDictionary.UNSAFETY)),
+    color: 'primary'
+  }, {
+    value: disableReasonDictionary.MAINTENANCE_IN_STORE,
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, {
+      padding: "0px"
+    }, /*#__PURE__*/_react.default.createElement("span", null, disableReasonDictionary.MAINTENANCE_IN_STORE)),
+    color: 'primary'
+  }, {
+    value: disableReasonDictionary.RAINING,
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, {
+      padding: "0px"
+    }, /*#__PURE__*/_react.default.createElement("span", null, disableReasonDictionary.RAINING)),
+    color: 'primary'
+  }, {
+    value: disableReasonDictionary.STORE_EVENT,
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, {
+      padding: "0px"
+    }, /*#__PURE__*/_react.default.createElement("span", null, disableReasonDictionary.STORE_EVENT)),
+    color: 'primary'
+  }, {
+    value: disableReasonDictionary.PROBLEM_WITH_POWER,
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, {
+      padding: "0px"
+    }, /*#__PURE__*/_react.default.createElement("span", null, disableReasonDictionary.PROBLEM_WITH_POWER)),
+    color: 'primary'
+  }, {
+    value: disableReasonDictionary.DRIVER_ACCIDENT,
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, {
+      padding: "0px"
+    }, /*#__PURE__*/_react.default.createElement("span", null, disableReasonDictionary.DRIVER_ACCIDENT)),
+    color: 'primary'
+  }, {
+    value: disableReasonDictionary.MAINTENANCE_SYSTEM_IN_STORE,
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, {
+      padding: "0px"
+    }, /*#__PURE__*/_react.default.createElement("span", null, disableReasonDictionary.MAINTENANCE_SYSTEM_IN_STORE)),
+    color: 'primary'
+  }, {
+    value: disableReasonDictionary.PROBLEM_WITH_GAS,
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, {
+      padding: "0px"
+    }, /*#__PURE__*/_react.default.createElement("span", null, disableReasonDictionary.PROBLEM_WITH_GAS)),
+    color: 'primary'
+  }, {
+    value: disableReasonDictionary.ROLLER_FAILURE,
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, {
+      padding: "0px"
+    }, /*#__PURE__*/_react.default.createElement("span", null, disableReasonDictionary.ROLLER_FAILURE)),
+    color: 'primary'
+  }, {
+    value: disableReasonDictionary.WEATHER,
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, {
+      padding: "0px"
+    }, /*#__PURE__*/_react.default.createElement("span", null, disableReasonDictionary.WEATHER)),
+    color: 'primary'
+  }, {
+    value: disableReasonDictionary.GAS_LEAK,
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, {
+      padding: "0px"
+    }, /*#__PURE__*/_react.default.createElement("span", null, disableReasonDictionary.GAS_LEAK)),
+    color: 'primary'
+  }, {
+    value: disableReasonDictionary.MANIFESTATION,
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, {
+      padding: "0px"
+    }, /*#__PURE__*/_react.default.createElement("span", null, disableReasonDictionary.MANIFESTATION)),
+    color: 'primary'
+  }, {
+    value: disableReasonDictionary.LACK_OF_STAFF,
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, {
+      padding: "0px"
+    }, /*#__PURE__*/_react.default.createElement("span", null, disableReasonDictionary.LACK_OF_STAFF)),
+    color: 'primary'
+  }, {
+    value: disableReasonDictionary.MIXER_FAILURE,
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, {
+      padding: "0px"
+    }, /*#__PURE__*/_react.default.createElement("span", null, disableReasonDictionary.MIXER_FAILURE)),
+    color: 'primary'
+  }, {
+    value: disableReasonDictionary.AUTOMATICS,
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, {
+      padding: "0px"
+    }, /*#__PURE__*/_react.default.createElement("span", null, disableReasonDictionary.AUTOMATICS)),
+    color: 'primary'
+  }, {
+    value: disableReasonDictionary.PRODUCT_SHORTAGE,
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, {
+      padding: "0px"
+    }, /*#__PURE__*/_react.default.createElement("span", null, disableReasonDictionary.PRODUCT_SHORTAGE)),
+    color: 'primary'
+  }, {
+    value: disableReasonDictionary.TERMINAL_FAILURES,
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, {
+      padding: "0px"
+    }, /*#__PURE__*/_react.default.createElement("span", null, disableReasonDictionary.TERMINAL_FAILURES)),
+    color: 'primary'
   }];
   var socialOriginalURL = {
     facebook: 'https://www.facebook.com/',
@@ -341,13 +520,17 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
         });
       }
     }, /*#__PURE__*/_react.default.createElement("div", null), (formState !== null && formState !== void 0 && (_formState$changes24 = formState.changes) !== null && _formState$changes24 !== void 0 && (_formState$changes24 = _formState$changes24.ribbon) !== null && _formState$changes24 !== void 0 && _formState$changes24.shape ? (formState === null || formState === void 0 || (_formState$changes25 = formState.changes) === null || _formState$changes25 === void 0 || (_formState$changes25 = _formState$changes25.ribbon) === null || _formState$changes25 === void 0 ? void 0 : _formState$changes25.shape) === _utils.shape[key] : (businessState === null || businessState === void 0 || (_businessState$busine19 = businessState.business) === null || _businessState$busine19 === void 0 || (_businessState$busine19 = _businessState$busine19.ribbon) === null || _businessState$busine19 === void 0 ? void 0 : _businessState$busine19.shape) === _utils.shape[key]) ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null));
-  }))))), (businessState === null || businessState === void 0 || (_businessState$busine20 = businessState.business) === null || _businessState$busine20 === void 0 ? void 0 : _businessState$busine20.enabled) === false && /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('DISABLED_REASON', 'Disabled reason'), " ", /*#__PURE__*/_react.default.createElement("span", null, "(", t('MAX_60_CHAR', 'Max 60 Characters'), ")")), /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    name: "disabled_reason",
-    defaultValue: (_formState$changes$di = formState === null || formState === void 0 || (_formState$changes26 = formState.changes) === null || _formState$changes26 === void 0 ? void 0 : _formState$changes26.disabled_reason) !== null && _formState$changes$di !== void 0 ? _formState$changes$di : businessState === null || businessState === void 0 || (_businessState$busine21 = businessState.business) === null || _businessState$busine21 === void 0 ? void 0 : _businessState$busine21.disabled_reason,
-    onChange: handleChangeInput,
-    disabled: formState.loading,
-    autoComplete: "off",
-    maxLength: 60
+  }))))), (businessState === null || businessState === void 0 || (_businessState$busine20 = businessState.business) === null || _businessState$busine20 === void 0 ? void 0 : _businessState$busine20.enabled) === false && /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('DISABLED_REASON', 'Disabled reason')), /*#__PURE__*/_react.default.createElement(_styles.SecondSelect, {
+    defaultValue: (_ref = (_formState$changes$di = formState === null || formState === void 0 || (_formState$changes26 = formState.changes) === null || _formState$changes26 === void 0 ? void 0 : _formState$changes26.disabled_reason) !== null && _formState$changes$di !== void 0 ? _formState$changes$di : businessState === null || businessState === void 0 || (_businessState$busine21 = businessState.business) === null || _businessState$busine21 === void 0 ? void 0 : _businessState$busine21.disabled_reason) !== null && _ref !== void 0 ? _ref : 'default',
+    options: reasonOptionList,
+    optionInnerMaxHeight: "200px",
+    onChange: function onChange(value) {
+      return handleChangeSelectedOption('disabled_reason', value);
+    }
+    // isShowSearchBar
+    // searchBarPlaceholder={t('SEARCH', 'Search')}
+    // searchValue={searchValue}
+    // handleChangeSearch={handleSearch}
   })), /*#__PURE__*/_react.default.createElement(_styles2.PriceFilterWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('PRICE_FILTER', 'Price filter')), /*#__PURE__*/_react.default.createElement(_styles2.PriceFilterListWrapper, null, priceList.map(function (item, i) {
     var _formState$changes$pr, _formState$changes27, _businessState$busine22, _formState$changes$pr2, _formState$changes28, _businessState$busine23;
     return /*#__PURE__*/_react.default.createElement(_styles2.PriceFilterItem, {
