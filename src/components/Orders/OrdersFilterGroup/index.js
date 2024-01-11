@@ -14,6 +14,7 @@ import { PaymethodTypeSelector } from '../PaymethodTypeSelector'
 import { CountryFilter } from '../CountryFilter'
 import { Button, IconButton, Input, LinkButton } from '../../../styles'
 import { CurrencyFilter } from '../CurrencyFilter'
+import { AdminsSelector } from '../AdminsSelector'
 import { getUniqueId } from '../../../utils'
 import { Select } from '../../../styles/Select/FirstSelect'
 import { useFilterValues } from '../../../contexts/FilterValuesContext'
@@ -44,6 +45,7 @@ const OrdersFilterGroupUI = (props) => {
     paymethodsList,
     businessesList,
     citiesList,
+    adminsList,
     handleChangeGroup,
     handleChangeDateType,
     handleChangeFromDate,
@@ -61,6 +63,7 @@ const OrdersFilterGroupUI = (props) => {
     handleChangeCurrency,
     handleChangeMetaFieldValue,
     handleAddMetaField,
+    handleChangeAdmin,
     handleDeleteMetafield,
     handleChangeExternalId,
     handleChangeChildFilterValue,
@@ -329,6 +332,13 @@ const OrdersFilterGroupUI = (props) => {
                 onChange={(value) => handleChangeChildFilterValue({ assigned: value })}
               />
             </SelectWrapper>
+          </WrapperRow>
+          <WrapperRow>
+            <AdminsSelector
+              filterValues={filterValues}
+              adminsList={adminsList}
+              handleChangeAdmin={handleChangeAdmin}
+            />
           </WrapperRow>
           {filterValues?.metafield.map(item => (
             <WrapperRow key={item.id}>
