@@ -430,7 +430,12 @@ export const OrdersFilterGroup = (props) => {
   const [savedFilterValues, setSavedFilterValues] = useState(filterValues)
 
   useEffect(() => {
-    setSavedFilterValues(filterValues)
+    if  (filterValues && !filterValues.administratorIds){
+      setSavedFilterValues({ ...filterValues, administratorIds:[] })
+    }
+    else{
+      setSavedFilterValues(filterValues)
+    }
   }, [filterValues])
 
   const FilterControlProps = {
