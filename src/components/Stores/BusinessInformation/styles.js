@@ -369,3 +369,45 @@ export const SocialItemContent = styled.div`
     border-radius: 8px;
   }
 `
+export const Option = styled.div`
+  display: flex;
+  align-items: center;
+  color: ${props => props.theme.colors?.headingColor};
+  padding: ${({ padding }) => padding || '5px 10px'};
+  white-space: nowrap;
+  ${({ isPhoneView }) => isPhoneView && css`
+    width: 100%;
+  `}
+  ${({ isRemove }) => isRemove && css`
+    color: ${props => props.theme.colors.danger};
+    padding: 3px 10px;
+    font-size: 14px;
+  `}
+
+  img {
+    width: 45px;
+    border-radius: 8px;
+  }
+
+  ${({ small }) => small && css`
+    padding: ${({ padding }) => padding || '5px 0px'};
+    img {
+      width: 25px;
+    }
+  `}
+
+  span {
+    font-size: 14px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 350px;
+  }
+
+  @media (max-width: 576px) {
+    padding: ${({ padding }) => padding || '5px 0px'};
+    span {
+      max-width: 280px;
+    }
+  }
+`
