@@ -38,39 +38,49 @@ var OrdersHeaderFilterGroupUI = function OrdersHeaderFilterGroupUI(props) {
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 1),
     dictionary = _useLanguage2[0].dictionary;
-  var _useState = (0, _react.useState)(false),
-    _useState2 = _slicedToArray(_useState, 2),
-    isShow = _useState2[0],
-    setIsShow = _useState2[1];
-  var metafieldRef = (0, _react.useRef)();
+  var wrapperRef = (0, _react.useRef)(null);
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     _useConfig2$ = _useConfig2[0],
     configs = _useConfig2$.configs,
     loading = _useConfig2$.loading;
+  var _useState = (0, _react.useState)({
+      width: null,
+      height: null
+    }),
+    _useState2 = _slicedToArray(_useState, 2),
+    wrapperSize = _useState2[0],
+    setWrapperSize = _useState2[1];
   var configFilter = (configs === null || configs === void 0 || (_configs$filter_order = configs.filter_order_options) === null || _configs$filter_order === void 0 ? void 0 : _configs$filter_order.value.split('|').map(function (value) {
     return value;
   })) || [];
-  var handleClickOutside = function handleClickOutside(e) {
-    var _metafieldRef$current;
-    if (!isShow) return;
-    var outsideCalendar = !((_metafieldRef$current = metafieldRef.current) !== null && _metafieldRef$current !== void 0 && _metafieldRef$current.contains(e.target));
-    if (outsideCalendar) {
-      setIsShow(false);
-    }
-  };
   (0, _react.useEffect)(function () {
-    window.addEventListener('mouseup', handleClickOutside);
-    return function () {
-      return window.removeEventListener('mouseup', handleClickOutside);
+    var handleResize = function handleResize() {
+      if (wrapperRef !== null && wrapperRef !== void 0 && wrapperRef.current) {
+        var _wrapperRef$current, _wrapperRef$current2;
+        var divWidth = wrapperRef === null || wrapperRef === void 0 || (_wrapperRef$current = wrapperRef.current) === null || _wrapperRef$current === void 0 ? void 0 : _wrapperRef$current.offsetWidth;
+        var divHeight = wrapperRef === null || wrapperRef === void 0 || (_wrapperRef$current2 = wrapperRef.current) === null || _wrapperRef$current2 === void 0 ? void 0 : _wrapperRef$current2.offsetHeight;
+        setWrapperSize({
+          width: divWidth,
+          height: divHeight
+        });
+      }
     };
-  }, [isShow]);
+    window.addEventListener('resize', handleResize);
+    handleResize();
+    return function () {
+      return window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   (0, _react.useEffect)(function () {
     if (Object.keys(filterValues).length > 0) {
       handleChangeFilterValues(filterValues);
     }
   }, [filterValues]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, !loading && configFilter.includes('external_id') && /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, {
+    ref: wrapperRef,
+    wrapperWidth: wrapperSize.width
+  }, !loading && configFilter.includes('external_id') && /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
     placeholder: (_dictionary$EXTERNAL_ = dictionary === null || dictionary === void 0 ? void 0 : dictionary.EXTERNAL_ID) !== null && _dictionary$EXTERNAL_ !== void 0 ? _dictionary$EXTERNAL_ : 'External Id',
     onChange: handleChangeExternalId,
     search: (filterValues === null || filterValues === void 0 ? void 0 : filterValues.externalId) || '',
@@ -84,7 +94,8 @@ var OrdersHeaderFilterGroupUI = function OrdersHeaderFilterGroupUI(props) {
           value: value
         }
       });
-    }
+    },
+    customClass: "external_id"
   }), !loading && configFilter.includes('driver') && /*#__PURE__*/_react.default.createElement(_DriverMultiSelector.DriverMultiSelector, {
     drivers: driversList.drivers,
     filterValues: filterValues,
