@@ -21,23 +21,27 @@ const OrdersHeaderFilterGroupUI = (props) => {
   } = props
 
   const [{ dictionary }] = useLanguage()
-  const [isShow, setIsShow] = useState(false)
-  const metafieldRef = useRef()
+  const wrapperRef = useRef(null)
   const [{ configs, loading }] = useConfig()
+  const [wrapperSize, setWrapperSize] = useState({ width: null, height: null })
+
   const configFilter = configs?.filter_order_options?.value.split('|').map(value => (value)) || []
 
-  const handleClickOutside = (e) => {
-    if (!isShow) return
-    const outsideCalendar = !metafieldRef.current?.contains(e.target)
-    if (outsideCalendar) {
-      setIsShow(false)
-    }
-  }
-
   useEffect(() => {
-    window.addEventListener('mouseup', handleClickOutside)
-    return () => window.removeEventListener('mouseup', handleClickOutside)
-  }, [isShow])
+    const handleResize = () => {
+      if (wrapperRef?.current) {
+        const divWidth = wrapperRef?.current?.offsetWidth
+        const divHeight = wrapperRef?.current?.offsetHeight
+        setWrapperSize({ width: divWidth, height: divHeight })
+      }
+    }
+
+    window.addEventListener('resize', handleResize)
+
+    handleResize()
+
+    return () => (window.removeEventListener('resize', handleResize))
+  }, [])
 
   useEffect(() => {
     if (Object.keys(filterValues).length > 0) {
@@ -47,7 +51,7 @@ const OrdersHeaderFilterGroupUI = (props) => {
 
   return (
     <>
-      <WrapperRow>
+      <WrapperRow ref={wrapperRef} wrapperWidth={wrapperSize.width}>
         {!loading && configFilter.includes('external_id') && (
           <SearchBar
             placeholder={dictionary?.EXTERNAL_ID ?? 'External Id'}
@@ -58,6 +62,7 @@ const OrdersHeaderFilterGroupUI = (props) => {
             lazyLoad
             CustomInput={Input}
             onSearch={(value) => handleChangeExternalId({ target: { value } })}
+            customClass='external_id'
           />
         )}
         {!loading && configFilter.includes('driver') && (
