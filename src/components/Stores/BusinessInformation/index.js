@@ -94,6 +94,11 @@ const BusinessInformationUI = (props) => {
       color: 'primary'
     },
     {
+      value: disableReasonDictionary.OVEN_FAILURE,
+      content: <Option padding='0px'><span>{disableReasonDictionary.OVEN_FAILURE}</span></Option>,
+      color: 'primary'
+    },
+    {
       value: disableReasonDictionary.NO_ELECTRIC_POWER,
       content: <Option padding='0px'><span>{disableReasonDictionary.NO_ELECTRIC_POWER}</span></Option>,
       color: 'primary'
