@@ -114,6 +114,12 @@ var BusinessInformationUI = function BusinessInformationUI(props) {
     }, /*#__PURE__*/_react.default.createElement("span", null, disableReasonDictionary.EXCESS_ORDERS)),
     color: 'primary'
   }, {
+    value: disableReasonDictionary.OVEN_FAILURE,
+    content: /*#__PURE__*/_react.default.createElement(_styles2.Option, {
+      padding: "0px"
+    }, /*#__PURE__*/_react.default.createElement("span", null, disableReasonDictionary.OVEN_FAILURE)),
+    color: 'primary'
+  }, {
     value: disableReasonDictionary.NO_ELECTRIC_POWER,
     content: /*#__PURE__*/_react.default.createElement(_styles2.Option, {
       padding: "0px"
