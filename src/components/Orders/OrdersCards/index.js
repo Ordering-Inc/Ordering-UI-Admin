@@ -56,6 +56,11 @@ export const OrdersCards = (props) => {
     return imageKeys
   }, {})
 
+  const filterOptions = (configState?.configs?.filter_order_options?.value.split('|').map(value => value) || [])
+  const optionsToCheck = ['external_id', 'driver', 'driver_group_general']
+
+  const matchingFilterOptions = filterOptions.filter(option => optionsToCheck.includes(option)).length
+
   const handleChangePage = (page) => {
     getPageOrders(pagination.pageSize, page)
   }
@@ -180,7 +185,7 @@ export const OrdersCards = (props) => {
 
   return (
     <>
-      <OrdersListContainer>
+      <OrdersListContainer matchingFilterOptions={matchingFilterOptions}>
         {orderList.loading ? (
           [...Array(10).keys()].map(i => (
             <OrderCard key={i}>

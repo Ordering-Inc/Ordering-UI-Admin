@@ -4,13 +4,15 @@ export const WrapperRow = styled.div`
   display: flex;
   width: 100% !important;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding-top: 10px;
   padding-bottom: 0px;
 
   & > div {
     width: 100%;
     height: 47px;
+    max-width: 1000px;
+    margin-right: 10px;
     margin-bottom: 20px;
     background-color: ${props => props.theme.colors.secundary};
     border: none;
@@ -45,16 +47,24 @@ export const WrapperRow = styled.div`
     -moz-appearance: textfield;
   }
 
+  .close {
+    right: 8px;
+  }
+
+  .external_id {
+    @media (max-width: 1200px) {
+    flex: auto;
+  }
+
+  }
+
   @media (min-width: 992px) {
     flex-direction: row;
-    & > div {
-      width: 48%;
-    }
-
-    > input {
-      width: 48%;
-    }
   }
+
+  ${({ wrapperWidth }) => wrapperWidth < 992 && css`
+      flex-direction: column !important;
+  `}
 `
 export const Option = styled.div`
   font-weight: 400;

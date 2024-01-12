@@ -1,13 +1,33 @@
 import styled, { css } from 'styled-components'
 
+const calculateHeight = (matchingFilterOptions, customMappings) => {
+  const defaultMapping = {
+    3: 'calc(100% - 380px)',
+    2: 'calc(100% - 320px)',
+    1: 'calc(100% - 250px)',
+    default: 'calc(100% - 200px)'
+  }
+
+  const mappings = { ...defaultMapping, ...customMappings }
+
+  return mappings[matchingFilterOptions] || mappings.default
+}
+
 export const OrdersListContainer = styled.div`
-  height: calc(100% - 200px);
+  height: ${({ matchingFilterOptions }) => calculateHeight(matchingFilterOptions)};
   padding: 0 12px 15px 12px;
   box-sizing: border-box;
   overflow-x: hidden;
 
   @media (min-width: 1024px) and (max-width: 1300px) {
-    height: calc(100% - 230px);
+    height: ${({ matchingFilterOptions }) =>
+      calculateHeight(matchingFilterOptions, {
+        3: 'calc(100% - 400px)',
+        2: 'calc(100% - 340px)',
+        1: 'calc(100% - 270px)',
+        default: 'calc(100% - 230px)'
+      }
+    )};
   }
 `
 export const OrderNunberContainer = styled.div`

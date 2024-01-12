@@ -55,11 +55,11 @@ export const DeliveryDashboard = (props) => {
   return (
     <DeliveryDashboardContainer>
       <OrdersContainer>
-         <OrdersHeaderFilterGroup
-            driverGroupList={driverGroupList}
-            driversList={driversList}
-            handleChangeFilterValues={handleChangeFilterValues}
-          />
+        <OrdersHeaderFilterGroup
+          driverGroupList={driverGroupList}
+          driversList={driversList}
+          handleChangeFilterValues={handleChangeFilterValues}
+        />
         <FilterContainer>
           <OrderStatusFilterBar
             isUseQuery={isUseQuery}
