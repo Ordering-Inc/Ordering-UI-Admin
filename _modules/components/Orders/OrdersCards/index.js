@@ -78,9 +78,13 @@ var OrdersCards = function OrdersCards(props) {
     imageKeys[franchise.id] = franchise.logo;
     return imageKeys;
   }, {}));
-  var isShowFiltersOptions = ((configState === null || configState === void 0 || (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 || (_configState$configs2 = _configState$configs2.filter_order_options) === null || _configState$configs2 === void 0 ? void 0 : _configState$configs2.value.split('|').map(function (value) {
+  var filterOptions = (configState === null || configState === void 0 || (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 || (_configState$configs2 = _configState$configs2.filter_order_options) === null || _configState$configs2 === void 0 ? void 0 : _configState$configs2.value.split('|').map(function (value) {
     return value;
-  })) || []).length > 0;
+  })) || [];
+  var optionsToCheck = ['external_id', 'driver', 'driver_group_general'];
+  var matchingFilterOptions = filterOptions.filter(function (option) {
+    return optionsToCheck.includes(option);
+  }).length;
   var handleChangePage = function handleChangePage(page) {
     getPageOrders(pagination.pageSize, page);
   };
@@ -198,7 +202,7 @@ var OrdersCards = function OrdersCards(props) {
     });
   }, [pagination === null || pagination === void 0 ? void 0 : pagination.currentPage, pagination === null || pagination === void 0 ? void 0 : pagination.pageSize, pagination === null || pagination === void 0 ? void 0 : pagination.total]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OrdersListContainer, {
-    isShowFiltersOptions: isShowFiltersOptions
+    matchingFilterOptions: matchingFilterOptions
   }, orderList.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles.OrderCard, {
       key: i
