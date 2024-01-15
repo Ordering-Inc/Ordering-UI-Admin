@@ -31,6 +31,7 @@ const OrdersManagerUI = (props) => {
     paymethodsList,
     businessesList,
     citiesList,
+    adminsList,
     ordersStatusGroup,
     filterValues,
     deletedOrderIds,
@@ -183,6 +184,7 @@ const OrdersManagerUI = (props) => {
           citiesList={citiesList}
           paymethodsList={paymethodsList}
           businessesList={businessesList}
+          adminsList={adminsList}
           handleChangeSearch={handleChangeSearch}
           handleChangeFilterValues={handleChangeFilterValues}
           selectedOrderIds={selectedOrderIds}
