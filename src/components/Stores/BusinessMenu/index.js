@@ -161,14 +161,14 @@ const BusinessMenuUI = (props) => {
             {t('SELECT_NONE', 'Select none')}
           </Button>
         </SelectButtonGroup> */}
-        {businessMenusState.loading && (
+        {businessMenusState?.loading && (
           [...Array(4).keys()].map(i => (
             <MeunItem key={i}>
               <Skeleton width={120} height={24} />
             </MeunItem>
           ))
         )}
-        {!businessMenusState.loading && menuList.map((menu, index) => (
+        {!businessMenusState?.loading && menuList.map((menu, index) => (
           <MeunItem
             key={menu.id}
             isBorderTop={index === 0}
@@ -191,7 +191,7 @@ const BusinessMenuUI = (props) => {
           <AddMenuButtonWrapper>
             <LinkButton
               onClick={() => handleOpenOptions('option', {})}
-              disabled={businessMenusState.loading}
+              disabled={businessMenusState?.loading}
             >
               {t('ADD_MENU', 'Add menu')}
             </LinkButton>
