@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
+import Skeleton from 'react-loading-skeleton'
 import { useLanguage, BusinessMenu as BusinessMenuController } from 'ordering-components-admin'
 import { BusinessMenuOptions } from '../BusinessMenuOptions'
 import { Confirm, Modal, SearchBar } from '../../Shared'
@@ -160,8 +161,14 @@ const BusinessMenuUI = (props) => {
             {t('SELECT_NONE', 'Select none')}
           </Button>
         </SelectButtonGroup> */}
-
-        {menuList.map((menu, index) => (
+        {businessMenusState.loading && (
+          [...Array(4).keys()].map(i => (
+            <MeunItem key={i}>
+              <Skeleton width={120} height={24} />
+            </MeunItem>
+          ))
+        )}
+        {!businessMenusState.loading && menuList.map((menu, index) => (
           <MeunItem
             key={menu.id}
             isBorderTop={index === 0}
@@ -184,6 +191,7 @@ const BusinessMenuUI = (props) => {
           <AddMenuButtonWrapper>
             <LinkButton
               onClick={() => handleOpenOptions('option', {})}
+              disabled={businessMenusState.loading}
             >
               {t('ADD_MENU', 'Add menu')}
             </LinkButton>
