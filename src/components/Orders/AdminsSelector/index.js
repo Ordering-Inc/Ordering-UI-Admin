@@ -28,6 +28,8 @@ export const AdminsSelector = (props) => {
   const [adminsMultiOptionList, setAdminsMultiOptionList] = useState([])
   const [searchValue, setSearchValue] = useState(null)
   const adminsLoading = [{ value: 'default', content: <Option small={small}>{t('LOADING', 'loading')}...</Option> }]
+  const Placeholder = <PlaceholderTitle>{t('SELECT_ADMINISTRATOR', 'Select the administrator')}</PlaceholderTitle>
+
   useEffect(() => {
     const _adminsOptionList = [
       {
@@ -71,8 +73,6 @@ export const AdminsSelector = (props) => {
     }
   }, [adminsList, defaultValue, searchValue])
 
-  const Placeholder = <PlaceholderTitle>{t('SELECT_ADMINISTRATOR', 'Select the administrator')}</PlaceholderTitle>
-
   return (
     <>
       {adminsList && !adminsList.loading ? (
@@ -107,20 +107,3 @@ export const AdminsSelector = (props) => {
   )
 }
 
-// export const AdminsSelector = (props) => {
-//   const AdminsSelectorProps = {
-//     ...props,
-//     UIComponent: AdminsSelectorUI,
-//     propsToFetch: [
-//       'name', 'lastname', 'email', 'phone', 'photo', 'cellphone', 'schedule', 'external_id',
-//       'country_phone_code', 'city_id', 'city', 'address', 'addresses', 'max_days_in_future', 'push_tokens',
-//       'address_notes', 'driver_zone_restriction', 'mono_session', 'dropdown_option_id', 'dropdown_option', 'location', 'available',
-//       'zipcode', 'level', 'enabled', 'middle_name', 'second_lastname', 'birthdate', 'drivergroups', 'created_at', 'timezone', 'busy'
-//     ]
-//   }
-//   return (
-//     <>
-//       <DriversController {...AdminsSelectorProps} />
-//     </>
-//   )
-// }
