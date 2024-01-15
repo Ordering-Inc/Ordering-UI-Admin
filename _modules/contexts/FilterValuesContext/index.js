@@ -54,7 +54,8 @@ var FilterValuesProvider = function FilterValuesProvider(_ref) {
       customerCellphone: null,
       customerLastname: null,
       coupon: null,
-      offerId: null
+      offerId: null,
+      administratorIds: []
     }),
     _useState2 = _slicedToArray(_useState, 2),
     filterValues = _useState2[0],
