@@ -16,7 +16,7 @@ var WrapperRow = _styledComponents.default.div(_templateObject || (_templateObje
   return props.theme.colors.headingColor;
 }, function (_ref) {
   var wrapperWidth = _ref.wrapperWidth;
-  return wrapperWidth < 992 && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n      flex-direction: column !important;\n  "])));
+  return wrapperWidth < 992 && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n      flex-direction: column !important;\n      padding: 15px 10px 0 10px;\n  "])));
 });
 exports.WrapperRow = WrapperRow;
 var Option = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  font-weight: 400;\n  font-size: 14px;\n  line-height: 24px;\n  color: ", ";\n  display: flex;\n  align-items: center;\n  padding: 5px;\n"])), function (props) {
