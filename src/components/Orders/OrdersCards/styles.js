@@ -2,9 +2,9 @@ import styled, { css } from 'styled-components'
 
 const calculateHeight = (matchingFilterOptions, customMappings) => {
   const defaultMapping = {
-    3: 'calc(100% - 380px)',
-    2: 'calc(100% - 320px)',
-    1: 'calc(100% - 250px)',
+    3: 'calc(100% - 410px)',
+    2: 'calc(100% - 350px)',
+    1: 'calc(100% - 280px)',
     default: 'calc(100% - 200px)'
   }
 
