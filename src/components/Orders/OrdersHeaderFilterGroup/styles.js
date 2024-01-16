@@ -64,6 +64,7 @@ export const WrapperRow = styled.div`
 
   ${({ wrapperWidth }) => wrapperWidth < 992 && css`
       flex-direction: column !important;
+      padding: 15px 10px 0 10px;
   `}
 `
 export const Option = styled.div`
