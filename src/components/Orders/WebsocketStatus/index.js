@@ -48,7 +48,7 @@ const SocketStatusUI = (props) => {
   }, [reconnectAttemptCount])
 
   return (
-    <Contatiner>
+    <Contatiner className='websocket-container'>
       <InfoWrapper>
         <IconButton
           color='primary'
