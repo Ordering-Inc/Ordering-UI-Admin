@@ -94,6 +94,10 @@ var DriversTimeDisplayUI = function DriversTimeDisplayUI(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     scheduleOptions = _useState4[0],
     setScheduleOptions = _useState4[1];
+  var _useState5 = (0, _react.useState)([]),
+    _useState6 = _slicedToArray(_useState5, 2),
+    scheduleOptionValues = _useState6[0],
+    setScheduleOptionValues = _useState6[1];
   var rule = ruleState !== null && ruleState !== void 0 && ruleState.freq ? new _rrule.RRule(ruleState).toString() : null;
   var isEnabledAppointmentsFeature = configs === null || configs === void 0 || (_configs$appointments = configs.appointments) === null || _configs$appointments === void 0 ? void 0 : _configs$appointments.value;
   var is12Hours = configs === null || configs === void 0 || (_configs$general_hour = configs.general_hour_format) === null || _configs$general_hour === void 0 || (_configs$general_hour = _configs$general_hour.value) === null || _configs$general_hour === void 0 ? void 0 : _configs$general_hour.includes('hh:mm');
@@ -260,6 +264,9 @@ var DriversTimeDisplayUI = function DriversTimeDisplayUI(props) {
         content: /*#__PURE__*/_react.default.createElement(_styles2.TimeOptions, null, is12Hours ? "".concat((0, _moment.default)(selectedBlock === null || selectedBlock === void 0 || (_selectedBlock$block13 = selectedBlock.block) === null || _selectedBlock$block13 === void 0 ? void 0 : _selectedBlock$block13.start).format('hh:mm A')) : "".concat((0, _moment.default)(selectedBlock === null || selectedBlock === void 0 || (_selectedBlock$block14 = selectedBlock.block) === null || _selectedBlock$block14 === void 0 ? void 0 : _selectedBlock$block14.start).format('HH : mm')))
       });
     }
+    setScheduleOptionValues(_scheduleOptions.map(function (option) {
+      return option === null || option === void 0 ? void 0 : option.value;
+    }));
     setScheduleOptions(_scheduleOptions);
   };
   (0, _react.useEffect)(function () {
@@ -278,10 +285,10 @@ var DriversTimeDisplayUI = function DriversTimeDisplayUI(props) {
           return (option === null || option === void 0 ? void 0 : option.name) === 'break_start';
         })) === null || _scheduleOptions$find4 === void 0 ? void 0 : _scheduleOptions$find4.value) !== null && _scheduleOptions$find3 !== void 0 ? _scheduleOptions$find3 : (_scheduleOptions$2 = scheduleOptions[0]) === null || _scheduleOptions$2 === void 0 ? void 0 : _scheduleOptions$2.value, ":00");
       }
-      if (!(scheduleState !== null && scheduleState !== void 0 && (_scheduleState$block = scheduleState.block) !== null && _scheduleState$block !== void 0 && _scheduleState$block.end)) {
+      if (!(scheduleState !== null && scheduleState !== void 0 && (_scheduleState$block = scheduleState.block) !== null && _scheduleState$block !== void 0 && _scheduleState$block.end) && !selectedBlock) {
         state.end = "".concat(date, " 23:59:00");
       }
-      if (!(scheduleState !== null && scheduleState !== void 0 && (_scheduleState$block2 = scheduleState.block) !== null && _scheduleState$block2 !== void 0 && _scheduleState$block2.rrule)) {
+      if (!(scheduleState !== null && scheduleState !== void 0 && (_scheduleState$block2 = scheduleState.block) !== null && _scheduleState$block2 !== void 0 && _scheduleState$block2.rrule) && !selectedBlock) {
         delete state.until;
       }
       setScheduleState(_objectSpread(_objectSpread({}, scheduleState), {}, {
@@ -290,7 +297,7 @@ var DriversTimeDisplayUI = function DriversTimeDisplayUI(props) {
         error: null
       }));
     }
-  }, [scheduleOptions === null || scheduleOptions === void 0 ? void 0 : scheduleOptions.length, selectedDate, showBreakBlock, selectedBlock, date]);
+  }, [JSON.stringify(scheduleOptions), selectedDate, showBreakBlock, selectedBlock, date]);
   (0, _react.useEffect)(function () {
     if (!(isTimeChangeError !== null && isTimeChangeError !== void 0 && isTimeChangeError.state)) return;
     setAlertState({
@@ -343,10 +350,12 @@ var DriversTimeDisplayUI = function DriversTimeDisplayUI(props) {
         end: _block.end
       }
     }));
+    !_block && generateHourList();
     setOpenModal(true);
   };
   var onCloseModal = function onCloseModal() {
     setOpenModal(false);
+    setScheduleOptionValues([]);
     handleSetInitialStates();
   };
   var handleCloseSecondModal = function handleCloseSecondModal() {
@@ -408,7 +417,8 @@ var DriversTimeDisplayUI = function DriversTimeDisplayUI(props) {
     setOpenDeleteModal: setOpenDeleteModal,
     handleAddBlockTime: handleAddBlockTime,
     handleChangeScheduleTime: handleChangeScheduleTime,
-    onCloseModal: onCloseModal
+    onCloseModal: onCloseModal,
+    scheduleOptionValues: scheduleOptionValues
   })), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "500px",
     height: "40vh",

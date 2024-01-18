@@ -13,6 +13,7 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 var _dist = require("react-bootstrap-icons/dist");
 var _reactDatepicker = _interopRequireDefault(require("react-datepicker"));
 var _styles2 = require("./styles");
+var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -30,7 +31,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var DriverBlockAddFormUI = function DriverBlockAddFormUI(props) {
-  var _scheduleState$state, _scheduleState$state2, _scheduleState$state3, _scheduleState$state$, _scheduleState$state4, _scheduleState$state$2, _scheduleState$state5, _scheduleState$state$3, _scheduleState$state6, _scheduleState$state$4, _scheduleState$state7, _scheduleState$state8;
+  var _scheduleState$state, _scheduleState$state2, _scheduleState$state3, _scheduleState$state$, _scheduleState$state4, _scheduleState$state$2, _scheduleState$state5, _scheduleState$state$3, _scheduleState$state6, _scheduleState$state$4, _scheduleState$state7, _scheduleState$state$5, _scheduleState$state8, _scheduleState$state$6, _scheduleState$state9, _scheduleState$state$7, _scheduleState$state10, _scheduleState$state$8, _scheduleState$state11, _scheduleState$state$9, _scheduleState$state12, _scheduleState$state13;
   var scheduleOptions = props.scheduleOptions,
     selectedBlock = props.selectedBlock,
     handleChangeScheduleTime = props.handleChangeScheduleTime,
@@ -49,7 +50,8 @@ var DriverBlockAddFormUI = function DriverBlockAddFormUI(props) {
     setShowBreakBlock = props.setShowBreakBlock,
     showBreakBlock = props.showBreakBlock,
     handleUntilDate = props.handleUntilDate,
-    setOpenEditModal = props.setOpenEditModal;
+    setOpenEditModal = props.setOpenEditModal,
+    scheduleOptionValues = props.scheduleOptionValues;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -113,47 +115,59 @@ var DriverBlockAddFormUI = function DriverBlockAddFormUI(props) {
       return setShowBreakBlock(enabled);
     },
     disabled: showBreakBlock && isEdit
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.SelectsWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.SelectTitleWrappre, null, /*#__PURE__*/_react.default.createElement(_styles2.SelectTitle, null, t('START_BLOCK_DATE', 'Start block date:')), /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.SelectsWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.SelectTitleWrappre, null, /*#__PURE__*/_react.default.createElement(_styles2.SelectTitle, null, t('START_BLOCK_DATE', 'Start block date:')), scheduleOptionValues.includes(getHourOrMinute((_scheduleState$state$ = scheduleState === null || scheduleState === void 0 || (_scheduleState$state4 = scheduleState.state) === null || _scheduleState$state4 === void 0 ? void 0 : _scheduleState$state4.start) !== null && _scheduleState$state$ !== void 0 ? _scheduleState$state$ : selectedBlock === null || selectedBlock === void 0 ? void 0 : selectedBlock.start, true)) ? /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
     noSelected: true,
     options: scheduleOptions.filter(function (option) {
       return !['break_start', 'end', 'break_end'].includes(option === null || option === void 0 ? void 0 : option.name);
     }),
-    defaultValue: getHourOrMinute((_scheduleState$state$ = scheduleState === null || scheduleState === void 0 || (_scheduleState$state4 = scheduleState.state) === null || _scheduleState$state4 === void 0 ? void 0 : _scheduleState$state4.start) !== null && _scheduleState$state$ !== void 0 ? _scheduleState$state$ : selectedBlock === null || selectedBlock === void 0 ? void 0 : selectedBlock.start, true),
+    defaultValue: getHourOrMinute((_scheduleState$state$2 = scheduleState === null || scheduleState === void 0 || (_scheduleState$state5 = scheduleState.state) === null || _scheduleState$state5 === void 0 ? void 0 : _scheduleState$state5.start) !== null && _scheduleState$state$2 !== void 0 ? _scheduleState$state$2 : selectedBlock === null || selectedBlock === void 0 ? void 0 : selectedBlock.start, true),
     onChange: function onChange(val) {
       return handleChangeScheduleTime(val, true);
     },
     optionInnerMaxHeight: "300px"
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.SelectTitleWrappre, null, /*#__PURE__*/_react.default.createElement(_styles2.SelectTitle, null, t('END_BLOCK_DATE', 'End block date:')), /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
+  })) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 34,
+    width: 95
+  })), /*#__PURE__*/_react.default.createElement(_styles2.SelectTitleWrappre, null, /*#__PURE__*/_react.default.createElement(_styles2.SelectTitle, null, t('END_BLOCK_DATE', 'End block date:')), scheduleOptionValues.includes(getHourOrMinute((_scheduleState$state$3 = scheduleState === null || scheduleState === void 0 || (_scheduleState$state6 = scheduleState.state) === null || _scheduleState$state6 === void 0 ? void 0 : _scheduleState$state6.end) !== null && _scheduleState$state$3 !== void 0 ? _scheduleState$state$3 : selectedBlock === null || selectedBlock === void 0 ? void 0 : selectedBlock.end, true)) ? /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
     noSelected: true,
     options: scheduleOptions.filter(function (option) {
       return !['break_start', 'start', 'break_end'].includes(option === null || option === void 0 ? void 0 : option.name);
     }),
-    defaultValue: getHourOrMinute((_scheduleState$state$2 = scheduleState === null || scheduleState === void 0 || (_scheduleState$state5 = scheduleState.state) === null || _scheduleState$state5 === void 0 ? void 0 : _scheduleState$state5.end) !== null && _scheduleState$state$2 !== void 0 ? _scheduleState$state$2 : selectedBlock === null || selectedBlock === void 0 ? void 0 : selectedBlock.end),
+    defaultValue: getHourOrMinute((_scheduleState$state$4 = scheduleState === null || scheduleState === void 0 || (_scheduleState$state7 = scheduleState.state) === null || _scheduleState$state7 === void 0 ? void 0 : _scheduleState$state7.end) !== null && _scheduleState$state$4 !== void 0 ? _scheduleState$state$4 : selectedBlock === null || selectedBlock === void 0 ? void 0 : selectedBlock.end),
     onChange: function onChange(val) {
       return handleChangeScheduleTime(val, false);
     },
     optionInnerMaxHeight: "300px"
-  }))), showBreakBlock && /*#__PURE__*/_react.default.createElement(_styles2.SelectTitleWrappre, null, /*#__PURE__*/_react.default.createElement(_styles2.SelectTitle, null, t('START_BREAK_BLOCK_DATE', 'Start break block date:')), /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
+  })) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 34,
+    width: 95
+  })), showBreakBlock && /*#__PURE__*/_react.default.createElement(_styles2.SelectTitleWrappre, null, /*#__PURE__*/_react.default.createElement(_styles2.SelectTitle, null, t('START_BREAK_BLOCK_DATE', 'Start break block date:')), scheduleOptionValues.includes(getHourOrMinute((_scheduleState$state$5 = scheduleState === null || scheduleState === void 0 || (_scheduleState$state8 = scheduleState.state) === null || _scheduleState$state8 === void 0 ? void 0 : _scheduleState$state8.break_start) !== null && _scheduleState$state$5 !== void 0 ? _scheduleState$state$5 : selectedBlock === null || selectedBlock === void 0 ? void 0 : selectedBlock.break_start, true)) ? /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
     noSelected: true,
     options: scheduleOptions.filter(function (option) {
       return !['start', 'end', 'break_end'].includes(option === null || option === void 0 ? void 0 : option.name);
     }),
-    defaultValue: getHourOrMinute((_scheduleState$state$3 = scheduleState === null || scheduleState === void 0 || (_scheduleState$state6 = scheduleState.state) === null || _scheduleState$state6 === void 0 ? void 0 : _scheduleState$state6.break_start) !== null && _scheduleState$state$3 !== void 0 ? _scheduleState$state$3 : selectedBlock === null || selectedBlock === void 0 ? void 0 : selectedBlock.break_start, true),
+    defaultValue: getHourOrMinute((_scheduleState$state$6 = scheduleState === null || scheduleState === void 0 || (_scheduleState$state9 = scheduleState.state) === null || _scheduleState$state9 === void 0 ? void 0 : _scheduleState$state9.break_start) !== null && _scheduleState$state$6 !== void 0 ? _scheduleState$state$6 : selectedBlock === null || selectedBlock === void 0 ? void 0 : selectedBlock.break_start, true),
     onChange: function onChange(val) {
       return handleChangeScheduleTime(val, true, true);
     },
     optionInnerMaxHeight: "300px"
-  }))), showBreakBlock && /*#__PURE__*/_react.default.createElement(_styles2.SelectTitleWrappre, null, /*#__PURE__*/_react.default.createElement(_styles2.SelectTitle, null, t('END_BREAK_BLOCK_DATE', 'End break block date:')), /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
+  })) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 34,
+    width: 95
+  })), showBreakBlock && /*#__PURE__*/_react.default.createElement(_styles2.SelectTitleWrappre, null, /*#__PURE__*/_react.default.createElement(_styles2.SelectTitle, null, t('END_BREAK_BLOCK_DATE', 'End break block date:')), scheduleOptionValues.includes(getHourOrMinute((_scheduleState$state$7 = scheduleState === null || scheduleState === void 0 || (_scheduleState$state10 = scheduleState.state) === null || _scheduleState$state10 === void 0 ? void 0 : _scheduleState$state10.break_end) !== null && _scheduleState$state$7 !== void 0 ? _scheduleState$state$7 : selectedBlock === null || selectedBlock === void 0 ? void 0 : selectedBlock.break_end, true)) || getHourOrMinute((_scheduleState$state$8 = scheduleState === null || scheduleState === void 0 || (_scheduleState$state11 = scheduleState.state) === null || _scheduleState$state11 === void 0 ? void 0 : _scheduleState$state11.break_end) !== null && _scheduleState$state$8 !== void 0 ? _scheduleState$state$8 : selectedBlock === null || selectedBlock === void 0 ? void 0 : selectedBlock.break_end) === scheduleOptionValues[(scheduleOptionValues === null || scheduleOptionValues === void 0 ? void 0 : scheduleOptionValues.length) - 1] ? /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
     noSelected: true,
     options: scheduleOptions.filter(function (option) {
       return !['break_start', 'end', 'start'].includes(option === null || option === void 0 ? void 0 : option.name);
     }),
-    defaultValue: getHourOrMinute((_scheduleState$state$4 = scheduleState === null || scheduleState === void 0 || (_scheduleState$state7 = scheduleState.state) === null || _scheduleState$state7 === void 0 ? void 0 : _scheduleState$state7.break_end) !== null && _scheduleState$state$4 !== void 0 ? _scheduleState$state$4 : selectedBlock === null || selectedBlock === void 0 ? void 0 : selectedBlock.break_end),
+    defaultValue: getHourOrMinute((_scheduleState$state$9 = scheduleState === null || scheduleState === void 0 || (_scheduleState$state12 = scheduleState.state) === null || _scheduleState$state12 === void 0 ? void 0 : _scheduleState$state12.break_end) !== null && _scheduleState$state$9 !== void 0 ? _scheduleState$state$9 : selectedBlock === null || selectedBlock === void 0 ? void 0 : selectedBlock.break_end),
     onChange: function onChange(val) {
       return handleChangeScheduleTime(val, false, true);
     },
     optionInnerMaxHeight: "300px"
-  })))), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("span", null, t('FREQUENCY', 'Frequency')), /*#__PURE__*/_react.default.createElement(_styles2.RrulesListWrapper, null, rruleList.map(function (rule) {
+  })) : /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+    height: 34,
+    width: 95
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("span", null, t('FREQUENCY', 'Frequency')), /*#__PURE__*/_react.default.createElement(_styles2.RrulesListWrapper, null, rruleList.map(function (rule) {
     return /*#__PURE__*/_react.default.createElement(_styles2.RrulesItem, {
       key: rule.value,
       onClick: function onClick() {
@@ -190,7 +204,7 @@ var DriverBlockAddFormUI = function DriverBlockAddFormUI(props) {
   }, t('DELETE', 'Delete')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     borderRadius: "8px",
-    disabled: scheduleState.loading || (isEdit ? false : !(scheduleState !== null && scheduleState !== void 0 && (_scheduleState$state8 = scheduleState.state) !== null && _scheduleState$state8 !== void 0 && _scheduleState$state8.until) && scheduleState.rrule),
+    disabled: scheduleState.loading || (isEdit ? false : !(scheduleState !== null && scheduleState !== void 0 && (_scheduleState$state13 = scheduleState.state) !== null && _scheduleState$state13 !== void 0 && _scheduleState$state13.until) && scheduleState.rrule),
     onClick: function onClick() {
       return isEdit ? setOpenEditModal(true) : handleAddBlockTime();
     }
