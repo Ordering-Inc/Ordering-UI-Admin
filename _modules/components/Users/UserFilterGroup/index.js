@@ -126,7 +126,37 @@ var UserFilterGroupUI = function UserFilterGroupUI(props) {
     padding: "30px",
     open: isFilterModal,
     onClose: onClose
-  }, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.FormGroup, null, /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, isCustomers && /*#__PURE__*/_react.default.createElement(_styles2.FormGroup, null, /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('ID', 'ID')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    type: "text",
+    placeholder: t('ID', 'ID'),
+    autoComplete: "off",
+    value: (filterValues === null || filterValues === void 0 ? void 0 : filterValues.id) || '',
+    onChange: function onChange(e) {
+      return handleChangeValue({
+        id: e.target.value
+      });
+    },
+    onKeyPress: function onKeyPress(e) {
+      if (!/^[0-9]$/.test(e.key)) {
+        e.preventDefault();
+      }
+    }
+  })), /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('EXTERNAL_ID', 'External id')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    type: "text",
+    placeholder: t('EXTERNAL_ID', 'External id'),
+    autoComplete: "off",
+    value: (filterValues === null || filterValues === void 0 ? void 0 : filterValues.externalId) || '',
+    onChange: function onChange(e) {
+      return handleChangeValue({
+        externalId: e.target.value
+      });
+    },
+    onKeyPress: function onKeyPress(e) {
+      if (!/^[0-9]$/.test(e.key)) {
+        e.preventDefault();
+      }
+    }
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.FormGroup, null, /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('NAME', 'Name')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     type: "text",
     placeholder: t('NAME', 'Name'),
     autoComplete: "off",
@@ -284,16 +314,6 @@ var UserFilterGroupUI = function UserFilterGroupUI(props) {
     },
     optionInnerMaxHeight: "300px",
     className: "full-select"
-  }))), isCustomers && /*#__PURE__*/_react.default.createElement(_styles2.FormGroup, null, /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('ID', 'ID')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    type: "text",
-    placeholder: t('ID', 'ID'),
-    autoComplete: "off",
-    value: (filterValues === null || filterValues === void 0 ? void 0 : filterValues.id) || '',
-    onChange: function onChange(e) {
-      return handleChangeValue({
-        id: e.target.value
-      });
-    }
   }))), /*#__PURE__*/_react.default.createElement(_styles2.ButtonGroup, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     borderRadius: "8px",
