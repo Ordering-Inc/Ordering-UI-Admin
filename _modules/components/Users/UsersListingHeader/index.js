@@ -62,7 +62,7 @@ var UsersListingHeader = function UsersListingHeader(props) {
     isCustomLayout: true,
     onSearch: onSearch,
     search: searchValue,
-    placeholder: t('SEARCH', 'Search')
+    placeholder: isCustomers ? t('SEARCH_BY_CELLPHONE', 'Search by phone') : t('SEARCH', 'Search')
   }), multiFilterValues && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {

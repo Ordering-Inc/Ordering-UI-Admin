@@ -235,6 +235,7 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     setSlaSettingTime: setSlaSettingTime,
     isLateralBar: isLateralBar
   }), /*#__PURE__*/_react.default.createElement(_OrdersHeaderFilterGroup.OrdersHeaderFilterGroup, {
+    isSelectedOrders: isSelectedOrders,
     driverGroupList: driverGroupList,
     driversList: driversList,
     handleChangeFilterValues: handleChangeFilterValues

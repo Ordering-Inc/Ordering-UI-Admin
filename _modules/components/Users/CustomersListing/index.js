@@ -239,9 +239,7 @@ var CustomersListing = function CustomersListing(props) {
   var customersProps = _objectSpread(_objectSpread({}, props), {}, {
     defaultUserActiveState: defaultUserActiveState,
     UIComponent: CustomersListingUI,
-    isSearchByUserEmail: true,
     isSearchByUserPhone: true,
-    isSearchByUserName: true,
     paginationSettings: {
       initialPage: props.isUseQuery && !isNaN(defaultPage) ? Number(defaultPage) : 1,
       pageSize: props.isUseQuery && !isNaN(defaultPage) ? Number(defaultPageSize) : 10,

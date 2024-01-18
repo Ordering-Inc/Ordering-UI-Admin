@@ -34,7 +34,8 @@ var OrdersHeaderFilterGroupUI = function OrdersHeaderFilterGroupUI(props) {
     handleChangeDriver = props.handleChangeDriver,
     handleChangeFilterValues = props.handleChangeFilterValues,
     handleChangeExternalId = props.handleChangeExternalId,
-    handleChangeGroupUnassigned = props.handleChangeGroupUnassigned;
+    handleChangeGroupUnassigned = props.handleChangeGroupUnassigned,
+    isSelectedOrders = props.isSelectedOrders;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 1),
     dictionary = _useLanguage2[0].dictionary;
@@ -79,7 +80,8 @@ var OrdersHeaderFilterGroupUI = function OrdersHeaderFilterGroupUI(props) {
   }, [filterValues]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, {
     ref: wrapperRef,
-    wrapperWidth: wrapperSize.width
+    wrapperWidth: wrapperSize.width,
+    isSelectedOrders: isSelectedOrders
   }, !loading && configFilter.includes('external_id') && /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
     placeholder: (_dictionary$EXTERNAL_ = dictionary === null || dictionary === void 0 ? void 0 : dictionary.EXTERNAL_ID) !== null && _dictionary$EXTERNAL_ !== void 0 ? _dictionary$EXTERNAL_ : 'External Id',
     onChange: handleChangeExternalId,

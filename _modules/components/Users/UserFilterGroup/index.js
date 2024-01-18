@@ -192,7 +192,7 @@ var UserFilterGroupUI = function UserFilterGroupUI(props) {
         })
       });
     }
-  })))), /*#__PURE__*/_react.default.createElement(_styles2.FormGroup, null, /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('COUNTRY_PHONE_CODE', 'Country phone code')), /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
+  })))), !isCustomers && /*#__PURE__*/_react.default.createElement(_styles2.FormGroup, null, /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('COUNTRY_PHONE_CODE', 'Country phone code')), /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
     placeholder: t('SELECT_OPTION', 'Select a option'),
     defaultValue: filterValues === null || filterValues === void 0 ? void 0 : filterValues.countryPhoneCode,
     options: phoneCodeList,
@@ -284,6 +284,16 @@ var UserFilterGroupUI = function UserFilterGroupUI(props) {
     },
     optionInnerMaxHeight: "300px",
     className: "full-select"
+  }))), isCustomers && /*#__PURE__*/_react.default.createElement(_styles2.FormGroup, null, /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('ID', 'ID')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    type: "text",
+    placeholder: t('ID', 'ID'),
+    autoComplete: "off",
+    value: (filterValues === null || filterValues === void 0 ? void 0 : filterValues.id) || '',
+    onChange: function onChange(e) {
+      return handleChangeValue({
+        id: e.target.value
+      });
+    }
   }))), /*#__PURE__*/_react.default.createElement(_styles2.ButtonGroup, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     borderRadius: "8px",
