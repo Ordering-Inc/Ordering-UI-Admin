@@ -94,6 +94,40 @@ const UserFilterGroupUI = (props) => {
       onClose={onClose}
     >
       <Container>
+        {isCustomers && (
+          <FormGroup>
+            <FormControl>
+              <label>{t('ID', 'ID')}</label>
+              <Input
+                type='text'
+                placeholder={t('ID', 'ID')}
+                autoComplete='off'
+                value={filterValues?.id || ''}
+                onChange={(e) => handleChangeValue({ id: e.target.value })}
+                onKeyPress={(e) => {
+                  if (!/^[0-9]$/.test(e.key)) {
+                    e.preventDefault()
+                  }
+                }}
+              />
+            </FormControl>
+            <FormControl>
+              <label>{t('EXTERNAL_ID', 'External id')}</label>
+              <Input
+                type='text'
+                placeholder={t('EXTERNAL_ID', 'External id')}
+                autoComplete='off'
+                value={filterValues?.externalId || ''}
+                onChange={(e) => handleChangeValue({ externalId: e.target.value })}
+                onKeyPress={(e) => {
+                  if (!/^[0-9]$/.test(e.key)) {
+                    e.preventDefault()
+                  }
+                }}
+              />
+            </FormControl>
+          </FormGroup>
+        )}
         <FormGroup>
           <FormControl>
             <label>{t('NAME', 'Name')}</label>
@@ -276,20 +310,6 @@ const UserFilterGroupUI = (props) => {
                 )}
               </FormControl>
             )}
-          </FormGroup>
-        )}
-        {isCustomers && (
-          <FormGroup>
-            <FormControl>
-              <label>{t('ID', 'ID')}</label>
-              <Input
-                type='text'
-                placeholder={t('ID', 'ID')}
-                autoComplete='off'
-                value={filterValues?.id || ''}
-                onChange={(e) => handleChangeValue({ id: e.target.value })}
-              />
-            </FormControl>
           </FormGroup>
         )}
         <ButtonGroup>
