@@ -67,6 +67,16 @@ const BusinessFilterGroupUI = (props) => {
               onChange={(e) => handleChangeValue({ name: e.target.value })}
             />
           </FormControl>
+          <FormControl>
+            <label>{t('EXTERNAL_ID', 'External id')}</label>
+            <Input
+              type='text'
+              placeholder={t('EXTERNAL_ID', 'External id')}
+              autoComplete='off'
+              value={filterValues?.externalId || ''}
+              onChange={(e) => handleChangeValue({ externalId: e.target.value })}
+            />
+          </FormControl>
         </FormGroup>
         <FormGroup>
           <FormControl>
