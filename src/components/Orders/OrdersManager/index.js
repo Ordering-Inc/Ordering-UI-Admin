@@ -198,6 +198,7 @@ const OrdersManagerUI = (props) => {
           isLateralBar={isLateralBar}
         />
         <OrdersHeaderFilterGroup
+          isSelectedOrders={isSelectedOrders}
           driverGroupList={driverGroupList}
           driversList={driversList}
           handleChangeFilterValues={handleChangeFilterValues}

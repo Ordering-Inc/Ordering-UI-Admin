@@ -164,34 +164,36 @@ const UserFilterGroupUI = (props) => {
             </FormControl>
           )}
         </FormGroup>
-        <FormGroup>
-          <FormControl>
-            <label>{t('COUNTRY_PHONE_CODE', 'Country phone code')}</label>
-            <DefaultSelect
-              placeholder={t('SELECT_OPTION', 'Select a option')}
-              defaultValue={filterValues?.countryPhoneCode}
-              options={phoneCodeList}
-              onChange={val => handleChangeValue({ countryPhoneCode: val })}
-              optionInnerMaxHeight='300px'
-              className='full-select'
-            />
-          </FormControl>
-          <FormControl>
-            <label>{t('PHONE_NUMBER', 'Phone number')}</label>
-            <Input
-              type='text'
-              placeholder={t('PHONE_NUMBER', 'Phone number')}
-              autoComplete='off'
-              onKeyPress={(e) => {
-                if (!/^[0-9]$/.test(e.key)) {
-                  e.preventDefault()
-                }
-              }}
-              value={filterValues?.cellphone || ''}
-              onChange={(e) => handleChangeValue({ cellphone: e.target.value })}
-            />
-          </FormControl>
-        </FormGroup>
+        {!isCustomers && (
+          <FormGroup>
+            <FormControl>
+              <label>{t('COUNTRY_PHONE_CODE', 'Country phone code')}</label>
+              <DefaultSelect
+                placeholder={t('SELECT_OPTION', 'Select a option')}
+                defaultValue={filterValues?.countryPhoneCode}
+                options={phoneCodeList}
+                onChange={val => handleChangeValue({ countryPhoneCode: val })}
+                optionInnerMaxHeight='300px'
+                className='full-select'
+              />
+            </FormControl>
+            <FormControl>
+              <label>{t('PHONE_NUMBER', 'Phone number')}</label>
+              <Input
+                type='text'
+                placeholder={t('PHONE_NUMBER', 'Phone number')}
+                autoComplete='off'
+                onKeyPress={(e) => {
+                  if (!/^[0-9]$/.test(e.key)) {
+                    e.preventDefault()
+                  }
+                }}
+                value={filterValues?.cellphone || ''}
+                onChange={(e) => handleChangeValue({ cellphone: e.target.value })}
+              />
+            </FormControl>
+          </FormGroup>
+        )}
         <FormGroup>
           <FormControl>
             <label>{t('PHONE_VERIFIED', 'Phone verified')}</label>
@@ -274,6 +276,20 @@ const UserFilterGroupUI = (props) => {
                 )}
               </FormControl>
             )}
+          </FormGroup>
+        )}
+        {isCustomers && (
+          <FormGroup>
+            <FormControl>
+              <label>{t('ID', 'ID')}</label>
+              <Input
+                type='text'
+                placeholder={t('ID', 'ID')}
+                autoComplete='off'
+                value={filterValues?.id || ''}
+                onChange={(e) => handleChangeValue({ id: e.target.value })}
+              />
+            </FormControl>
           </FormGroup>
         )}
         <ButtonGroup>

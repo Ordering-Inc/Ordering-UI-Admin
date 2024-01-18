@@ -62,9 +62,9 @@ export const WrapperRow = styled.div`
     flex-direction: row;
   }
 
-  ${({ wrapperWidth }) => wrapperWidth < 992 && css`
+  ${({ wrapperWidth, isSelectedOrders }) => wrapperWidth < 992 && css`
       flex-direction: column !important;
-      padding: 15px 10px 0 10px;
+      padding: ${!isSelectedOrders && '15px 10px 0 10px'};
   `}
 `
 export const Option = styled.div`

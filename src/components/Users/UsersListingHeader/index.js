@@ -68,7 +68,7 @@ export const UsersListingHeader = (props) => {
             isCustomLayout
             onSearch={onSearch}
             search={searchValue}
-            placeholder={t('SEARCH', 'Search')}
+            placeholder={isCustomers ? t('SEARCH_BY_CELLPHONE', 'Search by phone') : t('SEARCH', 'Search')}
           />
           {multiFilterValues && (
             <IconButton
