@@ -71,7 +71,13 @@ export const TopRightSection = styled.div`
   ${({ isCustomLayout }) => !isCustomLayout && css`
     justify-content: flex-end;
   `}
-  
+
+  ${({ isCustomLayout }) => isCustomLayout && css`
+    .websocket-container {
+      padding-bottom: 10px;
+    }
+  `}
+
   @media (min-width: 768px) {
     flex-direction: row;
     align-items: center;
