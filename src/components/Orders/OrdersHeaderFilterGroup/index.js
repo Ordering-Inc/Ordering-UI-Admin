@@ -17,7 +17,8 @@ const OrdersHeaderFilterGroupUI = (props) => {
     handleChangeDriver,
     handleChangeFilterValues,
     handleChangeExternalId,
-    handleChangeGroupUnassigned
+    handleChangeGroupUnassigned,
+    isSelectedOrders
   } = props
 
   const [{ dictionary }] = useLanguage()
@@ -51,7 +52,7 @@ const OrdersHeaderFilterGroupUI = (props) => {
 
   return (
     <>
-      <WrapperRow ref={wrapperRef} wrapperWidth={wrapperSize.width}>
+      <WrapperRow ref={wrapperRef} wrapperWidth={wrapperSize.width} isSelectedOrders={isSelectedOrders}>
         {!loading && configFilter.includes('external_id') && (
           <SearchBar
             placeholder={dictionary?.EXTERNAL_ID ?? 'External Id'}
