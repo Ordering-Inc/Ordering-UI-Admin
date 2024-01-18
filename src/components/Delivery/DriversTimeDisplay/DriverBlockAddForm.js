@@ -21,6 +21,7 @@ import {
   BlocksWrapper,
   DateBlockWrapper
 } from './styles'
+import Skeleton from 'react-loading-skeleton'
 
 export const DriverBlockAddFormUI = (props) => {
   const {
@@ -42,7 +43,8 @@ export const DriverBlockAddFormUI = (props) => {
     setShowBreakBlock,
     showBreakBlock,
     handleUntilDate,
-    setOpenEditModal
+    setOpenEditModal,
+    scheduleOptionValues
   } = props
 
   const [, t] = useLanguage()
@@ -96,7 +98,6 @@ export const DriverBlockAddFormUI = (props) => {
         onChange={e => handleChangeInput(e)}
         defaultValue={selectedBlock?.description}
       />
-
       <BlocksWrapper>
         <DateBlockWrapper>
           <span>{t('BLOCK_DATE', 'Block date')}</span>
@@ -117,59 +118,89 @@ export const DriverBlockAddFormUI = (props) => {
           />
         </ShowBreakBlocksWrapper>
       </BlocksWrapper>
-
       <SelectsWrapper>
         <SelectTitleWrappre>
           <SelectTitle>{t('START_BLOCK_DATE', 'Start block date:')}</SelectTitle>
-          <SelectWrapper>
-            <DefaultSelect
-              noSelected
-              options={scheduleOptions.filter(option => !['break_start', 'end', 'break_end'].includes(option?.name))}
-              defaultValue={getHourOrMinute(scheduleState?.state?.start ?? selectedBlock?.start, true)}
-              onChange={val => handleChangeScheduleTime(val, true)}
-              optionInnerMaxHeight='300px'
+          {scheduleOptionValues.includes(getHourOrMinute(scheduleState?.state?.start ?? selectedBlock?.start, true)) ? (
+            <SelectWrapper>
+              <DefaultSelect
+                noSelected
+                options={scheduleOptions.filter(option => !['break_start', 'end', 'break_end'].includes(option?.name))}
+                defaultValue={getHourOrMinute(scheduleState?.state?.start ?? selectedBlock?.start, true)}
+                onChange={val => handleChangeScheduleTime(val, true)}
+                optionInnerMaxHeight='300px'
+              />
+            </SelectWrapper>
+          ) : (
+            <Skeleton
+              height={34}
+              width={95}
             />
-          </SelectWrapper>
+          )}
         </SelectTitleWrappre>
-
         <SelectTitleWrappre>
           <SelectTitle>{t('END_BLOCK_DATE', 'End block date:')}</SelectTitle>
-          <SelectWrapper>
-            <DefaultSelect
-              noSelected
-              options={scheduleOptions.filter(option => !['break_start', 'start', 'break_end'].includes(option?.name))}
-              defaultValue={getHourOrMinute(scheduleState?.state?.end ?? selectedBlock?.end)}
-              onChange={val => handleChangeScheduleTime(val, false)}
-              optionInnerMaxHeight='300px'
+          {scheduleOptionValues.includes(getHourOrMinute(scheduleState?.state?.end ?? selectedBlock?.end, true)) ? (
+            <SelectWrapper>
+              <DefaultSelect
+                noSelected
+                options={scheduleOptions.filter(option => !['break_start', 'start', 'break_end'].includes(option?.name))}
+                defaultValue={getHourOrMinute(scheduleState?.state?.end ?? selectedBlock?.end)}
+                onChange={val => handleChangeScheduleTime(val, false)}
+                optionInnerMaxHeight='300px'
+              />
+            </SelectWrapper>
+          ) : (
+            <Skeleton
+              height={34}
+              width={95}
             />
-          </SelectWrapper>
+          )}
         </SelectTitleWrappre>
         {showBreakBlock && (
           <SelectTitleWrappre>
             <SelectTitle>{t('START_BREAK_BLOCK_DATE', 'Start break block date:')}</SelectTitle>
-            <SelectWrapper>
-              <DefaultSelect
-                noSelected
-                options={scheduleOptions.filter(option => !['start', 'end', 'break_end'].includes(option?.name))}
-                defaultValue={getHourOrMinute(scheduleState?.state?.break_start ?? selectedBlock?.break_start, true)}
-                onChange={val => handleChangeScheduleTime(val, true, true)}
-                optionInnerMaxHeight='300px'
+            {scheduleOptionValues.includes(getHourOrMinute(scheduleState?.state?.break_start ?? selectedBlock?.break_start, true)) ? (
+              <SelectWrapper>
+                <DefaultSelect
+                  noSelected
+                  options={scheduleOptions.filter(option => !['start', 'end', 'break_end'].includes(option?.name))}
+                  defaultValue={getHourOrMinute(scheduleState?.state?.break_start ?? selectedBlock?.break_start, true)}
+                  onChange={val => handleChangeScheduleTime(val, true, true)}
+                  optionInnerMaxHeight='300px'
+                />
+              </SelectWrapper>
+            ) : (
+              <Skeleton
+                height={34}
+                width={95}
               />
-            </SelectWrapper>
+            )}
           </SelectTitleWrappre>
         )}
         {showBreakBlock && (
           <SelectTitleWrappre>
             <SelectTitle>{t('END_BREAK_BLOCK_DATE', 'End break block date:')}</SelectTitle>
-            <SelectWrapper>
-              <DefaultSelect
-                noSelected
-                options={scheduleOptions.filter(option => !['break_start', 'end', 'start'].includes(option?.name))}
-                defaultValue={getHourOrMinute(scheduleState?.state?.break_end ?? selectedBlock?.break_end)}
-                onChange={val => handleChangeScheduleTime(val, false, true)}
-                optionInnerMaxHeight='300px'
-              />
-            </SelectWrapper>
+            {
+              scheduleOptionValues.includes(getHourOrMinute(scheduleState?.state?.break_end ?? selectedBlock?.break_end, true)) ||
+              getHourOrMinute(scheduleState?.state?.break_end ?? selectedBlock?.break_end) === scheduleOptionValues[scheduleOptionValues?.length - 1]
+                ? (
+                  <SelectWrapper>
+                    <DefaultSelect
+                      noSelected
+                      options={scheduleOptions.filter(option => !['break_start', 'end', 'start'].includes(option?.name))}
+                      defaultValue={getHourOrMinute(scheduleState?.state?.break_end ?? selectedBlock?.break_end)}
+                      onChange={val => handleChangeScheduleTime(val, false, true)}
+                      optionInnerMaxHeight='300px'
+                    />
+                  </SelectWrapper>
+                ) : (
+                  <Skeleton
+                    height={34}
+                    width={95}
+                  />
+                )
+            }
           </SelectTitleWrappre>
         )}
       </SelectsWrapper>
