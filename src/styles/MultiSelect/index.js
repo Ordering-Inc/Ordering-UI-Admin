@@ -60,7 +60,7 @@ export const MultiSelect = (props) => {
     if (isShowSearchBar && searchValue) return
 
     const _defaultOption = options?.filter(
-      (option) => defaultValue.includes(option.value)
+      (option) => defaultValue?.includes?.(option?.value)
     )
     setSelectedOptions(_defaultOption)
     setValues(defaultValue)
