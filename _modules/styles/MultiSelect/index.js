@@ -67,6 +67,7 @@ var MultiSelect = exports.MultiSelect = function MultiSelect(props) {
   };
   (0, _react.useEffect)(function () {
     if (isShowSearchBar && searchValue) return;
+    console.log('asdfasdf');
     var _defaultOption = options === null || options === void 0 ? void 0 : options.filter(function (option) {
       var _defaultValue$include;
       return defaultValue === null || defaultValue === void 0 || (_defaultValue$include = defaultValue.includes) === null || _defaultValue$include === void 0 ? void 0 : _defaultValue$include.call(defaultValue, option === null || option === void 0 ? void 0 : option.value);
