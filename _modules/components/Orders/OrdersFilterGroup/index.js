@@ -41,7 +41,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; } // import { OrderStatusTypeSelector } from '../OrderStatusTypeSelector'
 var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
-  var _configs$filter_order, _filterValues$logisti, _filterValues$assigne;
+  var _configs$filter_order, _filterValues$logisti, _filterValues$assigne, _filterValues$metafie, _filterValues$metafie2;
   var isLateralBar = props.isLateralBar,
     filterModalOpen = props.filterModalOpen,
     setFilterModalOpen = props.setFilterModalOpen,
@@ -342,7 +342,7 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
     filterValues: filterValues,
     adminsList: adminsList,
     handleChangeAdmin: handleChangeAdmin
-  })), filterValues === null || filterValues === void 0 ? void 0 : filterValues.metafield.map(function (item) {
+  })), filterValues === null || filterValues === void 0 || (_filterValues$metafie = filterValues.metafield) === null || _filterValues$metafie === void 0 || (_filterValues$metafie2 = _filterValues$metafie.map) === null || _filterValues$metafie2 === void 0 ? void 0 : _filterValues$metafie2.call(_filterValues$metafie, function (item) {
     return /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, {
       key: item.id
     }, /*#__PURE__*/_react.default.createElement(_styles.Input, {
