@@ -340,7 +340,7 @@ const OrdersFilterGroupUI = (props) => {
               handleChangeAdmin={handleChangeAdmin}
             />
           </WrapperRow>
-          {filterValues?.metafield.map(item => (
+          {filterValues?.metafield?.map?.(item => (
             <WrapperRow key={item.id}>
               <Input
                 type='text'
@@ -430,10 +430,10 @@ export const OrdersFilterGroup = (props) => {
   const [savedFilterValues, setSavedFilterValues] = useState(filterValues)
 
   useEffect(() => {
-    if  (filterValues && !filterValues.administratorIds){
-      setSavedFilterValues({ ...filterValues, administratorIds:[] })
+    if (filterValues && !filterValues.administratorIds) {
+      setSavedFilterValues({ ...filterValues, administratorIds: [] })
     }
-    else{
+    else {
       setSavedFilterValues(filterValues)
     }
   }, [filterValues])
