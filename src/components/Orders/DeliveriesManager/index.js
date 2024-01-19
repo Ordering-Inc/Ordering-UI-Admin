@@ -11,6 +11,7 @@ import {
   OrdersContent,
   WrapItemView
 } from './styles'
+import { useFilterValues } from '../../../contexts/FilterValuesContext'
 
 const DeliveriesManagerUI = (props) => {
   const {
@@ -50,6 +51,19 @@ const DeliveriesManagerUI = (props) => {
     cancelled: null
   })
 
+  const [filterValuesOrders, { handleFilterValues }] = useFilterValues()
+  const [savedFilterValues, setSavedFilterValues] = useState(filterValues)
+
+  const propsHeaderByCallcenter = props.isCallcenter ? {
+    filterValues: savedFilterValues,
+    setFilterValues: setSavedFilterValues,
+    handleFilterValues
+  } : {}
+  const propsFilterGroupByCallcenter = props.isCallcenter ? {
+    filterValues: filterValuesOrders,
+    setFilterValues: handleFilterValues
+  } : {}
+
   const [configState] = useConfig()
   const googleMapsApiKey = configState?.configs?.google_maps_api_key?.value
 
@@ -74,6 +88,15 @@ const DeliveriesManagerUI = (props) => {
     }
   }, [])
 
+  useEffect(() => {
+    if (props.isCallcenter) return
+    if (filterValuesOrders && !filterValuesOrders.administratorIds) {
+      setSavedFilterValues({ ...filterValuesOrders, administratorIds: [] })
+    } else {
+      setSavedFilterValues(filterValuesOrders)
+    }
+  }, [filterValuesOrders])
+
   return (
     <>
       <DeliveriesContainer id='deliveryDashboard'>
@@ -93,6 +116,8 @@ const DeliveriesManagerUI = (props) => {
           setFilterModalOpen={setFilterModalOpen}
           setTimeStatus={setTimeStatus}
           setSlaSettingTime={setSlaSettingTime}
+          propsHeaderByCallcenter={propsHeaderByCallcenter}
+
         />
         <OrdersContent>
           <WrapItemView>
@@ -118,6 +143,7 @@ const DeliveriesManagerUI = (props) => {
               franchisesList={props.franchisesList}
               driverGroupList={driverGroupList}
               handleChangeFilterValues={handleChangeFilterValues}
+              propsFilterGroupByCallcenter={propsFilterGroupByCallcenter}
             />
           </WrapItemView>
         </OrdersContent>

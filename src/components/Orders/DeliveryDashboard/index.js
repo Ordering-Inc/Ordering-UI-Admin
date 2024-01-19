@@ -25,7 +25,8 @@ export const DeliveryDashboard = (props) => {
     setOrdersAmountByStatus,
     isUseQuery,
     driverGroupList,
-    handleChangeFilterValues
+    handleChangeFilterValues,
+    propsFilterGroupByCallcenter = {}
   } = props
 
   const ordersDashboardListProps = {
@@ -59,6 +60,7 @@ export const DeliveryDashboard = (props) => {
           driverGroupList={driverGroupList}
           driversList={driversList}
           handleChangeFilterValues={handleChangeFilterValues}
+          {...propsFilterGroupByCallcenter}
         />
         <FilterContainer>
           <OrderStatusFilterBar

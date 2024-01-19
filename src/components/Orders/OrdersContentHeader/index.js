@@ -42,7 +42,8 @@ export const OrdersContentHeader = memo((props) => {
     setTimeStatus,
     setSlaSettingTime,
     isShowMapsKeySettingButton,
-    adminsList
+    adminsList,
+    propsHeaderByCallcenter = {}
   } = props
 
   const { width } = useWindowSize()
@@ -132,6 +133,7 @@ export const OrdersContentHeader = memo((props) => {
               handleChangeFilterValues={handleChangeFilterValues}
               searchValue={searchValue}
               handleChangeSearch={handleChangeSearch}
+              {...propsHeaderByCallcenter}
             />
           </WrapperSearchAndFilter>
         </TopRightSection>

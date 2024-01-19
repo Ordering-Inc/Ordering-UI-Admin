@@ -20,6 +20,7 @@ import { OrderStatusSubFilter } from '../OrderStatusSubFilter'
 import { OrderNotification } from '../OrderNotification'
 import { WizardOrders } from '../WizardOrders'
 import { OrdersHeaderFilterGroup } from '../OrdersHeaderFilterGroup'
+import { useFilterValues } from '../../../contexts/FilterValuesContext'
 
 const OrdersManagerUI = (props) => {
   const {
@@ -76,8 +77,20 @@ const OrdersManagerUI = (props) => {
     completed: null,
     cancelled: null
   })
-
+  const [filterValuesOrders, { handleFilterValues }] = useFilterValues()
+  const [savedFilterValues, setSavedFilterValues] = useState(filterValues)
   const [totalSelectedOrder, setTotalSelectedOrder] = useState(0)
+
+  const propsHeaderByCallcenter = props.isCallcenter ? {
+    filterValues: savedFilterValues,
+    setFilterValues: setSavedFilterValues,
+    handleFilterValues
+  } : {}
+  const propsFilterGroupByCallcenter = props.isCallcenter ? {
+    filterValues: filterValuesOrders,
+    setFilterValues: handleFilterValues
+  } : {}
+
   const handleBackRedirect = () => {
     setIsOpenOrderDetail(false)
     setDetailsOrder(null)
@@ -169,6 +182,15 @@ const OrdersManagerUI = (props) => {
     setIsTourFlag(false)
   }, [isTourOpen])
 
+  useEffect(() => {
+    if (props.isCallcenter) return
+    if (filterValuesOrders && !filterValuesOrders.administratorIds) {
+      setSavedFilterValues({ ...filterValuesOrders, administratorIds: [] })
+    } else {
+      setSavedFilterValues(filterValuesOrders)
+    }
+  }, [filterValuesOrders])
+
   return (
     <>
       <OrdersListContainer
@@ -196,12 +218,14 @@ const OrdersManagerUI = (props) => {
           setTimeStatus={setTimeStatus}
           setSlaSettingTime={setSlaSettingTime}
           isLateralBar={isLateralBar}
+          propsHeaderByCallcenter={propsHeaderByCallcenter}
         />
         <OrdersHeaderFilterGroup
           isSelectedOrders={isSelectedOrders}
           driverGroupList={driverGroupList}
           driversList={driversList}
           handleChangeFilterValues={handleChangeFilterValues}
+          {...propsFilterGroupByCallcenter}
         />
         <OrderStatusFilterBar
           isUseQuery={isUseQuery}
