@@ -338,7 +338,7 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
         assigned: value
       });
     }
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_AdminsSelector.AdminsSelector, {
+  })), /*#__PURE__*/_react.default.createElement(_AdminsSelector.AdminsSelector, {
     filterValues: filterValues,
     adminsList: adminsList,
     handleChangeAdmin: handleChangeAdmin
@@ -424,13 +424,7 @@ var OrdersFilterGroup = function OrdersFilterGroup(props) {
     savedFilterValues = _useState8[0],
     setSavedFilterValues = _useState8[1];
   (0, _react.useEffect)(function () {
-    if (filterValues && !filterValues.administratorIds) {
-      setSavedFilterValues(_objectSpread(_objectSpread({}, filterValues), {}, {
-        administratorIds: []
-      }));
-    } else {
-      setSavedFilterValues(filterValues);
-    }
+    setSavedFilterValues(filterValues);
   }, [filterValues]);
   var FilterControlProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: OrdersFilterGroupUI,
