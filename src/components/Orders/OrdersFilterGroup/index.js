@@ -332,8 +332,6 @@ const OrdersFilterGroupUI = (props) => {
                 onChange={(value) => handleChangeChildFilterValue({ assigned: value })}
               />
             </SelectWrapper>
-          </WrapperRow>
-          <WrapperRow>
             <AdminsSelector
               filterValues={filterValues}
               adminsList={adminsList}
@@ -430,12 +428,7 @@ export const OrdersFilterGroup = (props) => {
   const [savedFilterValues, setSavedFilterValues] = useState(filterValues)
 
   useEffect(() => {
-    if  (filterValues && !filterValues.administratorIds){
-      setSavedFilterValues({ ...filterValues, administratorIds:[] })
-    }
-    else{
-      setSavedFilterValues(filterValues)
-    }
+    setSavedFilterValues(filterValues)
   }, [filterValues])
 
   const FilterControlProps = {
