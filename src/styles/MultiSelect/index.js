@@ -58,7 +58,7 @@ export const MultiSelect = (props) => {
 
   useEffect(() => {
     if (isShowSearchBar && searchValue) return
-
+    console.log('asdfasdf')
     const _defaultOption = options?.filter(
       (option) => defaultValue?.includes?.(option?.value)
     )
