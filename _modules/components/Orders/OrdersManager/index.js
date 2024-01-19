@@ -144,6 +144,7 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     filterValues: filterValuesOrders,
     setFilterValues: handleFilterValues
   } : {};
+  console.log('props', propsHeaderByCallcenter, propsFilterGroupByCallcenter);
   var handleBackRedirect = function handleBackRedirect() {
     setIsOpenOrderDetail(false);
     setDetailsOrder(null);

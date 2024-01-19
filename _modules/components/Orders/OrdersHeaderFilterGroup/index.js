@@ -55,6 +55,7 @@ var OrdersHeaderFilterGroupUI = function OrdersHeaderFilterGroupUI(props) {
   var configFilter = (configs === null || configs === void 0 || (_configs$filter_order = configs.filter_order_options) === null || _configs$filter_order === void 0 ? void 0 : _configs$filter_order.value.split('|').map(function (value) {
     return value;
   })) || [];
+  console.log('group prs', props);
   (0, _react.useEffect)(function () {
     var handleResize = function handleResize() {
       if (wrapperRef !== null && wrapperRef !== void 0 && wrapperRef.current) {
@@ -110,15 +111,9 @@ var OrdersHeaderFilterGroupUI = function OrdersHeaderFilterGroupUI(props) {
   })));
 };
 var OrdersHeaderFilterGroup = exports.OrdersHeaderFilterGroup = function OrdersHeaderFilterGroup(props) {
-  var _useFilterValues = (0, _FilterValuesContext.useFilterValues)(),
-    _useFilterValues2 = _slicedToArray(_useFilterValues, 2),
-    filterValues = _useFilterValues2[0],
-    handleFilterValues = _useFilterValues2[1].handleFilterValues;
   var FilterControlProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: OrdersHeaderFilterGroupUI,
-    driverGroupList: props.driverGroupList,
-    filterValues: filterValues,
-    setFilterValues: handleFilterValues
+    driverGroupList: props.driverGroupList
   });
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.OrdersFilter, FilterControlProps));
 };

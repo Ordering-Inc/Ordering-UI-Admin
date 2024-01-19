@@ -195,6 +195,7 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
     }
     setFilterApplied(_filterApplied);
   }, [_filterValues]);
+  console.log('filtprops', props);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {
@@ -415,29 +416,9 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
   }, t('CLEAR', 'Clear'))))));
 };
 var OrdersFilterGroup = exports.OrdersFilterGroup = function OrdersFilterGroup(props) {
-  var _useFilterValues3 = (0, _FilterValuesContext.useFilterValues)(),
-    _useFilterValues4 = _slicedToArray(_useFilterValues3, 2),
-    filterValues = _useFilterValues4[0],
-    handleFilterValues = _useFilterValues4[1].handleFilterValues;
-  var _useState7 = (0, _react.useState)(filterValues),
-    _useState8 = _slicedToArray(_useState7, 2),
-    savedFilterValues = _useState8[0],
-    setSavedFilterValues = _useState8[1];
-  (0, _react.useEffect)(function () {
-    if (filterValues && !filterValues.administratorIds) {
-      setSavedFilterValues(_objectSpread(_objectSpread({}, filterValues), {}, {
-        administratorIds: []
-      }));
-    } else {
-      setSavedFilterValues(filterValues);
-    }
-  }, [filterValues]);
   var FilterControlProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: OrdersFilterGroupUI,
-    driverGroupList: props.driverGroupList,
-    filterValues: savedFilterValues,
-    setFilterValues: setSavedFilterValues,
-    handleFilterValues: handleFilterValues
+    driverGroupList: props.driverGroupList
   });
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.OrdersFilter, FilterControlProps));
 };
