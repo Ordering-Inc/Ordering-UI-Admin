@@ -90,7 +90,7 @@ const OrdersManagerUI = (props) => {
     filterValues: filterValuesOrders,
     setFilterValues: handleFilterValues
   } : {}
-
+  console.log('props', propsHeaderByCallcenter, propsFilterGroupByCallcenter)
   const handleBackRedirect = () => {
     setIsOpenOrderDetail(false)
     setDetailsOrder(null)

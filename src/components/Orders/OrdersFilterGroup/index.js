@@ -152,7 +152,7 @@ const OrdersFilterGroupUI = (props) => {
     }
     setFilterApplied(_filterApplied)
   }, [_filterValues])
-
+  console.log('filtprops', props)
   return (
     <>
       <IconButton
@@ -426,25 +426,11 @@ const OrdersFilterGroupUI = (props) => {
 }
 
 export const OrdersFilterGroup = (props) => {
-  const [filterValues, { handleFilterValues }] = useFilterValues()
-  const [savedFilterValues, setSavedFilterValues] = useState(filterValues)
-
-  useEffect(() => {
-    if (filterValues && !filterValues.administratorIds) {
-      setSavedFilterValues({ ...filterValues, administratorIds: [] })
-    }
-    else {
-      setSavedFilterValues(filterValues)
-    }
-  }, [filterValues])
 
   const FilterControlProps = {
     ...props,
     UIComponent: OrdersFilterGroupUI,
-    driverGroupList: props.driverGroupList,
-    filterValues: savedFilterValues,
-    setFilterValues: setSavedFilterValues,
-    handleFilterValues: handleFilterValues
+    driverGroupList: props.driverGroupList
   }
   return (
     <>

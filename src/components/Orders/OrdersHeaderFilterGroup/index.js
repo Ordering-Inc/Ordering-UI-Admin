@@ -27,7 +27,7 @@ const OrdersHeaderFilterGroupUI = (props) => {
   const [wrapperSize, setWrapperSize] = useState({ width: null, height: null })
 
   const configFilter = configs?.filter_order_options?.value.split('|').map(value => (value)) || []
-
+  console.log('group prs', props)
   useEffect(() => {
     const handleResize = () => {
       if (wrapperRef?.current) {
@@ -87,14 +87,12 @@ const OrdersHeaderFilterGroupUI = (props) => {
 }
 
 export const OrdersHeaderFilterGroup = (props) => {
-  const [filterValues, { handleFilterValues }] = useFilterValues()
 
   const FilterControlProps = {
     ...props,
     UIComponent: OrdersHeaderFilterGroupUI,
     driverGroupList: props.driverGroupList,
-    filterValues: filterValues,
-    setFilterValues: handleFilterValues
+
   }
   return (
     <>
