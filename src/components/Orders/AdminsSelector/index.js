@@ -31,22 +31,14 @@ export const AdminsSelector = (props) => {
   const Placeholder = <PlaceholderTitle>{t('SELECT_ADMINISTRATOR', 'Select the administrator')}</PlaceholderTitle>
 
   useEffect(() => {
-    const _adminsOptionList = [
-      {
-        value: 'default',
-        content: <Option padding='0px'><span>{t('SELECT_ADMINISTRATOR', 'Select the administrator')}</span></Option>,
-        color: 'primary',
-        showDisable: true
-      }
-    ]
-    if (adminsList && !adminsList.loading) {
+    if (!adminsList?.loading && adminsList?.admins?.length > 0) {
       let _adminList
       if (searchValue) {
-        _adminList = adminsList.admins.filter(admin => (admin.name + admin.lastname).toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()))
+        _adminList = adminsList?.admins?.filter(admin => (admin.name + admin.lastname).toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()))
       } else {
-        _adminList = adminsList.admins
+        _adminList = adminsList?.admins
       }
-      const _adminsOptionListTemp = _adminList.map((admin, i) => {
+      const _adminsOptionListTemp = _adminList?.map((admin, i) => {
         return {
           value: admin.id,
           showDisable: true,
@@ -66,16 +58,12 @@ export const AdminsSelector = (props) => {
       })
 
       setAdminsMultiOptionList(_adminsOptionListTemp)
-
-      for (const option of _adminsOptionListTemp) {
-        _adminsOptionList.push(option)
-      }
     }
   }, [adminsList, defaultValue, searchValue])
 
   return (
     <>
-      {adminsList && !adminsList.loading ? (
+      {!adminsList?.loading && adminsList?.admins?.length > 0 ? (
         <MultiSelect
           defaultValue={filterValues.administratorIds}
           placeholder={Placeholder}
