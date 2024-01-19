@@ -38,7 +38,9 @@ var DeliveryDashboard = exports.DeliveryDashboard = function DeliveryDashboard(p
     setOrdersAmountByStatus = props.setOrdersAmountByStatus,
     isUseQuery = props.isUseQuery,
     driverGroupList = props.driverGroupList,
-    handleChangeFilterValues = props.handleChangeFilterValues;
+    handleChangeFilterValues = props.handleChangeFilterValues,
+    _props$propsFilterGro = props.propsFilterGroupByCallcenter,
+    propsFilterGroupByCallcenter = _props$propsFilterGro === void 0 ? {} : _props$propsFilterGro;
   var ordersDashboardListProps = _objectSpread({}, props);
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
@@ -60,11 +62,11 @@ var DeliveryDashboard = exports.DeliveryDashboard = function DeliveryDashboard(p
       setInterActionMapOrder(_objectSpread({}, order));
     }
   };
-  return /*#__PURE__*/_react.default.createElement(_styles.DeliveryDashboardContainer, null, /*#__PURE__*/_react.default.createElement(_styles.OrdersContainer, null, /*#__PURE__*/_react.default.createElement(_OrdersHeaderFilterGroup.OrdersHeaderFilterGroup, {
+  return /*#__PURE__*/_react.default.createElement(_styles.DeliveryDashboardContainer, null, /*#__PURE__*/_react.default.createElement(_styles.OrdersContainer, null, /*#__PURE__*/_react.default.createElement(_OrdersHeaderFilterGroup.OrdersHeaderFilterGroup, _extends({
     driverGroupList: driverGroupList,
     driversList: driversList,
     handleChangeFilterValues: handleChangeFilterValues
-  }), /*#__PURE__*/_react.default.createElement(_styles.FilterContainer, null, /*#__PURE__*/_react.default.createElement(_OrderStatusFilterBar.OrderStatusFilterBar, {
+  }, propsFilterGroupByCallcenter)), /*#__PURE__*/_react.default.createElement(_styles.FilterContainer, null, /*#__PURE__*/_react.default.createElement(_OrderStatusFilterBar.OrderStatusFilterBar, {
     isUseQuery: isUseQuery,
     selectedOrderStatus: ordersStatusGroup,
     changeOrderStatus: handleOrdersStatusGroupFilter,

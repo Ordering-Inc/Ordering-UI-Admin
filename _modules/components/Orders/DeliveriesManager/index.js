@@ -13,6 +13,7 @@ var _OrderDetails = require("../OrderDetails");
 var _OrderNotification = require("../OrderNotification");
 var _DeliveryDashboard = require("../DeliveryDashboard");
 var _styles = require("./styles");
+var _FilterValuesContext = require("../../../contexts/FilterValuesContext");
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
@@ -80,6 +81,23 @@ var DeliveriesManagerUI = function DeliveriesManagerUI(props) {
     _useState12 = _slicedToArray(_useState11, 2),
     ordersAmountByStatus = _useState12[0],
     setOrdersAmountByStatus = _useState12[1];
+  var _useFilterValues = (0, _FilterValuesContext.useFilterValues)(),
+    _useFilterValues2 = _slicedToArray(_useFilterValues, 2),
+    filterValuesOrders = _useFilterValues2[0],
+    handleFilterValues = _useFilterValues2[1].handleFilterValues;
+  var _useState13 = (0, _react.useState)(filterValues),
+    _useState14 = _slicedToArray(_useState13, 2),
+    savedFilterValues = _useState14[0],
+    setSavedFilterValues = _useState14[1];
+  var propsHeaderByCallcenter = props.isCallcenter ? {
+    filterValues: savedFilterValues,
+    setFilterValues: setSavedFilterValues,
+    handleFilterValues: handleFilterValues
+  } : {};
+  var propsFilterGroupByCallcenter = props.isCallcenter ? {
+    filterValues: filterValuesOrders,
+    setFilterValues: handleFilterValues
+  } : {};
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configState = _useConfig2[0];
@@ -102,6 +120,16 @@ var DeliveriesManagerUI = function DeliveriesManagerUI(props) {
       setIsOpenOrderDetail(true);
     }
   }, []);
+  (0, _react.useEffect)(function () {
+    if (props.isCallcenter) return;
+    if (filterValuesOrders && !filterValuesOrders.administratorIds) {
+      setSavedFilterValues(_objectSpread(_objectSpread({}, filterValuesOrders), {}, {
+        administratorIds: []
+      }));
+    } else {
+      setSavedFilterValues(filterValuesOrders);
+    }
+  }, [filterValuesOrders]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.DeliveriesContainer, {
     id: "deliveryDashboard"
   }, /*#__PURE__*/_react.default.createElement(_OrdersContentHeader.OrdersContentHeader, {
@@ -119,7 +147,8 @@ var DeliveriesManagerUI = function DeliveriesManagerUI(props) {
     filterModalOpen: filterModalOpen,
     setFilterModalOpen: setFilterModalOpen,
     setTimeStatus: setTimeStatus,
-    setSlaSettingTime: setSlaSettingTime
+    setSlaSettingTime: setSlaSettingTime,
+    propsHeaderByCallcenter: propsHeaderByCallcenter
   }), /*#__PURE__*/_react.default.createElement(_styles.OrdersContent, null, /*#__PURE__*/_react.default.createElement(_styles.WrapItemView, null, /*#__PURE__*/_react.default.createElement(_DeliveryDashboard.DeliveryDashboard, {
     searchValue: searchValue,
     filterValues: filterValues,
@@ -141,7 +170,8 @@ var DeliveriesManagerUI = function DeliveriesManagerUI(props) {
     isUseQuery: isUseQuery,
     franchisesList: props.franchisesList,
     driverGroupList: driverGroupList,
-    handleChangeFilterValues: handleChangeFilterValues
+    handleChangeFilterValues: handleChangeFilterValues,
+    propsFilterGroupByCallcenter: propsFilterGroupByCallcenter
   })))), isOpenOrderDetail && /*#__PURE__*/_react.default.createElement(_OrderDetails.OrderDetails, {
     open: isOpenOrderDetail,
     order: detailsOrder,

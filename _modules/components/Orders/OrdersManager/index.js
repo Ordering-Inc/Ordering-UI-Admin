@@ -19,8 +19,10 @@ var _OrderStatusSubFilter = require("../OrderStatusSubFilter");
 var _OrderNotification = require("../OrderNotification");
 var _WizardOrders = require("../WizardOrders");
 var _OrdersHeaderFilterGroup = require("../OrdersHeaderFilterGroup");
+var _FilterValuesContext = require("../../../contexts/FilterValuesContext");
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -121,10 +123,27 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     _useState20 = _slicedToArray(_useState19, 2),
     ordersAmountByStatus = _useState20[0],
     setOrdersAmountByStatus = _useState20[1];
-  var _useState21 = (0, _react.useState)(0),
+  var _useFilterValues = (0, _FilterValuesContext.useFilterValues)(),
+    _useFilterValues2 = _slicedToArray(_useFilterValues, 2),
+    filterValuesOrders = _useFilterValues2[0],
+    handleFilterValues = _useFilterValues2[1].handleFilterValues;
+  var _useState21 = (0, _react.useState)(filterValues),
     _useState22 = _slicedToArray(_useState21, 2),
-    totalSelectedOrder = _useState22[0],
-    setTotalSelectedOrder = _useState22[1];
+    savedFilterValues = _useState22[0],
+    setSavedFilterValues = _useState22[1];
+  var _useState23 = (0, _react.useState)(0),
+    _useState24 = _slicedToArray(_useState23, 2),
+    totalSelectedOrder = _useState24[0],
+    setTotalSelectedOrder = _useState24[1];
+  var propsHeaderByCallcenter = props.isCallcenter ? {
+    filterValues: savedFilterValues,
+    setFilterValues: setSavedFilterValues,
+    handleFilterValues: handleFilterValues
+  } : {};
+  var propsFilterGroupByCallcenter = props.isCallcenter ? {
+    filterValues: filterValuesOrders,
+    setFilterValues: handleFilterValues
+  } : {};
   var handleBackRedirect = function handleBackRedirect() {
     setIsOpenOrderDetail(false);
     setDetailsOrder(null);
@@ -208,6 +227,16 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     if (isTourOpen) return;
     setIsTourFlag(false);
   }, [isTourOpen]);
+  (0, _react.useEffect)(function () {
+    if (props.isCallcenter) return;
+    if (filterValuesOrders && !filterValuesOrders.administratorIds) {
+      setSavedFilterValues(_objectSpread(_objectSpread({}, filterValuesOrders), {}, {
+        administratorIds: []
+      }));
+    } else {
+      setSavedFilterValues(filterValuesOrders);
+    }
+  }, [filterValuesOrders]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OrdersListContainer, {
     isSelectedOrders: isSelectedOrders
   }, /*#__PURE__*/_react.default.createElement(_OrdersContentHeader.OrdersContentHeader, {
@@ -233,13 +262,14 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     setFilterModalOpen: setFilterModalOpen,
     setTimeStatus: setTimeStatus,
     setSlaSettingTime: setSlaSettingTime,
-    isLateralBar: isLateralBar
-  }), /*#__PURE__*/_react.default.createElement(_OrdersHeaderFilterGroup.OrdersHeaderFilterGroup, {
+    isLateralBar: isLateralBar,
+    propsHeaderByCallcenter: propsHeaderByCallcenter
+  }), /*#__PURE__*/_react.default.createElement(_OrdersHeaderFilterGroup.OrdersHeaderFilterGroup, _extends({
     isSelectedOrders: isSelectedOrders,
     driverGroupList: driverGroupList,
     driversList: driversList,
     handleChangeFilterValues: handleChangeFilterValues
-  }), /*#__PURE__*/_react.default.createElement(_OrderStatusFilterBar.OrderStatusFilterBar, {
+  }, propsFilterGroupByCallcenter)), /*#__PURE__*/_react.default.createElement(_OrderStatusFilterBar.OrderStatusFilterBar, {
     isUseQuery: isUseQuery,
     selectedOrderStatus: ordersStatusGroup,
     changeOrderStatus: handleOrdersStatusGroupFilter,
