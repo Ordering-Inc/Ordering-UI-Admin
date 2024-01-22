@@ -88,6 +88,7 @@ import { BusinessDevicesList } from './pages/BusinessDevicesList'
 import { SettingsLogs } from './pages/SettingsLogs'
 import { Banners } from '../src/components/Banners'
 import { useProjectState } from '../src/contexts/ProjectContext'
+import { DriversTimeDisplay } from './pages/DriverTimeDisplay'
 
 export const App = () => {
   const history = useHistory()
@@ -374,7 +375,9 @@ export const App = () => {
                     <ProtectedRoute path='/delivery/drivers-groups' allowedLevels={[0, 5]}>
                       <DriversGroupsList />
                     </ProtectedRoute>
-
+                    <ProtectedRoute path='/delivery/drivers-time-display' allowedLevels={[0, 5]}>
+                      <DriversTimeDisplay />
+                    </ProtectedRoute>
                     <ProtectedRoute path='/marketing/promotions-enterprise' allowedLevels={[0]}>
                       <EnterprisePromotionList />
                     </ProtectedRoute>

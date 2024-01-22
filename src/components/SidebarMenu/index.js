@@ -359,6 +359,13 @@ const SidebarMenuUI = (props) => {
       pageName: 'drivers_groups',
       url: '/delivery/drivers-groups',
       enabled: sessionState?.user?.level === 5 || sessionState?.user?.level === 0
+    },
+    {
+      id: 5,
+      title: t('DRIVERS_TIME_DISPLAY', 'Drivers time display'),
+      pageName: 'drivers_time_display',
+      url: '/delivery/drivers-time-display',
+      enabled: sessionState?.user?.level === 5 || sessionState?.user?.level === 0
     }
   ]
 
@@ -703,7 +710,8 @@ const SidebarMenuUI = (props) => {
                           location.pathname === '/delivery/drivers-list' ||
                           location.pathname === '/delivery/drivers-managers' ||
                           location.pathname === '/delivery/drivers-companies' ||
-                          location.pathname === '/delivery/drivers-groups'
+                          location.pathname === '/delivery/drivers-groups' ||
+                          location.pathname === '/delivery/drivers-time-display'
                         }
                       >
                         <Truck />
