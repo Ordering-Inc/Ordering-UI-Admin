@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.widgetURL = exports.verifyDecimals = exports.stringToSlug = exports.sortInputFields = exports.shape = exports.setStorageItem = exports.scrollTo = exports.ribbonValues = exports.reviewCommentList = exports.removeStorageItem = exports.removeQueryToUrl = exports.queryStringToObject = exports.orderStatus = exports.orderRejectCommentList = exports.optimizeImage = exports.getUniqueId = exports.getStorageItem = exports.getStarWidth = exports.getSeconds = exports.getOrderStatus = exports.getOrderStatuPickUp = exports.getMinutes = exports.getLocale = exports.getIconCard = exports.getHours = exports.getCurrenySymbol = exports.getCurrentDiffDays = exports.getAgoMinutes = exports.formatUrlVideo = exports.formatSeconds = exports.firstLetterCapital = exports.findExitingCountryPhoneCode = exports.findExitingCode = exports.fieldsToSort = exports.disableReasons = exports.convertHoursToMinutes = exports.convertHMS = exports.checkValidUrlFormat = exports.checkSiteUrl = exports.checkPreSiteUrl = exports.capitalize = exports.bytesConverter = exports.addQueryToUrl = exports.DriverTipsOptions = void 0;
+exports.widgetURL = exports.verifyDecimals = exports.stringToSlug = exports.sortInputFields = exports.shape = exports.setStorageItem = exports.scrollTo = exports.ribbonValues = exports.reviewCommentList = exports.removeStorageItem = exports.removeQueryToUrl = exports.queryStringToObject = exports.orderStatus = exports.orderRejectCommentList = exports.optimizeImage = exports.getUniqueId = exports.getStorageItem = exports.getStarWidth = exports.getSeconds = exports.getOrderStatus = exports.getOrderStatuPickUp = exports.getMinutes = exports.getLocale = exports.getIconCard = exports.getHours = exports.getCurrenySymbol = exports.getCurrentDiffDays = exports.getAgoMinutes = exports.formatUrlVideo = exports.formatSeconds = exports.firstLetterCapital = exports.findExitingCountryPhoneCode = exports.findExitingCode = exports.fieldsToSort = exports.disableReasons = exports.convertHoursToMinutes = exports.convertHMS = exports.checkValidUrlFormat = exports.checkSiteUrl = exports.checkPreSiteUrl = exports.capitalize = exports.bytesConverter = exports.addQueryToUrl = exports.TwentyFourHours = exports.TwelveHours = exports.DriverTipsOptions = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _FaCcMastercard = _interopRequireDefault(require("@meronex/icons/fa/FaCcMastercard"));
 var _FaCcVisa = _interopRequireDefault(require("@meronex/icons/fa/FaCcVisa"));
@@ -930,3 +930,7 @@ var disableReasons = function disableReasons() {
   return disableReasonDictionary;
 };
 exports.disableReasons = disableReasons;
+var TwelveHours = ['12:00 AM', '01:00 AM', '02:00 AM', '03:00 AM', '04:00 AM', '05:00 AM', '06:00 AM', '07:00 AM', '08:00 AM', '09:00 AM', '10:00 AM', '11:00 AM', '12:00 PM', '01:00 PM', '02:00 PM', '03:00 PM', '04:00 PM', '05:00 PM', '06:00 PM', '07:00 PM', '08:00 PM', '09:00 PM', '10:00 PM', '11:00 PM'];
+exports.TwelveHours = TwelveHours;
+var TwentyFourHours = ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'];
+exports.TwentyFourHours = TwentyFourHours;
