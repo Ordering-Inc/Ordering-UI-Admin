@@ -20,6 +20,7 @@ var _PaymethodTypeSelector = require("../PaymethodTypeSelector");
 var _CountryFilter = require("../CountryFilter");
 var _styles = require("../../../styles");
 var _CurrencyFilter = require("../CurrencyFilter");
+var _AdminsSelector = require("../AdminsSelector");
 var _utils = require("../../../utils");
 var _FirstSelect = require("../../../styles/Select/FirstSelect");
 var _FilterValuesContext = require("../../../contexts/FilterValuesContext");
@@ -52,6 +53,7 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
     paymethodsList = props.paymethodsList,
     businessesList = props.businessesList,
     citiesList = props.citiesList,
+    adminsList = props.adminsList,
     handleChangeGroup = props.handleChangeGroup,
     handleChangeDateType = props.handleChangeDateType,
     handleChangeFromDate = props.handleChangeFromDate,
@@ -68,6 +70,7 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
     handleChangeCurrency = props.handleChangeCurrency,
     handleChangeMetaFieldValue = props.handleChangeMetaFieldValue,
     handleAddMetaField = props.handleAddMetaField,
+    handleChangeAdmin = props.handleChangeAdmin,
     handleDeleteMetafield = props.handleDeleteMetafield,
     handleChangeExternalId = props.handleChangeExternalId,
     handleChangeChildFilterValue = props.handleChangeChildFilterValue,
@@ -315,7 +318,11 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
         assigned: value
       });
     }
-  }))), filterValues === null || filterValues === void 0 ? void 0 : filterValues.metafield.map(function (item) {
+  })), /*#__PURE__*/_react.default.createElement(_AdminsSelector.AdminsSelector, {
+    filterValues: filterValues,
+    adminsList: adminsList,
+    handleChangeAdmin: handleChangeAdmin
+  })), filterValues === null || filterValues === void 0 ? void 0 : filterValues.metafield.map(function (item) {
     return /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, {
       key: item.id
     }, /*#__PURE__*/_react.default.createElement(_styles.Input, {
