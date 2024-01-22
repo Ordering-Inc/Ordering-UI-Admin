@@ -34,7 +34,8 @@ export const FilterValuesProvider = ({ children }) => {
     customerName: null,
     customerEmail: null,
     customerCellphone: null,
-    customerLastname: null
+    customerLastname: null,
+    administratorIds: []
   })
 
   const handleFilterValues = (filterValues) => {
