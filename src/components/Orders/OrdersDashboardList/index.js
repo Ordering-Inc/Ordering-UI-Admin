@@ -1,6 +1,6 @@
 import React from 'react'
 import { useLocation } from 'react-router-dom'
-import { DashboardOrdersList as OrdersListController } from 'ordering-components-admin'
+import { DashboardOrdersList as OrdersListController, useConfig } from 'ordering-components-admin'
 import { OrdersListing } from '../OrdersListing'
 
 export const OrdersDashboardList = (props) => {
@@ -12,6 +12,9 @@ export const OrdersDashboardList = (props) => {
     isUseQuery
   } = props
 
+  const [configState] = useConfig()
+
+  const isShowSearchFilters = !configState?.configs?.search_box_enabled || configState?.configs?.search_box_enabled?.value === '1'
   const query = new URLSearchParams(useLocation().search)
   const defaultStatus = query.get('status')
   const defaultPage = query.get('page') || 1
@@ -26,11 +29,12 @@ export const OrdersDashboardList = (props) => {
       ? orderByOption === 'id' ? 'desc' : 'asc'
       : 'desc',
     asDashboard: true,
-    isSearchByOrderId: true,
-    isSearchByCustomerEmail: true,
-    isSearchByCustomerPhone: true,
+    isSearchByOrderId: isShowSearchFilters,
+    isSearchByCustomerName: isShowSearchFilters,
+    isSearchByCustomerEmail: isShowSearchFilters,
+    isSearchByCustomerPhone: isShowSearchFilters,
+    isSearchByDriverName: isShowSearchFilters,
     isSearchByBusinessName: true,
-    isSearchByDriverName: true,
     driverId: props.driverId
   }
 
