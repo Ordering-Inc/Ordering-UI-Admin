@@ -233,8 +233,10 @@ const OrdersManagerUI = (props) => {
             <OrdersContainer showCompressedInfo>
               <OrdersHeaderFilterGroup
                 driverGroupList={driverGroupList}
+                searchValue={searchValue}
                 driversList={driversList}
                 handleChangeFilterValues={handleChangeFilterValues}
+                handleChangeSearch={handleChangeSearch}
               />
               <OrderStatusFilterBar
                 isUseQuery={isUseQuery}
