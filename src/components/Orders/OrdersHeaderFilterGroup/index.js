@@ -12,12 +12,14 @@ import { SearchBar } from '../../Shared'
 const OrdersHeaderFilterGroupUI = (props) => {
   const {
     filterValues,
+    searchValue,
     driverGroupList,
     driversList,
     handleChangeDriver,
     handleChangeFilterValues,
     handleChangeExternalId,
     handleChangeGroupUnassigned,
+    handleChangeSearch,
     isSelectedOrders
   } = props
 
@@ -74,11 +76,20 @@ const OrdersHeaderFilterGroupUI = (props) => {
           />
         )}
         {!loading && configFilter.includes('driver_group_general') && (
-          <DriversGroupTypeSelector
-            driverGroupList={driverGroupList}
-            handleChangeGroup={handleChangeGroupUnassigned}
-            filterValues={filterValues.groupTypesUnassigned}
-            title={dictionary?.DRIVER_GROUP_NOT_ASSIGNED ?? 'Driver group (general)'}
+          // <DriversGroupTypeSelector
+          //   driverGroupList={driverGroupList}
+          //   handleChangeGroup={handleChangeGroupUnassigned}
+          //   filterValues={filterValues.groupTypesUnassigned}
+          //   title={dictionary?.DRIVER_GROUP_NOT_ASSIGNED ?? 'Driver group (general)'}
+          // />
+          <SearchBar
+            customClass='external_id'
+            isCustomLayout
+            hideSearchIcon
+            lazyLoad
+            onSearch={handleChangeSearch}
+            search={searchValue || ''}
+            placeholder={dictionary?.SEARCH_BY_STORE_NAME || 'Store name'}
           />
         )}
       </WrapperRow>
