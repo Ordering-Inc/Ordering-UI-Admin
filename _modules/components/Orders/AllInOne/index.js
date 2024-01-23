@@ -266,8 +266,10 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     showCompressedInfo: true
   }, /*#__PURE__*/_react.default.createElement(_OrdersHeaderFilterGroup.OrdersHeaderFilterGroup, {
     driverGroupList: driverGroupList,
+    searchValue: searchValue,
     driversList: driversList,
-    handleChangeFilterValues: handleChangeFilterValues
+    handleChangeFilterValues: handleChangeFilterValues,
+    handleChangeSearch: handleChangeSearch
   }), /*#__PURE__*/_react.default.createElement(_OrderStatusFilterBar.OrderStatusFilterBar, {
     isUseQuery: isUseQuery,
     selectedOrderStatus: ordersStatusGroup,
