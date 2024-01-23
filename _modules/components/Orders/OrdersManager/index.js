@@ -238,7 +238,9 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     isSelectedOrders: isSelectedOrders,
     driverGroupList: driverGroupList,
     driversList: driversList,
-    handleChangeFilterValues: handleChangeFilterValues
+    searchValue: searchValue,
+    handleChangeFilterValues: handleChangeFilterValues,
+    handleChangeSearch: handleChangeSearch
   }), /*#__PURE__*/_react.default.createElement(_OrderStatusFilterBar.OrderStatusFilterBar, {
     isUseQuery: isUseQuery,
     selectedOrderStatus: ordersStatusGroup,
