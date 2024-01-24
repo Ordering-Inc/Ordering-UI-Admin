@@ -68,7 +68,8 @@ const OrdersFilterGroupUI = (props) => {
     handleChangeExternalId,
     handleChangeChildFilterValue,
     handleChangeGroupUnassigned,
-    handleFilterValues
+    handleFilterValues,
+    handleChangeOfferId
   } = props
 
   const [, t] = useLanguage()
@@ -304,6 +305,22 @@ const OrdersFilterGroupUI = (props) => {
                 onChange={(value) => handleChangeChildFilterValue({ logisticStatus: value })}
               />
             </SelectWrapper>
+          </WrapperRow>
+          <WrapperRow>
+            <Input
+              type='text'
+              placeholder={t('OFFER_ID', 'Offer id')}
+              autoComplete='off'
+              value={filterValues?.offerId || ''}
+              onChange={(e) => handleChangeOfferId(e)}
+            />
+            <Input
+              type='text'
+              placeholder={t('COUPON', 'Coupon')}
+              autoComplete='off'
+              value={filterValues?.coupon || ''}
+              onChange={(e) => handleChangeChildFilterValue({ coupon: e?.target?.value })}
+            />
           </WrapperRow>
           <WrapperRow>
             <SelectWrapper>
