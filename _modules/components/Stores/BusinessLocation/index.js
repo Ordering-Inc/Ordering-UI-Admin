@@ -110,7 +110,7 @@ var BusinessLocation = function BusinessLocation(props) {
           case 9:
             result = _context.sent;
             setFormState(function (prevState) {
-              var _googleInputRef$curre;
+              var _googleInputRef$curre, _address$zipcode;
               return _objectSpread(_objectSpread({}, prevState), {}, {
                 changes: _objectSpread(_objectSpread({}, prevState === null || prevState === void 0 ? void 0 : prevState.changes), {}, {
                   address: (googleInputRef === null || googleInputRef === void 0 || (_googleInputRef$curre = googleInputRef.current) === null || _googleInputRef$curre === void 0 ? void 0 : _googleInputRef$curre.value) || (address === null || address === void 0 ? void 0 : address.address),
@@ -118,7 +118,8 @@ var BusinessLocation = function BusinessLocation(props) {
                     zipcode: address !== null && address !== void 0 && address.zipcode ? address.zipcode : -1,
                     zoom: 15
                   }),
-                  timezone: result === null || result === void 0 ? void 0 : result.timeZoneId
+                  timezone: result === null || result === void 0 ? void 0 : result.timeZoneId,
+                  zipcode: (_address$zipcode = address === null || address === void 0 ? void 0 : address.zipcode) !== null && _address$zipcode !== void 0 ? _address$zipcode : -1
                 })
               });
             });
