@@ -294,7 +294,7 @@ const ProductExtraOptionsUI = (props) => {
                     <img
                       src={theme.images.icons?.sixDots}
                       alt='six dots'
-                      draggable
+                      draggable={!extraState?.loading}
                       onDragStart={e => handleDragStart(e, option)}
                     />
                   </DragImageWrapper>
