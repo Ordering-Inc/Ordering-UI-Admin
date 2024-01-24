@@ -71,7 +71,8 @@ export const BusinessLocation = (props) => {
         ...prevState?.changes,
         address: googleInputRef?.current?.value || address?.address,
         location: { ...address?.location, zipcode: address?.zipcode ? address.zipcode : -1, zoom: 15 },
-        timezone: result?.timeZoneId
+        timezone: result?.timeZoneId,
+        zipcode: address?.zipcode ?? -1
       }
     }))
   }
