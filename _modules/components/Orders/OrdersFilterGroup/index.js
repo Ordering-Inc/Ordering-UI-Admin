@@ -75,7 +75,8 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
     handleChangeExternalId = props.handleChangeExternalId,
     handleChangeChildFilterValue = props.handleChangeChildFilterValue,
     handleChangeGroupUnassigned = props.handleChangeGroupUnassigned,
-    handleFilterValues = props.handleFilterValues;
+    handleFilterValues = props.handleFilterValues,
+    handleChangeOfferId = props.handleChangeOfferId;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -308,7 +309,26 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
         logisticStatus: value
       });
     }
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    type: "text",
+    placeholder: t('OFFER_ID', 'Offer id'),
+    autoComplete: "off",
+    value: (filterValues === null || filterValues === void 0 ? void 0 : filterValues.offerId) || '',
+    onChange: function onChange(e) {
+      return handleChangeOfferId(e);
+    }
+  }), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    type: "text",
+    placeholder: t('COUPON', 'Coupon'),
+    autoComplete: "off",
+    value: (filterValues === null || filterValues === void 0 ? void 0 : filterValues.coupon) || '',
+    onChange: function onChange(e) {
+      var _e$target5;
+      return handleChangeChildFilterValue({
+        coupon: e === null || e === void 0 || (_e$target5 = e.target) === null || _e$target5 === void 0 ? void 0 : _e$target5.value
+      });
+    }
+  })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
     options: assignedFilterOptions,
     className: "select",
     defaultValue: (_filterValues$assigne = filterValues === null || filterValues === void 0 ? void 0 : filterValues.assigned) !== null && _filterValues$assigne !== void 0 ? _filterValues$assigne : '',
