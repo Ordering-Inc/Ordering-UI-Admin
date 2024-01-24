@@ -168,7 +168,7 @@ export const ProductExtraSuboption = (props) => {
           <img
             src={theme.images.icons?.sixDots}
             alt='six dots'
-            draggable
+            draggable={!optionState.loading}
             onDragStart={e => handleDragStart(e, subOption)}
           />
         </DragImageWrapper>
