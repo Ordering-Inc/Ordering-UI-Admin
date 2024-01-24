@@ -331,7 +331,7 @@ var ProductExtraOptionsUI = function ProductExtraOptionsUI(props) {
     }, /*#__PURE__*/_react.default.createElement(_styles2.OptionNameContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.DragImageWrapper, null, /*#__PURE__*/_react.default.createElement("img", {
       src: (_theme$images$icons = theme.images.icons) === null || _theme$images$icons === void 0 ? void 0 : _theme$images$icons.sixDots,
       alt: "six dots",
-      draggable: true,
+      draggable: !(extraState !== null && extraState !== void 0 && extraState.loading),
       onDragStart: function onDragStart(e) {
         return handleDragStart(e, option);
       }
