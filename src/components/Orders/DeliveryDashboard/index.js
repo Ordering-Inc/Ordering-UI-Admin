@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { useConfig } from 'ordering-components-admin'
 import { DeliveriesLocation } from '../DeliveriesLocation'
 import { OrdersDashboardList } from '../OrdersDashboardList'
-import { OrdersHeaderFilterGroup } from '../OrdersHeaderFilterGroup'
 import { OrderStatusFilterBar } from '../OrderStatusFilterBar'
 import { OrderStatusSubFilter } from '../OrderStatusSubFilter'
 
@@ -57,13 +56,6 @@ export const DeliveryDashboard = (props) => {
   return (
     <DeliveryDashboardContainer>
       <OrdersContainer>
-        <OrdersHeaderFilterGroup
-          driverGroupList={driverGroupList}
-          driversList={driversList}
-          searchValue={searchValue}
-          handleChangeFilterValues={handleChangeFilterValues}
-          handleChangeSearch={handleChangeSearch}
-        />
         <FilterContainer>
           <OrderStatusFilterBar
             isUseQuery={isUseQuery}
