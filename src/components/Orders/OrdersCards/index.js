@@ -56,11 +56,6 @@ export const OrdersCards = (props) => {
     return imageKeys
   }, {})
 
-  const filterOptions = (configState?.configs?.filter_order_options?.value.split('|').map(value => value) || [])
-  const optionsToCheck = ['external_id', 'driver', 'driver_group_general']
-
-  const matchingFilterOptions = filterOptions.filter(option => optionsToCheck.includes(option)).length
-
   const handleChangePage = (page) => {
     getPageOrders(pagination.pageSize, page)
   }
@@ -185,7 +180,7 @@ export const OrdersCards = (props) => {
 
   return (
     <>
-      <OrdersListContainer matchingFilterOptions={matchingFilterOptions}>
+      <OrdersListContainer>
         {orderList.loading ? (
           [...Array(10).keys()].map(i => (
             <OrderCard key={i}>
@@ -261,15 +256,15 @@ export const OrdersCards = (props) => {
                       <p className={order?.time_status}>{displayDelayedTime(order)}</p>
                     </Timer>
                   )}
-                  { order?.codigoPod && (
-                    <div style={{paddingTop: 50}}>
+                  {order?.codigoPod && (
+                    <div style={{ paddingTop: 50 }}>
                       <p>
                         {
                           `${t('PODS', 'Pod')}: ${order?.codigoPod}` 
                         }
                       </p>
                     </div>
-                   )}
+                  )}
                 </CardHeading>
                 {isMessagesView && order?.unread_count > 0 && (
                   <UnreadMessageCounter>

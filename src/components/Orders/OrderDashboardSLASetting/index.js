@@ -26,10 +26,12 @@ export const OrderDashboardSLASettingUI = (props) => {
   const {
     settingsState,
     handleInputChange,
-    handleClickUpdate
+    handleClickUpdate,
+    settingOptionOpen,
+    setSettingOptionOpen
   } = props
   const [, t] = useLanguage()
-  const [settingOpen, setSettingOpen] = useState(false)
+  const [settingOpen, setSettingOpen] = useState(settingOptionOpen)
   const [currentTabItem, setCurrentTabItem] = useState(1)
   const [selectedTabStatus, setSelectedTabStatus] = useState(null)
   const theme = useTheme()
@@ -70,12 +72,14 @@ export const OrderDashboardSLASettingUI = (props) => {
 
   const handleCloseSettings = () => {
     setSettingOpen(false)
+    setSettingOptionOpen && setSettingOptionOpen(false)
   }
 
   const onSubmit = (data) => {
     if (data && Object.keys(data).length > 0) {
       handleClickUpdate()
       setSettingOpen(false)
+      setSettingOptionOpen && setSettingOptionOpen(false)
     }
   }
 
@@ -110,12 +114,14 @@ export const OrderDashboardSLASettingUI = (props) => {
 
   return (
     <SettingContainer>
-      <Button
-        color='secundary'
-        onClick={() => setSettingOpen(true)}
-      >
-        {t('SLA_SETTING', 'SLA’s settings')}
-      </Button>
+      {!settingOptionOpen && (
+        <Button
+          color='secundary'
+          onClick={() => setSettingOpen(true)}
+        >
+          {t('SLA_SETTING', 'SLA’s settings')}
+        </Button>
+      )}
       <Modal
         open={settingOpen}
         onClose={() => handleCloseSettings()}

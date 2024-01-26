@@ -2,10 +2,8 @@ import styled, { css } from 'styled-components'
 
 export const WrapperRow = styled.div`
   display: flex;
-  width: 100% !important;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding-top: 10px;
+  width: 100%;
+  align-items: center;
   padding-bottom: 0px;
 
   & > div {
@@ -13,7 +11,6 @@ export const WrapperRow = styled.div`
     height: 47px;
     max-width: 1000px;
     margin-right: 10px;
-    margin-bottom: 20px;
     background-color: ${props => props.theme.colors.secundary};
     border: none;
     font-size: 14px;
@@ -53,18 +50,24 @@ export const WrapperRow = styled.div`
 
   .external_id {
     @media (max-width: 1200px) {
-    flex: auto;
+     flex: auto;
+    }
   }
 
+  @media (max-width: 798px) {
+    flex-direction: column !important;
+    padding: 10px 15px 0 0px;
+    & > div {
+      margin-top: 15px;
+    }
   }
 
-  @media (min-width: 992px) {
-    flex-direction: row;
-  }
-
-  ${({ wrapperWidth, isSelectedOrders }) => wrapperWidth < 992 && css`
+  ${({ isSelectedOrders }) => isSelectedOrders && css`
       flex-direction: column !important;
-      padding: ${!isSelectedOrders && '15px 10px 0 10px'};
+      padding: ${!isSelectedOrders && '10px 15px 0 0px'};
+      & > div {
+        margin-top: 15px;
+      }
   `}
 `
 export const Option = styled.div`
