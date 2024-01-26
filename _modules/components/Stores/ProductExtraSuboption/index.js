@@ -208,7 +208,7 @@ var ProductExtraSuboption = function ProductExtraSuboption(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles2.LeftSubOptionContent, null, /*#__PURE__*/_react.default.createElement(_styles2.DragImageWrapper, null, /*#__PURE__*/_react.default.createElement("img", {
     src: (_theme$images$icons = theme.images.icons) === null || _theme$images$icons === void 0 ? void 0 : _theme$images$icons.sixDots,
     alt: "six dots",
-    draggable: true,
+    draggable: !optionState.loading,
     onDragStart: function onDragStart(e) {
       return handleDragStart(e, subOption);
     }
