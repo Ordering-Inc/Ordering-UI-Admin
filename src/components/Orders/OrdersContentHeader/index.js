@@ -4,13 +4,13 @@ import { SearchBar } from '../../Shared'
 import { OrdersFilterGroup } from '../OrdersFilterGroup'
 import { List as MenuIcon, LifePreserver } from 'react-bootstrap-icons'
 import { OrdersDashboardSLAControls } from '../OrdersDashboardSLAControls'
-import { OrderDashboardSLASetting } from '../OrderDashboardSLASetting'
 import { IconButton } from '../../../styles'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { OverlayTrigger, Tooltip } from 'react-bootstrap'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import { GoogleMapsApiKeySettingButton } from '../GoogleMapsApiKeySettingButton'
 import { WebsocketStatus } from '../WebsocketStatus'
+import { OrdersHeaderFilterGroup } from '../OrdersHeaderFilterGroup'
 
 import {
   OrderContentHeaderContainer,
@@ -18,10 +18,11 @@ import {
   HeaderTitle,
   TopRightSection,
   SLAControlsWrapper,
-  WrapperSearchAndFilter
+  WrapperSearchAndFilter,
+  WrapperHeaderFilterGroup
 } from './styles'
 
-export const OrdersContentHeader = memo((props) => {
+export const OrdersContentHeader = (props) => {
   const {
     isLateralBar,
     isDisableTitle,
@@ -92,18 +93,26 @@ export const OrdersContentHeader = memo((props) => {
 
           </HeaderSection>
         )}
-        <TopRightSection isCustomLayout={isSelectedOrders}>
+        <TopRightSection isCustomLayout={isSelectedOrders} isCollapse={isCollapse}>
+          <WrapperHeaderFilterGroup>
+            <OrdersHeaderFilterGroup
+              isSelectedOrders={isSelectedOrders}
+              driverGroupList={driverGroupList}
+              driversList={driversList}
+              searchValue={searchValue}
+              handleChangeFilterValues={handleChangeFilterValues}
+              handleChangeSearch={handleChangeSearch}
+            />
+          </WrapperHeaderFilterGroup>
           <WebsocketStatus />
           {isShowMapsKeySettingButton && (
             <GoogleMapsApiKeySettingButton />
           )}
           {(configState?.configs?.order_deadlines_enabled?.value === '1') && (
             <SLAControlsWrapper>
-              <OrderDashboardSLASetting
-                setSlaSettingTime={setSlaSettingTime}
-              />
               <OrdersDashboardSLAControls
                 setTimeStatus={setTimeStatus}
+                setSlaSettingTime={setSlaSettingTime}
               />
             </SLAControlsWrapper>
           )}
@@ -138,4 +147,4 @@ export const OrdersContentHeader = memo((props) => {
       </OrderContentHeaderContainer>
     </>
   )
-})
+}

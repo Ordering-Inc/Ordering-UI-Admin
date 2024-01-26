@@ -66,8 +66,10 @@ export const HeaderTitle = styled.p`
 export const TopRightSection = styled.div`
   width: 100%;
   display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
+  flex-direction: column-reverse;
+  flex-wrap: nowrap;
+  margin: 5px 0px 10px 15px;
+
   ${({ isCustomLayout }) => !isCustomLayout && css`
     justify-content: flex-end;
   `}
@@ -78,12 +80,16 @@ export const TopRightSection = styled.div`
     }
   `}
 
-  @media (min-width: 768px) {
-    flex-direction: row;
-    align-items: center;
+  @media (min-width: 799px) {
+    flex-direction: ${({ isCustomLayout }) => (isCustomLayout) ? 'column-reverse' : 'row'};
+    align-items: ${({ isCustomLayout }) => (isCustomLayout) ? 'flex-start' : 'center'};
   }
 `
 
+export const WrapperHeaderFilterGroup = styled.div`
+  width: 100%;
+  max-width: 850px
+`
 export const SLAControlsWrapper = styled.div`
   display: flex;
   align-items: center;

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useLanguage, useSession, OrdersManage as OrdersManageController } from 'ordering-components-admin'
-import { OrdersHeaderFilterGroup } from '../OrdersHeaderFilterGroup'
 import { OrderStatusFilterBar } from '../OrderStatusFilterBar'
 import { OrdersContentHeader } from '../OrdersContentHeader'
 import { OrderDetails } from '../OrderDetails'
@@ -231,13 +230,6 @@ const OrdersManagerUI = (props) => {
               />
             </DriversContainer>
             <OrdersContainer showCompressedInfo>
-              <OrdersHeaderFilterGroup
-                driverGroupList={driverGroupList}
-                searchValue={searchValue}
-                driversList={driversList}
-                handleChangeFilterValues={handleChangeFilterValues}
-                handleChangeSearch={handleChangeSearch}
-              />
               <OrderStatusFilterBar
                 isUseQuery={isUseQuery}
                 selectedOrderStatus={ordersStatusGroup}
