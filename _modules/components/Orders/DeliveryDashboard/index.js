@@ -8,7 +8,6 @@ var _react = _interopRequireWildcard(require("react"));
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _DeliveriesLocation = require("../DeliveriesLocation");
 var _OrdersDashboardList = require("../OrdersDashboardList");
-var _OrdersHeaderFilterGroup = require("../OrdersHeaderFilterGroup");
 var _OrderStatusFilterBar = require("../OrderStatusFilterBar");
 var _OrderStatusSubFilter = require("../OrderStatusSubFilter");
 var _styles = require("./styles");
@@ -62,13 +61,7 @@ var DeliveryDashboard = function DeliveryDashboard(props) {
       setInterActionMapOrder(_objectSpread({}, order));
     }
   };
-  return /*#__PURE__*/_react.default.createElement(_styles.DeliveryDashboardContainer, null, /*#__PURE__*/_react.default.createElement(_styles.OrdersContainer, null, /*#__PURE__*/_react.default.createElement(_OrdersHeaderFilterGroup.OrdersHeaderFilterGroup, {
-    driverGroupList: driverGroupList,
-    driversList: driversList,
-    searchValue: searchValue,
-    handleChangeFilterValues: handleChangeFilterValues,
-    handleChangeSearch: handleChangeSearch
-  }), /*#__PURE__*/_react.default.createElement(_styles.FilterContainer, null, /*#__PURE__*/_react.default.createElement(_OrderStatusFilterBar.OrderStatusFilterBar, {
+  return /*#__PURE__*/_react.default.createElement(_styles.DeliveryDashboardContainer, null, /*#__PURE__*/_react.default.createElement(_styles.OrdersContainer, null, /*#__PURE__*/_react.default.createElement(_styles.FilterContainer, null, /*#__PURE__*/_react.default.createElement(_OrderStatusFilterBar.OrderStatusFilterBar, {
     isUseQuery: isUseQuery,
     selectedOrderStatus: ordersStatusGroup,
     changeOrderStatus: handleOrdersStatusGroupFilter,

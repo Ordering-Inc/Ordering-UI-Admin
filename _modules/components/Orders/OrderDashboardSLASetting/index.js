@@ -29,11 +29,13 @@ var OrderDashboardSLASettingUI = function OrderDashboardSLASettingUI(props) {
   var _theme$images$icons, _theme$images$icons2, _theme$images$icons3;
   var settingsState = props.settingsState,
     handleInputChange = props.handleInputChange,
-    handleClickUpdate = props.handleClickUpdate;
+    handleClickUpdate = props.handleClickUpdate,
+    settingOptionOpen = props.settingOptionOpen,
+    setSettingOptionOpen = props.setSettingOptionOpen;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
-  var _useState = (0, _react.useState)(false),
+  var _useState = (0, _react.useState)(settingOptionOpen),
     _useState2 = _slicedToArray(_useState, 2),
     settingOpen = _useState2[0],
     setSettingOpen = _useState2[1];
@@ -91,11 +93,13 @@ var OrderDashboardSLASettingUI = function OrderDashboardSLASettingUI(props) {
   }];
   var handleCloseSettings = function handleCloseSettings() {
     setSettingOpen(false);
+    setSettingOptionOpen && setSettingOptionOpen(false);
   };
   var onSubmit = function onSubmit(data) {
     if (data && Object.keys(data).length > 0) {
       handleClickUpdate();
       setSettingOpen(false);
+      setSettingOptionOpen && setSettingOptionOpen(false);
     }
   };
   var closeAlert = function closeAlert() {
@@ -127,7 +131,7 @@ var OrderDashboardSLASettingUI = function OrderDashboardSLASettingUI(props) {
       });
     }
   }, [settingsState === null || settingsState === void 0 ? void 0 : settingsState.result]);
-  return /*#__PURE__*/_react.default.createElement(_styles2.SettingContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  return /*#__PURE__*/_react.default.createElement(_styles2.SettingContainer, null, !settingOptionOpen && /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "secundary",
     onClick: function onClick() {
       return setSettingOpen(true);

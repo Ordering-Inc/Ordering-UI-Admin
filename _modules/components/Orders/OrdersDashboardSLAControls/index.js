@@ -8,6 +8,7 @@ exports.OrdersDashboardSLAControls = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _FirstSelect = require("../../../styles/Select/FirstSelect");
+var _OrderDashboardSLASetting = require("../OrderDashboardSLASetting");
 var _styles = require("./styles");
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -22,7 +23,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrdersDashboardSLAControls = function OrdersDashboardSLAControls(props) {
-  var setTimeStatus = props.setTimeStatus;
+  var setTimeStatus = props.setTimeStatus,
+    setSlaSettingTime = props.setSlaSettingTime;
   var _useState = (0, _react.useState)('default'),
     _useState2 = _slicedToArray(_useState, 2),
     defaultOptionValue = _useState2[0],
@@ -31,6 +33,10 @@ var OrdersDashboardSLAControls = function OrdersDashboardSLAControls(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     filteredTimeStatus = _useState4[0],
     setFilteredTimeStatus = _useState4[1];
+  var _useState5 = (0, _react.useState)(false),
+    _useState6 = _slicedToArray(_useState5, 2),
+    settingOptionOpen = _useState6[0],
+    setSettingOptionOpen = _useState6[1];
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -66,8 +72,18 @@ var OrdersDashboardSLAControls = function OrdersDashboardSLAControls(props) {
     }, /*#__PURE__*/_react.default.createElement(_styles.Timestatus, {
       timeState: "delayed"
     }), /*#__PURE__*/_react.default.createElement("p", null, t('DELAYED', 'Delayed')))
+  }, {
+    value: 'sla_settings',
+    name: t('SLA_SETTING', 'SLA’s settings'),
+    content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
+      noPadding: true
+    }, /*#__PURE__*/_react.default.createElement("p", null, t('SLA_SETTING', 'SLA’s settings')))
   }];
   var changeOrderTimeStatus = function changeOrderTimeStatus(val) {
+    if (val === 'sla_settings') {
+      setSettingOptionOpen(true);
+      return;
+    }
     setDefaultOptionValue(val);
     if (val === 'default') {
       setTimeStatus(null);
@@ -98,6 +114,10 @@ var OrdersDashboardSLAControls = function OrdersDashboardSLAControls(props) {
     isShowSearchBar: true,
     searchBarPlaceholder: t('SEARCH', 'Search'),
     handleChangeSearch: handleChangeSearch
-  })));
+  })), settingOptionOpen && /*#__PURE__*/_react.default.createElement(_OrderDashboardSLASetting.OrderDashboardSLASetting, {
+    setSlaSettingTime: setSlaSettingTime,
+    settingOptionOpen: settingOptionOpen,
+    setSettingOptionOpen: setSettingOptionOpen
+  }));
 };
 exports.OrdersDashboardSLAControls = OrdersDashboardSLAControls;

@@ -4,9 +4,9 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WrapperSearchAndFilter = exports.TopRightSection = exports.SLAControlsWrapper = exports.OrderContentHeaderContainer = exports.HeaderTitle = exports.HeaderSection = void 0;
+exports.WrapperSearchAndFilter = exports.WrapperHeaderFilterGroup = exports.TopRightSection = exports.SLAControlsWrapper = exports.OrderContentHeaderContainer = exports.HeaderTitle = exports.HeaderSection = void 0;
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18;
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
@@ -27,26 +27,34 @@ var HeaderTitle = _styledComponents.default.p(_templateObject8 || (_templateObje
   return props.theme.colors.headingColor;
 });
 exports.HeaderTitle = HeaderTitle;
-var TopRightSection = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  ", "\n\n  ", "\n\n  @media (min-width: 768px) {\n    flex-direction: row;\n    align-items: center;\n  }\n"])), function (_ref2) {
+var TopRightSection = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  flex-direction: column-reverse;\n  flex-wrap: nowrap;\n  margin: 5px 0px 10px 15px;\n\n  ", "\n\n  ", "\n\n  @media (min-width: 799px) {\n    flex-direction: ", ";\n    align-items: ", ";\n  }\n"])), function (_ref2) {
   var isCustomLayout = _ref2.isCustomLayout;
   return !isCustomLayout && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    justify-content: flex-end;\n  "])));
 }, function (_ref3) {
   var isCustomLayout = _ref3.isCustomLayout;
   return isCustomLayout && (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n    .websocket-container {\n      padding-bottom: 10px;\n    }\n  "])));
+}, function (_ref4) {
+  var isCustomLayout = _ref4.isCustomLayout;
+  return isCustomLayout ? 'column-reverse' : 'row';
+}, function (_ref5) {
+  var isCustomLayout = _ref5.isCustomLayout;
+  return isCustomLayout ? 'flex-start' : 'center';
 });
 exports.TopRightSection = TopRightSection;
-var SLAControlsWrapper = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-top: 10px;\n\n  @media (min-width: 768px) {\n    margin-top: 0px;\n  }\n"])));
+var WrapperHeaderFilterGroup = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  width: 100%;\n  max-width: 850px\n"])));
+exports.WrapperHeaderFilterGroup = WrapperHeaderFilterGroup;
+var SLAControlsWrapper = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  margin-top: 10px;\n\n  @media (min-width: 768px) {\n    margin-top: 0px;\n  }\n"])));
 exports.SLAControlsWrapper = SLAControlsWrapper;
-var WrapperSearchAndFilter = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  position: relative;\n  display: flex;\n  align-items: center;\n  margin-top: 10px;\n\n  ", "\n\n  input {\n    background: ", ";\n    border: none;\n  }\n\n  > button {\n    ", "\n  }\n\n  @media (min-width: 760px) {\n    margin: 20px 0 10px 0;\n  }\n\n  @media (min-width: 992px) {\n    ", "\n  }\n"])), function (_ref4) {
-  var fullWidth = _ref4.fullWidth;
-  return fullWidth && (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n    width: 100%;\n    > div {\n      width: 100%;\n\n      input {\n        width: 100%;\n      }\n    }\n  "])));
+var WrapperSearchAndFilter = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  position: relative;\n  display: flex;\n  align-items: center;\n  margin-top: 10px;\n\n  ", "\n\n  input {\n    background: ", ";\n    border: none;\n  }\n\n  > button {\n    ", "\n  }\n\n  @media (min-width: 760px) {\n    margin: 20px 0 10px 0;\n  }\n\n  @media (min-width: 992px) {\n    ", "\n  }\n"])), function (_ref6) {
+  var fullWidth = _ref6.fullWidth;
+  return fullWidth && (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    width: 100%;\n    > div {\n      width: 100%;\n\n      input {\n        width: 100%;\n      }\n    }\n  "])));
 }, function (props) {
   return props.theme.colors.secundary;
 }, function (props) {
   var _props$theme3;
-  return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n      margin-right: 8px;\n    "]))) : (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n      margin-left: 8px;\n    "])));
-}, function (_ref5) {
-  var fullWidth = _ref5.fullWidth;
-  return !fullWidth && (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n      margin: 0px;\n    "])));
+  return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n      margin-right: 8px;\n    "]))) : (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n      margin-left: 8px;\n    "])));
+}, function (_ref7) {
+  var fullWidth = _ref7.fullWidth;
+  return !fullWidth && (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n      margin: 0px;\n    "])));
 });
 exports.WrapperSearchAndFilter = WrapperSearchAndFilter;

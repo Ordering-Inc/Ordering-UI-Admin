@@ -8,7 +8,6 @@ exports.AllInOne = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
-var _OrdersHeaderFilterGroup = require("../OrdersHeaderFilterGroup");
 var _OrderStatusFilterBar = require("../OrderStatusFilterBar");
 var _OrdersContentHeader = require("../OrdersContentHeader");
 var _OrderDetails = require("../OrderDetails");
@@ -264,13 +263,7 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     handleEmtpyOrderSelected: handleBackRedirect
   })), /*#__PURE__*/_react.default.createElement(_styles.OrdersContainer, {
     showCompressedInfo: true
-  }, /*#__PURE__*/_react.default.createElement(_OrdersHeaderFilterGroup.OrdersHeaderFilterGroup, {
-    driverGroupList: driverGroupList,
-    searchValue: searchValue,
-    driversList: driversList,
-    handleChangeFilterValues: handleChangeFilterValues,
-    handleChangeSearch: handleChangeSearch
-  }), /*#__PURE__*/_react.default.createElement(_OrderStatusFilterBar.OrderStatusFilterBar, {
+  }, /*#__PURE__*/_react.default.createElement(_OrderStatusFilterBar.OrderStatusFilterBar, {
     isUseQuery: isUseQuery,
     selectedOrderStatus: ordersStatusGroup,
     changeOrderStatus: handleOrdersStatusGroupFilter,
