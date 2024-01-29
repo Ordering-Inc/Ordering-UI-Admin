@@ -24,7 +24,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var DriversGroupGeneralForm = function DriversGroupGeneralForm(props) {
-  var _ref, _changesState$name, _driversGroupState$dr, _changesState$type, _driversGroupState$dr2, _driversGroupState$dr3, _changesState$priorit, _driversGroupState$dr4;
+  var _ref, _changesState$name, _driversGroupState$dr, _ref2, _changesState$driver_, _driversGroupState$dr2, _changesState$type, _driversGroupState$dr3, _driversGroupState$dr4, _changesState$priorit, _driversGroupState$dr5;
   var driversGroupState = props.driversGroupState,
     driversManagers = props.driversManagers,
     changesState = props.changesState,
@@ -35,7 +35,8 @@ var DriversGroupGeneralForm = function DriversGroupGeneralForm(props) {
     isTourOpen = props.isTourOpen,
     handleNextClick = props.handleNextClick,
     selectedDriverManager = props.selectedDriverManager,
-    handleSelectDriverManager = props.handleSelectDriverManager;
+    handleSelectDriverManager = props.handleSelectDriverManager,
+    handleChangeMaxDistance = props.handleChangeMaxDistance;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -146,6 +147,14 @@ var DriversGroupGeneralForm = function DriversGroupGeneralForm(props) {
       required: t('VALIDATION_ERROR_REQUIRED', 'Project is required').replace('_attribute_', t('NAME', 'Name'))
     }),
     autoComplete: "off"
+  })), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('DRIVER_AVAILABLE_MAX_DISTANCE', 'Driver available max distance')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    name: "driver_available_max_distance",
+    value: (_ref2 = (_changesState$driver_ = changesState === null || changesState === void 0 ? void 0 : changesState.driver_available_max_distance) !== null && _changesState$driver_ !== void 0 ? _changesState$driver_ : (_driversGroupState$dr2 = driversGroupState.driversGroup) === null || _driversGroupState$dr2 === void 0 ? void 0 : _driversGroupState$dr2.driver_available_max_distance) !== null && _ref2 !== void 0 ? _ref2 : '',
+    onChange: function onChange(e) {
+      return handleChangeMaxDistance(e.target.value);
+    },
+    placeholder: t('WITHOUT_RESTRICTIONS', 'Without restrictions'),
+    autoComplete: "off"
   })), (user === null || user === void 0 ? void 0 : user.level) !== 5 && /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('DRIVER_MANAGER', 'Driver manager')), /*#__PURE__*/_react.default.createElement(_styles2.DriverManagerContainer, null, driversManagers.map(function (driverManager) {
     return /*#__PURE__*/_react.default.createElement(_styles2.DriverManagerWrapper, {
       key: driverManager.id
@@ -163,17 +172,17 @@ var DriversGroupGeneralForm = function DriversGroupGeneralForm(props) {
     isSecondIcon: true,
     placeholder: t('SELECT_TYPE', 'Select type'),
     options: typeOptions,
-    defaultValue: (_changesState$type = changesState === null || changesState === void 0 ? void 0 : changesState.type) !== null && _changesState$type !== void 0 ? _changesState$type : (_driversGroupState$dr2 = driversGroupState.driversGroup) === null || _driversGroupState$dr2 === void 0 ? void 0 : _driversGroupState$dr2.type,
+    defaultValue: (_changesState$type = changesState === null || changesState === void 0 ? void 0 : changesState.type) !== null && _changesState$type !== void 0 ? _changesState$type : (_driversGroupState$dr3 = driversGroupState.driversGroup) === null || _driversGroupState$dr3 === void 0 ? void 0 : _driversGroupState$dr3.type,
     onChange: function onChange(val) {
       return handleChangesState({
         type: val
       });
     }
-  })), (changesState === null || changesState === void 0 ? void 0 : changesState.type) === 0 || typeof (changesState === null || changesState === void 0 ? void 0 : changesState.type) === 'undefined' && ((_driversGroupState$dr3 = driversGroupState.driversGroup) === null || _driversGroupState$dr3 === void 0 ? void 0 : _driversGroupState$dr3.type) === 0 ? /*#__PURE__*/_react.default.createElement(_DriversGroupDrivers.DriversGroupDrivers, props) : /*#__PURE__*/_react.default.createElement(_DriversGroupCompanies.DriversGroupCompanies, props), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('PRIORITY', 'Priority')), /*#__PURE__*/_react.default.createElement(_styles.SecondSelect, {
+  })), (changesState === null || changesState === void 0 ? void 0 : changesState.type) === 0 || typeof (changesState === null || changesState === void 0 ? void 0 : changesState.type) === 'undefined' && ((_driversGroupState$dr4 = driversGroupState.driversGroup) === null || _driversGroupState$dr4 === void 0 ? void 0 : _driversGroupState$dr4.type) === 0 ? /*#__PURE__*/_react.default.createElement(_DriversGroupDrivers.DriversGroupDrivers, props) : /*#__PURE__*/_react.default.createElement(_DriversGroupCompanies.DriversGroupCompanies, props), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('PRIORITY', 'Priority')), /*#__PURE__*/_react.default.createElement(_styles.SecondSelect, {
     isSecondIcon: true,
     placeholder: t('SELECT_PRIORITY', 'Select priority'),
     options: priorityOptions,
-    defaultValue: (_changesState$priorit = changesState === null || changesState === void 0 ? void 0 : changesState.priority) !== null && _changesState$priorit !== void 0 ? _changesState$priorit : (_driversGroupState$dr4 = driversGroupState.driversGroup) === null || _driversGroupState$dr4 === void 0 ? void 0 : _driversGroupState$dr4.priority,
+    defaultValue: (_changesState$priorit = changesState === null || changesState === void 0 ? void 0 : changesState.priority) !== null && _changesState$priorit !== void 0 ? _changesState$priorit : (_driversGroupState$dr5 = driversGroupState.driversGroup) === null || _driversGroupState$dr5 === void 0 ? void 0 : _driversGroupState$dr5.priority,
     onChange: function onChange(val) {
       return handleChangesState({
         priority: val
