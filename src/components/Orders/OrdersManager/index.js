@@ -197,14 +197,6 @@ const OrdersManagerUI = (props) => {
           setSlaSettingTime={setSlaSettingTime}
           isLateralBar={isLateralBar}
         />
-        <OrdersHeaderFilterGroup
-          isSelectedOrders={isSelectedOrders}
-          driverGroupList={driverGroupList}
-          driversList={driversList}
-          searchValue={searchValue}
-          handleChangeFilterValues={handleChangeFilterValues}
-          handleChangeSearch={handleChangeSearch}
-        />
         <OrderStatusFilterBar
           isUseQuery={isUseQuery}
           selectedOrderStatus={ordersStatusGroup}

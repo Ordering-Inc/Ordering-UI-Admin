@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 
 import { Select as FirstSelect } from '../../../styles/Select/FirstSelect'
+import { OrderDashboardSLASetting } from '../OrderDashboardSLASetting'
 
 import {
   OrdersDashboardSLAControlsContainer,
@@ -11,9 +12,10 @@ import {
 } from './styles'
 
 export const OrdersDashboardSLAControls = (props) => {
-  const { setTimeStatus } = props
+  const { setTimeStatus, setSlaSettingTime } = props
   const [defaultOptionValue, setDefaultOptionValue] = useState('default')
   const [filteredTimeStatus, setFilteredTimeStatus] = useState([])
+  const [settingOptionOpen, setSettingOptionOpen] = useState(false)
   const [, t] = useLanguage()
 
   const timeStatus = [
@@ -56,10 +58,23 @@ export const OrdersDashboardSLAControls = (props) => {
           <p>{t('DELAYED', 'Delayed')}</p>
         </Option>
       )
+    },
+    {
+      value: 'sla_settings',
+      name: t('SLA_SETTING', 'SLA’s settings'),
+      content: (
+        <Option noPadding>
+          <p>{t('SLA_SETTING', 'SLA’s settings')}</p>
+        </Option>
+      )
     }
   ]
 
   const changeOrderTimeStatus = (val) => {
+    if (val === 'sla_settings') {
+      setSettingOptionOpen(true)
+      return
+    }
     setDefaultOptionValue(val)
     if (val === 'default') {
       setTimeStatus(null)
@@ -92,6 +107,13 @@ export const OrdersDashboardSLAControls = (props) => {
           handleChangeSearch={handleChangeSearch}
         />
       </OrderTimeStatusSelectWrapper>
+      {settingOptionOpen && (
+        <OrderDashboardSLASetting
+          setSlaSettingTime={setSlaSettingTime}
+          settingOptionOpen={settingOptionOpen}
+          setSettingOptionOpen={setSettingOptionOpen}
+        />
+      )}
     </OrdersDashboardSLAControlsContainer>
   )
 }

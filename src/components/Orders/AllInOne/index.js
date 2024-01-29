@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useLanguage, useSession, OrdersManage as OrdersManageController } from 'ordering-components-admin'
-import { OrdersHeaderFilterGroup } from '../OrdersHeaderFilterGroup'
+import { useLanguage, useConfig, useSession, OrdersManage as OrdersManageController } from 'ordering-components-admin'
 import { OrderStatusFilterBar } from '../OrderStatusFilterBar'
 import { OrdersContentHeader } from '../OrdersContentHeader'
 import { OrderDetails } from '../OrderDetails'
@@ -62,6 +61,9 @@ const OrdersManagerUI = (props) => {
 
   const [, t] = useLanguage()
   const [{ user }] = useSession()
+  const [configState] = useConfig()
+
+  const isSearchFilterValue = (configState?.configs?.filter_order_options?.value.split('|').map(value => (value)) || []).includes('driver_group_general')
 
   const query = new URLSearchParams(useLocation().search)
   const [isOpenOrderDetail, setIsOpenOrderDetail] = useState(false)
@@ -221,23 +223,19 @@ const OrdersManagerUI = (props) => {
           <TopContent>
             <DriversContainer>
               <DriversManager
-                filterValues={filterValues}
-                setMapsData={setMapsData}
-                handleUpdateAssignedOrders={handleUpdateAssignedOrders}
                 disableSocketRoomDriver
-                drivers={driversList.drivers}
                 showCompressedInfo
+                filterValues={filterValues}
+                searchFilterValue={searchValue}
+                driverGroupList={driverGroupList}
+                isSearchFilterValue={isSearchFilterValue}
+                drivers={driversList.drivers}
+                setMapsData={setMapsData}
                 handleEmtpyOrderSelected={handleBackRedirect}
+                handleUpdateAssignedOrders={handleUpdateAssignedOrders}
               />
             </DriversContainer>
             <OrdersContainer showCompressedInfo>
-              <OrdersHeaderFilterGroup
-                driverGroupList={driverGroupList}
-                searchValue={searchValue}
-                driversList={driversList}
-                handleChangeFilterValues={handleChangeFilterValues}
-                handleChangeSearch={handleChangeSearch}
-              />
               <OrderStatusFilterBar
                 isUseQuery={isUseQuery}
                 selectedOrderStatus={ordersStatusGroup}

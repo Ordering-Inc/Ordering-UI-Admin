@@ -27,7 +27,7 @@ export const OrdersDashboardSLAControlsContainer = styled.div`
 
 export const OrderTimeStatusSelectWrapper = styled.div`
   .timeStatusSelect {
-    width: 168px;
+    width: fit-content;
     height: 43px;
     line-height: 43px;
     border: none;
