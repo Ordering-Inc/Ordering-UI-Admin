@@ -79,7 +79,7 @@ var SocketStatusUI = function SocketStatusUI(props) {
     onClick: function onClick() {
       return setOpenModal(true);
     }
-  }, /*#__PURE__*/_react.default.createElement(_styles2.StatusContainer, null, /*#__PURE__*/_react.default.createElement("span", null, t('CONNECTION_STATUS', 'Connection status')), /*#__PURE__*/_react.default.createElement(_styles2.WebsocketStatusDot, {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.StatusContainer, null, /*#__PURE__*/_react.default.createElement("span", null, t('CONNECTION', 'Connection')), /*#__PURE__*/_react.default.createElement(_styles2.WebsocketStatusDot, {
     status: socketStatus
   }))), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     open: openModal,

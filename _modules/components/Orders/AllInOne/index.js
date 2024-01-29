@@ -8,7 +8,6 @@ exports.AllInOne = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
-var _OrdersHeaderFilterGroup = require("../OrdersHeaderFilterGroup");
 var _OrderStatusFilterBar = require("../OrderStatusFilterBar");
 var _OrdersContentHeader = require("../OrdersContentHeader");
 var _OrderDetails = require("../OrderDetails");
@@ -35,6 +34,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrdersManagerUI = function OrdersManagerUI(props) {
+  var _configState$configs;
   var isSelectedOrders = props.isSelectedOrders,
     searchValue = props.searchValue,
     driverGroupList = props.driverGroupList,
@@ -68,6 +68,12 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
   var _useSession = (0, _orderingComponentsAdmin.useSession)(),
     _useSession2 = _slicedToArray(_useSession, 1),
     user = _useSession2[0].user;
+  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configState = _useConfig2[0];
+  var isSearchFilterValue = ((configState === null || configState === void 0 || (_configState$configs = configState.configs) === null || _configState$configs === void 0 || (_configState$configs = _configState$configs.filter_order_options) === null || _configState$configs === void 0 ? void 0 : _configState$configs.value.split('|').map(function (value) {
+    return value;
+  })) || []).includes('driver_group_general');
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
@@ -255,22 +261,19 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     setTimeStatus: setTimeStatus,
     setSlaSettingTime: setSlaSettingTime
   }), /*#__PURE__*/_react.default.createElement(_styles.MainContentContainer, null, /*#__PURE__*/_react.default.createElement(_styles.TopContent, null, /*#__PURE__*/_react.default.createElement(_styles.DriversContainer, null, /*#__PURE__*/_react.default.createElement(_DriversManager.DriversManager, {
-    filterValues: filterValues,
-    setMapsData: setMapsData,
-    handleUpdateAssignedOrders: handleUpdateAssignedOrders,
     disableSocketRoomDriver: true,
-    drivers: driversList.drivers,
     showCompressedInfo: true,
-    handleEmtpyOrderSelected: handleBackRedirect
+    filterValues: filterValues,
+    searchFilterValue: searchValue,
+    driverGroupList: driverGroupList,
+    isSearchFilterValue: isSearchFilterValue,
+    drivers: driversList.drivers,
+    setMapsData: setMapsData,
+    handleEmtpyOrderSelected: handleBackRedirect,
+    handleUpdateAssignedOrders: handleUpdateAssignedOrders
   })), /*#__PURE__*/_react.default.createElement(_styles.OrdersContainer, {
     showCompressedInfo: true
-  }, /*#__PURE__*/_react.default.createElement(_OrdersHeaderFilterGroup.OrdersHeaderFilterGroup, {
-    driverGroupList: driverGroupList,
-    searchValue: searchValue,
-    driversList: driversList,
-    handleChangeFilterValues: handleChangeFilterValues,
-    handleChangeSearch: handleChangeSearch
-  }), /*#__PURE__*/_react.default.createElement(_OrderStatusFilterBar.OrderStatusFilterBar, {
+  }, /*#__PURE__*/_react.default.createElement(_OrderStatusFilterBar.OrderStatusFilterBar, {
     isUseQuery: isUseQuery,
     selectedOrderStatus: ordersStatusGroup,
     changeOrderStatus: handleOrdersStatusGroupFilter,

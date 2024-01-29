@@ -234,13 +234,6 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     setTimeStatus: setTimeStatus,
     setSlaSettingTime: setSlaSettingTime,
     isLateralBar: isLateralBar
-  }), /*#__PURE__*/_react.default.createElement(_OrdersHeaderFilterGroup.OrdersHeaderFilterGroup, {
-    isSelectedOrders: isSelectedOrders,
-    driverGroupList: driverGroupList,
-    driversList: driversList,
-    searchValue: searchValue,
-    handleChangeFilterValues: handleChangeFilterValues,
-    handleChangeSearch: handleChangeSearch
   }), /*#__PURE__*/_react.default.createElement(_OrderStatusFilterBar.OrderStatusFilterBar, {
     isUseQuery: isUseQuery,
     selectedOrderStatus: ordersStatusGroup,
