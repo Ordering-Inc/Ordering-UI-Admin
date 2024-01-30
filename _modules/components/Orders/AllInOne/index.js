@@ -61,7 +61,8 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     setSelectedOrderIds = props.setSelectedOrderIds,
     allowColumns = props.allowColumns,
     setAllowColumns = props.setAllowColumns,
-    isUseQuery = props.isUseQuery;
+    isUseQuery = props.isUseQuery,
+    adminsList = props.adminsList;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -257,6 +258,7 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
       return _handleOpenTour();
     },
     filterModalOpen: filterModalOpen,
+    adminsList: adminsList,
     setFilterModalOpen: setFilterModalOpen,
     setTimeStatus: setTimeStatus,
     setSlaSettingTime: setSlaSettingTime
