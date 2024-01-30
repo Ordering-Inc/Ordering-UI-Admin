@@ -56,7 +56,8 @@ const OrdersManagerUI = (props) => {
     setSelectedOrderIds,
     allowColumns,
     setAllowColumns,
-    isUseQuery
+    isUseQuery,
+    adminsList
   } = props
 
   const [, t] = useLanguage()
@@ -214,6 +215,7 @@ const OrdersManagerUI = (props) => {
           handleChangeMultiOrdersStatus={handleChangeMultiOrdersStatus}
           handleOpenTour={() => handleOpenTour()}
           filterModalOpen={filterModalOpen}
+          adminsList={adminsList}
           setFilterModalOpen={setFilterModalOpen}
           setTimeStatus={setTimeStatus}
           setSlaSettingTime={setSlaSettingTime}
