@@ -39,12 +39,12 @@ var DriversTimeDisplayUI = function DriversTimeDisplayUI(props) {
   var driversList = props.driversList,
     paginationProps = props.paginationProps,
     getDrivers = props.getDrivers,
-    setSelectedGroupId = props.setSelectedGroupId,
+    setSelectedGroup = props.setSelectedGroup,
     setIsTimeChangeError = props.setIsTimeChangeError,
     isTimeChangeError = props.isTimeChangeError,
     handleChangeScheduleTime = props.handleChangeScheduleTime,
     scheduleState = props.scheduleState,
-    selectedGroupId = props.selectedGroupId,
+    selectedGroup = props.selectedGroup,
     setScheduleState = props.setScheduleState,
     setDate = props.setDate,
     setSelectedUntilDate = props.setSelectedUntilDate,
@@ -149,7 +149,7 @@ var DriversTimeDisplayUI = function DriversTimeDisplayUI(props) {
   }];
   var changeDriverGroupState = function changeDriverGroupState(_driverGroup) {
     setShowSelectHeader(false);
-    setSelectedGroupId(_driverGroup === null || _driverGroup === void 0 ? void 0 : _driverGroup.id);
+    setSelectedGroup(_driverGroup);
   };
   var handleChangeDate = function handleChangeDate(date1, date2) {
     var diff = (0, _moment.default)(date2).diff(date1, 'days');
@@ -338,18 +338,21 @@ var DriversTimeDisplayUI = function DriversTimeDisplayUI(props) {
       });
     }
   }, [selectedBlock === null || selectedBlock === void 0 ? void 0 : selectedBlock.block]);
-  var handleSelectDriver = function handleSelectDriver(_driver, _block) {
+  var handleSelectDriver = function handleSelectDriver(_driver, _block, date) {
     setSelectedBlock({
       user: _driver,
       block: _block
     });
-    _block && setSelectedDate(new Date(_block.start));
-    _block && setScheduleState(_objectSpread(_objectSpread({}, scheduleState), {}, {
-      state: {
-        start: _block.start,
-        end: _block.end
-      }
-    }));
+    var isTodayOrPastDate = (0, _moment.default)(date).format('YYYY-MM-DD') <= (0, _moment.default)().format('YYYY-MM-DD');
+    if (_block || date && !isTodayOrPastDate) {
+      setSelectedDate(new Date((_block === null || _block === void 0 ? void 0 : _block.start) || "".concat(date, " 00:00:00")));
+      setScheduleState(_objectSpread(_objectSpread({}, scheduleState), {}, {
+        state: {
+          start: (_block === null || _block === void 0 ? void 0 : _block.start) || "".concat(date, " 00:00:00"),
+          end: (_block === null || _block === void 0 ? void 0 : _block.end) || "".concat(date, " 23:59:00")
+        }
+      }));
+    }
     !_block && generateHourList();
     setOpenModal(true);
   };
@@ -379,19 +382,18 @@ var DriversTimeDisplayUI = function DriversTimeDisplayUI(props) {
     changeDriverGroupState: changeDriverGroupState
   }), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null), /*#__PURE__*/_react.default.createElement("span", {
     className: "calendar"
-  }, t('CALENDAR', 'Calendar')))), /*#__PURE__*/_react.default.createElement(_styles2.DriversGroupCalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, _extends({}, props, {
+  }, t('CALENDAR', 'Calendar')), selectedGroup && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null), /*#__PURE__*/_react.default.createElement("span", null, selectedGroup === null || selectedGroup === void 0 ? void 0 : selectedGroup.name)))), /*#__PURE__*/_react.default.createElement(_styles2.DriversGroupCalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, _extends({}, props, {
     handleChangeDate: handleChangeDate
   })))))), /*#__PURE__*/_react.default.createElement(_UserList.DeliveryUsersListing, {
     date: date,
     getDrivers: getDrivers,
     driversList: driversList,
     paginationProps: paginationProps,
-    selectedGroupId: selectedGroupId,
+    selectedGroup: selectedGroup,
     handleSelectDriver: handleSelectDriver,
     setStackEventsState: setStackEventsState
   })), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "700px",
-    height: "80vh",
     padding: "30px",
     title: selectedBlock !== null && selectedBlock !== void 0 && selectedBlock.block ? t('EDIT_BLOCK', 'Edit block') : t('ADD_NEW_BLOCK', 'Add new block'),
     open: openModal,
@@ -447,7 +449,7 @@ var DriversTimeDisplayUI = function DriversTimeDisplayUI(props) {
     onClick: function onClick() {
       return openDeleteModal ? deleteBlockTime() : editBlockTime();
     }
-  }, scheduleState.loading ? t('LOADING', 'Loading') : openDeleteModal ? t('DELETE', 'Delete') : t('EDIT', 'Edit')))), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+  }, scheduleState.loading ? t('LOADING', 'Loading') : openDeleteModal ? t('DELETE', 'Delete') : t('ACCEPT', 'Accept')))), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "500px",
     height: "40vh",
     padding: "30px",
