@@ -40,7 +40,7 @@ export const DeliveryUsersListing = (props) => {
     paginationProps,
     getDrivers,
     handleSelectDriver,
-    selectedGroupId,
+    selectedGroup,
     setStackEventsState
   } = props
 
@@ -52,12 +52,12 @@ export const DeliveryUsersListing = (props) => {
   const hourFormat = configs?.general_hour_format?.value
 
   const handleChangePage = (page) => {
-    getDrivers(page, 10, selectedGroupId)
+    getDrivers(page, 10, selectedGroup?.id)
   }
 
   const handleChangePageSize = (pageSize) => {
     const expectedPage = Math.ceil(paginationProps.from / pageSize)
-    getDrivers(expectedPage, pageSize, selectedGroupId)
+    getDrivers(expectedPage, pageSize, selectedGroup?.id)
   }
 
   const getDatesInRange = (date_range) => {
@@ -257,7 +257,7 @@ export const DeliveryUsersListing = (props) => {
                           {getBlocksByDate(user?.delivery_blocks, _date)?.map((block, j) => {
                             return j === 0 && handleBlockWeekToShow(block, user, getDatesInRange(date), getBlocksByDate(user?.delivery_blocks, _date))
                           })}
-                          <EmptyBlock onClick={() => handleSelectDriver(user, null)} />
+                          <EmptyBlock onClick={() => handleSelectDriver(user, null, _date)} />
                         </td>
                       </React.Fragment>
                     ))}

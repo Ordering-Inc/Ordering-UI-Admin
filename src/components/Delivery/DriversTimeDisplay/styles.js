@@ -725,7 +725,6 @@ export const FormWrapper = styled.div`
   justify-content: center;
   gap: 10px;
   position: relative;
-  margin-bottom: 20px;
   min-height: 500px;
   .react-datepicker-popper {
     z-index: 1000;
@@ -795,13 +794,13 @@ export const RrulesItem = styled.div`
 `
 
 export const ButtonsWrapper = styled.div`
-  width: 50%;
   display: flex;
   justify-content: flex-end;
-  gap: 10px;
-  position: absolute;
-  bottom: -20px;
-  right: 20px;
+  margin-top: 20px;
+  width: 100%;
+  button:nth-child(2){
+    margin-left: 10px;
+  }
 `
 
 export const WeekDayCheckWrapper = styled.div`
