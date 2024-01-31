@@ -40,7 +40,7 @@ var DeliveryUsersListing = function DeliveryUsersListing(props) {
     paginationProps = props.paginationProps,
     getDrivers = props.getDrivers,
     handleSelectDriver = props.handleSelectDriver,
-    selectedGroupId = props.selectedGroupId,
+    selectedGroup = props.selectedGroup,
     setStackEventsState = props.setStackEventsState;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -61,11 +61,11 @@ var DeliveryUsersListing = function DeliveryUsersListing(props) {
   var is12hours = (configs === null || configs === void 0 || (_configs$general_hour = configs.general_hour_format) === null || _configs$general_hour === void 0 ? void 0 : _configs$general_hour.value) === 'hh:mma';
   var hourFormat = configs === null || configs === void 0 || (_configs$general_hour2 = configs.general_hour_format) === null || _configs$general_hour2 === void 0 ? void 0 : _configs$general_hour2.value;
   var handleChangePage = function handleChangePage(page) {
-    getDrivers(page, 10, selectedGroupId);
+    getDrivers(page, 10, selectedGroup === null || selectedGroup === void 0 ? void 0 : selectedGroup.id);
   };
   var handleChangePageSize = function handleChangePageSize(pageSize) {
     var expectedPage = Math.ceil(paginationProps.from / pageSize);
-    getDrivers(expectedPage, pageSize, selectedGroupId);
+    getDrivers(expectedPage, pageSize, selectedGroup === null || selectedGroup === void 0 ? void 0 : selectedGroup.id);
   };
   var getDatesInRange = function getDatesInRange(date_range) {
     var start = (0, _moment.default)(date_range[0]);
@@ -204,7 +204,7 @@ var DeliveryUsersListing = function DeliveryUsersListing(props) {
         return j === 0 && handleBlockWeekToShow(block, user, getDatesInRange(date), getBlocksByDate(user === null || user === void 0 ? void 0 : user.delivery_blocks, _date));
       }), /*#__PURE__*/_react.default.createElement(_styles2.EmptyBlock, {
         onClick: function onClick() {
-          return handleSelectDriver(user, null);
+          return handleSelectDriver(user, null, _date);
         }
       })));
     })));
