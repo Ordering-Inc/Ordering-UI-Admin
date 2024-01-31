@@ -34,12 +34,12 @@ const DriversTimeDisplayUI = (props) => {
     driversList,
     paginationProps,
     getDrivers,
-    setSelectedGroupId,
+    setSelectedGroup,
     setIsTimeChangeError,
     isTimeChangeError,
     handleChangeScheduleTime,
     scheduleState,
-    selectedGroupId,
+    selectedGroup,
     setScheduleState,
     setDate,
     setSelectedUntilDate,
@@ -123,7 +123,7 @@ const DriversTimeDisplayUI = (props) => {
 
   const changeDriverGroupState = (_driverGroup) => {
     setShowSelectHeader(false)
-    setSelectedGroupId(_driverGroup?.id)
+    setSelectedGroup(_driverGroup)
   }
 
   const handleChangeDate = (date1, date2) => {
@@ -330,19 +330,23 @@ const DriversTimeDisplayUI = (props) => {
     }
   }, [selectedBlock?.block])
 
-  const handleSelectDriver = (_driver, _block) => {
+  const handleSelectDriver = (_driver, _block, date) => {
     setSelectedBlock({
       user: _driver,
       block: _block
     })
-    _block && setSelectedDate(new Date(_block.start))
-    _block && setScheduleState({
-      ...scheduleState,
-      state: {
-        start: _block.start,
-        end: _block.end
-      }
-    })
+
+    const isTodayOrPastDate = moment(date).format('YYYY-MM-DD') <= moment().format('YYYY-MM-DD')
+    if (_block || (date && !isTodayOrPastDate)) {
+      setSelectedDate(new Date(_block?.start || `${date} 00:00:00`))
+      setScheduleState({
+        ...scheduleState,
+        state: {
+          start: _block?.start || `${date} 00:00:00`,
+          end: _block?.end || `${date} 23:59:00`
+        }
+      })
+    }
     !_block && generateHourList()
     setOpenModal(true)
   }
@@ -393,6 +397,12 @@ const DriversTimeDisplayUI = (props) => {
                     )}
                     <ChevronRight />
                     <span className='calendar'>{t('CALENDAR', 'Calendar')}</span>
+                    {selectedGroup && (
+                      <>
+                        <ChevronRight />
+                        <span>{selectedGroup?.name}</span>
+                      </>
+                    )}
                   </DriverGroupSelectorWrapper>
                 )}
               </div>
@@ -407,14 +417,13 @@ const DriversTimeDisplayUI = (props) => {
           getDrivers={getDrivers}
           driversList={driversList}
           paginationProps={paginationProps}
-          selectedGroupId={selectedGroupId}
+          selectedGroup={selectedGroup}
           handleSelectDriver={handleSelectDriver}
           setStackEventsState={setStackEventsState}
         />
       </Container>
       <Modal
         width='700px'
-        height='80vh'
         padding='30px'
         title={selectedBlock?.block ? t('EDIT_BLOCK', 'Edit block') : t('ADD_NEW_BLOCK', 'Add new block')}
         open={openModal}
@@ -483,7 +492,7 @@ const DriversTimeDisplayUI = (props) => {
             disabled={scheduleState.loading}
             onClick={() => openDeleteModal ? deleteBlockTime() : editBlockTime()}
           >
-            {scheduleState.loading ? t('LOADING', 'Loading') : openDeleteModal ? t('DELETE', 'Delete') : t('EDIT', 'Edit')}
+            {scheduleState.loading ? t('LOADING', 'Loading') : openDeleteModal ? t('DELETE', 'Delete') : t('ACCEPT', 'Accept')}
           </Button>
         </DeleteButtons>
       </Modal>
