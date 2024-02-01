@@ -35,7 +35,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var DriversTimeDisplayUI = function DriversTimeDisplayUI(props) {
-  var _configs$appointments, _configs$general_hour, _configs$general_hour2, _stackEventsState$eve;
+  var _configs$general_hour, _configs$general_hour2, _stackEventsState$eve;
   var driversList = props.driversList,
     paginationProps = props.paginationProps,
     getDrivers = props.getDrivers,
@@ -99,7 +99,6 @@ var DriversTimeDisplayUI = function DriversTimeDisplayUI(props) {
     scheduleOptionValues = _useState6[0],
     setScheduleOptionValues = _useState6[1];
   var rule = ruleState !== null && ruleState !== void 0 && ruleState.freq ? new _rrule.RRule(ruleState).toString() : null;
-  var isEnabledAppointmentsFeature = configs === null || configs === void 0 || (_configs$appointments = configs.appointments) === null || _configs$appointments === void 0 ? void 0 : _configs$appointments.value;
   var is12Hours = configs === null || configs === void 0 || (_configs$general_hour = configs.general_hour_format) === null || _configs$general_hour === void 0 || (_configs$general_hour = _configs$general_hour.value) === null || _configs$general_hour === void 0 ? void 0 : _configs$general_hour.includes('hh:mm');
   var hourFormat = configs === null || configs === void 0 || (_configs$general_hour2 = configs.general_hour_format) === null || _configs$general_hour2 === void 0 ? void 0 : _configs$general_hour2.value;
   var rruleList = [{
@@ -370,7 +369,7 @@ var DriversTimeDisplayUI = function DriversTimeDisplayUI(props) {
     onClick: function onClick() {
       return handleMenuCollapse(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement(_styles2.HeaderWrapper, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, t('DRIVERS_TIME_DISPLAY', 'Drivers time display')), isEnabledAppointmentsFeature && /*#__PURE__*/_react.default.createElement(_styles2.DriverGroupSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.DriverGroupName, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement(_styles2.HeaderWrapper, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, t('DRIVERS_TIME_DISPLAY', 'Drivers time display')), /*#__PURE__*/_react.default.createElement(_styles2.DriverGroupSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.DriverGroupName, {
     onClick: function onClick() {
       return setShowSelectHeader(!showSelectHeader);
     }
