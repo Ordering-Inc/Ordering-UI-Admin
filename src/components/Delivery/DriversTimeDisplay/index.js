@@ -82,7 +82,6 @@ const DriversTimeDisplayUI = (props) => {
   const [scheduleOptionValues, setScheduleOptionValues] = useState([])
 
   const rule = ruleState?.freq ? new RRule(ruleState).toString() : null
-  const isEnabledAppointmentsFeature = configs?.appointments?.value
   const is12Hours = configs?.general_hour_format?.value?.includes('hh:mm')
   const hourFormat = configs?.general_hour_format?.value
 
@@ -383,28 +382,26 @@ const DriversTimeDisplayUI = (props) => {
             <HeaderWrapper>
               <div>
                 <h1>{t('DRIVERS_TIME_DISPLAY', 'Drivers time display')}</h1>
-                {isEnabledAppointmentsFeature && (
-                  <DriverGroupSelectorWrapper>
-                    <DriverGroupName onClick={() => setShowSelectHeader(!showSelectHeader)}>
-                      {t('SELECT_DRIVER_GROUP', 'Select a driver group')}
-                    </DriverGroupName>
-                    {showSelectHeader && (
-                      <DriverGroupSelectHeader
-                        close={() => setShowSelectHeader(false)}
-                        isOpen={showSelectHeader}
-                        changeDriverGroupState={changeDriverGroupState}
-                      />
-                    )}
-                    <ChevronRight />
-                    <span className='calendar'>{t('CALENDAR', 'Calendar')}</span>
-                    {selectedGroup && (
-                      <>
-                        <ChevronRight />
-                        <span>{selectedGroup?.name}</span>
-                      </>
-                    )}
-                  </DriverGroupSelectorWrapper>
-                )}
+                <DriverGroupSelectorWrapper>
+                  <DriverGroupName onClick={() => setShowSelectHeader(!showSelectHeader)}>
+                    {t('SELECT_DRIVER_GROUP', 'Select a driver group')}
+                  </DriverGroupName>
+                  {showSelectHeader && (
+                    <DriverGroupSelectHeader
+                      close={() => setShowSelectHeader(false)}
+                      isOpen={showSelectHeader}
+                      changeDriverGroupState={changeDriverGroupState}
+                    />
+                  )}
+                  <ChevronRight />
+                  <span className='calendar'>{t('CALENDAR', 'Calendar')}</span>
+                  {selectedGroup && (
+                    <>
+                      <ChevronRight />
+                      <span>{selectedGroup?.name}</span>
+                    </>
+                  )}
+                </DriverGroupSelectorWrapper>
               </div>
               <DriversGroupCalendarWrapper>
                 <AnalyticsCalendar {...props} handleChangeDate={handleChangeDate} />
