@@ -16,6 +16,7 @@ var _styles = require("../../../styles");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _UserTypeSelector = require("../UserTypeSelector");
 var _OccupationSelector = require("../OccupationSelector");
+var _constants = require("../../../config/constants");
 var _styles2 = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -31,7 +32,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var UserFormDetailsUI = function UserFormDetailsUI(props) {
-  var _validationFields$fie, _validationFields$fie2, _validationFields$fie5, _formState$changes$dr, _formState$changes6, _formState$changes$bi, _formState$changes7, _formState$changes$le, _formState$changes8;
+  var _validationFields$fie, _validationFields$fie2, _validationFields$fie5, _ref4, _formState$changes$ti, _formState$changes6, _formState$changes$dr, _formState$changes7, _formState$changes$bi, _formState$changes8, _formState$changes$le, _formState$changes9;
   var formState = props.formState,
     showField = props.showField,
     cleanFormState = props.cleanFormState,
@@ -67,18 +68,26 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
     _useState6 = _slicedToArray(_useState5, 2),
     alertState = _useState6[0],
     setAlertState = _useState6[1];
+  var _useState7 = (0, _react.useState)([]),
+    _useState8 = _slicedToArray(_useState7, 2),
+    timezonesOptions = _useState8[0],
+    setTimezonesOptions = _useState8[1];
+  var _useState9 = (0, _react.useState)(''),
+    _useState10 = _slicedToArray(_useState9, 2),
+    timezoneSearchValue = _useState10[0],
+    setTimezoneSearchValue = _useState10[1];
   var _useCustomer = (0, _orderingComponentsAdmin.useCustomer)(),
     _useCustomer2 = _slicedToArray(_useCustomer, 2),
     setUserCustomer = _useCustomer2[1].setUserCustomer;
   var emailInput = (0, _react.useRef)(null);
-  var _useState7 = (0, _react.useState)(userData),
-    _useState8 = _slicedToArray(_useState7, 2),
-    user = _useState8[0],
-    setUser = _useState8[1];
-  var _useState9 = (0, _react.useState)(false),
-    _useState10 = _slicedToArray(_useState9, 2),
-    passwordSee = _useState10[0],
-    setPasswordSee = _useState10[1];
+  var _useState11 = (0, _react.useState)(userData),
+    _useState12 = _slicedToArray(_useState11, 2),
+    user = _useState12[0],
+    setUser = _useState12[1];
+  var _useState13 = (0, _react.useState)(false),
+    _useState14 = _slicedToArray(_useState13, 2),
+    passwordSee = _useState14[0],
+    setPasswordSee = _useState14[1];
   (0, _react.useEffect)(function () {
     setUser(userData);
   }, [userData]);
@@ -238,6 +247,17 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       }
     });
   }, [formMethods]);
+  (0, _react.useEffect)(function () {
+    var _timezonesOptions = _constants.timezones.filter(function (timezone) {
+      return timezone.toLocaleLowerCase().includes(timezoneSearchValue.toLocaleLowerCase());
+    }).map(function (timezone) {
+      return {
+        value: timezone,
+        content: timezone
+      };
+    });
+    setTimezonesOptions(_timezonesOptions);
+  }, [timezoneSearchValue]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.FormInput, {
     onSubmit: formMethods.handleSubmit(onSubmit),
     isCheckout: isCheckout
@@ -272,7 +292,22 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       }),
       autoComplete: "off"
     }));
-  }), isProfessional && (occupations === null || occupations === void 0 ? void 0 : occupations.length) > 0 && /*#__PURE__*/_react.default.createElement(_OccupationSelector.OccupationSelector, {
+  }), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, {
+    isTimezone: true
+  }, /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
+    placeholder: t('SELECT_TIMEZONE', 'Select a timezone'),
+    defaultValue: (_ref4 = (_formState$changes$ti = formState === null || formState === void 0 || (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.timezone) !== null && _formState$changes$ti !== void 0 ? _formState$changes$ti : user === null || user === void 0 ? void 0 : user.timezone) !== null && _ref4 !== void 0 ? _ref4 : '',
+    options: timezonesOptions,
+    onChange: function onChange(val) {
+      return handleChangeSwtich('timezone', val);
+    },
+    optionInnerMaxHeight: "300px",
+    isShowSearchBar: true,
+    searchBarIsCustomLayout: true,
+    searchBarIsNotLazyLoad: true,
+    searchValue: timezoneSearchValue,
+    handleChangeSearch: setTimezoneSearchValue
+  })), isProfessional && (occupations === null || occupations === void 0 ? void 0 : occupations.length) > 0 && /*#__PURE__*/_react.default.createElement(_OccupationSelector.OccupationSelector, {
     occupationId: user === null || user === void 0 ? void 0 : user.occupation_id,
     occupations: occupations,
     handleChangeOccupation: handleChangeOccupation
@@ -300,20 +335,20 @@ var UserFormDetailsUI = function UserFormDetailsUI(props) {
       return setPasswordSee(!passwordSee);
     }
   }, !passwordSee ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Eye, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.EyeSlash, null))), isDriversPage && /*#__PURE__*/_react.default.createElement(_styles2.DriverZoneRestrictionWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, ('DRIVER_ZONE_RESTRICTION', 'Driver Zone Restriccion')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
-    defaultChecked: (_formState$changes$dr = formState === null || formState === void 0 || (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.driver_zone_restriction) !== null && _formState$changes$dr !== void 0 ? _formState$changes$dr : user === null || user === void 0 ? void 0 : user.driver_zone_restriction,
+    defaultChecked: (_formState$changes$dr = formState === null || formState === void 0 || (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.driver_zone_restriction) !== null && _formState$changes$dr !== void 0 ? _formState$changes$dr : user === null || user === void 0 ? void 0 : user.driver_zone_restriction,
     onChange: function onChange(val) {
       return handleChangeSwtich('driver_zone_restriction', val);
     }
   })), isProfessional && /*#__PURE__*/_react.default.createElement(_styles2.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.RangeCalendar, {
     isLeft: true,
     isSingleDate: true,
-    defaultValue: (_formState$changes$bi = formState === null || formState === void 0 || (_formState$changes7 = formState.changes) === null || _formState$changes7 === void 0 ? void 0 : _formState$changes7.birthdate) !== null && _formState$changes$bi !== void 0 ? _formState$changes$bi : user === null || user === void 0 ? void 0 : user.birthdate,
+    defaultValue: (_formState$changes$bi = formState === null || formState === void 0 || (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.birthdate) !== null && _formState$changes$bi !== void 0 ? _formState$changes$bi : user === null || user === void 0 ? void 0 : user.birthdate,
     handleChangeDate: function handleChangeDate(date) {
       return handleChangeSwtich('birthdate', date);
     }
   })), !isProfessional && /*#__PURE__*/_react.default.createElement(_styles2.WrapperUserTypeSelector, null, /*#__PURE__*/_react.default.createElement(_UserTypeSelector.UserTypeSelector, {
     isPrimary: true,
-    defaultUserType: (_formState$changes$le = formState === null || formState === void 0 || (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.level) !== null && _formState$changes$le !== void 0 ? _formState$changes$le : user === null || user === void 0 ? void 0 : user.level,
+    defaultUserType: (_formState$changes$le = formState === null || formState === void 0 || (_formState$changes9 = formState.changes) === null || _formState$changes9 === void 0 ? void 0 : _formState$changes9.level) !== null && _formState$changes$le !== void 0 ? _formState$changes$le : user === null || user === void 0 ? void 0 : user.level,
     handleChangeUserType: handleChangeUserType
   })), /*#__PURE__*/_react.default.createElement(_styles2.ActionsForm, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     id: "form-btn",
