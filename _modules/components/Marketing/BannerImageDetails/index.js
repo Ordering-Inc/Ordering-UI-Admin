@@ -128,12 +128,11 @@ var BannerImageDetailsUI = function BannerImageDetailsUI(props) {
     });
   };
   var onDeleteImage = function onDeleteImage(id) {
-    var _handleOnAccept;
     setConfirm({
       open: true,
       content: t('QUESTION_DELETE_ITEM', 'Are you sure to delete this _item_?').replace('_item_', t('IMAGE', 'Image')),
-      handleOnAccept: function handleOnAccept() {
-        return (_handleOnAccept = _handleOnAccept || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+      handleOnAccept: function () {
+        var _handleOnAccept = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
           var _imageState$image;
           return _regeneratorRuntime().wrap(function _callee$(_context) {
             while (1) switch (_context.prev = _context.next) {
@@ -150,8 +149,12 @@ var BannerImageDetailsUI = function BannerImageDetailsUI(props) {
                 return _context.stop();
             }
           }, _callee);
-        }))).apply(this, arguments);
-      }
+        }));
+        function handleOnAccept() {
+          return _handleOnAccept.apply(this, arguments);
+        }
+        return handleOnAccept;
+      }()
     });
   };
   (0, _react.useEffect)(function () {

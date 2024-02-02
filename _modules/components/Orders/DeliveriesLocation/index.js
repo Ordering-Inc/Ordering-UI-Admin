@@ -194,10 +194,9 @@ var DeliveriesLocation = /*#__PURE__*/_react.default.memo(function (props) {
     }
   }, [interActionMapOrder, mapLoaded, driversList, mapFitted]);
   (0, _react.useEffect)(function () {
-    var _ref, _ref2;
     if (!interActionMapOrder || interActionMapOrder !== null && interActionMapOrder !== void 0 && interActionMapOrder.driver) return;
-    var getControls = function getControls(_x) {
-      return (_ref = _ref || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(order) {
+    var getControls = /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(order) {
         var _yield$ordering$setAc, _yield$ordering$setAc2, errorResponse, response, error, result, driversControls, _result$drivers;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
@@ -235,10 +234,13 @@ var DeliveriesLocation = /*#__PURE__*/_react.default.memo(function (props) {
               return _context.stop();
           }
         }, _callee);
-      }))).apply(this, arguments);
-    };
-    var fetchData = function fetchData() {
-      return (_ref2 = _ref2 || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+      }));
+      return function getControls(_x) {
+        return _ref.apply(this, arguments);
+      };
+    }();
+    var fetchData = /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
         var driversControls;
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) switch (_context2.prev = _context2.next) {
@@ -258,8 +260,11 @@ var DeliveriesLocation = /*#__PURE__*/_react.default.memo(function (props) {
               return _context2.stop();
           }
         }, _callee2);
-      }))).apply(this, arguments);
-    };
+      }));
+      return function fetchData() {
+        return _ref2.apply(this, arguments);
+      };
+    }();
     fetchData();
   }, [interActionMapOrder === null || interActionMapOrder === void 0 ? void 0 : interActionMapOrder.id]);
   (0, _react.useEffect)(function () {
