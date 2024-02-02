@@ -42,7 +42,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessesListingUI = function BusinessesListingUI(props) {
-  var _configs$allow_busine, _ref;
+  var _configs$allow_busine;
   var businessList = props.businessList,
     pagination = props.pagination,
     searchValue = props.searchValue,
@@ -180,8 +180,8 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
     setIsTutorialMode(true);
     handleOpenAddBusiness();
   };
-  var handleSetStorage = function handleSetStorage() {
-    return (_ref = _ref || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+  var handleSetStorage = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       var preVisited, visited;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
@@ -206,8 +206,11 @@ var BusinessesListingUI = function BusinessesListingUI(props) {
             return _context.stop();
         }
       }, _callee);
-    }))).apply(this, arguments);
-  };
+    }));
+    return function handleSetStorage() {
+      return _ref.apply(this, arguments);
+    };
+  }();
   var handleViewMethod = function handleViewMethod(method) {
     setViewMethod(method);
     if (method === 'list') {

@@ -27,7 +27,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessLocation = function BusinessLocation(props) {
-  var _configs$google_maps_, _ref, _configs$google_maps_2, _ref2, _formState$changes$ti, _formState$changes, _formState$result, _formState$result2, _ref3, _formState$changes$ad, _formState$changes2, _configs$country_auto, _formState$result3, _formState$result4, _ref4, _formState$changes$ad2, _formState$changes3;
+  var _configs$google_maps_, _configs$google_maps_2, _ref2, _formState$changes$ti, _formState$changes, _formState$result, _formState$result2, _ref3, _formState$changes$ad, _formState$changes2, _configs$country_auto, _formState$result3, _formState$result4, _ref4, _formState$changes$ad2, _formState$changes3;
   var business = props.business,
     formState = props.formState,
     setFormState = props.setFormState,
@@ -88,8 +88,8 @@ var BusinessLocation = function BusinessLocation(props) {
       });
     });
   };
-  var getTimeZone = function getTimeZone(_x) {
-    return (_ref = _ref || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(address) {
+  var getTimeZone = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(address) {
       var _address$location, _address$location2;
       var date, timestamp, timezoneApiKey, url, response, result;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -128,8 +128,11 @@ var BusinessLocation = function BusinessLocation(props) {
             return _context.stop();
         }
       }, _callee);
-    }))).apply(this, arguments);
-  };
+    }));
+    return function getTimeZone(_x) {
+      return _ref.apply(this, arguments);
+    };
+  }();
   var handleChangeCenter = function handleChangeCenter(address) {
     setFormState(function (prevState) {
       return _objectSpread(_objectSpread({}, prevState), {}, {
