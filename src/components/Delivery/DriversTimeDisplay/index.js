@@ -298,10 +298,7 @@ const DriversTimeDisplayUI = (props) => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const diff = moment(selectedDate).diff(moment(), 'day')
-      if (diff <= 0 || selectedBlock?.block?.start || selectedBlock?.block?.end) {
-        generateHourList()
-      }
+      generateHourList()
     }, 1000)
     return () => clearInterval(interval)
   }, [selectedDate, selectedBlock, showBreakBlock])
