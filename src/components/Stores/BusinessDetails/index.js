@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useSession, useLanguage } from 'ordering-components-admin'
-import { BusinessDetails as BusinessDetailsController } from './test'
+import { useSession, useLanguage, BusinessDetails as BusinessDetailsController } from 'ordering-components-admin'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import { BusinessSummary } from '../BusinessSummary'
 import { BusinessSupport } from '../BusinessSupport'
