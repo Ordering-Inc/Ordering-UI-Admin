@@ -34,7 +34,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ProductDetailsAdvancedUI = function ProductDetailsAdvancedUI(props) {
-  var _formState$changes10, _productState$estimat, _taxSelected$value, _fesSelected$value, _productState$cost_pr, _productState$cost_of, _productState$minimum, _productState$maximum, _productState$calorie, _productState$weight, _productState$weight_;
+  var _ref, _formState$changes10, _productState$estimat, _taxSelected$value, _fesSelected$value, _productState$cost_pr, _productState$cost_of, _productState$minimum, _productState$maximum, _productState$calorie, _productState$weight, _productState$weight_;
   var formState = props.formState,
     productState = props.productState,
     handleClickProperty = props.handleClickProperty,
@@ -138,8 +138,8 @@ var ProductDetailsAdvancedUI = function ProductDetailsAdvancedUI(props) {
       payload: null
     });
   };
-  var getTaxes = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+  var getTaxes = function getTaxes() {
+    return (_ref = _ref || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       var inheritOption, addTaxOption, taxesOptions;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
@@ -181,11 +181,8 @@ var ProductDetailsAdvancedUI = function ProductDetailsAdvancedUI(props) {
             return _context.stop();
         }
       }, _callee);
-    }));
-    return function getTaxes() {
-      return _ref.apply(this, arguments);
-    };
-  }();
+    }))).apply(this, arguments);
+  };
   var getFees = function getFees() {
     var inheritOption = {
       name: t('INHERIT_FROM_BUSINESS', 'Inherit from business'),

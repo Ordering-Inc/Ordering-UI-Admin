@@ -306,11 +306,7 @@ var DriversTimeDisplayUI = function DriversTimeDisplayUI(props) {
   }, [isTimeChangeError === null || isTimeChangeError === void 0 ? void 0 : isTimeChangeError.state]);
   (0, _react.useEffect)(function () {
     var interval = setInterval(function () {
-      var _selectedBlock$block15, _selectedBlock$block16;
-      var diff = (0, _moment.default)(selectedDate).diff((0, _moment.default)(), 'day');
-      if (diff <= 0 || selectedBlock !== null && selectedBlock !== void 0 && (_selectedBlock$block15 = selectedBlock.block) !== null && _selectedBlock$block15 !== void 0 && _selectedBlock$block15.start || selectedBlock !== null && selectedBlock !== void 0 && (_selectedBlock$block16 = selectedBlock.block) !== null && _selectedBlock$block16 !== void 0 && _selectedBlock$block16.end) {
-        generateHourList();
-      }
+      generateHourList();
     }, 1000);
     return function () {
       return clearInterval(interval);
@@ -326,11 +322,11 @@ var DriversTimeDisplayUI = function DriversTimeDisplayUI(props) {
     }));
   }, [rule]);
   (0, _react.useEffect)(function () {
-    var _selectedBlock$block17;
+    var _selectedBlock$block15;
     if (!(selectedBlock !== null && selectedBlock !== void 0 && selectedBlock.block)) return;
-    if (selectedBlock !== null && selectedBlock !== void 0 && (_selectedBlock$block17 = selectedBlock.block) !== null && _selectedBlock$block17 !== void 0 && _selectedBlock$block17.rrule) {
-      var _selectedBlock$block18, _selectedBlock$block19, _selectedBlock$block20, _selectedBlock$block21;
-      var _date = _rrule.RRule.fromString("DTSTART:".concat((0, _moment.default)(selectedBlock === null || selectedBlock === void 0 || (_selectedBlock$block18 = selectedBlock.block) === null || _selectedBlock$block18 === void 0 ? void 0 : _selectedBlock$block18.start).toISOString().replaceAll('-', '').replaceAll(':', '').replaceAll('.', '')) + '\n' + (selectedBlock === null || selectedBlock === void 0 || (_selectedBlock$block19 = selectedBlock.block) === null || _selectedBlock$block19 === void 0 || (_selectedBlock$block19 = _selectedBlock$block19.rrule) === null || _selectedBlock$block19 === void 0 ? void 0 : _selectedBlock$block19.includes('RRULE:')) ? selectedBlock === null || selectedBlock === void 0 || (_selectedBlock$block20 = selectedBlock.block) === null || _selectedBlock$block20 === void 0 ? void 0 : _selectedBlock$block20.rrule : "RRULE:".concat(selectedBlock === null || selectedBlock === void 0 || (_selectedBlock$block21 = selectedBlock.block) === null || _selectedBlock$block21 === void 0 ? void 0 : _selectedBlock$block21.rrule));
+    if (selectedBlock !== null && selectedBlock !== void 0 && (_selectedBlock$block15 = selectedBlock.block) !== null && _selectedBlock$block15 !== void 0 && _selectedBlock$block15.rrule) {
+      var _selectedBlock$block16, _selectedBlock$block17, _selectedBlock$block18, _selectedBlock$block19;
+      var _date = _rrule.RRule.fromString("DTSTART:".concat((0, _moment.default)(selectedBlock === null || selectedBlock === void 0 || (_selectedBlock$block16 = selectedBlock.block) === null || _selectedBlock$block16 === void 0 ? void 0 : _selectedBlock$block16.start).toISOString().replaceAll('-', '').replaceAll(':', '').replaceAll('.', '')) + '\n' + (selectedBlock === null || selectedBlock === void 0 || (_selectedBlock$block17 = selectedBlock.block) === null || _selectedBlock$block17 === void 0 || (_selectedBlock$block17 = _selectedBlock$block17.rrule) === null || _selectedBlock$block17 === void 0 ? void 0 : _selectedBlock$block17.includes('RRULE:')) ? selectedBlock === null || selectedBlock === void 0 || (_selectedBlock$block18 = selectedBlock.block) === null || _selectedBlock$block18 === void 0 ? void 0 : _selectedBlock$block18.rrule : "RRULE:".concat(selectedBlock === null || selectedBlock === void 0 || (_selectedBlock$block19 = selectedBlock.block) === null || _selectedBlock$block19 === void 0 ? void 0 : _selectedBlock$block19.rrule));
       setRuleState({
         freq: _date.options.freq,
         byweekday: _date.options.byweekday

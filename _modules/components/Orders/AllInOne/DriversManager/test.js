@@ -31,6 +31,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var DriversList = function DriversList(props) {
+  var _ref, _ref2, _ref4, _ref5, _ref6, _ref7;
   var drivers = props.drivers,
     UIComponent = props.UIComponent,
     propsToFetch = props.propsToFetch,
@@ -168,8 +169,8 @@ var DriversList = function DriversList(props) {
    * Method to assign driver to order from API
    * @param {object} assign assigned order id and driver id
    */
-  var handleAssignDriver = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(assign) {
+  var handleAssignDriver = function handleAssignDriver(_x) {
+    return (_ref = _ref || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(assign) {
       var source, _yield$ordering$setAc, content;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
@@ -215,18 +216,15 @@ var DriversList = function DriversList(props) {
             return _context.stop();
         }
       }, _callee, null, [[0, 13]]);
-    }));
-    return function handleAssignDriver(_x) {
-      return _ref.apply(this, arguments);
-    };
-  }();
+    }))).apply(this, arguments);
+  };
 
   /**
    * Method to assign driver_company to order from API
    * @param {object} assign assigned order_id and driver_company_id
    */
-  var handleAssignDriverCompany = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(assign) {
+  var handleAssignDriverCompany = function handleAssignDriverCompany(_x2) {
+    return (_ref2 = _ref2 || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(assign) {
       var requestOptions, response, _yield$response$json, error, result;
       return _regeneratorRuntime().wrap(function _callee2$(_context2) {
         while (1) switch (_context2.prev = _context2.next) {
@@ -281,11 +279,8 @@ var DriversList = function DriversList(props) {
             return _context2.stop();
         }
       }, _callee2, null, [[0, 16]]);
-    }));
-    return function handleAssignDriverCompany(_x2) {
-      return _ref2.apply(this, arguments);
-    };
-  }();
+    }))).apply(this, arguments);
+  };
 
   /**
    * change online state for drivers
@@ -362,8 +357,8 @@ var DriversList = function DriversList(props) {
   /**
    * Method to get drivers from API
    */
-  var getDrivers = /*#__PURE__*/function () {
-    var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+  var getDrivers = function getDrivers() {
+    return (_ref4 = _ref4 || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
       var source, where, conditions, searchConditions, _yield$ordering$setAc2, result;
       return _regeneratorRuntime().wrap(function _callee3$(_context3) {
         while (1) switch (_context3.prev = _context3.next) {
@@ -444,17 +439,14 @@ var DriversList = function DriversList(props) {
             return _context3.stop();
         }
       }, _callee3, null, [[0, 17]]);
-    }));
-    return function getDrivers() {
-      return _ref4.apply(this, arguments);
-    };
-  }();
+    }))).apply(this, arguments);
+  };
 
   /**
    * Method to get the drivers of order from API
    */
-  var getOrderDrivers = /*#__PURE__*/function () {
-    var _ref5 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+  var getOrderDrivers = function getOrderDrivers() {
+    return (_ref5 = _ref5 || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
       var _result$drivers, requestOptions, response, _yield$response$json2, error, result, _drivers2;
       return _regeneratorRuntime().wrap(function _callee4$(_context4) {
         while (1) switch (_context4.prev = _context4.next) {
@@ -517,13 +509,10 @@ var DriversList = function DriversList(props) {
             return _context4.stop();
         }
       }, _callee4, null, [[0, 17]]);
-    }));
-    return function getOrderDrivers() {
-      return _ref5.apply(this, arguments);
-    };
-  }();
-  var getOrders = /*#__PURE__*/function () {
-    var _ref6 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
+    }))).apply(this, arguments);
+  };
+  var getOrders = function getOrders() {
+    return (_ref6 = _ref6 || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
       var options, where, conditions, source, functionFetch;
       return _regeneratorRuntime().wrap(function _callee5$(_context5) {
         while (1) switch (_context5.prev = _context5.next) {
@@ -577,17 +566,14 @@ var DriversList = function DriversList(props) {
             return _context5.stop();
         }
       }, _callee5);
-    }));
-    return function getOrders() {
-      return _ref6.apply(this, arguments);
-    };
-  }();
+    }))).apply(this, arguments);
+  };
 
   /**
    * Method to get the orders assigned to the driver
    */
-  var loadAssignedOrders = /*#__PURE__*/function () {
-    var _ref7 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
+  var loadAssignedOrders = function loadAssignedOrders() {
+    return (_ref7 = _ref7 || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
       var response;
       return _regeneratorRuntime().wrap(function _callee6$(_context6) {
         while (1) switch (_context6.prev = _context6.next) {
@@ -619,11 +605,8 @@ var DriversList = function DriversList(props) {
             return _context6.stop();
         }
       }, _callee6, null, [[0, 8]]);
-    }));
-    return function loadAssignedOrders() {
-      return _ref7.apply(this, arguments);
-    };
-  }();
+    }))).apply(this, arguments);
+  };
   (0, _react.useEffect)(function () {
     if (selectedDriver !== null && selectedDriver !== void 0 && selectedDriver.id) {
       loadAssignedOrders();
