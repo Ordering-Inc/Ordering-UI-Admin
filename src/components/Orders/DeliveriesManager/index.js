@@ -32,7 +32,8 @@ const DeliveriesManagerUI = (props) => {
     numberOfOrdersBySubstatus,
     timeStatus,
     setTimeStatus,
-    isUseQuery
+    isUseQuery,
+    adminsList
   } = props
 
   const [, t] = useLanguage()
@@ -93,6 +94,7 @@ const DeliveriesManagerUI = (props) => {
           setFilterModalOpen={setFilterModalOpen}
           setTimeStatus={setTimeStatus}
           setSlaSettingTime={setSlaSettingTime}
+          adminsList={adminsList}
         />
         <OrdersContent>
           <WrapItemView>
