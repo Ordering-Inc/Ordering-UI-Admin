@@ -246,7 +246,7 @@ export const BusinessSummary = (props) => {
                       {t('SYNC_BUSINESS', 'Sync Business')}
                     </Dropdown.Item>
                     <Dropdown.Item
-                      onClick={() => handleSyncEvent('products')}
+                      onClick={() => handleSyncEvent('menu')}
                     >
                       {t('SYNC_PRODUCTS', 'Sync Products')}
                     </Dropdown.Item>
