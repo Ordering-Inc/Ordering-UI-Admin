@@ -98,6 +98,8 @@ export const Image = (props) => {
 }
 
 export const DriverInfoContainer = styled.div`
+  padding-right: 15px;
+
   p {
     margin: 0px;
     &:first-child {
@@ -108,6 +110,21 @@ export const DriverInfoContainer = styled.div`
     &:last-child {
       font-size: 12px;
       color: ${props => props.theme.colors.lightGray};
+    }
+  }
+`
+export const DriverTemporaryContainer = styled.div`
+  padding-left: 5px;
+
+  p {
+    margin: 0px;
+    font-weight: 500;
+    font-size: 13px;
+
+    &:hover {
+      text-decoration: underline;
+      color: ${props => props.theme.colors.primary};
+      cursor: pointer;
     }
   }
 `
