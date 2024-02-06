@@ -29,7 +29,8 @@ export const DriversGroupGeneralForm = (props) => {
     isTourOpen,
     handleNextClick,
     selectedDriverManager,
-    handleSelectDriverManager
+    handleSelectDriverManager,
+    handleChangeMaxDistance
   } = props
 
   const [, t] = useLanguage()
@@ -128,7 +129,16 @@ export const DriversGroupGeneralForm = (props) => {
           autoComplete='off'
         />
       </InputWrapper>
-
+      <InputWrapper>
+        <label>{t('DRIVER_AVAILABLE_MAX_DISTANCE', 'Driver available max distance')}</label>
+        <Input
+          name='driver_available_max_distance'
+          value={changesState?.driver_available_max_distance ?? driversGroupState.driversGroup?.driver_available_max_distance ?? ''}
+          onChange={e => handleChangeMaxDistance(e.target.value)}
+          placeholder={t('WITHOUT_RESTRICTIONS', 'Without restrictions')}
+          autoComplete='off'
+        />
+      </InputWrapper>
       {user?.level !== 5 && (
         <InputWrapper>
           <label>{t('DRIVER_MANAGER', 'Driver manager')}</label>
