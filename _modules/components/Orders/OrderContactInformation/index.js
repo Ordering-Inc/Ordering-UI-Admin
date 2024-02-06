@@ -30,7 +30,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var OrderContactInformation = function OrderContactInformation(props) {
-  var _configs$google_maps_, _configs$disable_comp, _order$business, _order$business2, _order$business3, _order$business4, _order$business5, _order$business6, _order$business7, _order$business8, _order$business9, _order$business10, _order$business11, _order$business12, _order$business13, _order$business14, _order$business15, _order$customer, _order$customer2, _order$customer3, _order$customer4, _order$customer5, _order$customer6, _order$customer7, _order$customer8, _order$customer9, _order$customer10, _order$customer11, _order$customer12, _order$customer13, _ref2, _customerInfoState$cu, _customerInfoState$cu2, _order$customer17, _ref3, _customerInfoState$cu3, _customerInfoState$cu4, _order$customer18, _order$customer$addre, _order$customer19, _configs$country_auto, _configs$google_maps_2, _ref4, _addressState$locatio, _order$customer20, _ref5, _customerInfoState$cu5, _customerInfoState$cu6, _order$customer21, _order$customer22, _order$customer23, _order$customer24, _order$customer25, _order$customer26, _order$customer27, _order$customer28, _order$customer29, _order$customer30, _order$customer31, _order$customer32, _order$customer33, _order$customer34, _order$customer35, _order$customer36, _order$customer37, _order$customer38, _order$customer39, _order$customer40, _order$customer41, _order$customer42, _order$customer43, _order$customer44, _order$customer45, _order$driver_company, _ref6, _commentInfoState$dri, _order$driver, _order$external_drive, _order$driver2, _order$external_drive2, _order$driver3, _order$driver4, _order$driver5, _order$driver6, _order$driver7, _order$external_drive3, _order$external_drive4;
+  var _configs$google_maps_, _configs$disable_comp, _ref, _order$business, _order$business2, _order$business3, _order$business4, _order$business5, _order$business6, _order$business7, _order$business8, _order$business9, _order$business10, _order$business11, _order$business12, _order$business13, _order$business14, _order$business15, _order$customer, _order$customer2, _order$customer3, _order$customer4, _order$customer5, _order$customer6, _order$customer7, _order$customer8, _order$customer9, _order$customer10, _order$customer11, _order$customer12, _order$customer13, _ref2, _customerInfoState$cu, _customerInfoState$cu2, _order$customer17, _ref3, _customerInfoState$cu3, _customerInfoState$cu4, _order$customer18, _order$customer$addre, _order$customer19, _configs$country_auto, _configs$google_maps_2, _ref4, _addressState$locatio, _order$customer20, _ref5, _customerInfoState$cu5, _customerInfoState$cu6, _order$customer21, _order$customer22, _order$customer23, _order$customer24, _order$customer25, _order$customer26, _order$customer27, _order$customer28, _order$customer29, _order$customer30, _order$customer31, _order$customer32, _order$customer33, _order$customer34, _order$customer35, _order$customer36, _order$customer37, _order$customer38, _order$customer39, _order$customer40, _order$customer41, _order$customer42, _order$customer43, _order$customer44, _order$customer45, _order$driver_company, _ref6, _commentInfoState$dri, _order$driver, _order$external_drive, _order$driver2, _order$external_drive2, _order$driver3, _order$driver4, _order$driver5, _order$driver6, _order$driver7, _order$external_drive3, _order$external_drive4;
   var order = props.order,
     customerInfoState = props.customerInfoState,
     handleChangeCustomerInfoState = props.handleChangeCustomerInfoState,
@@ -113,8 +113,8 @@ var OrderContactInformation = function OrderContactInformation(props) {
       zipcode: e === null || e === void 0 ? void 0 : e.zipcode
     });
   };
-  var handleUpdateCustomer = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+  var handleUpdateCustomer = function handleUpdateCustomer() {
+    return (_ref = _ref || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
@@ -127,11 +127,8 @@ var OrderContactInformation = function OrderContactInformation(props) {
             return _context.stop();
         }
       }, _callee);
-    }));
-    return function handleUpdateCustomer() {
-      return _ref.apply(this, arguments);
-    };
-  }();
+    }))).apply(this, arguments);
+  };
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Accordion, null, (user === null || user === void 0 ? void 0 : user.level) !== 2 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "0"
   }, /*#__PURE__*/_react.default.createElement(_styles2.BusinessInfo, null, /*#__PURE__*/_react.default.createElement(_styles2.PhotoWrapper, null, order !== null && order !== void 0 && (_order$business = order.business) !== null && _order$business !== void 0 && _order$business.logo ? /*#__PURE__*/_react.default.createElement(_styles2.Photo, {

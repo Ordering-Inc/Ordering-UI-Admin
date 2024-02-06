@@ -36,6 +36,7 @@ var ProjectContext = /*#__PURE__*/(0, _react.createContext)();
   */
 exports.ProjectContext = ProjectContext;
 var ProjectProvider = function ProjectProvider(_ref) {
+  var _ref2;
   var children = _ref.children;
   var _useApi = (0, _orderingComponentsAdmin.useApi)(),
     _useApi2 = _slicedToArray(_useApi, 1),
@@ -50,8 +51,8 @@ var ProjectProvider = function ProjectProvider(_ref) {
     _useState2 = _slicedToArray(_useState, 2),
     state = _useState2[0],
     setState = _useState2[1];
-  var getProjectStatus = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+  var getProjectStatus = function getProjectStatus() {
+    return (_ref2 = _ref2 || _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       var response, _yield$response$json, error, result;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
@@ -98,11 +99,8 @@ var ProjectProvider = function ProjectProvider(_ref) {
             return _context.stop();
         }
       }, _callee, null, [[2, 15]]);
-    }));
-    return function getProjectStatus() {
-      return _ref2.apply(this, arguments);
-    };
-  }();
+    }))).apply(this, arguments);
+  };
   var functions = {
     getProjectStatus: getProjectStatus
   };
