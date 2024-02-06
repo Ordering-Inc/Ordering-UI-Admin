@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useSession, useLanguage, BusinessDetails as BusinessDetailsController } from 'ordering-components-admin'
+import { useSession, useLanguage } from 'ordering-components-admin'
+import { BusinessDetails as BusinessDetailsController } from './test'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import { BusinessSummary } from '../BusinessSummary'
 import { BusinessSupport } from '../BusinessSupport'
@@ -52,6 +53,7 @@ export const BusinessDetailsUI = (props) => {
     actionStatus,
     handleUpdatePreorderConfigs,
     handleUpdateSpoonityKey,
+    handleSyncEvent,
     spoonityKeyState,
     siteState
   } = props
@@ -175,6 +177,7 @@ export const BusinessDetailsUI = (props) => {
           handleSucessUpdateBusiness={handleSucessUpdateBusiness}
           handleDuplicateBusiness={handleDuplicateBusiness}
           handleDeleteBusiness={handleDeleteBusiness}
+          handleSyncEvent={handleSyncEvent}
           extraOpen={extraOpen}
           spoonityConfig={spoonityConfig}
           siteState={siteState}
