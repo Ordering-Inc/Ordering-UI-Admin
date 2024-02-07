@@ -38,6 +38,7 @@ export const BusinessSummary = (props) => {
     handleSelectedItem,
     handleDuplicateBusiness,
     handleDeleteBusiness,
+    handleSyncEvent,
     extraOpen,
     spoonityConfig,
     siteState,
@@ -58,7 +59,8 @@ export const BusinessSummary = (props) => {
 
   const isEnabledWhiteLabelModule = configs?.white_label_module?.value
   const isAllowRegisteredBusiness = ((sessionState?.user?.level === 0) || (sessionState?.user?.level === 2 && configs?.allow_business_owner_register_business?.value === '1'))
-
+  const projectsForEnableSync = ['dominosordering']
+  const enableSyncFunctions = projectsForEnableSync.includes(ordering.project)
   const handleOpenCategory = () => {
     events.emit('go_to_page', { page: 'store', params: { store: businessState?.business?.slug } })
   }
@@ -217,13 +219,13 @@ export const BusinessSummary = (props) => {
                 >
                   {t('PREVIEW', 'Preview')}
                 </Dropdown.Item>
-                {isAllowRegisteredBusiness &&
-                <Dropdown.Item
-                  onClick={() => handleDuplicateBusiness()}
-                >
-                  {t('DUPLICATE', 'Duplicate')}
-                </Dropdown.Item>
-               }
+                {isAllowRegisteredBusiness && (
+                  <Dropdown.Item
+                    onClick={() => handleDuplicateBusiness()}
+                  >
+                    {t('DUPLICATE', 'Duplicate')}
+                  </Dropdown.Item>
+                )}
                 {!isEnabledWhiteLabelModule && (
                   <Dropdown.Item
                     onClick={() => handleSelectedItem('personalization')}
@@ -236,6 +238,25 @@ export const BusinessSummary = (props) => {
                 >
                   {t('CUSTOM_FIELDS', 'Custom fields')}
                 </Dropdown.Item>
+                {enableSyncFunctions && (
+                  <>
+                    <Dropdown.Item
+                      onClick={() => handleSyncEvent('business')}
+                    >
+                      {t('SYNC_BUSINESS', 'Sync Business')}
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      onClick={() => handleSyncEvent('menu')}
+                    >
+                      {t('SYNC_PRODUCTS', 'Sync Products')}
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      onClick={() => handleSyncEvent('coupons')}
+                    >
+                      {t('SYNC_COUPONS', 'Sync Coupons')}
+                    </Dropdown.Item>
+                  </>
+                )}
                 <Dropdown.Item
                   onClick={() => onClickDeleteBusiness()}
                 >
