@@ -57,8 +57,8 @@ export const ServiceDetail = (props) => {
     { value: 15, content: <Option>15 <span>{t('MINUTES', 'minutes')}</span></Option> },
     { value: 30, content: <Option>30 <span>{t('MINUTES', 'minutes')}</span></Option> },
     { value: 45, content: <Option>45 <span>{t('MINUTES', 'minutes')}</span></Option> },
-    { value: 60, content: <Option>1 <span>{('HOUR', 'hour')}</span></Option> },
-    { value: 'custom', content: <Option><span>{('CUSTOME', 'custom')}</span></Option> }
+    { value: 60, content: <Option>1 <span>{t('HOUR', 'hour')}</span></Option> },
+    { value: 'custom', content: <Option><span>{t('CUSTOME', 'custom')}</span></Option> }
   ]
 
   const setTimeList = () => {
