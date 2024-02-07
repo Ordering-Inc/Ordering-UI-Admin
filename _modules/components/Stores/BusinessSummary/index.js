@@ -42,6 +42,7 @@ var BusinessSummary = function BusinessSummary(props) {
     handleSelectedItem = props.handleSelectedItem,
     handleDuplicateBusiness = props.handleDuplicateBusiness,
     handleDeleteBusiness = props.handleDeleteBusiness,
+    handleSyncEvent = props.handleSyncEvent,
     extraOpen = props.extraOpen,
     spoonityConfig = props.spoonityConfig,
     siteState = props.siteState,
@@ -86,6 +87,8 @@ var BusinessSummary = function BusinessSummary(props) {
     setConfirm = _useState6[1];
   var isEnabledWhiteLabelModule = configs === null || configs === void 0 || (_configs$white_label_ = configs.white_label_module) === null || _configs$white_label_ === void 0 ? void 0 : _configs$white_label_.value;
   var isAllowRegisteredBusiness = (sessionState === null || sessionState === void 0 || (_sessionState$user = sessionState.user) === null || _sessionState$user === void 0 ? void 0 : _sessionState$user.level) === 0 || (sessionState === null || sessionState === void 0 || (_sessionState$user2 = sessionState.user) === null || _sessionState$user2 === void 0 ? void 0 : _sessionState$user2.level) === 2 && (configs === null || configs === void 0 || (_configs$allow_busine = configs.allow_business_owner_register_business) === null || _configs$allow_busine === void 0 ? void 0 : _configs$allow_busine.value) === '1';
+  var projectsForEnableSync = ['dominosordering'];
+  var enableSyncFunctions = projectsForEnableSync.includes(ordering.project);
   var handleOpenCategory = function handleOpenCategory() {
     var _businessState$busine;
     events.emit('go_to_page', {
@@ -211,7 +214,19 @@ var BusinessSummary = function BusinessSummary(props) {
     onClick: function onClick() {
       return handleSelectedItem('custom_fields');
     }
-  }, t('CUSTOM_FIELDS', 'Custom fields')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+  }, t('CUSTOM_FIELDS', 'Custom fields')), enableSyncFunctions && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+    onClick: function onClick() {
+      return handleSyncEvent('business');
+    }
+  }, t('SYNC_BUSINESS', 'Sync Business')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+    onClick: function onClick() {
+      return handleSyncEvent('menu');
+    }
+  }, t('SYNC_PRODUCTS', 'Sync Products')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+    onClick: function onClick() {
+      return handleSyncEvent('coupons');
+    }
+  }, t('SYNC_COUPONS', 'Sync Coupons'))), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
     onClick: function onClick() {
       return onClickDeleteBusiness();
     }

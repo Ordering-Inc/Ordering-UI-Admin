@@ -66,6 +66,7 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
     actionStatus = props.actionStatus,
     handleUpdatePreorderConfigs = props.handleUpdatePreorderConfigs,
     handleUpdateSpoonityKey = props.handleUpdateSpoonityKey,
+    handleSyncEvent = props.handleSyncEvent,
     spoonityKeyState = props.spoonityKeyState,
     siteState = props.siteState;
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
@@ -203,6 +204,7 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
     handleSucessUpdateBusiness: handleSucessUpdateBusiness,
     handleDuplicateBusiness: handleDuplicateBusiness,
     handleDeleteBusiness: handleDeleteBusiness,
+    handleSyncEvent: handleSyncEvent,
     extraOpen: extraOpen,
     spoonityConfig: spoonityConfig,
     siteState: siteState,
