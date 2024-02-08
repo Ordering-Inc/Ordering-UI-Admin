@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import { SearchBar } from '../../Shared'
+import { SearchBar, Modal } from '../../Shared'
 import { Button, Checkbox } from '../../../styles'
+import { DriverTemporalSchedule } from '../DriverTemporalSchedule'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 
 import {
@@ -12,7 +13,8 @@ import {
   BusinessWrapper,
   WrapperImage,
   Image,
-  DriverInfoContainer
+  DriverInfoContainer,
+  DriverTemporaryContainer
 } from './styles'
 
 export const DriversGroupDrivers = (props) => {
@@ -20,12 +22,21 @@ export const DriversGroupDrivers = (props) => {
     drivers,
     actionState,
     selectedDriverIds,
+    selectedDriverTemporaryIds,
     handleSelectDriver,
-    handleSelectAllDriver
+    handleSelectAllDriver,
+    handleSelectDriverTemporary
   } = props
   const [, t] = useLanguage()
   const [searchValue, setSearchValue] = useState(null)
   const [filteredDrivers, setFilteredDrivers] = useState([])
+  const [driverTemporalSchedule, setDriverTemporalScheduleModal] = useState(false)
+  const [driverSchedule, setDriverSchedule] = useState(null)
+
+  const handleOpenModal = (driver) => {
+    setDriverSchedule(driver)
+    setDriverTemporalScheduleModal(true)
+  }
 
   useEffect(() => {
     let _filteredDrivers = []
@@ -91,9 +102,35 @@ export const DriversGroupDrivers = (props) => {
               <p>{driver?.name} {driver?.lastname}</p>
               <p>{driver?.email}</p>
             </DriverInfoContainer>
+            {selectedDriverIds?.includes(driver?.id) && (
+              <>
+                <Checkbox
+                  checked={selectedDriverTemporaryIds?.some((_driver) => _driver?.id === driver.id && _driver?.temporarily_activated)}
+                  onChange={e => handleSelectDriverTemporary(driver?.id, e.target.checked)}
+                />
+                <DriverTemporaryContainer>
+                  <p onClick={() => handleOpenModal(selectedDriverTemporaryIds.find((_driver) => (_driver?.id === driver?.id)) ?? { id: driver?.id, temporarily_activated: true, temporary_at: null })}>{t('DRIVER_TEMPORAL', 'Temporal driver')}</p>
+                </DriverTemporaryContainer>
+              </>
+            )}
           </BusinessWrapper>
         ))}
       </BusinessesContainer>
+
+      <Modal
+        width='385px'
+        height='auto'
+        padding='30px'
+        title={t('TEMPORAL_SCHEDULE', 'Temporal Schedule')}
+        open={driverTemporalSchedule}
+        onClose={() => setDriverTemporalScheduleModal(false)}
+      >
+        <DriverTemporalSchedule
+          driverSchedule={driverSchedule}
+          handleSelectDriverTemporary={handleSelectDriverTemporary}
+          onClose={() => setDriverTemporalScheduleModal(false)}
+        />
+      </Modal>
     </Container>
   )
 }
