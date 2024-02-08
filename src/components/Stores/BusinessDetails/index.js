@@ -52,6 +52,7 @@ export const BusinessDetailsUI = (props) => {
     actionStatus,
     handleUpdatePreorderConfigs,
     handleUpdateSpoonityKey,
+    handleSyncEvent,
     spoonityKeyState,
     siteState
   } = props
@@ -175,6 +176,7 @@ export const BusinessDetailsUI = (props) => {
           handleSucessUpdateBusiness={handleSucessUpdateBusiness}
           handleDuplicateBusiness={handleDuplicateBusiness}
           handleDeleteBusiness={handleDeleteBusiness}
+          handleSyncEvent={handleSyncEvent}
           extraOpen={extraOpen}
           spoonityConfig={spoonityConfig}
           siteState={siteState}
