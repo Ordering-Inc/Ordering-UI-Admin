@@ -119,7 +119,7 @@ export const DriversGroupDrivers = (props) => {
 
       <Modal
         width='385px'
-        height='70vh'
+        height='auto'
         padding='30px'
         title={t('TEMPORAL_SCHEDULE', 'Temporal Schedule')}
         open={driverTemporalSchedule}

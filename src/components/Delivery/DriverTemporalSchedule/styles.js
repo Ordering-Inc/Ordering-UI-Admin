@@ -19,6 +19,7 @@ export const DateContainer = styled.div`
   input {
     border-radius: 20px;
     width: auto;
+    min-width: 220px;
     outline: none;
     padding: 3px 10px;
     border: 1px solid #F2F2F2;
