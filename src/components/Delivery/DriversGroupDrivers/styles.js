@@ -99,9 +99,14 @@ export const Image = (props) => {
 
 export const DriverInfoContainer = styled.div`
   padding-right: 15px;
-
+  width: 200px;
   p {
     margin: 0px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
     &:first-child {
       font-weight: 500;
       font-size: 13px;
