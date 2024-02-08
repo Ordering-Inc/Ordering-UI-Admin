@@ -121,7 +121,7 @@ var DriversGroupDrivers = function DriversGroupDrivers(props) {
     }, t('DRIVER_TEMPORAL', 'Temporal driver')))));
   })), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "385px",
-    height: "70vh",
+    height: "auto",
     padding: "30px",
     title: t('TEMPORAL_SCHEDULE', 'Temporal Schedule'),
     open: driverTemporalSchedule,

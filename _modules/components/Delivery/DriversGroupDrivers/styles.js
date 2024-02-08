@@ -45,7 +45,7 @@ var Image = function Image(props) {
   }), props.children);
 };
 exports.Image = Image;
-var DriverInfoContainer = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  padding-right: 15px;\n\n  p {\n    margin: 0px;\n    &:first-child {\n      font-weight: 500;\n      font-size: 13px;\n    }\n\n    &:last-child {\n      font-size: 12px;\n      color: ", ";\n    }\n  }\n"])), function (props) {
+var DriverInfoContainer = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  padding-right: 15px;\n  width: 200px;\n  p {\n    margin: 0px;\n    display: -webkit-box;\n    -webkit-line-clamp: 2;\n    -webkit-box-orient: vertical;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    &:first-child {\n      font-weight: 500;\n      font-size: 13px;\n    }\n\n    &:last-child {\n      font-size: 12px;\n      color: ", ";\n    }\n  }\n"])), function (props) {
   return props.theme.colors.lightGray;
 });
 exports.DriverInfoContainer = DriverInfoContainer;
