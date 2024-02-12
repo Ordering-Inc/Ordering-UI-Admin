@@ -34,13 +34,13 @@ var DriverTemporalSchedule = function DriverTemporalSchedule(props) {
     state = _useLanguage2[0],
     t = _useLanguage2[1];
   var datePickerRef = (0, _react.useRef)(null);
-  var _useState = (0, _react.useState)(driverSchedule !== null && driverSchedule !== void 0 && driverSchedule.temporary_at ? new Date(driverSchedule === null || driverSchedule === void 0 ? void 0 : driverSchedule.temporary_at) : new Date()),
+  var _useState = (0, _react.useState)(driverSchedule !== null && driverSchedule !== void 0 && driverSchedule.temporary_at ? _moment.default.utc(driverSchedule === null || driverSchedule === void 0 ? void 0 : driverSchedule.temporary_at).local().toDate() : new Date()),
     _useState2 = _slicedToArray(_useState, 2),
     selectedDate = _useState2[0],
     setSelectedDate = _useState2[1];
   var handleSelect = function handleSelect(date) {
     setSelectedDate(date);
-    handleSelectDriverTemporary(driverSchedule === null || driverSchedule === void 0 ? void 0 : driverSchedule.id, true, (0, _moment.default)(date).format('YYYY-MM-DD HH:mm:ss'));
+    handleSelectDriverTemporary(driverSchedule === null || driverSchedule === void 0 ? void 0 : driverSchedule.id, true, (0, _moment.default)(date).utc().format('YYYY-MM-DD HH:mm:ss'));
   };
   var handleOnClick = function handleOnClick() {
     onClose();
