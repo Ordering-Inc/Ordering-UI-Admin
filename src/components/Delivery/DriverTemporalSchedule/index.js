@@ -24,11 +24,11 @@ export const DriverTemporalSchedule = (props) => {
   const [state, t] = useLanguage()
   const datePickerRef = useRef(null)
 
-  const [selectedDate, setSelectedDate] = useState(driverSchedule?.temporary_at ? new Date(driverSchedule?.temporary_at) : new Date())
+  const [selectedDate, setSelectedDate] = useState(driverSchedule?.temporary_at ? moment.utc(driverSchedule?.temporary_at).local().toDate() : new Date())
 
   const handleSelect = (date) => {
     setSelectedDate(date)
-    handleSelectDriverTemporary(driverSchedule?.id, true, moment(date).format('YYYY-MM-DD HH:mm:ss'))
+    handleSelectDriverTemporary(driverSchedule?.id, true, moment(date).utc().format('YYYY-MM-DD HH:mm:ss'))
   }
 
   const handleOnClick = () => {
