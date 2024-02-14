@@ -69,6 +69,7 @@ export const TopRightSection = styled.div`
   flex-direction: column-reverse;
   flex-wrap: nowrap;
   margin: 5px 0px 10px 15px;
+  overflow: auto;
 
   ${({ isCustomLayout }) => !isCustomLayout && css`
     justify-content: flex-end;

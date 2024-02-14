@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useLanguage, UsersList as UsersListController } from 'ordering-components-admin'
- import { getStorageItem, removeStorageItem, setStorageItem, addQueryToUrl } from '../../../utils'
+import { useLanguage, useSession, UsersList as UsersListController } from 'ordering-components-admin'
+import { getStorageItem, removeStorageItem, setStorageItem, addQueryToUrl } from '../../../utils'
 
 import { UsersListingHeader } from '../UsersListingHeader'
 import { UserTypeFilter } from '../UserTypeFilter'
@@ -58,6 +58,7 @@ const DeliveryUsersListingUI = (props) => {
   } = props
 
   const [, t] = useLanguage()
+  const [{ user }] = useSession()
   const query = new URLSearchParams(useLocation().search)
   const firstRender = useRef(true)
   const [queryId, setQueryId] = useState(null)
@@ -65,6 +66,7 @@ const DeliveryUsersListingUI = (props) => {
   const [openUser, setOpenUser] = useState(null)
   const [openUserAddForm, setOpenUserAddForm] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const readOnlyDeliveryManager = user?.readOnlyDeliveryManager
 
   const [isTourOpen, setIsTourOpen] = useState(false)
   const [currentTourStep, setCurrentTourStep] = useState(isDriversManagersPage ? 2 : 0)
@@ -182,7 +184,7 @@ const DeliveryUsersListingUI = (props) => {
           handleDeleteSeveralUsers={handleDeleteSeveralUsers}
           handleOpenUserAddForm={handleOpenUserAddForm}
           handleOpenTour={() => handleOpenTour()}
-          actionDisabled={actionDisabled}
+          actionDisabled={(actionDisabled || readOnlyDeliveryManager)}
         />
         {isShowActiveStateFilter && (
           <UserActiveStateFilter
@@ -211,7 +213,7 @@ const DeliveryUsersListingUI = (props) => {
           userDetailsId={openUser?.id || queryId}
           handleOpenUserDetails={handleOpenUserDetails}
           handleOpenUserAddForm={handleOpenUserAddForm}
-          actionDisabled={actionDisabled}
+          actionDisabled={(actionDisabled || readOnlyDeliveryManager)}
           setSelectedUsers={setSelectedUsers}
           isUseQuery={isUseQuery}
           handleChangeBusyUser={handleChangeBusyUser}
@@ -230,7 +232,7 @@ const DeliveryUsersListingUI = (props) => {
           handleSuccessUpdate={handleSuccessUpdate}
           handleSuccessDeleteUser={handleSuccessDeleteUser}
           handleChangeActiveUser={handleChangeActiveUser}
-          actionDisabled={actionDisabled}
+          actionDisabled={(actionDisabled || readOnlyDeliveryManager)}
         />
       )}
       {openUserAddForm && (

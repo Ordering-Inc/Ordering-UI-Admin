@@ -51,6 +51,7 @@ export const OrderContactInformation = (props) => {
   const [{ optimizeImage }] = useUtils()
   const [{ configs }] = useConfig()
   const googleInputRef = useRef(null)
+  const readOnlyBusinessOwner = user?.readOnlyBusinessOwner
 
   const googleMapsApiKey = configs?.google_maps_api_key?.value
   const isDisableDriverCompanies = configs?.disable_companies_order_details?.value === '1'
@@ -211,10 +212,12 @@ export const OrderContactInformation = (props) => {
                 </ReviewButton>
               )}
             </InfoContent>
-            <ActionIconWrapper>
-              <Pencil className='edit-icon' onClick={handleEdit} />
-              <ChevronDown className='down-arrow' />
-            </ActionIconWrapper>
+            {!readOnlyBusinessOwner && (
+              <ActionIconWrapper>
+                <Pencil className='edit-icon' onClick={handleEdit} />
+                <ChevronDown className='down-arrow' />
+              </ActionIconWrapper>
+            )}
           </CustomerInfo>
         </ContextAwareToggle>
         <Accordion.Collapse eventKey='1'>
@@ -348,7 +351,7 @@ export const OrderContactInformation = (props) => {
       </Accordion>
       {deliveryTypes.includes(order?.delivery_type) && !isServiceOrder && (
         <>
-          {!order?.driver_id && !isDisableDriverCompanies && (
+          {!order?.driver_id && !isDisableDriverCompanies && !readOnlyBusinessOwner && (
             <CompanySelectorContainer>
               <p>{t('DRIVER_COMPANY', 'Driver company')}</p>
               <CompanySelector
@@ -365,7 +368,7 @@ export const OrderContactInformation = (props) => {
               />
             </CompanySelectorContainer>
           )}
-          {!order?.driver_company_id && !commentInfoState?.open && (
+          {!order?.driver_company_id && !commentInfoState?.open && !readOnlyBusinessOwner && (
             <DriverSelectorContainer>
               <p>{t('DRIVER_ASSIGN', 'Driver assign')}</p>
               <DriverSelector
