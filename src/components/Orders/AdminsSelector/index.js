@@ -63,7 +63,7 @@ export const AdminsSelector = (props) => {
 
   return (
     <>
-      {!adminsList?.loading && adminsList?.admins?.length > 0 ? (
+      {!adminsList?.loading ? (
         <MultiSelect
           defaultValue={filterValues.administratorIds}
           placeholder={Placeholder}
