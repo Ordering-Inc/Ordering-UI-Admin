@@ -60,19 +60,19 @@ export const DeliveryUsersListing = (props) => {
     getDrivers(expectedPage, pageSize, selectedGroup?.id)
   }
 
-  const getDatesInRange = (date_range) => {
-    const start = moment(date_range[0])
-    const end = moment(date_range[1])
-    const dates = [];
+  const getDatesInRange = (dateRange) => {
+    const start = moment(dateRange[0])
+    const end = moment(dateRange[1])
+    const dates = []
 
-    let current = start;
+    let current = start
 
     while (current <= end) {
       dates.push(current.format('YYYY-MM-DD'))
       current = current.clone().add(1, 'days')
     }
 
-    return dates;
+    return dates
   }
 
   const handleHourBlockWidth = (block) => {
@@ -103,7 +103,7 @@ export const DeliveryUsersListing = (props) => {
           cellSections={21.5}
           onClick={() => handleSelectDriver(user, block)}
         >
-          <UserName>{`${!!user?.name ? user?.name : ''} ${!!user?.lastname ? user?.lastname : ''}`}</UserName>
+          <UserName>{`${user?.name ?? ''} ${user?.lastname ?? ''}`}</UserName>
           <p>{moment(block.start).format(hourFormat)} - {moment(block.end).format(hourFormat)}</p>
         </Block>
       </td>
@@ -112,32 +112,35 @@ export const DeliveryUsersListing = (props) => {
   const handleBlockWeekToShow = (block, user, allBlocks, blockByDay) => {
     if (!block) return
     return block.start && block.end && (
-      blockByDay?.length === 1 ?
-        <Block
-          innerWidth={106}
-          rowPosition={allBlocks.indexOf(moment(block?.start).format('YYYY-MM-DD'))}
-          cellPosition={4}
-          cellWidth={160}
-          cellSections={6.67}
-          onClick={() => handleSelectDriver(user, block)}
-        >
-          <p>{moment(block.start).format(hourFormat)} - {moment(block.end).format(hourFormat)}</p>
-        </Block>
-        :
-        <ButtonWrapper
-          rowPosition={allBlocks.indexOf(moment(block?.start).format('YYYY-MM-DD'))}
-          cellPosition={moment(block?.start).hour()}
-          cellWidth={160}
-          cellSections={6.67}
-        >
-          <Button
-            color='lightPrimary'
-            borderRadius='8px'
-            onClick={() => setStackEventsState({ open: true, events: blockByDay, user: user })}
+      blockByDay?.length === 1
+        ? (
+          <Block
+            innerWidth={106}
+            rowPosition={allBlocks.indexOf(moment(block?.start).format('YYYY-MM-DD'))}
+            cellPosition={4}
+            cellWidth={160}
+            cellSections={6.67}
+            onClick={() => handleSelectDriver(user, block)}
           >
-            {blockByDay?.length} {t('BLOCKS', 'Blocks')}
-          </Button>
-        </ButtonWrapper>
+            <p>{moment(block.start).format(hourFormat)} - {moment(block.end).format(hourFormat)}</p>
+          </Block>
+        )
+        : (
+          <ButtonWrapper
+            rowPosition={allBlocks.indexOf(moment(block?.start).format('YYYY-MM-DD'))}
+            cellPosition={moment(block?.start).hour()}
+            cellWidth={160}
+            cellSections={6.67}
+          >
+            <Button
+              color='lightPrimary'
+              borderRadius='8px'
+              onClick={() => setStackEventsState({ open: true, events: blockByDay, user: user })}
+            >
+              {blockByDay?.length} {t('BLOCKS', 'Blocks')}
+            </Button>
+          </ButtonWrapper>
+        )
     )
   }
 
