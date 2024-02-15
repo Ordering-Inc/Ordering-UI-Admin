@@ -141,6 +141,7 @@ export const HeaderWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  position: relative;
 `
 
 export const EventProfessionalPhoto = styled.div`
@@ -224,7 +225,7 @@ export const DriversGroupFilterWrapper = styled.div`
 
 export const DriversGroupCalendarWrapper = styled(DriversGroupFilterWrapper)`
   position: relative;
-
+  display: flex;
   > button {
     svg {
       font-size: 16px;
@@ -850,4 +851,143 @@ export const BlocksWrapper = styled.div`
 export const DateBlockWrapper = styled.div`
   display: flex;
   flex-direction: column;
+`
+
+export const DriverMultiSelectorContainer = styled.div`
+  > div {
+    max-width: 400px;
+    min-width: 150px;
+  }
+`
+
+export const WrapperRow = styled.div`
+  display: flex;
+  align-items: center;
+  padding-bottom: 0px;
+
+  & > div {
+    height: 55px;
+    max-width: 400px;
+    margin-right: 10px;
+    background-color: ${props => props.theme.colors.secundary};
+    border: none;
+    font-size: 14px;
+    border-radius: 8px;
+    > div:first-child {
+      height: 100%;
+    }
+  }
+
+  .order-status-multi-select {
+    p {
+      padding: 0;
+      color: ${props => props.theme.colors.headingColor} !important;
+    }
+  }
+
+  .date-filter-container {
+    z-index: 100;
+  }
+
+  input {
+    width: 100%;
+    height: 47px;
+    padding: 10px 25px;
+    box-sizing: border-box;
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    -moz-appearance: textfield;
+  }
+
+  .close {
+    right: 8px;
+  }
+
+  .external_id {
+    @media (max-width: 1200px) {
+     flex: auto;
+    }
+  }
+
+  @media (max-width: 798px) {
+    flex-direction: column !important;
+    padding: 10px 15px 0 0px;
+    & > div {
+      margin-top: 15px;
+    }
+  }
+
+  ${({ isSelectedOrders }) => isSelectedOrders && css`
+      flex-direction: column !important;
+      padding: ${!isSelectedOrders && '10px 15px 0 0px'};
+      & > div {
+        margin-top: 15px;
+      }
+  `}
+`
+
+export const WarningMessage = styled.div`
+  position: absolute;
+  display: flex;
+  align-items: center;
+  z-index: 100;
+  bottom: 20px;
+  background: ${props => props.theme.colors.warning100};
+  border: 1px solid ${props => props.theme.colors.warning};
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+  border-radius: 7.6px;
+  padding: 0px 15px;
+  box-sizing: border-box;
+  margin: 10px 0px 0px 0px !important;
+
+  right: 0px;
+  ${props => props.theme?.rtl && css`
+    left: 0px;
+    right: initial;
+  `}
+
+  svg {
+    font-size: 20px;
+    color: ${props => props.theme.colors.warning};
+  }
+
+  span {
+    font-size: 12px;
+    line-height: 18px;
+    color: ${props => props.theme.colors.headingColor};
+    margin: 0 10px;
+    flex: 1;
+  }
+
+  a {
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  @media (min-width: 768px) {
+    padding: 0px 20px;
+    font-size: 14px;
+    line-height: 24px;
+    ${({ isLateralBar }) => isLateralBar ? css`
+      right: 0px;
+    ` : css`
+      right: 0px;
+    `}
+    ${({ isLateralBar }) => isLateralBar ? css`
+      bottom: -25px;
+    ` : css`
+      bottom: -35px;
+    `}
+    ${props => props.theme?.rtl && css`
+      left: 0px;
+      right: initial;
+    `}
+
+    span {
+      white-space: nowrap;
+    }
+  }
 `
