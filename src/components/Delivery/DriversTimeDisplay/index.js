@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useLanguage, useConfig, CalendarDriversList as CalendarDriversListController } from 'ordering-components-admin'
 import { List as MenuIcon, ChevronRight } from 'react-bootstrap-icons'
-import { Button, IconButton } from '../../../styles'
+import { Button, IconButton, LinkButton } from '../../../styles'
 import { useInfoShare } from '../../../contexts/InfoShareContext'
 import { Alert, Modal, SpinnerLoader } from '../../Shared'
 import { DeliveryUsersListing } from './UserList'
@@ -25,9 +25,14 @@ import {
   DeleteButtons,
   DeleteWrapper,
   OrderStatusTypeSelectWrapper,
-  StackedBlock
+  StackedBlock,
+  DriverMultiSelectorContainer,
+  WrapperRow,
+  WarningMessage
 } from './styles'
 import { Select } from '../../../styles/Select'
+import { DriverMultiSelector } from '../../Orders/DriverMultiSelector'
+import TiWarningOutline from '@meronex/icons/ti/TiWarningOutline'
 
 const DriversTimeDisplayUI = (props) => {
   const {
@@ -70,7 +75,10 @@ const DriversTimeDisplayUI = (props) => {
     handleSelectedUntilDate,
     ruleState,
     setRuleState,
-    handleSetInitialStates
+    handleSetInitialStates,
+    filterValues,
+    handleChangeDriver,
+    handleClearFilters
   } = props
 
   const [, t] = useLanguage()
@@ -400,7 +408,26 @@ const DriversTimeDisplayUI = (props) => {
                   )}
                 </DriverGroupSelectorWrapper>
               </div>
+
+              {(filterValues?.driverIds?.length > 0) && (
+                <WarningMessage>
+                  <TiWarningOutline />
+                  <span>{t('WARNING_FILTER_APPLIED', 'Filters applied. You may miss new orders.')}</span>
+                  <LinkButton onClick={() => handleClearFilters()}>{t('CLEAR_FILTERS', 'Clear filters')}</LinkButton>
+                </WarningMessage>
+              )}
               <DriversGroupCalendarWrapper>
+                {selectedGroup && (
+                  <WrapperRow wrapperWidth={400}>
+                    <DriverMultiSelectorContainer>
+                      <DriverMultiSelector
+                        disableSocketRoomDriver
+                        filterValues={filterValues}
+                        handleChangeDriver={handleChangeDriver}
+                      />
+                    </DriverMultiSelectorContainer>
+                  </WrapperRow>
+                )}
                 <AnalyticsCalendar {...props} handleChangeDate={handleChangeDate} />
               </DriversGroupCalendarWrapper>
             </HeaderWrapper>
