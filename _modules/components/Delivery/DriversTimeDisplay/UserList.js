@@ -67,9 +67,9 @@ var DeliveryUsersListing = function DeliveryUsersListing(props) {
     var expectedPage = Math.ceil(paginationProps.from / pageSize);
     getDrivers(expectedPage, pageSize, selectedGroup === null || selectedGroup === void 0 ? void 0 : selectedGroup.id);
   };
-  var getDatesInRange = function getDatesInRange(date_range) {
-    var start = (0, _moment.default)(date_range[0]);
-    var end = (0, _moment.default)(date_range[1]);
+  var getDatesInRange = function getDatesInRange(dateRange) {
+    var start = (0, _moment.default)(dateRange[0]);
+    var end = (0, _moment.default)(dateRange[1]);
     var dates = [];
     var current = start;
     while (current <= end) {
@@ -94,6 +94,7 @@ var DeliveryUsersListing = function DeliveryUsersListing(props) {
     return width;
   };
   var handleBlockHourToShow = function handleBlockHourToShow(block, user) {
+    var _user$name, _user$lastname;
     if (!block) return;
     return block.start && block.end && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.Block, {
       innerWidth: handleHourBlockWidth(block),
@@ -104,7 +105,7 @@ var DeliveryUsersListing = function DeliveryUsersListing(props) {
       onClick: function onClick() {
         return handleSelectDriver(user, block);
       }
-    }, /*#__PURE__*/_react.default.createElement(_styles2.UserName, null, "".concat(!!(user !== null && user !== void 0 && user.name) ? user === null || user === void 0 ? void 0 : user.name : '', " ").concat(!!(user !== null && user !== void 0 && user.lastname) ? user === null || user === void 0 ? void 0 : user.lastname : '')), /*#__PURE__*/_react.default.createElement("p", null, (0, _moment.default)(block.start).format(hourFormat), " - ", (0, _moment.default)(block.end).format(hourFormat))));
+    }, /*#__PURE__*/_react.default.createElement(_styles2.UserName, null, "".concat((_user$name = user === null || user === void 0 ? void 0 : user.name) !== null && _user$name !== void 0 ? _user$name : '', " ").concat((_user$lastname = user === null || user === void 0 ? void 0 : user.lastname) !== null && _user$lastname !== void 0 ? _user$lastname : '')), /*#__PURE__*/_react.default.createElement("p", null, (0, _moment.default)(block.start).format(hourFormat), " - ", (0, _moment.default)(block.end).format(hourFormat))));
   };
   var handleBlockWeekToShow = function handleBlockWeekToShow(block, user, allBlocks, blockByDay) {
     if (!block) return;
@@ -175,14 +176,14 @@ var DeliveryUsersListing = function DeliveryUsersListing(props) {
       width: 100
     })))))));
   }) : driversList === null || driversList === void 0 || (_driversList$users2 = driversList.users) === null || _driversList$users2 === void 0 ? void 0 : _driversList$users2.map(function (user, i) {
-    var _user$name, _user$lastname, _getDatesInRange, _user$delivery_blocks, _user$delivery_blocks2, _getDatesInRange2;
+    var _user$name2, _user$lastname2, _getDatesInRange, _user$delivery_blocks, _user$delivery_blocks2, _getDatesInRange2;
     return /*#__PURE__*/_react.default.createElement("tbody", {
       key: i
     }, /*#__PURE__*/_react.default.createElement(_styles2.UserRow, null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.UserIdWrapper, null, user === null || user === void 0 ? void 0 : user.id)), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.UserMainInfo, null, /*#__PURE__*/_react.default.createElement(_styles2.WrapperImage, null, user !== null && user !== void 0 && user.photo ? /*#__PURE__*/_react.default.createElement(_styles2.Image, {
       bgimage: optimizeImage(user === null || user === void 0 ? void 0 : user.photo, 'h_50,c_limit')
     }) : /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)), /*#__PURE__*/_react.default.createElement(_styles2.InfoBlock, null, /*#__PURE__*/_react.default.createElement("span", {
       className: "bold"
-    }, "".concat((_user$name = user.name) !== null && _user$name !== void 0 ? _user$name : '', " ").concat((_user$lastname = user === null || user === void 0 ? void 0 : user.lastname) !== null && _user$lastname !== void 0 ? _user$lastname : '')), /*#__PURE__*/_react.default.createElement("span", null, user === null || user === void 0 ? void 0 : user.email)), ((user === null || user === void 0 ? void 0 : user.phone_verified) || (user === null || user === void 0 ? void 0 : user.email_verified)) && /*#__PURE__*/_react.default.createElement(_styles2.VerifiedItemsContainer, null, !!(user !== null && user !== void 0 && user.phone_verified) && /*#__PURE__*/_react.default.createElement(_styles2.VerifiedItem, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Phone, null), t('VERIFIED', 'Verified')), !!(user !== null && user !== void 0 && user.email_verified) && /*#__PURE__*/_react.default.createElement(_styles2.VerifiedItem, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Envelope, null), t('VERIFIED', 'Verified'))))), ((_getDatesInRange = getDatesInRange(date)) === null || _getDatesInRange === void 0 ? void 0 : _getDatesInRange.length) === 1 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, _toConsumableArray(Array(24 - (user === null || user === void 0 || (_user$delivery_blocks = user.delivery_blocks) === null || _user$delivery_blocks === void 0 ? void 0 : _user$delivery_blocks.length)).keys()).map(function (i) {
+    }, "".concat((_user$name2 = user.name) !== null && _user$name2 !== void 0 ? _user$name2 : '', " ").concat((_user$lastname2 = user === null || user === void 0 ? void 0 : user.lastname) !== null && _user$lastname2 !== void 0 ? _user$lastname2 : '')), /*#__PURE__*/_react.default.createElement("span", null, user === null || user === void 0 ? void 0 : user.email)), ((user === null || user === void 0 ? void 0 : user.phone_verified) || (user === null || user === void 0 ? void 0 : user.email_verified)) && /*#__PURE__*/_react.default.createElement(_styles2.VerifiedItemsContainer, null, !!(user !== null && user !== void 0 && user.phone_verified) && /*#__PURE__*/_react.default.createElement(_styles2.VerifiedItem, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Phone, null), t('VERIFIED', 'Verified')), !!(user !== null && user !== void 0 && user.email_verified) && /*#__PURE__*/_react.default.createElement(_styles2.VerifiedItem, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Envelope, null), t('VERIFIED', 'Verified'))))), ((_getDatesInRange = getDatesInRange(date)) === null || _getDatesInRange === void 0 ? void 0 : _getDatesInRange.length) === 1 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, _toConsumableArray(Array(24 - (user === null || user === void 0 || (_user$delivery_blocks = user.delivery_blocks) === null || _user$delivery_blocks === void 0 ? void 0 : _user$delivery_blocks.length)).keys()).map(function (i) {
       return /*#__PURE__*/_react.default.createElement("td", {
         key: i
       }, /*#__PURE__*/_react.default.createElement(_styles2.EmptyBlock, {

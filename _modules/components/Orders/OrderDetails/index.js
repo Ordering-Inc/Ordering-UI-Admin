@@ -141,6 +141,9 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     setCommentInfostate = _useState16[1];
   var cateringTypes = [7, 8];
   var placeSpotEnabled = [3, 4];
+  var readOnlyBusinessOwner = user === null || user === void 0 ? void 0 : user.readOnlyBusinessOwner;
+  var readOnlyDeliveryManager = user === null || user === void 0 ? void 0 : user.readOnlyDeliveryManager;
+  var readOnlyAdmin = user === null || user === void 0 ? void 0 : user.readOnlyAdmin;
   var _props$order = props.order,
     order = _props$order.order,
     loading = _props$order.loading;
@@ -433,7 +436,8 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     orderId: order.id,
     deliveryType: order === null || order === void 0 ? void 0 : order.delivery_type,
     defaultValue: parseInt(order.status),
-    handleUpdateOrderStatus: handleUpdateOrderStatus
+    handleUpdateOrderStatus: handleUpdateOrderStatus,
+    viewOnly: readOnlyAdmin || readOnlyDeliveryManager || readOnlyBusinessOwner
   }))), (order === null || order === void 0 ? void 0 : order.place) && placeSpotEnabled.includes(order === null || order === void 0 ? void 0 : order.delivery_type) && /*#__PURE__*/_react.default.createElement(_styles2.PlaceSpotContainer, null, /*#__PURE__*/_react.default.createElement("p", null, t('SPOT', 'Spot'), ": ", order === null || order === void 0 || (_order$place = order.place) === null || _order$place === void 0 ? void 0 : _order$place.name)), /*#__PURE__*/_react.default.createElement(_styles2.StatusBarContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.StatusBar, {
     percentage: (_progressBarObjt = progressBarObjt(order === null || order === void 0 ? void 0 : order.status)) === null || _progressBarObjt === void 0 ? void 0 : _progressBarObjt.percentage
   })), /*#__PURE__*/_react.default.createElement(_styles2.AdvancedLogistic, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, t('LOGISTIC', 'Logistic')), /*#__PURE__*/_react.default.createElement("p", null, getLogisticTag(order === null || order === void 0 ? void 0 : order.logistic_status))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, t('ATTEMPTS', 'Attempts')), /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 ? void 0 : order.logistic_attemps)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, t('PRIORITY', 'Priority')), /*#__PURE__*/_react.default.createElement("p", null, getPriorityTag(order === null || order === void 0 ? void 0 : order.priority)))), rejectResonStatuses.includes(order === null || order === void 0 ? void 0 : order.status) && (order === null || order === void 0 ? void 0 : order.reject_reason) && /*#__PURE__*/_react.default.createElement(_styles2.RejectReasonsContainer, null, /*#__PURE__*/_react.default.createElement("p", null, t('REJECT_REASONS', 'Reject reasons')), /*#__PURE__*/_react.default.createElement(_styles2.RejectReasonsList, null, /*#__PURE__*/_react.default.createElement(_styles2.RejectReasonWrapper, null, t("REJECT_REASON_".concat(order === null || order === void 0 ? void 0 : order.reject_reason.toUpperCase()), order === null || order === void 0 ? void 0 : order.reject_reason.replace(/_/g, ' '))))), /*#__PURE__*/_react.default.createElement("div", {
@@ -465,7 +469,8 @@ var OrderDetailsUI = function OrderDetailsUI(props) {
     order: order,
     actionStatus: actionStatus,
     handleRefundPaymentsStripe: handleRefundPaymentsStripe,
-    handleOrderRefund: handleOrderRefund
+    handleOrderRefund: handleOrderRefund,
+    viewOnly: readOnlyAdmin || readOnlyDeliveryManager || readOnlyBusinessOwner
   })), /*#__PURE__*/_react.default.createElement(_styles2.DetailBottom, null)), extraOpen && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, width >= 1000 ? /*#__PURE__*/_react.default.createElement(_styles2.OrderDetailsExtraContent, null, /*#__PURE__*/_react.default.createElement(_styles2.CloseButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {
