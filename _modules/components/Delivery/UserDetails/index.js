@@ -82,7 +82,8 @@ var UserDetailsUI = function UserDetailsUI(props) {
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configs = _useConfig2[0].configs;
-  var disableSchedule = (configs === null || configs === void 0 || (_configs$allow_driver = configs.allow_driver_manager_update_driver_schedule) === null || _configs$allow_driver === void 0 ? void 0 : _configs$allow_driver.value) === '0' && (user === null || user === void 0 ? void 0 : user.level) === 5;
+  var viewOnly = (user === null || user === void 0 ? void 0 : user.readOnlyAdmin) || (user === null || user === void 0 ? void 0 : user.readOnlyDeliveryManager);
+  var disableSchedule = (configs === null || configs === void 0 || (_configs$allow_driver = configs.allow_driver_manager_update_driver_schedule) === null || _configs$allow_driver === void 0 ? void 0 : _configs$allow_driver.value) === '0' && (user === null || user === void 0 ? void 0 : user.level) === 5 || viewOnly;
   var isWhiteLabel = configs === null || configs === void 0 || (_configs$white_label_ = configs.white_label_module) === null || _configs$white_label_ === void 0 ? void 0 : _configs$white_label_.value;
   var expandSidebar = function expandSidebar() {
     var element = document.getElementById('user_lateral_bar');

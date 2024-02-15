@@ -37,7 +37,8 @@ var OrderStatusTypeSelector = function OrderStatusTypeSelector(props) {
     filterValues = props.filterValues,
     handleUpdateOrderStatus = props.handleUpdateOrderStatus,
     handleChangeMultiOrdersStatus = props.handleChangeMultiOrdersStatus,
-    handleChangeOrderStatus = props.handleChangeOrderStatus;
+    handleChangeOrderStatus = props.handleChangeOrderStatus,
+    viewOnly = props.viewOnly;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -504,7 +505,8 @@ var OrderStatusTypeSelector = function OrderStatusTypeSelector(props) {
       className: "orderStatus",
       isShowSearchBar: true,
       searchValue: searchValue,
-      handleChangeSearch: handleChangeSearch
+      handleChangeSearch: handleChangeSearch,
+      isDisabled: viewOnly
     }) : /*#__PURE__*/_react.default.createElement(_Select.Select, {
       searchBarIsCustomLayout: true,
       searchBarIsNotLazyLoad: true,
