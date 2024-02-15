@@ -15,7 +15,8 @@ export const OrderBill = (props) => {
     order,
     actionStatus,
     handleRefundPaymentsStripe,
-    handleOrderRefund
+    handleOrderRefund,
+    viewOnly
   } = props
 
   const isGiftCardOrder = order?.products?.[0]?.type === 'gift_card'
@@ -284,7 +285,7 @@ export const OrderBill = (props) => {
           </tbody>
         </table>
       )}
-      {!isGiftCardOrder && (
+      {!isGiftCardOrder && !viewOnly && (
         <RefundToWallet
           order={order}
           actionStatus={actionStatus}
@@ -377,7 +378,7 @@ export const OrderBill = (props) => {
         </table>
       )}
 
-      {!isGiftCardOrder && !order?.refund_data && stripePaymethods.includes(order?.paymethod?.gateway) && (
+      {!isGiftCardOrder && !order?.refund_data && stripePaymethods.includes(order?.paymethod?.gateway) && !viewOnly && (
         <RefundButtonWrapper>
           <Button
             color='primary'
