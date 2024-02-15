@@ -106,6 +106,9 @@ export const App = () => {
   const onlineStatus = useOnlineStatus()
   const { height } = useWindowSize()
 
+  const readOnlyBusinessOwner = user?.readOnlyBusinessOwner
+  const readOnlyDeliveryManager = user?.readOnlyDeliveryManager
+  const readOnlyAdmin = user?.readOnlyAdmin
   const cannyAppId = '5b05e5e2d3f6c47201694ad4'
   const isPastDue = projectStatus.project?.current_status === 'past_due'
   const showBanner = auth && isPastDue
@@ -232,7 +235,7 @@ export const App = () => {
                     <Route exact path='/'>
                       {
                         auth
-                          ? (user?.level !== 5 && user?.level !== 8)
+                          ? ((user?.level !== 5 && user?.level !== 8) && !(readOnlyAdmin || readOnlyDeliveryManager || readOnlyBusinessOwner))
                             ? <Redirect to='/home' />
                             : user?.level === 8 ? <Redirect to='/profile' /> : <Redirect to='/orders' />
                           : (queryProject && queryToken)
@@ -291,7 +294,7 @@ export const App = () => {
                     <Route exact path='/home'>
                       {
                         auth
-                          ? (user?.level !== 5 && user?.level !== 8)
+                          ? ((user?.level !== 5 && user?.level !== 8) && !(readOnlyAdmin || readOnlyDeliveryManager || readOnlyBusinessOwner))
                             ? <Home />
                             : user?.level === 8 ? <Redirect to='/profile' /> : <Redirect to='/orders' />
                           : <Redirect to='/login' />

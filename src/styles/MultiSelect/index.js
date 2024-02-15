@@ -112,16 +112,18 @@ export const MultiSelect = (props) => {
               <React.Fragment key={selectedOption.value}>
                 <MultiSelectOption>
                   {selectedOption.showOnSelected || selectedOption.content}
-                  <Button
-                    circle
-                    outline
-                    color='primary'
-                    type='reset'
-                    className='remove_option'
-                    onClick={() => onChange && onChange(selectedOption.value)}
-                  >
-                    <MdClose />
-                  </Button>
+                  {selectedOption?.value !== 'default' && (
+                    <Button
+                      circle
+                      outline
+                      color='primary'
+                      type='reset'
+                      className='remove_option'
+                      onClick={() => onChange && onChange(selectedOption.value)}
+                    >
+                      <MdClose />
+                    </Button>
+                  )}
                 </MultiSelectOption>
               </React.Fragment>
             ))}

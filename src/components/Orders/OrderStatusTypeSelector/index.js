@@ -20,7 +20,8 @@ export const OrderStatusTypeSelector = (props) => {
     filterValues,
     handleUpdateOrderStatus,
     handleChangeMultiOrdersStatus,
-    handleChangeOrderStatus
+    handleChangeOrderStatus,
+    viewOnly
   } = props
 
   const [, t] = useLanguage()
@@ -551,6 +552,7 @@ export const OrderStatusTypeSelector = (props) => {
             isShowSearchBar
             searchValue={searchValue}
             handleChangeSearch={handleChangeSearch}
+            isDisabled={viewOnly}
           />
         ) : (
           <Select
