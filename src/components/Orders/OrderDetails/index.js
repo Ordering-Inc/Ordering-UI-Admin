@@ -104,6 +104,10 @@ const OrderDetailsUI = (props) => {
   const [commentInfoState, setCommentInfostate] = useState({ open: false, driverId: null })
   const cateringTypes = [7, 8]
   const placeSpotEnabled = [3, 4]
+  const readOnlyBusinessOwner = user?.readOnlyBusinessOwner
+  const readOnlyDeliveryManager = user?.readOnlyDeliveryManager
+  const readOnlyAdmin = user?.readOnlyAdmin
+
   const {
     order,
     loading
@@ -375,6 +379,7 @@ const OrderDetailsUI = (props) => {
                 deliveryType={order?.delivery_type}
                 defaultValue={parseInt(order.status)}
                 handleUpdateOrderStatus={handleUpdateOrderStatus}
+                viewOnly={(readOnlyAdmin || readOnlyDeliveryManager || readOnlyBusinessOwner)}
               />
             </OrderStatusSelectorWrapper>
           </OrderStatus>
@@ -445,6 +450,7 @@ const OrderDetailsUI = (props) => {
               actionStatus={actionStatus}
               handleRefundPaymentsStripe={handleRefundPaymentsStripe}
               handleOrderRefund={handleOrderRefund}
+              viewOnly={(readOnlyAdmin || readOnlyDeliveryManager || readOnlyBusinessOwner)}
             />
           </div>
           <DetailBottom />

@@ -60,7 +60,9 @@ const SidebarMenuUI = (props) => {
   const windowSize = useWindowSize()
   const isPoweredByOrderingModule = configs?.powered_by_ordering_module?.value
   const isEnabledAppointmentsFeature = configs?.appointments?.value
-
+  const readOnlyBusinessOwner = sessionState?.user?.readOnlyBusinessOwner
+  const readOnlyDeliveryManager = sessionState?.user?.readOnlyDeliveryManager
+  const readOnlyAdmin = sessionState?.user?.readOnlyAdmin
   const [showMessage, setShowMessage] = useState(false)
 
   const ordersSubMenus = [
@@ -344,28 +346,28 @@ const SidebarMenuUI = (props) => {
       title: t('DRIVER_MANAGERS', 'Drivers manager'),
       pageName: 'drivers_managers',
       url: '/delivery/drivers-managers',
-      enabled: sessionState?.user?.level === 0
+      enabled: sessionState?.user?.level === 0 && !(readOnlyAdmin || readOnlyDeliveryManager)
     },
     {
       id: 3,
       title: t('DELIVERY_COMPANIES', 'Delivery companies'),
       pageName: 'drivers_companies',
       url: '/delivery/drivers-companies',
-      enabled: sessionState?.user?.level === 0
+      enabled: sessionState?.user?.level === 0 && !(readOnlyAdmin || readOnlyDeliveryManager)
     },
     {
       id: 4,
       title: t('DELIVERY_AUTOMATION', 'Delivery automation'),
       pageName: 'drivers_groups',
       url: '/delivery/drivers-groups',
-      enabled: sessionState?.user?.level === 5 || sessionState?.user?.level === 0
+      enabled: (sessionState?.user?.level === 5 || sessionState?.user?.level === 0) && !(readOnlyAdmin || readOnlyDeliveryManager)
     },
     {
       id: 5,
       title: t('DRIVERS_TIME_DISPLAY', 'Drivers time display'),
       pageName: 'drivers_time_display',
       url: '/delivery/drivers-time-display',
-      enabled: sessionState?.user?.level === 5 || sessionState?.user?.level === 0
+      enabled: (sessionState?.user?.level === 5 || sessionState?.user?.level === 0) && !(readOnlyAdmin || readOnlyDeliveryManager)
     }
   ]
 
@@ -512,7 +514,7 @@ const SidebarMenuUI = (props) => {
                     </Button>
                   )} */}
 
-                  {sessionState?.user?.level !== 5 && sessionState?.user?.level !== 8 && (
+                  {sessionState?.user?.level !== 5 && sessionState?.user?.level !== 8 && !(readOnlyAdmin || readOnlyDeliveryManager || readOnlyBusinessOwner) && (
                     <MenuContainer>
                       <ContextAwareToggle
                         eventKey='0'
@@ -548,8 +550,8 @@ const SidebarMenuUI = (props) => {
                         <MenuContent>
                           {ordersSubMenus.map(item => (
                             !(sessionState?.user?.level === 2 && item.pageName === 'drivers') &&
-                            !((sessionState?.user?.level === 2 || sessionState?.user?.level === 5) && item.pageName === 'giftCards') &&
-                            !(sessionState?.user?.level === 5 && item.pageName === 'appointments') && (
+                            !((sessionState?.user?.level === 2 || sessionState?.user?.level === 5 || readOnlyAdmin) && item.pageName === 'giftCards') &&
+                            !((sessionState?.user?.level === 5 || readOnlyAdmin) && item.pageName === 'appointments') && (
                               item.pageName === 'appointments' ? (
                                 isEnabledAppointmentsFeature && (
                                   <SubMenu
@@ -576,7 +578,7 @@ const SidebarMenuUI = (props) => {
                     </MenuContainer>
                   )}
 
-                  {(sessionState?.user?.level !== 5 && sessionState?.user?.level !== 8) && (
+                  {(sessionState?.user?.level !== 5 && sessionState?.user?.level !== 8) && !(readOnlyAdmin || readOnlyDeliveryManager || readOnlyBusinessOwner) && (
                     <MenuContainer>
                       <ContextAwareToggle
                         eventKey='2'
@@ -590,7 +592,7 @@ const SidebarMenuUI = (props) => {
                     </MenuContainer>
                   )}
 
-                  {(sessionState?.user?.level !== 5 && sessionState?.user?.level !== 8) && (
+                  {(sessionState?.user?.level !== 5 && sessionState?.user?.level !== 8) && !(readOnlyAdmin || readOnlyDeliveryManager || readOnlyBusinessOwner) && (
                     <MenuContainer>
                       <ContextAwareToggle
                         eventKey='3'
@@ -619,7 +621,7 @@ const SidebarMenuUI = (props) => {
                     </MenuContainer>
                   )}
 
-                  {(sessionState?.user?.level === 0 || sessionState?.user?.level === 2) && (
+                  {(sessionState?.user?.level === 0 || sessionState?.user?.level === 2) && !(readOnlyAdmin || readOnlyDeliveryManager || readOnlyBusinessOwner) && (
                     <MenuContainer>
                       <ContextAwareToggle
                         eventKey='4'
@@ -666,7 +668,7 @@ const SidebarMenuUI = (props) => {
                     </MenuContainer>
                   )}
 
-                  {(sessionState?.user?.level !== 5 && sessionState?.user?.level !== 8) && (
+                  {(sessionState?.user?.level !== 5 && sessionState?.user?.level !== 8) && !(readOnlyAdmin || readOnlyDeliveryManager || readOnlyBusinessOwner) && (
                     <MenuContainer>
                       <ContextAwareToggle
                         eventKey='5'
@@ -735,14 +737,14 @@ const SidebarMenuUI = (props) => {
                     </MenuContainer>
                   )}
 
-                  {sessionState?.user?.level === 0 && (
+                  {sessionState?.user?.level === 0 && !(readOnlyAdmin || readOnlyDeliveryManager || readOnlyBusinessOwner) && (
                     <MenuContainer>
                       <ContextAwareToggle
                         eventKey='8'
                         active={
                           location.pathname === '/marketing/promotions-enterprise' ||
                           location.pathname === '/marketing/campaign' ||
-                          location.pathname === '/marketing/ad-banners'||
+                          location.pathname === '/marketing/ad-banners' ||
                           location.pathname === '/loyalty/rewards-programs' ||
                           location.pathname === '/loyalty/levels' ||
                           location.pathname === '/loyalty/reports' ||
@@ -769,7 +771,7 @@ const SidebarMenuUI = (props) => {
                     </MenuContainer>
                   )}
 
-                  {/* {sessionState?.user?.level === 0 && (
+                  {/* {sessionState?.user?.level === 0 && !(readOnlyAdmin || readOnlyDeliveryManager || readOnlyBusinessOwner) && (
                     <MenuContainer>
                       <ContextAwareToggle
                         eventKey='9'
@@ -798,7 +800,7 @@ const SidebarMenuUI = (props) => {
                     </MenuContainer>
                   )}
 
-                  {sessionState?.user?.level === 0 && (
+                  {sessionState?.user?.level === 0 && !(readOnlyAdmin || readOnlyDeliveryManager || readOnlyBusinessOwner) && (
                     <MenuContainer>
                       <ContextAwareToggle
                         eventKey='10'
@@ -825,7 +827,7 @@ const SidebarMenuUI = (props) => {
                       </Accordion.Collapse>
                     </MenuContainer>
                   )} */}
-                  {sessionState?.user?.level === 0 && (
+                  {sessionState?.user?.level === 0 && !(readOnlyAdmin || readOnlyDeliveryManager || readOnlyBusinessOwner) && (
                     <MenuContainer>
                       <span>{t('SALES_CHANNELS_AND_PRODUCTS', 'Sales channels and products')}</span>
                       <ContextAwareToggle
@@ -861,77 +863,79 @@ const SidebarMenuUI = (props) => {
                   )}
                 </Accordion>
               </div>
-              <div className='d-flex flex-column mt-4'>
-                <LanguageSelectorContainer>
-                  <LanguageSelector />
-                </LanguageSelectorContainer>
-                {sessionState?.user?.level === 0 && (
-                  <Accordion>
-                    <MenuContainer>
-                      <ContextAwareToggle
-                        eventKey='5'
-                        active={
-                          location.pathname === '/settings/basic' ||
-                          location.pathname === '/settings/operation' ||
-                          location.pathname === '/settings/plugin' ||
-                          location.pathname === '/settings/pages' ||
-                          location.pathname === '/settings/integrations' ||
-                          location.pathname === '/settings/places' ||
-                          location.pathname === '/settings/advanced' ||
-                          location.pathname === '/settings/language' ||
-                          location.pathname === '/settings/logs'
-                        }
-                      >
-                        <GearIcon />
-                        <span>{t('SETTINGS', 'Settings')}</span>
-                      </ContextAwareToggle>
-                      <Accordion.Collapse eventKey='5'>
-                        <MenuContent>
-                          {settingsSubMenus.map(item => (
-                            <SubMenu
-                              key={item.id}
-                              active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
-                              onClick={() => handleGoToPage({ page: item.pageName })}
-                            >
-                              {firstLetterCapital(item.title)}
-                            </SubMenu>
-                          ))}
-                        </MenuContent>
-                      </Accordion.Collapse>
-                    </MenuContainer>
-                  </Accordion>
-                )}
-                {sessionState?.user?.level === 0 && (
-                  <Button
-                    className='d-flex align-items-center'
-                    variant={location.pathname === '/ordering-products' && 'primary'}
-                    onClick={() => handleGoToPage({ page: 'ordering_products' })}
-                  >
-                    <WindowDock />
-                    <span>{t('ORDERING_PRODUCTS', 'Ordering products')}</span>
-                  </Button>
-                )}
-                {sessionState?.user?.level === 0 && (
-                  <Button
-                    className='d-flex align-items-center'
-                    variant={location.pathname === '/support' && 'primary'}
-                    onClick={() => handleGoToPage({ page: 'support' })}
-                  >
-                    <HeadsetIcon />
-                    <span>{t('SUPPORT', 'Support')}</span>
-                  </Button>
-                )}
-                {sessionState?.user?.level === 0 && (
-                  <Button
-                    className='d-flex align-items-center'
-                    variant={false}
-                    onClick={() => handleClickBilling()}
-                  >
-                    <Cash />
-                    <span>{t('BILLING', 'Billing')}</span>
-                  </Button>
-                )}
-              </div>
+              {!(readOnlyAdmin || readOnlyDeliveryManager || readOnlyBusinessOwner) && (
+                <div className='d-flex flex-column mt-4'>
+                  <LanguageSelectorContainer>
+                    <LanguageSelector />
+                  </LanguageSelectorContainer>
+                  {sessionState?.user?.level === 0 && (
+                    <Accordion>
+                      <MenuContainer>
+                        <ContextAwareToggle
+                          eventKey='5'
+                          active={
+                            location.pathname === '/settings/basic' ||
+                            location.pathname === '/settings/operation' ||
+                            location.pathname === '/settings/plugin' ||
+                            location.pathname === '/settings/pages' ||
+                            location.pathname === '/settings/integrations' ||
+                            location.pathname === '/settings/places' ||
+                            location.pathname === '/settings/advanced' ||
+                            location.pathname === '/settings/language' ||
+                            location.pathname === '/settings/logs'
+                          }
+                        >
+                          <GearIcon />
+                          <span>{t('SETTINGS', 'Settings')}</span>
+                        </ContextAwareToggle>
+                        <Accordion.Collapse eventKey='5'>
+                          <MenuContent>
+                            {settingsSubMenus.map(item => (
+                              <SubMenu
+                                key={item.id}
+                                active={location.pathname.includes(item.pageName) || location.pathname.includes(item?.url)}
+                                onClick={() => handleGoToPage({ page: item.pageName })}
+                              >
+                                {firstLetterCapital(item.title)}
+                              </SubMenu>
+                            ))}
+                          </MenuContent>
+                        </Accordion.Collapse>
+                      </MenuContainer>
+                    </Accordion>
+                  )}
+                  {sessionState?.user?.level === 0 && (
+                    <Button
+                      className='d-flex align-items-center'
+                      variant={location.pathname === '/ordering-products' && 'primary'}
+                      onClick={() => handleGoToPage({ page: 'ordering_products' })}
+                    >
+                      <WindowDock />
+                      <span>{t('ORDERING_PRODUCTS', 'Ordering products')}</span>
+                    </Button>
+                  )}
+                  {sessionState?.user?.level === 0 && (
+                    <Button
+                      className='d-flex align-items-center'
+                      variant={location.pathname === '/support' && 'primary'}
+                      onClick={() => handleGoToPage({ page: 'support' })}
+                    >
+                      <HeadsetIcon />
+                      <span>{t('SUPPORT', 'Support')}</span>
+                    </Button>
+                  )}
+                  {sessionState?.user?.level === 0 && (
+                    <Button
+                      className='d-flex align-items-center'
+                      variant={false}
+                      onClick={() => handleClickBilling()}
+                    >
+                      <Cash />
+                      <span>{t('BILLING', 'Billing')}</span>
+                    </Button>
+                  )}
+                </div>
+              )}
             </SidebarContent>
             <UserInfo
               id='user_info'

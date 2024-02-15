@@ -54,7 +54,8 @@ export const UserDetailsUI = (props) => {
   const [isPersonalization, setIsPersonalization] = useState(false)
   const [isExpand, setIsExpand] = useState(false)
   const [{ configs }] = useConfig()
-  const disableSchedule = configs?.allow_driver_manager_update_driver_schedule?.value === '0' && user?.level === 5
+  const viewOnly = user?.readOnlyAdmin || user?.readOnlyDeliveryManager
+  const disableSchedule = (configs?.allow_driver_manager_update_driver_schedule?.value === '0' && user?.level === 5) || viewOnly
   const isWhiteLabel = configs?.white_label_module?.value
   const expandSidebar = () => {
     const element = document.getElementById('user_lateral_bar')
