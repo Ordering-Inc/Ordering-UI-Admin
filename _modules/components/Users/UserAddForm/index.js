@@ -12,6 +12,7 @@ var _styles = require("../../../styles");
 var _Shared = require("../../Shared");
 var _UserTypeSelector = require("../UserTypeSelector");
 var _libphonenumberJs = _interopRequireDefault(require("libphonenumber-js"));
+var _reactPhoneNumberInput = require("react-phone-number-input");
 var _utils = require("../../../utils");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _BiImage = _interopRequireDefault(require("@meronex/icons/bi/BiImage"));
@@ -55,6 +56,9 @@ var UserAddFormUI = function UserAddFormUI(props) {
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
+  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configs = _useConfig2[0].configs;
   var _useState = (0, _react.useState)(null),
     _useState2 = _slicedToArray(_useState, 2),
     isValidPhoneNumber = _useState2[0],
@@ -163,7 +167,12 @@ var UserAddFormUI = function UserAddFormUI(props) {
       }
     };
     if (isValid) {
+      var _configs$validation_p, _configs$validation_p2;
       phoneNumberParser = (0, _libphonenumberJs.default)(number);
+      if (!parseInt((_configs$validation_p = configs === null || configs === void 0 || (_configs$validation_p2 = configs.validation_phone_number_lib) === null || _configs$validation_p2 === void 0 ? void 0 : _configs$validation_p2.value) !== null && _configs$validation_p !== void 0 ? _configs$validation_p : 1, 10)) {
+        var _phoneNumberParser;
+        if ((_phoneNumberParser = phoneNumberParser) !== null && _phoneNumberParser !== void 0 && _phoneNumberParser.nationalNumber) phoneNumberParser.nationalNumber = (0, _reactPhoneNumberInput.formatPhoneNumber)(number);
+      }
     }
     if (phoneNumberParser) {
       phoneNumber = {

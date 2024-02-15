@@ -116,7 +116,7 @@ var MultiSelect = function MultiSelect(props) {
   }, /*#__PURE__*/_react.default.createElement(_Selects.Header, null, selectedOptions.map(function (selectedOption) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: selectedOption.value
-    }, /*#__PURE__*/_react.default.createElement(_Selects.MultiSelectOption, null, selectedOption.showOnSelected || selectedOption.content, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    }, /*#__PURE__*/_react.default.createElement(_Selects.MultiSelectOption, null, selectedOption.showOnSelected || selectedOption.content, (selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.value) !== 'default' && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
       circle: true,
       outline: true,
       color: "primary",

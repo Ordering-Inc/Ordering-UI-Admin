@@ -39,7 +39,11 @@ var InputPhoneNumber = function InputPhoneNumber(props) {
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configs = _useConfig2[0].configs;
   var isValidPhoneNumber = function isValidPhoneNumber(number) {
+    var _configs$validation_p, _configs$validation_p2;
     if (!number) return;
+    if (!parseInt((_configs$validation_p = configs === null || configs === void 0 || (_configs$validation_p2 = configs.validation_phone_number_lib) === null || _configs$validation_p2 === void 0 ? void 0 : _configs$validation_p2.value) !== null && _configs$validation_p !== void 0 ? _configs$validation_p : 1, 10)) {
+      return true;
+    }
     var numberParser = (0, _libphonenumberJs.default)(number);
     return numberParser === null || numberParser === void 0 ? void 0 : numberParser.isValid();
   };
