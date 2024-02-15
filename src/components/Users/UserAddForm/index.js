@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import {
   useLanguage,
+  useConfig,
   DragAndDrop,
   ExamineClick,
   UserFormDetails as UserFormDetailsController
@@ -10,6 +11,7 @@ import { Input, Button } from '../../../styles'
 import { Alert, InputPhoneNumber, Modal, ImageCrop } from '../../Shared'
 import { UserTypeSelector } from '../UserTypeSelector'
 import parsePhoneNumber from 'libphonenumber-js'
+import { formatPhoneNumber } from 'react-phone-number-input'
 import { sortInputFields, bytesConverter } from '../../../utils'
 import Skeleton from 'react-loading-skeleton'
 import BiImage from '@meronex/icons/bi/BiImage'
@@ -46,6 +48,7 @@ const UserAddFormUI = (props) => {
   } = props
   const formMethods = useForm()
   const [, t] = useLanguage()
+  const [{ configs }] = useConfig()
 
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(null)
   const [userPhoneNumber, setUserPhoneNumber] = useState(null)
@@ -133,6 +136,9 @@ const UserAddFormUI = (props) => {
     }
     if (isValid) {
       phoneNumberParser = parsePhoneNumber(number)
+      if (!parseInt(configs?.validation_phone_number_lib?.value ?? 1, 10)) {
+        if (phoneNumberParser?.nationalNumber) phoneNumberParser.nationalNumber = formatPhoneNumber(number)
+      }
     }
     if (phoneNumberParser) {
       phoneNumber = {
