@@ -8,6 +8,7 @@ var _react = _interopRequireWildcard(require("react"));
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _Shared = require("../../Shared");
+var _utils = require("../../../utils");
 var _styles = require("./styles");
 var _moment = _interopRequireDefault(require("moment"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -56,80 +57,6 @@ var DriversGroupLogsUI = function DriversGroupLogsUI(props) {
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configs = _useConfig2[0].configs;
   var formatTime = configs === null || configs === void 0 || (_configs$general_hour = configs.general_hour_format) === null || _configs$general_hour === void 0 ? void 0 : _configs$general_hour.value;
-  var getAttributeName = function getAttributeName(key) {
-    var attributes = [{
-      key: 'autoassign_amount_drivers',
-      content: t('AUTO_ASSIGN_GROUP_ORDERS_TO_DRIVERS', 'Auto assign the order of group to this amount of drivers')
-    }, {
-      key: 'orders_group_max_orders',
-      content: t('MAX_NUMBER_ORDERS', 'Maximum Number of Orders')
-    }, {
-      key: 'autoassign_autoaccept_by_driver',
-      content: t('ORDER_CONFIRMED_ACCEPTED_BY_DRIVER', 'Accepted by Driver')
-    }, {
-      key: 'orders_group_max_time_between',
-      content: t('MAX_ORDER_TIME_BETWEEN', 'Maximum time between orders in seconds')
-    }, {
-      key: 'orders_group_max_distance_between_pickup',
-      content: t('MAX_DISTANCE_BETWEEN_BUSINESS', 'Maximum distance between businesses in meters')
-    }, {
-      key: 'orders_group_max_distance_between_delivery',
-      content: t('MAX_DISTANCE_BETWEEN_DELIVERY', 'Maximum distance between deliveries in meters')
-    }, {
-      key: 'orders_group_use_maps_api',
-      content: t('USE_MAPS_API', 'Use maps api')
-    }, {
-      key: 'orders_group_max_time_between_pickup',
-      content: t('MAX_DISTANCE_BETWEEN_BUSINESS', 'Maximum distance between businesses in meters')
-    }, {
-      key: 'orders_group_max_time_between_delivery',
-      content: t('MAX_DISTANCE_BETWEEN_DELIVERY', 'Maximum distance between deliveries in meters')
-    }, {
-      key: 'autoassign_forced_assignment',
-      content: t('AUTO_ASSIGN_FORCED_ASSIGNMENT', 'Forced assignment')
-    }, {
-      key: 'autoassign_customer_max_distance_from_business',
-      content: t('MAX_CUSTOMER_DISTANCE_FROM_BUSINESS', 'Max distance between customer and business')
-    }, {
-      key: 'autoassign_initial_radius',
-      content: t('INITIAL_RADIUS', 'Initial radius in meters')
-    }, {
-      key: 'autoassign_increment_radius',
-      content: t('INCREMENT_RADIUS', 'Radius increase in meters')
-    }, {
-      key: 'autoassign_max_radius',
-      content: t('MAX_RADIUS', 'Maximum radius in meters')
-    }, {
-      key: 'autoassign_autoreject_time',
-      content: t('AUTO_REJECT_ORDER_GROUP_AFTER', 'Auto reject Orders After')
-    }, {
-      key: 'autoassign_max_orders',
-      content: t('MAX_AMOUNT_ORDERS_PER_DRIVER', 'Maximum amount of orders per drivers')
-    }, {
-      key: 'autoassign_max_in_pending',
-      content: t('ORDER_PENDING', 'Pending')
-    }, {
-      key: 'available',
-      content: t('AVAILABLE', 'Available')
-    }, {
-      key: 'enabled',
-      content: t('ENABLED', 'Enabled')
-    }, {
-      key: 'last_available_at',
-      content: t('LAST_AVAILABLE_AT', 'Last available at')
-    }, {
-      key: 'busy',
-      content: t('BUSY', 'Busy')
-    }];
-    var found = attributes.find(function (attribute) {
-      return attribute.key === key;
-    });
-    if (found) {
-      return found.content;
-    } else {
-      return key;
-    }
-  };
   var handleChangePage = function handleChangePage(page) {
     getDriversGroupLogs(page, 10);
   };
@@ -200,7 +127,7 @@ var DriversGroupLogsUI = function DriversGroupLogsUI(props) {
     }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.UserInfoContainer, null, /*#__PURE__*/_react.default.createElement("p", null, (log === null || log === void 0 || (_log$author = log.author) === null || _log$author === void 0 ? void 0 : _log$author.name) || (log === null || log === void 0 || (_log$user = log.user) === null || _log$user === void 0 ? void 0 : _log$user.name), " ", (log === null || log === void 0 || (_log$author2 = log.author) === null || _log$author2 === void 0 ? void 0 : _log$author2.lastname) || (log === null || log === void 0 || (_log$user2 = log.user) === null || _log$user2 === void 0 ? void 0 : _log$user2.lastname)), /*#__PURE__*/_react.default.createElement("p", null, (log === null || log === void 0 || (_log$author3 = log.author) === null || _log$author3 === void 0 ? void 0 : _log$author3.email) || (log === null || log === void 0 || (_log$user3 = log.user) === null || _log$user3 === void 0 ? void 0 : _log$user3.email)))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.EventTypeContainer, null, /*#__PURE__*/_react.default.createElement("p", null, t(((log === null || log === void 0 ? void 0 : log.event) || '').toUpperCase())))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.DataListTable, null, (log === null || log === void 0 ? void 0 : log.data) && getValidLogData(log === null || log === void 0 ? void 0 : log.data).map(function (item, i) {
       return /*#__PURE__*/_react.default.createElement("tbody", {
         key: i
-      }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, getAttributeName(item === null || item === void 0 ? void 0 : item.attribute))));
+      }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, (0, _utils.getAttributeName)(item === null || item === void 0 ? void 0 : item.attribute))));
     }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.DataListTable, null, (log === null || log === void 0 ? void 0 : log.data) && getValidLogData(log === null || log === void 0 ? void 0 : log.data).map(function (item, i) {
       var _item$added, _item$added2;
       return /*#__PURE__*/_react.default.createElement("tbody", {

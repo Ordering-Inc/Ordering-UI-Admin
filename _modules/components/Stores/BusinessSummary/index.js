@@ -158,6 +158,9 @@ var BusinessSummary = function BusinessSummary(props) {
   }, {
     key: 'spoonity_key',
     value: t('SPOONITY_KEY', 'Sponity key')
+  }, {
+    key: 'logs',
+    value: t('LOGS', 'Logs')
   }];
   var onClickDeleteBusiness = function onClickDeleteBusiness() {
     setConfirm({
