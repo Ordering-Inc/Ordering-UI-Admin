@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react'
-import { useLanguage, useUtils, DriversGroupLogs as DriversGroupLogsController, useConfig } from 'ordering-components-admin'
+import { useLanguage, useUtils, useConfig, BusinessLogs as BusinessLogsController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import { Modal, Pagination } from '../../Shared'
 import { getAttributeName } from '../../../utils'
-
 import {
-  DriversGroupLogsContainer,
+  BusinessLogsContainer,
   TableWrapper,
   Table,
   UserInfoContainer,
@@ -23,11 +22,11 @@ import {
 } from './styles'
 import moment from 'moment'
 
-export const DriversGroupLogsUI = (props) => {
+export const BusinessLogsUI = (props) => {
   const {
     logsList,
     paginationProps,
-    getDriversGroupLogs,
+    getBusinessLogs,
     actionDisabled
   } = props
 
@@ -42,12 +41,12 @@ export const DriversGroupLogsUI = (props) => {
   const formatTime = configs?.general_hour_format?.value
 
   const handleChangePage = (page) => {
-    getDriversGroupLogs(page, 10)
+    getBusinessLogs(page, 10)
   }
 
   const handleChangePageSize = (pageSize) => {
     const expectedPage = Math.ceil(paginationProps.from / pageSize)
-    getDriversGroupLogs(expectedPage, pageSize)
+    getBusinessLogs(expectedPage, pageSize)
   }
 
   const getValidLogData = (data) => {
@@ -58,8 +57,8 @@ export const DriversGroupLogsUI = (props) => {
 
   const handleSchedules = (_schedules) => {
     setSchedules({
-      newSchedule: _schedules?.new,
-      oldSchedule: _schedules?.old
+      newSchedule: typeof _schedules?.new === 'string' ? JSON.parse(_schedules?.new) : _schedules?.new,
+      oldSchedule: typeof _schedules?.old === 'string' ? JSON.parse(_schedules?.old) : _schedules?.old
     })
   }
 
@@ -98,9 +97,12 @@ export const DriversGroupLogsUI = (props) => {
         <ScheduleDay key={i}>
           <span>{daysOptions[i]}</span>
           <ScheduleLapses>
-            {schedule?.lapses?.map((item, i) => {
+            {schedule?.enabled && schedule?.lapses?.map((item, i) => {
               return <p key={i}>{`${timeFormated(item?.open)} - ${timeFormated(item?.close)}`}</p>
             })}
+            {!schedule?.enabled && (
+              <p>{t('UNAVAILABLE', 'Unavailable')}</p>
+            )}
           </ScheduleLapses>
         </ScheduleDay>
       )
@@ -110,9 +112,10 @@ export const DriversGroupLogsUI = (props) => {
 
   return (
     <>
-      <DriversGroupLogsContainer
+      <BusinessLogsContainer
         disabled={actionDisabled}
       >
+        <h1>{t('LOGS', 'Logs')}</h1>
         <TableWrapper>
           {(logsList.loading || logsList.logs.length > 0) ? (
             <Table>
@@ -176,7 +179,7 @@ export const DriversGroupLogsUI = (props) => {
                       </td>
                       <td>
                         <DataListTable>
-                          {log?.data && getValidLogData(log?.data).map((item, i) => (
+                          {log?.data && getValidLogData(log?.data).filter(item => item.attribute !== 'schedule_ranges').map((item, i) => (
                             <tbody key={i}>
                               <tr>
                                 <td>{getAttributeName(item?.attribute)}</td>
@@ -187,10 +190,10 @@ export const DriversGroupLogsUI = (props) => {
                       </td>
                       <td>
                         <DataListTable>
-                          {log?.data && getValidLogData(log?.data).map((item, i) => (
+                          {log?.data && getValidLogData(log?.data).filter(item => item.attribute !== 'schedule_ranges').map((item, i) => (
                             <tbody key={i}>
                               <tr>
-                                {item.attribute !== 'schedule'
+                                {(item.attribute !== 'schedule')
                                   ? (
                                     <td>
                                       {
@@ -212,7 +215,7 @@ export const DriversGroupLogsUI = (props) => {
                       </td>
                       <td>
                         <DataListTable>
-                          {log?.data && getValidLogData(log?.data).map((item, i) => (
+                          {log?.data && getValidLogData(log?.data).filter(item => item.attribute !== 'schedule_ranges').map((item, i) => (
                             <tbody key={i}>
                               <tr>
                                 {item.attribute !== 'schedule'
@@ -263,7 +266,7 @@ export const DriversGroupLogsUI = (props) => {
             />
           </WrapperPagination>
         )}
-      </DriversGroupLogsContainer>
+      </BusinessLogsContainer>
       <Modal
         width='40%'
         height='60vh'
@@ -292,10 +295,10 @@ export const DriversGroupLogsUI = (props) => {
   )
 }
 
-export const DriversGroupLogs = (props) => {
-  const driversGroupLogsProps = {
+export const BusinessLogs = (props) => {
+  const businessLogsProps = {
     ...props,
-    UIComponent: DriversGroupLogsUI
+    UIComponent: BusinessLogsUI
   }
-  return <DriversGroupLogsController {...driversGroupLogsProps} />
+  return <BusinessLogsController {...businessLogsProps} />
 }
