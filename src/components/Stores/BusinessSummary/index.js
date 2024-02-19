@@ -147,6 +147,9 @@ export const BusinessSummary = (props) => {
     }, {
       key: 'spoonity_key',
       value: t('SPOONITY_KEY', 'Sponity key')
+    }, {
+      key: 'logs',
+      value: t('LOGS', 'Logs')
     }
   ]
 

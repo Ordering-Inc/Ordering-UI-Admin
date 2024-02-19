@@ -19,6 +19,7 @@ import { BusinessOrderingChannels } from '../BusinessOrderingChannels'
 import { BusinessFrontLayout } from '../BusinessFrontLayout'
 // import { BusinessPublishing } from '../BusinessPublishing'
 import { BusinessPlaceGroupList } from '../BusinessPlaceGroupList'
+import { BusinessLogs } from '../BusinessLogs'
 import { SpoonityApiKey } from '../SpoonityApiKey'
 
 import { MoreSidebarLayout, Personalization, Alert } from '../../Shared'
@@ -346,6 +347,11 @@ export const BusinessDetailsUI = (props) => {
               spoonityConfig={spoonityConfig}
               handleUpdateSpoonityKey={handleUpdateSpoonityKey}
               spoonityKeyState={spoonityKeyState}
+            />
+          )}
+          {selectedItem === 'logs' && (
+            <BusinessLogs
+              businessId={businessState?.business?.id}
             />
           )}
         </MoreSidebarLayout>
