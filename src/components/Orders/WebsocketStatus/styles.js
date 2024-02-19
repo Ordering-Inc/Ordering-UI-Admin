@@ -7,7 +7,7 @@ export const Contatiner = styled.div`
   > button {
     height: 41px;
   }
-  
+
   @media (min-width: 576px) {
     ${props => props.theme?.rtl ? css`
       margin-left: 10px;
@@ -89,7 +89,7 @@ export const InfoContent = styled.div`
   visibility: hidden;
   opacity: 0;
   /* display: none; */
-  right: 0px;
+  left: 0px;
   ${props => props.theme.rtl && css`
     left: 0px;
     right: initial;
@@ -112,7 +112,8 @@ export const InfoContent = styled.div`
   @media (min-width: 576px) {
     min-width: 350px;
     padding: 12px 15px;
-    left: 0px;
+    right: 0px;
+    left: auto;
     ${props => props.theme.rtl && css`
       right: 0px;
       left: initial;

@@ -17,6 +17,7 @@ import { BusinessImages } from './BusinessImages'
 import { BusinessInformation } from './BusinessInformation'
 import { BusinessInfoSettingList } from './BusinessInfoSettingList'
 import { BusinessLocation } from './BusinessLocation'
+import { BusinessLogs } from './BusinessLogs'
 import { BusinessMenu } from './BusinessMenu'
 import { BusinessNotifications } from './BusinessNotifications'
 import { BusinessOrderingChannels } from './BusinessOrderingChannels'
@@ -135,6 +136,7 @@ export {
   BusinessInformation,
   BusinessInfoSettingList,
   BusinessLocation,
+  BusinessLogs,
   BusinessMenu,
   BusinessNotifications,
   BusinessOrderingChannels,
