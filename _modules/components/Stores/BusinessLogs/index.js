@@ -78,7 +78,7 @@ var BusinessLogsUI = function BusinessLogsUI(props) {
     handleSchedules(_schedules);
   };
   (0, _react.useEffect)(function () {
-    if (logsList.loading || logsList.logs.length > 0 || paginationProps.totalPages <= 1) return;
+    if (logsList.loading || logsList.logs.length > 0 || paginationProps.totalPages <= 1 || logsList.error) return;
     if (paginationProps.currentPage !== paginationProps.totalPages) {
       handleChangePage(paginationProps.currentPage);
     } else {
