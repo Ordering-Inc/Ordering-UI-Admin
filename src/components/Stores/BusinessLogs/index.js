@@ -68,7 +68,7 @@ export const BusinessLogsUI = (props) => {
   }
 
   useEffect(() => {
-    if (logsList.loading || logsList.logs.length > 0 || paginationProps.totalPages <= 1) return
+    if (logsList.loading || logsList.logs.length > 0 || paginationProps.totalPages <= 1 || logsList.error) return
     if (paginationProps.currentPage !== paginationProps.totalPages) {
       handleChangePage(paginationProps.currentPage)
     } else {
