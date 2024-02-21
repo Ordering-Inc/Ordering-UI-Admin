@@ -354,55 +354,55 @@ export const reviewCommentList = (type) => {
   const reviews = {
     1: {
       1: {
-        title: t('CUSTOMER_QUICK_COMMENT_TITLE_1', "What went wrong?"),
+        title: t('CUSTOMER_QUICK_COMMENT_TITLE_1', 'What went wrong?'),
         list: [
-          { key: 0, content: t('CUSTOMER_QUICK_COMMENT_1_0', "Not handled with care") },
-          { key: 1, content: t('CUSTOMER_QUICK_COMMENT_1_1', "Poor communication") },
-          { key: 2, content: t('CUSTOMER_QUICK_COMMENT_1_2', "COVID-19 issue") },
+          { key: 0, content: t('CUSTOMER_QUICK_COMMENT_1_0', 'Not handled with care') },
+          { key: 1, content: t('CUSTOMER_QUICK_COMMENT_1_1', 'Poor communication') },
+          { key: 2, content: t('CUSTOMER_QUICK_COMMENT_1_2', 'COVID-19 issue') },
           { key: 3, content: t('CUSTOMER_QUICK_COMMENT_1_3', "Didn't follow instructions") },
-          { key: 4, content: t('CUSTOMER_QUICK_COMMENT_1_4', "Rude") },
-          { key: 5, content: t('CUSTOMER_QUICK_COMMENT_1_5', "Not on-time") }
+          { key: 4, content: t('CUSTOMER_QUICK_COMMENT_1_4', 'Rude') },
+          { key: 5, content: t('CUSTOMER_QUICK_COMMENT_1_5', 'Not on-time') }
         ]
       },
       2: {
-        title: t('CUSTOMER_QUICK_COMMENT_TITLE_2', "What went wrong?"),
+        title: t('CUSTOMER_QUICK_COMMENT_TITLE_2', 'What went wrong?'),
         list: [
-          { key: 0, content: t('CUSTOMER_QUICK_COMMENT_2_0', "Not handled with care") },
-          { key: 1, content: t('CUSTOMER_QUICK_COMMENT_2_1', "Poor communication") },
-          { key: 2, content: t('CUSTOMER_QUICK_COMMENT_2_2', "COVID-19 issue") },
+          { key: 0, content: t('CUSTOMER_QUICK_COMMENT_2_0', 'Not handled with care') },
+          { key: 1, content: t('CUSTOMER_QUICK_COMMENT_2_1', 'Poor communication') },
+          { key: 2, content: t('CUSTOMER_QUICK_COMMENT_2_2', 'COVID-19 issue') },
           { key: 3, content: t('CUSTOMER_QUICK_COMMENT_2_3', "Didn't follow instructions") },
-          { key: 4, content: t('CUSTOMER_QUICK_COMMENT_2_4', "Rude") },
-          { key: 5, content: t('CUSTOMER_QUICK_COMMENT_2_5', "Not on-time") }
+          { key: 4, content: t('CUSTOMER_QUICK_COMMENT_2_4', 'Rude') },
+          { key: 5, content: t('CUSTOMER_QUICK_COMMENT_2_5', 'Not on-time') }
         ]
       },
       3: {
-        title: t('CUSTOMER_QUICK_COMMENT_TITLE_3', "What could have been better?"),
+        title: t('CUSTOMER_QUICK_COMMENT_TITLE_3', 'What could have been better?'),
         list: [
-          { key: 0, content: t('CUSTOMER_QUICK_COMMENT_3_0', "Not handled with care") },
-          { key: 1, content: t('CUSTOMER_QUICK_COMMENT_3_1', "Poor communication") },
-          { key: 2, content: t('CUSTOMER_QUICK_COMMENT_3_2', "COVID-19 issue") },
+          { key: 0, content: t('CUSTOMER_QUICK_COMMENT_3_0', 'Not handled with care') },
+          { key: 1, content: t('CUSTOMER_QUICK_COMMENT_3_1', 'Poor communication') },
+          { key: 2, content: t('CUSTOMER_QUICK_COMMENT_3_2', 'COVID-19 issue') },
           { key: 3, content: t('CUSTOMER_QUICK_COMMENT_3_3', "Didn't follow instructions") },
-          { key: 4, content: t('CUSTOMER_QUICK_COMMENT_3_4', "Rude") },
-          { key: 5, content: t('CUSTOMER_QUICK_COMMENT_3_5', "Not on-time") }
+          { key: 4, content: t('CUSTOMER_QUICK_COMMENT_3_4', 'Rude') },
+          { key: 5, content: t('CUSTOMER_QUICK_COMMENT_3_5', 'Not on-time') }
         ]
       },
       4: {
-        title: t('CUSTOMER_QUICK_COMMENT_TITLE_4', " Tell us more"),
+        title: t('CUSTOMER_QUICK_COMMENT_TITLE_4', ' Tell us more'),
         list: [
-          { key: 0, content: t('CUSTOMER_QUICK_COMMENT_4_0', "Not handled with care") },
-          { key: 1, content: t('CUSTOMER_QUICK_COMMENT_4_1', "Poor communication") },
-          { key: 2, content: t('CUSTOMER_QUICK_COMMENT_4_2', "COVID-19 issue") },
+          { key: 0, content: t('CUSTOMER_QUICK_COMMENT_4_0', 'Not handled with care') },
+          { key: 1, content: t('CUSTOMER_QUICK_COMMENT_4_1', 'Poor communication') },
+          { key: 2, content: t('CUSTOMER_QUICK_COMMENT_4_2', 'COVID-19 issue') },
           { key: 3, content: t('CUSTOMER_QUICK_COMMENT_4_3', "Didn't follow instructions") },
-          { key: 4, content: t('CUSTOMER_QUICK_COMMENT_4_4', "Rude") },
-          { key: 5, content: t('CUSTOMER_QUICK_COMMENT_4_5', "Not on-time") }
+          { key: 4, content: t('CUSTOMER_QUICK_COMMENT_4_4', 'Rude') },
+          { key: 5, content: t('CUSTOMER_QUICK_COMMENT_4_5', 'Not on-time') }
         ]
       },
       5: {
-        title: t('CUSTOMER_QUICK_COMMENT_TITLE_5', "What went well?"),
+        title: t('CUSTOMER_QUICK_COMMENT_TITLE_5', 'What went well?'),
         list: [
-          { key: 0, content: t('CUSTOMER_QUICK_COMMENT_5_0', "Good communication") },
-          { key: 1, content: t('CUSTOMER_QUICK_COMMENT_5_1', "Friendly") },
-          { key: 2, content: t('CUSTOMER_QUICK_COMMENT_5_2', "Above and beyond") }
+          { key: 0, content: t('CUSTOMER_QUICK_COMMENT_5_0', 'Good communication') },
+          { key: 1, content: t('CUSTOMER_QUICK_COMMENT_5_1', 'Friendly') },
+          { key: 2, content: t('CUSTOMER_QUICK_COMMENT_5_2', 'Above and beyond') }
         ]
       }
     }
@@ -460,7 +460,7 @@ export const getOrderStatuPickUp = (status) => {
     { key: 16, value: 'Canceled by customer', slug: 'CANCELED_BY_CUSTOMER', percentage: 0 },
     { key: 17, value: 'Not picked by customer', slug: 'NOT_PICKED_BY_CUSTOMER', percentage: 0 },
     { key: 20, value: 'Customer almost arrived to business', slug: 'CUSTOMER_ALMOST_ARRIVED_TO_BUSINESS', percentage: 70 },
-    { key: 21, value: 'Customer arrived to business', slug: 'CUSTOMER_ARRIVED_TO_BUSINESS', percentage: 90 },
+    { key: 21, value: 'Customer arrived to business', slug: 'CUSTOMER_ARRIVED_TO_BUSINESS', percentage: 90 }
   ]
 
   const objectStatus = orderStatus.find((o) => o.key === status)
@@ -676,3 +676,36 @@ export const TwentyFourHours = [
   '22:00',
   '23:00'
 ]
+
+export const getAttributeName = (key) => {
+  const [, t] = useLanguage()
+  const attributes = [
+    { key: 'autoassign_amount_drivers', content: t('AUTO_ASSIGN_GROUP_ORDERS_TO_DRIVERS', 'Auto assign the order of group to this amount of drivers') },
+    { key: 'orders_group_max_orders', content: t('MAX_NUMBER_ORDERS', 'Maximum Number of Orders') },
+    { key: 'autoassign_autoaccept_by_driver', content: t('ORDER_CONFIRMED_ACCEPTED_BY_DRIVER', 'Accepted by Driver') },
+    { key: 'orders_group_max_time_between', content: t('MAX_ORDER_TIME_BETWEEN', 'Maximum time between orders in seconds') },
+    { key: 'orders_group_max_distance_between_pickup', content: t('MAX_DISTANCE_BETWEEN_BUSINESS', 'Maximum distance between businesses in meters') },
+    { key: 'orders_group_max_distance_between_delivery', content: t('MAX_DISTANCE_BETWEEN_DELIVERY', 'Maximum distance between deliveries in meters') },
+    { key: 'orders_group_use_maps_api', content: t('USE_MAPS_API', 'Use maps api') },
+    { key: 'orders_group_max_time_between_pickup', content: t('MAX_DISTANCE_BETWEEN_BUSINESS', 'Maximum distance between businesses in meters') },
+    { key: 'orders_group_max_time_between_delivery', content: t('MAX_DISTANCE_BETWEEN_DELIVERY', 'Maximum distance between deliveries in meters') },
+    { key: 'autoassign_forced_assignment', content: t('AUTO_ASSIGN_FORCED_ASSIGNMENT', 'Forced assignment') },
+    { key: 'autoassign_customer_max_distance_from_business', content: t('MAX_CUSTOMER_DISTANCE_FROM_BUSINESS', 'Max distance between customer and business') },
+    { key: 'autoassign_initial_radius', content: t('INITIAL_RADIUS', 'Initial radius in meters') },
+    { key: 'autoassign_increment_radius', content: t('INCREMENT_RADIUS', 'Radius increase in meters') },
+    { key: 'autoassign_max_radius', content: t('MAX_RADIUS', 'Maximum radius in meters') },
+    { key: 'autoassign_autoreject_time', content: t('AUTO_REJECT_ORDER_GROUP_AFTER', 'Auto reject Orders After') },
+    { key: 'autoassign_max_orders', content: t('MAX_AMOUNT_ORDERS_PER_DRIVER', 'Maximum amount of orders per drivers') },
+    { key: 'autoassign_max_in_pending', content: t('ORDER_PENDING', 'Pending') },
+    { key: 'available', content: t('AVAILABLE', 'Available') },
+    { key: 'enabled', content: t('ENABLED', 'Enabled') },
+    { key: 'last_available_at', content: t('LAST_AVAILABLE_AT', 'Last available at') },
+    { key: 'busy', content: t('BUSY', 'Busy') }
+  ]
+  const found = attributes.find(attribute => attribute.key === key)
+  if (found) {
+    return found.content
+  } else {
+    return key
+  }
+}
