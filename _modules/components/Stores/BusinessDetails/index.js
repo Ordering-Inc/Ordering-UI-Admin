@@ -25,6 +25,7 @@ var _BusinessNotifications = require("../BusinessNotifications");
 var _BusinessOrderingChannels = require("../BusinessOrderingChannels");
 var _BusinessFrontLayout = require("../BusinessFrontLayout");
 var _BusinessPlaceGroupList = require("../BusinessPlaceGroupList");
+var _BusinessLogs = require("../BusinessLogs");
 var _SpoonityApiKey = require("../SpoonityApiKey");
 var _Shared = require("../../Shared");
 var _utils = require("../../../utils");
@@ -45,7 +46,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; } // import { BusinessPublishing } from '../BusinessPublishing'
 var BusinessDetailsUI = function BusinessDetailsUI(props) {
-  var _businessState$busine, _businessState$busine2, _businessState$busine3, _businessState$busine4, _businessState$busine5, _businessState$busine6;
+  var _businessState$busine, _businessState$busine2, _businessState$busine3, _businessState$busine4, _businessState$busine5, _businessState$busine6, _businessState$busine7;
   var open = props.open,
     businessId = props.businessId,
     businessState = props.businessState,
@@ -313,6 +314,8 @@ var BusinessDetailsUI = function BusinessDetailsUI(props) {
     spoonityConfig: spoonityConfig,
     handleUpdateSpoonityKey: handleUpdateSpoonityKey,
     spoonityKeyState: spoonityKeyState
+  }), selectedItem === 'logs' && /*#__PURE__*/_react.default.createElement(_BusinessLogs.BusinessLogs, {
+    businessId: businessState === null || businessState === void 0 || (_businessState$busine7 = businessState.business) === null || _businessState$busine7 === void 0 ? void 0 : _businessState$busine7.id
   })), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('WEB_APPNAME', 'Ordering'),
     content: alertState.content,

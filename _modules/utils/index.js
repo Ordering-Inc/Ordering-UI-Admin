@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.widgetURL = exports.verifyDecimals = exports.stringToSlug = exports.sortInputFields = exports.shape = exports.setStorageItem = exports.scrollTo = exports.ribbonValues = exports.reviewCommentList = exports.removeStorageItem = exports.removeQueryToUrl = exports.queryStringToObject = exports.orderStatus = exports.orderRejectCommentList = exports.optimizeImage = exports.getUniqueId = exports.getStorageItem = exports.getStarWidth = exports.getSeconds = exports.getOrderStatus = exports.getOrderStatuPickUp = exports.getMinutes = exports.getLocale = exports.getIconCard = exports.getHours = exports.getCurrenySymbol = exports.getCurrentDiffDays = exports.getAgoMinutes = exports.formatUrlVideo = exports.formatSeconds = exports.firstLetterCapital = exports.findExitingCountryPhoneCode = exports.findExitingCode = exports.fieldsToSort = exports.disableReasons = exports.convertHoursToMinutes = exports.convertHMS = exports.checkValidUrlFormat = exports.checkSiteUrl = exports.checkPreSiteUrl = exports.capitalize = exports.bytesConverter = exports.addQueryToUrl = exports.TwentyFourHours = exports.TwelveHours = exports.DriverTipsOptions = void 0;
+exports.widgetURL = exports.verifyDecimals = exports.stringToSlug = exports.sortInputFields = exports.shape = exports.setStorageItem = exports.scrollTo = exports.ribbonValues = exports.reviewCommentList = exports.removeStorageItem = exports.removeQueryToUrl = exports.queryStringToObject = exports.orderStatus = exports.orderRejectCommentList = exports.optimizeImage = exports.getUniqueId = exports.getStorageItem = exports.getStarWidth = exports.getSeconds = exports.getOrderStatus = exports.getOrderStatuPickUp = exports.getMinutes = exports.getLocale = exports.getIconCard = exports.getHours = exports.getCurrenySymbol = exports.getCurrentDiffDays = exports.getAttributeName = exports.getAgoMinutes = exports.formatUrlVideo = exports.formatSeconds = exports.firstLetterCapital = exports.findExitingCountryPhoneCode = exports.findExitingCode = exports.fieldsToSort = exports.disableReasons = exports.convertHoursToMinutes = exports.convertHMS = exports.checkValidUrlFormat = exports.checkSiteUrl = exports.checkPreSiteUrl = exports.capitalize = exports.bytesConverter = exports.addQueryToUrl = exports.TwentyFourHours = exports.TwelveHours = exports.DriverTipsOptions = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _FaCcMastercard = _interopRequireDefault(require("@meronex/icons/fa/FaCcMastercard"));
 var _FaCcVisa = _interopRequireDefault(require("@meronex/icons/fa/FaCcVisa"));
@@ -459,104 +459,104 @@ var reviewCommentList = function reviewCommentList(type) {
   var reviews = {
     1: {
       1: {
-        title: t('CUSTOMER_QUICK_COMMENT_TITLE_1', "What went wrong?"),
+        title: t('CUSTOMER_QUICK_COMMENT_TITLE_1', 'What went wrong?'),
         list: [{
           key: 0,
-          content: t('CUSTOMER_QUICK_COMMENT_1_0', "Not handled with care")
+          content: t('CUSTOMER_QUICK_COMMENT_1_0', 'Not handled with care')
         }, {
           key: 1,
-          content: t('CUSTOMER_QUICK_COMMENT_1_1', "Poor communication")
+          content: t('CUSTOMER_QUICK_COMMENT_1_1', 'Poor communication')
         }, {
           key: 2,
-          content: t('CUSTOMER_QUICK_COMMENT_1_2', "COVID-19 issue")
+          content: t('CUSTOMER_QUICK_COMMENT_1_2', 'COVID-19 issue')
         }, {
           key: 3,
           content: t('CUSTOMER_QUICK_COMMENT_1_3', "Didn't follow instructions")
         }, {
           key: 4,
-          content: t('CUSTOMER_QUICK_COMMENT_1_4', "Rude")
+          content: t('CUSTOMER_QUICK_COMMENT_1_4', 'Rude')
         }, {
           key: 5,
-          content: t('CUSTOMER_QUICK_COMMENT_1_5', "Not on-time")
+          content: t('CUSTOMER_QUICK_COMMENT_1_5', 'Not on-time')
         }]
       },
       2: {
-        title: t('CUSTOMER_QUICK_COMMENT_TITLE_2', "What went wrong?"),
+        title: t('CUSTOMER_QUICK_COMMENT_TITLE_2', 'What went wrong?'),
         list: [{
           key: 0,
-          content: t('CUSTOMER_QUICK_COMMENT_2_0', "Not handled with care")
+          content: t('CUSTOMER_QUICK_COMMENT_2_0', 'Not handled with care')
         }, {
           key: 1,
-          content: t('CUSTOMER_QUICK_COMMENT_2_1', "Poor communication")
+          content: t('CUSTOMER_QUICK_COMMENT_2_1', 'Poor communication')
         }, {
           key: 2,
-          content: t('CUSTOMER_QUICK_COMMENT_2_2', "COVID-19 issue")
+          content: t('CUSTOMER_QUICK_COMMENT_2_2', 'COVID-19 issue')
         }, {
           key: 3,
           content: t('CUSTOMER_QUICK_COMMENT_2_3', "Didn't follow instructions")
         }, {
           key: 4,
-          content: t('CUSTOMER_QUICK_COMMENT_2_4', "Rude")
+          content: t('CUSTOMER_QUICK_COMMENT_2_4', 'Rude')
         }, {
           key: 5,
-          content: t('CUSTOMER_QUICK_COMMENT_2_5', "Not on-time")
+          content: t('CUSTOMER_QUICK_COMMENT_2_5', 'Not on-time')
         }]
       },
       3: {
-        title: t('CUSTOMER_QUICK_COMMENT_TITLE_3', "What could have been better?"),
+        title: t('CUSTOMER_QUICK_COMMENT_TITLE_3', 'What could have been better?'),
         list: [{
           key: 0,
-          content: t('CUSTOMER_QUICK_COMMENT_3_0', "Not handled with care")
+          content: t('CUSTOMER_QUICK_COMMENT_3_0', 'Not handled with care')
         }, {
           key: 1,
-          content: t('CUSTOMER_QUICK_COMMENT_3_1', "Poor communication")
+          content: t('CUSTOMER_QUICK_COMMENT_3_1', 'Poor communication')
         }, {
           key: 2,
-          content: t('CUSTOMER_QUICK_COMMENT_3_2', "COVID-19 issue")
+          content: t('CUSTOMER_QUICK_COMMENT_3_2', 'COVID-19 issue')
         }, {
           key: 3,
           content: t('CUSTOMER_QUICK_COMMENT_3_3', "Didn't follow instructions")
         }, {
           key: 4,
-          content: t('CUSTOMER_QUICK_COMMENT_3_4', "Rude")
+          content: t('CUSTOMER_QUICK_COMMENT_3_4', 'Rude')
         }, {
           key: 5,
-          content: t('CUSTOMER_QUICK_COMMENT_3_5', "Not on-time")
+          content: t('CUSTOMER_QUICK_COMMENT_3_5', 'Not on-time')
         }]
       },
       4: {
-        title: t('CUSTOMER_QUICK_COMMENT_TITLE_4', " Tell us more"),
+        title: t('CUSTOMER_QUICK_COMMENT_TITLE_4', ' Tell us more'),
         list: [{
           key: 0,
-          content: t('CUSTOMER_QUICK_COMMENT_4_0', "Not handled with care")
+          content: t('CUSTOMER_QUICK_COMMENT_4_0', 'Not handled with care')
         }, {
           key: 1,
-          content: t('CUSTOMER_QUICK_COMMENT_4_1', "Poor communication")
+          content: t('CUSTOMER_QUICK_COMMENT_4_1', 'Poor communication')
         }, {
           key: 2,
-          content: t('CUSTOMER_QUICK_COMMENT_4_2', "COVID-19 issue")
+          content: t('CUSTOMER_QUICK_COMMENT_4_2', 'COVID-19 issue')
         }, {
           key: 3,
           content: t('CUSTOMER_QUICK_COMMENT_4_3', "Didn't follow instructions")
         }, {
           key: 4,
-          content: t('CUSTOMER_QUICK_COMMENT_4_4', "Rude")
+          content: t('CUSTOMER_QUICK_COMMENT_4_4', 'Rude')
         }, {
           key: 5,
-          content: t('CUSTOMER_QUICK_COMMENT_4_5', "Not on-time")
+          content: t('CUSTOMER_QUICK_COMMENT_4_5', 'Not on-time')
         }]
       },
       5: {
-        title: t('CUSTOMER_QUICK_COMMENT_TITLE_5', "What went well?"),
+        title: t('CUSTOMER_QUICK_COMMENT_TITLE_5', 'What went well?'),
         list: [{
           key: 0,
-          content: t('CUSTOMER_QUICK_COMMENT_5_0', "Good communication")
+          content: t('CUSTOMER_QUICK_COMMENT_5_0', 'Good communication')
         }, {
           key: 1,
-          content: t('CUSTOMER_QUICK_COMMENT_5_1', "Friendly")
+          content: t('CUSTOMER_QUICK_COMMENT_5_1', 'Friendly')
         }, {
           key: 2,
-          content: t('CUSTOMER_QUICK_COMMENT_5_2', "Above and beyond")
+          content: t('CUSTOMER_QUICK_COMMENT_5_2', 'Above and beyond')
         }]
       }
     }
@@ -934,3 +934,81 @@ var TwelveHours = ['12:00 AM', '01:00 AM', '02:00 AM', '03:00 AM', '04:00 AM', '
 exports.TwelveHours = TwelveHours;
 var TwentyFourHours = ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'];
 exports.TwentyFourHours = TwentyFourHours;
+var getAttributeName = function getAttributeName(key) {
+  var _useLanguage5 = (0, _orderingComponentsAdmin.useLanguage)(),
+    _useLanguage6 = _slicedToArray(_useLanguage5, 2),
+    t = _useLanguage6[1];
+  var attributes = [{
+    key: 'autoassign_amount_drivers',
+    content: t('AUTO_ASSIGN_GROUP_ORDERS_TO_DRIVERS', 'Auto assign the order of group to this amount of drivers')
+  }, {
+    key: 'orders_group_max_orders',
+    content: t('MAX_NUMBER_ORDERS', 'Maximum Number of Orders')
+  }, {
+    key: 'autoassign_autoaccept_by_driver',
+    content: t('ORDER_CONFIRMED_ACCEPTED_BY_DRIVER', 'Accepted by Driver')
+  }, {
+    key: 'orders_group_max_time_between',
+    content: t('MAX_ORDER_TIME_BETWEEN', 'Maximum time between orders in seconds')
+  }, {
+    key: 'orders_group_max_distance_between_pickup',
+    content: t('MAX_DISTANCE_BETWEEN_BUSINESS', 'Maximum distance between businesses in meters')
+  }, {
+    key: 'orders_group_max_distance_between_delivery',
+    content: t('MAX_DISTANCE_BETWEEN_DELIVERY', 'Maximum distance between deliveries in meters')
+  }, {
+    key: 'orders_group_use_maps_api',
+    content: t('USE_MAPS_API', 'Use maps api')
+  }, {
+    key: 'orders_group_max_time_between_pickup',
+    content: t('MAX_DISTANCE_BETWEEN_BUSINESS', 'Maximum distance between businesses in meters')
+  }, {
+    key: 'orders_group_max_time_between_delivery',
+    content: t('MAX_DISTANCE_BETWEEN_DELIVERY', 'Maximum distance between deliveries in meters')
+  }, {
+    key: 'autoassign_forced_assignment',
+    content: t('AUTO_ASSIGN_FORCED_ASSIGNMENT', 'Forced assignment')
+  }, {
+    key: 'autoassign_customer_max_distance_from_business',
+    content: t('MAX_CUSTOMER_DISTANCE_FROM_BUSINESS', 'Max distance between customer and business')
+  }, {
+    key: 'autoassign_initial_radius',
+    content: t('INITIAL_RADIUS', 'Initial radius in meters')
+  }, {
+    key: 'autoassign_increment_radius',
+    content: t('INCREMENT_RADIUS', 'Radius increase in meters')
+  }, {
+    key: 'autoassign_max_radius',
+    content: t('MAX_RADIUS', 'Maximum radius in meters')
+  }, {
+    key: 'autoassign_autoreject_time',
+    content: t('AUTO_REJECT_ORDER_GROUP_AFTER', 'Auto reject Orders After')
+  }, {
+    key: 'autoassign_max_orders',
+    content: t('MAX_AMOUNT_ORDERS_PER_DRIVER', 'Maximum amount of orders per drivers')
+  }, {
+    key: 'autoassign_max_in_pending',
+    content: t('ORDER_PENDING', 'Pending')
+  }, {
+    key: 'available',
+    content: t('AVAILABLE', 'Available')
+  }, {
+    key: 'enabled',
+    content: t('ENABLED', 'Enabled')
+  }, {
+    key: 'last_available_at',
+    content: t('LAST_AVAILABLE_AT', 'Last available at')
+  }, {
+    key: 'busy',
+    content: t('BUSY', 'Busy')
+  }];
+  var found = attributes.find(function (attribute) {
+    return attribute.key === key;
+  });
+  if (found) {
+    return found.content;
+  } else {
+    return key;
+  }
+};
+exports.getAttributeName = getAttributeName;
