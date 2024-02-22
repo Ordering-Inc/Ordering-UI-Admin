@@ -21,14 +21,29 @@ const DriverMultiSelectorUI = (props) => {
     small,
     padding,
     handleChangeDriver,
-    filterValues
+    filterValues,
+    useTextStyle,
+    hideChevronIcon,
+    andText,
+    textClassnames,
+    pagination,
+    handleChangePage,
+    handleChangePageSize,
+    useDriversByProps,
+    setSearchValue,
+    searchValue,
+    optionsPosition
   } = props
 
   const [{ dictionary }] = useLanguage()
   const theme = useTheme()
   const [driversMultiOptionList, setDriversMultiOptionList] = useState([])
-  const [searchValue, setSearchValue] = useState(null)
-  const driversLoading = [{ value: 'default', content: <Option small={small}>{dictionary?.LOADING ?? 'loading'}...</Option> }]
+
+  const driversLoading = [{
+    value: 'default',
+    content: <Option small={small}>{dictionary?.LOADING ?? 'loading'}...</Option>,
+    showOnSelected: useTextStyle ? dictionary?.LOADING ?? 'loading' : null
+  }]
 
   useEffect(() => {
     const _driversOptionList = [
@@ -36,7 +51,8 @@ const DriverMultiSelectorUI = (props) => {
         value: 'default',
         content: <Option padding='0px'><span>{dictionary?.SELECT_DRIVER ?? 'Select driver'}</span></Option>,
         color: 'primary',
-        showDisable: true
+        showDisable: true,
+        showOnSelected: useTextStyle ? dictionary?.SELECT_DRIVER ?? 'Select driver' : null
       }
     ]
     if (!driversList.loading) {
@@ -62,7 +78,8 @@ const DriverMultiSelectorUI = (props) => {
                 </DriverNameContainer>
               </OptionContent>
             </Option>
-          )
+          ),
+          showOnSelected: useTextStyle ? driver.name : null
         }
       })
 
@@ -78,22 +95,37 @@ const DriverMultiSelectorUI = (props) => {
 
   return (
     <>
-      {!driversList.loading ? (
+      {!driversList.loading || (!useDriversByProps && pagination) ? (
         <MultiSelect
-          defaultValue={filterValues.driverIds}
+          isLoading={driversList.loading}
+          useLazyPagination={!useDriversByProps}
+          searchBarIsNotLazyLoad={useDriversByProps}
+          useTextStyle={useTextStyle}
+          hideChevronIcon={hideChevronIcon}
+          andText={andText}
+          textClassnames={textClassnames}
+          defaultValue={driversList.loading && !useDriversByProps ? 'loading' : filterValues.driverIds}
           placeholder={Placeholder}
-          options={driversMultiOptionList}
+          options={driversList.loading && !useDriversByProps ? driversLoading : driversMultiOptionList}
           optionInnerMargin='10px'
           optionInnerMaxHeight='150px'
+          optionsPosition={optionsPosition}
           onChange={(driver) => handleChangeDriver(driver)}
           isShowSearchBar
           searchBarIsCustomLayout
-          searchBarIsNotLazyLoad
           searchValue={searchValue}
           handleChangeSearch={(val) => setSearchValue(val)}
+          pagination={pagination}
+          handleChangePage={handleChangePage}
+          handleChangePageSize={handleChangePageSize}
         />
       ) : (
         <MultiSelect
+          searchBarIsNotLazyLoad={useDriversByProps}
+          useTextStyle={useTextStyle}
+          hideChevronIcon={hideChevronIcon}
+          andText={andText}
+          textClassnames={textClassnames}
           defaultValue='default'
           options={driversLoading}
           optionInnerMargin='10px'
@@ -101,7 +133,6 @@ const DriverMultiSelectorUI = (props) => {
           className='driver-select'
           isShowSearchBar
           searchBarIsCustomLayout
-          searchBarIsNotLazyLoad
           searchValue={searchValue}
           handleChangeSearch={(val) => setSearchValue(val)}
         />
@@ -114,6 +145,11 @@ export const DriverMultiSelector = (props) => {
   const DriversControlProps = {
     ...props,
     UIComponent: DriverMultiSelectorUI,
+    paginationSettings: {
+      initialPage: 1,
+      pageSize: 10,
+      controlType: 'pages'
+    },
     propsToFetch: ['id', 'name', 'lastname', 'cellphone', 'photo']
   }
   return (
