@@ -63,7 +63,7 @@ export const DriverGroupSelectorWrapper = styled.div`
   width: fit-content;
   margin: 3px 0;
 
-  > span {
+  span {
     font-size: 14px;
     color: ${props => props.theme.colors.secundaryLight};
     &.calendar {
@@ -989,5 +989,23 @@ export const WarningMessage = styled.div`
     span {
       white-space: nowrap;
     }
+  }
+`
+
+export const FiltContainer = styled.div`
+  display: inline-block;
+  position: relative;
+  button {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    background: transparent;
+    width: 20px;
+    height: 20px;
+    transform: translate(100%, -50%);
+    top: 5px;
+    right: 10px;
   }
 `

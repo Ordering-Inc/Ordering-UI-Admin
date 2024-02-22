@@ -3,7 +3,7 @@ import EnChevronDown from '@meronex/icons/en/EnChevronDown'
 import { CheckSquareFill, Square } from 'react-bootstrap-icons'
 import MdClose from '@meronex/icons/md/MdClose'
 import { Button } from '../Buttons'
-import { SearchBar } from '../../components/Shared'
+import { Pagination, SearchBar } from '../../components/Shared'
 
 import {
   Select as SelectInput,
@@ -18,7 +18,9 @@ import {
 } from '../Selects'
 
 import {
-  CheckBox
+  CheckBox,
+  TextFormatted,
+  PaginationWrapper
 } from './styles'
 
 export const MultiSelect = (props) => {
@@ -33,7 +35,17 @@ export const MultiSelect = (props) => {
     searchBarPlaceholder,
     searchBarIsCustomLayout,
     searchValue,
-    handleChangeSearch
+    handleChangeSearch,
+    useTextStyle,
+    textClassnames,
+    hideChevronIcon,
+    andText,
+    pagination,
+    handleChangePage,
+    handleChangePageSize,
+    useLazyPagination,
+    isLoading,
+    optionsPosition
   } = props
 
   const [open, setOpen] = useState(false)
@@ -48,7 +60,7 @@ export const MultiSelect = (props) => {
   }
 
   const closeSelect = (e) => {
-    if (open) {
+    if (open && !isLoading) {
       const outsideDropdown = !dropdownReference.current?.contains(e.target)
       if (outsideDropdown) {
         setOpen(false)
@@ -62,7 +74,9 @@ export const MultiSelect = (props) => {
     const _defaultOption = options?.filter(
       (option) => defaultValue.includes(option.value)
     )
-    setSelectedOptions(_defaultOption)
+    if (!(useLazyPagination && pagination)) {
+      setSelectedOptions(_defaultOption)
+    }
     setValues(defaultValue)
   }, [defaultValue, options, searchValue])
 
@@ -74,6 +88,11 @@ export const MultiSelect = (props) => {
     document.addEventListener('click', closeSelect)
     return () => document.removeEventListener('click', closeSelect)
   }, [open])
+
+  const handlerChangePage = (page) => {
+    setOpen(true)
+    handleChangePage(page)
+  }
 
   const handleSelectOption = (option) => {
     if (option.value === null || option.value === 'default') return
@@ -96,48 +115,89 @@ export const MultiSelect = (props) => {
     onChange && onChange(option.value)
   }
 
+  const optionsTextFormatted = (selectedOption, index) => {
+    if (index <= 2) {
+      return `${selectedOption.showOnSelected || selectedOption.content}${index + 1 !== selectedOptions?.length && index <= 2 ? ', ' : ' '}`
+    }
+    if (index + 1 === selectedOptions?.length && selectedOptions?.length >= 4) {
+      return `${andText || 'And'} ${index - 2} +`
+    }
+    return null
+  }
+
+  const filterFunction = (_, index) => {
+    if (!pagination || useLazyPagination) return true
+    const validation = pagination?.currentPage === 1
+      ? index < (pagination.pageSize * pagination.currentPage)
+      : (index >= (pagination.pageSize * (pagination.currentPage - 1))) && (index < (pagination.pageSize * pagination.currentPage))
+    return validation
+  }
+
   return (
-    <SelectInput className={className || 'multi-select'}>
+    <SelectInput useTextStyle={useTextStyle} className={className || 'multi-select'}>
       {selectedOptions.length === 0 ? (
-        <Selected onClick={(e) => handleSelectClick(e)}>
-          {placeholder || ''}
-          <Chevron>
-            <EnChevronDown />
-          </Chevron>
+        <Selected useTextStyle={useTextStyle} onClick={(e) => handleSelectClick(e)}>
+          {useTextStyle ? (
+            <Header>
+              <TextFormatted className={textClassnames}>
+                {placeholder || ''}
+              </TextFormatted>
+            </Header>
+          ) : (
+            <>
+              {placeholder || ''}
+            </>
+          )}
+          {!hideChevronIcon && (
+            <Chevron>
+              <EnChevronDown />
+            </Chevron>
+          )}
         </Selected>
       ) : (
         <Selected onClick={(e) => handleSelectClick(e)}>
-          <Header>
-            {selectedOptions.map((selectedOption) => (
+          <Header useTextStyle={useTextStyle}>
+            {selectedOptions.map((selectedOption, index) => (
               <React.Fragment key={selectedOption.value}>
-                <MultiSelectOption>
-                  {selectedOption.showOnSelected || selectedOption.content}
-                  {selectedOption?.value !== 'default' && (
-                    <Button
-                      circle
-                      outline
-                      color='primary'
-                      type='reset'
-                      className='remove_option'
-                      onClick={() => onChange && onChange(selectedOption.value)}
-                    >
-                      <MdClose />
-                    </Button>
-                  )}
-                </MultiSelectOption>
+                {
+                  useTextStyle ? (
+                    <TextFormatted className={textClassnames} primary>
+                      {optionsTextFormatted(selectedOption, index)}
+                    </TextFormatted>
+                  ) : (
+                    <MultiSelectOption>
+                      {selectedOption.showOnSelected || selectedOption.content}
+                      {selectedOption?.value !== 'default' && (
+                        <Button
+                          circle
+                          outline
+                          color='primary'
+                          type='reset'
+                          className='remove_option'
+                          onClick={() => onChange && onChange(selectedOption.value)}
+                        >
+                          <MdClose />
+                        </Button>
+                      )}
+                    </MultiSelectOption>
+                  )
+                }
               </React.Fragment>
             ))}
           </Header>
-          <Chevron>
-            <EnChevronDown />
-          </Chevron>
+          {!hideChevronIcon && (
+            <Chevron>
+              <EnChevronDown />
+            </Chevron>
+          )}
         </Selected>
       )}
       {open && options && (
         <Options
           isAbsolute
-          position='right'
+          position={optionsPosition ?? 'right'}
           ref={dropdownReference}
+          minWidth='330px'
         >
           {isShowSearchBar && (
             <SearchBarWrapper
@@ -156,7 +216,7 @@ export const MultiSelect = (props) => {
             optionInnerMargin={props.optionInnerMargin}
             optionInnerMaxHeight={props.optionInnerMaxHeight}
           >
-            {options.map((option, i) => (
+            {options.filter(filterFunction).map((option, i) => (
               <MultiOption
                 key={i}
                 color={option.color}
@@ -174,6 +234,17 @@ export const MultiSelect = (props) => {
               </MultiOption>
             ))}
           </OptionsInner>
+          {pagination && handleChangePageSize && handleChangePage && (
+            <PaginationWrapper>
+              <Pagination
+                currentPage={pagination?.currentPage}
+                totalPages={pagination?.totalPages}
+                handleChangePage={handlerChangePage}
+                handleChangePageSize={handleChangePageSize}
+                defaultPageSize={pagination?.pageSize}
+              />
+            </PaginationWrapper>
+          )}
         </Options>
       )}
     </SelectInput>
