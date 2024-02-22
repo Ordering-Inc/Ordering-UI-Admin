@@ -942,10 +942,10 @@ export const WarningMessage = styled.div`
   padding: 0px 15px;
   box-sizing: border-box;
   margin: 10px 0px 0px 0px !important;
-
-  right: 0px;
+  max-width: 250px;
+  left: 0px;
   ${props => props.theme?.rtl && css`
-    left: 0px;
+    right: 0px;
     right: initial;
   `}
 
@@ -1004,7 +1004,7 @@ export const FiltContainer = styled.div`
     background: transparent;
     width: 20px;
     height: 20px;
-    transform: translate(100%, -50%);
+    transform: translate(140%, -50%);
     top: 5px;
     right: 10px;
   }
