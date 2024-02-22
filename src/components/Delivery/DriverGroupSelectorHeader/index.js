@@ -17,21 +17,21 @@ const DriverGroupsListingUI = (props) => {
     pagination,
     searchValue,
     onSearch,
-    getPageBusinesses,
+    getHeaderDriversGroups,
     isOpen,
     close,
-    changeDriverGroupState,
+    changeDriverGroupState
   } = props
   const [, t] = useLanguage()
   const dropdownReference = useRef()
 
   const handleChangePage = (page) => {
-    getPageBusinesses(pagination.pageSize, page)
+    getHeaderDriversGroups(page, pagination.pageSize)
   }
 
   const handleChangePageSize = (pageSize) => {
     const expectedPage = Math.ceil(pagination.from / pageSize)
-    getPageBusinesses(pageSize, expectedPage)
+    getHeaderDriversGroups(expectedPage, pageSize)
   }
 
   const closeSelect = (e) => {
@@ -74,31 +74,30 @@ const DriverGroupsListingUI = (props) => {
             ))
           ) : (
             <>
-              {driversGroupsState.groups.map(driver_group => (
-                <OptionItem key={driver_group.id}
-                onClick={() => changeDriverGroupState(driver_group)}
+              {driversGroupsState.groups.map(driverGroup => (
+                <OptionItem
+                  key={driverGroup.id}
+                  onClick={() => changeDriverGroupState(driverGroup)}
                 >
                   <div>
-                    <b>{driver_group?.name}</b>
-                    <p>{t('DRIVERS', 'Drivers:')} {driver_group?.drivers?.length}</p>
+                    <b>{driverGroup?.name}</b>
+                    <p>{t('DRIVERS', 'Drivers:')} {driverGroup?.drivers?.length}</p>
                   </div>
                 </OptionItem>
               ))}
             </>
           )}
         </DriverGroupList>
-        {pagination && pagination?.total > 0 && (
+        {pagination && pagination?.totalPages > 0 && (
           <WrapperPagination className='pagination-container'>
-            {pagination?.total && (
-              <Pagination
-                currentPage={pagination.currentPage}
-                totalPages={Math.ceil(pagination?.total / pagination.pageSize)}
-                handleChangePage={handleChangePage}
-                defaultPageSize={pagination.pageSize}
-                handleChangePageSize={handleChangePageSize}
-                isHidePagecontrol
-              />
-            )}
+            <Pagination
+              currentPage={pagination.currentPage}
+              totalPages={pagination?.totalPages}
+              handleChangePage={handleChangePage}
+              defaultPageSize={pagination.pageSize}
+              handleChangePageSize={handleChangePageSize}
+              isHidePagecontrol
+            />
           </WrapperPagination>
         )}
       </SelectHeaderContent>
@@ -114,9 +113,10 @@ export const DriverGroupSelectHeader = (props) => {
     isHeaderComponent: true,
     paginationSettings: {
       initialPage: 1,
-      pageSize: 6,
+      pageSize: 5,
       controlType: 'pages'
     },
+    propsToFetch: ['id', 'enabled', 'drivers', 'name']
   }
   return (
     <DriverGroupsListController {...driverGroupsListingProps} />
