@@ -37,7 +37,17 @@ var MultiSelect = function MultiSelect(props) {
     searchBarPlaceholder = props.searchBarPlaceholder,
     searchBarIsCustomLayout = props.searchBarIsCustomLayout,
     searchValue = props.searchValue,
-    handleChangeSearch = props.handleChangeSearch;
+    handleChangeSearch = props.handleChangeSearch,
+    useTextStyle = props.useTextStyle,
+    textClassnames = props.textClassnames,
+    hideChevronIcon = props.hideChevronIcon,
+    andText = props.andText,
+    pagination = props.pagination,
+    handleChangePage = props.handleChangePage,
+    handleChangePageSize = props.handleChangePageSize,
+    useLazyPagination = props.useLazyPagination,
+    isLoading = props.isLoading,
+    optionsPosition = props.optionsPosition;
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     open = _useState2[0],
@@ -57,7 +67,7 @@ var MultiSelect = function MultiSelect(props) {
     setOpen(!open);
   };
   var closeSelect = function closeSelect(e) {
-    if (open) {
+    if (open && !isLoading) {
       var _dropdownReference$cu;
       var outsideDropdown = !((_dropdownReference$cu = dropdownReference.current) !== null && _dropdownReference$cu !== void 0 && _dropdownReference$cu.contains(e.target));
       if (outsideDropdown) {
@@ -70,7 +80,9 @@ var MultiSelect = function MultiSelect(props) {
     var _defaultOption = options === null || options === void 0 ? void 0 : options.filter(function (option) {
       return defaultValue.includes(option.value);
     });
-    setSelectedOptions(_defaultOption);
+    if (!(useLazyPagination && pagination)) {
+      setSelectedOptions(_defaultOption);
+    }
     setValues(defaultValue);
   }, [defaultValue, options, searchValue]);
   (0, _react.useEffect)(function () {
@@ -83,6 +95,10 @@ var MultiSelect = function MultiSelect(props) {
       return document.removeEventListener('click', closeSelect);
     };
   }, [open]);
+  var handlerChangePage = function handlerChangePage(page) {
+    setOpen(true);
+    handleChangePage(page);
+  };
   var handleSelectOption = function handleSelectOption(option) {
     if (option.value === null || option.value === 'default') return;
     var _selectedOptions = _toConsumableArray(selectedOptions);
@@ -103,20 +119,43 @@ var MultiSelect = function MultiSelect(props) {
     setValues(_values);
     onChange && onChange(option.value);
   };
+  var optionsTextFormatted = function optionsTextFormatted(selectedOption, index) {
+    if (index <= 2) {
+      return "".concat(selectedOption.showOnSelected || selectedOption.content).concat(index + 1 !== (selectedOptions === null || selectedOptions === void 0 ? void 0 : selectedOptions.length) && index <= 2 ? ', ' : ' ');
+    }
+    if (index + 1 === (selectedOptions === null || selectedOptions === void 0 ? void 0 : selectedOptions.length) && (selectedOptions === null || selectedOptions === void 0 ? void 0 : selectedOptions.length) >= 4) {
+      return "".concat(andText || 'And', " ").concat(index - 2, " +");
+    }
+    return null;
+  };
+  var filterFunction = function filterFunction(_, index) {
+    if (!pagination || useLazyPagination) return true;
+    var validation = (pagination === null || pagination === void 0 ? void 0 : pagination.currentPage) === 1 ? index < pagination.pageSize * pagination.currentPage : index >= pagination.pageSize * (pagination.currentPage - 1) && index < pagination.pageSize * pagination.currentPage;
+    return validation;
+  };
   return /*#__PURE__*/_react.default.createElement(_Selects.Select, {
+    useTextStyle: useTextStyle,
     className: className || 'multi-select'
   }, selectedOptions.length === 0 ? /*#__PURE__*/_react.default.createElement(_Selects.Selected, {
+    useTextStyle: useTextStyle,
     onClick: function onClick(e) {
       return handleSelectClick(e);
     }
-  }, placeholder || '', /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, /*#__PURE__*/_react.default.createElement(_EnChevronDown.default, null))) : /*#__PURE__*/_react.default.createElement(_Selects.Selected, {
+  }, useTextStyle ? /*#__PURE__*/_react.default.createElement(_Selects.Header, null, /*#__PURE__*/_react.default.createElement(_styles.TextFormatted, {
+    className: textClassnames
+  }, placeholder || '')) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, placeholder || ''), !hideChevronIcon && /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, /*#__PURE__*/_react.default.createElement(_EnChevronDown.default, null))) : /*#__PURE__*/_react.default.createElement(_Selects.Selected, {
     onClick: function onClick(e) {
       return handleSelectClick(e);
     }
-  }, /*#__PURE__*/_react.default.createElement(_Selects.Header, null, selectedOptions.map(function (selectedOption) {
+  }, /*#__PURE__*/_react.default.createElement(_Selects.Header, {
+    useTextStyle: useTextStyle
+  }, selectedOptions.map(function (selectedOption, index) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: selectedOption.value
-    }, /*#__PURE__*/_react.default.createElement(_Selects.MultiSelectOption, null, selectedOption.showOnSelected || selectedOption.content, (selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.value) !== 'default' && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    }, useTextStyle ? /*#__PURE__*/_react.default.createElement(_styles.TextFormatted, {
+      className: textClassnames,
+      primary: true
+    }, optionsTextFormatted(selectedOption, index)) : /*#__PURE__*/_react.default.createElement(_Selects.MultiSelectOption, null, selectedOption.showOnSelected || selectedOption.content, (selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.value) !== 'default' && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
       circle: true,
       outline: true,
       color: "primary",
@@ -126,10 +165,11 @@ var MultiSelect = function MultiSelect(props) {
         return onChange && onChange(selectedOption.value);
       }
     }, /*#__PURE__*/_react.default.createElement(_MdClose.default, null))));
-  })), /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, /*#__PURE__*/_react.default.createElement(_EnChevronDown.default, null))), open && options && /*#__PURE__*/_react.default.createElement(_Selects.Options, {
+  })), !hideChevronIcon && /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, /*#__PURE__*/_react.default.createElement(_EnChevronDown.default, null))), open && options && /*#__PURE__*/_react.default.createElement(_Selects.Options, {
     isAbsolute: true,
-    position: "right",
-    ref: dropdownReference
+    position: optionsPosition !== null && optionsPosition !== void 0 ? optionsPosition : 'right',
+    ref: dropdownReference,
+    minWidth: "330px"
   }, isShowSearchBar && /*#__PURE__*/_react.default.createElement(_Selects.SearchBarWrapper, {
     className: "search-bar-container"
   }, /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
@@ -141,7 +181,7 @@ var MultiSelect = function MultiSelect(props) {
   })), /*#__PURE__*/_react.default.createElement(_Selects.OptionsInner, {
     optionInnerMargin: props.optionInnerMargin,
     optionInnerMaxHeight: props.optionInnerMaxHeight
-  }, options.map(function (option, i) {
+  }, options.filter(filterFunction).map(function (option, i) {
     return /*#__PURE__*/_react.default.createElement(_Selects.MultiOption, {
       key: i,
       color: option.color,
@@ -150,6 +190,12 @@ var MultiSelect = function MultiSelect(props) {
       },
       optionBottomBorder: props.optionBottomBorder
     }, option.value !== 'default' && /*#__PURE__*/_react.default.createElement(_styles.CheckBox, null, values.includes(option.value) ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CheckSquareFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Square, null)), option.content);
+  })), pagination && handleChangePageSize && handleChangePage && /*#__PURE__*/_react.default.createElement(_styles.PaginationWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
+    currentPage: pagination === null || pagination === void 0 ? void 0 : pagination.currentPage,
+    totalPages: pagination === null || pagination === void 0 ? void 0 : pagination.totalPages,
+    handleChangePage: handlerChangePage,
+    handleChangePageSize: handleChangePageSize,
+    defaultPageSize: pagination === null || pagination === void 0 ? void 0 : pagination.pageSize
   }))));
 };
 exports.MultiSelect = MultiSelect;

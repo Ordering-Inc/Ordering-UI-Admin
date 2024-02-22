@@ -33,7 +33,7 @@ var DriverGroupsListingUI = function DriverGroupsListingUI(props) {
     pagination = props.pagination,
     searchValue = props.searchValue,
     onSearch = props.onSearch,
-    getPageBusinesses = props.getPageBusinesses,
+    getHeaderDriversGroups = props.getHeaderDriversGroups,
     isOpen = props.isOpen,
     close = props.close,
     changeDriverGroupState = props.changeDriverGroupState;
@@ -42,11 +42,11 @@ var DriverGroupsListingUI = function DriverGroupsListingUI(props) {
     t = _useLanguage2[1];
   var dropdownReference = (0, _react.useRef)();
   var handleChangePage = function handleChangePage(page) {
-    getPageBusinesses(pagination.pageSize, page);
+    getHeaderDriversGroups(page, pagination.pageSize);
   };
   var handleChangePageSize = function handleChangePageSize(pageSize) {
     var expectedPage = Math.ceil(pagination.from / pageSize);
-    getPageBusinesses(pageSize, expectedPage);
+    getHeaderDriversGroups(expectedPage, pageSize);
   };
   var closeSelect = function closeSelect(e) {
     if (isOpen) {
@@ -96,19 +96,19 @@ var DriverGroupsListingUI = function DriverGroupsListingUI(props) {
         marginTop: '7px'
       }
     })));
-  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, driversGroupsState.groups.map(function (driver_group) {
-    var _driver_group$drivers;
+  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, driversGroupsState.groups.map(function (driverGroup) {
+    var _driverGroup$drivers;
     return /*#__PURE__*/_react.default.createElement(_styles.OptionItem, {
-      key: driver_group.id,
+      key: driverGroup.id,
       onClick: function onClick() {
-        return changeDriverGroupState(driver_group);
+        return changeDriverGroupState(driverGroup);
       }
-    }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("b", null, driver_group === null || driver_group === void 0 ? void 0 : driver_group.name), /*#__PURE__*/_react.default.createElement("p", null, t('DRIVERS', 'Drivers:'), " ", driver_group === null || driver_group === void 0 || (_driver_group$drivers = driver_group.drivers) === null || _driver_group$drivers === void 0 ? void 0 : _driver_group$drivers.length)));
-  }))), pagination && (pagination === null || pagination === void 0 ? void 0 : pagination.total) > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperPagination, {
+    }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("b", null, driverGroup === null || driverGroup === void 0 ? void 0 : driverGroup.name), /*#__PURE__*/_react.default.createElement("p", null, t('DRIVERS', 'Drivers:'), " ", driverGroup === null || driverGroup === void 0 || (_driverGroup$drivers = driverGroup.drivers) === null || _driverGroup$drivers === void 0 ? void 0 : _driverGroup$drivers.length)));
+  }))), pagination && (pagination === null || pagination === void 0 ? void 0 : pagination.totalPages) > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperPagination, {
     className: "pagination-container"
-  }, (pagination === null || pagination === void 0 ? void 0 : pagination.total) && /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
+  }, /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
     currentPage: pagination.currentPage,
-    totalPages: Math.ceil((pagination === null || pagination === void 0 ? void 0 : pagination.total) / pagination.pageSize),
+    totalPages: pagination === null || pagination === void 0 ? void 0 : pagination.totalPages,
     handleChangePage: handleChangePage,
     defaultPageSize: pagination.pageSize,
     handleChangePageSize: handleChangePageSize,
@@ -122,9 +122,10 @@ var DriverGroupSelectHeader = function DriverGroupSelectHeader(props) {
     isHeaderComponent: true,
     paginationSettings: {
       initialPage: 1,
-      pageSize: 6,
+      pageSize: 5,
       controlType: 'pages'
-    }
+    },
+    propsToFetch: ['id', 'enabled', 'drivers', 'name']
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DriversGroupsList, driverGroupsListingProps);
 };

@@ -25,13 +25,24 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var DriverMultiSelectorUI = function DriverMultiSelectorUI(props) {
-  var _dictionary$LOADING, _dictionary$SELECT_DR2;
+  var _dictionary$LOADING, _dictionary$LOADING2, _dictionary$SELECT_DR3;
   var driversList = props.driversList,
     defaultValue = props.defaultValue,
     small = props.small,
     padding = props.padding,
     handleChangeDriver = props.handleChangeDriver,
-    filterValues = props.filterValues;
+    filterValues = props.filterValues,
+    useTextStyle = props.useTextStyle,
+    hideChevronIcon = props.hideChevronIcon,
+    andText = props.andText,
+    textClassnames = props.textClassnames,
+    pagination = props.pagination,
+    handleChangePage = props.handleChangePage,
+    handleChangePageSize = props.handleChangePageSize,
+    useDriversByProps = props.useDriversByProps,
+    setSearchValue = props.setSearchValue,
+    searchValue = props.searchValue,
+    optionsPosition = props.optionsPosition;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 1),
     dictionary = _useLanguage2[0].dictionary;
@@ -40,25 +51,23 @@ var DriverMultiSelectorUI = function DriverMultiSelectorUI(props) {
     _useState2 = _slicedToArray(_useState, 2),
     driversMultiOptionList = _useState2[0],
     setDriversMultiOptionList = _useState2[1];
-  var _useState3 = (0, _react.useState)(null),
-    _useState4 = _slicedToArray(_useState3, 2),
-    searchValue = _useState4[0],
-    setSearchValue = _useState4[1];
   var driversLoading = [{
     value: 'default',
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
       small: small
-    }, (_dictionary$LOADING = dictionary === null || dictionary === void 0 ? void 0 : dictionary.LOADING) !== null && _dictionary$LOADING !== void 0 ? _dictionary$LOADING : 'loading', "...")
+    }, (_dictionary$LOADING = dictionary === null || dictionary === void 0 ? void 0 : dictionary.LOADING) !== null && _dictionary$LOADING !== void 0 ? _dictionary$LOADING : 'loading', "..."),
+    showOnSelected: useTextStyle ? (_dictionary$LOADING2 = dictionary === null || dictionary === void 0 ? void 0 : dictionary.LOADING) !== null && _dictionary$LOADING2 !== void 0 ? _dictionary$LOADING2 : 'loading' : null
   }];
   (0, _react.useEffect)(function () {
-    var _dictionary$SELECT_DR;
+    var _dictionary$SELECT_DR, _dictionary$SELECT_DR2;
     var _driversOptionList = [{
       value: 'default',
       content: /*#__PURE__*/_react.default.createElement(_styles.Option, {
         padding: "0px"
       }, /*#__PURE__*/_react.default.createElement("span", null, (_dictionary$SELECT_DR = dictionary === null || dictionary === void 0 ? void 0 : dictionary.SELECT_DRIVER) !== null && _dictionary$SELECT_DR !== void 0 ? _dictionary$SELECT_DR : 'Select driver')),
       color: 'primary',
-      showDisable: true
+      showDisable: true,
+      showOnSelected: useTextStyle ? (_dictionary$SELECT_DR2 = dictionary === null || dictionary === void 0 ? void 0 : dictionary.SELECT_DRIVER) !== null && _dictionary$SELECT_DR2 !== void 0 ? _dictionary$SELECT_DR2 : 'Select driver' : null
     }];
     if (!driversList.loading) {
       var _driverList;
@@ -89,7 +98,8 @@ var DriverMultiSelectorUI = function DriverMultiSelectorUI(props) {
             small: small
           }, driver.name, " ", driver.lastname), /*#__PURE__*/_react.default.createElement(_styles.DriverText, {
             small: small
-          }, (_dictionary$DRIVER = dictionary === null || dictionary === void 0 ? void 0 : dictionary.DRIVER) !== null && _dictionary$DRIVER !== void 0 ? _dictionary$DRIVER : 'Driver'))))
+          }, (_dictionary$DRIVER = dictionary === null || dictionary === void 0 ? void 0 : dictionary.DRIVER) !== null && _dictionary$DRIVER !== void 0 ? _dictionary$DRIVER : 'Driver')))),
+          showOnSelected: useTextStyle ? driver.name : null
         };
       });
       setDriversMultiOptionList(_driversOptionListTemp);
@@ -107,24 +117,39 @@ var DriverMultiSelectorUI = function DriverMultiSelectorUI(props) {
       }
     }
   }, [driversList, defaultValue, searchValue]);
-  var Placeholder = /*#__PURE__*/_react.default.createElement(_styles.PlaceholderTitle, null, (_dictionary$SELECT_DR2 = dictionary === null || dictionary === void 0 ? void 0 : dictionary.SELECT_DRIVER) !== null && _dictionary$SELECT_DR2 !== void 0 ? _dictionary$SELECT_DR2 : 'Select driver');
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !driversList.loading ? /*#__PURE__*/_react.default.createElement(_MultiSelect.MultiSelect, {
-    defaultValue: filterValues.driverIds,
+  var Placeholder = /*#__PURE__*/_react.default.createElement(_styles.PlaceholderTitle, null, (_dictionary$SELECT_DR3 = dictionary === null || dictionary === void 0 ? void 0 : dictionary.SELECT_DRIVER) !== null && _dictionary$SELECT_DR3 !== void 0 ? _dictionary$SELECT_DR3 : 'Select driver');
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !driversList.loading || !useDriversByProps && pagination ? /*#__PURE__*/_react.default.createElement(_MultiSelect.MultiSelect, {
+    isLoading: driversList.loading,
+    useLazyPagination: !useDriversByProps,
+    searchBarIsNotLazyLoad: useDriversByProps,
+    useTextStyle: useTextStyle,
+    hideChevronIcon: hideChevronIcon,
+    andText: andText,
+    textClassnames: textClassnames,
+    defaultValue: driversList.loading && !useDriversByProps ? 'loading' : filterValues.driverIds,
     placeholder: Placeholder,
-    options: driversMultiOptionList,
+    options: driversList.loading && !useDriversByProps ? driversLoading : driversMultiOptionList,
     optionInnerMargin: "10px",
     optionInnerMaxHeight: "150px",
+    optionsPosition: optionsPosition,
     onChange: function onChange(driver) {
       return handleChangeDriver(driver);
     },
     isShowSearchBar: true,
     searchBarIsCustomLayout: true,
-    searchBarIsNotLazyLoad: true,
     searchValue: searchValue,
     handleChangeSearch: function handleChangeSearch(val) {
       return setSearchValue(val);
-    }
+    },
+    pagination: pagination,
+    handleChangePage: handleChangePage,
+    handleChangePageSize: handleChangePageSize
   }) : /*#__PURE__*/_react.default.createElement(_MultiSelect.MultiSelect, {
+    searchBarIsNotLazyLoad: useDriversByProps,
+    useTextStyle: useTextStyle,
+    hideChevronIcon: hideChevronIcon,
+    andText: andText,
+    textClassnames: textClassnames,
     defaultValue: "default",
     options: driversLoading,
     optionInnerMargin: "10px",
@@ -132,7 +157,6 @@ var DriverMultiSelectorUI = function DriverMultiSelectorUI(props) {
     className: "driver-select",
     isShowSearchBar: true,
     searchBarIsCustomLayout: true,
-    searchBarIsNotLazyLoad: true,
     searchValue: searchValue,
     handleChangeSearch: function handleChangeSearch(val) {
       return setSearchValue(val);
@@ -142,6 +166,11 @@ var DriverMultiSelectorUI = function DriverMultiSelectorUI(props) {
 var DriverMultiSelector = function DriverMultiSelector(props) {
   var DriversControlProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: DriverMultiSelectorUI,
+    paginationSettings: {
+      initialPage: 1,
+      pageSize: 10,
+      controlType: 'pages'
+    },
     propsToFetch: ['id', 'name', 'lastname', 'cellphone', 'photo']
   });
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DriversList, DriversControlProps));
