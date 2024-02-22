@@ -59,7 +59,7 @@ export const Option = styled.div`
 `
 
 export const Options = styled.div`
-  min-width: 100%;
+  min-width: ${({ minWidth }) => minWidth || '100%'};
   background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
   z-index: 10000;
   border-width: 1px;
@@ -102,8 +102,10 @@ export const OptionsInner = styled.div`
   overscroll-behavior: contain;
 `
 export const Selected = styled.div`
-  padding-left: 15px;
-  padding-right: 15px;
+  ${({ useTextStyle }) => !useTextStyle && css`
+    padding-left: 15px;
+    padding-right: 15px;
+  `}
   cursor: pointer;
   position: relative;
   display: flex;
@@ -136,14 +138,16 @@ export const Selected = styled.div`
 
 export const Select = styled.div`
   display: inline-block;
-  border-radius: 7.6px;
-  line-height: 34px;
-  border-width: 1px;
-  border-style: solid;
-  border-color: #DEE2E6;
   color: #344050;
   position: relative;
 
+  ${props => !props.useTextStyle && css`
+    border-radius: 7.6px;
+    line-height: 34px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #DEE2E6;
+  `}
   ${props => props.open && css`
     background-color: ${darken(0.07, '#CCC')};
   `}
@@ -175,7 +179,7 @@ export const Chevron = styled.div`
 export const Header = styled.div`
   flex: 1;
   overflow: auto;
-  white-space: nowrap;
+  white-space: ${({ useTextStyle }) => useTextStyle ? 'pre-wrap' : 'nowrap'};
   display: flex;
   align-items: center;
 `
@@ -262,7 +266,7 @@ export const MultiOption = styled.div`
 
   ${props => props.selected && css`
     background-color: ${darken(0.07, '#fafafa')};
-  
+
     &:hover {
       background-color: ${darken(0.07, '#fafafa')};
     }
