@@ -34,7 +34,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var DeliveryUsersListing = function DeliveryUsersListing(props) {
-  var _configs$general_hour, _configs$general_hour2, _driversList$users2, _driversList$users3;
+  var _configs$general_hour, _configs$general_hour2, _driversList$users, _driversList$users2;
   var date = props.date,
     driversList = props.driversList,
     paginationProps = props.paginationProps,
@@ -141,15 +141,6 @@ var DeliveryUsersListing = function DeliveryUsersListing(props) {
       return objDate.date() === (0, _moment.default)(_date).date();
     });
   };
-  (0, _react.useEffect)(function () {
-    var _driversList$users;
-    if (driversList.loading || (driversList === null || driversList === void 0 || (_driversList$users = driversList.users) === null || _driversList$users === void 0 ? void 0 : _driversList$users.length) > 0 || paginationProps.totalPages <= 1) return;
-    if (paginationProps.currentPage !== paginationProps.totalPages) {
-      handleChangePage(paginationProps.currentPage);
-    } else {
-      handleChangePage(paginationProps.currentPage - 1);
-    }
-  }, [driversList === null || driversList === void 0 ? void 0 : driversList.users, paginationProps]);
   return /*#__PURE__*/_react.default.createElement(_styles2.UsersListingContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.UsersConatiner, null, /*#__PURE__*/_react.default.createElement(_styles2.UserTableWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.UsersTable, null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement(_styles2.ThId, null, t('ID', 'ID')), /*#__PURE__*/_react.default.createElement(_styles2.ThName, null, t('NAME', 'Name')), getDatesInRange(date).length === 1 && (is12hours ? _utils.TwelveHours : _utils.TwentyFourHours).map(function (hour, i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.HoursHeader, {
       key: i
@@ -175,7 +166,7 @@ var DeliveryUsersListing = function DeliveryUsersListing(props) {
     })), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100
     })))))));
-  }) : driversList === null || driversList === void 0 || (_driversList$users2 = driversList.users) === null || _driversList$users2 === void 0 ? void 0 : _driversList$users2.map(function (user, i) {
+  }) : driversList === null || driversList === void 0 || (_driversList$users = driversList.users) === null || _driversList$users === void 0 ? void 0 : _driversList$users.map(function (user, i) {
     var _user$name2, _user$lastname2, _getDatesInRange, _user$delivery_blocks, _user$delivery_blocks2, _getDatesInRange2;
     return /*#__PURE__*/_react.default.createElement("tbody", {
       key: i
@@ -209,7 +200,7 @@ var DeliveryUsersListing = function DeliveryUsersListing(props) {
         }
       })));
     })));
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.UsersBottomContainer, null, (driversList === null || driversList === void 0 || (_driversList$users3 = driversList.users) === null || _driversList$users3 === void 0 ? void 0 : _driversList$users3.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.WrapperPagination, null, /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.UsersBottomContainer, null, (driversList === null || driversList === void 0 || (_driversList$users2 = driversList.users) === null || _driversList$users2 === void 0 ? void 0 : _driversList$users2.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.WrapperPagination, null, /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
     currentPage: paginationProps.currentPage,
     totalPages: paginationProps.totalPages,
     handleChangePage: handleChangePage,

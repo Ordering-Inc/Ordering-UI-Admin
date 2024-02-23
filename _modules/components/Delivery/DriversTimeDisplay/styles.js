@@ -270,13 +270,13 @@ var WrapperRow = _styledComponents.default.div(_templateObject94 || (_templateOb
   return isSelectedOrders && (0, _styledComponents.css)(_templateObject95 || (_templateObject95 = _taggedTemplateLiteral(["\n      flex-direction: column !important;\n      padding: ", ";\n      & > div {\n        margin-top: 15px;\n      }\n  "])), !isSelectedOrders && '10px 15px 0 0px');
 });
 exports.WrapperRow = WrapperRow;
-var WarningMessage = _styledComponents.default.div(_templateObject96 || (_templateObject96 = _taggedTemplateLiteral(["\n  position: absolute;\n  display: flex;\n  align-items: center;\n  z-index: 100;\n  bottom: 20px;\n  background: ", ";\n  border: 1px solid ", ";\n  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n  border-radius: 7.6px;\n  padding: 0px 15px;\n  box-sizing: border-box;\n  margin: 10px 0px 0px 0px !important;\n\n  right: 0px;\n  ", "\n\n  svg {\n    font-size: 20px;\n    color: ", ";\n  }\n\n  span {\n    font-size: 12px;\n    line-height: 18px;\n    color: ", ";\n    margin: 0 10px;\n    flex: 1;\n  }\n\n  a {\n    font-size: 12px;\n    white-space: nowrap;\n  }\n\n  @media (min-width: 768px) {\n    padding: 0px 20px;\n    font-size: 14px;\n    line-height: 24px;\n    ", "\n    ", "\n    ", "\n\n    span {\n      white-space: nowrap;\n    }\n  }\n"])), function (props) {
+var WarningMessage = _styledComponents.default.div(_templateObject96 || (_templateObject96 = _taggedTemplateLiteral(["\n  position: absolute;\n  display: flex;\n  align-items: center;\n  z-index: 100;\n  bottom: 20px;\n  background: ", ";\n  border: 1px solid ", ";\n  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n  border-radius: 7.6px;\n  padding: 0px 15px;\n  box-sizing: border-box;\n  margin: 10px 0px 0px 0px !important;\n  max-width: 250px;\n  left: 0px;\n  ", "\n\n  svg {\n    font-size: 20px;\n    color: ", ";\n  }\n\n  span {\n    font-size: 12px;\n    line-height: 18px;\n    color: ", ";\n    margin: 0 10px;\n    flex: 1;\n  }\n\n  a {\n    font-size: 12px;\n    white-space: nowrap;\n  }\n\n  @media (min-width: 768px) {\n    padding: 0px 20px;\n    font-size: 14px;\n    line-height: 24px;\n    ", "\n    ", "\n    ", "\n\n    span {\n      white-space: nowrap;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.warning100;
 }, function (props) {
   return props.theme.colors.warning;
 }, function (props) {
   var _props$theme11;
-  return ((_props$theme11 = props.theme) === null || _props$theme11 === void 0 ? void 0 : _props$theme11.rtl) && (0, _styledComponents.css)(_templateObject97 || (_templateObject97 = _taggedTemplateLiteral(["\n    left: 0px;\n    right: initial;\n  "])));
+  return ((_props$theme11 = props.theme) === null || _props$theme11 === void 0 ? void 0 : _props$theme11.rtl) && (0, _styledComponents.css)(_templateObject97 || (_templateObject97 = _taggedTemplateLiteral(["\n    right: 0px;\n    right: initial;\n  "])));
 }, function (props) {
   return props.theme.colors.warning;
 }, function (props) {
@@ -292,5 +292,5 @@ var WarningMessage = _styledComponents.default.div(_templateObject96 || (_templa
   return ((_props$theme12 = props.theme) === null || _props$theme12 === void 0 ? void 0 : _props$theme12.rtl) && (0, _styledComponents.css)(_templateObject102 || (_templateObject102 = _taggedTemplateLiteral(["\n      left: 0px;\n      right: initial;\n    "])));
 });
 exports.WarningMessage = WarningMessage;
-var FiltContainer = _styledComponents.default.div(_templateObject103 || (_templateObject103 = _taggedTemplateLiteral(["\n  display: inline-block;\n  position: relative;\n  button {\n    position: absolute;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    position: absolute;\n    background: transparent;\n    width: 20px;\n    height: 20px;\n    transform: translate(100%, -50%);\n    top: 5px;\n    right: 10px;\n  }\n"])));
+var FiltContainer = _styledComponents.default.div(_templateObject103 || (_templateObject103 = _taggedTemplateLiteral(["\n  display: inline-block;\n  position: relative;\n  button {\n    position: absolute;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    position: absolute;\n    background: transparent;\n    width: 20px;\n    height: 20px;\n    transform: translate(140%, -50%);\n    top: 5px;\n    right: 10px;\n  }\n"])));
 exports.FiltContainer = FiltContainer;

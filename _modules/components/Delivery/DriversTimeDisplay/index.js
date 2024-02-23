@@ -155,9 +155,20 @@ var DriversTimeDisplayUI = function DriversTimeDisplayUI(props) {
     value: 'from_event',
     content: t('FROM_EVENT', 'From event')
   }];
-  var changeDriverGroupState = function changeDriverGroupState(_driverGroup) {
+  var handleCleanFilters = function handleCleanFilters() {
     setShowSelectHeader(false);
+    handleClearFilters();
+  };
+  var changeDriverGroupState = function changeDriverGroupState(_driverGroup) {
+    if ((_driverGroup === null || _driverGroup === void 0 ? void 0 : _driverGroup.id) === (selectedGroup === null || selectedGroup === void 0 ? void 0 : selectedGroup.id)) return;
+    handleCleanFilters();
     setSelectedGroup(_driverGroup);
+  };
+  var handleCloseFiltOption = function handleCloseFiltOption() {
+    setSelectedGroup(null);
+    setFiltOption(null);
+    handleClearDriversList();
+    handleCleanFilters();
   };
   var handleChangeDate = function handleChangeDate(date1, date2) {
     var diff = (0, _moment.default)(date2).diff(date1, 'days');
@@ -280,13 +291,6 @@ var DriversTimeDisplayUI = function DriversTimeDisplayUI(props) {
   var handleChangeFiltOption = function handleChangeFiltOption(option) {
     setFiltOption(option);
     option === 'driver_groups' && setShowSelectHeader(true);
-  };
-  var handleCloseFiltOption = function handleCloseFiltOption() {
-    setFiltOption(null);
-    setShowSelectHeader(false);
-    handleClearFilters();
-    handleClearDriversList();
-    setSelectedGroup(null);
   };
   (0, _react.useEffect)(function () {
     var isTodayOrPastDate = (0, _moment.default)(selectedDate).format('YYYY-MM-DD') <= (0, _moment.default)().format('YYYY-MM-DD');
@@ -430,11 +434,11 @@ var DriversTimeDisplayUI = function DriversTimeDisplayUI(props) {
     },
     isOpen: showSelectHeader,
     changeDriverGroupState: changeDriverGroupState
-  }))), (filterValues === null || filterValues === void 0 || (_filterValues$driverI = filterValues.driverIds) === null || _filterValues$driverI === void 0 ? void 0 : _filterValues$driverI.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.WarningMessage, null, /*#__PURE__*/_react.default.createElement(_TiWarningOutline.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('WARNING_FILTER_APPLIED', 'Filters applied. You may miss new orders.')), /*#__PURE__*/_react.default.createElement(_styles.LinkButton, {
+  }), (filterValues === null || filterValues === void 0 || (_filterValues$driverI = filterValues.driverIds) === null || _filterValues$driverI === void 0 ? void 0 : _filterValues$driverI.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.WarningMessage, null, /*#__PURE__*/_react.default.createElement(_TiWarningOutline.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('FILTER_APPLIED', 'Filters applied')), /*#__PURE__*/_react.default.createElement(_styles.LinkButton, {
     onClick: function onClick() {
       return handleClearFilters();
     }
-  }, t('CLEAR_FILTERS', 'Clear filters'))), /*#__PURE__*/_react.default.createElement(_styles2.DriversGroupCalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, _extends({}, props, {
+  }, t('CLEAR_FILTERS', 'Clear filters'))))), /*#__PURE__*/_react.default.createElement(_styles2.DriversGroupCalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, _extends({}, props, {
     handleChangeDate: handleChangeDate
   })))))), /*#__PURE__*/_react.default.createElement(_UserList.DeliveryUsersListing, {
     date: date,
