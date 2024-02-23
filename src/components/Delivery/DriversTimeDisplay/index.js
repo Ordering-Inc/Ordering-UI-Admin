@@ -131,9 +131,22 @@ const DriversTimeDisplayUI = (props) => {
     }
   ]
 
-  const changeDriverGroupState = (_driverGroup) => {
+  const handleCleanFilters = () => {
     setShowSelectHeader(false)
+    handleClearFilters()
+  }
+
+  const changeDriverGroupState = (_driverGroup) => {
+    if (_driverGroup?.id === selectedGroup?.id) return
+    handleCleanFilters()
     setSelectedGroup(_driverGroup)
+  }
+
+  const handleCloseFiltOption = () => {
+    setSelectedGroup(null)
+    setFiltOption(null)
+    handleClearDriversList()
+    handleCleanFilters()
   }
 
   const handleChangeDate = (date1, date2) => {
@@ -275,14 +288,6 @@ const DriversTimeDisplayUI = (props) => {
   const handleChangeFiltOption = (option) => {
     setFiltOption(option)
     option === 'driver_groups' && setShowSelectHeader(true)
-  }
-
-  const handleCloseFiltOption = () => {
-    setFiltOption(null)
-    setShowSelectHeader(false)
-    handleClearFilters()
-    handleClearDriversList()
-    setSelectedGroup(null)
   }
 
   useEffect(() => {
@@ -466,16 +471,16 @@ const DriversTimeDisplayUI = (props) => {
                       changeDriverGroupState={changeDriverGroupState}
                     />
                   )}
+                  {(filterValues?.driverIds?.length > 0) && (
+                    <WarningMessage>
+                      <TiWarningOutline />
+                      <span>{t('FILTER_APPLIED', 'Filters applied')}</span>
+                      <LinkButton onClick={() => handleClearFilters()}>{t('CLEAR_FILTERS', 'Clear filters')}</LinkButton>
+                    </WarningMessage>
+                  )}
                 </DriverGroupSelectorWrapper>
               </div>
 
-              {(filterValues?.driverIds?.length > 0) && (
-                <WarningMessage>
-                  <TiWarningOutline />
-                  <span>{t('WARNING_FILTER_APPLIED', 'Filters applied. You may miss new orders.')}</span>
-                  <LinkButton onClick={() => handleClearFilters()}>{t('CLEAR_FILTERS', 'Clear filters')}</LinkButton>
-                </WarningMessage>
-              )}
               <DriversGroupCalendarWrapper>
                 <AnalyticsCalendar {...props} handleChangeDate={handleChangeDate} />
               </DriversGroupCalendarWrapper>
