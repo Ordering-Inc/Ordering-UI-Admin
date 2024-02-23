@@ -151,15 +151,6 @@ export const DeliveryUsersListing = (props) => {
     })
   }
 
-  useEffect(() => {
-    if (driversList.loading || driversList?.users?.length > 0 || paginationProps.totalPages <= 1) return
-    if (paginationProps.currentPage !== paginationProps.totalPages) {
-      handleChangePage(paginationProps.currentPage)
-    } else {
-      handleChangePage(paginationProps.currentPage - 1)
-    }
-  }, [driversList?.users, paginationProps])
-
   return (
     <UsersListingContainer>
       <UsersConatiner>
