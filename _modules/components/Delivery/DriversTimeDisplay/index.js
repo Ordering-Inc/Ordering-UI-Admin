@@ -21,15 +21,16 @@ var _styles2 = require("./styles");
 var _Select = require("../../../styles/Select");
 var _DriverMultiSelector = require("../../Orders/DriverMultiSelector");
 var _TiWarningOutline = _interopRequireDefault(require("@meronex/icons/ti/TiWarningOutline"));
+var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : String(i); }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -80,7 +81,10 @@ var DriversTimeDisplayUI = function DriversTimeDisplayUI(props) {
     handleSetInitialStates = props.handleSetInitialStates,
     filterValues = props.filterValues,
     handleChangeDriver = props.handleChangeDriver,
-    handleClearFilters = props.handleClearFilters;
+    handleClearFilters = props.handleClearFilters,
+    setFiltOption = props.setFiltOption,
+    filtOption = props.filtOption,
+    handleClearDriversList = props.handleClearDriversList;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -151,9 +155,20 @@ var DriversTimeDisplayUI = function DriversTimeDisplayUI(props) {
     value: 'from_event',
     content: t('FROM_EVENT', 'From event')
   }];
-  var changeDriverGroupState = function changeDriverGroupState(_driverGroup) {
+  var handleCleanFilters = function handleCleanFilters() {
     setShowSelectHeader(false);
+    handleClearFilters();
+  };
+  var changeDriverGroupState = function changeDriverGroupState(_driverGroup) {
+    if ((_driverGroup === null || _driverGroup === void 0 ? void 0 : _driverGroup.id) === (selectedGroup === null || selectedGroup === void 0 ? void 0 : selectedGroup.id)) return;
+    handleCleanFilters();
     setSelectedGroup(_driverGroup);
+  };
+  var handleCloseFiltOption = function handleCloseFiltOption() {
+    setSelectedGroup(null);
+    setFiltOption(null);
+    handleClearDriversList();
+    handleCleanFilters();
   };
   var handleChangeDate = function handleChangeDate(date1, date2) {
     var diff = (0, _moment.default)(date2).diff(date1, 'days');
@@ -273,6 +288,10 @@ var DriversTimeDisplayUI = function DriversTimeDisplayUI(props) {
     }));
     setScheduleOptions(_scheduleOptions);
   };
+  var handleChangeFiltOption = function handleChangeFiltOption(option) {
+    setFiltOption(option);
+    option === 'driver_groups' && setShowSelectHeader(true);
+  };
   (0, _react.useEffect)(function () {
     var isTodayOrPastDate = (0, _moment.default)(selectedDate).format('YYYY-MM-DD') <= (0, _moment.default)().format('YYYY-MM-DD');
     var date = (0, _moment.default)(selectedDate).format('YYYY-MM-DD');
@@ -370,29 +389,56 @@ var DriversTimeDisplayUI = function DriversTimeDisplayUI(props) {
     onClick: function onClick() {
       return handleMenuCollapse(false);
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement(_styles2.HeaderWrapper, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, t('DRIVERS_TIME_DISPLAY', 'Drivers time display')), /*#__PURE__*/_react.default.createElement(_styles2.DriverGroupSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.DriverGroupName, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.List, null)), /*#__PURE__*/_react.default.createElement(_styles2.HeaderWrapper, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, t('DRIVERS_TIME_DISPLAY', 'Drivers time display')), /*#__PURE__*/_react.default.createElement(_styles2.DriverGroupSelectorWrapper, null, /*#__PURE__*/_react.default.createElement("span", {
+    className: "calendar"
+  }, t('CALENDAR', 'Calendar')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null), !filtOption ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.DriverGroupName, {
+    className: "calendar",
     onClick: function onClick() {
-      return setShowSelectHeader(!showSelectHeader);
+      return handleChangeFiltOption('driver_groups');
     }
-  }, t('SELECT_DRIVER_GROUP', 'Select a driver group')), showSelectHeader && /*#__PURE__*/_react.default.createElement(_DriverGroupSelectorHeader.DriverGroupSelectHeader, {
+  }, t('SELECT_DRIVER_GROUPS', 'Select driver groups')), /*#__PURE__*/_react.default.createElement("span", null, " ", t('OR', 'Or'), " "), /*#__PURE__*/_react.default.createElement(_styles2.DriverGroupName, {
+    className: "calendar",
+    onClick: function onClick() {
+      return handleChangeFiltOption('drivers');
+    }
+  }, t('SELECT_DRIVERS', 'Select drivers'))) : /*#__PURE__*/_react.default.createElement(_styles2.FiltContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.DriverGroupName, {
+    className: "calendar",
+    onClick: function onClick() {
+      return filtOption === 'driver_groups' ? setShowSelectHeader(!showSelectHeader) : {};
+    }
+  }, filtOption === 'driver_groups' ? t('DRIVER_GROUPS', 'driver groups') : t('DRIVERS', 'drivers')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    circle: true,
+    outline: true,
+    color: "primary",
+    type: "reset",
+    className: "remove_option",
+    onClick: function onClick() {
+      return handleCloseFiltOption();
+    }
+  }, /*#__PURE__*/_react.default.createElement(_MdClose.default, null))), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null), (selectedGroup || filtOption === 'drivers') && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, selectedGroup && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("span", null, selectedGroup === null || selectedGroup === void 0 ? void 0 : selectedGroup.name), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRIVERS', 'DRIVERS')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null)), /*#__PURE__*/_react.default.createElement(_DriverMultiSelector.DriverMultiSelector, {
+    isSearchByName: true,
+    useDriversByProps: selectedGroup,
+    drivers: selectedGroup === null || selectedGroup === void 0 ? void 0 : selectedGroup.drivers,
+    disableSocketRoomDriver: true,
+    useTextStyle: true,
+    hideChevronIcon: true,
+    autoOpen: filtOption === 'drivers',
+    filterValues: filterValues,
+    handleChangeDriver: handleChangeDriver,
+    andText: t('AND', 'And'),
+    textClassnames: "calendar",
+    optionsPosition: "left"
+  })), showSelectHeader && /*#__PURE__*/_react.default.createElement(_DriverGroupSelectorHeader.DriverGroupSelectHeader, {
     close: function close() {
       return setShowSelectHeader(false);
     },
     isOpen: showSelectHeader,
     changeDriverGroupState: changeDriverGroupState
-  }), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null), /*#__PURE__*/_react.default.createElement("span", {
-    className: "calendar"
-  }, t('CALENDAR', 'Calendar')), selectedGroup && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null), /*#__PURE__*/_react.default.createElement("span", null, selectedGroup === null || selectedGroup === void 0 ? void 0 : selectedGroup.name)))), (filterValues === null || filterValues === void 0 || (_filterValues$driverI = filterValues.driverIds) === null || _filterValues$driverI === void 0 ? void 0 : _filterValues$driverI.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.WarningMessage, null, /*#__PURE__*/_react.default.createElement(_TiWarningOutline.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('WARNING_FILTER_APPLIED', 'Filters applied. You may miss new orders.')), /*#__PURE__*/_react.default.createElement(_styles.LinkButton, {
+  }), (filterValues === null || filterValues === void 0 || (_filterValues$driverI = filterValues.driverIds) === null || _filterValues$driverI === void 0 ? void 0 : _filterValues$driverI.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.WarningMessage, null, /*#__PURE__*/_react.default.createElement(_TiWarningOutline.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('FILTER_APPLIED', 'Filters applied')), /*#__PURE__*/_react.default.createElement(_styles.LinkButton, {
     onClick: function onClick() {
       return handleClearFilters();
     }
-  }, t('CLEAR_FILTERS', 'Clear filters'))), /*#__PURE__*/_react.default.createElement(_styles2.DriversGroupCalendarWrapper, null, selectedGroup && /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, {
-    wrapperWidth: 400
-  }, /*#__PURE__*/_react.default.createElement(_styles2.DriverMultiSelectorContainer, null, /*#__PURE__*/_react.default.createElement(_DriverMultiSelector.DriverMultiSelector, {
-    disableSocketRoomDriver: true,
-    filterValues: filterValues,
-    handleChangeDriver: handleChangeDriver
-  }))), /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, _extends({}, props, {
+  }, t('CLEAR_FILTERS', 'Clear filters'))))), /*#__PURE__*/_react.default.createElement(_styles2.DriversGroupCalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_AnalyticsCalendar.AnalyticsCalendar, _extends({}, props, {
     handleChangeDate: handleChangeDate
   })))))), /*#__PURE__*/_react.default.createElement(_UserList.DeliveryUsersListing, {
     date: date,
@@ -487,15 +533,15 @@ var DriversTimeDisplayUI = function DriversTimeDisplayUI(props) {
     closeOnBackdrop: false
   }));
 };
-var DriversTimeDisplay = function DriversTimeDisplay(props) {
+var DriversTimeDisplay = exports.DriversTimeDisplay = function DriversTimeDisplay(props) {
   var driversTimeDisplayProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: DriversTimeDisplayUI,
     paginationSettings: {
       initialPage: 1,
       pageSize: 10,
       controlType: 'pages'
-    }
+    },
+    propsToFetch: ['id', 'enabled', 'name', 'email', 'level', 'lastname', 'delivery_blocks', 'photo']
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.CalendarDriversList, driversTimeDisplayProps);
 };
-exports.DriversTimeDisplay = DriversTimeDisplay;

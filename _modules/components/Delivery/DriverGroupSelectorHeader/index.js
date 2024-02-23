@@ -11,13 +11,13 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 var _Shared = require("../../Shared");
 var _styles = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : String(i); }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
@@ -33,7 +33,7 @@ var DriverGroupsListingUI = function DriverGroupsListingUI(props) {
     pagination = props.pagination,
     searchValue = props.searchValue,
     onSearch = props.onSearch,
-    getPageBusinesses = props.getPageBusinesses,
+    getHeaderDriversGroups = props.getHeaderDriversGroups,
     isOpen = props.isOpen,
     close = props.close,
     changeDriverGroupState = props.changeDriverGroupState;
@@ -42,11 +42,11 @@ var DriverGroupsListingUI = function DriverGroupsListingUI(props) {
     t = _useLanguage2[1];
   var dropdownReference = (0, _react.useRef)();
   var handleChangePage = function handleChangePage(page) {
-    getPageBusinesses(pagination.pageSize, page);
+    getHeaderDriversGroups(page, pagination.pageSize);
   };
   var handleChangePageSize = function handleChangePageSize(pageSize) {
     var expectedPage = Math.ceil(pagination.from / pageSize);
-    getPageBusinesses(pageSize, expectedPage);
+    getHeaderDriversGroups(expectedPage, pageSize);
   };
   var closeSelect = function closeSelect(e) {
     if (isOpen) {
@@ -96,36 +96,36 @@ var DriverGroupsListingUI = function DriverGroupsListingUI(props) {
         marginTop: '7px'
       }
     })));
-  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, driversGroupsState.groups.map(function (driver_group) {
-    var _driver_group$drivers;
+  }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, driversGroupsState.groups.map(function (driverGroup) {
+    var _driverGroup$drivers;
     return /*#__PURE__*/_react.default.createElement(_styles.OptionItem, {
-      key: driver_group.id,
+      key: driverGroup.id,
       onClick: function onClick() {
-        return changeDriverGroupState(driver_group);
+        return changeDriverGroupState(driverGroup);
       }
-    }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("b", null, driver_group === null || driver_group === void 0 ? void 0 : driver_group.name), /*#__PURE__*/_react.default.createElement("p", null, t('DRIVERS', 'Drivers:'), " ", driver_group === null || driver_group === void 0 || (_driver_group$drivers = driver_group.drivers) === null || _driver_group$drivers === void 0 ? void 0 : _driver_group$drivers.length)));
-  }))), pagination && (pagination === null || pagination === void 0 ? void 0 : pagination.total) > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperPagination, {
+    }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("b", null, driverGroup === null || driverGroup === void 0 ? void 0 : driverGroup.name), /*#__PURE__*/_react.default.createElement("p", null, t('DRIVERS', 'Drivers:'), " ", driverGroup === null || driverGroup === void 0 || (_driverGroup$drivers = driverGroup.drivers) === null || _driverGroup$drivers === void 0 ? void 0 : _driverGroup$drivers.length)));
+  }))), pagination && (pagination === null || pagination === void 0 ? void 0 : pagination.totalPages) > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperPagination, {
     className: "pagination-container"
-  }, (pagination === null || pagination === void 0 ? void 0 : pagination.total) && /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
+  }, /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
     currentPage: pagination.currentPage,
-    totalPages: Math.ceil((pagination === null || pagination === void 0 ? void 0 : pagination.total) / pagination.pageSize),
+    totalPages: pagination === null || pagination === void 0 ? void 0 : pagination.totalPages,
     handleChangePage: handleChangePage,
     defaultPageSize: pagination.pageSize,
     handleChangePageSize: handleChangePageSize,
     isHidePagecontrol: true
   }))));
 };
-var DriverGroupSelectHeader = function DriverGroupSelectHeader(props) {
+var DriverGroupSelectHeader = exports.DriverGroupSelectHeader = function DriverGroupSelectHeader(props) {
   var driverGroupsListingProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: DriverGroupsListingUI,
     asDashboard: true,
     isHeaderComponent: true,
     paginationSettings: {
       initialPage: 1,
-      pageSize: 6,
+      pageSize: 5,
       controlType: 'pages'
-    }
+    },
+    propsToFetch: ['id', 'enabled', 'drivers', 'name']
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DriversGroupsList, driverGroupsListingProps);
 };
-exports.DriverGroupSelectHeader = DriverGroupSelectHeader;

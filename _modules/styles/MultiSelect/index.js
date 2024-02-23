@@ -14,8 +14,8 @@ var _Shared = require("../../components/Shared");
 var _Selects = require("../Selects");
 var _styles = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
@@ -26,7 +26,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-var MultiSelect = function MultiSelect(props) {
+var MultiSelect = exports.MultiSelect = function MultiSelect(props) {
   var placeholder = props.placeholder,
     options = props.options,
     onChange = props.onChange,
@@ -37,7 +37,17 @@ var MultiSelect = function MultiSelect(props) {
     searchBarPlaceholder = props.searchBarPlaceholder,
     searchBarIsCustomLayout = props.searchBarIsCustomLayout,
     searchValue = props.searchValue,
-    handleChangeSearch = props.handleChangeSearch;
+    handleChangeSearch = props.handleChangeSearch,
+    useTextStyle = props.useTextStyle,
+    textClassnames = props.textClassnames,
+    hideChevronIcon = props.hideChevronIcon,
+    andText = props.andText,
+    pagination = props.pagination,
+    handleChangePage = props.handleChangePage,
+    handleChangePageSize = props.handleChangePageSize,
+    useLazyPagination = props.useLazyPagination,
+    isLoading = props.isLoading,
+    optionsPosition = props.optionsPosition;
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     open = _useState2[0],
@@ -57,7 +67,7 @@ var MultiSelect = function MultiSelect(props) {
     setOpen(!open);
   };
   var closeSelect = function closeSelect(e) {
-    if (open) {
+    if (open && !isLoading) {
       var _dropdownReference$cu;
       var outsideDropdown = !((_dropdownReference$cu = dropdownReference.current) !== null && _dropdownReference$cu !== void 0 && _dropdownReference$cu.contains(e.target));
       if (outsideDropdown) {
@@ -70,7 +80,9 @@ var MultiSelect = function MultiSelect(props) {
     var _defaultOption = options === null || options === void 0 ? void 0 : options.filter(function (option) {
       return defaultValue.includes(option.value);
     });
-    setSelectedOptions(_defaultOption);
+    if (!(useLazyPagination && pagination)) {
+      setSelectedOptions(_defaultOption);
+    }
     setValues(defaultValue);
   }, [defaultValue, options, searchValue]);
   (0, _react.useEffect)(function () {
@@ -83,6 +95,10 @@ var MultiSelect = function MultiSelect(props) {
       return document.removeEventListener('click', closeSelect);
     };
   }, [open]);
+  var handlerChangePage = function handlerChangePage(page) {
+    setOpen(true);
+    handleChangePage(page);
+  };
   var handleSelectOption = function handleSelectOption(option) {
     if (option.value === null || option.value === 'default') return;
     var _selectedOptions = _toConsumableArray(selectedOptions);
@@ -103,20 +119,43 @@ var MultiSelect = function MultiSelect(props) {
     setValues(_values);
     onChange && onChange(option.value);
   };
+  var optionsTextFormatted = function optionsTextFormatted(selectedOption, index) {
+    if (index <= 2) {
+      return "".concat(selectedOption.showOnSelected || selectedOption.content).concat(index + 1 !== (selectedOptions === null || selectedOptions === void 0 ? void 0 : selectedOptions.length) && index <= 2 ? ', ' : ' ');
+    }
+    if (index + 1 === (selectedOptions === null || selectedOptions === void 0 ? void 0 : selectedOptions.length) && (selectedOptions === null || selectedOptions === void 0 ? void 0 : selectedOptions.length) >= 4) {
+      return "".concat(andText || 'And', " ").concat(index - 2, " +");
+    }
+    return null;
+  };
+  var filterFunction = function filterFunction(_, index) {
+    if (!pagination || useLazyPagination) return true;
+    var validation = (pagination === null || pagination === void 0 ? void 0 : pagination.currentPage) === 1 ? index < pagination.pageSize * pagination.currentPage : index >= pagination.pageSize * (pagination.currentPage - 1) && index < pagination.pageSize * pagination.currentPage;
+    return validation;
+  };
   return /*#__PURE__*/_react.default.createElement(_Selects.Select, {
+    useTextStyle: useTextStyle,
     className: className || 'multi-select'
   }, selectedOptions.length === 0 ? /*#__PURE__*/_react.default.createElement(_Selects.Selected, {
+    useTextStyle: useTextStyle,
     onClick: function onClick(e) {
       return handleSelectClick(e);
     }
-  }, placeholder || '', /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, /*#__PURE__*/_react.default.createElement(_EnChevronDown.default, null))) : /*#__PURE__*/_react.default.createElement(_Selects.Selected, {
+  }, useTextStyle ? /*#__PURE__*/_react.default.createElement(_Selects.Header, null, /*#__PURE__*/_react.default.createElement(_styles.TextFormatted, {
+    className: textClassnames
+  }, placeholder || '')) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, placeholder || ''), !hideChevronIcon && /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, /*#__PURE__*/_react.default.createElement(_EnChevronDown.default, null))) : /*#__PURE__*/_react.default.createElement(_Selects.Selected, {
     onClick: function onClick(e) {
       return handleSelectClick(e);
     }
-  }, /*#__PURE__*/_react.default.createElement(_Selects.Header, null, selectedOptions.map(function (selectedOption) {
+  }, /*#__PURE__*/_react.default.createElement(_Selects.Header, {
+    useTextStyle: useTextStyle
+  }, selectedOptions.map(function (selectedOption, index) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: selectedOption.value
-    }, /*#__PURE__*/_react.default.createElement(_Selects.MultiSelectOption, null, selectedOption.showOnSelected || selectedOption.content, (selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.value) !== 'default' && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
+    }, useTextStyle ? /*#__PURE__*/_react.default.createElement(_styles.TextFormatted, {
+      className: textClassnames,
+      primary: true
+    }, optionsTextFormatted(selectedOption, index)) : /*#__PURE__*/_react.default.createElement(_Selects.MultiSelectOption, null, selectedOption.showOnSelected || selectedOption.content, (selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.value) !== 'default' && /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
       circle: true,
       outline: true,
       color: "primary",
@@ -126,10 +165,11 @@ var MultiSelect = function MultiSelect(props) {
         return onChange && onChange(selectedOption.value);
       }
     }, /*#__PURE__*/_react.default.createElement(_MdClose.default, null))));
-  })), /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, /*#__PURE__*/_react.default.createElement(_EnChevronDown.default, null))), open && options && /*#__PURE__*/_react.default.createElement(_Selects.Options, {
+  })), !hideChevronIcon && /*#__PURE__*/_react.default.createElement(_Selects.Chevron, null, /*#__PURE__*/_react.default.createElement(_EnChevronDown.default, null))), open && options && /*#__PURE__*/_react.default.createElement(_Selects.Options, {
     isAbsolute: true,
-    position: "right",
-    ref: dropdownReference
+    position: optionsPosition !== null && optionsPosition !== void 0 ? optionsPosition : 'right',
+    ref: dropdownReference,
+    minWidth: "330px"
   }, isShowSearchBar && /*#__PURE__*/_react.default.createElement(_Selects.SearchBarWrapper, {
     className: "search-bar-container"
   }, /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
@@ -141,7 +181,7 @@ var MultiSelect = function MultiSelect(props) {
   })), /*#__PURE__*/_react.default.createElement(_Selects.OptionsInner, {
     optionInnerMargin: props.optionInnerMargin,
     optionInnerMaxHeight: props.optionInnerMaxHeight
-  }, options.map(function (option, i) {
+  }, options.filter(filterFunction).map(function (option, i) {
     return /*#__PURE__*/_react.default.createElement(_Selects.MultiOption, {
       key: i,
       color: option.color,
@@ -150,6 +190,11 @@ var MultiSelect = function MultiSelect(props) {
       },
       optionBottomBorder: props.optionBottomBorder
     }, option.value !== 'default' && /*#__PURE__*/_react.default.createElement(_styles.CheckBox, null, values.includes(option.value) ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CheckSquareFill, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Square, null)), option.content);
+  })), pagination && handleChangePageSize && handleChangePage && /*#__PURE__*/_react.default.createElement(_styles.PaginationWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
+    currentPage: pagination === null || pagination === void 0 ? void 0 : pagination.currentPage,
+    totalPages: pagination === null || pagination === void 0 ? void 0 : pagination.totalPages,
+    handleChangePage: handlerChangePage,
+    handleChangePageSize: handleChangePageSize,
+    defaultPageSize: pagination === null || pagination === void 0 ? void 0 : pagination.pageSize
   }))));
 };
-exports.MultiSelect = MultiSelect;

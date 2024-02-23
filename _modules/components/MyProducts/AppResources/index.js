@@ -17,7 +17,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-var AppResources = function AppResources(props) {
+var AppResources = exports.AppResources = function AppResources(props) {
   var _advancedValues$andro, _advancedValues$andro2, _advancedValues$andro3, _advancedValues$andro4, _advancedValues$andro5, _advancedValues$andro6, _advancedValues$andro7, _advancedValues$andro8, _advancedValues$ios, _advancedValues$ios2, _advancedValues$ios3, _advancedValues$ios4, _advancedValues$ios5, _advancedValues$ios6;
   var handleUpdateSiteTheme = props.handleUpdateSiteTheme,
     advancedValues = props.advancedValues,
@@ -129,4 +129,3 @@ var AppResources = function AppResources(props) {
     }
   }, t('SAVE', 'Save'))));
 };
-exports.AppResources = AppResources;
