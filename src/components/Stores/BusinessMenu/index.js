@@ -204,7 +204,7 @@ const BusinessMenuUI = (props) => {
             <BusinessMenuOptions
               open={showOption === 'option'}
               business={business}
-              menu={currentMenu}
+              menu={currentMenu || {}}
               onClose={() => handleCloseOption()}
               handleUpdateBusinessState={handleSuccessBusinessMenu}
               isSelectedSharedMenus={isSelectedSharedMenus}
@@ -226,7 +226,7 @@ const BusinessMenuUI = (props) => {
               <BusinessMenuOptions
                 open={showOption === 'option'}
                 business={business}
-                menu={currentMenu}
+                menu={currentMenu || {}}
                 onClose={() => handleCloseOption()}
                 handleUpdateBusinessState={handleSuccessBusinessMenu}
                 isSelectedSharedMenus={isSelectedSharedMenus}
