@@ -35,7 +35,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var BusinessMenuOptionsUI = function BusinessMenuOptionsUI(props) {
-  var _sitesState$sites;
+  var _Object$keys2, _Object$keys3, _sitesState$sites, _Object$keys4, _Object$keys5;
   var open = props.open,
     onClose = props.onClose,
     menu = props.menu,
@@ -105,7 +105,8 @@ var BusinessMenuOptionsUI = function BusinessMenuOptionsUI(props) {
     actionSidebar(true);
   }, [open]);
   (0, _react.useEffect)(function () {
-    if (Object.keys(menu).length === 0) {
+    var _Object$keys;
+    if (((_Object$keys = Object.keys(menu)) === null || _Object$keys === void 0 ? void 0 : _Object$keys.length) === 0) {
       setSelectedMenuOption('basic');
     }
   }, [menu]);
@@ -127,7 +128,7 @@ var BusinessMenuOptionsUI = function BusinessMenuOptionsUI(props) {
   }, [isSelectedSharedMenus]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, {
     id: "menu_options"
-  }, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('MENU_SETTINGS', 'Menu settings')), /*#__PURE__*/_react.default.createElement(_styles2.ActionBlock, null, Object.keys(menu).length > 0 && /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('MENU_SETTINGS', 'Menu settings')), /*#__PURE__*/_react.default.createElement(_styles2.ActionBlock, null, ((_Object$keys2 = Object.keys(menu)) === null || _Object$keys2 === void 0 ? void 0 : _Object$keys2.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
     className: "product_actions",
     menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
     title: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDots, null),
@@ -145,7 +146,7 @@ var BusinessMenuOptionsUI = function BusinessMenuOptionsUI(props) {
     onClick: function onClick() {
       return onClose();
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)))), Object.keys(menu).length > 0 && !isSelectedSharedMenus && /*#__PURE__*/_react.default.createElement(_styles2.TabContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.TabInnerContainer, null, /*#__PURE__*/_react.default.createElement(_Shared.AutoScroll, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)))), ((_Object$keys3 = Object.keys(menu)) === null || _Object$keys3 === void 0 ? void 0 : _Object$keys3.length) > 0 && !isSelectedSharedMenus && /*#__PURE__*/_react.default.createElement(_styles2.TabContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.TabInnerContainer, null, /*#__PURE__*/_react.default.createElement(_Shared.AutoScroll, {
     innerScroll: true,
     scrollId: "menu_options"
   }, /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
@@ -158,12 +159,12 @@ var BusinessMenuOptionsUI = function BusinessMenuOptionsUI(props) {
     onClick: function onClick() {
       return handleTabClick('channels');
     }
-  }, t('CHANNELS', 'Channels')), Object.keys(menu).length > 0 && /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
+  }, t('CHANNELS', 'Channels')), ((_Object$keys4 = Object.keys(menu)) === null || _Object$keys4 === void 0 ? void 0 : _Object$keys4.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
     active: selectedMenuOption === 'share_with',
     onClick: function onClick() {
       return handleTabClick('share_with');
     }
-  }, t('SHARE_WITH', 'Share with'))))), !isSelectedSharedMenus || Object.keys(menu).length === 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, selectedMenuOption === 'basic' && /*#__PURE__*/_react.default.createElement(_BusinessMenuBasicOptions.BusinessMenuBasicOptions, props), selectedMenuOption === 'channels' && /*#__PURE__*/_react.default.createElement(_BusinessMenuChannels.BusinessMenuChannels, props), selectedMenuOption === 'share_with' && /*#__PURE__*/_react.default.createElement(_BusinessMenuShare.BusinessMenuShare, {
+  }, t('SHARE_WITH', 'Share with'))))), !isSelectedSharedMenus || ((_Object$keys5 = Object.keys(menu)) === null || _Object$keys5 === void 0 ? void 0 : _Object$keys5.length) === 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, selectedMenuOption === 'basic' && /*#__PURE__*/_react.default.createElement(_BusinessMenuBasicOptions.BusinessMenuBasicOptions, props), selectedMenuOption === 'channels' && /*#__PURE__*/_react.default.createElement(_BusinessMenuChannels.BusinessMenuChannels, props), selectedMenuOption === 'share_with' && /*#__PURE__*/_react.default.createElement(_BusinessMenuShare.BusinessMenuShare, {
     menu: menu,
     business: business,
     handleUpdateBusinessState: handleUpdateBusinessState

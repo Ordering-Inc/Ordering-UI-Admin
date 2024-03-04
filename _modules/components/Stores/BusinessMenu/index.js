@@ -204,7 +204,7 @@ var BusinessMenuUI = function BusinessMenuUI(props) {
   }, t('ADD_MENU', 'Add menu')))), width >= 1000 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, showOption === 'option' && /*#__PURE__*/_react.default.createElement(_BusinessMenuOptions.BusinessMenuOptions, {
     open: showOption === 'option',
     business: business,
-    menu: currentMenu,
+    menu: currentMenu || {},
     onClose: function onClose() {
       return handleCloseOption();
     },
@@ -223,7 +223,7 @@ var BusinessMenuUI = function BusinessMenuUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_BusinessMenuOptions.BusinessMenuOptions, {
     open: showOption === 'option',
     business: business,
-    menu: currentMenu,
+    menu: currentMenu || {},
     onClose: function onClose() {
       return handleCloseOption();
     },
