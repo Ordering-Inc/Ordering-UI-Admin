@@ -86,7 +86,7 @@ const BusinessMenuOptionsUI = (props) => {
   }, [open])
 
   useEffect(() => {
-    if (Object.keys(menu).length === 0) {
+    if (Object.keys(menu)?.length === 0) {
       setSelectedMenuOption('basic')
     }
   }, [menu])
@@ -115,7 +115,7 @@ const BusinessMenuOptionsUI = (props) => {
         <Header>
           <h1>{t('MENU_SETTINGS', 'Menu settings')}</h1>
           <ActionBlock>
-            {Object.keys(menu).length > 0 && (
+            {Object.keys(menu)?.length > 0 && (
               <ActionSelectorWrapper>
                 <DropdownButton
                   className='product_actions'
@@ -146,7 +146,7 @@ const BusinessMenuOptionsUI = (props) => {
             </IconButton>
           </ActionBlock>
         </Header>
-        {Object.keys(menu).length > 0 && !isSelectedSharedMenus && (
+        {Object.keys(menu)?.length > 0 && !isSelectedSharedMenus && (
           <TabContainer>
             <TabInnerContainer>
               <AutoScroll innerScroll scrollId='menu_options'>
@@ -164,7 +164,7 @@ const BusinessMenuOptionsUI = (props) => {
                     {t('CHANNELS', 'Channels')}
                   </Tab>
                 )}
-                {Object.keys(menu).length > 0 && (
+                {Object.keys(menu)?.length > 0 && (
                   <Tab
                     active={selectedMenuOption === 'share_with'}
                     onClick={() => handleTabClick('share_with')}
@@ -177,7 +177,7 @@ const BusinessMenuOptionsUI = (props) => {
           </TabContainer>
         )}
 
-        {(!isSelectedSharedMenus || Object.keys(menu).length === 0) ? (
+        {(!isSelectedSharedMenus || Object.keys(menu)?.length === 0) ? (
           <>
             {selectedMenuOption === 'basic' && (
               <BusinessMenuBasicOptions
