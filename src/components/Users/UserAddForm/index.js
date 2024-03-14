@@ -44,7 +44,8 @@ const UserAddFormUI = (props) => {
     handleChangeSwtich,
     defaultPhoneNumber,
     isFromCustomOrder,
-    hideUserTypeSelector
+    hideUserTypeSelector,
+    setCellphoneStartZero
   } = props
   const formMethods = useForm()
   const [, t] = useLanguage()
@@ -120,7 +121,7 @@ const UserAddFormUI = (props) => {
     setCropState({ name: null, data: null, open: false })
   }
 
-  const handleChangePhoneNumber = (number, isValid) => {
+  const handleChangePhoneNumber = (number, isValid, rawNumber) => {
     setUserPhoneNumber(number)
 
     let phoneNumberParser = null
@@ -152,6 +153,7 @@ const UserAddFormUI = (props) => {
         }
       }
     }
+    setCellphoneStartZero && setCellphoneStartZero(rawNumber?.number && rawNumber?.countryCallingCode ? rawNumber?.number : null)
     handleChangeInput(phoneNumber, true)
   }
 

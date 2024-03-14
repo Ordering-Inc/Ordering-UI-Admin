@@ -65,7 +65,8 @@ const LoginFormUI = (props) => {
     setOtpState,
     useLoginByEmail,
     handleChangeCredentials,
-    credentials
+    credentials,
+    setCellphoneStartZero
   } = props
   const [, t] = useLanguage()
   const [ordering] = useApi()
@@ -126,7 +127,7 @@ const LoginFormUI = (props) => {
     }
   }
 
-  const handleChangePhoneNumber = (number, isValid) => {
+  const handleChangePhoneNumber = (number, isValid, rawNumber) => {
     let phoneNumberParser = null
     let values = { country_phone_code: '', cellphone: '' }
 
@@ -139,6 +140,7 @@ const LoginFormUI = (props) => {
         cellphone: phoneNumberParser.nationalNumber
       }
     }
+    setCellphoneStartZero && setCellphoneStartZero(rawNumber?.number && rawNumber?.countryCallingCode ? rawNumber?.number : null)
     handleChangeCredentials(values)
   }
 
