@@ -44,7 +44,8 @@ const ProfessionalAddFormUI = (props) => {
     handleChangeSwtich,
     onClose,
     isService,
-    occupations
+    occupations,
+    setCellphoneStartZero
   } = props
   const formMethods = useForm()
   const [, t] = useLanguage()
@@ -105,7 +106,7 @@ const ProfessionalAddFormUI = (props) => {
     }
   }
 
-  const handleChangePhoneNumber = (number, isValid) => {
+  const handleChangePhoneNumber = (number, isValid, rawNumber) => {
     setUserPhoneNumber(number)
 
     let phoneNumberParser = null
@@ -134,6 +135,7 @@ const ProfessionalAddFormUI = (props) => {
         }
       }
     }
+    setCellphoneStartZero && setCellphoneStartZero(rawNumber?.number && rawNumber?.countryCallingCode ? rawNumber?.number : null)
     handleChangeInput(phoneNumber, true)
   }
 
