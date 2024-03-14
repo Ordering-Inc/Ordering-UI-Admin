@@ -50,7 +50,8 @@ var ProfessionalAddFormUI = function ProfessionalAddFormUI(props) {
     handleChangeSwtich = props.handleChangeSwtich,
     onClose = props.onClose,
     isService = props.isService,
-    occupations = props.occupations;
+    occupations = props.occupations,
+    setCellphoneStartZero = props.setCellphoneStartZero;
   var formMethods = (0, _reactHookForm.useForm)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -121,7 +122,7 @@ var ProfessionalAddFormUI = function ProfessionalAddFormUI(props) {
       handlechangeImage(files[0]);
     }
   };
-  var handleChangePhoneNumber = function handleChangePhoneNumber(number, isValid) {
+  var handleChangePhoneNumber = function handleChangePhoneNumber(number, isValid, rawNumber) {
     setUserPhoneNumber(number);
     var phoneNumberParser = null;
     var phoneNumber = {
@@ -149,6 +150,7 @@ var ProfessionalAddFormUI = function ProfessionalAddFormUI(props) {
         }
       };
     }
+    setCellphoneStartZero && setCellphoneStartZero(rawNumber !== null && rawNumber !== void 0 && rawNumber.number && rawNumber !== null && rawNumber !== void 0 && rawNumber.countryCallingCode ? rawNumber === null || rawNumber === void 0 ? void 0 : rawNumber.number : null);
     handleChangeInput(phoneNumber, true);
   };
   var handleChangeInputEmail = function handleChangeInputEmail(e) {

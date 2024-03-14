@@ -38,14 +38,51 @@ var InputPhoneNumber = function InputPhoneNumber(props) {
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configs = _useConfig2[0].configs;
+  var phoneRef = (0, _react.useRef)(null);
+  var codesStartsWithZero = ['44'];
   var isValidPhoneNumber = function isValidPhoneNumber(number) {
-    var _configs$validation_p, _configs$validation_p2;
+    var _configs$validation_p, _configs$validation_p2, _numberParser$isPossi, _numberParser$isValid;
     if (!number) return;
     if (!parseInt((_configs$validation_p = configs === null || configs === void 0 || (_configs$validation_p2 = configs.validation_phone_number_lib) === null || _configs$validation_p2 === void 0 ? void 0 : _configs$validation_p2.value) !== null && _configs$validation_p !== void 0 ? _configs$validation_p : 1, 10)) {
       return true;
     }
     var numberParser = (0, _libphonenumberJs.default)(number);
-    return numberParser === null || numberParser === void 0 ? void 0 : numberParser.isValid();
+    var enableIspossibly = false;
+    if (codesStartsWithZero.includes(numberParser === null || numberParser === void 0 ? void 0 : numberParser.countryCallingCode)) {
+      var inputNumber = returnRawNumber(number);
+      var validationsForUK = ['01', '02', '07', '0800', '0808', '0845', '0870', '0871'];
+      var result = validationsForUK.some(function (areaCode) {
+        var _inputNumber$number;
+        return inputNumber === null || inputNumber === void 0 || (_inputNumber$number = inputNumber.number) === null || _inputNumber$number === void 0 ? void 0 : _inputNumber$number.startsWith(areaCode);
+      });
+      enableIspossibly = result;
+    }
+    return enableIspossibly ? numberParser === null || numberParser === void 0 || (_numberParser$isPossi = numberParser.isPossible) === null || _numberParser$isPossi === void 0 ? void 0 : _numberParser$isPossi.call(numberParser) : numberParser === null || numberParser === void 0 || (_numberParser$isValid = numberParser.isValid) === null || _numberParser$isValid === void 0 ? void 0 : _numberParser$isValid.call(numberParser);
+  };
+  var returnRawNumber = function returnRawNumber(number) {
+    var _configs$validation_p3, _configs$validation_p4, _phoneRef$current;
+    if (!number) return null;
+    if (!parseInt((_configs$validation_p3 = configs === null || configs === void 0 || (_configs$validation_p4 = configs.validation_phone_number_lib) === null || _configs$validation_p4 === void 0 ? void 0 : _configs$validation_p4.value) !== null && _configs$validation_p3 !== void 0 ? _configs$validation_p3 : 1, 10)) {
+      return null;
+    }
+    var numberParser = (0, _libphonenumberJs.default)(number);
+    var validations = ['0', '+'];
+    if (validations.includes(phoneRef === null || phoneRef === void 0 || (_phoneRef$current = phoneRef.current) === null || _phoneRef$current === void 0 ? void 0 : _phoneRef$current.value[0]) && codesStartsWithZero.includes(numberParser === null || numberParser === void 0 ? void 0 : numberParser.countryCallingCode)) {
+      var _phoneRef$current2, _numberInput$split;
+      var numberInput = phoneRef === null || phoneRef === void 0 || (_phoneRef$current2 = phoneRef.current) === null || _phoneRef$current2 === void 0 ? void 0 : _phoneRef$current2.value.replace('-', '');
+      var numberRaw = '';
+      numberInput === null || numberInput === void 0 || (_numberInput$split = numberInput.split(' ')) === null || _numberInput$split === void 0 || (_numberInput$split = _numberInput$split.filter(function (_splited, i) {
+        return i > 0 || i === 0 && _splited[0] === '0';
+      })) === null || _numberInput$split === void 0 || _numberInput$split.map(function (splited) {
+        numberRaw = "".concat(numberRaw).concat(splited);
+        return numberRaw;
+      });
+      return {
+        number: numberRaw,
+        countryCallingCode: numberParser !== null && numberParser !== void 0 && numberParser.countryCallingCode ? "+".concat(numberParser === null || numberParser === void 0 ? void 0 : numberParser.countryCallingCode) : null
+      };
+    }
+    return number;
   };
   (0, _react.useEffect)(function () {
     if (value) {
@@ -65,6 +102,7 @@ var InputPhoneNumber = function InputPhoneNumber(props) {
       key: i
     }, props));
   }), /*#__PURE__*/_react.default.createElement(_reactPhoneNumberInput.default, {
+    ref: phoneRef,
     disabled: disabled,
     placeholder: t('PHONE_NUMBER', 'Phone number'),
     defaultCountry: (0, _utils.findExitingCode)(configs === null || configs === void 0 || (_configs$default_coun = configs.default_country_code) === null || _configs$default_coun === void 0 || (_configs$default_coun = _configs$default_coun.value) === null || _configs$default_coun === void 0 ? void 0 : _configs$default_coun.toUpperCase()),
@@ -72,7 +110,7 @@ var InputPhoneNumber = function InputPhoneNumber(props) {
     displayInitialValueAsLocalNumber: !isUser,
     international: isUser,
     onChange: function onChange(val) {
-      return setValue && setValue(val, isValidPhoneNumber(val));
+      return setValue && setValue(val, isValidPhoneNumber(val), returnRawNumber(val));
     }
   }), value && !isValidPhoneNumber(value) && !disabled && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (auth && (user === null || user === void 0 ? void 0 : user.country_phone_code) || !auth || value.includes('+')) && /*#__PURE__*/_react.default.createElement(_styles.ErrorMsg, null, t('INVALID_ERROR_PHONE_NUMBER', 'The Phone Number field is invalid')), auth && !(user !== null && user !== void 0 && user.country_phone_code) && !value.includes('+') && /*#__PURE__*/_react.default.createElement(_styles.ErrorMsg, null, t('INVALID_ERROR_COUNTRY_CODE_PHONE_NUMBER', 'The country code of the phone number is invalid'))), (_props$afterComponent = props.afterComponents) === null || _props$afterComponent === void 0 ? void 0 : _props$afterComponent.map(function (AfterComponent, i) {
     return /*#__PURE__*/_react.default.createElement(AfterComponent, _extends({
