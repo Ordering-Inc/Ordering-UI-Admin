@@ -64,7 +64,8 @@ var LoginFormUI = function LoginFormUI(props) {
     setOtpState = props.setOtpState,
     useLoginByEmail = props.useLoginByEmail,
     handleChangeCredentials = props.handleChangeCredentials,
-    credentials = props.credentials;
+    credentials = props.credentials,
+    setCellphoneStartZero = props.setCellphoneStartZero;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -160,7 +161,7 @@ var LoginFormUI = function LoginFormUI(props) {
       }
     }
   };
-  var handleChangePhoneNumber = function handleChangePhoneNumber(number, isValid) {
+  var handleChangePhoneNumber = function handleChangePhoneNumber(number, isValid, rawNumber) {
     var phoneNumberParser = null;
     var values = {
       country_phone_code: '',
@@ -175,6 +176,7 @@ var LoginFormUI = function LoginFormUI(props) {
         cellphone: phoneNumberParser.nationalNumber
       };
     }
+    setCellphoneStartZero && setCellphoneStartZero(rawNumber !== null && rawNumber !== void 0 && rawNumber.number && rawNumber !== null && rawNumber !== void 0 && rawNumber.countryCallingCode ? rawNumber === null || rawNumber === void 0 ? void 0 : rawNumber.number : null);
     handleChangeCredentials(values);
   };
   (0, _react.useEffect)(function () {
