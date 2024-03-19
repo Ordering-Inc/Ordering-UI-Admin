@@ -31,7 +31,8 @@ export const UserFormDetailsUI = (props) => {
     userData,
     isCustomerMode,
     isDriversPage,
-    handleChangeSwtich
+    handleChangeSwtich,
+    setCellphoneStartZero
   } = props
 
   const formMethods = useForm()
@@ -126,7 +127,7 @@ export const UserFormDetailsUI = (props) => {
     }
   }
 
-  const handleChangePhoneNumber = (number, isValid) => {
+  const handleChangePhoneNumber = (number, isValid, rawNumber) => {
     setUserPhoneNumber(number)
 
     let phoneNumberParser = null
@@ -155,6 +156,7 @@ export const UserFormDetailsUI = (props) => {
         }
       }
     }
+    setCellphoneStartZero && setCellphoneStartZero(rawNumber?.number && rawNumber?.countryCallingCode ? rawNumber?.number : null)
     handleChangeInput(phoneNumber, true)
   }
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import parsePhoneNumber from 'libphonenumber-js'
 import PhoneInput from 'react-phone-number-input'
 import { useLanguage, useConfig, useSession } from 'ordering-components-admin'
@@ -19,13 +19,48 @@ export const InputPhoneNumber = (props) => {
   const [{ auth }] = useSession()
   const [{ configs }] = useConfig()
 
+  const phoneRef = useRef(null)
+  const codesStartsWithZero = ['44']
+
   const isValidPhoneNumber = (number) => {
     if (!number) return
     if (!parseInt(configs?.validation_phone_number_lib?.value ?? 1, 10)) {
       return true
     }
     const numberParser = parsePhoneNumber(number)
-    return numberParser?.isValid()
+    let enableIspossibly = false
+    if (codesStartsWithZero.includes(numberParser?.countryCallingCode)) {
+      const inputNumber = returnRawNumber(number)
+      const validationsForUK = ['01', '02', '07', '0800', '0808', '0845', '0870', '0871']
+      const result = validationsForUK.some(areaCode => inputNumber?.number?.startsWith(areaCode))
+      enableIspossibly = result
+    }
+
+    return enableIspossibly ? numberParser?.isPossible?.() : numberParser?.isValid?.()
+  }
+
+  const returnRawNumber = (number) => {
+    if (!number) return null
+    if (!parseInt(configs?.validation_phone_number_lib?.value ?? 1, 10)) {
+      return null
+    }
+    const numberParser = parsePhoneNumber(number)
+    const validations = ['0', '+']
+    if (validations.includes(phoneRef?.current?.value[0]) && codesStartsWithZero.includes(numberParser?.countryCallingCode)) {
+      const numberInput = phoneRef?.current?.value.replace('-', '')
+      let numberRaw = ''
+      numberInput?.split(' ')?.filter((_splited, i) => i > 0 || (i === 0 && _splited[0] === '0'))?.map(splited => {
+        numberRaw = `${numberRaw}${splited}`
+        return numberRaw
+      })
+
+      return {
+        number: numberRaw,
+        countryCallingCode: numberParser?.countryCallingCode ? `+${numberParser?.countryCallingCode}` : null
+      }
+    }
+
+    return number
   }
 
   useEffect(() => {
@@ -44,12 +79,14 @@ export const InputPhoneNumber = (props) => {
         {props.beforeComponents?.map((BeforeComponent, i) => (
           <BeforeComponent key={i} {...props} />))}
         <PhoneInput
+          ref={phoneRef}
           disabled={disabled}
           placeholder={t('PHONE_NUMBER', 'Phone number')}
           defaultCountry={findExitingCode(configs?.default_country_code?.value?.toUpperCase())}
           value={value}
-          displayInitialValueAsLocalNumber
-          onChange={(val) => setValue && setValue(val, isValidPhoneNumber(val))}
+          displayInitialValueAsLocalNumber={!isUser}
+          international={isUser}
+          onChange={(val) => setValue && setValue(val, isValidPhoneNumber(val), returnRawNumber(val))}
         />
         {value && !isValidPhoneNumber(value) && !disabled && (
           <>
