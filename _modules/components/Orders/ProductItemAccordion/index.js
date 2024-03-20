@@ -75,10 +75,38 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
   var productActionsEdit = (0, _react.useRef)(null);
   var productActionsDelete = (0, _react.useRef)(null);
   var productInfo = function productInfo() {
+    var _product$options;
+    var options = JSON.parse(JSON.stringify(Object.values((_product$options = product.options) !== null && _product$options !== void 0 ? _product$options : {})));
+    var extraGroups = options.reduce(function (acc, option) {
+      var _option$extra$rank, _option$extra;
+      var extraRank = (_option$extra$rank = option === null || option === void 0 || (_option$extra = option.extra) === null || _option$extra === void 0 ? void 0 : _option$extra.rank) !== null && _option$extra$rank !== void 0 ? _option$extra$rank : option === null || option === void 0 ? void 0 : option.rank;
+      acc[extraRank] = acc[extraRank] || [];
+      acc[extraRank].push(option);
+      return acc;
+    }, {});
+    var sortedExtraGroups = Object.entries(extraGroups).sort(function (_ref, _ref2) {
+      var _ref3 = _slicedToArray(_ref, 1),
+        rankA = _ref3[0];
+      var _ref4 = _slicedToArray(_ref2, 1),
+        rankB = _ref4[0];
+      return rankA - rankB;
+    });
+    sortedExtraGroups.forEach(function (_ref5) {
+      var _ref6 = _slicedToArray(_ref5, 2),
+        _ = _ref6[0],
+        group = _ref6[1];
+      group.sort(function (a, b) {
+        return a.rank - b.rank;
+      });
+    });
+    options = sortedExtraGroups.flatMap(function (_ref7) {
+      var _ref8 = _slicedToArray(_ref7, 2),
+        group = _ref8[1];
+      return group;
+    });
     if (isCartProduct) {
-      var _product$ingredients, _product$options;
+      var _product$ingredients;
       var ingredients = JSON.parse(JSON.stringify(Object.values((_product$ingredients = product.ingredients) !== null && _product$ingredients !== void 0 ? _product$ingredients : {})));
-      var options = JSON.parse(JSON.stringify(Object.values((_product$options = product.options) !== null && _product$options !== void 0 ? _product$options : {})));
       options = options.map(function (option) {
         var _option$suboptions;
         option.suboptions = Object.values((_option$suboptions = option.suboptions) !== null && _option$suboptions !== void 0 ? _option$suboptions : {});
@@ -89,7 +117,9 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
         options: options
       });
     }
-    return product;
+    return _objectSpread(_objectSpread({}, product), {}, {
+      options: options
+    });
   };
   var toggleAccordion = function toggleAccordion(e) {
     var _productSelect$curren, _productActionsEdit$c, _productActionsDelete;
@@ -106,11 +136,11 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
       changeQuantity(product, parseInt(value));
     }
   };
-  var getFormattedSubOptionName = function getFormattedSubOptionName(_ref) {
-    var quantity = _ref.quantity,
-      name = _ref.name,
-      position = _ref.position,
-      price = _ref.price;
+  var getFormattedSubOptionName = function getFormattedSubOptionName(_ref9) {
+    var quantity = _ref9.quantity,
+      name = _ref9.name,
+      position = _ref9.position,
+      price = _ref9.price;
     if (name !== 'No') {
       var pos = position ? "(".concat(position, ")") : '';
       return price > 0 ? "".concat(name, " ").concat(pos, " ").concat(parsePrice(quantity * price, {
