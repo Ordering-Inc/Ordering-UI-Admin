@@ -439,7 +439,12 @@ const SidebarMenuUI = (props) => {
   const handleClickBilling = async () => {
     const billingState = await getBillingToken()
     if (!billingState?.error && billingState?.result?.access_token) {
-      window.open(`${billingState?.result?.referer_url ?? billingUrl}?token=${billingState?.result?.access_token}`, '_blank')
+      window.open(
+        `${billingState?.result?.referer_url
+            ? `https://${billingState?.result?.referer_url}`
+            : billingUrl}?token=${billingState?.result?.access_token}`,
+        '_blank'
+      )
     }
   }
 
