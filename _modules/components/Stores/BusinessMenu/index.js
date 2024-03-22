@@ -42,7 +42,8 @@ var BusinessMenuUI = function BusinessMenuUI(props) {
     handleSuccessBusinessMenu = props.handleSuccessBusinessMenu,
     isSelectedSharedMenus = props.isSelectedSharedMenus,
     setIsSelectedSharedMenus = props.setIsSelectedSharedMenus,
-    sitesState = props.sitesState;
+    sitesState = props.sitesState,
+    setBusinessMenusState = props.setBusinessMenusState;
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -212,7 +213,9 @@ var BusinessMenuUI = function BusinessMenuUI(props) {
     isSelectedSharedMenus: isSelectedSharedMenus,
     isOpenSharedProduct: isOpenSharedProduct,
     setIsOpenSharedProduct: setIsOpenSharedProduct,
-    sitesState: sitesState
+    sitesState: sitesState,
+    menuList: businessMenusState,
+    setMenuList: setBusinessMenusState
   })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, showOption === 'option' && /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "80%",
     open: showOption === 'option',
@@ -230,7 +233,9 @@ var BusinessMenuUI = function BusinessMenuUI(props) {
     handleUpdateBusinessState: handleSuccessBusinessMenu,
     isSelectedSharedMenus: isSelectedSharedMenus,
     setIsOpenSharedProduct: setIsOpenSharedProduct,
-    sitesState: sitesState
+    sitesState: sitesState,
+    menuList: businessMenusState,
+    setMenuList: setBusinessMenusState
   }))), /*#__PURE__*/_react.default.createElement(_Shared.Confirm, {
     title: t('WEB_APPNAME', 'Ordering'),
     width: "700px",
