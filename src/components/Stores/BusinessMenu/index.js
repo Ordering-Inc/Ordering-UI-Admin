@@ -32,7 +32,8 @@ const BusinessMenuUI = (props) => {
     handleSuccessBusinessMenu,
     isSelectedSharedMenus,
     setIsSelectedSharedMenus,
-    sitesState
+    sitesState,
+    setBusinessMenusState
   } = props
 
   const query = new URLSearchParams(useLocation().search)
@@ -211,6 +212,8 @@ const BusinessMenuUI = (props) => {
               isOpenSharedProduct={isOpenSharedProduct}
               setIsOpenSharedProduct={setIsOpenSharedProduct}
               sitesState={sitesState}
+              menuList={businessMenusState}
+              setMenuList={setBusinessMenusState}
             />
           )}
         </>
@@ -232,6 +235,8 @@ const BusinessMenuUI = (props) => {
                 isSelectedSharedMenus={isSelectedSharedMenus}
                 setIsOpenSharedProduct={setIsOpenSharedProduct}
                 sitesState={sitesState}
+                menuList={businessMenusState}
+                setMenuList={setBusinessMenusState}
               />
             </Modal>
           )}
