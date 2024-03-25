@@ -180,7 +180,7 @@ const BusinessMenuUI = (props) => {
               className='business_checkbox_control'
             >
               <Checkbox
-                defaultChecked={menu?.enabled}
+                checked={menu?.enabled}
                 onChange={e => handleChangeBusinessMenuActiveState(menu?.id, e.target.checked)}
               />
             </CheckboxWrapper>
