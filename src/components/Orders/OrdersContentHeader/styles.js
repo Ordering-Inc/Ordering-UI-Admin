@@ -69,7 +69,6 @@ export const TopRightSection = styled.div`
   flex-direction: column-reverse;
   flex-wrap: nowrap;
   margin: 5px 0px 10px 15px;
-  overflow: auto;
 
   ${({ isCustomLayout }) => !isCustomLayout && css`
     justify-content: flex-end;
@@ -89,7 +88,7 @@ export const TopRightSection = styled.div`
 
 export const WrapperHeaderFilterGroup = styled.div`
   width: 100%;
-  max-width: 850px
+  max-width: 850px;
 `
 export const SLAControlsWrapper = styled.div`
   display: flex;

@@ -61,8 +61,12 @@ export const FormSide = styled(Side)`
   box-sizing: border-box;
   height: 100vh;
 
+  button {
+    padding: 9px 5px;
+  }
+
   @media (min-width: 769px) {
-    height: auto;     
+    height: auto;
   }
 
   @media (min-width: 992px) {
@@ -199,7 +203,7 @@ export const SocialButtons = styled.div`
 
 export const TitleFormSide = styled.div`
   color: ${props => props.theme.colors.white};
-  
+
   h1 {
     text-transform: uppercase;
     font-size: 24px;
@@ -229,7 +233,7 @@ export const TitleFormSide = styled.div`
       font-size: 24px;
       margin-bottom: 80px;
     }
-  }  
+  }
 `
 export const InputWithIcon = styled.div`
   position: relative;
@@ -320,7 +324,7 @@ export const ReCAPTCHAWrapper = styled.div`
 `
 
 export const Tabs = styled.div`
-  display: flex;  
+  display: flex;
 `
 
 export const Tab = styled.div`
@@ -344,7 +348,7 @@ export const CountdownTimer = styled.div`
   margin: 15px;
   display: flex;
   justify-content: center;
-  
+
   span {
     font-size: 30px;
     font-weight: 700;
@@ -357,7 +361,7 @@ export const OtpWrapper = styled.div`
     display: flex;
     justify-content: space-evenly;
     margin: 20px;
-    
+
     .otp-input{
       width: 50px !important;
       height: 45px;
@@ -366,7 +370,7 @@ export const OtpWrapper = styled.div`
       outline: none;
       border: none;
       font-size: 20px;
-      font-weight: bold; 
+      font-weight: bold;
 
       &:focus{
         border-color: ${() => darken(0.07, '#CCC')} !important;

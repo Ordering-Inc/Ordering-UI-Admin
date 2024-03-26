@@ -482,6 +482,20 @@ const LoginFormUI = (props) => {
           )}
         </FormInput>
 
+        <RedirectLink>
+          <span className='or'>{t('OR', 'or')}</span>
+        </RedirectLink>
+
+        <Button
+          borderRadius='8px'
+          color='primary'
+          outline
+          bgtransparent
+          onClick={() => window.location.assign(t('SIGN_UP_FOR_FREE_URL', 'https://admin.orderingplus.com/'))}
+        >
+          {t('SIGN_UP_FOR_FREE', 'Sign up for free')}
+        </Button>
+
         {elementLinkToSignup && (
           <RedirectLink register isPopup={isPopup}>
             <span>{t('NEW_ON_PLATFORM', 'New on Ordering?')}</span>
