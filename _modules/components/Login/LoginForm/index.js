@@ -431,7 +431,7 @@ var LoginFormUI = function LoginFormUI(props) {
     outline: true,
     bgtransparent: true,
     onClick: function onClick() {
-      return window.location.href = 'https://start-free.tryordering.com/';
+      return window.location.assign(t('SIGN_UP_FOR_FREE_URL', 'https://admin.orderingplus.com/'));
     }
   }, t('SIGN_UP_FOR_FREE', 'Sign up for free')), elementLinkToSignup && /*#__PURE__*/_react.default.createElement(_styles2.RedirectLink, {
     register: true,
