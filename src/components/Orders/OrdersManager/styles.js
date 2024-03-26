@@ -43,22 +43,14 @@ export const WrapItemView = styled.div`
 export const OrderSubFilterControls = styled.div`
   flex-wrap: wrap;
   display: flex;
+  justify-content: space-between;
   width: 100%;
   flex-direction: row;
   justify-content: space-between;
 `
 export const OrderStatusSubFilterWrapper = styled.div`
-  flex: 1;
+  width: 50%;
   display: inline-block;
-
-  ${props => props.theme?.rtl ? css`
-    margin-left: 15px;
-  ` : css`
-    margin-right: 20px;
-  `}
-  ${({ isColumn }) => isColumn ? css`
-    width: 100%;
-  ` : css`
-    width: 50%;
-  `}
+  flex: 1;
+  margin-right: 20px;
 `

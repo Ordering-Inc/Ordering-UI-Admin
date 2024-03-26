@@ -491,7 +491,7 @@ const LoginFormUI = (props) => {
           color='primary'
           outline
           bgtransparent
-          onClick={() => window.location.href = 'https://start-free.tryordering.com/'}
+          onClick={() => window.location.assign(t('SIGN_UP_FOR_FREE_URL', 'https://admin.orderingplus.com/'))}
         >
           {t('SIGN_UP_FOR_FREE', 'Sign up for free')}
         </Button>
