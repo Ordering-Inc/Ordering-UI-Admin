@@ -33,7 +33,7 @@ var LoginHeroContainer = function LoginHeroContainer(props) {
   }), props.children);
 };
 exports.LoginHeroContainer = LoginHeroContainer;
-var FormSide = (0, _styledComponents.default)(Side)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  flex-direction: column;\n  justify-content: center;\n  background-color: #1C202E;\n  padding: 30px 8%;\n  box-sizing: border-box;\n  height: 100vh;\n\n  @media (min-width: 769px) {\n    height: auto;     \n  }\n\n  @media (min-width: 992px) {\n    margin-left: -80px;\n    border-radius: 54px 0px 0px 54px;\n    width: calc(50% + 80px);\n  }\n"])));
+var FormSide = (0, _styledComponents.default)(Side)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  flex-direction: column;\n  justify-content: center;\n  background-color: #1C202E;\n  padding: 30px 8%;\n  box-sizing: border-box;\n  height: 100vh;\n\n  button {\n    padding: 9px 5px;\n  }\n\n  @media (min-width: 769px) {\n    height: auto;\n  }\n\n  @media (min-width: 992px) {\n    margin-left: -80px;\n    border-radius: 54px 0px 0px 54px;\n    width: calc(50% + 80px);\n  }\n"])));
 exports.FormSide = FormSide;
 var LoginWith = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  font-size: 14px;\n\n  @media (min-width: 425px) {\n    font-size: 18px;\n  }\n\n  @media (min-width: 768px) {\n    font-size: 14px;\n  }\n\n  @media (min-width: 992px) {\n    font-size: 18px;\n  }\n"])));
 exports.LoginWith = LoginWith;
@@ -63,7 +63,7 @@ var RedirectLink = _styledComponents.default.div(_templateObject8 || (_templateO
 exports.RedirectLink = RedirectLink;
 var SocialButtons = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n   width: calc(100% - 40px);\n   margin-top: 5px;\n\n  button {\n    display: flex;\n    justify-content: start;\n    width: 100%;\n    padding: 5px 30px;\n    color: #000000;\n\n    img {\n      width: 30px;\n    }\n\n    div {\n      font-size: 0.8em;\n    }\n  }\n"])));
 exports.SocialButtons = SocialButtons;
-var TitleFormSide = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  color: ", ";\n  \n  h1 {\n    text-transform: uppercase;\n    font-size: 24px;\n    margin: 0px;\n  }\n\n  p {\n    font-size: 16px;\n    margin-top: 0px;\n    margin-bottom: 60px;\n  }\n\n  @media (min-width: 425px) {\n    h1 {\n      font-size: 40px;\n    }\n    p {\n      font-size: 20px;\n    }\n  }\n\n  @media (min-width: 769px) {\n    h1 {\n      font-size: 50px;\n    }\n    p {\n      font-size: 24px;\n      margin-bottom: 80px;\n    }\n  }  \n"])), function (props) {
+var TitleFormSide = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  color: ", ";\n\n  h1 {\n    text-transform: uppercase;\n    font-size: 24px;\n    margin: 0px;\n  }\n\n  p {\n    font-size: 16px;\n    margin-top: 0px;\n    margin-bottom: 60px;\n  }\n\n  @media (min-width: 425px) {\n    h1 {\n      font-size: 40px;\n    }\n    p {\n      font-size: 20px;\n    }\n  }\n\n  @media (min-width: 769px) {\n    h1 {\n      font-size: 50px;\n    }\n    p {\n      font-size: 24px;\n      margin-bottom: 80px;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.white;
 });
 exports.TitleFormSide = TitleFormSide;
@@ -82,7 +82,7 @@ var TogglePassword = _styledComponents.default.span(_templateObject17 || (_templ
 exports.TogglePassword = TogglePassword;
 var ReCAPTCHAWrapper = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: center;\n\n  * {\n    padding: 0;\n  }\n"])));
 exports.ReCAPTCHAWrapper = ReCAPTCHAWrapper;
-var Tabs = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  display: flex;  \n"])));
+var Tabs = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  display: flex;\n"])));
 exports.Tabs = Tabs;
 var Tab = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  padding: 10px 0;\n  cursor: pointer;\n  ", "\n  ", "\n\n  ", "\n"])), function (props) {
   var _props$theme3;
@@ -99,11 +99,11 @@ var Tab = _styledComponents.default.div(_templateObject22 || (_templateObject22 
   });
 });
 exports.Tab = Tab;
-var CountdownTimer = _styledComponents.default.div(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  margin: 15px;\n  display: flex;\n  justify-content: center;\n  \n  span {\n    font-size: 30px;\n    font-weight: 700;\n    color: ", ";\n  }\n"])), function (props) {
+var CountdownTimer = _styledComponents.default.div(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  margin: 15px;\n  display: flex;\n  justify-content: center;\n\n  span {\n    font-size: 30px;\n    font-weight: 700;\n    color: ", ";\n  }\n"])), function (props) {
   return props.theme.colors.white;
 });
 exports.CountdownTimer = CountdownTimer;
-var OtpWrapper = _styledComponents.default.div(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  width: 100%;\n  .otp-container{\n    display: flex;\n    justify-content: space-evenly;\n    margin: 20px;\n    \n    .otp-input{\n      width: 50px !important;\n      height: 45px;\n      border-radius: 8px;\n      background-color: ", ";\n      outline: none;\n      border: none;\n      font-size: 20px;\n      font-weight: bold; \n\n      &:focus{\n        border-color: ", " !important;\n      }\n\n      &::placeholder,\n      &::-webkit-input-placeholder {\n        color: #DBDCDB;\n      }\n      &:-ms-input-placeholder {\n        color: #DBDCDB;\n      }\n    }\n  }\n"])), function (props) {
+var OtpWrapper = _styledComponents.default.div(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  width: 100%;\n  .otp-container{\n    display: flex;\n    justify-content: space-evenly;\n    margin: 20px;\n\n    .otp-input{\n      width: 50px !important;\n      height: 45px;\n      border-radius: 8px;\n      background-color: ", ";\n      outline: none;\n      border: none;\n      font-size: 20px;\n      font-weight: bold;\n\n      &:focus{\n        border-color: ", " !important;\n      }\n\n      &::placeholder,\n      &::-webkit-input-placeholder {\n        color: #DBDCDB;\n      }\n      &:-ms-input-placeholder {\n        color: #DBDCDB;\n      }\n    }\n  }\n"])), function (props) {
   return props.theme.colors.backgroundPage;
 }, function () {
   return (0, _polished.darken)(0.07, '#CCC');

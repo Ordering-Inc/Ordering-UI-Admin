@@ -423,7 +423,17 @@ var LoginFormUI = function LoginFormUI(props) {
     }
   }, t('CANCEL', 'Cancel'))), loginTab !== 'otp' && /*#__PURE__*/_react.default.createElement(_styles2.RedirectLink, {
     isPopup: isPopup
-  }, /*#__PURE__*/_react.default.createElement("span", null, t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')), elementLinkToForgotPassword)), elementLinkToSignup && /*#__PURE__*/_react.default.createElement(_styles2.RedirectLink, {
+  }, /*#__PURE__*/_react.default.createElement("span", null, t('FORGOT_YOUR_PASSWORD', 'Forgot your password?')), elementLinkToForgotPassword)), /*#__PURE__*/_react.default.createElement(_styles2.RedirectLink, null, /*#__PURE__*/_react.default.createElement("span", {
+    className: "or"
+  }, t('OR', 'or'))), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    borderRadius: "8px",
+    color: "primary",
+    outline: true,
+    bgtransparent: true,
+    onClick: function onClick() {
+      return window.location.assign(t('SIGN_UP_FOR_FREE_URL', 'https://admin.orderingplus.com/'));
+    }
+  }, t('SIGN_UP_FOR_FREE', 'Sign up for free')), elementLinkToSignup && /*#__PURE__*/_react.default.createElement(_styles2.RedirectLink, {
     register: true,
     isPopup: isPopup
   }, /*#__PURE__*/_react.default.createElement("span", null, t('NEW_ON_PLATFORM', 'New on Ordering?')), elementLinkToSignup)), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
