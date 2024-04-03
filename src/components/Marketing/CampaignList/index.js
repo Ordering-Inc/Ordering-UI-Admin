@@ -138,6 +138,15 @@ export const CampaignList = (props) => {
   }
 
   useEffect(() => {
+    if (campaignList?.loading || campaignList?.campaigns?.length > 0 || paginationProps?.totalPages <= 1) return
+    if (paginationProps?.currentPage !== paginationProps?.totalPages) {
+      handleChangePage(paginationProps?.currentPage)
+    } else {
+      handleChangePage(paginationProps?.currentPage - 1)
+    }
+  }, [campaignList?.campaigns, paginationProps])
+
+  useEffect(() => {
     if (!isUseQuery || !paginationProps?.currentPage || !paginationProps?.pageSize || !paginationProps?.totalPages) return
     addQueryToUrl({
       page: paginationProps.currentPage,
