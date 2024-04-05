@@ -32,7 +32,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var CampaignList = function CampaignList(props) {
-  var _campaignList$campaig, _campaignList$campaig2;
+  var _campaignList$campaig2, _campaignList$campaig3;
   var campaignList = props.campaignList,
     getCampaignList = props.getCampaignList,
     paginationProps = props.paginationProps,
@@ -142,6 +142,15 @@ var CampaignList = function CampaignList(props) {
     setOpenBounced(true);
   };
   (0, _react.useEffect)(function () {
+    var _campaignList$campaig;
+    if (campaignList !== null && campaignList !== void 0 && campaignList.loading || (campaignList === null || campaignList === void 0 || (_campaignList$campaig = campaignList.campaigns) === null || _campaignList$campaig === void 0 ? void 0 : _campaignList$campaig.length) > 0 || (paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.totalPages) <= 1) return;
+    if ((paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.currentPage) !== (paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.totalPages)) {
+      handleChangePage(paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.currentPage);
+    } else {
+      handleChangePage((paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.currentPage) - 1);
+    }
+  }, [campaignList === null || campaignList === void 0 ? void 0 : campaignList.campaigns, paginationProps]);
+  (0, _react.useEffect)(function () {
     if (!isUseQuery || !(paginationProps !== null && paginationProps !== void 0 && paginationProps.currentPage) || !(paginationProps !== null && paginationProps !== void 0 && paginationProps.pageSize) || !(paginationProps !== null && paginationProps !== void 0 && paginationProps.totalPages)) return;
     (0, _utils.addQueryToUrl)({
       page: paginationProps.currentPage,
@@ -149,7 +158,7 @@ var CampaignList = function CampaignList(props) {
     });
   }, [paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.currentPage, paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.pageSize, paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.totalPages]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.Table, {
-    isRelative: (campaignList === null || campaignList === void 0 || (_campaignList$campaig = campaignList.campaigns) === null || _campaignList$campaig === void 0 ? void 0 : _campaignList$campaig.length) > 5
+    isRelative: (campaignList === null || campaignList === void 0 || (_campaignList$campaig2 = campaignList.campaigns) === null || _campaignList$campaig2 === void 0 ? void 0 : _campaignList$campaig2.length) > 5
   }, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.campaign) && /*#__PURE__*/_react.default.createElement("th", null, t('CAMPAIGN', 'Campaign')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.contact_type) && /*#__PURE__*/_react.default.createElement("th", null, t('CONTACT_TYPE', 'Contact type')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.audience) && /*#__PURE__*/_react.default.createElement("th", null, t('AUDIENCE', 'Audience')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.in_queue) && /*#__PURE__*/_react.default.createElement("th", null, t('IN_QUEUE', 'In Queue')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.sent_count) && /*#__PURE__*/_react.default.createElement("th", null, t('SENT', 'Sent')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.open_count) && /*#__PURE__*/_react.default.createElement("th", null, t('OPENS', 'Opens')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.unsubscribed_count) && /*#__PURE__*/_react.default.createElement("th", null, t('UNSUBSCRIBED', 'Unsubscribed')), (allowColumns === null || allowColumns === void 0 ? void 0 : allowColumns.bounced_count) && /*#__PURE__*/_react.default.createElement("th", null, t('BOUNCES', 'Bounces')), /*#__PURE__*/_react.default.createElement("th", {
     className: "allow-colums action"
   }, /*#__PURE__*/_react.default.createElement(_Shared.ColumnAllowSettingPopover, {
@@ -238,7 +247,7 @@ var CampaignList = function CampaignList(props) {
     onClick: function onClick() {
       return handleOpenDetail({});
     }
-  }, t('ADD_NEW_CAMPAIGN', 'Add new campaign')), (campaignList === null || campaignList === void 0 || (_campaignList$campaig2 = campaignList.campaigns) === null || _campaignList$campaig2 === void 0 ? void 0 : _campaignList$campaig2.length) > 0 && /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
+  }, t('ADD_NEW_CAMPAIGN', 'Add new campaign')), (campaignList === null || campaignList === void 0 || (_campaignList$campaig3 = campaignList.campaigns) === null || _campaignList$campaig3 === void 0 ? void 0 : _campaignList$campaig3.length) > 0 && /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
     currentPage: paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.currentPage,
     totalPages: paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.totalPages,
     handleChangePage: handleChangePage,
