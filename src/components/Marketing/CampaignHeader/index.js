@@ -18,13 +18,19 @@ import {
 export const CampaignHeader = (props) => {
   const {
     searchValue,
+    paginationProps,
     handleChangeSearch,
-    handleOpenDetail
+    handleOpenDetail,
+    getCampaignList
   } = props
 
   const [, t] = useLanguage()
   const [sessionState] = useSession()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
+
+  const handleReloadCampaigns = () => {
+    getCampaignList(paginationProps?.currentPage ?? 1, paginationProps?.pageSize ?? 10)
+  }
 
   return (
     <CampaignHeaderContainer>
@@ -54,6 +60,13 @@ export const CampaignHeader = (props) => {
       </HeaderSection>
       <TopRightSection>
         <WrapperSearch>
+          <Button
+            borderRadius='8px'
+            color='lightPrimary'
+            onClick={() => handleReloadCampaigns({})}
+          >
+            {t('REFRESH', 'Refresh')}
+          </Button>
           <Button
             borderRadius='8px'
             color='lightPrimary'
