@@ -21,8 +21,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var CampaignHeader = function CampaignHeader(props) {
   var _sessionState$user;
   var searchValue = props.searchValue,
+    paginationProps = props.paginationProps,
     handleChangeSearch = props.handleChangeSearch,
-    handleOpenDetail = props.handleOpenDetail;
+    handleOpenDetail = props.handleOpenDetail,
+    getCampaignList = props.getCampaignList;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -33,6 +35,10 @@ var CampaignHeader = function CampaignHeader(props) {
     _useInfoShare2 = _slicedToArray(_useInfoShare, 2),
     isCollapse = _useInfoShare2[0].isCollapse,
     handleMenuCollapse = _useInfoShare2[1].handleMenuCollapse;
+  var handleReloadCampaigns = function handleReloadCampaigns() {
+    var _paginationProps$curr, _paginationProps$page;
+    getCampaignList((_paginationProps$curr = paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.currentPage) !== null && _paginationProps$curr !== void 0 ? _paginationProps$curr : 1, (_paginationProps$page = paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.pageSize) !== null && _paginationProps$page !== void 0 ? _paginationProps$page : 10);
+  };
   return /*#__PURE__*/_react.default.createElement(_styles2.CampaignHeaderContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.HeaderSection, null, isCollapse && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {
@@ -45,6 +51,12 @@ var CampaignHeader = function CampaignHeader(props) {
     target: "_blank",
     rel: "noopener noreferrer"
   }, t('CUSTOMER_SUPPORT', 'Customer support'))))), /*#__PURE__*/_react.default.createElement(_styles2.TopRightSection, null, /*#__PURE__*/_react.default.createElement(_styles2.WrapperSearch, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    borderRadius: "8px",
+    color: "lightPrimary",
+    onClick: function onClick() {
+      return handleReloadCampaigns();
+    }
+  }, t('REFRESH', 'Refresh')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "lightPrimary",
     onClick: function onClick() {
