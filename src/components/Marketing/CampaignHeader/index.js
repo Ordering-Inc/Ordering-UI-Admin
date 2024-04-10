@@ -63,7 +63,7 @@ export const CampaignHeader = (props) => {
           <Button
             borderRadius='8px'
             color='lightPrimary'
-            onClick={() => handleReloadCampaigns({})}
+            onClick={() => handleReloadCampaigns()}
           >
             {t('REFRESH', 'Refresh')}
           </Button>
