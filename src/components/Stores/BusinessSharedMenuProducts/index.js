@@ -24,7 +24,9 @@ const BusinessSharedMenuProductsUI = (props) => {
     business,
     handleUpdateBusinessSharedMenuProduct,
     setIsOpenSharedProduct,
-    handleChangeInput
+    handleChangeInput,
+    menuList,
+    setMenuList
   } = props
 
   const query = new URLSearchParams(useLocation().search)
@@ -108,6 +110,8 @@ const BusinessSharedMenuProductsUI = (props) => {
                 menu={menuState.menu}
                 product={currentProduct}
                 handleChangeInput={handleChangeInput}
+                menuList={menuList}
+                setMenuList={setMenuList}
               />
             </SideBar>
           )}
@@ -123,6 +127,8 @@ const BusinessSharedMenuProductsUI = (props) => {
             menu={menuState.menu}
             product={currentProduct}
             handleChangeInput={handleChangeInput}
+            menuList={menuList}
+            setMenuList={setMenuList}
           />
         </Modal>
       )}
