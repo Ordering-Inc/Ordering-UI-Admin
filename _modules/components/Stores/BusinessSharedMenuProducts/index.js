@@ -33,7 +33,9 @@ var BusinessSharedMenuProductsUI = function BusinessSharedMenuProductsUI(props) 
     business = props.business,
     handleUpdateBusinessSharedMenuProduct = props.handleUpdateBusinessSharedMenuProduct,
     setIsOpenSharedProduct = props.setIsOpenSharedProduct,
-    handleChangeInput = props.handleChangeInput;
+    handleChangeInput = props.handleChangeInput,
+    menuList = props.menuList,
+    setMenuList = props.setMenuList;
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -120,7 +122,9 @@ var BusinessSharedMenuProductsUI = function BusinessSharedMenuProductsUI(props) 
     business: business,
     menu: menuState.menu,
     product: currentProduct,
-    handleChangeInput: handleChangeInput
+    handleChangeInput: handleChangeInput,
+    menuList: menuList,
+    setMenuList: setMenuList
   }))) : /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "80%",
     open: isOpenDetails,
@@ -131,7 +135,9 @@ var BusinessSharedMenuProductsUI = function BusinessSharedMenuProductsUI(props) 
     business: business,
     menu: menuState.menu,
     product: currentProduct,
-    handleChangeInput: handleChangeInput
+    handleChangeInput: handleChangeInput,
+    menuList: menuList,
+    setMenuList: setMenuList
   })));
 };
 var BusinessSharedMenuProducts = function BusinessSharedMenuProducts(props) {

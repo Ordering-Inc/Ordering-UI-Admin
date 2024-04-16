@@ -215,7 +215,8 @@ var BusinessMenuUI = function BusinessMenuUI(props) {
     setIsOpenSharedProduct: setIsOpenSharedProduct,
     sitesState: sitesState,
     menuList: businessMenusState,
-    setMenuList: setBusinessMenusState
+    setMenuList: setBusinessMenusState,
+    setCurrentMenu: setCurrentMenu
   })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, showOption === 'option' && /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "80%",
     open: showOption === 'option',
@@ -235,7 +236,8 @@ var BusinessMenuUI = function BusinessMenuUI(props) {
     setIsOpenSharedProduct: setIsOpenSharedProduct,
     sitesState: sitesState,
     menuList: businessMenusState,
-    setMenuList: setBusinessMenusState
+    setMenuList: setBusinessMenusState,
+    setCurrentMenu: setCurrentMenu
   }))), /*#__PURE__*/_react.default.createElement(_Shared.Confirm, {
     title: t('WEB_APPNAME', 'Ordering'),
     width: "700px",
