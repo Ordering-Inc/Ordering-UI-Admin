@@ -214,6 +214,7 @@ const BusinessMenuUI = (props) => {
               sitesState={sitesState}
               menuList={businessMenusState}
               setMenuList={setBusinessMenusState}
+              setCurrentMenu={setCurrentMenu}
             />
           )}
         </>
@@ -237,6 +238,7 @@ const BusinessMenuUI = (props) => {
                 sitesState={sitesState}
                 menuList={businessMenusState}
                 setMenuList={setBusinessMenusState}
+                setCurrentMenu={setCurrentMenu}
               />
             </Modal>
           )}
