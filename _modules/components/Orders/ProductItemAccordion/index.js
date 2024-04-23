@@ -281,11 +281,12 @@ var ProductItemAccordion = function ProductItemAccordion(props) {
       key: ingredient.id
     }, /*#__PURE__*/_react.default.createElement("span", null, t('NO', 'No'), " ", ingredient.name));
   })), ((_productInfo$options2 = productInfo().options) === null || _productInfo$options2 === void 0 ? void 0 : _productInfo$options2.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.ProductOptionsList, null, Array.isArray(productInfo().options) && productInfo().options.map(function (option, i) {
+    var _Object$values, _Object$values$map;
     return /*#__PURE__*/_react.default.createElement("li", {
       key: i
     }, /*#__PURE__*/_react.default.createElement("p", null, option.name), /*#__PURE__*/_react.default.createElement(_styles.ProductOptionsList, {
       className: "suboption"
-    }, option.suboptions.map(function (suboption) {
+    }, (_Object$values = Object.values(option === null || option === void 0 ? void 0 : option.suboptions)) === null || _Object$values === void 0 || (_Object$values$map = _Object$values.map) === null || _Object$values$map === void 0 ? void 0 : _Object$values$map.call(_Object$values, function (suboption) {
       var _suboption$half_price2;
       return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
         key: suboption.id
