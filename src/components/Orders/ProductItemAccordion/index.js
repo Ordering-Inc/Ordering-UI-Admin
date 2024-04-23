@@ -300,7 +300,7 @@ export const ProductItemAccordion = (props) => {
               <li key={i}>
                 <p>{option.name}</p>
                 <ProductOptionsList className='suboption'>
-                  {option.suboptions.map(suboption => (
+                  {Object.values(option?.suboptions)?.map?.(suboption => (
                     <React.Fragment key={suboption.id}>
                       <li>
                         <span>
