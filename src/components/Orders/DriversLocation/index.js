@@ -13,7 +13,8 @@ const DriversLocationPropsAreEqual = (prevProps, nextProps) => {
   return JSON.stringify(prevProps.selectedDriver) === JSON.stringify(nextProps.selectedDriver) &&
     JSON.stringify(prevProps.assignedOrders) === JSON.stringify(nextProps.assignedOrders) &&
     prevProps.driversIsOnline === nextProps.driversIsOnline &&
-    prevProps.onlineDrivers?.length === nextProps.onlineDrivers?.length &&
+    JSON.stringify(prevProps.onlineDrivers) === JSON.stringify(nextProps.onlineDrivers) &&
+    JSON.stringify(prevProps.driversList) === JSON.stringify(nextProps.driversList) &&
     prevProps.offlineDrivers?.length === nextProps.offlineDrivers?.length &&
     JSON.stringify(prevProps.selectedOrder) === JSON.stringify(nextProps.selectedOrder)
 }
