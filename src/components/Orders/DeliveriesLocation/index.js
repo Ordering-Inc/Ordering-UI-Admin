@@ -17,8 +17,7 @@ import {
 } from './styles'
 
 const DeliveriesLocationPropsAreEqual = (prevProps, nextProps) => {
-  return prevProps.interActionMapOrder?.id === nextProps.interActionMapOrder?.id &&
-    JSON.stringify(prevProps.interActionMapOrder?.driver) === JSON.stringify(nextProps.interActionMapOrder?.driver) &&
+  return JSON.stringify(prevProps.interActionMapOrder) === JSON.stringify(nextProps.interActionMapOrder) &&
     JSON.stringify(prevProps.driversList) === JSON.stringify(nextProps.driversList)
 }
 
