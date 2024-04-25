@@ -101,6 +101,7 @@ var OrdersHeaderFilterGroupUI = function OrdersHeaderFilterGroupUI(props) {
     },
     customClass: "external_id"
   }), !loading && configFilter.includes('driver') && /*#__PURE__*/_react.default.createElement(_DriverMultiSelector.DriverMultiSelector, {
+    useDriversByProps: true,
     drivers: driversList.drivers,
     filterValues: filterValues,
     handleChangeDriver: handleChangeDriver
