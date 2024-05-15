@@ -9,7 +9,7 @@ var _MdKeyboardArrowLeft = _interopRequireDefault(require("@meronex/icons/md/MdK
 var _MdKeyboardArrowRight = _interopRequireDefault(require("@meronex/icons/md/MdKeyboardArrowRight"));
 var _styles = require("./styles");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-var OrdersPagination = exports.OrdersPagination = function OrdersPagination(_ref) {
+var OrdersPagination = function OrdersPagination(_ref) {
   var ordersPerPage = _ref.ordersPerPage,
     totalOrders = _ref.totalOrders,
     currentPage = _ref.currentPage,
@@ -30,3 +30,4 @@ var OrdersPagination = exports.OrdersPagination = function OrdersPagination(_ref
     disabled: currentPage === totalPages || totalPages === 1
   }, /*#__PURE__*/_react.default.createElement(_MdKeyboardArrowRight.default, null)));
 };
+exports.OrdersPagination = OrdersPagination;

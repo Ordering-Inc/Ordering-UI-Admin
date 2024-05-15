@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.CURRENCY = void 0;
-var CURRENCY = exports.CURRENCY = {
+var CURRENCY = {
   AED: {
     name: 'United Arab Emirates Dirham',
     symbol: 'د.إ.‏',
@@ -1014,3 +1014,4 @@ var CURRENCY = exports.CURRENCY = {
     symbol: '$'
   }
 };
+exports.CURRENCY = CURRENCY;

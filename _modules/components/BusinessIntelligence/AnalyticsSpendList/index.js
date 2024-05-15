@@ -18,7 +18,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-var AnalyticsSpendList = exports.AnalyticsSpendList = function AnalyticsSpendList(props) {
+var AnalyticsSpendList = function AnalyticsSpendList(props) {
   var dataList = props.dataList,
     title = props.title;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -38,3 +38,4 @@ var AnalyticsSpendList = exports.AnalyticsSpendList = function AnalyticsSpendLis
     height: 20
   })), /*#__PURE__*/_react.default.createElement(_GraphLoadingMessage.GraphLoadingMessage, null)) : dataList !== null && dataList !== void 0 && dataList.data ? /*#__PURE__*/_react.default.createElement(_styles.AnalyticsSpendListContent, null, /*#__PURE__*/_react.default.createElement(_styles.TimeContentWrapper, null, /*#__PURE__*/_react.default.createElement("h1", null, (0, _utils.convertHMS)((dataList === null || dataList === void 0 ? void 0 : dataList.data) * 1))), /*#__PURE__*/_react.default.createElement(_styles.ReviewContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.ReviewBlock, null, /*#__PURE__*/_react.default.createElement(_GiAlarmClock.default, null)), /*#__PURE__*/_react.default.createElement("p", null, t('REGULAR', 'Regular')))) : /*#__PURE__*/_react.default.createElement(_styles.EmptyContent, null, t('NO_DATA', 'No Data')));
 };
+exports.AnalyticsSpendList = AnalyticsSpendList;
