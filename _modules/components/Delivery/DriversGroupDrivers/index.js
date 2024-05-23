@@ -12,6 +12,7 @@ var _styles = require("../../../styles");
 var _DriverTemporalSchedule = require("../DriverTemporalSchedule");
 var _FaUserAlt = _interopRequireDefault(require("@meronex/icons/fa/FaUserAlt"));
 var _styles2 = require("./styles");
+var _moment = _interopRequireDefault(require("moment"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -105,7 +106,7 @@ var DriversGroupDrivers = function DriversGroupDrivers(props) {
         return (_driver === null || _driver === void 0 ? void 0 : _driver.id) === driver.id && (_driver === null || _driver === void 0 ? void 0 : _driver.temporarily_activated);
       }),
       onChange: function onChange(e) {
-        return handleSelectDriverTemporary(driver === null || driver === void 0 ? void 0 : driver.id, e.target.checked);
+        return handleSelectDriverTemporary(driver === null || driver === void 0 ? void 0 : driver.id, e.target.checked, (0, _moment.default)().endOf('day').utc().format('YYYY-MM-DD HH:mm:ss'));
       }
     }), /*#__PURE__*/_react.default.createElement(_styles2.DriverTemporaryContainer, null, /*#__PURE__*/_react.default.createElement("p", {
       onClick: function onClick() {
