@@ -16,6 +16,7 @@ import {
   DriverInfoContainer,
   DriverTemporaryContainer
 } from './styles'
+import moment from 'moment'
 
 export const DriversGroupDrivers = (props) => {
   const {
@@ -106,7 +107,7 @@ export const DriversGroupDrivers = (props) => {
               <>
                 <Checkbox
                   checked={selectedDriverTemporaryIds?.some((_driver) => _driver?.id === driver.id && _driver?.temporarily_activated)}
-                  onChange={e => handleSelectDriverTemporary(driver?.id, e.target.checked)}
+                  onChange={e => handleSelectDriverTemporary(driver?.id, e.target.checked, moment().endOf('day').utc().format('YYYY-MM-DD HH:mm:ss'))}
                 />
                 <DriverTemporaryContainer>
                   <p onClick={() => handleOpenModal(selectedDriverTemporaryIds.find((_driver) => (_driver?.id === driver?.id)) ?? { id: driver?.id, temporarily_activated: true, temporary_at: null })}>{t('DRIVER_TEMPORAL', 'Temporal driver')}</p>
