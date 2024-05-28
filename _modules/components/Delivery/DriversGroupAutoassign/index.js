@@ -26,7 +26,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var DriversGroupAutoassignUI = function DriversGroupAutoassignUI(props) {
-  var _theme$images$icons, _theme$images$icons2, _theme$images$icons3, _theme$images$icons4, _theme$images$icons5, _changesState$autoass, _ref, _changesState$autoass2, _ref2, _changesState$autoass3, _changesState$autoass4, _changesState$autoass5, _autoRejectOrderGroup, _autoRejectOrderGroup2, _autoRejectOrderGroup3, _ref3, _changesState$autoass6, _ref4, _changesState$autoass7, _ref5, _changesState$autoass8, _changesState$autoass9;
+  var _theme$images$icons, _theme$images$icons2, _theme$images$icons3, _theme$images$icons4, _theme$images$icons5, _changesState$autoass, _ref, _changesState$autoass2, _ref2, _changesState$autoass3, _changesState$autoass4, _changesState$autoass5, _autoRejectOrderGroup, _autoRejectOrderGroup2, _autoRejectOrderGroup3, _ref3, _changesState$autoass6, _ref4, _changesState$autoass7, _ref5, _changesState$autoass8, _changesState$autoass9, _changesState$autorej;
   var autoAssign = props.autoAssign,
     autoRejectOrderGroup = props.autoRejectOrderGroup,
     onSelectAssign = props.onSelectAssign,
@@ -195,7 +195,16 @@ var DriversGroupAutoassignUI = function DriversGroupAutoassignUI(props) {
         autoassign_groupable_individual_orders_only: e.target.checked
       });
     }
-  }), /*#__PURE__*/_react.default.createElement("span", null, t('DO_NOT_ASSIGN_MORE_THAN_1_ORDER_IF_ORDER_CAN_NOT_GROUPED', 'Do not assign more than 1 order IF the order can’t be grouped'))));
+  }), /*#__PURE__*/_react.default.createElement("span", null, t('DO_NOT_ASSIGN_MORE_THAN_1_ORDER_IF_ORDER_CAN_NOT_GROUPED', 'Do not assign more than 1 order IF the order can’t be grouped'))), /*#__PURE__*/_react.default.createElement(_styles2.CheckboxWrapper, {
+    isPadding: true
+  }, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
+    checked: (_changesState$autorej = changesState === null || changesState === void 0 ? void 0 : changesState.autoreject_after_expiration) !== null && _changesState$autorej !== void 0 ? _changesState$autorej : curDriversGroup === null || curDriversGroup === void 0 ? void 0 : curDriversGroup.autoreject_after_expiration,
+    onChange: function onChange(e) {
+      return onChangeSave({
+        autoreject_after_expiration: e.target.checked
+      });
+    }
+  }), /*#__PURE__*/_react.default.createElement("span", null, t('AUTOREJECT_AFTER_EXPIRATION', 'Autoreject after expiration'))));
 };
 var DriversGroupAutoassign = function DriversGroupAutoassign(props) {
   var driversGroupAutoassignProps = _objectSpread(_objectSpread({}, props), {}, {
