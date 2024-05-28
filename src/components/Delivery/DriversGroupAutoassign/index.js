@@ -226,6 +226,13 @@ const DriversGroupAutoassignUI = (props) => {
         />
         <span>{t('DO_NOT_ASSIGN_MORE_THAN_1_ORDER_IF_ORDER_CAN_NOT_GROUPED', 'Do not assign more than 1 order IF the order can’t be grouped')}</span>
       </CheckboxWrapper>
+      <CheckboxWrapper isPadding>
+        <Checkbox
+          checked={changesState?.autoreject_after_expiration ?? curDriversGroup?.autoreject_after_expiration}
+          onChange={e => onChangeSave({ autoreject_after_expiration: e.target.checked })}
+        />
+        <span>{t('AUTOREJECT_AFTER_EXPIRATION', 'Autoreject after expiration')}</span>
+      </CheckboxWrapper>
     </AutoassignContainer>
   )
 }
