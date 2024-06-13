@@ -13,6 +13,7 @@ import { UserMetaFields } from '../../Users'
 import { DriversLogs } from '../DriversLogs'
 import { DriversGroupLogsUI } from '../DriversGroupLogs'
 import { DriverGroupSetting } from '../DriverGroupSetting'
+import { DriversAdvancedLogs } from '../DriversAdvancedLogs'
 import { ArrowsAngleContract, ArrowsAngleExpand, ThreeDots } from 'react-bootstrap-icons'
 import { Switch, Button, IconButton } from '../../../styles'
 import { ActionsForm } from '../UserFormDetails/styles'
@@ -203,6 +204,12 @@ export const UserDetailsUI = (props) => {
           )}
           {currentMenuSelected === 'logs' && (
             <DriversLogs
+              userId={userState.user?.id}
+              UIComponent={DriversGroupLogsUI}
+            />
+          )}
+          {currentMenuSelected === 'advanced_logs' && (
+            <DriversAdvancedLogs
               userId={userState.user?.id}
               UIComponent={DriversGroupLogsUI}
             />
