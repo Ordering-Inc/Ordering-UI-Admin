@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage, ExportCSV as ExportCSVController } from 'ordering-components-admin'
-import { Modal, SpinnerLoader } from '../../Shared'
+import { Alert, Modal, SpinnerLoader } from '../../Shared'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import { Button } from '../../../styles'
 import { Download } from 'react-bootstrap-icons'
@@ -20,6 +20,7 @@ const ExportCSVUI = (props) => {
   const { width } = useWindowSize()
   const [popoverOpen, setPopoverOpen] = useState(false)
   const [modalOpen, setModalOpen] = useState(false)
+  const [alertState, setAlertState] = useState({ open: false, content: [] })
 
   const handleExportAll = () => {
     setPopoverOpen(false)
@@ -35,6 +36,13 @@ const ExportCSVUI = (props) => {
     setPopoverOpen(false)
   }
 
+  const closeAlert = () => {
+    setAlertState({
+      open: false,
+      content: []
+    })
+  }
+
   useEffect(() => {
     if (!popoverOpen) return
     document.addEventListener('click', closePopover)
@@ -42,6 +50,12 @@ const ExportCSVUI = (props) => {
   }, [popoverOpen])
 
   useEffect(() => {
+    if (actionStatus?.error) {
+      setAlertState({
+        open: true,
+        content: actionStatus?.error
+      })
+    }
     if (!actionStatus?.result || actionStatus?.error) return
     setModalOpen(true)
   }, [actionStatus])
@@ -59,7 +73,7 @@ const ExportCSVUI = (props) => {
           <Download />
         </Button>
         {popoverOpen && (
-          <PopoverContainer>
+          <PopoverContainer disabled={actionStatus.loading}>
             <Item onClick={() => handleExportAll()}>
               {t('EXPORT_ALL', 'Export all')}
             </Item>
@@ -92,6 +106,15 @@ const ExportCSVUI = (props) => {
           </Button>
         </ExportCSVResult>
       </Modal>
+      <Alert
+        title={t('CSV_ORDERS', 'Csv orders')}
+        content={alertState?.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={alertState?.open}
+        onClose={() => closeAlert()}
+        onAccept={() => closeAlert()}
+        closeOnBackdrop={false}
+      />
     </>
   )
 }
