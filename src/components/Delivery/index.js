@@ -17,6 +17,7 @@ import { DriversGroupBusinesses } from './DriversGroupBusinesses'
 import { DriversGroupPaymethods } from './DriversGroupPaymethods'
 import { DriversGroupLogistics } from './DriversGroupLogistics'
 import { DriversGroupLogs } from './DriversGroupLogs'
+import { DriversAdvancedLogs } from './DriversAdvancedLogs'
 import { DriversGroupCompanies } from './DriversGroupCompanies'
 import { DriversGroupDrivers } from './DriversGroupDrivers'
 import { DriversGroupOrders } from './DriversGroupOrders'
@@ -46,6 +47,7 @@ export {
   DriversGroupPaymethods,
   DriversGroupLogistics,
   DriversGroupLogs,
+  DriversAdvancedLogs,
   DriversGroupCompanies,
   DriversGroupDrivers,
   DriversGroupOrders,
