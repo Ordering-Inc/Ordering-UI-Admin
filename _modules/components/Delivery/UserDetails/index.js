@@ -20,6 +20,7 @@ var _Users = require("../../Users");
 var _DriversLogs = require("../DriversLogs");
 var _DriversGroupLogs = require("../DriversGroupLogs");
 var _DriverGroupSetting = require("../DriverGroupSetting");
+var _DriversAdvancedLogs = require("../DriversAdvancedLogs");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _styles = require("../../../styles");
 var _styles2 = require("../UserFormDetails/styles");
@@ -41,7 +42,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var UserDetailsUI = function UserDetailsUI(props) {
-  var _configs$allow_driver, _configs$white_label_, _userState$user, _userState$user2, _userState$user3, _userState$user5, _userState$user7, _userState$user8, _userState$user9, _userState$user10, _userState$user11, _scheduleState$change, _userState$user12, _userState$user13, _userState$user14, _userState$user15, _userState$user16;
+  var _configs$allow_driver, _configs$white_label_, _userState$user, _userState$user2, _userState$user3, _userState$user5, _userState$user7, _userState$user8, _userState$user9, _userState$user10, _userState$user11, _scheduleState$change, _userState$user12, _userState$user13, _userState$user14, _userState$user15, _userState$user16, _userState$user17;
   var isDriversPage = props.isDriversPage,
     isDriversManagersPage = props.isDriversManagersPage,
     userState = props.userState,
@@ -189,13 +190,16 @@ var UserDetailsUI = function UserDetailsUI(props) {
   }, scheduleState.loading ? t('UPDATING', 'Updating...') : t('UPDATE', 'Update')))), currentMenuSelected === 'logs' && /*#__PURE__*/_react.default.createElement(_DriversLogs.DriversLogs, {
     userId: (_userState$user12 = userState.user) === null || _userState$user12 === void 0 ? void 0 : _userState$user12.id,
     UIComponent: _DriversGroupLogs.DriversGroupLogsUI
+  }), currentMenuSelected === 'advanced_logs' && /*#__PURE__*/_react.default.createElement(_DriversAdvancedLogs.DriversAdvancedLogs, {
+    userId: (_userState$user13 = userState.user) === null || _userState$user13 === void 0 ? void 0 : _userState$user13.id,
+    UIComponent: _DriversGroupLogs.DriversGroupLogsUI
   }), currentMenuSelected === 'orders' && /*#__PURE__*/_react.default.createElement(_OrdersManager.OrdersManager, {
     isSelectedOrders: true,
-    customerId: (_userState$user13 = userState.user) === null || _userState$user13 === void 0 ? void 0 : _userState$user13.id,
+    customerId: (_userState$user14 = userState.user) === null || _userState$user14 === void 0 ? void 0 : _userState$user14.id,
     handleCustomOrderDetail: setExtraOpen
   }), currentMenuSelected === 'push_tokens' && /*#__PURE__*/_react.default.createElement(_Shared.PushTokens, {
-    userId: userState === null || userState === void 0 || (_userState$user14 = userState.user) === null || _userState$user14 === void 0 ? void 0 : _userState$user14.id,
-    pushTokens: (userState === null || userState === void 0 || (_userState$user15 = userState.user) === null || _userState$user15 === void 0 ? void 0 : _userState$user15.push_tokens) || []
+    userId: userState === null || userState === void 0 || (_userState$user15 = userState.user) === null || _userState$user15 === void 0 ? void 0 : _userState$user15.id,
+    pushTokens: (userState === null || userState === void 0 || (_userState$user16 = userState.user) === null || _userState$user16 === void 0 ? void 0 : _userState$user16.push_tokens) || []
   })), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "700px",
     height: "80vh",
@@ -206,7 +210,7 @@ var UserDetailsUI = function UserDetailsUI(props) {
       return setIsCustomField(false);
     }
   }, /*#__PURE__*/_react.default.createElement(_Users.UserMetaFields, {
-    userId: (_userState$user16 = userState.user) === null || _userState$user16 === void 0 ? void 0 : _userState$user16.id
+    userId: (_userState$user17 = userState.user) === null || _userState$user17 === void 0 ? void 0 : _userState$user17.id
   })), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "700px",
     height: "80vh",

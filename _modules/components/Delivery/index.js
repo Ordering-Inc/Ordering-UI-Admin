@@ -27,6 +27,12 @@ Object.defineProperty(exports, "DriverGroupSetting", {
     return _DriverGroupSetting.DriverGroupSetting;
   }
 });
+Object.defineProperty(exports, "DriversAdvancedLogs", {
+  enumerable: true,
+  get: function get() {
+    return _DriversAdvancedLogs.DriversAdvancedLogs;
+  }
+});
 Object.defineProperty(exports, "DriversCompaniesList", {
   enumerable: true,
   get: function get() {
@@ -178,6 +184,7 @@ var _DriversGroupBusinesses = require("./DriversGroupBusinesses");
 var _DriversGroupPaymethods = require("./DriversGroupPaymethods");
 var _DriversGroupLogistics = require("./DriversGroupLogistics");
 var _DriversGroupLogs = require("./DriversGroupLogs");
+var _DriversAdvancedLogs = require("./DriversAdvancedLogs");
 var _DriversGroupCompanies = require("./DriversGroupCompanies");
 var _DriversGroupDrivers = require("./DriversGroupDrivers");
 var _DriversGroupOrders = require("./DriversGroupOrders");
