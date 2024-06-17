@@ -42,6 +42,13 @@ var ExportCSVUI = function ExportCSVUI(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     modalOpen = _useState4[0],
     setModalOpen = _useState4[1];
+  var _useState5 = (0, _react.useState)({
+      open: false,
+      content: []
+    }),
+    _useState6 = _slicedToArray(_useState5, 2),
+    alertState = _useState6[0],
+    setAlertState = _useState6[1];
   var handleExportAll = function handleExportAll() {
     setPopoverOpen(false);
     getCSV(false);
@@ -53,6 +60,12 @@ var ExportCSVUI = function ExportCSVUI(props) {
   var closePopover = function closePopover() {
     setPopoverOpen(false);
   };
+  var closeAlert = function closeAlert() {
+    setAlertState({
+      open: false,
+      content: []
+    });
+  };
   (0, _react.useEffect)(function () {
     if (!popoverOpen) return;
     document.addEventListener('click', closePopover);
@@ -61,6 +74,12 @@ var ExportCSVUI = function ExportCSVUI(props) {
     };
   }, [popoverOpen]);
   (0, _react.useEffect)(function () {
+    if (actionStatus !== null && actionStatus !== void 0 && actionStatus.error) {
+      setAlertState({
+        open: true,
+        content: actionStatus === null || actionStatus === void 0 ? void 0 : actionStatus.error
+      });
+    }
     if (!(actionStatus !== null && actionStatus !== void 0 && actionStatus.result) || actionStatus !== null && actionStatus !== void 0 && actionStatus.error) return;
     setModalOpen(true);
   }, [actionStatus]);
@@ -71,7 +90,9 @@ var ExportCSVUI = function ExportCSVUI(props) {
     onClick: function onClick() {
       return setPopoverOpen(!popoverOpen);
     }
-  }, width > 600 && t('CSV', 'CSV'), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Download, null)), popoverOpen && /*#__PURE__*/_react.default.createElement(_styles2.PopoverContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Item, {
+  }, width > 600 && t('CSV', 'CSV'), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Download, null)), popoverOpen && /*#__PURE__*/_react.default.createElement(_styles2.PopoverContainer, {
+    disabled: actionStatus.loading
+  }, /*#__PURE__*/_react.default.createElement(_styles2.Item, {
     onClick: function onClick() {
       return handleExportAll();
     }
@@ -98,7 +119,19 @@ var ExportCSVUI = function ExportCSVUI(props) {
     onClick: function onClick() {
       return setModalOpen(false);
     }
-  }, t('OK', 'OK')))));
+  }, t('OK', 'OK')))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+    title: t('CSV_ORDERS', 'Csv orders'),
+    content: alertState === null || alertState === void 0 ? void 0 : alertState.content,
+    acceptText: t('ACCEPT', 'Accept'),
+    open: alertState === null || alertState === void 0 ? void 0 : alertState.open,
+    onClose: function onClose() {
+      return closeAlert();
+    },
+    onAccept: function onAccept() {
+      return closeAlert();
+    },
+    closeOnBackdrop: false
+  }));
 };
 var OrdersExportCSV = function OrdersExportCSV(props) {
   var ExportCSVControlProps = _objectSpread(_objectSpread({}, props), {}, {
