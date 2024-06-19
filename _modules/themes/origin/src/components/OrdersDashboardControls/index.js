@@ -9,14 +9,14 @@ var _OrderStatusTypeSelector = require("../OrderStatusTypeSelector");
 var _ExportCSV = require("../ExportCSV");
 var _OrderDelete = require("../OrderDelete");
 var _styles = require("./styles");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 // import { useLanguage } from 'ordering-components-admin'
 // import { useWindowSize } from '../../hooks/useWindowSize'
 
 // import { Button } from '../../styles/Buttons'
 // import MdcBasket from '@meronex/icons/mdc/MdcBasket'
 
-var OrdersDashboardControls = function OrdersDashboardControls(props) {
+var OrdersDashboardControls = exports.OrdersDashboardControls = function OrdersDashboardControls(props) {
   var selectedOrderNumber = props.selectedOrderNumber,
     filterValues = props.filterValues,
     handleDeleteMultiOrders = props.handleDeleteMultiOrders,
@@ -37,4 +37,3 @@ var OrdersDashboardControls = function OrdersDashboardControls(props) {
     handleChangeMultiOrdersStatus: handleChangeMultiOrdersStatus
   })))));
 };
-exports.OrdersDashboardControls = OrdersDashboardControls;

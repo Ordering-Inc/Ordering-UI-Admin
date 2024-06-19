@@ -10,18 +10,18 @@ var _BsDot = _interopRequireDefault(require("@meronex/icons/bs/BsDot"));
 var _styles2 = require("../../../styles");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _styledComponents = require("styled-components");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 var DriverPropsAreEqual = function DriverPropsAreEqual(prevProps, nextProps) {
   var _prevProps$selectedDr, _nextProps$selectedDr;
   return JSON.stringify(prevProps.driver) === JSON.stringify(nextProps.driver) && (prevProps === null || prevProps === void 0 || (_prevProps$selectedDr = prevProps.selectedDriver) === null || _prevProps$selectedDr === void 0 ? void 0 : _prevProps$selectedDr.id) === (nextProps === null || nextProps === void 0 || (_nextProps$selectedDr = nextProps.selectedDriver) === null || _nextProps$selectedDr === void 0 ? void 0 : _nextProps$selectedDr.id);
 };
-var Driver = /*#__PURE__*/_react.default.memo(function (props) {
+var Driver = exports.Driver = /*#__PURE__*/_react.default.memo(function (props) {
   var _theme$images;
   var driver = props.driver,
     handleClickDriver = props.handleClickDriver,
@@ -65,4 +65,3 @@ var Driver = /*#__PURE__*/_react.default.memo(function (props) {
     width: getStarWidth(driver === null || driver === void 0 ? void 0 : driver.qualification)
   })));
 }, DriverPropsAreEqual);
-exports.Driver = Driver;

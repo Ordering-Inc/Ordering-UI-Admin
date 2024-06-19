@@ -5,5 +5,4 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ConfigFileContext = void 0;
 var _react = require("react");
-var ConfigFileContext = /*#__PURE__*/(0, _react.createContext)();
-exports.ConfigFileContext = ConfigFileContext;
+var ConfigFileContext = exports.ConfigFileContext = /*#__PURE__*/(0, _react.createContext)();

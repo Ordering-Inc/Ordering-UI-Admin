@@ -7,10 +7,10 @@ Object.defineProperty(exports, "__esModule", {
 exports.UserInfo = exports.SubMenu = exports.SidebarMainContent = exports.SidebarInnerContainer = exports.SidebarHeader = exports.SidebarContent = exports.SidebarContainer = exports.PoweredWrapper = exports.MobileMessage = exports.MenuContent = exports.MenuContainer = exports.LogoWrapper = exports.LanguageSelectorContainer = exports.BurgerButton = void 0;
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29;
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-var SidebarContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  @media print {\n    display: none;\n  }\n\n  position: fixed;\n  background: ", ";\n  z-index: 1000;\n  transition: all 0.25s ease;\n  height: calc(var(--vh, 1vh) * 100);\n  overflow: auto;\n  width: 100vw;\n  ", "\n\n  @media (min-width: 768px) {\n    position: relative;\n    width: 240px;\n    ", "\n  }\n\n  button.btn-primary {\n    background-color: ", ";\n  }\n\n  button {\n    display: flex;\n    font-size: 14px;\n    box-sizing: border-box;\n    border-radius: 8px;\n    font-weight: 500;\n    &:hover {\n      background-color: ", ";\n    }\n    &.btn-primary {\n      &:hover {\n        background-color: ", ";\n      }\n    }\n\n    span {\n      ", "\n    }\n\n    svg {\n      font-size: 20px;\n    }\n  }\n\n"])), function (props) {
+function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _taggedTemplateLiteral(e, t) { return t || (t = e.slice(0)), Object.freeze(Object.defineProperties(e, { raw: { value: Object.freeze(t) } })); }
+var SidebarContainer = exports.SidebarContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  @media print {\n    display: none;\n  }\n\n  position: fixed;\n  background: ", ";\n  z-index: 1000;\n  transition: all 0.25s ease;\n  height: calc(var(--vh, 1vh) * 100);\n  overflow: auto;\n  width: 100vw;\n  ", "\n\n  @media (min-width: 768px) {\n    position: relative;\n    width: 240px;\n    ", "\n  }\n\n  button.btn-primary {\n    background-color: ", ";\n  }\n\n  button {\n    display: flex;\n    font-size: 14px;\n    box-sizing: border-box;\n    border-radius: 8px;\n    font-weight: 500;\n    &:hover {\n      background-color: ", ";\n    }\n    &.btn-primary {\n      &:hover {\n        background-color: ", ";\n      }\n    }\n\n    span {\n      ", "\n    }\n\n    svg {\n      font-size: 20px;\n    }\n  }\n\n"])), function (props) {
   return props.theme.colors.backgroundPage;
 }, function (_ref) {
   var isCollapse = _ref.isCollapse;
@@ -28,8 +28,7 @@ var SidebarContainer = _styledComponents.default.div(_templateObject || (_templa
   var _props$theme;
   return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n        margin-right: 15px;\n      "]))) : (0, _styledComponents.css)(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n        margin-left: 15px;\n      "])));
 });
-exports.SidebarContainer = SidebarContainer;
-var SidebarInnerContainer = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  height: 100%;\n  @media (min-width: 760px) {\n    position: sticky;\n    top: 0px;\n    ", "\n  }\n"])), function (props) {
+var SidebarInnerContainer = exports.SidebarInnerContainer = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  height: 100%;\n  @media (min-width: 760px) {\n    position: sticky;\n    top: 0px;\n    ", "\n  }\n"])), function (props) {
   var _props$theme2;
   return (_props$theme2 = props.theme) !== null && _props$theme2 !== void 0 && _props$theme2.rtl ? (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n      border-left: 1px solid ", ";\n    "])), function (props) {
     return props.theme.colors.borderColor;
@@ -37,30 +36,23 @@ var SidebarInnerContainer = _styledComponents.default.div(_templateObject6 || (_
     return props.theme.colors.borderColor;
   });
 });
-exports.SidebarInnerContainer = SidebarInnerContainer;
-var SidebarHeader = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  padding: 12px;\n"])));
-exports.SidebarHeader = SidebarHeader;
-var LogoWrapper = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n\n  > img {\n    max-width: 150px;\n    max-height: 100px;\n    object-fit: contain;\n  }\n"])));
-exports.LogoWrapper = LogoWrapper;
-var BurgerButton = _styledComponents.default.button(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  background-color: transparent;\n  border: none;\n  border-radius: 6px;\n  height: 32px;\n  padding: 0 5px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  transition: all .2s ease-in;\n\n  > svg {\n    width: 25px;\n    height: 16px;\n    color: #B1BCCC;\n  }\n\n  &:hover {\n    background-color: #1507260a !important;\n\n    > svg {\n      color:  #151b26;\n    }\n  }\n\n  &:active {\n    background-color: #1507261a !important;\n  }\n"])));
-exports.BurgerButton = BurgerButton;
-var SidebarMainContent = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  flex: 1;\n  display: flex;\n  flex-direction: column;\n  overflow: auto;\n"])));
-exports.SidebarMainContent = SidebarMainContent;
-var SidebarContent = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  flex: 1;\n  box-sizing: border-box;\n  transition: 0.1s;\n  border-top: 1px solid ", ";\n  border-bottom: 1px solid ", ";\n"])), function (props) {
+var SidebarHeader = exports.SidebarHeader = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  padding: 12px;\n"])));
+var LogoWrapper = exports.LogoWrapper = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n\n  > img {\n    max-width: 150px;\n    max-height: 100px;\n    object-fit: contain;\n  }\n"])));
+var BurgerButton = exports.BurgerButton = _styledComponents.default.button(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  background-color: transparent;\n  border: none;\n  border-radius: 6px;\n  height: 32px;\n  padding: 0 5px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  transition: all .2s ease-in;\n\n  > svg {\n    width: 25px;\n    height: 16px;\n    color: #B1BCCC;\n  }\n\n  &:hover {\n    background-color: #1507260a !important;\n\n    > svg {\n      color:  #151b26;\n    }\n  }\n\n  &:active {\n    background-color: #1507261a !important;\n  }\n"])));
+var SidebarMainContent = exports.SidebarMainContent = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  flex: 1;\n  display: flex;\n  flex-direction: column;\n  overflow: auto;\n"])));
+var SidebarContent = exports.SidebarContent = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  flex: 1;\n  box-sizing: border-box;\n  transition: 0.1s;\n  border-top: 1px solid ", ";\n  border-bottom: 1px solid ", ";\n"])), function (props) {
   return props.theme.colors.borderColor;
 }, function (props) {
   return props.theme.colors.borderColor;
 });
-exports.SidebarContent = SidebarContent;
-var UserInfo = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  transition: 0.1s;\n  > button:first-child {\n    margin: 5px 0;\n    ", "\n    span {\n      max-width: calc(100% - 40px);\n      overflow: hidden;\n      white-space: nowrap;\n      text-overflow: ellipsis;\n      ", "\n      font-weight: 600;\n      font-size: 16px;\n    }\n  }\n"])), function (props) {
+var UserInfo = exports.UserInfo = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  transition: 0.1s;\n  > button:first-child {\n    margin: 5px 0;\n    ", "\n    span {\n      max-width: calc(100% - 40px);\n      overflow: hidden;\n      white-space: nowrap;\n      text-overflow: ellipsis;\n      ", "\n      font-weight: 600;\n      font-size: 16px;\n    }\n  }\n"])), function (props) {
   var _props$theme3;
   return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n      padding-right: 8px;\n    "]))) : (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n      padding-left: 8px;\n    "])));
 }, function (props) {
   var _props$theme4;
   return (_props$theme4 = props.theme) !== null && _props$theme4 !== void 0 && _props$theme4.rtl ? (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n        margin-right: 10px;\n      "]))) : (0, _styledComponents.css)(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n        margin-left: 10px;\n      "])));
 });
-exports.UserInfo = UserInfo;
-var MenuContainer = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  margin: 5px 0;\n  > span {\n    font-weight: 500;\n    font-size: 10px;\n    line-height: 15px;\n    padding: 0px 13px;\n    color: ", ";\n  }\n  > button {\n    width: 100%;\n    text-align: initial;\n  }\n\n  > span {\n    font-weight: 500;\n    font-size: 10px;\n    line-height: 15px;\n    padding: 20px;\n    color: ", ";\n  }\n\n  ", "\n"])), function (props) {
+var MenuContainer = exports.MenuContainer = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  margin: 5px 0;\n  > span {\n    font-weight: 500;\n    font-size: 10px;\n    line-height: 15px;\n    padding: 0px 13px;\n    color: ", ";\n  }\n  > button {\n    width: 100%;\n    text-align: initial;\n  }\n\n  > span {\n    font-weight: 500;\n    font-size: 10px;\n    line-height: 15px;\n    padding: 20px;\n    color: ", ";\n  }\n\n  ", "\n"])), function (props) {
   return props.theme.colors.lightGray;
 }, function (props) {
   return props.theme.colors.lightGray;
@@ -70,10 +62,8 @@ var MenuContainer = _styledComponents.default.div(_templateObject19 || (_templat
     return props.theme.colors.disabled;
   });
 });
-exports.MenuContainer = MenuContainer;
-var MenuContent = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  padding: 5px 0;\n"])));
-exports.MenuContent = MenuContent;
-var SubMenu = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  padding: 5px 0;\n  font-size: 14px;\n  color: ", ";\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  border-radius: 8px;\n\n  &:hover {\n    background-color: ", ";\n  }\n\n  ", "\n  ", "\n\n  ", "\n"])), function (props) {
+var MenuContent = exports.MenuContent = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  padding: 5px 0;\n"])));
+var SubMenu = exports.SubMenu = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  padding: 5px 0;\n  font-size: 14px;\n  color: ", ";\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  border-radius: 8px;\n\n  &:hover {\n    background-color: ", ";\n  }\n\n  ", "\n  ", "\n\n  ", "\n"])), function (props) {
   return props.theme.colors.lightGray;
 }, function (props) {
   return props.theme.colors.lightPrimary;
@@ -91,16 +81,12 @@ var SubMenu = _styledComponents.default.div(_templateObject22 || (_templateObjec
   var _props$theme5;
   return (_props$theme5 = props.theme) !== null && _props$theme5 !== void 0 && _props$theme5.rtl ? (0, _styledComponents.css)(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n    padding-right: 40px;\n  "]))) : (0, _styledComponents.css)(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n    padding-left: 40px;\n  "])));
 });
-exports.SubMenu = SubMenu;
-var LanguageSelectorContainer = _styledComponents.default.div(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  position: relative;\n  border-radius: 8px;\n  min-height: 35px;\n\n  &:hover {\n    background-color: ", ";\n  }\n\n  .options {\n    > div {\n      font-size: 14px;\n    }\n  }\n"])), function (props) {
+var LanguageSelectorContainer = exports.LanguageSelectorContainer = _styledComponents.default.div(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  position: relative;\n  border-radius: 8px;\n  min-height: 35px;\n\n  &:hover {\n    background-color: ", ";\n  }\n\n  .options {\n    > div {\n      font-size: 14px;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.lightPrimary;
 });
-exports.LanguageSelectorContainer = LanguageSelectorContainer;
-var PoweredWrapper = _styledComponents.default.div(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  text-align: center;\n  font-size: 14px;\n  font-weight: 600;\n"])));
-exports.PoweredWrapper = PoweredWrapper;
-var MobileMessage = _styledComponents.default.div(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  position: fixed;\n  top: 100px;\n  left: calc(50% - 130px);\n  z-index: 999;\n  background: ", ";\n  border: 1px solid ", ";\n  box-sizing: border-box;\n  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n  border-radius: 7.6px;\n  width: 260px;\n  > div {\n    padding: 15px 15px 10px 15px;\n    font-size: 12px;\n    line-height: 18px;\n    position: relative;\n    > svg {\n      position: absolute;\n      top: 3px;\n      right: 3px;\n      cursor: pointer;\n      font-size: 21px;\n    }\n  }\n"])), function (props) {
+var PoweredWrapper = exports.PoweredWrapper = _styledComponents.default.div(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  text-align: center;\n  font-size: 14px;\n  font-weight: 600;\n"])));
+var MobileMessage = exports.MobileMessage = _styledComponents.default.div(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  position: fixed;\n  top: 100px;\n  left: calc(50% - 130px);\n  z-index: 999;\n  background: ", ";\n  border: 1px solid ", ";\n  box-sizing: border-box;\n  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n  border-radius: 7.6px;\n  width: 260px;\n  > div {\n    padding: 15px 15px 10px 15px;\n    font-size: 12px;\n    line-height: 18px;\n    position: relative;\n    > svg {\n      position: absolute;\n      top: 3px;\n      right: 3px;\n      cursor: pointer;\n      font-size: 21px;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.backgroundInfo;
 }, function (props) {
   return props.theme.colors.primary;
 });
-exports.MobileMessage = MobileMessage;
