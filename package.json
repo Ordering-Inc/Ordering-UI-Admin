@@ -61,8 +61,6 @@
     "@handsontable/react": "^9.0.1",
     "@meronex/icons": "^4.0.0",
     "@popperjs/core": "^2.5.4",
-    "@sentry/react": "^5.27.4",
-    "@sentry/tracing": "^5.27.4",
     "@stripe/react-stripe-js": "^2.1.0",
     "@stripe/stripe-js": "^1.54.0",
     "body-scroll-lock": "^4.0.0-beta.0",
