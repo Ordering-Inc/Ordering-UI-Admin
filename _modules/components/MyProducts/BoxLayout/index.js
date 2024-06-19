@@ -6,8 +6,8 @@ Object.defineProperty(exports, "__esModule", {
 exports.BoxLayout = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _styles = require("./styles");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-var BoxLayout = function BoxLayout(props) {
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+var BoxLayout = exports.BoxLayout = function BoxLayout(props) {
   var photo = props.photo,
     title = props.title,
     description = props.description,
@@ -17,4 +17,3 @@ var BoxLayout = function BoxLayout(props) {
     alt: ""
   }), /*#__PURE__*/_react.default.createElement(_styles.InfoWrapper, null, /*#__PURE__*/_react.default.createElement("h2", null, title), /*#__PURE__*/_react.default.createElement("p", null, description), children));
 };
-exports.BoxLayout = BoxLayout;

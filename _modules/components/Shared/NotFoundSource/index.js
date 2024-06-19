@@ -8,8 +8,8 @@ var _react = _interopRequireDefault(require("react"));
 var _styledComponents = require("styled-components");
 var _styles = require("../../../styles");
 var _styles2 = require("./styles");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-var NotFoundSource = function NotFoundSource(props) {
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+var NotFoundSource = exports.NotFoundSource = function NotFoundSource(props) {
   var _theme$images;
   var content = props.content,
     btnTitle = props.btnTitle,
@@ -27,4 +27,3 @@ var NotFoundSource = function NotFoundSource(props) {
     }
   }, btnTitle)));
 };
-exports.NotFoundSource = NotFoundSource;

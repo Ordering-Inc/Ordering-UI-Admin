@@ -1,11 +1,11 @@
 /*!
- * Cropper.js v1.6.0
+ * Cropper.js v1.6.2
  * https://fengyuanchen.github.io/cropperjs
  *
  * Copyright 2015-present Chen Fengyuan
  * Released under the MIT license
  *
- * Date: 2023-08-26T08:14:25.104Z
+ * Date: 2024-04-21T07:43:02.731Z
  */
 
 .cropper-container {
@@ -15,6 +15,7 @@
   position: relative;
   -ms-touch-action: none;
       touch-action: none;
+  -webkit-touch-callout: none;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
@@ -64,7 +65,7 @@
   display: block;
   height: 100%;
   outline: 1px solid #39f;
-  outline-color: rgba(51, 153, 255, 75%);
+  outline-color: rgba(51, 153, 255, 0.75);
   overflow: hidden;
   width: 100%;
 }
@@ -107,7 +108,7 @@
 .cropper-center::before,
   .cropper-center::after {
     background-color: #eee;
-    content: " ";
+    content: ' ';
     display: block;
     position: absolute;
   }
@@ -264,7 +265,7 @@
 .cropper-point.point-se::before {
     background-color: #39f;
     bottom: -50%;
-    content: " ";
+    content: ' ';
     display: block;
     height: 200%;
     opacity: 0;
@@ -278,7 +279,7 @@
 }
 
 .cropper-bg {
-  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAAA3NCSVQICAjb4U/gAAAABlBMVEXMzMz////TjRV2AAAACXBIWXMAAArrAAAK6wGCiw1aAAAAHHRFWHRTb2Z0d2FyZQBBZG9iZSBGaXJld29ya3MgQ1M26LyyjAAAABFJREFUCJlj+M/AgBVhF/0PAH6/D/HkDxOGAAAAAElFTkSuQmCC");
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAAA3NCSVQICAjb4U/gAAAABlBMVEXMzMz////TjRV2AAAACXBIWXMAAArrAAAK6wGCiw1aAAAAHHRFWHRTb2Z0d2FyZQBBZG9iZSBGaXJld29ya3MgQ1M26LyyjAAAABFJREFUCJlj+M/AgBVhF/0PAH6/D/HkDxOGAAAAAElFTkSuQmCC');
 }
 
 .cropper-hide {
@@ -14330,6 +14331,12 @@ a.text-dark:hover, a.text-dark:focus {
   cursor: default;
 }
 
+.jsoneditor,
+.jsoneditor-modal {
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
+
 .jsoneditor input,
 .jsoneditor input:not([type]),
 .jsoneditor input[type=text],
@@ -14932,6 +14939,7 @@ a.text-dark:hover, a.text-dark:focus {
 
 div.jsoneditor-field,
 div.jsoneditor-value,
+a.jsoneditor-value,
 div.jsoneditor-readonly,
 div.jsoneditor-default {
   border: 1px solid transparent;
@@ -14941,16 +14949,14 @@ div.jsoneditor-default {
   padding: 2px;
   margin: 1px;
   word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
   float: left;
 }
 
 div.jsoneditor-field p,
 div.jsoneditor-value p {
   margin: 0;
-}
-
-div.jsoneditor-value {
-  word-break: break-word;
 }
 
 div.jsoneditor-value.jsoneditor-empty::after {
@@ -17464,6 +17470,14 @@ button.rbc-input::-moz-focus-inner {
   margin-left: 10px;
 }
 
+@media (max-width: 767px) {
+  .rbc-toolbar {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
 .rbc-event, .rbc-day-slot .rbc-background-event {
   border: none;
   -webkit-box-sizing: border-box;
