@@ -41,6 +41,11 @@ export const Table = styled.table`
           `}
           box-sizing: border-box;
         }
+        &:nth-child(2) {
+          width: 10%;
+          padding-left: 15px;
+          padding-right: 15px;
+        }
         &:nth-child(3) {
           width: 15%;
           padding-left: 15px;
@@ -73,8 +78,13 @@ export const Table = styled.table`
         `}
         box-sizing: border-box;
       }
+      &:nth-child(2) {
+        width: 10%;
+        padding-left: 15px;
+        padding-right: 15px;
+      }
       &:nth-child(3) {
-        width: 20%;
+        width: 15%;
         padding-left: 15px;
         padding-right: 15px;
       }

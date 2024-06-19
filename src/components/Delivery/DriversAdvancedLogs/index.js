@@ -63,7 +63,6 @@ export const DriversAdvancedLogsUI = (props) => {
                   <th>{t('EVENTS_TYPE', 'Events type')}</th>
                   <th>{t('DETAILS', 'Details')}</th>
                   <th>{t('EXPORT_DATE', 'Date')}</th>
-                  <th>{t('USER_AGENT', 'User agent')}</th>
                 </tr>
               </thead>
               {logsList.loading ? (
@@ -109,11 +108,10 @@ export const DriversAdvancedLogsUI = (props) => {
                       </td>
                       <td>
                         <DataListTable>
-                          {console.log(log?.data)}
                           {log?.data && getValidLogData(log?.data).map((item, i) => (
                             <tbody key={i}>
                               <tr>
-                                <td>{getAttributeName(item)}</td>
+                                <td>{JSON.stringify(getAttributeName(item))}</td>
                               </tr>
                             </tbody>
                           ))}
@@ -123,9 +121,6 @@ export const DriversAdvancedLogsUI = (props) => {
                         <DateTimeWrapper>
                           {parseDate(log.created_at, { utc: false })}
                         </DateTimeWrapper>
-                      </td>
-                      <td>
-                        {log?.user_agent}
                       </td>
                     </tr>
                   </tbody>
