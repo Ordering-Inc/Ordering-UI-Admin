@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom'
 import { Router } from './template/router'
 import { OrderingProvider } from 'ordering-components-admin'
 import { Alert } from './src/components/Shared'
-import * as Sentry from '@sentry/react'
-import { Integrations } from '@sentry/tracing'
 import { ThemeProvider } from './src/contexts/ThemeContext'
 import { ConfigFileContext } from './src/contexts/ConfigFileContext'
 import { InfoShareProvider } from './src/contexts/InfoShareContext'
@@ -292,82 +290,6 @@ import franchise from './template/assets/images/preview/franchise.png'
 import singleStore from './template/assets/images/preview/single-store.png'
 
 import { AutologinParams } from './template/components/AutologinParams'
-
-if (!(window?.location?.hostname === 'localhost')) {
-  Sentry.init({
-    environment: process.env.NODE_ENV,
-    dsn: 'https://ee8c5677dcce40e5a0740ecdb222f357@o460529.ingest.sentry.io/5681485',
-    integrations: [
-      new Integrations.BrowserTracing()
-    ],
-    release: 'ordering-ui-admin@' + process.env.npm_package_version,
-    // Release health
-    autoSessionTracking: true,
-    ignoreErrors: [
-      'is not defined',
-      'is not a function',
-      'can\'t find variable',
-      'objects are not valid',
-      'element type is invalid',
-      'TypeError: Failed to fetch',
-      'TypeError: NetworkError when attempting to fetch resource.',
-      'TypeError: Cancelled',
-      'TypeError: cancelado',
-      'is not defined',
-      "Can't find variable",
-      'NotAllowedError',
-      'SecurityError',
-      'Element type is invalid',
-      'undefined is not an object',
-      // Random plugins/extensions
-      'top.GLOBALS',
-      // See: http://blog.errorception.com/2012/03/tale-of-unfindable-js-error.html
-      'originalCreateNotification',
-      'canvas.contentDocument',
-      'MyApp_RemoveAllHighlights',
-      'http://tt.epicplay.com',
-      'Can\'t find variable: ZiteReader',
-      'jigsaw is not defined',
-      'ComboSearch is not defined',
-      'http://loading.retry.widdit.com/',
-      'atomicFindClose',
-      // Facebook borked
-      'fb_xd_fragment',
-      // ISP "optimizing" proxy - `Cache-Control: no-transform` seems to reduce this. (thanks @acdha)
-      // See http://stackoverflow.com/questions/4113268/how-to-stop-javascript-injection-from-vodafone-proxy
-      'bmi_SafeAddOnload',
-      'EBCallBackMessageReceived',
-      // See http://toolbar.conduit.com/Developer/HtmlAndGadget/Methods/JSInjection.aspx
-      'conduitPage',
-      // Generic error code from errors outside the security sandbox
-      // You can delete this if using raven.js > 1.0, which ignores these automatically.
-      'Script error.',
-      // Avast extension error
-      "_avast_submit"
-    ],
-    denyUrls: [
-      // Google Adsense
-      /pagead\/js/i,
-      // Facebook flakiness
-      /graph\.facebook\.com/i,
-      // Facebook blocked
-      /connect\.facebook\.net\/en_US\/all\.js/i,
-      // Woopra flakiness
-      /eatdifferent\.com\.woopra-ns\.com/i,
-      /static\.woopra\.com\/js\/woopra\.js/i,
-      // Chrome extensions
-      /extensions\//i,
-      /^chrome:\/\//i,
-      // Other plugins
-      /127\.0\.0\.1:4001\/isrunning/i,  // Cacaoweb
-      /webappstoolbarba\.texthelp\.com\//i,
-      /metrics\.itunes\.apple\.com\.edgesuite\.net\//i
-    ],
-    // We recommend adjusting this value in production, or using tracesSampler
-    // for finer control
-    tracesSampleRate: 0.2
-  })
-}
 
 const logos = {
   logotype,
