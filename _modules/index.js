@@ -909,6 +909,12 @@ Object.defineProperty(exports, "DriverSelector", {
     return _Orders.DriverSelector;
   }
 });
+Object.defineProperty(exports, "DriversAdvancedLogs", {
+  enumerable: true,
+  get: function get() {
+    return _Delivery.DriversAdvancedLogs;
+  }
+});
 Object.defineProperty(exports, "DriversBusyStatusFilter", {
   enumerable: true,
   get: function get() {
