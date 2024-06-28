@@ -74,7 +74,7 @@ var RefundToWallet = exports.RefundToWallet = function RefundToWallet(props) {
     refundOptions = _useState14[0],
     setRefundOptions = _useState14[1];
   var onSubmit = function onSubmit(formData) {
-    var _order$summary;
+    var _order$summary$total, _order$summary;
     if (!selectedRefundOption) {
       setAlertState({
         open: true,
@@ -87,7 +87,7 @@ var RefundToWallet = exports.RefundToWallet = function RefundToWallet(props) {
       data.order_payment_event_id = selectedRefundOption;
     }
     if (formData.description) data.description = formData.description;
-    data.amount = isRefundAll ? (order === null || order === void 0 || (_order$summary = order.summary) === null || _order$summary === void 0 ? void 0 : _order$summary.total) || (order === null || order === void 0 ? void 0 : order.total) : formData.amount;
+    data.amount = isRefundAll ? (_order$summary$total = order === null || order === void 0 || (_order$summary = order.summary) === null || _order$summary === void 0 ? void 0 : _order$summary.total) !== null && _order$summary$total !== void 0 ? _order$summary$total : order === null || order === void 0 ? void 0 : order.total : formData.amount;
     data.transfer_to = selectedRefundOption !== 'cash_wallet' ? 'source' : 'cash_wallet';
     handleOrderRefund(data);
   };
@@ -104,7 +104,7 @@ var RefundToWallet = exports.RefundToWallet = function RefundToWallet(props) {
     }
   }, [errors]);
   (0, _react.useEffect)(function () {
-    var _order$paymethod, _order$payment_events, _order$summary2, _order$payment_events2;
+    var _order$paymethod, _order$payment_events, _order$summary$total2, _order$summary2, _order$payment_events2;
     setSelectedRefundOption(null);
     setRefundDisabled(false);
     setRefundAllDisabled(false);
@@ -118,7 +118,7 @@ var RefundToWallet = exports.RefundToWallet = function RefundToWallet(props) {
     }).reduce(function (total, event) {
       return total + ((event === null || event === void 0 ? void 0 : event.amount) || 0);
     }, 0)) || 0;
-    if (totalRefundAmount === ((order === null || order === void 0 || (_order$summary2 = order.summary) === null || _order$summary2 === void 0 ? void 0 : _order$summary2.total) || (order === null || order === void 0 ? void 0 : order.total))) {
+    if (totalRefundAmount === ((_order$summary$total2 = order === null || order === void 0 || (_order$summary2 = order.summary) === null || _order$summary2 === void 0 ? void 0 : _order$summary2.total) !== null && _order$summary$total2 !== void 0 ? _order$summary$total2 : order === null || order === void 0 ? void 0 : order.total)) {
       setRefundDisabled(true);
     }
     if (totalRefundAmount) {
