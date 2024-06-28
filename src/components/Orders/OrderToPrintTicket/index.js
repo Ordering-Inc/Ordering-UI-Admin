@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react'
-import { verifyDecimals } from '../../../utils'
+import { getCurrenySymbol, verifyDecimals } from '../../../utils'
 import { useUtils, useLanguage, useConfig } from 'ordering-components-admin'
 import { PrintContainer, PrintTextContainer, ProductComments, ProdcutCommentsContainer, Products, InfoContainer, InsideInfo2, InsideInfo, PrintProductsContainer, PrintProducts } from './styles'
 
@@ -50,8 +50,8 @@ export const OrderToPrintTicket = forwardRef((props, ref) => {
 
   const getSuboptions = (suboptions) => {
     const array = []
-    suboptions?.length > 0 &&
-      suboptions?.map((suboption) => {
+    suboptions && suboptions.length > 0 &&
+      suboptions.map((suboption) => {
         const string = `${getFormattedSubOptionName(suboption)}`
         array.push(string)
       })
@@ -59,11 +59,22 @@ export const OrderToPrintTicket = forwardRef((props, ref) => {
     return array.join('')
   }
 
+  const getIncludedTaxes = (isDeliveryFee) => {
+    if (!order?.taxes) return 0
+    if (order?.taxes?.length === 0) {
+      return order.tax_type === 1 ? order?.summary?.tax ?? 0 : 0
+    } else {
+      return order?.taxes.reduce((taxIncluded, tax) => {
+        return taxIncluded + (((!isDeliveryFee && tax.type === 1 && tax.target === 'product') || (isDeliveryFee && tax.type === 1 && tax.target === 'delivery_fee')) ? tax.summary?.tax : 0)
+      }, 0)
+    }
+  }
+
   const getOptions = (options, productComment = '') => {
     const array = []
 
-    options?.length &&
-    options?.map((option) => {
+    options && options.length &&
+    options.map((option) => {
       const string =
         `${option.name} ${getSuboptions(option.suboptions)}`
       array.push(string)
@@ -175,9 +186,9 @@ export const OrderToPrintTicket = forwardRef((props, ref) => {
         </InsideInfo>
         <InsideInfo2>
           {parsePrice(
-          order?.tax_type === 1
-            ? order?.summary?.subtotal + order?.summary?.tax ?? 0
-            : order?.summary?.subtotal ?? 0
+            order?.tax_type === 1
+              ? order?.summary?.subtotal + order?.summary?.tax ?? 0
+              : order?.summary?.subtotal ?? 0
           )}
         </InsideInfo2>
       </InfoContainer>
@@ -213,7 +224,7 @@ export const OrderToPrintTicket = forwardRef((props, ref) => {
             {t('DELIVERY_FEE', 'Delivery Fee')}
           </InsideInfo>
           <InsideInfo2>
-            {parsePrice(order?.summary?.delivery_price)}
+            {parsePrice(order?.summary?.delivery_price + getIncludedTaxes(true), { currency: getCurrenySymbol(order?.currency) })}
           </InsideInfo2>
         </InfoContainer>
       )}
@@ -249,3 +260,5 @@ export const OrderToPrintTicket = forwardRef((props, ref) => {
     </PrintContainer>
   )
 })
+
+OrderToPrintTicket.displayName = 'OrderToPrintTicket'
