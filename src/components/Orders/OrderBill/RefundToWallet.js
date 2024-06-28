@@ -54,7 +54,7 @@ export const RefundToWallet = (props) => {
       data.order_payment_event_id = selectedRefundOption
     }
     if (formData.description) data.description = formData.description
-    data.amount = isRefundAll ? (order?.summary?.total || order?.total) : formData.amount
+    data.amount = isRefundAll ? (order?.summary?.total ?? order?.total) : formData.amount
     data.transfer_to = selectedRefundOption !== 'cash_wallet' ? 'source' : 'cash_wallet'
     handleOrderRefund(data)
   }
@@ -79,7 +79,7 @@ export const RefundToWallet = (props) => {
     }
     if (!order?.payment_events) return
     const totalRefundAmount = order?.payment_events?.filter(item => item.event === 'refund').reduce((total, event) => total + (event?.amount || 0), 0) || 0
-    if (totalRefundAmount === (order?.summary?.total || order?.total)) {
+    if (totalRefundAmount === (order?.summary?.total ?? order?.total)) {
       setRefundDisabled(true)
     }
     if (totalRefundAmount) {
