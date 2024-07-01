@@ -252,7 +252,7 @@ export const OrderBill = (props) => {
         <tbody>
           <tr>
             <td>{t('TOTAL', 'Total')}</td>
-            <td>{parsePrice(order?.summary?.total || order?.total, { currency: getCurrenySymbol(order?.currency) })}</td>
+            <td>{parsePrice(order?.summary?.total ?? order?.total, { currency: getCurrenySymbol(order?.currency) })}</td>
           </tr>
         </tbody>
       </table>
