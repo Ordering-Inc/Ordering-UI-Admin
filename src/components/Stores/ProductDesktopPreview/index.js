@@ -2,9 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useLanguage, useUtils } from 'ordering-components-admin'
 import { XLg } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
-import { Checkbox, TextArea, Button } from '../../../styles'
-import MdRadioButtonChecked from '@meronex/icons/md/MdRadioButtonChecked'
-import MdRadioButtonUnchecked from '@meronex/icons/md/MdRadioButtonUnchecked'
+import { Checkbox, TextArea, Button, RadioButton } from '../../../styles'
 import BsDashCircle from '@meronex/icons/bs/BsDashCircle'
 import BsPlusCircle from '@meronex/icons/bs/BsPlusCircle'
 import BsCircleHalf from '@meronex/icons/bs/BsCircleHalf'
@@ -311,31 +309,28 @@ export const ProductDesktopPreview = (props) => {
                                       option.suboptions.map(suboption => {
                                         const currentState = productCart.options[`id:${option?.id}`]?.suboptions[`id:${suboption?.id}`] || {}
                                         const price = option?.with_half_option && suboption?.half_price && currentState.position !== 'whole' ? suboption?.half_price : suboption?.price
+                                        const inputId = `${suboption.id}`
                                         return suboption?.enabled ? (
                                           <ProductSuboptionContainer
                                             key={suboption?.id}
                                           >
                                             <IconControl>
                                               {((option?.min === 0 && option?.max === 1) || option?.max > 1) ? (
-                                                <Checkbox defaultChecked={currentState?.selected} />
+                                                <Checkbox id={inputId} defaultChecked={currentState?.selected} />
                                               ) : (
-                                                currentState?.selected ? (
-                                                  <MdRadioButtonChecked />
-                                                ) : (
-                                                  <MdRadioButtonUnchecked disabled />
-                                                )
+                                                <RadioButton id={inputId} />
                                               )}
                                             </IconControl>
                                             {suboption.image && suboption.image !== '-' && (
                                               <SubOptionThumbnail src={suboption.image} />
                                             )}
                                             <SuoptionText>
-                                              <div>{suboption?.name}</div>
+                                              <div><label htmlFor={inputId}>{suboption?.name}</label></div>
                                             </SuoptionText>
                                             {option?.allow_suboption_quantity && (
                                               <QuantityControl>
                                                 <BsDashCircle />
-                                                {currentState.quantity}
+                                                {currentState.quantity || 1}
                                                 <BsPlusCircle />
                                               </QuantityControl>
                                             )}

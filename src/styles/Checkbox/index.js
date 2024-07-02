@@ -54,3 +54,56 @@ export const Checkbox = styled.input.attrs({ type: 'checkbox' })`
     `}
   }
 `
+export const RadioButton = styled.input.attrs({ type: 'checkbox' })`
+  position: relative;
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+  border: none;
+  appearance: none;
+
+  &:before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    top: 0;
+    left: 0;
+    border: 1px solid #B1BCCC;
+    border-radius: 50%;
+    background: ${props => props.theme.colors?.backgroundPage || '#FFF'};
+  }
+
+  &:checked:before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    top: 0;
+    ${props => props.theme?.rtl ? css`
+      right: 0;
+    ` : css`
+      left: 0;
+    `}
+    background-color: ${props => props.theme.colors.primary};
+    border: none;
+  }
+
+  &:checked:after {
+    content: "";
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+    position: absolute;
+    top: 5.2px;
+    ${props => props.theme?.rtl ? css`
+      right: 5.1px;
+    ` : css`
+      left: 5.1px;
+    `}
+  }
+`
