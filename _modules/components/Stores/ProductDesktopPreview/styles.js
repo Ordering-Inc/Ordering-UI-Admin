@@ -26,7 +26,7 @@ var DesktopBackground = exports.DesktopBackground = _styledComponents.default.di
     return props.theme.colors.gray;
   });
 });
-var ProductInfoModalPreview = exports.ProductInfoModalPreview = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  max-width: 500px;\n  width: 100%;\n  height: 100%;\n  border-radius: 8px;\n  position: relative;\n  \n  ", "\n\n  ", "\n"])), function (_ref3) {
+var ProductInfoModalPreview = exports.ProductInfoModalPreview = _styledComponents.default.div(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  max-width: 500px;\n  width: 100%;\n  height: 100%;\n  border-radius: 8px;\n  position: relative;\n\n  ", "\n\n  ", "\n"])), function (_ref3) {
   var isMobileView = _ref3.isMobileView;
   return !isMobileView && (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n    background: ", ";\n  "])), function (props) {
     return props.theme.colors.backgroundPage;
@@ -109,7 +109,7 @@ var OptionWrapHeader = exports.OptionWrapHeader = _styledComponents.default.div(
   var _props$theme$colors2;
   return ((_props$theme$colors2 = props.theme.colors) === null || _props$theme$colors2 === void 0 ? void 0 : _props$theme$colors2.backgroundPage) || '#FFF';
 });
-var OptionTitleContainer = exports.OptionTitleContainer = _styledComponents.default.div(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["\n  margin: 0px;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  white-space: nowrap;\n  width: 70%;\n  display: flex;\n  align-items: center;  \n\n  *:first-child {\n    margin-right: 8px;\n  }\n"])));
+var OptionTitleContainer = exports.OptionTitleContainer = _styledComponents.default.div(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["\n  margin: 0px;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  white-space: nowrap;\n  width: 70%;\n  display: flex;\n  align-items: center;\n\n  *:first-child {\n    margin-right: 8px;\n  }\n"])));
 var OptionTitle = exports.OptionTitle = _styledComponents.default.h3(_templateObject37 || (_templateObject37 = _taggedTemplateLiteral(["\n  font-size: 14px;\n  display: flex;\n  flex-direction: column;\n  margin-bottom: 0;\n\n  span {\n    &:not(:first-child) {\n      color: ", ";\n      font-size: 12px;\n      font-weight: 400;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.grayTextColor;
 });
@@ -130,11 +130,11 @@ var SubOptionThumbnail = exports.SubOptionThumbnail = _styledComponents.default.
   var src = _ref12.src;
   return src;
 });
-var SuoptionText = exports.SuoptionText = _styledComponents.default.div(_templateObject45 || (_templateObject45 = _taggedTemplateLiteral(["\n  flex: 1 1 auto;\n  display: flex;\n  font-weight: 300;\n  color: #555;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  margin: 0 5px;\n  font-size: 12px;\n\n  div {\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n  }\n\n  span {\n    margin-left: 10px;\n    font-weight: 500;\n    color: ", ";\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    ", "\n  }\n"])), function (props) {
+var SuoptionText = exports.SuoptionText = _styledComponents.default.div(_templateObject45 || (_templateObject45 = _taggedTemplateLiteral(["\n  flex: 1 1 auto;\n  display: flex;\n  font-weight: 300;\n  color: #555;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  margin: 0 5px;\n  font-size: 12px;\n\n  div {\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n  }\n\n  span {\n    margin-left: 10px;\n    font-weight: 500;\n    color: ", ";\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    ", "\n  }\n  label {\n    margin: 0;\n  }\n"])), function (props) {
   return props.theme.colors.primary;
 }, function (props) {
   var _props$theme4;
-  return ((_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.rtl) && (0, _styledComponents.css)(_templateObject46 || (_templateObject46 = _taggedTemplateLiteral(["\n      margin-left: 0;\n      margin-right: 10px;    \n    "])));
+  return ((_props$theme4 = props.theme) === null || _props$theme4 === void 0 ? void 0 : _props$theme4.rtl) && (0, _styledComponents.css)(_templateObject46 || (_templateObject46 = _taggedTemplateLiteral(["\n      margin-left: 0;\n      margin-right: 10px;\n    "])));
 });
 var QuantityControl = exports.QuantityControl = _styledComponents.default.div(_templateObject47 || (_templateObject47 = _taggedTemplateLiteral(["\n  display: flex;\n  color: #555;\n  align-items: center;\n  font-weight: 300;\n  font-size: 12px;\n  margin: 0 5px;\n\n  svg {\n    color: ", ";\n    font-size: 16px;\n    margin-right: 3px;\n    ", "\n  }\n\n  svg[disabled] {\n    color: #CBCBCB;\n  }\n\n  svg:last-child {\n    margin-left: 3px;\n    margin-right: 0;\n    ", "\n  }\n"])), function (props) {
   return props.theme.colors.primary;
