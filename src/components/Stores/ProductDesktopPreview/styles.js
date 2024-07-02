@@ -38,7 +38,7 @@ export const ProductInfoModalPreview = styled.div`
   height: 100%;
   border-radius: 8px;
   position: relative;
-  
+
   ${({ isMobileView }) => !isMobileView && css`
     background: ${props => props.theme.colors.backgroundPage};
   `}
@@ -314,7 +314,7 @@ export const OptionTitleContainer = styled.div`
   white-space: nowrap;
   width: 70%;
   display: flex;
-  align-items: center;  
+  align-items: center;
 
   *:first-child {
     margin-right: 8px;
@@ -434,8 +434,11 @@ export const SuoptionText = styled.div`
     text-overflow: ellipsis;
     ${props => props.theme?.rtl && css`
       margin-left: 0;
-      margin-right: 10px;    
+      margin-right: 10px;
     `}
+  }
+  label {
+    margin: 0;
   }
 `
 
