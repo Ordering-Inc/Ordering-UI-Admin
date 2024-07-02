@@ -1,5 +1,5 @@
 import { Button, IconButton, LinkButton } from './Buttons'
-import { Checkbox } from './Checkbox'
+import { Checkbox, RadioButton } from './Checkbox'
 import { Input, TextArea } from './Inputs'
 import { MultiSelect } from './MultiSelect'
 import { Select as SecondSelect } from './Select'
@@ -12,6 +12,7 @@ export {
   IconButton,
   LinkButton,
   Checkbox,
+  RadioButton,
   Input,
   MultiSelect,
   Switch,
