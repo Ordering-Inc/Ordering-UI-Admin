@@ -59,6 +59,10 @@ export const OrderToPrintTicket = forwardRef((props, ref) => {
     return array.join('')
   }
 
+  const getIncludedTaxesDiscounts = () => {
+    return order?.taxes?.filter(tax => (tax?.type === 1 && tax?.target === 'product'))?.reduce((carry, tax) => carry + (tax?.summary?.tax_after_discount ?? tax?.summary?.tax), 0)
+  }
+
   const getIncludedTaxes = (isDeliveryFee) => {
     if (!order?.taxes) return 0
     if (order?.taxes?.length === 0) {
@@ -185,38 +189,107 @@ export const OrderToPrintTicket = forwardRef((props, ref) => {
           {t('SUBTOTAL', 'Subtotal')}
         </InsideInfo>
         <InsideInfo2>
-          {parsePrice(
-            order?.tax_type === 1
-              ? order?.summary?.subtotal + order?.summary?.tax ?? 0
-              : order?.summary?.subtotal ?? 0
-          )}
+          {parsePrice(((order?.summary?.subtotal ?? order?.subtotal) + getIncludedTaxes()), { currency: getCurrenySymbol(order?.currency) })}
         </InsideInfo2>
       </InfoContainer>
-      <InfoContainer>
-        {order?.summary?.discount > 0
-          ? order?.offer_type === 1
-            ? <InsideInfo>{t('DISCOUNT', 'Discount')} ({verifyDecimals(order?.offer_rate, parsePrice)}%)</InsideInfo>
-            : <InsideInfo> {t('DISCOUNT', 'Discount')}</InsideInfo>
-          : ''}
-        {order?.summary?.discount > 0
-          ? <InsideInfo2>- {parsePrice(order?.summary?.discount)}</InsideInfo2>
-          : ''}
-      </InfoContainer>
 
-      {order?.tax_type !== 1 && (
+      {(order?.summary?.discount > 0 ?? order?.discount > 0) && order?.offers?.length === 0 && (
+        <InfoContainer>
+          {order?.offer_type === 1
+            ? (
+              <InsideInfo>
+                {t('DISCOUNT', 'Discount')}{' '}
+                {`(${verifyDecimals(order?.offer_rate, parsePrice)}%)`}
+              </InsideInfo>
+            ) : (
+              <InsideInfo>{t('DISCOUNT', 'Discount')}</InsideInfo>
+            )}
+          <InsideInfo2>- {parsePrice(order?.summary?.discount ?? order?.discount, { currency: getCurrenySymbol(order?.currency) })}</InsideInfo2>
+        </InfoContainer>
+      )}
+
+      {order?.offers?.length > 0 && order?.offers?.filter(offer => offer?.target === 1)?.map(offer => (
+        <InfoContainer key={offer.id}>
+          <InsideInfo>
+            {t(offer?.name?.toUpperCase()?.replaceAll(' ', '_'), offer.name)}
+            {offer.rate_type === 1 && (
+              `${' '}${`(${verifyDecimals(offer?.rate, parsePrice)}%)`}`
+            )}
+          </InsideInfo>
+          <InsideInfo2>
+            - {parsePrice(offer?.summary?.discount, { currency: getCurrenySymbol(order?.currency) })}
+          </InsideInfo2>
+        </InfoContainer>))}
+
+      {order?.summary?.subtotal_with_discount > 0 && order?.summary?.discount > 0 && order?.summary?.total >= 0 && (
+        <InfoContainer>
+          <InsideInfo>{t('SUBTOTAL_WITH_DISCOUNT', 'Subtotal with discount')}</InsideInfo>
+          {order?.tax_type === 1
+            ? <InsideInfo2>{parsePrice((order?.summary?.subtotal_with_discount + getIncludedTaxesDiscounts() ?? 0), { currency: getCurrenySymbol(order?.currency) })}</InsideInfo2>
+            : <InsideInfo2>{parsePrice(order?.summary?.subtotal_with_discount ?? 0, { currency: getCurrenySymbol(order?.currency) })}</InsideInfo2>}
+        </InfoContainer>
+      )}
+
+      {order?.taxes?.length === 0 && order?.tax_type === 2 && (
         <>
           <InfoContainer>
             <InsideInfo>
               {t('TAX', 'Tax')}
               {' '}
-              {`(${verifyDecimals(order?.summary?.tax_rate, parseNumber)}%)`}
+              {`(${verifyDecimals(order?.tax, parseNumber)}%)`}
             </InsideInfo>
             <InsideInfo2>
-              {parsePrice(order?.summary?.tax ?? 0)}
+              {parsePrice(order?.summary?.tax ?? 0, { currency: getCurrenySymbol(order?.currency) })}
             </InsideInfo2>
           </InfoContainer>
         </>
       )}
+
+      {order?.fees?.length === 0 && (
+        <InfoContainer>
+          <InsideInfo>
+            {t('SERVICE_FEE', 'Service fee')}
+            {' '}
+            {`(${verifyDecimals(order?.service_fee, parseNumber)}%)`}
+          </InsideInfo>
+          <InsideInfo2>{parsePrice(order?.summary?.service_fee ?? 0, { currency: getCurrenySymbol(order?.currency) })}</InsideInfo2>
+        </InfoContainer>
+      )}
+
+      {order?.taxes?.length > 0 && order?.taxes?.filter(tax => tax?.type === 2 && tax?.rate !== 0 && tax?.target === 'product').map(tax => (
+        <InfoContainer key={tax?.id}>
+          <InsideInfo>
+            {t(tax?.name?.toUpperCase()?.replaceAll(' ', '_'), tax?.name) || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
+            {' '}
+            {`(${verifyDecimals(tax?.rate, parseNumber)}%)`}
+          </InsideInfo>
+          <InsideInfo2>{parsePrice(tax?.summary?.tax_after_discount ?? tax?.summary?.tax ?? 0, { currency: getCurrenySymbol(order?.currency) })}</InsideInfo2>
+        </InfoContainer>
+      ))}
+
+      {order?.fees?.length > 0 && order?.fees?.filter(fee => !(fee?.fixed === 0 && fee?.percentage === 0))?.map(fee => (
+        <InfoContainer key={fee.id}>
+          <InsideInfo>
+            {t(fee?.name?.toUpperCase()?.replace(/ /g, '_'), fee?.name) || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
+            ({fee?.fixed > 0 && `${parsePrice(fee?.fixed)} + `}{fee.percentage}%)
+          </InsideInfo>
+          <InsideInfo2>{parsePrice(fee?.summary?.fixed + (fee?.summary?.percentage_after_discount ?? fee?.summary?.percentage) ?? 0, { currency: getCurrenySymbol(order?.currency) })}</InsideInfo2>
+        </InfoContainer>
+      ))}
+
+      {order?.offers?.length > 0 && order?.offers?.filter(offer => offer?.target === 3)?.map(offer => (
+        <InfoContainer key={offer.id}>
+          <InsideInfo>
+            {t(offer.name?.toUpperCase()?.replace(/ /g, '_'), offer.name)}
+            {offer.rate_type === 1 && (
+              `${' '}${`(${verifyDecimals(offer?.rate, parsePrice)}%)`}`
+            )}
+          </InsideInfo>
+          <InsideInfo2>
+            - {parsePrice(offer?.summary?.discount, { currency: getCurrenySymbol(order?.currency) })}
+          </InsideInfo2>
+        </InfoContainer>
+      ))}
 
       {order?.summary?.delivery_price > 0 && (
         <InfoContainer>
@@ -229,23 +302,37 @@ export const OrderToPrintTicket = forwardRef((props, ref) => {
         </InfoContainer>
       )}
 
+      {order?.taxes?.length > 0 && order?.taxes?.filter(tax => tax?.type === 2 && tax?.rate !== 0 && tax?.target === 'delivery_fee').map(tax => (
+        <InfoContainer key={tax?.id}>
+          <InsideInfo>
+            {t(tax?.name?.toUpperCase()?.replace(/ /g, '_'), tax?.name) || t('INHERIT_FROM_BUSINESS', 'Inherit from business')}
+            {' '}{`(${verifyDecimals(tax?.rate, parseNumber)}%)`}
+          </InsideInfo>
+          <InsideInfo2>{parsePrice(tax?.summary?.tax_after_discount ?? tax?.summary?.tax ?? 0)}</InsideInfo2>
+        </InfoContainer>
+      ))}
+
+      {order?.offers?.length > 0 && order?.offers?.filter(offer => offer?.target === 2)?.map(offer => (
+        <InfoContainer key={offer.id}>
+          <InsideInfo>
+            {t(offer?.name?.toUpperCase()?.replaceAll(' ', '_'), offer.name)}
+            {offer.rate_type === 1 && (
+              `${' '}${`(${verifyDecimals(offer?.rate, parsePrice)}%)`}`
+            )}
+          </InsideInfo>
+          <InsideInfo2>
+            - {parsePrice(offer?.summary?.discount, { currency: getCurrenySymbol(order?.currency) })}
+          </InsideInfo2>
+        </InfoContainer>
+      ))}
+
       <InfoContainer>
         <InsideInfo>
           {t('DRIVER_TIP', 'Driver tip')}
           {percentTip ? `(${percentTip}%)` : ''}
         </InsideInfo>
         <InsideInfo2>
-          {parsePrice(order?.summary?.driver_tip ?? 0)}
-        </InsideInfo2>
-      </InfoContainer>
-
-      <InfoContainer>
-        <InsideInfo>
-          {t('SERVICE_FEE', 'Service Fee')}
-          ({verifyDecimals(order?.summary?.service_fee, parseNumber)}%)
-        </InsideInfo>
-        <InsideInfo2>
-          {parsePrice(order?.summary?.service_fee ?? 0)}
+          {parsePrice(order?.summary?.driver_tip ?? order?.totalDriverTip, { currency: getCurrenySymbol(order?.currency) })}
         </InsideInfo2>
       </InfoContainer>
 
