@@ -59,7 +59,8 @@ var BusinessDeliveryPickupMore = exports.BusinessDeliveryPickupMore = function B
   };
   (0, _react.useEffect)(function () {
     var tab = query.get('tab');
-    if (tab) {
+    var tabs = ['delivery', 'pickup', 'driver_delivery_group', 'advanced_eta'];
+    if (tab && tabs.includes(tab)) {
       handleTabClick(tab, true);
     } else {
       handleTabClick('delivery');
