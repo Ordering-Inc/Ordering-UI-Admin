@@ -76,7 +76,8 @@ export const BusinessOrderingChannels = (props) => {
 
   useEffect(() => {
     const tab = query.get('tab')
-    if (tab) {
+    const tabs = ['custom_slug', 'widgets']
+    if (tab && tabs.includes(tab)) {
       handleChangeOption(tab, true)
     } else {
       handleChangeOption('custom_slug')

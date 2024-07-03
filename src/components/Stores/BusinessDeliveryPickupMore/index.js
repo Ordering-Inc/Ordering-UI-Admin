@@ -43,7 +43,8 @@ export const BusinessDeliveryPickupMore = (props) => {
 
   useEffect(() => {
     const tab = query.get('tab')
-    if (tab) {
+    const tabs = ['delivery', 'pickup', 'driver_delivery_group', 'advanced_eta']
+    if (tab && tabs.includes(tab)) {
       handleTabClick(tab, true)
     } else {
       handleTabClick('delivery')

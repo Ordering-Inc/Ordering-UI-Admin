@@ -49,7 +49,8 @@ export const BusinessDetail = (props) => {
 
   useEffect(() => {
     const tab = query.get('tab')
-    if (tab) {
+    const tabs = ['information', 'owner', 'categories', 'location', 'images', 'videos', 'seo_options']
+    if (tab && tabs.includes(tab)) {
       setSelctedInfoItem(tab)
     } else {
       handleSelectInfoItem('information')
