@@ -383,7 +383,7 @@ export const ProductDesktopPreview = (props) => {
                       <FiMinusCircle
                         className={`${productCart.quantity === 1 || isSoldOut ? 'disabled' : ''}`}
                       />
-                      <span>{productCart.quantity}</span>
+                      <span>{productCart.quantity || 1}</span>
                       <FiPlusCircle
                         className={`${isSoldOut ? 'disabled' : ''}`}
                       />

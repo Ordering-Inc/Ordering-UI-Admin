@@ -4,7 +4,7 @@ import BsChevronRight from '@meronex/icons/bs/BsChevronRight'
 import BiImage from '@meronex/icons/bi/BiImage'
 import { XLg, ThreeDots, Laptop, Phone, ArrowsAngleContract, ArrowsAngleExpand } from 'react-bootstrap-icons'
 import { Switch } from '../../../styles/Switch'
-import { IconButton } from '../../../styles'
+import { IconButton, Button } from '../../../styles'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
 import { Confirm, Modal, ProgressRing } from '../../Shared'
@@ -45,7 +45,8 @@ export const ProductSummary = (props) => {
     showProductOption,
     isExpand,
     setIsExpand,
-    handleDuplicateProduct
+    handleDuplicateProduct,
+    getProduct
   } = props
 
   const [, t] = useLanguage()
@@ -318,6 +319,13 @@ export const ProductSummary = (props) => {
         <ProductPreviewHeader>
           <h1>{t('PREVIEW', 'Preview')}</h1>
           <div>
+            <Button
+              color='primary'
+              borderRadius='7.6px'
+              onClick={() => getProduct()}
+            >
+              {t('RELOAD', 'Reload')}
+            </Button>
             <IconButton
               color={selectedView === 'desktop' ? 'primary' : 'black'}
               onClick={() => setSelectedView('desktop')}
