@@ -39,7 +39,7 @@ const SingleBusinessProductUI = (props) => {
     productDetailsId,
     dataSelected,
     business,
-
+    taxes,
     handleDragStart,
     handleDragOver,
     handleDrop,
@@ -122,7 +122,7 @@ const SingleBusinessProductUI = (props) => {
     return () => document.removeEventListener('click', closeProductEdit)
   }, [productFormState])
 
-  const taxProduct = productFormState?.changes?.tax ?? business?.tax
+  const taxProduct = productFormState?.changes?.tax ?? taxes?.[`id:${productFormState?.changes?.tax_id}`] ?? business?.tax
   const taxProductType = taxProduct?.type || business?.tax_type
   const taxProductTypeString = taxProductType === 1 ? t('INCLUDED_ON_PRICE', 'Included on price') : t('NOT_INCLUDED_ON_PRICE', 'Not included on price')
 
