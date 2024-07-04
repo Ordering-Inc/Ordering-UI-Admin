@@ -60,7 +60,8 @@ var BusinessDetail = exports.BusinessDetail = function BusinessDetail(props) {
   }, [selectedInfoItem]);
   (0, _react.useEffect)(function () {
     var tab = query.get('tab');
-    if (tab) {
+    var tabs = ['information', 'owner', 'categories', 'location', 'images', 'videos', 'seo_options'];
+    if (tab && tabs.includes(tab)) {
       setSelctedInfoItem(tab);
     } else {
       handleSelectInfoItem('information');
