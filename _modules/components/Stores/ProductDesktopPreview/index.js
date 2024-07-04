@@ -33,7 +33,7 @@ function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" !=
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 _swiper.default.use([_swiper.Navigation, _swiper.Thumbs]);
 var ProductDesktopPreview = exports.ProductDesktopPreview = function ProductDesktopPreview(props) {
-  var _product$product, _product$product2, _theme$defaultLanguag, _product$ingredients, _product$extras, _product$ingredients2, _product$extras2, _product$ingredients3, _theme$defaultLanguag2, _product$extras3;
+  var _product$product, _product$product2, _theme$defaultLanguag, _product$ingredients, _product$extras, _product$ingredients2, _product$extras2, _product$ingredients3, _theme$defaultLanguag2, _product$extras3, _productCart$quantity;
   var product = props.product,
     productCart = props.productCart,
     showProductOption = props.showProductOption,
@@ -275,7 +275,7 @@ var ProductDesktopPreview = exports.ProductDesktopPreview = function ProductDesk
     className: "incdec-control"
   }, /*#__PURE__*/_react.default.createElement(_FiMinusCircle.default, {
     className: "".concat(productCart.quantity === 1 || isSoldOut ? 'disabled' : '')
-  }), /*#__PURE__*/_react.default.createElement("span", null, productCart.quantity), /*#__PURE__*/_react.default.createElement(_FiPlusCircle.default, {
+  }), /*#__PURE__*/_react.default.createElement("span", null, (_productCart$quantity = productCart.quantity) !== null && _productCart$quantity !== void 0 ? _productCart$quantity : 1), /*#__PURE__*/_react.default.createElement(_FiPlusCircle.default, {
     className: "".concat(isSoldOut ? 'disabled' : '')
   })), productCart && !isSoldOut && /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
