@@ -1,8 +1,9 @@
 import { useLanguage, useUtils } from 'ordering-components-admin'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Image } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
-import { getOrderStatus } from '../../../utils'
+import { ConfigFileContext } from '../../../contexts/ConfigFileContext'
+import { getOrderStatusPrefix as getOrderStatus } from '../../../utils'
 export const InvoiceBusinessPdf = (props) => {
   const {
     exportInvoiceList,
@@ -11,12 +12,14 @@ export const InvoiceBusinessPdf = (props) => {
   } = props
 
   const theme = useTheme()
-  const [, t] = useLanguage()
+  const [{ dictionary }, t] = useLanguage()
   const [{ parseDate, parsePrice }] = useUtils()
+  const [configFile] = useContext(ConfigFileContext)
+  const prefixForVariable = configFile.app_internal_name.toUpperCase()
 
   const styles = {
     root: {
-      fontFamily: 'Helvetica, Arial, sans-serif',
+      fontFamily: 'Noto Sans Georgian, sans-serif',
       color: '#333'
     },
     table: {
@@ -150,7 +153,7 @@ export const InvoiceBusinessPdf = (props) => {
               <tr key={i}>
                 <td style={styles.table.tbody.tr.td}>{order.id}</td>
                 <td style={styles.table.tbody.tr.td}>{parseDate(order.delivery_datetime, { utc: false })}</td>
-                <td style={styles.table.tbody.tr.td}>{getOrderStatus(order.status).value}</td>
+                <td style={styles.table.tbody.tr.td}>{getOrderStatus(order.status, dictionary, prefixForVariable)}</td>
                 <td style={styles.table.tbody.tr.tdNumber}>{parsePrice(getSubtotal(order))}</td>
                 <td style={styles.table.tbody.tr.tdNumber}>{parsePrice(getTotal(order))}</td>
               </tr>
