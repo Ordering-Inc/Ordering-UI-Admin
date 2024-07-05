@@ -10,8 +10,6 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _styledComponents = require("styled-components");
 var _styles = require("../../../styles");
-var _MdRadioButtonChecked = _interopRequireDefault(require("@meronex/icons/md/MdRadioButtonChecked"));
-var _MdRadioButtonUnchecked = _interopRequireDefault(require("@meronex/icons/md/MdRadioButtonUnchecked"));
 var _BsDashCircle = _interopRequireDefault(require("@meronex/icons/bs/BsDashCircle"));
 var _BsPlusCircle = _interopRequireDefault(require("@meronex/icons/bs/BsPlusCircle"));
 var _BsCircleHalf = _interopRequireDefault(require("@meronex/icons/bs/BsCircleHalf"));
@@ -35,7 +33,7 @@ function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" !=
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 _swiper.default.use([_swiper.Navigation, _swiper.Thumbs]);
 var ProductDesktopPreview = exports.ProductDesktopPreview = function ProductDesktopPreview(props) {
-  var _product$product, _product$product2, _theme$defaultLanguag, _product$ingredients, _product$extras, _product$ingredients2, _product$extras2, _product$ingredients3, _theme$defaultLanguag2, _product$extras3;
+  var _product$product, _product$product2, _theme$defaultLanguag, _product$ingredients, _product$extras, _product$ingredients2, _product$extras2, _product$ingredients3, _theme$defaultLanguag2, _product$extras3, _productCart$quantity;
   var product = props.product,
     productCart = props.productCart,
     showProductOption = props.showProductOption,
@@ -238,15 +236,19 @@ var ProductDesktopPreview = exports.ProductDesktopPreview = function ProductDesk
         var _productCart$options;
         var currentState = ((_productCart$options = productCart.options["id:".concat(option === null || option === void 0 ? void 0 : option.id)]) === null || _productCart$options === void 0 ? void 0 : _productCart$options.suboptions["id:".concat(suboption === null || suboption === void 0 ? void 0 : suboption.id)]) || {};
         var price = option !== null && option !== void 0 && option.with_half_option && suboption !== null && suboption !== void 0 && suboption.half_price && currentState.position !== 'whole' ? suboption === null || suboption === void 0 ? void 0 : suboption.half_price : suboption === null || suboption === void 0 ? void 0 : suboption.price;
+        var inputId = "".concat(suboption.id);
         return suboption !== null && suboption !== void 0 && suboption.enabled ? /*#__PURE__*/_react.default.createElement(_styles2.ProductSuboptionContainer, {
           key: suboption === null || suboption === void 0 ? void 0 : suboption.id
         }, /*#__PURE__*/_react.default.createElement(_styles2.IconControl, null, (option === null || option === void 0 ? void 0 : option.min) === 0 && (option === null || option === void 0 ? void 0 : option.max) === 1 || (option === null || option === void 0 ? void 0 : option.max) > 1 ? /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
+          id: inputId,
           defaultChecked: currentState === null || currentState === void 0 ? void 0 : currentState.selected
-        }) : currentState !== null && currentState !== void 0 && currentState.selected ? /*#__PURE__*/_react.default.createElement(_MdRadioButtonChecked.default, null) : /*#__PURE__*/_react.default.createElement(_MdRadioButtonUnchecked.default, {
-          disabled: true
+        }) : /*#__PURE__*/_react.default.createElement(_styles.RadioButton, {
+          id: inputId
         })), suboption.image && suboption.image !== '-' && /*#__PURE__*/_react.default.createElement(_styles2.SubOptionThumbnail, {
           src: suboption.image
-        }), /*#__PURE__*/_react.default.createElement(_styles2.SuoptionText, null, /*#__PURE__*/_react.default.createElement("div", null, suboption === null || suboption === void 0 ? void 0 : suboption.name)), (option === null || option === void 0 ? void 0 : option.allow_suboption_quantity) && /*#__PURE__*/_react.default.createElement(_styles2.QuantityControl, null, /*#__PURE__*/_react.default.createElement(_BsDashCircle.default, null), currentState.quantity, /*#__PURE__*/_react.default.createElement(_BsPlusCircle.default, null)), (option === null || option === void 0 ? void 0 : option.with_half_option) && /*#__PURE__*/_react.default.createElement(_styles2.PositionControl, null, /*#__PURE__*/_react.default.createElement(_BsCircleHalf.default, {
+        }), /*#__PURE__*/_react.default.createElement(_styles2.SuoptionText, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("label", {
+          htmlFor: inputId
+        }, suboption === null || suboption === void 0 ? void 0 : suboption.name))), (option === null || option === void 0 ? void 0 : option.allow_suboption_quantity) && /*#__PURE__*/_react.default.createElement(_styles2.QuantityControl, null, /*#__PURE__*/_react.default.createElement(_BsDashCircle.default, null), currentState.quantity || 1, /*#__PURE__*/_react.default.createElement(_BsPlusCircle.default, null)), (option === null || option === void 0 ? void 0 : option.with_half_option) && /*#__PURE__*/_react.default.createElement(_styles2.PositionControl, null, /*#__PURE__*/_react.default.createElement(_BsCircleHalf.default, {
           className: ['reverse', currentState.selected && currentState.position === 'left' ? 'selected' : null].filter(function (classname) {
             return classname;
           }).join(' ')
@@ -273,7 +275,7 @@ var ProductDesktopPreview = exports.ProductDesktopPreview = function ProductDesk
     className: "incdec-control"
   }, /*#__PURE__*/_react.default.createElement(_FiMinusCircle.default, {
     className: "".concat(productCart.quantity === 1 || isSoldOut ? 'disabled' : '')
-  }), /*#__PURE__*/_react.default.createElement("span", null, productCart.quantity), /*#__PURE__*/_react.default.createElement(_FiPlusCircle.default, {
+  }), /*#__PURE__*/_react.default.createElement("span", null, (_productCart$quantity = productCart.quantity) !== null && _productCart$quantity !== void 0 ? _productCart$quantity : 1), /*#__PURE__*/_react.default.createElement(_FiPlusCircle.default, {
     className: "".concat(isSoldOut ? 'disabled' : '')
   })), productCart && !isSoldOut && /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",

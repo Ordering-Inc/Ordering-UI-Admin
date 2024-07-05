@@ -45,6 +45,12 @@ Object.defineProperty(exports, "MultiSelect", {
     return _MultiSelect.MultiSelect;
   }
 });
+Object.defineProperty(exports, "RadioButton", {
+  enumerable: true,
+  get: function get() {
+    return _Checkbox.RadioButton;
+  }
+});
 Object.defineProperty(exports, "SecondSelect", {
   enumerable: true,
   get: function get() {

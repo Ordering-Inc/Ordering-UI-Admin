@@ -43,7 +43,8 @@ var ProductSummary = exports.ProductSummary = function ProductSummary(props) {
     showProductOption = props.showProductOption,
     isExpand = props.isExpand,
     setIsExpand = props.setIsExpand,
-    handleDuplicateProduct = props.handleDuplicateProduct;
+    handleDuplicateProduct = props.handleDuplicateProduct,
+    getProduct = props.getProduct;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -234,7 +235,13 @@ var ProductSummary = exports.ProductSummary = function ProductSummary(props) {
       setIsProductPreview(false);
       setSelectedView('desktop');
     }
-  }, /*#__PURE__*/_react.default.createElement(_styles2.ProductPreviewHeader, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PREVIEW', 'Preview')), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.ProductPreviewHeader, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PREVIEW', 'Preview')), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    color: "primary",
+    borderRadius: "7.6px",
+    onClick: function onClick() {
+      return getProduct();
+    }
+  }, t('RELOAD', 'Reload')), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: selectedView === 'desktop' ? 'primary' : 'black',
     onClick: function onClick() {
       return setSelectedView('desktop');
