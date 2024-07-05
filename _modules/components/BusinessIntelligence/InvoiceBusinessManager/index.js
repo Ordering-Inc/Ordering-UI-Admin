@@ -101,6 +101,10 @@ var InvoiceBusinessManagerUI = function InvoiceBusinessManagerUI(props) {
     ref: inputRef,
     type: "hidden",
     name: "html"
+  }), /*#__PURE__*/_react.default.createElement("input", {
+    value: "1",
+    type: "hidden",
+    name: "with_doctype"
   }), /*#__PURE__*/_react.default.createElement("button", {
     ref: submitBtnRef,
     type: "submit"

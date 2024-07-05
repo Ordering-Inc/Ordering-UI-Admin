@@ -9,6 +9,7 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 var _react = _interopRequireWildcard(require("react"));
 var _reactBootstrap = require("react-bootstrap");
 var _styledComponents = require("styled-components");
+var _ConfigFileContext = require("../../../contexts/ConfigFileContext");
 var _utils = require("../../../utils");
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
@@ -29,15 +30,20 @@ var InvoiceBusinessPdf = exports.InvoiceBusinessPdf = function InvoiceBusinessPd
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
+    dictionary = _useLanguage2[0].dictionary,
     t = _useLanguage2[1];
   var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
     _useUtils2 = _slicedToArray(_useUtils, 1),
     _useUtils2$ = _useUtils2[0],
     parseDate = _useUtils2$.parseDate,
     parsePrice = _useUtils2$.parsePrice;
+  var _useContext = (0, _react.useContext)(_ConfigFileContext.ConfigFileContext),
+    _useContext2 = _slicedToArray(_useContext, 1),
+    configFile = _useContext2[0];
+  var prefixForVariable = configFile.app_internal_name.toUpperCase();
   var styles = {
     root: {
-      fontFamily: 'Helvetica, Arial, sans-serif',
+      fontFamily: 'Noto Sans Georgian, sans-serif',
       color: '#333'
     },
     table: {
@@ -188,7 +194,7 @@ var InvoiceBusinessPdf = exports.InvoiceBusinessPdf = function InvoiceBusinessPd
       utc: false
     })), /*#__PURE__*/_react.default.createElement("td", {
       style: styles.table.tbody.tr.td
-    }, (0, _utils.getOrderStatus)(order.status).value), /*#__PURE__*/_react.default.createElement("td", {
+    }, (0, _utils.getOrderStatusPrefix)(order.status, dictionary, prefixForVariable)), /*#__PURE__*/_react.default.createElement("td", {
       style: styles.table.tbody.tr.tdNumber
     }, parsePrice(getSubtotal(order))), /*#__PURE__*/_react.default.createElement("td", {
       style: styles.table.tbody.tr.tdNumber
