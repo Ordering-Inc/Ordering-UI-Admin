@@ -110,6 +110,7 @@ const InvoiceBusinessManagerUI = (props) => {
       }
       <Form target='_blank' action={`${ordering.root}/pdf/html`} method='POST'>
         <input ref={inputRef} type='hidden' name='html' />
+        <input value='1' type='hidden' name='with_doctype' />
         <button ref={submitBtnRef} type='submit' />
       </Form>
       <InvoicePdfWrapper ref={invoicePdfRef}>

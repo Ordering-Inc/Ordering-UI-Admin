@@ -16,7 +16,7 @@ export const InvoiceDriverPdf = (props) => {
 
   const styles = {
     root: {
-      fontFamily: 'Helvetica, Arial, sans-serif',
+      fontFamily: 'Noto Sans Georgian, sans-serif',
       color: '#333'
     },
     table: {
