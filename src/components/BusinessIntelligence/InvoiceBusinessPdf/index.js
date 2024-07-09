@@ -15,7 +15,7 @@ export const InvoiceBusinessPdf = (props) => {
   const [{ dictionary }, t] = useLanguage()
   const [{ parseDate, parsePrice }] = useUtils()
   const [configFile] = useContext(ConfigFileContext)
-  const prefixForVariable = configFile.app_internal_name.toUpperCase()
+  const prefixForVariable = configFile?.app_internal_name?.toUpperCase()
 
   const styles = {
     root: {
