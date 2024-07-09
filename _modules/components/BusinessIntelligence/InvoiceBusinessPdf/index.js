@@ -23,7 +23,7 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 var InvoiceBusinessPdf = exports.InvoiceBusinessPdf = function InvoiceBusinessPdf(props) {
-  var _theme$images, _exportInvoiceList$in, _exportInvoiceList$in2, _exportInvoiceList$in3, _exportInvoiceList$in4, _exportInvoiceList$in5, _exportInvoiceList$in6, _exportInvoiceList$in7, _exportInvoiceList$in8, _exportInvoiceList$in9, _exportInvoiceList$in10, _exportInvoiceList$in11, _exportInvoiceList$in12, _exportInvoiceList$in13, _exportInvoiceList$in14, _exportInvoiceList$in15, _exportInvoiceList$in16, _exportInvoiceList$in17, _exportInvoiceList$in18, _exportInvoiceList$in19, _exportInvoiceList$in20, _exportInvoiceList$in21, _exportInvoiceList$in22, _exportInvoiceList$in23, _exportInvoiceList$in24, _exportInvoiceList$in25, _exportInvoiceList$in26, _exportInvoiceList$in27, _exportInvoiceList$in28, _exportInvoiceList$in29, _exportInvoiceList$in30;
+  var _configFile$app_inter, _theme$images, _exportInvoiceList$in, _exportInvoiceList$in2, _exportInvoiceList$in3, _exportInvoiceList$in4, _exportInvoiceList$in5, _exportInvoiceList$in6, _exportInvoiceList$in7, _exportInvoiceList$in8, _exportInvoiceList$in9, _exportInvoiceList$in10, _exportInvoiceList$in11, _exportInvoiceList$in12, _exportInvoiceList$in13, _exportInvoiceList$in14, _exportInvoiceList$in15, _exportInvoiceList$in16, _exportInvoiceList$in17, _exportInvoiceList$in18, _exportInvoiceList$in19, _exportInvoiceList$in20, _exportInvoiceList$in21, _exportInvoiceList$in22, _exportInvoiceList$in23, _exportInvoiceList$in24, _exportInvoiceList$in25, _exportInvoiceList$in26, _exportInvoiceList$in27, _exportInvoiceList$in28, _exportInvoiceList$in29, _exportInvoiceList$in30;
   var exportInvoiceList = props.exportInvoiceList,
     getSubtotal = props.getSubtotal,
     getTotal = props.getTotal;
@@ -40,7 +40,7 @@ var InvoiceBusinessPdf = exports.InvoiceBusinessPdf = function InvoiceBusinessPd
   var _useContext = (0, _react.useContext)(_ConfigFileContext.ConfigFileContext),
     _useContext2 = _slicedToArray(_useContext, 1),
     configFile = _useContext2[0];
-  var prefixForVariable = configFile.app_internal_name.toUpperCase();
+  var prefixForVariable = configFile === null || configFile === void 0 || (_configFile$app_inter = configFile.app_internal_name) === null || _configFile$app_inter === void 0 ? void 0 : _configFile$app_inter.toUpperCase();
   var styles = {
     root: {
       fontFamily: 'Noto Sans Georgian, sans-serif',
