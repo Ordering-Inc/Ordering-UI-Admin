@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import { getStarWidth } from '../../../utils'
 import { useWindowSize } from '../../../hooks/useWindowSize'
@@ -7,8 +7,10 @@ import {
   DriverCard,
   WrapperImage,
   DriverInfo,
+  PaginationWrapper
 } from './styles'
 import { Driver } from './Driver'
+import { Pagination } from '../../Shared'
 
 export const DriversList = (props) => {
   const {
@@ -24,7 +26,13 @@ export const DriversList = (props) => {
   } = props
 
   const { width } = useWindowSize()
-
+  const [pagination, setPagination] = useState({
+    currentPage: 1,
+    pageSize: 10,
+    totalItems: null,
+    totalPages: null
+  })
+  const drivers = driversIsOnline ? onlineDrivers : offlineDrivers
   const handleClickDriver = (e, driver) => {
     const isInvalid = e.target.closest('.driver-orders')
     if (isInvalid) return
@@ -39,6 +47,40 @@ export const DriversList = (props) => {
     }
     handleOpenDriverOrders(driver)
   }
+
+  const filterFunction = (_, index) => {
+    const validation = pagination?.currentPage === 1
+      ? index < (pagination.pageSize * pagination.currentPage)
+      : (index >= (pagination.pageSize * (pagination.currentPage - 1))) && (index < (pagination.pageSize * pagination.currentPage))
+    return validation
+  }
+
+  const handleChangePage = (page) => {
+    setPagination({
+      ...pagination,
+      currentPage: page
+    })
+  }
+
+  const handleChangePageSize = (pageSize) => {
+    const expectedPage = Math.ceil(((pagination?.currentPage - 1) * pagination?.pageSize + 1) / pageSize)
+    setPagination({
+      ...pagination,
+      currentPage: expectedPage,
+      pageSize,
+      totalPages: Math.ceil(drivers?.length / pageSize)
+    })
+  }
+
+  useEffect(() => {
+    if (drivers?.length) {
+      setPagination({
+        ...pagination,
+        totalItems: drivers?.length,
+        totalPages: Math.ceil(drivers?.length / 10)
+      })
+    }
+  }, [drivers])
 
   return (
     <DriversListContainer showCompressedInfo={showCompressedInfo}>
@@ -64,7 +106,7 @@ export const DriversList = (props) => {
         </>
       ) : (
         <>
-          {(driversIsOnline ? onlineDrivers : offlineDrivers).map(driver => (
+          {drivers.filter(filterFunction).map(driver => (
             <Driver
               key={driver?.id}
               driver={driver}
@@ -77,6 +119,17 @@ export const DriversList = (props) => {
             />
           ))}
         </>
+      )}
+      {drivers?.length > 0 && (
+        <PaginationWrapper>
+          <Pagination
+            currentPage={pagination?.currentPage}
+            totalPages={pagination?.totalPages}
+            handleChangePage={handleChangePage}
+            handleChangePageSize={handleChangePageSize}
+            defaultPageSize={pagination?.pageSize}
+          />
+        </PaginationWrapper>
       )}
     </DriversListContainer>
   )

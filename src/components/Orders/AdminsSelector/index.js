@@ -29,6 +29,29 @@ export const AdminsSelector = (props) => {
   const [searchValue, setSearchValue] = useState(null)
   const adminsLoading = [{ value: 'default', content: <Option small={small}>{t('LOADING', 'loading')}...</Option> }]
   const Placeholder = <PlaceholderTitle>{t('SELECT_ADMINISTRATOR', 'Select the administrator')}</PlaceholderTitle>
+  const [pagination, setPagination] = useState({
+    currentPage: 1,
+    pageSize: 5,
+    totalItems: null,
+    totalPages: null
+  })
+
+  const handleChangePage = (page) => {
+    setPagination({
+      ...pagination,
+      currentPage: page
+    })
+  }
+
+  const handleChangePageSize = (pageSize) => {
+    const expectedPage = Math.ceil(((pagination?.currentPage - 1) * pagination?.pageSize + 1) / pageSize)
+    setPagination({
+      ...pagination,
+      currentPage: expectedPage,
+      pageSize,
+      totalPages: Math.ceil(adminsMultiOptionList?.length / pageSize)
+    })
+  }
 
   useEffect(() => {
     if (!adminsList?.loading && adminsList?.admins?.length > 0) {
@@ -61,6 +84,16 @@ export const AdminsSelector = (props) => {
     }
   }, [adminsList, defaultValue, searchValue])
 
+  useEffect(() => {
+    if (adminsMultiOptionList?.length) {
+      setPagination({
+        ...pagination,
+        totalItems: adminsMultiOptionList?.length,
+        totalPages: Math.ceil(adminsMultiOptionList?.length / 10)
+      })
+    }
+  }, [adminsMultiOptionList])
+
   return (
     <>
       {!adminsList?.loading ? (
@@ -76,6 +109,10 @@ export const AdminsSelector = (props) => {
           searchBarIsNotLazyLoad
           searchValue={searchValue}
           handleChangeSearch={(val) => setSearchValue(val)}
+          isHidePagecontrol
+          pagination={pagination}
+          handleChangePage={handleChangePage}
+          handleChangePageSize={handleChangePageSize}
         />
       ) : (
         <MultiSelect
@@ -94,4 +131,3 @@ export const AdminsSelector = (props) => {
     </>
   )
 }
-

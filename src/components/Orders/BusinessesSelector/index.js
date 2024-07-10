@@ -23,6 +23,29 @@ export const BusinessesSelector = (props) => {
   const [, t] = useLanguage()
   const [businessTypes, setBusinessTypes] = useState([])
   const [searchValue, setSearchValue] = useState('')
+  const [pagination, setPagination] = useState({
+    currentPage: 1,
+    pageSize: 5,
+    totalItems: null,
+    totalPages: null
+  })
+
+  const handleChangePage = (page) => {
+    setPagination({
+      ...pagination,
+      currentPage: page
+    })
+  }
+
+  const handleChangePageSize = (pageSize) => {
+    const expectedPage = Math.ceil(((pagination?.currentPage - 1) * pagination?.pageSize + 1) / pageSize)
+    setPagination({
+      ...pagination,
+      currentPage: expectedPage,
+      pageSize,
+      totalPages: Math.ceil(businessTypes?.length / pageSize)
+    })
+  }
 
   const Placeholder = <PlaceholderTitle>{t('SELECT_BUSINESS', 'Select business')}</PlaceholderTitle>
   const businessesLoading = [{ value: 'default', content: <Option>{t('BUSINESSES_LOADING', 'Businesses loading')}...</Option> }]
@@ -64,6 +87,16 @@ export const BusinessesSelector = (props) => {
     setBusinessTypes(_businessesOptionList)
   }, [businessesList, searchValue])
 
+  useEffect(() => {
+    if (businessTypes?.length) {
+      setPagination({
+        ...pagination,
+        totalItems: businessTypes?.length,
+        totalPages: Math.ceil(businessTypes?.length / 10)
+      })
+    }
+  }, [businessTypes])
+
   return (
     <>
       {!businessesList.loading ? (
@@ -80,6 +113,10 @@ export const BusinessesSelector = (props) => {
           searchBarIsNotLazyLoad
           searchValue={searchValue}
           handleChangeSearch={(val) => setSearchValue(val)}
+          isHidePagecontrol
+          pagination={pagination}
+          handleChangePage={handleChangePage}
+          handleChangePageSize={handleChangePageSize}
         />
       ) : (
         <MultiSelect
