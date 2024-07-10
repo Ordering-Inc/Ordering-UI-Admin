@@ -15,6 +15,29 @@ const CountryFilterUI = (props) => {
 
   const [searchValue, setSearchValue] = useState('')
   const [countryTypes, setCountryTypes] = useState([])
+  const [pagination, setPagination] = useState({
+    currentPage: 1,
+    pageSize: 5,
+    totalItems: null,
+    totalPages: null
+  })
+
+  const handleChangePage = (page) => {
+    setPagination({
+      ...pagination,
+      currentPage: page
+    })
+  }
+
+  const handleChangePageSize = (pageSize) => {
+    const expectedPage = Math.ceil(((pagination?.currentPage - 1) * pagination?.pageSize + 1) / pageSize)
+    setPagination({
+      ...pagination,
+      currentPage: expectedPage,
+      pageSize,
+      totalPages: Math.ceil(countryTypes?.length / pageSize)
+    })
+  }
 
   const placeholder = (
     <PlaceholderTitle>
@@ -43,6 +66,16 @@ const CountryFilterUI = (props) => {
     setCountryTypes(_countryList)
   }, [countriesState, searchValue])
 
+  useEffect(() => {
+    if (countryTypes?.length) {
+      setPagination({
+        ...pagination,
+        totalItems: countryTypes?.length,
+        totalPages: Math.ceil(countryTypes?.length / 10)
+      })
+    }
+  }, [countryTypes])
+
   return (
     <>
       {!countriesState.loading ? (
@@ -57,6 +90,10 @@ const CountryFilterUI = (props) => {
           searchBarIsNotLazyLoad
           searchValue={searchValue}
           handleChangeSearch={(val) => setSearchValue(val)}
+          isHidePagecontrol
+          pagination={pagination}
+          handleChangePage={handleChangePage}
+          handleChangePageSize={handleChangePageSize}
         />
       ) : (
         <SkeletonWrapper>

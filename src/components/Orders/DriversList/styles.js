@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components'
 
 export const DriversListContainer = styled.div`
   padding: 15px 0px;
+  position: relative;
   @media (min-width: 992px) {
     ${({ showCompressedInfo }) => showCompressedInfo && css`
       padding: 0px 0px;
@@ -25,7 +26,7 @@ export const DriverCard = styled.div`
   &:hover {
     background-color: ${props => props.theme.colors.lightPrimary};
   }
-  
+
   ${({ active }) => active && css`
     background-color: ${props => props.theme.colors.lightPrimary};
     border: 1px solid ${props => props.theme.colors.primary};
@@ -171,4 +172,14 @@ export const Timestatus = styled.div`
   ${({ timeState }) => timeState === 'delayed' && css`
     background-color: #E63757;
   `}
+`
+
+export const PaginationWrapper = styled.div`
+  position: sticky;
+  bottom: 0px;
+  background: #fff;
+  justify-content: center;
+  > div {
+    padding: 10px 5px 0px 5px;
+  }
 `

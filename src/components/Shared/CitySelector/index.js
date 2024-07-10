@@ -25,6 +25,29 @@ const CitySelectorUI = (props) => {
   const [cityOptions, setCityOptions] = useState([])
   const [searchValue, setSearchValue] = useState('')
   const placeholder = <PlaceholderTitle isDefault={isDefault}>{t('SELECT_CITY', 'Select City')}</PlaceholderTitle>
+  const [pagination, setPagination] = useState({
+    currentPage: 1,
+    pageSize: 5,
+    totalItems: null,
+    totalPages: null
+  })
+
+  const handleChangePage = (page) => {
+    setPagination({
+      ...pagination,
+      currentPage: page
+    })
+  }
+
+  const handleChangePageSize = (pageSize) => {
+    const expectedPage = Math.ceil(((pagination?.currentPage - 1) * pagination?.pageSize + 1) / pageSize)
+    setPagination({
+      ...pagination,
+      currentPage: expectedPage,
+      pageSize,
+      totalPages: Math.ceil(cityOptions?.length / pageSize)
+    })
+  }
 
   useEffect(() => {
     if (citiesList?.loading) return
@@ -46,6 +69,16 @@ const CitySelectorUI = (props) => {
       handleChangeCity(citiesList?.cities[0]?.id)
     }
   }, [cityOptions, isAddMode])
+
+  useEffect(() => {
+    if (cityOptions?.length) {
+      setPagination({
+        ...pagination,
+        totalItems: cityOptions?.length,
+        totalPages: Math.ceil(cityOptions?.length / 10)
+      })
+    }
+  }, [cityOptions])
 
   return (
     <>
@@ -75,6 +108,10 @@ const CitySelectorUI = (props) => {
               searchBarIsNotLazyLoad
               searchValue={searchValue}
               handleChangeSearch={(val) => setSearchValue(val)}
+              isHidePagecontrol
+              pagination={pagination}
+              handleChangePage={handleChangePage}
+              handleChangePageSize={handleChangePageSize}
             />
           )}
         </>

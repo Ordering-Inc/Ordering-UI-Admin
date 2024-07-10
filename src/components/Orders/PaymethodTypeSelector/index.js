@@ -16,6 +16,29 @@ export const PaymethodTypeSelector = (props) => {
   const [searchValue, setSearchValue] = useState('')
   const placeholder = <PlaceholderTitle>{t('SELECT_PAYMETHOD', 'Select paymethod')}</PlaceholderTitle>
   const paymthodsLoading = [{ value: 'default', content: <Option>{t('PAYMETHODS_LOADING', 'Paymethods loading')}...</Option> }]
+  const [pagination, setPagination] = useState({
+    currentPage: 1,
+    pageSize: 5,
+    totalItems: null,
+    totalPages: null
+  })
+
+  const handleChangePage = (page) => {
+    setPagination({
+      ...pagination,
+      currentPage: page
+    })
+  }
+
+  const handleChangePageSize = (pageSize) => {
+    const expectedPage = Math.ceil(((pagination?.currentPage - 1) * pagination?.pageSize + 1) / pageSize)
+    setPagination({
+      ...pagination,
+      currentPage: expectedPage,
+      pageSize,
+      totalPages: Math.ceil(paymethodsTypes?.length / pageSize)
+    })
+  }
 
   useEffect(() => {
     const _paymthodsOptionList = []
@@ -39,6 +62,16 @@ export const PaymethodTypeSelector = (props) => {
     setPaymethodsTypes(_paymthodsOptionList)
   }, [paymethodsList, searchValue])
 
+  useEffect(() => {
+    if (paymethodsTypes?.length) {
+      setPagination({
+        ...pagination,
+        totalItems: paymethodsTypes?.length,
+        totalPages: Math.ceil(paymethodsTypes?.length / 10)
+      })
+    }
+  }, [paymethodsTypes])
+
   return (
     <>
       {!paymethodsList.loading ? (
@@ -53,6 +86,10 @@ export const PaymethodTypeSelector = (props) => {
           searchBarIsNotLazyLoad
           searchValue={searchValue}
           handleChangeSearch={(val) => setSearchValue(val)}
+          isHidePagecontrol
+          pagination={pagination}
+          handleChangePage={handleChangePage}
+          handleChangePageSize={handleChangePageSize}
         />
       ) : (
         <MultiSelect

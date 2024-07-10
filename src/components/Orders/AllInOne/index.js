@@ -368,7 +368,7 @@ export const AllInOne = (props) => {
   const OrdersListControlProps = {
     ...props,
     UIComponent: OrdersManagerUI,
-    driversPropsToFetch: ['id', 'name', 'lastname', 'location', 'enabled', 'available', 'busy', 'driver_groups', 'assigned_orders_count', 'last_order_assigned_at', 'last_location_at', 'cellphone', 'photo', 'qualification']
+    driversPropsToFetch: ['id', 'name', 'lastname', 'location', 'enabled', 'available', 'busy', 'driver_groups.name', 'driver_groups.id', 'assigned_orders_count', 'photo']
   }
   return <OrdersManageController {...OrdersListControlProps} />
 }
