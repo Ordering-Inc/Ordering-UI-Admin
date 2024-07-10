@@ -19,7 +19,10 @@ function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) 
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
-var InterActOrderMarker = exports.InterActOrderMarker = function InterActOrderMarker(props) {
+var InterActOrderMarkerPropsAreEqual = function InterActOrderMarkerPropsAreEqual(prevProps, nextProps) {
+  return prevProps.image === nextProps.image && JSON.stringify(prevProps.customer) === JSON.stringify(nextProps.customer) && JSON.stringify(prevProps.business) === JSON.stringify(nextProps.business) && prevProps.timeStatus === nextProps.timeStatus && JSON.stringify(prevProps.driver) === JSON.stringify(nextProps.driver);
+};
+var InterActOrderMarker = exports.InterActOrderMarker = /*#__PURE__*/_react.default.memo(function (props) {
   var _driver$drivergroups, _theme$images;
   var image = props.image,
     customer = props.customer,
@@ -92,4 +95,4 @@ var InterActOrderMarker = exports.InterActOrderMarker = function InterActOrderMa
   }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, customer && /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null), driver && /*#__PURE__*/_react.default.createElement(_styles.MapMarkerImg, {
     bgimage: theme === null || theme === void 0 || (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.icons) === null || _theme$images === void 0 ? void 0 : _theme$images.noDriver
   }))));
-};
+}, InterActOrderMarkerPropsAreEqual);

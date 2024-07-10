@@ -379,7 +379,7 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
 var AllInOne = exports.AllInOne = function AllInOne(props) {
   var OrdersListControlProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: OrdersManagerUI,
-    driversPropsToFetch: ['id', 'name', 'lastname', 'location', 'enabled', 'available', 'busy', 'driver_groups', 'assigned_orders_count', 'last_order_assigned_at', 'last_location_at', 'cellphone', 'photo', 'qualification']
+    driversPropsToFetch: ['id', 'name', 'lastname', 'location', 'enabled', 'available', 'busy', 'driver_groups.name', 'driver_groups.id', 'assigned_orders_count', 'photo']
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.OrdersManage, OrdersListControlProps);
 };

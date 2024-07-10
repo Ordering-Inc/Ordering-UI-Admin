@@ -48,6 +48,28 @@ var CitySelectorUI = function CitySelectorUI(props) {
   var placeholder = /*#__PURE__*/_react.default.createElement(_styles.PlaceholderTitle, {
     isDefault: isDefault
   }, t('SELECT_CITY', 'Select City'));
+  var _useState5 = (0, _react.useState)({
+      currentPage: 1,
+      pageSize: 5,
+      totalItems: null,
+      totalPages: null
+    }),
+    _useState6 = _slicedToArray(_useState5, 2),
+    pagination = _useState6[0],
+    setPagination = _useState6[1];
+  var handleChangePage = function handleChangePage(page) {
+    setPagination(_objectSpread(_objectSpread({}, pagination), {}, {
+      currentPage: page
+    }));
+  };
+  var handleChangePageSize = function handleChangePageSize(pageSize) {
+    var expectedPage = Math.ceil((((pagination === null || pagination === void 0 ? void 0 : pagination.currentPage) - 1) * (pagination === null || pagination === void 0 ? void 0 : pagination.pageSize) + 1) / pageSize);
+    setPagination(_objectSpread(_objectSpread({}, pagination), {}, {
+      currentPage: expectedPage,
+      pageSize: pageSize,
+      totalPages: Math.ceil((cityOptions === null || cityOptions === void 0 ? void 0 : cityOptions.length) / pageSize)
+    }));
+  };
   (0, _react.useEffect)(function () {
     if (citiesList !== null && citiesList !== void 0 && citiesList.loading) return;
     var _cityOptions = citiesList === null || citiesList === void 0 ? void 0 : citiesList.cities.filter(function (option) {
@@ -73,6 +95,14 @@ var CitySelectorUI = function CitySelectorUI(props) {
       handleChangeCity(citiesList === null || citiesList === void 0 || (_citiesList$cities$ = citiesList.cities[0]) === null || _citiesList$cities$ === void 0 ? void 0 : _citiesList$cities$.id);
     }
   }, [cityOptions, isAddMode]);
+  (0, _react.useEffect)(function () {
+    if (cityOptions !== null && cityOptions !== void 0 && cityOptions.length) {
+      setPagination(_objectSpread(_objectSpread({}, pagination), {}, {
+        totalItems: cityOptions === null || cityOptions === void 0 ? void 0 : cityOptions.length,
+        totalPages: Math.ceil((cityOptions === null || cityOptions === void 0 ? void 0 : cityOptions.length) / 10)
+      }));
+    }
+  }, [cityOptions]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, citiesList !== null && citiesList !== void 0 && citiesList.loading ? /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     style: {
       height: '100%',
@@ -100,7 +130,11 @@ var CitySelectorUI = function CitySelectorUI(props) {
     searchValue: searchValue,
     handleChangeSearch: function handleChangeSearch(val) {
       return setSearchValue(val);
-    }
+    },
+    isHidePagecontrol: true,
+    pagination: pagination,
+    handleChangePage: handleChangePage,
+    handleChangePageSize: handleChangePageSize
   })));
 };
 var CitySelector = exports.CitySelector = function CitySelector(props) {
