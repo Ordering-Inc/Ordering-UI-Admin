@@ -12,6 +12,29 @@ export const CurrencyFilter = (props) => {
 
   const [, t] = useLanguage()
   const [searchValue, setSearchValue] = useState('')
+  const [pagination, setPagination] = useState({
+    currentPage: 1,
+    pageSize: 5,
+    totalItems: null,
+    totalPages: null
+  })
+
+  const handleChangePage = (page) => {
+    setPagination({
+      ...pagination,
+      currentPage: page
+    })
+  }
+
+  const handleChangePageSize = (pageSize) => {
+    const expectedPage = Math.ceil(((pagination?.currentPage - 1) * pagination?.pageSize + 1) / pageSize)
+    setPagination({
+      ...pagination,
+      currentPage: expectedPage,
+      pageSize,
+      totalPages: Math.ceil(currencyList?.length / pageSize)
+    })
+  }
 
   const placeholder = (
     <PlaceholderTitle>
@@ -40,6 +63,16 @@ export const CurrencyFilter = (props) => {
     setCountryTypes(_countryList)
   }, [currencyList, searchValue])
 
+  useEffect(() => {
+    if (currencyList?.length) {
+      setPagination({
+        ...pagination,
+        totalItems: currencyList?.length,
+        totalPages: Math.ceil(currencyList?.length / 10)
+      })
+    }
+  }, [currencyList])
+
   return (
     <MultiSelect
       placeholder={placeholder}
@@ -52,6 +85,10 @@ export const CurrencyFilter = (props) => {
       searchBarIsNotLazyLoad
       searchValue={searchValue}
       handleChangeSearch={(val) => setSearchValue(val)}
+      isHidePagecontrol
+      pagination={pagination}
+      handleChangePage={handleChangePage}
+      handleChangePageSize={handleChangePageSize}
     />
   )
 }
