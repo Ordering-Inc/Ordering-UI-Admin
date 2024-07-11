@@ -155,7 +155,10 @@ var ProductDetailsUI = function ProductDetailsUI(props) {
     handleShowOption: handleShowOption,
     extraOpen: extraOpen,
     isExpand: isExpand,
-    setIsExpand: setIsExpand
+    setIsExpand: setIsExpand,
+    formState: formState,
+    handleChangeFormState: handleChangeFormState,
+    handleUpdateClick: handleUpdateClick
   })), extraOpen && /*#__PURE__*/_react.default.createElement(_Shared.MoreSidebarLayout, {
     isExtendExtraOpen: isExtendExtraOpen,
     onClose: handleCloseExtraOpen

@@ -53,7 +53,7 @@ var ProductDescription = exports.ProductDescription = _styledComponents.default.
 var ProductConfigsContainer = exports.ProductConfigsContainer = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  border: 1px solid ", ";\n  border-radius: 8px;\n  margin-bottom: 50px;\n  overflow: hidden;\n  > div:first-child {\n    border-top: none !important;\n  }\n\n  > div:last-child {\n    border-bottom: none !important;\n  }\n"])), function (props) {
   return props.theme.colors.borderColor;
 });
-var ProductConfigOption = exports.ProductConfigOption = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  padding: 13px 15px;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  color: ", ";\n  border-bottom: 1px solid ", ";\n\n  &:hover {\n    background-color: ", ";\n  }\n  \n  ", "\n\n  span {\n    font-size: 12px;\n  }\n  svg {\n    font-size: 14px;\n  }\n"])), function (props) {
+var ProductConfigOption = exports.ProductConfigOption = _styledComponents.default.div(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  padding: 13px 15px;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  color: ", ";\n  border-bottom: 1px solid ", ";\n\n  &:hover {\n    background-color: ", ";\n  }\n\n  ", "\n\n  span {\n    font-size: 12px;\n  }\n  svg {\n    font-size: 14px;\n  }\n"])), function (props) {
   return props.theme.colors.lightGray;
 }, function (props) {
   return props.theme.colors.borderColor;
@@ -71,7 +71,7 @@ var ProductConfigOption = exports.ProductConfigOption = _styledComponents.defaul
     return props.theme.colors.primary;
   });
 });
-var ActionSelectorWrapper = exports.ActionSelectorWrapper = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  button {\n    display: flex;\n    background: transparent !important;\n    border: none;\n    padding: 5px;\n    border-radius: 8px;\n\n    &:active,\n    &:focus {\n      border-color: unset !important;\n      box-shadow: none !important;\n    }\n    svg {\n      color: ", ";\n      font-size: 20px;\n    }\n\n    &:after {\n      display: none;\n    }\n\n    &:hover {\n      background: ", " !important;\n      > svg {\n        color:  #151b26;\n      }\n    }\n    &:active {\n      background: ", " !important;\n    }\n  }\n\n  .show {\n    >div {\n      border: 1px solid ", ";\n      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n    }\n  }\n\n  > div {\n    > div {\n      border-radius: 8px;\n      .dropdown-item {\n        font-size: 12px;\n        color: ", ";\n        padding: 7px 20px;\n        &:active {\n          background: ", " !important;\n        }\n      }\n      .dropdown-item:last-child {\n        color: ", ";\n      }\n    }\n  }\n"])), function (props) {
+var ActionSelectorWrapper = exports.ActionSelectorWrapper = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  display: flex;\n\n  button {\n    display: flex;\n    background: transparent !important;\n    border: none;\n    padding: 5px;\n    border-radius: 8px;\n\n    &:active,\n    &:focus {\n      border-color: unset !important;\n      box-shadow: none !important;\n    }\n    svg {\n      color: ", ";\n      font-size: 20px;\n    }\n\n    &:after {\n      display: none;\n    }\n\n    &:hover {\n      background: ", " !important;\n      > svg {\n        color:  #151b26;\n      }\n    }\n    &:active {\n      background: ", " !important;\n    }\n  }\n\n  .show {\n    >div {\n      border: 1px solid ", ";\n      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n    }\n  }\n\n  > div {\n    > div {\n      border-radius: 8px;\n      .dropdown-item {\n        font-size: 12px;\n        color: ", ";\n        padding: 7px 20px;\n        &:active {\n          background: ", " !important;\n        }\n      }\n      .dropdown-item:last-child {\n        color: ", ";\n      }\n    }\n  }\n\n  .snooze {\n    background: ", " !important;\n    padding-left: 15px;\n    padding-right: 15px;\n    margin-right: 5px;\n  }\n"])), function (props) {
   return props.theme.colors.headingColor;
 }, function (props) {
   return props.theme.colors.secundary;
@@ -85,6 +85,8 @@ var ActionSelectorWrapper = exports.ActionSelectorWrapper = _styledComponents.de
   return (0, _polished.darken)(0.1, props.theme.colors.secundary);
 }, function (props) {
   return props.theme.colors.danger;
+}, function (props) {
+  return props.theme.colors.lightGreen;
 });
 var ProductPreviewHeader = exports.ProductPreviewHeader = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  border-right: 1px solid ", ";\n  ", "\n\n  h1 {\n    font-size: 20px;\n    font-weight: 700;\n    margin: 0;\n  }\n  > div {\n    display: flex;\n    button {\n      margin: 0 5px;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.borderColor;
@@ -103,7 +105,7 @@ var RolWrapper = exports.RolWrapper = _styledComponents.default.div(_templateObj
   return props.theme.colors.lightGray;
 });
 var ProductDetails = exports.ProductDetails = _styledComponents.default.div(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  display: flex;\n  justify-content: space-between;\n  flex-wrap: wrap;\n  padding: 10px 0;\n"])));
-var FieldsItem = exports.FieldsItem = _styledComponents.default.div(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 48%;\n  margin-bottom: 25px;\n  \n  h4 {\n    margin: 0;\n    font-weight: 600;\n    font-size: 16px;\n    line-height: 24px;\n    ", ";\n  }\n\n  p {\n    margin: 0;\n    font-size: 12px;\n    line-height: 18px;\n    ", ";\n  }\n"])), function (props) {
+var FieldsItem = exports.FieldsItem = _styledComponents.default.div(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  width: 48%;\n  margin-bottom: 25px;\n\n  h4 {\n    margin: 0;\n    font-weight: 600;\n    font-size: 16px;\n    line-height: 24px;\n    ", ";\n  }\n\n  p {\n    margin: 0;\n    font-size: 12px;\n    line-height: 18px;\n    ", ";\n  }\n"])), function (props) {
   return props.theme.colors.headingColor;
 }, function (props) {
   return props.theme.colors.lightGray;

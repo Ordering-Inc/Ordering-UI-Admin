@@ -56,7 +56,8 @@ var ModalUI = function ModalUI(props) {
   return /*#__PURE__*/_react.default.createElement(_styles2.ModalDialog, {
     className: "popup-dialog ".concat(className || ''),
     height: props.height,
-    width: props.width
+    width: props.width,
+    maxWidth: props.maxWidth
   }, /*#__PURE__*/_react.default.createElement(_styles2.ModalDialogInnerContainer, {
     padding: props.padding,
     isTransparent: isTransparent,

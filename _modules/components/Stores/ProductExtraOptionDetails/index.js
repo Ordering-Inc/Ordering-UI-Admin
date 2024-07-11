@@ -20,6 +20,7 @@ var _reactHookForm = require("react-hook-form");
 var _ProductExtraSuboption = require("../ProductExtraSuboption");
 var _ProductExtraOptionForm = require("../ProductExtraOptionForm");
 var _ProductOptionExternalId = require("../ProductOptionExternalId");
+var _SnoozeComponent = require("../SnoozeComponent");
 var _styles2 = require("./styles");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
@@ -48,6 +49,7 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
     handleDeteteSubOption = props.handleDeteteSubOption,
     handleOptionSetting = props.handleOptionSetting,
     settingChangeState = props.settingChangeState,
+    handleChangeSettingsChangeState = props.handleChangeSettingsChangeState,
     conditionalOptions = props.conditionalOptions,
     conditionalSubOptions = props.conditionalSubOptions,
     conditionalOptionId = props.conditionalOptionId,
@@ -73,6 +75,8 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
     hanldeDragOver = props.hanldeDragOver,
     handleDrop = props.handleDrop,
     handleDragEnd = props.handleDragEnd;
+  console.log('optionState', optionState);
+  console.log('extra', extra);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -118,10 +122,14 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
     _useState12 = _slicedToArray(_useState11, 2),
     externalId = _useState12[0],
     setExternalId = _useState12[1];
-  var _useState13 = (0, _react.useState)(null),
+  var _useState13 = (0, _react.useState)(false),
     _useState14 = _slicedToArray(_useState13, 2),
-    timer = _useState14[0],
-    setTimer = _useState14[1];
+    isExtraOptionSnooze = _useState14[0],
+    setIsExtraOptionSnooze = _useState14[1];
+  var _useState15 = (0, _react.useState)(null),
+    _useState16 = _slicedToArray(_useState15, 2),
+    timer = _useState16[0],
+    setTimer = _useState16[1];
   var handleClickSubOptionImage = function handleClickSubOptionImage(id) {
     document.getElementById(id).click();
   };
@@ -206,7 +214,14 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
     var _optionState$option;
     setExternalId(optionState === null || optionState === void 0 || (_optionState$option = optionState.option) === null || _optionState$option === void 0 ? void 0 : _optionState$option.external_id);
   }, [optionState === null || optionState === void 0 || (_optionState$option2 = optionState.option) === null || _optionState$option2 === void 0 ? void 0 : _optionState$option2.external_id]);
-  return /*#__PURE__*/_react.default.createElement(_styles2.MainContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PRODUCT_OPTION', 'Product option')), /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
+  return /*#__PURE__*/_react.default.createElement(_styles2.MainContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('PRODUCT_OPTION', 'Product option')), /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    className: "snooze",
+    color: "lightGreen",
+    borderRadius: "8px",
+    onClick: function onClick() {
+      return setIsExtraOptionSnooze(true);
+    }
+  }, t('SNOOZE', 'Snooze')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
     className: "product_actions",
     menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
     title: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDots, null),
@@ -497,6 +512,23 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_Shared.ImageCrop, {
     photo: cropState === null || cropState === void 0 ? void 0 : cropState.data,
     handleChangePhoto: handleChangePhoto
+  })), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    width: "85%",
+    maxWidth: "1000px",
+    open: isExtraOptionSnooze,
+    onClose: function onClose() {
+      return setIsExtraOptionSnooze(false);
+    },
+    closeOnBackdrop: false
+  }, /*#__PURE__*/_react.default.createElement(_SnoozeComponent.SnoozeComponent, {
+    isAutomaticUpdate: true,
+    dataState: optionState === null || optionState === void 0 ? void 0 : optionState.option,
+    handleUpdate: handleUpdateOption,
+    handleChangeFormState: handleChangeSettingsChangeState,
+    formState: settingChangeState,
+    onClose: function onClose() {
+      return setIsExtraOptionSnooze(false);
+    }
   })));
 };
 var ProductExtraOptionDetails = exports.ProductExtraOptionDetails = function ProductExtraOptionDetails(props) {

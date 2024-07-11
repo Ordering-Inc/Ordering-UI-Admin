@@ -205,12 +205,15 @@ var BusinessDetailsUI = exports.BusinessDetailsUI = function BusinessDetailsUI(p
     handleSucessUpdateBusiness: handleSucessUpdateBusiness,
     handleDuplicateBusiness: handleDuplicateBusiness,
     handleDeleteBusiness: handleDeleteBusiness,
+    handleUpdateBusinessClick: handleUpdateBusinessClick,
     handleSyncEvent: handleSyncEvent,
     extraOpen: extraOpen,
     spoonityConfig: spoonityConfig,
     siteState: siteState,
     isExpand: isExpand,
-    setIsExpand: setIsExpand
+    setIsExpand: setIsExpand,
+    formState: formState,
+    setFormState: setFormState
   }), extraOpen && /*#__PURE__*/_react.default.createElement(_Shared.MoreSidebarLayout, {
     isExtendExtraOpen: isExtendExtraOpen,
     onClose: handleCloseExtraOpen
