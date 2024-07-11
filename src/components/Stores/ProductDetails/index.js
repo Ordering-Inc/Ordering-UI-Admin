@@ -135,6 +135,9 @@ const ProductDetailsUI = (props) => {
           extraOpen={extraOpen}
           isExpand={isExpand}
           setIsExpand={setIsExpand}
+          formState={formState}
+          handleChangeFormState={handleChangeFormState}
+          handleUpdateClick={handleUpdateClick}
         />
       )}
       {extraOpen && (

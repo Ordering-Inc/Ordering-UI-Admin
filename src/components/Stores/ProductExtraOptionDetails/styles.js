@@ -23,6 +23,8 @@ export const Header = styled.div`
   `}
 `
 export const ActionSelectorWrapper = styled.div`
+  display: flex;
+
   button {
     display: flex;
     background: transparent !important;
@@ -75,6 +77,13 @@ export const ActionSelectorWrapper = styled.div`
       }
     }
   }
+
+  .snooze {
+    background: ${props => props.theme.colors.lightGreen} !important;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-right: 5px;
+  }
 `
 
 export const UploadImageIconContainer = styled.div`
@@ -95,7 +104,7 @@ export const UploadImageIcon = styled.div`
     margin: 0;
   }
 
-  svg {   
+  svg {
     font-size: ${({ small }) => small ? '16px' : '32px'};
   }
 `
@@ -148,7 +157,7 @@ export const InputWrapper = styled.div`
       margin-top: 10px;
     }
   `}
-  
+
   .checked {
     svg {
       color: ${props => props.theme.colors.primary};
@@ -164,7 +173,7 @@ export const ActionsContainer = styled.div`
   padding-top: 6px;
   padding-bottom: 6px;
   width: 150px;
-  
+
   ${({ primary }) => !primary && css`
     margin-top: 0px;
   `}

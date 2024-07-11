@@ -9,6 +9,7 @@ import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
 import { Confirm, Modal, ProgressRing } from '../../Shared'
 import { ProductDesktopPreview } from '../ProductDesktopPreview'
+import { SnoozeComponent } from '../SnoozeComponent'
 
 import {
   ProductDetailsContainer,
@@ -46,7 +47,10 @@ export const ProductSummary = (props) => {
     isExpand,
     setIsExpand,
     handleDuplicateProduct,
-    getProduct
+    getProduct,
+    formState,
+    handleChangeFormState,
+    handleUpdateClick
   } = props
 
   const [, t] = useLanguage()
@@ -58,6 +62,8 @@ export const ProductSummary = (props) => {
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [isProductPreview, setIsProductPreview] = useState(false)
   const [selectedView, setSelectedView] = useState('desktop')
+  const [isProductSnooze, setIsProductSnooze] = useState(false)
+
   const isWhiteLabel = configs?.white_label_module?.value
 
   const productConfigOptions = [
@@ -156,6 +162,16 @@ export const ProductSummary = (props) => {
             />
           </LeftHeader>
           <RightHeader>
+            <ActionSelectorWrapper>
+              <Button
+                className='snooze'
+                color='lightGreen'
+                borderRadius='8px'
+                onClick={() => setIsProductSnooze(true)}
+              >
+                {t('SNOOZE', 'Snooze')}
+              </Button>
+            </ActionSelectorWrapper>
             <IconButton
               color='black'
               onClick={() => expandSideBar()}
@@ -345,6 +361,21 @@ export const ProductSummary = (props) => {
           product={productState?.product}
           productCart={productCart}
           showProductOption={showProductOption}
+        />
+      </Modal>
+      <Modal
+        width='85%'
+        maxWidth='1000px'
+        open={isProductSnooze}
+        onClose={() => setIsProductSnooze(false)}
+        closeOnBackdrop={false}
+      >
+        <SnoozeComponent
+          dataState={productState?.product}
+          handleUpdate={handleUpdateClick}
+          handleChangeFormState={handleChangeFormState}
+          formState={formState}
+          onClose={() => setIsProductSnooze(false)}
         />
       </Modal>
     </>
