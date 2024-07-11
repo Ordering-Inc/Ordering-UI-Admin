@@ -146,7 +146,7 @@ export const ProductConfigOption = styled.div`
   &:hover {
     background-color: ${props => props.theme.colors.lightPrimary};
   }
-  
+
   ${({ active }) => active && css`
     color: ${props => props.theme.colors.headingColor};
     background-color: ${props => props.theme.colors.lightPrimary};
@@ -162,6 +162,8 @@ export const ProductConfigOption = styled.div`
   }
 `
 export const ActionSelectorWrapper = styled.div`
+  display: flex;
+
   button {
     display: flex;
     background: transparent !important;
@@ -216,6 +218,13 @@ export const ActionSelectorWrapper = styled.div`
         color: ${props => props.theme.colors.danger};
       }
     }
+  }
+
+  .snooze {
+    background: ${props => props.theme.colors.lightGreen} !important;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-right: 5px;
   }
 `
 export const ProductPreviewHeader = styled.div`
@@ -300,7 +309,7 @@ export const FieldsItem = styled.div`
   flex-direction: column;
   width: 48%;
   margin-bottom: 25px;
-  
+
   h4 {
     margin: 0;
     font-weight: 600;

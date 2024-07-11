@@ -8,6 +8,7 @@ import { XLg, LifePreserver, ThreeDots, Laptop, Phone, ArrowsAngleExpand, Arrows
 import { Button, IconButton, Switch } from '../../../styles'
 import { Confirm, Modal } from '../../Shared'
 import { BusinessPreview } from '../BusinessPreview'
+import { SnoozeComponent } from '../SnoozeComponent'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 
 import {
@@ -24,7 +25,8 @@ import {
   BusinessConfigItem,
   ActionSelectorWrapper,
   BusinessPreviewHeader,
-  ButtonWrapper
+  ButtonWrapper,
+  ButtonsContainer
 } from './styles'
 import { checkSiteUrl } from '../../../utils'
 
@@ -39,11 +41,14 @@ export const BusinessSummary = (props) => {
     handleDuplicateBusiness,
     handleDeleteBusiness,
     handleSyncEvent,
+    handleUpdateBusinessClick,
     extraOpen,
     spoonityConfig,
     siteState,
     isExpand,
-    setIsExpand
+    setIsExpand,
+    formState,
+    setFormState
   } = props
   const [, t] = useLanguage()
   const [{ optimizeImage }] = useUtils()
@@ -53,6 +58,7 @@ export const BusinessSummary = (props) => {
   const [ordering] = useApi()
   const { width } = useWindowSize()
   const [isBusinessPreview, setIsBusinessPreview] = useState(false)
+  const [isBusinessSnooze, setIsBusinessSnooze] = useState(false)
   const [selectedView, setSelectedView] = useState('desktop')
   const [sessionState] = useSession()
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
@@ -288,27 +294,39 @@ export const BusinessSummary = (props) => {
         )}
 
         <BusinessDetailsContent>
-          <ButtonWrapper>
-            <Button
-              color='lightPrimary'
-              borderRadius='8px'
-              onClick={handleOpenCategory}
-              disabled={businessState?.loading}
-            >
-              {t('CATEGORIES_AND_PRODUCTS', 'Categories & products')}
-            </Button>
-            {!isEnabledWhiteLabelModule && (
+          <ButtonsContainer>
+            <ButtonWrapper>
               <Button
-                color='primary'
-                outline
+                color='lightPrimary'
                 borderRadius='8px'
-                onClick={handleOpenSite}
+                onClick={handleOpenCategory}
                 disabled={businessState?.loading}
               >
-                {t('STORE_WEBSITE', 'Store website')}
+                {t('CATEGORIES_AND_PRODUCTS', 'Categories & products')}
               </Button>
-            )}
-          </ButtonWrapper>
+              {!isEnabledWhiteLabelModule && (
+                <Button
+                  color='primary'
+                  outline
+                  borderRadius='8px'
+                  onClick={handleOpenSite}
+                  disabled={businessState?.loading}
+                >
+                  {t('STORE_WEBSITE', 'Store website')}
+                </Button>
+              )}
+            </ButtonWrapper>
+            <ButtonWrapper>
+              <Button
+                color='lightGreen'
+                borderRadius='8px'
+                onClick={() => setIsBusinessSnooze(true)}
+                disabled={businessState?.loading}
+              >
+                {t('SNOOZE', 'Snooze')}
+              </Button>
+            </ButtonWrapper>
+          </ButtonsContainer>
           <BusinessDescription>
             {businessState?.loading ? (
               <Skeleton width={300} />
@@ -318,7 +336,7 @@ export const BusinessSummary = (props) => {
           </BusinessDescription>
           <BusinessConfigsContainer isLoading={businessState?.loading}>
             {(isAdmin
-              ? !!spoonityConfig
+              ? spoonityConfig
                 ? businessConfigs
                 : businessConfigs.filter(configs => configs.key !== 'spoonity_key')
               : businessConfigs.filter(c => !itemsExcluded.includes(c.key))
@@ -375,6 +393,21 @@ export const BusinessSummary = (props) => {
         <BusinessPreview
           isMobileView={selectedView === 'mobile'}
           business={businessState?.business}
+        />
+      </Modal>
+      <Modal
+        width='85%'
+        maxWidth='1000px'
+        open={isBusinessSnooze}
+        onClose={() => setIsBusinessSnooze(false)}
+        closeOnBackdrop={false}
+      >
+        <SnoozeComponent
+          dataState={businessState?.business}
+          handleUpdate={handleUpdateBusinessClick}
+          setFormState={setFormState}
+          formState={formState}
+          onClose={() => setIsBusinessSnooze(false)}
         />
       </Modal>
     </>

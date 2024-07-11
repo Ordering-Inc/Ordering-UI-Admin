@@ -177,12 +177,15 @@ export const BusinessDetailsUI = (props) => {
           handleSucessUpdateBusiness={handleSucessUpdateBusiness}
           handleDuplicateBusiness={handleDuplicateBusiness}
           handleDeleteBusiness={handleDeleteBusiness}
+          handleUpdateBusinessClick={handleUpdateBusinessClick}
           handleSyncEvent={handleSyncEvent}
           extraOpen={extraOpen}
           spoonityConfig={spoonityConfig}
           siteState={siteState}
           isExpand={isExpand}
           setIsExpand={setIsExpand}
+          formState={formState}
+          setFormState={setFormState}
         />
       )}
       {extraOpen && (

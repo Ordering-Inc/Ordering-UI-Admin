@@ -6,7 +6,7 @@ import {
   ProductExtraOptionDetails as ProductExtraOptionDetailsController
 } from 'ordering-components-admin'
 import BiImage from '@meronex/icons/bi/BiImage'
-import { IconButton, Input, LinkButton } from '../../../styles'
+import { IconButton, Input, LinkButton, Button } from '../../../styles'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
 import { bytesConverter } from '../../../utils'
@@ -22,6 +22,7 @@ import { useForm, Controller } from 'react-hook-form'
 import { ProductExtraSuboption } from '../ProductExtraSuboption'
 import { ProductExtraOptionForm } from '../ProductExtraOptionForm'
 import { ProductOptionExternalId } from '../ProductOptionExternalId'
+import { SnoozeComponent } from '../SnoozeComponent'
 
 import {
   MainContainer,
@@ -54,6 +55,7 @@ const ProductExtraOptionDetailsUI = (props) => {
     handleDeteteSubOption,
     handleOptionSetting,
     settingChangeState,
+    handleChangeSettingsChangeState,
     conditionalOptions,
     conditionalSubOptions,
     conditionalOptionId,
@@ -81,7 +83,8 @@ const ProductExtraOptionDetailsUI = (props) => {
     handleDrop,
     handleDragEnd
   } = props
-
+  console.log('optionState', optionState)
+  console.log('extra', extra)
   const [, t] = useLanguage()
   const theme = useTheme()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
@@ -91,6 +94,7 @@ const ProductExtraOptionDetailsUI = (props) => {
   const { handleSubmit, register, errors, control, setValue } = useForm()
   const [cropState, setCropState] = useState({ name: null, data: null, open: false })
   const [externalId, setExternalId] = useState()
+  const [isExtraOptionSnooze, setIsExtraOptionSnooze] = useState(false)
   const [timer, setTimer] = useState(null)
 
   const handleClickSubOptionImage = (id) => {
@@ -171,6 +175,14 @@ const ProductExtraOptionDetailsUI = (props) => {
       <Header>
         <h1>{t('PRODUCT_OPTION', 'Product option')}</h1>
         <ActionSelectorWrapper>
+          <Button
+            className='snooze'
+            color='lightGreen'
+            borderRadius='8px'
+            onClick={() => setIsExtraOptionSnooze(true)}
+          >
+            {t('SNOOZE', 'Snooze')}
+          </Button>
           <DropdownButton
             className='product_actions'
             menuAlign={theme?.rtl ? 'left' : 'right'}
@@ -509,6 +521,22 @@ const ProductExtraOptionDetailsUI = (props) => {
         <ImageCrop
           photo={cropState?.data}
           handleChangePhoto={handleChangePhoto}
+        />
+      </Modal>
+      <Modal
+        width='85%'
+        maxWidth='1000px'
+        open={isExtraOptionSnooze}
+        onClose={() => setIsExtraOptionSnooze(false)}
+        closeOnBackdrop={false}
+      >
+        <SnoozeComponent
+          isAutomaticUpdate
+          dataState={optionState?.option}
+          handleUpdate={handleUpdateOption}
+          handleChangeFormState={handleChangeSettingsChangeState}
+          formState={settingChangeState}
+          onClose={() => setIsExtraOptionSnooze(false)}
         />
       </Modal>
     </MainContainer>
