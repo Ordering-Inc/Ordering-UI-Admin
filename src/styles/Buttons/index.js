@@ -219,6 +219,17 @@ export const Button = styled.button`
       background: ${props => darken(0.1, props.theme.colors.lightPrimary)};
     }
   `}
+  ${({ color }) => color === 'lightGreen' && css`
+    background: ${props => props.theme.colors.lightGreen};
+    color: #00D27A;
+    border-color: ${props => props.theme.colors.lightGreen};
+    &:hover {
+      background: ${props => darken(0.04, props.theme.colors.lightGreen)};
+    }
+    &:active {
+      background: ${props => darken(0.1, props.theme.colors.lightGreen)};
+    }
+  `}
   ${({ color }) => color === 'warning' && css`
     background: ${props => props.theme.colors.warning};
     color: #FFF;

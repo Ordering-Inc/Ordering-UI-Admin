@@ -5,7 +5,7 @@ export const Container = styled.div`
   width: 100%;
   padding: 20px;
   box-sizing: border-box;
-  
+
   > button {
     margin: 20px 0;
   }
@@ -71,8 +71,10 @@ export const Tab = styled.div`
   `}
 `
 export const ActionSelectorWrapper = styled.div`
+  display: flex;
+
   button {
-    background: transparent !important;
+    background: transparent;
     border: none;
     padding: 0px 5px;
     &:active,
@@ -121,5 +123,12 @@ export const ActionSelectorWrapper = styled.div`
         color: #E63757;
       }
     }
+  }
+
+  .snooze {
+    background: ${props => props.theme.colors.lightGreen};
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-right: 5px;
   }
 `
