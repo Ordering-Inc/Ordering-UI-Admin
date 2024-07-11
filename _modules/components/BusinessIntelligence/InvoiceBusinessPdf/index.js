@@ -9,6 +9,7 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 var _react = _interopRequireWildcard(require("react"));
 var _reactBootstrap = require("react-bootstrap");
 var _styledComponents = require("styled-components");
+var _ConfigFileContext = require("../../../contexts/ConfigFileContext");
 var _utils = require("../../../utils");
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
@@ -22,22 +23,27 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 var InvoiceBusinessPdf = exports.InvoiceBusinessPdf = function InvoiceBusinessPdf(props) {
-  var _theme$images, _exportInvoiceList$in, _exportInvoiceList$in2, _exportInvoiceList$in3, _exportInvoiceList$in4, _exportInvoiceList$in5, _exportInvoiceList$in6, _exportInvoiceList$in7, _exportInvoiceList$in8, _exportInvoiceList$in9, _exportInvoiceList$in10, _exportInvoiceList$in11, _exportInvoiceList$in12, _exportInvoiceList$in13, _exportInvoiceList$in14, _exportInvoiceList$in15, _exportInvoiceList$in16, _exportInvoiceList$in17, _exportInvoiceList$in18, _exportInvoiceList$in19, _exportInvoiceList$in20, _exportInvoiceList$in21, _exportInvoiceList$in22, _exportInvoiceList$in23, _exportInvoiceList$in24, _exportInvoiceList$in25, _exportInvoiceList$in26, _exportInvoiceList$in27, _exportInvoiceList$in28, _exportInvoiceList$in29, _exportInvoiceList$in30;
+  var _configFile$app_inter, _theme$images, _exportInvoiceList$in, _exportInvoiceList$in2, _exportInvoiceList$in3, _exportInvoiceList$in4, _exportInvoiceList$in5, _exportInvoiceList$in6, _exportInvoiceList$in7, _exportInvoiceList$in8, _exportInvoiceList$in9, _exportInvoiceList$in10, _exportInvoiceList$in11, _exportInvoiceList$in12, _exportInvoiceList$in13, _exportInvoiceList$in14, _exportInvoiceList$in15, _exportInvoiceList$in16, _exportInvoiceList$in17, _exportInvoiceList$in18, _exportInvoiceList$in19, _exportInvoiceList$in20, _exportInvoiceList$in21, _exportInvoiceList$in22, _exportInvoiceList$in23, _exportInvoiceList$in24, _exportInvoiceList$in25, _exportInvoiceList$in26, _exportInvoiceList$in27, _exportInvoiceList$in28, _exportInvoiceList$in29, _exportInvoiceList$in30;
   var exportInvoiceList = props.exportInvoiceList,
     getSubtotal = props.getSubtotal,
     getTotal = props.getTotal;
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
+    dictionary = _useLanguage2[0].dictionary,
     t = _useLanguage2[1];
   var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
     _useUtils2 = _slicedToArray(_useUtils, 1),
     _useUtils2$ = _useUtils2[0],
     parseDate = _useUtils2$.parseDate,
     parsePrice = _useUtils2$.parsePrice;
+  var _useContext = (0, _react.useContext)(_ConfigFileContext.ConfigFileContext),
+    _useContext2 = _slicedToArray(_useContext, 1),
+    configFile = _useContext2[0];
+  var prefixForVariable = configFile === null || configFile === void 0 || (_configFile$app_inter = configFile.app_internal_name) === null || _configFile$app_inter === void 0 ? void 0 : _configFile$app_inter.toUpperCase();
   var styles = {
     root: {
-      fontFamily: 'Helvetica, Arial, sans-serif',
+      fontFamily: 'Noto Sans Georgian, sans-serif',
       color: '#333'
     },
     table: {
@@ -188,7 +194,7 @@ var InvoiceBusinessPdf = exports.InvoiceBusinessPdf = function InvoiceBusinessPd
       utc: false
     })), /*#__PURE__*/_react.default.createElement("td", {
       style: styles.table.tbody.tr.td
-    }, (0, _utils.getOrderStatus)(order.status).value), /*#__PURE__*/_react.default.createElement("td", {
+    }, (0, _utils.getOrderStatusPrefix)(order.status, dictionary, prefixForVariable)), /*#__PURE__*/_react.default.createElement("td", {
       style: styles.table.tbody.tr.tdNumber
     }, parsePrice(getSubtotal(order))), /*#__PURE__*/_react.default.createElement("td", {
       style: styles.table.tbody.tr.tdNumber
