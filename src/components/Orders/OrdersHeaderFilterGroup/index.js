@@ -18,7 +18,8 @@ const OrdersHeaderFilterGroupUI = (props) => {
     handleChangeFilterValues,
     handleChangeExternalId,
     handleChangeGroup,
-    isSelectedOrders
+    isSelectedOrders,
+    disableDriverLocationsSockets
   } = props
 
   const [{ dictionary }] = useLanguage()
@@ -72,6 +73,7 @@ const OrdersHeaderFilterGroupUI = (props) => {
             drivers={driversList.drivers}
             filterValues={filterValues}
             handleChangeDriver={handleChangeDriver}
+            disableDriverLocationsSockets={disableDriverLocationsSockets}
           />
         )}
         {!loading && configFilter.includes('driver_group') && (

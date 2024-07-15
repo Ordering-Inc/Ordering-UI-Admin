@@ -52,7 +52,8 @@ const OrdersManagerUI = (props) => {
     setAllowColumns,
     timeStatus,
     setTimeStatus,
-    isUseQuery
+    isUseQuery,
+    disableDriverLocationsSockets
   } = props
 
   const [, t] = useLanguage()
@@ -196,6 +197,7 @@ const OrdersManagerUI = (props) => {
           setTimeStatus={setTimeStatus}
           setSlaSettingTime={setSlaSettingTime}
           isLateralBar={isLateralBar}
+          disableDriverLocationsSockets={disableDriverLocationsSockets}
         />
         <OrderStatusFilterBar
           isUseQuery={isUseQuery}

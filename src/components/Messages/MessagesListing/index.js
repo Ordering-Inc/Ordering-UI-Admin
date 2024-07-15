@@ -233,7 +233,7 @@ export const MessagesListing = (props) => {
   const OrdersListControlProps = {
     ...props,
     UIComponent: MessagesListingUI,
-    driversPropsToFetch: ['id', 'name', 'lastname', 'location', 'enabled', 'available', 'busy', 'driver_groups', 'assigned_orders_count', 'last_order_assigned_at', 'last_location_at', 'cellphone', 'photo', 'qualification']
+    driversPropsToFetch: ['id', 'name', 'lastname', 'location', 'enabled', 'available', 'busy', 'driver_groups.name', 'driver_groups.id', 'assigned_orders_count', 'last_order_assigned_at', 'last_location_at', 'cellphone', 'photo', 'qualification']
   }
   return <OrdersManageController {...OrdersListControlProps} />
 }
