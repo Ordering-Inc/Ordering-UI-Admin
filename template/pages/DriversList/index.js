@@ -11,7 +11,7 @@ export const DriversList = (props) => {
     isSearchByName: true,
     isSearchByCellphone: true,
     useBatchSockets: settings?.use_batch_sockets,
-    propsToFetch: ['id', 'name', 'lastname', 'location', 'enabled', 'available', 'busy', 'driver_groups.name', 'driver_groups.id', 'assigned_orders_count', 'photo'],
+    propsToFetch: ['id', 'name', 'lastname', 'location', 'enabled', 'available', 'busy', 'driver_groups.name', 'driver_groups.id', 'assigned_orders_count', 'photo', 'last_location_at'],
     onDriverRedirect: (driverId) => {
       if (!driverId) {
         return events.emit('go_to_page', { page: 'drivers', replace: true })

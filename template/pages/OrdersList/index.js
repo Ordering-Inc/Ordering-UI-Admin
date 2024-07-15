@@ -15,6 +15,8 @@ export const OrdersList = (props) => {
     disableSocketRoomDriver: true,
     useFranchiseImages: settings?.use_franchise_images,
     defaultFilterValues: filterValues,
+    getDriversByControls: true,
+    disableDriverLocationsSockets: true,
     onOrderRedirect: (orderId) => {
       if (!orderId) {
         return removeQueryToUrl(['id', 'section', 'tab'])
