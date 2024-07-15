@@ -49,7 +49,8 @@ var OrdersDashboardList = exports.OrdersDashboardList = function OrdersDashboard
     isSearchByCustomerPhone: isShowSearchFilters,
     isSearchByDriverName: isShowSearchFilters,
     isSearchByBusinessName: true,
-    driverId: props.driverId
+    driverId: props.driverId,
+    getDriversByControls: true
   });
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isMessagesView ? /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.DashboardOrdersList, _extends({
     isMessagesView: true

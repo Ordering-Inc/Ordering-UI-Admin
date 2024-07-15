@@ -35,7 +35,8 @@ var OrdersHeaderFilterGroupUI = function OrdersHeaderFilterGroupUI(props) {
     handleChangeFilterValues = props.handleChangeFilterValues,
     handleChangeExternalId = props.handleChangeExternalId,
     handleChangeGroup = props.handleChangeGroup,
-    isSelectedOrders = props.isSelectedOrders;
+    isSelectedOrders = props.isSelectedOrders,
+    disableDriverLocationsSockets = props.disableDriverLocationsSockets;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 1),
     dictionary = _useLanguage2[0].dictionary;
@@ -102,7 +103,8 @@ var OrdersHeaderFilterGroupUI = function OrdersHeaderFilterGroupUI(props) {
     useDriversByProps: true,
     drivers: driversList.drivers,
     filterValues: filterValues,
-    handleChangeDriver: handleChangeDriver
+    handleChangeDriver: handleChangeDriver,
+    disableDriverLocationsSockets: disableDriverLocationsSockets
   }), !loading && configFilter.includes('driver_group') && /*#__PURE__*/_react.default.createElement(_DriversGroupTypeSelector.DriversGroupTypeSelector, {
     driverGroupList: driverGroupList,
     handleChangeGroup: handleChangeGroup,

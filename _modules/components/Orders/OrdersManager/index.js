@@ -62,7 +62,8 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     setAllowColumns = props.setAllowColumns,
     timeStatus = props.timeStatus,
     setTimeStatus = props.setTimeStatus,
-    isUseQuery = props.isUseQuery;
+    isUseQuery = props.isUseQuery,
+    disableDriverLocationsSockets = props.disableDriverLocationsSockets;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -233,7 +234,8 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     setFilterModalOpen: setFilterModalOpen,
     setTimeStatus: setTimeStatus,
     setSlaSettingTime: setSlaSettingTime,
-    isLateralBar: isLateralBar
+    isLateralBar: isLateralBar,
+    disableDriverLocationsSockets: disableDriverLocationsSockets
   }), /*#__PURE__*/_react.default.createElement(_OrderStatusFilterBar.OrderStatusFilterBar, {
     isUseQuery: isUseQuery,
     selectedOrderStatus: ordersStatusGroup,
