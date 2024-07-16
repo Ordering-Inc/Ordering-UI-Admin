@@ -29,14 +29,13 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 var OrdersHeaderFilterGroupUI = function OrdersHeaderFilterGroupUI(props) {
   var _configs$filter_order, _dictionary$EXTERNAL_, _dictionary$DRIVER_GR;
   var filterValues = props.filterValues,
-    driverGroupList = props.driverGroupList,
     driversList = props.driversList,
     handleChangeDriver = props.handleChangeDriver,
     handleChangeFilterValues = props.handleChangeFilterValues,
     handleChangeExternalId = props.handleChangeExternalId,
     handleChangeGroup = props.handleChangeGroup,
     isSelectedOrders = props.isSelectedOrders,
-    disableDriverLocationsSockets = props.disableDriverLocationsSockets;
+    assignableDriverGroupList = props.assignableDriverGroupList;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 1),
     dictionary = _useLanguage2[0].dictionary;
@@ -103,13 +102,12 @@ var OrdersHeaderFilterGroupUI = function OrdersHeaderFilterGroupUI(props) {
     useDriversByProps: true,
     drivers: driversList.drivers,
     filterValues: filterValues,
-    handleChangeDriver: handleChangeDriver,
-    disableDriverLocationsSockets: disableDriverLocationsSockets
+    handleChangeDriver: handleChangeDriver
   }), !loading && configFilter.includes('driver_group') && /*#__PURE__*/_react.default.createElement(_DriversGroupTypeSelector.DriversGroupTypeSelector, {
-    driverGroupList: driverGroupList,
+    driverGroupList: assignableDriverGroupList,
     handleChangeGroup: handleChangeGroup,
     filterValues: filterValues.driverGroupBusinessIds,
-    title: (_dictionary$DRIVER_GR = dictionary === null || dictionary === void 0 ? void 0 : dictionary.DRIVER_GROUP_ASSIGNED) !== null && _dictionary$DRIVER_GR !== void 0 ? _dictionary$DRIVER_GR : 'Driver group (assigned)'
+    title: (_dictionary$DRIVER_GR = dictionary === null || dictionary === void 0 ? void 0 : dictionary.DRIVER_GROUP_ASSIGNABLE) !== null && _dictionary$DRIVER_GR !== void 0 ? _dictionary$DRIVER_GR : 'Driver group (assignable)'
   })));
 };
 var OrdersHeaderFilterGroup = exports.OrdersHeaderFilterGroup = function OrdersHeaderFilterGroup(props) {

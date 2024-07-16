@@ -36,6 +36,7 @@ var OrdersContentHeader = exports.OrdersContentHeader = function OrdersContentHe
     handleChangeSearch = props.handleChangeSearch,
     searchValue = props.searchValue,
     driverGroupList = props.driverGroupList,
+    assignableDriverGroupList = props.assignableDriverGroupList,
     driversList = props.driversList,
     citiesList = props.citiesList,
     paymethodsList = props.paymethodsList,
@@ -48,8 +49,7 @@ var OrdersContentHeader = exports.OrdersContentHeader = function OrdersContentHe
     setTimeStatus = props.setTimeStatus,
     setSlaSettingTime = props.setSlaSettingTime,
     isShowMapsKeySettingButton = props.isShowMapsKeySettingButton,
-    adminsList = props.adminsList,
-    disableDriverLocationsSockets = props.disableDriverLocationsSockets;
+    adminsList = props.adminsList;
   var _useWindowSize = (0, _useWindowSize2.useWindowSize)(),
     width = _useWindowSize.width;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -85,11 +85,11 @@ var OrdersContentHeader = exports.OrdersContentHeader = function OrdersContentHe
   }, /*#__PURE__*/_react.default.createElement(_styles2.WrapperHeaderFilterGroup, null, /*#__PURE__*/_react.default.createElement(_OrdersHeaderFilterGroup.OrdersHeaderFilterGroup, {
     isSelectedOrders: isSelectedOrders,
     driverGroupList: driverGroupList,
+    assignableDriverGroupList: assignableDriverGroupList,
     driversList: driversList,
     searchValue: searchValue,
     handleChangeFilterValues: handleChangeFilterValues,
-    handleChangeSearch: handleChangeSearch,
-    disableDriverLocationsSockets: disableDriverLocationsSockets
+    handleChangeSearch: handleChangeSearch
   })), /*#__PURE__*/_react.default.createElement(_WebsocketStatus.WebsocketStatus, null), isShowMapsKeySettingButton && /*#__PURE__*/_react.default.createElement(_GoogleMapsApiKeySettingButton.GoogleMapsApiKeySettingButton, null), (configState === null || configState === void 0 || (_configState$configs3 = configState.configs) === null || _configState$configs3 === void 0 || (_configState$configs3 = _configState$configs3.order_deadlines_enabled) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.value) === '1' && /*#__PURE__*/_react.default.createElement(_styles2.SLAControlsWrapper, null, /*#__PURE__*/_react.default.createElement(_OrdersDashboardSLAControls.OrdersDashboardSLAControls, {
     setTimeStatus: setTimeStatus,
     setSlaSettingTime: setSlaSettingTime

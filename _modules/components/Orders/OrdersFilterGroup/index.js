@@ -277,7 +277,7 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
     driverGroupList: driverGroupList,
     handleChangeGroup: handleChangeGroupUnassigned,
     filterValues: filterValues.groupTypesUnassigned,
-    title: t('DRIVER_GROUP_NOT_ASSIGNED', 'Driver group (general)')
+    title: t('DRIVER_GROUP_ASSIGNED', 'Driver group (assigned)')
   }), /*#__PURE__*/_react.default.createElement(_BusinessesSelector.BusinessesSelector, {
     filterValues: filterValues,
     businessesList: businessesList,
