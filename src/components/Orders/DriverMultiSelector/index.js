@@ -145,6 +145,7 @@ export const DriverMultiSelector = (props) => {
   const DriversControlProps = {
     ...props,
     UIComponent: DriverMultiSelectorUI,
+    disableDriverLocationsSockets: true,
     paginationSettings: {
       initialPage: 1,
       pageSize: 10,
