@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useConfig, useLanguage, useSession } from 'ordering-components-admin'
-import { OrdersManage as OrdersManageController } from './test'
+import { OrdersManage as OrdersManageController, useConfig, useLanguage, useSession } from 'ordering-components-admin'
 import { OrderStatusFilterBar } from '../OrderStatusFilterBar'
 import { OrdersContentHeader } from '../OrdersContentHeader'
 import { OrderDetails } from '../OrderDetails'
