@@ -8,13 +8,14 @@ import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { XLg, ThreeDots } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
 import { useWindowSize } from '../../../hooks/useWindowSize'
-import { IconButton } from '../../../styles'
+import { IconButton, Button } from '../../../styles'
 import { AutoScroll, Confirm, Modal } from '../../Shared'
 import { BusinessMenuShare } from '../BusinessMenuShare'
 import { BusinessMenuBasicOptions } from '../BusinessMenuBasicOptions'
 import { BusinessMenuCustomFields } from '../BusinessMenuCustomFields'
 import { BusinessSharedMenuProducts } from '../BusinessSharedMenuProducts'
 import { BusinessMenuChannels } from '../BusinessMenuChannels'
+import { SnoozeComponent } from '../SnoozeComponent'
 import { addQueryToUrl } from '../../../utils'
 
 import {
@@ -36,10 +37,14 @@ const BusinessMenuOptionsUI = (props) => {
     handleUpdateBusinessState,
     isSelectedSharedMenus,
     handleDeleteMenu,
+    handleUpdateBusinessMenuOption,
+    handleChangeInput,
     setIsOpenSharedProduct,
     sitesState,
     setMenuList,
-    menuList
+    menuList,
+    formState,
+    businessMenuState
   } = props
 
   const query = new URLSearchParams(useLocation().search)
@@ -50,6 +55,7 @@ const BusinessMenuOptionsUI = (props) => {
   const [selectedMenuOption, setSelectedMenuOption] = useState('basic')
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [isCustomFieldsOpen, setIsCustomFieldsOpen] = useState(false)
+  const [isMenuSnooze, setIsMenuSnooze] = useState(false)
 
   const actionSidebar = (value) => {
     if (!value) {
@@ -70,6 +76,15 @@ const BusinessMenuOptionsUI = (props) => {
         setConfirm({ ...confirm, open: false })
       }
     })
+  }
+  const handleChangeSnooze = (changes) => {
+    const _changes = {
+      target: {
+        name: 'snooze_until',
+        value: changes.snooze_until
+      }
+    }
+    handleChangeInput(_changes)
   }
 
   useEffect(() => {
@@ -118,27 +133,39 @@ const BusinessMenuOptionsUI = (props) => {
           <h1>{t('MENU_SETTINGS', 'Menu settings')}</h1>
           <ActionBlock>
             {Object.keys(menu)?.length > 0 && (
-              <ActionSelectorWrapper>
-                <DropdownButton
-                  className='product_actions'
-                  menuAlign={theme?.rtl ? 'left' : 'right'}
-                  title={<ThreeDots />}
-                  id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
-                >
-                  {!isSelectedSharedMenus && (
-                    <Dropdown.Item
-                      onClick={() => setIsCustomFieldsOpen(true)}
-                    >
-                      {t('CUSTOM_FIELDS', 'Custom fields')}
-                    </Dropdown.Item>
-                  )}
-                  <Dropdown.Item
-                    onClick={() => handleDeleteClick()}
+              <>
+                <ActionSelectorWrapper>
+                  <Button
+                    className='snooze'
+                    color='lightGreen'
+                    borderRadius='8px'
+                    onClick={() => setIsMenuSnooze(true)}
                   >
-                    {t('DELETE', 'Delete')}
-                  </Dropdown.Item>
-                </DropdownButton>
-              </ActionSelectorWrapper>
+                    {t('SNOOZE', 'Snooze')}
+                  </Button>
+                </ActionSelectorWrapper>
+                <ActionSelectorWrapper>
+                  <DropdownButton
+                    className='product_actions'
+                    menuAlign={theme?.rtl ? 'left' : 'right'}
+                    title={<ThreeDots />}
+                    id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
+                  >
+                    {!isSelectedSharedMenus && (
+                      <Dropdown.Item
+                        onClick={() => setIsCustomFieldsOpen(true)}
+                      >
+                        {t('CUSTOM_FIELDS', 'Custom fields')}
+                      </Dropdown.Item>
+                    )}
+                    <Dropdown.Item
+                      onClick={() => handleDeleteClick()}
+                    >
+                      {t('DELETE', 'Delete')}
+                    </Dropdown.Item>
+                  </DropdownButton>
+                </ActionSelectorWrapper>
+              </>
             )}
             <IconButton
               color='black'
@@ -221,6 +248,21 @@ const BusinessMenuOptionsUI = (props) => {
             onClose={() => setIsCustomFieldsOpen(false)}
             businessId={business?.id}
             menuId={menu.id}
+          />
+        </Modal>
+        <Modal
+          width='85%'
+          maxWidth='1000px'
+          open={isMenuSnooze}
+          onClose={() => setIsMenuSnooze(false)}
+          closeOnBackdrop={false}
+        >
+          <SnoozeComponent
+            dataState={businessMenuState?.menu}
+            handleUpdate={handleUpdateBusinessMenuOption}
+            handleChangeFormState={handleChangeSnooze}
+            formState={formState}
+            onClose={() => setIsMenuSnooze(false)}
           />
         </Modal>
         <Confirm

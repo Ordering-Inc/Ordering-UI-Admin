@@ -183,4 +183,10 @@ export const ActionSelectorWrapper = styled.div`
       }
     }
   }
+  .snooze {
+    background: ${props => props.theme.colors.lightGreen} !important;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-right: 5px;
+  }
 `
