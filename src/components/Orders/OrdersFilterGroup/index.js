@@ -236,7 +236,7 @@ const OrdersFilterGroupUI = (props) => {
               driverGroupList={driverGroupList}
               handleChangeGroup={handleChangeGroupUnassigned}
               filterValues={filterValues.groupTypesUnassigned}
-              title={t('DRIVER_GROUP_NOT_ASSIGNED', 'Driver group (general)')}
+              title={t('DRIVER_GROUP_ASSIGNED', 'Driver group (assigned)')}
             />
             <BusinessesSelector
               filterValues={filterValues}

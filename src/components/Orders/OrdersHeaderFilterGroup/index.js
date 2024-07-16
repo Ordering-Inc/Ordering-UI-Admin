@@ -12,14 +12,13 @@ import { SearchBar } from '../../Shared'
 const OrdersHeaderFilterGroupUI = (props) => {
   const {
     filterValues,
-    driverGroupList,
     driversList,
     handleChangeDriver,
     handleChangeFilterValues,
     handleChangeExternalId,
     handleChangeGroup,
     isSelectedOrders,
-    disableDriverLocationsSockets
+    assignableDriverGroupList
   } = props
 
   const [{ dictionary }] = useLanguage()
@@ -73,15 +72,14 @@ const OrdersHeaderFilterGroupUI = (props) => {
             drivers={driversList.drivers}
             filterValues={filterValues}
             handleChangeDriver={handleChangeDriver}
-            disableDriverLocationsSockets={disableDriverLocationsSockets}
           />
         )}
         {!loading && configFilter.includes('driver_group') && (
           <DriversGroupTypeSelector
-            driverGroupList={driverGroupList}
+            driverGroupList={assignableDriverGroupList}
             handleChangeGroup={handleChangeGroup}
             filterValues={filterValues.driverGroupBusinessIds}
-            title={dictionary?.DRIVER_GROUP_ASSIGNED ?? 'Driver group (assigned)'}
+            title={dictionary?.DRIVER_GROUP_ASSIGNABLE ?? 'Driver group (assignable)'}
           />
         )}
       </WrapperRow>
