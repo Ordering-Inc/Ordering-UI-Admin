@@ -33,7 +33,8 @@ const DeliveriesManagerUI = (props) => {
     timeStatus,
     setTimeStatus,
     isUseQuery,
-    adminsList
+    adminsList,
+    assignableDriverGroupList
   } = props
 
   const [, t] = useLanguage()
@@ -95,6 +96,7 @@ const DeliveriesManagerUI = (props) => {
           setTimeStatus={setTimeStatus}
           setSlaSettingTime={setSlaSettingTime}
           adminsList={adminsList}
+          assignableDriverGroupList={assignableDriverGroupList}
         />
         <OrdersContent>
           <WrapItemView>
