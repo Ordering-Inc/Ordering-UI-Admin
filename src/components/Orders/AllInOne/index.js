@@ -57,7 +57,8 @@ const OrdersManagerUI = (props) => {
     allowColumns,
     setAllowColumns,
     isUseQuery,
-    adminsList
+    adminsList,
+    assignableDriverGroupList
   } = props
 
   const [, t] = useLanguage()
@@ -203,6 +204,7 @@ const OrdersManagerUI = (props) => {
           isDisableControl={isSelectedOrders}
           title={t('ORDER_MANAGER', 'Orders manager')}
           searchValue={searchValue}
+          assignableDriverGroupList={assignableDriverGroupList}
           driverGroupList={driverGroupList}
           driversList={driversList}
           citiesList={citiesList}
