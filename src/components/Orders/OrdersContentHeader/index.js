@@ -31,6 +31,7 @@ export const OrdersContentHeader = (props) => {
     handleChangeSearch,
     searchValue,
     driverGroupList,
+    assignableDriverGroupList,
     driversList,
     citiesList,
     paymethodsList,
@@ -98,6 +99,7 @@ export const OrdersContentHeader = (props) => {
             <OrdersHeaderFilterGroup
               isSelectedOrders={isSelectedOrders}
               driverGroupList={driverGroupList}
+              assignableDriverGroupList={assignableDriverGroupList}
               driversList={driversList}
               searchValue={searchValue}
               handleChangeFilterValues={handleChangeFilterValues}

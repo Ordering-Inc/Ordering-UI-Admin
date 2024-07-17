@@ -45,7 +45,8 @@ export const MultiSelect = (props) => {
     handleChangePageSize,
     useLazyPagination,
     isLoading,
-    optionsPosition
+    optionsPosition,
+    isHidePagecontrol
   } = props
 
   const [open, setOpen] = useState(false)
@@ -242,6 +243,7 @@ export const MultiSelect = (props) => {
                 handleChangePage={handlerChangePage}
                 handleChangePageSize={handleChangePageSize}
                 defaultPageSize={pagination?.pageSize}
+                isHidePagecontrol={isHidePagecontrol}
               />
             </PaginationWrapper>
           )}

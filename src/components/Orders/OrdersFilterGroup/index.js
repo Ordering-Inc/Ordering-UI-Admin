@@ -234,8 +234,8 @@ const OrdersFilterGroupUI = (props) => {
           <WrapperRow>
             <DriversGroupTypeSelector
               driverGroupList={driverGroupList}
-              handleChangeGroup={handleChangeGroup}
-              filterValues={filterValues.groupTypes}
+              handleChangeGroup={handleChangeGroupUnassigned}
+              filterValues={filterValues.groupTypesUnassigned}
               title={t('DRIVER_GROUP_ASSIGNED', 'Driver group (assigned)')}
             />
             <BusinessesSelector
@@ -243,12 +243,6 @@ const OrdersFilterGroupUI = (props) => {
               businessesList={businessesList}
               handleChangeBusinesses={handleChangeBusinesses}
             />
-            {/* <DriversGroupTypeSelector
-              driverGroupList={driverGroupList}
-              handleChangeGroup={handleChangeGroupUnassigned}
-              filterValues={filterValues.groupTypesUnassigned}
-              title={t('DRIVER_GROUP_NOT_ASSIGNED', 'Driver group (general)')}
-            /> */}
           </WrapperRow>
           {/* <WrapperRow>
             <BusinessesSelector

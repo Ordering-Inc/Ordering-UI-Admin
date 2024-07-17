@@ -10,7 +10,15 @@ import {
   MapMarkerImg
 } from './styles'
 
-export const InterActOrderMarker = (props) => {
+const InterActOrderMarkerPropsAreEqual = (prevProps, nextProps) => {
+  return prevProps.image === nextProps.image &&
+    JSON.stringify(prevProps.customer) === JSON.stringify(nextProps.customer) &&
+    JSON.stringify(prevProps.business) === JSON.stringify(nextProps.business) &&
+    prevProps.timeStatus === nextProps.timeStatus &&
+    JSON.stringify(prevProps.driver) === JSON.stringify(nextProps.driver)
+}
+
+export const InterActOrderMarker = React.memo((props) => {
   const {
     image,
     customer,
@@ -165,4 +173,4 @@ export const InterActOrderMarker = (props) => {
       </WrapperMapMarker>
     </>
   )
-}
+}, InterActOrderMarkerPropsAreEqual)

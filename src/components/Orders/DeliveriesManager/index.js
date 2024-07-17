@@ -33,7 +33,8 @@ const DeliveriesManagerUI = (props) => {
     timeStatus,
     setTimeStatus,
     isUseQuery,
-    adminsList
+    adminsList,
+    assignableDriverGroupList
   } = props
 
   const [, t] = useLanguage()
@@ -95,6 +96,7 @@ const DeliveriesManagerUI = (props) => {
           setTimeStatus={setTimeStatus}
           setSlaSettingTime={setSlaSettingTime}
           adminsList={adminsList}
+          assignableDriverGroupList={assignableDriverGroupList}
         />
         <OrdersContent>
           <WrapItemView>
@@ -147,7 +149,7 @@ export const DeliveriesManager = (props) => {
     ...props,
     isOnlyDelivery: true,
     UIComponent: DeliveriesManagerUI,
-    driversPropsToFetch: ['id', 'name', 'lastname', 'location', 'enabled', 'available', 'busy', 'driver_groups', 'assigned_orders_count', 'last_order_assigned_at', 'last_location_at', 'cellphone', 'photo', 'qualification']
+    driversPropsToFetch: ['id', 'name', 'lastname', 'location', 'enabled', 'available', 'busy', 'driver_groups.name', 'driver_groups.id', 'assigned_orders_count', 'last_order_assigned_at', 'last_location_at', 'cellphone', 'photo', 'qualification']
   }
   return <OrdersManageController {...OrdersListControlProps} />
 }

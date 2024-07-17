@@ -15,6 +15,12 @@ export const DriversGroupTypeSelector = (props) => {
   const [{ dictionary }] = useLanguage()
 
   const [searchValue, setSearchValue] = useState('')
+  const [pagination, setPagination] = useState({
+    currentPage: 1,
+    pageSize: 5,
+    totalItems: null,
+    totalPages: null
+  })
 
   const placeholder = (
     <PlaceholderTitle>
@@ -23,6 +29,23 @@ export const DriversGroupTypeSelector = (props) => {
   )
   const [groupTypes, setGroupTypes] = useState([])
   const groupTypesLoading = [{ value: 'default', content: <Option>{dictionary?.GROUP_LOADING ?? 'Group loading'}...</Option> }]
+
+  const handleChangePage = (page) => {
+    setPagination({
+      ...pagination,
+      currentPage: page
+    })
+  }
+
+  const handleChangePageSize = (pageSize) => {
+    const expectedPage = Math.ceil(((pagination?.currentPage - 1) * pagination?.pageSize + 1) / pageSize)
+    setPagination({
+      ...pagination,
+      currentPage: expectedPage,
+      pageSize,
+      totalPages: Math.ceil(groupTypes?.length / pageSize)
+    })
+  }
 
   useEffect(() => {
     const _groupList = []
@@ -45,6 +68,16 @@ export const DriversGroupTypeSelector = (props) => {
     setGroupTypes(_groupList)
   }, [driverGroupList, searchValue])
 
+  useEffect(() => {
+    if (groupTypes?.length) {
+      setPagination({
+        ...pagination,
+        totalItems: groupTypes?.length,
+        totalPages: Math.ceil(groupTypes?.length / 10)
+      })
+    }
+  }, [groupTypes])
+
   return (
     <>
       {!driverGroupList.loading ? (
@@ -58,6 +91,10 @@ export const DriversGroupTypeSelector = (props) => {
           searchBarIsNotLazyLoad
           searchValue={searchValue}
           handleChangeSearch={(val) => setSearchValue(val)}
+          isHidePagecontrol
+          pagination={pagination}
+          handleChangePage={handleChangePage}
+          handleChangePageSize={handleChangePageSize}
         />
       ) : (
         <MultiSelect

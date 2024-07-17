@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useConfig, useLanguage, useSession, OrdersManage as OrdersManageController } from 'ordering-components-admin'
+import { OrdersManage as OrdersManageController, useConfig, useLanguage, useSession } from 'ordering-components-admin'
 import { OrderStatusFilterBar } from '../OrderStatusFilterBar'
 import { OrdersContentHeader } from '../OrdersContentHeader'
 import { OrderDetails } from '../OrderDetails'
@@ -19,7 +19,6 @@ import { OrdersDashboard } from '../OrdersDashboard'
 import { OrderStatusSubFilter } from '../OrderStatusSubFilter'
 import { OrderNotification } from '../OrderNotification'
 import { WizardOrders } from '../WizardOrders'
-import { OrdersHeaderFilterGroup } from '../OrdersHeaderFilterGroup'
 
 const OrdersManagerUI = (props) => {
   const {
@@ -27,6 +26,7 @@ const OrdersManagerUI = (props) => {
     isSelectedOrders,
     searchValue,
     driverGroupList,
+    assignableDriverGroupList,
     driversList,
     paymethodsList,
     businessesList,
@@ -52,7 +52,8 @@ const OrdersManagerUI = (props) => {
     setAllowColumns,
     timeStatus,
     setTimeStatus,
-    isUseQuery
+    isUseQuery,
+    disableDriverLocationsSockets
   } = props
 
   const [, t] = useLanguage()
@@ -179,6 +180,7 @@ const OrdersManagerUI = (props) => {
           isSelectedOrders={isSelectedOrders}
           title={t('ORDERS_LIST', 'Orders list')}
           searchValue={searchValue}
+          assignableDriverGroupList={assignableDriverGroupList}
           driverGroupList={driverGroupList}
           driversList={driversList}
           citiesList={citiesList}
@@ -196,6 +198,7 @@ const OrdersManagerUI = (props) => {
           setTimeStatus={setTimeStatus}
           setSlaSettingTime={setSlaSettingTime}
           isLateralBar={isLateralBar}
+          disableDriverLocationsSockets={disableDriverLocationsSockets}
         />
         <OrderStatusFilterBar
           isUseQuery={isUseQuery}

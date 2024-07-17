@@ -9,7 +9,13 @@ import {
   TextContainer,
   Text
 } from './styles'
-export const DriverMapMarkerAndInfo = (props) => {
+
+const DriverMapMarkerPropsAreEqual = (prevProps, nextProps) => {
+  return JSON.stringify(prevProps.driver) === JSON.stringify(nextProps.driver) &&
+  prevProps.timeStatus === nextProps.timeStatus
+}
+
+export const DriverMapMarkerAndInfo = React.memo((props) => {
   const {
     driver,
     timeStatus
@@ -84,4 +90,4 @@ export const DriverMapMarkerAndInfo = (props) => {
       </WrapperMapMarker>
     </>
   )
-}
+}, DriverMapMarkerPropsAreEqual)

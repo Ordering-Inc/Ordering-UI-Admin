@@ -57,7 +57,8 @@ const OrdersManagerUI = (props) => {
     allowColumns,
     setAllowColumns,
     isUseQuery,
-    adminsList
+    adminsList,
+    assignableDriverGroupList
   } = props
 
   const [, t] = useLanguage()
@@ -203,6 +204,7 @@ const OrdersManagerUI = (props) => {
           isDisableControl={isSelectedOrders}
           title={t('ORDER_MANAGER', 'Orders manager')}
           searchValue={searchValue}
+          assignableDriverGroupList={assignableDriverGroupList}
           driverGroupList={driverGroupList}
           driversList={driversList}
           citiesList={citiesList}
@@ -368,7 +370,7 @@ export const AllInOne = (props) => {
   const OrdersListControlProps = {
     ...props,
     UIComponent: OrdersManagerUI,
-    driversPropsToFetch: ['id', 'name', 'lastname', 'location', 'enabled', 'available', 'busy', 'driver_groups', 'assigned_orders_count', 'last_order_assigned_at', 'last_location_at', 'cellphone', 'photo', 'qualification']
+    driversPropsToFetch: ['id', 'name', 'lastname', 'location', 'enabled', 'available', 'busy', 'driver_groups.name', 'driver_groups.id', 'assigned_orders_count', 'photo']
   }
   return <OrdersManageController {...OrdersListControlProps} />
 }
