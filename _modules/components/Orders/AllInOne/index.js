@@ -62,7 +62,8 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     allowColumns = props.allowColumns,
     setAllowColumns = props.setAllowColumns,
     isUseQuery = props.isUseQuery,
-    adminsList = props.adminsList;
+    adminsList = props.adminsList,
+    assignableDriverGroupList = props.assignableDriverGroupList;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -244,6 +245,7 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     isDisableControl: isSelectedOrders,
     title: t('ORDER_MANAGER', 'Orders manager'),
     searchValue: searchValue,
+    assignableDriverGroupList: assignableDriverGroupList,
     driverGroupList: driverGroupList,
     driversList: driversList,
     citiesList: citiesList,
