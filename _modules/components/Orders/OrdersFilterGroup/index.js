@@ -275,8 +275,8 @@ var OrdersFilterGroupUI = function OrdersFilterGroupUI(props) {
     }
   })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperRow, null, /*#__PURE__*/_react.default.createElement(_DriversGroupTypeSelector.DriversGroupTypeSelector, {
     driverGroupList: driverGroupList,
-    handleChangeGroup: handleChangeGroup,
-    filterValues: filterValues.groupTypes,
+    handleChangeGroup: handleChangeGroupUnassigned,
+    filterValues: filterValues.groupTypesUnassigned,
     title: t('DRIVER_GROUP_ASSIGNED', 'Driver group (assigned)')
   }), /*#__PURE__*/_react.default.createElement(_BusinessesSelector.BusinessesSelector, {
     filterValues: filterValues,

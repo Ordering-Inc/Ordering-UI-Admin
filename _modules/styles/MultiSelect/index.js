@@ -47,7 +47,8 @@ var MultiSelect = exports.MultiSelect = function MultiSelect(props) {
     handleChangePageSize = props.handleChangePageSize,
     useLazyPagination = props.useLazyPagination,
     isLoading = props.isLoading,
-    optionsPosition = props.optionsPosition;
+    optionsPosition = props.optionsPosition,
+    isHidePagecontrol = props.isHidePagecontrol;
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     open = _useState2[0],
@@ -195,6 +196,7 @@ var MultiSelect = exports.MultiSelect = function MultiSelect(props) {
     totalPages: pagination === null || pagination === void 0 ? void 0 : pagination.totalPages,
     handleChangePage: handlerChangePage,
     handleChangePageSize: handleChangePageSize,
-    defaultPageSize: pagination === null || pagination === void 0 ? void 0 : pagination.pageSize
+    defaultPageSize: pagination === null || pagination === void 0 ? void 0 : pagination.pageSize,
+    isHidePagecontrol: isHidePagecontrol
   }))));
 };

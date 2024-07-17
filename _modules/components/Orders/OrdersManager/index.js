@@ -18,7 +18,6 @@ var _OrdersDashboard = require("../OrdersDashboard");
 var _OrderStatusSubFilter = require("../OrderStatusSubFilter");
 var _OrderNotification = require("../OrderNotification");
 var _WizardOrders = require("../WizardOrders");
-var _OrdersHeaderFilterGroup = require("../OrdersHeaderFilterGroup");
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
@@ -37,6 +36,7 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     isSelectedOrders = props.isSelectedOrders,
     searchValue = props.searchValue,
     driverGroupList = props.driverGroupList,
+    assignableDriverGroupList = props.assignableDriverGroupList,
     driversList = props.driversList,
     paymethodsList = props.paymethodsList,
     businessesList = props.businessesList,
@@ -62,7 +62,8 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     setAllowColumns = props.setAllowColumns,
     timeStatus = props.timeStatus,
     setTimeStatus = props.setTimeStatus,
-    isUseQuery = props.isUseQuery;
+    isUseQuery = props.isUseQuery,
+    disableDriverLocationsSockets = props.disableDriverLocationsSockets;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -215,6 +216,7 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     isSelectedOrders: isSelectedOrders,
     title: t('ORDERS_LIST', 'Orders list'),
     searchValue: searchValue,
+    assignableDriverGroupList: assignableDriverGroupList,
     driverGroupList: driverGroupList,
     driversList: driversList,
     citiesList: citiesList,
@@ -233,7 +235,8 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     setFilterModalOpen: setFilterModalOpen,
     setTimeStatus: setTimeStatus,
     setSlaSettingTime: setSlaSettingTime,
-    isLateralBar: isLateralBar
+    isLateralBar: isLateralBar,
+    disableDriverLocationsSockets: disableDriverLocationsSockets
   }), /*#__PURE__*/_react.default.createElement(_OrderStatusFilterBar.OrderStatusFilterBar, {
     isUseQuery: isUseQuery,
     selectedOrderStatus: ordersStatusGroup,

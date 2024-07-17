@@ -62,7 +62,8 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     allowColumns = props.allowColumns,
     setAllowColumns = props.setAllowColumns,
     isUseQuery = props.isUseQuery,
-    adminsList = props.adminsList;
+    adminsList = props.adminsList,
+    assignableDriverGroupList = props.assignableDriverGroupList;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -244,6 +245,7 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     isDisableControl: isSelectedOrders,
     title: t('ORDER_MANAGER', 'Orders manager'),
     searchValue: searchValue,
+    assignableDriverGroupList: assignableDriverGroupList,
     driverGroupList: driverGroupList,
     driversList: driversList,
     citiesList: citiesList,
@@ -379,7 +381,7 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
 var AllInOne = exports.AllInOne = function AllInOne(props) {
   var OrdersListControlProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: OrdersManagerUI,
-    driversPropsToFetch: ['id', 'name', 'lastname', 'location', 'enabled', 'available', 'busy', 'driver_groups', 'assigned_orders_count', 'last_order_assigned_at', 'last_location_at', 'cellphone', 'photo', 'qualification']
+    driversPropsToFetch: ['id', 'name', 'lastname', 'location', 'enabled', 'available', 'busy', 'driver_groups.name', 'driver_groups.id', 'assigned_orders_count', 'photo']
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.OrdersManage, OrdersListControlProps);
 };

@@ -27,17 +27,15 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 var OrdersHeaderFilterGroupUI = function OrdersHeaderFilterGroupUI(props) {
-  var _configs$filter_order, _dictionary$EXTERNAL_;
+  var _configs$filter_order, _dictionary$EXTERNAL_, _dictionary$DRIVER_GR;
   var filterValues = props.filterValues,
-    searchValue = props.searchValue,
-    driverGroupList = props.driverGroupList,
     driversList = props.driversList,
     handleChangeDriver = props.handleChangeDriver,
     handleChangeFilterValues = props.handleChangeFilterValues,
     handleChangeExternalId = props.handleChangeExternalId,
-    handleChangeGroupUnassigned = props.handleChangeGroupUnassigned,
-    handleChangeSearch = props.handleChangeSearch,
-    isSelectedOrders = props.isSelectedOrders;
+    handleChangeGroup = props.handleChangeGroup,
+    isSelectedOrders = props.isSelectedOrders,
+    assignableDriverGroupList = props.assignableDriverGroupList;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 1),
     dictionary = _useLanguage2[0].dictionary;
@@ -105,22 +103,11 @@ var OrdersHeaderFilterGroupUI = function OrdersHeaderFilterGroupUI(props) {
     drivers: driversList.drivers,
     filterValues: filterValues,
     handleChangeDriver: handleChangeDriver
-  }), !loading && configFilter.includes('driver_group_general') &&
-  /*#__PURE__*/
-  // <DriversGroupTypeSelector
-  //   driverGroupList={driverGroupList}
-  //   handleChangeGroup={handleChangeGroupUnassigned}
-  //   filterValues={filterValues.groupTypesUnassigned}
-  //   title={dictionary?.DRIVER_GROUP_NOT_ASSIGNED ?? 'Driver group (general)'}
-  // />
-  _react.default.createElement(_Shared.SearchBar, {
-    customClass: "external_id",
-    isCustomLayout: true,
-    hideSearchIcon: true,
-    lazyLoad: true,
-    onSearch: handleChangeSearch,
-    search: searchValue || '',
-    placeholder: (dictionary === null || dictionary === void 0 ? void 0 : dictionary.SEARCH_BY_STORE_NAME) || 'Store name'
+  }), !loading && configFilter.includes('driver_group') && /*#__PURE__*/_react.default.createElement(_DriversGroupTypeSelector.DriversGroupTypeSelector, {
+    driverGroupList: assignableDriverGroupList,
+    handleChangeGroup: handleChangeGroup,
+    filterValues: filterValues.driverGroupBusinessIds,
+    title: (_dictionary$DRIVER_GR = dictionary === null || dictionary === void 0 ? void 0 : dictionary.DRIVER_GROUP_ASSIGNABLE) !== null && _dictionary$DRIVER_GR !== void 0 ? _dictionary$DRIVER_GR : 'Driver group (assignable)'
   })));
 };
 var OrdersHeaderFilterGroup = exports.OrdersHeaderFilterGroup = function OrdersHeaderFilterGroup(props) {

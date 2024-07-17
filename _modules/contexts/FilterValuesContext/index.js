@@ -52,9 +52,9 @@ var FilterValuesProvider = exports.FilterValuesProvider = function FilterValuesP
       customerEmail: null,
       customerCellphone: null,
       customerLastname: null,
-      administratorIds: [],
       coupon: null,
-      offerId: null
+      offerId: null,
+      administratorIds: []
     }),
     _useState2 = _slicedToArray(_useState, 2),
     filterValues = _useState2[0],

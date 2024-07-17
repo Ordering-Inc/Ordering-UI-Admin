@@ -166,6 +166,7 @@ var DriverMultiSelectorUI = function DriverMultiSelectorUI(props) {
 var DriverMultiSelector = exports.DriverMultiSelector = function DriverMultiSelector(props) {
   var DriversControlProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: DriverMultiSelectorUI,
+    disableDriverLocationsSockets: true,
     paginationSettings: {
       initialPage: 1,
       pageSize: 10,

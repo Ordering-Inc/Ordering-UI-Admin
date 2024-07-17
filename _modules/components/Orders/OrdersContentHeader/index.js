@@ -36,6 +36,7 @@ var OrdersContentHeader = exports.OrdersContentHeader = function OrdersContentHe
     handleChangeSearch = props.handleChangeSearch,
     searchValue = props.searchValue,
     driverGroupList = props.driverGroupList,
+    assignableDriverGroupList = props.assignableDriverGroupList,
     driversList = props.driversList,
     citiesList = props.citiesList,
     paymethodsList = props.paymethodsList,
@@ -84,6 +85,7 @@ var OrdersContentHeader = exports.OrdersContentHeader = function OrdersContentHe
   }, /*#__PURE__*/_react.default.createElement(_styles2.WrapperHeaderFilterGroup, null, /*#__PURE__*/_react.default.createElement(_OrdersHeaderFilterGroup.OrdersHeaderFilterGroup, {
     isSelectedOrders: isSelectedOrders,
     driverGroupList: driverGroupList,
+    assignableDriverGroupList: assignableDriverGroupList,
     driversList: driversList,
     searchValue: searchValue,
     handleChangeFilterValues: handleChangeFilterValues,

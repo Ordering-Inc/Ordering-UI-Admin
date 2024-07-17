@@ -47,7 +47,8 @@ var DeliveriesManagerUI = function DeliveriesManagerUI(props) {
     timeStatus = props.timeStatus,
     setTimeStatus = props.setTimeStatus,
     isUseQuery = props.isUseQuery,
-    adminsList = props.adminsList;
+    adminsList = props.adminsList,
+    assignableDriverGroupList = props.assignableDriverGroupList;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -121,7 +122,8 @@ var DeliveriesManagerUI = function DeliveriesManagerUI(props) {
     setFilterModalOpen: setFilterModalOpen,
     setTimeStatus: setTimeStatus,
     setSlaSettingTime: setSlaSettingTime,
-    adminsList: adminsList
+    adminsList: adminsList,
+    assignableDriverGroupList: assignableDriverGroupList
   }), /*#__PURE__*/_react.default.createElement(_styles.OrdersContent, null, /*#__PURE__*/_react.default.createElement(_styles.WrapItemView, null, /*#__PURE__*/_react.default.createElement(_DeliveryDashboard.DeliveryDashboard, {
     searchValue: searchValue,
     filterValues: filterValues,
@@ -161,7 +163,7 @@ var DeliveriesManager = exports.DeliveriesManager = function DeliveriesManager(p
   var OrdersListControlProps = _objectSpread(_objectSpread({}, props), {}, {
     isOnlyDelivery: true,
     UIComponent: DeliveriesManagerUI,
-    driversPropsToFetch: ['id', 'name', 'lastname', 'location', 'enabled', 'available', 'busy', 'driver_groups', 'assigned_orders_count', 'last_order_assigned_at', 'last_location_at', 'cellphone', 'photo', 'qualification']
+    driversPropsToFetch: ['id', 'name', 'lastname', 'location', 'enabled', 'available', 'busy', 'driver_groups.name', 'driver_groups.id', 'assigned_orders_count', 'last_order_assigned_at', 'last_location_at', 'cellphone', 'photo', 'qualification']
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.OrdersManage, OrdersListControlProps);
 };
