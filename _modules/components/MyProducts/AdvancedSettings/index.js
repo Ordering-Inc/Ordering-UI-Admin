@@ -24,7 +24,7 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 var AdvancedSettings = exports.AdvancedSettings = function AdvancedSettings(props) {
-  var _themeValuesRef$curre, _themesList$themes3, _themesList$themes4, _themeValuesRef$curre2, _themeValuesRef$curre3, _themesList$themes5, _themeValuesRef$curre4, _themesList$themes6, _themesList$themes7, _themeValuesRef$curre5, _themesList$themes8, _themeValuesRef$curre6, _themesList$themes9, _themesList$themes10, _themesList$themes11, _themesList$themes12, _themesList$themes13, _themesList$themes14, _themesList$themes15, _themesList$themes16, _themesList$themes17, _themesList$themes18, _themesList$themes19, _themesList$themes20, _themesList$themes21, _themesList$themes22, _themesList$themes23, _themeValuesRef$curre7, _themeValuesRef$curre8, _themeValuesRef$curre9, _themesList$themes24, _themeValuesRef$curre10, _themeValuesRef$curre11, _themesList$themes25, _themeValuesRef$curre12, _themeValuesRef$curre13, _themesList$themes26, _themeValuesRef$curre14, _themeValuesRef$curre15, _themesList$themes27, _themeValuesRef$curre16, _themeValuesRef$curre17, _themesList$themes28, _themesList$themes29, _themesList$themes30;
+  var _themeValuesRef$curre, _themesList$themes3, _themesList$themes4, _themeValuesRef$curre2, _themeValuesRef$curre3, _themesList$themes5, _themeValuesRef$curre4, _themesList$themes6, _themesList$themes7, _themeValuesRef$curre5, _themesList$themes8, _themeValuesRef$curre6, _themesList$themes9, _themesList$themes10, _themesList$themes11, _themesList$themes12, _themesList$themes13, _themesList$themes14, _themesList$themes15, _themesList$themes16, _themesList$themes17, _themesList$themes18, _themesList$themes19, _themesList$themes20, _themesList$themes21, _themesList$themes22, _themesList$themes23, _themeValuesRef$curre7, _themeValuesRef$curre8, _themeValuesRef$curre9, _themesList$themes24, _themeValuesRef$curre10, _themeValuesRef$curre11, _themesList$themes25, _themeValuesRef$curre12, _themeValuesRef$curre13, _themesList$themes26, _themeValuesRef$curre14, _themeValuesRef$curre15, _themesList$themes27, _themeValuesRef$curre16, _themeValuesRef$curre17, _themesList$themes28, _themesList$themes29, _themesList$themes30, _themesList$themes31;
   var themesList = props.themesList,
     advancedValues = props.advancedValues,
     handleUpdateSiteTheme = props.handleUpdateSiteTheme,
@@ -434,6 +434,19 @@ var AdvancedSettings = exports.AdvancedSettings = function AdvancedSettings(prop
     type: 'hidden',
     path: 'bar_menu.components.profile.hidden'
   }];
+  var smartBannersList = [{
+    name: t('ANDROID_ID', 'Android id'),
+    type: 'input',
+    path: 'smart_banner_settings.android_id'
+  }, {
+    name: t('APPLE_ID', 'Apple id'),
+    type: 'input',
+    path: 'smart_banner_settings.apple_id'
+  }, {
+    name: t('KINDLE_ID', 'Kindle id'),
+    type: 'input',
+    path: 'smart_banner_settings.kindle_id'
+  }];
   var closeAlert = function closeAlert() {
     setAlertState({
       open: false,
@@ -674,13 +687,19 @@ var AdvancedSettings = exports.AdvancedSettings = function AdvancedSettings(prop
     advancedValues: themeValuesRef === null || themeValuesRef === void 0 ? void 0 : themeValuesRef.current,
     themeStructure: themeStructure,
     themeId: themesList === null || themesList === void 0 || (_themesList$themes29 = themesList.themes) === null || _themesList$themes29 === void 0 || (_themesList$themes29 = _themesList$themes29[0]) === null || _themesList$themes29 === void 0 ? void 0 : _themesList$themes29.id
-  })), isApp && /*#__PURE__*/_react.default.createElement(_styles2.BoxLayout, null, /*#__PURE__*/_react.default.createElement("h2", null, t('NAVIGATION_BAR_MENU', 'Navigation bar menu')), /*#__PURE__*/_react.default.createElement(_SettingComponent.SettingComponent, {
+  })), isApp && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.BoxLayout, null, /*#__PURE__*/_react.default.createElement("h2", null, t('NAVIGATION_BAR_MENU', 'Navigation bar menu')), /*#__PURE__*/_react.default.createElement(_SettingComponent.SettingComponent, {
     settingList: navigationBarList,
     handleUpdateThemeValue: handleUpdateThemeValue,
     advancedValues: themeValuesRef === null || themeValuesRef === void 0 ? void 0 : themeValuesRef.current,
     themeStructure: themeStructure,
     themeId: themesList === null || themesList === void 0 || (_themesList$themes30 = themesList.themes) === null || _themesList$themes30 === void 0 || (_themesList$themes30 = _themesList$themes30[0]) === null || _themesList$themes30 === void 0 ? void 0 : _themesList$themes30.id
-  })), /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.BoxLayout, null, /*#__PURE__*/_react.default.createElement("h2", null, t('SMART_BANNER_SETTINGS', 'Smart banners settings')), /*#__PURE__*/_react.default.createElement(_SettingComponent.SettingComponent, {
+    settingList: smartBannersList,
+    handleUpdateThemeValue: handleUpdateThemeValue,
+    advancedValues: themeValuesRef === null || themeValuesRef === void 0 ? void 0 : themeValuesRef.current,
+    themeStructure: themeStructure,
+    themeId: themesList === null || themesList === void 0 || (_themesList$themes31 = themesList.themes) === null || _themesList$themes31 === void 0 || (_themesList$themes31 = _themesList$themes31[0]) === null || _themesList$themes31 === void 0 ? void 0 : _themesList$themes31.id
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     borderRadius: "8px",
     onClick: function onClick() {
