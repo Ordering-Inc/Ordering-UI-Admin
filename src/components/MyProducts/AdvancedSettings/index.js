@@ -30,7 +30,7 @@ export const AdvancedSettings = (props) => {
   const [themeStructure, setThemeStructure] = useState({})
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const themeValuesRef = useRef({})
-  
+
   const [isOpenSound, setIsOpenSound] = useState(false)
 
   const headerList = [
@@ -178,6 +178,12 @@ export const AdvancedSettings = (props) => {
     { name: t('MY_CARTS', 'My carts'), type: 'hidden', path: 'bar_menu.components.my_carts.hidden' },
     { name: t('WALLET', 'Wallet'), type: 'hidden', path: 'bar_menu.components.wallet.hidden' },
     { name: t('PROFILE', 'Profile'), type: 'hidden', path: 'bar_menu.components.profile.hidden' }
+  ]
+
+  const smartBannersList = [
+    { name: t('ANDROID_ID', 'Android id'), type: 'input', path: 'smart_banner_settings.android_id' },
+    { name: t('APPLE_ID', 'Apple id'), type: 'input', path: 'smart_banner_settings.apple_id' },
+    { name: t('KINDLE_ID', 'Kindle id'), type: 'input', path: 'smart_banner_settings.kindle_id' }
   ]
 
   const closeAlert = () => {
@@ -468,70 +474,70 @@ export const AdvancedSettings = (props) => {
             path='order_types.components.delivery.components'
             handleUpdateThemeValue={handleUpdateThemeValue}
           />
-            <ImageBox
-              title={t('DELIVERY_OPTION_IMAGE', 'Delivery option image')}
-              ratio='900 x 200 px'
-              photo={themeValuesRef?.current?.order_types?.components?.delivery?.components?.image}
-              path='order_types.components.delivery.components.image'
-              themeId={themesList?.themes?.[0]?.id}
-              handleChangePhoto={handleUpdateThemeValue}
-            />
+          <ImageBox
+            title={t('DELIVERY_OPTION_IMAGE', 'Delivery option image')}
+            ratio='900 x 200 px'
+            photo={themeValuesRef?.current?.order_types?.components?.delivery?.components?.image}
+            path='order_types.components.delivery.components.image'
+            themeId={themesList?.themes?.[0]?.id}
+            handleChangePhoto={handleUpdateThemeValue}
+          />
           <h3>{t('PICKUP', 'Pickup')}</h3>
           <OrderType
             typeValues={themeValuesRef?.current?.order_types?.components?.pickup?.components}
             path='order_types.components.pickup.components'
             handleUpdateThemeValue={handleUpdateThemeValue}
           />
-            <ImageBox
-              title={t('PICKUP_OPTION_IMAGE', 'Pickup option image')}
-              ratio='900 x 200 px'
-              photo={themeValuesRef?.current?.order_types?.components?.pickup?.components?.image}
-              path='order_types.components.pickup.components.image'
-              themeId={themesList?.themes?.[0]?.id}
-              handleChangePhoto={handleUpdateThemeValue}
-            />
+          <ImageBox
+            title={t('PICKUP_OPTION_IMAGE', 'Pickup option image')}
+            ratio='900 x 200 px'
+            photo={themeValuesRef?.current?.order_types?.components?.pickup?.components?.image}
+            path='order_types.components.pickup.components.image'
+            themeId={themesList?.themes?.[0]?.id}
+            handleChangePhoto={handleUpdateThemeValue}
+          />
           <h3>{t('EAT_IN', 'Eat in')}</h3>
           <OrderType
             typeValues={themeValuesRef?.current?.order_types?.components?.eat_in?.components}
             path='order_types.components.eat_in.components'
             handleUpdateThemeValue={handleUpdateThemeValue}
           />
-            <ImageBox
-              title={t('EAT_IN_OPTION_IMAGE', 'Eat in option image')}
-              ratio='900 x 200 px'
-              photo={themeValuesRef?.current?.order_types?.components?.eat_in?.components?.image}
-              path='order_types.components.eat_in.components.image'
-              themeId={themesList?.themes?.[0]?.id}
-              handleChangePhoto={handleUpdateThemeValue}
-            />
+          <ImageBox
+            title={t('EAT_IN_OPTION_IMAGE', 'Eat in option image')}
+            ratio='900 x 200 px'
+            photo={themeValuesRef?.current?.order_types?.components?.eat_in?.components?.image}
+            path='order_types.components.eat_in.components.image'
+            themeId={themesList?.themes?.[0]?.id}
+            handleChangePhoto={handleUpdateThemeValue}
+          />
           <h3>{t('CURBSIDE', 'Curbside')}</h3>
           <OrderType
             typeValues={themeValuesRef?.current?.order_types?.components?.curbside?.components}
             path='order_types.components.curbside.components'
             handleUpdateThemeValue={handleUpdateThemeValue}
           />
-            <ImageBox
-              title={t('CURBSIDE_OPTION_IMAGE', 'Curbside option image')}
-              ratio='900 x 200 px'
-              photo={themeValuesRef?.current?.order_types?.components?.curbside?.components?.image}
-              path='order_types.components.curbside.components.image'
-              themeId={themesList?.themes?.[0]?.id}
-              handleChangePhoto={handleUpdateThemeValue}
-            />
+          <ImageBox
+            title={t('CURBSIDE_OPTION_IMAGE', 'Curbside option image')}
+            ratio='900 x 200 px'
+            photo={themeValuesRef?.current?.order_types?.components?.curbside?.components?.image}
+            path='order_types.components.curbside.components.image'
+            themeId={themesList?.themes?.[0]?.id}
+            handleChangePhoto={handleUpdateThemeValue}
+          />
           <h3>{t('DRIVE_THRU', 'Drive thru')}</h3>
           <OrderType
             typeValues={themeValuesRef?.current?.order_types?.components?.drive_thru?.components}
             path='order_types.components.drive_thru.components'
             handleUpdateThemeValue={handleUpdateThemeValue}
           />
-            <ImageBox
-              title={t('DRIVE_THRU_OPTION_IMAGE', 'Drive thru option image')}
-              ratio='900 x 200 px'
-              photo={themeValuesRef?.current?.order_types?.components?.drive_thru?.components?.image}
-              path='order_types.components.drive_thru.components.image'
-              themeId={themesList?.themes?.[0]?.id}
-              handleChangePhoto={handleUpdateThemeValue}
-            />
+          <ImageBox
+            title={t('DRIVE_THRU_OPTION_IMAGE', 'Drive thru option image')}
+            ratio='900 x 200 px'
+            photo={themeValuesRef?.current?.order_types?.components?.drive_thru?.components?.image}
+            path='order_types.components.drive_thru.components.image'
+            themeId={themesList?.themes?.[0]?.id}
+            handleChangePhoto={handleUpdateThemeValue}
+          />
 
         </BoxLayout>
         <BoxLayout>
@@ -545,16 +551,28 @@ export const AdvancedSettings = (props) => {
           />
         </BoxLayout>
         {isApp && (
-          <BoxLayout>
-            <h2>{t('NAVIGATION_BAR_MENU', 'Navigation bar menu')}</h2>
-            <SettingComponent
-              settingList={navigationBarList}
-              handleUpdateThemeValue={handleUpdateThemeValue}
-              advancedValues={themeValuesRef?.current}
-              themeStructure={themeStructure}
-              themeId={themesList?.themes?.[0]?.id}
-            />
-          </BoxLayout>
+          <>
+            <BoxLayout>
+              <h2>{t('NAVIGATION_BAR_MENU', 'Navigation bar menu')}</h2>
+              <SettingComponent
+                settingList={navigationBarList}
+                handleUpdateThemeValue={handleUpdateThemeValue}
+                advancedValues={themeValuesRef?.current}
+                themeStructure={themeStructure}
+                themeId={themesList?.themes?.[0]?.id}
+              />
+            </BoxLayout>
+            <BoxLayout>
+              <h2>{t('SMART_BANNER_SETTINGS', 'Smart banners settings')}</h2>
+              <SettingComponent
+                settingList={smartBannersList}
+                handleUpdateThemeValue={handleUpdateThemeValue}
+                advancedValues={themeValuesRef?.current}
+                themeStructure={themeStructure}
+                themeId={themesList?.themes?.[0]?.id}
+              />
+            </BoxLayout>
+          </>
         )}
         <ButtonWrapper>
           <Button
