@@ -74,7 +74,7 @@ const OrdersHeaderFilterGroupUI = (props) => {
             handleChangeDriver={handleChangeDriver}
           />
         )}
-        {!loading && configFilter.includes('driver_group') && (
+        {!loading && configFilter.includes('driver_group') && assignableDriverGroupList && (
           <DriversGroupTypeSelector
             driverGroupList={assignableDriverGroupList}
             handleChangeGroup={handleChangeGroup}
