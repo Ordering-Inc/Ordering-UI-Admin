@@ -100,10 +100,10 @@ var OrdersHeaderFilterGroupUI = function OrdersHeaderFilterGroupUI(props) {
     customClass: "external_id"
   }), !loading && configFilter.includes('driver') && /*#__PURE__*/_react.default.createElement(_DriverMultiSelector.DriverMultiSelector, {
     useDriversByProps: true,
-    drivers: driversList.drivers,
+    driversList: driversList,
     filterValues: filterValues,
     handleChangeDriver: handleChangeDriver
-  }), !loading && configFilter.includes('driver_group') && /*#__PURE__*/_react.default.createElement(_DriversGroupTypeSelector.DriversGroupTypeSelector, {
+  }), !loading && configFilter.includes('driver_group') && assignableDriverGroupList && /*#__PURE__*/_react.default.createElement(_DriversGroupTypeSelector.DriversGroupTypeSelector, {
     driverGroupList: assignableDriverGroupList,
     handleChangeGroup: handleChangeGroup,
     filterValues: filterValues.driverGroupBusinessIds,

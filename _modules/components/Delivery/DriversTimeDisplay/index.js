@@ -418,7 +418,7 @@ var DriversTimeDisplayUI = function DriversTimeDisplayUI(props) {
   }, /*#__PURE__*/_react.default.createElement(_MdClose.default, null))), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null), (selectedGroup || filtOption === 'drivers') && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, selectedGroup && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("span", null, selectedGroup === null || selectedGroup === void 0 ? void 0 : selectedGroup.name), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null), /*#__PURE__*/_react.default.createElement("span", null, t('DRIVERS', 'DRIVERS')), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ChevronRight, null)), /*#__PURE__*/_react.default.createElement(_DriverMultiSelector.DriverMultiSelector, {
     isSearchByName: true,
     useDriversByProps: selectedGroup,
-    drivers: selectedGroup === null || selectedGroup === void 0 ? void 0 : selectedGroup.drivers,
+    driversList: selectedGroup,
     disableSocketRoomDriver: true,
     useTextStyle: true,
     hideChevronIcon: true,
