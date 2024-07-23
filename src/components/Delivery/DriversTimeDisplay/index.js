@@ -451,7 +451,7 @@ const DriversTimeDisplayUI = (props) => {
                       <DriverMultiSelector
                         isSearchByName
                         useDriversByProps={selectedGroup}
-                        drivers={selectedGroup?.drivers}
+                        driversList={selectedGroup}
                         disableSocketRoomDriver
                         useTextStyle
                         hideChevronIcon
