@@ -74,26 +74,32 @@ var DriversList = exports.DriversList = function DriversList(props) {
     return validation;
   };
   var handleChangePage = function handleChangePage(page) {
-    setPagination(_objectSpread(_objectSpread({}, pagination), {}, {
-      currentPage: page
-    }));
+    setPagination(function (pagintaion) {
+      return _objectSpread(_objectSpread({}, pagination), {}, {
+        currentPage: page
+      });
+    });
   };
   var handleChangePageSize = function handleChangePageSize(pageSize) {
     var expectedPage = Math.ceil((((pagination === null || pagination === void 0 ? void 0 : pagination.currentPage) - 1) * (pagination === null || pagination === void 0 ? void 0 : pagination.pageSize) + 1) / pageSize);
-    setPagination(_objectSpread(_objectSpread({}, pagination), {}, {
-      currentPage: expectedPage,
-      pageSize: pageSize,
-      totalPages: Math.ceil((drivers === null || drivers === void 0 ? void 0 : drivers.length) / pageSize)
-    }));
+    setPagination(function (pagination) {
+      return _objectSpread(_objectSpread({}, pagination), {}, {
+        currentPage: expectedPage,
+        pageSize: pageSize,
+        totalPages: Math.ceil((drivers === null || drivers === void 0 ? void 0 : drivers.length) / pageSize)
+      });
+    });
   };
   (0, _react.useEffect)(function () {
     if (drivers !== null && drivers !== void 0 && drivers.length) {
-      setPagination(_objectSpread(_objectSpread({}, pagination), {}, {
-        totalItems: drivers === null || drivers === void 0 ? void 0 : drivers.length,
-        totalPages: Math.ceil((drivers === null || drivers === void 0 ? void 0 : drivers.length) / 10)
-      }));
+      setPagination(function (pagination) {
+        return _objectSpread(_objectSpread({}, pagination), {}, {
+          totalItems: drivers === null || drivers === void 0 ? void 0 : drivers.length,
+          totalPages: Math.ceil((drivers === null || drivers === void 0 ? void 0 : drivers.length) / 10)
+        });
+      });
     }
-  }, [drivers]);
+  }, [drivers === null || drivers === void 0 ? void 0 : drivers.length]);
   return /*#__PURE__*/_react.default.createElement(_styles.DriversListContainer, {
     showCompressedInfo: showCompressedInfo
   }, loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, _toConsumableArray(Array(10).keys()).map(function (i) {
