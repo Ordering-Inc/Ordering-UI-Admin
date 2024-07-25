@@ -56,7 +56,7 @@ export const DriversList = (props) => {
   }
 
   const handleChangePage = (page) => {
-    setPagination((pagintaion) => ({
+    setPagination((pagination) => ({
       ...pagination,
       currentPage: page
     }))
