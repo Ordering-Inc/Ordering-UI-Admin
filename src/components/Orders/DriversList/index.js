@@ -56,31 +56,31 @@ export const DriversList = (props) => {
   }
 
   const handleChangePage = (page) => {
-    setPagination({
+    setPagination((pagintaion) => ({
       ...pagination,
       currentPage: page
-    })
+    }))
   }
 
   const handleChangePageSize = (pageSize) => {
     const expectedPage = Math.ceil(((pagination?.currentPage - 1) * pagination?.pageSize + 1) / pageSize)
-    setPagination({
+    setPagination((pagination) => ({
       ...pagination,
       currentPage: expectedPage,
       pageSize,
       totalPages: Math.ceil(drivers?.length / pageSize)
-    })
+    }))
   }
 
   useEffect(() => {
     if (drivers?.length) {
-      setPagination({
+      setPagination((pagination) => ({
         ...pagination,
         totalItems: drivers?.length,
         totalPages: Math.ceil(drivers?.length / 10)
-      })
+      }))
     }
-  }, [drivers])
+  }, [drivers?.length])
 
   return (
     <DriversListContainer showCompressedInfo={showCompressedInfo}>
