@@ -76,13 +76,17 @@ var OrdersTable = exports.OrdersTable = /*#__PURE__*/(0, _react.memo)(function (
     _useState4 = _slicedToArray(_useState3, 2),
     dragOverd = _useState4[0],
     setDragOverd = _useState4[1];
-  var handleChangePage = function handleChangePage(page) {
-    getPageOrders(pagination.pageSize, page);
-  };
-  var handleChangePageSize = function handleChangePageSize(pageSize) {
-    var expectedPage = Math.ceil(pagination.from / pageSize);
-    getPageOrders(pageSize, expectedPage);
-  };
+  var handleChangePage = (0, _react.useCallback)(function (page) {
+    if (page !== pagination.currentPage) {
+      getPageOrders(pagination.pageSize, page);
+    }
+  }, [pagination.currentPage, pagination.pageSize, getPageOrders]);
+  var handleChangePageSize = (0, _react.useCallback)(function (pageSize) {
+    if (pageSize !== pagination.pageSize) {
+      var expectedPage = Math.ceil(pagination.from / pageSize);
+      getPageOrders(pageSize, expectedPage);
+    }
+  }, [pagination.from, pagination.pageSize, getPageOrders]);
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configState = _useConfig2[0];

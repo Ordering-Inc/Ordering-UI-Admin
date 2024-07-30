@@ -74,7 +74,7 @@ var DriversList = exports.DriversList = function DriversList(props) {
     return validation;
   };
   var handleChangePage = function handleChangePage(page) {
-    setPagination(function (pagintaion) {
+    setPagination(function (pagination) {
       return _objectSpread(_objectSpread({}, pagination), {}, {
         currentPage: page
       });

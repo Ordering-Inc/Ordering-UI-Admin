@@ -18,7 +18,25 @@ function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) 
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
-var Pagination = exports.Pagination = function Pagination(props) {
+var filterPages = function filterPages(visiblePages, totalPages) {
+  return visiblePages.filter(function (page) {
+    return page <= totalPages;
+  });
+};
+var getVisiblePages = function getVisiblePages(page, total) {
+  if (total < 7) {
+    return filterPages([1, 2, 3, 4, 5, 6], total);
+  } else {
+    if (page % 5 >= 0 && page > 4 && page + 2 < total) {
+      return [1, page - 1, page, page + 1, total];
+    } else if (page % 5 >= 0 && page > 4 && page + 2 >= total) {
+      return [1, total - 3, total - 2, total - 1, total];
+    } else {
+      return [1, 2, 3, 4, 5, total];
+    }
+  }
+};
+var Pagination = exports.Pagination = /*#__PURE__*/_react.default.memo(function (props) {
   var currentPage = props.currentPage,
     totalPages = props.totalPages,
     handleChangePage = props.handleChangePage,
@@ -29,16 +47,18 @@ var Pagination = exports.Pagination = function Pagination(props) {
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
-  var pageSizeOptions = [{
-    value: 10,
-    content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, "10")
-  }, {
-    value: 25,
-    content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, "25")
-  }, {
-    value: 50,
-    content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, "50")
-  }];
+  var pageSizeOptions = (0, _react.useMemo)(function () {
+    return [{
+      value: 10,
+      content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, "10")
+    }, {
+      value: 25,
+      content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, "25")
+    }, {
+      value: 50,
+      content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, "50")
+    }];
+  }, []);
   var _useState = (0, _react.useState)([]),
     _useState2 = _slicedToArray(_useState, 2),
     visiblePages = _useState2[0],
@@ -47,33 +67,13 @@ var Pagination = exports.Pagination = function Pagination(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     activePage = _useState4[0],
     setActivePage = _useState4[1];
-  var filterPages = function filterPages(visiblePages, totalPages) {
-    return visiblePages.filter(function (page) {
-      return page <= totalPages;
-    });
-  };
-  var getVisiblePages = function getVisiblePages(page, total) {
-    if (total < 7) {
-      return filterPages([1, 2, 3, 4, 5, 6], total);
-    } else {
-      if (page % 5 >= 0 && page > 4 && page + 2 < total) {
-        return [1, page - 1, page, page + 1, total];
-      } else if (page % 5 >= 0 && page > 4 && page + 2 >= total) {
-        return [1, total - 3, total - 2, total - 1, total];
-      } else {
-        return [1, 2, 3, 4, 5, total];
-      }
-    }
-  };
-  var changePage = function changePage(page) {
-    if (page === activePage) {
-      return;
-    }
+  var changePage = (0, _react.useCallback)(function (page) {
+    if (page === activePage) return;
     setActivePage(page);
     var _visiblePages = getVisiblePages(page, totalPages);
     setVisiblePages(filterPages(_visiblePages, totalPages));
     handleChangePage(page);
-  };
+  }, [activePage, totalPages, handleChangePage]);
   (0, _react.useEffect)(function () {
     if (!totalPages) return;
     setVisiblePages(getVisiblePages(null, totalPages));
@@ -119,4 +119,4 @@ var Pagination = exports.Pagination = function Pagination(props) {
       return handleChangePageSize(size);
     }
   })));
-};
+});
