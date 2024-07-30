@@ -9,7 +9,7 @@ export const WrapperRow = styled.div`
   & > div {
     width: 100%;
     height: 47px;
-    max-width: 300px;
+    max-width: 1000px;
     margin-right: 10px;
     background-color: ${props => props.theme.colors.secundary};
     border: none;
@@ -17,6 +17,10 @@ export const WrapperRow = styled.div`
     border-radius: 8px;
     > div:first-child {
       height: 100%;
+    }
+
+    @media (min-width: 798px) {
+      max-width: 300px;
     }
   }
 

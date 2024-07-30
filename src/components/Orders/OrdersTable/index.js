@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react'
+import React, { memo, useEffect, useState, useCallback } from 'react'
 import moment from 'moment'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
@@ -70,13 +70,20 @@ export const OrdersTable = memo((props) => {
   const [{ parseDate }] = useUtils()
   const [isAllChecked, setIsAllChecked] = useState(false)
   const [dragOverd, setDragOverd] = useState('')
-  const handleChangePage = (page) => {
-    getPageOrders(pagination.pageSize, page)
-  }
-  const handleChangePageSize = (pageSize) => {
-    const expectedPage = Math.ceil(pagination.from / pageSize)
-    getPageOrders(pageSize, expectedPage)
-  }
+
+  const handleChangePage = useCallback((page) => {
+    if (page !== pagination.currentPage) {
+      getPageOrders(pagination.pageSize, page)
+    }
+  }, [pagination.currentPage, pagination.pageSize, getPageOrders])
+
+  const handleChangePageSize = useCallback((pageSize) => {
+    if (pageSize !== pagination.pageSize) {
+      const expectedPage = Math.ceil(pagination.from / pageSize)
+      getPageOrders(pageSize, expectedPage)
+    }
+  }, [pagination.from, pagination.pageSize, getPageOrders])
+
   const [configState] = useConfig()
   const isEnabledRowInColor = configState?.configs?.row_in_color_enabled?.value === '1'
   const showExternalId = configState?.configs?.change_order_id?.value === '1'
@@ -269,11 +276,11 @@ export const OrdersTable = memo((props) => {
     let _column = {}
     if (type === 'channel') {
       _column = { visable: allowColumns[type]?.visable ?? false, title: t('CHANNEL', 'Channel'), className: 'channelInfo', draggable: true, colSpan: 1, order: 12 }
-     } else if (type === 'pod') {
+    } else if (type === 'pod') {
       _column = { visable: allowColumns[type]?.visable ?? false, title: t('PODS', 'Pod'), className: 'podInfo', draggable: true, colSpan: 1, order: 13 }
-     } else {
+    } else {
       _column = allowColumns[type]
-     }
+    }
     const updatedAllowColumns = {
       ...allowColumns,
       [type]: { ..._column, visable: !_column?.visable }
