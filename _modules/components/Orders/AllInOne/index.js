@@ -73,7 +73,7 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configState = _useConfig2[0];
-  var isSearchFilterValue = ((configState === null || configState === void 0 || (_configState$configs = configState.configs) === null || _configState$configs === void 0 || (_configState$configs = _configState$configs.filter_order_options) === null || _configState$configs === void 0 ? void 0 : _configState$configs.value.split('|').map(function (value) {
+  var isFilterDriverGroup = ((configState === null || configState === void 0 || (_configState$configs = configState.configs) === null || _configState$configs === void 0 || (_configState$configs = _configState$configs.filter_order_options) === null || _configState$configs === void 0 ? void 0 : _configState$configs.value.split('|').map(function (value) {
     return value;
   })) || []).includes('driver_group_general');
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
@@ -268,9 +268,8 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     disableSocketRoomDriver: true,
     showCompressedInfo: true,
     filterValues: filterValues,
-    searchFilterValue: searchValue,
     driverGroupList: driverGroupList,
-    isSearchFilterValue: isSearchFilterValue,
+    isFilterDriverGroup: isFilterDriverGroup,
     drivers: driversList.drivers,
     setMapsData: setMapsData,
     handleEmtpyOrderSelected: handleBackRedirect,

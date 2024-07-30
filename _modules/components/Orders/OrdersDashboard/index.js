@@ -30,7 +30,7 @@ var OrdersDashboard = exports.OrdersDashboard = function OrdersDashboard(props) 
     configs = _useConfig2[0].configs;
   var ordersDashboardListProps = _objectSpread({}, props);
   if (configs !== null && configs !== void 0 && configs.optimize_order_data && (configs === null || configs === void 0 || (_configs$optimize_ord = configs.optimize_order_data) === null || _configs$optimize_ord === void 0 ? void 0 : _configs$optimize_ord.value) === '1') {
-    ordersDashboardListProps.propsToFetch = ['app_id', 'business', 'business_id', 'created_at', 'customer', 'customer_id', 'delivery_type', 'driver_group_id', 'driver_id', 'driver', 'delivery_datetime', 'delivery_datetime_utc', 'external_id', 'eta_time', 'id', 'logistic_status', 'logistic_attemps', 'uuid', 'order_group', 'order_group_id', 'priority', 'summary', 'status', 'time_status', 'total', 'driver_group_business', 'metadata'];
+    ordersDashboardListProps.propsToFetch = ['app_id', 'business', 'business_id', 'created_at', 'customer', 'customer_id', 'delivery_type', 'driver_group_id', 'driver_id', 'driver', 'delivery_datetime', 'delivery_datetime_utc', 'external_id', 'eta_time', 'id', 'logistic_status', 'logistic_attemps', 'uuid', 'order_group', 'order_group_id', 'priority', 'summary', 'status', 'time_status', 'total', 'driver_group_business', 'metadata', 'assignable_driver_groups'];
   }
   return /*#__PURE__*/_react.default.createElement(_styles.OrdersManageContainer, null, /*#__PURE__*/_react.default.createElement(_OrdersDashboardList.OrdersDashboardList, _extends({}, ordersDashboardListProps, {
     orderListView: "table"
