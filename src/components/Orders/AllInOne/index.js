@@ -65,7 +65,7 @@ const OrdersManagerUI = (props) => {
   const [{ user }] = useSession()
   const [configState] = useConfig()
 
-  const isSearchFilterValue = (configState?.configs?.filter_order_options?.value.split('|').map(value => (value)) || []).includes('driver_group_general')
+  const isFilterDriverGroup = (configState?.configs?.filter_order_options?.value.split('|').map(value => (value)) || []).includes('driver_group_general')
 
   const query = new URLSearchParams(useLocation().search)
   const [isOpenOrderDetail, setIsOpenOrderDetail] = useState(false)
@@ -230,9 +230,8 @@ const OrdersManagerUI = (props) => {
                 disableSocketRoomDriver
                 showCompressedInfo
                 filterValues={filterValues}
-                searchFilterValue={searchValue}
                 driverGroupList={driverGroupList}
-                isSearchFilterValue={isSearchFilterValue}
+                isFilterDriverGroup={isFilterDriverGroup}
                 drivers={driversList.drivers}
                 setMapsData={setMapsData}
                 handleEmtpyOrderSelected={handleBackRedirect}
