@@ -165,7 +165,6 @@ var SnoozeComponent = exports.SnoozeComponent = function SnoozeComponent(props) 
         setSelectedOption('off');
         return;
       }
-      console.log('duration.asHours()', duration.asHours());
       if (duration.asHours() <= 1) {
         setSelectedOption('1');
       } else if (duration.asHours() <= 2) {
