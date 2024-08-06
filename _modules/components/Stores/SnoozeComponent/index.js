@@ -105,7 +105,31 @@ var SnoozeComponent = exports.SnoozeComponent = function SnoozeComponent(props) 
     }
   };
   var handleSelectDate = function handleSelectDate(date) {
+    var currentDate = new Date();
+    var diffInHours = Math.abs((date - currentDate) / 36e5);
+    var tolerance = 10 * 60 * 1000; // 10 minutes tolerance
+
+    var matchedOption = '';
+    if (Math.abs(diffInHours - 1) <= tolerance) {
+      matchedOption = '1';
+    } else if (Math.abs(diffInHours - 2) <= tolerance) {
+      matchedOption = '2';
+    } else if (Math.abs(diffInHours - 4) <= tolerance) {
+      matchedOption = '4';
+    } else if (Math.abs(diffInHours - 6) <= tolerance) {
+      matchedOption = '6';
+    } else if (Math.abs(diffInHours - 12) <= tolerance) {
+      matchedOption = '12';
+    }
+    var selectedDateTime = new Date(selectedDate);
+    var newDateTime = new Date(date);
+    var isTimeChanged = selectedDateTime.getHours() !== newDateTime.getHours() || selectedDateTime.getMinutes() !== newDateTime.getMinutes();
     setSelectedDate(date);
+    if (matchedOption) {
+      setSelectedOption(matchedOption);
+    } else if (isTimeChanged) {
+      setSelectedOption('');
+    }
     handleChangeFormState && handleChangeFormState({
       snooze_until: (0, _moment.default)(date).utc().format('YYYY-MM-DD HH:mm:ss')
     });
@@ -189,17 +213,14 @@ var SnoozeComponent = exports.SnoozeComponent = function SnoozeComponent(props) 
     return /*#__PURE__*/_react.default.createElement("div", {
       key: i
     }, option.value === 'until_date' && /*#__PURE__*/_react.default.createElement(_styles2.DateContainer, {
-      onClick: function onClick() {
-        return handleChangeOption(option.value);
-      },
-      active: option.value === selectedOption
+      active: option.value === selectedOption || selectedOption === ''
     }, /*#__PURE__*/_react.default.createElement(_styles2.IconContainer, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Calendar4, null)), /*#__PURE__*/_react.default.createElement(_reactDatepicker.default, {
       locale: (0, _utils.getLocale)(state === null || state === void 0 || (_state$language = state.language) === null || _state$language === void 0 ? void 0 : _state$language.code, locales),
       selected: selectedDate,
       minDate: new Date(),
       onChange: handleSelectDate,
-      onCalendarClose: function onCalendarClose() {
-        return setSelectedOption('');
+      onCalendarOpen: function onCalendarOpen() {
+        return handleChangeOption(option.value);
       },
       showTimeSelect: true,
       timeFormat: "HH:mm",
