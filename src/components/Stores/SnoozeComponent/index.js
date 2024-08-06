@@ -86,9 +86,42 @@ export const SnoozeComponent = (props) => {
   }
 
   const handleSelectDate = (date) => {
+    const currentDate = new Date()
+    const diffInHours = Math.abs((date - currentDate) / 36e5)
+
+    const tolerance = 10 * 60 * 1000 // 10 minutes tolerance
+
+    let matchedOption = ''
+
+    if (Math.abs(diffInHours - 1) <= tolerance) {
+      matchedOption = '1'
+    } else if (Math.abs(diffInHours - 2) <= tolerance) {
+      matchedOption = '2'
+    } else if (Math.abs(diffInHours - 4) <= tolerance) {
+      matchedOption = '4'
+    } else if (Math.abs(diffInHours - 6) <= tolerance) {
+      matchedOption = '6'
+    } else if (Math.abs(diffInHours - 12) <= tolerance) {
+      matchedOption = '12'
+    }
+
+    const selectedDateTime = new Date(selectedDate)
+    const newDateTime = new Date(date)
+
+    const isTimeChanged = selectedDateTime.getHours() !== newDateTime.getHours() ||
+                        selectedDateTime.getMinutes() !== newDateTime.getMinutes()
     setSelectedDate(date)
+    if (matchedOption) {
+      setSelectedOption(matchedOption)
+    } else if (isTimeChanged) {
+      setSelectedOption('')
+    }
+
     handleChangeFormState && handleChangeFormState({ snooze_until: moment(date).utc().format('YYYY-MM-DD HH:mm:ss') })
-    setFormState && setFormState(prevState => ({ ...prevState, changes: { ...prevState?.changes, snooze_until: moment(date).utc().format('YYYY-MM-DD HH:mm:ss') } }))
+    setFormState && setFormState(prevState => ({
+      ...prevState,
+      changes: { ...prevState?.changes, snooze_until: moment(date).utc().format('YYYY-MM-DD HH:mm:ss') }
+    }))
   }
 
   const handleUpdateClick = () => {
@@ -179,7 +212,7 @@ export const SnoozeComponent = (props) => {
           {snoozeOptions?.map((option, i) => (
             <div key={i}>
               {option.value === 'until_date' && (
-                <DateContainer onClick={() => handleChangeOption(option.value)} active={option.value === selectedOption}>
+                <DateContainer active={option.value === selectedOption || selectedOption === ''}>
                   <IconContainer>
                     <Calendar4 />
                   </IconContainer>
@@ -188,7 +221,7 @@ export const SnoozeComponent = (props) => {
                     selected={selectedDate}
                     minDate={new Date()}
                     onChange={handleSelectDate}
-                    onCalendarClose={() => setSelectedOption('')}
+                    onCalendarOpen={() => handleChangeOption(option.value)}
                     showTimeSelect
                     timeFormat='HH:mm'
                     timeIntervals={15}
