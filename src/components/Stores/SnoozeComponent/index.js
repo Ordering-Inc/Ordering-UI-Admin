@@ -46,8 +46,7 @@ export const SnoozeComponent = (props) => {
     setFormState && setFormState(prevState => ({ ...prevState, changes: { ...prevState?.changes, snooze_until: null } }))
   }
 
-  const handleChangeOption = (value, ca) => {
-    console.log('value', value, ca)
+  const handleChangeOption = (value) => {
     setSelectedOption(value)
     if (value === 'until_date') return
     const currentDate = new Date()
