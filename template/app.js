@@ -14,7 +14,6 @@ import {
   useLanguage,
   useConfig,
   GoogleTagManager,
-  CannyIdentification,
   useEvent
 } from 'ordering-components-admin'
 import { NotNetworkConnectivity } from '../src/components/NotNetworkConnectivity'
@@ -109,7 +108,6 @@ export const App = () => {
   const readOnlyBusinessOwner = user?.readOnlyBusinessOwner
   const readOnlyDeliveryManager = user?.readOnlyDeliveryManager
   const readOnlyAdmin = user?.readOnlyAdmin
-  const cannyAppId = '5b05e5e2d3f6c47201694ad4'
   const isPastDue = projectStatus.project?.current_status === 'past_due'
   const showBanner = auth && isPastDue
 
@@ -213,9 +211,6 @@ export const App = () => {
             <NotNetworkConnectivity />
             {GoogleTagManager && (
               <GoogleTagManager tagId={configs?.google_tag_manager?.value} />
-            )}
-            {cannyAppId && (
-              <CannyIdentification appId={cannyAppId} />
             )}
             {showBanner && (
               <Banners
