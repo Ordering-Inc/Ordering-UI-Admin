@@ -134,7 +134,7 @@ const BusinessMenuOptionsUI = (props) => {
           <ActionBlock>
             {Object.keys(menu)?.length > 0 && (
               <>
-                <ActionSelectorWrapper>
+                {/* <ActionSelectorWrapper>
                   <Button
                     className='snooze'
                     color='lightGreen'
@@ -143,7 +143,7 @@ const BusinessMenuOptionsUI = (props) => {
                   >
                     {t('SNOOZE', 'Snooze')}
                   </Button>
-                </ActionSelectorWrapper>
+                </ActionSelectorWrapper> */}
                 <ActionSelectorWrapper>
                   <DropdownButton
                     className='product_actions'
