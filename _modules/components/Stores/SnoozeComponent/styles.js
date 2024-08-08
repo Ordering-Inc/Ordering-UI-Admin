@@ -4,33 +4,27 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.SnoozeWrapper = exports.SnoozeTitle = exports.SnoozeContainer = exports.IconContainer = exports.DateContainer = exports.ButtonWrapper = exports.ButtonOptions = exports.Button = void 0;
+exports.SnoozeWrapper = exports.SnoozeTitle = exports.SnoozeContainer = exports.InfoContainer = exports.IconContainer = exports.DateContainer = exports.ButtonWrapper = exports.ButtonOptions = exports.Button = void 0;
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
 var _polished = require("polished");
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19;
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 function _taggedTemplateLiteral(e, t) { return t || (t = e.slice(0)), Object.freeze(Object.defineProperties(e, { raw: { value: Object.freeze(t) } })); }
 var SnoozeContainer = exports.SnoozeContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  transition: all 3s ease-in;\n\n  ", "\n"])), function (_ref) {
-  var selectedOption = _ref.selectedOption;
-  return selectedOption === 'until_date' && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    height: 362px;\n  "])));
+  var openCalendar = _ref.openCalendar;
+  return openCalendar && (0, _styledComponents.css)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    height: 362px;\n  "])));
 });
 var SnoozeTitle = exports.SnoozeTitle = _styledComponents.default.div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: flex;\n  font-size: 16;\n  font-weight: 700;\n  margin-bottom: 30px;\n"])));
 var SnoozeWrapper = exports.SnoozeWrapper = _styledComponents.default.div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  align-items: flex-start;\n  margin-bottom: 30px;\n\n  > div {\n    margin: auto 0;\n    > p {\n      margin: 0;\n    }\n  }\n\n  @media (min-width: 862px) {\n    flex-direction: row;\n  }\n"])));
 var ButtonWrapper = exports.ButtonWrapper = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  display: flex;\n\n  > button {\n    margin-right: 20px;\n  }\n"])));
-var Button = exports.Button = _styledComponents.default.button(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  height: 44px;\n  background: ", ";\n  color: ", ";\n  border-color: ", ";\n  border: 1px solid #CCC;\n  border-radius: 8px;\n  line-height: 30px;\n  padding-left: 15px;\n  padding-right: 15px;\n  font-size: 14px;\n  cursor: pointer;\n  outline: none;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  transition: all .2s ease-in;\n\n  /* &:active {\n    color: ", ";\n    background: ", ";\n  } */\n  &:disabled {\n    opacity: 0.5;\n    cursor: not-allowed;\n  }\n  /* &:hover {\n    background: ", ";\n    color: #FFF;\n  } */\n  ", "\n  ", "\n"])), function (props) {
+var Button = exports.Button = _styledComponents.default.button(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  height: 44px;\n  background: ", ";\n  color: ", ";\n  border-color: ", ";\n  border: 1px solid #CCC;\n  border-radius: 8px;\n  line-height: 30px;\n  padding-left: 15px;\n  padding-right: 15px;\n  font-size: 14px;\n  cursor: pointer;\n  outline: none;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  transition: all .2s ease-in;\n\n  &:disabled {\n    opacity: 0.5;\n    cursor: not-allowed;\n  }\n\n  ", "\n  ", "\n"])), function (props) {
   var _props$theme$colors;
   return ((_props$theme$colors = props.theme.colors) === null || _props$theme$colors === void 0 ? void 0 : _props$theme$colors.backgroundPage) || '#FFF';
 }, function (props) {
   return props.theme.colors.primary;
 }, function (props) {
   return props.theme.colors.primary;
-}, function (props) {
-  return props.theme.colors.primaryContrast;
-}, function (props) {
-  return props.theme.colors.primary;
-}, function (props) {
-  return (0, _polished.darken)(0.07, props.theme.colors.primary);
 }, function (_ref2) {
   var active = _ref2.active;
   return active && (0, _styledComponents.css)(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n    background: ", " !important;\n    color: #FFF !important;\n  "])), function (props) {
@@ -138,3 +132,7 @@ var DateContainer = exports.DateContainer = _styledComponents.default.div(_templ
   return (_props$theme = props.theme) !== null && _props$theme !== void 0 && _props$theme.rtl ? (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    span {\n      margin-left: 10px;\n    }\n  "]))) : (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n    span {\n      margin-right: 10px;\n    }\n  "])));
 });
 var IconContainer = exports.IconContainer = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  background-color: transparent;\n  border: none;\n  border-radius: 6px;\n  margin-left: 10px;\n  padding: 0 5px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  transition: all .2s ease-in;\n"])));
+var InfoContainer = exports.InfoContainer = _styledComponents.default.div(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: end;\n  justify-content: ", ";\n"])), function (_ref9) {
+  var hasSnooze = _ref9.hasSnooze;
+  return hasSnooze ? 'space-between' : 'flex-start';
+});

@@ -148,14 +148,7 @@ var BusinessMenuOptionsUI = function BusinessMenuOptionsUI(props) {
   }, [isSelectedSharedMenus]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, {
     id: "menu_options"
-  }, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('MENU_SETTINGS', 'Menu settings')), /*#__PURE__*/_react.default.createElement(_styles2.ActionBlock, null, ((_Object$keys2 = Object.keys(menu)) === null || _Object$keys2 === void 0 ? void 0 : _Object$keys2.length) > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
-    className: "snooze",
-    color: "lightGreen",
-    borderRadius: "8px",
-    onClick: function onClick() {
-      return setIsMenuSnooze(true);
-    }
-  }, t('SNOOZE', 'Snooze'))), /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('MENU_SETTINGS', 'Menu settings')), /*#__PURE__*/_react.default.createElement(_styles2.ActionBlock, null, ((_Object$keys2 = Object.keys(menu)) === null || _Object$keys2 === void 0 ? void 0 : _Object$keys2.length) > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
     className: "product_actions",
     menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
     title: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDots, null),

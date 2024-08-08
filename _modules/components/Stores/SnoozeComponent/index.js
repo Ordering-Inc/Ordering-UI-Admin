@@ -42,21 +42,21 @@ var SnoozeComponent = exports.SnoozeComponent = function SnoozeComponent(props) 
     state = _useLanguage2[0],
     t = _useLanguage2[1];
   var _useState = (0, _react.useState)(function () {
-      if (dataState !== null && dataState !== void 0 && dataState.snooze_until) {
-        return _moment.default.utc(dataState === null || dataState === void 0 ? void 0 : dataState.snooze_until).local().toDate();
-      } else {
-        var today = new Date();
-        today.setDate(today.getDate() + 1);
-        return today;
-      }
+      var today = new Date();
+      today.setDate(today.getDate() + 1);
+      return today;
     }),
     _useState2 = _slicedToArray(_useState, 2),
     selectedDate = _useState2[0],
     setSelectedDate = _useState2[1];
-  var _useState3 = (0, _react.useState)(''),
+  var _useState3 = (0, _react.useState)(false),
     _useState4 = _slicedToArray(_useState3, 2),
-    selectedOption = _useState4[0],
-    setSelectedOption = _useState4[1];
+    openCalendar = _useState4[0],
+    setOpenCalendar = _useState4[1];
+  var _useState5 = (0, _react.useState)(''),
+    _useState6 = _slicedToArray(_useState5, 2),
+    selectedOption = _useState6[0],
+    setSelectedOption = _useState6[1];
   var handleRemoveSnooze = function handleRemoveSnooze() {
     handleChangeFormState && handleChangeFormState({
       snooze_until: null
@@ -107,7 +107,7 @@ var SnoozeComponent = exports.SnoozeComponent = function SnoozeComponent(props) 
   var handleSelectDate = function handleSelectDate(date) {
     var currentDate = new Date();
     var diffInHours = Math.abs((date - currentDate) / 36e5);
-    var tolerance = 10 * 60 * 1000; // 10 minutes tolerance
+    var tolerance = .15; // 10 minutes tolerance
 
     var matchedOption = '';
     if (Math.abs(diffInHours - 1) <= tolerance) {
@@ -121,14 +121,9 @@ var SnoozeComponent = exports.SnoozeComponent = function SnoozeComponent(props) 
     } else if (Math.abs(diffInHours - 12) <= tolerance) {
       matchedOption = '12';
     }
-    var selectedDateTime = new Date(selectedDate);
-    var newDateTime = new Date(date);
-    var isTimeChanged = selectedDateTime.getHours() !== newDateTime.getHours() || selectedDateTime.getMinutes() !== newDateTime.getMinutes();
     setSelectedDate(date);
     if (matchedOption) {
       setSelectedOption(matchedOption);
-    } else if (isTimeChanged) {
-      setSelectedOption('');
     }
     handleChangeFormState && handleChangeFormState({
       snooze_until: (0, _moment.default)(date).utc().format('YYYY-MM-DD HH:mm:ss')
@@ -180,47 +175,25 @@ var SnoozeComponent = exports.SnoozeComponent = function SnoozeComponent(props) 
   }, {
     value: 'until_date'
   }];
-  (0, _react.useEffect)(function () {
-    if (dataState !== null && dataState !== void 0 && dataState.snooze_until) {
-      var snoozeUntil = _moment.default.utc(dataState === null || dataState === void 0 ? void 0 : dataState.snooze_until).local();
-      var now = (0, _moment.default)();
-      var duration = _moment.default.duration(snoozeUntil.diff(now));
-      if (duration.asHours() < 0) {
-        setSelectedOption('off');
-        return;
-      }
-      if (duration.asHours() <= 1) {
-        setSelectedOption('1');
-      } else if (duration.asHours() <= 2) {
-        setSelectedOption('2');
-      } else if (duration.asHours() <= 4) {
-        setSelectedOption('4');
-      } else if (duration.asHours() <= 6) {
-        setSelectedOption('6');
-      } else if (duration.asHours() <= 12) {
-        setSelectedOption('12');
-      } else if (duration.asYears() >= 1) {
-        setSelectedOption('indefinitely');
-      } else {
-        setSelectedOption('until_date');
-      }
-    }
-  }, [dataState === null || dataState === void 0 ? void 0 : dataState.snooze_until]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.SnoozeContainer, {
-    selectedOption: selectedOption
+    openCalendar: openCalendar
   }, /*#__PURE__*/_react.default.createElement(_styles2.SnoozeTitle, null, t('SNOOZE_TITLE', 'Disable for:')), /*#__PURE__*/_react.default.createElement(_styles2.SnoozeWrapper, null, snoozeOptions === null || snoozeOptions === void 0 ? void 0 : snoozeOptions.map(function (option, i) {
     var _state$language;
     return /*#__PURE__*/_react.default.createElement("div", {
       key: i
     }, option.value === 'until_date' && /*#__PURE__*/_react.default.createElement(_styles2.DateContainer, {
-      active: option.value === selectedOption || selectedOption === ''
+      active: option.value === selectedOption || openCalendar
     }, /*#__PURE__*/_react.default.createElement(_styles2.IconContainer, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Calendar4, null)), /*#__PURE__*/_react.default.createElement(_reactDatepicker.default, {
       locale: (0, _utils.getLocale)(state === null || state === void 0 || (_state$language = state.language) === null || _state$language === void 0 ? void 0 : _state$language.code, locales),
       selected: selectedDate,
       minDate: new Date(),
       onChange: handleSelectDate,
       onCalendarOpen: function onCalendarOpen() {
-        return handleChangeOption(option.value);
+        setSelectedOption('until_date');
+        setOpenCalendar(true);
+      },
+      onCalendarClose: function onCalendarClose() {
+        return setOpenCalendar(false);
       },
       showTimeSelect: true,
       timeFormat: "HH:mm",
@@ -233,7 +206,9 @@ var SnoozeComponent = exports.SnoozeComponent = function SnoozeComponent(props) 
       },
       active: option.value === selectedOption
     }, option.content));
-  })), /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.Button, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.InfoContainer, {
+    hasSnooze: dataState === null || dataState === void 0 ? void 0 : dataState.snooze_until
+  }, /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.Button, {
     color: "primary",
     onClick: function onClick() {
       return handleUpdateClick();
@@ -242,5 +217,5 @@ var SnoozeComponent = exports.SnoozeComponent = function SnoozeComponent(props) 
     onClick: function onClick() {
       return onClose();
     }
-  }, t('CANCEL', 'Cancel')))));
+  }, t('CANCEL', 'Cancel'))), (dataState === null || dataState === void 0 ? void 0 : dataState.snooze_until) && /*#__PURE__*/_react.default.createElement("span", null, /*#__PURE__*/_react.default.createElement("strong", null, t('SNOOZED_UNTIL', 'Snoozed until:')), " ", _moment.default.utc(dataState === null || dataState === void 0 ? void 0 : dataState.snooze_until).local().format('YYYY-MM-DD HH:mm')))));
 };
