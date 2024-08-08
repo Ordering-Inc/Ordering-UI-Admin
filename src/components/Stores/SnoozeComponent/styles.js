@@ -6,7 +6,7 @@ export const SnoozeContainer = styled.div`
   flex-direction: column;
   transition: all 3s ease-in;
 
-  ${({ openCalendar }) => openCalendar && css`
+  ${({ selectedOption }) => selectedOption === 'until_date' && css`
     height: 362px;
   `}
 `
@@ -62,11 +62,18 @@ export const Button = styled.button`
   text-overflow: ellipsis;
   transition: all .2s ease-in;
 
+  /* &:active {
+    color: ${props => props.theme.colors.primaryContrast};
+    background: ${props => props.theme.colors.primary};
+  } */
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
   }
-
+  /* &:hover {
+    background: ${props => darken(0.07, props.theme.colors.primary)};
+    color: #FFF;
+  } */
   ${({ active }) => active && css`
     background: ${props => darken(0.07, props.theme.colors.primary)} !important;
     color: #FFF !important;
@@ -229,10 +236,4 @@ export const IconContainer = styled.div`
   align-items: center;
   justify-content: center;
   transition: all .2s ease-in;
-`
-
-export const InfoContainer = styled.div`
-  display: flex;
-  align-items: end;
-  justify-content: ${({ hasSnooze }) => hasSnooze ? 'space-between' : 'flex-start'};
 `
