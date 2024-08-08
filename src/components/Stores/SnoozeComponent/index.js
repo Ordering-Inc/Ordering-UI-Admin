@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Calendar4 } from 'react-bootstrap-icons'
 import DatePicker from 'react-datepicker'
 import 'react-date-range/dist/styles.css'
@@ -17,7 +17,8 @@ import {
   ButtonOptions,
   ButtonWrapper,
   DateContainer,
-  IconContainer
+  IconContainer,
+  InfoContainer
 } from './styles'
 
 export const SnoozeComponent = (props) => {
@@ -33,15 +34,11 @@ export const SnoozeComponent = (props) => {
   const [state, t] = useLanguage()
 
   const [selectedDate, setSelectedDate] = useState(() => {
-    if (dataState?.snooze_until) {
-      return moment.utc(dataState?.snooze_until).local().toDate()
-    } else {
       const today = new Date()
       today.setDate(today.getDate() + 1)
       return today
-    }
   })
-
+  const [openCalendar, setOpenCalendar] = useState(false)
   const [selectedOption, setSelectedOption] = useState('')
 
   const handleRemoveSnooze = () => {
@@ -89,7 +86,7 @@ export const SnoozeComponent = (props) => {
     const currentDate = new Date()
     const diffInHours = Math.abs((date - currentDate) / 36e5)
 
-    const tolerance = 10 * 60 * 1000 // 10 minutes tolerance
+    const tolerance = .15 // 10 minutes tolerance
 
     let matchedOption = ''
 
@@ -105,16 +102,9 @@ export const SnoozeComponent = (props) => {
       matchedOption = '12'
     }
 
-    const selectedDateTime = new Date(selectedDate)
-    const newDateTime = new Date(date)
-
-    const isTimeChanged = selectedDateTime.getHours() !== newDateTime.getHours() ||
-                        selectedDateTime.getMinutes() !== newDateTime.getMinutes()
     setSelectedDate(date)
     if (matchedOption) {
       setSelectedOption(matchedOption)
-    } else if (isTimeChanged) {
-      setSelectedOption('')
     }
 
     handleChangeFormState && handleChangeFormState({ snooze_until: moment(date).utc().format('YYYY-MM-DD HH:mm:ss') })
@@ -175,36 +165,9 @@ export const SnoozeComponent = (props) => {
     }
   ]
 
-  useEffect(() => {
-    if (dataState?.snooze_until) {
-      const snoozeUntil = moment.utc(dataState?.snooze_until).local()
-      const now = moment()
-      const duration = moment.duration(snoozeUntil.diff(now))
-      if (duration.asHours() < 0) {
-        setSelectedOption('off')
-        return
-      }
-      if (duration.asHours() <= 1) {
-        setSelectedOption('1')
-      } else if (duration.asHours() <= 2) {
-        setSelectedOption('2')
-      } else if (duration.asHours() <= 4) {
-        setSelectedOption('4')
-      } else if (duration.asHours() <= 6) {
-        setSelectedOption('6')
-      } else if (duration.asHours() <= 12) {
-        setSelectedOption('12')
-      } else if (duration.asYears() >= 1) {
-        setSelectedOption('indefinitely')
-      } else {
-        setSelectedOption('until_date')
-      }
-    }
-  }, [dataState?.snooze_until])
-
   return (
     <>
-      <SnoozeContainer selectedOption={selectedOption}>
+      <SnoozeContainer openCalendar={openCalendar}>
         <SnoozeTitle>
           {t('SNOOZE_TITLE', 'Disable for:')}
         </SnoozeTitle>
@@ -212,7 +175,7 @@ export const SnoozeComponent = (props) => {
           {snoozeOptions?.map((option, i) => (
             <div key={i}>
               {option.value === 'until_date' && (
-                <DateContainer active={option.value === selectedOption || selectedOption === ''}>
+                <DateContainer active={option.value === selectedOption || openCalendar}>
                   <IconContainer>
                     <Calendar4 />
                   </IconContainer>
@@ -221,7 +184,11 @@ export const SnoozeComponent = (props) => {
                     selected={selectedDate}
                     minDate={new Date()}
                     onChange={handleSelectDate}
-                    onCalendarOpen={() => handleChangeOption(option.value)}
+                    onCalendarOpen={() => {
+                      setSelectedOption('until_date')
+                      setOpenCalendar(true)
+                    }}
+                    onCalendarClose={() => setOpenCalendar(false)}
                     showTimeSelect
                     timeFormat='HH:mm'
                     timeIntervals={15}
@@ -243,10 +210,15 @@ export const SnoozeComponent = (props) => {
             </div>
           ))}
         </SnoozeWrapper>
-        <ButtonWrapper>
-          <Button color='primary' onClick={() => handleUpdateClick()}>{selectedOption === 'off' ? t('DISABLE_SNOOZE', 'Disable Snooze') : t('SNOOZE_SAVE', 'Snooze')}</Button>
-          <Button onClick={() => onClose()}>{t('CANCEL', 'Cancel')}</Button>
-        </ButtonWrapper>
+        <InfoContainer hasSnooze={dataState?.snooze_until}>
+          <ButtonWrapper>
+            <Button color='primary' onClick={() => handleUpdateClick()}>{selectedOption === 'off' ? t('DISABLE_SNOOZE', 'Disable Snooze') : t('SNOOZE_SAVE', 'Snooze')}</Button>
+            <Button onClick={() => onClose()}>{t('CANCEL', 'Cancel')}</Button>
+          </ButtonWrapper>
+          {dataState?.snooze_until && (
+            <span><strong>{t('SNOOZED_UNTIL', 'Snoozed until:')}</strong> {moment.utc(dataState?.snooze_until).local().format('YYYY-MM-DD HH:mm')}</span>
+          )}
+        </InfoContainer>
       </SnoozeContainer>
     </>
   )
