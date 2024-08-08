@@ -40,7 +40,7 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 var HomeUI = function HomeUI(props) {
-  var _configs$white_label_, _projectStatus$projec, _sessionState$user, _projectStatus$projec2, _projectStatus$projec3, _project$projectStatu, _projectStatus$projec4, _projectStatus$projec5, _project$projectStatu2, _projectStatus$projec6, _projectStatus$projec7, _project$projectStatu3, _projectStatus$projec8, _project$projectStatu4, _projectStatus$projec9, _sessionState$user2, _sessionState$user3;
+  var _configs$white_label_, _projectStatus$projec, _sessionState$user, _projectStatus$projec2, _projectStatus$projec3, _project$projectStatu, _projectStatus$projec4, _projectStatus$projec5, _project$projectStatu2, _projectStatus$projec6, _projectStatus$projec7, _project$projectStatu3, _projectStatus$projec8, _project$projectStatu4, _projectStatus$projec9, _sessionState$user2;
   var ordersList = props.ordersList,
     todaySalelsList = props.todaySalelsList,
     monthSalesList = props.monthSalesList,
@@ -107,9 +107,6 @@ var HomeUI = function HomeUI(props) {
     }
     if (location === 'tech') {
       window.open('https://support.ordering.co', '_blank');
-    }
-    if (location === 'canny') {
-      window.open('https://feedback.ordering.co', '_blank');
     }
     if (location === 'onboarding') {
       window.open("https://calendly.com/luisana/group-onboarding-conference?month=".concat((0, _moment.default)().format('YYYY-MM')), '_blank');
@@ -326,15 +323,7 @@ var HomeUI = function HomeUI(props) {
     onClick: function onClick() {
       return goToLink('onboarding');
     }
-  }, t('SCHEDULE_TODAY', 'Schedule Today')))), (sessionState === null || sessionState === void 0 || (_sessionState$user3 = sessionState.user) === null || _sessionState$user3 === void 0 ? void 0 : _sessionState$user3.level) === 0 && /*#__PURE__*/_react.default.createElement(_styles.FeedbackWidgets, null, /*#__PURE__*/_react.default.createElement(_styles.ParagraphHeaders, null, /*#__PURE__*/_react.default.createElement("p", null, t('FEEDBACK', 'Feedback'))), /*#__PURE__*/_react.default.createElement(_styles.FeedbackContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, t('SHARE_WITH_US_YOUR_IDEAS', 'Share with us your ideas')), /*#__PURE__*/_react.default.createElement("p", {
-    className: "center"
-  }, t('FEEDBACK_DESCRIPTION', 'Do you think our functionalities can be improved or do you want to see a new feature?')), /*#__PURE__*/_react.default.createElement("p", null, t('SHARE_US_YOUR_COMMENTS', 'Share us your comments')), /*#__PURE__*/_react.default.createElement(_styles.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_Buttons.Button, {
-    outline: true,
-    color: "primary",
-    onClick: function onClick() {
-      return goToLink('canny');
-    }
-  }, t('REQUESTS', 'Requests')))))), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+  }, t('SCHEDULE_TODAY', 'Schedule Today'))))), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "769px",
     padding: "30px",
     title: t('ORDERING', 'Ordering'),
