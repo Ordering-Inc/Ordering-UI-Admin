@@ -34,9 +34,9 @@ export const SnoozeComponent = (props) => {
   const [state, t] = useLanguage()
 
   const [selectedDate, setSelectedDate] = useState(() => {
-      const today = new Date()
-      today.setDate(today.getDate() + 1)
-      return today
+    const today = new Date()
+    today.setDate(today.getDate() + 1)
+    return today
   })
   const [openCalendar, setOpenCalendar] = useState(false)
   const [selectedOption, setSelectedOption] = useState('')
@@ -86,7 +86,7 @@ export const SnoozeComponent = (props) => {
     const currentDate = new Date()
     const diffInHours = Math.abs((date - currentDate) / 36e5)
 
-    const tolerance = .15 // 10 minutes tolerance
+    const tolerance = 0.15 // 10 minutes tolerance
 
     let matchedOption = ''
 
