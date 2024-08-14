@@ -149,7 +149,7 @@ const BusinessDeliveryZoneDetailsUI = (props) => {
         closeOnBackdrop={false}
       >
         <SnoozeComponent
-          dataState={business}
+          dataState={zoneState?.zone}
           handleUpdate={handleUpdateBusinessDeliveryZone}
           handleChangeFormState={handleChangeFormState}
           formState={formState}
