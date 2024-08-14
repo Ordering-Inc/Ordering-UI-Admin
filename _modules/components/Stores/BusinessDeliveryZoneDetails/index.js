@@ -150,7 +150,7 @@ var BusinessDeliveryZoneDetailsUI = function BusinessDeliveryZoneDetailsUI(props
     },
     closeOnBackdrop: false
   }, /*#__PURE__*/_react.default.createElement(_SnoozeComponent.SnoozeComponent, {
-    dataState: business,
+    dataState: zoneState === null || zoneState === void 0 ? void 0 : zoneState.zone,
     handleUpdate: handleUpdateBusinessDeliveryZone,
     handleChangeFormState: handleChangeFormState,
     formState: formState,

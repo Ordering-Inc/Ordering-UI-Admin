@@ -107,7 +107,7 @@ var SnoozeComponent = exports.SnoozeComponent = function SnoozeComponent(props) 
   var handleSelectDate = function handleSelectDate(date) {
     var currentDate = new Date();
     var diffInHours = Math.abs((date - currentDate) / 36e5);
-    var tolerance = .15; // 10 minutes tolerance
+    var tolerance = 0.15; // 10 minutes tolerance
 
     var matchedOption = '';
     if (Math.abs(diffInHours - 1) <= tolerance) {
