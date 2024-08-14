@@ -83,8 +83,7 @@ const ProductExtraOptionDetailsUI = (props) => {
     handleDrop,
     handleDragEnd
   } = props
-  console.log('optionState', optionState)
-  console.log('extra', extra)
+
   const [, t] = useLanguage()
   const theme = useTheme()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
@@ -95,7 +94,6 @@ const ProductExtraOptionDetailsUI = (props) => {
   const [cropState, setCropState] = useState({ name: null, data: null, open: false })
   const [externalId, setExternalId] = useState()
   const [isExtraOptionSnooze, setIsExtraOptionSnooze] = useState(false)
-  const [timer, setTimer] = useState(null)
 
   const handleClickSubOptionImage = (id) => {
     document.getElementById(id).click()
@@ -175,14 +173,14 @@ const ProductExtraOptionDetailsUI = (props) => {
       <Header>
         <h1>{t('PRODUCT_OPTION', 'Product option')}</h1>
         <ActionSelectorWrapper>
-          <Button
+          {/* <Button
             className='snooze'
             color='lightGreen'
             borderRadius='8px'
             onClick={() => setIsExtraOptionSnooze(true)}
           >
             {t('SNOOZE', 'Snooze')}
-          </Button>
+          </Button> */}
           <DropdownButton
             className='product_actions'
             menuAlign={theme?.rtl ? 'left' : 'right'}
