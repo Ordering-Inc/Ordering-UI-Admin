@@ -166,7 +166,14 @@ var BusinessProductsCategoyDetailsUI = function BusinessProductsCategoyDetailsUI
         enabled: val
       });
     }
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.RightHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null), width > 576 && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.RightHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    className: "snooze",
+    color: "lightGreen",
+    borderRadius: "8px",
+    onClick: function onClick() {
+      return setIsCategorySnooze(true);
+    }
+  }, t('SNOOZE', 'Snooze'))), width > 576 && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {
       return expandSideBar();
