@@ -155,14 +155,14 @@ const BusinessProductsCategoyDetailsUI = (props) => {
                   </BusinessEnableWrapper>
                   <RightHeader>
                     <ActionSelectorWrapper>
-                      {/* <Button
+                      <Button
                         className='snooze'
                         color='lightGreen'
                         borderRadius='8px'
                         onClick={() => setIsCategorySnooze(true)}
                       >
                         {t('SNOOZE', 'Snooze')}
-                      </Button> */}
+                      </Button>
                     </ActionSelectorWrapper>
                     {width > 576 && (
                       <IconButton

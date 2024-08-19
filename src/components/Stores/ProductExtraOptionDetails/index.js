@@ -173,14 +173,14 @@ const ProductExtraOptionDetailsUI = (props) => {
       <Header>
         <h1>{t('PRODUCT_OPTION', 'Product option')}</h1>
         <ActionSelectorWrapper>
-          {/* <Button
+          <Button
             className='snooze'
             color='lightGreen'
             borderRadius='8px'
             onClick={() => setIsExtraOptionSnooze(true)}
           >
             {t('SNOOZE', 'Snooze')}
-          </Button> */}
+          </Button>
           <DropdownButton
             className='product_actions'
             menuAlign={theme?.rtl ? 'left' : 'right'}
