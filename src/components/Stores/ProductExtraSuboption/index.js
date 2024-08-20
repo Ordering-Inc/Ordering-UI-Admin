@@ -22,6 +22,7 @@ import {
   DragImageWrapper
 } from './styles'
 import { ProductOptionExternalId } from '../ProductOptionExternalId'
+import { SnoozeComponent } from '../SnoozeComponent'
 
 export const ProductExtraSuboption = (props) => {
   const {
@@ -58,6 +59,7 @@ export const ProductExtraSuboption = (props) => {
   const [formState, setFormState] = useState({ })
   const [externalIdOpen, setExternalIdOpen] = useState(false)
   const [externalId, setExternalId] = useState()
+  const [isProductExtraSuboptionSnooze, setProductExtraSuboptionSnooze] = useState(false)
 
   const handleClickSubOptionImage = (id) => {
     document.getElementById(id).click()
@@ -342,6 +344,11 @@ export const ProductExtraSuboption = (props) => {
               id={theme?.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'}
             >
               <Dropdown.Item
+                onClick={() => setProductExtraSuboptionSnooze(true)}
+              >
+                {t('SNOOZE', 'Snooze')}
+              </Dropdown.Item>
+              <Dropdown.Item
                 onClick={() => {
                   setSelectedSubOptionId(subOption?.id)
                   setOpenModal({ ...openModal, subOptionMetaFields: true })
@@ -410,6 +417,21 @@ export const ProductExtraSuboption = (props) => {
           value={externalId}
           handleChange={setExternalId}
           handleUpdate={handleUpdateExternalId}
+        />
+      </Modal>
+      <Modal
+        width='85%'
+        maxWidth='1000px'
+        open={isProductExtraSuboptionSnooze}
+        onClose={() => setProductExtraSuboptionSnooze(false)}
+        closeOnBackdrop={false}
+      >
+        <SnoozeComponent
+          hideButtons
+          dataState={subOption}
+          handleChangeFormState={(data) => handleChangeInput({ target: { name: 'snooze_until', value: data.snooze_until } })}
+          formState={formState}
+          onClose={() => setProductExtraSuboptionSnooze(false)}
         />
       </Modal>
     </SubOptionContainer>
