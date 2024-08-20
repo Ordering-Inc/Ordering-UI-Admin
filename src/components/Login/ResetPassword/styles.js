@@ -81,7 +81,7 @@ export const TitleFormSide = styled.div`
       font-size: 16px;
       margin-bottom: 60px;
     }
-  }  
+  }
 `
 
 export const FormSide = styled(Side)`
@@ -115,7 +115,13 @@ export const FormInput = styled.form`
   input:not(:last-child) {
     margin-top: 15px;
     margin-bottom: 15px;
-    padding-left: 60px;
+    ${({ theme }) => theme.rtl
+    ? css`
+      padding-right: 60px;
+    `
+    : css`
+      padding-left: 60px;
+    `}
     padding-top: 12px;
     padding-bottom: 12px;
   }
