@@ -51,7 +51,7 @@ export const HeroContainer = (props) => {
 
 export const TitleFormSide = styled.div`
   color: #fff;
-  
+
   h1 {
     text-transform: uppercase;
     font-size: 24px;
@@ -81,7 +81,7 @@ export const TitleFormSide = styled.div`
       font-size: 16px;
       margin-bottom: 60px;
     }
-  }  
+  }
 `
 
 export const FormSide = styled(Side)`
@@ -93,7 +93,7 @@ export const FormSide = styled(Side)`
   height: 100vh;
 
   @media (min-width: 769px) {
-    height: auto;     
+    height: auto;
   }
 
   @media (min-width: 992px) {
@@ -115,7 +115,13 @@ export const FormInput = styled.form`
   input:not(:last-child) {
     margin-top: 15px;
     margin-bottom: 15px;
-    padding-left: 60px;
+    ${({ theme }) => theme.rtl
+    ? css`
+      padding-right: 60px;
+    `
+    : css`
+      padding-left: 60px;
+    `}
     padding-top: 12px;
     padding-bottom: 12px;
   }
