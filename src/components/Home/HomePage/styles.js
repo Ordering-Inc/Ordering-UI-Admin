@@ -15,18 +15,10 @@ export const HomeContainer = styled.div`
     padding: 20px 25px;
   }
   @media (min-width: 800px) {
-    ${props => props.theme?.rtl ? css`
-      padding-left: 100px;
-    ` : css`
-      padding-right: 100px;
-    `}
+    padding-right: 100px;
   }
   @media (min-width: 1440px) {
-    ${props => props.theme?.rtl ? css`
-      padding-left: 180px;
-    ` : css`
-      padding-right: 180px;
-    `}
+    padding-right: 180px;
   }
 `
 export const Breadcrumb = styled.div`
