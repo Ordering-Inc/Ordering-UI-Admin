@@ -102,6 +102,8 @@ export const OptionNameWrapper = styled.div`
 
 export const ExtraOptionEditContainer = styled.div`
   padding: 20px;
+  display: flex;
+  flex-direction: column;
 
   > h2 {
     font-size: 20px;
@@ -113,7 +115,12 @@ export const ExtraOptionEditContainer = styled.div`
     margin-top: 30px;
     height: 44px;
     border-radius: 8px;
-    margin-left: auto;
+    margin-left: 30px;
+  }
+
+  .buttons-container {
+    display: flex;
+    justify-content: flex-end;
   }
 `
 

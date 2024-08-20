@@ -24,6 +24,7 @@ import {
 export const SnoozeComponent = (props) => {
   const {
     isAutomaticUpdate,
+    hideButtons,
     dataState,
     handleUpdate,
     onClose,
@@ -211,10 +212,12 @@ export const SnoozeComponent = (props) => {
           ))}
         </SnoozeWrapper>
         <InfoContainer hasSnooze={dataState?.snooze_until}>
-          <ButtonWrapper>
-            <Button color='primary' onClick={() => handleUpdateClick()}>{selectedOption === 'off' ? t('DISABLE_SNOOZE', 'Disable Snooze') : t('SNOOZE_SAVE', 'Snooze')}</Button>
-            <Button onClick={() => onClose()}>{t('CANCEL', 'Cancel')}</Button>
-          </ButtonWrapper>
+          {!hideButtons && (
+            <ButtonWrapper>
+              <Button color='primarys' onClick={() => handleUpdateClick()}>{selectedOption === 'off' ? t('DISABLE_SNOOZE', 'Disable Snooze') : t('SNOOZE_SAVE', 'Snooze')}</Button>
+              <Button onClick={() => onClose()}>{t('CANCEL', 'Cancel')}</Button>
+            </ButtonWrapper>
+          )}
           {dataState?.snooze_until && (
             <span><strong>{t('SNOOZED_UNTIL', 'Snoozed until:')}</strong> {moment.utc(dataState?.snooze_until).local().format('YYYY-MM-DD HH:mm')}</span>
           )}
