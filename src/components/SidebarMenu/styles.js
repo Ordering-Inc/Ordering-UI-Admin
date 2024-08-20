@@ -13,14 +13,18 @@ export const SidebarContainer = styled.div`
   overflow: auto;
   width: 100vw;
   ${({ isCollapse }) => isCollapse && css`
-    margin-left: -100vw;
+    ${props => props.theme?.rtl
+      ? css`margin-right: -100vw;`
+      : css`margin-left: -100vw;`};
   `}
 
   @media (min-width: 768px) {
     position: relative;
     width: 240px;
     ${({ isCollapse }) => isCollapse && css`
-      margin-left: -240px;
+      ${props => props.theme?.rtl
+        ? css`margin-right: -240px;`
+        : css`margin-left: -240px;`};
     `}
   }
 

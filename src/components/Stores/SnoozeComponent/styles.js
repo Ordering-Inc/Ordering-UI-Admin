@@ -235,4 +235,8 @@ export const InfoContainer = styled.div`
   display: flex;
   align-items: end;
   justify-content: ${({ hasSnooze }) => hasSnooze ? 'space-between' : 'flex-start'};
+
+  ${({ hideButtons }) => hideButtons && css`
+    justify-content: flex-end;
+  `}
 `

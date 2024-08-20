@@ -66,7 +66,7 @@ export const FormSide = styled(Side)`
   }
 
   @media (min-width: 769px) {
-    height: auto;     
+    height: auto;
   }
 
   @media (min-width: 992px) {
@@ -103,7 +103,13 @@ export const FormInput = styled.form`
   input:not(:last-child) {
     margin-top: 15px;
     margin-bottom: 15px;
-    padding-left: 60px;
+    ${({ theme }) => theme.rtl
+    ? css`
+      padding-right: 60px;
+    `
+    : css`
+      padding-left: 60px;
+    `}
     padding-top: 12px;
     padding-bottom: 12px;
   }
@@ -203,7 +209,7 @@ export const SocialButtons = styled.div`
 
 export const TitleFormSide = styled.div`
   color: ${props => props.theme.colors.white};
-  
+
   h1 {
     text-transform: uppercase;
     font-size: 24px;
@@ -233,7 +239,7 @@ export const TitleFormSide = styled.div`
       font-size: 24px;
       margin-bottom: 80px;
     }
-  }  
+  }
 `
 export const InputWithIcon = styled.div`
   position: relative;
@@ -324,7 +330,7 @@ export const ReCAPTCHAWrapper = styled.div`
 `
 
 export const Tabs = styled.div`
-  display: flex;  
+  display: flex;
 `
 
 export const Tab = styled.div`
@@ -348,7 +354,7 @@ export const CountdownTimer = styled.div`
   margin: 15px;
   display: flex;
   justify-content: center;
-  
+
   span {
     font-size: 30px;
     font-weight: 700;
@@ -361,7 +367,7 @@ export const OtpWrapper = styled.div`
     display: flex;
     justify-content: space-evenly;
     margin: 20px;
-    
+
     .otp-input{
       width: 50px !important;
       height: 45px;
@@ -370,7 +376,7 @@ export const OtpWrapper = styled.div`
       outline: none;
       border: none;
       font-size: 20px;
-      font-weight: bold; 
+      font-weight: bold;
 
       &:focus{
         border-color: ${() => darken(0.07, '#CCC')} !important;

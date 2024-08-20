@@ -8,6 +8,7 @@ import { ProductExtraOptions } from '../ProductExtraOptions'
 import { ChevronRight, Pencil } from 'react-bootstrap-icons'
 import { useTheme } from 'styled-components'
 import { addQueryToUrl, removeQueryToUrl } from '../../../utils'
+import { SnoozeComponent } from '../SnoozeComponent'
 
 import {
   MainContainer,
@@ -61,6 +62,7 @@ const ProductExtrasUI = (props) => {
   const [isCheckboxClicked, setIsCheckboxClicked] = useState(false)
   const [timer, setTimer] = useState(null)
   const [extraSelected, setExtraSelected] = useState(null)
+  const [isProductExtraSnooze, setProductExtraSnooze] = useState(false)
 
   const extraInputRef = useRef()
 
@@ -296,8 +298,34 @@ const ProductExtrasUI = (props) => {
               ref={extraInputRef}
             />
           </FormControl>
-          <Button color='primary' onClick={() => handleChangeExtra(extraSelected?.id, { name: extraInputRef?.current?.value })}>{t('SAVE', 'Save')}</Button>
+          <div className='buttons-container'>
+              <Button
+                className='snooze'
+                color='lightGreen'
+                borderRadius='8px'
+                onClick={() => setProductExtraSnooze(true)}
+              >
+                {t('SNOOZE', 'Snooze')}
+              </Button>
+              <Button color='primary' onClick={() => handleChangeExtra(extraSelected?.id, { name: extraInputRef?.current?.value })}>{t('SAVE', 'Save')}</Button>
+            </div>
         </ExtraOptionEditContainer>
+      </Modal>
+      <Modal
+        width='85%'
+        maxWidth='1000px'
+        open={isProductExtraSnooze}
+        onClose={() => setProductExtraSnooze(false)}
+        closeOnBackdrop={false}
+      >
+        <SnoozeComponent
+          isAutomaticUpdate
+          dataState={extraSelected}
+          handleUpdate={(data) => handleChangeExtra(extraSelected?.id, { snooze_until: data.snooze_until })}
+          setFormState={setExtrasState}
+          formState={extrasState}
+          onClose={() => setProductExtraSnooze(false)}
+        />
       </Modal>
       <Alert
         title={t('WEB_APPNAME', 'Ordering')}
