@@ -15,6 +15,7 @@ var _ProductExtraOptions = require("../ProductExtraOptions");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _styledComponents = require("styled-components");
 var _utils = require("../../../utils");
+var _SnoozeComponent = require("../SnoozeComponent");
 var _styles2 = require("./styles");
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
@@ -107,6 +108,10 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
     _useState18 = _slicedToArray(_useState17, 2),
     extraSelected = _useState18[0],
     setExtraSelected = _useState18[1];
+  var _useState19 = (0, _react.useState)(false),
+    _useState20 = _slicedToArray(_useState19, 2),
+    isProductExtraSnooze = _useState20[0],
+    setProductExtraSnooze = _useState20[1];
   var extraInputRef = (0, _react.useRef)();
   var handleOpenExtraDetails = function handleOpenExtraDetails(e, extra, isInitialRender) {
     var _e$target, _e$target2;
@@ -337,7 +342,16 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
     placeholder: t('NAME', 'Name'),
     defaultValue: extraSelected === null || extraSelected === void 0 ? void 0 : extraSelected.name,
     ref: extraInputRef
-  })), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  })), /*#__PURE__*/_react.default.createElement("div", {
+    className: "buttons-container"
+  }, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    className: "snooze",
+    color: "lightGreen",
+    borderRadius: "8px",
+    onClick: function onClick() {
+      return setProductExtraSnooze(true);
+    }
+  }, t('SNOOZE', 'Snooze')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "primary",
     onClick: function onClick() {
       var _extraInputRef$curren2;
@@ -345,7 +359,28 @@ var ProductExtrasUI = function ProductExtrasUI(props) {
         name: extraInputRef === null || extraInputRef === void 0 || (_extraInputRef$curren2 = extraInputRef.current) === null || _extraInputRef$curren2 === void 0 ? void 0 : _extraInputRef$curren2.value
       });
     }
-  }, t('SAVE', 'Save')))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+  }, t('SAVE', 'Save'))))), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    width: "85%",
+    maxWidth: "1000px",
+    open: isProductExtraSnooze,
+    onClose: function onClose() {
+      return setProductExtraSnooze(false);
+    },
+    closeOnBackdrop: false
+  }, /*#__PURE__*/_react.default.createElement(_SnoozeComponent.SnoozeComponent, {
+    isAutomaticUpdate: true,
+    dataState: extraSelected,
+    handleUpdate: function handleUpdate(data) {
+      return handleChangeExtra(extraSelected === null || extraSelected === void 0 ? void 0 : extraSelected.id, {
+        snooze_until: data.snooze_until
+      });
+    },
+    setFormState: setExtrasState,
+    formState: extrasState,
+    onClose: function onClose() {
+      return setProductExtraSnooze(false);
+    }
+  })), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('WEB_APPNAME', 'Ordering'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),

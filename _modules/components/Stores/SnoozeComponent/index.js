@@ -31,6 +31,7 @@ function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" !=
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 var SnoozeComponent = exports.SnoozeComponent = function SnoozeComponent(props) {
   var isAutomaticUpdate = props.isAutomaticUpdate,
+    hideButtons = props.hideButtons,
     dataState = props.dataState,
     handleUpdate = props.handleUpdate,
     onClose = props.onClose,
@@ -208,8 +209,8 @@ var SnoozeComponent = exports.SnoozeComponent = function SnoozeComponent(props) 
     }, option.content));
   })), /*#__PURE__*/_react.default.createElement(_styles2.InfoContainer, {
     hasSnooze: dataState === null || dataState === void 0 ? void 0 : dataState.snooze_until
-  }, /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.Button, {
-    color: "primary",
+  }, !hideButtons && /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.Button, {
+    color: "primarys",
     onClick: function onClick() {
       return handleUpdateClick();
     }
