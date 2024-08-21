@@ -36,24 +36,6 @@ const NotificationSettingUI = (props) => {
   const [, t] = useLanguage()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
-  const generalList = [
-    'onesignal_user_auth',
-    'onesignal_orderingapp_id',
-    'onesignal_businessapp_id',
-    'onesignal_deliveryapp_id',
-    'onesignal_orderingweb_id',
-    'onesignal_dashboardweb_id',
-    'driver_close_distance',
-    'notification_toast',
-    'notification_times_repeat',
-    'notification_each_time_repeat',
-    'notification_superadmin_repeat',
-    'notification_business_repeat',
-    'notification_driver_repeat',
-    'notification_in_app_enabled',
-    'notification_in_app_position'
-  ]
-
   const tooltips = {
     notification_times_repeat: t('MAX_TIMES_TO_REPEAT_15', 'Max times to repeat = 15'),
     notification_each_time_repeat: t('EACH_TIME_SETTING_SET_IN_SECONDS', 'Each time setting set in seconds'),
@@ -77,7 +59,8 @@ const NotificationSettingUI = (props) => {
 
   useEffect(() => {
     if (!configs || configs?.length === 0) return
-    const _general = configs.filter(config => generalList.includes(config.key))
+    const excludedKeys = ['notification_superadmin_states', 'notification_business_states', 'notification_customer_states', 'notification_driver_states']
+    const _general = configs.filter(config => !excludedKeys.includes(config.key))
     const _superAdmin = configs.find(config => config.key === 'notification_superadmin_states')
     const _business = configs.find(config => config.key === 'notification_business_states')
     const _customer = configs.find(config => config.key === 'notification_customer_states')
