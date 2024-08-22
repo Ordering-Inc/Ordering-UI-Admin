@@ -48,6 +48,7 @@ const ModalUI = (props) => {
       className={`popup-dialog ${className || ''}`}
       height={props.height}
       width={props.width}
+      maxWidth={props.maxWidth}
     >
       <ModalDialogInnerContainer
         padding={props.padding}

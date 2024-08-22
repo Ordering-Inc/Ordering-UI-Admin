@@ -8,6 +8,7 @@ export const BusinessDetailsContainer = styled.div`
   padding: 20px;
   position: relative;
   overflow-x: hidden;
+
   @media (min-width: 768px) {
     min-width: 500px;
   }
@@ -137,7 +138,7 @@ export const BusinessConfigsContainer = styled.div`
 
   > div:last-child {
     border-bottom: none !important;
-  }  
+  }
 `
 
 export const BusinessConfigItem = styled.div`
@@ -161,7 +162,7 @@ export const BusinessConfigItem = styled.div`
     border-bottom: 1px solid ${props => props.theme.colors.primary} !important;
     background-color: ${props => props.theme.colors.lightPrimary};
   `}
-  
+
   svg {
     font-size: 20px;
   }
@@ -246,7 +247,11 @@ export const BusinessPreviewHeader = styled.div`
 
 export const ButtonWrapper = styled.div`
   display: flex;
-  > button:first-child {
+  > button {
     margin-right: 15px;
   }
+`
+export const ButtonsContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
 `

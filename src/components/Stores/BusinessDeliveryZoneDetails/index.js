@@ -6,10 +6,12 @@ import {
 } from 'ordering-components-admin'
 import { BusinessDeliveryZoneInformation } from '../BusinessDeliveryZoneInformation'
 import { BusinessDeliveryZoneShare } from '../BusinessDeliveryZoneShare'
+import { SnoozeComponent } from '../SnoozeComponent'
 import { ThreeDots } from 'react-bootstrap-icons'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
-import { Confirm } from '../../Shared'
+import { Button } from '../../../styles'
+import { Confirm, Modal } from '../../Shared'
 import { addQueryToUrl } from '../../../utils'
 
 import {
@@ -40,6 +42,7 @@ const BusinessDeliveryZoneDetailsUI = (props) => {
   const theme = useTheme()
   const [, t] = useLanguage()
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
+  const [isDeliveryZoneSnooze, setIsDeliveryZoneSnooze] = useState(false)
   const [selectedMenuOption, setSelectedMenuOption] = useState('information')
   const tabs = [
     { key: 'information', content: t('INFORMATION', 'Information') },
@@ -82,6 +85,14 @@ const BusinessDeliveryZoneDetailsUI = (props) => {
             {zoneState?.zone ? zoneState?.zone?.name : t('ZONE_DELIVERY_SETTINGS', 'Zone delivery settings')}
           </h1>
           <ActionSelectorWrapper>
+            <Button
+              className='snooze'
+              color='lightGreen'
+              borderRadius='8px'
+              onClick={() => setIsDeliveryZoneSnooze(true)}
+            >
+              {t('SNOOZE', 'Snooze')}
+            </Button>
             <DropdownButton
               menuAlign={theme?.rtl ? 'left' : 'right'}
               title={<ThreeDots />}
@@ -130,6 +141,21 @@ const BusinessDeliveryZoneDetailsUI = (props) => {
           />
         )}
       </Container>
+      <Modal
+        width='85%'
+        maxWidth='1000px'
+        open={isDeliveryZoneSnooze}
+        onClose={() => setIsDeliveryZoneSnooze(false)}
+        closeOnBackdrop={false}
+      >
+        <SnoozeComponent
+          dataState={zoneState?.zone}
+          handleUpdate={handleUpdateBusinessDeliveryZone}
+          handleChangeFormState={handleChangeFormState}
+          formState={formState}
+          onClose={() => setIsDeliveryZoneSnooze(false)}
+        />
+      </Modal>
       <Confirm
         width='700px'
         title={t('WEB_APPNAME', 'Ordering')}

@@ -5,13 +5,13 @@ export const Container = styled.div`
   padding: 20px;
   overflow: auto;
   transition: 0.3s;
-  
+
   > button {
     height: 42px;
     width: 100%;
     margin-top: 20px;
   }
-  
+
   @media (min-width: 1000px) {
     max-width: 500px;
     width: 0;
@@ -71,6 +71,8 @@ export const ActionBlock = styled.div`
 `
 
 export const ActionSelectorWrapper = styled.div`
+  display: flex;
+
   button {
     display: flex;
     background: transparent !important;
@@ -122,6 +124,12 @@ export const ActionSelectorWrapper = styled.div`
         color: ${props => props.theme.colors.danger};
       }
     }
+  }
+  .snooze {
+    background: ${props => props.theme.colors.lightGreen} !important;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-right: 5px;
   }
 `
 

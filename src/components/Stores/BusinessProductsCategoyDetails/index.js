@@ -5,13 +5,14 @@ import { useLanguage, BusinessProductsCategoyDetails as BusinessProductsCategoyD
 import { ArrowsAngleContract, ArrowsAngleExpand, ThreeDots } from 'react-bootstrap-icons'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { useTheme } from 'styled-components'
-import { Alert, Confirm } from '../../Shared'
-import { IconButton, Switch } from '../../../styles'
+import { Alert, Confirm, Modal } from '../../Shared'
+import { IconButton, Switch, Button } from '../../../styles'
 import { SeoOptions } from '../SeoOptions'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import { addQueryToUrl } from '../../../utils'
 import { BusinessCategoryInfoSettingList } from '../BusinessCategoryInfoSettingList'
 import { BusinessProductsCategoyInfo } from '../BusinessProductsCategoyInfo'
+import { SnoozeComponent } from '../SnoozeComponent'
 
 import {
   Container,
@@ -53,6 +54,7 @@ const BusinessProductsCategoyDetailsUI = (props) => {
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [selectedInfoItem, setSelctedInfoItem] = useState('information')
   const [isExpand, setIsExpand] = useState(false)
+  const [isCategorySnooze, setIsCategorySnooze] = useState(false)
 
   const closeAlert = () => {
     setAlertState({
@@ -152,6 +154,16 @@ const BusinessProductsCategoyDetailsUI = (props) => {
                     )}
                   </BusinessEnableWrapper>
                   <RightHeader>
+                    <ActionSelectorWrapper>
+                      <Button
+                        className='snooze'
+                        color='lightGreen'
+                        borderRadius='8px'
+                        onClick={() => setIsCategorySnooze(true)}
+                      >
+                        {t('SNOOZE', 'Snooze')}
+                      </Button>
+                    </ActionSelectorWrapper>
                     {width > 576 && (
                       <IconButton
                         color='black'
@@ -217,6 +229,21 @@ const BusinessProductsCategoyDetailsUI = (props) => {
           }
         </EditCategoryContent>
       </Container>
+      <Modal
+        width='85%'
+        maxWidth='1000px'
+        open={isCategorySnooze}
+        onClose={() => setIsCategorySnooze(false)}
+        closeOnBackdrop={false}
+      >
+        <SnoozeComponent
+          dataState={categorySelected}
+          handleUpdate={handleUpdateClick}
+          handleChangeFormState={handleChangeItem}
+          formState={formState}
+          onClose={() => setIsCategorySnooze(false)}
+        />
+      </Modal>
       <Alert
         title={t('BUSINESS_TYPE', 'Business type')}
         content={alertState.content}
