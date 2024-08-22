@@ -48,7 +48,6 @@ var NotificationSettingUI = function NotificationSettingUI(props) {
     _useState2 = _slicedToArray(_useState, 2),
     alertState = _useState2[0],
     setAlertState = _useState2[1];
-  var generalList = ['onesignal_user_auth', 'onesignal_orderingapp_id', 'onesignal_businessapp_id', 'onesignal_deliveryapp_id', 'onesignal_orderingweb_id', 'onesignal_dashboardweb_id', 'driver_close_distance', 'notification_toast', 'notification_times_repeat', 'notification_each_time_repeat', 'notification_superadmin_repeat', 'notification_business_repeat', 'notification_driver_repeat', 'notification_in_app_enabled', 'notification_in_app_position'];
   var tooltips = {
     notification_times_repeat: t('MAX_TIMES_TO_REPEAT_15', 'Max times to repeat = 15'),
     notification_each_time_repeat: t('EACH_TIME_SETTING_SET_IN_SECONDS', 'Each time setting set in seconds'),
@@ -84,8 +83,9 @@ var NotificationSettingUI = function NotificationSettingUI(props) {
   };
   (0, _react.useEffect)(function () {
     if (!configs || (configs === null || configs === void 0 ? void 0 : configs.length) === 0) return;
+    var excludedKeys = ['notification_superadmin_states', 'notification_business_states', 'notification_customer_states', 'notification_driver_states'];
     var _general = configs.filter(function (config) {
-      return generalList.includes(config.key);
+      return !excludedKeys.includes(config.key);
     });
     var _superAdmin = configs.find(function (config) {
       return config.key === 'notification_superadmin_states';
