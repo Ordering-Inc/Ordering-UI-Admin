@@ -16,6 +16,7 @@ var _reactBootstrap = require("react-bootstrap");
 var _styledComponents = require("styled-components");
 var _Shared = require("../../Shared");
 var _ProductDesktopPreview = require("../ProductDesktopPreview");
+var _SnoozeComponent = require("../SnoozeComponent");
 var _styles2 = require("./styles");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
@@ -44,7 +45,10 @@ var ProductSummary = exports.ProductSummary = function ProductSummary(props) {
     isExpand = props.isExpand,
     setIsExpand = props.setIsExpand,
     handleDuplicateProduct = props.handleDuplicateProduct,
-    getProduct = props.getProduct;
+    getProduct = props.getProduct,
+    formState = props.formState,
+    handleChangeFormState = props.handleChangeFormState,
+    handleUpdateClick = props.handleUpdateClick;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -77,6 +81,10 @@ var ProductSummary = exports.ProductSummary = function ProductSummary(props) {
     _useState8 = _slicedToArray(_useState7, 2),
     selectedView = _useState8[0],
     setSelectedView = _useState8[1];
+  var _useState9 = (0, _react.useState)(false),
+    _useState10 = _slicedToArray(_useState9, 2),
+    isProductSnooze = _useState10[0],
+    setIsProductSnooze = _useState10[1];
   var isWhiteLabel = configs === null || configs === void 0 || (_configs$white_label_ = configs.white_label_module) === null || _configs$white_label_ === void 0 ? void 0 : _configs$white_label_.value;
   var productConfigOptions = [{
     key: 'product_details',
@@ -154,7 +162,14 @@ var ProductSummary = exports.ProductSummary = function ProductSummary(props) {
   }, /*#__PURE__*/_react.default.createElement(_styles2.DetailsHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.LeftHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.ProductName, null, productState === null || productState === void 0 || (_productState$product5 = productState.product) === null || _productState$product5 === void 0 ? void 0 : _productState$product5.name), /*#__PURE__*/_react.default.createElement(_Switch.Switch, {
     defaultChecked: (productState === null || productState === void 0 || (_productState$product6 = productState.product) === null || _productState$product6 === void 0 ? void 0 : _productState$product6.enabled) || false,
     onChange: handleChangeProductActiveState
-  })), /*#__PURE__*/_react.default.createElement(_styles2.RightHeader, null, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.RightHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    className: "snooze",
+    color: "lightGreen",
+    borderRadius: "8px",
+    onClick: function onClick() {
+      return setIsProductSnooze(true);
+    }
+  }, t('SNOOZE', 'Snooze'))), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {
       return expandSideBar();
@@ -256,5 +271,21 @@ var ProductSummary = exports.ProductSummary = function ProductSummary(props) {
     product: productState === null || productState === void 0 ? void 0 : productState.product,
     productCart: productCart,
     showProductOption: showProductOption
+  })), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    width: "85%",
+    maxWidth: "1000px",
+    open: isProductSnooze,
+    onClose: function onClose() {
+      return setIsProductSnooze(false);
+    },
+    closeOnBackdrop: false
+  }, /*#__PURE__*/_react.default.createElement(_SnoozeComponent.SnoozeComponent, {
+    dataState: productState === null || productState === void 0 ? void 0 : productState.product,
+    handleUpdate: handleUpdateClick,
+    handleChangeFormState: handleChangeFormState,
+    formState: formState,
+    onClose: function onClose() {
+      return setIsProductSnooze(false);
+    }
   })));
 };

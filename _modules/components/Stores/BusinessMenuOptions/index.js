@@ -19,6 +19,7 @@ var _BusinessMenuBasicOptions = require("../BusinessMenuBasicOptions");
 var _BusinessMenuCustomFields = require("../BusinessMenuCustomFields");
 var _BusinessSharedMenuProducts = require("../BusinessSharedMenuProducts");
 var _BusinessMenuChannels = require("../BusinessMenuChannels");
+var _SnoozeComponent = require("../SnoozeComponent");
 var _utils = require("../../../utils");
 var _styles2 = require("./styles");
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
@@ -43,10 +44,14 @@ var BusinessMenuOptionsUI = function BusinessMenuOptionsUI(props) {
     handleUpdateBusinessState = props.handleUpdateBusinessState,
     isSelectedSharedMenus = props.isSelectedSharedMenus,
     handleDeleteMenu = props.handleDeleteMenu,
+    handleUpdateBusinessMenuOption = props.handleUpdateBusinessMenuOption,
+    handleChangeInput = props.handleChangeInput,
     setIsOpenSharedProduct = props.setIsOpenSharedProduct,
     sitesState = props.sitesState,
     setMenuList = props.setMenuList,
-    menuList = props.menuList;
+    menuList = props.menuList,
+    formState = props.formState,
+    businessMenuState = props.businessMenuState;
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -74,6 +79,10 @@ var BusinessMenuOptionsUI = function BusinessMenuOptionsUI(props) {
     _useState8 = _slicedToArray(_useState7, 2),
     isCustomFieldsOpen = _useState8[0],
     setIsCustomFieldsOpen = _useState8[1];
+  var _useState9 = (0, _react.useState)(false),
+    _useState10 = _slicedToArray(_useState9, 2),
+    isMenuSnooze = _useState10[0],
+    setIsMenuSnooze = _useState10[1];
   var actionSidebar = function actionSidebar(value) {
     if (!value) {
       props.onClose();
@@ -92,6 +101,15 @@ var BusinessMenuOptionsUI = function BusinessMenuOptionsUI(props) {
         }));
       }
     });
+  };
+  var handleChangeSnooze = function handleChangeSnooze(changes) {
+    var _changes = {
+      target: {
+        name: 'snooze_until',
+        value: changes.snooze_until
+      }
+    };
+    handleChangeInput(_changes);
   };
   (0, _react.useEffect)(function () {
     if (isMenuOpen) {
@@ -130,7 +148,14 @@ var BusinessMenuOptionsUI = function BusinessMenuOptionsUI(props) {
   }, [isSelectedSharedMenus]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, {
     id: "menu_options"
-  }, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('MENU_SETTINGS', 'Menu settings')), /*#__PURE__*/_react.default.createElement(_styles2.ActionBlock, null, ((_Object$keys2 = Object.keys(menu)) === null || _Object$keys2 === void 0 ? void 0 : _Object$keys2.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
+  }, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('MENU_SETTINGS', 'Menu settings')), /*#__PURE__*/_react.default.createElement(_styles2.ActionBlock, null, ((_Object$keys2 = Object.keys(menu)) === null || _Object$keys2 === void 0 ? void 0 : _Object$keys2.length) > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    className: "snooze",
+    color: "lightGreen",
+    borderRadius: "8px",
+    onClick: function onClick() {
+      return setIsMenuSnooze(true);
+    }
+  }, t('SNOOZE', 'Snooze'))), /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
     className: "product_actions",
     menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
     title: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDots, null),
@@ -143,7 +168,7 @@ var BusinessMenuOptionsUI = function BusinessMenuOptionsUI(props) {
     onClick: function onClick() {
       return handleDeleteClick();
     }
-  }, t('DELETE', 'Delete')))), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+  }, t('DELETE', 'Delete'))))), /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {
       return onClose();
@@ -192,6 +217,22 @@ var BusinessMenuOptionsUI = function BusinessMenuOptionsUI(props) {
     },
     businessId: business === null || business === void 0 ? void 0 : business.id,
     menuId: menu.id
+  })), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    width: "85%",
+    maxWidth: "1000px",
+    open: isMenuSnooze,
+    onClose: function onClose() {
+      return setIsMenuSnooze(false);
+    },
+    closeOnBackdrop: false
+  }, /*#__PURE__*/_react.default.createElement(_SnoozeComponent.SnoozeComponent, {
+    dataState: businessMenuState === null || businessMenuState === void 0 ? void 0 : businessMenuState.menu,
+    handleUpdate: handleUpdateBusinessMenuOption,
+    handleChangeFormState: handleChangeSnooze,
+    formState: formState,
+    onClose: function onClose() {
+      return setIsMenuSnooze(false);
+    }
   })), /*#__PURE__*/_react.default.createElement(_Shared.Confirm, {
     title: t('WEB_APPNAME', 'Ordering'),
     width: "700px",

@@ -15,6 +15,7 @@ var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _styles = require("../../../styles");
 var _Shared = require("../../Shared");
 var _BusinessPreview = require("../BusinessPreview");
+var _SnoozeComponent = require("../SnoozeComponent");
 var _useWindowSize2 = require("../../../hooks/useWindowSize");
 var _styles2 = require("./styles");
 var _utils = require("../../../utils");
@@ -43,11 +44,14 @@ var BusinessSummary = exports.BusinessSummary = function BusinessSummary(props) 
     handleDuplicateBusiness = props.handleDuplicateBusiness,
     handleDeleteBusiness = props.handleDeleteBusiness,
     handleSyncEvent = props.handleSyncEvent,
+    handleUpdateBusinessClick = props.handleUpdateBusinessClick,
     extraOpen = props.extraOpen,
     spoonityConfig = props.spoonityConfig,
     siteState = props.siteState,
     isExpand = props.isExpand,
-    setIsExpand = props.setIsExpand;
+    setIsExpand = props.setIsExpand,
+    formState = props.formState,
+    setFormState = props.setFormState;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -70,21 +74,25 @@ var BusinessSummary = exports.BusinessSummary = function BusinessSummary(props) 
     _useState2 = _slicedToArray(_useState, 2),
     isBusinessPreview = _useState2[0],
     setIsBusinessPreview = _useState2[1];
-  var _useState3 = (0, _react.useState)('desktop'),
+  var _useState3 = (0, _react.useState)(false),
     _useState4 = _slicedToArray(_useState3, 2),
-    selectedView = _useState4[0],
-    setSelectedView = _useState4[1];
+    isBusinessSnooze = _useState4[0],
+    setIsBusinessSnooze = _useState4[1];
+  var _useState5 = (0, _react.useState)('desktop'),
+    _useState6 = _slicedToArray(_useState5, 2),
+    selectedView = _useState6[0],
+    setSelectedView = _useState6[1];
   var _useSession = (0, _orderingComponentsAdmin.useSession)(),
     _useSession2 = _slicedToArray(_useSession, 1),
     sessionState = _useSession2[0];
-  var _useState5 = (0, _react.useState)({
+  var _useState7 = (0, _react.useState)({
       open: false,
       content: null,
       handleOnAccept: null
     }),
-    _useState6 = _slicedToArray(_useState5, 2),
-    confirm = _useState6[0],
-    setConfirm = _useState6[1];
+    _useState8 = _slicedToArray(_useState7, 2),
+    confirm = _useState8[0],
+    setConfirm = _useState8[1];
   var isEnabledWhiteLabelModule = configs === null || configs === void 0 || (_configs$white_label_ = configs.white_label_module) === null || _configs$white_label_ === void 0 ? void 0 : _configs$white_label_.value;
   var isAllowRegisteredBusiness = (sessionState === null || sessionState === void 0 || (_sessionState$user = sessionState.user) === null || _sessionState$user === void 0 ? void 0 : _sessionState$user.level) === 0 || (sessionState === null || sessionState === void 0 || (_sessionState$user2 = sessionState.user) === null || _sessionState$user2 === void 0 ? void 0 : _sessionState$user2.level) === 2 && (configs === null || configs === void 0 || (_configs$allow_busine = configs.allow_business_owner_register_business) === null || _configs$allow_busine === void 0 ? void 0 : _configs$allow_busine.value) === '1';
   var projectsForEnableSync = ['dominosordering'];
@@ -247,7 +255,7 @@ var BusinessSummary = exports.BusinessSummary = function BusinessSummary(props) 
     bgimage: optimizeImage(businessState === null || businessState === void 0 || (_businessState$busine7 = businessState.business) === null || _businessState$busine7 === void 0 ? void 0 : _businessState$busine7.header, 'h_200,c_limit')
   }, /*#__PURE__*/_react.default.createElement(_styles2.BusinessLogo, {
     bgimage: optimizeImage((businessState === null || businessState === void 0 || (_businessState$busine8 = businessState.business) === null || _businessState$busine8 === void 0 ? void 0 : _businessState$busine8.logo) || ((_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.dummies) === null || _theme$images === void 0 ? void 0 : _theme$images.businessLogo), 'h_100,c_limit')
-  })), /*#__PURE__*/_react.default.createElement(_styles2.BusinessDetailsContent, null, /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.BusinessDetailsContent, null, /*#__PURE__*/_react.default.createElement(_styles2.ButtonsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
     color: "lightPrimary",
     borderRadius: "8px",
     onClick: handleOpenCategory,
@@ -258,11 +266,18 @@ var BusinessSummary = exports.BusinessSummary = function BusinessSummary(props) 
     borderRadius: "8px",
     onClick: handleOpenSite,
     disabled: businessState === null || businessState === void 0 ? void 0 : businessState.loading
-  }, t('STORE_WEBSITE', 'Store website'))), /*#__PURE__*/_react.default.createElement(_styles2.BusinessDescription, null, businessState !== null && businessState !== void 0 && businessState.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
+  }, t('STORE_WEBSITE', 'Store website'))), /*#__PURE__*/_react.default.createElement(_styles2.ButtonWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    color: "lightGreen",
+    borderRadius: "8px",
+    onClick: function onClick() {
+      return setIsBusinessSnooze(true);
+    },
+    disabled: businessState === null || businessState === void 0 ? void 0 : businessState.loading
+  }, t('SNOOZE', 'Snooze')))), /*#__PURE__*/_react.default.createElement(_styles2.BusinessDescription, null, businessState !== null && businessState !== void 0 && businessState.loading ? /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     width: 300
   }) : businessState === null || businessState === void 0 || (_businessState$busine9 = businessState.business) === null || _businessState$busine9 === void 0 ? void 0 : _businessState$busine9.description), /*#__PURE__*/_react.default.createElement(_styles2.BusinessConfigsContainer, {
     isLoading: businessState === null || businessState === void 0 ? void 0 : businessState.loading
-  }, (isAdmin ? !!spoonityConfig ? businessConfigs : businessConfigs.filter(function (configs) {
+  }, (isAdmin ? spoonityConfig ? businessConfigs : businessConfigs.filter(function (configs) {
     return configs.key !== 'spoonity_key';
   }) : businessConfigs.filter(function (c) {
     return !itemsExcluded.includes(c.key);
@@ -314,5 +329,21 @@ var BusinessSummary = exports.BusinessSummary = function BusinessSummary(props) 
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Phone, null)))), /*#__PURE__*/_react.default.createElement(_BusinessPreview.BusinessPreview, {
     isMobileView: selectedView === 'mobile',
     business: businessState === null || businessState === void 0 ? void 0 : businessState.business
+  })), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    width: "85%",
+    maxWidth: "1000px",
+    open: isBusinessSnooze,
+    onClose: function onClose() {
+      return setIsBusinessSnooze(false);
+    },
+    closeOnBackdrop: false
+  }, /*#__PURE__*/_react.default.createElement(_SnoozeComponent.SnoozeComponent, {
+    dataState: businessState === null || businessState === void 0 ? void 0 : businessState.business,
+    handleUpdate: handleUpdateBusinessClick,
+    setFormState: setFormState,
+    formState: formState,
+    onClose: function onClose() {
+      return setIsBusinessSnooze(false);
+    }
   })));
 };

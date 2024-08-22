@@ -17,6 +17,7 @@ var _styledComponents = require("styled-components");
 var _reactHookForm = require("react-hook-form");
 var _styles2 = require("./styles");
 var _ProductOptionExternalId = require("../ProductOptionExternalId");
+var _SnoozeComponent = require("../SnoozeComponent");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
@@ -99,6 +100,10 @@ var ProductExtraSuboption = exports.ProductExtraSuboption = function ProductExtr
     _useState14 = _slicedToArray(_useState13, 2),
     externalId = _useState14[0],
     setExternalId = _useState14[1];
+  var _useState15 = (0, _react.useState)(false),
+    _useState16 = _slicedToArray(_useState15, 2),
+    isProductExtraSuboptionSnooze = _useState16[0],
+    setProductExtraSuboptionSnooze = _useState16[1];
   var handleClickSubOptionImage = function handleClickSubOptionImage(id) {
     document.getElementById(id).click();
   };
@@ -377,6 +382,10 @@ var ProductExtraSuboption = exports.ProductExtraSuboption = function ProductExtr
     id: theme !== null && theme !== void 0 && theme.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
   }, /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
     onClick: function onClick() {
+      return setProductExtraSuboptionSnooze(true);
+    }
+  }, t('SNOOZE', 'Snooze')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+    onClick: function onClick() {
       setSelectedSubOptionId(subOption === null || subOption === void 0 ? void 0 : subOption.id);
       setOpenModal(_objectSpread(_objectSpread({}, openModal), {}, {
         subOptionMetaFields: true
@@ -455,5 +464,28 @@ var ProductExtraSuboption = exports.ProductExtraSuboption = function ProductExtr
     value: externalId,
     handleChange: setExternalId,
     handleUpdate: handleUpdateExternalId
+  })), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    width: "85%",
+    maxWidth: "1000px",
+    open: isProductExtraSuboptionSnooze,
+    onClose: function onClose() {
+      return setProductExtraSuboptionSnooze(false);
+    },
+    closeOnBackdrop: false
+  }, /*#__PURE__*/_react.default.createElement(_SnoozeComponent.SnoozeComponent, {
+    hideButtons: true,
+    dataState: subOption,
+    handleChangeFormState: function handleChangeFormState(data) {
+      return handleChangeInput({
+        target: {
+          name: 'snooze_until',
+          value: data.snooze_until
+        }
+      });
+    },
+    formState: formState,
+    onClose: function onClose() {
+      return setProductExtraSuboptionSnooze(false);
+    }
   })));
 };

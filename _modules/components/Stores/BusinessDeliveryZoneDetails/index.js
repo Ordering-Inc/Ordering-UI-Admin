@@ -10,12 +10,14 @@ var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _BusinessDeliveryZoneInformation = require("../BusinessDeliveryZoneInformation");
 var _BusinessDeliveryZoneShare = require("../BusinessDeliveryZoneShare");
+var _SnoozeComponent = require("../SnoozeComponent");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _reactBootstrap = require("react-bootstrap");
 var _styledComponents = require("styled-components");
+var _styles = require("../../../styles");
 var _Shared = require("../../Shared");
 var _utils = require("../../../utils");
-var _styles = require("./styles");
+var _styles2 = require("./styles");
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
@@ -56,10 +58,14 @@ var BusinessDeliveryZoneDetailsUI = function BusinessDeliveryZoneDetailsUI(props
     _useState2 = _slicedToArray(_useState, 2),
     confirm = _useState2[0],
     setConfirm = _useState2[1];
-  var _useState3 = (0, _react.useState)('information'),
+  var _useState3 = (0, _react.useState)(false),
     _useState4 = _slicedToArray(_useState3, 2),
-    selectedMenuOption = _useState4[0],
-    setSelectedMenuOption = _useState4[1];
+    isDeliveryZoneSnooze = _useState4[0],
+    setIsDeliveryZoneSnooze = _useState4[1];
+  var _useState5 = (0, _react.useState)('information'),
+    _useState6 = _slicedToArray(_useState5, 2),
+    selectedMenuOption = _useState6[0],
+    setSelectedMenuOption = _useState6[1];
   var tabs = [{
     key: 'information',
     content: t('INFORMATION', 'Information')
@@ -97,7 +103,14 @@ var BusinessDeliveryZoneDetailsUI = function BusinessDeliveryZoneDetailsUI(props
       handleTabClick('information');
     }
   }, []);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.Container, null, /*#__PURE__*/_react.default.createElement(_styles.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, zoneState !== null && zoneState !== void 0 && zoneState.zone ? zoneState === null || zoneState === void 0 || (_zoneState$zone = zoneState.zone) === null || _zoneState$zone === void 0 ? void 0 : _zoneState$zone.name : t('ZONE_DELIVERY_SETTINGS', 'Zone delivery settings')), /*#__PURE__*/_react.default.createElement(_styles.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, zoneState !== null && zoneState !== void 0 && zoneState.zone ? zoneState === null || zoneState === void 0 || (_zoneState$zone = zoneState.zone) === null || _zoneState$zone === void 0 ? void 0 : _zoneState$zone.name : t('ZONE_DELIVERY_SETTINGS', 'Zone delivery settings')), /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    className: "snooze",
+    color: "lightGreen",
+    borderRadius: "8px",
+    onClick: function onClick() {
+      return setIsDeliveryZoneSnooze(true);
+    }
+  }, t('SNOOZE', 'Snooze')), /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
     menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
     title: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDots, null),
     id: theme !== null && theme !== void 0 && theme.rtl ? 'dropdown-menu-align-left' : 'dropdown-menu-align-right'
@@ -105,8 +118,8 @@ var BusinessDeliveryZoneDetailsUI = function BusinessDeliveryZoneDetailsUI(props
     onClick: function onClick() {
       return onClickDelete();
     }
-  }, t('DELETE', 'Delete'))))), /*#__PURE__*/_react.default.createElement(_styles.TabContainer, null, tabs.map(function (tab) {
-    return /*#__PURE__*/_react.default.createElement(_styles.Tab, {
+  }, t('DELETE', 'Delete'))))), /*#__PURE__*/_react.default.createElement(_styles2.TabContainer, null, tabs.map(function (tab) {
+    return /*#__PURE__*/_react.default.createElement(_styles2.Tab, {
       key: tab.key,
       active: selectedMenuOption === tab.key,
       onClick: function onClick() {
@@ -128,6 +141,22 @@ var BusinessDeliveryZoneDetailsUI = function BusinessDeliveryZoneDetailsUI(props
     business: business,
     zone: zoneState.zone,
     handleSuccessUpdate: handleSuccessUpdate
+  })), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    width: "85%",
+    maxWidth: "1000px",
+    open: isDeliveryZoneSnooze,
+    onClose: function onClose() {
+      return setIsDeliveryZoneSnooze(false);
+    },
+    closeOnBackdrop: false
+  }, /*#__PURE__*/_react.default.createElement(_SnoozeComponent.SnoozeComponent, {
+    dataState: zoneState === null || zoneState === void 0 ? void 0 : zoneState.zone,
+    handleUpdate: handleUpdateBusinessDeliveryZone,
+    handleChangeFormState: handleChangeFormState,
+    formState: formState,
+    onClose: function onClose() {
+      return setIsDeliveryZoneSnooze(false);
+    }
   })), /*#__PURE__*/_react.default.createElement(_Shared.Confirm, {
     width: "700px",
     title: t('WEB_APPNAME', 'Ordering'),

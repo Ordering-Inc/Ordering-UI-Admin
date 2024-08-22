@@ -19,6 +19,7 @@ var _useWindowSize2 = require("../../../hooks/useWindowSize");
 var _utils = require("../../../utils");
 var _BusinessCategoryInfoSettingList = require("../BusinessCategoryInfoSettingList");
 var _BusinessProductsCategoyInfo = require("../BusinessProductsCategoyInfo");
+var _SnoozeComponent = require("../SnoozeComponent");
 var _styles2 = require("./styles");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
@@ -81,6 +82,10 @@ var BusinessProductsCategoyDetailsUI = function BusinessProductsCategoyDetailsUI
     _useState8 = _slicedToArray(_useState7, 2),
     isExpand = _useState8[0],
     setIsExpand = _useState8[1];
+  var _useState9 = (0, _react.useState)(false),
+    _useState10 = _slicedToArray(_useState9, 2),
+    isCategorySnooze = _useState10[0],
+    setIsCategorySnooze = _useState10[1];
   var closeAlert = function closeAlert() {
     setAlertState({
       open: false,
@@ -161,7 +166,14 @@ var BusinessProductsCategoyDetailsUI = function BusinessProductsCategoyDetailsUI
         enabled: val
       });
     }
-  }))), /*#__PURE__*/_react.default.createElement(_styles2.RightHeader, null, width > 576 && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+  }))), /*#__PURE__*/_react.default.createElement(_styles2.RightHeader, null, /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    className: "snooze",
+    color: "lightGreen",
+    borderRadius: "8px",
+    onClick: function onClick() {
+      return setIsCategorySnooze(true);
+    }
+  }, t('SNOOZE', 'Snooze'))), width > 576 && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
     color: "black",
     onClick: function onClick() {
       return expandSideBar();
@@ -202,7 +214,23 @@ var BusinessProductsCategoyDetailsUI = function BusinessProductsCategoyDetailsUI
     handleProductCategoryChangeInput: handleChangeInput,
     handlechangeImageProductCategory: handlechangeImage,
     isCategorySeo: true
-  })))), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
+  })))), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+    width: "85%",
+    maxWidth: "1000px",
+    open: isCategorySnooze,
+    onClose: function onClose() {
+      return setIsCategorySnooze(false);
+    },
+    closeOnBackdrop: false
+  }, /*#__PURE__*/_react.default.createElement(_SnoozeComponent.SnoozeComponent, {
+    dataState: categorySelected,
+    handleUpdate: handleUpdateClick,
+    handleChangeFormState: handleChangeItem,
+    formState: formState,
+    onClose: function onClose() {
+      return setIsCategorySnooze(false);
+    }
+  })), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('BUSINESS_TYPE', 'Business type'),
     content: alertState.content,
     acceptText: t('ACCEPT', 'Accept'),
