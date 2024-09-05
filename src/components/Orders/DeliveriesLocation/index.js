@@ -16,12 +16,7 @@ import {
   DriverInfo
 } from './styles'
 
-const DeliveriesLocationPropsAreEqual = (prevProps, nextProps) => {
-  return JSON.stringify(prevProps.interActionMapOrder) === JSON.stringify(nextProps.interActionMapOrder) &&
-    JSON.stringify(prevProps.driversList) === JSON.stringify(nextProps.driversList)
-}
-
-export const DeliveriesLocation = React.memo((props) => {
+export const DeliveriesLocation = (props) => {
   const {
     driversList,
     interActionMapOrder
@@ -307,4 +302,4 @@ export const DeliveriesLocation = React.memo((props) => {
       )}
     </WrapperMap>
   )
-}, DeliveriesLocationPropsAreEqual)
+}
