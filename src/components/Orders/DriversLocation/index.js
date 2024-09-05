@@ -9,17 +9,7 @@ import {
   WrapperMap
 } from './styles'
 
-const DriversLocationPropsAreEqual = (prevProps, nextProps) => {
-  return JSON.stringify(prevProps.selectedDriver) === JSON.stringify(nextProps.selectedDriver) &&
-    JSON.stringify(prevProps.assignedOrders) === JSON.stringify(nextProps.assignedOrders) &&
-    prevProps.driversIsOnline === nextProps.driversIsOnline &&
-    JSON.stringify(prevProps.onlineDrivers) === JSON.stringify(nextProps.onlineDrivers) &&
-    JSON.stringify(prevProps.driversList) === JSON.stringify(nextProps.driversList) &&
-    prevProps.offlineDrivers?.length === nextProps.offlineDrivers?.length &&
-    JSON.stringify(prevProps.selectedOrder) === JSON.stringify(nextProps.selectedOrder)
-}
-
-export const DriversLocation = React.memo((props) => {
+export const DriversLocation = (props) => {
   const {
     driversIsOnline,
     onlineDrivers,
@@ -122,7 +112,6 @@ export const DriversLocation = React.memo((props) => {
         lng: bounds.getSouthWest()?.lng?.()
       }
     }
-
     const mapSize = {
       width: mapRef.current.clientWidth,
       height: mapRef.current.clientHeight
@@ -149,7 +138,7 @@ export const DriversLocation = React.memo((props) => {
     if (!mapFitted) {
       mapFit()
     }
-  }, [showDrivers, mapLoaded, mapFitted, selectedOrder, assignedOrders?.orders])
+  }, [JSON.stringify(showDrivers), mapLoaded, mapFitted, selectedOrder, assignedOrders?.orders])
 
   useEffect(() => {
     if (selectedDriver) {
@@ -278,4 +267,4 @@ export const DriversLocation = React.memo((props) => {
       </WrapperMap>
     </>
   )
-}, DriversLocationPropsAreEqual)
+}

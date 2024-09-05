@@ -58,7 +58,9 @@ const OrdersManagerUI = (props) => {
     setAllowColumns,
     isUseQuery,
     adminsList,
-    assignableDriverGroupList
+    assignableDriverGroupList,
+    mapsData,
+    setMapsData
   } = props
 
   const [, t] = useLanguage()
@@ -86,13 +88,6 @@ const OrdersManagerUI = (props) => {
     inProgress: null,
     completed: null,
     cancelled: null
-  })
-
-  const [mapsData, setMapsData] = useState({
-    driversIsOnline: true,
-    onlineDrivers: [],
-    offlineDrivers: [],
-    selectedDriver: null
   })
 
   const handleBackRedirect = () => {
