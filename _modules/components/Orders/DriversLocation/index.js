@@ -21,11 +21,7 @@ function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) 
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
-var DriversLocationPropsAreEqual = function DriversLocationPropsAreEqual(prevProps, nextProps) {
-  var _prevProps$offlineDri, _nextProps$offlineDri;
-  return JSON.stringify(prevProps.selectedDriver) === JSON.stringify(nextProps.selectedDriver) && JSON.stringify(prevProps.assignedOrders) === JSON.stringify(nextProps.assignedOrders) && prevProps.driversIsOnline === nextProps.driversIsOnline && JSON.stringify(prevProps.onlineDrivers) === JSON.stringify(nextProps.onlineDrivers) && JSON.stringify(prevProps.driversList) === JSON.stringify(nextProps.driversList) && ((_prevProps$offlineDri = prevProps.offlineDrivers) === null || _prevProps$offlineDri === void 0 ? void 0 : _prevProps$offlineDri.length) === ((_nextProps$offlineDri = nextProps.offlineDrivers) === null || _nextProps$offlineDri === void 0 ? void 0 : _nextProps$offlineDri.length) && JSON.stringify(prevProps.selectedOrder) === JSON.stringify(nextProps.selectedOrder);
-};
-var DriversLocation = exports.DriversLocation = /*#__PURE__*/_react.default.memo(function (props) {
+var DriversLocation = exports.DriversLocation = function DriversLocation(props) {
   var _configState$configs, _configState$configs2, _configState$configs3, _selectedOrder$custom3, _selectedOrder$custom4, _selectedOrder$custom5, _selectedOrder$custom6, _selectedOrder$custom7, _selectedOrder$busine3, _selectedOrder$busine4, _selectedOrder$busine5, _selectedOrder$driver3, _selectedOrder$driver4, _selectedOrder$driver5, _selectedOrder$driver6, _selectedOrder$driver7, _selectedOrder$driver8, _selectedOrder$driver9, _selectedOrder$driver10, _selectedOrder$driver11, _selectedOrder$driver12, _selectedOrder$driver13, _selectedOrder$driver14, _assignedOrders$order6, _assignedOrders$order7;
   var driversIsOnline = props.driversIsOnline,
     onlineDrivers = props.onlineDrivers,
@@ -165,7 +161,7 @@ var DriversLocation = exports.DriversLocation = /*#__PURE__*/_react.default.memo
     if (!mapFitted) {
       mapFit();
     }
-  }, [showDrivers, mapLoaded, mapFitted, selectedOrder, assignedOrders === null || assignedOrders === void 0 ? void 0 : assignedOrders.orders]);
+  }, [JSON.stringify(showDrivers), mapLoaded, mapFitted, selectedOrder, assignedOrders === null || assignedOrders === void 0 ? void 0 : assignedOrders.orders]);
   (0, _react.useEffect)(function () {
     if (selectedDriver) {
       setShowDrivers([selectedDriver]);
@@ -253,4 +249,4 @@ var DriversLocation = exports.DriversLocation = /*#__PURE__*/_react.default.memo
       image: order === null || order === void 0 || (_order$business5 = order.business) === null || _order$business5 === void 0 ? void 0 : _order$business5.logo
     });
   }))));
-}, DriversLocationPropsAreEqual);
+};
