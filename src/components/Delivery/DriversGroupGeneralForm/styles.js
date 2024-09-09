@@ -125,3 +125,20 @@ export const Image = (props) => {
     </ImageStyled>
   )
 }
+
+export const CheckboxContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 0 0 29px 0;
+  p {
+    font-size: 14px;
+    margin: 0px;
+    ${props => props.theme?.rtl
+? css`
+      padding-right: 10px;
+    `
+: css`
+      padding-left: 10px;
+    `}
+  }
+`
