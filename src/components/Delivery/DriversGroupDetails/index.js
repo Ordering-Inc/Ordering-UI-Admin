@@ -68,7 +68,6 @@ const DriversGroupDetailsUI = (props) => {
           { key: 'businesses', value: t('BUSINESSES', 'Businesses') },
           { key: 'delivery_zones', value: t('DELIVERY_ZONES', 'Delivery Zones') },
           { key: 'paymethods', value: t('PAYMENT_METHODS', 'Payment methods') },
-          { key: 'advanced_logistics', value: t('ADVANCED_LOGISTICS', 'Advanced logistics') },
           { key: 'logs', value: t('LOGS', 'Logs') }
         ]
         : [
@@ -78,6 +77,12 @@ const DriversGroupDetailsUI = (props) => {
           { key: 'paymethods', value: t('PAYMENT_METHODS', 'Payment methods') },
           { key: 'logs', value: t('LOGS', 'Logs') }
         ]
+    const hideAdvancedLogistic = driversGroupState?.driversGroup?.autoassign_amount_drivers === 0 &&
+      driversGroupState?.driversGroup?.orders_group_max_orders === 0
+
+    if (autoAssignType !== 'basic' && !hideAdvancedLogistic) {
+      _driversGroupMenus.push({ key: 'advanced_logistics', value: t('ADVANCED_LOGISTICS', 'Advanced logistics') })
+    }
     setDriversGroupMenus(_driversGroupMenus)
   }, [driversGroupState?.driversGroup])
 

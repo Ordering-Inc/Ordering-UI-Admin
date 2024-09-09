@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import { Circle, RecordCircleFill } from 'react-bootstrap-icons'
 import { DriversGroupOrders } from '../../DriversGroupOrders'
@@ -19,21 +19,12 @@ export const AdvancedLogisticsForm = (props) => {
   const {
     driversGroupState,
     changesState,
-    handleChangesState
+    handleChangesState,
+    useAdvanced,
+    handleLogistic
   } = props
 
   const [, t] = useLanguage()
-  const [useAdvanced, setUseAdvanced] = useState(false)
-
-  const handleLogistic = (checked) => {
-    setUseAdvanced(checked)
-    if (checked) return
-    const changes = {
-      autoassign_amount_drivers: 0,
-      orders_group_max_orders: 0
-    }
-    handleChangesState(changes)
-  }
 
   return (
     <LogisticsContainer>
