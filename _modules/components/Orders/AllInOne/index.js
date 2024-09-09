@@ -63,7 +63,9 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     setAllowColumns = props.setAllowColumns,
     isUseQuery = props.isUseQuery,
     adminsList = props.adminsList,
-    assignableDriverGroupList = props.assignableDriverGroupList;
+    assignableDriverGroupList = props.assignableDriverGroupList,
+    mapsData = props.mapsData,
+    setMapsData = props.setMapsData;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -141,15 +143,6 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     _useState26 = _slicedToArray(_useState25, 2),
     ordersAmountByStatus = _useState26[0],
     setOrdersAmountByStatus = _useState26[1];
-  var _useState27 = (0, _react.useState)({
-      driversIsOnline: true,
-      onlineDrivers: [],
-      offlineDrivers: [],
-      selectedDriver: null
-    }),
-    _useState28 = _slicedToArray(_useState27, 2),
-    mapsData = _useState28[0],
-    setMapsData = _useState28[1];
   var handleBackRedirect = function handleBackRedirect() {
     setIsOpenOrderDetail(false);
     setDetailsOrder(null);
