@@ -36,7 +36,9 @@ var DriversGroupGeneralForm = exports.DriversGroupGeneralForm = function Drivers
     handleNextClick = props.handleNextClick,
     selectedDriverManager = props.selectedDriverManager,
     handleSelectDriverManager = props.handleSelectDriverManager,
-    handleChangeMaxDistance = props.handleChangeMaxDistance;
+    handleChangeMaxDistance = props.handleChangeMaxDistance,
+    useAdvanced = props.useAdvanced,
+    handleLogistic = props.handleLogistic;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -178,7 +180,12 @@ var DriversGroupGeneralForm = exports.DriversGroupGeneralForm = function Drivers
         type: val
       });
     }
-  })), (changesState === null || changesState === void 0 ? void 0 : changesState.type) === 0 || typeof (changesState === null || changesState === void 0 ? void 0 : changesState.type) === 'undefined' && ((_driversGroupState$dr4 = driversGroupState.driversGroup) === null || _driversGroupState$dr4 === void 0 ? void 0 : _driversGroupState$dr4.type) === 0 ? /*#__PURE__*/_react.default.createElement(_DriversGroupDrivers.DriversGroupDrivers, props) : /*#__PURE__*/_react.default.createElement(_DriversGroupCompanies.DriversGroupCompanies, props), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('PRIORITY', 'Priority')), /*#__PURE__*/_react.default.createElement(_styles.SecondSelect, {
+  })), /*#__PURE__*/_react.default.createElement(_styles2.CheckboxContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
+    checked: useAdvanced,
+    onChange: function onChange(e) {
+      return handleLogistic(e.target.checked);
+    }
+  }), /*#__PURE__*/_react.default.createElement("p", null, t('USE_ADVANCED_LOGISTIC', 'Use advanced logistic'))), (changesState === null || changesState === void 0 ? void 0 : changesState.type) === 0 || typeof (changesState === null || changesState === void 0 ? void 0 : changesState.type) === 'undefined' && ((_driversGroupState$dr4 = driversGroupState.driversGroup) === null || _driversGroupState$dr4 === void 0 ? void 0 : _driversGroupState$dr4.type) === 0 ? /*#__PURE__*/_react.default.createElement(_DriversGroupDrivers.DriversGroupDrivers, props) : /*#__PURE__*/_react.default.createElement(_DriversGroupCompanies.DriversGroupCompanies, props), /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('PRIORITY', 'Priority')), /*#__PURE__*/_react.default.createElement(_styles.SecondSelect, {
     isSecondIcon: true,
     placeholder: t('SELECT_PRIORITY', 'Select priority'),
     options: priorityOptions,

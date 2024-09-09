@@ -37,7 +37,7 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 var DriversGroupDetailsUI = function DriversGroupDetailsUI(props) {
-  var _configState$configs, _driversGroupState$dr, _driversGroupState$dr2, _driversGroupState$dr3, _driversGroupState$dr4;
+  var _configState$configs, _driversGroupState$dr3, _driversGroupState$dr4, _driversGroupState$dr5, _driversGroupState$dr6;
   var driversGroupState = props.driversGroupState,
     actionState = props.actionState,
     handleParentSidebarMove = props.handleParentSidebarMove,
@@ -90,6 +90,7 @@ var DriversGroupDetailsUI = function DriversGroupDetailsUI(props) {
     isExpand = _useState12[0],
     setIsExpand = _useState12[1];
   (0, _react.useEffect)(function () {
+    var _driversGroupState$dr, _driversGroupState$dr2;
     var _driversGroupMenus = !driversGroupState.driversGroup ? [{
       key: 'general',
       value: t('GENERAL', 'General')
@@ -109,9 +110,6 @@ var DriversGroupDetailsUI = function DriversGroupDetailsUI(props) {
       key: 'paymethods',
       value: t('PAYMENT_METHODS', 'Payment methods')
     }, {
-      key: 'advanced_logistics',
-      value: t('ADVANCED_LOGISTICS', 'Advanced logistics')
-    }, {
       key: 'logs',
       value: t('LOGS', 'Logs')
     }] : [{
@@ -130,6 +128,13 @@ var DriversGroupDetailsUI = function DriversGroupDetailsUI(props) {
       key: 'logs',
       value: t('LOGS', 'Logs')
     }];
+    var hideAdvancedLogistic = (driversGroupState === null || driversGroupState === void 0 || (_driversGroupState$dr = driversGroupState.driversGroup) === null || _driversGroupState$dr === void 0 ? void 0 : _driversGroupState$dr.autoassign_amount_drivers) === 0 && (driversGroupState === null || driversGroupState === void 0 || (_driversGroupState$dr2 = driversGroupState.driversGroup) === null || _driversGroupState$dr2 === void 0 ? void 0 : _driversGroupState$dr2.orders_group_max_orders) === 0;
+    if (autoAssignType !== 'basic' && !hideAdvancedLogistic) {
+      _driversGroupMenus.push({
+        key: 'advanced_logistics',
+        value: t('ADVANCED_LOGISTICS', 'Advanced logistics')
+      });
+    }
     setDriversGroupMenus(_driversGroupMenus);
   }, [driversGroupState === null || driversGroupState === void 0 ? void 0 : driversGroupState.driversGroup]);
   var onDeleteGroup = function onDeleteGroup() {
@@ -163,7 +168,7 @@ var DriversGroupDetailsUI = function DriversGroupDetailsUI(props) {
     handleParentSidebarMove(0);
     setIsOpenDetails(false);
     setIsExtendExtraOpen(false);
-  }, [showMenu, (_driversGroupState$dr = driversGroupState.driversGroup) === null || _driversGroupState$dr === void 0 ? void 0 : _driversGroupState$dr.id]);
+  }, [showMenu, (_driversGroupState$dr3 = driversGroupState.driversGroup) === null || _driversGroupState$dr3 === void 0 ? void 0 : _driversGroupState$dr3.id]);
   (0, _react.useEffect)(function () {
     if (!(actionState !== null && actionState !== void 0 && actionState.error)) return;
     setAlertState({
@@ -191,8 +196,8 @@ var DriversGroupDetailsUI = function DriversGroupDetailsUI(props) {
   (0, _react.useEffect)(function () {
     setShowMenu('general');
   }, [driversGroupId]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.DetailsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, driversGroupState.driversGroup ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, (_driversGroupState$dr2 = driversGroupState.driversGroup) === null || _driversGroupState$dr2 === void 0 ? void 0 : _driversGroupState$dr2.name), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
-    defaultChecked: (_driversGroupState$dr3 = driversGroupState.driversGroup) === null || _driversGroupState$dr3 === void 0 ? void 0 : _driversGroupState$dr3.enabled,
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.DetailsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, driversGroupState.driversGroup ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h1", null, (_driversGroupState$dr4 = driversGroupState.driversGroup) === null || _driversGroupState$dr4 === void 0 ? void 0 : _driversGroupState$dr4.name), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
+    defaultChecked: (_driversGroupState$dr5 = driversGroupState.driversGroup) === null || _driversGroupState$dr5 === void 0 ? void 0 : _driversGroupState$dr5.enabled,
     onChange: function onChange(enabled) {
       return handleUpdateDriversGroup({
         enabled: enabled
@@ -232,7 +237,7 @@ var DriversGroupDetailsUI = function DriversGroupDetailsUI(props) {
   })), showMenu === 'advanced_logistics' && /*#__PURE__*/_react.default.createElement(_DriversGroupLogistics.DriversGroupLogistics, _extends({}, props, {
     curDriversGroup: driversGroupState.driversGroup
   })), showMenu === 'logs' && /*#__PURE__*/_react.default.createElement(_DriversGroupLogs.DriversGroupLogs, {
-    driversGroupId: (_driversGroupState$dr4 = driversGroupState.driversGroup) === null || _driversGroupState$dr4 === void 0 ? void 0 : _driversGroupState$dr4.id
+    driversGroupId: (_driversGroupState$dr6 = driversGroupState.driversGroup) === null || _driversGroupState$dr6 === void 0 ? void 0 : _driversGroupState$dr6.id
   }), showMenu === 'delivery_zones' && /*#__PURE__*/_react.default.createElement(_DriversGroupDeliveryDetails.DriverGroupDeliveryDetails, _extends({}, props, {
     curDriversGroup: driversGroupState.driversGroup,
     handleParentSidebarMove: handleParentSidebarMove,
