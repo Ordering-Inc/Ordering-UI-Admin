@@ -7,6 +7,7 @@ import { DriversGroupDrivers } from '../DriversGroupDrivers'
 import { DriversGroupCompanies } from '../DriversGroupCompanies'
 
 import {
+  CheckboxContainer,
   Container,
   DriverManagerContainer,
   DriverManagerWrapper,
@@ -30,7 +31,9 @@ export const DriversGroupGeneralForm = (props) => {
     handleNextClick,
     selectedDriverManager,
     handleSelectDriverManager,
-    handleChangeMaxDistance
+    handleChangeMaxDistance,
+    useAdvanced,
+    handleLogistic
   } = props
 
   const [, t] = useLanguage()
@@ -178,7 +181,13 @@ export const DriversGroupGeneralForm = (props) => {
           onChange={val => handleChangesState({ type: val })}
         />
       </InputWrapper>
-
+      <CheckboxContainer>
+        <Checkbox
+          checked={useAdvanced}
+          onChange={e => handleLogistic(e.target.checked)}
+        />
+        <p>{t('USE_ADVANCED_LOGISTIC', 'Use advanced logistic')}</p>
+      </CheckboxContainer>
       {
         (changesState?.type === 0 || (typeof changesState?.type === 'undefined' && driversGroupState.driversGroup?.type === 0))
           ? <DriversGroupDrivers {...props} />
