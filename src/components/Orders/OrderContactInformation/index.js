@@ -4,7 +4,7 @@ import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 import BisBusiness from '@meronex/icons/bi/BisBusiness'
 import { DriverSelector } from '../DriverSelector'
 import { CompanySelector } from '../CompanySelector'
-import { Button, IconButton, Input, TextArea } from '../../../styles'
+import { Button, IconButton, Input } from '../../../styles'
 import { Telephone, ChevronDown, Pencil } from 'react-bootstrap-icons'
 import { Accordion, AccordionContext, useAccordionToggle } from 'react-bootstrap'
 import { ReviewCustomer } from '../ReviewCustomer'
@@ -26,7 +26,6 @@ import {
   ReviewButton,
   CustomerEditWrapper,
   ActionIconWrapper,
-  ReviewWrapper,
   WrapperMap
 } from './styles'
 
@@ -65,7 +64,8 @@ export const OrderContactInformation = (props) => {
     mapTypeControl: false,
     mapTypeControlOptions: {
       mapTypeIds: ['roadmap', 'satellite']
-    }
+    },
+    isMarkerDraggable: true
   }
 
   const defaultPosition = { lat: 40.77473399999999, lng: -73.9653844 }
@@ -105,6 +105,15 @@ export const OrderContactInformation = (props) => {
   const handleUpdateCustomer = async () => {
     await handleUpdateCustomerInfo()
     setIsEdit(false)
+  }
+
+  const handleChangeCenter = (position) => {
+    const newLat = position.lat()
+    const newLng = position.lng()
+    setAddressState((prev) => ({
+      ...prev,
+      location: { lat: newLat, lng: newLng }
+    }))
   }
 
   return (
@@ -263,6 +272,8 @@ export const OrderContactInformation = (props) => {
                     apiKey={configs?.google_maps_api_key?.value}
                     location={addressState?.location ?? order?.customer?.location ?? defaultPosition}
                     mapControls={googleMapsControls}
+                    handleChangeCenter={handleChangeCenter}
+                    onlyMarkerChangeCenter
                   />
                 </WrapperMap>
                 <Input
