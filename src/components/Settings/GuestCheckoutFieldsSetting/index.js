@@ -14,6 +14,8 @@ import {
   InfoContent
 } from './styles'
 
+const typesNoDriverTip = [3, 4, 5, 6]
+
 const GuestCheckoutFieldsSettingUI = (props) => {
   const {
     checkoutFieldsState,
@@ -88,7 +90,7 @@ const GuestCheckoutFieldsSettingUI = (props) => {
                 const indexB = orderValidationFields.indexOf(b?.validation_field.code)
                 return indexA - indexB
               })
-              .map(field => !hideSettingList.includes(field?.validation_field.code) && !([2, 3, 4, 5, 6].includes(field?.order_type_id) && field?.validation_field.code === 'driver_tip') && (
+              .map(field => !hideSettingList.includes(field?.validation_field.code) && !(typesNoDriverTip.includes(field?.order_type_id) && field?.validation_field.code === 'driver_tip') && (
                 <FieldContainer key={field.id}>
                   <div className='name'>{t(field?.validation_field.code.toUpperCase(), field?.validation_field.name)}</div>
                   <div className='required'>
