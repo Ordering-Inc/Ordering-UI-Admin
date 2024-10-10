@@ -82,7 +82,7 @@ var OrderToPrint = exports.OrderToPrint = /*#__PURE__*/(0, _react.forwardRef)(fu
       price = _ref.price;
     if (name !== 'No') {
       var pos = position ? "(".concat(position, ")") : '';
-      return price > 0 ? "".concat(name, " ").concat(pos, " ").concat(parsePrice(quantity * price, {
+      return price > 0 ? "".concat(quantity, " x ").concat(name, " ").concat(pos, " +").concat(parsePrice(price, {
         currency: (0, _utils.getCurrenySymbol)(order === null || order === void 0 ? void 0 : order.currency)
       })) : "".concat(name, " ").concat(pos);
     } else {
