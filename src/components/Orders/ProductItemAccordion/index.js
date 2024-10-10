@@ -110,7 +110,7 @@ export const ProductItemAccordion = (props) => {
   const getFormattedSubOptionName = ({ quantity, name, position, price }) => {
     if (name !== 'No') {
       const pos = position ? `(${position})` : ''
-      return price > 0 ? `${name} ${pos} ${parsePrice(quantity * price, { currency: currency })}` : `${name} ${pos}`
+      return `${quantity} x ${name} ${pos} +${parsePrice(price, { currency })}`
     } else {
       return 'No'
     }
