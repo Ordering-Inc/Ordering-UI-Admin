@@ -82,7 +82,7 @@ export const OrderToPrint = forwardRef((props, ref) => {
   const getFormattedSubOptionName = ({ quantity, name, position, price }) => {
     if (name !== 'No') {
       const pos = position ? `(${position})` : ''
-      return price > 0 ? `${quantity} x ${name} ${pos} +${parsePrice(price, { currency: getCurrenySymbol(order?.currency) })}` : `${name} ${pos}`
+      return price > 0 ? `${quantity} x ${name} ${pos} +${parsePrice(price, { currency: getCurrenySymbol(order?.currency) })}` : `${quantity} x ${name} ${pos}`
     } else {
       return 'No'
     }
