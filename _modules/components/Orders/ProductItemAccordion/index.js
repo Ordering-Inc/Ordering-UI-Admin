@@ -145,7 +145,7 @@ var ProductItemAccordion = exports.ProductItemAccordion = function ProductItemAc
       var pos = position ? "(".concat(position, ")") : '';
       return price > 0 ? "".concat(quantity, " x ").concat(name, " ").concat(pos, " +").concat(parsePrice(price, {
         currency: currency
-      })) : "".concat(name, " ").concat(pos);
+      })) : "".concat(quantity, " x ").concat(name, " ").concat(pos);
     } else {
       return 'No';
     }
