@@ -29,6 +29,7 @@ function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) 
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+var typesNoDriverTip = [3, 4, 5, 6];
 var GuestCheckoutFieldsSettingUI = function GuestCheckoutFieldsSettingUI(props) {
   var checkoutFieldsState = props.checkoutFieldsState,
     handleChangeCheckoutFieldSetting = props.handleChangeCheckoutFieldSetting;
@@ -110,7 +111,7 @@ var GuestCheckoutFieldsSettingUI = function GuestCheckoutFieldsSettingUI(props) 
     var indexB = orderValidationFields.indexOf(b === null || b === void 0 ? void 0 : b.validation_field.code);
     return indexA - indexB;
   }).map(function (field) {
-    return !hideSettingList.includes(field === null || field === void 0 ? void 0 : field.validation_field.code) && !([2, 3, 4, 5, 6].includes(field === null || field === void 0 ? void 0 : field.order_type_id) && (field === null || field === void 0 ? void 0 : field.validation_field.code) === 'driver_tip') && /*#__PURE__*/_react.default.createElement(_styles2.FieldContainer, {
+    return !hideSettingList.includes(field === null || field === void 0 ? void 0 : field.validation_field.code) && !(typesNoDriverTip.includes(field === null || field === void 0 ? void 0 : field.order_type_id) && (field === null || field === void 0 ? void 0 : field.validation_field.code) === 'driver_tip') && /*#__PURE__*/_react.default.createElement(_styles2.FieldContainer, {
       key: field.id
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "name"
