@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 
 import { Checkbox, Button } from '../../../../styles'
-import { SearchBar } from '../../../Shared'
+import { Pagination, SearchBar } from '../../../Shared'
+import { PaginationWrapper } from '../../../../styles/MultiSelect/styles'
 
 import {
   Container,
@@ -30,6 +31,36 @@ export const BusinessesForm = (props) => {
   const [, t] = useLanguage()
   const [searchValue, setSearchValue] = useState(null)
   const [filteredBusinesses, setFilteredBusinesses] = useState([])
+  const [pagination, setPagination] = useState({
+    currentPage: 1,
+    pageSize: 10,
+    totalItems: null,
+    totalPages: null
+  })
+
+  const handleChangePage = (page) => {
+    setPagination({
+      ...pagination,
+      currentPage: page
+    })
+  }
+
+  const handleChangePageSize = (pageSize) => {
+    const expectedPage = Math.ceil(((pagination?.currentPage - 1) * pagination?.pageSize + 1) / pageSize)
+    setPagination({
+      ...pagination,
+      currentPage: expectedPage,
+      pageSize,
+      totalPages: Math.ceil(filteredBusinesses?.length / pageSize)
+    })
+  }
+
+  const filterFunction = (_, index) => {
+    const validation = pagination?.currentPage === 1
+      ? index < (pagination.pageSize * pagination.currentPage)
+      : (index >= (pagination.pageSize * (pagination.currentPage - 1))) && (index < (pagination.pageSize * pagination.currentPage))
+    return validation
+  }
 
   useEffect(() => {
     let _filteredBusinesses = []
@@ -39,6 +70,12 @@ export const BusinessesForm = (props) => {
       _filteredBusinesses = [...businesses]
     }
     setFilteredBusinesses(_filteredBusinesses)
+    setPagination({
+      ...pagination,
+      currentPage: 1,
+      totalItems: _filteredBusinesses?.length,
+      totalPages: Math.ceil(_filteredBusinesses?.length / pagination.pageSize)
+    })
   }, [searchValue, businesses])
 
   return (
@@ -92,7 +129,7 @@ export const BusinessesForm = (props) => {
           </>
         ) : (
           <>
-            {filteredBusinesses.map(business => (
+            {filteredBusinesses.filter(filterFunction).map(business => (
               <BusinessWrapper
                 key={business.id}
                 isDisabed={actionState.loading}
@@ -110,6 +147,17 @@ export const BusinessesForm = (props) => {
           </>
         )}
       </BusinessesContainer>
+      {pagination && handleChangePageSize && handleChangePage && (
+        <PaginationWrapper>
+          <Pagination
+            currentPage={pagination?.currentPage}
+            totalPages={pagination?.totalPages}
+            handleChangePage={handleChangePage}
+            handleChangePageSize={handleChangePageSize}
+            defaultPageSize={pagination?.pageSize}
+          />
+        </PaginationWrapper>
+      )}
     </Container>
   )
 }

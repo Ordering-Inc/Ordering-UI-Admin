@@ -66,17 +66,12 @@ export const DriversGroupTypeSelector = (props) => {
       }
     }
     setGroupTypes(_groupList)
+    setPagination({
+      ...pagination,
+      totalItems: _groupList?.length,
+      totalPages: Math.ceil(_groupList?.length / pagination.pageSize)
+    })
   }, [driverGroupList, searchValue])
-
-  useEffect(() => {
-    if (groupTypes?.length) {
-      setPagination({
-        ...pagination,
-        totalItems: groupTypes?.length,
-        totalPages: Math.ceil(groupTypes?.length / 10)
-      })
-    }
-  }, [groupTypes])
 
   return (
     <>

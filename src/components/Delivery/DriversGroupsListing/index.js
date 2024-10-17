@@ -36,7 +36,9 @@ const DriversGroupsListingUI = (props) => {
     handleDeleteDriversGroup,
     driversCompanyList,
     actionDisabled,
-    isUseQuery
+    isUseQuery,
+    pagination,
+    setPagination
   } = props
 
   const history = useHistory()
@@ -210,6 +212,8 @@ const DriversGroupsListingUI = (props) => {
             handleAllSelectGroup={handleAllSelectGroup}
             actionDisabled={actionDisabled}
             isUseQuery={isUseQuery}
+            pagination={pagination}
+            setPagination={setPagination}
           />
         ) : (
           <DriversGroupAddForm

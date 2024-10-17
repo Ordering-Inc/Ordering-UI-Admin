@@ -3,7 +3,7 @@ import { useSession } from 'ordering-components-admin'
 import { usePopper } from 'react-popper'
 import { CaretDownFill } from 'react-bootstrap-icons'
 import FiChevronDown from '@meronex/icons/fi/FiChevronDown'
-import { SearchBar } from '../../components/Shared'
+import { Pagination, SearchBar } from '../../components/Shared'
 
 import {
   Selected,
@@ -19,6 +19,7 @@ import {
   HeaderItem,
   PopoverBody
 } from './styles'
+import { PaginationWrapper } from '../MultiSelect/styles'
 
 export const Select = (props) => {
   const {
@@ -38,7 +39,12 @@ export const Select = (props) => {
     className,
     isShowCustomOption,
     customOptionTitle,
-    handleCustomOptionClick
+    handleCustomOptionClick,
+    pagination,
+    handleChangePage,
+    handleChangePageSize,
+    useLazyPagination,
+    isHidePagecontrol
   } = props
   const defaultOption = options?.find(
     (option) => option.value === defaultValue
@@ -89,6 +95,11 @@ export const Select = (props) => {
     }
   }
 
+  const handlerChangePage = (page) => {
+    setOpen(true)
+    handleChangePage(page)
+  }
+
   useEffect(() => {
     window.addEventListener('mouseup', handleClickOutside)
     window.addEventListener('keydown', handleKeyDown)
@@ -104,7 +115,9 @@ export const Select = (props) => {
       const _defaultOption = options?.find(
         (option) => option.value === defaultValue
       )
-      setSelectedOption(_defaultOption)
+      if (!(useLazyPagination && pagination)) {
+        setSelectedOption(_defaultOption)
+      }
       setValue(defaultValue)
     }
   }, [defaultValue, options, searchValue])
@@ -122,6 +135,14 @@ export const Select = (props) => {
   const handleClickHeader = (e) => {
     if (e.target.closest('.open-disabled')) return
     setOpen(!open)
+  }
+
+  const filterFunction = (_, index) => {
+    if (!pagination || useLazyPagination) return true
+    const validation = pagination?.currentPage === 1
+      ? index < (pagination.pageSize * pagination.currentPage)
+      : (index >= (pagination.pageSize * (pagination.currentPage - 1))) && (index < (pagination.pageSize * pagination.currentPage))
+    return validation
   }
 
   const popStyle = { ...styles.popper, display: open ? 'block' : 'none', minWidth: referenceElement?.current?.offsetWidth || '100px' }
@@ -173,7 +194,7 @@ export const Select = (props) => {
             optionInnerMargin={props.optionInnerMargin}
             optionInnerMaxHeight={props.optionInnerMaxHeight}
           >
-            {options.map((option, i) => (
+            {options.filter(filterFunction).map((option, i) => (
               <Option
                 key={i}
                 selected={value === option.value}
@@ -199,6 +220,18 @@ export const Select = (props) => {
             >
               {customOptionTitle}
             </Option>
+          )}
+          {pagination && handleChangePageSize && handleChangePage && (
+            <PaginationWrapper>
+              <Pagination
+                currentPage={pagination?.currentPage}
+                totalPages={pagination?.totalPages}
+                handleChangePage={handlerChangePage}
+                handleChangePageSize={handleChangePageSize}
+                defaultPageSize={pagination?.pageSize}
+                isHidePagecontrol={isHidePagecontrol}
+              />
+            </PaginationWrapper>
           )}
         </Options>
       </PopoverBody>
