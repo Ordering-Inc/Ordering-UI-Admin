@@ -13,6 +13,7 @@ var _FiChevronDown = _interopRequireDefault(require("@meronex/icons/fi/FiChevron
 var _Shared = require("../../components/Shared");
 var _Selects = require("../Selects");
 var _styles = require("./styles");
+var _styles2 = require("../MultiSelect/styles");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
@@ -46,7 +47,12 @@ var Select = exports.Select = function Select(props) {
     className = props.className,
     isShowCustomOption = props.isShowCustomOption,
     customOptionTitle = props.customOptionTitle,
-    handleCustomOptionClick = props.handleCustomOptionClick;
+    handleCustomOptionClick = props.handleCustomOptionClick,
+    pagination = props.pagination,
+    handleChangePage = props.handleChangePage,
+    handleChangePageSize = props.handleChangePageSize,
+    useLazyPagination = props.useLazyPagination,
+    isHidePagecontrol = props.isHidePagecontrol;
   var defaultOption = options === null || options === void 0 ? void 0 : options.find(function (option) {
     return option.value === defaultValue;
   });
@@ -105,6 +111,10 @@ var Select = exports.Select = function Select(props) {
       setOpen(false);
     }
   };
+  var handlerChangePage = function handlerChangePage(page) {
+    setOpen(true);
+    handleChangePage(page);
+  };
   (0, _react.useEffect)(function () {
     window.addEventListener('mouseup', handleClickOutside);
     window.addEventListener('keydown', handleKeyDown);
@@ -119,7 +129,9 @@ var Select = exports.Select = function Select(props) {
       var _defaultOption = options === null || options === void 0 ? void 0 : options.find(function (option) {
         return option.value === defaultValue;
       });
-      setSelectedOption(_defaultOption);
+      if (!(useLazyPagination && pagination)) {
+        setSelectedOption(_defaultOption);
+      }
       setValue(defaultValue);
     }
   }, [defaultValue, options, searchValue]);
@@ -135,6 +147,11 @@ var Select = exports.Select = function Select(props) {
   var handleClickHeader = function handleClickHeader(e) {
     if (e.target.closest('.open-disabled')) return;
     setOpen(!open);
+  };
+  var filterFunction = function filterFunction(_, index) {
+    if (!pagination || useLazyPagination) return true;
+    var validation = (pagination === null || pagination === void 0 ? void 0 : pagination.currentPage) === 1 ? index < pagination.pageSize * pagination.currentPage : index >= pagination.pageSize * (pagination.currentPage - 1) && index < pagination.pageSize * pagination.currentPage;
+    return validation;
   };
   var popStyle = _objectSpread(_objectSpread({}, styles.popper), {}, {
     display: open ? 'block' : 'none',
@@ -173,7 +190,7 @@ var Select = exports.Select = function Select(props) {
   })), /*#__PURE__*/_react.default.createElement(_Selects.OptionsInner, {
     optionInnerMargin: props.optionInnerMargin,
     optionInnerMaxHeight: props.optionInnerMaxHeight
-  }, options.map(function (option, i) {
+  }, options.filter(filterFunction).map(function (option, i) {
     return /*#__PURE__*/_react.default.createElement(_Selects.Option, {
       key: i,
       selected: value === option.value,
@@ -192,5 +209,12 @@ var Select = exports.Select = function Select(props) {
       handleCustomOptionClick();
       setOpen(false);
     }
-  }, customOptionTitle))));
+  }, customOptionTitle), pagination && handleChangePageSize && handleChangePage && /*#__PURE__*/_react.default.createElement(_styles2.PaginationWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
+    currentPage: pagination === null || pagination === void 0 ? void 0 : pagination.currentPage,
+    totalPages: pagination === null || pagination === void 0 ? void 0 : pagination.totalPages,
+    handleChangePage: handlerChangePage,
+    handleChangePageSize: handleChangePageSize,
+    defaultPageSize: pagination === null || pagination === void 0 ? void 0 : pagination.pageSize,
+    isHidePagecontrol: isHidePagecontrol
+  })))));
 };

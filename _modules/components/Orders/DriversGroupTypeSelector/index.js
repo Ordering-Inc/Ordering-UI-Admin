@@ -92,15 +92,11 @@ var DriversGroupTypeSelector = exports.DriversGroupTypeSelector = function Drive
       }
     }
     setGroupTypes(_groupList);
+    setPagination(_objectSpread(_objectSpread({}, pagination), {}, {
+      totalItems: _groupList === null || _groupList === void 0 ? void 0 : _groupList.length,
+      totalPages: Math.ceil((_groupList === null || _groupList === void 0 ? void 0 : _groupList.length) / pagination.pageSize)
+    }));
   }, [driverGroupList, searchValue]);
-  (0, _react.useEffect)(function () {
-    if (groupTypes !== null && groupTypes !== void 0 && groupTypes.length) {
-      setPagination(_objectSpread(_objectSpread({}, pagination), {}, {
-        totalItems: groupTypes === null || groupTypes === void 0 ? void 0 : groupTypes.length,
-        totalPages: Math.ceil((groupTypes === null || groupTypes === void 0 ? void 0 : groupTypes.length) / 10)
-      }));
-    }
-  }, [groupTypes]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !driverGroupList.loading ? /*#__PURE__*/_react.default.createElement(_MultiSelect.MultiSelect, {
     placeholder: placeholder,
     defaultValue: filterValues,

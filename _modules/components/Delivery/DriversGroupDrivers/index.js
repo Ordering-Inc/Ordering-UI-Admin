@@ -13,6 +13,7 @@ var _DriverTemporalSchedule = require("../DriverTemporalSchedule");
 var _FaUserAlt = _interopRequireDefault(require("@meronex/icons/fa/FaUserAlt"));
 var _styles2 = require("./styles");
 var _moment = _interopRequireDefault(require("moment"));
+var _styles3 = require("../../../styles/MultiSelect/styles");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
@@ -20,6 +21,11 @@ function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArra
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
 function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -53,11 +59,38 @@ var DriversGroupDrivers = exports.DriversGroupDrivers = function DriversGroupDri
     _useState8 = _slicedToArray(_useState7, 2),
     driverSchedule = _useState8[0],
     setDriverSchedule = _useState8[1];
+  var _useState9 = (0, _react.useState)({
+      currentPage: 1,
+      pageSize: 10,
+      totalItems: null,
+      totalPages: null
+    }),
+    _useState10 = _slicedToArray(_useState9, 2),
+    pagination = _useState10[0],
+    setPagination = _useState10[1];
   var handleOpenModal = function handleOpenModal(driver) {
     setDriverSchedule(driver);
     setDriverTemporalScheduleModal(true);
   };
+  var handleChangePage = function handleChangePage(page) {
+    setPagination(_objectSpread(_objectSpread({}, pagination), {}, {
+      currentPage: page
+    }));
+  };
+  var handleChangePageSize = function handleChangePageSize(pageSize) {
+    var expectedPage = Math.ceil((((pagination === null || pagination === void 0 ? void 0 : pagination.currentPage) - 1) * (pagination === null || pagination === void 0 ? void 0 : pagination.pageSize) + 1) / pageSize);
+    setPagination(_objectSpread(_objectSpread({}, pagination), {}, {
+      currentPage: expectedPage,
+      pageSize: pageSize,
+      totalPages: Math.ceil((filteredDrivers === null || filteredDrivers === void 0 ? void 0 : filteredDrivers.length) / pageSize)
+    }));
+  };
+  var filterFunction = function filterFunction(_, index) {
+    var validation = (pagination === null || pagination === void 0 ? void 0 : pagination.currentPage) === 1 ? index < pagination.pageSize * pagination.currentPage : index >= pagination.pageSize * (pagination.currentPage - 1) && index < pagination.pageSize * pagination.currentPage;
+    return validation;
+  };
   (0, _react.useEffect)(function () {
+    var _filteredDrivers2, _filteredDrivers3;
     var _filteredDrivers = [];
     if (searchValue) {
       _filteredDrivers = drivers.filter(function (driver) {
@@ -68,6 +101,11 @@ var DriversGroupDrivers = exports.DriversGroupDrivers = function DriversGroupDri
       _filteredDrivers = _toConsumableArray(drivers);
     }
     setFilteredDrivers(_filteredDrivers);
+    setPagination(_objectSpread(_objectSpread({}, pagination), {}, {
+      currentPage: 1,
+      totalItems: (_filteredDrivers2 = _filteredDrivers) === null || _filteredDrivers2 === void 0 ? void 0 : _filteredDrivers2.length,
+      totalPages: Math.ceil(((_filteredDrivers3 = _filteredDrivers) === null || _filteredDrivers3 === void 0 ? void 0 : _filteredDrivers3.length) / pagination.pageSize)
+    }));
   }, [searchValue]);
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.SearchBarWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
     placeholder: t('SEARCH', 'Search'),
@@ -89,7 +127,7 @@ var DriversGroupDrivers = exports.DriversGroupDrivers = function DriversGroupDri
     onClick: function onClick() {
       return handleSelectAllDriver(false);
     }
-  }, t('SELECT_NONE', 'Select none'))), /*#__PURE__*/_react.default.createElement(_styles2.BusinessesContainer, null, filteredDrivers.map(function (driver) {
+  }, t('SELECT_NONE', 'Select none'))), /*#__PURE__*/_react.default.createElement(_styles2.BusinessesContainer, null, filteredDrivers.filter(filterFunction).map(function (driver) {
     return /*#__PURE__*/_react.default.createElement(_styles2.BusinessWrapper, {
       key: driver.id,
       isDisabed: actionState.loading
@@ -120,6 +158,12 @@ var DriversGroupDrivers = exports.DriversGroupDrivers = function DriversGroupDri
         });
       }
     }, t('DRIVER_TEMPORAL', 'Temporal driver')))));
+  })), pagination && handleChangePageSize && handleChangePage && /*#__PURE__*/_react.default.createElement(_styles3.PaginationWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
+    currentPage: pagination === null || pagination === void 0 ? void 0 : pagination.currentPage,
+    totalPages: pagination === null || pagination === void 0 ? void 0 : pagination.totalPages,
+    handleChangePage: handleChangePage,
+    handleChangePageSize: handleChangePageSize,
+    defaultPageSize: pagination === null || pagination === void 0 ? void 0 : pagination.pageSize
   })), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "385px",
     height: "auto",

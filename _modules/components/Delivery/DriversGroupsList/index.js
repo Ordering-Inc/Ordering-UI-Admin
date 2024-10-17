@@ -6,7 +6,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.DriversGroupsList = void 0;
 var _react = _interopRequireWildcard(require("react"));
-var _reactRouterDom = require("react-router-dom");
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 var _MdCheckBoxOutlineBlank = _interopRequireDefault(require("@meronex/icons/md/MdCheckBoxOutlineBlank"));
@@ -23,6 +22,11 @@ function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArra
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
 function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -40,44 +44,34 @@ var DriversGroupsList = exports.DriversGroupsList = function DriversGroupsList(p
     handleSelectGroup = props.handleSelectGroup,
     handleAllSelectGroup = props.handleAllSelectGroup,
     actionDisabled = props.actionDisabled,
-    isUseQuery = props.isUseQuery;
+    isUseQuery = props.isUseQuery,
+    pagination = props.pagination,
+    setPagination = props.setPagination;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
-  var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
-  var defaultPage = query.get('page') || 1;
-  var defaultPageSize = query.get('pageSize') || 10;
-
-  // Change page
-  var _useState = (0, _react.useState)(Number(defaultPage) || 1),
-    _useState2 = _slicedToArray(_useState, 2),
-    currentPage = _useState2[0],
-    setCurrentPage = _useState2[1];
-  var _useState3 = (0, _react.useState)(Number(defaultPageSize) || 10),
-    _useState4 = _slicedToArray(_useState3, 2),
-    groupsPerPage = _useState4[0],
-    setGroupsPerPage = _useState4[1];
 
   // Get current groups
-  var _useState5 = (0, _react.useState)([]),
-    _useState6 = _slicedToArray(_useState5, 2),
-    currentGroups = _useState6[0],
-    setCurrentGroups = _useState6[1];
-  var _useState7 = (0, _react.useState)(null),
-    _useState8 = _slicedToArray(_useState7, 2),
-    totalPages = _useState8[0],
-    setTotalPages = _useState8[1];
+  var _useState = (0, _react.useState)([]),
+    _useState2 = _slicedToArray(_useState, 2),
+    currentGroups = _useState2[0],
+    setCurrentGroups = _useState2[1];
+  var _useState3 = (0, _react.useState)(null),
+    _useState4 = _slicedToArray(_useState3, 2),
+    totalPages = _useState4[0],
+    setTotalPages = _useState4[1];
   var handleChangePage = function handleChangePage(page) {
-    setCurrentPage(page);
+    setPagination(_objectSpread(_objectSpread({}, pagination), {}, {
+      currentPage: page
+    }));
   };
   var handleChangePageSize = function handleChangePageSize(pageSize) {
-    var expectedPage = Math.ceil(((currentPage - 1) * groupsPerPage + 1) / pageSize);
-    setCurrentPage(expectedPage);
-    setGroupsPerPage(pageSize);
+    setPagination(_objectSpread(_objectSpread({}, pagination), {}, {
+      pageSize: pageSize
+    }));
   };
   (0, _react.useEffect)(function () {
     if (driversGroupsState.loading) return;
-    var _totalPages;
     var groups = [];
     if (searchValue) {
       groups = driversGroupsState.groups.filter(function (plugin) {
@@ -87,15 +81,9 @@ var DriversGroupsList = exports.DriversGroupsList = function DriversGroupsList(p
     } else {
       groups = _toConsumableArray(driversGroupsState.groups);
     }
-    if (groups.length > 0) {
-      _totalPages = Math.ceil(groups.length / groupsPerPage);
-    }
-    var indexOfLastPost = currentPage * groupsPerPage;
-    var indexOfFirstPost = indexOfLastPost - groupsPerPage;
-    var _currentGroups = groups.slice(indexOfFirstPost, indexOfLastPost);
-    setTotalPages(_totalPages);
-    setCurrentGroups(_currentGroups);
-  }, [driversGroupsState, currentPage, groupsPerPage, searchValue]);
+    setTotalPages(pagination.totalPages);
+    setCurrentGroups(groups);
+  }, [driversGroupsState, searchValue]);
   var handleClickDriverGroup = function handleClickDriverGroup(e, group) {
     var isInvalid = e.target.closest('.group-checkbox') || e.target.closest('.group-enabled');
     if (isInvalid) return;
@@ -110,12 +98,12 @@ var DriversGroupsList = exports.DriversGroupsList = function DriversGroupsList(p
     }
   };
   (0, _react.useEffect)(function () {
-    if (!isUseQuery || !currentPage || !groupsPerPage || !totalPages) return;
+    if (!isUseQuery || !totalPages) return;
     (0, _utils.addQueryToUrl)({
-      page: currentPage,
-      pageSize: groupsPerPage
+      page: pagination.currentPage,
+      pageSize: pagination.pageSize
     });
-  }, [currentPage, groupsPerPage, totalPages]);
+  }, [pagination, totalPages]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.DriversGroupsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.TableWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.GroupsTable, {
     "data-tour": "tour_delivery_completed",
     disabled: isFromStore
@@ -130,7 +118,7 @@ var DriversGroupsList = exports.DriversGroupsList = function DriversGroupsList(p
     isHeader: true
   }, t('DRIVER_MANAGER', 'Driver manager'))), /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles2.DriverGroupTypeContainer, {
     isHeader: true
-  }, t('TYPE', 'Type'))), !isFromStore && /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles2.ActionsContainer, null, t('ACTIONS', 'Actions'))))), driversGroupsState.loading ? _toConsumableArray(Array(groupsPerPage).keys()).map(function (i) {
+  }, t('TYPE', 'Type'))), !isFromStore && /*#__PURE__*/_react.default.createElement("th", null, /*#__PURE__*/_react.default.createElement(_styles2.ActionsContainer, null, t('ACTIONS', 'Actions'))))), driversGroupsState.loading ? _toConsumableArray(Array(pagination.pageSize).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement("tbody", {
       key: i
     }, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.GroupIdWrapper, null, !isFromStore && /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -192,10 +180,10 @@ var DriversGroupsList = exports.DriversGroupsList = function DriversGroupsList(p
     },
     disabled: actionDisabled
   }, t('ADD_NEW_DRIVER_GROUP', 'Add new driver group')), (currentGroups === null || currentGroups === void 0 ? void 0 : currentGroups.length) > 0 && /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
-    currentPage: currentPage,
-    totalPages: totalPages,
+    currentPage: pagination.currentPage,
+    totalPages: pagination.totalPages,
     handleChangePage: handleChangePage,
-    defaultPageSize: groupsPerPage,
+    defaultPageSize: pagination.pageSize,
     handleChangePageSize: handleChangePageSize
   }))));
 };
