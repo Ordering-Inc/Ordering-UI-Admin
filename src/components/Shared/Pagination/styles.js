@@ -17,7 +17,7 @@ export const PaginationButtonContainer = styled.div`
   `}
 `
 
-export const PageButton = styled.button`
+export const PageButton = styled.div`
   background-color: transparent;
   font-size: 14px;
   color: ${props => props.theme.colors.headingColor};
@@ -29,6 +29,7 @@ export const PageButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
   padding: 0px 7px;
 
   ${props => props.theme?.rtl ? css`

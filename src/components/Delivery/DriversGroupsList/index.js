@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
 import { useLanguage } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import MdCheckBoxOutlineBlank from '@meronex/icons/md/MdCheckBoxOutlineBlank'
@@ -38,50 +37,42 @@ export const DriversGroupsList = (props) => {
     handleSelectGroup,
     handleAllSelectGroup,
     actionDisabled,
-    isUseQuery
+    isUseQuery,
+    pagination,
+    setPagination
   } = props
 
   const [, t] = useLanguage()
-  const query = new URLSearchParams(useLocation().search)
-  const defaultPage = query.get('page') || 1
-  const defaultPageSize = query.get('pageSize') || 10
-
-  // Change page
-  const [currentPage, setCurrentPage] = useState(Number(defaultPage) || 1)
-  const [groupsPerPage, setGroupsPerPage] = useState(Number(defaultPageSize) || 10)
 
   // Get current groups
   const [currentGroups, setCurrentGroups] = useState([])
   const [totalPages, setTotalPages] = useState(null)
 
   const handleChangePage = (page) => {
-    setCurrentPage(page)
+    setPagination({
+      ...pagination,
+      currentPage: page
+    })
   }
 
   const handleChangePageSize = (pageSize) => {
-    const expectedPage = Math.ceil(((currentPage - 1) * groupsPerPage + 1) / pageSize)
-    setCurrentPage(expectedPage)
-    setGroupsPerPage(pageSize)
+    setPagination({
+      ...pagination,
+      pageSize
+    })
   }
 
   useEffect(() => {
     if (driversGroupsState.loading) return
-    let _totalPages
     let groups = []
     if (searchValue) {
       groups = driversGroupsState.groups.filter(plugin => plugin.name?.toLowerCase().includes(searchValue?.toLowerCase()))
     } else {
       groups = [...driversGroupsState.groups]
     }
-    if (groups.length > 0) {
-      _totalPages = Math.ceil(groups.length / groupsPerPage)
-    }
-    const indexOfLastPost = currentPage * groupsPerPage
-    const indexOfFirstPost = indexOfLastPost - groupsPerPage
-    const _currentGroups = groups.slice(indexOfFirstPost, indexOfLastPost)
-    setTotalPages(_totalPages)
-    setCurrentGroups(_currentGroups)
-  }, [driversGroupsState, currentPage, groupsPerPage, searchValue])
+    setTotalPages(pagination.totalPages)
+    setCurrentGroups(groups)
+  }, [driversGroupsState, searchValue])
 
   const handleClickDriverGroup = (e, group) => {
     const isInvalid = e.target.closest('.group-checkbox') || e.target.closest('.group-enabled')
@@ -99,12 +90,12 @@ export const DriversGroupsList = (props) => {
   }
 
   useEffect(() => {
-    if (!isUseQuery || !currentPage || !groupsPerPage || !totalPages) return
+    if (!isUseQuery || !totalPages) return
     addQueryToUrl({
-      page: currentPage,
-      pageSize: groupsPerPage
+      page: pagination.currentPage,
+      pageSize: pagination.pageSize
     })
-  }, [currentPage, groupsPerPage, totalPages])
+  }, [pagination, totalPages])
 
   return (
     <>
@@ -157,7 +148,7 @@ export const DriversGroupsList = (props) => {
               </tr>
             </thead>
             {driversGroupsState.loading ? (
-              [...Array(groupsPerPage).keys()].map(i => (
+              [...Array(pagination.pageSize).keys()].map(i => (
                 <tbody key={i}>
                   <tr>
                     <td>
@@ -286,10 +277,10 @@ export const DriversGroupsList = (props) => {
             )}
             {currentGroups?.length > 0 && (
               <Pagination
-                currentPage={currentPage}
-                totalPages={totalPages}
+                currentPage={pagination.currentPage}
+                totalPages={pagination.totalPages}
                 handleChangePage={handleChangePage}
-                defaultPageSize={groupsPerPage}
+                defaultPageSize={pagination.pageSize}
                 handleChangePageSize={handleChangePageSize}
               />
             )}
