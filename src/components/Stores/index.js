@@ -44,6 +44,7 @@ import { BusinessMenuOptions } from './BusinessMenuOptions'
 import { BusinessDeliveryDetails } from './BusinessDeliveryDetails'
 import { BusinessPickupDetails } from './BusinessPickupDetails'
 import { PaymentOptionStripeDirect } from './PaymentOptionStripeDirect'
+import { PaymentOptionStripeLink } from './PaymentOptionStripeLink'
 import { PaymentOption } from './PaymentOption'
 import { PaymethodOptionPaypalExpress } from './PaymethodOptionPaypalExpress'
 import { PaymethodOptionStripeRedirect } from './PaymethodOptionStripeRedirect'
@@ -163,6 +164,7 @@ export {
   BusinessDeliveryDetails,
   BusinessPickupDetails,
   PaymentOptionStripeDirect,
+  PaymentOptionStripeLink,
   PaymentOption,
   PaymethodOptionPaypalExpress,
   PaymethodOptionStripeRedirect,
