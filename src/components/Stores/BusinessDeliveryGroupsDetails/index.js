@@ -19,7 +19,9 @@ const DriversGroupsListingDetailsUI = (props) => {
     handleAllSelectGroup,
     actionState,
     handleUpdateDriversGroup,
-    paginationSettings
+    paginationSettings,
+    pagination,
+    setPagination
   } = props
 
   const history = useHistory()
@@ -72,6 +74,8 @@ const DriversGroupsListingDetailsUI = (props) => {
           handleSelectGroup={handleSelectGroup}
           handleAllSelectGroup={handleAllSelectGroup}
           paginationSettings={paginationSettings}
+          pagination={pagination}
+          setPagination={setPagination}
         />
       </DriversGroupsListingContainer>
       <Alert

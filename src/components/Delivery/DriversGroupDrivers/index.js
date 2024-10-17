@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
-import { SearchBar, Modal } from '../../Shared'
+import { SearchBar, Modal, Pagination } from '../../Shared'
 import { Button, Checkbox } from '../../../styles'
 import { DriverTemporalSchedule } from '../DriverTemporalSchedule'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
@@ -17,6 +17,7 @@ import {
   DriverTemporaryContainer
 } from './styles'
 import moment from 'moment'
+import { PaginationWrapper } from '../../../styles/MultiSelect/styles'
 
 export const DriversGroupDrivers = (props) => {
   const {
@@ -33,10 +34,40 @@ export const DriversGroupDrivers = (props) => {
   const [filteredDrivers, setFilteredDrivers] = useState([])
   const [driverTemporalSchedule, setDriverTemporalScheduleModal] = useState(false)
   const [driverSchedule, setDriverSchedule] = useState(null)
+  const [pagination, setPagination] = useState({
+    currentPage: 1,
+    pageSize: 10,
+    totalItems: null,
+    totalPages: null
+  })
 
   const handleOpenModal = (driver) => {
     setDriverSchedule(driver)
     setDriverTemporalScheduleModal(true)
+  }
+
+  const handleChangePage = (page) => {
+    setPagination({
+      ...pagination,
+      currentPage: page
+    })
+  }
+
+  const handleChangePageSize = (pageSize) => {
+    const expectedPage = Math.ceil(((pagination?.currentPage - 1) * pagination?.pageSize + 1) / pageSize)
+    setPagination({
+      ...pagination,
+      currentPage: expectedPage,
+      pageSize,
+      totalPages: Math.ceil(filteredDrivers?.length / pageSize)
+    })
+  }
+
+  const filterFunction = (_, index) => {
+    const validation = pagination?.currentPage === 1
+      ? index < (pagination.pageSize * pagination.currentPage)
+      : (index >= (pagination.pageSize * (pagination.currentPage - 1))) && (index < (pagination.pageSize * pagination.currentPage))
+    return validation
   }
 
   useEffect(() => {
@@ -53,6 +84,12 @@ export const DriversGroupDrivers = (props) => {
       _filteredDrivers = [...drivers]
     }
     setFilteredDrivers(_filteredDrivers)
+    setPagination({
+      ...pagination,
+      currentPage: 1,
+      totalItems: _filteredDrivers?.length,
+      totalPages: Math.ceil(_filteredDrivers?.length / pagination.pageSize)
+    })
   }, [searchValue])
 
   return (
@@ -83,7 +120,7 @@ export const DriversGroupDrivers = (props) => {
         </Button>
       </ButtonGroup>
       <BusinessesContainer>
-        {filteredDrivers.map(driver => (
+        {filteredDrivers.filter(filterFunction).map(driver => (
           <BusinessWrapper
             key={driver.id}
             isDisabed={actionState.loading}
@@ -117,7 +154,17 @@ export const DriversGroupDrivers = (props) => {
           </BusinessWrapper>
         ))}
       </BusinessesContainer>
-
+      {pagination && handleChangePageSize && handleChangePage && (
+        <PaginationWrapper>
+          <Pagination
+            currentPage={pagination?.currentPage}
+            totalPages={pagination?.totalPages}
+            handleChangePage={handleChangePage}
+            handleChangePageSize={handleChangePageSize}
+            defaultPageSize={pagination?.pageSize}
+          />
+        </PaginationWrapper>
+      )}
       <Modal
         width='385px'
         height='auto'
