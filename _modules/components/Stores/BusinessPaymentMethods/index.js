@@ -351,6 +351,7 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
     handleSaveClick: handleSaveClick,
     handleDeletePaymethod: handleDeleteBusinessPaymethodOption
   }), selectedPaymethodGateway === 'stripe_link' && /*#__PURE__*/_react.default.createElement(_PaymentOptionStripeLink.PaymentOptionStripeLink, {
+    business: business,
     sitesState: sitesState,
     open: isEdit,
     onClose: function onClose() {
@@ -365,7 +366,8 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
     handleChangeSandbox: handleChangeSandbox,
     handleChangeInput: handleChangeInput,
     handleSaveClick: handleSaveClick,
-    handleDeletePaymethod: handleDeleteBusinessPaymethodOption
+    handleDeletePaymethod: handleDeleteBusinessPaymethodOption,
+    handleSuccessUpdate: handleSuccessUpdate
   }), selectedPaymethodGateway === 'paypal' && /*#__PURE__*/_react.default.createElement(_PaymentOptionPaypal.PaymentOptionPaypal, {
     open: isEdit,
     sitesState: sitesState,
@@ -500,6 +502,7 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
     handleSaveClick: handleSaveClick,
     handleDeletePaymethod: handleDeleteBusinessPaymethodOption
   }), selectedPaymethodGateway === 'stripe_link' && /*#__PURE__*/_react.default.createElement(_PaymentOptionStripeLink.PaymentOptionStripeLink, {
+    business: business,
     sitesState: sitesState,
     open: isEdit,
     onClose: function onClose() {
@@ -514,7 +517,8 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
     handleChangeSandbox: handleChangeSandbox,
     handleChangeInput: handleChangeInput,
     handleSaveClick: handleSaveClick,
-    handleDeletePaymethod: handleDeleteBusinessPaymethodOption
+    handleDeletePaymethod: handleDeleteBusinessPaymethodOption,
+    handleSuccessUpdate: handleSuccessUpdate
   }), selectedPaymethodGateway === 'paypal' && /*#__PURE__*/_react.default.createElement(_PaymentOptionPaypal.PaymentOptionPaypal, {
     open: isEdit,
     sitesState: sitesState,

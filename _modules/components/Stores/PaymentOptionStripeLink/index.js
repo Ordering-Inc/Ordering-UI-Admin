@@ -37,12 +37,13 @@ function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) 
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
-var PaymentOptionStripeLink = exports.PaymentOptionStripeLink = function PaymentOptionStripeLink(props) {
-  var _localState$sites, _businessPaymethod$si, _sitesState$sites2, _ref2, _changesState$sandbox, _changesState$data, _changesState$data2, _businessPaymethod$da, _changesState$data3, _changesState$data4, _businessPaymethod$da2, _changesState$data_sa, _changesState$data_sa2, _businessPaymethod$da3, _changesState$data_sa3, _changesState$data_sa4, _businessPaymethod$da4, _sitesState$sites3;
+var PaymentOptionStripeLinkUI = function PaymentOptionStripeLinkUI(props) {
+  var _localState$sites, _businessPaymethod$si, _sitesState$sites2, _ref2, _changesState$sandbox, _changesState$data, _changesState$data2, _businessPaymethod$da, _changesState$data3, _changesState$data4, _businessPaymethod$da2, _changesState$data_sa, _changesState$data_sa2, _businessPaymethod$da3, _changesState$data_sa3, _changesState$data_sa4, _businessPaymethod$da4, _configsState$configs, _sitesState$sites3;
   var open = props.open,
     onClose = props.onClose,
     orderTypes = props.orderTypes,
     sitesState = props.sitesState,
+    configsState = props.configsState,
     changesState = props.changesState,
     handleChangeBusinessPaymentState = props.handleChangeBusinessPaymentState,
     cleanChangesState = props.cleanChangesState,
@@ -51,7 +52,8 @@ var PaymentOptionStripeLink = exports.PaymentOptionStripeLink = function Payment
     handleChangeInput = props.handleChangeInput,
     handleSaveClick = props.handleSaveClick,
     businessPaymethod = props.businessPaymethod,
-    handleDeletePaymethod = props.handleDeletePaymethod;
+    handleDeletePaymethod = props.handleDeletePaymethod,
+    handleUpdateConfigs = props.handleUpdateConfigs;
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -92,6 +94,10 @@ var PaymentOptionStripeLink = exports.PaymentOptionStripeLink = function Payment
     _useState10 = _slicedToArray(_useState9, 2),
     all = _useState10[0],
     setAll = _useState10[1];
+  var configsToShow = {
+    allow_text_messages_sms: true,
+    allow_text_messages_whatsapp: true
+  };
   var setPaymethodInfo = function setPaymethodInfo(values) {
     var data = {};
     if ((values === null || values === void 0 ? void 0 : values.value) === 'All') {
@@ -243,7 +249,28 @@ var PaymentOptionStripeLink = exports.PaymentOptionStripeLink = function Payment
     onChange: function onChange(e) {
       return handleChangeInput(e, true);
     }
-  })), paymentTabs === 1 && (sitesState === null || sitesState === void 0 || (_sitesState$sites3 = sitesState.sites) === null || _sitesState$sites3 === void 0 ? void 0 : _sitesState$sites3.length) > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.TabOption, {
+  }), !(configsState !== null && configsState !== void 0 && configsState.loading) && (configsState === null || configsState === void 0 || (_configsState$configs = configsState.configs) === null || _configsState$configs === void 0 ? void 0 : _configsState$configs.filter(function (config) {
+    return configsToShow[config === null || config === void 0 ? void 0 : config.key];
+  }).map(function (config) {
+    var _config$options;
+    var options = config === null || config === void 0 || (_config$options = config.options) === null || _config$options === void 0 ? void 0 : _config$options.map(function (item) {
+      return {
+        value: item.value,
+        content: /*#__PURE__*/_react.default.createElement(_styles2.Option, null, t(item.text.toUpperCase()))
+      };
+    });
+    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.FieldName, null, config === null || config === void 0 ? void 0 : config.name), (config === null || config === void 0 ? void 0 : config.type) === 2 && options && /*#__PURE__*/_react.default.createElement(_styles.DefaultSelect, {
+      notAsync: true,
+      defaultValue: config === null || config === void 0 ? void 0 : config.value,
+      options: options,
+      onChange: function onChange(typeValue) {
+        return handleUpdateConfigs(config === null || config === void 0 ? void 0 : config.id, {
+          value: typeValue
+        });
+      },
+      placeholder: t('SELECT_A_OPTION', 'Select a option')
+    }));
+  }))), paymentTabs === 1 && (sitesState === null || sitesState === void 0 || (_sitesState$sites3 = sitesState.sites) === null || _sitesState$sites3 === void 0 ? void 0 : _sitesState$sites3.length) > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.TabOption, {
     key: "all",
     onClick: function onClick() {
       return setPaymethodInfo({
@@ -307,4 +334,10 @@ var PaymentOptionStripeLink = exports.PaymentOptionStripeLink = function Payment
     onAccept: confirm.handleOnAccept,
     closeOnBackdrop: false
   }));
+};
+var PaymentOptionStripeLink = exports.PaymentOptionStripeLink = function PaymentOptionStripeLink(props) {
+  var paymentOptionStripeLinkProps = _objectSpread(_objectSpread({}, props), {}, {
+    UIComponent: PaymentOptionStripeLinkUI
+  });
+  return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.PaymentOptionStripeLink, paymentOptionStripeLinkProps);
 };
