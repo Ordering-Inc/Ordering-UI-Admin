@@ -18,6 +18,13 @@ export const Container = styled.div`
     margin-bottom: 20px;
   }
 
+  .select {
+    width: 100%;
+    > div:first-child {
+      padding: 8px 15px;
+    }
+  }
+
   @media (min-width: 1000px) {
     width: 0;
     ${props => props.theme?.rtl ? css`
@@ -26,6 +33,15 @@ export const Container = styled.div`
       border-left: 1px solid #E9ECEF;
     `}
   }
+`
+
+export const Option = styled.div`
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+  font-size: 13px;
+  line-height: 2;
+  font-weight: 500;
 `
 
 export const SandboxWrapper = styled.div`
@@ -72,7 +88,7 @@ export const TabOption = styled.div`
   padding: 12px 0;
   cursor: pointer;
   color: ${props => props.theme.colors.headingColor};
-  
+
   > svg {
     font-size: 20px;
     &.fill {
