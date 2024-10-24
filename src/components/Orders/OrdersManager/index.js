@@ -53,7 +53,9 @@ const OrdersManagerUI = (props) => {
     timeStatus,
     setTimeStatus,
     isUseQuery,
-    disableDriverLocationsSockets
+    disableDriverLocationsSockets,
+    detailsOrder,
+    setDetailsOrder
   } = props
 
   const [, t] = useLanguage()
@@ -63,7 +65,6 @@ const OrdersManagerUI = (props) => {
   const query = new URLSearchParams(useLocation().search)
   const [isOpenOrderDetail, setIsOpenOrderDetail] = useState(false)
   const [orderDetailId, setOrderDetailId] = useState(null)
-  const [detailsOrder, setDetailsOrder] = useState(null)
   const [filterModalOpen, setFilterModalOpen] = useState(false)
 
   const [isTourOpen, setIsTourOpen] = useState(false)

@@ -60,7 +60,9 @@ const OrdersManagerUI = (props) => {
     adminsList,
     assignableDriverGroupList,
     mapsData,
-    setMapsData
+    setMapsData,
+    detailsOrder,
+    setDetailsOrder
   } = props
 
   const [, t] = useLanguage()
@@ -72,7 +74,6 @@ const OrdersManagerUI = (props) => {
   const query = new URLSearchParams(useLocation().search)
   const [isOpenOrderDetail, setIsOpenOrderDetail] = useState(false)
   const [orderDetailId, setOrderDetailId] = useState(null)
-  const [detailsOrder, setDetailsOrder] = useState(null)
   const [filterModalOpen, setFilterModalOpen] = useState(false)
   const [assignedOrders, setAssignedOrders] = useState({ loading: false, error: null, orders: [] })
 

@@ -34,7 +34,9 @@ const DeliveriesManagerUI = (props) => {
     setTimeStatus,
     isUseQuery,
     adminsList,
-    assignableDriverGroupList
+    assignableDriverGroupList,
+    detailsOrder,
+    setDetailsOrder
   } = props
 
   const [, t] = useLanguage()
@@ -42,7 +44,6 @@ const DeliveriesManagerUI = (props) => {
   const query = new URLSearchParams(useLocation().search)
   const [isOpenOrderDetail, setIsOpenOrderDetail] = useState(false)
   const [orderDetailId, setOrderDetailId] = useState(null)
-  const [detailsOrder, setDetailsOrder] = useState(null)
   const [filterModalOpen, setFilterModalOpen] = useState(false)
   const [slaSettingTime, setSlaSettingTime] = useState(60000)
   const [ordersAmountByStatus, setOrdersAmountByStatus] = useState({
