@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useLanguage } from 'ordering-components-admin'
+import { useLanguage, PaymentOptionStripeLink as PaymentOptionStripeLinkController } from 'ordering-components-admin'
 import RiCheckboxBlankLine from '@meronex/icons/ri/RiCheckboxBlankLine'
 import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
-import { Button, Input, IconButton, Checkbox } from '../../../styles'
+import { Button, Input, IconButton, Checkbox, DefaultSelect as Select } from '../../../styles'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import { useTheme } from 'styled-components'
 import { ThreeDots, XLg } from 'react-bootstrap-icons'
@@ -19,16 +19,18 @@ import {
   CloseButton,
   TabOption,
   TabOptionName,
-  ActionSelectorWrapper
+  ActionSelectorWrapper,
+  Option
 } from './styles'
 import { Tab, TabsContainer } from '../BusinessMenu/styles'
 
-export const PaymentOptionStripeLink = (props) => {
+const PaymentOptionStripeLinkUI = (props) => {
   const {
     open,
     onClose,
     orderTypes,
     sitesState,
+    configsState,
     changesState,
     handleChangeBusinessPaymentState,
     cleanChangesState,
@@ -37,7 +39,8 @@ export const PaymentOptionStripeLink = (props) => {
     handleChangeInput,
     handleSaveClick,
     businessPaymethod,
-    handleDeletePaymethod
+    handleDeletePaymethod,
+    handleUpdateConfigs
   } = props
 
   const query = new URLSearchParams(useLocation().search)
@@ -50,6 +53,11 @@ export const PaymentOptionStripeLink = (props) => {
   const [localState, setLocalState] = useState({ allowed_order_types: businessPaymethod?.allowed_order_types, sites: businessPaymethod?.sites })
   const filteredOptions = localState?.sites ?? businessPaymethod?.sites?.filter(a => sitesState?.sites?.find(b => a.id === b.id))
   const [all, setAll] = useState(!filteredOptions?.length)
+
+  const configsToShow = {
+    allow_text_messages_sms: true,
+    allow_text_messages_whatsapp: true
+  }
 
   const setPaymethodInfo = (values) => {
     const data = {}
@@ -248,6 +256,25 @@ export const PaymentOptionStripeLink = (props) => {
               placeholder={`${t('SECRECT_KEY', 'Secret key')} (${t('SANDBOX', 'Sandbox')})`}
               onChange={e => handleChangeInput(e, true)}
             />
+            {!configsState?.loading && configsState?.configs?.filter(config => configsToShow[config?.key]).map(config => {
+              const options = config?.options?.map(item => {
+                return { value: item.value, content: <Option>{t(item.text.toUpperCase())}</Option> }
+              })
+              return (
+                <>
+                  <FieldName>{config?.name}</FieldName>
+                  {config?.type === 2 && options && (
+                    <Select
+                      notAsync
+                      defaultValue={config?.value}
+                      options={options}
+                      onChange={(typeValue) => handleUpdateConfigs(config?.id, { value: typeValue })}
+                      placeholder={t('SELECT_A_OPTION', 'Select a option')}
+                    />
+                  )}
+                </>
+              )
+            })}
           </>
         )}
 
@@ -318,4 +345,12 @@ export const PaymentOptionStripeLink = (props) => {
       />
     </>
   )
+}
+
+export const PaymentOptionStripeLink = (props) => {
+  const paymentOptionStripeLinkProps = {
+    ...props,
+    UIComponent: PaymentOptionStripeLinkUI
+  }
+  return <PaymentOptionStripeLinkController {...paymentOptionStripeLinkProps} />
 }
