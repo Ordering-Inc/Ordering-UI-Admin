@@ -355,6 +355,7 @@ const BusinessPaymentMethodsUI = (props) => {
               )}
               {selectedPaymethodGateway === 'stripe_link' && (
                 <PaymentOptionStripeLink
+                  business={business}
                   sitesState={sitesState}
                   open={isEdit}
                   onClose={() => handleCloseEdit()}
@@ -368,6 +369,7 @@ const BusinessPaymentMethodsUI = (props) => {
                   handleChangeInput={handleChangeInput}
                   handleSaveClick={handleSaveClick}
                   handleDeletePaymethod={handleDeleteBusinessPaymethodOption}
+                  handleSuccessUpdate={handleSuccessUpdate}
                 />
               )}
               {selectedPaymethodGateway === 'paypal' && (
@@ -529,6 +531,7 @@ const BusinessPaymentMethodsUI = (props) => {
                 )}
                 {selectedPaymethodGateway === 'stripe_link' && (
                   <PaymentOptionStripeLink
+                    business={business}
                     sitesState={sitesState}
                     open={isEdit}
                     onClose={() => handleCloseEdit()}
@@ -542,6 +545,7 @@ const BusinessPaymentMethodsUI = (props) => {
                     handleChangeInput={handleChangeInput}
                     handleSaveClick={handleSaveClick}
                     handleDeletePaymethod={handleDeleteBusinessPaymethodOption}
+                    handleSuccessUpdate={handleSuccessUpdate}
                   />
                 )}
                 {selectedPaymethodGateway === 'paypal' && (
