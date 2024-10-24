@@ -52,7 +52,9 @@ var DriversGroupsListingUI = function DriversGroupsListingUI(props) {
     handleDeleteDriversGroup = props.handleDeleteDriversGroup,
     driversCompanyList = props.driversCompanyList,
     actionDisabled = props.actionDisabled,
-    isUseQuery = props.isUseQuery;
+    isUseQuery = props.isUseQuery,
+    pagination = props.pagination,
+    setPagination = props.setPagination;
   var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -255,7 +257,9 @@ var DriversGroupsListingUI = function DriversGroupsListingUI(props) {
     handleSelectGroup: handleSelectGroup,
     handleAllSelectGroup: handleAllSelectGroup,
     actionDisabled: actionDisabled,
-    isUseQuery: isUseQuery
+    isUseQuery: isUseQuery,
+    pagination: pagination,
+    setPagination: setPagination
   }) : /*#__PURE__*/_react.default.createElement(_DriversGroupAddForm.DriversGroupAddForm, {
     driversGroupsState: driversGroupsState,
     setDriversGroupsState: setDriversGroupsState,

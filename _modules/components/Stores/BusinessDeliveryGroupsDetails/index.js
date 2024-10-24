@@ -37,7 +37,9 @@ var DriversGroupsListingDetailsUI = function DriversGroupsListingDetailsUI(props
     handleAllSelectGroup = props.handleAllSelectGroup,
     actionState = props.actionState,
     handleUpdateDriversGroup = props.handleUpdateDriversGroup,
-    paginationSettings = props.paginationSettings;
+    paginationSettings = props.paginationSettings,
+    pagination = props.pagination,
+    setPagination = props.setPagination;
   var history = (0, _reactRouterDom.useHistory)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -116,7 +118,9 @@ var DriversGroupsListingDetailsUI = function DriversGroupsListingDetailsUI(props
     selectedGroupList: selectedGroupList,
     handleSelectGroup: handleSelectGroup,
     handleAllSelectGroup: handleAllSelectGroup,
-    paginationSettings: paginationSettings
+    paginationSettings: paginationSettings,
+    pagination: pagination,
+    setPagination: setPagination
   })), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: t('WEB_APPNAME', 'Ordering'),
     content: alertState.content,
