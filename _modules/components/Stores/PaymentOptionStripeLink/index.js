@@ -141,9 +141,9 @@ var PaymentOptionStripeLinkUI = function PaymentOptionStripeLinkUI(props) {
   (0, _react.useEffect)(function () {
     if (isMenuOpen) {
       if (width < 1000) {
-        document.getElementById('stripe_direct').style.width = '100%';
+        document.getElementById('stripe_link').style.width = '100%';
       } else {
-        document.getElementById('stripe_direct').style.width = '500px';
+        document.getElementById('stripe_link').style.width = '500px';
       }
     }
   }, [width]);
@@ -187,7 +187,7 @@ var PaymentOptionStripeLinkUI = function PaymentOptionStripeLinkUI(props) {
     }
   }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, {
-    id: "stripe_direct"
+    id: "stripe_link"
   }, /*#__PURE__*/_react.default.createElement(_styles2.Header, null, /*#__PURE__*/_react.default.createElement("h1", null, t('STRIPE_LINK', 'Stripe link (Only for callcenter)')), /*#__PURE__*/_react.default.createElement(_styles2.ActionSelectorWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrap.DropdownButton, {
     menuAlign: theme !== null && theme !== void 0 && theme.rtl ? 'left' : 'right',
     title: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ThreeDots, null),
@@ -201,7 +201,9 @@ var PaymentOptionStripeLinkUI = function PaymentOptionStripeLinkUI(props) {
     onClick: function onClick() {
       return onClose();
     }
-  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)))), /*#__PURE__*/_react.default.createElement(_styles3.TabsContainer, null, /*#__PURE__*/_react.default.createElement(_styles3.Tab, {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.XLg, null)))), /*#__PURE__*/_react.default.createElement("p", {
+    className: "message"
+  }, t('STRIPE_AND_TWILIO_CONFIGS_REQUIERED', 'Stripe and Twilio keys are requiered to use this Payment Method')), /*#__PURE__*/_react.default.createElement(_styles3.TabsContainer, null, /*#__PURE__*/_react.default.createElement(_styles3.Tab, {
     active: paymentTabs === 0,
     onClick: function onClick() {
       return handleTabClick(0);
@@ -249,7 +251,9 @@ var PaymentOptionStripeLinkUI = function PaymentOptionStripeLinkUI(props) {
     onChange: function onChange(e) {
       return handleChangeInput(e, true);
     }
-  }), !(configsState !== null && configsState !== void 0 && configsState.loading) && (configsState === null || configsState === void 0 || (_configsState$configs = configsState.configs) === null || _configsState$configs === void 0 ? void 0 : _configsState$configs.filter(function (config) {
+  }), /*#__PURE__*/_react.default.createElement("p", {
+    className: "alert-message"
+  }, t('TWILIO_CONFIGURATION_MESSAGE', '*Enable these options after twilio configuration')), !(configsState !== null && configsState !== void 0 && configsState.loading) && (configsState === null || configsState === void 0 || (_configsState$configs = configsState.configs) === null || _configsState$configs === void 0 ? void 0 : _configsState$configs.filter(function (config) {
     return configsToShow[config === null || config === void 0 ? void 0 : config.key];
   }).map(function (config) {
     var _config$options;
