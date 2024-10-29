@@ -42,7 +42,8 @@ export const OrderContactInformation = (props) => {
     setAddressState,
     setCommentInfostate,
     commentInfoState,
-    addressState
+    addressState,
+    disableSocketRoomDriver
   } = props
 
   const [, t] = useLanguage()
@@ -393,6 +394,7 @@ export const OrderContactInformation = (props) => {
                 isOrderDrivers
                 orderId={order?.id}
                 setCommentInfostate={setCommentInfostate}
+                disableSocketRoomDriver={disableSocketRoomDriver}
               />
             </DriverSelectorContainer>
           )}

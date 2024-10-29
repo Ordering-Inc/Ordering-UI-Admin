@@ -18,7 +18,8 @@ const OrdersHeaderFilterGroupUI = (props) => {
     handleChangeExternalId,
     handleChangeGroup,
     isSelectedOrders,
-    assignableDriverGroupList
+    assignableDriverGroupList,
+    disableSocketRoomDriver
   } = props
 
   const [{ dictionary }] = useLanguage()
@@ -72,6 +73,7 @@ const OrdersHeaderFilterGroupUI = (props) => {
             driversList={driversList}
             filterValues={filterValues}
             handleChangeDriver={handleChangeDriver}
+            disableSocketRoomDriver={disableSocketRoomDriver}
           />
         )}
         {!loading && configFilter.includes('driver_group') && assignableDriverGroupList && (

@@ -55,7 +55,8 @@ const OrdersManagerUI = (props) => {
     isUseQuery,
     disableDriverLocationsSockets,
     detailsOrder,
-    setDetailsOrder
+    setDetailsOrder,
+    disableSocketRoomDriver
   } = props
 
   const [, t] = useLanguage()
@@ -200,6 +201,7 @@ const OrdersManagerUI = (props) => {
           setSlaSettingTime={setSlaSettingTime}
           isLateralBar={isLateralBar}
           disableDriverLocationsSockets={disableDriverLocationsSockets}
+          disableSocketRoomDriver={disableSocketRoomDriver}
         />
         <OrderStatusFilterBar
           isUseQuery={isUseQuery}
@@ -265,6 +267,7 @@ const OrdersManagerUI = (props) => {
                 ordersAmountByStatus={ordersAmountByStatus}
                 setOrdersAmountByStatus={setOrdersAmountByStatus}
                 franchisesList={props.franchisesList}
+                disableSocketRoomDriver={disableSocketRoomDriver}
               />
             </WrapItemView>
           </OrdersInnerContent>
@@ -285,6 +288,7 @@ const OrdersManagerUI = (props) => {
           setIsTourFlag={setIsTourFlag}
           setIsTourOpen={setIsTourOpen}
           drivers={driversList.drivers}
+          disableSocketRoomDriver={disableSocketRoomDriver}
         />
       )}
 
