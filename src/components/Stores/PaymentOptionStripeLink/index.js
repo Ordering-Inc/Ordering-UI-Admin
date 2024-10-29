@@ -103,9 +103,9 @@ const PaymentOptionStripeLinkUI = (props) => {
   useEffect(() => {
     if (isMenuOpen) {
       if (width < 1000) {
-        document.getElementById('stripe_direct').style.width = '100%'
+        document.getElementById('stripe_link').style.width = '100%'
       } else {
-        document.getElementById('stripe_direct').style.width = '500px'
+        document.getElementById('stripe_link').style.width = '500px'
       }
     }
   }, [width])
@@ -154,7 +154,7 @@ const PaymentOptionStripeLinkUI = (props) => {
 
   return (
     <>
-      <Container id='stripe_direct'>
+      <Container id='stripe_link'>
         <Header>
           <h1>{t('STRIPE_LINK', 'Stripe link (Only for callcenter)')}</h1>
           <ActionSelectorWrapper>
@@ -179,7 +179,7 @@ const PaymentOptionStripeLinkUI = (props) => {
             </IconButton>
           </CloseButton>
         </Header>
-
+        <p className='message'>{t('STRIPE_AND_TWILIO_CONFIGS_REQUIERED', 'Stripe and Twilio keys are requiered to use this Payment Method')}</p>
         <TabsContainer>
           <Tab
             active={paymentTabs === 0}
@@ -256,6 +256,7 @@ const PaymentOptionStripeLinkUI = (props) => {
               placeholder={`${t('SECRECT_KEY', 'Secret key')} (${t('SANDBOX', 'Sandbox')})`}
               onChange={e => handleChangeInput(e, true)}
             />
+            <p className='alert-message'>{t('TWILIO_CONFIGURATION_MESSAGE', '*Enable these options after twilio configuration')}</p>
             {!configsState?.loading && configsState?.configs?.filter(config => configsToShow[config?.key]).map(config => {
               const options = config?.options?.map(item => {
                 return { value: item.value, content: <Option>{t(item.text.toUpperCase())}</Option> }
