@@ -232,6 +232,7 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OrdersListContainer, {
     isSelectedOrders: isSelectedOrders
   }, /*#__PURE__*/_react.default.createElement(_OrdersContentHeader.OrdersContentHeader, {
+    disableSocketRoomDriver: true,
     isDisableTitle: isSelectedOrders,
     isDisableControl: isSelectedOrders,
     title: t('ORDER_MANAGER', 'Orders manager'),
@@ -257,6 +258,7 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     setSlaSettingTime: setSlaSettingTime
   }), /*#__PURE__*/_react.default.createElement(_styles.MainContentContainer, null, /*#__PURE__*/_react.default.createElement(_styles.TopContent, null, /*#__PURE__*/_react.default.createElement(_styles.DriversContainer, null, /*#__PURE__*/_react.default.createElement(_DriversManager.DriversManager, {
     disableSocketRoomDriver: true,
+    disableDriverLocationsSockets: true,
     showCompressedInfo: true,
     filterValues: filterValues,
     driverGroupList: driverGroupList,

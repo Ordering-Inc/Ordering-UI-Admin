@@ -35,7 +35,8 @@ var OrdersHeaderFilterGroupUI = function OrdersHeaderFilterGroupUI(props) {
     handleChangeExternalId = props.handleChangeExternalId,
     handleChangeGroup = props.handleChangeGroup,
     isSelectedOrders = props.isSelectedOrders,
-    assignableDriverGroupList = props.assignableDriverGroupList;
+    assignableDriverGroupList = props.assignableDriverGroupList,
+    disableSocketRoomDriver = props.disableSocketRoomDriver;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 1),
     dictionary = _useLanguage2[0].dictionary;
@@ -102,7 +103,8 @@ var OrdersHeaderFilterGroupUI = function OrdersHeaderFilterGroupUI(props) {
     useDriversByProps: true,
     driversList: driversList,
     filterValues: filterValues,
-    handleChangeDriver: handleChangeDriver
+    handleChangeDriver: handleChangeDriver,
+    disableSocketRoomDriver: disableSocketRoomDriver
   }), !loading && configFilter.includes('driver_group') && assignableDriverGroupList && /*#__PURE__*/_react.default.createElement(_DriversGroupTypeSelector.DriversGroupTypeSelector, {
     driverGroupList: assignableDriverGroupList,
     handleChangeGroup: handleChangeGroup,

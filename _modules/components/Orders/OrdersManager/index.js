@@ -65,7 +65,8 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     isUseQuery = props.isUseQuery,
     disableDriverLocationsSockets = props.disableDriverLocationsSockets,
     detailsOrder = props.detailsOrder,
-    setDetailsOrder = props.setDetailsOrder;
+    setDetailsOrder = props.setDetailsOrder,
+    disableSocketRoomDriver = props.disableSocketRoomDriver;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -234,7 +235,8 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     setTimeStatus: setTimeStatus,
     setSlaSettingTime: setSlaSettingTime,
     isLateralBar: isLateralBar,
-    disableDriverLocationsSockets: disableDriverLocationsSockets
+    disableDriverLocationsSockets: disableDriverLocationsSockets,
+    disableSocketRoomDriver: disableSocketRoomDriver
   }), /*#__PURE__*/_react.default.createElement(_OrderStatusFilterBar.OrderStatusFilterBar, {
     isUseQuery: isUseQuery,
     selectedOrderStatus: ordersStatusGroup,
@@ -290,7 +292,8 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     setAllowColumns: setAllowColumns,
     ordersAmountByStatus: ordersAmountByStatus,
     setOrdersAmountByStatus: setOrdersAmountByStatus,
-    franchisesList: props.franchisesList
+    franchisesList: props.franchisesList,
+    disableSocketRoomDriver: disableSocketRoomDriver
   }))))), isOpenOrderDetail && /*#__PURE__*/_react.default.createElement(_OrderDetails.OrderDetails, {
     isSelectedOrders: isSelectedOrders,
     open: isOpenOrderDetail,
@@ -305,7 +308,8 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     isTourFlag: isTourFlag,
     setIsTourFlag: setIsTourFlag,
     setIsTourOpen: setIsTourOpen,
-    drivers: driversList.drivers
+    drivers: driversList.drivers,
+    disableSocketRoomDriver: disableSocketRoomDriver
   }), !isSelectedOrders && /*#__PURE__*/_react.default.createElement(_OrderNotification.OrderNotification, {
     customerId: props.customerId
   }), totalSelectedOrder > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperIndicator, null, selectedOrderIds.length, "/", totalSelectedOrder), /*#__PURE__*/_react.default.createElement(_WizardOrders.WizardOrders, {
