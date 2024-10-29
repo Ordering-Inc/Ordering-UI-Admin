@@ -196,6 +196,7 @@ const OrdersManagerUI = (props) => {
         isSelectedOrders={isSelectedOrders}
       >
         <OrdersContentHeader
+          disableSocketRoomDriver
           isDisableTitle={isSelectedOrders}
           isDisableControl={isSelectedOrders}
           title={t('ORDER_MANAGER', 'Orders manager')}
@@ -224,6 +225,7 @@ const OrdersManagerUI = (props) => {
             <DriversContainer>
               <DriversManager
                 disableSocketRoomDriver
+                disableDriverLocationsSockets
                 showCompressedInfo
                 filterValues={filterValues}
                 driverGroupList={driverGroupList}
