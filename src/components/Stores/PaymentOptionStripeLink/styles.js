@@ -11,11 +11,21 @@ export const Container = styled.div`
 
   > button {
     margin-top: 20px;
+    padding: 5px 15px 35px;
     position: sticky;
     top: 100%;
     width: fit-content;
     height: 42px;
-    margin-bottom: 20px;
+  }
+
+  .message {
+    margin: 0px;
+    font-size: 12px;
+  }
+
+  .alert-message {
+    margin: 30px 0 0 0;
+    font-weight: 700;
   }
 
   .select {
