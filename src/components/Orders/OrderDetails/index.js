@@ -78,7 +78,8 @@ const OrderDetailsUI = (props) => {
     handleRefundPaymentsStripe,
     handleOrderRefund,
     isServiceOrder,
-    handleUpdateComment
+    handleUpdateComment,
+    disableSocketRoomDriver
   } = props
 
   const {
@@ -419,6 +420,7 @@ const OrderDetailsUI = (props) => {
           )}
           <div data-tour='tour_driver'>
             <OrderContactInformation
+              disableSocketRoomDriver={disableSocketRoomDriver}
               isServiceOrder={isServiceOrder}
               customerInfoState={customerInfoState}
               handleChangeCustomerInfoState={handleChangeCustomerInfoState}

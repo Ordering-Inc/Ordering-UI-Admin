@@ -13,6 +13,7 @@ import { useWindowSize } from '../../../hooks/useWindowSize'
 import { Modal, SearchBar, Alert } from '../../Shared'
 import { Button } from '../../../styles'
 import { PaymentOptionStripeDirect } from '../PaymentOptionStripeDirect'
+import { PaymentOptionStripeLink } from '../PaymentOptionStripeLink'
 import { PaymentOption } from '../PaymentOption'
 import { PaymethodOptionPaypalExpress } from '../PaymethodOptionPaypalExpress'
 import { PaymethodOptionStripeRedirect } from '../PaymethodOptionStripeRedirect'
@@ -269,6 +270,7 @@ const BusinessPaymentMethodsUI = (props) => {
             <>
               {
                 !['stripe_direct',
+                  'stripe_link',
                   'paypal',
                   'paypal_express',
                   'stripe_redirect',
@@ -349,6 +351,25 @@ const BusinessPaymentMethodsUI = (props) => {
                   handleChangeInput={handleChangeInput}
                   handleSaveClick={handleSaveClick}
                   handleDeletePaymethod={handleDeleteBusinessPaymethodOption}
+                />
+              )}
+              {selectedPaymethodGateway === 'stripe_link' && (
+                <PaymentOptionStripeLink
+                  business={business}
+                  sitesState={sitesState}
+                  open={isEdit}
+                  onClose={() => handleCloseEdit()}
+                  businessPaymethod={selectedBusinessPaymethod}
+                  changesState={changesState}
+                  orderTypes={orderTypes}
+                  handleChangeBusinessPaymentState={handleChangeBusinessPaymentState}
+                  cleanChangesState={cleanChangesState}
+                  actionState={actionState}
+                  handleChangeSandbox={handleChangeSandbox}
+                  handleChangeInput={handleChangeInput}
+                  handleSaveClick={handleSaveClick}
+                  handleDeletePaymethod={handleDeleteBusinessPaymethodOption}
+                  handleSuccessUpdate={handleSuccessUpdate}
                 />
               )}
               {selectedPaymethodGateway === 'paypal' && (
@@ -466,6 +487,7 @@ const BusinessPaymentMethodsUI = (props) => {
               >
                 {
                   !['stripe_direct',
+                    'stripe_link',
                     'paypal',
                     'paypal_express',
                     'stripe_redirect',
@@ -505,6 +527,25 @@ const BusinessPaymentMethodsUI = (props) => {
                     handleChangeInput={handleChangeInput}
                     handleSaveClick={handleSaveClick}
                     handleDeletePaymethod={handleDeleteBusinessPaymethodOption}
+                  />
+                )}
+                {selectedPaymethodGateway === 'stripe_link' && (
+                  <PaymentOptionStripeLink
+                    business={business}
+                    sitesState={sitesState}
+                    open={isEdit}
+                    onClose={() => handleCloseEdit()}
+                    businessPaymethod={selectedBusinessPaymethod}
+                    changesState={changesState}
+                    orderTypes={orderTypes}
+                    handleChangeBusinessPaymentState={handleChangeBusinessPaymentState}
+                    cleanChangesState={cleanChangesState}
+                    actionState={actionState}
+                    handleChangeSandbox={handleChangeSandbox}
+                    handleChangeInput={handleChangeInput}
+                    handleSaveClick={handleSaveClick}
+                    handleDeletePaymethod={handleDeleteBusinessPaymethodOption}
+                    handleSuccessUpdate={handleSuccessUpdate}
                   />
                 )}
                 {selectedPaymethodGateway === 'paypal' && (

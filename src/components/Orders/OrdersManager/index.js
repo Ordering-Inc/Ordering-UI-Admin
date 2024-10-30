@@ -53,7 +53,10 @@ const OrdersManagerUI = (props) => {
     timeStatus,
     setTimeStatus,
     isUseQuery,
-    disableDriverLocationsSockets
+    disableDriverLocationsSockets,
+    detailsOrder,
+    setDetailsOrder,
+    disableSocketRoomDriver
   } = props
 
   const [, t] = useLanguage()
@@ -63,7 +66,6 @@ const OrdersManagerUI = (props) => {
   const query = new URLSearchParams(useLocation().search)
   const [isOpenOrderDetail, setIsOpenOrderDetail] = useState(false)
   const [orderDetailId, setOrderDetailId] = useState(null)
-  const [detailsOrder, setDetailsOrder] = useState(null)
   const [filterModalOpen, setFilterModalOpen] = useState(false)
 
   const [isTourOpen, setIsTourOpen] = useState(false)
@@ -199,6 +201,7 @@ const OrdersManagerUI = (props) => {
           setSlaSettingTime={setSlaSettingTime}
           isLateralBar={isLateralBar}
           disableDriverLocationsSockets={disableDriverLocationsSockets}
+          disableSocketRoomDriver={disableSocketRoomDriver}
         />
         <OrderStatusFilterBar
           isUseQuery={isUseQuery}
@@ -264,6 +267,7 @@ const OrdersManagerUI = (props) => {
                 ordersAmountByStatus={ordersAmountByStatus}
                 setOrdersAmountByStatus={setOrdersAmountByStatus}
                 franchisesList={props.franchisesList}
+                disableSocketRoomDriver={disableSocketRoomDriver}
               />
             </WrapItemView>
           </OrdersInnerContent>
@@ -284,6 +288,7 @@ const OrdersManagerUI = (props) => {
           setIsTourFlag={setIsTourFlag}
           setIsTourOpen={setIsTourOpen}
           drivers={driversList.drivers}
+          disableSocketRoomDriver={disableSocketRoomDriver}
         />
       )}
 

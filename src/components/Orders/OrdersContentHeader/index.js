@@ -44,7 +44,8 @@ export const OrdersContentHeader = (props) => {
     setTimeStatus,
     setSlaSettingTime,
     isShowMapsKeySettingButton,
-    adminsList
+    adminsList,
+    disableSocketRoomDriver
   } = props
 
   const { width } = useWindowSize()
@@ -104,6 +105,7 @@ export const OrdersContentHeader = (props) => {
               searchValue={searchValue}
               handleChangeFilterValues={handleChangeFilterValues}
               handleChangeSearch={handleChangeSearch}
+              disableSocketRoomDriver={disableSocketRoomDriver}
             />
           </WrapperHeaderFilterGroup>
           <WebsocketStatus />
