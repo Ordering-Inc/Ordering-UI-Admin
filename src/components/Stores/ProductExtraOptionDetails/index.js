@@ -315,9 +315,7 @@ const ProductExtraOptionDetailsUI = (props) => {
                         disabled={optionState.loading || isDraggingExtraOption}
                       >
                         {
-                          (changesState?.result?.image && editSubOptionId === null)
-                            ? (<img src={changesState?.result?.image} alt='sub option image' loading='lazy' />)
-                            : (changesState?.changes?.image && editSubOptionId === null) && (<img src={changesState?.changes?.image} alt='sub option image' loading='lazy' />)
+                          (changesState?.changes?.image && editSubOptionId === null) && (<img src={changesState?.changes?.image} alt='sub option image' loading='lazy' />)
                         }
                         <UploadImageIconContainer>
                           <UploadImageIcon small>
