@@ -47,7 +47,8 @@ var OrderContactInformation = exports.OrderContactInformation = function OrderCo
     setAddressState = props.setAddressState,
     setCommentInfostate = props.setCommentInfostate,
     commentInfoState = props.commentInfoState,
-    addressState = props.addressState;
+    addressState = props.addressState,
+    disableSocketRoomDriver = props.disableSocketRoomDriver;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -280,7 +281,8 @@ var OrderContactInformation = exports.OrderContactInformation = function OrderCo
     handleOpenMessages: handleOpenMessages,
     isOrderDrivers: true,
     orderId: order === null || order === void 0 ? void 0 : order.id,
-    setCommentInfostate: setCommentInfostate
+    setCommentInfostate: setCommentInfostate,
+    disableSocketRoomDriver: disableSocketRoomDriver
   })), /*#__PURE__*/_react.default.createElement(_styles2.DriverInfoContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.DriverInfo, null, /*#__PURE__*/_react.default.createElement(_styles2.PhotoWrapper, null, order !== null && order !== void 0 && (_order$driver = order.driver) !== null && _order$driver !== void 0 && _order$driver.photo || order !== null && order !== void 0 && (_order$external_drive = order.external_driver) !== null && _order$external_drive !== void 0 && _order$external_drive.photo ? /*#__PURE__*/_react.default.createElement(_styles2.Photo, {
     bgimage: optimizeImage((order === null || order === void 0 || (_order$driver2 = order.driver) === null || _order$driver2 === void 0 ? void 0 : _order$driver2.photo) || (order === null || order === void 0 || (_order$external_drive2 = order.external_driver) === null || _order$external_drive2 === void 0 ? void 0 : _order$external_drive2.photo), 'h_50,c_limit')
   }) : /*#__PURE__*/_react.default.createElement(_FaUserAlt.default, null)), order.driver_id ? /*#__PURE__*/_react.default.createElement(_styles2.InfoContent, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, order === null || order === void 0 || (_order$driver3 = order.driver) === null || _order$driver3 === void 0 ? void 0 : _order$driver3.name, " ", order === null || order === void 0 || (_order$driver4 = order.driver) === null || _order$driver4 === void 0 ? void 0 : _order$driver4.middle_name, " ", order === null || order === void 0 || (_order$driver5 = order.driver) === null || _order$driver5 === void 0 ? void 0 : _order$driver5.lastname, " ", order === null || order === void 0 || (_order$driver6 = order.driver) === null || _order$driver6 === void 0 ? void 0 : _order$driver6.second_lastname), (order === null || order === void 0 || (_order$driver7 = order.driver) === null || _order$driver7 === void 0 ? void 0 : _order$driver7.cellphone) && /*#__PURE__*/_react.default.createElement(_styles.IconButton, {

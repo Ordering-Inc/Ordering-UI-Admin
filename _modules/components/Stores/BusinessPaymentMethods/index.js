@@ -16,6 +16,7 @@ var _useWindowSize2 = require("../../../hooks/useWindowSize");
 var _Shared = require("../../Shared");
 var _styles = require("../../../styles");
 var _PaymentOptionStripeDirect = require("../PaymentOptionStripeDirect");
+var _PaymentOptionStripeLink = require("../PaymentOptionStripeLink");
 var _PaymentOption = require("../PaymentOption");
 var _PaymethodOptionPaypalExpress = require("../PaymethodOptionPaypalExpress");
 var _PaymethodOptionStripeRedirect = require("../PaymethodOptionStripeRedirect");
@@ -286,7 +287,7 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
     onClick: function onClick() {
       return handleTutorialContinue();
     }
-  }, t('CONTINUE', 'Continue'))), width >= 1000 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isEdit && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !['stripe_direct', 'paypal', 'paypal_express', 'stripe_redirect', 'stripe_connect', 'square', 'credomatic'].concat(methodsPay).includes(selectedPaymethodGateway) && /*#__PURE__*/_react.default.createElement(_PaymentOption.PaymentOption, {
+  }, t('CONTINUE', 'Continue'))), width >= 1000 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isEdit && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !['stripe_direct', 'stripe_link', 'paypal', 'paypal_express', 'stripe_redirect', 'stripe_connect', 'square', 'credomatic'].concat(methodsPay).includes(selectedPaymethodGateway) && /*#__PURE__*/_react.default.createElement(_PaymentOption.PaymentOption, {
     sitesState: sitesState,
     open: isEdit,
     onClose: function onClose() {
@@ -356,6 +357,24 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
     handleChangeInput: handleChangeInput,
     handleSaveClick: handleSaveClick,
     handleDeletePaymethod: handleDeleteBusinessPaymethodOption
+  }), selectedPaymethodGateway === 'stripe_link' && /*#__PURE__*/_react.default.createElement(_PaymentOptionStripeLink.PaymentOptionStripeLink, {
+    business: business,
+    sitesState: sitesState,
+    open: isEdit,
+    onClose: function onClose() {
+      return handleCloseEdit();
+    },
+    businessPaymethod: selectedBusinessPaymethod,
+    changesState: changesState,
+    orderTypes: orderTypes,
+    handleChangeBusinessPaymentState: handleChangeBusinessPaymentState,
+    cleanChangesState: cleanChangesState,
+    actionState: actionState,
+    handleChangeSandbox: handleChangeSandbox,
+    handleChangeInput: handleChangeInput,
+    handleSaveClick: handleSaveClick,
+    handleDeletePaymethod: handleDeleteBusinessPaymethodOption,
+    handleSuccessUpdate: handleSuccessUpdate
   }), selectedPaymethodGateway === 'paypal' && /*#__PURE__*/_react.default.createElement(_PaymentOptionPaypal.PaymentOptionPaypal, {
     open: isEdit,
     sitesState: sitesState,
@@ -457,7 +476,7 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
     onClose: function onClose() {
       return handleCloseEdit();
     }
-  }, !['stripe_direct', 'paypal', 'paypal_express', 'stripe_redirect', 'stripe_connect', 'square', 'credomatic'].includes(selectedPaymethodGateway) && /*#__PURE__*/_react.default.createElement(_PaymentOption.PaymentOption, {
+  }, !['stripe_direct', 'stripe_link', 'paypal', 'paypal_express', 'stripe_redirect', 'stripe_connect', 'square', 'credomatic'].includes(selectedPaymethodGateway) && /*#__PURE__*/_react.default.createElement(_PaymentOption.PaymentOption, {
     sitesState: sitesState,
     open: isEdit,
     onClose: function onClose() {
@@ -489,6 +508,24 @@ var BusinessPaymentMethodsUI = function BusinessPaymentMethodsUI(props) {
     handleChangeInput: handleChangeInput,
     handleSaveClick: handleSaveClick,
     handleDeletePaymethod: handleDeleteBusinessPaymethodOption
+  }), selectedPaymethodGateway === 'stripe_link' && /*#__PURE__*/_react.default.createElement(_PaymentOptionStripeLink.PaymentOptionStripeLink, {
+    business: business,
+    sitesState: sitesState,
+    open: isEdit,
+    onClose: function onClose() {
+      return handleCloseEdit();
+    },
+    businessPaymethod: selectedBusinessPaymethod,
+    changesState: changesState,
+    orderTypes: orderTypes,
+    handleChangeBusinessPaymentState: handleChangeBusinessPaymentState,
+    cleanChangesState: cleanChangesState,
+    actionState: actionState,
+    handleChangeSandbox: handleChangeSandbox,
+    handleChangeInput: handleChangeInput,
+    handleSaveClick: handleSaveClick,
+    handleDeletePaymethod: handleDeleteBusinessPaymethodOption,
+    handleSuccessUpdate: handleSuccessUpdate
   }), selectedPaymethodGateway === 'paypal' && /*#__PURE__*/_react.default.createElement(_PaymentOptionPaypal.PaymentOptionPaypal, {
     open: isEdit,
     sitesState: sitesState,

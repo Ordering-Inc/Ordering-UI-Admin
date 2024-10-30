@@ -1695,6 +1695,12 @@ Object.defineProperty(exports, "PaymentOptionStripeDirect", {
     return _Stores.PaymentOptionStripeDirect;
   }
 });
+Object.defineProperty(exports, "PaymentOptionStripeLink", {
+  enumerable: true,
+  get: function get() {
+    return _Stores.PaymentOptionStripeLink;
+  }
+});
 Object.defineProperty(exports, "PaymethodOptionPaypalExpress", {
   enumerable: true,
   get: function get() {

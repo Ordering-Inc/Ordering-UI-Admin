@@ -48,7 +48,9 @@ var DeliveriesManagerUI = function DeliveriesManagerUI(props) {
     setTimeStatus = props.setTimeStatus,
     isUseQuery = props.isUseQuery,
     adminsList = props.adminsList,
-    assignableDriverGroupList = props.assignableDriverGroupList;
+    assignableDriverGroupList = props.assignableDriverGroupList,
+    detailsOrder = props.detailsOrder,
+    setDetailsOrder = props.setDetailsOrder;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -61,27 +63,23 @@ var DeliveriesManagerUI = function DeliveriesManagerUI(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     orderDetailId = _useState4[0],
     setOrderDetailId = _useState4[1];
-  var _useState5 = (0, _react.useState)(null),
+  var _useState5 = (0, _react.useState)(false),
     _useState6 = _slicedToArray(_useState5, 2),
-    detailsOrder = _useState6[0],
-    setDetailsOrder = _useState6[1];
-  var _useState7 = (0, _react.useState)(false),
+    filterModalOpen = _useState6[0],
+    setFilterModalOpen = _useState6[1];
+  var _useState7 = (0, _react.useState)(60000),
     _useState8 = _slicedToArray(_useState7, 2),
-    filterModalOpen = _useState8[0],
-    setFilterModalOpen = _useState8[1];
-  var _useState9 = (0, _react.useState)(60000),
-    _useState10 = _slicedToArray(_useState9, 2),
-    slaSettingTime = _useState10[0],
-    setSlaSettingTime = _useState10[1];
-  var _useState11 = (0, _react.useState)({
+    slaSettingTime = _useState8[0],
+    setSlaSettingTime = _useState8[1];
+  var _useState9 = (0, _react.useState)({
       pending: null,
       inProgress: null,
       completed: null,
       cancelled: null
     }),
-    _useState12 = _slicedToArray(_useState11, 2),
-    ordersAmountByStatus = _useState12[0],
-    setOrdersAmountByStatus = _useState12[1];
+    _useState10 = _slicedToArray(_useState9, 2),
+    ordersAmountByStatus = _useState10[0],
+    setOrdersAmountByStatus = _useState10[1];
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configState = _useConfig2[0];

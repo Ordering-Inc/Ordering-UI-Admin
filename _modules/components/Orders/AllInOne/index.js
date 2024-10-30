@@ -65,7 +65,9 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     adminsList = props.adminsList,
     assignableDriverGroupList = props.assignableDriverGroupList,
     mapsData = props.mapsData,
-    setMapsData = props.setMapsData;
+    setMapsData = props.setMapsData,
+    detailsOrder = props.detailsOrder,
+    setDetailsOrder = props.setDetailsOrder;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -87,62 +89,58 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     orderDetailId = _useState4[0],
     setOrderDetailId = _useState4[1];
-  var _useState5 = (0, _react.useState)(null),
+  var _useState5 = (0, _react.useState)(false),
     _useState6 = _slicedToArray(_useState5, 2),
-    detailsOrder = _useState6[0],
-    setDetailsOrder = _useState6[1];
-  var _useState7 = (0, _react.useState)(false),
-    _useState8 = _slicedToArray(_useState7, 2),
-    filterModalOpen = _useState8[0],
-    setFilterModalOpen = _useState8[1];
-  var _useState9 = (0, _react.useState)({
+    filterModalOpen = _useState6[0],
+    setFilterModalOpen = _useState6[1];
+  var _useState7 = (0, _react.useState)({
       loading: false,
       error: null,
       orders: []
     }),
+    _useState8 = _slicedToArray(_useState7, 2),
+    assignedOrders = _useState8[0],
+    setAssignedOrders = _useState8[1];
+  var _useState9 = (0, _react.useState)(false),
     _useState10 = _slicedToArray(_useState9, 2),
-    assignedOrders = _useState10[0],
-    setAssignedOrders = _useState10[1];
-  var _useState11 = (0, _react.useState)(false),
+    isTourOpen = _useState10[0],
+    setIsTourOpen = _useState10[1];
+  var _useState11 = (0, _react.useState)(0),
     _useState12 = _slicedToArray(_useState11, 2),
-    isTourOpen = _useState12[0],
-    setIsTourOpen = _useState12[1];
-  var _useState13 = (0, _react.useState)(0),
+    currentTourStep = _useState12[0],
+    setCurrentTourStep = _useState12[1];
+  var _useState13 = (0, _react.useState)(false),
     _useState14 = _slicedToArray(_useState13, 2),
-    currentTourStep = _useState14[0],
-    setCurrentTourStep = _useState14[1];
-  var _useState15 = (0, _react.useState)(false),
-    _useState16 = _slicedToArray(_useState15, 2),
-    isTourFlag = _useState16[0],
-    setIsTourFlag = _useState16[1];
-  var _useState17 = (0, _react.useState)({
+    isTourFlag = _useState14[0],
+    setIsTourFlag = _useState14[1];
+  var _useState15 = (0, _react.useState)({
       open: false,
       content: []
     }),
+    _useState16 = _slicedToArray(_useState15, 2),
+    alertState = _useState16[0],
+    setAlertState = _useState16[1];
+  var _useState17 = (0, _react.useState)(null),
     _useState18 = _slicedToArray(_useState17, 2),
-    alertState = _useState18[0],
-    setAlertState = _useState18[1];
-  var _useState19 = (0, _react.useState)(null),
+    timeStatus = _useState18[0],
+    setTimeStatus = _useState18[1];
+  var _useState19 = (0, _react.useState)(60000),
     _useState20 = _slicedToArray(_useState19, 2),
-    timeStatus = _useState20[0],
-    setTimeStatus = _useState20[1];
-  var _useState21 = (0, _react.useState)(60000),
+    slaSettingTime = _useState20[0],
+    setSlaSettingTime = _useState20[1];
+  var _useState21 = (0, _react.useState)(0),
     _useState22 = _slicedToArray(_useState21, 2),
-    slaSettingTime = _useState22[0],
-    setSlaSettingTime = _useState22[1];
-  var _useState23 = (0, _react.useState)(0),
-    _useState24 = _slicedToArray(_useState23, 2),
-    totalSelectedOrder = _useState24[0],
-    setTotalSelectedOrder = _useState24[1];
-  var _useState25 = (0, _react.useState)({
+    totalSelectedOrder = _useState22[0],
+    setTotalSelectedOrder = _useState22[1];
+  var _useState23 = (0, _react.useState)({
       pending: null,
       inProgress: null,
       completed: null,
       cancelled: null
     }),
-    _useState26 = _slicedToArray(_useState25, 2),
-    ordersAmountByStatus = _useState26[0],
-    setOrdersAmountByStatus = _useState26[1];
+    _useState24 = _slicedToArray(_useState23, 2),
+    ordersAmountByStatus = _useState24[0],
+    setOrdersAmountByStatus = _useState24[1];
   var handleBackRedirect = function handleBackRedirect() {
     setIsOpenOrderDetail(false);
     setDetailsOrder(null);
@@ -234,6 +232,7 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OrdersListContainer, {
     isSelectedOrders: isSelectedOrders
   }, /*#__PURE__*/_react.default.createElement(_OrdersContentHeader.OrdersContentHeader, {
+    disableSocketRoomDriver: true,
     isDisableTitle: isSelectedOrders,
     isDisableControl: isSelectedOrders,
     title: t('ORDER_MANAGER', 'Orders manager'),
@@ -259,6 +258,7 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     setSlaSettingTime: setSlaSettingTime
   }), /*#__PURE__*/_react.default.createElement(_styles.MainContentContainer, null, /*#__PURE__*/_react.default.createElement(_styles.TopContent, null, /*#__PURE__*/_react.default.createElement(_styles.DriversContainer, null, /*#__PURE__*/_react.default.createElement(_DriversManager.DriversManager, {
     disableSocketRoomDriver: true,
+    disableDriverLocationsSockets: true,
     showCompressedInfo: true,
     filterValues: filterValues,
     driverGroupList: driverGroupList,

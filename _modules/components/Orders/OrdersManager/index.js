@@ -63,7 +63,10 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     timeStatus = props.timeStatus,
     setTimeStatus = props.setTimeStatus,
     isUseQuery = props.isUseQuery,
-    disableDriverLocationsSockets = props.disableDriverLocationsSockets;
+    disableDriverLocationsSockets = props.disableDriverLocationsSockets,
+    detailsOrder = props.detailsOrder,
+    setDetailsOrder = props.setDetailsOrder,
+    disableSocketRoomDriver = props.disableSocketRoomDriver;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -82,50 +85,46 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     orderDetailId = _useState4[0],
     setOrderDetailId = _useState4[1];
-  var _useState5 = (0, _react.useState)(null),
+  var _useState5 = (0, _react.useState)(false),
     _useState6 = _slicedToArray(_useState5, 2),
-    detailsOrder = _useState6[0],
-    setDetailsOrder = _useState6[1];
+    filterModalOpen = _useState6[0],
+    setFilterModalOpen = _useState6[1];
   var _useState7 = (0, _react.useState)(false),
     _useState8 = _slicedToArray(_useState7, 2),
-    filterModalOpen = _useState8[0],
-    setFilterModalOpen = _useState8[1];
-  var _useState9 = (0, _react.useState)(false),
+    isTourOpen = _useState8[0],
+    setIsTourOpen = _useState8[1];
+  var _useState9 = (0, _react.useState)(0),
     _useState10 = _slicedToArray(_useState9, 2),
-    isTourOpen = _useState10[0],
-    setIsTourOpen = _useState10[1];
-  var _useState11 = (0, _react.useState)(0),
+    currentTourStep = _useState10[0],
+    setCurrentTourStep = _useState10[1];
+  var _useState11 = (0, _react.useState)(false),
     _useState12 = _slicedToArray(_useState11, 2),
-    currentTourStep = _useState12[0],
-    setCurrentTourStep = _useState12[1];
-  var _useState13 = (0, _react.useState)(false),
-    _useState14 = _slicedToArray(_useState13, 2),
-    isTourFlag = _useState14[0],
-    setIsTourFlag = _useState14[1];
-  var _useState15 = (0, _react.useState)({
+    isTourFlag = _useState12[0],
+    setIsTourFlag = _useState12[1];
+  var _useState13 = (0, _react.useState)({
       open: false,
       content: []
     }),
+    _useState14 = _slicedToArray(_useState13, 2),
+    alertState = _useState14[0],
+    setAlertState = _useState14[1];
+  var _useState15 = (0, _react.useState)(60000),
     _useState16 = _slicedToArray(_useState15, 2),
-    alertState = _useState16[0],
-    setAlertState = _useState16[1];
-  var _useState17 = (0, _react.useState)(60000),
-    _useState18 = _slicedToArray(_useState17, 2),
-    slaSettingTime = _useState18[0],
-    setSlaSettingTime = _useState18[1];
-  var _useState19 = (0, _react.useState)({
+    slaSettingTime = _useState16[0],
+    setSlaSettingTime = _useState16[1];
+  var _useState17 = (0, _react.useState)({
       pending: null,
       inProgress: null,
       completed: null,
       cancelled: null
     }),
+    _useState18 = _slicedToArray(_useState17, 2),
+    ordersAmountByStatus = _useState18[0],
+    setOrdersAmountByStatus = _useState18[1];
+  var _useState19 = (0, _react.useState)(0),
     _useState20 = _slicedToArray(_useState19, 2),
-    ordersAmountByStatus = _useState20[0],
-    setOrdersAmountByStatus = _useState20[1];
-  var _useState21 = (0, _react.useState)(0),
-    _useState22 = _slicedToArray(_useState21, 2),
-    totalSelectedOrder = _useState22[0],
-    setTotalSelectedOrder = _useState22[1];
+    totalSelectedOrder = _useState20[0],
+    setTotalSelectedOrder = _useState20[1];
   var handleBackRedirect = function handleBackRedirect() {
     setIsOpenOrderDetail(false);
     setDetailsOrder(null);
@@ -236,7 +235,8 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     setTimeStatus: setTimeStatus,
     setSlaSettingTime: setSlaSettingTime,
     isLateralBar: isLateralBar,
-    disableDriverLocationsSockets: disableDriverLocationsSockets
+    disableDriverLocationsSockets: disableDriverLocationsSockets,
+    disableSocketRoomDriver: disableSocketRoomDriver
   }), /*#__PURE__*/_react.default.createElement(_OrderStatusFilterBar.OrderStatusFilterBar, {
     isUseQuery: isUseQuery,
     selectedOrderStatus: ordersStatusGroup,
@@ -292,7 +292,8 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     setAllowColumns: setAllowColumns,
     ordersAmountByStatus: ordersAmountByStatus,
     setOrdersAmountByStatus: setOrdersAmountByStatus,
-    franchisesList: props.franchisesList
+    franchisesList: props.franchisesList,
+    disableSocketRoomDriver: disableSocketRoomDriver
   }))))), isOpenOrderDetail && /*#__PURE__*/_react.default.createElement(_OrderDetails.OrderDetails, {
     isSelectedOrders: isSelectedOrders,
     open: isOpenOrderDetail,
@@ -307,7 +308,8 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     isTourFlag: isTourFlag,
     setIsTourFlag: setIsTourFlag,
     setIsTourOpen: setIsTourOpen,
-    drivers: driversList.drivers
+    drivers: driversList.drivers,
+    disableSocketRoomDriver: disableSocketRoomDriver
   }), !isSelectedOrders && /*#__PURE__*/_react.default.createElement(_OrderNotification.OrderNotification, {
     customerId: props.customerId
   }), totalSelectedOrder > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperIndicator, null, selectedOrderIds.length, "/", totalSelectedOrder), /*#__PURE__*/_react.default.createElement(_WizardOrders.WizardOrders, {
