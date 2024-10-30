@@ -308,7 +308,7 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
     name: "image",
     control: control,
     render: function render() {
-      var _changesState$result, _changesState$result2, _changesState$changes, _changesState$changes2;
+      var _changesState$changes, _changesState$changes2;
       return /*#__PURE__*/_react.default.createElement(_styles2.SubOptionImage, {
         onClick: function onClick() {
           return handleClickSubOptionImage('add_suboption_image');
@@ -326,11 +326,7 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
         },
         accept: "image/png, image/jpeg, image/jpg",
         disabled: optionState.loading || isDraggingExtraOption
-      }, changesState !== null && changesState !== void 0 && (_changesState$result = changesState.result) !== null && _changesState$result !== void 0 && _changesState$result.image && editSubOptionId === null ? /*#__PURE__*/_react.default.createElement("img", {
-        src: changesState === null || changesState === void 0 || (_changesState$result2 = changesState.result) === null || _changesState$result2 === void 0 ? void 0 : _changesState$result2.image,
-        alt: "sub option image",
-        loading: "lazy"
-      }) : (changesState === null || changesState === void 0 || (_changesState$changes = changesState.changes) === null || _changesState$changes === void 0 ? void 0 : _changesState$changes.image) && editSubOptionId === null && /*#__PURE__*/_react.default.createElement("img", {
+      }, (changesState === null || changesState === void 0 || (_changesState$changes = changesState.changes) === null || _changesState$changes === void 0 ? void 0 : _changesState$changes.image) && editSubOptionId === null && /*#__PURE__*/_react.default.createElement("img", {
         src: changesState === null || changesState === void 0 || (_changesState$changes2 = changesState.changes) === null || _changesState$changes2 === void 0 ? void 0 : _changesState$changes2.image,
         alt: "sub option image",
         loading: "lazy"
