@@ -45,7 +45,9 @@ export const ProductExtraSuboption = (props) => {
     hanldeDragOver,
     handleDrop,
     handleDragEnd,
-    handleDuplicateSubOption
+    handleDuplicateSubOption,
+    isDraggingExtraOption,
+    setIsDraggingExtraOption
   } = props
 
   const theme = useTheme()
@@ -133,6 +135,15 @@ export const ProductExtraSuboption = (props) => {
     setExternalIdOpen(false)
   }
 
+  const handleDropSubOption = (e, subOption) => {
+    setIsDraggingExtraOption(false)
+    handleDrop(e, subOption)
+  }
+
+  const handleDragStartSubOption = () => {
+    setIsDraggingExtraOption(true)
+  }
+
   useEffect(() => {
     if (Object.keys(errors).length > 0) {
       setAlertState({
@@ -160,8 +171,9 @@ export const ProductExtraSuboption = (props) => {
       onSubmit={handleSubmit(onSubmit)}
       isDragOver={dragoverSubOptionId === subOption.id}
       isBorderBottom={isSubOptionsBottom && isLastSubOption}
+      onDragStart={handleDragStartSubOption}
       onDragOver={e => hanldeDragOver(e, subOption, isLastSubOption)}
-      onDrop={e => handleDrop(e, subOption)}
+      onDrop={e => handleDropSubOption(e, subOption)}
       onDragEnd={handleDragEnd}
       className='draggable-suboption'
     >
@@ -186,7 +198,7 @@ export const ProductExtraSuboption = (props) => {
             <DragAndDrop
               onDrop={dataTransfer => handleSubOptionFiles(dataTransfer.files, subOption.id)}
               accept='image/png, image/jpeg, image/jpg'
-              disabled={optionState.loading}
+              disabled={optionState.loading || isDraggingExtraOption}
             >
               {
                 (changesState?.result?.image && editSubOptionId === subOption.id)

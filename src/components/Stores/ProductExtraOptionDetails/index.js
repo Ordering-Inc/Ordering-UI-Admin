@@ -94,6 +94,7 @@ const ProductExtraOptionDetailsUI = (props) => {
   const [cropState, setCropState] = useState({ name: null, data: null, open: false })
   const [externalId, setExternalId] = useState()
   const [isExtraOptionSnooze, setIsExtraOptionSnooze] = useState(false)
+  const [isDraggingExtraOption, setIsDraggingExtraOption] = useState(false)
 
   const handleClickSubOptionImage = (id) => {
     document.getElementById(id).click()
@@ -286,6 +287,8 @@ const ProductExtraOptionDetailsUI = (props) => {
               handleDrop={handleDrop}
               handleDragEnd={handleDragEnd}
               handleDuplicateSubOption={handleDuplicateSubOption}
+              isDraggingExtraOption={isDraggingExtraOption}
+              setIsDraggingExtraOption={setIsDraggingExtraOption}
             />
           )
         })}
@@ -309,12 +312,10 @@ const ProductExtraOptionDetailsUI = (props) => {
                       <DragAndDrop
                         onDrop={dataTransfer => handleSubOptionFiles(dataTransfer.files, 'add_suboption_image')}
                         accept='image/png, image/jpeg, image/jpg'
-                        disabled={optionState.loading}
+                        disabled={optionState.loading || isDraggingExtraOption}
                       >
                         {
-                          (changesState?.result?.image && editSubOptionId === null)
-                            ? (<img src={changesState?.result?.image} alt='sub option image' loading='lazy' />)
-                            : (changesState?.changes?.image && editSubOptionId === null) && (<img src={changesState?.changes?.image} alt='sub option image' loading='lazy' />)
+                          (changesState?.changes?.image && editSubOptionId === null) && (<img src={changesState?.changes?.image} alt='sub option image' loading='lazy' />)
                         }
                         <UploadImageIconContainer>
                           <UploadImageIcon small>
