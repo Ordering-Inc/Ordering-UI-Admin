@@ -52,7 +52,9 @@ var ProductExtraSuboption = exports.ProductExtraSuboption = function ProductExtr
     hanldeDragOver = props.hanldeDragOver,
     handleDrop = props.handleDrop,
     handleDragEnd = props.handleDragEnd,
-    handleDuplicateSubOption = props.handleDuplicateSubOption;
+    handleDuplicateSubOption = props.handleDuplicateSubOption,
+    isDraggingExtraOption = props.isDraggingExtraOption,
+    setIsDraggingExtraOption = props.setIsDraggingExtraOption;
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -177,6 +179,13 @@ var ProductExtraSuboption = exports.ProductExtraSuboption = function ProductExtr
     });
     setExternalIdOpen(false);
   };
+  var handleDropSubOption = function handleDropSubOption(e, subOption) {
+    setIsDraggingExtraOption(false);
+    handleDrop(e, subOption);
+  };
+  var handleDragStartSubOption = function handleDragStartSubOption() {
+    setIsDraggingExtraOption(true);
+  };
   (0, _react.useEffect)(function () {
     if (Object.keys(errors).length > 0) {
       setAlertState({
@@ -202,11 +211,12 @@ var ProductExtraSuboption = exports.ProductExtraSuboption = function ProductExtr
     onSubmit: handleSubmit(onSubmit),
     isDragOver: dragoverSubOptionId === subOption.id,
     isBorderBottom: isSubOptionsBottom && isLastSubOption,
+    onDragStart: handleDragStartSubOption,
     onDragOver: function onDragOver(e) {
       return hanldeDragOver(e, subOption, isLastSubOption);
     },
     onDrop: function onDrop(e) {
-      return handleDrop(e, subOption);
+      return handleDropSubOption(e, subOption);
     },
     onDragEnd: handleDragEnd,
     className: "draggable-suboption"
@@ -233,7 +243,7 @@ var ProductExtraSuboption = exports.ProductExtraSuboption = function ProductExtr
       return handleSubOptionFiles(dataTransfer.files, subOption.id);
     },
     accept: "image/png, image/jpeg, image/jpg",
-    disabled: optionState.loading
+    disabled: optionState.loading || isDraggingExtraOption
   }, changesState !== null && changesState !== void 0 && (_changesState$result = changesState.result) !== null && _changesState$result !== void 0 && _changesState$result.image && editSubOptionId === subOption.id ? /*#__PURE__*/_react.default.createElement("img", {
     src: changesState === null || changesState === void 0 || (_changesState$result2 = changesState.result) === null || _changesState$result2 === void 0 ? void 0 : _changesState$result2.image,
     alt: "sub option image",

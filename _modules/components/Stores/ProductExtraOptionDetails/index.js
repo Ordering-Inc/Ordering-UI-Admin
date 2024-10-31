@@ -124,6 +124,10 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
     _useState14 = _slicedToArray(_useState13, 2),
     isExtraOptionSnooze = _useState14[0],
     setIsExtraOptionSnooze = _useState14[1];
+  var _useState15 = (0, _react.useState)(false),
+    _useState16 = _slicedToArray(_useState15, 2),
+    isDraggingExtraOption = _useState16[0],
+    setIsDraggingExtraOption = _useState16[1];
   var handleClickSubOptionImage = function handleClickSubOptionImage(id) {
     document.getElementById(id).click();
   };
@@ -292,7 +296,9 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
       hanldeDragOver: hanldeDragOver,
       handleDrop: handleDrop,
       handleDragEnd: handleDragEnd,
-      handleDuplicateSubOption: handleDuplicateSubOption
+      handleDuplicateSubOption: handleDuplicateSubOption,
+      isDraggingExtraOption: isDraggingExtraOption,
+      setIsDraggingExtraOption: setIsDraggingExtraOption
     });
   }), isAddForm && /*#__PURE__*/_react.default.createElement(_styles2.AdddSubOptionForm, {
     onSubmit: handleSubmit(handleAddOption)
@@ -302,7 +308,7 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
     name: "image",
     control: control,
     render: function render() {
-      var _changesState$result, _changesState$result2, _changesState$changes, _changesState$changes2;
+      var _changesState$changes, _changesState$changes2;
       return /*#__PURE__*/_react.default.createElement(_styles2.SubOptionImage, {
         onClick: function onClick() {
           return handleClickSubOptionImage('add_suboption_image');
@@ -319,12 +325,8 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
           return handleSubOptionFiles(dataTransfer.files, 'add_suboption_image');
         },
         accept: "image/png, image/jpeg, image/jpg",
-        disabled: optionState.loading
-      }, changesState !== null && changesState !== void 0 && (_changesState$result = changesState.result) !== null && _changesState$result !== void 0 && _changesState$result.image && editSubOptionId === null ? /*#__PURE__*/_react.default.createElement("img", {
-        src: changesState === null || changesState === void 0 || (_changesState$result2 = changesState.result) === null || _changesState$result2 === void 0 ? void 0 : _changesState$result2.image,
-        alt: "sub option image",
-        loading: "lazy"
-      }) : (changesState === null || changesState === void 0 || (_changesState$changes = changesState.changes) === null || _changesState$changes === void 0 ? void 0 : _changesState$changes.image) && editSubOptionId === null && /*#__PURE__*/_react.default.createElement("img", {
+        disabled: optionState.loading || isDraggingExtraOption
+      }, (changesState === null || changesState === void 0 || (_changesState$changes = changesState.changes) === null || _changesState$changes === void 0 ? void 0 : _changesState$changes.image) && editSubOptionId === null && /*#__PURE__*/_react.default.createElement("img", {
         src: changesState === null || changesState === void 0 || (_changesState$changes2 = changesState.changes) === null || _changesState$changes2 === void 0 ? void 0 : _changesState$changes2.image,
         alt: "sub option image",
         loading: "lazy"
