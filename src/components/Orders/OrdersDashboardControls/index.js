@@ -1,5 +1,5 @@
 import React from 'react'
-import { useSession } from 'ordering-components-admin'
+import { useConfig, useSession } from 'ordering-components-admin'
 import { OrderStatusTypeSelector } from '../OrderStatusTypeSelector'
 import { OrdersExportCSV } from '../OrdersExportCSV'
 import { OrderDelete } from '../OrderDelete'
@@ -24,6 +24,7 @@ export const OrdersDashboardControls = (props) => {
   } = props
 
   const [{ user }] = useSession()
+  const [{ configs }] = useConfig()
 
   return (
     <>
@@ -43,18 +44,20 @@ export const OrdersDashboardControls = (props) => {
                   handleDeleteMultiOrders={handleDeleteMultiOrders}
                 />
               )}
-              <WrapOrderStatusTypeSelector>
-                <OrderStatusTypeSelector
-                  orderControl
-                  isFirstSelect
-                  noPadding
-                  mutiOrdersChange
-                  noSelected
-                  defaultValue='default'
-                  type='primary'
-                  handleChangeMultiOrdersStatus={handleChangeMultiOrdersStatus}
-                />
-              </WrapOrderStatusTypeSelector>
+              {(user?.level !== 5 || configs?.allow_driver_manager_batch_update_order_status?.value === '1') && (
+                <WrapOrderStatusTypeSelector>
+                  <OrderStatusTypeSelector
+                    orderControl
+                    isFirstSelect
+                    noPadding
+                    mutiOrdersChange
+                    noSelected
+                    defaultValue='default'
+                    type='primary'
+                    handleChangeMultiOrdersStatus={handleChangeMultiOrdersStatus}
+                  />
+                </WrapOrderStatusTypeSelector>
+              )}
             </>
           )}
         </InnerContnet>
