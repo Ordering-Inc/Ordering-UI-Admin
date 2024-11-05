@@ -19,6 +19,7 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 var OrdersDashboardControls = exports.OrdersDashboardControls = function OrdersDashboardControls(props) {
+  var _configs$allow_driver;
   var selectedOrderNumber = props.selectedOrderNumber,
     filterValues = props.filterValues,
     handleDeleteMultiOrders = props.handleDeleteMultiOrders,
@@ -31,6 +32,9 @@ var OrdersDashboardControls = exports.OrdersDashboardControls = function OrdersD
   var _useSession = (0, _orderingComponentsAdmin.useSession)(),
     _useSession2 = _slicedToArray(_useSession, 1),
     user = _useSession2[0].user;
+  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configs = _useConfig2[0].configs;
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles.OrderDashboardControlsContainer, null, /*#__PURE__*/_react.default.createElement(_styles.InnerContnet, null, /*#__PURE__*/_react.default.createElement(_CreateCustomOrder.CreateCustomOrder, {
     handleOpenCustomOrderDetail: handleOpenCustomOrderDetail,
     handleOpenOrderDetail: handleOpenOrderDetail
@@ -41,7 +45,7 @@ var OrdersDashboardControls = exports.OrdersDashboardControls = function OrdersD
     franchiseId: franchiseId
   }), selectedOrderNumber > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (user === null || user === void 0 ? void 0 : user.level) !== 5 && /*#__PURE__*/_react.default.createElement(_OrderDelete.OrderDelete, {
     handleDeleteMultiOrders: handleDeleteMultiOrders
-  }), /*#__PURE__*/_react.default.createElement(_styles.WrapOrderStatusTypeSelector, null, /*#__PURE__*/_react.default.createElement(_OrderStatusTypeSelector.OrderStatusTypeSelector, {
+  }), ((user === null || user === void 0 ? void 0 : user.level) !== 5 || (configs === null || configs === void 0 || (_configs$allow_driver = configs.allow_driver_manager_batch_update_order_status) === null || _configs$allow_driver === void 0 ? void 0 : _configs$allow_driver.value) === '1') && /*#__PURE__*/_react.default.createElement(_styles.WrapOrderStatusTypeSelector, null, /*#__PURE__*/_react.default.createElement(_OrderStatusTypeSelector.OrderStatusTypeSelector, {
     orderControl: true,
     isFirstSelect: true,
     noPadding: true,
