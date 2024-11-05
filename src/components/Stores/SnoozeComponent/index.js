@@ -154,10 +154,6 @@ export const SnoozeComponent = (props) => {
       content: t('SNOOZE_TWELVE_HOUR', '12H')
     },
     {
-      value: 'indefinitely',
-      content: t('SNOOZE_INDEFINITELY', 'Indefinitely')
-    },
-    {
       value: 'or',
       content: t('SNOOZE_OR', 'or')
     },
