@@ -85,7 +85,7 @@ var DriversGroupsListingDetailsUI = function DriversGroupsListingDetailsUI(props
     }
   }, [(_history$location2 = history.location) === null || _history$location2 === void 0 || (_history$location2 = _history$location2.state) === null || _history$location2 === void 0 ? void 0 : _history$location2.isFromTourDriversGroup]);
   var getDataFromStorage = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+    var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       var value;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {

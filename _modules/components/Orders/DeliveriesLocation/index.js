@@ -193,7 +193,7 @@ var DeliveriesLocation = exports.DeliveriesLocation = function DeliveriesLocatio
   (0, _react.useEffect)(function () {
     if (!interActionMapOrder || interActionMapOrder !== null && interActionMapOrder !== void 0 && interActionMapOrder.driver) return;
     var getControls = /*#__PURE__*/function () {
-      var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(order) {
+      var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(order) {
         var _yield$ordering$setAc, _yield$ordering$setAc2, errorResponse, response, error, result, driversControls, _result$drivers;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
@@ -237,7 +237,7 @@ var DeliveriesLocation = exports.DeliveriesLocation = function DeliveriesLocatio
       };
     }();
     var fetchData = /*#__PURE__*/function () {
-      var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+      var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
         var driversControls;
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) switch (_context2.prev = _context2.next) {

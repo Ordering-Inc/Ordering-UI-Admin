@@ -132,7 +132,7 @@ var BannerImageDetailsUI = function BannerImageDetailsUI(props) {
       open: true,
       content: t('QUESTION_DELETE_ITEM', 'Are you sure to delete this _item_?').replace('_item_', t('IMAGE', 'Image')),
       handleOnAccept: function () {
-        var _handleOnAccept = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+        var _handleOnAccept = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
           var _imageState$image;
           return _regeneratorRuntime().wrap(function _callee$(_context) {
             while (1) switch (_context.prev = _context.next) {

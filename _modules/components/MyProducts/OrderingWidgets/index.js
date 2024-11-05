@@ -70,7 +70,7 @@ var OrderingWidgets = exports.OrderingWidgets = function OrderingWidgets() {
     disabled: true
   })), /*#__PURE__*/_react.default.createElement(_styles2.FormGroup, null, /*#__PURE__*/_react.default.createElement("label", null, "3* .htaccess"), /*#__PURE__*/_react.default.createElement(_styles.TextArea, {
     placeholder: t('CODE', 'Code'),
-    defaultValue: "RewriteEngine On\r RewriteRule ^inline/(.+)$ /inline/ [NC,L] #where inline is the folder",
+    defaultValue: "RewriteEngine On RewriteRule ^inline/(.+)$ /inline/ [NC,L] #where inline is the folder",
     disabled: true
   })))));
 };

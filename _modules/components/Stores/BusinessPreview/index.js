@@ -82,7 +82,7 @@ var BusinessPreview = exports.BusinessPreview = function BusinessPreview(props) 
       y: e.clientY
     };
     document.addEventListener('mousemove', mouseMoveHandler);
-    document.addEventListener('mouseup', mouseUpHandler);
+    document.addEventListener('mouseup', _mouseUpHandler);
   };
   var mouseMoveHandler = function mouseMoveHandler(e) {
     var dx = e.clientX - pos.x;
@@ -90,9 +90,9 @@ var BusinessPreview = exports.BusinessPreview = function BusinessPreview(props) 
     ele.scrollTop = pos.top - dy;
     ele.scrollLeft = pos.left - dx;
   };
-  var mouseUpHandler = function mouseUpHandler() {
+  var _mouseUpHandler = function mouseUpHandler() {
     document.removeEventListener('mousemove', mouseMoveHandler);
-    document.removeEventListener('mouseup', mouseUpHandler);
+    document.removeEventListener('mouseup', _mouseUpHandler);
     ele.style.cursor = 'grab';
     ele.style.removeProperty('user-select');
   };

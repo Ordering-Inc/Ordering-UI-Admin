@@ -89,7 +89,7 @@ var BusinessLocation = exports.BusinessLocation = function BusinessLocation(prop
     });
   };
   var getTimeZone = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(address) {
+    var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(address) {
       var _address$location, _address$location2;
       var date, timestamp, timezoneApiKey, url, response, result;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
