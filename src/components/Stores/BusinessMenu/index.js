@@ -42,14 +42,21 @@ const BusinessMenuUI = (props) => {
 
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [showOption, setShowOption] = useState(null)
-  const [currentMenu, setCurrentMenu] = useState(null)
+  const [currentMenuState, setCurrentMenuState] = useState({ menu: null, loading: false })
   const [isOpenSharedProduct, setIsOpenSharedProduct] = useState(false)
   const [searchValue, setSearchValue] = useState('')
   const [menuList, setMenuList] = useState([])
   const [initMenuId, setInitMenuId] = useState(null)
 
+  const setCurrentMenu = (data) => {
+    setCurrentMenuState({
+      ...currentMenuState,
+      ...data
+    })
+  }
+
   const handleOpenOptions = (name, menu) => {
-    setCurrentMenu(menu)
+    setCurrentMenu({ menu })
     setIsExtendExtraOpen(true)
     setShowOption(name)
   }
@@ -58,7 +65,7 @@ const BusinessMenuUI = (props) => {
     setShowOption(null)
     setIsExtendExtraOpen(false)
     setIsOpenSharedProduct(false)
-    setCurrentMenu(null)
+    setCurrentMenu({ menu: null })
     if (!isTab) {
       setInitMenuId(null)
       removeQueryToUrl(['menu', 'product'])
@@ -171,9 +178,10 @@ const BusinessMenuUI = (props) => {
         )}
         {!businessMenusState?.loading && menuList.map((menu, index) => (
           <MeunItem
+            disabled={currentMenuState?.loading}
             key={menu.id}
             isBorderTop={index === 0}
-            active={menu.id === currentMenu?.id}
+            active={menu.id === currentMenuState?.menu?.id}
             onClick={(e) => handleOpenEdit(e, menu)}
           >
             <CheckboxWrapper
@@ -205,7 +213,7 @@ const BusinessMenuUI = (props) => {
             <BusinessMenuOptions
               open={showOption === 'option'}
               business={business}
-              menu={currentMenu || {}}
+              menu={currentMenuState?.menu || {}}
               onClose={() => handleCloseOption()}
               handleUpdateBusinessState={handleSuccessBusinessMenu}
               isSelectedSharedMenus={isSelectedSharedMenus}
@@ -230,7 +238,7 @@ const BusinessMenuUI = (props) => {
               <BusinessMenuOptions
                 open={showOption === 'option'}
                 business={business}
-                menu={currentMenu || {}}
+                menu={currentMenuState?.menu || {}}
                 onClose={() => handleCloseOption()}
                 handleUpdateBusinessState={handleSuccessBusinessMenu}
                 isSelectedSharedMenus={isSelectedSharedMenus}
