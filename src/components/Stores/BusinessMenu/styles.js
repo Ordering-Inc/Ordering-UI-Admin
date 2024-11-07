@@ -68,6 +68,11 @@ export const MeunItem = styled.div`
     border-bottom: 1px solid ${props => props.theme.colors.primary};
   `}
 
+  ${({ disabled }) => disabled && css`
+    opacity: 0.7;
+    pointer-events: none;
+  `}
+
   > svg {
     color: ${props => props.theme.colors.secundaryLight};
     margin: 0 3px;
