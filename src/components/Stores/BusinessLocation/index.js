@@ -137,11 +137,7 @@ export const BusinessLocation = (props) => {
           onChange={(e) => {
             handleChangeInput(e.target.value)
           }}
-          defaultValue={
-            formState?.result?.result
-              ? formState?.result?.result?.address
-              : formState?.changes?.address ?? business?.address ?? ''
-          }
+          defaultValue={formState?.changes?.address ?? business?.address ?? ''}
           childRef={(ref) => {
             googleInputRef.current = ref
           }}
