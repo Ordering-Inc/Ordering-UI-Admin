@@ -27,7 +27,7 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 var BusinessLocation = exports.BusinessLocation = function BusinessLocation(props) {
-  var _configs$google_maps_, _configs$google_maps_2, _ref2, _formState$changes$ti, _formState$changes, _formState$result, _formState$result2, _ref3, _formState$changes$ad, _formState$changes2, _configs$country_auto, _formState$result3, _formState$result4, _ref4, _formState$changes$ad2, _formState$changes3;
+  var _configs$google_maps_, _configs$google_maps_2, _ref2, _formState$changes$ti, _formState$changes, _ref3, _formState$changes$ad, _formState$changes2, _configs$country_auto, _formState$result, _formState$result2, _ref4, _formState$changes$ad2, _formState$changes3;
   var business = props.business,
     formState = props.formState,
     setFormState = props.setFormState,
@@ -176,7 +176,7 @@ var BusinessLocation = exports.BusinessLocation = function BusinessLocation(prop
     onChange: function onChange(e) {
       handleChangeInput(e.target.value);
     },
-    defaultValue: formState !== null && formState !== void 0 && (_formState$result = formState.result) !== null && _formState$result !== void 0 && _formState$result.result ? formState === null || formState === void 0 || (_formState$result2 = formState.result) === null || _formState$result2 === void 0 || (_formState$result2 = _formState$result2.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.address : (_ref3 = (_formState$changes$ad = formState === null || formState === void 0 || (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.address) !== null && _formState$changes$ad !== void 0 ? _formState$changes$ad : business === null || business === void 0 ? void 0 : business.address) !== null && _ref3 !== void 0 ? _ref3 : '',
+    defaultValue: (_ref3 = (_formState$changes$ad = formState === null || formState === void 0 || (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.address) !== null && _formState$changes$ad !== void 0 ? _formState$changes$ad : business === null || business === void 0 ? void 0 : business.address) !== null && _ref3 !== void 0 ? _ref3 : '',
     childRef: function childRef(ref) {
       googleInputRef.current = ref;
     },
@@ -184,7 +184,7 @@ var BusinessLocation = exports.BusinessLocation = function BusinessLocation(prop
     countryCode: (configs === null || configs === void 0 || (_configs$country_auto = configs.country_autocomplete) === null || _configs$country_auto === void 0 ? void 0 : _configs$country_auto.value) || '*'
   })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperAddressnotes, null, /*#__PURE__*/_react.default.createElement("label", null, t('ADDRESS_NOTES', 'Address notes')), /*#__PURE__*/_react.default.createElement(_styles.TextArea, {
     rows: 4,
-    defaultValue: formState !== null && formState !== void 0 && (_formState$result3 = formState.result) !== null && _formState$result3 !== void 0 && _formState$result3.result ? formState === null || formState === void 0 || (_formState$result4 = formState.result) === null || _formState$result4 === void 0 || (_formState$result4 = _formState$result4.result) === null || _formState$result4 === void 0 ? void 0 : _formState$result4.address_notes : (_ref4 = (_formState$changes$ad2 = formState === null || formState === void 0 || (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.address_notes) !== null && _formState$changes$ad2 !== void 0 ? _formState$changes$ad2 : business === null || business === void 0 ? void 0 : business.address_notes) !== null && _ref4 !== void 0 ? _ref4 : '',
+    defaultValue: formState !== null && formState !== void 0 && (_formState$result = formState.result) !== null && _formState$result !== void 0 && _formState$result.result ? formState === null || formState === void 0 || (_formState$result2 = formState.result) === null || _formState$result2 === void 0 || (_formState$result2 = _formState$result2.result) === null || _formState$result2 === void 0 ? void 0 : _formState$result2.address_notes : (_ref4 = (_formState$changes$ad2 = formState === null || formState === void 0 || (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.address_notes) !== null && _formState$changes$ad2 !== void 0 ? _formState$changes$ad2 : business === null || business === void 0 ? void 0 : business.address_notes) !== null && _ref4 !== void 0 ? _ref4 : '',
     onChange: function onChange(e) {
       return handleChangeTextarea(e.target.value);
     },
