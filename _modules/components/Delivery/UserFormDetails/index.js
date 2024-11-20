@@ -354,12 +354,12 @@ var UserFormDetailsUI = exports.UserFormDetailsUI = function UserFormDetailsUI(p
     onClick: function onClick() {
       return setPasswordSee(!passwordSee);
     }
-  }, !passwordSee ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Eye, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.EyeSlash, null))), isDriversPage && /*#__PURE__*/_react.default.createElement(_styles2.DriverZoneRestrictionWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, ('DRIVER_ZONE_RESTRICTION', 'Driver Zone Restriccion')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
+  }, !passwordSee ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Eye, null) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.EyeSlash, null))), isDriversPage && /*#__PURE__*/_react.default.createElement(_styles2.DriverZoneRestrictionWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('DRIVER_ZONE_RESTRICTION', 'Driver Zone Restriction')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
     defaultChecked: (_ref6 = (_formState$changes$dr = formState === null || formState === void 0 || (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.driver_zone_restriction) !== null && _formState$changes$dr !== void 0 ? _formState$changes$dr : user === null || user === void 0 ? void 0 : user.driver_zone_restriction) !== null && _ref6 !== void 0 ? _ref6 : false,
     onChange: function onChange(val) {
       return handleChangeSwtich('driver_zone_restriction', val);
     }
-  })), isDriversPage && /*#__PURE__*/_react.default.createElement(_styles2.DriverZoneRestrictionWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, ('MONO_SESSION', 'Mono session')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
+  })), isDriversPage && /*#__PURE__*/_react.default.createElement(_styles2.DriverZoneRestrictionWrapper, null, /*#__PURE__*/_react.default.createElement("span", null, t('MONO_SESSION', 'Mono session')), /*#__PURE__*/_react.default.createElement(_styles.Switch, {
     defaultChecked: (_ref7 = (_formState$changes$mo = formState === null || formState === void 0 || (_formState$changes9 = formState.changes) === null || _formState$changes9 === void 0 ? void 0 : _formState$changes9.mono_session) !== null && _formState$changes$mo !== void 0 ? _formState$changes$mo : user === null || user === void 0 ? void 0 : user.mono_session) !== null && _ref7 !== void 0 ? _ref7 : false,
     onChange: function onChange(val) {
       return handleChangeSwtich('mono_session', val);
