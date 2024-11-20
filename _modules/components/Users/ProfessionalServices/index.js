@@ -78,10 +78,10 @@ var ProfessionalServicesUI = function ProfessionalServicesUI(props) {
     }
     return valid;
   };
-  var deepFilter = function deepFilter(nodes) {
+  var _deepFilter = function deepFilter(nodes) {
     return nodes.map(function (node) {
       if (checkProducts(node)) return node;
-      var children = deepFilter(node.subcategories || []);
+      var children = _deepFilter(node.subcategories || []);
       return children.length && _objectSpread(_objectSpread({}, node), {}, {
         children: children
       });
@@ -90,7 +90,7 @@ var ProfessionalServicesUI = function ProfessionalServicesUI(props) {
   (0, _react.useEffect)(function () {
     var _businessState$busine, _businessState$busine2;
     if (!(businessState !== null && businessState !== void 0 && (_businessState$busine = businessState.business) !== null && _businessState$busine !== void 0 && _businessState$busine.categories)) return;
-    var result = deepFilter(businessState === null || businessState === void 0 || (_businessState$busine2 = businessState.business) === null || _businessState$busine2 === void 0 ? void 0 : _businessState$busine2.categories);
+    var result = _deepFilter(businessState === null || businessState === void 0 || (_businessState$busine2 = businessState.business) === null || _businessState$busine2 === void 0 ? void 0 : _businessState$busine2.categories);
     setCategories(result);
   }, [businessState === null || businessState === void 0 || (_businessState$busine3 = businessState.business) === null || _businessState$busine3 === void 0 ? void 0 : _businessState$busine3.categories, searchValue]);
   (0, _react.useEffect)(function () {

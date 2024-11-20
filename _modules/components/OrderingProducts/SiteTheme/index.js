@@ -99,12 +99,12 @@ var SiteThemeUI = function SiteThemeUI(props) {
     });
     setThemeOptions(_themeOptions);
   }, [themesList]);
-  var recursiveAssign = function recursiveAssign(a, b) {
+  var _recursiveAssign = function recursiveAssign(a, b) {
     if (b) {
       if (Object(b) !== b) return b;
       if (Object(a) !== a) a = {};
       for (var key in b) {
-        a[key] = recursiveAssign(a[key], b[key]);
+        a[key] = _recursiveAssign(a[key], b[key]);
       }
       return a;
     } else {
@@ -114,7 +114,7 @@ var SiteThemeUI = function SiteThemeUI(props) {
   (0, _react.useEffect)(function () {
     var _siteThemesState$resu, _siteThemesState$resu2, _siteThemesState$resu3;
     if (siteThemesState.loading || siteThemesState.result.length === 0) return;
-    var _themeValues = recursiveAssign((_siteThemesState$resu = siteThemesState.result[0]) === null || _siteThemesState$resu === void 0 || (_siteThemesState$resu = _siteThemesState$resu.theme) === null || _siteThemesState$resu === void 0 ? void 0 : _siteThemesState$resu.values_default, (_siteThemesState$resu2 = siteThemesState.result[0]) === null || _siteThemesState$resu2 === void 0 ? void 0 : _siteThemesState$resu2.values);
+    var _themeValues = _recursiveAssign((_siteThemesState$resu = siteThemesState.result[0]) === null || _siteThemesState$resu === void 0 || (_siteThemesState$resu = _siteThemesState$resu.theme) === null || _siteThemesState$resu === void 0 ? void 0 : _siteThemesState$resu.values_default, (_siteThemesState$resu2 = siteThemesState.result[0]) === null || _siteThemesState$resu2 === void 0 ? void 0 : _siteThemesState$resu2.values);
     setThemeValues(_themeValues);
     var structure = ((_siteThemesState$resu3 = siteThemesState.result[0]) === null || _siteThemesState$resu3 === void 0 || (_siteThemesState$resu3 = _siteThemesState$resu3.theme) === null || _siteThemesState$resu3 === void 0 ? void 0 : _siteThemesState$resu3.structure) || {};
     setThemeStructure(structure);

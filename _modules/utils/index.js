@@ -87,15 +87,15 @@ var scrollTo = exports.scrollTo = function scrollTo(element, to, duration) {
   var change = to - start;
   var currentTime = 0;
   var increment = 20;
-  var animateScroll = function animateScroll() {
+  var _animateScroll = function animateScroll() {
     currentTime += increment;
     var val = easeInOutQuad(currentTime, start, change, duration);
     element.scrollTop = val;
     if (currentTime < duration && val > 0) {
-      setTimeout(animateScroll, increment);
+      setTimeout(_animateScroll, increment);
     }
   };
-  animateScroll();
+  _animateScroll();
 };
 
 /**
@@ -261,7 +261,7 @@ var verifyDecimals = exports.verifyDecimals = function verifyDecimals(value, par
  * Fuctions to control the local storage
  */
 var getStorageItem = exports.getStorageItem = /*#__PURE__*/function () {
-  var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(storageKey, isJson) {
+  var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(storageKey, isJson) {
     var value;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
@@ -288,7 +288,7 @@ var getStorageItem = exports.getStorageItem = /*#__PURE__*/function () {
   };
 }();
 var setStorageItem = exports.setStorageItem = /*#__PURE__*/function () {
-  var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(key, val, isJson) {
+  var _ref3 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2(key, val, isJson) {
     var value;
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
       while (1) switch (_context2.prev = _context2.next) {
@@ -307,7 +307,7 @@ var setStorageItem = exports.setStorageItem = /*#__PURE__*/function () {
   };
 }();
 var removeStorageItem = exports.removeStorageItem = /*#__PURE__*/function () {
-  var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(key) {
+  var _ref4 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3(key) {
     return _regeneratorRuntime().wrap(function _callee3$(_context3) {
       while (1) switch (_context3.prev = _context3.next) {
         case 0:

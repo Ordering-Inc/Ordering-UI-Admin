@@ -366,7 +366,7 @@ var SidebarMenuUI = function SidebarMenuUI(props) {
     }
   }, [windowSize.width]);
   var handleClickBilling = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+    var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       var _billingState$result;
       var billingState, _billingState$result2, _billingState$result3, _billingState$result4;
       return _regeneratorRuntime().wrap(function _callee$(_context) {

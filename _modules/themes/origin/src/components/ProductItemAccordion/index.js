@@ -66,7 +66,7 @@ var ProductItemAccordion = exports.ProductItemAccordion = function ProductItemAc
   var productSelect = (0, _react.useRef)(null);
   var productActionsEdit = (0, _react.useRef)(null);
   var productActionsDelete = (0, _react.useRef)(null);
-  var productInfo = function productInfo() {
+  var _productInfo = function productInfo() {
     if (isCartProduct) {
       var _product$ingredients, _product$options;
       var ingredients = JSON.parse(JSON.stringify(Object.values((_product$ingredients = product.ingredients) !== null && _product$ingredients !== void 0 ? _product$ingredients : {})));
@@ -76,7 +76,7 @@ var ProductItemAccordion = exports.ProductItemAccordion = function ProductItemAc
         option.suboptions = Object.values((_option$suboptions = option.suboptions) !== null && _option$suboptions !== void 0 ? _option$suboptions : {});
         return option;
       });
-      return _objectSpread(_objectSpread({}, productInfo), {}, {
+      return _objectSpread(_objectSpread({}, _productInfo), {}, {
         ingredients: ingredients,
         options: options
       });
@@ -177,7 +177,7 @@ var ProductItemAccordion = exports.ProductItemAccordion = function ProductItemAc
     onClick: function onClick() {
       return onDeleteProduct(product);
     }
-  })))))), ((product === null || product === void 0 ? void 0 : product.valid) || !isCartProduct) && windowSize.width > 410 && /*#__PURE__*/_react.default.createElement(_styles.ProductPriceSection, null, /*#__PURE__*/_react.default.createElement(_styles.ProductPrice, null, /*#__PURE__*/_react.default.createElement("span", null, parsePrice(getProductPrice(product))), (((_productInfo$ingredie = productInfo().ingredients) === null || _productInfo$ingredie === void 0 ? void 0 : _productInfo$ingredie.length) > 0 || ((_productInfo$options = productInfo().options) === null || _productInfo$options === void 0 ? void 0 : _productInfo$options.length) > 0 || product.comment) && /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_IosArrowDown.default, {
+  })))))), ((product === null || product === void 0 ? void 0 : product.valid) || !isCartProduct) && windowSize.width > 410 && /*#__PURE__*/_react.default.createElement(_styles.ProductPriceSection, null, /*#__PURE__*/_react.default.createElement(_styles.ProductPrice, null, /*#__PURE__*/_react.default.createElement("span", null, parsePrice(getProductPrice(product))), (((_productInfo$ingredie = _productInfo().ingredients) === null || _productInfo$ingredie === void 0 ? void 0 : _productInfo$ingredie.length) > 0 || ((_productInfo$options = _productInfo().options) === null || _productInfo$options === void 0 ? void 0 : _productInfo$options.length) > 0 || product.comment) && /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_IosArrowDown.default, {
     className: "".concat(setRotate)
   }))), isCartProduct && /*#__PURE__*/_react.default.createElement(_styles.ProductActions, null, /*#__PURE__*/_react.default.createElement(_styles.ProductActionsEdit, {
     ref: productActionsEdit,
@@ -224,14 +224,14 @@ var ProductItemAccordion = exports.ProductItemAccordion = function ProductItemAc
     style: {
       maxHeight: "".concat(setHeight)
     }
-  }, ((_productInfo$ingredie2 = productInfo().ingredients) === null || _productInfo$ingredie2 === void 0 ? void 0 : _productInfo$ingredie2.length) > 0 && productInfo().ingredients.some(function (ingredient) {
+  }, ((_productInfo$ingredie2 = _productInfo().ingredients) === null || _productInfo$ingredie2 === void 0 ? void 0 : _productInfo$ingredie2.length) > 0 && _productInfo().ingredients.some(function (ingredient) {
     return !ingredient.selected;
-  }) && /*#__PURE__*/_react.default.createElement(_styles.ProductOptionsList, null, /*#__PURE__*/_react.default.createElement("p", null, t('INGREDIENTS', 'Ingredients')), productInfo().ingredients.map(function (ingredient) {
+  }) && /*#__PURE__*/_react.default.createElement(_styles.ProductOptionsList, null, /*#__PURE__*/_react.default.createElement("p", null, t('INGREDIENTS', 'Ingredients')), _productInfo().ingredients.map(function (ingredient) {
     return !ingredient.selected && /*#__PURE__*/_react.default.createElement("li", {
       className: "ingredient",
       key: ingredient.id
     }, /*#__PURE__*/_react.default.createElement("span", null, t('NO', 'No'), " ", ingredient.name));
-  })), ((_productInfo$options2 = productInfo().options) === null || _productInfo$options2 === void 0 ? void 0 : _productInfo$options2.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.ProductOptionsList, null, Array.isArray(productInfo().options) && productInfo().options.map(function (option, i) {
+  })), ((_productInfo$options2 = _productInfo().options) === null || _productInfo$options2 === void 0 ? void 0 : _productInfo$options2.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.ProductOptionsList, null, Array.isArray(_productInfo().options) && _productInfo().options.map(function (option, i) {
     return /*#__PURE__*/_react.default.createElement("li", {
       key: i
     }, /*#__PURE__*/_react.default.createElement("p", null, option.name), /*#__PURE__*/_react.default.createElement(_styles.ProductOptionsList, {

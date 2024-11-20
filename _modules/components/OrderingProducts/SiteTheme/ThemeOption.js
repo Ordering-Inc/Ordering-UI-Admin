@@ -23,7 +23,7 @@ function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) 
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
-var ThemeOption = exports.ThemeOption = function ThemeOption(props) {
+var _ThemeOption = exports.ThemeOption = function ThemeOption(props) {
   var _Object$keys;
   var name = props.name,
     optionObject = props.optionObject,
@@ -102,7 +102,7 @@ var ThemeOption = exports.ThemeOption = function ThemeOption(props) {
   }).map(function (subOption) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: subOption
-    }, subOption !== 'components' && /*#__PURE__*/_react.default.createElement(ThemeOption, {
+    }, subOption !== 'components' && /*#__PURE__*/_react.default.createElement(_ThemeOption, {
       name: subOption,
       optionObject: optionObject[subOption],
       valueObject: valueObject[subOption],
@@ -114,7 +114,7 @@ var ThemeOption = exports.ThemeOption = function ThemeOption(props) {
   }), (optionObject === null || optionObject === void 0 ? void 0 : optionObject.components) && (Object === null || Object === void 0 || (_Object$keys = Object.keys(optionObject === null || optionObject === void 0 ? void 0 : optionObject.components)) === null || _Object$keys === void 0 ? void 0 : _Object$keys.map(function (subOption) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: subOption
-    }, /*#__PURE__*/_react.default.createElement(ThemeOption, {
+    }, /*#__PURE__*/_react.default.createElement(_ThemeOption, {
       name: subOption,
       optionObject: optionObject === null || optionObject === void 0 ? void 0 : optionObject.components[subOption],
       valueObject: valueObject === null || valueObject === void 0 ? void 0 : valueObject.components[subOption],

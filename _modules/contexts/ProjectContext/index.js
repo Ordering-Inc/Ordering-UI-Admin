@@ -50,7 +50,7 @@ var ProjectProvider = exports.ProjectProvider = function ProjectProvider(_ref) {
     state = _useState2[0],
     setState = _useState2[1];
   var getProjectStatus = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+    var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       var response, _yield$response$json, error, result;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {

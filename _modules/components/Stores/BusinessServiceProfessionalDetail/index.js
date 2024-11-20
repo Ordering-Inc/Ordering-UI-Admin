@@ -74,7 +74,7 @@ var BusinessServiceProfessionalDetail = exports.BusinessServiceProfessionalDetai
     document.getElementById('business_service').style.width = value ? width > 1000 ? '500px' : '100%' : '0';
   };
   var onDeleteCustomer = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+    var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
       return _regeneratorRuntime().wrap(function _callee2$(_context2) {
         while (1) switch (_context2.prev = _context2.next) {
           case 0:
@@ -82,7 +82,7 @@ var BusinessServiceProfessionalDetail = exports.BusinessServiceProfessionalDetai
               open: true,
               content: t('QUESTION_DELETE_USER', 'Are you sure that you want to delete this user?'),
               handleOnAccept: function () {
-                var _handleOnAccept = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+                var _handleOnAccept = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
                   return _regeneratorRuntime().wrap(function _callee$(_context) {
                     while (1) switch (_context.prev = _context.next) {
                       case 0:
