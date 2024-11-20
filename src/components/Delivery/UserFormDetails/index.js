@@ -348,7 +348,7 @@ export const UserFormDetailsUI = (props) => {
             </WrapperPassword>
             {isDriversPage && (
               <DriverZoneRestrictionWrapper>
-                <span>{('DRIVER_ZONE_RESTRICTION', 'Driver Zone Restriccion')}</span>
+                <span>{t('DRIVER_ZONE_RESTRICTION', 'Driver Zone Restriction')}</span>
                 <Switch
                   defaultChecked={formState?.changes?.driver_zone_restriction ?? user?.driver_zone_restriction ?? false}
                   onChange={(val) => handleChangeSwtich('driver_zone_restriction', val)}
@@ -357,7 +357,7 @@ export const UserFormDetailsUI = (props) => {
             )}
             {isDriversPage && (
               <DriverZoneRestrictionWrapper>
-                <span>{('MONO_SESSION', 'Mono session')}</span>
+                <span>{t('MONO_SESSION', 'Mono session')}</span>
                 <Switch
                   defaultChecked={formState?.changes?.mono_session ?? user?.mono_session ?? false}
                   onChange={(val) => handleChangeSwtich('mono_session', val)}
