@@ -224,6 +224,7 @@ const OrdersManagerUI = (props) => {
           <TopContent>
             <DriversContainer>
               <DriversManager
+                enableSocketEventDriverRoom
                 disableSocketRoomDriver
                 disableDriverLocationsSockets
                 showCompressedInfo
