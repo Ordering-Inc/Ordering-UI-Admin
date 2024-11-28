@@ -16,7 +16,6 @@ import {
 export const DeliveryDashboard = (props) => {
   const {
     driversList,
-    searchValue,
     ordersStatusGroup,
     selectedSubOrderStatus,
     handleOrdersStatusGroupFilter,
@@ -24,9 +23,7 @@ export const DeliveryDashboard = (props) => {
     ordersAmountByStatus,
     setOrdersAmountByStatus,
     isUseQuery,
-    driverGroupList,
-    handleChangeFilterValues,
-    handleChangeSearch
+    setDetailsOrder
   } = props
 
   const ordersDashboardListProps = {
@@ -48,8 +45,10 @@ export const DeliveryDashboard = (props) => {
   const handleLocation = (order) => {
     if (interActionMapOrder?.id === order?.id) {
       setInterActionMapOrder(null)
+      setDetailsOrder(null)
     } else {
-      setInterActionMapOrder({ ...order })
+      setInterActionMapOrder(order)
+      setDetailsOrder(order)
     }
   }
 

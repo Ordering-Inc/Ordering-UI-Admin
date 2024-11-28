@@ -124,6 +124,7 @@ const DeliveriesManagerUI = (props) => {
               driverGroupList={driverGroupList}
               handleChangeFilterValues={handleChangeFilterValues}
               handleChangeSearch={handleChangeSearch}
+              setDetailsOrder={setDetailsOrder}
             />
           </WrapItemView>
         </OrdersContent>
