@@ -132,7 +132,9 @@ var DriversGroupLogsUI = exports.DriversGroupLogsUI = function DriversGroupLogsU
       var _item$added, _item$added2;
       return /*#__PURE__*/_react.default.createElement("tbody", {
         key: i
-      }, /*#__PURE__*/_react.default.createElement("tr", null, item.attribute !== 'schedule' ? /*#__PURE__*/_react.default.createElement("td", null, typeof (item === null || item === void 0 ? void 0 : item.new) !== 'undefined' && (item === null || item === void 0 ? void 0 : item.new) !== null ? "".concat(item === null || item === void 0 ? void 0 : item.new) : (item === null || item === void 0 || (_item$added = item.added) === null || _item$added === void 0 ? void 0 : _item$added.length) > 0 ? item === null || item === void 0 || (_item$added2 = item.added) === null || _item$added2 === void 0 ? void 0 : _item$added2.toString() : t('NONE', 'None')) : /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.SeeChanges, {
+      }, /*#__PURE__*/_react.default.createElement("tr", null, (item === null || item === void 0 ? void 0 : item.attribute) !== 'schedule' ? /*#__PURE__*/_react.default.createElement("td", null, typeof (item === null || item === void 0 ? void 0 : item.new) !== 'undefined' && (item === null || item === void 0 ? void 0 : item.new) !== null ? (item === null || item === void 0 ? void 0 : item.attribute) === 'last_available_at' ? parseDate(item === null || item === void 0 ? void 0 : item.new, {
+        utc: true
+      }) : "".concat(item === null || item === void 0 ? void 0 : item.new) : (item === null || item === void 0 || (_item$added = item.added) === null || _item$added === void 0 ? void 0 : _item$added.length) > 0 ? item === null || item === void 0 || (_item$added2 = item.added) === null || _item$added2 === void 0 ? void 0 : _item$added2.toString() : t('NONE', 'None')) : /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.SeeChanges, {
         onClick: function onClick() {
           return scheduleModalData(item, 'new');
         }
@@ -141,13 +143,15 @@ var DriversGroupLogsUI = exports.DriversGroupLogsUI = function DriversGroupLogsU
       var _item$removed, _item$removed2;
       return /*#__PURE__*/_react.default.createElement("tbody", {
         key: i
-      }, /*#__PURE__*/_react.default.createElement("tr", null, item.attribute !== 'schedule' ? /*#__PURE__*/_react.default.createElement("td", null, typeof (item === null || item === void 0 ? void 0 : item.old) !== 'undefined' && (item === null || item === void 0 ? void 0 : item.old) !== null ? "".concat(item === null || item === void 0 ? void 0 : item.old) : (item === null || item === void 0 || (_item$removed = item.removed) === null || _item$removed === void 0 ? void 0 : _item$removed.length) > 0 ? item === null || item === void 0 || (_item$removed2 = item.removed) === null || _item$removed2 === void 0 ? void 0 : _item$removed2.toString() : t('NONE', 'None')) : /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.SeeChanges, {
+      }, /*#__PURE__*/_react.default.createElement("tr", null, (item === null || item === void 0 ? void 0 : item.attribute) !== 'schedule' ? /*#__PURE__*/_react.default.createElement("td", null, typeof (item === null || item === void 0 ? void 0 : item.old) !== 'undefined' && (item === null || item === void 0 ? void 0 : item.old) !== null ? (item === null || item === void 0 ? void 0 : item.attribute) === 'last_available_at' ? parseDate(item === null || item === void 0 ? void 0 : item.old, {
+        utc: true
+      }) : "".concat(item === null || item === void 0 ? void 0 : item.old) : (item === null || item === void 0 || (_item$removed = item.removed) === null || _item$removed === void 0 ? void 0 : _item$removed.length) > 0 ? item === null || item === void 0 || (_item$removed2 = item.removed) === null || _item$removed2 === void 0 ? void 0 : _item$removed2.toString() : t('NONE', 'None')) : /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.SeeChanges, {
         onClick: function onClick() {
           return scheduleModalData(item, 'old');
         }
       }, t('SEE_CHANGES', 'See changes')))));
     }))), /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles.DateTimeWrapper, null, parseDate(log.created_at, {
-      utc: false
+      utc: true
     }))), /*#__PURE__*/_react.default.createElement("td", null, log === null || log === void 0 ? void 0 : log.user_agent)));
   }))) : /*#__PURE__*/_react.default.createElement(_styles.NoData, null, t('NO_DATA', 'No Data'))), (logsList === null || logsList === void 0 ? void 0 : logsList.logs.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles.WrapperPagination, null, /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
     isHidePagecontrol: true,
