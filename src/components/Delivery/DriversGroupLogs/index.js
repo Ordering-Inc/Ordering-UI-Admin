@@ -190,12 +190,12 @@ export const DriversGroupLogsUI = (props) => {
                           {log?.data && getValidLogData(log?.data).map((item, i) => (
                             <tbody key={i}>
                               <tr>
-                                {item?.attribute !== 'schedule'
+                                {item.attribute !== 'schedule'
                                   ? (
                                     <td>
                                       {
                                         (typeof item?.new !== 'undefined' && item?.new !== null)
-                                          ? item?.attribute === 'last_available_at' ? parseDate(item?.new, { utc: true }) : `${item?.new}`
+                                          ? `${item?.new}`
                                           : item?.added?.length > 0 ? item?.added?.toString() : t('NONE', 'None')
                                       }
                                     </td>
@@ -215,12 +215,12 @@ export const DriversGroupLogsUI = (props) => {
                           {log?.data && getValidLogData(log?.data).map((item, i) => (
                             <tbody key={i}>
                               <tr>
-                                {item?.attribute !== 'schedule'
+                                {item.attribute !== 'schedule'
                                   ? (
                                     <td>
                                       {
                                         (typeof item?.old !== 'undefined' && item?.old !== null)
-                                          ? item?.attribute === 'last_available_at' ? parseDate(item?.old, { utc: true }) : `${item?.old}`
+                                          ? `${item?.old}`
                                           : item?.removed?.length > 0 ? item?.removed?.toString() : t('NONE', 'None')
                                       }
                                     </td>
@@ -237,7 +237,7 @@ export const DriversGroupLogsUI = (props) => {
                       </td>
                       <td>
                         <DateTimeWrapper>
-                          {parseDate(log.created_at, { utc: true })}
+                          {parseDate(log.created_at, { utc: false })}
                         </DateTimeWrapper>
                       </td>
                       <td>
