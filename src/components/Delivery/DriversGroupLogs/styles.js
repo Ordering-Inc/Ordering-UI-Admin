@@ -108,10 +108,12 @@ export const DateTimeWrapper = styled.div`
   align-items: center;
 
   ${props => props.theme?.rtl ? css`
+    padding-right: 15px;
     padding-left: 15px;
     margin-left: 15px;
     border-left: 1px solid ${props => props.theme.colors.borderColor};
   ` : css`
+    padding-left: 15px;
     padding-right: 15px;
     margin-right: 15px;
     border-right: 1px solid ${props => props.theme.colors.borderColor};
