@@ -45,9 +45,9 @@ var UserInfoContainer = exports.UserInfoContainer = _styledComponents.default.di
 });
 var DateTimeWrapper = exports.DateTimeWrapper = _styledComponents.default.div(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  white-space: nowrap;\n  font-size: 12px;\n  min-height: 36px;\n  display: flex;\n  align-items: center;\n\n  ", "\n"])), function (props) {
   var _props$theme5;
-  return (_props$theme5 = props.theme) !== null && _props$theme5 !== void 0 && _props$theme5.rtl ? (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    padding-left: 15px;\n    margin-left: 15px;\n    border-left: 1px solid ", ";\n  "])), function (props) {
+  return (_props$theme5 = props.theme) !== null && _props$theme5 !== void 0 && _props$theme5.rtl ? (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n    padding-right: 15px;\n    padding-left: 15px;\n    margin-left: 15px;\n    border-left: 1px solid ", ";\n  "])), function (props) {
     return props.theme.colors.borderColor;
-  }) : (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n    padding-right: 15px;\n    margin-right: 15px;\n    border-right: 1px solid ", ";\n  "])), function (props) {
+  }) : (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n    padding-left: 15px;\n    padding-right: 15px;\n    margin-right: 15px;\n    border-right: 1px solid ", ";\n  "])), function (props) {
     return props.theme.colors.borderColor;
   });
 });
