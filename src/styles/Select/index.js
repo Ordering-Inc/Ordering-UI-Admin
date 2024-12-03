@@ -3,7 +3,7 @@ import { usePopper } from 'react-popper'
 import { CaretDownFill } from 'react-bootstrap-icons'
 import FiChevronDown from '@meronex/icons/fi/FiChevronDown'
 import { Pagination, SearchBar } from '../../components/Shared'
-import { useSession } from '../../../../index'
+import { useSession } from 'ordering-components-admin'
 
 import {
   Selected,
