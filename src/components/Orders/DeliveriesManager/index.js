@@ -132,6 +132,7 @@ const DeliveriesManagerUI = (props) => {
 
       {isOpenOrderDetail && (
         <OrderDetails
+          disableSocketRoomDriver
           open={isOpenOrderDetail}
           order={detailsOrder}
           orderId={orderDetailId}
