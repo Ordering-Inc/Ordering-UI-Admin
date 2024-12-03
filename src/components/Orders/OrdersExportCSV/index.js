@@ -22,14 +22,14 @@ const ExportCSVUI = (props) => {
   const [modalOpen, setModalOpen] = useState(false)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
 
-  const handleExportAll = () => {
+  const handleExportAll = (withoutMetafields) => {
     setPopoverOpen(false)
-    getCSV(false)
+    getCSV(false, withoutMetafields)
   }
 
-  const handleExportFiltered = () => {
+  const handleExportFiltered = (withoutMetafields) => {
     setPopoverOpen(false)
-    getCSV(true)
+    getCSV(true, withoutMetafields)
   }
 
   const closePopover = () => {
@@ -79,6 +79,12 @@ const ExportCSVUI = (props) => {
             </Item>
             <Item onClick={() => handleExportFiltered()}>
               {t('EXPORT_FILTERED', 'Export filtered')}
+            </Item>
+            <Item onClick={() => handleExportAll(true)}>
+              {t('EXPORT_ALL_WITHOUT_METAFIELDS', 'Export all without metafields')}
+            </Item>
+            <Item onClick={() => handleExportFiltered(true)}>
+              {t('EXPORT_FILTERED_WITHOUT_METAFIELDS', 'Export filtered without metafields')}
             </Item>
           </PopoverContainer>
         )}

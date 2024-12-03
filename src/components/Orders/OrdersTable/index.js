@@ -68,6 +68,7 @@ export const OrdersTable = memo((props) => {
   const [{ dictionary }, t] = useLanguage()
   const theme = useTheme()
   const [{ parseDate }] = useUtils()
+  const [configState] = useConfig()
   const [isAllChecked, setIsAllChecked] = useState(false)
   const [dragOverd, setDragOverd] = useState('')
 
@@ -84,9 +85,9 @@ export const OrdersTable = memo((props) => {
     }
   }, [pagination.from, pagination.pageSize, getPageOrders])
 
-  const [configState] = useConfig()
   const isEnabledRowInColor = configState?.configs?.row_in_color_enabled?.value === '1'
   const showExternalId = configState?.configs?.change_order_id?.value === '1'
+  const isProjectEnterpricePlan = configState?.configs?.plan_enterprise && configState?.configs?.plan_enterprise?.value
 
   const franchiseImages = !franchisesList?.error && franchisesList?.franchises?.reduce((imageKeys, franchise) => {
     imageKeys[franchise.id] = franchise.logo
@@ -96,67 +97,88 @@ export const OrdersTable = memo((props) => {
   const optionsDefault = [
     {
       value: 'status',
-      content: t('STATUS', 'Status')
+      content: t('STATUS', 'Status'),
+      enabled: true
     },
     {
       value: 'orderNumber',
-      content: t('INVOICE_ORDER_NO', 'Order No.')
-    },
-    {
-      value: 'agent',
-      content: t('AGENT', 'Agent')
-    },
-    {
-      value: 'cartGroupId',
-      content: t('GROUP_ORDER', 'Group Order')
-    },
-    {
-      value: 'driverGroupId',
-      content: t('EXPORT_DRIVER_GROUP_ID', 'Driver Group Id')
+      content: t('INVOICE_ORDER_NO', 'Order No.'),
+      enabled: !showExternalId
     },
     {
       value: 'dateTime',
-      content: t('DATE_TIME', 'Date and time')
+      content: t('DATE_TIME', 'Date and time'),
+      enabled: true
+    },
+    {
+      value: 'agent',
+      content: t('AGENT', 'Agent'),
+      enabled: true
+    },
+    {
+      value: 'cartGroupId',
+      content: t('GROUP_ORDER', 'Group Order'),
+      enabled: true
+    },
+    {
+      value: 'driverGroupId',
+      content: t('EXPORT_DRIVER_GROUP_ID', 'Driver Group Id'),
+      enabled: true
     },
     {
       value: 'business',
-      content: t('BUSINESS', 'Business')
+      content: t('BUSINESS', 'Business'),
+      enabled: true
     },
     {
       value: 'customer',
-      content: t('CUSTOMER', 'Customer')
+      content: t('CUSTOMER', 'Customer'),
+      enabled: true
     },
     {
       value: 'driver',
-      content: t('DRIVER', 'Driver')
+      content: t('DRIVER', 'Driver'),
+      enabled: true
     },
     {
       value: 'advanced',
-      content: t('ADVANCED_LOGISTICS', 'Advance Logistics')
+      content: t('ADVANCED_LOGISTICS', 'Advance Logistics'),
+      enabled: true
+    },
+    {
+      value: 'cloned',
+      content: t('CLONED', 'Cloned'),
+      enabled: true
     },
     {
       value: 'timer',
-      content: t('SLA_TIMER', 'SLA’s timer')
+      content: t('SLA_TIMER', 'SLA’s timer'),
+      enabled: isProjectEnterpricePlan
     },
     {
       value: 'eta',
-      content: t('ETA', 'ETA')
+      content: t('ETA', 'ETA'),
+      enabled: true
     },
     {
       value: 'total',
-      content: t('EXPORT_TOTAL', 'Total')
+      content: t('EXPORT_TOTAL', 'Total'),
+      enabled: true
     },
     {
       value: 'externalId',
-      content: t('EXTERNAL_ID', 'External id')
+      content: t('EXTERNAL_ID', 'External id'),
+      enabled: true
     },
     {
       value: 'channel',
-      content: t('CHANNEL', 'Channel')
+      content: t('CHANNEL', 'Channel'),
+      enabled: true
     },
     {
       value: 'pod',
-      content: t('PODS', 'Pod')
+      content: t('PODS', 'Pod'),
+      enabled: true
     }
   ]
 
@@ -384,19 +406,20 @@ export const OrdersTable = memo((props) => {
                     <th className='orderPrice'>
                       <ColumnAllowSettingPopover
                         allowColumns={allowColumns}
-                        optionsDefault={optionsDefault}
+                        optionsDefault={optionsDefault.filter(({ enabled }) => enabled)}
                         handleChangeAllowColumns={handleChangeAllowColumns}
                         isOrder
                       />
                     </th>
-                  ) : (
+                  )
+                  : (
                     Object.keys(allowColumns).filter(col => allowColumns[col]?.visable && allowColumns[col]?.order !== 0)
                       .sort((col1, col2) => allowColumns[col1]?.order - allowColumns[col2]?.order)
                       .map((column, i, array) => {
                         if (column === 'slaBar') {
                           return
                         }
-                        if (column === 'orderNumber') {
+                        if (showExternalId ? column === 'dateTime' : column === 'orderNumber') {
                           return (
                             <React.Fragment key={i}>
                               <th
@@ -409,11 +432,13 @@ export const OrdersTable = memo((props) => {
                                   onClick={() => handleSelecteAllOrder()}
                                   className='orderCheckBox'
                                 >
-                                  {(!orderList.loading && isAllChecked) ? (
-                                    <RiCheckboxFill />
-                                  ) : (
-                                    <RiCheckboxBlankLine />
-                                  )}
+                                  {(!orderList.loading && isAllChecked)
+                                    ? (
+                                      <RiCheckboxFill />
+                                    )
+                                    : (
+                                      <RiCheckboxBlankLine />
+                                    )}
                                 </CheckBox>
                                 {showExternalId ? t('DATE', 'Date') : t('ORDER', 'Order')}
                               </th>
@@ -421,7 +446,7 @@ export const OrdersTable = memo((props) => {
                                 <th className='orderPrice' key={`noDragTh-${i}`}>
                                   <ColumnAllowSettingPopover
                                     allowColumns={allowColumns}
-                                    optionsDefault={optionsDefault}
+                                    optionsDefault={optionsDefault.filter(({ enabled }) => enabled)}
                                     handleChangeAllowColumns={handleChangeAllowColumns}
                                     isOrder
                                   />
@@ -499,198 +524,200 @@ export const OrdersTable = memo((props) => {
               </tr>
             </thead>
           )}
-          {(orderList.loading || !allowColumns) ? (
-            [...Array(10).keys()].map(i => (
-              <OrderTbody key={i}>
-                <tr>
-                  {allowColumns?.slaBar?.visable && (
-                    <td>
-                      <Timestatus />
-                    </td>
-                  )}
-                  <td
-                    className={!(allowColumns?.orderNumber?.visable || allowColumns?.dateTime?.visable) ? 'orderNo small' : 'orderNo'}
-                  >
-                    <OrderNumberContainer>
-                      <CheckBox>
-                        <Skeleton width={25} height={25} style={{ margin: '10px' }} />
-                      </CheckBox>
-                      <div className='info'>
-                        {allowColumns?.orderNumber?.visable && (
-                          <p><Skeleton width={100} /></p>
-                        )}
-                        {allowColumns?.dateTime?.visable && (
-                          <Skeleton width={120} />
-                        )}
-                      </div>
-                    </OrderNumberContainer>
-                  </td>
-                  {allowColumns?.externalId?.visable && (
-                    <td className='externalId'>
-                      <StatusInfo>
+          {(orderList.loading || !allowColumns)
+            ? (
+              [...Array(10).keys()].map(i => (
+                <OrderTbody key={i}>
+                  <tr>
+                    {allowColumns?.slaBar?.visable && (
+                      <td>
+                        <Timestatus />
+                      </td>
+                    )}
+                    <td
+                      className={!(allowColumns?.orderNumber?.visable || allowColumns?.dateTime?.visable) ? 'orderNo small' : 'orderNo'}
+                    >
+                      <OrderNumberContainer>
+                        <CheckBox>
+                          <Skeleton width={25} height={25} style={{ margin: '10px' }} />
+                        </CheckBox>
                         <div className='info'>
-                          <p className='bold'><Skeleton width={100} /></p>
+                          {allowColumns?.orderNumber?.visable && (
+                            <p><Skeleton width={100} /></p>
+                          )}
+                          {allowColumns?.dateTime?.visable && (
+                            <Skeleton width={120} />
+                          )}
                         </div>
-                      </StatusInfo>
+                      </OrderNumberContainer>
                     </td>
-                  )}
-                  {allowColumns?.cartGroupId?.visable && (
-                    <td className='statusInfo'>
-                      <StatusInfo>
+                    {allowColumns?.externalId?.visable && (
+                      <td className='externalId'>
+                        <StatusInfo>
+                          <div className='info'>
+                            <p className='bold'><Skeleton width={100} /></p>
+                          </div>
+                        </StatusInfo>
+                      </td>
+                    )}
+                    {allowColumns?.cartGroupId?.visable && (
+                      <td className='statusInfo'>
+                        <StatusInfo>
+                          <div className='info'>
+                            <p className='bold'><Skeleton width={100} /></p>
+                          </div>
+                        </StatusInfo>
+                      </td>
+                    )}
+                    {allowColumns?.driverGroupId?.visable && (
+                      <td className='statusInfo'>
+                        <StatusInfo>
+                          <div className='info'>
+                            <p className='bold'><Skeleton width={100} /></p>
+                          </div>
+                        </StatusInfo>
+                      </td>
+                    )}
+                    {allowColumns?.status?.visable && !isSelectedOrders && (
+                      <td className='statusInfo'>
+                        <StatusInfo>
+                          <div className='info'>
+                            <p className='bold'><Skeleton width={100} /></p>
+                          </div>
+                        </StatusInfo>
+                      </td>
+                    )}
+                    {allowColumns?.business?.visable && (
+                      <td className='businessInfo'>
+                        <BusinessInfo>
+                          {!hidePhoto && (
+                            <Skeleton width={45} height={45} />
+                          )}
+                          <div className='info'>
+                            <p className='bold'><Skeleton width={80} /></p>
+                            <p><Skeleton width={100} /></p>
+                          </div>
+                        </BusinessInfo>
+                      </td>
+                    )}
+                    {allowColumns?.customer?.visable && (
+                      <td className='customerInfo'>
+                        <CustomerInfo>
+                          {!hidePhoto && (
+                            <Skeleton width={45} height={45} />
+                          )}
+                          <div className='info'>
+                            <p className='bold'><Skeleton width={100} /></p>
+                            <p><Skeleton width={100} /></p>
+                          </div>
+                        </CustomerInfo>
+                      </td>
+                    )}
+                    {allowColumns?.driver?.visable && !isSelectedOrders && (
+                      <td className='driverInfo'>
+                        <DriversInfo className='d-flex align-items-center'>
+                          {!hidePhoto && (
+                            <Skeleton width={45} height={45} />
+                          )}
+                          <Skeleton width={100} style={{ margin: '10px' }} />
+                        </DriversInfo>
+                      </td>
+                    )}
+                    {allowColumns?.deliveryType?.visable && !isSelectedOrders && (
+                      <td className='orderType'>
+                        <OrderType>
+                          <Skeleton width={35} height={35} />
+                        </OrderType>
+                      </td>
+                    )}
+                    {allowColumns?.status?.visable && !isSelectedOrders && (
+                      <td className='orderStatusTitle'>
+                        <WrapOrderStatusSelector>
+                          <Skeleton width={100} height={30} />
+                        </WrapOrderStatusSelector>
+                      </td>
+                    )}
+                    {allowColumns?.advanced?.visable && !isSelectedOrders && (
+                      <td className='logistic'>
                         <div className='info'>
-                          <p className='bold'><Skeleton width={100} /></p>
-                        </div>
-                      </StatusInfo>
-                    </td>
-                  )}
-                  {allowColumns?.driverGroupId?.visable && (
-                    <td className='statusInfo'>
-                      <StatusInfo>
-                        <div className='info'>
-                          <p className='bold'><Skeleton width={100} /></p>
-                        </div>
-                      </StatusInfo>
-                    </td>
-                  )}
-                  {allowColumns?.status?.visable && !isSelectedOrders && (
-                    <td className='statusInfo'>
-                      <StatusInfo>
-                        <div className='info'>
-                          <p className='bold'><Skeleton width={100} /></p>
-                        </div>
-                      </StatusInfo>
-                    </td>
-                  )}
-                  {allowColumns?.business?.visable && (
-                    <td className='businessInfo'>
-                      <BusinessInfo>
-                        {!hidePhoto && (
-                          <Skeleton width={45} height={45} />
-                        )}
-                        <div className='info'>
-                          <p className='bold'><Skeleton width={80} /></p>
-                          <p><Skeleton width={100} /></p>
-                        </div>
-                      </BusinessInfo>
-                    </td>
-                  )}
-                  {allowColumns?.customer?.visable && (
-                    <td className='customerInfo'>
-                      <CustomerInfo>
-                        {!hidePhoto && (
-                          <Skeleton width={45} height={45} />
-                        )}
-                        <div className='info'>
-                          <p className='bold'><Skeleton width={100} /></p>
-                          <p><Skeleton width={100} /></p>
-                        </div>
-                      </CustomerInfo>
-                    </td>
-                  )}
-                  {allowColumns?.driver?.visable && !isSelectedOrders && (
-                    <td className='driverInfo'>
-                      <DriversInfo className='d-flex align-items-center'>
-                        {!hidePhoto && (
-                          <Skeleton width={45} height={45} />
-                        )}
-                        <Skeleton width={100} style={{ margin: '10px' }} />
-                      </DriversInfo>
-                    </td>
-                  )}
-                  {allowColumns?.deliveryType?.visable && !isSelectedOrders && (
-                    <td className='orderType'>
-                      <OrderType>
-                        <Skeleton width={35} height={35} />
-                      </OrderType>
-                    </td>
-                  )}
-                  {allowColumns?.status?.visable && !isSelectedOrders && (
-                    <td className='orderStatusTitle'>
-                      <WrapOrderStatusSelector>
-                        <Skeleton width={100} height={30} />
-                      </WrapOrderStatusSelector>
-                    </td>
-                  )}
-                  {allowColumns?.advanced?.visable && !isSelectedOrders && (
-                    <td className='logistic'>
-                      <div className='info'>
-                        <p className='bold'><Skeleton width={60} /></p>
-                        <p><Skeleton width={60} /></p>
-                      </div>
-                    </td>
-                  )}
-                  {allowColumns?.advanced?.visable && !isSelectedOrders && (
-                    <td className='attempts'>
-                      <div className='info'>
-                        <p className='bold'><Skeleton width={60} /></p>
-                        <p><Skeleton width={60} /></p>
-                      </div>
-                    </td>
-                  )}
-                  {allowColumns?.advanced?.visable && !isSelectedOrders && (
-                    <td className='priority'>
-                      <div className='info'>
-                        <p className='bold'><Skeleton width={60} /></p>
-                        <p><Skeleton width={60} /></p>
-                      </div>
-                    </td>
-                  )}
-                  {allowColumns?.channel?.visable && !isSelectedOrders && (
-                    <td className='orderStatusTitle'>
-                      <WrapOrderStatusSelector>
-                        <Skeleton width={100} height={30} />
-                      </WrapOrderStatusSelector>
-                    </td>
-                  )}
-                  {allowColumns?.pod?.visable && !isSelectedOrders && (
-                    <td className='orderStatusTitle'>
-                      <WrapOrderStatusSelector>
-                        <Skeleton width={100} height={30} />
-                      </WrapOrderStatusSelector>
-                    </td>
-                  )}
-                  {!isSelectedOrders && (
-                    <td className='orderPrice'>
-                      <div className='info'>
-                        {allowColumns?.total?.visable && (
                           <p className='bold'><Skeleton width={60} /></p>
-                        )}
-                        <p>
-                          <Skeleton width={100} />
-                        </p>
-                      </div>
-                    </td>
-                  )}
-                </tr>
+                          <p><Skeleton width={60} /></p>
+                        </div>
+                      </td>
+                    )}
+                    {allowColumns?.advanced?.visable && !isSelectedOrders && (
+                      <td className='attempts'>
+                        <div className='info'>
+                          <p className='bold'><Skeleton width={60} /></p>
+                          <p><Skeleton width={60} /></p>
+                        </div>
+                      </td>
+                    )}
+                    {allowColumns?.advanced?.visable && !isSelectedOrders && (
+                      <td className='priority'>
+                        <div className='info'>
+                          <Skeleton width={45} />
+                        </div>
+                      </td>
+                    )}
+
+                    {allowColumns?.channel?.visable && !isSelectedOrders && (
+                      <td className='orderStatusTitle'>
+                        <WrapOrderStatusSelector>
+                          <Skeleton width={100} height={30} />
+                        </WrapOrderStatusSelector>
+                      </td>
+                    )}
+                    {allowColumns?.pod?.visable && !isSelectedOrders && (
+                      <td className='orderStatusTitle'>
+                        <WrapOrderStatusSelector>
+                          <Skeleton width={100} height={30} />
+                        </WrapOrderStatusSelector>
+                      </td>
+                    )}
+                    {!isSelectedOrders && (
+                      <td className='orderPrice'>
+                        <div className='info'>
+                          {allowColumns?.total?.visable && (
+                            <p className='bold'><Skeleton width={60} /></p>
+                          )}
+                          <p>
+                            <Skeleton width={100} />
+                          </p>
+                        </div>
+                      </td>
+                    )}
+                  </tr>
+                </OrderTbody>
+              ))
+            )
+            : (
+              <OrderTbody>
+                {orderList.orders.map((order, i) => (
+                  <Order
+                    key={order?.id}
+                    i={i}
+                    order={order}
+                    orderDetailId={orderDetailId}
+                    isEnabledRowInColor={isEnabledRowInColor}
+                    handleClickOrder={handleClickOrder}
+                    allowColumns={allowColumns}
+                    isSelectedOrders={isSelectedOrders}
+                    selectedOrderIds={selectedOrderIds}
+                    handleSelectedOrderIds={handleSelectedOrderIds}
+                    showExternalId={showExternalId}
+                    getOrderStatus={getOrderStatus}
+                    hidePhoto={hidePhoto}
+                    getLogisticTag={getLogisticTag}
+                    getPriorityTag={getPriorityTag}
+                    groupStatus={groupStatus}
+                    displayDelayedTime={displayDelayedTime}
+                    getCurrenySymbol={getCurrenySymbol}
+                    franchiseImages={franchiseImages}
+                  />
+                ))}
               </OrderTbody>
-            ))
-          ) : (
-            <OrderTbody>
-              {orderList.orders.map((order, i) => (
-                <Order
-                  key={order?.id}
-                  i={i}
-                  order={order}
-                  orderDetailId={orderDetailId}
-                  isEnabledRowInColor={isEnabledRowInColor}
-                  handleClickOrder={handleClickOrder}
-                  allowColumns={allowColumns}
-                  isSelectedOrders={isSelectedOrders}
-                  selectedOrderIds={selectedOrderIds}
-                  handleSelectedOrderIds={handleSelectedOrderIds}
-                  showExternalId={showExternalId}
-                  getOrderStatus={getOrderStatus}
-                  hidePhoto={hidePhoto}
-                  getLogisticTag={getLogisticTag}
-                  getPriorityTag={getPriorityTag}
-                  groupStatus={groupStatus}
-                  displayDelayedTime={displayDelayedTime}
-                  getCurrenySymbol={getCurrenySymbol}
-                  franchiseImages={franchiseImages}
-                />
-              ))}
-            </OrderTbody>
-          )}
+            )}
         </Table>
       </OrdersContainer>
 
@@ -708,3 +735,5 @@ export const OrdersTable = memo((props) => {
     </>
   )
 }, OrderTablePropsAreEqual)
+
+OrdersTable.displayName = 'OrdersTable'
