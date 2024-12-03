@@ -29,7 +29,7 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 var OrdersListing = exports.OrdersListing = /*#__PURE__*/(0, _react.memo)(function (props) {
-  var _theme$images;
+  var _configState$configs, _theme$images;
   var hidePhoto = props.hidePhoto,
     isSelectedOrders = props.isSelectedOrders,
     orderList = props.orderList,
@@ -72,10 +72,14 @@ var OrdersListing = exports.OrdersListing = /*#__PURE__*/(0, _react.memo)(functi
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
+  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configState = _useConfig2[0];
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     filterApplied = _useState2[0],
     setFilterApplied = _useState2[1];
+  var showExternalId = (configState === null || configState === void 0 || (_configState$configs = configState.configs) === null || _configState$configs === void 0 || (_configState$configs = _configState$configs.change_order_id) === null || _configState$configs === void 0 ? void 0 : _configState$configs.value) === '1';
   var handleDobleClick = function handleDobleClick() {
     if (handleSetOpenOrderDetail && orderDetailId) {
       handleSetOpenOrderDetail(true);
@@ -83,49 +87,64 @@ var OrdersListing = exports.OrdersListing = /*#__PURE__*/(0, _react.memo)(functi
   };
   var optionsDefault = [{
     value: 'status',
-    content: t('STATUS', 'Status')
+    content: t('STATUS', 'Status'),
+    enabled: true
   }, {
     value: 'orderNumber',
-    content: t('INVOICE_ORDER_NO', 'Order No.')
-  }, {
-    value: 'agent',
-    content: t('AGENT', 'Agent')
-  }, {
-    value: 'cartGroupId',
-    content: t('GROUP_ORDER', 'Group Order')
-  }, {
-    value: 'driverGroupId',
-    content: t('EXPORT_DRIVER_GROUP_ID', 'Driver Group Id')
+    content: t('INVOICE_ORDER_NO', 'Order No.'),
+    enabled: !showExternalId
   }, {
     value: 'dateTime',
-    content: t('DATE_TIME', 'Date and time')
+    content: t('DATE_TIME', 'Date and time'),
+    enabled: true
+  }, {
+    value: 'agent',
+    content: t('AGENT', 'Agent'),
+    enabled: true
+  }, {
+    value: 'cartGroupId',
+    content: t('GROUP_ORDER', 'Group Order'),
+    enabled: true
+  }, {
+    value: 'driverGroupId',
+    content: t('EXPORT_DRIVER_GROUP_ID', 'Driver Group Id'),
+    enabled: true
   }, {
     value: 'business',
-    content: t('BUSINESS', 'Business')
+    content: t('BUSINESS', 'Business'),
+    enabled: true
   }, {
     value: 'customer',
-    content: t('CUSTOMER', 'Customer')
+    content: t('CUSTOMER', 'Customer'),
+    enabled: true
   }, {
     value: 'driver',
-    content: t('DRIVER', 'Driver')
+    content: t('DRIVER', 'Driver'),
+    enabled: true
   }, {
     value: 'advanced',
-    content: t('ADVANCED_LOGISTICS', 'Advance Logistics')
+    content: t('ADVANCED_LOGISTICS', 'Advance Logistics'),
+    enabled: true
   }, {
     value: 'timer',
-    content: t('SLA_TIMER', 'SLA’s timer')
+    content: t('SLA_TIMER', 'SLA’s timer'),
+    enabled: true
   }, {
     value: 'eta',
-    content: t('ETA', 'ETA')
+    content: t('ETA', 'ETA'),
+    enabled: true
   }, {
     value: 'total',
-    content: t('EXPORT_TOTAL', 'Total')
+    content: t('EXPORT_TOTAL', 'Total'),
+    enabled: true
   }, {
     value: 'externalId',
-    content: t('EXTERNAL_ID', 'External id')
+    content: t('EXTERNAL_ID', 'External id'),
+    enabled: true
   }, {
     value: 'channel',
-    content: t('CHANNEL', 'Channel')
+    content: t('CHANNEL', 'Channel'),
+    enabled: true
   }];
   var handleChangeAllowColumns = function handleChangeAllowColumns(type) {
     var _column2;
@@ -194,7 +213,10 @@ var OrdersListing = exports.OrdersListing = /*#__PURE__*/(0, _react.memo)(functi
     return ((_allowColumns$col = allowColumns[col]) === null || _allowColumns$col === void 0 ? void 0 : _allowColumns$col.visable) && ((_allowColumns$col2 = allowColumns[col]) === null || _allowColumns$col2 === void 0 ? void 0 : _allowColumns$col2.order) !== 0;
   }).length === 0) && /*#__PURE__*/_react.default.createElement(_styles2.ColumnPopoverContainer, null, /*#__PURE__*/_react.default.createElement(_Shared.ColumnAllowSettingPopover, {
     allowColumns: allowColumns,
-    optionsDefault: optionsDefault,
+    optionsDefault: optionsDefault === null || optionsDefault === void 0 ? void 0 : optionsDefault.filter(function (_ref) {
+      var enabled = _ref.enabled;
+      return enabled;
+    }),
     handleChangeAllowColumns: handleChangeAllowColumns,
     isOrder: true
   })), /*#__PURE__*/_react.default.createElement(_OrdersTable.OrdersTable, {
@@ -241,3 +263,4 @@ var OrdersListing = exports.OrdersListing = /*#__PURE__*/(0, _react.memo)(functi
     franchisesList: props.franchisesList
   })), handleSetOpenOrderDetail && orderDetailId && /*#__PURE__*/_react.default.createElement(_styles2.InfoMessage, null, /*#__PURE__*/_react.default.createElement(_AiOutlineInfoCircle.default, null), /*#__PURE__*/_react.default.createElement("span", null, t('DOBLE_CLICK_OPEN_ORDER_INFO', 'Doble click order to open details')))));
 });
+OrdersListing.displayName = 'OrdersListing';

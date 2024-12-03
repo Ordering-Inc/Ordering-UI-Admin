@@ -82,7 +82,7 @@ var Order = exports.Order = /*#__PURE__*/_react.default.memo(function (props) {
         className: "bold"
       }, order === null || order === void 0 ? void 0 : order.external_id)));
     }
-    if (column === 'orderNumber') {
+    if (showExternalId ? column === 'dateTime' : column === 'orderNumber') {
       var _allowColumns$orderNu, _allowColumns$dateTim, _allowColumns$orderNu2, _allowColumns$dateTim2;
       return /*#__PURE__*/_react.default.createElement("td", {
         className: !(allowColumns !== null && allowColumns !== void 0 && (_allowColumns$orderNu = allowColumns.orderNumber) !== null && _allowColumns$orderNu !== void 0 && _allowColumns$orderNu.visable || allowColumns !== null && allowColumns !== void 0 && (_allowColumns$dateTim = allowColumns.dateTime) !== null && _allowColumns$dateTim !== void 0 && _allowColumns$dateTim.visable) ? 'small' : '',
