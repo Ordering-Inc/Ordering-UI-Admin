@@ -1,7 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, useMemo } from 'react'
 import { useConfig, useLanguage, useApi, useSession } from 'ordering-components-admin'
 import GoogleMapReact, { fitBounds } from 'google-map-react'
-import { DriverMapMarkerAndInfo } from '../DriverMapMarkerAndInfo'
 import { InterActOrderMarker } from '../InterActOrderMarker'
 import { AutoScroll } from '../../Shared'
 import { useTheme } from 'styled-components'
@@ -44,9 +43,12 @@ export const DeliveriesLocation = (props) => {
   const [mapLoaded, setMapLoaded] = useState(true)
   const [mapFitted, setMapFitted] = useState(false)
 
-  const [interActionOrderDriverLocation, setInterActionOrderDriverLocation] = useState(null)
   const defaultZoom = 10
   const mapRef = useRef(null)
+
+  const interActionOrderDriverLocation = useMemo(() => {
+    return driversList?.drivers?.find?.(driver => driver?.id === interActionMapOrder?.driver?.id)?.location || null
+  }, [JSON.stringify(driversList?.drivers), interActionMapOrder?.driver?.id])
 
   const mapFit = () => {
     const bounds = new window.google.maps.LatLngBounds()
@@ -127,13 +129,6 @@ export const DeliveriesLocation = (props) => {
   // Fit bounds on mount, and when the markers change
   useEffect(() => {
     if (driversList.loading || driversList.drivers.length === 0 || mapLoaded) return
-    if (interActionMapOrder !== null) {
-      for (const driver of driversList.drivers) {
-        if (driver.id === interActionMapOrder?.driver?.id) {
-          setInterActionOrderDriverLocation(driver.location)
-        }
-      }
-    }
     if (!mapFitted) {
       mapFit()
     }
