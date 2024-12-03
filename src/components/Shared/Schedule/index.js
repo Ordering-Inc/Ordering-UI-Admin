@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import {
   useLanguage,
   useConfig,
   useUtils,
   Schedule as ScheduleController
-} from 'ordering-components-admin'
+} from '../../../../../index'
 import {
   PlusSquare,
   PlusCircleFill,
@@ -59,7 +59,8 @@ const ScheduleUI = (props) => {
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
 
-  const [scheduleOptions, setScheduleOptions] = useState([])
+  const minuteOptions = useRef([])
+  const hourOptions = useRef([])
   const [isOpenCopytimes, setIsOpenCopytimes] = useState(null)
 
   const daysOfWeek = [
@@ -115,53 +116,24 @@ const ScheduleUI = (props) => {
   }, [isConflict])
 
   useEffect(() => {
-    const _scheduleOptions = []
-    for (let hour = 0; hour < 24; hour++) {
-      let hh = ''
-      let meridian = ''
-      if (!is12Hours) hh = hour < 10 ? `0${hour}` : hour
-      else {
-        if (hour === 0) {
-          hh = '12'
-          meridian = ' ' + t('AM', 'AM')
-        } else if (hour > 0 && hour < 12) {
-          hh = (hour < 10 ? '0' + hour : hour)
-          meridian = ' ' + t('AM', 'AM')
-        } else if (hour === 12) {
-          hh = '12'
-          meridian = ' ' + t('PM', 'PM')
-        } else {
-          hh = ((hour - 12 < 10) ? '0' + (hour - 12) : (hour - 12))
-          meridian = ' ' + t('PM', 'PM')
-        }
-      }
-      for (let min = 0; min < 4; min++) {
-        _scheduleOptions.push({
-          value: hour + ':' + min * 15,
-          content: (
-            <Option>
-              {is12Hours ? (
-                <>
-                  {hh}:{min === 0 ? '00' : min * 15} {meridian}
-                </>
-              ) : (
-                <>
-                  {hh} : {min === 0 ? '00' : min * 15}
-                </>
-              )}
-            </Option>
-          )
-        })
-      }
+    const generateOptions = (count, formatFn) => {
+      return Array.from({ length: count }, (_, i) => ({
+        value: i,
+        content: <Option>{formatFn(i)}</Option>
+      }))
     }
-    _scheduleOptions.push({
-      value: '23:59',
-      content: (
-        <Option>{is12Hours ? '11:59 PM' : '23 : 59'}</Option>
-      )
-    })
-    setScheduleOptions(_scheduleOptions)
-  }, [])
+
+    const formatMinute = (i) => (i < 10 ? `0${i}` : i)
+    const formatHour = (hour) => {
+      if (!is12Hours) return hour < 10 ? `0${hour}` : hour
+      if (hour === 0) return `12 ${t('AM', 'AM')}`
+      if (hour < 12) return `${hour} ${t('AM', 'AM')}`
+      if (hour === 12) return `12 ${t('PM', 'PM')}`
+      return `${hour - 12} ${t('PM', 'PM')}`
+    }
+    minuteOptions.current = generateOptions(60, formatMinute)
+    hourOptions.current = generateOptions(24, formatHour)
+  }, [is12Hours])
 
   return (
     <>
@@ -184,95 +156,117 @@ const ScheduleUI = (props) => {
                 )}
               </DateWrapper>
             </div>
-            {schedule?.enabled ? (
-              <div>
-                {schedule?.lapses.map((lapse, index) => (
-                  <div
-                    key={index}
-                  >
-                    <SelectWrapper>
-                      <DefaultSelect
-                        noSelected
-                        options={scheduleOptions}
-                        defaultValue={
-                          lapse?.open?.hour === 23 && lapse?.open?.minute === 59
-                            ? `${lapse?.open?.hour}:${lapse?.open?.minute}`
-                            : `${lapse?.open?.hour}:${parseInt(lapse?.open?.minute / 15) * 15}`
-                        }
-                        onChange={val => handleChangeScheduleTime(val, daysOfWeekIndex, index, true)}
-                        optionInnerMaxHeight='300px'
-                      />
-                    </SelectWrapper>
-                    <SplitLine />
-                    <SelectWrapper>
-                      <DefaultSelect
-                        noSelected
-                        options={scheduleOptions}
-                        defaultValue={
-                          lapse?.close?.hour === 23 && lapse?.close?.minute === 59
-                            ? `${lapse?.close?.hour}:${lapse?.close?.minute}`
-                            : `${lapse?.close?.hour}:${parseInt(lapse?.close?.minute / 15) * 15}`
-                        }
-                        onChange={val => handleChangeScheduleTime(val, daysOfWeekIndex, index, false)}
-                        optionInnerMaxHeight='300px'
-                      />
-                    </SelectWrapper>
-                    <TrashIconWrapper
-                      isHide={schedule?.lapses.length <= 1}
+            {schedule?.enabled
+              ? (
+                <div>
+                  {schedule?.lapses.map((lapse, index) => (
+                    <div
+                      key={index}
                     >
-                      {!disableSchedule && (
-                        <Trash
-                          onClick={() => onClickDelete(daysOfWeekIndex, index)}
+                      <SelectWrapper>
+                        <DefaultSelect
+                          noSelected
+                          options={hourOptions.current}
+                          defaultValue={lapse?.open?.hour}
+                          onChange={val => handleChangeScheduleTime(`${val}:${lapse?.open?.minute}`, daysOfWeekIndex, index, true)}
+                          optionInnerMaxHeight='300px'
                         />
-                      )}
-                    </TrashIconWrapper>
-                  </div>
-                ))}
-                {openAddSchedule[daysOfWeekIndex] && (
-                  <div>
-                    <SelectWrapper>
-                      <DefaultSelect
-                        noSelected
-                        options={scheduleOptions}
-                        defaultValue={
-                          addScheduleTime?.open?.hour === 23 && addScheduleTime?.open?.minute === 59
-                            ? `${addScheduleTime?.open?.hour}:${addScheduleTime?.open?.minute}`
-                            : `${addScheduleTime?.open?.hour}:${parseInt(addScheduleTime?.open?.minute / 15) * 15}`
-                        }
-                        optionInnerMaxHeight='300px'
-                        onChange={val => handleChangeAddScheduleTime(val, true)}
-                      />
-                    </SelectWrapper>
-                    <SplitLine />
-                    <SelectWrapper>
-                      <DefaultSelect
-                        noSelected
-                        options={scheduleOptions}
-                        defaultValue={
-                          addScheduleTime?.close?.hour === 23 && addScheduleTime?.close?.minute === 59
-                            ? `${addScheduleTime?.close?.hour}:${addScheduleTime?.close?.minute}`
-                            : `${addScheduleTime?.close?.hour}:${parseInt(addScheduleTime?.close?.minute / 15) * 15}`
-                        }
-                        optionInnerMaxHeight='300px'
-                        onChange={val => handleChangeAddScheduleTime(val, false)}
-                      />
-                    </SelectWrapper>
-                    <AddScheduleIconWrapper>
-                      <PlusCircleFill
-                        onClick={() => handleAddSchedule(daysOfWeekIndex)}
-                      />
-                      <DashCircleFill
-                        onClick={() => handleOpenAddSchedule(null)}
-                      />
-                    </AddScheduleIconWrapper>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <div>
-                <p>{t('UNAVAILABLE', 'Unavailable')}</p>
-              </div>
-            )}
+                      </SelectWrapper>
+                      <SelectWrapper>
+                        <DefaultSelect
+                          noSelected
+                          options={minuteOptions.current}
+                          defaultValue={lapse?.open?.minute}
+                          onChange={val => handleChangeScheduleTime(`${lapse?.open?.hour}:${val}`, daysOfWeekIndex, index, true)}
+                          optionInnerMaxHeight='300px'
+                        />
+                      </SelectWrapper>
+                      <SplitLine />
+                      <SelectWrapper>
+                        <DefaultSelect
+                          noSelected
+                          options={hourOptions.current}
+                          defaultValue={lapse?.close?.hour}
+                          onChange={val => handleChangeScheduleTime(`${val}:${lapse?.close?.minute}`, daysOfWeekIndex, index, false)}
+                          optionInnerMaxHeight='300px'
+                        />
+                      </SelectWrapper>
+                      <SelectWrapper>
+                        <DefaultSelect
+                          noSelected
+                          options={minuteOptions.current}
+                          defaultValue={lapse?.close?.minute}
+                          onChange={val => handleChangeScheduleTime(`${lapse?.close?.hour}:${val}`, daysOfWeekIndex, index, false)}
+                          optionInnerMaxHeight='300px'
+                        />
+                      </SelectWrapper>
+                      <TrashIconWrapper
+                        isHide={schedule?.lapses.length <= 1}
+                      >
+                        {!disableSchedule && (
+                          <Trash
+                            onClick={() => onClickDelete(daysOfWeekIndex, index)}
+                          />
+                        )}
+                      </TrashIconWrapper>
+                    </div>
+                  ))}
+                  {openAddSchedule[daysOfWeekIndex] && (
+                    <div>
+                      <SelectWrapper>
+                        <DefaultSelect
+                          noSelected
+                          options={hourOptions}
+                          defaultValue={addScheduleTime?.open?.hour}
+                          onChange={val => handleChangeAddScheduleTime(`${val}:${addScheduleTime?.open?.minute}`, true)}
+                          optionInnerMaxHeight='300px'
+                        />
+                      </SelectWrapper>
+                      <SelectWrapper>
+                        <DefaultSelect
+                          noSelected
+                          options={minuteOptions}
+                          defaultValue={addScheduleTime?.open?.minute}
+                          onChange={val => handleChangeAddScheduleTime(`${addScheduleTime?.open?.hour}:${val}`, true)}
+                          optionInnerMaxHeight='300px'
+                        />
+                      </SelectWrapper>
+                      <SplitLine />
+                      <SelectWrapper>
+                        <DefaultSelect
+                          noSelected
+                          options={hourOptions}
+                          defaultValue={addScheduleTime?.close?.hour}
+                          onChange={val => handleChangeAddScheduleTime(`${val}:${addScheduleTime?.close?.minute}`, false)}
+                          optionInnerMaxHeight='300px'
+                        />
+                      </SelectWrapper>
+                      <SelectWrapper>
+                        <DefaultSelect
+                          noSelected
+                          options={minuteOptions}
+                          defaultValue={addScheduleTime?.close?.minute}
+                          onChange={val => handleChangeAddScheduleTime(`${addScheduleTime?.close?.hour}:${val}`, false)}
+                          optionInnerMaxHeight='300px'
+                        />
+                      </SelectWrapper>
+                      <AddScheduleIconWrapper>
+                        <PlusCircleFill
+                          onClick={() => handleAddSchedule(daysOfWeekIndex)}
+                        />
+                        <DashCircleFill
+                          onClick={() => handleOpenAddSchedule(null)}
+                        />
+                      </AddScheduleIconWrapper>
+                    </div>
+                  )}
+                </div>
+              )
+              : (
+                <div>
+                  <p>{t('UNAVAILABLE', 'Unavailable')}</p>
+                </div>
+              )}
             {!disableSchedule && (
               <div>
                 <IconWrapper
