@@ -147,6 +147,7 @@ var DeliveriesManagerUI = function DeliveriesManagerUI(props) {
     handleChangeSearch: handleChangeSearch,
     setDetailsOrder: setDetailsOrder
   })))), isOpenOrderDetail && /*#__PURE__*/_react.default.createElement(_OrderDetails.OrderDetails, {
+    disableSocketRoomDriver: true,
     open: isOpenOrderDetail,
     order: detailsOrder,
     orderId: orderDetailId,
