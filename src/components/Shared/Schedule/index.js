@@ -4,7 +4,7 @@ import {
   useConfig,
   useUtils,
   Schedule as ScheduleController
-} from '../../../../../index'
+} from 'ordering-components-admin'
 import {
   PlusSquare,
   PlusCircleFill,
