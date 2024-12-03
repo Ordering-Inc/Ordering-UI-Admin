@@ -72,7 +72,7 @@ export const Order = React.memo((props) => {
               </td>
             )
           }
-          if (column === 'orderNumber') {
+          if (showExternalId ? column === 'dateTime' : column === 'orderNumber') {
             return (
               <td
                 className={!(allowColumns?.orderNumber?.visable || allowColumns?.dateTime?.visable) ? 'small' : ''}

@@ -1,9 +1,9 @@
-import React, { memo, useState, useEffect, useRef } from 'react'
-import { useLanguage } from 'ordering-components-admin'
+import React, { memo, useState, useEffect } from 'react'
+import { useLanguage, useConfig } from 'ordering-components-admin'
 import { useTheme } from 'styled-components'
 import { OrdersTable } from '../OrdersTable'
 import { OrdersCards } from '../OrdersCards'
-import { Button, LinkButton } from '../../../styles'
+import { Button } from '../../../styles'
 import AiOutlineInfoCircle from '@meronex/icons/ai/AiOutlineInfoCircle'
 
 import {
@@ -61,7 +61,10 @@ export const OrdersListing = memo((props) => {
 
   const theme = useTheme()
   const [, t] = useLanguage()
+  const [configState] = useConfig()
   const [filterApplied, setFilterApplied] = useState(false)
+
+  const showExternalId = configState?.configs?.change_order_id?.value === '1'
 
   const handleDobleClick = () => {
     if (handleSetOpenOrderDetail && orderDetailId) {
@@ -72,63 +75,78 @@ export const OrdersListing = memo((props) => {
   const optionsDefault = [
     {
       value: 'status',
-      content: t('STATUS', 'Status')
+      content: t('STATUS', 'Status'),
+      enabled: true
     },
     {
       value: 'orderNumber',
-      content: t('INVOICE_ORDER_NO', 'Order No.')
-    },
-    {
-      value: 'agent',
-      content: t('AGENT', 'Agent')
-    },
-    {
-      value: 'cartGroupId',
-      content: t('GROUP_ORDER', 'Group Order')
-    },
-    {
-      value: 'driverGroupId',
-      content: t('EXPORT_DRIVER_GROUP_ID', 'Driver Group Id')
+      content: t('INVOICE_ORDER_NO', 'Order No.'),
+      enabled: !showExternalId
     },
     {
       value: 'dateTime',
-      content: t('DATE_TIME', 'Date and time')
+      content: t('DATE_TIME', 'Date and time'),
+      enabled: true
+    },
+    {
+      value: 'agent',
+      content: t('AGENT', 'Agent'),
+      enabled: true
+    },
+    {
+      value: 'cartGroupId',
+      content: t('GROUP_ORDER', 'Group Order'),
+      enabled: true
+    },
+    {
+      value: 'driverGroupId',
+      content: t('EXPORT_DRIVER_GROUP_ID', 'Driver Group Id'),
+      enabled: true
     },
     {
       value: 'business',
-      content: t('BUSINESS', 'Business')
+      content: t('BUSINESS', 'Business'),
+      enabled: true
     },
     {
       value: 'customer',
-      content: t('CUSTOMER', 'Customer')
+      content: t('CUSTOMER', 'Customer'),
+      enabled: true
     },
     {
       value: 'driver',
-      content: t('DRIVER', 'Driver')
+      content: t('DRIVER', 'Driver'),
+      enabled: true
     },
     {
       value: 'advanced',
-      content: t('ADVANCED_LOGISTICS', 'Advance Logistics')
+      content: t('ADVANCED_LOGISTICS', 'Advance Logistics'),
+      enabled: true
     },
     {
       value: 'timer',
-      content: t('SLA_TIMER', 'SLA’s timer')
+      content: t('SLA_TIMER', 'SLA’s timer'),
+      enabled: true
     },
     {
       value: 'eta',
-      content: t('ETA', 'ETA')
+      content: t('ETA', 'ETA'),
+      enabled: true
     },
     {
       value: 'total',
-      content: t('EXPORT_TOTAL', 'Total')
+      content: t('EXPORT_TOTAL', 'Total'),
+      enabled: true
     },
     {
       value: 'externalId',
-      content: t('EXTERNAL_ID', 'External id')
+      content: t('EXTERNAL_ID', 'External id'),
+      enabled: true
     },
     {
       value: 'channel',
-      content: t('CHANNEL', 'Channel')
+      content: t('CHANNEL', 'Channel'),
+      enabled: true
     }
   ]
 
@@ -182,95 +200,101 @@ export const OrdersListing = memo((props) => {
     <>
       {((ordersStatusGroup === groupStatus) || isMessagesView) && (
         <>
-          {!orderList.loading && pagination?.total === 0 ? (
-            <WrapperNoneOrders>
-              <InnerNoneOrdersContainer small={orderListView === 'small'}>
-                <img src={theme?.images?.dummies?.noOrders} alt='none' />
-                {filterApplied ? (
-                  <>
-                    <p>{t('NOT_FOUND_FILTERED_ORDERS', 'No orders with the current filters applied.')}</p>
-                    <Button
-                      outline
-                      borderRadius='8px'
-                      color='primary'
-                      onClick={() => setFilterModalOpen(true)}
-                    >
-                      {t('FILTERS', 'Filters')}
-                    </Button>
-                  </>
-                ) : (
-                  <p>{t('MOBILE_NO_ORDERS', 'No Orders yet.')}</p>
-                )}
-              </InnerNoneOrdersContainer>
-            </WrapperNoneOrders>
-          ) : (
-            <WrapperOrderListContent
-              maxHeight={orderListView !== 'table'}
-              onDoubleClick={handleDobleClick}
-            >
+          {!orderList.loading && pagination?.total === 0
+            ? (
+              <WrapperNoneOrders>
+                <InnerNoneOrdersContainer small={orderListView === 'small'}>
+                  <img src={theme?.images?.dummies?.noOrders} alt='none' />
+                  {filterApplied
+                    ? (
+                      <>
+                        <p>{t('NOT_FOUND_FILTERED_ORDERS', 'No orders with the current filters applied.')}</p>
+                        <Button
+                          outline
+                          borderRadius='8px'
+                          color='primary'
+                          onClick={() => setFilterModalOpen(true)}
+                        >
+                          {t('FILTERS', 'Filters')}
+                        </Button>
+                      </>
+                    )
+                    : (
+                      <p>{t('MOBILE_NO_ORDERS', 'No Orders yet.')}</p>
+                    )}
+                </InnerNoneOrdersContainer>
+              </WrapperNoneOrders>
+            )
+            : (
+              <WrapperOrderListContent
+                maxHeight={orderListView !== 'table'}
+                onDoubleClick={handleDobleClick}
+              >
 
-              {orderListView === 'table' ? (
-                <>
-                  {allowColumns && !(Object.keys(allowColumns).filter(col => allowColumns[col]?.visable && allowColumns[col]?.order !== 0).length === 0) && (
-                    <ColumnPopoverContainer>
-                      <ColumnAllowSettingPopover
+                {orderListView === 'table'
+                  ? (
+                    <>
+                      {allowColumns && !(Object.keys(allowColumns).filter(col => allowColumns[col]?.visable && allowColumns[col]?.order !== 0).length === 0) && (
+                        <ColumnPopoverContainer>
+                          <ColumnAllowSettingPopover
+                            allowColumns={allowColumns}
+                            optionsDefault={optionsDefault?.filter(({ enabled }) => enabled)}
+                            handleChangeAllowColumns={handleChangeAllowColumns}
+                            isOrder
+                          />
+                        </ColumnPopoverContainer>
+                      )}
+                      <OrdersTable
+                        hidePhoto={hidePhoto}
+                        setSelectedOrderIds={setSelectedOrderIds}
+                        isSelectedOrders={isSelectedOrders}
+                        orderList={orderList}
+                        pagination={pagination}
+                        selectedOrderIds={selectedOrderIds}
+                        orderDetailId={orderDetailId}
+                        loadMoreOrders={loadMoreOrders}
+                        getPageOrders={getPageOrders}
+                        handleUpdateOrderStatus={handleUpdateOrderStatus}
+                        handleSelectedOrderIds={handleSelectedOrderIds}
+                        handleOpenOrderDetail={handleOpenOrderDetail}
+                        currentTourStep={currentTourStep}
+                        isTourOpen={isTourOpen}
+                        handleOpenTour={handleOpenTour}
+                        setIsTourOpen={setIsTourOpen}
+                        slaSettingTime={slaSettingTime}
+                        groupStatus={groupStatus}
                         allowColumns={allowColumns}
-                        optionsDefault={optionsDefault}
-                        handleChangeAllowColumns={handleChangeAllowColumns}
-                        isOrder
+                        setAllowColumns={setAllowColumns}
+                        handleDrop={handleDrop}
+                        saveUserSettings={saveUserSettings}
+                        isUseQuery={isUseQuery}
+                        franchisesList={props.franchisesList}
                       />
-                    </ColumnPopoverContainer>
-                  )}
-                  <OrdersTable
-                    hidePhoto={hidePhoto}
-                    setSelectedOrderIds={setSelectedOrderIds}
-                    isSelectedOrders={isSelectedOrders}
-                    orderList={orderList}
-                    pagination={pagination}
-                    selectedOrderIds={selectedOrderIds}
-                    orderDetailId={orderDetailId}
-                    loadMoreOrders={loadMoreOrders}
-                    getPageOrders={getPageOrders}
-                    handleUpdateOrderStatus={handleUpdateOrderStatus}
-                    handleSelectedOrderIds={handleSelectedOrderIds}
-                    handleOpenOrderDetail={handleOpenOrderDetail}
-                    currentTourStep={currentTourStep}
-                    isTourOpen={isTourOpen}
-                    handleOpenTour={handleOpenTour}
-                    setIsTourOpen={setIsTourOpen}
-                    slaSettingTime={slaSettingTime}
-                    groupStatus={groupStatus}
-                    allowColumns={allowColumns}
-                    setAllowColumns={setAllowColumns}
-                    handleDrop={handleDrop}
-                    saveUserSettings={saveUserSettings}
-                    isUseQuery={isUseQuery}
-                    franchisesList={props.franchisesList}
-                  />
-                </>
-              ) : (
-                <OrdersCards
-                  isMessagesView={isMessagesView}
+                    </>
+                  )
+                  : (
+                    <OrdersCards
+                      isMessagesView={isMessagesView}
 
-                  orderList={orderList}
-                  pagination={pagination}
-                  selectedOrderIds={selectedOrderIds}
-                  loadMoreOrders={loadMoreOrders}
-                  getPageOrders={getPageOrders}
-                  handleUpdateOrderStatus={handleUpdateOrderStatus}
-                  handleSelectedOrderIds={handleSelectedOrderIds}
-                  handleOpenOrderDetail={handleOpenOrderDetail}
-                  selectedOrderCard={selectedOrderCard}
-                  handleOrderCardClick={handleOrderCardClick}
-                  handleUpdateDriverLocation={handleUpdateDriverLocation}
-                  slaSettingTime={slaSettingTime}
-                  isDelivery={isDelivery}
-                  isUseQuery={isUseQuery}
-                  franchisesList={props.franchisesList}
-                />
-              )}
-            </WrapperOrderListContent>
-          )}
+                      orderList={orderList}
+                      pagination={pagination}
+                      selectedOrderIds={selectedOrderIds}
+                      loadMoreOrders={loadMoreOrders}
+                      getPageOrders={getPageOrders}
+                      handleUpdateOrderStatus={handleUpdateOrderStatus}
+                      handleSelectedOrderIds={handleSelectedOrderIds}
+                      handleOpenOrderDetail={handleOpenOrderDetail}
+                      selectedOrderCard={selectedOrderCard}
+                      handleOrderCardClick={handleOrderCardClick}
+                      handleUpdateDriverLocation={handleUpdateDriverLocation}
+                      slaSettingTime={slaSettingTime}
+                      isDelivery={isDelivery}
+                      isUseQuery={isUseQuery}
+                      franchisesList={props.franchisesList}
+                    />
+                  )}
+              </WrapperOrderListContent>
+            )}
           {(handleSetOpenOrderDetail && orderDetailId) && (
             <InfoMessage>
               <AiOutlineInfoCircle />
@@ -282,3 +306,5 @@ export const OrdersListing = memo((props) => {
     </>
   )
 })
+
+OrdersListing.displayName = 'OrdersListing'
