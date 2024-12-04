@@ -1,9 +1,9 @@
 import React, { useRef, useEffect, useState } from 'react'
-import { useSession } from 'ordering-components-admin'
 import { usePopper } from 'react-popper'
 import { CaretDownFill } from 'react-bootstrap-icons'
 import FiChevronDown from '@meronex/icons/fi/FiChevronDown'
 import { Pagination, SearchBar } from '../../components/Shared'
+import { useSession } from 'ordering-components-admin'
 
 import {
   Selected,
@@ -21,7 +21,7 @@ import {
 } from './styles'
 import { PaginationWrapper } from '../MultiSelect/styles'
 
-export const Select = (props) => {
+export const Select = React.memo((props) => {
   const {
     placeholder,
     options,
@@ -237,4 +237,11 @@ export const Select = (props) => {
       </PopoverBody>
     </div>
   )
-}
+}, (prevProps, nextProps) => {
+  return prevProps.defaultValue === nextProps.defaultValue &&
+    prevProps.options === nextProps.options &&
+    prevProps.searchValue === nextProps.searchValue &&
+    prevProps.pagination === nextProps.pagination
+})
+
+Select.displayName = 'Select'
