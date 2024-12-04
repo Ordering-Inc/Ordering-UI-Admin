@@ -168,7 +168,7 @@ const ScheduleUI = (props) => {
                           noSelected
                           options={hourOptions.current}
                           defaultValue={lapse?.open?.hour}
-                          onChange={val => handleChangeScheduleTime(val, daysOfWeekIndex, index, true, 'hour')}
+                          onChange={val => handleChangeScheduleTime(`${val}:${lapse?.open?.minute}`, daysOfWeekIndex, index, true)}
                           optionInnerMaxHeight='300px'
                         />
                       </SelectWrapper>
@@ -177,7 +177,7 @@ const ScheduleUI = (props) => {
                           noSelected
                           options={minuteOptions.current}
                           defaultValue={lapse?.open?.minute}
-                          onChange={val => handleChangeScheduleTime(val, daysOfWeekIndex, index, true, 'minute')}
+                          onChange={val => handleChangeScheduleTime(`${lapse?.open?.hour}:${val}`, daysOfWeekIndex, index, true)}
                           optionInnerMaxHeight='300px'
                         />
                       </SelectWrapper>
@@ -187,7 +187,7 @@ const ScheduleUI = (props) => {
                           noSelected
                           options={hourOptions.current}
                           defaultValue={lapse?.close?.hour}
-                          onChange={val => handleChangeScheduleTime(val, daysOfWeekIndex, index, false, 'hour')}
+                          onChange={val => handleChangeScheduleTime(`${val}:${lapse?.close?.minute}`, daysOfWeekIndex, index, false)}
                           optionInnerMaxHeight='300px'
                         />
                       </SelectWrapper>
@@ -196,7 +196,7 @@ const ScheduleUI = (props) => {
                           noSelected
                           options={minuteOptions.current}
                           defaultValue={lapse?.close?.minute}
-                          onChange={val => handleChangeScheduleTime(val, daysOfWeekIndex, index, false, 'minute')}
+                          onChange={val => handleChangeScheduleTime(`${lapse?.close?.hour}:${val}`, daysOfWeekIndex, index, false)}
                           optionInnerMaxHeight='300px'
                         />
                       </SelectWrapper>
@@ -216,18 +216,18 @@ const ScheduleUI = (props) => {
                       <SelectWrapper>
                         <DefaultSelect
                           noSelected
-                          options={hourOptions.current}
+                          options={hourOptions}
                           defaultValue={addScheduleTime?.open?.hour}
-                          onChange={val => handleChangeAddScheduleTime(val, true, 'hour')}
+                          onChange={val => handleChangeAddScheduleTime(`${val}:${addScheduleTime?.open?.minute}`, true)}
                           optionInnerMaxHeight='300px'
                         />
                       </SelectWrapper>
                       <SelectWrapper>
                         <DefaultSelect
                           noSelected
-                          options={minuteOptions.current}
+                          options={minuteOptions}
                           defaultValue={addScheduleTime?.open?.minute}
-                          onChange={val => handleChangeAddScheduleTime(val, true, 'minute')}
+                          onChange={val => handleChangeAddScheduleTime(`${addScheduleTime?.open?.hour}:${val}`, true)}
                           optionInnerMaxHeight='300px'
                         />
                       </SelectWrapper>
@@ -235,18 +235,18 @@ const ScheduleUI = (props) => {
                       <SelectWrapper>
                         <DefaultSelect
                           noSelected
-                          options={hourOptions.current}
+                          options={hourOptions}
                           defaultValue={addScheduleTime?.close?.hour}
-                          onChange={val => handleChangeAddScheduleTime(val, false, 'hour')}
+                          onChange={val => handleChangeAddScheduleTime(`${val}:${addScheduleTime?.close?.minute}`, false)}
                           optionInnerMaxHeight='300px'
                         />
                       </SelectWrapper>
                       <SelectWrapper>
                         <DefaultSelect
                           noSelected
-                          options={minuteOptions.current}
+                          options={minuteOptions}
                           defaultValue={addScheduleTime?.close?.minute}
-                          onChange={val => handleChangeAddScheduleTime(val, false, 'minute')}
+                          onChange={val => handleChangeAddScheduleTime(`${addScheduleTime?.close?.hour}:${val}`, false)}
                           optionInnerMaxHeight='300px'
                         />
                       </SelectWrapper>
