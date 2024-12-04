@@ -29,7 +29,6 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
 var DeliveryDashboard = exports.DeliveryDashboard = function DeliveryDashboard(props) {
   var _configs$optimize_ord;
   var driversList = props.driversList,
-    searchValue = props.searchValue,
     ordersStatusGroup = props.ordersStatusGroup,
     selectedSubOrderStatus = props.selectedSubOrderStatus,
     handleOrdersStatusGroupFilter = props.handleOrdersStatusGroupFilter,
@@ -37,9 +36,7 @@ var DeliveryDashboard = exports.DeliveryDashboard = function DeliveryDashboard(p
     ordersAmountByStatus = props.ordersAmountByStatus,
     setOrdersAmountByStatus = props.setOrdersAmountByStatus,
     isUseQuery = props.isUseQuery,
-    driverGroupList = props.driverGroupList,
-    handleChangeFilterValues = props.handleChangeFilterValues,
-    handleChangeSearch = props.handleChangeSearch;
+    setDetailsOrder = props.setDetailsOrder;
   var ordersDashboardListProps = _objectSpread({}, props);
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
@@ -57,8 +54,10 @@ var DeliveryDashboard = exports.DeliveryDashboard = function DeliveryDashboard(p
   var handleLocation = function handleLocation(order) {
     if ((interActionMapOrder === null || interActionMapOrder === void 0 ? void 0 : interActionMapOrder.id) === (order === null || order === void 0 ? void 0 : order.id)) {
       setInterActionMapOrder(null);
+      setDetailsOrder(null);
     } else {
-      setInterActionMapOrder(_objectSpread({}, order));
+      setInterActionMapOrder(order);
+      setDetailsOrder(order);
     }
   };
   return /*#__PURE__*/_react.default.createElement(_styles.DeliveryDashboardContainer, null, /*#__PURE__*/_react.default.createElement(_styles.OrdersContainer, null, /*#__PURE__*/_react.default.createElement(_styles.FilterContainer, null, /*#__PURE__*/_react.default.createElement(_OrderStatusFilterBar.OrderStatusFilterBar, {
