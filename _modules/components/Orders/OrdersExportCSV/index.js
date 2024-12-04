@@ -49,13 +49,13 @@ var ExportCSVUI = function ExportCSVUI(props) {
     _useState6 = _slicedToArray(_useState5, 2),
     alertState = _useState6[0],
     setAlertState = _useState6[1];
-  var handleExportAll = function handleExportAll() {
+  var handleExportAll = function handleExportAll(withoutMetafields) {
     setPopoverOpen(false);
-    getCSV(false);
+    getCSV(false, withoutMetafields);
   };
-  var handleExportFiltered = function handleExportFiltered() {
+  var handleExportFiltered = function handleExportFiltered(withoutMetafields) {
     setPopoverOpen(false);
-    getCSV(true);
+    getCSV(true, withoutMetafields);
   };
   var closePopover = function closePopover() {
     setPopoverOpen(false);
@@ -100,7 +100,15 @@ var ExportCSVUI = function ExportCSVUI(props) {
     onClick: function onClick() {
       return handleExportFiltered();
     }
-  }, t('EXPORT_FILTERED', 'Export filtered'))), actionStatus.loading && /*#__PURE__*/_react.default.createElement(_Shared.SpinnerLoader, {
+  }, t('EXPORT_FILTERED', 'Export filtered')), /*#__PURE__*/_react.default.createElement(_styles2.Item, {
+    onClick: function onClick() {
+      return handleExportAll(true);
+    }
+  }, t('EXPORT_ALL_WITHOUT_METAFIELDS', 'Export all without metafields')), /*#__PURE__*/_react.default.createElement(_styles2.Item, {
+    onClick: function onClick() {
+      return handleExportFiltered(true);
+    }
+  }, t('EXPORT_FILTERED_WITHOUT_METAFIELDS', 'Export filtered without metafields'))), actionStatus.loading && /*#__PURE__*/_react.default.createElement(_Shared.SpinnerLoader, {
     primary: true
   })), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     open: modalOpen,

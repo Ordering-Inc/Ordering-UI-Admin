@@ -38,7 +38,7 @@ var OrderTablePropsAreEqual = function OrderTablePropsAreEqual(prevProps, nextPr
   return prevProps.isSelectedOrders === nextProps.isSelectedOrders && JSON.stringify(prevProps.orderList) === JSON.stringify(nextProps.orderList) && JSON.stringify(prevProps.pagination) === JSON.stringify(nextProps.pagination) && JSON.stringify(prevProps.selectedOrderIds) === JSON.stringify(nextProps.selectedOrderIds) && JSON.stringify(prevProps.isTourOpen) === JSON.stringify(nextProps.isTourOpen) && prevProps.groupStatus === nextProps.groupStatus && JSON.stringify(prevProps.allowColumns) === JSON.stringify(nextProps.allowColumns) && prevProps.isUseQuery === nextProps.isUseQuery;
 };
 var OrdersTable = exports.OrdersTable = /*#__PURE__*/(0, _react.memo)(function (props) {
-  var _configState$configs, _configState$configs2, _franchisesList$franc, _orderList$orders3;
+  var _configState$configs, _configState$configs2, _configState$configs3, _configState$configs4, _franchisesList$franc, _orderList$orders3;
   var hidePhoto = props.hidePhoto,
     isSelectedOrders = props.isSelectedOrders,
     orderList = props.orderList,
@@ -68,6 +68,9 @@ var OrdersTable = exports.OrdersTable = /*#__PURE__*/(0, _react.memo)(function (
   var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
     _useUtils2 = _slicedToArray(_useUtils, 1),
     parseDate = _useUtils2[0].parseDate;
+  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
+    _useConfig2 = _slicedToArray(_useConfig, 1),
+    configState = _useConfig2[0];
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     isAllChecked = _useState2[0],
@@ -87,63 +90,81 @@ var OrdersTable = exports.OrdersTable = /*#__PURE__*/(0, _react.memo)(function (
       getPageOrders(pageSize, expectedPage);
     }
   }, [pagination.from, pagination.pageSize, getPageOrders]);
-  var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
-    _useConfig2 = _slicedToArray(_useConfig, 1),
-    configState = _useConfig2[0];
   var isEnabledRowInColor = (configState === null || configState === void 0 || (_configState$configs = configState.configs) === null || _configState$configs === void 0 || (_configState$configs = _configState$configs.row_in_color_enabled) === null || _configState$configs === void 0 ? void 0 : _configState$configs.value) === '1';
   var showExternalId = (configState === null || configState === void 0 || (_configState$configs2 = configState.configs) === null || _configState$configs2 === void 0 || (_configState$configs2 = _configState$configs2.change_order_id) === null || _configState$configs2 === void 0 ? void 0 : _configState$configs2.value) === '1';
+  var isProjectEnterpricePlan = (configState === null || configState === void 0 || (_configState$configs3 = configState.configs) === null || _configState$configs3 === void 0 ? void 0 : _configState$configs3.plan_enterprise) && (configState === null || configState === void 0 || (_configState$configs4 = configState.configs) === null || _configState$configs4 === void 0 || (_configState$configs4 = _configState$configs4.plan_enterprise) === null || _configState$configs4 === void 0 ? void 0 : _configState$configs4.value);
   var franchiseImages = !(franchisesList !== null && franchisesList !== void 0 && franchisesList.error) && (franchisesList === null || franchisesList === void 0 || (_franchisesList$franc = franchisesList.franchises) === null || _franchisesList$franc === void 0 ? void 0 : _franchisesList$franc.reduce(function (imageKeys, franchise) {
     imageKeys[franchise.id] = franchise.logo;
     return imageKeys;
   }, {}));
   var optionsDefault = [{
     value: 'status',
-    content: t('STATUS', 'Status')
+    content: t('STATUS', 'Status'),
+    enabled: true
   }, {
     value: 'orderNumber',
-    content: t('INVOICE_ORDER_NO', 'Order No.')
-  }, {
-    value: 'agent',
-    content: t('AGENT', 'Agent')
-  }, {
-    value: 'cartGroupId',
-    content: t('GROUP_ORDER', 'Group Order')
-  }, {
-    value: 'driverGroupId',
-    content: t('EXPORT_DRIVER_GROUP_ID', 'Driver Group Id')
+    content: t('INVOICE_ORDER_NO', 'Order No.'),
+    enabled: !showExternalId
   }, {
     value: 'dateTime',
-    content: t('DATE_TIME', 'Date and time')
+    content: t('DATE_TIME', 'Date and time'),
+    enabled: true
+  }, {
+    value: 'agent',
+    content: t('AGENT', 'Agent'),
+    enabled: true
+  }, {
+    value: 'cartGroupId',
+    content: t('GROUP_ORDER', 'Group Order'),
+    enabled: true
+  }, {
+    value: 'driverGroupId',
+    content: t('EXPORT_DRIVER_GROUP_ID', 'Driver Group Id'),
+    enabled: true
   }, {
     value: 'business',
-    content: t('BUSINESS', 'Business')
+    content: t('BUSINESS', 'Business'),
+    enabled: true
   }, {
     value: 'customer',
-    content: t('CUSTOMER', 'Customer')
+    content: t('CUSTOMER', 'Customer'),
+    enabled: true
   }, {
     value: 'driver',
-    content: t('DRIVER', 'Driver')
+    content: t('DRIVER', 'Driver'),
+    enabled: true
   }, {
     value: 'advanced',
-    content: t('ADVANCED_LOGISTICS', 'Advance Logistics')
+    content: t('ADVANCED_LOGISTICS', 'Advance Logistics'),
+    enabled: true
+  }, {
+    value: 'cloned',
+    content: t('CLONED', 'Cloned'),
+    enabled: true
   }, {
     value: 'timer',
-    content: t('SLA_TIMER', 'SLA’s timer')
+    content: t('SLA_TIMER', 'SLA’s timer'),
+    enabled: isProjectEnterpricePlan
   }, {
     value: 'eta',
-    content: t('ETA', 'ETA')
+    content: t('ETA', 'ETA'),
+    enabled: true
   }, {
     value: 'total',
-    content: t('EXPORT_TOTAL', 'Total')
+    content: t('EXPORT_TOTAL', 'Total'),
+    enabled: true
   }, {
     value: 'externalId',
-    content: t('EXTERNAL_ID', 'External id')
+    content: t('EXTERNAL_ID', 'External id'),
+    enabled: true
   }, {
     value: 'channel',
-    content: t('CHANNEL', 'Channel')
+    content: t('CHANNEL', 'Channel'),
+    enabled: true
   }, {
     value: 'pod',
-    content: t('PODS', 'Pod')
+    content: t('PODS', 'Pod'),
+    enabled: true
   }];
   var getDelayMinutes = function getDelayMinutes(order) {
     // targetMin = delivery_datetime  + eta_time - now()
@@ -376,7 +397,10 @@ var OrdersTable = exports.OrdersTable = /*#__PURE__*/(0, _react.memo)(function (
     className: "orderPrice"
   }, /*#__PURE__*/_react.default.createElement(_Shared.ColumnAllowSettingPopover, {
     allowColumns: allowColumns,
-    optionsDefault: optionsDefault,
+    optionsDefault: optionsDefault.filter(function (_ref) {
+      var enabled = _ref.enabled;
+      return enabled;
+    }),
     handleChangeAllowColumns: handleChangeAllowColumns,
     isOrder: true
   })) : Object.keys(allowColumns).filter(function (col) {
@@ -390,7 +414,7 @@ var OrdersTable = exports.OrdersTable = /*#__PURE__*/(0, _react.memo)(function (
     if (column === 'slaBar') {
       return;
     }
-    if (column === 'orderNumber') {
+    if (showExternalId ? column === 'dateTime' : column === 'orderNumber') {
       var _allowColumns$orderNu, _allowColumns$dateTim, _allowColumns$slaBar;
       return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
         key: i
@@ -409,7 +433,10 @@ var OrdersTable = exports.OrdersTable = /*#__PURE__*/(0, _react.memo)(function (
         key: "noDragTh-".concat(i)
       }, /*#__PURE__*/_react.default.createElement(_Shared.ColumnAllowSettingPopover, {
         allowColumns: allowColumns,
-        optionsDefault: optionsDefault,
+        optionsDefault: optionsDefault.filter(function (_ref2) {
+          var enabled = _ref2.enabled;
+          return enabled;
+        }),
         handleChangeAllowColumns: handleChangeAllowColumns,
         isOrder: true
       })));
@@ -613,13 +640,9 @@ var OrdersTable = exports.OrdersTable = /*#__PURE__*/(0, _react.memo)(function (
       className: "priority"
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "info"
-    }, /*#__PURE__*/_react.default.createElement("p", {
-      className: "bold"
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 60
-    })), /*#__PURE__*/_react.default.createElement("p", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
-      width: 60
-    })))), (allowColumns === null || allowColumns === void 0 || (_allowColumns$channel = allowColumns.channel) === null || _allowColumns$channel === void 0 ? void 0 : _allowColumns$channel.visable) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
+      width: 45
+    }))), (allowColumns === null || allowColumns === void 0 || (_allowColumns$channel = allowColumns.channel) === null || _allowColumns$channel === void 0 ? void 0 : _allowColumns$channel.visable) && !isSelectedOrders && /*#__PURE__*/_react.default.createElement("td", {
       className: "orderStatusTitle"
     }, /*#__PURE__*/_react.default.createElement(_styles.WrapOrderStatusSelector, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 100,
@@ -670,3 +693,4 @@ var OrdersTable = exports.OrdersTable = /*#__PURE__*/(0, _react.memo)(function (
     handleChangePageSize: handleChangePageSize
   })));
 }, OrderTablePropsAreEqual);
+OrdersTable.displayName = 'OrdersTable';
