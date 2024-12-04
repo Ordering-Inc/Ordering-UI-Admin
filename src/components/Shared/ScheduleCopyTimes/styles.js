@@ -30,9 +30,9 @@ export const PopoverBody = styled.div`
   border-radius: 6px;
 
   ${props => props.theme?.rtl ? css`
-    left: 0px;
+    left: 60px;
   ` : css`
-    right: 0px;
+    right: 60px;
   `}
 
   > button {
