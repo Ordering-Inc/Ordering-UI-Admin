@@ -142,7 +142,7 @@ var ScheduleUI = function ScheduleUI(props) {
     hourOptions.current = generateOptions(24, formatHour);
   }, [is12Hours]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.ScheduleContainer, null, scheduleState.map(function (schedule, daysOfWeekIndex) {
-    var _addScheduleTime$open, _addScheduleTime$open3, _addScheduleTime$clos, _addScheduleTime$clos3;
+    var _addScheduleTime$open, _addScheduleTime$open2, _addScheduleTime$clos, _addScheduleTime$clos2;
     return /*#__PURE__*/_react.default.createElement(_styles2.TimeScheduleItemContainer, {
       key: daysOfWeekIndex
     }, /*#__PURE__*/_react.default.createElement("div", null, !disableSchedule && /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
@@ -155,7 +155,7 @@ var ScheduleUI = function ScheduleUI(props) {
     }, parseDate(getNextDate(daysOfWeekIndex), {
       outputFormat: 'YYYY-MM-DD'
     })))), schedule !== null && schedule !== void 0 && schedule.enabled ? /*#__PURE__*/_react.default.createElement("div", null, schedule === null || schedule === void 0 ? void 0 : schedule.lapses.map(function (lapse, index) {
-      var _lapse$open, _lapse$open3, _lapse$close, _lapse$close3;
+      var _lapse$open, _lapse$open2, _lapse$close, _lapse$close2;
       return /*#__PURE__*/_react.default.createElement("div", {
         key: index
       }, /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.SecondSelect, {
@@ -163,17 +163,15 @@ var ScheduleUI = function ScheduleUI(props) {
         options: hourOptions.current,
         defaultValue: lapse === null || lapse === void 0 || (_lapse$open = lapse.open) === null || _lapse$open === void 0 ? void 0 : _lapse$open.hour,
         onChange: function onChange(val) {
-          var _lapse$open2;
-          return handleChangeScheduleTime("".concat(val, ":").concat(lapse === null || lapse === void 0 || (_lapse$open2 = lapse.open) === null || _lapse$open2 === void 0 ? void 0 : _lapse$open2.minute), daysOfWeekIndex, index, true);
+          return handleChangeScheduleTime(val, daysOfWeekIndex, index, true, 'hour');
         },
         optionInnerMaxHeight: "300px"
       })), /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.SecondSelect, {
         noSelected: true,
         options: minuteOptions.current,
-        defaultValue: lapse === null || lapse === void 0 || (_lapse$open3 = lapse.open) === null || _lapse$open3 === void 0 ? void 0 : _lapse$open3.minute,
+        defaultValue: lapse === null || lapse === void 0 || (_lapse$open2 = lapse.open) === null || _lapse$open2 === void 0 ? void 0 : _lapse$open2.minute,
         onChange: function onChange(val) {
-          var _lapse$open4;
-          return handleChangeScheduleTime("".concat(lapse === null || lapse === void 0 || (_lapse$open4 = lapse.open) === null || _lapse$open4 === void 0 ? void 0 : _lapse$open4.hour, ":").concat(val), daysOfWeekIndex, index, true);
+          return handleChangeScheduleTime(val, daysOfWeekIndex, index, true, 'minute');
         },
         optionInnerMaxHeight: "300px"
       })), /*#__PURE__*/_react.default.createElement(_styles2.SplitLine, null), /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.SecondSelect, {
@@ -181,17 +179,15 @@ var ScheduleUI = function ScheduleUI(props) {
         options: hourOptions.current,
         defaultValue: lapse === null || lapse === void 0 || (_lapse$close = lapse.close) === null || _lapse$close === void 0 ? void 0 : _lapse$close.hour,
         onChange: function onChange(val) {
-          var _lapse$close2;
-          return handleChangeScheduleTime("".concat(val, ":").concat(lapse === null || lapse === void 0 || (_lapse$close2 = lapse.close) === null || _lapse$close2 === void 0 ? void 0 : _lapse$close2.minute), daysOfWeekIndex, index, false);
+          return handleChangeScheduleTime(val, daysOfWeekIndex, index, false, 'hour');
         },
         optionInnerMaxHeight: "300px"
       })), /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.SecondSelect, {
         noSelected: true,
         options: minuteOptions.current,
-        defaultValue: lapse === null || lapse === void 0 || (_lapse$close3 = lapse.close) === null || _lapse$close3 === void 0 ? void 0 : _lapse$close3.minute,
+        defaultValue: lapse === null || lapse === void 0 || (_lapse$close2 = lapse.close) === null || _lapse$close2 === void 0 ? void 0 : _lapse$close2.minute,
         onChange: function onChange(val) {
-          var _lapse$close4;
-          return handleChangeScheduleTime("".concat(lapse === null || lapse === void 0 || (_lapse$close4 = lapse.close) === null || _lapse$close4 === void 0 ? void 0 : _lapse$close4.hour, ":").concat(val), daysOfWeekIndex, index, false);
+          return handleChangeScheduleTime(val, daysOfWeekIndex, index, false, 'minute');
         },
         optionInnerMaxHeight: "300px"
       })), /*#__PURE__*/_react.default.createElement(_styles2.TrashIconWrapper, {
@@ -203,38 +199,34 @@ var ScheduleUI = function ScheduleUI(props) {
       })));
     }), openAddSchedule[daysOfWeekIndex] && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.SecondSelect, {
       noSelected: true,
-      options: hourOptions,
+      options: hourOptions.current,
       defaultValue: addScheduleTime === null || addScheduleTime === void 0 || (_addScheduleTime$open = addScheduleTime.open) === null || _addScheduleTime$open === void 0 ? void 0 : _addScheduleTime$open.hour,
       onChange: function onChange(val) {
-        var _addScheduleTime$open2;
-        return handleChangeAddScheduleTime("".concat(val, ":").concat(addScheduleTime === null || addScheduleTime === void 0 || (_addScheduleTime$open2 = addScheduleTime.open) === null || _addScheduleTime$open2 === void 0 ? void 0 : _addScheduleTime$open2.minute), true);
+        return handleChangeAddScheduleTime(val, true, 'hour');
       },
       optionInnerMaxHeight: "300px"
     })), /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.SecondSelect, {
       noSelected: true,
-      options: minuteOptions,
-      defaultValue: addScheduleTime === null || addScheduleTime === void 0 || (_addScheduleTime$open3 = addScheduleTime.open) === null || _addScheduleTime$open3 === void 0 ? void 0 : _addScheduleTime$open3.minute,
+      options: minuteOptions.current,
+      defaultValue: addScheduleTime === null || addScheduleTime === void 0 || (_addScheduleTime$open2 = addScheduleTime.open) === null || _addScheduleTime$open2 === void 0 ? void 0 : _addScheduleTime$open2.minute,
       onChange: function onChange(val) {
-        var _addScheduleTime$open4;
-        return handleChangeAddScheduleTime("".concat(addScheduleTime === null || addScheduleTime === void 0 || (_addScheduleTime$open4 = addScheduleTime.open) === null || _addScheduleTime$open4 === void 0 ? void 0 : _addScheduleTime$open4.hour, ":").concat(val), true);
+        return handleChangeAddScheduleTime(val, true, 'minute');
       },
       optionInnerMaxHeight: "300px"
     })), /*#__PURE__*/_react.default.createElement(_styles2.SplitLine, null), /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.SecondSelect, {
       noSelected: true,
-      options: hourOptions,
+      options: hourOptions.current,
       defaultValue: addScheduleTime === null || addScheduleTime === void 0 || (_addScheduleTime$clos = addScheduleTime.close) === null || _addScheduleTime$clos === void 0 ? void 0 : _addScheduleTime$clos.hour,
       onChange: function onChange(val) {
-        var _addScheduleTime$clos2;
-        return handleChangeAddScheduleTime("".concat(val, ":").concat(addScheduleTime === null || addScheduleTime === void 0 || (_addScheduleTime$clos2 = addScheduleTime.close) === null || _addScheduleTime$clos2 === void 0 ? void 0 : _addScheduleTime$clos2.minute), false);
+        return handleChangeAddScheduleTime(val, false, 'hour');
       },
       optionInnerMaxHeight: "300px"
     })), /*#__PURE__*/_react.default.createElement(_styles2.SelectWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.SecondSelect, {
       noSelected: true,
-      options: minuteOptions,
-      defaultValue: addScheduleTime === null || addScheduleTime === void 0 || (_addScheduleTime$clos3 = addScheduleTime.close) === null || _addScheduleTime$clos3 === void 0 ? void 0 : _addScheduleTime$clos3.minute,
+      options: minuteOptions.current,
+      defaultValue: addScheduleTime === null || addScheduleTime === void 0 || (_addScheduleTime$clos2 = addScheduleTime.close) === null || _addScheduleTime$clos2 === void 0 ? void 0 : _addScheduleTime$clos2.minute,
       onChange: function onChange(val) {
-        var _addScheduleTime$clos4;
-        return handleChangeAddScheduleTime("".concat(addScheduleTime === null || addScheduleTime === void 0 || (_addScheduleTime$clos4 = addScheduleTime.close) === null || _addScheduleTime$clos4 === void 0 ? void 0 : _addScheduleTime$clos4.hour, ":").concat(val), false);
+        return handleChangeAddScheduleTime(val, false, 'minute');
       },
       optionInnerMaxHeight: "300px"
     })), /*#__PURE__*/_react.default.createElement(_styles2.AddScheduleIconWrapper, null, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PlusCircleFill, {
