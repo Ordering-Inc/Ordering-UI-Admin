@@ -6,11 +6,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Select = void 0;
 var _react = _interopRequireWildcard(require("react"));
-var _orderingComponentsAdmin = require("ordering-components-admin");
 var _reactPopper = require("react-popper");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _FiChevronDown = _interopRequireDefault(require("@meronex/icons/fi/FiChevronDown"));
 var _Shared = require("../../components/Shared");
+var _orderingComponentsAdmin = require("ordering-components-admin");
 var _Selects = require("../Selects");
 var _styles = require("./styles");
 var _styles2 = require("../MultiSelect/styles");
@@ -29,7 +29,7 @@ function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) 
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
-var Select = exports.Select = function Select(props) {
+var Select = exports.Select = /*#__PURE__*/_react.default.memo(function (props) {
   var _referenceElement$cur2;
   var placeholder = props.placeholder,
     options = props.options,
@@ -217,4 +217,7 @@ var Select = exports.Select = function Select(props) {
     defaultPageSize: pagination === null || pagination === void 0 ? void 0 : pagination.pageSize,
     isHidePagecontrol: isHidePagecontrol
   })))));
-};
+}, function (prevProps, nextProps) {
+  return prevProps.defaultValue === nextProps.defaultValue && prevProps.options === nextProps.options && prevProps.searchValue === nextProps.searchValue && prevProps.pagination === nextProps.pagination;
+});
+Select.displayName = 'Select';

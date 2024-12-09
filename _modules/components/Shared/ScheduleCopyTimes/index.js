@@ -11,6 +11,7 @@ var _RiCheckboxFill = _interopRequireDefault(require("@meronex/icons/ri/RiCheckb
 var _orderingComponentsAdmin = require("ordering-components-admin");
 var _MdcContentCopy = _interopRequireDefault(require("@meronex/icons/mdc/MdcContentCopy"));
 var _styles = require("../../../styles");
+var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _styles2 = require("./styles");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
@@ -56,25 +57,14 @@ var ScheduleCopyTimes = exports.ScheduleCopyTimes = function ScheduleCopyTimes(p
     value: 6,
     content: t('DAY6', 'Saturday')
   }];
-  var handleClickOutside = function handleClickOutside(e) {
-    var _popperElement$curren, _referenceElement$cur;
-    if (!open) return;
-    var outsidePopover = !((_popperElement$curren = popperElement.current) !== null && _popperElement$curren !== void 0 && _popperElement$curren.contains(e.target));
-    var outsidePopoverMenu = !((_referenceElement$cur = referenceElement.current) !== null && _referenceElement$cur !== void 0 && _referenceElement$cur.contains(e.target));
-    if (outsidePopover && outsidePopoverMenu) {
-      props.onClose && props.onClose();
-    }
-  };
   var handleKeyDown = function handleKeyDown(e) {
     if (e.keyCode === 27) {
       props.onClose && props.onClose();
     }
   };
   (0, _react.useEffect)(function () {
-    window.addEventListener('mouseup', handleClickOutside);
     window.addEventListener('keydown', handleKeyDown);
     return function () {
-      window.removeEventListener('mouseup', handleClickOutside);
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [open]);
@@ -94,7 +84,12 @@ var ScheduleCopyTimes = exports.ScheduleCopyTimes = function ScheduleCopyTimes(p
     }
   }, /*#__PURE__*/_react.default.createElement(_MdcContentCopy.default, null)), open && /*#__PURE__*/_react.default.createElement(_styles2.PopoverBody, {
     ref: popperElement
-  }, /*#__PURE__*/_react.default.createElement(_styles2.Title, null, t('COPY_TIMES_TO', 'Copy times to')), /*#__PURE__*/_react.default.createElement(_styles2.PopoverList, null, daysOptions.map(function (option) {
+  }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.X, {
+    className: "close-icon",
+    onClick: function onClick() {
+      return props.onClose && props.onClose();
+    }
+  }), /*#__PURE__*/_react.default.createElement(_styles2.Title, null, t('COPY_TIMES_TO', 'Copy times to')), /*#__PURE__*/_react.default.createElement(_styles2.PopoverList, null, daysOptions.map(function (option) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: option.value
     }, /*#__PURE__*/_react.default.createElement(_styles2.CopyItem, {

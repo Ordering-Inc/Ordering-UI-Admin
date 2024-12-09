@@ -20,7 +20,7 @@ var HeaderItem = exports.HeaderItem = _styledComponents.default.div(_templateObj
   var disabled = _ref.disabled;
   return disabled && (0, _styledComponents.css)(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    pointer-events: none;\n    opacity: 0.6;\n  "])));
 });
-var PopoverBody = exports.PopoverBody = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  position: absolute;\n  background: ", ";\n  padding: 15px 0px;\n  border-radius: 10px;\n  max-width: 250px;\n  z-index: 1001;\n  border: 1px solid #E9ECEF;\n  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n  border-radius: 6px;\n\n  ", "\n\n  > button {\n    width: calc(100% - 20px);\n    margin: 5px 10px 0 10px;\n  }\n"])), function (props) {
+var PopoverBody = exports.PopoverBody = _styledComponents.default.div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  position: absolute;\n  background: ", ";\n  padding: 15px 0px;\n  border-radius: 10px;\n  max-width: 250px;\n  z-index: 1001;\n  border: 1px solid #E9ECEF;\n  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n  border-radius: 6px;\n\n  ", "\n\n  > button {\n    width: calc(100% - 20px);\n    margin: 5px 10px 0 10px;\n  }\n  .close-icon {\n    position: absolute;\n    width: 28px;\n    height: 28px;\n    z-index: 100;\n    right: 0px;\n    top: 0px;\n    cursor: pointer;\n  }\n"])), function (props) {
   var _props$theme$colors2;
   return ((_props$theme$colors2 = props.theme.colors) === null || _props$theme$colors2 === void 0 ? void 0 : _props$theme$colors2.backgroundPage) || '#FFF';
 }, function (props) {
