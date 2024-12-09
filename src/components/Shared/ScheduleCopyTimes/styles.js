@@ -39,6 +39,15 @@ export const PopoverBody = styled.div`
     width: calc(100% - 20px);
     margin: 5px 10px 0 10px;
   }
+  .close-icon {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    z-index: 100;
+    right: 0px;
+    top: 0px;
+    cursor: pointer;
+  }
 `
 
 export const Title = styled.div`

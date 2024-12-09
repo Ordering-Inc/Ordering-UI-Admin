@@ -4,7 +4,9 @@ import RiCheckboxFill from '@meronex/icons/ri/RiCheckboxFill'
 import { useLanguage } from 'ordering-components-admin'
 import MdcContentCopy from '@meronex/icons/mdc/MdcContentCopy'
 import { Button } from '../../../styles'
-
+import {
+  X as CloseIcon
+} from 'react-bootstrap-icons'
 import {
   HeaderItem,
   PopoverBody,
@@ -37,15 +39,6 @@ export const ScheduleCopyTimes = (props) => {
     { value: 6, content: t('DAY6', 'Saturday') }
   ]
 
-  const handleClickOutside = (e) => {
-    if (!open) return
-    const outsidePopover = !popperElement.current?.contains(e.target)
-    const outsidePopoverMenu = !referenceElement.current?.contains(e.target)
-    if (outsidePopover && outsidePopoverMenu) {
-      props.onClose && props.onClose()
-    }
-  }
-
   const handleKeyDown = (e) => {
     if (e.keyCode === 27) {
       props.onClose && props.onClose()
@@ -53,10 +46,8 @@ export const ScheduleCopyTimes = (props) => {
   }
 
   useEffect(() => {
-    window.addEventListener('mouseup', handleClickOutside)
     window.addEventListener('keydown', handleKeyDown)
     return () => {
-      window.removeEventListener('mouseup', handleClickOutside)
       window.removeEventListener('keydown', handleKeyDown)
     }
   }, [open])
@@ -77,6 +68,7 @@ export const ScheduleCopyTimes = (props) => {
       </HeaderItem>
       {open && (
         <PopoverBody ref={popperElement}>
+          <CloseIcon className='close-icon' onClick={() => props.onClose && props.onClose()} />
           <Title>{t('COPY_TIMES_TO', 'Copy times to')}</Title>
           <PopoverList>
             {daysOptions.map(option => (

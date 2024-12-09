@@ -22,17 +22,12 @@ export const TimeScheduleItemContainer = styled.div`
     }
 
     &:first-child {
-      min-width: 95px;
+      min-width: 70px;
     }
 
     &:nth-child(2) {
       flex-direction: column;
       flex: 1;
-      ${props => props.theme?.rtl ? css`
-        padding-right: 8px;
-      ` : css`
-        padding-left: 8px;
-      `}
       > div {
         display: flex;
         justify-content: center;
@@ -40,7 +35,6 @@ export const TimeScheduleItemContainer = styled.div`
         &:not(:last-child) {
           margin-bottom: 10px;
         }
-  
         svg {
           font-size: 18px;
           cursor: pointer;
@@ -58,9 +52,11 @@ export const TimeScheduleItemContainer = styled.div`
           cursor: pointer;
           font-size: 18px;
           color: ${props => props.theme.colors.primary};
-          ${props => props.theme?.rtl ? css`
+          ${props => props.theme?.rtl
+? css`
             margin-left: 10px;
-          ` : css`
+          `
+: css`
             margin-right: 10px;
           `}
         }
@@ -125,7 +121,8 @@ export const SelectWrapper = styled.div`
   }
 
   @media (min-width: 450px) {
-    width: 95px;
+    width: 70px;
+    margin: 0px 5px;
     .select {
       > div {
         font-size: 16px;
@@ -146,10 +143,12 @@ export const SplitLine = styled.div`
   background-color: ${props => props.theme.colors.disabled};
 `
 export const IconWrapper = styled.span`
-  ${({ isHide }) => isHide ? css`
+  ${({ isHide }) => isHide
+? css`
     opacity: 0;
     pointer-events: none;
-  ` : css`
+  `
+: css`
     opacity: 1;
   `}
 `
@@ -157,10 +156,12 @@ export const TrashIconWrapper = styled.div`
   display: flex;
   justify-content: center;
   width: 50px;
-  ${({ isHide }) => isHide ? css`
+  ${({ isHide }) => isHide
+? css`
     opacity: 0;
     pointer-events: none;
-  ` : css`
+  `
+: css`
     opacity: 1;
   `}
   @media (min-width: 450px) {
@@ -174,9 +175,11 @@ export const AddScheduleIconWrapper = styled.div`
   width: 50px;
   > svg {
     color: ${props => props.theme.colors.primary};
-    ${props => props.theme?.rtl ? css`
+    ${props => props.theme?.rtl
+? css`
       margin-right: 8px;
-    ` : css`
+    `
+: css`
       margin-left: 8px;
     `}
     &:last-child {
