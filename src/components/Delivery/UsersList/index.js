@@ -141,7 +141,7 @@ export const UsersList = (props) => {
           <UsersTable>
             <thead>
               <tr>
-                {isDriversPage && (
+                {(isDriversPage || isDriversManagersPage) && (
                   <th>
                     <UserIdWrapper>
                       <CheckBoxWrapper
@@ -168,7 +168,7 @@ export const UsersList = (props) => {
               [...Array(10).keys()].map(i => (
                 <tbody key={i}>
                   <tr>
-                    {isDriversPage && (
+                    {(isDriversPage || isDriversManagersPage) && (
                       <td>
                         <UserIdWrapper>
                           <CheckBoxWrapper>
@@ -210,7 +210,7 @@ export const UsersList = (props) => {
                   <tr
                     onClick={(e) => onChangeUserDetails(e, user)}
                   >
-                    {isDriversPage && (
+                    {(isDriversPage || isDriversManagersPage) && (
                       <td>
                         <UserIdWrapper>
                           <CheckBoxWrapper
