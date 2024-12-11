@@ -230,19 +230,6 @@ export const UsersList = (props) => {
                     )}
                     <td>
                       <UserMainInfo>
-                        {isDriversManagersPage && (
-                          <CheckBoxWrapper
-                            className='user_checkbox'
-                            isChecked={selectedUsers.includes(user.id)}
-                            onClick={() => handleSelectedUsers(user.id)}
-                          >
-                            {selectedUsers.includes(user.id) ? (
-                              <MdCheckBox />
-                            ) : (
-                              <MdCheckBoxOutlineBlank />
-                            )}
-                          </CheckBoxWrapper>
-                        )}
                         <WrapperImage>
                           {user?.photo ? (
                             <Image bgimage={optimizeImage(user?.photo, 'h_50,c_limit')} />
