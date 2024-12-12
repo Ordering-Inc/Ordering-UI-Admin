@@ -141,7 +141,7 @@ export const UsersList = (props) => {
           <UsersTable>
             <thead>
               <tr>
-                {isDriversPage && (
+                {(isDriversPage || isDriversManagersPage) && (
                   <th>
                     <UserIdWrapper>
                       <CheckBoxWrapper
@@ -168,7 +168,7 @@ export const UsersList = (props) => {
               [...Array(10).keys()].map(i => (
                 <tbody key={i}>
                   <tr>
-                    {isDriversPage && (
+                    {(isDriversPage || isDriversManagersPage) && (
                       <td>
                         <UserIdWrapper>
                           <CheckBoxWrapper>
@@ -210,7 +210,7 @@ export const UsersList = (props) => {
                   <tr
                     onClick={(e) => onChangeUserDetails(e, user)}
                   >
-                    {isDriversPage && (
+                    {(isDriversPage || isDriversManagersPage) && (
                       <td>
                         <UserIdWrapper>
                           <CheckBoxWrapper
@@ -230,19 +230,6 @@ export const UsersList = (props) => {
                     )}
                     <td>
                       <UserMainInfo>
-                        {isDriversManagersPage && (
-                          <CheckBoxWrapper
-                            className='user_checkbox'
-                            isChecked={selectedUsers.includes(user.id)}
-                            onClick={() => handleSelectedUsers(user.id)}
-                          >
-                            {selectedUsers.includes(user.id) ? (
-                              <MdCheckBox />
-                            ) : (
-                              <MdCheckBoxOutlineBlank />
-                            )}
-                          </CheckBoxWrapper>
-                        )}
                         <WrapperImage>
                           {user?.photo ? (
                             <Image bgimage={optimizeImage(user?.photo, 'h_50,c_limit')} />
