@@ -56,11 +56,11 @@ export const TimeScheduleItemContainer = styled.div`
           font-size: 18px;
           color: ${props => props.theme.colors.primary};
           ${props => props.theme?.rtl
-? css`
-            margin-left: 10px;
-          `
-: css`
-            margin-right: 10px;
+            ? css`
+              margin-left: 10px;
+            `
+            : css`
+              margin-right: 10px;
           `}
         }
       }
@@ -77,7 +77,7 @@ export const TimeScheduleItemContainer = styled.div`
 
     .days {
       flex-direction: column;
-      /* flex: 1; */
+
       > div {
         display: flex;
         flex-direction: row;
