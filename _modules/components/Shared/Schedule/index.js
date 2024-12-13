@@ -45,7 +45,8 @@ var ScheduleUI = function ScheduleUI(props) {
     handleSelectCopyTimes = props.handleSelectCopyTimes,
     handleApplyScheduleCopyTimes = props.handleApplyScheduleCopyTimes,
     isShowDate = props.isShowDate,
-    disableSchedule = props.disableSchedule;
+    disableSchedule = props.disableSchedule,
+    useDaysAbbrevation = props.useDaysAbbrevation;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -77,7 +78,7 @@ var ScheduleUI = function ScheduleUI(props) {
     _useState6 = _slicedToArray(_useState5, 2),
     isOpenCopytimes = _useState6[0],
     setIsOpenCopytimes = _useState6[1];
-  var daysOfWeek = [t('SUNDAY_ABBREVIATION', 'Sun'), t('MONDAY_ABBREVIATION', 'Mon'), t('TUESDAY_ABBREVIATION', 'Tue'), t('WEDNESDAY_ABBREVIATION', 'Wed'), t('THURSDAY_ABBREVIATION', 'Thu'), t('FRIDAY_ABBREVIATION', 'Fri'), t('SATURDAY_ABBREVIATION', 'Sat')];
+  var daysOfWeek = [t("SUNDAY".concat(useDaysAbbrevation ? '_ABBREVIATION' : ''), 'Sunday'), t("MONDAY".concat(useDaysAbbrevation ? '_ABBREVIATION' : ''), 'Monday'), t("TUESDAY".concat(useDaysAbbrevation ? '_ABBREVIATION' : ''), 'Tuesday'), t("WEDNESDAY".concat(useDaysAbbrevation ? '_ABBREVIATION' : ''), 'Wednesday'), t("THURSDAY".concat(useDaysAbbrevation ? '_ABBREVIATION' : ''), 'Thursday'), t("FRIDAY".concat(useDaysAbbrevation ? '_ABBREVIATION' : ''), 'Friday'), t("SATURDAY".concat(useDaysAbbrevation ? '_ABBREVIATION' : ''), 'Saturday')];
   var closeAlert = function closeAlert() {
     setIsConflict(false);
     setIsTimeChangeError(false);
@@ -145,7 +146,9 @@ var ScheduleUI = function ScheduleUI(props) {
     var _addScheduleTime$open, _addScheduleTime$open2, _addScheduleTime$clos, _addScheduleTime$clos2;
     return /*#__PURE__*/_react.default.createElement(_styles2.TimeScheduleItemContainer, {
       key: daysOfWeekIndex
-    }, /*#__PURE__*/_react.default.createElement("div", null, !disableSchedule && /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
+    }, /*#__PURE__*/_react.default.createElement("div", {
+      className: "day-title"
+    }, !disableSchedule && /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
       checked: schedule === null || schedule === void 0 ? void 0 : schedule.enabled,
       onChange: function onChange(e) {
         return handleEnabledSchedule(daysOfWeekIndex, e.target.checked);
@@ -154,7 +157,11 @@ var ScheduleUI = function ScheduleUI(props) {
       className: "date"
     }, parseDate(getNextDate(daysOfWeekIndex), {
       outputFormat: 'YYYY-MM-DD'
-    })))), schedule !== null && schedule !== void 0 && schedule.enabled ? /*#__PURE__*/_react.default.createElement("div", null, schedule === null || schedule === void 0 ? void 0 : schedule.lapses.map(function (lapse, index) {
+    })))), /*#__PURE__*/_react.default.createElement("div", {
+      className: "day-selector"
+    }, schedule !== null && schedule !== void 0 && schedule.enabled ? /*#__PURE__*/_react.default.createElement("div", {
+      className: "days"
+    }, schedule === null || schedule === void 0 ? void 0 : schedule.lapses.map(function (lapse, index) {
       var _lapse$open, _lapse$open2, _lapse$close, _lapse$close2;
       return /*#__PURE__*/_react.default.createElement("div", {
         key: index
@@ -237,7 +244,11 @@ var ScheduleUI = function ScheduleUI(props) {
       onClick: function onClick() {
         return handleOpenAddSchedule(null);
       }
-    })))) : /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, t('UNAVAILABLE', 'Unavailable'))), !disableSchedule && /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles2.IconWrapper, {
+    })))) : /*#__PURE__*/_react.default.createElement("div", {
+      className: "days"
+    }, /*#__PURE__*/_react.default.createElement("p", null, t('UNAVAILABLE', 'Unavailable'))), !disableSchedule && /*#__PURE__*/_react.default.createElement("div", {
+      className: "icons"
+    }, /*#__PURE__*/_react.default.createElement(_styles2.IconWrapper, {
       isHide: !(schedule !== null && schedule !== void 0 && schedule.enabled)
     }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.PlusSquare, {
       onClick: function onClick() {
@@ -257,7 +268,7 @@ var ScheduleUI = function ScheduleUI(props) {
         return handleSelectCopyTimes(value);
       },
       handleApplyScheduleCopyTimes: handleApplyScheduleCopyTimes
-    })));
+    }))));
   })), /*#__PURE__*/_react.default.createElement(_Confirm.Alert, {
     title: t('WEB_APPNAME', 'Ordering'),
     content: alertState.content,
