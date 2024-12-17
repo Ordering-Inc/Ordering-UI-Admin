@@ -6,14 +6,17 @@ export const ScheduleContainer = styled.div`
 
 export const TimeScheduleItemContainer = styled.div`
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   justify-content: space-between;
   padding: 12px 0;
   border-bottom: 1px solid ${props => props.theme.colors.borderColor};
 
-  > div {
+  div.day-title {
     display: flex;
     align-items: center;
+    padding: 10px 0 5px;
+
     h4 {
       font-size: 13px;
       font-weight: 600;
@@ -53,11 +56,60 @@ export const TimeScheduleItemContainer = styled.div`
           font-size: 18px;
           color: ${props => props.theme.colors.primary};
           ${props => props.theme?.rtl
-? css`
-            margin-left: 10px;
-          `
-: css`
-            margin-right: 10px;
+            ? css`
+              margin-left: 10px;
+            `
+            : css`
+              margin-right: 10px;
+          `}
+        }
+      }
+    }
+  }
+
+  div.day-selector {
+    display: flex;
+    align-items: center;
+    padding: 5px 0 10px;
+
+    width: 100%;
+    justify-content: space-between;
+
+    .days {
+      flex-direction: column;
+
+      > div {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        svg {
+          font-size: 18px;
+          cursor: pointer;
+        }
+      }
+      > p {
+        margin: 6px 0;
+        font-size: 13px;
+      }
+    }
+
+    .icons {
+      display: flex;
+      align-items: center;
+      margin-right: 15px;
+      > span {
+        svg {
+          cursor: pointer;
+          font-size: 18px;
+          color: ${props => props.theme.colors.primary};
+          ${props => props.theme?.rtl
+            ? css`
+              margin-left: 10px;
+            `
+            : css`
+              margin-right: 10px;
           `}
         }
       }
@@ -65,7 +117,7 @@ export const TimeScheduleItemContainer = styled.div`
   }
 
   @media (min-width: 450px) {
-    > div {
+    div.day-title {
       h4 {
         font-size: 14px;
         padding: 0 12px;
@@ -86,13 +138,31 @@ export const TimeScheduleItemContainer = styled.div`
         }
       }
     }
+
+    div.day-selector {
+      .days {
+        p {
+          font-size: 14px;
+        }
+        svg {
+          font-size: 20px;
+        }
+      }
+      .icons {
+        > span {
+          svg {
+            font-size: 20px;
+          }
+        }
+      }
+    }
   }
 `
 
 export const SelectWrapper = styled.div`
   border: 1px solid ${props => props.theme.colors.borderColor};
   border-radius: 8px;
-  width: 70px;
+  width: min-content;
   display: flex;
   justify-content: center;
   .select {
@@ -121,8 +191,8 @@ export const SelectWrapper = styled.div`
   }
 
   @media (min-width: 450px) {
-    width: 70px;
-    margin: 0px 5px;
+    width: 65px;
+    margin: 5px;
     .select {
       > div {
         font-size: 16px;
@@ -188,6 +258,7 @@ export const AddScheduleIconWrapper = styled.div`
   }
 
   @media (min-width: 450px) {
+    justify-content: flex-start;
     width: 56px;
   }
 `
