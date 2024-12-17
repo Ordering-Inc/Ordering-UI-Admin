@@ -98,6 +98,7 @@ export const TimeScheduleItemContainer = styled.div`
     .icons {
       display: flex;
       align-items: center;
+      margin-right: 15px;
       > span {
         svg {
           cursor: pointer;
@@ -257,6 +258,7 @@ export const AddScheduleIconWrapper = styled.div`
   }
 
   @media (min-width: 450px) {
+    justify-content: flex-start;
     width: 56px;
   }
 `
