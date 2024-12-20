@@ -241,7 +241,9 @@ export const Select = React.memo((props) => {
   return prevProps.defaultValue === nextProps.defaultValue &&
     prevProps.options === nextProps.options &&
     prevProps.searchValue === nextProps.searchValue &&
-    prevProps.pagination === nextProps.pagination
+    prevProps.pagination === nextProps.pagination &&
+    prevProps.onChange === nextProps.onChange &&
+    prevProps.handleChangePage === nextProps.handleChangePage
 })
 
 Select.displayName = 'Select'
