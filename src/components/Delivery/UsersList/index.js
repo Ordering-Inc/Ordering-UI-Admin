@@ -61,7 +61,7 @@ export const UsersList = (props) => {
   }
 
   const handleChangePage = (page) => {
-    getUsers(page, 10)
+    getUsers(page, paginationProps?.pageSize ?? 10)
   }
 
   const handleChangePageSize = (pageSize) => {
