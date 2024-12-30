@@ -74,7 +74,8 @@ var UsersList = exports.UsersList = function UsersList(props) {
     handleOpenUserDetails(user);
   };
   var handleChangePage = function handleChangePage(page) {
-    getUsers(page, 10);
+    var _paginationProps$page;
+    getUsers(page, (_paginationProps$page = paginationProps === null || paginationProps === void 0 ? void 0 : paginationProps.pageSize) !== null && _paginationProps$page !== void 0 ? _paginationProps$page : 10);
   };
   var handleChangePageSize = function handleChangePageSize(pageSize) {
     var expectedPage = Math.ceil(paginationProps.from / pageSize);

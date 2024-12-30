@@ -218,6 +218,6 @@ var Select = exports.Select = /*#__PURE__*/_react.default.memo(function (props) 
     isHidePagecontrol: isHidePagecontrol
   })))));
 }, function (prevProps, nextProps) {
-  return prevProps.defaultValue === nextProps.defaultValue && prevProps.options === nextProps.options && prevProps.searchValue === nextProps.searchValue && prevProps.pagination === nextProps.pagination;
+  return prevProps.defaultValue === nextProps.defaultValue && prevProps.options === nextProps.options && prevProps.searchValue === nextProps.searchValue && prevProps.pagination === nextProps.pagination && prevProps.onChange === nextProps.onChange && prevProps.handleChangePage === nextProps.handleChangePage;
 });
 Select.displayName = 'Select';
