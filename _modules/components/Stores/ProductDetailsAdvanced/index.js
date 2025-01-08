@@ -315,7 +315,7 @@ var ProductDetailsAdvancedUI = function ProductDetailsAdvancedUI(props) {
   }, [productState === null || productState === void 0 ? void 0 : productState.weight]);
   (0, _react.useEffect)(function () {
     var _formState$changes8, _formState$changes9;
-    if (formState !== null && formState !== void 0 && (_formState$changes8 = formState.changes) !== null && _formState$changes8 !== void 0 && _formState$changes8.weight && !(formState !== null && formState !== void 0 && (_formState$changes9 = formState.changes) !== null && _formState$changes9 !== void 0 && _formState$changes9.weight_unit)) {
+    if (formState !== null && formState !== void 0 && (_formState$changes8 = formState.changes) !== null && _formState$changes8 !== void 0 && _formState$changes8.weight && !(productState !== null && productState !== void 0 && productState.weight_unit) && !(formState !== null && formState !== void 0 && (_formState$changes9 = formState.changes) !== null && _formState$changes9 !== void 0 && _formState$changes9.weight_unit)) {
       handleClickProperty('weight_unit', 'grams');
     }
   }, [formState === null || formState === void 0 || (_formState$changes10 = formState.changes) === null || _formState$changes10 === void 0 ? void 0 : _formState$changes10.weight]);
