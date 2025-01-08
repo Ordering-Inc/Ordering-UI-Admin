@@ -279,7 +279,7 @@ const ProductDetailsAdvancedUI = (props) => {
   }, [productState?.weight])
 
   useEffect(() => {
-    if (formState?.changes?.weight && !(formState?.changes?.weight_unit)) {
+    if (formState?.changes?.weight && !productState?.weight_unit && !(formState?.changes?.weight_unit)) {
       handleClickProperty('weight_unit', 'grams')
     }
   }, [formState?.changes?.weight])
