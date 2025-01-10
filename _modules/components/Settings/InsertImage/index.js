@@ -62,9 +62,14 @@ var InsertImage = exports.InsertImage = function InsertImage(props) {
     _useState6 = _slicedToArray(_useState5, 2),
     confirm = _useState6[0],
     setConfirm = _useState6[1];
+  var _useState7 = (0, _react.useState)(''),
+    _useState8 = _slicedToArray(_useState7, 2),
+    altText = _useState8[0],
+    setAltText = _useState8[1];
   var handleInsertClick = function handleInsertClick() {
     handleRestoreEditor();
-    editorContext.invoke('editor.insertImage', imageUrl);
+    var imgTag = "<img src=\"".concat(imageUrl, "\" alt=\"").concat(altText || t('IMAGE', 'Image'), "\" />");
+    editorContext.invoke('editor.pasteHTML', imgTag);
     onClose();
   };
   var handleClickImage = function handleClickImage(type) {
@@ -120,6 +125,12 @@ var InsertImage = exports.InsertImage = function InsertImage(props) {
     onChange: function onChange(e) {
       return setImageUrl(e.target.value);
     }
+  })), /*#__PURE__*/_react.default.createElement(_styles2.WrapperInput, null, /*#__PURE__*/_react.default.createElement("label", null, t('ALT_TEXT', 'Alt text')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    value: insertImageState.alt,
+    onChange: function onChange(e) {
+      return setAltText(e.target.value);
+    },
+    placeholder: t('ENTER_ALT_TEXT', 'Enter alt text')
   })), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     borderRadius: "8px",
     color: "primary",
