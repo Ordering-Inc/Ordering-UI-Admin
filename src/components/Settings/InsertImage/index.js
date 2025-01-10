@@ -41,10 +41,12 @@ export const InsertImage = (props) => {
   const imageInputRef = useRef(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
+  const [altText, setAltText] = useState('')
 
   const handleInsertClick = () => {
     handleRestoreEditor()
-    editorContext.invoke('editor.insertImage', imageUrl)
+    const imgTag = `<img src="${imageUrl}" alt="${altText || t('IMAGE', 'Image')}" />`
+    editorContext.invoke('editor.pasteHTML', imgTag)
     onClose()
   }
 
@@ -105,6 +107,14 @@ export const InsertImage = (props) => {
         <Input
           value={imageUrl || ''}
           onChange={e => setImageUrl(e.target.value)}
+        />
+      </WrapperInput>
+      <WrapperInput>
+        <label>{t('ALT_TEXT', 'Alt text')}</label>
+        <Input
+          value={insertImageState.alt}
+          onChange={(e) => setAltText(e.target.value)}
+          placeholder={t('ENTER_ALT_TEXT', 'Enter alt text')}
         />
       </WrapperInput>
       <Button
