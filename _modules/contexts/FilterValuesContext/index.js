@@ -54,7 +54,8 @@ var FilterValuesProvider = exports.FilterValuesProvider = function FilterValuesP
       customerLastname: null,
       coupon: null,
       offerId: null,
-      administratorIds: []
+      administratorIds: [],
+      timeStatus: null
     }),
     _useState2 = _slicedToArray(_useState, 2),
     filterValues = _useState2[0],
