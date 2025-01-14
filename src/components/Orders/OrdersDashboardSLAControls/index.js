@@ -3,6 +3,7 @@ import { useLanguage } from 'ordering-components-admin'
 
 import { Select as FirstSelect } from '../../../styles/Select/FirstSelect'
 import { OrderDashboardSLASetting } from '../OrderDashboardSLASetting'
+import { useFilterValues } from '../../../contexts/FilterValuesContext'
 
 import {
   OrdersDashboardSLAControlsContainer,
@@ -13,7 +14,8 @@ import {
 
 export const OrdersDashboardSLAControls = (props) => {
   const { setTimeStatus, setSlaSettingTime } = props
-  const [defaultOptionValue, setDefaultOptionValue] = useState('default')
+  const [filterValues, { handleFilterValues }] = useFilterValues()
+  const [defaultOptionValue, setDefaultOptionValue] = useState(filterValues?.timeStatus ?? 'default')
   const [filteredTimeStatus, setFilteredTimeStatus] = useState([])
   const [settingOptionOpen, setSettingOptionOpen] = useState(false)
   const [, t] = useLanguage()
@@ -77,9 +79,11 @@ export const OrdersDashboardSLAControls = (props) => {
     }
     setDefaultOptionValue(val)
     if (val === 'default') {
+      handleFilterValues({ ...filterValues, timeStatus: null })
       setTimeStatus(null)
       return
     }
+    handleFilterValues({ ...filterValues, timeStatus: val })
     setTimeStatus(val)
   }
 
@@ -87,6 +91,11 @@ export const OrdersDashboardSLAControls = (props) => {
     const _filteredTimeStatus = [...timeStatus?.filter(orderStatuse => orderStatuse?.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()))]
     setFilteredTimeStatus(_filteredTimeStatus)
   }
+
+  useEffect(() => {
+    if (filterValues?.timeStatus) return
+    setDefaultOptionValue('default')
+  }, [filterValues?.timeStatus])
 
   useEffect(() => {
     setFilteredTimeStatus(timeStatus)
