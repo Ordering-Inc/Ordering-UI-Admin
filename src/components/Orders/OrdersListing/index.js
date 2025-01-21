@@ -86,7 +86,7 @@ export const OrdersListing = memo((props) => {
     {
       value: 'dateTime',
       content: t('DATE_TIME', 'Date and time'),
-      enabled: true
+      enabled: !showExternalId
     },
     {
       value: 'agent',
