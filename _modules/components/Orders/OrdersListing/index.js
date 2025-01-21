@@ -96,7 +96,7 @@ var OrdersListing = exports.OrdersListing = /*#__PURE__*/(0, _react.memo)(functi
   }, {
     value: 'dateTime',
     content: t('DATE_TIME', 'Date and time'),
-    enabled: true
+    enabled: !showExternalId
   }, {
     value: 'agent',
     content: t('AGENT', 'Agent'),
