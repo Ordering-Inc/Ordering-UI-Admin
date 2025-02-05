@@ -342,7 +342,7 @@ var ProductExtraSuboption = exports.ProductExtraSuboption = function ProductExtr
     },
     defaultValue: subOption === null || subOption === void 0 ? void 0 : subOption.half_price
   })), (typeof (settingChangeState === null || settingChangeState === void 0 || (_settingChangeState$c3 = settingChangeState.changes) === null || _settingChangeState$c3 === void 0 ? void 0 : _settingChangeState$c3.allow_suboption_quantity) !== 'undefined' ? settingChangeState === null || settingChangeState === void 0 || (_settingChangeState$c4 = settingChangeState.changes) === null || _settingChangeState$c4 === void 0 ? void 0 : _settingChangeState$c4.allow_suboption_quantity : optionState === null || optionState === void 0 || (_optionState$option2 = optionState.option) === null || _optionState$option2 === void 0 ? void 0 : _optionState$option2.allow_suboption_quantity) && /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement(_reactHookForm.Controller, {
-    name: "half_price",
+    name: "max",
     control: control,
     render: function render(_ref4) {
       var _onChange4 = _ref4.onChange,
