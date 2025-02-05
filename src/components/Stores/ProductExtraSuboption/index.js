@@ -304,7 +304,7 @@ export const ProductExtraSuboption = (props) => {
         {(typeof settingChangeState?.changes?.allow_suboption_quantity !== 'undefined' ? settingChangeState?.changes?.allow_suboption_quantity : optionState?.option?.allow_suboption_quantity) && (
           <InputWrapper>
             <Controller
-              name='half_price'
+              name='max'
               control={control}
               render={({ onChange, value }) => (
                 <Input
