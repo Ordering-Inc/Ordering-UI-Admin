@@ -81,7 +81,7 @@ export const OrdersListing = memo((props) => {
     {
       value: 'orderNumber',
       content: t('INVOICE_ORDER_NO', 'Order No.'),
-      enabled: !showExternalId
+      enabled: false
     },
     {
       value: 'dateTime',
