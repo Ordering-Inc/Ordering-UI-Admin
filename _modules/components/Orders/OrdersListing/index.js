@@ -92,7 +92,7 @@ var OrdersListing = exports.OrdersListing = /*#__PURE__*/(0, _react.memo)(functi
   }, {
     value: 'orderNumber',
     content: t('INVOICE_ORDER_NO', 'Order No.'),
-    enabled: !showExternalId
+    enabled: false
   }, {
     value: 'dateTime',
     content: t('DATE_TIME', 'Date and time'),
