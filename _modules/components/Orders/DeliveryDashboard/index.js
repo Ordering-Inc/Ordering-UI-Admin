@@ -35,8 +35,7 @@ var DeliveryDashboard = exports.DeliveryDashboard = function DeliveryDashboard(p
     handleSelectedSubOrderStatus = props.handleSelectedSubOrderStatus,
     ordersAmountByStatus = props.ordersAmountByStatus,
     setOrdersAmountByStatus = props.setOrdersAmountByStatus,
-    isUseQuery = props.isUseQuery,
-    setDetailsOrder = props.setDetailsOrder;
+    isUseQuery = props.isUseQuery;
   var ordersDashboardListProps = _objectSpread({}, props);
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
