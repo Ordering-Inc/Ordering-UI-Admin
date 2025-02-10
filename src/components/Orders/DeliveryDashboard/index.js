@@ -22,8 +22,7 @@ export const DeliveryDashboard = (props) => {
     handleSelectedSubOrderStatus,
     ordersAmountByStatus,
     setOrdersAmountByStatus,
-    isUseQuery,
-    setDetailsOrder
+    isUseQuery
   } = props
 
   const ordersDashboardListProps = {
