@@ -22,8 +22,7 @@ export const DeliveryDashboard = (props) => {
     handleSelectedSubOrderStatus,
     ordersAmountByStatus,
     setOrdersAmountByStatus,
-    isUseQuery,
-    setDetailsOrder
+    isUseQuery
   } = props
 
   const ordersDashboardListProps = {
@@ -45,10 +44,8 @@ export const DeliveryDashboard = (props) => {
   const handleLocation = (order) => {
     if (interActionMapOrder?.id === order?.id) {
       setInterActionMapOrder(null)
-      setDetailsOrder(null)
     } else {
-      setInterActionMapOrder(order)
-      setDetailsOrder(order)
+      setInterActionMapOrder({ ...order })
     }
   }
 
