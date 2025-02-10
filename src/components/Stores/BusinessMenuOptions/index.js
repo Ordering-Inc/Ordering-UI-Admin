@@ -44,7 +44,8 @@ const BusinessMenuOptionsUI = (props) => {
     setMenuList,
     menuList,
     formState,
-    businessMenuState
+    businessMenuState,
+    setCurrentMenu
   } = props
 
   const query = new URLSearchParams(useLocation().search)
@@ -221,6 +222,7 @@ const BusinessMenuOptionsUI = (props) => {
             {selectedMenuOption === 'share_with' && (
               <BusinessMenuShare
                 menu={menu}
+                setCurrentMenu={setCurrentMenu}
                 business={business}
                 handleUpdateBusinessState={handleUpdateBusinessState}
                 setMenuList={setMenuList}
