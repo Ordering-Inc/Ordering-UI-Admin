@@ -45,10 +45,8 @@ export const DeliveryDashboard = (props) => {
   const handleLocation = (order) => {
     if (interActionMapOrder?.id === order?.id) {
       setInterActionMapOrder(null)
-      setDetailsOrder(null)
     } else {
-      setInterActionMapOrder(order)
-      setDetailsOrder(order)
+      setInterActionMapOrder({ ...order })
     }
   }
 
