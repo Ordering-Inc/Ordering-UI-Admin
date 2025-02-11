@@ -160,6 +160,7 @@ export const UserDetailsUI = (props) => {
           {currentMenuSelected === 'driver_group' && (
             <DriverGroupSetting
               userId={userState?.user?.id}
+              isDriverManager={userState?.user?.level === 5}
             />
           )}
           {currentMenuSelected === 'saved_places' && (
