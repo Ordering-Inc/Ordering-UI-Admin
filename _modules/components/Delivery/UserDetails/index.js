@@ -42,7 +42,7 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 var UserDetailsUI = exports.UserDetailsUI = function UserDetailsUI(props) {
-  var _configs$allow_driver, _configs$white_label_, _userState$user, _userState$user2, _userState$user3, _userState$user5, _userState$user7, _userState$user8, _userState$user9, _userState$user10, _userState$user11, _scheduleState$change, _userState$user12, _userState$user13, _userState$user14, _userState$user15, _userState$user16, _userState$user17;
+  var _configs$allow_driver, _configs$white_label_, _userState$user, _userState$user2, _userState$user3, _userState$user5, _userState$user7, _userState$user8, _userState$user9, _userState$user10, _userState$user11, _userState$user12, _scheduleState$change, _userState$user13, _userState$user14, _userState$user15, _userState$user16, _userState$user17, _userState$user18;
   var isDriversPage = props.isDriversPage,
     isDriversManagersPage = props.isDriversManagersPage,
     userState = props.userState,
@@ -163,17 +163,18 @@ var UserDetailsUI = exports.UserDetailsUI = function UserDetailsUI(props) {
     user: userState.user,
     handleSuccessUpdate: handleSuccessUserUpdate
   }), currentMenuSelected === 'driver_group' && /*#__PURE__*/_react.default.createElement(_DriverGroupSetting.DriverGroupSetting, {
-    userId: userState === null || userState === void 0 || (_userState$user7 = userState.user) === null || _userState$user7 === void 0 ? void 0 : _userState$user7.id
-  }), currentMenuSelected === 'saved_places' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (userState === null || userState === void 0 || (_userState$user8 = userState.user) === null || _userState$user8 === void 0 ? void 0 : _userState$user8.addresses) && /*#__PURE__*/_react.default.createElement(_styles3.SavedPlaces, null, /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
+    userId: userState === null || userState === void 0 || (_userState$user7 = userState.user) === null || _userState$user7 === void 0 ? void 0 : _userState$user7.id,
+    isDriverManager: (userState === null || userState === void 0 || (_userState$user8 = userState.user) === null || _userState$user8 === void 0 ? void 0 : _userState$user8.level) === 5
+  }), currentMenuSelected === 'saved_places' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (userState === null || userState === void 0 || (_userState$user9 = userState.user) === null || _userState$user9 === void 0 ? void 0 : _userState$user9.addresses) && /*#__PURE__*/_react.default.createElement(_styles3.SavedPlaces, null, /*#__PURE__*/_react.default.createElement(_AddressList.AddressList, {
     isSeletectedUserAddresses: true,
-    userId: (_userState$user9 = userState.user) === null || _userState$user9 === void 0 ? void 0 : _userState$user9.id,
-    addresses: (_userState$user10 = userState.user) === null || _userState$user10 === void 0 ? void 0 : _userState$user10.addresses,
+    userId: (_userState$user10 = userState.user) === null || _userState$user10 === void 0 ? void 0 : _userState$user10.id,
+    addresses: (_userState$user11 = userState.user) === null || _userState$user11 === void 0 ? void 0 : _userState$user11.addresses,
     setExtraOpen: setExtraOpen,
     userState: userState,
     handleSuccessUpdate: handleSuccessUserUpdate
   }))), currentMenuSelected === 'schedule' && /*#__PURE__*/_react.default.createElement(_styles3.ScheduleSection, null, /*#__PURE__*/_react.default.createElement(_Shared.Schedule, {
     isShowDate: !!isDriversPage,
-    scheduleList: userState === null || userState === void 0 || (_userState$user11 = userState.user) === null || _userState$user11 === void 0 ? void 0 : _userState$user11.schedule,
+    scheduleList: userState === null || userState === void 0 || (_userState$user12 = userState.user) === null || _userState$user12 === void 0 ? void 0 : _userState$user12.schedule,
     handleChangeScheduleState: handleScheduleState,
     disableSchedule: disableSchedule
   }), !disableSchedule && /*#__PURE__*/_react.default.createElement(_styles2.ActionsForm, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
@@ -188,18 +189,18 @@ var UserDetailsUI = exports.UserDetailsUI = function UserDetailsUI(props) {
       return handleScheduleUpdateUser();
     }
   }, scheduleState.loading ? t('UPDATING', 'Updating...') : t('UPDATE', 'Update')))), currentMenuSelected === 'logs' && /*#__PURE__*/_react.default.createElement(_DriversLogs.DriversLogs, {
-    userId: (_userState$user12 = userState.user) === null || _userState$user12 === void 0 ? void 0 : _userState$user12.id,
+    userId: (_userState$user13 = userState.user) === null || _userState$user13 === void 0 ? void 0 : _userState$user13.id,
     UIComponent: _DriversGroupLogs.DriversGroupLogsUI
   }), currentMenuSelected === 'advanced_logs' && /*#__PURE__*/_react.default.createElement(_DriversAdvancedLogs.DriversAdvancedLogs, {
-    userId: (_userState$user13 = userState.user) === null || _userState$user13 === void 0 ? void 0 : _userState$user13.id,
+    userId: (_userState$user14 = userState.user) === null || _userState$user14 === void 0 ? void 0 : _userState$user14.id,
     UIComponent: _DriversGroupLogs.DriversGroupLogsUI
   }), currentMenuSelected === 'orders' && /*#__PURE__*/_react.default.createElement(_OrdersManager.OrdersManager, {
     isSelectedOrders: true,
-    customerId: (_userState$user14 = userState.user) === null || _userState$user14 === void 0 ? void 0 : _userState$user14.id,
+    customerId: (_userState$user15 = userState.user) === null || _userState$user15 === void 0 ? void 0 : _userState$user15.id,
     handleCustomOrderDetail: setExtraOpen
   }), currentMenuSelected === 'push_tokens' && /*#__PURE__*/_react.default.createElement(_Shared.PushTokens, {
-    userId: userState === null || userState === void 0 || (_userState$user15 = userState.user) === null || _userState$user15 === void 0 ? void 0 : _userState$user15.id,
-    pushTokens: (userState === null || userState === void 0 || (_userState$user16 = userState.user) === null || _userState$user16 === void 0 ? void 0 : _userState$user16.push_tokens) || []
+    userId: userState === null || userState === void 0 || (_userState$user16 = userState.user) === null || _userState$user16 === void 0 ? void 0 : _userState$user16.id,
+    pushTokens: (userState === null || userState === void 0 || (_userState$user17 = userState.user) === null || _userState$user17 === void 0 ? void 0 : _userState$user17.push_tokens) || []
   })), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "700px",
     height: "80vh",
@@ -210,7 +211,7 @@ var UserDetailsUI = exports.UserDetailsUI = function UserDetailsUI(props) {
       return setIsCustomField(false);
     }
   }, /*#__PURE__*/_react.default.createElement(_Users.UserMetaFields, {
-    userId: (_userState$user17 = userState.user) === null || _userState$user17 === void 0 ? void 0 : _userState$user17.id
+    userId: (_userState$user18 = userState.user) === null || _userState$user18 === void 0 ? void 0 : _userState$user18.id
   })), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     width: "700px",
     height: "80vh",

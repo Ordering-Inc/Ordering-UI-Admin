@@ -52,6 +52,9 @@ var UserDetailsMenu = exports.UserDetailsMenu = function UserDetailsMenu(props) 
   }, {
     key: 'saved_places',
     content: t('SAVED_PLACES', 'Saved places')
+  }, {
+    key: 'driver_group',
+    content: t('DRIVER_GROUP', 'Driver group')
   }
   // { key: 'metafields', content: t('METAFIELDS', 'Metafields') },
   // { key: 'personalization', content: t('PERSONALIZATION', 'Personalization') }
