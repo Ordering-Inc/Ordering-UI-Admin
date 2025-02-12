@@ -267,6 +267,13 @@ export const MessagesUI = (props) => {
     handleReadMessages(messages.messages[messages.messages.length - 1].id)
   }
 
+  const getAuthor = (message) => {
+    if (message?.author_id) {
+      return (message?.author?.name || '') + (message?.author?.lastname ? ' ' + message?.author?.lastname : '')
+    }
+    return t('AUTHOR_SYSTEM', 'System')
+  }
+
   useEffect(() => {
     if (!isChat) return
     if (order?.driver) {
@@ -285,7 +292,7 @@ export const MessagesUI = (props) => {
     if (messages.loading) return
     const _filteredMessages = messages.messages.filter(message => {
       if (message.type === 2) {
-        return message.comment.toLocaleLowerCase().includes(messageSearchValue.toLocaleLowerCase())
+        return message?.comment?.toLocaleLowerCase()?.includes(messageSearchValue?.toLocaleLowerCase())
       }
       return true
     })
@@ -484,7 +491,7 @@ export const MessagesUI = (props) => {
                                 }}
                               />
                               <div><strong>{t('APP_ID', 'App ID')}: </strong>{message?.app_id}</div>
-                              <div><strong>{t('AUTHOR', 'Author')}: </strong>{message?.author?.name} {message?.author?.lastname}</div>
+                              <div><strong>{t('AUTHOR', 'Author')}: </strong>{getAuthor(message)}</div>
                               <div><strong>{t('USER_AGENT', 'User agent')}: </strong>{message?.user_agent}</div>
                               <div><strong>{t('IP', 'IP')}: </strong>{message?.ip}</div>
                               <TimeofSent>{getTimeAgo(message?.created_at)}</TimeofSent>
@@ -526,7 +533,7 @@ export const MessagesUI = (props) => {
                                 </strong>{' '}
                               </p>
                               <div><strong>{t('APP_ID', 'App ID')}: </strong>{message?.app_id}</div>
-                              <div><strong>{t('AUTHOR', 'Author')}: </strong>{message?.author?.name} {message?.author?.lastname}</div>
+                              <div><strong>{t('AUTHOR', 'Author')}: </strong>{getAuthor(message)}</div>
                               <div><strong>{t('USER_AGENT', 'User agent')}: </strong>{message?.user_agent}</div>
                               <div><strong>{t('IP', 'IP')}: </strong>{message?.ip}</div>
                               <TimeofSent>{getTimeAgo(message?.created_at)}</TimeofSent>
