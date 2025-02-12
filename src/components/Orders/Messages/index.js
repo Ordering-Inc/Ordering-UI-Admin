@@ -484,7 +484,7 @@ export const MessagesUI = (props) => {
                                 }}
                               />
                               <div><strong>{t('APP_ID', 'App ID')}: </strong>{message?.app_id}</div>
-                              <div><strong>{t('AUTHOR', 'Author')}: </strong>{message?.author_id ? message?.author?.name + ' ' + message?.author?.lastname : t('SYSTEM', 'System')}</div>
+                              <div><strong>{t('AUTHOR', 'Author')}: </strong>{message?.author_id ? message?.author?.name + ' ' + message?.author?.lastname : t('AUTHOR_SYSTEM', 'System')}</div>
                               <div><strong>{t('USER_AGENT', 'User agent')}: </strong>{message?.user_agent}</div>
                               <div><strong>{t('IP', 'IP')}: </strong>{message?.ip}</div>
                               <TimeofSent>{getTimeAgo(message?.created_at)}</TimeofSent>
@@ -526,7 +526,7 @@ export const MessagesUI = (props) => {
                                 </strong>{' '}
                               </p>
                               <div><strong>{t('APP_ID', 'App ID')}: </strong>{message?.app_id}</div>
-                              <div><strong>{t('AUTHOR', 'Author')}: </strong>{message?.author_id ? message?.author?.name + ' ' + message?.author?.lastname : t('SYSTEM', 'System')}</div>
+                              <div><strong>{t('AUTHOR', 'Author')}: </strong>{message?.author_id ? message?.author?.name + ' ' + message?.author?.lastname : t('AUTHOR_SYSTEM', 'System')}</div>
                               <div><strong>{t('USER_AGENT', 'User agent')}: </strong>{message?.user_agent}</div>
                               <div><strong>{t('IP', 'IP')}: </strong>{message?.ip}</div>
                               <TimeofSent>{getTimeAgo(message?.created_at)}</TimeofSent>
