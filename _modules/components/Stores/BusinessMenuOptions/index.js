@@ -51,7 +51,8 @@ var BusinessMenuOptionsUI = function BusinessMenuOptionsUI(props) {
     setMenuList = props.setMenuList,
     menuList = props.menuList,
     formState = props.formState,
-    businessMenuState = props.businessMenuState;
+    businessMenuState = props.businessMenuState,
+    setCurrentMenu = props.setCurrentMenu;
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var theme = (0, _styledComponents.useTheme)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -193,6 +194,7 @@ var BusinessMenuOptionsUI = function BusinessMenuOptionsUI(props) {
     }
   }, t('SHARE_WITH', 'Share with'))))), !isSelectedSharedMenus || ((_Object$keys5 = Object.keys(menu)) === null || _Object$keys5 === void 0 ? void 0 : _Object$keys5.length) === 0 ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, selectedMenuOption === 'basic' && /*#__PURE__*/_react.default.createElement(_BusinessMenuBasicOptions.BusinessMenuBasicOptions, props), selectedMenuOption === 'channels' && /*#__PURE__*/_react.default.createElement(_BusinessMenuChannels.BusinessMenuChannels, props), selectedMenuOption === 'share_with' && /*#__PURE__*/_react.default.createElement(_BusinessMenuShare.BusinessMenuShare, {
     menu: menu,
+    setCurrentMenu: setCurrentMenu,
     business: business,
     handleUpdateBusinessState: handleUpdateBusinessState,
     setMenuList: setMenuList,
