@@ -35,8 +35,7 @@ var DeliveryDashboard = exports.DeliveryDashboard = function DeliveryDashboard(p
     handleSelectedSubOrderStatus = props.handleSelectedSubOrderStatus,
     ordersAmountByStatus = props.ordersAmountByStatus,
     setOrdersAmountByStatus = props.setOrdersAmountByStatus,
-    isUseQuery = props.isUseQuery,
-    setDetailsOrder = props.setDetailsOrder;
+    isUseQuery = props.isUseQuery;
   var ordersDashboardListProps = _objectSpread({}, props);
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
@@ -54,10 +53,8 @@ var DeliveryDashboard = exports.DeliveryDashboard = function DeliveryDashboard(p
   var handleLocation = function handleLocation(order) {
     if ((interActionMapOrder === null || interActionMapOrder === void 0 ? void 0 : interActionMapOrder.id) === (order === null || order === void 0 ? void 0 : order.id)) {
       setInterActionMapOrder(null);
-      setDetailsOrder(null);
     } else {
-      setInterActionMapOrder(order);
-      setDetailsOrder(order);
+      setInterActionMapOrder(_objectSpread({}, order));
     }
   };
   return /*#__PURE__*/_react.default.createElement(_styles.DeliveryDashboardContainer, null, /*#__PURE__*/_react.default.createElement(_styles.OrdersContainer, null, /*#__PURE__*/_react.default.createElement(_styles.FilterContainer, null, /*#__PURE__*/_react.default.createElement(_OrderStatusFilterBar.OrderStatusFilterBar, {
