@@ -67,9 +67,9 @@ const OrdersManagerUI = (props) => {
 
   const [, t] = useLanguage()
   const [{ user }] = useSession()
-  const [configState] = useConfig()
+  const [{ configs }] = useConfig()
 
-  const isFilterDriverGroup = (configState?.configs?.filter_order_options?.value.split('|').map(value => (value)) || []).includes('driver_group_general')
+  const isFilterDriverGroup = (configs?.filter_order_options?.value.split('|').map(value => (value)) || []).includes('driver_group_general')
 
   const query = new URLSearchParams(useLocation().search)
   const [isOpenOrderDetail, setIsOpenOrderDetail] = useState(false)
@@ -114,7 +114,7 @@ const OrdersManagerUI = (props) => {
       setIsTourOpen(false)
       return
     }
-    setDetailsOrder(order)
+    (!configs?.optimize_order_data || (configs?.optimize_order_data?.value === '0')) && setDetailsOrder(order)
     setOrderDetailId(order.id)
     // setIsOpenOrderDetail(true)
     if (!isSelectedOrders) {
