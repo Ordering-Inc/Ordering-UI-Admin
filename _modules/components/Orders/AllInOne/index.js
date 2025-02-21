@@ -34,7 +34,7 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 var OrdersManagerUI = function OrdersManagerUI(props) {
-  var _configState$configs;
+  var _configs$filter_order;
   var isSelectedOrders = props.isSelectedOrders,
     searchValue = props.searchValue,
     driverGroupList = props.driverGroupList,
@@ -76,8 +76,8 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     user = _useSession2[0].user;
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
-    configState = _useConfig2[0];
-  var isFilterDriverGroup = ((configState === null || configState === void 0 || (_configState$configs = configState.configs) === null || _configState$configs === void 0 || (_configState$configs = _configState$configs.filter_order_options) === null || _configState$configs === void 0 ? void 0 : _configState$configs.value.split('|').map(function (value) {
+    configs = _useConfig2[0].configs;
+  var isFilterDriverGroup = ((configs === null || configs === void 0 || (_configs$filter_order = configs.filter_order_options) === null || _configs$filter_order === void 0 ? void 0 : _configs$filter_order.value.split('|').map(function (value) {
     return value;
   })) || []).includes('driver_group_general');
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
@@ -158,12 +158,13 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     });
   };
   var handleOpenOrderDetail = function handleOpenOrderDetail(order) {
+    var _configs$optimize_ord;
     var isKeydown = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
     if (isTourOpen && currentTourStep === 4 && !isKeydown) {
       setIsTourOpen(false);
       return;
     }
-    setDetailsOrder(order);
+    (!(configs !== null && configs !== void 0 && configs.optimize_order_data) || (configs === null || configs === void 0 || (_configs$optimize_ord = configs.optimize_order_data) === null || _configs$optimize_ord === void 0 ? void 0 : _configs$optimize_ord.value) === '0') && setDetailsOrder(order);
     setOrderDetailId(order.id);
     // setIsOpenOrderDetail(true)
     if (!isSelectedOrders) {
