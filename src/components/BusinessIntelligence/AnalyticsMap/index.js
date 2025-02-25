@@ -18,8 +18,8 @@ export const AnalyticsMap = (props) => {
   const [isHeat, setIsHeat] = useState(false)
 
   const defaultCenter = {
-    lat: Number(configState.configs?.location_default_latitude?.value) ?? 40.77473399999999,
-    lng: Number(configState.configs?.location_default_longitude?.value) ?? -73.9653844
+    lat: Number(configState.configs?.location_default_latitude?.value) || 40.77473399999999,
+    lng: Number(configState.configs?.location_default_longitude?.value) || -73.9653844
   }
 
   const googleMapsControls = {
@@ -33,6 +33,16 @@ export const AnalyticsMap = (props) => {
       mapTypeIds: ['roadmap', 'satellite']
     }
   }
+
+  const validLocations = locationList?.locations && Array.isArray(locationList.locations)
+    ? locationList.locations.filter(location =>
+      location &&
+        typeof location.lat !== 'undefined' &&
+        typeof location.lng !== 'undefined' &&
+        !isNaN(Number(location.lat)) &&
+        !isNaN(Number(location.lng))
+    )
+    : []
 
   useEffect(() => {
     setIsHeat(false)
@@ -50,16 +60,17 @@ export const AnalyticsMap = (props) => {
                 <GoogleMapsMap
                   apiKey={configState?.configs?.google_maps_api_key?.value}
                   location={defaultCenter}
-                  locations={locationList?.locations}
+                  locations={validLocations}
                   mapControls={googleMapsControls}
                   isHeatMap
                   isHeat={isHeat}
                   markerIcon={theme?.images?.icons?.mapMarker}
+                  onError={(error) => console.error('Google Maps error:', error)}
                 />
                 <Button
                   borderRadius='7.6px'
                   color='primary'
-                  disabled={locationList.loading}
+                  disabled={locationList.loading || validLocations.length === 0}
                   onClick={() => setIsHeat(!isHeat)}
                 >
                   {isHeat ? t('GROUPED', 'Grouped') : t('HEATMAP', 'Heatmap')}
