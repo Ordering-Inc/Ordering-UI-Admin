@@ -280,6 +280,13 @@ var MessagesUI = exports.MessagesUI = function MessagesUI(props) {
     if (messages.messages[messages.messages.length - 1].read) return;
     handleReadMessages(messages.messages[messages.messages.length - 1].id);
   };
+  var getAuthor = function getAuthor(message) {
+    if (message !== null && message !== void 0 && message.author_id) {
+      var _message$author, _message$author2, _message$author3;
+      return ((message === null || message === void 0 || (_message$author = message.author) === null || _message$author === void 0 ? void 0 : _message$author.name) || '') + (message !== null && message !== void 0 && (_message$author2 = message.author) !== null && _message$author2 !== void 0 && _message$author2.lastname ? ' ' + (message === null || message === void 0 || (_message$author3 = message.author) === null || _message$author3 === void 0 ? void 0 : _message$author3.lastname) : '');
+    }
+    return t('AUTHOR_SYSTEM', 'System');
+  };
   (0, _react.useEffect)(function () {
     if (!isChat) return;
     if (order !== null && order !== void 0 && order.driver) {
@@ -306,7 +313,8 @@ var MessagesUI = exports.MessagesUI = function MessagesUI(props) {
     if (messages.loading) return;
     var _filteredMessages = messages.messages.filter(function (message) {
       if (message.type === 2) {
-        return message.comment.toLocaleLowerCase().includes(messageSearchValue.toLocaleLowerCase());
+        var _message$comment;
+        return message === null || message === void 0 || (_message$comment = message.comment) === null || _message$comment === void 0 || (_message$comment = _message$comment.toLocaleLowerCase()) === null || _message$comment === void 0 ? void 0 : _message$comment.includes(messageSearchValue === null || messageSearchValue === void 0 ? void 0 : messageSearchValue.toLocaleLowerCase());
       }
       return true;
     });
@@ -421,7 +429,7 @@ var MessagesUI = exports.MessagesUI = function MessagesUI(props) {
   })), tabActive === 'logistic_information' && /*#__PURE__*/_react.default.createElement(_styles.WrapperLogisticInformation, null, /*#__PURE__*/_react.default.createElement(_OrderLogisticInformation.OrderLogisticInformation, {
     orderId: order.id
   }))), filteredMessages.length > 0 && filteredMessages.map(function (message) {
-    var _message$author, _message$author2, _message$author3, _message$author4, _order$business2, _order$customer2, _order$driver2, _order$business3, _order$customer3, _order$driver3, _order$business4, _order$customer4, _order$driver4, _order$business5, _order$customer5, _order$driver5;
+    var _order$business2, _order$customer2, _order$driver2, _order$business3, _order$customer3, _order$driver3, _order$business4, _order$customer4, _order$driver4, _order$business5, _order$customer5, _order$driver5;
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: message.id
     }, history && tabActive === 'order_history' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, message.type === 0 && /*#__PURE__*/_react.default.createElement(_styles.MessageConsole, {
@@ -432,7 +440,7 @@ var MessagesUI = exports.MessagesUI = function MessagesUI(props) {
           utc: false
         }) + " (".concat(t('BUSINESS_TIME', 'Business time'), ")")) + '</b>').replace('_via_', '<b>' + t(order.app_id ? order.app_id.toUpperCase() : 'OTHER') + '</b>')
       }
-    }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("strong", null, t('APP_ID', 'App ID'), ": "), message === null || message === void 0 ? void 0 : message.app_id), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("strong", null, t('AUTHOR', 'Author'), ": "), message === null || message === void 0 || (_message$author = message.author) === null || _message$author === void 0 ? void 0 : _message$author.name, " ", message === null || message === void 0 || (_message$author2 = message.author) === null || _message$author2 === void 0 ? void 0 : _message$author2.lastname), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("strong", null, t('USER_AGENT', 'User agent'), ": "), message === null || message === void 0 ? void 0 : message.user_agent), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("strong", null, t('IP', 'IP'), ": "), message === null || message === void 0 ? void 0 : message.ip), /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message === null || message === void 0 ? void 0 : message.created_at)))), message.type === 1 && /*#__PURE__*/_react.default.createElement(_styles.MessageConsole, {
+    }), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("strong", null, t('APP_ID', 'App ID'), ": "), message === null || message === void 0 ? void 0 : message.app_id), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("strong", null, t('AUTHOR', 'Author'), ": "), getAuthor(message)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("strong", null, t('USER_AGENT', 'User agent'), ": "), message === null || message === void 0 ? void 0 : message.user_agent), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("strong", null, t('IP', 'IP'), ": "), message === null || message === void 0 ? void 0 : message.ip), /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message === null || message === void 0 ? void 0 : message.created_at)))), message.type === 1 && /*#__PURE__*/_react.default.createElement(_styles.MessageConsole, {
       key: message.id,
       style: {
         display: "".concat(tabActive === 'order_history' ? 'inline-flex' : 'none')
@@ -446,7 +454,7 @@ var MessagesUI = exports.MessagesUI = function MessagesUI(props) {
       overlay: /*#__PURE__*/_react.default.createElement(_reactBootstrap.Tooltip, null, parseDate(message.created_at))
     }, /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message.created_at)))))), isChat && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, message.type === 0 && /*#__PURE__*/_react.default.createElement(_styles.MessageConsole, {
       key: message.id
-    }, /*#__PURE__*/_react.default.createElement(_styles.BubbleConsole, null, /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_PLACED_FOR', 'Order placed for'), " ", ' ', /*#__PURE__*/_react.default.createElement("strong", null, parseDate(order.created_at)), " ", ' ', t('VIA', 'Via'), ' ', /*#__PURE__*/_react.default.createElement("strong", null, order.app_id ? t(order.app_id.toUpperCase(), order.app_id) : t('OTHER', 'Other')), ' '), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("strong", null, t('APP_ID', 'App ID'), ": "), message === null || message === void 0 ? void 0 : message.app_id), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("strong", null, t('AUTHOR', 'Author'), ": "), message === null || message === void 0 || (_message$author3 = message.author) === null || _message$author3 === void 0 ? void 0 : _message$author3.name, " ", message === null || message === void 0 || (_message$author4 = message.author) === null || _message$author4 === void 0 ? void 0 : _message$author4.lastname), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("strong", null, t('USER_AGENT', 'User agent'), ": "), message === null || message === void 0 ? void 0 : message.user_agent), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("strong", null, t('IP', 'IP'), ": "), message === null || message === void 0 ? void 0 : message.ip), /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message === null || message === void 0 ? void 0 : message.created_at)))), message.type === 1 && /*#__PURE__*/_react.default.createElement(_styles.MessageConsole, {
+    }, /*#__PURE__*/_react.default.createElement(_styles.BubbleConsole, null, /*#__PURE__*/_react.default.createElement("p", null, t('ORDER_PLACED_FOR', 'Order placed for'), " ", ' ', /*#__PURE__*/_react.default.createElement("strong", null, parseDate(order.created_at)), " ", ' ', t('VIA', 'Via'), ' ', /*#__PURE__*/_react.default.createElement("strong", null, order.app_id ? t(order.app_id.toUpperCase(), order.app_id) : t('OTHER', 'Other')), ' '), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("strong", null, t('APP_ID', 'App ID'), ": "), message === null || message === void 0 ? void 0 : message.app_id), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("strong", null, t('AUTHOR', 'Author'), ": "), getAuthor(message)), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("strong", null, t('USER_AGENT', 'User agent'), ": "), message === null || message === void 0 ? void 0 : message.user_agent), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("strong", null, t('IP', 'IP'), ": "), message === null || message === void 0 ? void 0 : message.ip), /*#__PURE__*/_react.default.createElement(_styles.TimeofSent, null, getTimeAgo(message === null || message === void 0 ? void 0 : message.created_at)))), message.type === 1 && /*#__PURE__*/_react.default.createElement(_styles.MessageConsole, {
       key: message.id,
       style: {
         display: "".concat(tabActive === 'order_history' ? 'inline-flex' : 'none')
