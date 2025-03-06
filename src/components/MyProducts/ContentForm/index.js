@@ -121,6 +121,10 @@ const ContentFormUI = (props) => {
 
   const onInit = (note) => {
     note.reset()
+    if (!content) {
+      note.insertText('')
+      return
+    }
     const regex = /(\<\w*)((\s\/\>)|(.*\<\/\w*\>))/i
     if (content?.match(regex) !== null) {
       note.replace(content)
