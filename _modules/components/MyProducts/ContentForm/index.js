@@ -140,6 +140,10 @@ var ContentFormUI = function ContentFormUI(props) {
   }, [pageContent]);
   var onInit = function onInit(note) {
     note.reset();
+    if (!content) {
+      note.insertText('');
+      return;
+    }
     var regex = /(\<\w*)((\s\/\>)|(.*\<\/\w*\>))/i;
     if ((content === null || content === void 0 ? void 0 : content.match(regex)) !== null) {
       note.replace(content);
