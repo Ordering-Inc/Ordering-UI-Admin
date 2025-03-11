@@ -76,7 +76,7 @@ const OrdersManagerUI = (props) => {
   const [orderDetailId, setOrderDetailId] = useState(null)
   const [filterModalOpen, setFilterModalOpen] = useState(false)
   const [assignedOrders, setAssignedOrders] = useState({ loading: false, error: null, orders: [] })
-
+  const [orderForMap, setOrderForMap] = useState(detailsOrder)
   const [isTourOpen, setIsTourOpen] = useState(false)
   const [currentTourStep, setCurrentTourStep] = useState(0)
   const [isTourFlag, setIsTourFlag] = useState(false)
@@ -94,6 +94,7 @@ const OrdersManagerUI = (props) => {
   const handleBackRedirect = () => {
     setIsOpenOrderDetail(false)
     setDetailsOrder(null)
+    setOrderForMap(null)
     setOrderDetailId(null)
     if (!isSelectedOrders) {
       onOrderRedirect()
@@ -116,6 +117,7 @@ const OrdersManagerUI = (props) => {
     }
     (!configs?.optimize_order_data || (configs?.optimize_order_data?.value === '0')) && setDetailsOrder(order)
     setOrderDetailId(order.id)
+    setOrderForMap(order)
     // setIsOpenOrderDetail(true)
     if (!isSelectedOrders) {
       onOrderRedirect(order.id)
@@ -305,7 +307,7 @@ const OrdersManagerUI = (props) => {
               selectedDriver={mapsData.selectedDriver}
               onlineDrivers={mapsData.onlineDrivers}
               offlineDrivers={mapsData.offlineDrivers}
-              selectedOrder={detailsOrder}
+              selectedOrder={orderForMap}
               assignedOrders={assignedOrders}
             />
           </WrapperDriversLocation>
