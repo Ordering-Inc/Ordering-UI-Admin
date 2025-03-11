@@ -101,49 +101,54 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     _useState8 = _slicedToArray(_useState7, 2),
     assignedOrders = _useState8[0],
     setAssignedOrders = _useState8[1];
-  var _useState9 = (0, _react.useState)(false),
+  var _useState9 = (0, _react.useState)(detailsOrder),
     _useState10 = _slicedToArray(_useState9, 2),
-    isTourOpen = _useState10[0],
-    setIsTourOpen = _useState10[1];
-  var _useState11 = (0, _react.useState)(0),
+    orderForMap = _useState10[0],
+    setOrderForMap = _useState10[1];
+  var _useState11 = (0, _react.useState)(false),
     _useState12 = _slicedToArray(_useState11, 2),
-    currentTourStep = _useState12[0],
-    setCurrentTourStep = _useState12[1];
-  var _useState13 = (0, _react.useState)(false),
+    isTourOpen = _useState12[0],
+    setIsTourOpen = _useState12[1];
+  var _useState13 = (0, _react.useState)(0),
     _useState14 = _slicedToArray(_useState13, 2),
-    isTourFlag = _useState14[0],
-    setIsTourFlag = _useState14[1];
-  var _useState15 = (0, _react.useState)({
+    currentTourStep = _useState14[0],
+    setCurrentTourStep = _useState14[1];
+  var _useState15 = (0, _react.useState)(false),
+    _useState16 = _slicedToArray(_useState15, 2),
+    isTourFlag = _useState16[0],
+    setIsTourFlag = _useState16[1];
+  var _useState17 = (0, _react.useState)({
       open: false,
       content: []
     }),
-    _useState16 = _slicedToArray(_useState15, 2),
-    alertState = _useState16[0],
-    setAlertState = _useState16[1];
-  var _useState17 = (0, _react.useState)(null),
     _useState18 = _slicedToArray(_useState17, 2),
-    timeStatus = _useState18[0],
-    setTimeStatus = _useState18[1];
-  var _useState19 = (0, _react.useState)(60000),
+    alertState = _useState18[0],
+    setAlertState = _useState18[1];
+  var _useState19 = (0, _react.useState)(null),
     _useState20 = _slicedToArray(_useState19, 2),
-    slaSettingTime = _useState20[0],
-    setSlaSettingTime = _useState20[1];
-  var _useState21 = (0, _react.useState)(0),
+    timeStatus = _useState20[0],
+    setTimeStatus = _useState20[1];
+  var _useState21 = (0, _react.useState)(60000),
     _useState22 = _slicedToArray(_useState21, 2),
-    totalSelectedOrder = _useState22[0],
-    setTotalSelectedOrder = _useState22[1];
-  var _useState23 = (0, _react.useState)({
+    slaSettingTime = _useState22[0],
+    setSlaSettingTime = _useState22[1];
+  var _useState23 = (0, _react.useState)(0),
+    _useState24 = _slicedToArray(_useState23, 2),
+    totalSelectedOrder = _useState24[0],
+    setTotalSelectedOrder = _useState24[1];
+  var _useState25 = (0, _react.useState)({
       pending: null,
       inProgress: null,
       completed: null,
       cancelled: null
     }),
-    _useState24 = _slicedToArray(_useState23, 2),
-    ordersAmountByStatus = _useState24[0],
-    setOrdersAmountByStatus = _useState24[1];
+    _useState26 = _slicedToArray(_useState25, 2),
+    ordersAmountByStatus = _useState26[0],
+    setOrdersAmountByStatus = _useState26[1];
   var handleBackRedirect = function handleBackRedirect() {
     setIsOpenOrderDetail(false);
     setDetailsOrder(null);
+    setOrderForMap(null);
     setOrderDetailId(null);
     if (!isSelectedOrders) {
       onOrderRedirect();
@@ -166,6 +171,7 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     }
     (!(configs !== null && configs !== void 0 && configs.optimize_order_data) || (configs === null || configs === void 0 || (_configs$optimize_ord = configs.optimize_order_data) === null || _configs$optimize_ord === void 0 ? void 0 : _configs$optimize_ord.value) === '0') && setDetailsOrder(order);
     setOrderDetailId(order.id);
+    setOrderForMap(order);
     // setIsOpenOrderDetail(true)
     if (!isSelectedOrders) {
       onOrderRedirect(order.id);
@@ -325,7 +331,7 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     selectedDriver: mapsData.selectedDriver,
     onlineDrivers: mapsData.onlineDrivers,
     offlineDrivers: mapsData.offlineDrivers,
-    selectedOrder: detailsOrder,
+    selectedOrder: orderForMap,
     assignedOrders: assignedOrders
   })))), isOpenOrderDetail && /*#__PURE__*/_react.default.createElement(_OrderDetails.OrderDetails, {
     isSelectedOrders: isSelectedOrders,
