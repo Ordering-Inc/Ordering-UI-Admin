@@ -34,9 +34,9 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 var DriversGroupsList = exports.DriversGroupsList = function DriversGroupsList(props) {
+  var _driversGroupsState$g, _driversGroupsState$g2;
   var curDriversGroup = props.curDriversGroup,
     driversGroupsState = props.driversGroupsState,
-    searchValue = props.searchValue,
     handleOpenDetails = props.handleOpenDetails,
     handleUpdateDriversGroup = props.handleUpdateDriversGroup,
     selectedGroupList = props.selectedGroupList,
@@ -50,16 +50,6 @@ var DriversGroupsList = exports.DriversGroupsList = function DriversGroupsList(p
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
-
-  // Get current groups
-  var _useState = (0, _react.useState)([]),
-    _useState2 = _slicedToArray(_useState, 2),
-    currentGroups = _useState2[0],
-    setCurrentGroups = _useState2[1];
-  var _useState3 = (0, _react.useState)(null),
-    _useState4 = _slicedToArray(_useState3, 2),
-    totalPages = _useState4[0],
-    setTotalPages = _useState4[1];
   var handleChangePage = function handleChangePage(page) {
     setPagination(_objectSpread(_objectSpread({}, pagination), {}, {
       currentPage: page
@@ -70,20 +60,6 @@ var DriversGroupsList = exports.DriversGroupsList = function DriversGroupsList(p
       pageSize: pageSize
     }));
   };
-  (0, _react.useEffect)(function () {
-    if (driversGroupsState.loading) return;
-    var groups = [];
-    if (searchValue) {
-      groups = driversGroupsState.groups.filter(function (plugin) {
-        var _plugin$name;
-        return (_plugin$name = plugin.name) === null || _plugin$name === void 0 ? void 0 : _plugin$name.toLowerCase().includes(searchValue === null || searchValue === void 0 ? void 0 : searchValue.toLowerCase());
-      });
-    } else {
-      groups = _toConsumableArray(driversGroupsState.groups);
-    }
-    setTotalPages(pagination.totalPages);
-    setCurrentGroups(groups);
-  }, [driversGroupsState, searchValue]);
   var handleClickDriverGroup = function handleClickDriverGroup(e, group) {
     var isInvalid = e.target.closest('.group-checkbox') || e.target.closest('.group-enabled');
     if (isInvalid) return;
@@ -98,12 +74,12 @@ var DriversGroupsList = exports.DriversGroupsList = function DriversGroupsList(p
     }
   };
   (0, _react.useEffect)(function () {
-    if (!isUseQuery || !totalPages) return;
+    if (!isUseQuery || !pagination.totalPages) return;
     (0, _utils.addQueryToUrl)({
       page: pagination.currentPage,
       pageSize: pagination.pageSize
     });
-  }, [pagination, totalPages]);
+  }, [pagination, pagination.totalPages]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.DriversGroupsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.TableWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.GroupsTable, {
     "data-tour": "tour_delivery_completed",
     disabled: isFromStore
@@ -145,7 +121,7 @@ var DriversGroupsList = exports.DriversGroupsList = function DriversGroupsList(p
     }))), !isFromStore && /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement(_styles2.ActionsContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.EnableWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
       width: 50
     }))))));
-  }) : currentGroups.map(function (group) {
+  }) : driversGroupsState === null || driversGroupsState === void 0 || (_driversGroupsState$g = driversGroupsState.groups) === null || _driversGroupsState$g === void 0 ? void 0 : _driversGroupsState$g.map(function (group) {
     var _group$administrator, _group$administrator2, _group$administrator3, _group$administrator4, _group$administrator5;
     return /*#__PURE__*/_react.default.createElement("tbody", {
       key: group.id,
@@ -179,7 +155,7 @@ var DriversGroupsList = exports.DriversGroupsList = function DriversGroupsList(p
       return handleOpenDetails(null);
     },
     disabled: actionDisabled
-  }, t('ADD_NEW_DRIVER_GROUP', 'Add new driver group')), (currentGroups === null || currentGroups === void 0 ? void 0 : currentGroups.length) > 0 && /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
+  }, t('ADD_NEW_DRIVER_GROUP', 'Add new driver group')), (driversGroupsState === null || driversGroupsState === void 0 || (_driversGroupsState$g2 = driversGroupsState.groups) === null || _driversGroupsState$g2 === void 0 ? void 0 : _driversGroupsState$g2.length) > 0 && /*#__PURE__*/_react.default.createElement(_Shared.Pagination, {
     currentPage: pagination.currentPage,
     totalPages: pagination.totalPages,
     handleChangePage: handleChangePage,

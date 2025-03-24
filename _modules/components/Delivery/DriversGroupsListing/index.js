@@ -54,7 +54,9 @@ var DriversGroupsListingUI = function DriversGroupsListingUI(props) {
     actionDisabled = props.actionDisabled,
     isUseQuery = props.isUseQuery,
     pagination = props.pagination,
-    setPagination = props.setPagination;
+    setPagination = props.setPagination,
+    searchValue = props.searchValue,
+    onSearch = props.onSearch;
   var history = (0, _reactRouterDom.useHistory)();
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
@@ -64,57 +66,53 @@ var DriversGroupsListingUI = function DriversGroupsListingUI(props) {
     _useInfoShare2 = _slicedToArray(_useInfoShare, 2),
     isCollapse = _useInfoShare2[0].isCollapse,
     handleMenuCollapse = _useInfoShare2[1].handleMenuCollapse;
-  var _useState = (0, _react.useState)(null),
-    _useState2 = _slicedToArray(_useState, 2),
-    searchValue = _useState2[0],
-    setSearchValue = _useState2[1];
-  var _useState3 = (0, _react.useState)({
+  var _useState = (0, _react.useState)({
       open: false,
       content: []
     }),
-    _useState4 = _slicedToArray(_useState3, 2),
-    alertState = _useState4[0],
-    setAlertState = _useState4[1];
-  var _useState5 = (0, _react.useState)({
+    _useState2 = _slicedToArray(_useState, 2),
+    alertState = _useState2[0],
+    setAlertState = _useState2[1];
+  var _useState3 = (0, _react.useState)({
       open: false,
       content: null,
       handleOnAccept: null
     }),
+    _useState4 = _slicedToArray(_useState3, 2),
+    confirm = _useState4[0],
+    setConfirm = _useState4[1];
+  var _useState5 = (0, _react.useState)(0),
     _useState6 = _slicedToArray(_useState5, 2),
-    confirm = _useState6[0],
-    setConfirm = _useState6[1];
-  var _useState7 = (0, _react.useState)(0),
+    moveDistance = _useState6[0],
+    setMoveDistance = _useState6[1];
+  var _useState7 = (0, _react.useState)(false),
     _useState8 = _slicedToArray(_useState7, 2),
-    moveDistance = _useState8[0],
-    setMoveDistance = _useState8[1];
-  var _useState9 = (0, _react.useState)(false),
+    openDetails = _useState8[0],
+    setOpenDetails = _useState8[1];
+  var _useState9 = (0, _react.useState)(null),
     _useState10 = _slicedToArray(_useState9, 2),
-    openDetails = _useState10[0],
-    setOpenDetails = _useState10[1];
+    curDriversGroup = _useState10[0],
+    setCurDriversGroup = _useState10[1];
   var _useState11 = (0, _react.useState)(null),
     _useState12 = _slicedToArray(_useState11, 2),
-    curDriversGroup = _useState12[0],
-    setCurDriversGroup = _useState12[1];
-  var _useState13 = (0, _react.useState)(null),
+    curDriversGroupId = _useState12[0],
+    setCurDriversGroupId = _useState12[1];
+  var _useState13 = (0, _react.useState)(false),
     _useState14 = _slicedToArray(_useState13, 2),
-    curDriversGroupId = _useState14[0],
-    setCurDriversGroupId = _useState14[1];
+    isExtendExtraOpen = _useState14[0],
+    setIsExtendExtraOpen = _useState14[1];
   var _useState15 = (0, _react.useState)(false),
     _useState16 = _slicedToArray(_useState15, 2),
-    isExtendExtraOpen = _useState16[0],
-    setIsExtendExtraOpen = _useState16[1];
+    isAddMode = _useState16[0],
+    setIsAddMode = _useState16[1];
   var _useState17 = (0, _react.useState)(false),
     _useState18 = _slicedToArray(_useState17, 2),
-    isAddMode = _useState18[0],
-    setIsAddMode = _useState18[1];
-  var _useState19 = (0, _react.useState)(false),
+    isTourOpen = _useState18[0],
+    setIsTourOpen = _useState18[1];
+  var _useState19 = (0, _react.useState)(4),
     _useState20 = _slicedToArray(_useState19, 2),
-    isTourOpen = _useState20[0],
-    setIsTourOpen = _useState20[1];
-  var _useState21 = (0, _react.useState)(4),
-    _useState22 = _slicedToArray(_useState21, 2),
-    currentTourStep = _useState22[0],
-    setCurrentTourStep = _useState22[1];
+    currentTourStep = _useState20[0],
+    setCurrentTourStep = _useState20[1];
   var handleOpenDetails = function handleOpenDetails(driverGroup) {
     setMoveDistance(0);
     setCurDriversGroup(driverGroup);
@@ -241,9 +239,7 @@ var DriversGroupsListingUI = function DriversGroupsListingUI(props) {
     }
   }, t('DELETE', 'Delete')), /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
     lazyLoad: true,
-    onSearch: function onSearch(val) {
-      return setSearchValue(val);
-    },
+    onSearch: onSearch,
     search: searchValue,
     placeholder: t('SEARCH', 'Search')
   }))), !isAddMode ? /*#__PURE__*/_react.default.createElement(_DriversGroupsList.DriversGroupsList, {
