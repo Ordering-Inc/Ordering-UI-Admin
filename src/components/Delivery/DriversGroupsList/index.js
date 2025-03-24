@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useLanguage } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
 import MdCheckBoxOutlineBlank from '@meronex/icons/md/MdCheckBoxOutlineBlank'
@@ -29,7 +29,6 @@ export const DriversGroupsList = (props) => {
   const {
     curDriversGroup,
     driversGroupsState,
-    searchValue,
     handleOpenDetails,
     handleUpdateDriversGroup,
     selectedGroupList,
@@ -44,10 +43,6 @@ export const DriversGroupsList = (props) => {
 
   const [, t] = useLanguage()
 
-  // Get current groups
-  const [currentGroups, setCurrentGroups] = useState([])
-  const [totalPages, setTotalPages] = useState(null)
-
   const handleChangePage = (page) => {
     setPagination({
       ...pagination,
@@ -61,18 +56,6 @@ export const DriversGroupsList = (props) => {
       pageSize
     })
   }
-
-  useEffect(() => {
-    if (driversGroupsState.loading) return
-    let groups = []
-    if (searchValue) {
-      groups = driversGroupsState.groups.filter(plugin => plugin.name?.toLowerCase().includes(searchValue?.toLowerCase()))
-    } else {
-      groups = [...driversGroupsState.groups]
-    }
-    setTotalPages(pagination.totalPages)
-    setCurrentGroups(groups)
-  }, [driversGroupsState, searchValue])
 
   const handleClickDriverGroup = (e, group) => {
     const isInvalid = e.target.closest('.group-checkbox') || e.target.closest('.group-enabled')
@@ -90,12 +73,12 @@ export const DriversGroupsList = (props) => {
   }
 
   useEffect(() => {
-    if (!isUseQuery || !totalPages) return
+    if (!isUseQuery || !pagination.totalPages) return
     addQueryToUrl({
       page: pagination.currentPage,
       pageSize: pagination.pageSize
     })
-  }, [pagination, totalPages])
+  }, [pagination, pagination.totalPages])
 
   return (
     <>
@@ -191,7 +174,7 @@ export const DriversGroupsList = (props) => {
                 </tbody>
               ))
             ) : (
-              currentGroups.map(group => (
+              driversGroupsState?.groups?.map(group => (
                 <tbody
                   key={group.id}
                   className={group.id === parseInt(curDriversGroup?.id) ? 'active' : null}
@@ -275,7 +258,7 @@ export const DriversGroupsList = (props) => {
                 {t('ADD_NEW_DRIVER_GROUP', 'Add new driver group')}
               </LinkButton>
             )}
-            {currentGroups?.length > 0 && (
+            {driversGroupsState?.groups?.length > 0 && (
               <Pagination
                 currentPage={pagination.currentPage}
                 totalPages={pagination.totalPages}
