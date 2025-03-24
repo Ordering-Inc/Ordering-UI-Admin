@@ -38,14 +38,15 @@ const DriversGroupsListingUI = (props) => {
     actionDisabled,
     isUseQuery,
     pagination,
-    setPagination
+    setPagination,
+    searchValue,
+    onSearch
   } = props
 
   const history = useHistory()
   const query = new URLSearchParams(useLocation().search)
   const [, t] = useLanguage()
   const [{ isCollapse }, { handleMenuCollapse }] = useInfoShare()
-  const [searchValue, setSearchValue] = useState(null)
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
   const [moveDistance, setMoveDistance] = useState(0)
@@ -193,7 +194,7 @@ const DriversGroupsListingUI = (props) => {
             </Button>
             <SearchBar
               lazyLoad
-              onSearch={val => setSearchValue(val)}
+              onSearch={onSearch}
               search={searchValue}
               placeholder={t('SEARCH', 'Search')}
             />
