@@ -8,7 +8,7 @@ import { OrdersDashboardControls } from '../OrdersDashboardControls'
 import { Alert } from '../../Shared'
 import { DriversManager } from './DriversManager'
 import { DriversLocation } from '../DriversLocation'
-
+import { usePreventDoubleClick } from '../../../utils'
 import {
   MainContentContainer,
   TopContent,
@@ -27,6 +27,8 @@ import { OrdersDashboard } from '../OrdersDashboard'
 import { OrderStatusSubFilter } from '../OrderStatusSubFilter'
 import { OrderNotification } from '../OrderNotification'
 import { WizardOrders } from '../WizardOrders'
+
+const DEBOUNCE_DELAY = 300
 
 const OrdersManagerUI = (props) => {
   const {
@@ -110,14 +112,14 @@ const OrdersManagerUI = (props) => {
     })
   }
 
-  const handleOpenOrderDetail = (order, isKeydown = false) => {
+  const handleOpenOrderDetailBase = (order, isKeydown = false) => {
     if (isTourOpen && currentTourStep === 4 && !isKeydown) {
       setIsTourOpen(false)
       return
     }
     (!configs?.optimize_order_data || (configs?.optimize_order_data?.value === '0')) && setDetailsOrder(order)
     setOrderDetailId(order.id)
-    setOrderForMap(order)
+    setOrderForMap((prev) => (prev?.id === order?.id ? null : order))
     // setIsOpenOrderDetail(true)
     if (!isSelectedOrders) {
       onOrderRedirect(order.id)
@@ -133,6 +135,8 @@ const OrdersManagerUI = (props) => {
       }, 1)
     }
   }
+
+  const handleOpenOrderDetail = usePreventDoubleClick(handleOpenOrderDetailBase, DEBOUNCE_DELAY)
 
   const handleSetOpenOrderDetail = (state) => {
     setIsOpenOrderDetail(state)
