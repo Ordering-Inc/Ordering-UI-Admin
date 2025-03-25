@@ -15,6 +15,7 @@ var _OrdersDashboardControls = require("../OrdersDashboardControls");
 var _Shared = require("../../Shared");
 var _DriversManager = require("./DriversManager");
 var _DriversLocation = require("../DriversLocation");
+var _utils = require("../../../utils");
 var _styles = require("./styles");
 var _OrdersDashboard = require("../OrdersDashboard");
 var _OrderStatusSubFilter = require("../OrderStatusSubFilter");
@@ -33,6 +34,7 @@ function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) 
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+var DEBOUNCE_DELAY = 300;
 var OrdersManagerUI = function OrdersManagerUI(props) {
   var _configs$filter_order;
   var isSelectedOrders = props.isSelectedOrders,
@@ -162,7 +164,7 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
       content: []
     });
   };
-  var handleOpenOrderDetail = function handleOpenOrderDetail(order) {
+  var handleOpenOrderDetailBase = function handleOpenOrderDetailBase(order) {
     var _configs$optimize_ord;
     var isKeydown = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
     if (isTourOpen && currentTourStep === 4 && !isKeydown) {
@@ -171,7 +173,9 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     }
     (!(configs !== null && configs !== void 0 && configs.optimize_order_data) || (configs === null || configs === void 0 || (_configs$optimize_ord = configs.optimize_order_data) === null || _configs$optimize_ord === void 0 ? void 0 : _configs$optimize_ord.value) === '0') && setDetailsOrder(order);
     setOrderDetailId(order.id);
-    setOrderForMap(order);
+    setOrderForMap(function (prev) {
+      return (prev === null || prev === void 0 ? void 0 : prev.id) === (order === null || order === void 0 ? void 0 : order.id) ? null : order;
+    });
     // setIsOpenOrderDetail(true)
     if (!isSelectedOrders) {
       onOrderRedirect(order.id);
@@ -187,6 +191,7 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
       }, 1);
     }
   };
+  var handleOpenOrderDetail = (0, _utils.usePreventDoubleClick)(handleOpenOrderDetailBase, DEBOUNCE_DELAY);
   var handleSetOpenOrderDetail = function handleSetOpenOrderDetail(state) {
     setIsOpenOrderDetail(state);
   };
