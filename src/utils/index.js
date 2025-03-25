@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback, useRef } from 'react'
 import FaCcMastercard from '@meronex/icons/fa/FaCcMastercard'
 import FaCcVisa from '@meronex/icons/fa/FaCcVisa'
 import FaCreditCard from '@meronex/icons/fa/FaCreditCard'
@@ -748,4 +748,19 @@ export const getAttributeName = (key) => {
   } else {
     return key
   }
+}
+
+export const usePreventDoubleClick = (_callback, delay = 300) => {
+  const clickTimeRef = useRef(0)
+
+  const handleClick = useCallback((...args) => {
+    const currentTime = new Date().getTime()
+    if (currentTime - clickTimeRef.current < delay) {
+      return
+    }
+    clickTimeRef.current = currentTime
+    _callback(...args)
+  }, [_callback, delay])
+
+  return handleClick
 }
