@@ -241,6 +241,8 @@ const OrdersManagerUI = (props) => {
                 setMapsData={setMapsData}
                 handleEmtpyOrderSelected={handleBackRedirect}
                 handleUpdateAssignedOrders={handleUpdateAssignedOrders}
+                orderForMap={orderForMap}
+                setOrderForMap={setOrderForMap}
               />
             </DriversContainer>
             <OrdersContainer showCompressedInfo>
