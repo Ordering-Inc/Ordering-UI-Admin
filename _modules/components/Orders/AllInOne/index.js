@@ -279,7 +279,9 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     drivers: driversList.drivers,
     setMapsData: setMapsData,
     handleEmtpyOrderSelected: handleBackRedirect,
-    handleUpdateAssignedOrders: handleUpdateAssignedOrders
+    handleUpdateAssignedOrders: handleUpdateAssignedOrders,
+    orderForMap: orderForMap,
+    setOrderForMap: setOrderForMap
   })), /*#__PURE__*/_react.default.createElement(_styles.OrdersContainer, {
     showCompressedInfo: true
   }, /*#__PURE__*/_react.default.createElement(_OrderStatusFilterBar.OrderStatusFilterBar, {
