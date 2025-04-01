@@ -31,7 +31,8 @@ const DriversManagerUI = (props) => {
     assignedOrders,
     handleUpdateAssignedOrders,
     showCompressedInfo,
-    handleEmtpyOrderSelected
+    handleEmtpyOrderSelected,
+    orderForMap
   } = props
 
   const [configState] = useConfig()
@@ -75,6 +76,12 @@ const DriversManagerUI = (props) => {
       selectedDriver: selectedDriver
     })
   }, [driversIsOnline, selectedDriver, onlineDrivers, offlineDrivers])
+
+  useEffect(() => {
+    if (orderForMap === null) {
+      setSelectedDriver(null)
+    }
+  }, [orderForMap])
 
   useEffect(() => {
     handleUpdateAssignedOrders && handleUpdateAssignedOrders(assignedOrders)

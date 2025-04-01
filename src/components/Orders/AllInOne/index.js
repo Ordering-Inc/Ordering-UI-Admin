@@ -120,6 +120,12 @@ const OrdersManagerUI = (props) => {
     (!configs?.optimize_order_data || (configs?.optimize_order_data?.value === '0')) && setDetailsOrder(order)
     setOrderDetailId(order.id)
     setOrderForMap((prev) => (prev?.id === order?.id ? null : order))
+    if (orderForMap?.id === order?.id) {
+      setMapsData({
+        ...mapsData,
+        selectedDriver: null
+      })
+    }
     // setIsOpenOrderDetail(true)
     if (!isSelectedOrders) {
       onOrderRedirect(order.id)
