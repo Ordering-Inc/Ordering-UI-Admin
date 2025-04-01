@@ -131,7 +131,7 @@ export const DriversLocation = (props) => {
       setMapFitted(false)
       return
     }
-    if ((selectedOrder && selectedDriver) || (selectedDriver && assignedOrders?.orders?.length)) {
+    if ((selectedOrder && selectedDriver) || (selectedDriver && assignedOrders?.orders?.length) || (!selectedOrder && !selectedDriver)) {
       mapFit()
       return
     }
