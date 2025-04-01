@@ -176,6 +176,11 @@ var OrdersManagerUI = function OrdersManagerUI(props) {
     setOrderForMap(function (prev) {
       return (prev === null || prev === void 0 ? void 0 : prev.id) === (order === null || order === void 0 ? void 0 : order.id) ? null : order;
     });
+    if ((orderForMap === null || orderForMap === void 0 ? void 0 : orderForMap.id) === (order === null || order === void 0 ? void 0 : order.id)) {
+      setMapsData(_objectSpread(_objectSpread({}, mapsData), {}, {
+        selectedDriver: null
+      }));
+    }
     // setIsOpenOrderDetail(true)
     if (!isSelectedOrders) {
       onOrderRedirect(order.id);

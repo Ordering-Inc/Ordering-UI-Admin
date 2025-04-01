@@ -41,7 +41,8 @@ var DriversManagerUI = function DriversManagerUI(props) {
     assignedOrders = props.assignedOrders,
     handleUpdateAssignedOrders = props.handleUpdateAssignedOrders,
     showCompressedInfo = props.showCompressedInfo,
-    handleEmtpyOrderSelected = props.handleEmtpyOrderSelected;
+    handleEmtpyOrderSelected = props.handleEmtpyOrderSelected,
+    orderForMap = props.orderForMap;
   var _useConfig = (0, _orderingComponentsAdmin.useConfig)(),
     _useConfig2 = _slicedToArray(_useConfig, 1),
     configState = _useConfig2[0];
@@ -92,6 +93,11 @@ var DriversManagerUI = function DriversManagerUI(props) {
       selectedDriver: selectedDriver
     });
   }, [driversIsOnline, selectedDriver, onlineDrivers, offlineDrivers]);
+  (0, _react.useEffect)(function () {
+    if (orderForMap === null) {
+      setSelectedDriver(null);
+    }
+  }, [orderForMap]);
   (0, _react.useEffect)(function () {
     handleUpdateAssignedOrders && handleUpdateAssignedOrders(assignedOrders);
   }, [assignedOrders]);

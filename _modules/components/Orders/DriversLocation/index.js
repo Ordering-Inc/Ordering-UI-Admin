@@ -154,7 +154,7 @@ var DriversLocation = exports.DriversLocation = function DriversLocation(props) 
       setMapFitted(false);
       return;
     }
-    if (selectedOrder && selectedDriver || selectedDriver && assignedOrders !== null && assignedOrders !== void 0 && (_assignedOrders$order3 = assignedOrders.orders) !== null && _assignedOrders$order3 !== void 0 && _assignedOrders$order3.length) {
+    if (selectedOrder && selectedDriver || selectedDriver && assignedOrders !== null && assignedOrders !== void 0 && (_assignedOrders$order3 = assignedOrders.orders) !== null && _assignedOrders$order3 !== void 0 && _assignedOrders$order3.length || !selectedOrder && !selectedDriver) {
       mapFit();
       return;
     }
