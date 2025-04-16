@@ -57,7 +57,8 @@ import {
   OrdersTable,
   OrdersCards,
   ReviewCustomer,
-  OrderToPrint
+  OrderToPrint,
+  RefundToWallet
 } from './components/Orders'
 import { Support } from './components/Support'
 import {
@@ -485,6 +486,7 @@ export {
   OrdersCards,
   ReviewCustomer,
   OrderToPrint,
+  RefundToWallet,
 
   BusinessAnalytics,
   DriverAnalytics,
