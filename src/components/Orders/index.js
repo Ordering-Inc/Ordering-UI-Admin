@@ -48,6 +48,7 @@ import { OrdersCards } from './OrdersCards'
 import { ReviewCustomer } from './ReviewCustomer'
 import { CountryFilter } from './CountryFilter'
 import { OrderToPrint } from './OrderToPrint'
+import { RefundToWallet } from './OrderBill/RefundToWallet'
 
 export {
   AllInOne,
@@ -98,5 +99,6 @@ export {
   OrdersCards,
   ReviewCustomer,
   CountryFilter,
-  OrderToPrint
+  OrderToPrint,
+  RefundToWallet
 }
