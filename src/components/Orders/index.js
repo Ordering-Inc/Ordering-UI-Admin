@@ -49,6 +49,7 @@ import { ReviewCustomer } from './ReviewCustomer'
 import { CountryFilter } from './CountryFilter'
 import { OrderToPrint } from './OrderToPrint'
 import { RefundToWallet } from './OrderBill/RefundToWallet'
+import { CompanySelector } from './CompanySelector'
 
 export {
   AllInOne,
@@ -100,5 +101,6 @@ export {
   ReviewCustomer,
   CountryFilter,
   OrderToPrint,
-  RefundToWallet
+  RefundToWallet,
+  CompanySelector
 }
