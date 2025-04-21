@@ -771,6 +771,12 @@ Object.defineProperty(exports, "ColumnAllowSettingPopover", {
     return _Shared.ColumnAllowSettingPopover;
   }
 });
+Object.defineProperty(exports, "CompanySelector", {
+  enumerable: true,
+  get: function get() {
+    return _Orders.CompanySelector;
+  }
+});
 Object.defineProperty(exports, "ConfigFileContext", {
   enumerable: true,
   get: function get() {
