@@ -21,6 +21,12 @@ Object.defineProperty(exports, "BusinessesSelector", {
     return _BusinessesSelector.BusinessesSelector;
   }
 });
+Object.defineProperty(exports, "CompanySelector", {
+  enumerable: true,
+  get: function get() {
+    return _CompanySelector.CompanySelector;
+  }
+});
 Object.defineProperty(exports, "CountryFilter", {
   enumerable: true,
   get: function get() {
@@ -353,3 +359,4 @@ var _ReviewCustomer = require("./ReviewCustomer");
 var _CountryFilter = require("./CountryFilter");
 var _OrderToPrint = require("./OrderToPrint");
 var _RefundToWallet = require("./OrderBill/RefundToWallet");
+var _CompanySelector = require("./CompanySelector");
