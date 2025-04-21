@@ -58,7 +58,8 @@ import {
   OrdersCards,
   ReviewCustomer,
   OrderToPrint,
-  RefundToWallet
+  RefundToWallet,
+  CompanySelector
 } from './components/Orders'
 import { Support } from './components/Support'
 import {
@@ -487,6 +488,7 @@ export {
   ReviewCustomer,
   OrderToPrint,
   RefundToWallet,
+  CompanySelector,
 
   BusinessAnalytics,
   DriverAnalytics,
