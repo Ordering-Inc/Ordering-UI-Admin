@@ -65,11 +65,11 @@ export const CurrencyFilter = (props) => {
 
   useEffect(() => {
     if (currencyList?.length) {
-      setPagination({
-        ...pagination,
+      setPagination(prevPagination => ({
+        ...prevPagination,
         totalItems: currencyList?.length,
-        totalPages: Math.ceil(currencyList?.length / 10)
-      })
+        totalPages: Math.ceil(currencyList?.length / prevPagination.pageSize)
+      }))
     }
   }, [currencyList])
 

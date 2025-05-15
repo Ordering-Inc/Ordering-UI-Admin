@@ -86,11 +86,11 @@ export const AdminsSelector = (props) => {
 
   useEffect(() => {
     if (adminsMultiOptionList?.length) {
-      setPagination({
-        ...pagination,
+      setPagination(prevPagination => ({
+        ...prevPagination,
         totalItems: adminsMultiOptionList?.length,
-        totalPages: Math.ceil(adminsMultiOptionList?.length / 10)
-      })
+        totalPages: Math.ceil(adminsMultiOptionList?.length / prevPagination.pageSize)
+      }))
     }
   }, [adminsMultiOptionList])
 

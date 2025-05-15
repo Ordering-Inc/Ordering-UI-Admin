@@ -68,11 +68,11 @@ const CountryFilterUI = (props) => {
 
   useEffect(() => {
     if (countryTypes?.length) {
-      setPagination({
-        ...pagination,
+      setPagination(prevPagination => ({
+        ...prevPagination,
         totalItems: countryTypes?.length,
-        totalPages: Math.ceil(countryTypes?.length / 10)
-      })
+        totalPages: Math.ceil(countryTypes?.length / prevPagination.pageSize)
+      }))
     }
   }, [countryTypes])
 
