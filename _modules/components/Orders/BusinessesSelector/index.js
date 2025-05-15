@@ -95,10 +95,12 @@ var BusinessesSelector = exports.BusinessesSelector = function BusinessesSelecto
   }, [businessesList, searchValue]);
   (0, _react.useEffect)(function () {
     if (businessTypes !== null && businessTypes !== void 0 && businessTypes.length) {
-      setPagination(_objectSpread(_objectSpread({}, pagination), {}, {
-        totalItems: businessTypes === null || businessTypes === void 0 ? void 0 : businessTypes.length,
-        totalPages: Math.ceil((businessTypes === null || businessTypes === void 0 ? void 0 : businessTypes.length) / 10)
-      }));
+      setPagination(function (prevPagination) {
+        return _objectSpread(_objectSpread({}, prevPagination), {}, {
+          totalItems: businessTypes === null || businessTypes === void 0 ? void 0 : businessTypes.length,
+          totalPages: Math.ceil((businessTypes === null || businessTypes === void 0 ? void 0 : businessTypes.length) / prevPagination.pageSize)
+        });
+      });
     }
   }, [businessTypes]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !businessesList.loading ? /*#__PURE__*/_react.default.createElement(_styles.MultiSelect, {

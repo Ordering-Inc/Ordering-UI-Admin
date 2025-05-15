@@ -110,10 +110,12 @@ var AdminsSelector = exports.AdminsSelector = function AdminsSelector(props) {
   }, [adminsList, defaultValue, searchValue]);
   (0, _react.useEffect)(function () {
     if (adminsMultiOptionList !== null && adminsMultiOptionList !== void 0 && adminsMultiOptionList.length) {
-      setPagination(_objectSpread(_objectSpread({}, pagination), {}, {
-        totalItems: adminsMultiOptionList === null || adminsMultiOptionList === void 0 ? void 0 : adminsMultiOptionList.length,
-        totalPages: Math.ceil((adminsMultiOptionList === null || adminsMultiOptionList === void 0 ? void 0 : adminsMultiOptionList.length) / 10)
-      }));
+      setPagination(function (prevPagination) {
+        return _objectSpread(_objectSpread({}, prevPagination), {}, {
+          totalItems: adminsMultiOptionList === null || adminsMultiOptionList === void 0 ? void 0 : adminsMultiOptionList.length,
+          totalPages: Math.ceil((adminsMultiOptionList === null || adminsMultiOptionList === void 0 ? void 0 : adminsMultiOptionList.length) / prevPagination.pageSize)
+        });
+      });
     }
   }, [adminsMultiOptionList]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !(adminsList !== null && adminsList !== void 0 && adminsList.loading) ? /*#__PURE__*/_react.default.createElement(_MultiSelect.MultiSelect, {

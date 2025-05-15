@@ -94,10 +94,12 @@ var PaymethodTypeSelector = exports.PaymethodTypeSelector = function PaymethodTy
   }, [paymethodsList, searchValue]);
   (0, _react.useEffect)(function () {
     if (paymethodsTypes !== null && paymethodsTypes !== void 0 && paymethodsTypes.length) {
-      setPagination(_objectSpread(_objectSpread({}, pagination), {}, {
-        totalItems: paymethodsTypes === null || paymethodsTypes === void 0 ? void 0 : paymethodsTypes.length,
-        totalPages: Math.ceil((paymethodsTypes === null || paymethodsTypes === void 0 ? void 0 : paymethodsTypes.length) / 10)
-      }));
+      setPagination(function (prevPagination) {
+        return _objectSpread(_objectSpread({}, prevPagination), {}, {
+          totalItems: paymethodsTypes === null || paymethodsTypes === void 0 ? void 0 : paymethodsTypes.length,
+          totalPages: Math.ceil((paymethodsTypes === null || paymethodsTypes === void 0 ? void 0 : paymethodsTypes.length) / prevPagination.pageSize)
+        });
+      });
     }
   }, [paymethodsTypes]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !paymethodsList.loading ? /*#__PURE__*/_react.default.createElement(_MultiSelect.MultiSelect, {
