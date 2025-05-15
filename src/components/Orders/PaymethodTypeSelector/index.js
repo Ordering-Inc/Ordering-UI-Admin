@@ -64,11 +64,11 @@ export const PaymethodTypeSelector = (props) => {
 
   useEffect(() => {
     if (paymethodsTypes?.length) {
-      setPagination({
-        ...pagination,
+      setPagination(prevPagination => ({
+        ...prevPagination,
         totalItems: paymethodsTypes?.length,
-        totalPages: Math.ceil(paymethodsTypes?.length / 10)
-      })
+        totalPages: Math.ceil(paymethodsTypes?.length / prevPagination.pageSize)
+      }))
     }
   }, [paymethodsTypes])
 

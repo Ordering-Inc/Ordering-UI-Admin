@@ -64,14 +64,14 @@ export const CurrencyFilter = (props) => {
   }, [currencyList, searchValue])
 
   useEffect(() => {
-    if (currencyList?.length) {
-      setPagination({
-        ...pagination,
-        totalItems: currencyList?.length,
-        totalPages: Math.ceil(currencyList?.length / 10)
-      })
+    if (countryTypes?.length) {
+      setPagination(prevPagination => ({
+        ...prevPagination,
+        totalItems: countryTypes?.length,
+        totalPages: Math.ceil(countryTypes?.length / prevPagination.pageSize)
+      }))
     }
-  }, [currencyList])
+  }, [countryTypes])
 
   return (
     <MultiSelect
