@@ -97,10 +97,12 @@ var CitySelectorUI = function CitySelectorUI(props) {
   }, [cityOptions, isAddMode]);
   (0, _react.useEffect)(function () {
     if (cityOptions !== null && cityOptions !== void 0 && cityOptions.length) {
-      setPagination(_objectSpread(_objectSpread({}, pagination), {}, {
-        totalItems: cityOptions === null || cityOptions === void 0 ? void 0 : cityOptions.length,
-        totalPages: Math.ceil((cityOptions === null || cityOptions === void 0 ? void 0 : cityOptions.length) / 10)
-      }));
+      setPagination(function (prevPagination) {
+        return _objectSpread(_objectSpread({}, prevPagination), {}, {
+          totalItems: cityOptions === null || cityOptions === void 0 ? void 0 : cityOptions.length,
+          totalPages: Math.ceil((cityOptions === null || cityOptions === void 0 ? void 0 : cityOptions.length) / prevPagination.pageSize)
+        });
+      });
     }
   }, [cityOptions]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, citiesList !== null && citiesList !== void 0 && citiesList.loading ? /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {

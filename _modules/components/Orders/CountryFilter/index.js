@@ -91,10 +91,12 @@ var CountryFilterUI = function CountryFilterUI(props) {
   }, [countriesState, searchValue]);
   (0, _react.useEffect)(function () {
     if (countryTypes !== null && countryTypes !== void 0 && countryTypes.length) {
-      setPagination(_objectSpread(_objectSpread({}, pagination), {}, {
-        totalItems: countryTypes === null || countryTypes === void 0 ? void 0 : countryTypes.length,
-        totalPages: Math.ceil((countryTypes === null || countryTypes === void 0 ? void 0 : countryTypes.length) / 10)
-      }));
+      setPagination(function (prevPagination) {
+        return _objectSpread(_objectSpread({}, prevPagination), {}, {
+          totalItems: countryTypes === null || countryTypes === void 0 ? void 0 : countryTypes.length,
+          totalPages: Math.ceil((countryTypes === null || countryTypes === void 0 ? void 0 : countryTypes.length) / prevPagination.pageSize)
+        });
+      });
     }
   }, [countryTypes]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, !countriesState.loading ? /*#__PURE__*/_react.default.createElement(_MultiSelect.MultiSelect, {

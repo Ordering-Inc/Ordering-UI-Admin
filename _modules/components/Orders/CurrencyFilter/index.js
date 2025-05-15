@@ -87,10 +87,12 @@ var CurrencyFilter = exports.CurrencyFilter = function CurrencyFilter(props) {
   }, [_constants.currencyList, searchValue]);
   (0, _react.useEffect)(function () {
     if (_constants.currencyList !== null && _constants.currencyList !== void 0 && _constants.currencyList.length) {
-      setPagination(_objectSpread(_objectSpread({}, pagination), {}, {
-        totalItems: _constants.currencyList === null || _constants.currencyList === void 0 ? void 0 : _constants.currencyList.length,
-        totalPages: Math.ceil((_constants.currencyList === null || _constants.currencyList === void 0 ? void 0 : _constants.currencyList.length) / 10)
-      }));
+      setPagination(function (prevPagination) {
+        return _objectSpread(_objectSpread({}, prevPagination), {}, {
+          totalItems: _constants.currencyList === null || _constants.currencyList === void 0 ? void 0 : _constants.currencyList.length,
+          totalPages: Math.ceil((_constants.currencyList === null || _constants.currencyList === void 0 ? void 0 : _constants.currencyList.length) / prevPagination.pageSize)
+        });
+      });
     }
   }, [_constants.currencyList]);
   return /*#__PURE__*/_react.default.createElement(_MultiSelect.MultiSelect, {
