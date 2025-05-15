@@ -89,11 +89,11 @@ export const BusinessesSelector = (props) => {
 
   useEffect(() => {
     if (businessTypes?.length) {
-      setPagination({
-        ...pagination,
+      setPagination(prevPagination => ({
+        ...prevPagination,
         totalItems: businessTypes?.length,
-        totalPages: Math.ceil(businessTypes?.length / 10)
-      })
+        totalPages: Math.ceil(businessTypes?.length / prevPagination.pageSize)
+      }))
     }
   }, [businessTypes])
 

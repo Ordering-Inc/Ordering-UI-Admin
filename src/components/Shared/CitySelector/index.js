@@ -72,11 +72,11 @@ const CitySelectorUI = (props) => {
 
   useEffect(() => {
     if (cityOptions?.length) {
-      setPagination({
-        ...pagination,
+      setPagination(prevPagination => ({
+        ...prevPagination,
         totalItems: cityOptions?.length,
-        totalPages: Math.ceil(cityOptions?.length / 10)
-      })
+        totalPages: Math.ceil(cityOptions?.length / prevPagination.pageSize)
+      }))
     }
   }, [cityOptions])
 
