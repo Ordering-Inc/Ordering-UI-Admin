@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useLanguage, DriverGroupSetting as DriverGroupSettingController } from 'ordering-components-admin'
 import Skeleton from 'react-loading-skeleton'
-import { Alert, SearchBar } from '../../Shared'
+import { Alert, SearchBar, Confirm } from '../../Shared'
+import { Button } from '../../../styles'
 import MdCheckBoxOutlineBlank from '@meronex/icons/md/MdCheckBoxOutlineBlank'
 import MdCheckBox from '@meronex/icons/md/MdCheckBox'
 
@@ -9,21 +10,36 @@ import {
   Container,
   DriverGroupListContainer,
   DriverGroupItem,
-  CheckboxWrapper
+  CheckboxWrapper,
+  ButtonGroup
 } from './styles'
 
 const DriverGroupSettingUI = (props) => {
   const {
+    isDriverManager,
     includedGroupIds,
     driversGroupsState,
     actionState,
-    handleCheckboxClick
+    handleCheckboxClick,
+    handleSelectAllDriver
   } = props
 
   const [, t] = useLanguage()
   const [searchValue, setSearchValue] = useState(null)
   const [filteredGroups, setFilteredGroups] = useState([])
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [confirm, setConfirm] = useState({ open: false, content: null, handleOnAccept: null })
+
+  const handleBatchSelector = (isSelectAll) => {
+    setConfirm({
+      open: true,
+      content: isSelectAll ? t('QUESTION_SELECT_ALL', 'Are you sure that you want to select all?') : t('QUESTION_SELECT_NONE', 'Are you sure that you want to select none?'),
+      handleOnAccept: () => {
+        setConfirm({ ...confirm, open: false })
+        handleSelectAllDriver && handleSelectAllDriver(isSelectAll)
+      }
+    })
+  }
 
   useEffect(() => {
     if (driversGroupsState.loading) return
@@ -53,6 +69,24 @@ const DriverGroupSettingUI = (props) => {
         search={searchValue}
         onSearch={val => setSearchValue(val)}
       />
+      {isDriverManager && (
+        <ButtonGroup>
+          <Button
+            type='button'
+            color='secundaryDark'
+            onClick={() => (handleBatchSelector(true))}
+          >
+            {t('SELECT_ALL', 'Select all')}
+          </Button>
+          <Button
+            type='button'
+            color='secundaryDark'
+            onClick={() => (handleBatchSelector(false))}
+          >
+            {t('SELECT_NONE', 'Select none')}
+          </Button>
+        </ButtonGroup>
+      )}
       <DriverGroupListContainer>
         {driversGroupsState.loading ? (
           [...Array(10).keys()].map(i => (
@@ -88,6 +122,16 @@ const DriverGroupSettingUI = (props) => {
         open={alertState.open}
         onClose={() => setAlertState({ open: false, content: [] })}
         onAccept={() => setAlertState({ open: false, content: [] })}
+        closeOnBackdrop={false}
+      />
+      <Confirm
+        title={t('DRIVER_GROUP', 'Driver Group')}
+        content={confirm.content}
+        acceptText={t('ACCEPT', 'Accept')}
+        open={confirm.open}
+        onClose={() => setConfirm({ ...confirm, open: false })}
+        onCancel={() => setConfirm({ ...confirm, open: false })}
+        onAccept={confirm.handleOnAccept}
         closeOnBackdrop={false}
       />
     </Container>
