@@ -33,7 +33,7 @@ const DriverGroupSettingUI = (props) => {
   const handleBatchSelector = (isSelectAll) => {
     setConfirm({
       open: true,
-      content: isSelectAll ? t('QUESTION_SELECT_ALL', 'Are you sure that you want to select all?') : t('QUESTION_SELECT_NONE', 'Are you sure that you want to select none?'),
+      content: isSelectAll ? t('QUESTION_SELECT_ALL', 'Are you sure that you want to select all?') : t('QUESTION_SELECT_NONE', 'Are you sure that you want to unselect all?'),
       handleOnAccept: () => {
         setConfirm({ ...confirm, open: false })
         handleSelectAllDriver && handleSelectAllDriver(isSelectAll)
