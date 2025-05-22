@@ -4,6 +4,22 @@ export const Container = styled.div`
   margin-top: 26px;
 `
 
+export const ButtonGroup = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  button:first-child {
+    ${props => props.theme?.rtl
+  ? css`
+      margin-left: 7px;
+    `
+  : css`
+      margin-right: 7px;
+    `}
+  }
+`
+
 export const DriverGroupListContainer = styled.div`
   margin: 15px 0;
 `
