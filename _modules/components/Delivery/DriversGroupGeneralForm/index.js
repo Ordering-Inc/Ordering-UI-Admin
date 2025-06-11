@@ -17,6 +17,10 @@ var _FaUserAlt = _interopRequireDefault(require("@meronex/icons/fa/FaUserAlt"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -36,6 +40,7 @@ var DriversGroupGeneralForm = exports.DriversGroupGeneralForm = function Drivers
     handleNextClick = props.handleNextClick,
     selectedDriverManager = props.selectedDriverManager,
     handleSelectDriverManager = props.handleSelectDriverManager,
+    handleSelectAllManagers = props.handleSelectAllManagers,
     handleChangeMaxDistance = props.handleChangeMaxDistance,
     useAdvanced = props.useAdvanced,
     handleLogistic = props.handleLogistic;
@@ -56,6 +61,14 @@ var DriversGroupGeneralForm = exports.DriversGroupGeneralForm = function Drivers
   var _useSession = (0, _orderingComponentsAdmin.useSession)(),
     _useSession2 = _slicedToArray(_useSession, 1),
     user = _useSession2[0].user;
+  var _useState3 = (0, _react.useState)(null),
+    _useState4 = _slicedToArray(_useState3, 2),
+    searchManagerValue = _useState4[0],
+    setSearchManagerValue = _useState4[1];
+  var _useState5 = (0, _react.useState)([]),
+    _useState6 = _slicedToArray(_useState5, 2),
+    filteredManagers = _useState6[0],
+    setFilteredManagers = _useState6[1];
   var typeOptions = [{
     value: 0,
     content: t('IN_HOUSE_DRIVERS', 'In house drivers')
@@ -132,6 +145,18 @@ var DriversGroupGeneralForm = exports.DriversGroupGeneralForm = function Drivers
       });
     }
   }, [errors]);
+  (0, _react.useEffect)(function () {
+    var _filteredManagers = [];
+    if (searchManagerValue) {
+      _filteredManagers = driversManagers.filter(function (manager) {
+        var _manager$name, _manager$email;
+        return (manager === null || manager === void 0 || (_manager$name = manager.name) === null || _manager$name === void 0 ? void 0 : _manager$name.toLowerCase().includes(searchManagerValue === null || searchManagerValue === void 0 ? void 0 : searchManagerValue.toLowerCase())) || (manager === null || manager === void 0 || (_manager$email = manager.email) === null || _manager$email === void 0 ? void 0 : _manager$email.toLowerCase().includes(searchManagerValue === null || searchManagerValue === void 0 ? void 0 : searchManagerValue.toLowerCase()));
+      });
+    } else {
+      _filteredManagers = _toConsumableArray(driversManagers);
+    }
+    setFilteredManagers(_filteredManagers);
+  }, [searchManagerValue, driversManagers]);
   return /*#__PURE__*/_react.default.createElement(_styles2.Container, {
     "data-tour": "tour_fill_group",
     onSubmit: handleSubmit(onSubmit),
@@ -157,7 +182,27 @@ var DriversGroupGeneralForm = exports.DriversGroupGeneralForm = function Drivers
     },
     placeholder: t('WITHOUT_RESTRICTIONS', 'Without restrictions'),
     autoComplete: "off"
-  })), (user === null || user === void 0 ? void 0 : user.level) !== 5 && /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('DRIVER_MANAGER', 'Driver manager')), /*#__PURE__*/_react.default.createElement(_styles2.DriverManagerContainer, null, driversManagers.map(function (driverManager) {
+  })), (user === null || user === void 0 ? void 0 : user.level) !== 5 && /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, t('DRIVER_MANAGER', 'Driver manager')), /*#__PURE__*/_react.default.createElement(_styles2.SearchBarWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.SearchBar, {
+    placeholder: t('SEARCH', 'Search'),
+    isCustomLayout: true,
+    lazyLoad: true,
+    search: searchManagerValue,
+    onSearch: function onSearch(val) {
+      return setSearchManagerValue(val);
+    }
+  })), /*#__PURE__*/_react.default.createElement(_styles2.ButtonGroup, null, /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    type: "button",
+    color: "secundaryDark",
+    onClick: function onClick() {
+      return handleSelectAllManagers(true);
+    }
+  }, t('SELECT_ALL', 'Select all')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
+    type: "button",
+    color: "secundaryDark",
+    onClick: function onClick() {
+      return handleSelectAllManagers(false);
+    }
+  }, t('SELECT_NONE', 'Select none'))), /*#__PURE__*/_react.default.createElement(_styles2.DriverManagerContainer, null, filteredManagers.map(function (driverManager) {
     return /*#__PURE__*/_react.default.createElement(_styles2.DriverManagerWrapper, {
       key: driverManager.id
     }, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
