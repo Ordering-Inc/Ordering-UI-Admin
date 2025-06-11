@@ -16,7 +16,6 @@ import {
 
 const DriverGroupSettingUI = (props) => {
   const {
-    isDriverManager,
     includedGroupIds,
     driversGroupsState,
     actionState,
@@ -69,24 +68,22 @@ const DriverGroupSettingUI = (props) => {
         search={searchValue}
         onSearch={val => setSearchValue(val)}
       />
-      {isDriverManager && (
-        <ButtonGroup>
-          <Button
-            type='button'
-            color='secundaryDark'
-            onClick={() => (handleBatchSelector(true))}
-          >
-            {t('SELECT_ALL', 'Select all')}
-          </Button>
-          <Button
-            type='button'
-            color='secundaryDark'
-            onClick={() => (handleBatchSelector(false))}
-          >
-            {t('SELECT_NONE', 'Select none')}
-          </Button>
-        </ButtonGroup>
-      )}
+      <ButtonGroup>
+        <Button
+          type='button'
+          color='secundaryDark'
+          onClick={() => (handleBatchSelector(true))}
+        >
+          {t('SELECT_ALL', 'Select all')}
+        </Button>
+        <Button
+          type='button'
+          color='secundaryDark'
+          onClick={() => (handleBatchSelector(false))}
+        >
+          {t('SELECT_NONE', 'Select none')}
+        </Button>
+      </ButtonGroup>
       <DriverGroupListContainer>
         {driversGroupsState.loading ? (
           [...Array(10).keys()].map(i => (
