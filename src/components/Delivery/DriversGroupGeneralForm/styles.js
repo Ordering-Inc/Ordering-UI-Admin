@@ -142,3 +142,13 @@ export const CheckboxContainer = styled.div`
     `}
   }
 `
+export const SearchBarWrapper = styled.div`
+  margin-bottom: 15px;
+  width: 100%;
+`
+
+export const ButtonGroup = styled.div`
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+`
