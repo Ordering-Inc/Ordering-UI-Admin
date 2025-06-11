@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useLanguage, useSession } from 'ordering-components-admin'
 import { useForm } from 'react-hook-form'
 import { Input, Button, SecondSelect as DefaultSelect, Checkbox } from '../../../styles'
-import { Alert } from '../../Shared'
+import { Alert, SearchBar } from '../../Shared'
 import { DriversGroupDrivers } from '../DriversGroupDrivers'
 import { DriversGroupCompanies } from '../DriversGroupCompanies'
 
@@ -14,7 +14,9 @@ import {
   Image,
   InputWrapper,
   ManagerInfoContainer,
-  WrapperImage
+  WrapperImage,
+  SearchBarWrapper,
+  ButtonGroup
 } from './styles'
 import FaUserAlt from '@meronex/icons/fa/FaUserAlt'
 
@@ -31,6 +33,7 @@ export const DriversGroupGeneralForm = (props) => {
     handleNextClick,
     selectedDriverManager,
     handleSelectDriverManager,
+    handleSelectAllManagers,
     handleChangeMaxDistance,
     useAdvanced,
     handleLogistic
@@ -40,6 +43,8 @@ export const DriversGroupGeneralForm = (props) => {
   const { handleSubmit, register, errors } = useForm()
   const [alertState, setAlertState] = useState({ open: false, content: [] })
   const [{ user }] = useSession()
+  const [searchManagerValue, setSearchManagerValue] = useState(null)
+  const [filteredManagers, setFilteredManagers] = useState([])
 
   const typeOptions = [
     { value: 0, content: t('IN_HOUSE_DRIVERS', 'In house drivers') },
@@ -110,6 +115,22 @@ export const DriversGroupGeneralForm = (props) => {
     }
   }, [errors])
 
+  useEffect(() => {
+    let _filteredManagers = []
+    if (searchManagerValue) {
+      _filteredManagers = driversManagers
+        .filter(
+          manager => (
+            manager?.name?.toLowerCase().includes(searchManagerValue?.toLowerCase()) ||
+            manager?.email?.toLowerCase().includes(searchManagerValue?.toLowerCase())
+          )
+        )
+    } else {
+      _filteredManagers = [...driversManagers]
+    }
+    setFilteredManagers(_filteredManagers)
+  }, [searchManagerValue, driversManagers])
+
   return (
     <Container
       data-tour='tour_fill_group'
@@ -145,8 +166,33 @@ export const DriversGroupGeneralForm = (props) => {
       {user?.level !== 5 && (
         <InputWrapper>
           <label>{t('DRIVER_MANAGER', 'Driver manager')}</label>
+          <SearchBarWrapper>
+            <SearchBar
+              placeholder={t('SEARCH', 'Search')}
+              isCustomLayout
+              lazyLoad
+              search={searchManagerValue}
+              onSearch={val => setSearchManagerValue(val)}
+            />
+          </SearchBarWrapper>
+          <ButtonGroup>
+            <Button
+              type='button'
+              color='secundaryDark'
+              onClick={() => handleSelectAllManagers(true)}
+            >
+              {t('SELECT_ALL', 'Select all')}
+            </Button>
+            <Button
+              type='button'
+              color='secundaryDark'
+              onClick={() => handleSelectAllManagers(false)}
+            >
+              {t('SELECT_NONE', 'Select none')}
+            </Button>
+          </ButtonGroup>
           <DriverManagerContainer>
-            {driversManagers.map(driverManager => (
+            {filteredManagers.map(driverManager => (
               <DriverManagerWrapper
                 key={driverManager.id}
               >
