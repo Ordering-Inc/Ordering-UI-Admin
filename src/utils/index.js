@@ -717,7 +717,7 @@ export const disableReasons = () => {
   return disableReasonDictionary
 }
 
-export const getAttributeName = (key) => {
+export const getAttributeName = (key, { parseDate }) => {
   const [, t] = useLanguage()
   const attributes = [
     { key: 'autoassign_amount_drivers', content: t('AUTO_ASSIGN_GROUP_ORDERS_TO_DRIVERS', 'Auto assign the order of group to this amount of drivers') },
@@ -743,10 +743,15 @@ export const getAttributeName = (key) => {
     { key: 'busy', content: t('BUSY', 'Busy') }
   ]
   const found = attributes.find(attribute => attribute.key === key)
+
   if (found) {
     return found.content
   } else {
-    return key
+    if (parseDate && moment(key).isValid()) {
+      return parseDate(key)
+    } else {
+      return key
+    }
   }
 }
 
