@@ -937,7 +937,8 @@ var disableReasons = exports.disableReasons = function disableReasons() {
   };
   return disableReasonDictionary;
 };
-var getAttributeName = exports.getAttributeName = function getAttributeName(key) {
+var getAttributeName = exports.getAttributeName = function getAttributeName(key, _ref5) {
+  var parseDate = _ref5.parseDate;
   var _useLanguage5 = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage6 = _slicedToArray(_useLanguage5, 2),
     t = _useLanguage6[1];
@@ -1011,7 +1012,11 @@ var getAttributeName = exports.getAttributeName = function getAttributeName(key)
   if (found) {
     return found.content;
   } else {
-    return key;
+    if (parseDate && (0, _moment.default)(key).isValid()) {
+      return parseDate(key);
+    } else {
+      return key;
+    }
   }
 };
 var usePreventDoubleClick = exports.usePreventDoubleClick = function usePreventDoubleClick(_callback) {
