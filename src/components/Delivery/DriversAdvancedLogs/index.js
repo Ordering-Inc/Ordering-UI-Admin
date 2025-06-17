@@ -111,7 +111,7 @@ export const DriversAdvancedLogsUI = (props) => {
                           {log?.data && getValidLogData(log?.data).map((item, i) => (
                             <tbody key={i}>
                               <tr>
-                                <td>{JSON.stringify(getAttributeName(item))}</td>
+                                <td>{getAttributeName(item, { parseDate })}</td>
                               </tr>
                             </tbody>
                           ))}
@@ -119,7 +119,7 @@ export const DriversAdvancedLogsUI = (props) => {
                       </td>
                       <td>
                         <DateTimeWrapper>
-                          {parseDate(log.created_at, { utc: false })}
+                          {parseDate(log.created_at)}
                         </DateTimeWrapper>
                       </td>
                     </tr>
