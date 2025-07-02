@@ -85,32 +85,37 @@ const DriverGroupSettingUI = (props) => {
         </Button>
       </ButtonGroup>
       <DriverGroupListContainer>
-        {driversGroupsState.loading ? (
-          [...Array(10).keys()].map(i => (
-            <DriverGroupItem key={i}>
-              <Skeleton width={20} height={20} />
-              <Skeleton width={100} />
-            </DriverGroupItem>
-          ))
-        ) : (
-          filteredGroups.map(group => (
-            <DriverGroupItem
-              key={group.id}
-              onClick={() => handleCheckboxClick(group.id)}
-            >
-              <CheckboxWrapper
-                active={includedGroupIds.includes(group.id)}
+        {driversGroupsState.loading
+          ? (
+            [...Array(8).keys()].map(i => (
+              <DriverGroupItem key={i}>
+                <Skeleton width={20} height={20} />
+                <Skeleton width={100} />
+              </DriverGroupItem>
+            ))
+          )
+          : (
+            filteredGroups.map(group => (
+              <DriverGroupItem
+                key={group.id}
+                onClick={() => handleCheckboxClick(group.id)}
+                disabled={actionState.loading || driversGroupsState.loading}
               >
-                {includedGroupIds.includes(group.id) ? (
-                  <MdCheckBox />
-                ) : (
-                  <MdCheckBoxOutlineBlank />
-                )}
-              </CheckboxWrapper>
-              <span>{group?.name}</span>
-            </DriverGroupItem>
-          ))
-        )}
+                <CheckboxWrapper
+                  active={includedGroupIds.includes(group.id)}
+                >
+                  {includedGroupIds.includes(group.id)
+                    ? (
+                      <MdCheckBox />
+                    )
+                    : (
+                      <MdCheckBoxOutlineBlank />
+                    )}
+                </CheckboxWrapper>
+                <span>{group?.name}</span>
+              </DriverGroupItem>
+            ))
+          )}
       </DriverGroupListContainer>
       <Alert
         title={t('WEB_APPNAME', 'Ordering')}

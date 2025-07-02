@@ -31,6 +31,12 @@ export const DriverGroupItem = styled.div`
   padding: 12px 0;
   cursor: pointer;
 
+  ${({ disabled }) => disabled && css`
+    cursor: not-allowed;
+    opacity: 0.6;
+    pointer-events: none;
+  `}
+
   > span {
     font-size: 14px;
     ${props => props.theme?.rtl ? css`
