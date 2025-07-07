@@ -115,7 +115,7 @@ var DriverGroupSettingUI = function DriverGroupSettingUI(props) {
     onClick: function onClick() {
       return handleBatchSelector(false);
     }
-  }, t('SELECT_NONE', 'Select none'))), /*#__PURE__*/_react.default.createElement(_styles2.DriverGroupListContainer, null, driversGroupsState.loading ? _toConsumableArray(Array(10).keys()).map(function (i) {
+  }, t('SELECT_NONE', 'Select none'))), /*#__PURE__*/_react.default.createElement(_styles2.DriverGroupListContainer, null, driversGroupsState.loading ? _toConsumableArray(Array(8).keys()).map(function (i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.DriverGroupItem, {
       key: i
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
@@ -129,7 +129,8 @@ var DriverGroupSettingUI = function DriverGroupSettingUI(props) {
       key: group.id,
       onClick: function onClick() {
         return handleCheckboxClick(group.id);
-      }
+      },
+      disabled: actionState.loading || driversGroupsState.loading
     }, /*#__PURE__*/_react.default.createElement(_styles2.CheckboxWrapper, {
       active: includedGroupIds.includes(group.id)
     }, includedGroupIds.includes(group.id) ? /*#__PURE__*/_react.default.createElement(_MdCheckBox.default, null) : /*#__PURE__*/_react.default.createElement(_MdCheckBoxOutlineBlank.default, null)), /*#__PURE__*/_react.default.createElement("span", null, group === null || group === void 0 ? void 0 : group.name));
