@@ -30,10 +30,12 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 var BusinessOwners = exports.BusinessOwners = function BusinessOwners(props) {
-  var _business$owners;
+  var _business$type;
   var business = props.business,
     handleDeleteBusinessOwner = props.handleDeleteBusinessOwner,
-    handleAddBusinessOwner = props.handleAddBusinessOwner;
+    handleAddBusinessOwner = props.handleAddBusinessOwner,
+    _props$type = props.type,
+    type = _props$type === void 0 ? 'owners' : _props$type;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -59,9 +61,11 @@ var BusinessOwners = exports.BusinessOwners = function BusinessOwners(props) {
     });
     setConfirm({
       open: true,
-      content: t('QUESTION_DELETE_BUSINESS_OWNER', 'Delete this business owner from this store?'),
+      content: t("QUESTION_DELETE_BUSINESS_".concat(type.toUpperCase().slice(0, -1)), "Delete this business ".concat(type.slice(0, -1), " from this store?")),
       handleOnAccept: function handleOnAccept() {
-        handleDeleteBusinessOwner(_ownerIds);
+        handleDeleteBusinessOwner(_ownerIds, {
+          type: type
+        });
         setOwnerIds(_ownerIds);
         setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
           open: false
@@ -74,9 +78,11 @@ var BusinessOwners = exports.BusinessOwners = function BusinessOwners(props) {
     var _ownerIds = [].concat(_toConsumableArray(ownerIds), [selectedOwner === null || selectedOwner === void 0 ? void 0 : selectedOwner.id]);
     setConfirm({
       open: true,
-      content: t('QUESTION_ADD_BUSINESS_OWNER', 'Add as a business owner to this store?'),
+      content: t("QUESTION_ADD_BUSINESS_".concat(type.toUpperCase().slice(0, -1)), "Add as a business ".concat(type.slice(0, -1), " to this store?")),
       handleOnAccept: function handleOnAccept() {
-        handleAddBusinessOwner(_ownerIds, selectedOwner);
+        handleAddBusinessOwner(_ownerIds, selectedOwner, {
+          type: type
+        });
         setOwnerIds(_ownerIds);
         setSelectedOwner(null);
         setConfirm(_objectSpread(_objectSpread({}, confirm), {}, {
@@ -86,9 +92,9 @@ var BusinessOwners = exports.BusinessOwners = function BusinessOwners(props) {
     });
   };
   (0, _react.useEffect)(function () {
-    if (!(business !== null && business !== void 0 && business.owners)) return;
+    if (!(business !== null && business !== void 0 && business[type])) return;
     var _ownerIds = [];
-    var _iterator = _createForOfIteratorHelper(business === null || business === void 0 ? void 0 : business.owners),
+    var _iterator = _createForOfIteratorHelper(business === null || business === void 0 ? void 0 : business[type]),
       _step;
     try {
       for (_iterator.s(); !(_step = _iterator.n()).done;) {
@@ -101,8 +107,8 @@ var BusinessOwners = exports.BusinessOwners = function BusinessOwners(props) {
       _iterator.f();
     }
     setOwnerIds(_ownerIds);
-  }, [business === null || business === void 0 ? void 0 : business.owners]);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, business === null || business === void 0 || (_business$owners = business.owners) === null || _business$owners === void 0 ? void 0 : _business$owners.map(function (owner) {
+  }, [business === null || business === void 0 ? void 0 : business[type]]);
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, business === null || business === void 0 || (_business$type = business[type]) === null || _business$type === void 0 ? void 0 : _business$type.map(function (owner) {
     return /*#__PURE__*/_react.default.createElement(_styles2.OwnerItem, {
       key: owner === null || owner === void 0 ? void 0 : owner.id
     }, /*#__PURE__*/_react.default.createElement("span", null, owner === null || owner === void 0 ? void 0 : owner.name, " ", owner === null || owner === void 0 ? void 0 : owner.lastname), /*#__PURE__*/_react.default.createElement("p", {
@@ -113,7 +119,9 @@ var BusinessOwners = exports.BusinessOwners = function BusinessOwners(props) {
   }), /*#__PURE__*/_react.default.createElement(_styles2.WrapperOwnerSelector, null, /*#__PURE__*/_react.default.createElement(_BusinessOwnerSelector.BusinessOwnerSelector, {
     selectedOwnerIds: ownerIds,
     selectedOwner: selectedOwner,
-    handleSelectBusinessOwner: setSelectedOwner
+    handleSelectBusinessOwner: setSelectedOwner,
+    defaultUserTypesSelected: type === 'agents' ? [9] : [2],
+    type: type
   }), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     onClick: function onClick() {
       return onAddBusinessOwner();

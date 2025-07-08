@@ -26,7 +26,8 @@ var BusinessOwnerSelectorUI = function BusinessOwnerSelectorUI(props) {
   var usersList = props.usersList,
     selectedOwnerIds = props.selectedOwnerIds,
     handleSelectBusinessOwner = props.handleSelectBusinessOwner,
-    selectedOwner = props.selectedOwner;
+    selectedOwner = props.selectedOwner,
+    type = props.type;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -38,7 +39,7 @@ var BusinessOwnerSelectorUI = function BusinessOwnerSelectorUI(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     searchValue = _useState4[0],
     setSearchValue = _useState4[1];
-  var placeholder = /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('SELECT_BUSINESS_OWNER', 'Select business owner'));
+  var placeholder = /*#__PURE__*/_react.default.createElement(_styles.Option, null, t("SELECT_BUSINESS_".concat(type.toUpperCase().slice(0, -1)), "Select business ".concat(type.slice(0, -1))));
   var onSelectBusinessOwner = function onSelectBusinessOwner(id) {
     var selectedOwner = usersList === null || usersList === void 0 ? void 0 : usersList.users.find(function (user) {
       return user.id === id;
@@ -84,7 +85,7 @@ var BusinessOwnerSelector = exports.BusinessOwnerSelector = function BusinessOwn
   var businessOwnersProps = _objectSpread(_objectSpread({}, props), {}, {
     UIComponent: BusinessOwnerSelectorUI,
     isBusinessOwners: true,
-    defaultUserTypesSelected: [2]
+    defaultUserTypesSelected: props.defaultUserTypesSelected || [2]
   });
   return /*#__PURE__*/_react.default.createElement(_orderingComponentsAdmin.UsersList, businessOwnersProps);
 };

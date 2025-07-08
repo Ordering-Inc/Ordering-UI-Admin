@@ -37,6 +37,9 @@ var BusinessInfoSettingList = exports.BusinessInfoSettingList = function Busines
     key: 'location',
     content: t('LOCATION', 'Location')
   }, {
+    key: 'agents',
+    content: t('AGENTS', 'Agents')
+  }, {
     key: 'images',
     content: t('IMAGES', 'Images')
   }, {
