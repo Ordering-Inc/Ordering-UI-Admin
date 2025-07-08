@@ -14,7 +14,8 @@ export const BusinessOwners = (props) => {
   const {
     business,
     handleDeleteBusinessOwner,
-    handleAddBusinessOwner
+    handleAddBusinessOwner,
+    type = 'owners'
   } = props
   const [, t] = useLanguage()
   const [ownerIds, setOwnerIds] = useState([])
@@ -25,9 +26,9 @@ export const BusinessOwners = (props) => {
     const _ownerIds = ownerIds.filter(id => id !== ownerId)
     setConfirm({
       open: true,
-      content: t('QUESTION_DELETE_BUSINESS_OWNER', 'Delete this business owner from this store?'),
+      content: t(`QUESTION_DELETE_BUSINESS_${type.toUpperCase().slice(0, -1)}`, `Delete this business ${type.slice(0, -1)} from this store?`),
       handleOnAccept: () => {
-        handleDeleteBusinessOwner(_ownerIds)
+        handleDeleteBusinessOwner(_ownerIds, { type })
         setOwnerIds(_ownerIds)
         setConfirm({ ...confirm, open: false })
       }
@@ -39,9 +40,9 @@ export const BusinessOwners = (props) => {
     const _ownerIds = [...ownerIds, selectedOwner?.id]
     setConfirm({
       open: true,
-      content: t('QUESTION_ADD_BUSINESS_OWNER', 'Add as a business owner to this store?'),
+      content: t(`QUESTION_ADD_BUSINESS_${type.toUpperCase().slice(0, -1)}`, `Add as a business ${type.slice(0, -1)} to this store?`),
       handleOnAccept: () => {
-        handleAddBusinessOwner(_ownerIds, selectedOwner)
+        handleAddBusinessOwner(_ownerIds, selectedOwner, { type })
         setOwnerIds(_ownerIds)
         setSelectedOwner(null)
         setConfirm({ ...confirm, open: false })
@@ -50,17 +51,18 @@ export const BusinessOwners = (props) => {
   }
 
   useEffect(() => {
-    if (!business?.owners) return
+    if (!business?.[type]) return
     const _ownerIds = []
-    for (const owner of business?.owners) {
+    for (const owner of business?.[type]) {
       _ownerIds.push(owner?.id)
     }
     setOwnerIds(_ownerIds)
-  }, [business?.owners])
+  }, [business?.[type]])
+
   return (
     <>
       <Container>
-        {business?.owners?.map(owner => (
+        {business?.[type]?.map(owner => (
           <OwnerItem key={owner?.id}>
             <span>{owner?.name} {owner?.lastname}</span>
             <p
@@ -75,6 +77,8 @@ export const BusinessOwners = (props) => {
             selectedOwnerIds={ownerIds}
             selectedOwner={selectedOwner}
             handleSelectBusinessOwner={setSelectedOwner}
+            defaultUserTypesSelected={type === 'agents' ? [9] : [2]}
+            type={type}
           />
           <Button
             onClick={() => onAddBusinessOwner()}
