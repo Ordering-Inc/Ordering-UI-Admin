@@ -49,7 +49,7 @@ export const BusinessDetail = (props) => {
 
   useEffect(() => {
     const tab = query.get('tab')
-    const tabs = ['information', 'owner', 'categories', 'location', 'images', 'videos', 'seo_options']
+    const tabs = ['information', 'owner', 'categories', 'location', 'agents', 'images', 'videos', 'seo_options']
     if (tab && tabs.includes(tab)) {
       setSelctedInfoItem(tab)
     } else {
@@ -98,6 +98,14 @@ export const BusinessDetail = (props) => {
               formState={formState}
               setFormState={setFormState}
               handleUpdateBusinessClick={handleUpdateBusinessClick}
+            />
+          )}
+          {selectedInfoItem === 'agents' && (
+            <BusinessOwners
+              business={business}
+              handleDeleteBusinessOwner={handleDeleteBusinessOwner}
+              handleAddBusinessOwner={handleAddBusinessOwner}
+              type='agents'
             />
           )}
           {selectedInfoItem === 'images' && (

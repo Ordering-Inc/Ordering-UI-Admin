@@ -9,14 +9,15 @@ const BusinessOwnerSelectorUI = (props) => {
     usersList,
     selectedOwnerIds,
     handleSelectBusinessOwner,
-    selectedOwner
+    selectedOwner,
+    type
   } = props
 
   const [, t] = useLanguage()
   const [usersListOptions, setUsersListOptions] = useState([])
   const [searchValue, setSearchValue] = useState(null)
 
-  const placeholder = <Option>{t('SELECT_BUSINESS_OWNER', 'Select business owner')}</Option>
+  const placeholder = <Option>{t(`SELECT_BUSINESS_${type.toUpperCase().slice(0, -1)}`, `Select business ${type.slice(0, -1)}`)}</Option>
 
   const onSelectBusinessOwner = (id) => {
     const selectedOwner = usersList?.users.find(user => user.id === id)
@@ -73,7 +74,7 @@ export const BusinessOwnerSelector = (props) => {
     ...props,
     UIComponent: BusinessOwnerSelectorUI,
     isBusinessOwners: true,
-    defaultUserTypesSelected: [2]
+    defaultUserTypesSelected: props.defaultUserTypesSelected || [2]
   }
   return <UsersListController {...businessOwnersProps} />
 }

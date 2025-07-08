@@ -152,6 +152,7 @@ export const UserDetailsUI = (props) => {
         currentMenuSelected={currentMenuSelected}
         handleChangeMenu={tab => handleTabClick(tab)}
         isBusinessOwner={userState?.user?.level === 2}
+        isCallcenterAgent={userState?.user?.level === 9}
       />
       {!userState?.loading && userState?.user && (
         <>
@@ -180,6 +181,7 @@ export const UserDetailsUI = (props) => {
           {currentMenuSelected === 'businesses' && (
             <BusinessManagerBusinesses
               userId={userState?.user?.id}
+              typeBusinessPropToFetch={userState?.user?.level === 9 ? 'businesses_agent' : 'businesses'}
             />
           )}
           {currentMenuSelected === 'orders' && (

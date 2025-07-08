@@ -19,6 +19,7 @@ export const BusinessInfoSettingList = (props) => {
     { key: 'owner', content: t('OWNER_ID', 'Owner') },
     { key: 'categories', content: t('CATEGORIES', 'Categories') },
     { key: 'location', content: t('LOCATION', 'Location') },
+    { key: 'agents', content: t('AGENTS', 'Agents') },
     { key: 'images', content: t('IMAGES', 'Images') },
     { key: 'videos', content: t('VIDEOS', 'Videos') },
     { key: 'seo_options', content: t('SEO_OPTIONS', 'SEO Options') }
