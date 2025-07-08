@@ -12,7 +12,8 @@ export const UserDetailsMenu = (props) => {
     currentMenuSelected,
     handleChangeMenu,
     isBusinessOwner,
-    isProfessional
+    isProfessional,
+    isCallcenterAgent
   } = props
 
   const [, t] = useLanguage()
@@ -31,6 +32,7 @@ export const UserDetailsMenu = (props) => {
     { key: 'saved_places', content: t('SAVED_PLACES', 'Saved places') },
     { key: 'orders', content: t('ORDERS', 'Orders') },
     { key: 'metafields', content: t('METAFIELDS', 'Metafields') },
+    { key: 'businesses', content: t('BUSINESSES', 'Businesses'), enabled: isCallcenterAgent },
     { key: 'personalization', content: t('PERSONALIZATION', 'Personalization') },
     { key: 'push_tokens', content: t('PUSH_TOKENS', 'Push tokens') }
   ]
