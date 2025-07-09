@@ -19,7 +19,8 @@ var UserDetailsMenu = exports.UserDetailsMenu = function UserDetailsMenu(props) 
   var currentMenuSelected = props.currentMenuSelected,
     handleChangeMenu = props.handleChangeMenu,
     isBusinessOwner = props.isBusinessOwner,
-    isProfessional = props.isProfessional;
+    isProfessional = props.isProfessional,
+    isCallcenterAgent = props.isCallcenterAgent;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
     t = _useLanguage2[1];
@@ -54,6 +55,10 @@ var UserDetailsMenu = exports.UserDetailsMenu = function UserDetailsMenu(props) 
   }, {
     key: 'metafields',
     content: t('METAFIELDS', 'Metafields')
+  }, {
+    key: 'businesses',
+    content: t('BUSINESSES', 'Businesses'),
+    enabled: isCallcenterAgent
   }, {
     key: 'personalization',
     content: t('PERSONALIZATION', 'Personalization')

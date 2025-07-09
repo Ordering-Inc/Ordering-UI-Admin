@@ -60,7 +60,7 @@ var BusinessDetail = exports.BusinessDetail = function BusinessDetail(props) {
   }, [selectedInfoItem]);
   (0, _react.useEffect)(function () {
     var tab = query.get('tab');
-    var tabs = ['information', 'owner', 'categories', 'location', 'images', 'videos', 'seo_options'];
+    var tabs = ['information', 'owner', 'categories', 'location', 'agents', 'images', 'videos', 'seo_options'];
     if (tab && tabs.includes(tab)) {
       setSelctedInfoItem(tab);
     } else {
@@ -92,6 +92,11 @@ var BusinessDetail = exports.BusinessDetail = function BusinessDetail(props) {
     formState: formState,
     setFormState: setFormState,
     handleUpdateBusinessClick: handleUpdateBusinessClick
+  }), selectedInfoItem === 'agents' && /*#__PURE__*/_react.default.createElement(_BusinessOwners.BusinessOwners, {
+    business: business,
+    handleDeleteBusinessOwner: handleDeleteBusinessOwner,
+    handleAddBusinessOwner: handleAddBusinessOwner,
+    type: "agents"
   }), selectedInfoItem === 'images' && /*#__PURE__*/_react.default.createElement(_BusinessImages.BusinessImages, {
     business: business,
     handleSucessAddBusinessGallery: function handleSucessAddBusinessGallery(result) {
