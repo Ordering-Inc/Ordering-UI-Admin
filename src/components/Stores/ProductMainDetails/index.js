@@ -88,6 +88,7 @@ export const ProductMainDetails = (props) => {
           handleChangeInput={handleChangeInput}
           handleChangeFormState={handleChangeFormState}
           handleButtonUpdateClick={handleUpdateClick}
+          maxLimitImage={props?.maxLimitImage}
         />
       )}
       {selectedOption === 'advanced' && (
