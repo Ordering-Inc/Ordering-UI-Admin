@@ -180,7 +180,8 @@ var ProductDetailsUI = function ProductDetailsUI(props) {
     setTaxes: setTaxes,
     fees: fees,
     setFees: setFees,
-    cleanFormState: cleanFormState
+    cleanFormState: cleanFormState,
+    maxLimitImage: props === null || props === void 0 ? void 0 : props.maxLimitImage
   }), showOption === 'service_details' && /*#__PURE__*/_react.default.createElement(_ServiceDetail.ServiceDetail, {
     product: productState === null || productState === void 0 ? void 0 : productState.product,
     formState: formState,
