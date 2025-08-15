@@ -513,6 +513,7 @@ const BusinessProductsListingUI = (props) => {
           setFees={setFees}
           categoryState={categoryState}
           handleUpdateCategoryState={handleUpdateCategoryState}
+          maxLimitImage={props?.maxLimitImage}
         />
       )}
       {openSidebar === 'business_details' && (

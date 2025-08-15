@@ -165,6 +165,7 @@ const ProductDetailsUI = (props) => {
               fees={fees}
               setFees={setFees}
               cleanFormState={cleanFormState}
+              maxLimitImage={props?.maxLimitImage}
             />
           )}
           {showOption === 'service_details' && (
