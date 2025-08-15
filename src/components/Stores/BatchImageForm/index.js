@@ -67,10 +67,10 @@ const BatchImageFormUI = (props) => {
           invalidfileNames.push(f?.name)
           return
         }
-        if (bytesConverter(f.size) > 2048) {
+        if (bytesConverter(f.size) > props?.maxLimitImage ?? 2048) {
           setAlertState({
             open: true,
-            content: [t('IMAGE_MAXIMUM_SIZE', 'The maximum image size is 2 megabytes')]
+            content: [t('IMAGE_MAXIMUM_SIZE_MESSAGE', 'The maximum image size is _amount_ megabytes').replace('_amount_', (props?.maxLimitImage ?? 2048) / 1024)]
           })
           invalidfileNames.push(f?.name)
           return
