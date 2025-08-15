@@ -61,6 +61,7 @@ var BatchImageFormUI = function BatchImageFormUI(props) {
     var validfiles = [];
     if (files && files.length > 0) {
       Object.values(files).forEach(function (f) {
+        var _ref;
         var type = f.type.split('/')[0];
         if (type !== 'image') {
           setAlertState({
@@ -70,10 +71,11 @@ var BatchImageFormUI = function BatchImageFormUI(props) {
           invalidfileNames.push(f === null || f === void 0 ? void 0 : f.name);
           return;
         }
-        if ((0, _utils.bytesConverter)(f.size) > 2048) {
+        if ((_ref = (0, _utils.bytesConverter)(f.size) > (props === null || props === void 0 ? void 0 : props.maxLimitImage)) !== null && _ref !== void 0 ? _ref : 2048) {
+          var _props$maxLimitImage;
           setAlertState({
             open: true,
-            content: [t('IMAGE_MAXIMUM_SIZE', 'The maximum image size is 2 megabytes')]
+            content: [t('IMAGE_MAXIMUM_SIZE_MESSAGE', 'The maximum image size is _amount_ megabytes').replace('_amount_', ((_props$maxLimitImage = props === null || props === void 0 ? void 0 : props.maxLimitImage) !== null && _props$maxLimitImage !== void 0 ? _props$maxLimitImage : 2048) / 1024)]
           });
           invalidfileNames.push(f === null || f === void 0 ? void 0 : f.name);
           return;

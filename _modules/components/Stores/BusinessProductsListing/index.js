@@ -466,7 +466,8 @@ var BusinessProductsListingUI = function BusinessProductsListingUI(props) {
     fees: fees,
     setFees: setFees,
     categoryState: categoryState,
-    handleUpdateCategoryState: handleUpdateCategoryState
+    handleUpdateCategoryState: handleUpdateCategoryState,
+    maxLimitImage: props === null || props === void 0 ? void 0 : props.maxLimitImage
   }), openSidebar === 'business_details' && /*#__PURE__*/_react.default.createElement(_BusinessDetails.BusinessDetails, {
     open: openSidebar === 'business_details',
     businessId: (selectedBusiness === null || selectedBusiness === void 0 ? void 0 : selectedBusiness.id) || (businessState === null || businessState === void 0 || (_businessState$busine18 = businessState.business) === null || _businessState$busine18 === void 0 ? void 0 : _businessState$busine18.id),

@@ -97,7 +97,8 @@ var ProductMainDetails = exports.ProductMainDetails = function ProductMainDetail
     handleChangeRibbon: handleChangeRibbon,
     handleChangeInput: handleChangeInput,
     handleChangeFormState: handleChangeFormState,
-    handleButtonUpdateClick: handleUpdateClick
+    handleButtonUpdateClick: handleUpdateClick,
+    maxLimitImage: props === null || props === void 0 ? void 0 : props.maxLimitImage
   }), selectedOption === 'advanced' && /*#__PURE__*/_react.default.createElement(_ProductDetailsAdvanced.ProductDetailsAdvanced, {
     product: product,
     business: business,

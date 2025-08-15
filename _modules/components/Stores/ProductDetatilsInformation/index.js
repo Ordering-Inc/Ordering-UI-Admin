@@ -80,7 +80,7 @@ var ProductDetatilsInformation = exports.ProductDetatilsInformation = function P
   };
   var handleFiles = function handleFiles(files) {
     if (files.length === 1) {
-      var _files$;
+      var _ref, _files$;
       var type = files[0].type.split('/')[0];
       if (type !== 'image') {
         setAlertState({
@@ -89,10 +89,11 @@ var ProductDetatilsInformation = exports.ProductDetatilsInformation = function P
         });
         return;
       }
-      if ((0, _utils.bytesConverter)((_files$ = files[0]) === null || _files$ === void 0 ? void 0 : _files$.size) > 2048) {
+      if ((_ref = (0, _utils.bytesConverter)((_files$ = files[0]) === null || _files$ === void 0 ? void 0 : _files$.size) > (props === null || props === void 0 ? void 0 : props.maxLimitImage)) !== null && _ref !== void 0 ? _ref : 2048) {
+        var _props$maxLimitImage;
         setAlertState({
           open: true,
-          content: [t('IMAGE_MAXIMUM_SIZE', 'The maximum image size is 2 megabytes')]
+          content: [t('IMAGE_MAXIMUM_SIZE_MESSAGE', 'The maximum image size is _amount_ megabytes').replace('_amount_', ((_props$maxLimitImage = props === null || props === void 0 ? void 0 : props.maxLimitImage) !== null && _props$maxLimitImage !== void 0 ? _props$maxLimitImage : 2048) / 1024)]
         });
         return;
       }
