@@ -39,7 +39,7 @@ var ProductStartGuide = exports.ProductStartGuide = function ProductStartGuide(p
     title: t('IMPORT_MENU_ONLY_USA_CANADA', 'Import Menu (Only if USA and Canada)'),
     description: t('IMPORT_MENU_ONLY_USA_CANADA_DESC', 'Import your menu from the Ordering Network that includes over 1M restaurants and stores from the US and Canada.'),
     icon: /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.ColumnsGap, null),
-    enabled: countriesState === null || countriesState === void 0 ? void 0 : countriesState.enabled
+    enabled: false
   }, {
     id: 3,
     title: t('UPLOAD_YOUR_MENU', 'Upload your Menu'),
