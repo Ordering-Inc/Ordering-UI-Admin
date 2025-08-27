@@ -160,7 +160,7 @@ export const Select = (props) => {
                         {t('EDIT', 'Edit')}
                       </Button>
                     )}
-                    {option.deleteFunctionality && (
+                    {option.deleteFunctionality && onDelete && (
                       <BsTrash className='delete' onClick={() => onDelete(option.value)} />
                     )}
                   </FunctionalityContainer>

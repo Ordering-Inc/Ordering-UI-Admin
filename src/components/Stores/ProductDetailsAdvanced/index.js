@@ -34,12 +34,13 @@ const ProductDetailsAdvancedUI = (props) => {
     setTaxToEdit,
     handleSaveTax,
     handleChangeTax,
-    formTaxChanges,
     handleDeleteTax,
     setAlertState,
     alertState,
     fees,
-    handleUpdateClick
+    handleUpdateClick,
+    formTaxChanges,
+    setFormTaxChanges
   } = props
 
   const formMethods = useForm()
@@ -50,7 +51,7 @@ const ProductDetailsAdvancedUI = (props) => {
   const [isShowPriceByWeight, setIsShowPriceByWeight] = useState(false)
   const [taxesOption, setTaxesOption] = useState([])
   const [feesOptions, setFeesOptions] = useState([])
-  const [fesSelected, setFeeSelected] = useState(null)
+  const [feesSelected, setFeeSelected] = useState(null)
   const [taxSelected, setTaxSelected] = useState(null)
   const [taxToDelete, setTaxToDelete] = useState({ action: null, id: null })
 
@@ -102,6 +103,11 @@ const ProductDetailsAdvancedUI = (props) => {
     setTaxToDelete({ action: null, payload: null })
   }
 
+  const handleCloseModal = () => {
+    setTaxToEdit({ action: null, payload: null })
+    setFormTaxChanges({})
+  }
+
   const getTaxes = async () => {
     const inheritOption = {
       name: t('INHERIT_FROM_BUSINESS', 'Inherit from business'),
@@ -129,7 +135,8 @@ const ProductDetailsAdvancedUI = (props) => {
         deleteFunctionality: user?.level === 0,
         rate: tax.rate,
         type: tax.type,
-        description: tax.description
+        description: tax.description,
+        order_type_rates: tax.order_type_rates
       })),
       addTaxOption
     ]
@@ -194,11 +201,11 @@ const ProductDetailsAdvancedUI = (props) => {
 
   useEffect(() => {
     if (taxes) getTaxes()
-  }, [JSON.stringify(taxes)])
+  }, [JSON.stringify(taxes), productState?.tax_id])
 
   useEffect(() => {
     if (fees) getFees()
-  }, [JSON.stringify(fees)])
+  }, [JSON.stringify(fees), productState?.fee_id])
 
   useEffect(() => {
     if (taxToDelete.action) {
@@ -333,8 +340,8 @@ const ProductDetailsAdvancedUI = (props) => {
       <TypeSelectWrapper>
         {fesSelected && (
           <Select
-            placeholder={fesSelected.showOnSelected}
-            defaultValue={fesSelected?.value ?? 'inherit'}
+            placeholder={feesSelected.showOnSelected}
+            defaultValue={feesSelected?.value ?? 'inherit'}
             options={feesOptions}
             onChange={(val) => handleClickProperty('fee_id', val === 'inherit' ? null : val)}
             onEdit={(val) => setTaxToEdit({ action: 'fees', payload: val })}
@@ -526,24 +533,26 @@ const ProductDetailsAdvancedUI = (props) => {
       >
         {formState?.loading ? t('LOADING', 'Loading') : t('SAVE', 'Save')}
       </Button>
-      <Modal
-        open={!!taxToEdit?.action}
-        width='80%'
-        padding='30px'
-        title={typeof taxToEdit?.payload === 'boolean'
-          ? t(`ADD_${getTaxOrFeeString(taxToEdit?.action).toUpperCase()}`, `Add ${getTaxOrFeeString(taxToEdit?.action)}`)
-          : t(`EDIT_${getTaxOrFeeString(taxToEdit?.action).toUpperCase()}`, `Edit ${getTaxOrFeeString(taxToEdit?.action)}`)}
-        onClose={() => setTaxToEdit({ action: null, payload: null })}
-      >
-        <EditTaxManager
-          type={taxToEdit?.action}
-          data={taxToEdit?.payload}
-          onChange={handleChangeTax}
-          formChanges={formTaxChanges}
-          onClose={() => setTaxToEdit({ action: null, payload: null })}
-          handleSave={handleSaveTax}
-        />
-      </Modal>
+      {!!taxToEdit?.action && (
+        <Modal
+          open={!!taxToEdit?.action}
+          width='80%'
+          padding='30px'
+          title={typeof taxToEdit?.payload === 'boolean'
+            ? t(`ADD_${getTaxOrFeeString(taxToEdit?.action).toUpperCase()}`, `Add ${getTaxOrFeeString(taxToEdit?.action)}`)
+            : t(`EDIT_${getTaxOrFeeString(taxToEdit?.action).toUpperCase()}`, `Edit ${getTaxOrFeeString(taxToEdit?.action)}`)}
+          onClose={handleCloseModal}
+        >
+          <EditTaxManager
+            type={taxToEdit?.action}
+            data={taxToEdit?.payload}
+            onChange={handleChangeTax}
+            formChanges={formTaxChanges}
+            onClose={handleCloseModal}
+            handleSave={handleSaveTax}
+          />
+        </Modal>
+      )}
       <Alert
         title={taxToDelete.action ? t(`DELETE_${getTaxOrFeeString(taxToDelete?.action).toUpperCase()}`, `Delete ${getTaxOrFeeString(taxToDelete?.action)}`) : t('ERROR')}
         content={alertState.content}
