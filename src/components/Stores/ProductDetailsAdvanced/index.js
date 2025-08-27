@@ -338,7 +338,7 @@ const ProductDetailsAdvancedUI = (props) => {
       </TypeSelectWrapper>
       <LabelCustom htmlFor='fees'>{t('FEES', 'Fees')}</LabelCustom>
       <TypeSelectWrapper>
-        {fesSelected && (
+        {feesSelected && (
           <Select
             placeholder={feesSelected.showOnSelected}
             defaultValue={feesSelected?.value ?? 'inherit'}
