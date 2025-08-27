@@ -34,7 +34,7 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 var ProductDetailsAdvancedUI = function ProductDetailsAdvancedUI(props) {
-  var _formState$changes10, _productState$estimat, _taxSelected$value, _fesSelected$value, _productState$cost_pr, _productState$cost_of, _productState$minimum, _productState$maximum, _productState$calorie, _productState$weight, _productState$weight_;
+  var _formState$changes10, _productState$estimat, _taxSelected$value, _feesSelected$value, _productState$cost_pr, _productState$cost_of, _productState$minimum, _productState$maximum, _productState$calorie, _productState$weight, _productState$weight_;
   var formState = props.formState,
     productState = props.productState,
     handleClickProperty = props.handleClickProperty,
@@ -44,12 +44,13 @@ var ProductDetailsAdvancedUI = function ProductDetailsAdvancedUI(props) {
     setTaxToEdit = props.setTaxToEdit,
     handleSaveTax = props.handleSaveTax,
     handleChangeTax = props.handleChangeTax,
-    formTaxChanges = props.formTaxChanges,
     handleDeleteTax = props.handleDeleteTax,
     setAlertState = props.setAlertState,
     alertState = props.alertState,
     fees = props.fees,
-    handleUpdateClick = props.handleUpdateClick;
+    handleUpdateClick = props.handleUpdateClick,
+    formTaxChanges = props.formTaxChanges,
+    setFormTaxChanges = props.setFormTaxChanges;
   var formMethods = (0, _reactHookForm.useForm)();
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -78,7 +79,7 @@ var ProductDetailsAdvancedUI = function ProductDetailsAdvancedUI(props) {
     setFeesOptions = _useState8[1];
   var _useState9 = (0, _react.useState)(null),
     _useState10 = _slicedToArray(_useState9, 2),
-    fesSelected = _useState10[0],
+    feesSelected = _useState10[0],
     setFeeSelected = _useState10[1];
   var _useState11 = (0, _react.useState)(null),
     _useState12 = _slicedToArray(_useState11, 2),
@@ -138,6 +139,13 @@ var ProductDetailsAdvancedUI = function ProductDetailsAdvancedUI(props) {
       payload: null
     });
   };
+  var handleCloseModal = function handleCloseModal() {
+    setTaxToEdit({
+      action: null,
+      payload: null
+    });
+    setFormTaxChanges({});
+  };
   var getTaxes = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       var inheritOption, addTaxOption, taxesOptions;
@@ -169,7 +177,8 @@ var ProductDetailsAdvancedUI = function ProductDetailsAdvancedUI(props) {
                 deleteFunctionality: (user === null || user === void 0 ? void 0 : user.level) === 0,
                 rate: tax.rate,
                 type: tax.type,
-                description: tax.description
+                description: tax.description,
+                order_type_rates: tax.order_type_rates
               };
             })), [addTaxOption]);
             setTaxesOption(taxesOptions);
@@ -238,10 +247,10 @@ var ProductDetailsAdvancedUI = function ProductDetailsAdvancedUI(props) {
   };
   (0, _react.useEffect)(function () {
     if (taxes) getTaxes();
-  }, [JSON.stringify(taxes)]);
+  }, [JSON.stringify(taxes), productState === null || productState === void 0 ? void 0 : productState.tax_id]);
   (0, _react.useEffect)(function () {
     if (fees) getFees();
-  }, [JSON.stringify(fees)]);
+  }, [JSON.stringify(fees), productState === null || productState === void 0 ? void 0 : productState.fee_id]);
   (0, _react.useEffect)(function () {
     if (taxToDelete.action) {
       setAlertState({
@@ -373,9 +382,9 @@ var ProductDetailsAdvancedUI = function ProductDetailsAdvancedUI(props) {
     }
   })), /*#__PURE__*/_react.default.createElement(_styles2.LabelCustom, {
     htmlFor: "fees"
-  }, t('FEES', 'Fees')), /*#__PURE__*/_react.default.createElement(_styles2.TypeSelectWrapper, null, fesSelected && /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
-    placeholder: fesSelected.showOnSelected,
-    defaultValue: (_fesSelected$value = fesSelected === null || fesSelected === void 0 ? void 0 : fesSelected.value) !== null && _fesSelected$value !== void 0 ? _fesSelected$value : 'inherit',
+  }, t('FEES', 'Fees')), /*#__PURE__*/_react.default.createElement(_styles2.TypeSelectWrapper, null, feesSelected && /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
+    placeholder: feesSelected.showOnSelected,
+    defaultValue: (_feesSelected$value = feesSelected === null || feesSelected === void 0 ? void 0 : feesSelected.value) !== null && _feesSelected$value !== void 0 ? _feesSelected$value : 'inherit',
     options: feesOptions,
     onChange: function onChange(val) {
       return handleClickProperty('fee_id', val === 'inherit' ? null : val);
@@ -560,28 +569,18 @@ var ProductDetailsAdvancedUI = function ProductDetailsAdvancedUI(props) {
     color: "primary",
     borderRadius: "7.6px",
     disabled: formState.loading || Object.keys(formState === null || formState === void 0 ? void 0 : formState.changes).length === 0
-  }, formState !== null && formState !== void 0 && formState.loading ? t('LOADING', 'Loading') : t('SAVE', 'Save')), /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
+  }, formState !== null && formState !== void 0 && formState.loading ? t('LOADING', 'Loading') : t('SAVE', 'Save')), !!(taxToEdit !== null && taxToEdit !== void 0 && taxToEdit.action) && /*#__PURE__*/_react.default.createElement(_Shared.Modal, {
     open: !!(taxToEdit !== null && taxToEdit !== void 0 && taxToEdit.action),
     width: "80%",
     padding: "30px",
     title: typeof (taxToEdit === null || taxToEdit === void 0 ? void 0 : taxToEdit.payload) === 'boolean' ? t("ADD_".concat(getTaxOrFeeString(taxToEdit === null || taxToEdit === void 0 ? void 0 : taxToEdit.action).toUpperCase()), "Add ".concat(getTaxOrFeeString(taxToEdit === null || taxToEdit === void 0 ? void 0 : taxToEdit.action))) : t("EDIT_".concat(getTaxOrFeeString(taxToEdit === null || taxToEdit === void 0 ? void 0 : taxToEdit.action).toUpperCase()), "Edit ".concat(getTaxOrFeeString(taxToEdit === null || taxToEdit === void 0 ? void 0 : taxToEdit.action))),
-    onClose: function onClose() {
-      return setTaxToEdit({
-        action: null,
-        payload: null
-      });
-    }
+    onClose: handleCloseModal
   }, /*#__PURE__*/_react.default.createElement(_EditTaxManager.EditTaxManager, {
     type: taxToEdit === null || taxToEdit === void 0 ? void 0 : taxToEdit.action,
     data: taxToEdit === null || taxToEdit === void 0 ? void 0 : taxToEdit.payload,
     onChange: handleChangeTax,
     formChanges: formTaxChanges,
-    onClose: function onClose() {
-      return setTaxToEdit({
-        action: null,
-        payload: null
-      });
-    },
+    onClose: handleCloseModal,
     handleSave: handleSaveTax
   })), /*#__PURE__*/_react.default.createElement(_Shared.Alert, {
     title: taxToDelete.action ? t("DELETE_".concat(getTaxOrFeeString(taxToDelete === null || taxToDelete === void 0 ? void 0 : taxToDelete.action).toUpperCase()), "Delete ".concat(getTaxOrFeeString(taxToDelete === null || taxToDelete === void 0 ? void 0 : taxToDelete.action))) : t('ERROR'),

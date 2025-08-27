@@ -151,7 +151,7 @@ var Select = exports.Select = function Select(props) {
         return onEdit(option, i);
       },
       className: "edit"
-    }, t('EDIT', 'Edit')), option.deleteFunctionality && /*#__PURE__*/_react.default.createElement(_BsTrash.default, {
+    }, t('EDIT', 'Edit')), option.deleteFunctionality && onDelete && /*#__PURE__*/_react.default.createElement(_BsTrash.default, {
       className: "delete",
       onClick: function onClick() {
         return onDelete(option.value);

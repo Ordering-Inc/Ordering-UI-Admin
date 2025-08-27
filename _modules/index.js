@@ -765,6 +765,12 @@ Object.defineProperty(exports, "Cms", {
     return _Settings.Cms;
   }
 });
+Object.defineProperty(exports, "ColorPicker", {
+  enumerable: true,
+  get: function get() {
+    return _Shared.ColorPicker;
+  }
+});
 Object.defineProperty(exports, "ColumnAllowSettingPopover", {
   enumerable: true,
   get: function get() {
@@ -1675,6 +1681,12 @@ Object.defineProperty(exports, "PaymentOption", {
   enumerable: true,
   get: function get() {
     return _Stores.PaymentOption;
+  }
+});
+Object.defineProperty(exports, "PaymentOptionCredomatic", {
+  enumerable: true,
+  get: function get() {
+    return _Stores.PaymentOptionCredomatic;
   }
 });
 Object.defineProperty(exports, "PaymentOptionMethods", {

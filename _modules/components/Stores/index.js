@@ -483,6 +483,12 @@ Object.defineProperty(exports, "PaymentOption", {
     return _PaymentOption.PaymentOption;
   }
 });
+Object.defineProperty(exports, "PaymentOptionCredomatic", {
+  enumerable: true,
+  get: function get() {
+    return _PaymentOptionCredomatic.PaymentOptionCredomatic;
+  }
+});
 Object.defineProperty(exports, "PaymentOptionMethods", {
   enumerable: true,
   get: function get() {
@@ -829,3 +835,4 @@ var _BusinessPlaceGroupList = require("./BusinessPlaceGroupList");
 var _BusinessPlaceGroup = require("./BusinessPlaceGroup");
 var _BusinessPlace = require("./BusinessPlace");
 var _BusinessAddStore = require("./BusinessAddStore");
+var _PaymentOptionCredomatic = require("./PaymentOptionCredomatic");
