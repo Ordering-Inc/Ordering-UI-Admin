@@ -241,6 +241,8 @@ export const SingleBusiness = (props) => {
   const { isSkeleton } = props
   const singleBusinessProps = {
     ...props,
+    notGetSites: true,
+    notGetTaxes: true,
     UIComponent: SingleBusinessUI
   }
   return (
