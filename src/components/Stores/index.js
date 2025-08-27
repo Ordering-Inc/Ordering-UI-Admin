@@ -116,6 +116,7 @@ import { BusinessPlaceGroupList } from './BusinessPlaceGroupList'
 import { BusinessPlaceGroup } from './BusinessPlaceGroup'
 import { BusinessPlace } from './BusinessPlace'
 import { BusinessAddStore } from './BusinessAddStore'
+import { PaymentOptionCredomatic } from './PaymentOptionCredomatic'
 
 export {
   BusinessAdd,
@@ -235,5 +236,6 @@ export {
   BusinessPlaceGroupList,
   BusinessPlaceGroup,
   BusinessPlace,
-  BusinessAddStore
+  BusinessAddStore,
+  PaymentOptionCredomatic
 }

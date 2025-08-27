@@ -332,7 +332,8 @@ import {
   BusinessPlace,
   BusinessSalesChannel,
   BusinessQRCodeOptions,
-  BusinessAddStore
+  BusinessAddStore,
+  PaymentOptionCredomatic
 } from './components/Stores'
 import {
   CustomersListing,
@@ -405,7 +406,8 @@ import {
   ImageCrop,
   NotFoundSource,
   RangeCalendar,
-  InputPhoneNumber
+  InputPhoneNumber,
+  ColorPicker
 } from './components/Shared'
 import { LogoutButton } from './components/LogoutButton'
 import { LanguageSelector } from './components/LanguageSelector'
@@ -747,6 +749,7 @@ export {
   ProductTagDetails,
   SingleBusiness,
   PaymentOptionSquare,
+  PaymentOptionCredomatic,
   BusinessWalletsList,
   PaymentOptionMethods,
   BusinessPublishing,
@@ -839,6 +842,7 @@ export {
   NotFoundSource,
   RangeCalendar,
   InputPhoneNumber,
+  ColorPicker,
 
   capitalize,
   verifyDecimals,
