@@ -65,6 +65,7 @@ export const AnalyticsMap = (props) => {
                   isHeatMap
                   isHeat={isHeat}
                   markerIcon={theme?.images?.icons?.mapMarker}
+                  disableAutoFit
                   onError={(error) => console.error('Google Maps error:', error)}
                 />
                 <Button
