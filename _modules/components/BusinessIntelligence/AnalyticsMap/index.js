@@ -66,6 +66,7 @@ var AnalyticsMap = exports.AnalyticsMap = function AnalyticsMap(props) {
     isHeatMap: true,
     isHeat: isHeat,
     markerIcon: theme === null || theme === void 0 || (_theme$images = theme.images) === null || _theme$images === void 0 || (_theme$images = _theme$images.icons) === null || _theme$images === void 0 ? void 0 : _theme$images.mapMarker,
+    disableAutoFit: true,
     onError: function onError(error) {
       return console.error('Google Maps error:', error);
     }
