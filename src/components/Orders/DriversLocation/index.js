@@ -35,8 +35,10 @@ export const DriversLocation = (props) => {
   const [mapZoom, setMapZoom] = useState(defaultZoom)
   const [mapLoaded, setMapLoaded] = useState(true)
   const [mapFitted, setMapFitted] = useState(false)
+  const [hasManualView, setHasManualView] = useState(false)
 
   const mapRef = useRef(null)
+  const isProgrammaticChangeRef = useRef(false)
 
   const [showDrivers, setShowDrivers] = useState([])
 
@@ -45,6 +47,7 @@ export const DriversLocation = (props) => {
 
     if (!selectedOrder) {
       if (showDrivers.length === 1 && !selectedOrder && !assignedOrders?.orders?.length) {
+        isProgrammaticChangeRef.current = true
         setMapCenter(
           (showDrivers[0].location !== null && typeof showDrivers[0].location === 'object' && showDrivers[0].location?.lat && showDrivers[0].location?.lng)
             ? showDrivers[0].location
@@ -56,6 +59,10 @@ export const DriversLocation = (props) => {
               : defaultCenter
         )
         setMapZoom(mapZoom)
+        setMapFitted(true)
+        setTimeout(() => {
+          isProgrammaticChangeRef.current = false
+        }, 0)
         return
       }
 
@@ -112,14 +119,19 @@ export const DriversLocation = (props) => {
         lng: bounds.getSouthWest()?.lng?.()
       }
     }
+
     const mapSize = {
       width: mapRef.current.clientWidth,
       height: mapRef.current.clientHeight
     }
     const { center, zoom } = fitBounds(newBounds, mapSize)
+    isProgrammaticChangeRef.current = true
     setMapZoom(zoom)
     setMapCenter(center)
     setMapFitted(true)
+    setTimeout(() => {
+      isProgrammaticChangeRef.current = false
+    }, 0)
   }
 
   // Fit bounds on mount, and when the markers change
@@ -129,8 +141,10 @@ export const DriversLocation = (props) => {
       setMapZoom(defaultZoom)
       setMapCenter(defaultCenter)
       setMapFitted(false)
+      setHasManualView(false)
       return
     }
+    if (hasManualView) return
     if ((selectedOrder && selectedDriver) || (selectedDriver && assignedOrders?.orders?.length) || (!selectedOrder && !selectedDriver)) {
       mapFit()
       return
@@ -138,7 +152,7 @@ export const DriversLocation = (props) => {
     if (!mapFitted) {
       mapFit()
     }
-  }, [JSON.stringify(showDrivers), mapLoaded, mapFitted, selectedOrder, assignedOrders?.orders])
+  }, [JSON.stringify(showDrivers), mapLoaded, mapFitted, selectedOrder, assignedOrders?.orders, hasManualView])
 
   useEffect(() => {
     if (selectedDriver) {
@@ -153,12 +167,22 @@ export const DriversLocation = (props) => {
   }, [onlineDrivers, offlineDrivers, driversIsOnline, selectedDriver])
 
   const handleMapChange = (data) => {
+    if (isProgrammaticChangeRef.current) return
+    setHasManualView(true)
     setMapZoom(data?.zoom)
+    if (data?.center?.lat && data?.center?.lng) {
+      setMapCenter({ lat: data.center.lat, lng: data.center.lng })
+    }
   }
 
   useEffect(() => {
     setMapFitted(false)
   }, [selectedOrder])
+
+  useEffect(() => {
+    setHasManualView(false)
+    setMapFitted(false)
+  }, [selectedOrder, selectedDriver, driversIsOnline])
 
   return (
     <>
