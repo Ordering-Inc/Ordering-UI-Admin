@@ -57,11 +57,16 @@ var DriversLocation = exports.DriversLocation = function DriversLocation(props) 
     _useState8 = _slicedToArray(_useState7, 2),
     mapFitted = _useState8[0],
     setMapFitted = _useState8[1];
-  var mapRef = (0, _react.useRef)(null);
-  var _useState9 = (0, _react.useState)([]),
+  var _useState9 = (0, _react.useState)(false),
     _useState10 = _slicedToArray(_useState9, 2),
-    showDrivers = _useState10[0],
-    setShowDrivers = _useState10[1];
+    hasManualView = _useState10[0],
+    setHasManualView = _useState10[1];
+  var mapRef = (0, _react.useRef)(null);
+  var isProgrammaticChangeRef = (0, _react.useRef)(false);
+  var _useState11 = (0, _react.useState)([]),
+    _useState12 = _slicedToArray(_useState11, 2),
+    showDrivers = _useState12[0],
+    setShowDrivers = _useState12[1];
   var mapFit = function mapFit() {
     var _assignedOrders$order2;
     var bounds = new window.google.maps.LatLngBounds();
@@ -69,11 +74,16 @@ var DriversLocation = exports.DriversLocation = function DriversLocation(props) 
       var _assignedOrders$order;
       if (showDrivers.length === 1 && !selectedOrder && !(assignedOrders !== null && assignedOrders !== void 0 && (_assignedOrders$order = assignedOrders.orders) !== null && _assignedOrders$order !== void 0 && _assignedOrders$order.length)) {
         var _showDrivers$0$locati, _showDrivers$0$locati2, _showDrivers$, _showDrivers$2;
+        isProgrammaticChangeRef.current = true;
         setMapCenter(showDrivers[0].location !== null && _typeof(showDrivers[0].location) === 'object' && (_showDrivers$0$locati = showDrivers[0].location) !== null && _showDrivers$0$locati !== void 0 && _showDrivers$0$locati.lat && (_showDrivers$0$locati2 = showDrivers[0].location) !== null && _showDrivers$0$locati2 !== void 0 && _showDrivers$0$locati2.lng ? showDrivers[0].location : typeof showDrivers[0].location === 'string' ? {
           lat: parseFloat((_showDrivers$ = showDrivers[0]) === null || _showDrivers$ === void 0 || (_showDrivers$ = _showDrivers$.location) === null || _showDrivers$ === void 0 ? void 0 : _showDrivers$.split(',')[0].replace(/[^-.0-9]/g, '')),
           lng: parseFloat((_showDrivers$2 = showDrivers[0]) === null || _showDrivers$2 === void 0 || (_showDrivers$2 = _showDrivers$2.location) === null || _showDrivers$2 === void 0 ? void 0 : _showDrivers$2.split(',')[1].replace(/[^-.0-9]/g, ''))
         } : defaultCenter);
         setMapZoom(mapZoom);
+        setMapFitted(true);
+        setTimeout(function () {
+          isProgrammaticChangeRef.current = false;
+        }, 0);
         return;
       }
       var _iterator = _createForOfIteratorHelper(showDrivers),
@@ -139,9 +149,13 @@ var DriversLocation = exports.DriversLocation = function DriversLocation(props) 
     var _fitBounds = (0, _googleMapReact.fitBounds)(newBounds, mapSize),
       center = _fitBounds.center,
       zoom = _fitBounds.zoom;
+    isProgrammaticChangeRef.current = true;
     setMapZoom(zoom);
     setMapCenter(center);
     setMapFitted(true);
+    setTimeout(function () {
+      isProgrammaticChangeRef.current = false;
+    }, 0);
   };
 
   // Fit bounds on mount, and when the markers change
@@ -152,8 +166,10 @@ var DriversLocation = exports.DriversLocation = function DriversLocation(props) 
       setMapZoom(defaultZoom);
       setMapCenter(defaultCenter);
       setMapFitted(false);
+      setHasManualView(false);
       return;
     }
+    if (hasManualView) return;
     if (selectedOrder && selectedDriver || selectedDriver && assignedOrders !== null && assignedOrders !== void 0 && (_assignedOrders$order3 = assignedOrders.orders) !== null && _assignedOrders$order3 !== void 0 && _assignedOrders$order3.length || !selectedOrder && !selectedDriver) {
       mapFit();
       return;
@@ -161,7 +177,7 @@ var DriversLocation = exports.DriversLocation = function DriversLocation(props) 
     if (!mapFitted) {
       mapFit();
     }
-  }, [JSON.stringify(showDrivers), mapLoaded, mapFitted, selectedOrder, assignedOrders === null || assignedOrders === void 0 ? void 0 : assignedOrders.orders]);
+  }, [JSON.stringify(showDrivers), mapLoaded, mapFitted, selectedOrder, assignedOrders === null || assignedOrders === void 0 ? void 0 : assignedOrders.orders, hasManualView]);
   (0, _react.useEffect)(function () {
     if (selectedDriver) {
       setShowDrivers([selectedDriver]);
@@ -174,11 +190,24 @@ var DriversLocation = exports.DriversLocation = function DriversLocation(props) 
     }
   }, [onlineDrivers, offlineDrivers, driversIsOnline, selectedDriver]);
   var handleMapChange = function handleMapChange(data) {
+    var _data$center, _data$center2;
+    if (isProgrammaticChangeRef.current) return;
+    setHasManualView(true);
     setMapZoom(data === null || data === void 0 ? void 0 : data.zoom);
+    if (data !== null && data !== void 0 && (_data$center = data.center) !== null && _data$center !== void 0 && _data$center.lat && data !== null && data !== void 0 && (_data$center2 = data.center) !== null && _data$center2 !== void 0 && _data$center2.lng) {
+      setMapCenter({
+        lat: data.center.lat,
+        lng: data.center.lng
+      });
+    }
   };
   (0, _react.useEffect)(function () {
     setMapFitted(false);
   }, [selectedOrder]);
+  (0, _react.useEffect)(function () {
+    setHasManualView(false);
+    setMapFitted(false);
+  }, [selectedOrder, selectedDriver, driversIsOnline]);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, selectedDriver && (assignedOrders === null || assignedOrders === void 0 ? void 0 : assignedOrders.loading) && /*#__PURE__*/_react.default.createElement(_Shared.SpinnerLoader, {
     primary: true
   }), /*#__PURE__*/_react.default.createElement(_styles.WrapperMap, {
