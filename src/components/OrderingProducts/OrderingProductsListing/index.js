@@ -34,7 +34,8 @@ const OrderingProductsUI = (props) => {
     paginationProps,
     setPaginationProps,
     handleSuccessUpdateSites,
-    isUseQuery
+    isUseQuery,
+    enableAutoFillFromWebsite
   } = props
 
   const query = new URLSearchParams(useLocation().search)
@@ -52,7 +53,7 @@ const OrderingProductsUI = (props) => {
 
   const handleChangePageSize = (pageSize) => {
     const expectedPage = Math.ceil(paginationProps.from / pageSize)
-    setPaginationProps({ ...paginationProps, pageSize: pageSize })
+    setPaginationProps({ ...paginationProps, pageSize })
     getSites(expectedPage, pageSize)
   }
 
@@ -80,11 +81,22 @@ const OrderingProductsUI = (props) => {
 
   useEffect(() => {
     if (sitesListState.loading) return
-    const productId = query.get('id')
-    if (productId) {
-      const initProduct = sitesListState.sites.find(site => site.id === Number(productId))
-      if (initProduct) onClickProduct(initProduct, true)
+
+    // Keep the currently edited site selected after list updates (e.g. after saving)
+    if (selectedSite?.id) {
+      const updatedSelected = sitesListState.sites.find(site => site.id === Number(selectedSite.id))
+      if (updatedSelected) {
+        setSelectedSite(updatedSelected)
+        return
+      }
     }
+
+    // Initial selection from URL query (deep link / refresh)
+    const productId = query.get('id')
+    if (!productId) return
+    const initProduct = sitesListState.sites.find(site => site.id === Number(productId))
+    if (!initProduct) return
+    onClickProduct(initProduct, true)
   }, [sitesListState])
 
   useEffect(() => {
@@ -145,37 +157,39 @@ const OrderingProductsUI = (props) => {
                 <th className='description'>{t('DESCRIPTION', 'Description')}</th>
               </tr>
             </thead>
-            {sitesListState.loading ? (
-              [...Array(paginationProps?.pageSize).keys()].map(i => (
-                <PageTbody key={i}>
-                  <tr>
-                    <td className='product'><Skeleton width={100} /></td>
-                    <td className='description'><Skeleton width={150} /></td>
-                  </tr>
-                </PageTbody>
-              ))
-            ) : (
-              sitesListState.sites.map(product => (
-                <PageTbody
-                  key={product.id}
-                  onClick={() => onClickProduct(product)}
-                  active={selectedSite?.id === product.id}
-                >
-                  <tr>
-                    <td className='product'>
-                      {product?.name}
-                    </td>
-                    <td className='description'>
-                      {product?.description && (
-                        <div>
-                          {product?.description}
-                        </div>
-                      )}
-                    </td>
-                  </tr>
-                </PageTbody>
-              ))
-            )}
+            {sitesListState.loading
+              ? (
+                [...Array(paginationProps?.pageSize).keys()].map(i => (
+                  <PageTbody key={i}>
+                    <tr>
+                      <td className='product'><Skeleton width={100} /></td>
+                      <td className='description'><Skeleton width={150} /></td>
+                    </tr>
+                  </PageTbody>
+                ))
+              )
+              : (
+                sitesListState.sites.map(product => (
+                  <PageTbody
+                    key={product.id}
+                    onClick={() => onClickProduct(product)}
+                    active={selectedSite?.id === product.id}
+                  >
+                    <tr>
+                      <td className='product'>
+                        {product?.name}
+                      </td>
+                      <td className='description'>
+                        {product?.description && (
+                          <div>
+                            {product?.description}
+                          </div>
+                        )}
+                      </td>
+                    </tr>
+                  </PageTbody>
+                ))
+              )}
           </ProductListTable>
         </ProductListTableWrapper>
 
@@ -208,6 +222,7 @@ const OrderingProductsUI = (props) => {
             onClose={() => handleCloseDetail()}
           >
             <OrderingProductDetails
+              enableAutoFillFromWebsite={enableAutoFillFromWebsite}
               site={selectedSite}
               sitesList={sitesListState.sites}
               handleSuccessUpdateSites={handleSuccessUpdateSites}

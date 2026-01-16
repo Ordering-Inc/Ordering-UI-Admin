@@ -10,7 +10,8 @@ import { InfoCircle } from 'react-bootstrap-icons'
 import {
   useLanguage,
   DragAndDrop,
-  ExamineClick
+  ExamineClick,
+  useApi
 } from 'ordering-components-admin'
 
 import {
@@ -42,14 +43,18 @@ export const OrderingProductGeneralDetails = (props) => {
     handleChangeInput,
     handlechangeImage,
     handleUpdateSite,
-    handleAddSite
+    handleAddSite,
+    sitesList,
+    enableAutoFillFromWebsite
   } = props
 
   const [, t] = useLanguage()
-  const { handleSubmit, register, errors, watch } = useForm()
+  const [, { configurations }] = useApi()
+  const { handleSubmit, register, errors, watch, setValue } = useForm()
   const businessUrlTemplate = watch('business_url_template', '')
 
   const [alertState, setAlertState] = useState({ open: false, content: [] })
+  const [syncState, setSyncState] = useState({ loading: false })
 
   const headerImageInputRef = useRef(null)
   const logoImageInputRef = useRef(null)
@@ -110,6 +115,79 @@ export const OrderingProductGeneralDetails = (props) => {
     }
   }
 
+  const fieldsToSync = [
+    'business_url_template',
+    'cart_url_template',
+    'category_url_template',
+    'checkout_url_template',
+    'image',
+    'logo',
+    'header',
+    'social_share',
+    'profile_url_template',
+    'product_url_template',
+    'reset_password_url_template',
+    'track_order_url_template'
+  ]
+
+  const getSourceSite = () => {
+    if (!Array.isArray(sitesList) || sitesList.length === 0) return null
+    const currentId = siteState?.site?.id
+
+    const websiteSite = sitesList.find(s => s?.code === 'website')
+    if (websiteSite && websiteSite?.id !== currentId) return websiteSite
+
+    return websiteSite ?? null
+  }
+
+  const handleSyncFromWebsite = async () => {
+    if (isAddMode) return
+    if (formState?.loading || syncState.loading) return
+
+    const sourceSite = getSourceSite()
+    if (!sourceSite) {
+      setAlertState({
+        open: true,
+        content: [t('NO_SOURCE_SITE_FOUND', 'No source site found to sync from.')]
+      })
+      return
+    }
+
+    const changesToApply = fieldsToSync.reduce((acc, fieldName) => {
+      const currentValue = formState?.changes?.[fieldName] ?? siteState?.site?.[fieldName]
+      if (currentValue) return acc
+
+      const sourceValue = sourceSite?.[fieldName]
+      if (sourceValue === null || sourceValue === undefined || sourceValue === '') return acc
+
+      acc[fieldName] = sourceValue
+      return acc
+    }, {})
+
+    if (Object.keys(changesToApply).length === 0) {
+      setAlertState({
+        open: true,
+        content: [t('NOTHING_TO_SYNC', 'Nothing to sync. All fields already have values.')]
+      })
+      return
+    }
+
+    try {
+      setSyncState({ loading: true })
+
+      // Keep UI in sync immediately (inputs + controller formState)
+      for (const [name, value] of Object.entries(changesToApply)) {
+        if (['business_url_template', 'category_url_template', 'product_url_template'].includes(name)) {
+          try { setValue(name, value) } catch (e) { }
+        }
+        // eslint-disable-next-line no-unused-expressions
+        handleChangeInput?.({ target: { name, value } })
+      }
+    } finally {
+      setSyncState({ loading: false })
+    }
+  }
+
   const closeAlert = () => {
     setAlertState({
       open: false,
@@ -162,7 +240,7 @@ export const OrderingProductGeneralDetails = (props) => {
             outline
             borderRadius='8px'
             color='primary'
-            onClick={() => window.open('https://www.ordering.co/ordering-sales', '_blank')}
+            onClick={() => window.open(`https://www.${configurations?.subdomain}.com/ordering-sales`, '_blank')}
           >
             {t('CONTACT_US', 'Contact us')}
           </Button>
@@ -187,7 +265,7 @@ export const OrderingProductGeneralDetails = (props) => {
                 ? (<SkeletonWrapper><Skeleton /></SkeletonWrapper>)
                 : ((!formState.changes?.header || formState.error)
                   ? siteState.site?.header &&
-                    (<img src={siteState.site?.header} alt='header image' loading='lazy' />)
+                  (<img src={siteState.site?.header} alt='header image' loading='lazy' />)
                   : formState?.changes?.header &&
                     <img src={formState?.changes?.header} alt='header image' loading='lazy' />
                 )}
@@ -218,7 +296,7 @@ export const OrderingProductGeneralDetails = (props) => {
                 ? (<SkeletonWrapper><Skeleton /></SkeletonWrapper>)
                 : ((!formState.changes?.logo || formState.error)
                   ? siteState.site?.logo &&
-                    (<img src={siteState.site?.logo} alt='logo image' loading='lazy' />)
+                  (<img src={siteState.site?.logo} alt='logo image' loading='lazy' />)
                   : formState?.changes?.logo &&
                     <img src={formState?.changes?.logo} alt='logo image' loading='lazy' />
                 )}
@@ -303,7 +381,7 @@ export const OrderingProductGeneralDetails = (props) => {
                     ? (<SkeletonWrapper><Skeleton /></SkeletonWrapper>)
                     : ((!formState.changes?.social_share || formState.error)
                       ? siteState.site?.social_share &&
-                        (<img src={siteState.site?.social_share} alt='social share image' loading='lazy' />)
+                      (<img src={siteState.site?.social_share} alt='social share image' loading='lazy' />)
                       : formState?.changes?.social_share &&
                         <img src={formState?.changes?.social_share} alt='social share image' loading='lazy' />
                     )}
@@ -323,7 +401,7 @@ export const OrderingProductGeneralDetails = (props) => {
               type='text'
               name='reset_password_url_template'
               placeholder={t('URL', 'Url')}
-              defaultValue={
+              value={
                 formState?.changes?.reset_password_url_template ?? siteState.site?.reset_password_url_template ?? ''
               }
               onChange={(e) => handleChangeInput(e)}
@@ -335,7 +413,7 @@ export const OrderingProductGeneralDetails = (props) => {
               type='text'
               placeholder={t('URL', 'Url')}
               name='track_order_url_template'
-              defaultValue={
+              value={
                 formState?.changes?.track_order_url_template ?? siteState.site?.track_order_url_template ?? ''
               }
               onChange={(e) => handleChangeInput(e)}
@@ -359,7 +437,7 @@ export const OrderingProductGeneralDetails = (props) => {
               type='text'
               placeholder={t('URL', 'Url')}
               name='checkout_url_template'
-              defaultValue={
+              value={
                 formState?.changes?.checkout_url_template ?? siteState.site?.checkout_url_template ?? ''
               }
               onChange={(e) => handleChangeInput(e)}
@@ -371,7 +449,7 @@ export const OrderingProductGeneralDetails = (props) => {
               type='text'
               placeholder={t('URL', 'Url')}
               name='cart_url_template'
-              defaultValue={
+              value={
                 formState?.changes?.cart_url_template ?? siteState.site?.cart_url_template ?? ''
               }
               onChange={(e) => handleChangeInput(e)}
@@ -497,6 +575,18 @@ export const OrderingProductGeneralDetails = (props) => {
           >
             {t('SAVE', 'Save')}
           </Button>
+          {!!enableAutoFillFromWebsite && !isAddMode && siteState?.site?.code !== 'website' && (
+            <Button
+              outline
+              borderRadius='7.6px'
+              color='primary'
+              type='button'
+              disabled={formState.loading || syncState.loading}
+              onClick={handleSyncFromWebsite}
+            >
+              {syncState.loading ? t('LOADING', 'Loading') : t('FILL_FROM_WEBSITE', 'Fill from Website')}
+            </Button>
+          )}
         </SaveBtnWrapper>
       </FormContainer>
 
