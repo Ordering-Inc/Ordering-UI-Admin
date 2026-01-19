@@ -43,7 +43,8 @@ var OrderingProductsUI = function OrderingProductsUI(props) {
     paginationProps = props.paginationProps,
     setPaginationProps = props.setPaginationProps,
     handleSuccessUpdateSites = props.handleSuccessUpdateSites,
-    isUseQuery = props.isUseQuery;
+    isUseQuery = props.isUseQuery,
+    enableAutoFillFromWebsite = props.enableAutoFillFromWebsite;
   var query = new URLSearchParams((0, _reactRouterDom.useLocation)().search);
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -100,13 +101,26 @@ var OrderingProductsUI = function OrderingProductsUI(props) {
   }, [sitesListState === null || sitesListState === void 0 ? void 0 : sitesListState.error]);
   (0, _react.useEffect)(function () {
     if (sitesListState.loading) return;
-    var productId = query.get('id');
-    if (productId) {
-      var initProduct = sitesListState.sites.find(function (site) {
-        return site.id === Number(productId);
+
+    // Keep the currently edited site selected after list updates (e.g. after saving)
+    if (selectedSite !== null && selectedSite !== void 0 && selectedSite.id) {
+      var updatedSelected = sitesListState.sites.find(function (site) {
+        return site.id === Number(selectedSite.id);
       });
-      if (initProduct) onClickProduct(initProduct, true);
+      if (updatedSelected) {
+        setSelectedSite(updatedSelected);
+        return;
+      }
     }
+
+    // Initial selection from URL query (deep link / refresh)
+    var productId = query.get('id');
+    if (!productId) return;
+    var initProduct = sitesListState.sites.find(function (site) {
+      return site.id === Number(productId);
+    });
+    if (!initProduct) return;
+    onClickProduct(initProduct, true);
   }, [sitesListState]);
   (0, _react.useEffect)(function () {
     if (!isUseQuery || !(paginationProps !== null && paginationProps !== void 0 && paginationProps.currentPage) || !(paginationProps !== null && paginationProps !== void 0 && paginationProps.pageSize) || !(paginationProps !== null && paginationProps !== void 0 && paginationProps.totalPages)) return;
@@ -183,6 +197,7 @@ var OrderingProductsUI = function OrderingProductsUI(props) {
       return handleCloseDetail();
     }
   }, /*#__PURE__*/_react.default.createElement(_OrderingProductDetails.OrderingProductDetails, {
+    enableAutoFillFromWebsite: enableAutoFillFromWebsite,
     site: selectedSite,
     sitesList: sitesListState.sites,
     handleSuccessUpdateSites: handleSuccessUpdateSites,

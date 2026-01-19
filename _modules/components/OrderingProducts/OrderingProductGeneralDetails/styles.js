@@ -38,7 +38,7 @@ var Label = exports.Label = _styledComponents.default.label(_templateObject19 ||
   var _props$theme2;
   return (_props$theme2 = props.theme) === null || _props$theme2 === void 0 ? void 0 : _props$theme2.colors.headingColor;
 });
-var SaveBtnWrapper = exports.SaveBtnWrapper = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  padding: 20px 0;\n  button {\n    padding: 6px 20px;\n  }\n"])));
+var SaveBtnWrapper = exports.SaveBtnWrapper = _styledComponents.default.div(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  padding: 20px 0;\n  button {\n    padding: 6px 20px;\n  }\n  button:last-child {\n    margin-left: 10px;\n  }\n"])));
 var SocialShareImage = exports.SocialShareImage = _styledComponents.default.div(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  height: 72px;\n  width: 72px;\n  overflow: hidden;\n  cursor: -webkit-grab;\n  cursor: grab;\n  background: #E9ECEF;\n  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);\n  border-radius: 7.6px;\n\n  img,\n  div {\n    width: 100%;\n    border-radius: 7.6px;\n    height: 100%;\n    overflow: hidden;\n    position: relative;\n  };\n\n  img{\n    object-fit: cover;\n  }\n"])));
 var LabelHeader = exports.LabelHeader = _styledComponents.default.div(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  position: relative;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  width: fit-content;\n\n  > button {\n    ", "\n\n    svg {\n      width: 25px;\n      height: 25px;\n    }\n  }\n"])), function (props) {
   var _props$theme3;
