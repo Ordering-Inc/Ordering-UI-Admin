@@ -171,6 +171,9 @@ export const SaveBtnWrapper = styled.div`
   button {
     padding: 6px 20px;
   }
+  button:last-child {
+    margin-left: 10px;
+  }
 `
 export const SocialShareImage = styled.div`
   height: 72px;
