@@ -425,7 +425,7 @@ export const OrderingProductGeneralDetails = (props) => {
               name='description'
               rows={5}
               placeholder={t('SHORT_PROMOTION_ABOUT', 'Write a little description')}
-              defaultValue={
+              value={
                 formState?.changes?.description ?? siteState.site?.description ?? ''
               }
               onChange={(e) => handleChangeInput(e)}
@@ -472,7 +472,7 @@ export const OrderingProductGeneralDetails = (props) => {
               type='text'
               placeholder={t('URL', 'Url')}
               name='business_url_template'
-              defaultValue={
+              value={
                 formState?.changes?.business_url_template ?? siteState.site?.business_url_template ?? ''
               }
               onChange={(e) => handleChangeInput(e)}
@@ -505,7 +505,7 @@ export const OrderingProductGeneralDetails = (props) => {
               type='text'
               placeholder={t('URL', 'Url')}
               name='category_url_template'
-              defaultValue={
+              value={
                 formState?.changes?.category_url_template ?? siteState.site?.category_url_template ?? ''
               }
               onChange={(e) => handleChangeInput(e)}
@@ -537,7 +537,7 @@ export const OrderingProductGeneralDetails = (props) => {
               type='text'
               placeholder={t('URL', 'Url')}
               name='product_url_template'
-              defaultValue={
+              value={
                 formState?.changes?.product_url_template ?? siteState.site?.product_url_template ?? ''
               }
               onChange={(e) => handleChangeInput(e)}
