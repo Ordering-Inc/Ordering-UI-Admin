@@ -131,13 +131,21 @@ export const OrderingProductGeneralDetails = (props) => {
   ]
 
   const getSourceSite = () => {
-    if (!Array.isArray(sitesList) || sitesList.length === 0) return null
     const currentId = siteState?.site?.id
-
-    const websiteSite = sitesList.find(s => s?.code === 'website')
-    if (websiteSite && websiteSite?.id !== currentId) return websiteSite
-
-    return websiteSite ?? null
+    let websiteSite = null
+    if (Array.isArray(sitesList) && sitesList.length > 0) {
+      websiteSite = sitesList.find(s => s?.code === 'website')
+    }
+    if (!websiteSite || websiteSite?.id === currentId) {
+      const storedSite = window.localStorage.getItem('website_site_details')
+      if (storedSite) {
+        const parsedSite = JSON.parse(storedSite)
+        if (parsedSite?.id !== currentId) {
+          websiteSite = parsedSite
+        }
+      }
+    }
+    return websiteSite
   }
 
   const handleSyncFromWebsite = async () => {
@@ -229,6 +237,14 @@ export const OrderingProductGeneralDetails = (props) => {
     }
   }, [errors])
 
+  useEffect(() => {
+    if (isAddMode) return
+    const fields = ['name', 'code', 'url', 'business_url_template', 'category_url_template', 'product_url_template']
+    fields.forEach(field => {
+      setValue(field, siteState.site?.[field] || '')
+    })
+  }, [siteState.site])
+
   return (
     <DetailContainer>
       {!isAddMode && (
@@ -316,9 +332,7 @@ export const OrderingProductGeneralDetails = (props) => {
               type='text'
               name='name'
               placeholder={t('NAME', 'Name')}
-              value={
-                formState?.changes?.name ?? siteState.site?.name ?? ''
-              }
+              autoComplete='off'
               onChange={(e) => handleChangeInput(e)}
               ref={register({
                 required: t('VALIDATION_ERROR_REQUIRED', 'The name field is required.').replace('_attribute_', t('NAME', 'Name'))
@@ -331,9 +345,7 @@ export const OrderingProductGeneralDetails = (props) => {
               type='text'
               name='code'
               placeholder={t('CODE', 'Code')}
-              value={
-                formState?.changes?.code ?? siteState.site?.code ?? ''
-              }
+              autoComplete='off'
               onChange={(e) => handleChangeInput(e)}
               ref={register({
                 required: t('VALIDATION_ERROR_REQUIRED', 'The name code is required.').replace('_attribute_', t('CODE', 'Code'))
@@ -346,9 +358,7 @@ export const OrderingProductGeneralDetails = (props) => {
               type='text'
               name='url'
               placeholder={t('URL', 'Url')}
-              value={
-                formState?.changes?.url ?? siteState.site?.url ?? ''
-              }
+              autoComplete='off'
               onChange={(e) => handleChangeInput(e)}
               ref={register({
                 pattern: {
@@ -472,9 +482,7 @@ export const OrderingProductGeneralDetails = (props) => {
               type='text'
               placeholder={t('URL', 'Url')}
               name='business_url_template'
-              value={
-                formState?.changes?.business_url_template ?? siteState.site?.business_url_template ?? ''
-              }
+              autoComplete='off'
               onChange={(e) => handleChangeInput(e)}
               ref={register({
                 pattern: {
@@ -505,9 +513,7 @@ export const OrderingProductGeneralDetails = (props) => {
               type='text'
               placeholder={t('URL', 'Url')}
               name='category_url_template'
-              value={
-                formState?.changes?.category_url_template ?? siteState.site?.category_url_template ?? ''
-              }
+              autoComplete='off'
               onChange={(e) => handleChangeInput(e)}
               ref={register({
                 pattern: {
@@ -537,9 +543,7 @@ export const OrderingProductGeneralDetails = (props) => {
               type='text'
               placeholder={t('URL', 'Url')}
               name='product_url_template'
-              value={
-                formState?.changes?.product_url_template ?? siteState.site?.product_url_template ?? ''
-              }
+              autoComplete='off'
               onChange={(e) => handleChangeInput(e)}
               ref={register({
                 pattern: {
