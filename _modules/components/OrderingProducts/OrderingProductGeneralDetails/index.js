@@ -28,7 +28,7 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 var OrderingProductGeneralDetails = exports.OrderingProductGeneralDetails = function OrderingProductGeneralDetails(props) {
-  var _formState$changes2, _siteState$site3, _siteState$site4, _formState$changes3, _formState$changes4, _formState$changes5, _siteState$site5, _siteState$site6, _formState$changes6, _formState$changes7, _ref2, _formState$changes$na, _formState$changes8, _siteState$site7, _ref3, _formState$changes$co, _formState$changes9, _siteState$site8, _ref4, _formState$changes$ur, _formState$changes10, _siteState$site9, _formState$changes11, _siteState$site10, _siteState$site11, _formState$changes12, _formState$changes13, _ref5, _formState$changes$re, _formState$changes14, _siteState$site12, _ref6, _formState$changes$tr, _formState$changes15, _siteState$site13, _ref7, _formState$changes$de, _formState$changes16, _siteState$site14, _ref8, _formState$changes$ch, _formState$changes17, _siteState$site15, _ref9, _formState$changes$ca, _formState$changes18, _siteState$site16, _ref10, _formState$changes$bu, _formState$changes19, _siteState$site17, _ref11, _formState$changes$ca2, _formState$changes20, _siteState$site18, _ref12, _formState$changes$pr, _formState$changes21, _siteState$site19, _ref13, _formState$changes$pr2, _formState$changes22, _siteState$site20, _siteState$site21;
+  var _formState$changes2, _siteState$site4, _siteState$site5, _formState$changes3, _formState$changes4, _formState$changes5, _siteState$site6, _siteState$site7, _formState$changes6, _formState$changes7, _formState$changes8, _siteState$site8, _siteState$site9, _formState$changes9, _formState$changes10, _ref2, _formState$changes$re, _formState$changes11, _siteState$site10, _ref3, _formState$changes$tr, _formState$changes12, _siteState$site11, _ref4, _formState$changes$de, _formState$changes13, _siteState$site12, _ref5, _formState$changes$ch, _formState$changes14, _siteState$site13, _ref6, _formState$changes$ca, _formState$changes15, _siteState$site14, _ref7, _formState$changes$pr, _formState$changes16, _siteState$site15, _siteState$site16;
   var siteState = props.siteState,
     formState = props.formState,
     isAddMode = props.isAddMode,
@@ -134,14 +134,24 @@ var OrderingProductGeneralDetails = exports.OrderingProductGeneralDetails = func
   };
   var fieldsToSync = ['business_url_template', 'cart_url_template', 'category_url_template', 'checkout_url_template', 'image', 'logo', 'header', 'social_share', 'profile_url_template', 'product_url_template', 'reset_password_url_template', 'track_order_url_template'];
   var getSourceSite = function getSourceSite() {
-    var _siteState$site;
-    if (!Array.isArray(sitesList) || sitesList.length === 0) return null;
+    var _siteState$site, _websiteSite;
     var currentId = siteState === null || siteState === void 0 || (_siteState$site = siteState.site) === null || _siteState$site === void 0 ? void 0 : _siteState$site.id;
-    var websiteSite = sitesList.find(function (s) {
-      return (s === null || s === void 0 ? void 0 : s.code) === 'website';
-    });
-    if (websiteSite && (websiteSite === null || websiteSite === void 0 ? void 0 : websiteSite.id) !== currentId) return websiteSite;
-    return websiteSite !== null && websiteSite !== void 0 ? websiteSite : null;
+    var websiteSite = null;
+    if (Array.isArray(sitesList) && sitesList.length > 0) {
+      websiteSite = sitesList.find(function (s) {
+        return (s === null || s === void 0 ? void 0 : s.code) === 'website';
+      });
+    }
+    if (!websiteSite || ((_websiteSite = websiteSite) === null || _websiteSite === void 0 ? void 0 : _websiteSite.id) === currentId) {
+      var storedSite = window.localStorage.getItem('website_site_details');
+      if (storedSite) {
+        var parsedSite = JSON.parse(storedSite);
+        if ((parsedSite === null || parsedSite === void 0 ? void 0 : parsedSite.id) !== currentId) {
+          websiteSite = parsedSite;
+        }
+      }
+    }
+    return websiteSite;
   };
   var handleSyncFromWebsite = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -266,6 +276,14 @@ var OrderingProductGeneralDetails = exports.OrderingProductGeneralDetails = func
       });
     }
   }, [errors]);
+  (0, _react.useEffect)(function () {
+    if (isAddMode) return;
+    var fields = ['name', 'code', 'url', 'business_url_template', 'category_url_template', 'product_url_template'];
+    fields.forEach(function (field) {
+      var _siteState$site3;
+      setValue(field, ((_siteState$site3 = siteState.site) === null || _siteState$site3 === void 0 ? void 0 : _siteState$site3[field]) || '');
+    });
+  }, [siteState.site]);
   return /*#__PURE__*/_react.default.createElement(_styles2.DetailContainer, null, !isAddMode && /*#__PURE__*/_react.default.createElement(_styles2.ContactUsContainer, null, /*#__PURE__*/_react.default.createElement("p", null, t('NEED_HELP_WITH_SET_UP', 'Do you need help with the setup?')), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     outline: true,
     borderRadius: "8px",
@@ -294,8 +312,8 @@ var OrderingProductGeneralDetails = exports.OrderingProductGeneralDetails = func
     },
     accept: "image/png, image/jpeg, image/jpg",
     disabled: formState.loading
-  }, formState.loading ? /*#__PURE__*/_react.default.createElement(_styles2.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null)) : !((_formState$changes2 = formState.changes) !== null && _formState$changes2 !== void 0 && _formState$changes2.header) || formState.error ? ((_siteState$site3 = siteState.site) === null || _siteState$site3 === void 0 ? void 0 : _siteState$site3.header) && /*#__PURE__*/_react.default.createElement("img", {
-    src: (_siteState$site4 = siteState.site) === null || _siteState$site4 === void 0 ? void 0 : _siteState$site4.header,
+  }, formState.loading ? /*#__PURE__*/_react.default.createElement(_styles2.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null)) : !((_formState$changes2 = formState.changes) !== null && _formState$changes2 !== void 0 && _formState$changes2.header) || formState.error ? ((_siteState$site4 = siteState.site) === null || _siteState$site4 === void 0 ? void 0 : _siteState$site4.header) && /*#__PURE__*/_react.default.createElement("img", {
+    src: (_siteState$site5 = siteState.site) === null || _siteState$site5 === void 0 ? void 0 : _siteState$site5.header,
     alt: "header image",
     loading: "lazy"
   }) : (formState === null || formState === void 0 || (_formState$changes3 = formState.changes) === null || _formState$changes3 === void 0 ? void 0 : _formState$changes3.header) && /*#__PURE__*/_react.default.createElement("img", {
@@ -321,8 +339,8 @@ var OrderingProductGeneralDetails = exports.OrderingProductGeneralDetails = func
     },
     accept: "image/png, image/jpeg, image/jpg",
     disabled: formState.loading
-  }, formState.loading ? /*#__PURE__*/_react.default.createElement(_styles2.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null)) : !((_formState$changes5 = formState.changes) !== null && _formState$changes5 !== void 0 && _formState$changes5.logo) || formState.error ? ((_siteState$site5 = siteState.site) === null || _siteState$site5 === void 0 ? void 0 : _siteState$site5.logo) && /*#__PURE__*/_react.default.createElement("img", {
-    src: (_siteState$site6 = siteState.site) === null || _siteState$site6 === void 0 ? void 0 : _siteState$site6.logo,
+  }, formState.loading ? /*#__PURE__*/_react.default.createElement(_styles2.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null)) : !((_formState$changes5 = formState.changes) !== null && _formState$changes5 !== void 0 && _formState$changes5.logo) || formState.error ? ((_siteState$site6 = siteState.site) === null || _siteState$site6 === void 0 ? void 0 : _siteState$site6.logo) && /*#__PURE__*/_react.default.createElement("img", {
+    src: (_siteState$site7 = siteState.site) === null || _siteState$site7 === void 0 ? void 0 : _siteState$site7.logo,
     alt: "logo image",
     loading: "lazy"
   }) : (formState === null || formState === void 0 || (_formState$changes6 = formState.changes) === null || _formState$changes6 === void 0 ? void 0 : _formState$changes6.logo) && /*#__PURE__*/_react.default.createElement("img", {
@@ -341,7 +359,7 @@ var OrderingProductGeneralDetails = exports.OrderingProductGeneralDetails = func
     type: "text",
     name: "name",
     placeholder: t('NAME', 'Name'),
-    value: (_ref2 = (_formState$changes$na = formState === null || formState === void 0 || (_formState$changes8 = formState.changes) === null || _formState$changes8 === void 0 ? void 0 : _formState$changes8.name) !== null && _formState$changes$na !== void 0 ? _formState$changes$na : (_siteState$site7 = siteState.site) === null || _siteState$site7 === void 0 ? void 0 : _siteState$site7.name) !== null && _ref2 !== void 0 ? _ref2 : '',
+    autoComplete: "off",
     onChange: function onChange(e) {
       return handleChangeInput(e);
     },
@@ -354,7 +372,7 @@ var OrderingProductGeneralDetails = exports.OrderingProductGeneralDetails = func
     type: "text",
     name: "code",
     placeholder: t('CODE', 'Code'),
-    value: (_ref3 = (_formState$changes$co = formState === null || formState === void 0 || (_formState$changes9 = formState.changes) === null || _formState$changes9 === void 0 ? void 0 : _formState$changes9.code) !== null && _formState$changes$co !== void 0 ? _formState$changes$co : (_siteState$site8 = siteState.site) === null || _siteState$site8 === void 0 ? void 0 : _siteState$site8.code) !== null && _ref3 !== void 0 ? _ref3 : '',
+    autoComplete: "off",
     onChange: function onChange(e) {
       return handleChangeInput(e);
     },
@@ -367,7 +385,7 @@ var OrderingProductGeneralDetails = exports.OrderingProductGeneralDetails = func
     type: "text",
     name: "url",
     placeholder: t('URL', 'Url'),
-    value: (_ref4 = (_formState$changes$ur = formState === null || formState === void 0 || (_formState$changes10 = formState.changes) === null || _formState$changes10 === void 0 ? void 0 : _formState$changes10.url) !== null && _formState$changes$ur !== void 0 ? _formState$changes$ur : (_siteState$site9 = siteState.site) === null || _siteState$site9 === void 0 ? void 0 : _siteState$site9.url) !== null && _ref4 !== void 0 ? _ref4 : '',
+    autoComplete: "off",
     onChange: function onChange(e) {
       return handleChangeInput(e);
     },
@@ -398,12 +416,12 @@ var OrderingProductGeneralDetails = exports.OrderingProductGeneralDetails = func
     },
     accept: "image/png, image/jpeg, image/jpg",
     disabled: formState.loading
-  }, formState.loading ? /*#__PURE__*/_react.default.createElement(_styles2.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null)) : !((_formState$changes11 = formState.changes) !== null && _formState$changes11 !== void 0 && _formState$changes11.social_share) || formState.error ? ((_siteState$site10 = siteState.site) === null || _siteState$site10 === void 0 ? void 0 : _siteState$site10.social_share) && /*#__PURE__*/_react.default.createElement("img", {
-    src: (_siteState$site11 = siteState.site) === null || _siteState$site11 === void 0 ? void 0 : _siteState$site11.social_share,
+  }, formState.loading ? /*#__PURE__*/_react.default.createElement(_styles2.SkeletonWrapper, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null)) : !((_formState$changes8 = formState.changes) !== null && _formState$changes8 !== void 0 && _formState$changes8.social_share) || formState.error ? ((_siteState$site8 = siteState.site) === null || _siteState$site8 === void 0 ? void 0 : _siteState$site8.social_share) && /*#__PURE__*/_react.default.createElement("img", {
+    src: (_siteState$site9 = siteState.site) === null || _siteState$site9 === void 0 ? void 0 : _siteState$site9.social_share,
     alt: "social share image",
     loading: "lazy"
-  }) : (formState === null || formState === void 0 || (_formState$changes12 = formState.changes) === null || _formState$changes12 === void 0 ? void 0 : _formState$changes12.social_share) && /*#__PURE__*/_react.default.createElement("img", {
-    src: formState === null || formState === void 0 || (_formState$changes13 = formState.changes) === null || _formState$changes13 === void 0 ? void 0 : _formState$changes13.social_share,
+  }) : (formState === null || formState === void 0 || (_formState$changes9 = formState.changes) === null || _formState$changes9 === void 0 ? void 0 : _formState$changes9.social_share) && /*#__PURE__*/_react.default.createElement("img", {
+    src: formState === null || formState === void 0 || (_formState$changes10 = formState.changes) === null || _formState$changes10 === void 0 ? void 0 : _formState$changes10.social_share,
     alt: "social share image",
     loading: "lazy"
   }), /*#__PURE__*/_react.default.createElement(_styles2.UploadImageIconContainer, {
@@ -416,7 +434,7 @@ var OrderingProductGeneralDetails = exports.OrderingProductGeneralDetails = func
     type: "text",
     name: "reset_password_url_template",
     placeholder: t('URL', 'Url'),
-    value: (_ref5 = (_formState$changes$re = formState === null || formState === void 0 || (_formState$changes14 = formState.changes) === null || _formState$changes14 === void 0 ? void 0 : _formState$changes14.reset_password_url_template) !== null && _formState$changes$re !== void 0 ? _formState$changes$re : (_siteState$site12 = siteState.site) === null || _siteState$site12 === void 0 ? void 0 : _siteState$site12.reset_password_url_template) !== null && _ref5 !== void 0 ? _ref5 : '',
+    value: (_ref2 = (_formState$changes$re = formState === null || formState === void 0 || (_formState$changes11 = formState.changes) === null || _formState$changes11 === void 0 ? void 0 : _formState$changes11.reset_password_url_template) !== null && _formState$changes$re !== void 0 ? _formState$changes$re : (_siteState$site10 = siteState.site) === null || _siteState$site10 === void 0 ? void 0 : _siteState$site10.reset_password_url_template) !== null && _ref2 !== void 0 ? _ref2 : '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
     }
@@ -426,7 +444,7 @@ var OrderingProductGeneralDetails = exports.OrderingProductGeneralDetails = func
     type: "text",
     placeholder: t('URL', 'Url'),
     name: "track_order_url_template",
-    value: (_ref6 = (_formState$changes$tr = formState === null || formState === void 0 || (_formState$changes15 = formState.changes) === null || _formState$changes15 === void 0 ? void 0 : _formState$changes15.track_order_url_template) !== null && _formState$changes$tr !== void 0 ? _formState$changes$tr : (_siteState$site13 = siteState.site) === null || _siteState$site13 === void 0 ? void 0 : _siteState$site13.track_order_url_template) !== null && _ref6 !== void 0 ? _ref6 : '',
+    value: (_ref3 = (_formState$changes$tr = formState === null || formState === void 0 || (_formState$changes12 = formState.changes) === null || _formState$changes12 === void 0 ? void 0 : _formState$changes12.track_order_url_template) !== null && _formState$changes$tr !== void 0 ? _formState$changes$tr : (_siteState$site11 = siteState.site) === null || _siteState$site11 === void 0 ? void 0 : _siteState$site11.track_order_url_template) !== null && _ref3 !== void 0 ? _ref3 : '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
     }
@@ -436,7 +454,7 @@ var OrderingProductGeneralDetails = exports.OrderingProductGeneralDetails = func
     name: "description",
     rows: 5,
     placeholder: t('SHORT_PROMOTION_ABOUT', 'Write a little description'),
-    defaultValue: (_ref7 = (_formState$changes$de = formState === null || formState === void 0 || (_formState$changes16 = formState.changes) === null || _formState$changes16 === void 0 ? void 0 : _formState$changes16.description) !== null && _formState$changes$de !== void 0 ? _formState$changes$de : (_siteState$site14 = siteState.site) === null || _siteState$site14 === void 0 ? void 0 : _siteState$site14.description) !== null && _ref7 !== void 0 ? _ref7 : '',
+    value: (_ref4 = (_formState$changes$de = formState === null || formState === void 0 || (_formState$changes13 = formState.changes) === null || _formState$changes13 === void 0 ? void 0 : _formState$changes13.description) !== null && _formState$changes$de !== void 0 ? _formState$changes$de : (_siteState$site12 = siteState.site) === null || _siteState$site12 === void 0 ? void 0 : _siteState$site12.description) !== null && _ref4 !== void 0 ? _ref4 : '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
     }
@@ -446,7 +464,7 @@ var OrderingProductGeneralDetails = exports.OrderingProductGeneralDetails = func
     type: "text",
     placeholder: t('URL', 'Url'),
     name: "checkout_url_template",
-    value: (_ref8 = (_formState$changes$ch = formState === null || formState === void 0 || (_formState$changes17 = formState.changes) === null || _formState$changes17 === void 0 ? void 0 : _formState$changes17.checkout_url_template) !== null && _formState$changes$ch !== void 0 ? _formState$changes$ch : (_siteState$site15 = siteState.site) === null || _siteState$site15 === void 0 ? void 0 : _siteState$site15.checkout_url_template) !== null && _ref8 !== void 0 ? _ref8 : '',
+    value: (_ref5 = (_formState$changes$ch = formState === null || formState === void 0 || (_formState$changes14 = formState.changes) === null || _formState$changes14 === void 0 ? void 0 : _formState$changes14.checkout_url_template) !== null && _formState$changes$ch !== void 0 ? _formState$changes$ch : (_siteState$site13 = siteState.site) === null || _siteState$site13 === void 0 ? void 0 : _siteState$site13.checkout_url_template) !== null && _ref5 !== void 0 ? _ref5 : '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
     }
@@ -456,7 +474,7 @@ var OrderingProductGeneralDetails = exports.OrderingProductGeneralDetails = func
     type: "text",
     placeholder: t('URL', 'Url'),
     name: "cart_url_template",
-    value: (_ref9 = (_formState$changes$ca = formState === null || formState === void 0 || (_formState$changes18 = formState.changes) === null || _formState$changes18 === void 0 ? void 0 : _formState$changes18.cart_url_template) !== null && _formState$changes$ca !== void 0 ? _formState$changes$ca : (_siteState$site16 = siteState.site) === null || _siteState$site16 === void 0 ? void 0 : _siteState$site16.cart_url_template) !== null && _ref9 !== void 0 ? _ref9 : '',
+    value: (_ref6 = (_formState$changes$ca = formState === null || formState === void 0 || (_formState$changes15 = formState.changes) === null || _formState$changes15 === void 0 ? void 0 : _formState$changes15.cart_url_template) !== null && _formState$changes$ca !== void 0 ? _formState$changes$ca : (_siteState$site14 = siteState.site) === null || _siteState$site14 === void 0 ? void 0 : _siteState$site14.cart_url_template) !== null && _ref6 !== void 0 ? _ref6 : '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
     }
@@ -470,7 +488,7 @@ var OrderingProductGeneralDetails = exports.OrderingProductGeneralDetails = func
     type: "text",
     placeholder: t('URL', 'Url'),
     name: "business_url_template",
-    defaultValue: (_ref10 = (_formState$changes$bu = formState === null || formState === void 0 || (_formState$changes19 = formState.changes) === null || _formState$changes19 === void 0 ? void 0 : _formState$changes19.business_url_template) !== null && _formState$changes$bu !== void 0 ? _formState$changes$bu : (_siteState$site17 = siteState.site) === null || _siteState$site17 === void 0 ? void 0 : _siteState$site17.business_url_template) !== null && _ref10 !== void 0 ? _ref10 : '',
+    autoComplete: "off",
     onChange: function onChange(e) {
       return handleChangeInput(e);
     },
@@ -486,7 +504,7 @@ var OrderingProductGeneralDetails = exports.OrderingProductGeneralDetails = func
     type: "text",
     placeholder: t('URL', 'Url'),
     name: "category_url_template",
-    defaultValue: (_ref11 = (_formState$changes$ca2 = formState === null || formState === void 0 || (_formState$changes20 = formState.changes) === null || _formState$changes20 === void 0 ? void 0 : _formState$changes20.category_url_template) !== null && _formState$changes$ca2 !== void 0 ? _formState$changes$ca2 : (_siteState$site18 = siteState.site) === null || _siteState$site18 === void 0 ? void 0 : _siteState$site18.category_url_template) !== null && _ref11 !== void 0 ? _ref11 : '',
+    autoComplete: "off",
     onChange: function onChange(e) {
       return handleChangeInput(e);
     },
@@ -506,7 +524,7 @@ var OrderingProductGeneralDetails = exports.OrderingProductGeneralDetails = func
     type: "text",
     placeholder: t('URL', 'Url'),
     name: "product_url_template",
-    defaultValue: (_ref12 = (_formState$changes$pr = formState === null || formState === void 0 || (_formState$changes21 = formState.changes) === null || _formState$changes21 === void 0 ? void 0 : _formState$changes21.product_url_template) !== null && _formState$changes$pr !== void 0 ? _formState$changes$pr : (_siteState$site19 = siteState.site) === null || _siteState$site19 === void 0 ? void 0 : _siteState$site19.product_url_template) !== null && _ref12 !== void 0 ? _ref12 : '',
+    autoComplete: "off",
     onChange: function onChange(e) {
       return handleChangeInput(e);
     },
@@ -523,7 +541,7 @@ var OrderingProductGeneralDetails = exports.OrderingProductGeneralDetails = func
     type: "text",
     placeholder: t('URL', 'Url'),
     name: "profile_url_template",
-    value: (_ref13 = (_formState$changes$pr2 = formState === null || formState === void 0 || (_formState$changes22 = formState.changes) === null || _formState$changes22 === void 0 ? void 0 : _formState$changes22.profile_url_template) !== null && _formState$changes$pr2 !== void 0 ? _formState$changes$pr2 : (_siteState$site20 = siteState.site) === null || _siteState$site20 === void 0 ? void 0 : _siteState$site20.profile_url_template) !== null && _ref13 !== void 0 ? _ref13 : '',
+    value: (_ref7 = (_formState$changes$pr = formState === null || formState === void 0 || (_formState$changes16 = formState.changes) === null || _formState$changes16 === void 0 ? void 0 : _formState$changes16.profile_url_template) !== null && _formState$changes$pr !== void 0 ? _formState$changes$pr : (_siteState$site15 = siteState.site) === null || _siteState$site15 === void 0 ? void 0 : _siteState$site15.profile_url_template) !== null && _ref7 !== void 0 ? _ref7 : '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
     }
@@ -532,7 +550,7 @@ var OrderingProductGeneralDetails = exports.OrderingProductGeneralDetails = func
     color: "primary",
     type: "submit",
     disabled: formState.loading || Object.keys(formState.changes).length === 0
-  }, t('SAVE', 'Save')), !!enableAutoFillFromWebsite && !isAddMode && (siteState === null || siteState === void 0 || (_siteState$site21 = siteState.site) === null || _siteState$site21 === void 0 ? void 0 : _siteState$site21.code) !== 'website' && /*#__PURE__*/_react.default.createElement(_styles.Button, {
+  }, t('SAVE', 'Save')), !!enableAutoFillFromWebsite && !isAddMode && (siteState === null || siteState === void 0 || (_siteState$site16 = siteState.site) === null || _siteState$site16 === void 0 ? void 0 : _siteState$site16.code) !== 'website' && /*#__PURE__*/_react.default.createElement(_styles.Button, {
     outline: true,
     borderRadius: "7.6px",
     color: "primary",
