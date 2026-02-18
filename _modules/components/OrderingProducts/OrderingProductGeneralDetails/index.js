@@ -132,7 +132,7 @@ var OrderingProductGeneralDetails = exports.OrderingProductGeneralDetails = func
       handleUpdateSite && handleUpdateSite();
     }
   };
-  var fieldsToSync = ['business_url_template', 'cart_url_template', 'category_url_template', 'checkout_url_template', 'image', 'logo', 'header', 'social_share', 'profile_url_template', 'product_url_template', 'reset_password_url_template', 'track_order_url_template'];
+  var fieldsToSync = ['url', 'business_url_template', 'cart_url_template', 'category_url_template', 'checkout_url_template', 'image', 'logo', 'header', 'social_share', 'profile_url_template', 'product_url_template', 'reset_password_url_template', 'track_order_url_template'];
   var getSourceSite = function getSourceSite() {
     var _siteState$site, _websiteSite;
     var currentId = siteState === null || siteState === void 0 || (_siteState$site = siteState.site) === null || _siteState$site === void 0 ? void 0 : _siteState$site.id;
@@ -155,7 +155,7 @@ var OrderingProductGeneralDetails = exports.OrderingProductGeneralDetails = func
   };
   var handleSyncFromWebsite = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-      var sourceSite, changesToApply, _i, _Object$entries, _Object$entries$_i, name, value;
+      var sourceSite, changesToApply, formFieldsToSetValue, _i, _Object$entries, _Object$entries$_i, name, value;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
@@ -207,9 +207,10 @@ var OrderingProductGeneralDetails = exports.OrderingProductGeneralDetails = func
               });
 
               // Keep UI in sync immediately (inputs + controller formState)
+              formFieldsToSetValue = ['url', 'business_url_template', 'category_url_template', 'product_url_template'];
               for (_i = 0, _Object$entries = Object.entries(changesToApply); _i < _Object$entries.length; _i++) {
                 _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2), name = _Object$entries$_i[0], value = _Object$entries$_i[1];
-                if (['business_url_template', 'category_url_template', 'product_url_template'].includes(name)) {
+                if (formFieldsToSetValue.includes(name)) {
                   try {
                     setValue(name, value);
                   } catch (e) {}
