@@ -116,6 +116,7 @@ export const OrderingProductGeneralDetails = (props) => {
   }
 
   const fieldsToSync = [
+    'url',
     'business_url_template',
     'cart_url_template',
     'category_url_template',
@@ -184,8 +185,10 @@ export const OrderingProductGeneralDetails = (props) => {
       setSyncState({ loading: true })
 
       // Keep UI in sync immediately (inputs + controller formState)
+      const formFieldsToSetValue = ['url', 'business_url_template', 'category_url_template', 'product_url_template']
+
       for (const [name, value] of Object.entries(changesToApply)) {
-        if (['business_url_template', 'category_url_template', 'product_url_template'].includes(name)) {
+        if (formFieldsToSetValue.includes(name)) {
           try { setValue(name, value) } catch (e) { }
         }
         // eslint-disable-next-line no-unused-expressions
