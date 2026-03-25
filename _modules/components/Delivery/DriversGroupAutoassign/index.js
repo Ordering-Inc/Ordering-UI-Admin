@@ -26,7 +26,7 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 var DriversGroupAutoassignUI = function DriversGroupAutoassignUI(props) {
-  var _theme$images$icons, _theme$images$icons2, _theme$images$icons3, _theme$images$icons4, _theme$images$icons5, _changesState$autoass, _ref, _changesState$autoass2, _ref2, _changesState$autoass3, _changesState$autoass4, _changesState$autoass5, _autoRejectOrderGroup, _autoRejectOrderGroup2, _autoRejectOrderGroup3, _ref3, _changesState$autoass6, _ref4, _changesState$autoass7, _ref5, _changesState$autoass8, _changesState$autoass9, _changesState$autorej;
+  var _theme$images$icons, _theme$images$icons2, _theme$images$icons3, _theme$images$icons4, _theme$images$icons5, _changesState$autoass, _ref, _changesState$autoass2, _ref2, _changesState$autoass3, _ref3, _changesState$autoass4, _changesState$autoass5, _changesState$autoass6, _autoRejectOrderGroup, _autoRejectOrderGroup2, _autoRejectOrderGroup3, _ref4, _changesState$autoass7, _ref5, _changesState$autoass8, _ref6, _changesState$autoass9, _changesState$autoass10, _changesState$autorej;
   var autoAssign = props.autoAssign,
     autoRejectOrderGroup = props.autoRejectOrderGroup,
     onSelectAssign = props.onSelectAssign,
@@ -34,6 +34,7 @@ var DriversGroupAutoassignUI = function DriversGroupAutoassignUI(props) {
     changesState = props.changesState,
     onChangeSave = props.onChangeSave,
     handleChangeInput = props.handleChangeInput,
+    handleChangeAzimuthInput = props.handleChangeAzimuthInput,
     onChangeAutoRejectOrderGroup = props.onChangeAutoRejectOrderGroup;
   var _useLanguage = (0, _orderingComponentsAdmin.useLanguage)(),
     _useLanguage2 = _slicedToArray(_useLanguage, 2),
@@ -98,22 +99,29 @@ var DriversGroupAutoassignUI = function DriversGroupAutoassignUI(props) {
     onChange: function onChange(e) {
       return handleChangeInput(e);
     }
+  })), /*#__PURE__*/_react.default.createElement(_styles2.MaxDistanceCustomerContainer, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, t('MAXIMUM_ORIENTATION_DIFFERENCE', 'Maximum orientation difference'), " (", t('ONLY_FOR_INDIVIDUAL_ORDERS', 'only for individual orders'), ")"), /*#__PURE__*/_react.default.createElement("p", null, t('MAXIMUM_ORIENTATION_DIFFERENCE_DESC', 'Maximum angular difference (in degrees) between delivery orientations assigned to the same driver. Lower values group orders heading the same way. Leave empty to disable.'))), /*#__PURE__*/_react.default.createElement(_styles.Input, {
+    name: "autoassign_max_azimuth_diff",
+    value: (_ref2 = (_changesState$autoass3 = changesState === null || changesState === void 0 ? void 0 : changesState.autoassign_max_azimuth_diff) !== null && _changesState$autoass3 !== void 0 ? _changesState$autoass3 : curDriversGroup === null || curDriversGroup === void 0 ? void 0 : curDriversGroup.autoassign_max_azimuth_diff) !== null && _ref2 !== void 0 ? _ref2 : '',
+    placeholder: "e.g. 90",
+    onChange: function onChange(e) {
+      return handleChangeAzimuthInput(e);
+    }
   })), /*#__PURE__*/_react.default.createElement(_styles2.RowGroupContainer, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_styles2.FieldContainer, null, /*#__PURE__*/_react.default.createElement("label", null, t('AUTO_ASSIGN_GROUP_ORDERS_TO_DRIVERS', 'Auto assign the order of group to this amount of drivers')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "autoassign_amount_drivers",
-    value: (_ref2 = (_changesState$autoass3 = changesState === null || changesState === void 0 ? void 0 : changesState.autoassign_amount_drivers) !== null && _changesState$autoass3 !== void 0 ? _changesState$autoass3 : curDriversGroup === null || curDriversGroup === void 0 ? void 0 : curDriversGroup.autoassign_amount_drivers) !== null && _ref2 !== void 0 ? _ref2 : '',
+    value: (_ref3 = (_changesState$autoass4 = changesState === null || changesState === void 0 ? void 0 : changesState.autoassign_amount_drivers) !== null && _changesState$autoass4 !== void 0 ? _changesState$autoass4 : curDriversGroup === null || curDriversGroup === void 0 ? void 0 : curDriversGroup.autoassign_amount_drivers) !== null && _ref3 !== void 0 ? _ref3 : '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
     },
     readOnly: ((changesState === null || changesState === void 0 ? void 0 : changesState.type) === 0 || typeof (changesState === null || changesState === void 0 ? void 0 : changesState.type) === 'undefined' && (curDriversGroup === null || curDriversGroup === void 0 ? void 0 : curDriversGroup.type) === 0) && autoAssign <= 3
   }))), autoAssign !== 2 && ((changesState === null || changesState === void 0 ? void 0 : changesState.autoassign_amount_drivers) < 2 || typeof (changesState === null || changesState === void 0 ? void 0 : changesState.autoassign_amount_drivers) === 'undefined' && (curDriversGroup === null || curDriversGroup === void 0 ? void 0 : curDriversGroup.autoassign_amount_drivers) < 2) && /*#__PURE__*/_react.default.createElement(_styles2.CheckboxContainer, null, /*#__PURE__*/_react.default.createElement(_styles2.CheckboxWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
-    checked: (_changesState$autoass4 = changesState === null || changesState === void 0 ? void 0 : changesState.autoassign_autoaccept_by_driver) !== null && _changesState$autoass4 !== void 0 ? _changesState$autoass4 : curDriversGroup === null || curDriversGroup === void 0 ? void 0 : curDriversGroup.autoassign_autoaccept_by_driver,
+    checked: (_changesState$autoass5 = changesState === null || changesState === void 0 ? void 0 : changesState.autoassign_autoaccept_by_driver) !== null && _changesState$autoass5 !== void 0 ? _changesState$autoass5 : curDriversGroup === null || curDriversGroup === void 0 ? void 0 : curDriversGroup.autoassign_autoaccept_by_driver,
     onChange: function onChange(e) {
       return onChangeSave({
         autoassign_autoaccept_by_driver: e.target.checked
       });
     }
   }), /*#__PURE__*/_react.default.createElement("span", null, t('ORDER_CONFIRMED_ACCEPTED_BY_DRIVER', 'Accepted by Driver'))), (typeof (changesState === null || changesState === void 0 ? void 0 : changesState.autoassign_autoaccept_by_driver) === 'undefined' ? !(curDriversGroup !== null && curDriversGroup !== void 0 && curDriversGroup.autoassign_autoaccept_by_driver) : !(changesState !== null && changesState !== void 0 && changesState.autoassign_autoaccept_by_driver)) && /*#__PURE__*/_react.default.createElement(_styles2.CheckboxWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
-    checked: (_changesState$autoass5 = changesState === null || changesState === void 0 ? void 0 : changesState.autoassign_autoassign_driver) !== null && _changesState$autoass5 !== void 0 ? _changesState$autoass5 : curDriversGroup === null || curDriversGroup === void 0 ? void 0 : curDriversGroup.autoassign_autoassign_driver,
+    checked: (_changesState$autoass6 = changesState === null || changesState === void 0 ? void 0 : changesState.autoassign_autoassign_driver) !== null && _changesState$autoass6 !== void 0 ? _changesState$autoass6 : curDriversGroup === null || curDriversGroup === void 0 ? void 0 : curDriversGroup.autoassign_autoassign_driver,
     onChange: function onChange(e) {
       return onChangeSave({
         autoassign_autoassign_driver: e.target.checked
@@ -140,7 +148,7 @@ var DriversGroupAutoassignUI = function DriversGroupAutoassignUI(props) {
     isBlue: curArea === 1
   }, /*#__PURE__*/_react.default.createElement("label", null, t('INITIAL_RADIUS', 'Initial radius in meters')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "autoassign_initial_radius",
-    value: (_ref3 = (_changesState$autoass6 = changesState === null || changesState === void 0 ? void 0 : changesState.autoassign_initial_radius) !== null && _changesState$autoass6 !== void 0 ? _changesState$autoass6 : curDriversGroup === null || curDriversGroup === void 0 ? void 0 : curDriversGroup.autoassign_initial_radius) !== null && _ref3 !== void 0 ? _ref3 : '',
+    value: (_ref4 = (_changesState$autoass7 = changesState === null || changesState === void 0 ? void 0 : changesState.autoassign_initial_radius) !== null && _changesState$autoass7 !== void 0 ? _changesState$autoass7 : curDriversGroup === null || curDriversGroup === void 0 ? void 0 : curDriversGroup.autoassign_initial_radius) !== null && _ref4 !== void 0 ? _ref4 : '',
     readOnly: autoAssign === 3,
     onFocus: function onFocus() {
       return setCurArea(1);
@@ -155,7 +163,7 @@ var DriversGroupAutoassignUI = function DriversGroupAutoassignUI(props) {
     isGreen: curArea === 2
   }, /*#__PURE__*/_react.default.createElement("label", null, t('INCREMENT_RADIUS', 'Radius increase in meters')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "autoassign_increment_radius",
-    value: (_ref4 = (_changesState$autoass7 = changesState === null || changesState === void 0 ? void 0 : changesState.autoassign_increment_radius) !== null && _changesState$autoass7 !== void 0 ? _changesState$autoass7 : curDriversGroup === null || curDriversGroup === void 0 ? void 0 : curDriversGroup.autoassign_increment_radius) !== null && _ref4 !== void 0 ? _ref4 : '',
+    value: (_ref5 = (_changesState$autoass8 = changesState === null || changesState === void 0 ? void 0 : changesState.autoassign_increment_radius) !== null && _changesState$autoass8 !== void 0 ? _changesState$autoass8 : curDriversGroup === null || curDriversGroup === void 0 ? void 0 : curDriversGroup.autoassign_increment_radius) !== null && _ref5 !== void 0 ? _ref5 : '',
     readOnly: autoAssign === 3,
     onFocus: function onFocus() {
       return setCurArea(2);
@@ -170,7 +178,7 @@ var DriversGroupAutoassignUI = function DriversGroupAutoassignUI(props) {
     isPink: curArea === 3
   }, /*#__PURE__*/_react.default.createElement("label", null, t('MAX_RADIUS', 'Maximum radius in meters')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "autoassign_max_radius",
-    value: (_ref5 = (_changesState$autoass8 = changesState === null || changesState === void 0 ? void 0 : changesState.autoassign_max_radius) !== null && _changesState$autoass8 !== void 0 ? _changesState$autoass8 : curDriversGroup === null || curDriversGroup === void 0 ? void 0 : curDriversGroup.autoassign_max_radius) !== null && _ref5 !== void 0 ? _ref5 : '',
+    value: (_ref6 = (_changesState$autoass9 = changesState === null || changesState === void 0 ? void 0 : changesState.autoassign_max_radius) !== null && _changesState$autoass9 !== void 0 ? _changesState$autoass9 : curDriversGroup === null || curDriversGroup === void 0 ? void 0 : curDriversGroup.autoassign_max_radius) !== null && _ref6 !== void 0 ? _ref6 : '',
     onChange: function onChange(e) {
       return handleChangeInput(e);
     },
@@ -189,7 +197,7 @@ var DriversGroupAutoassignUI = function DriversGroupAutoassignUI(props) {
   }), /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.GeoAlt, null)))), /*#__PURE__*/_react.default.createElement(_styles2.CheckboxWrapper, {
     isPadding: true
   }, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
-    checked: (_changesState$autoass9 = changesState === null || changesState === void 0 ? void 0 : changesState.autoassign_groupable_individual_orders_only) !== null && _changesState$autoass9 !== void 0 ? _changesState$autoass9 : curDriversGroup === null || curDriversGroup === void 0 ? void 0 : curDriversGroup.autoassign_groupable_individual_orders_only,
+    checked: (_changesState$autoass10 = changesState === null || changesState === void 0 ? void 0 : changesState.autoassign_groupable_individual_orders_only) !== null && _changesState$autoass10 !== void 0 ? _changesState$autoass10 : curDriversGroup === null || curDriversGroup === void 0 ? void 0 : curDriversGroup.autoassign_groupable_individual_orders_only,
     onChange: function onChange(e) {
       return onChangeSave({
         autoassign_groupable_individual_orders_only: e.target.checked
