@@ -32,6 +32,7 @@ const DriversGroupAutoassignUI = (props) => {
     changesState,
     onChangeSave,
     handleChangeInput,
+    handleChangeAzimuthInput,
     onChangeAutoRejectOrderGroup
   } = props
 
@@ -111,6 +112,19 @@ const DriversGroupAutoassignUI = (props) => {
           value={changesState?.autoassign_customer_max_distance_from_business ?? curDriversGroup?.autoassign_customer_max_distance_from_business ?? ''}
           placeholder={`00 ${t('METTERS', 'Meters')}`}
           onChange={e => handleChangeInput(e)}
+        />
+      </MaxDistanceCustomerContainer>
+
+      <MaxDistanceCustomerContainer>
+        <div>
+          <p>{t('MAXIMUM_ORIENTATION_DIFFERENCE', 'Maximum orientation difference')} ({t('ONLY_FOR_INDIVIDUAL_ORDERS', 'only for individual orders')})</p>
+          <p>{t('MAXIMUM_ORIENTATION_DIFFERENCE_DESC', 'Maximum angular difference (in degrees) between delivery orientations assigned to the same driver. Lower values group orders heading the same way. Leave empty to disable.')}</p>
+        </div>
+        <Input
+          name='autoassign_max_azimuth_diff'
+          value={changesState?.autoassign_max_azimuth_diff ?? curDriversGroup?.autoassign_max_azimuth_diff ?? ''}
+          placeholder='e.g. 90'
+          onChange={e => handleChangeAzimuthInput(e)}
         />
       </MaxDistanceCustomerContainer>
 
