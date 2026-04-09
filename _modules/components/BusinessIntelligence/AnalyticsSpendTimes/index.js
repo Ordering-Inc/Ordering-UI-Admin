@@ -17,8 +17,7 @@ var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skelet
 var _Shared = require("../../Shared");
 var _GraphLoadingMessage = require("../GraphLoadingMessage");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function _interopRequireWildcard(e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != _typeof(e) && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (var _t in e) "default" !== _t && {}.hasOwnProperty.call(e, _t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, _t)) && (i.get || i.set) ? o(f, _t, i) : f[_t] = e[_t]); return f; })(e, t); }
 function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t.return || t.return(); } finally { if (u) throw o; } } }; }
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -115,10 +114,10 @@ var AnalyticsSpendTimes = exports.AnalyticsSpendTimes = function AnalyticsSpendT
         return axe === (history === null || history === void 0 ? void 0 : history.time);
       });
       if (index !== -1) {
-        var _chartDataList$data$i10, _chartDataList$data$i11, _chartDataList$data$i12;
+        var _chartDataList$data$i0, _chartDataList$data$i1, _chartDataList$data$i10;
         values.push({
-          x: chartDataList === null || chartDataList === void 0 || (_chartDataList$data$i10 = chartDataList.data[index]) === null || _chartDataList$data$i10 === void 0 ? void 0 : _chartDataList$data$i10.time,
-          y: chartDataList !== null && chartDataList !== void 0 && (_chartDataList$data$i11 = chartDataList.data[index]) !== null && _chartDataList$data$i11 !== void 0 && _chartDataList$data$i11.complete_spend ? (chartDataList === null || chartDataList === void 0 || (_chartDataList$data$i12 = chartDataList.data[index]) === null || _chartDataList$data$i12 === void 0 ? void 0 : _chartDataList$data$i12.complete_spend) / 60 : 0
+          x: chartDataList === null || chartDataList === void 0 || (_chartDataList$data$i0 = chartDataList.data[index]) === null || _chartDataList$data$i0 === void 0 ? void 0 : _chartDataList$data$i0.time,
+          y: chartDataList !== null && chartDataList !== void 0 && (_chartDataList$data$i1 = chartDataList.data[index]) !== null && _chartDataList$data$i1 !== void 0 && _chartDataList$data$i1.complete_spend ? (chartDataList === null || chartDataList === void 0 || (_chartDataList$data$i10 = chartDataList.data[index]) === null || _chartDataList$data$i10 === void 0 ? void 0 : _chartDataList$data$i10.complete_spend) / 60 : 0
         });
       } else {
         values.push({

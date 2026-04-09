@@ -6,9 +6,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Tabs = exports.Tab = exports.Step = exports.LeftHeader = exports.Header = exports.FacebookProfileContainer = exports.FacebookPostContainer = exports.CopyInputWrapper = exports.Container = void 0;
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15;
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject0, _templateObject1, _templateObject10, _templateObject11, _templateObject12, _templateObject13;
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function _interopRequireWildcard(e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != _typeof(e) && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (var _t in e) "default" !== _t && {}.hasOwnProperty.call(e, _t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, _t)) && (i.get || i.set) ? o(f, _t, i) : f[_t] = e[_t]); return f; })(e, t); }
 function _taggedTemplateLiteral(e, t) { return t || (t = e.slice(0)), Object.freeze(Object.defineProperties(e, { raw: { value: Object.freeze(t) } })); }
 var Container = exports.Container = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  padding: 20px;\n  overflow: auto;\n  transition: 0.3s;\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: column;\n\n  @media (min-width: 1000px) {\n    width: 0;\n    ", "\n  }\n"])), function (props) {
   var _props$theme;
@@ -31,19 +30,19 @@ var Tab = exports.Tab = _styledComponents.default.div(_templateObject8 || (_temp
   return props.theme.rtl && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    margin-left: 30px;\n    margin-right: 0;\n  "])));
 }, function (_ref) {
   var active = _ref.active;
-  return active && (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    font-weight: 600;\n    color: ", ";\n    border-bottom: 1px solid ", ";\n  "])), function (props) {
+  return active && (0, _styledComponents.css)(_templateObject0 || (_templateObject0 = _taggedTemplateLiteral(["\n    font-weight: 600;\n    color: ", ";\n    border-bottom: 1px solid ", ";\n  "])), function (props) {
     return props.theme.colors.headingColor;
   }, function (props) {
     return props.theme.colors.headingColor;
   });
 });
-var FacebookProfileContainer = exports.FacebookProfileContainer = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  > p {\n    font-weight: 400;\n    font-size: 14px;\n    line-height: 24px;\n    color: ", ";\n    margin-bottom: 23px;\n    margin-top: 0;\n  }\n"])), function (props) {
+var FacebookProfileContainer = exports.FacebookProfileContainer = _styledComponents.default.div(_templateObject1 || (_templateObject1 = _taggedTemplateLiteral(["\n  > p {\n    font-weight: 400;\n    font-size: 14px;\n    line-height: 24px;\n    color: ", ";\n    margin-bottom: 23px;\n    margin-top: 0;\n  }\n"])), function (props) {
   return props.theme.colors.lightGray;
 });
-var Step = exports.Step = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  margin-bottom: 27px;\n  h3 {\n    font-weight: 600;\n    font-size: 16px;\n    line-height: 24px;\n    margin-top: 0;\n    margin-bottom: 12px;\n  }\n  p {\n    font-weight: 400;\n    font-size: 14px;\n    line-height: 24px;\n    margin-top: 0;\n    margin-bottom: 20px;\n    color: ", ";\n  }\n  img {\n    width: 100%;\n  }\n\n  @media (min-width: 576px) {\n    img {\n      display: block;\n      width: 90%;\n      margin-left: auto;\n      margin-right: auto;\n      margin-bottom: 24px;\n    }\n  }\n"])), function (props) {
+var Step = exports.Step = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  margin-bottom: 27px;\n  h3 {\n    font-weight: 600;\n    font-size: 16px;\n    line-height: 24px;\n    margin-top: 0;\n    margin-bottom: 12px;\n  }\n  p {\n    font-weight: 400;\n    font-size: 14px;\n    line-height: 24px;\n    margin-top: 0;\n    margin-bottom: 20px;\n    color: ", ";\n  }\n  img {\n    width: 100%;\n  }\n\n  @media (min-width: 576px) {\n    img {\n      display: block;\n      width: 90%;\n      margin-left: auto;\n      margin-right: auto;\n      margin-bottom: 24px;\n    }\n  }\n"])), function (props) {
   return props.theme.colors.lightGray;
 });
-var CopyInputWrapper = exports.CopyInputWrapper = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  input {\n    flex: 1;\n    height: 44px;\n  }\n  button {\n    margin-left: 15px;\n    ", "\n  }\n"])), function (props) {
-  return props.theme.rtl && (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n      margin-left: 0;\n      margin-right: 15px;\n    "])));
+var CopyInputWrapper = exports.CopyInputWrapper = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  input {\n    flex: 1;\n    height: 44px;\n  }\n  button {\n    margin-left: 15px;\n    ", "\n  }\n"])), function (props) {
+  return props.theme.rtl && (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n      margin-left: 0;\n      margin-right: 15px;\n    "])));
 });
-var FacebookPostContainer = exports.FacebookPostContainer = (0, _styledComponents.default)(FacebookProfileContainer)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral([""])));
+var FacebookPostContainer = exports.FacebookPostContainer = (0, _styledComponents.default)(FacebookProfileContainer)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral([""])));

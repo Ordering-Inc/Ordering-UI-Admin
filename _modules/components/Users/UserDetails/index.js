@@ -24,8 +24,7 @@ var _styles = require("../../../styles");
 var _utils = require("../../../utils");
 var _styles2 = require("./styles");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function _interopRequireWildcard(e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != _typeof(e) && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (var _t in e) "default" !== _t && {}.hasOwnProperty.call(e, _t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, _t)) && (i.get || i.set) ? o(f, _t, i) : f[_t] = e[_t]); return f; })(e, t); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
@@ -38,7 +37,7 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 var UserDetailsUI = exports.UserDetailsUI = function UserDetailsUI(props) {
-  var _userState$user, _userState$user2, _userState$user3, _userState$user4, _userState$user5, _adminUserState$user, _userState$user6, _adminUserState$user2, _userState$user7, _userState$user8, _userState$user9, _userState$user10, _userState$user11, _userState$user12, _userState$user13, _userState$user14, _userState$user15, _userState$user16, _userState$user17, _userState$user18;
+  var _userState$user, _userState$user2, _userState$user3, _userState$user4, _userState$user5, _adminUserState$user, _userState$user6, _adminUserState$user2, _userState$user7, _userState$user8, _userState$user9, _userState$user0, _userState$user1, _userState$user10, _userState$user11, _userState$user12, _userState$user13, _userState$user14, _userState$user15, _userState$user16;
   var isManagers = props.isManagers,
     userState = props.userState,
     setExtraOpen = props.setExtraOpen,
@@ -147,25 +146,25 @@ var UserDetailsUI = exports.UserDetailsUI = function UserDetailsUI(props) {
   }), !(userState !== null && userState !== void 0 && userState.loading) && (userState === null || userState === void 0 ? void 0 : userState.user) && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, currentMenuSelected === 'profile' && /*#__PURE__*/_react.default.createElement(_UserProfileForm.UserProfileForm, {
     user: userState.user,
     handleSuccessUpdate: handleSuccessUserUpdate
-  }), currentMenuSelected === 'saved_places' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (userState === null || userState === void 0 || (_userState$user10 = userState.user) === null || _userState$user10 === void 0 ? void 0 : _userState$user10.addresses) && /*#__PURE__*/_react.default.createElement(_styles2.SavedPlaces, null, /*#__PURE__*/_react.default.createElement(_Delivery.AddressList, {
+  }), currentMenuSelected === 'saved_places' && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (userState === null || userState === void 0 || (_userState$user0 = userState.user) === null || _userState$user0 === void 0 ? void 0 : _userState$user0.addresses) && /*#__PURE__*/_react.default.createElement(_styles2.SavedPlaces, null, /*#__PURE__*/_react.default.createElement(_Delivery.AddressList, {
     isSeletectedUserAddresses: true,
-    userId: (_userState$user11 = userState.user) === null || _userState$user11 === void 0 ? void 0 : _userState$user11.id,
-    addresses: (_userState$user12 = userState.user) === null || _userState$user12 === void 0 ? void 0 : _userState$user12.addresses,
+    userId: (_userState$user1 = userState.user) === null || _userState$user1 === void 0 ? void 0 : _userState$user1.id,
+    addresses: (_userState$user10 = userState.user) === null || _userState$user10 === void 0 ? void 0 : _userState$user10.addresses,
     setExtraOpen: setExtraOpen,
     userState: userState,
     handleSuccessUpdate: handleSuccessUserUpdate
   }))), currentMenuSelected === 'businesses' && /*#__PURE__*/_react.default.createElement(_BusinessManagerBusinesses.BusinessManagerBusinesses, {
-    userId: userState === null || userState === void 0 || (_userState$user13 = userState.user) === null || _userState$user13 === void 0 ? void 0 : _userState$user13.id,
-    typeBusinessPropToFetch: (userState === null || userState === void 0 || (_userState$user14 = userState.user) === null || _userState$user14 === void 0 ? void 0 : _userState$user14.level) === 9 ? 'businesses_agent' : 'businesses'
+    userId: userState === null || userState === void 0 || (_userState$user11 = userState.user) === null || _userState$user11 === void 0 ? void 0 : _userState$user11.id,
+    typeBusinessPropToFetch: (userState === null || userState === void 0 || (_userState$user12 = userState.user) === null || _userState$user12 === void 0 ? void 0 : _userState$user12.level) === 9 ? 'businesses_agent' : 'businesses'
   }), currentMenuSelected === 'orders' && /*#__PURE__*/_react.default.createElement(_styles2.OrdersWrapper, null, /*#__PURE__*/_react.default.createElement(_OrdersManager.OrdersManager, {
     isSelectedOrders: true,
-    customerId: (_userState$user15 = userState.user) === null || _userState$user15 === void 0 ? void 0 : _userState$user15.id,
+    customerId: (_userState$user13 = userState.user) === null || _userState$user13 === void 0 ? void 0 : _userState$user13.id,
     handleCustomOrderDetail: setExtraOpen
   })), currentMenuSelected === 'metafields' && /*#__PURE__*/_react.default.createElement(_UserMetaFields.UserMetaFields, {
-    userId: (_userState$user16 = userState.user) === null || _userState$user16 === void 0 ? void 0 : _userState$user16.id
+    userId: (_userState$user14 = userState.user) === null || _userState$user14 === void 0 ? void 0 : _userState$user14.id
   }), currentMenuSelected === 'personalization' && /*#__PURE__*/_react.default.createElement(_styles2.PersonalizationWrapper, null, /*#__PURE__*/_react.default.createElement(_Personalization.Personalization, null)), currentMenuSelected === 'push_tokens' && /*#__PURE__*/_react.default.createElement(_Shared.PushTokens, {
-    userId: (_userState$user17 = userState.user) === null || _userState$user17 === void 0 ? void 0 : _userState$user17.id,
-    pushTokens: ((_userState$user18 = userState.user) === null || _userState$user18 === void 0 ? void 0 : _userState$user18.push_tokens) || []
+    userId: (_userState$user15 = userState.user) === null || _userState$user15 === void 0 ? void 0 : _userState$user15.id,
+    pushTokens: ((_userState$user16 = userState.user) === null || _userState$user16 === void 0 ? void 0 : _userState$user16.push_tokens) || []
   })), /*#__PURE__*/_react.default.createElement(_Shared.Confirm, {
     width: "700px",
     title: t('WEB_APPNAME', 'Ordering'),

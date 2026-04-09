@@ -23,8 +23,7 @@ var _SelectFranchise = require("./SelectFranchise");
 var _AdvancedLayouts = require("../AdvancedLayouts");
 var _styles2 = require("./styles");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function _interopRequireWildcard(e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != _typeof(e) && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (var _t in e) "default" !== _t && {}.hasOwnProperty.call(e, _t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, _t)) && (i.get || i.set) ? o(f, _t, i) : f[_t] = e[_t]); return f; })(e, t); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
@@ -37,7 +36,7 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
-  var _themeValues$website_3, _themeValues$website_4, _themeValues$website_5, _themeValues$website_6, _themeValues$website_7, _themeValues$website_8, _themeValues$website_9, _themeValues$website_10, _themeValues$website_11, _themeValues$website_12, _themeValues$website_13, _themeValues$images, _themeValues$images2, _themeValues$images3, _themeValues$images4, _themeValues$images5, _themeValues$images6, _themeValues$images7, _themeValues$images8, _themeValues$images9, _themeValues$images11, _themeValues$theme_se, _themeValues$theme_se2, _themeValues$theme_se3, _orderingTheme$themes3, _themeValues$theme_se4, _themeValues$theme_se5;
+  var _themeValues$website_3, _themeValues$website_4, _themeValues$website_5, _themeValues$website_6, _themeValues$website_7, _themeValues$website_8, _themeValues$website_9, _themeValues$website_0, _themeValues$website_1, _themeValues$website_10, _themeValues$website_11, _themeValues$images, _themeValues$images2, _themeValues$images3, _themeValues$images4, _themeValues$images5, _themeValues$images6, _themeValues$images7, _themeValues$images8, _themeValues$images9, _themeValues$images1, _themeValues$theme_se, _themeValues$theme_se2, _themeValues$theme_se3, _orderingTheme$themes3, _themeValues$theme_se4, _themeValues$theme_se5;
   var themeValues = props.themeValues,
     orderingTheme = props.orderingTheme,
     setThemeValues = props.setThemeValues,
@@ -92,21 +91,21 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
     footerContent = _useState8[0],
     setFooterContent = _useState8[1];
   var _useState9 = (0, _react.useState)('basic'),
-    _useState10 = _slicedToArray(_useState9, 2),
-    selectedSetting = _useState10[0],
-    setSelectedSetting = _useState10[1];
-  var _useState11 = (0, _react.useState)(false),
+    _useState0 = _slicedToArray(_useState9, 2),
+    selectedSetting = _useState0[0],
+    setSelectedSetting = _useState0[1];
+  var _useState1 = (0, _react.useState)(false),
+    _useState10 = _slicedToArray(_useState1, 2),
+    isCustomDomain = _useState10[0],
+    setIsCustomDomain = _useState10[1];
+  var _useState11 = (0, _react.useState)(''),
     _useState12 = _slicedToArray(_useState11, 2),
-    isCustomDomain = _useState12[0],
-    setIsCustomDomain = _useState12[1];
-  var _useState13 = (0, _react.useState)(''),
+    selectedSubSetting = _useState12[0],
+    setSelectedSubSetting = _useState12[1];
+  var _useState13 = (0, _react.useState)(null),
     _useState14 = _slicedToArray(_useState13, 2),
-    selectedSubSetting = _useState14[0],
-    setSelectedSubSetting = _useState14[1];
-  var _useState15 = (0, _react.useState)(null),
-    _useState16 = _slicedToArray(_useState15, 2),
-    franchiseSelected = _useState16[0],
-    setFranchiseSelected = _useState16[1];
+    franchiseSelected = _useState14[0],
+    setFranchiseSelected = _useState14[1];
   var previewImages = {
     marketplace: theme.images.preview.marketplace,
     franchise: theme.images.preview.franchise,
@@ -350,14 +349,14 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
     }
   }, (themeValues === null || themeValues === void 0 || (_themeValues$website_9 = themeValues.website_theme) === null || _themeValues$website_9 === void 0 || (_themeValues$website_9 = _themeValues$website_9.components) === null || _themeValues$website_9 === void 0 ? void 0 : _themeValues$website_9.type) === 'single_store' ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, {
     className: "active"
-  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, t('SINGLE_STORE', 'Single Store'))), (themeValues === null || themeValues === void 0 || (_themeValues$website_10 = themeValues.website_theme) === null || _themeValues$website_10 === void 0 || (_themeValues$website_10 = _themeValues$website_10.components) === null || _themeValues$website_10 === void 0 ? void 0 : _themeValues$website_10.type) === 'single_store' && /*#__PURE__*/_react.default.createElement(_SelectBusiness.SelectBusiness, {
-    defaultValue: themeValues === null || themeValues === void 0 || (_themeValues$website_11 = themeValues.website_theme) === null || _themeValues$website_11 === void 0 || (_themeValues$website_11 = _themeValues$website_11.components) === null || _themeValues$website_11 === void 0 ? void 0 : _themeValues$website_11.business_slug,
+  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, t('SINGLE_STORE', 'Single Store'))), (themeValues === null || themeValues === void 0 || (_themeValues$website_0 = themeValues.website_theme) === null || _themeValues$website_0 === void 0 || (_themeValues$website_0 = _themeValues$website_0.components) === null || _themeValues$website_0 === void 0 ? void 0 : _themeValues$website_0.type) === 'single_store' && /*#__PURE__*/_react.default.createElement(_SelectBusiness.SelectBusiness, {
+    defaultValue: themeValues === null || themeValues === void 0 || (_themeValues$website_1 = themeValues.website_theme) === null || _themeValues$website_1 === void 0 || (_themeValues$website_1 = _themeValues$website_1.components) === null || _themeValues$website_1 === void 0 ? void 0 : _themeValues$website_1.business_slug,
     businessesList: businessesList,
     onChange: function onChange(value) {
       return handleChangeValue(value, 'website_theme', 'business_slug');
     }
-  })), (themeValues === null || themeValues === void 0 || (_themeValues$website_12 = themeValues.website_theme) === null || _themeValues$website_12 === void 0 || (_themeValues$website_12 = _themeValues$website_12.components) === null || _themeValues$website_12 === void 0 ? void 0 : _themeValues$website_12.type) && /*#__PURE__*/_react.default.createElement(_styles2.WebsitePriviewImageWrapper, null, /*#__PURE__*/_react.default.createElement("img", {
-    src: (franchiseSelected === null || franchiseSelected === void 0 ? void 0 : franchiseSelected.header) || (previewImages === null || previewImages === void 0 ? void 0 : previewImages[themeValues === null || themeValues === void 0 || (_themeValues$website_13 = themeValues.website_theme) === null || _themeValues$website_13 === void 0 || (_themeValues$website_13 = _themeValues$website_13.components) === null || _themeValues$website_13 === void 0 ? void 0 : _themeValues$website_13.type])
+  })), (themeValues === null || themeValues === void 0 || (_themeValues$website_10 = themeValues.website_theme) === null || _themeValues$website_10 === void 0 || (_themeValues$website_10 = _themeValues$website_10.components) === null || _themeValues$website_10 === void 0 ? void 0 : _themeValues$website_10.type) && /*#__PURE__*/_react.default.createElement(_styles2.WebsitePriviewImageWrapper, null, /*#__PURE__*/_react.default.createElement("img", {
+    src: (franchiseSelected === null || franchiseSelected === void 0 ? void 0 : franchiseSelected.header) || (previewImages === null || previewImages === void 0 ? void 0 : previewImages[themeValues === null || themeValues === void 0 || (_themeValues$website_11 = themeValues.website_theme) === null || _themeValues$website_11 === void 0 || (_themeValues$website_11 = _themeValues$website_11.components) === null || _themeValues$website_11 === void 0 ? void 0 : _themeValues$website_11.type])
   }))))), /*#__PURE__*/_react.default.createElement(_styles2.InputFormWrapper, null, /*#__PURE__*/_react.default.createElement("h4", null, t('IMAGES', 'Images')), /*#__PURE__*/_react.default.createElement(_styles2.InnerBlock, null, orderingTheme !== null && orderingTheme !== void 0 && orderingTheme.loading ? /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, {
     height: 100,
     width: 100,
@@ -477,10 +476,10 @@ var OrderingWebsiteUI = function OrderingWebsiteUI(props) {
     height: 20
   }) : /*#__PURE__*/_react.default.createElement(_styles2.CheckBoxWrapper, {
     onClick: function onClick() {
-      var _themeValues$images10;
-      return handleChangeValue(!(themeValues !== null && themeValues !== void 0 && (_themeValues$images10 = themeValues.images) !== null && _themeValues$images10 !== void 0 && (_themeValues$images10 = _themeValues$images10.components) !== null && _themeValues$images10 !== void 0 && _themeValues$images10.homepage_image_fullscreen), 'images', 'homepage_image_fullscreen');
+      var _themeValues$images0;
+      return handleChangeValue(!(themeValues !== null && themeValues !== void 0 && (_themeValues$images0 = themeValues.images) !== null && _themeValues$images0 !== void 0 && (_themeValues$images0 = _themeValues$images0.components) !== null && _themeValues$images0 !== void 0 && _themeValues$images0.homepage_image_fullscreen), 'images', 'homepage_image_fullscreen');
     }
-  }, themeValues !== null && themeValues !== void 0 && (_themeValues$images11 = themeValues.images) !== null && _themeValues$images11 !== void 0 && (_themeValues$images11 = _themeValues$images11.components) !== null && _themeValues$images11 !== void 0 && _themeValues$images11.homepage_image_fullscreen ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CheckSquareFill, {
+  }, themeValues !== null && themeValues !== void 0 && (_themeValues$images1 = themeValues.images) !== null && _themeValues$images1 !== void 0 && (_themeValues$images1 = _themeValues$images1.components) !== null && _themeValues$images1 !== void 0 && _themeValues$images1.homepage_image_fullscreen ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.CheckSquareFill, {
     className: "active"
   }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Square, null), /*#__PURE__*/_react.default.createElement("span", null, t('HOMEPAGE_IMAGE_FULLSCREEN', 'Homepage  image fullscreen'))))), !(orderingTheme !== null && orderingTheme !== void 0 && orderingTheme.loading) && /*#__PURE__*/_react.default.createElement(_styles2.InputFormWrapper, null, /*#__PURE__*/_react.default.createElement("h4", null, t('THEME_SETTINGS', 'Theme Settings')), /*#__PURE__*/_react.default.createElement(_styles2.InnerBlock, null, /*#__PURE__*/_react.default.createElement(_styles2.ContentWrapper, null, /*#__PURE__*/_react.default.createElement(_styles2.ColorPickerWrapper, null, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("p", null, t('BACKGROUND_COLOR', 'Background color')), /*#__PURE__*/_react.default.createElement(_Shared.ColorPicker, {
     defaultColor: (_themeValues$theme_se = themeValues === null || themeValues === void 0 || (_themeValues$theme_se2 = themeValues.theme_settings) === null || _themeValues$theme_se2 === void 0 || (_themeValues$theme_se2 = _themeValues$theme_se2.components) === null || _themeValues$theme_se2 === void 0 || (_themeValues$theme_se2 = _themeValues$theme_se2.style) === null || _themeValues$theme_se2 === void 0 ? void 0 : _themeValues$theme_se2.background_page) !== null && _themeValues$theme_se !== void 0 ? _themeValues$theme_se : '#FFFFFF',

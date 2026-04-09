@@ -14,8 +14,7 @@ var _reactHookForm = require("react-hook-form");
 var _Shared = require("../../Shared");
 var _styles2 = require("./styles");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function _interopRequireWildcard(e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != _typeof(e) && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (var _t in e) "default" !== _t && {}.hasOwnProperty.call(e, _t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, _t)) && (i.get || i.set) ? o(f, _t, i) : f[_t] = e[_t]); return f; })(e, t); }
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -23,7 +22,7 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 var ProductExtraOptionForm = exports.ProductExtraOptionForm = function ProductExtraOptionForm(props) {
-  var _optionState$option7, _optionState$option9, _optionState$option12, _optionState$option13, _optionState$option14, _optionState$option15, _optionState$option16, _optionState$option17;
+  var _optionState$option7, _optionState$option9, _optionState$option10, _optionState$option11, _optionState$option12, _optionState$option13, _optionState$option14, _optionState$option15;
   var optionState = props.optionState,
     optionChangesState = props.optionChangesState,
     isMaxError = props.isMaxError,
@@ -222,21 +221,21 @@ var ProductExtraOptionForm = exports.ProductExtraOptionForm = function ProductEx
     name: "enabled",
     control: control,
     render: function render(_ref5) {
-      var _optionState$option10;
+      var _optionState$option0;
       var _onChange4 = _ref5.onChange,
         value = _ref5.value;
       return /*#__PURE__*/_react.default.createElement(_styles.Switch, {
-        defaultChecked: (_optionState$option10 = optionState.option) === null || _optionState$option10 === void 0 ? void 0 : _optionState$option10.enabled,
+        defaultChecked: (_optionState$option0 = optionState.option) === null || _optionState$option0 === void 0 ? void 0 : _optionState$option0.enabled,
         onChange: function onChange(enabled) {
-          var _optionState$option11;
+          var _optionState$option1;
           _onChange4(enabled);
-          handleChangeOptionEnable(enabled, (_optionState$option11 = optionState.option) === null || _optionState$option11 === void 0 ? void 0 : _optionState$option11.id);
+          handleChangeOptionEnable(enabled, (_optionState$option1 = optionState.option) === null || _optionState$option1 === void 0 ? void 0 : _optionState$option1.id);
         }
       });
     }
   }))))), /*#__PURE__*/_react.default.createElement(_styles2.OptionSettings, null, /*#__PURE__*/_react.default.createElement(_styles2.OptionSettingItem, null, /*#__PURE__*/_react.default.createElement(_styles2.CheckboxWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
     id: "with_half_option",
-    defaultChecked: (optionState === null || optionState === void 0 || (_optionState$option12 = optionState.option) === null || _optionState$option12 === void 0 ? void 0 : _optionState$option12.with_half_option) || false,
+    defaultChecked: (optionState === null || optionState === void 0 || (_optionState$option10 = optionState.option) === null || _optionState$option10 === void 0 ? void 0 : _optionState$option10.with_half_option) || false,
     onClick: function onClick(e) {
       return handleOptionSetting('with_half_option', e.target.checked);
     }
@@ -244,15 +243,15 @@ var ProductExtraOptionForm = exports.ProductExtraOptionForm = function ProductEx
     htmlFor: "with_half_option"
   }, t('WITH_HALF_PRICE', 'Allow half option & price')))), /*#__PURE__*/_react.default.createElement(_styles2.OptionSettingItem, null, /*#__PURE__*/_react.default.createElement(_styles2.CheckboxWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
     id: "allow_suboption_quantity",
-    defaultChecked: (optionState === null || optionState === void 0 || (_optionState$option13 = optionState.option) === null || _optionState$option13 === void 0 ? void 0 : _optionState$option13.allow_suboption_quantity) || false,
+    defaultChecked: (optionState === null || optionState === void 0 || (_optionState$option11 = optionState.option) === null || _optionState$option11 === void 0 ? void 0 : _optionState$option11.allow_suboption_quantity) || false,
     onClick: function onClick(e) {
       return handleOptionSetting('allow_suboption_quantity', e.target.checked);
     }
   }), /*#__PURE__*/_react.default.createElement("label", {
     htmlFor: "allow_suboption_quantity"
-  }, t('SUBOPTION_QUANTITY', 'Allow suboptions quantity'))), (optionState === null || optionState === void 0 || (_optionState$option14 = optionState.option) === null || _optionState$option14 === void 0 ? void 0 : _optionState$option14.allow_suboption_quantity) && /*#__PURE__*/_react.default.createElement(_styles2.CheckboxWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
+  }, t('SUBOPTION_QUANTITY', 'Allow suboptions quantity'))), (optionState === null || optionState === void 0 || (_optionState$option12 = optionState.option) === null || _optionState$option12 === void 0 ? void 0 : _optionState$option12.allow_suboption_quantity) && /*#__PURE__*/_react.default.createElement(_styles2.CheckboxWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
     id: "limit_suboptions_by_max",
-    defaultChecked: (optionState === null || optionState === void 0 || (_optionState$option15 = optionState.option) === null || _optionState$option15 === void 0 ? void 0 : _optionState$option15.limit_suboptions_by_max) || false,
+    defaultChecked: (optionState === null || optionState === void 0 || (_optionState$option13 = optionState.option) === null || _optionState$option13 === void 0 ? void 0 : _optionState$option13.limit_suboptions_by_max) || false,
     onClick: function onClick(e) {
       return handleOptionSetting('limit_suboptions_by_max', e.target.checked);
     }
@@ -260,13 +259,13 @@ var ProductExtraOptionForm = exports.ProductExtraOptionForm = function ProductEx
     htmlFor: "limit_suboptions_by_max"
   }, t('LIMIT_SUBOPTIONS_BY_MAX', 'Limit suboptions by maximum option')))), (conditionalOptions === null || conditionalOptions === void 0 ? void 0 : conditionalOptions.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.OptionSettingItem, null, /*#__PURE__*/_react.default.createElement(_styles2.CheckboxWrapper, null, /*#__PURE__*/_react.default.createElement(_styles.Checkbox, {
     id: "conditioned",
-    defaultChecked: (optionState === null || optionState === void 0 || (_optionState$option16 = optionState.option) === null || _optionState$option16 === void 0 ? void 0 : _optionState$option16.conditioned) || false,
+    defaultChecked: (optionState === null || optionState === void 0 || (_optionState$option14 = optionState.option) === null || _optionState$option14 === void 0 ? void 0 : _optionState$option14.conditioned) || false,
     onClick: function onClick(e) {
       return handleOptionSetting('conditioned', e.target.checked);
     }
   }), /*#__PURE__*/_react.default.createElement("label", {
     htmlFor: "conditioned"
-  }, t('CONDITIONAL', 'Conditional'))), (optionState === null || optionState === void 0 || (_optionState$option17 = optionState.option) === null || _optionState$option17 === void 0 ? void 0 : _optionState$option17.conditioned) && /*#__PURE__*/_react.default.createElement(_styles2.SelectboxGroup, null, conditionalOptions.length > 0 && /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
+  }, t('CONDITIONAL', 'Conditional'))), (optionState === null || optionState === void 0 || (_optionState$option15 = optionState.option) === null || _optionState$option15 === void 0 ? void 0 : _optionState$option15.conditioned) && /*#__PURE__*/_react.default.createElement(_styles2.SelectboxGroup, null, conditionalOptions.length > 0 && /*#__PURE__*/_react.default.createElement(_FirstSelect.Select, {
     options: conditionalOptions,
     defaultValue: conditionalOptionId,
     placeholder: t('SELECT_OPTION', 'Select option'),

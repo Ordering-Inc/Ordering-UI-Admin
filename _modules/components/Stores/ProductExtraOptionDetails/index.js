@@ -23,8 +23,7 @@ var _ProductOptionExternalId = require("../ProductOptionExternalId");
 var _SnoozeComponent = require("../SnoozeComponent");
 var _styles2 = require("./styles");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function _interopRequireWildcard(e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != _typeof(e) && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (var _t in e) "default" !== _t && {}.hasOwnProperty.call(e, _t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, _t)) && (i.get || i.set) ? o(f, _t, i) : f[_t] = e[_t]); return f; })(e, t); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
@@ -37,7 +36,7 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
-  var _optionState$option2, _settingChangeState$c, _settingChangeState$c2, _optionState$option3, _settingChangeState$c3, _settingChangeState$c4, _optionState$option4, _optionState$option5, _optionState$option7, _changesState$changes3, _optionState$option8, _changesState$changes4, _settingChangeState$c5, _settingChangeState$c6, _optionState$option9, _optionState$option10, _changesState$changes5, _settingChangeState$c7, _settingChangeState$c8, _optionState$option11, _optionState$option12, _changesState$changes6;
+  var _optionState$option2, _settingChangeState$c, _settingChangeState$c2, _optionState$option3, _settingChangeState$c3, _settingChangeState$c4, _optionState$option4, _optionState$option5, _optionState$option7, _changesState$changes3, _optionState$option8, _changesState$changes4, _settingChangeState$c5, _settingChangeState$c6, _optionState$option9, _optionState$option0, _changesState$changes5, _settingChangeState$c7, _settingChangeState$c8, _optionState$option1, _optionState$option10, _changesState$changes6;
   var optionState = props.optionState,
     optionChangesState = props.optionChangesState,
     handleOptionFiles = props.handleOptionFiles,
@@ -113,21 +112,21 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
       data: null,
       open: false
     }),
-    _useState10 = _slicedToArray(_useState9, 2),
-    cropState = _useState10[0],
-    setCropState = _useState10[1];
-  var _useState11 = (0, _react.useState)(),
+    _useState0 = _slicedToArray(_useState9, 2),
+    cropState = _useState0[0],
+    setCropState = _useState0[1];
+  var _useState1 = (0, _react.useState)(),
+    _useState10 = _slicedToArray(_useState1, 2),
+    externalId = _useState10[0],
+    setExternalId = _useState10[1];
+  var _useState11 = (0, _react.useState)(false),
     _useState12 = _slicedToArray(_useState11, 2),
-    externalId = _useState12[0],
-    setExternalId = _useState12[1];
+    isExtraOptionSnooze = _useState12[0],
+    setIsExtraOptionSnooze = _useState12[1];
   var _useState13 = (0, _react.useState)(false),
     _useState14 = _slicedToArray(_useState13, 2),
-    isExtraOptionSnooze = _useState14[0],
-    setIsExtraOptionSnooze = _useState14[1];
-  var _useState15 = (0, _react.useState)(false),
-    _useState16 = _slicedToArray(_useState15, 2),
-    isDraggingExtraOption = _useState16[0],
-    setIsDraggingExtraOption = _useState16[1];
+    isDraggingExtraOption = _useState14[0],
+    setIsDraggingExtraOption = _useState14[1];
   var handleClickSubOptionImage = function handleClickSubOptionImage(id) {
     document.getElementById(id).click();
   };
@@ -371,7 +370,7 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
       }
     }
   })), (typeof (settingChangeState === null || settingChangeState === void 0 || (_settingChangeState$c5 = settingChangeState.changes) === null || _settingChangeState$c5 === void 0 ? void 0 : _settingChangeState$c5.with_half_option) !== 'undefined' ? settingChangeState === null || settingChangeState === void 0 || (_settingChangeState$c6 = settingChangeState.changes) === null || _settingChangeState$c6 === void 0 ? void 0 : _settingChangeState$c6.with_half_option : optionState === null || optionState === void 0 || (_optionState$option9 = optionState.option) === null || _optionState$option9 === void 0 ? void 0 : _optionState$option9.with_half_option) && /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, {
-    primary: (optionState === null || optionState === void 0 || (_optionState$option10 = optionState.option) === null || _optionState$option10 === void 0 || (_optionState$option10 = _optionState$option10.suboptions) === null || _optionState$option10 === void 0 ? void 0 : _optionState$option10.length) === 0
+    primary: (optionState === null || optionState === void 0 || (_optionState$option0 = optionState.option) === null || _optionState$option0 === void 0 || (_optionState$option0 = _optionState$option0.suboptions) === null || _optionState$option0 === void 0 ? void 0 : _optionState$option0.length) === 0
   }, /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "half_price",
     placeholder: t('HALF_PRICE', 'Half price'),
@@ -387,8 +386,8 @@ var ProductExtraOptionDetailsUI = function ProductExtraOptionDetailsUI(props) {
         e.preventDefault();
       }
     }
-  })), (typeof (settingChangeState === null || settingChangeState === void 0 || (_settingChangeState$c7 = settingChangeState.changes) === null || _settingChangeState$c7 === void 0 ? void 0 : _settingChangeState$c7.allow_suboption_quantity) !== 'undefined' ? settingChangeState === null || settingChangeState === void 0 || (_settingChangeState$c8 = settingChangeState.changes) === null || _settingChangeState$c8 === void 0 ? void 0 : _settingChangeState$c8.allow_suboption_quantity : optionState === null || optionState === void 0 || (_optionState$option11 = optionState.option) === null || _optionState$option11 === void 0 ? void 0 : _optionState$option11.allow_suboption_quantity) && /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, {
-    primary: (optionState === null || optionState === void 0 || (_optionState$option12 = optionState.option) === null || _optionState$option12 === void 0 || (_optionState$option12 = _optionState$option12.suboptions) === null || _optionState$option12 === void 0 ? void 0 : _optionState$option12.length) === 0
+  })), (typeof (settingChangeState === null || settingChangeState === void 0 || (_settingChangeState$c7 = settingChangeState.changes) === null || _settingChangeState$c7 === void 0 ? void 0 : _settingChangeState$c7.allow_suboption_quantity) !== 'undefined' ? settingChangeState === null || settingChangeState === void 0 || (_settingChangeState$c8 = settingChangeState.changes) === null || _settingChangeState$c8 === void 0 ? void 0 : _settingChangeState$c8.allow_suboption_quantity : optionState === null || optionState === void 0 || (_optionState$option1 = optionState.option) === null || _optionState$option1 === void 0 ? void 0 : _optionState$option1.allow_suboption_quantity) && /*#__PURE__*/_react.default.createElement(_styles2.InputWrapper, {
+    primary: (optionState === null || optionState === void 0 || (_optionState$option10 = optionState.option) === null || _optionState$option10 === void 0 || (_optionState$option10 = _optionState$option10.suboptions) === null || _optionState$option10 === void 0 ? void 0 : _optionState$option10.length) === 0
   }, /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "max",
     placeholder: t('MAX', 'Max'),

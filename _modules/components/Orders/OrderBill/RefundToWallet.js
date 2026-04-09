@@ -13,8 +13,7 @@ var _Shared = require("../../Shared");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _FirstSelect = require("../../../styles/Select/FirstSelect");
 var _styles2 = require("./styles");
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function _interopRequireWildcard(e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != _typeof(e) && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (var _t in e) "default" !== _t && {}.hasOwnProperty.call(e, _t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, _t)) && (i.get || i.set) ? o(f, _t, i) : f[_t] = e[_t]); return f; })(e, t); }
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -62,17 +61,17 @@ var RefundToWallet = exports.RefundToWallet = function RefundToWallet(props) {
     refundDisabled = _useState8[0],
     setRefundDisabled = _useState8[1];
   var _useState9 = (0, _react.useState)(false),
-    _useState10 = _slicedToArray(_useState9, 2),
-    refundAllDisabled = _useState10[0],
-    setRefundAllDisabled = _useState10[1];
-  var _useState11 = (0, _react.useState)(null),
+    _useState0 = _slicedToArray(_useState9, 2),
+    refundAllDisabled = _useState0[0],
+    setRefundAllDisabled = _useState0[1];
+  var _useState1 = (0, _react.useState)(null),
+    _useState10 = _slicedToArray(_useState1, 2),
+    selectedRefundOption = _useState10[0],
+    setSelectedRefundOption = _useState10[1];
+  var _useState11 = (0, _react.useState)([]),
     _useState12 = _slicedToArray(_useState11, 2),
-    selectedRefundOption = _useState12[0],
-    setSelectedRefundOption = _useState12[1];
-  var _useState13 = (0, _react.useState)([]),
-    _useState14 = _slicedToArray(_useState13, 2),
-    refundOptions = _useState14[0],
-    setRefundOptions = _useState14[1];
+    refundOptions = _useState12[0],
+    setRefundOptions = _useState12[1];
   var onSubmit = function onSubmit(formData) {
     var _order$summary$total, _order$summary;
     if (!selectedRefundOption) {

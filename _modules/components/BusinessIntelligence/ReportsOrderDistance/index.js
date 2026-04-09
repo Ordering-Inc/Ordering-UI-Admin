@@ -20,8 +20,7 @@ var _CountryFilter = require("../CountryFilter");
 var _AnalyticsFilterTimeZone = require("../AnalyticsFilterTimeZone");
 var _styles2 = require("./styles");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function _interopRequireWildcard(e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != _typeof(e) && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (var _t in e) "default" !== _t && {}.hasOwnProperty.call(e, _t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, _t)) && (i.get || i.set) ? o(f, _t, i) : f[_t] = e[_t]); return f; })(e, t); }
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -39,7 +38,7 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 var ReportsOrderDistanceUI = function ReportsOrderDistanceUI(props) {
-  var _filterList$franchise, _reportData$content8, _reportData$content9, _reportData$content10, _reportData$content11, _reportData$content12, _reportData$content13, _reportData$content14;
+  var _filterList$franchise, _reportData$content8, _reportData$content9, _reportData$content0, _reportData$content1, _reportData$content10, _reportData$content11, _reportData$content12;
   var filterList = props.filterList,
     handleChangeFilterList = props.handleChangeFilterList,
     reportData = props.reportData;
@@ -64,9 +63,9 @@ var ReportsOrderDistanceUI = function ReportsOrderDistanceUI(props) {
     openCountryFilter = _useState8[0],
     setOpenCountryFilter = _useState8[1];
   var _useState9 = (0, _react.useState)(null),
-    _useState10 = _slicedToArray(_useState9, 2),
-    chartData = _useState10[0],
-    setChartData = _useState10[1];
+    _useState0 = _slicedToArray(_useState9, 2),
+    chartData = _useState0[0],
+    setChartData = _useState0[1];
   var handleChangeDate = function handleChangeDate(date1, date2) {
     handleChangeFilterList(_objectSpread(_objectSpread({}, filterList), {}, {
       from: date1,
@@ -201,7 +200,7 @@ var ReportsOrderDistanceUI = function ReportsOrderDistanceUI(props) {
     }, /*#__PURE__*/_react.default.createElement(_reactLoadingSkeleton.default, null));
   })) : /*#__PURE__*/_react.default.createElement(_styles2.TableWrapper, null, (reportData === null || reportData === void 0 || (_reportData$content9 = reportData.content) === null || _reportData$content9 === void 0 || (_reportData$content9 = _reportData$content9.body) === null || _reportData$content9 === void 0 || (_reportData$content9 = _reportData$content9.rows) === null || _reportData$content9 === void 0 ? void 0 : _reportData$content9.length) > 0 ? /*#__PURE__*/_react.default.createElement(_styles2.DistanceTable, {
     ref: tableRef
-  }, (reportData === null || reportData === void 0 || (_reportData$content10 = reportData.content) === null || _reportData$content10 === void 0 || (_reportData$content10 = _reportData$content10.header) === null || _reportData$content10 === void 0 ? void 0 : _reportData$content10.rows.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.Thead, null, reportData === null || reportData === void 0 || (_reportData$content11 = reportData.content) === null || _reportData$content11 === void 0 || (_reportData$content11 = _reportData$content11.header) === null || _reportData$content11 === void 0 ? void 0 : _reportData$content11.rows.map(function (tr, i) {
+  }, (reportData === null || reportData === void 0 || (_reportData$content0 = reportData.content) === null || _reportData$content0 === void 0 || (_reportData$content0 = _reportData$content0.header) === null || _reportData$content0 === void 0 ? void 0 : _reportData$content0.rows.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.Thead, null, reportData === null || reportData === void 0 || (_reportData$content1 = reportData.content) === null || _reportData$content1 === void 0 || (_reportData$content1 = _reportData$content1.header) === null || _reportData$content1 === void 0 ? void 0 : _reportData$content1.rows.map(function (tr, i) {
     return /*#__PURE__*/_react.default.createElement("tr", {
       key: i
     }, tr === null || tr === void 0 ? void 0 : tr.map(function (th, j) {
@@ -210,7 +209,7 @@ var ReportsOrderDistanceUI = function ReportsOrderDistanceUI(props) {
         colSpan: th.colspan
       }, i === 0 && j === 0 ? '' : th.value);
     }));
-  })), reportData === null || reportData === void 0 || (_reportData$content12 = reportData.content) === null || _reportData$content12 === void 0 || (_reportData$content12 = _reportData$content12.body) === null || _reportData$content12 === void 0 ? void 0 : _reportData$content12.rows.map(function (tbody, i) {
+  })), reportData === null || reportData === void 0 || (_reportData$content10 = reportData.content) === null || _reportData$content10 === void 0 || (_reportData$content10 = _reportData$content10.body) === null || _reportData$content10 === void 0 ? void 0 : _reportData$content10.rows.map(function (tbody, i) {
     return /*#__PURE__*/_react.default.createElement(_styles2.Tbody, {
       key: i
     }, /*#__PURE__*/_react.default.createElement("tr", null, tbody.map(function (td, j) {
@@ -219,7 +218,7 @@ var ReportsOrderDistanceUI = function ReportsOrderDistanceUI(props) {
         colSpan: td.colspan
       }, td.value, j !== 0 && j % 2 === 0 && '%');
     })));
-  }), (reportData === null || reportData === void 0 || (_reportData$content13 = reportData.content) === null || _reportData$content13 === void 0 || (_reportData$content13 = _reportData$content13.footer) === null || _reportData$content13 === void 0 ? void 0 : _reportData$content13.rows.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.Tfoot, null, reportData === null || reportData === void 0 || (_reportData$content14 = reportData.content) === null || _reportData$content14 === void 0 || (_reportData$content14 = _reportData$content14.footer) === null || _reportData$content14 === void 0 ? void 0 : _reportData$content14.rows.map(function (tr, i) {
+  }), (reportData === null || reportData === void 0 || (_reportData$content11 = reportData.content) === null || _reportData$content11 === void 0 || (_reportData$content11 = _reportData$content11.footer) === null || _reportData$content11 === void 0 ? void 0 : _reportData$content11.rows.length) > 0 && /*#__PURE__*/_react.default.createElement(_styles2.Tfoot, null, reportData === null || reportData === void 0 || (_reportData$content12 = reportData.content) === null || _reportData$content12 === void 0 || (_reportData$content12 = _reportData$content12.footer) === null || _reportData$content12 === void 0 ? void 0 : _reportData$content12.rows.map(function (tr, i) {
     return /*#__PURE__*/_react.default.createElement("tr", {
       key: i
     }, tr === null || tr === void 0 ? void 0 : tr.map(function (td, j) {

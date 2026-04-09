@@ -19,8 +19,7 @@ var _CountryFilter = require("../CountryFilter");
 var _AnalyticsFilterTimeZone = require("../AnalyticsFilterTimeZone");
 var _styles2 = require("./styles");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function _interopRequireWildcard(e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != _typeof(e) && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (var _t in e) "default" !== _t && {}.hasOwnProperty.call(e, _t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, _t)) && (i.get || i.set) ? o(f, _t, i) : f[_t] = e[_t]); return f; })(e, t); }
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -62,20 +61,20 @@ var ReportsDriverDistanceUI = function ReportsDriverDistanceUI(props) {
     isDriverGroupFilter = _useState8[0],
     setIsDriverGroupFilter = _useState8[1];
   var _useState9 = (0, _react.useState)(true),
-    _useState10 = _slicedToArray(_useState9, 2),
-    openCountryFilter = _useState10[0],
-    setOpenCountryFilter = _useState10[1];
-  var _useState11 = (0, _react.useState)({
+    _useState0 = _slicedToArray(_useState9, 2),
+    openCountryFilter = _useState0[0],
+    setOpenCountryFilter = _useState0[1];
+  var _useState1 = (0, _react.useState)({
       open: false,
       content: []
     }),
+    _useState10 = _slicedToArray(_useState1, 2),
+    alertState = _useState10[0],
+    setAlertState = _useState10[1];
+  var _useState11 = (0, _react.useState)(null),
     _useState12 = _slicedToArray(_useState11, 2),
-    alertState = _useState12[0],
-    setAlertState = _useState12[1];
-  var _useState13 = (0, _react.useState)(null),
-    _useState14 = _slicedToArray(_useState13, 2),
-    availableDriverIds = _useState14[0],
-    setAvailableDriverIds = _useState14[1];
+    availableDriverIds = _useState12[0],
+    setAvailableDriverIds = _useState12[1];
   var _useUtils = (0, _orderingComponentsAdmin.useUtils)(),
     _useUtils2 = _slicedToArray(_useUtils, 1),
     parseNumber = _useUtils2[0].parseNumber;

@@ -70,6 +70,9 @@ var WebhookListSelector = exports.WebhookListSelector = function WebhookListSele
     value: 'orders_unassigned_driver',
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('ORDERS_UNASSIGNED_DRIVER', 'Order unassigned driver'))
   }, {
+    value: 'orders_driver_waiting_for_customer',
+    content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('ORDERS_DRIVER_WAITING_FOR_CUSTOMER', 'Order driver waiting for customer'))
+  }, {
     value: 'preorder_updated',
     content: /*#__PURE__*/_react.default.createElement(_styles.Option, null, t('PREORDER_UPDATED', 'Preorder updated'))
   }, {

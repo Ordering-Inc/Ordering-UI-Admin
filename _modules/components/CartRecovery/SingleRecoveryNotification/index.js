@@ -12,8 +12,7 @@ var _Select = require("../../../styles/Select");
 var _Shared = require("../../Shared");
 var _reactHookForm = require("react-hook-form");
 var _styles2 = require("./styles");
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function _interopRequireWildcard(e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != _typeof(e) && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (var _t in e) "default" !== _t && {}.hasOwnProperty.call(e, _t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, _t)) && (i.get || i.set) ? o(f, _t, i) : f[_t] = e[_t]); return f; })(e, t); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
@@ -26,7 +25,7 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 var SingleRecoveryNotificationUI = function SingleRecoveryNotificationUI(props) {
-  var _formState$changes2, _formState$changes3, _notification$title, _formState$changes4, _formState$changes5, _notification$channel, _formState$changes6, _formState$changes7, _formState$changes8, _notification$body, _formState$changes9, _formState$changes10, _notification$body2;
+  var _formState$changes2, _formState$changes3, _notification$title, _formState$changes4, _formState$changes5, _notification$channel, _formState$changes6, _formState$changes7, _formState$changes8, _notification$body, _formState$changes9, _formState$changes0, _notification$body2;
   var notification = props.notification,
     formState = props.formState,
     handleChangeInput = props.handleChangeInput,
@@ -155,7 +154,7 @@ var SingleRecoveryNotificationUI = function SingleRecoveryNotificationUI(props) 
   }) : /*#__PURE__*/_react.default.createElement(_styles.TextArea, {
     name: "body",
     placeholder: t('WRITE_MESSAGE', 'Write a message'),
-    defaultValue: formState !== null && formState !== void 0 && (_formState$changes9 = formState.changes) !== null && _formState$changes9 !== void 0 && _formState$changes9.body ? formState === null || formState === void 0 || (_formState$changes10 = formState.changes) === null || _formState$changes10 === void 0 ? void 0 : _formState$changes10.body : (_notification$body2 = notification === null || notification === void 0 ? void 0 : notification.body) !== null && _notification$body2 !== void 0 ? _notification$body2 : '',
+    defaultValue: formState !== null && formState !== void 0 && (_formState$changes9 = formState.changes) !== null && _formState$changes9 !== void 0 && _formState$changes9.body ? formState === null || formState === void 0 || (_formState$changes0 = formState.changes) === null || _formState$changes0 === void 0 ? void 0 : _formState$changes0.body : (_notification$body2 = notification === null || notification === void 0 ? void 0 : notification.body) !== null && _notification$body2 !== void 0 ? _notification$body2 : '',
     onChange: handleChangeInput,
     ref: register({
       required: t('VALIDATION_ERROR_REQUIRED').replace('_attribute_', t('MESSAGE', 'Message'))

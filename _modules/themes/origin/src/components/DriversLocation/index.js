@@ -14,8 +14,7 @@ var _FaUserAlt = _interopRequireDefault(require("@meronex/icons/fa/FaUserAlt"));
 var _AutoScroll = require("../../components/AutoScroll");
 var _styles = require("./styles");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function _interopRequireWildcard(e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != _typeof(e) && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (var _t in e) "default" !== _t && {}.hasOwnProperty.call(e, _t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, _t)) && (i.get || i.set) ? o(f, _t, i) : f[_t] = e[_t]); return f; })(e, t); }
 function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t.return || t.return(); } finally { if (u) throw o; } } }; }
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -24,7 +23,7 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 var DriversLocation = exports.DriversLocation = function DriversLocation(props) {
-  var _configState$configs, _interActionMapOrder$6, _interActionMapOrder$7, _interActionMapOrder$8, _interActionMapOrder$9, _interActionMapOrder$10, _interActionMapOrder$11, _interActionMapOrder$12, _interActionMapOrder$13, _interActionMapOrder$14;
+  var _configState$configs, _interActionMapOrder$6, _interActionMapOrder$7, _interActionMapOrder$8, _interActionMapOrder$9, _interActionMapOrder$0, _interActionMapOrder$1, _interActionMapOrder$10, _interActionMapOrder$11, _interActionMapOrder$12;
   var driversList = props.driversList,
     driverAvailable = props.driverAvailable,
     interActionMapOrder = props.interActionMapOrder;
@@ -55,13 +54,13 @@ var DriversLocation = exports.DriversLocation = function DriversLocation(props) 
     offlineDrivers = _useState8[0],
     setOfflineDrivers = _useState8[1];
   var _useState9 = (0, _react.useState)(true),
-    _useState10 = _slicedToArray(_useState9, 2),
-    mapLoaded = _useState10[0],
-    setMapLoaded = _useState10[1];
-  var _useState11 = (0, _react.useState)(null),
-    _useState12 = _slicedToArray(_useState11, 2),
-    interActionOrderDriverLocation = _useState12[0],
-    setInterActionOrderDriverLocation = _useState12[1];
+    _useState0 = _slicedToArray(_useState9, 2),
+    mapLoaded = _useState0[0],
+    setMapLoaded = _useState0[1];
+  var _useState1 = (0, _react.useState)(null),
+    _useState10 = _slicedToArray(_useState1, 2),
+    interActionOrderDriverLocation = _useState10[0],
+    setInterActionOrderDriverLocation = _useState10[1];
   var defaultCenter = {
     lat: 19.4326,
     lng: -99.1332
@@ -279,15 +278,15 @@ var DriversLocation = exports.DriversLocation = function DriversLocation(props) 
     image: interActionMapOrder === null || interActionMapOrder === void 0 || (_interActionMapOrder$8 = interActionMapOrder.business) === null || _interActionMapOrder$8 === void 0 ? void 0 : _interActionMapOrder$8.logo
   }), !(driverAvailable === 'online' || driverAvailable === 'offline') && interActionMapOrder !== null && /*#__PURE__*/_react.default.createElement(_InterActOrderMarker.InterActOrderMarker, {
     customer: interActionMapOrder === null || interActionMapOrder === void 0 ? void 0 : interActionMapOrder.customer,
-    lat: interActionMapOrder !== null && interActionMapOrder !== void 0 && (_interActionMapOrder$9 = interActionMapOrder.customer) !== null && _interActionMapOrder$9 !== void 0 && (_interActionMapOrder$9 = _interActionMapOrder$9.location) !== null && _interActionMapOrder$9 !== void 0 && _interActionMapOrder$9.lat ? interActionMapOrder === null || interActionMapOrder === void 0 || (_interActionMapOrder$10 = interActionMapOrder.customer) === null || _interActionMapOrder$10 === void 0 || (_interActionMapOrder$10 = _interActionMapOrder$10.location) === null || _interActionMapOrder$10 === void 0 ? void 0 : _interActionMapOrder$10.lat : defaultCenter.lat,
-    lng: interActionMapOrder !== null && interActionMapOrder !== void 0 && (_interActionMapOrder$11 = interActionMapOrder.customer) !== null && _interActionMapOrder$11 !== void 0 && (_interActionMapOrder$11 = _interActionMapOrder$11.location) !== null && _interActionMapOrder$11 !== void 0 && _interActionMapOrder$11.lng ? interActionMapOrder === null || interActionMapOrder === void 0 || (_interActionMapOrder$12 = interActionMapOrder.customer) === null || _interActionMapOrder$12 === void 0 || (_interActionMapOrder$12 = _interActionMapOrder$12.location) === null || _interActionMapOrder$12 === void 0 ? void 0 : _interActionMapOrder$12.lng : defaultCenter.lng,
-    image: interActionMapOrder === null || interActionMapOrder === void 0 || (_interActionMapOrder$13 = interActionMapOrder.customer) === null || _interActionMapOrder$13 === void 0 ? void 0 : _interActionMapOrder$13.photo
+    lat: interActionMapOrder !== null && interActionMapOrder !== void 0 && (_interActionMapOrder$9 = interActionMapOrder.customer) !== null && _interActionMapOrder$9 !== void 0 && (_interActionMapOrder$9 = _interActionMapOrder$9.location) !== null && _interActionMapOrder$9 !== void 0 && _interActionMapOrder$9.lat ? interActionMapOrder === null || interActionMapOrder === void 0 || (_interActionMapOrder$0 = interActionMapOrder.customer) === null || _interActionMapOrder$0 === void 0 || (_interActionMapOrder$0 = _interActionMapOrder$0.location) === null || _interActionMapOrder$0 === void 0 ? void 0 : _interActionMapOrder$0.lat : defaultCenter.lat,
+    lng: interActionMapOrder !== null && interActionMapOrder !== void 0 && (_interActionMapOrder$1 = interActionMapOrder.customer) !== null && _interActionMapOrder$1 !== void 0 && (_interActionMapOrder$1 = _interActionMapOrder$1.location) !== null && _interActionMapOrder$1 !== void 0 && _interActionMapOrder$1.lng ? interActionMapOrder === null || interActionMapOrder === void 0 || (_interActionMapOrder$10 = interActionMapOrder.customer) === null || _interActionMapOrder$10 === void 0 || (_interActionMapOrder$10 = _interActionMapOrder$10.location) === null || _interActionMapOrder$10 === void 0 ? void 0 : _interActionMapOrder$10.lng : defaultCenter.lng,
+    image: interActionMapOrder === null || interActionMapOrder === void 0 || (_interActionMapOrder$11 = interActionMapOrder.customer) === null || _interActionMapOrder$11 === void 0 ? void 0 : _interActionMapOrder$11.photo
   }), !(driverAvailable === 'online' || driverAvailable === 'offline') && interActionMapOrder !== null && (interActionMapOrder === null || interActionMapOrder === void 0 ? void 0 : interActionMapOrder.driver) !== null && /*#__PURE__*/_react.default.createElement(_InterActOrderMarker.InterActOrderMarker, {
     driver: interActionMapOrder === null || interActionMapOrder === void 0 ? void 0 : interActionMapOrder.driver,
     timeStatus: interActionMapOrder === null || interActionMapOrder === void 0 ? void 0 : interActionMapOrder.time_status,
     lat: interActionOrderDriverLocation ? interActionOrderDriverLocation === null || interActionOrderDriverLocation === void 0 ? void 0 : interActionOrderDriverLocation.lat : defaultCenter.lat,
     lng: interActionOrderDriverLocation ? interActionOrderDriverLocation === null || interActionOrderDriverLocation === void 0 ? void 0 : interActionOrderDriverLocation.lng : defaultCenter.lng,
-    image: interActionMapOrder === null || interActionMapOrder === void 0 || (_interActionMapOrder$14 = interActionMapOrder.driver) === null || _interActionMapOrder$14 === void 0 ? void 0 : _interActionMapOrder$14.photo
+    image: interActionMapOrder === null || interActionMapOrder === void 0 || (_interActionMapOrder$12 = interActionMapOrder.driver) === null || _interActionMapOrder$12 === void 0 ? void 0 : _interActionMapOrder$12.photo
   })), !(driverAvailable === 'online' || driverAvailable === 'offline') && interActionMapOrder !== null && (interActionMapOrder === null || interActionMapOrder === void 0 ? void 0 : interActionMapOrder.driver) === null && /*#__PURE__*/_react.default.createElement(_styles.WrapperOnlineDrivers, null, /*#__PURE__*/_react.default.createElement("p", null, t('ACTIVE_DRIVERS', 'Drivers online')), /*#__PURE__*/_react.default.createElement(_styles.OnlineDrivers, null, /*#__PURE__*/_react.default.createElement(_AutoScroll.AutoScroll, {
     innerScroll: true
   }, onlineDrivers.length > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, onlineDrivers.map(function (driver) {

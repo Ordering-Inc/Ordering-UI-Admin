@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.WrapperSpinnerLoader = exports.WrapMetaFields = exports.SkeletonItem = exports.RoundBorder = exports.NoMetaField = exports.MetaTitle = exports.MetaContainer = exports.MetaAddForm = exports.MetaAddContainer = exports.Header = void 0;
 var _styledComponents = _interopRequireDefault(require("styled-components"));
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject0;
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function _taggedTemplateLiteral(e, t) { return t || (t = e.slice(0)), Object.freeze(Object.defineProperties(e, { raw: { value: Object.freeze(t) } })); }
 var WrapMetaFields = exports.WrapMetaFields = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  position: relative;\n  box-sizing: border-box;\n  overflow: auto;\n\n  @media (min-width: 576px) {\n    padding: 20px;\n  }\n"])));
@@ -37,4 +37,4 @@ var MetaAddForm = exports.MetaAddForm = _styledComponents.default.form(_template
   return props.theme.colors.primary;
 });
 var SkeletonItem = exports.SkeletonItem = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  width: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  margin: 10px 0;\n\n  span {\n    border-radius: 5px;\n  }\n"])));
-var WrapperSpinnerLoader = exports.WrapperSpinnerLoader = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  > div {\n    position: absolute;\n    top: 0px;\n  }\n"])));
+var WrapperSpinnerLoader = exports.WrapperSpinnerLoader = _styledComponents.default.div(_templateObject0 || (_templateObject0 = _taggedTemplateLiteral(["\n  > div {\n    position: absolute;\n    top: 0px;\n  }\n"])));

@@ -12,8 +12,7 @@ var _reactNumericInput = _interopRequireDefault(require("react-numeric-input"));
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _styles2 = require("./styles");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function _interopRequireWildcard(e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != _typeof(e) && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (var _t in e) "default" !== _t && {}.hasOwnProperty.call(e, _t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, _t)) && (i.get || i.set) ? o(f, _t, i) : f[_t] = e[_t]); return f; })(e, t); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
@@ -28,7 +27,7 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 // import { AnalyticsCalendar } from '../../BusinessIntelligence/AnalyticsCalendar'
 
 var RecoveryGeneral = exports.RecoveryGeneral = function RecoveryGeneral(props) {
-  var _ref, _formState$changes$na, _formState$changes, _recoveryActionState$9, _ref2, _formState$changes$de, _formState$changes2, _recoveryActionState$10;
+  var _ref, _formState$changes$na, _formState$changes, _recoveryActionState$9, _ref2, _formState$changes$de, _formState$changes2, _recoveryActionState$0;
   var isAddMode = props.isAddMode,
     formState = props.formState,
     recoveryActionState = props.recoveryActionState,
@@ -60,13 +59,13 @@ var RecoveryGeneral = exports.RecoveryGeneral = function RecoveryGeneral(props) 
     curPreorderTime = _useState8[0],
     setCurPreorderTime = _useState8[1];
   var _useState9 = (0, _react.useState)(0),
-    _useState10 = _slicedToArray(_useState9, 2),
-    curDayTime = _useState10[0],
-    setCurDayTime = _useState10[1];
-  var _useState11 = (0, _react.useState)(true),
-    _useState12 = _slicedToArray(_useState11, 2),
-    isTime = _useState12[0],
-    setIsTime = _useState12[1];
+    _useState0 = _slicedToArray(_useState9, 2),
+    curDayTime = _useState0[0],
+    setCurDayTime = _useState0[1];
+  var _useState1 = (0, _react.useState)(true),
+    _useState10 = _slicedToArray(_useState1, 2),
+    isTime = _useState10[0],
+    setIsTime = _useState10[1];
   var setTimeList = function setTimeList() {
     var _hours = [];
     var _minutes = [];
@@ -153,7 +152,7 @@ var RecoveryGeneral = exports.RecoveryGeneral = function RecoveryGeneral(props) 
     placeholder: t('WRITE_LITTLE_DESCRIPTION', 'Write a little description'),
     name: "description",
     rows: 3,
-    value: (_ref2 = (_formState$changes$de = formState === null || formState === void 0 || (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.description) !== null && _formState$changes$de !== void 0 ? _formState$changes$de : recoveryActionState === null || recoveryActionState === void 0 || (_recoveryActionState$10 = recoveryActionState.action) === null || _recoveryActionState$10 === void 0 ? void 0 : _recoveryActionState$10.description) !== null && _ref2 !== void 0 ? _ref2 : '',
+    value: (_ref2 = (_formState$changes$de = formState === null || formState === void 0 || (_formState$changes2 = formState.changes) === null || _formState$changes2 === void 0 ? void 0 : _formState$changes2.description) !== null && _formState$changes$de !== void 0 ? _formState$changes$de : recoveryActionState === null || recoveryActionState === void 0 || (_recoveryActionState$0 = recoveryActionState.action) === null || _recoveryActionState$0 === void 0 ? void 0 : _recoveryActionState$0.description) !== null && _ref2 !== void 0 ? _ref2 : '',
     onChange: handleChangeInput,
     disabled: formState.loading,
     autoComplete: "off"

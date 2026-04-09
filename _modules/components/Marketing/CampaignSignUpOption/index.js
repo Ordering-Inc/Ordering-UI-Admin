@@ -11,8 +11,7 @@ var _Shared = require("../../Shared");
 var _reactBootstrapIcons = require("react-bootstrap-icons");
 var _styles = require("../../../styles");
 var _styles2 = require("./styles");
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function _interopRequireWildcard(e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != _typeof(e) && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (var _t in e) "default" !== _t && {}.hasOwnProperty.call(e, _t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, _t)) && (i.get || i.set) ? o(f, _t, i) : f[_t] = e[_t]); return f; })(e, t); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
@@ -29,7 +28,7 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 var CampaignSignUpOptionUI = function CampaignSignUpOptionUI(props) {
-  var _ruleFormState$change, _ruleFormState$change2, _ruleFormState$change3, _ruleFormState$change4, _ruleFormState$change13, _ruleFormState$change14;
+  var _ruleFormState$change, _ruleFormState$change2, _ruleFormState$change3, _ruleFormState$change4, _ruleFormState$change11, _ruleFormState$change12;
   var type = props.type,
     title = props.title,
     handleChangeItem = props.handleChangeItem,
@@ -145,29 +144,29 @@ var CampaignSignUpOptionUI = function CampaignSignUpOptionUI(props) {
     };
   }, []);
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.Container, null, /*#__PURE__*/_react.default.createElement(_styles2.Title, null, title), optionList.map(function (option) {
-    var _ruleFormState$change10, _ruleFormState$change11, _ruleFormState$change12;
+    var _ruleFormState$change0, _ruleFormState$change1, _ruleFormState$change10;
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
       key: option.key
     }, /*#__PURE__*/_react.default.createElement(_styles2.RadioCheckWrapper, null, /*#__PURE__*/_react.default.createElement("div", {
       onClick: function onClick() {
         return handleChangeOption(option.key);
       }
-    }, ((_ruleFormState$change10 = ruleFormState.changes) === null || _ruleFormState$change10 === void 0 ? void 0 : _ruleFormState$change10.date_condition) === option.key ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, {
+    }, ((_ruleFormState$change0 = ruleFormState.changes) === null || _ruleFormState$change0 === void 0 ? void 0 : _ruleFormState$change0.date_condition) === option.key ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, {
       className: "fill"
-    }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, option.title))), ((_ruleFormState$change11 = ruleFormState.changes) === null || _ruleFormState$change11 === void 0 ? void 0 : _ruleFormState$change11.date_condition) === option.key && /*#__PURE__*/_react.default.createElement(_styles2.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.RangeCalendar, {
+    }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, option.title))), ((_ruleFormState$change1 = ruleFormState.changes) === null || _ruleFormState$change1 === void 0 ? void 0 : _ruleFormState$change1.date_condition) === option.key && /*#__PURE__*/_react.default.createElement(_styles2.CalendarWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.RangeCalendar, {
       withTime: true,
       isLeft: true,
       isSingleDate: true,
-      defaultValue: (_ruleFormState$change12 = ruleFormState.changes) === null || _ruleFormState$change12 === void 0 ? void 0 : _ruleFormState$change12.date,
+      defaultValue: (_ruleFormState$change10 = ruleFormState.changes) === null || _ruleFormState$change10 === void 0 ? void 0 : _ruleFormState$change10.date,
       handleChangeDate: handleChangeDateTime
     })));
   }), /*#__PURE__*/_react.default.createElement(_styles2.RadioCheckWrapper, null, /*#__PURE__*/_react.default.createElement("div", {
     onClick: function onClick() {
       return handleChangeOption('><');
     }
-  }, ((_ruleFormState$change13 = ruleFormState.changes) === null || _ruleFormState$change13 === void 0 ? void 0 : _ruleFormState$change13.date_condition) === '><' ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, {
+  }, ((_ruleFormState$change11 = ruleFormState.changes) === null || _ruleFormState$change11 === void 0 ? void 0 : _ruleFormState$change11.date_condition) === '><' ? /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.RecordCircleFill, {
     className: "fill"
-  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, t('DATE_RANGE', 'Date range')))), ((_ruleFormState$change14 = ruleFormState.changes) === null || _ruleFormState$change14 === void 0 ? void 0 : _ruleFormState$change14.date_condition) === '><' && /*#__PURE__*/_react.default.createElement(_styles2.DateRangeWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.RangeCalendar, {
+  }) : /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.Circle, null), /*#__PURE__*/_react.default.createElement("span", null, t('DATE_RANGE', 'Date range')))), ((_ruleFormState$change12 = ruleFormState.changes) === null || _ruleFormState$change12 === void 0 ? void 0 : _ruleFormState$change12.date_condition) === '><' && /*#__PURE__*/_react.default.createElement(_styles2.DateRangeWrapper, null, /*#__PURE__*/_react.default.createElement(_Shared.RangeCalendar, {
     handleChangeDate: handleChangeDate,
     defaultValue: defaultValue,
     isLeft: true

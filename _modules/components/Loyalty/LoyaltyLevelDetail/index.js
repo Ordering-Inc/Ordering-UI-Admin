@@ -15,8 +15,7 @@ var _Shared = require("../../Shared");
 var _styles = require("../../../styles");
 var _utils = require("../../../utils");
 var _styles2 = require("./styles");
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function _interopRequireWildcard(e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != _typeof(e) && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (var _t in e) "default" !== _t && {}.hasOwnProperty.call(e, _t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, _t)) && (i.get || i.set) ? o(f, _t, i) : f[_t] = e[_t]); return f; })(e, t); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
@@ -29,7 +28,7 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 var LoyaltyLevelDetailUI = function LoyaltyLevelDetailUI(props) {
-  var _formState$changes$na, _formState$changes4, _formState$changes5, _formState$changes6, _formState$changes7, _ref, _formState$changes$na2, _formState$changes8, _ref2, _formState$changes$ac, _formState$changes9, _ref3, _formState$changes$mi, _formState$changes10, _ref4, _formState$changes$ma, _formState$changes11;
+  var _formState$changes$na, _formState$changes4, _formState$changes5, _formState$changes6, _formState$changes7, _ref, _formState$changes$na2, _formState$changes8, _ref2, _formState$changes$ac, _formState$changes9, _ref3, _formState$changes$mi, _formState$changes0, _ref4, _formState$changes$ma, _formState$changes1;
   var level = props.level,
     handleDeleteLevel = props.handleDeleteLevel,
     formState = props.formState,
@@ -75,9 +74,9 @@ var LoyaltyLevelDetailUI = function LoyaltyLevelDetailUI(props) {
       data: null,
       open: false
     }),
-    _useState10 = _slicedToArray(_useState9, 2),
-    cropState = _useState10[0],
-    setCropState = _useState10[1];
+    _useState0 = _slicedToArray(_useState9, 2),
+    cropState = _useState0[0],
+    setCropState = _useState0[1];
   var imageRef = (0, _react.useRef)();
   var closeAlert = function closeAlert() {
     setAlertState({
@@ -259,7 +258,7 @@ var LoyaltyLevelDetailUI = function LoyaltyLevelDetailUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles2.FormController, null, /*#__PURE__*/_react.default.createElement("label", null, t('POINTS_REQUIRED', 'Points required')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "minimum_points",
     placeholder: t('POINTS_REQUIRED', 'Points required'),
-    value: (_ref3 = (_formState$changes$mi = formState === null || formState === void 0 || (_formState$changes10 = formState.changes) === null || _formState$changes10 === void 0 ? void 0 : _formState$changes10.minimum_points) !== null && _formState$changes$mi !== void 0 ? _formState$changes$mi : level === null || level === void 0 ? void 0 : level.minimum_points) !== null && _ref3 !== void 0 ? _ref3 : '',
+    value: (_ref3 = (_formState$changes$mi = formState === null || formState === void 0 || (_formState$changes0 = formState.changes) === null || _formState$changes0 === void 0 ? void 0 : _formState$changes0.minimum_points) !== null && _formState$changes$mi !== void 0 ? _formState$changes$mi : level === null || level === void 0 ? void 0 : level.minimum_points) !== null && _ref3 !== void 0 ? _ref3 : '',
     onChange: handleChangeInput,
     disabled: formState.loading,
     autoComplete: "off",
@@ -271,7 +270,7 @@ var LoyaltyLevelDetailUI = function LoyaltyLevelDetailUI(props) {
   })), /*#__PURE__*/_react.default.createElement(_styles2.FormController, null, /*#__PURE__*/_react.default.createElement("label", null, t('MAXIMUM_OF_POINTS', 'Maximum of points')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
     name: "maximum_accumulation_fixed",
     placeholder: t('MAXIMUM_OF_POINTS', 'Maximum of points'),
-    value: (_ref4 = (_formState$changes$ma = formState === null || formState === void 0 || (_formState$changes11 = formState.changes) === null || _formState$changes11 === void 0 ? void 0 : _formState$changes11.maximum_accumulation_fixed) !== null && _formState$changes$ma !== void 0 ? _formState$changes$ma : level === null || level === void 0 ? void 0 : level.maximum_accumulation_fixed) !== null && _ref4 !== void 0 ? _ref4 : '',
+    value: (_ref4 = (_formState$changes$ma = formState === null || formState === void 0 || (_formState$changes1 = formState.changes) === null || _formState$changes1 === void 0 ? void 0 : _formState$changes1.maximum_accumulation_fixed) !== null && _formState$changes$ma !== void 0 ? _formState$changes$ma : level === null || level === void 0 ? void 0 : level.maximum_accumulation_fixed) !== null && _ref4 !== void 0 ? _ref4 : '',
     onChange: handleChangeInput,
     disabled: formState.loading,
     onKeyPress: function onKeyPress(e) {
