@@ -6,9 +6,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ProductsTableWrapper = exports.ProductsTable = exports.ProductsListContainer = exports.ProductTboday = exports.ProductDetailsContainer = exports.HeaderTitleContainer = exports.DownloadLinksContainer = exports.DownloadLink = exports.ButtonWrapper = exports.AppImageWrapper = exports.AppHeaderTitle = exports.AppDescriptionWarpper = void 0;
 var _styledComponents = _interopRequireWildcard(require("styled-components"));
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36;
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject0, _templateObject1, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34;
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function _interopRequireWildcard(e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != _typeof(e) && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (var _t in e) "default" !== _t && {}.hasOwnProperty.call(e, _t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, _t)) && (i.get || i.set) ? o(f, _t, i) : f[_t] = e[_t]); return f; })(e, t); }
 function _taggedTemplateLiteral(e, t) { return t || (t = e.slice(0)), Object.freeze(Object.defineProperties(e, { raw: { value: Object.freeze(t) } })); }
 var ProductsListContainer = exports.ProductsListContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  flex: 1;\n  padding: 25px 20px;\n  box-sizing: border-box;\n  transition: all 0.5s;\n  max-height: 100vh;\n  overflow: auto;\n"])));
 var HeaderTitleContainer = exports.HeaderTitleContainer = _styledComponents.default.div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n\n  > h1 {\n    font-weight: 700;\n    font-size: 20px;\n    color: ", ";\n    margin: 0px;\n    line-height: 32px;\n  }\n\n  > button {\n    ", "\n\n    svg {\n      width: 25px;\n      height: 25px;\n    }\n  }\n"])), function (props) {
@@ -31,29 +30,29 @@ var DownloadLink = exports.DownloadLink = _styledComponents.default.button(_temp
   var isSingle = _ref.isSingle;
   return isSingle && (0, _styledComponents.css)(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    margin: 0 auto;\n  "])));
 });
-var DownloadLinksContainer = exports.DownloadLinksContainer = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display: flex;\n\n  > button {\n    &:not(:first-child) {\n      ", "\n    }\n  }\n"])), function (props) {
+var DownloadLinksContainer = exports.DownloadLinksContainer = _styledComponents.default.div(_templateObject0 || (_templateObject0 = _taggedTemplateLiteral(["\n  display: flex;\n\n  > button {\n    &:not(:first-child) {\n      ", "\n    }\n  }\n"])), function (props) {
   var _props$theme3;
-  return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n        margin-right: 24px;\n      "]))) : (0, _styledComponents.css)(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n        margin-left: 24px;\n      "])));
+  return (_props$theme3 = props.theme) !== null && _props$theme3 !== void 0 && _props$theme3.rtl ? (0, _styledComponents.css)(_templateObject1 || (_templateObject1 = _taggedTemplateLiteral(["\n        margin-right: 24px;\n      "]))) : (0, _styledComponents.css)(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n        margin-left: 24px;\n      "])));
 });
-var AppImageWrapper = exports.AppImageWrapper = _styledComponents.default.div(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  min-width: 155px;\n\n  > img {\n    width: 105px;\n    height: 90px;\n    object-fit: contain;\n    margin: 0 auto;\n  }\n"])));
-var AppDescriptionWarpper = exports.AppDescriptionWarpper = _styledComponents.default.div(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  flex: 1;\n  padding: 0 24px;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n\n  h3 {\n    font-size: 16px;\n    line-height: 24px;\n    font-weight: 500;\n    color: ", ";\n    margin: 0;\n  }\n  > div {\n    font-size: 14px;\n    line-height: 24px;\n    margin: 0;\n    color: ", ";\n    display: -webkit-box;\n    -webkit-box-orient: vertical;\n    -webkit-line-clamp: 2;\n    overflow: hidden;\n  }\n\n  ", "\n"])), function (props) {
+var AppImageWrapper = exports.AppImageWrapper = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  min-width: 155px;\n\n  > img {\n    width: 105px;\n    height: 90px;\n    object-fit: contain;\n    margin: 0 auto;\n  }\n"])));
+var AppDescriptionWarpper = exports.AppDescriptionWarpper = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  flex: 1;\n  padding: 0 24px;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n\n  h3 {\n    font-size: 16px;\n    line-height: 24px;\n    font-weight: 500;\n    color: ", ";\n    margin: 0;\n  }\n  > div {\n    font-size: 14px;\n    line-height: 24px;\n    margin: 0;\n    color: ", ";\n    display: -webkit-box;\n    -webkit-box-orient: vertical;\n    -webkit-line-clamp: 2;\n    overflow: hidden;\n  }\n\n  ", "\n"])), function (props) {
   return props.theme.colors.headingColor;
 }, function (props) {
   return props.theme.colors.lightGray;
 }, function (_ref2) {
   var isHeader = _ref2.isHeader;
-  return !isHeader && (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n    height: 72px;\n    ", "\n  "])), function (props) {
+  return !isHeader && (0, _styledComponents.css)(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n    height: 72px;\n    ", "\n  "])), function (props) {
     var _props$theme4;
-    return (_props$theme4 = props.theme) !== null && _props$theme4 !== void 0 && _props$theme4.rtl ? (0, _styledComponents.css)(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n      border-right: 1px solid ", ";\n    "])), function (props) {
+    return (_props$theme4 = props.theme) !== null && _props$theme4 !== void 0 && _props$theme4.rtl ? (0, _styledComponents.css)(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n      border-right: 1px solid ", ";\n    "])), function (props) {
       return props.theme.colors.borderColor;
-    }) : (0, _styledComponents.css)(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n      border-left: 1px solid ", ";\n    "])), function (props) {
+    }) : (0, _styledComponents.css)(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n      border-left: 1px solid ", ";\n    "])), function (props) {
       return props.theme.colors.borderColor;
     });
   });
 });
-var ProductsTableWrapper = exports.ProductsTableWrapper = _styledComponents.default.div(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  overflow: auto;\n  margin-bottom: 30px;\n"])));
-var ProductsTable = exports.ProductsTable = _styledComponents.default.table(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  min-width: 700px;\n  width: 100%;\n  border-collapse: separate;\n  border-spacing: 0 35px;\n"])));
-var ProductTboday = exports.ProductTboday = _styledComponents.default.tbody(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  &:hover {\n    td {\n      background-color: ", ";\n    }\n  }\n\n  tr {\n    > td {\n      padding: 16px 0;\n      border-top: 1px solid ", ";\n      border-bottom: 1px solid ", ";\n\n      &:first-child {\n        width: 18%;\n        min-width: 155px;\n  \n        ", "\n      }\n      &:last-child {\n        ", "\n      }\n    }\n  }\n\n  ", "\n"])), function (props) {
+var ProductsTableWrapper = exports.ProductsTableWrapper = _styledComponents.default.div(_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  overflow: auto;\n  margin-bottom: 30px;\n"])));
+var ProductsTable = exports.ProductsTable = _styledComponents.default.table(_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  min-width: 700px;\n  width: 100%;\n  border-collapse: separate;\n  border-spacing: 0 35px;\n"])));
+var ProductTboday = exports.ProductTboday = _styledComponents.default.tbody(_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  cursor: pointer;\n  &:hover {\n    td {\n      background-color: ", ";\n    }\n  }\n\n  tr {\n    > td {\n      padding: 16px 0;\n      border-top: 1px solid ", ";\n      border-bottom: 1px solid ", ";\n\n      &:first-child {\n        width: 18%;\n        min-width: 155px;\n  \n        ", "\n      }\n      &:last-child {\n        ", "\n      }\n    }\n  }\n\n  ", "\n"])), function (props) {
   return props.theme.colors.lightPrimary;
 }, function (props) {
   return props.theme.colors.borderColor;
@@ -61,21 +60,21 @@ var ProductTboday = exports.ProductTboday = _styledComponents.default.tbody(_tem
   return props.theme.colors.borderColor;
 }, function (props) {
   var _props$theme5;
-  return (_props$theme5 = props.theme) !== null && _props$theme5 !== void 0 && _props$theme5.rtl ? (0, _styledComponents.css)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n          border-top-right-radius: 8px;\n          border-bottom-right-radius: 8px;\n          border-right: 1px solid ", ";\n        "])), function (props) {
+  return (_props$theme5 = props.theme) !== null && _props$theme5 !== void 0 && _props$theme5.rtl ? (0, _styledComponents.css)(_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n          border-top-right-radius: 8px;\n          border-bottom-right-radius: 8px;\n          border-right: 1px solid ", ";\n        "])), function (props) {
     return props.theme.colors.borderColor;
-  }) : (0, _styledComponents.css)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n          border-top-left-radius: 8px;\n          border-bottom-left-radius: 8px;\n          border-left: 1px solid ", ";\n        "])), function (props) {
+  }) : (0, _styledComponents.css)(_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n          border-top-left-radius: 8px;\n          border-bottom-left-radius: 8px;\n          border-left: 1px solid ", ";\n        "])), function (props) {
     return props.theme.colors.borderColor;
   });
 }, function (props) {
   var _props$theme6;
-  return (_props$theme6 = props.theme) !== null && _props$theme6 !== void 0 && _props$theme6.rtl ? (0, _styledComponents.css)(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n          border-top-left-radius: 8px;\n          border-bottom-left-radius: 8px;\n          border-left: 1px solid ", ";\n        "])), function (props) {
+  return (_props$theme6 = props.theme) !== null && _props$theme6 !== void 0 && _props$theme6.rtl ? (0, _styledComponents.css)(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n          border-top-left-radius: 8px;\n          border-bottom-left-radius: 8px;\n          border-left: 1px solid ", ";\n        "])), function (props) {
     return props.theme.colors.borderColor;
-  }) : (0, _styledComponents.css)(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n          border-top-right-radius: 8px;\n          border-bottom-right-radius: 8px;\n          border-right: 1px solid ", ";\n        "])), function (props) {
+  }) : (0, _styledComponents.css)(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n          border-top-right-radius: 8px;\n          border-bottom-right-radius: 8px;\n          border-right: 1px solid ", ";\n        "])), function (props) {
     return props.theme.colors.borderColor;
   });
 }, function (_ref3) {
   var active = _ref3.active;
-  return active && (0, _styledComponents.css)(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n    background-color: ", ";\n\n    tr {\n      > td {\n        border-top: 1px solid ", ";\n        border-bottom: 1px solid ", ";\n\n        &:first-child {\n          ", "\n        }\n        &:last-child {\n          ", "\n        }\n        }\n    }\n  "])), function (props) {
+  return active && (0, _styledComponents.css)(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n    background-color: ", ";\n\n    tr {\n      > td {\n        border-top: 1px solid ", ";\n        border-bottom: 1px solid ", ";\n\n        &:first-child {\n          ", "\n        }\n        &:last-child {\n          ", "\n        }\n        }\n    }\n  "])), function (props) {
     return props.theme.colors.lightPrimary;
   }, function (props) {
     return props.theme.colors.primary;
@@ -83,34 +82,34 @@ var ProductTboday = exports.ProductTboday = _styledComponents.default.tbody(_tem
     return props.theme.colors.primary;
   }, function (props) {
     var _props$theme7;
-    return (_props$theme7 = props.theme) !== null && _props$theme7 !== void 0 && _props$theme7.rtl ? (0, _styledComponents.css)(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n            border-right: 1px solid ", ";\n          "])), function (props) {
+    return (_props$theme7 = props.theme) !== null && _props$theme7 !== void 0 && _props$theme7.rtl ? (0, _styledComponents.css)(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n            border-right: 1px solid ", ";\n          "])), function (props) {
       return props.theme.colors.primary;
-    }) : (0, _styledComponents.css)(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n            border-left: 1px solid ", ";\n          "])), function (props) {
+    }) : (0, _styledComponents.css)(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n            border-left: 1px solid ", ";\n          "])), function (props) {
       return props.theme.colors.primary;
     });
   }, function (props) {
     var _props$theme8;
-    return (_props$theme8 = props.theme) !== null && _props$theme8 !== void 0 && _props$theme8.rtl ? (0, _styledComponents.css)(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n            border-left: 1px solid ", ";\n          "])), function (props) {
+    return (_props$theme8 = props.theme) !== null && _props$theme8 !== void 0 && _props$theme8.rtl ? (0, _styledComponents.css)(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n            border-left: 1px solid ", ";\n          "])), function (props) {
       return props.theme.colors.primary;
-    }) : (0, _styledComponents.css)(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n            border-right: 1px solid ", ";\n          "])), function (props) {
+    }) : (0, _styledComponents.css)(_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n            border-right: 1px solid ", ";\n          "])), function (props) {
       return props.theme.colors.primary;
     });
   });
 });
-var AppHeaderTitle = exports.AppHeaderTitle = _styledComponents.default.div(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  font-size: 12px;\n  font-weight: 700;\n  color: ", ";\n  line-height: 18px;\n  display: flex;\n  align-items: center;\n\n  img {\n    width: 16px;\n    height: 16px;\n    object-fit: contain;\n    ", "\n  }\n\n  ", "\n"])), function (props) {
+var AppHeaderTitle = exports.AppHeaderTitle = _styledComponents.default.div(_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  font-size: 12px;\n  font-weight: 700;\n  color: ", ";\n  line-height: 18px;\n  display: flex;\n  align-items: center;\n\n  img {\n    width: 16px;\n    height: 16px;\n    object-fit: contain;\n    ", "\n  }\n\n  ", "\n"])), function (props) {
   return props.theme.colors.headingColor;
 }, function (props) {
   var _props$theme9;
-  return (_props$theme9 = props.theme) !== null && _props$theme9 !== void 0 && _props$theme9.rtl ? (0, _styledComponents.css)(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n      margin-left: 6px;\n    "]))) : (0, _styledComponents.css)(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n      margin-right: 6px;\n    "])));
+  return (_props$theme9 = props.theme) !== null && _props$theme9 !== void 0 && _props$theme9.rtl ? (0, _styledComponents.css)(_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n      margin-left: 6px;\n    "]))) : (0, _styledComponents.css)(_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n      margin-right: 6px;\n    "])));
 }, function (_ref4) {
   var isCenter = _ref4.isCenter;
-  return isCenter && (0, _styledComponents.css)(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n    justify-content: center;\n  "])));
+  return isCenter && (0, _styledComponents.css)(_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n    justify-content: center;\n  "])));
 });
-var ButtonWrapper = exports.ButtonWrapper = _styledComponents.default.div(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n  height: 72px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  padding: 0 24px;\n  ", "\n\n  button {\n    white-space: nowrap;\n  }\n"])), function (props) {
-  var _props$theme10;
-  return (_props$theme10 = props.theme) !== null && _props$theme10 !== void 0 && _props$theme10.rtl ? (0, _styledComponents.css)(_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["\n    border-right: 1px solid ", ";\n  "])), function (props) {
+var ButtonWrapper = exports.ButtonWrapper = _styledComponents.default.div(_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n  height: 72px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  padding: 0 24px;\n  ", "\n\n  button {\n    white-space: nowrap;\n  }\n"])), function (props) {
+  var _props$theme0;
+  return (_props$theme0 = props.theme) !== null && _props$theme0 !== void 0 && _props$theme0.rtl ? (0, _styledComponents.css)(_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n    border-right: 1px solid ", ";\n  "])), function (props) {
     return props.theme.colors.borderColor;
-  }) : (0, _styledComponents.css)(_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["\n    border-left: 1px solid ", ";\n  "])), function (props) {
+  }) : (0, _styledComponents.css)(_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n    border-left: 1px solid ", ";\n  "])), function (props) {
     return props.theme.colors.borderColor;
   });
 });

@@ -23,8 +23,7 @@ var _DriverMultiSelector = require("../../Orders/DriverMultiSelector");
 var _TiWarningOutline = _interopRequireDefault(require("@meronex/icons/ti/TiWarningOutline"));
 var _MdClose = _interopRequireDefault(require("@meronex/icons/md/MdClose"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function _interopRequireWildcard(e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != _typeof(e) && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (var _t in e) "default" !== _t && {}.hasOwnProperty.call(e, _t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, _t)) && (i.get || i.set) ? o(f, _t, i) : f[_t] = e[_t]); return f; })(e, t); }
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
@@ -204,7 +203,7 @@ var DriversTimeDisplayUI = function DriversTimeDisplayUI(props) {
     });
   };
   var generateHourList = function generateHourList() {
-    var _selectedBlock$block, _selectedBlock$block2, _selectedBlock$block3, _selectedBlock$block4, _selectedBlock$block5, _selectedBlock$block9, _selectedBlock$block10, _selectedBlock$block11;
+    var _selectedBlock$block, _selectedBlock$block2, _selectedBlock$block3, _selectedBlock$block4, _selectedBlock$block5, _selectedBlock$block9, _selectedBlock$block0, _selectedBlock$block1;
     var _scheduleOptions = [];
     var isTodayOrPastDate = (0, _moment.default)(selectedDate).format('YYYY-MM-DD') <= (0, _moment.default)().format('YYYY-MM-DD');
     var now = new Date();
@@ -266,21 +265,21 @@ var DriversTimeDisplayUI = function DriversTimeDisplayUI(props) {
         content: /*#__PURE__*/_react.default.createElement(_styles2.TimeOptions, null, is12Hours ? "".concat((0, _moment.default)(breakEnd).format('hh:mm A')) : "".concat((0, _moment.default)(breakEnd).format('HH : mm')))
       });
     }
-    if (showBreakBlock && selectedBlock !== null && selectedBlock !== void 0 && (_selectedBlock$block10 = selectedBlock.block) !== null && _selectedBlock$block10 !== void 0 && _selectedBlock$block10.start) {
+    if (showBreakBlock && selectedBlock !== null && selectedBlock !== void 0 && (_selectedBlock$block0 = selectedBlock.block) !== null && _selectedBlock$block0 !== void 0 && _selectedBlock$block0.start) {
       _scheduleOptions.unshift({
         value: (0, _moment.default)(breakStart).format('HH:mm'),
         name: 'break_start',
         content: /*#__PURE__*/_react.default.createElement(_styles2.TimeOptions, null, is12Hours ? "".concat((0, _moment.default)(breakStart).format('hh:mm A')) : "".concat((0, _moment.default)(breakStart).format('HH : mm')))
       });
     }
-    if (selectedBlock !== null && selectedBlock !== void 0 && (_selectedBlock$block11 = selectedBlock.block) !== null && _selectedBlock$block11 !== void 0 && _selectedBlock$block11.start && !_scheduleOptions.some(function (option) {
+    if (selectedBlock !== null && selectedBlock !== void 0 && (_selectedBlock$block1 = selectedBlock.block) !== null && _selectedBlock$block1 !== void 0 && _selectedBlock$block1.start && !_scheduleOptions.some(function (option) {
       return (option === null || option === void 0 ? void 0 : option.name) === 'start';
     })) {
-      var _selectedBlock$block12, _selectedBlock$block13, _selectedBlock$block14;
+      var _selectedBlock$block10, _selectedBlock$block11, _selectedBlock$block12;
       _scheduleOptions.unshift({
-        value: (0, _moment.default)(selectedBlock === null || selectedBlock === void 0 || (_selectedBlock$block12 = selectedBlock.block) === null || _selectedBlock$block12 === void 0 ? void 0 : _selectedBlock$block12.start).format('HH:mm'),
+        value: (0, _moment.default)(selectedBlock === null || selectedBlock === void 0 || (_selectedBlock$block10 = selectedBlock.block) === null || _selectedBlock$block10 === void 0 ? void 0 : _selectedBlock$block10.start).format('HH:mm'),
         name: 'start',
-        content: /*#__PURE__*/_react.default.createElement(_styles2.TimeOptions, null, is12Hours ? "".concat((0, _moment.default)(selectedBlock === null || selectedBlock === void 0 || (_selectedBlock$block13 = selectedBlock.block) === null || _selectedBlock$block13 === void 0 ? void 0 : _selectedBlock$block13.start).format('hh:mm A')) : "".concat((0, _moment.default)(selectedBlock === null || selectedBlock === void 0 || (_selectedBlock$block14 = selectedBlock.block) === null || _selectedBlock$block14 === void 0 ? void 0 : _selectedBlock$block14.start).format('HH : mm')))
+        content: /*#__PURE__*/_react.default.createElement(_styles2.TimeOptions, null, is12Hours ? "".concat((0, _moment.default)(selectedBlock === null || selectedBlock === void 0 || (_selectedBlock$block11 = selectedBlock.block) === null || _selectedBlock$block11 === void 0 ? void 0 : _selectedBlock$block11.start).format('hh:mm A')) : "".concat((0, _moment.default)(selectedBlock === null || selectedBlock === void 0 || (_selectedBlock$block12 = selectedBlock.block) === null || _selectedBlock$block12 === void 0 ? void 0 : _selectedBlock$block12.start).format('HH : mm')))
       });
     }
     setScheduleOptionValues(_scheduleOptions.map(function (option) {
@@ -346,11 +345,11 @@ var DriversTimeDisplayUI = function DriversTimeDisplayUI(props) {
     }));
   }, [rule]);
   (0, _react.useEffect)(function () {
-    var _selectedBlock$block15;
+    var _selectedBlock$block13;
     if (!(selectedBlock !== null && selectedBlock !== void 0 && selectedBlock.block)) return;
-    if (selectedBlock !== null && selectedBlock !== void 0 && (_selectedBlock$block15 = selectedBlock.block) !== null && _selectedBlock$block15 !== void 0 && _selectedBlock$block15.rrule) {
-      var _selectedBlock$block16, _selectedBlock$block17, _selectedBlock$block18, _selectedBlock$block19;
-      var _date = _rrule.RRule.fromString("DTSTART:".concat((0, _moment.default)(selectedBlock === null || selectedBlock === void 0 || (_selectedBlock$block16 = selectedBlock.block) === null || _selectedBlock$block16 === void 0 ? void 0 : _selectedBlock$block16.start).toISOString().replaceAll('-', '').replaceAll(':', '').replaceAll('.', '')) + '\n' + (selectedBlock === null || selectedBlock === void 0 || (_selectedBlock$block17 = selectedBlock.block) === null || _selectedBlock$block17 === void 0 || (_selectedBlock$block17 = _selectedBlock$block17.rrule) === null || _selectedBlock$block17 === void 0 ? void 0 : _selectedBlock$block17.includes('RRULE:')) ? selectedBlock === null || selectedBlock === void 0 || (_selectedBlock$block18 = selectedBlock.block) === null || _selectedBlock$block18 === void 0 ? void 0 : _selectedBlock$block18.rrule : "RRULE:".concat(selectedBlock === null || selectedBlock === void 0 || (_selectedBlock$block19 = selectedBlock.block) === null || _selectedBlock$block19 === void 0 ? void 0 : _selectedBlock$block19.rrule));
+    if (selectedBlock !== null && selectedBlock !== void 0 && (_selectedBlock$block13 = selectedBlock.block) !== null && _selectedBlock$block13 !== void 0 && _selectedBlock$block13.rrule) {
+      var _selectedBlock$block14, _selectedBlock$block15, _selectedBlock$block16, _selectedBlock$block17;
+      var _date = _rrule.RRule.fromString("DTSTART:".concat((0, _moment.default)(selectedBlock === null || selectedBlock === void 0 || (_selectedBlock$block14 = selectedBlock.block) === null || _selectedBlock$block14 === void 0 ? void 0 : _selectedBlock$block14.start).toISOString().replaceAll('-', '').replaceAll(':', '').replaceAll('.', '')) + '\n' + (selectedBlock === null || selectedBlock === void 0 || (_selectedBlock$block15 = selectedBlock.block) === null || _selectedBlock$block15 === void 0 || (_selectedBlock$block15 = _selectedBlock$block15.rrule) === null || _selectedBlock$block15 === void 0 ? void 0 : _selectedBlock$block15.includes('RRULE:')) ? selectedBlock === null || selectedBlock === void 0 || (_selectedBlock$block16 = selectedBlock.block) === null || _selectedBlock$block16 === void 0 ? void 0 : _selectedBlock$block16.rrule : "RRULE:".concat(selectedBlock === null || selectedBlock === void 0 || (_selectedBlock$block17 = selectedBlock.block) === null || _selectedBlock$block17 === void 0 ? void 0 : _selectedBlock$block17.rrule));
       setRuleState({
         freq: _date.options.freq,
         byweekday: _date.options.byweekday

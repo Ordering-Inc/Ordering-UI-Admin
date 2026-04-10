@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Products = exports.ProductComments = exports.ProdcutCommentsContainer = exports.PrintTextContainer = exports.PrintProductsContainer = exports.PrintProducts = exports.PrintContainer = exports.InsideInfo2 = exports.InsideInfo = exports.InfoContainer = void 0;
 var _styledComponents = _interopRequireDefault(require("styled-components"));
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject0;
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function _taggedTemplateLiteral(e, t) { return t || (t = e.slice(0)), Object.freeze(Object.defineProperties(e, { raw: { value: Object.freeze(t) } })); }
 var PrintContainer = exports.PrintContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  display: none;\n  font-family: arial !important;\n  color: #000 !important;\n  padding: 80px 50px;\n  max-width: 420px;\n\n  > h1 {\n    font-size: 20px;\n    font-weight: 700;\n    margin: 0;\n  }\n\n  @media print {\n    display: block;\n\n    @page { size: portrait; }\n  }\n"])));
@@ -17,4 +17,4 @@ var ProdcutCommentsContainer = exports.ProdcutCommentsContainer = _styledCompone
 var ProductComments = exports.ProductComments = _styledComponents.default.div(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  margin-left: 10px;\n"])));
 var InfoContainer = exports.InfoContainer = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  display: flex;\n"])));
 var InsideInfo = exports.InsideInfo = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  display:flex;\n  justify-content: flex-start;\n  font-size: 16px;\n  width: 70%\n  font-weight: bold\n"])));
-var InsideInfo2 = exports.InsideInfo2 = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  display:flex;\n  justify-content: flex-end;\n  font-size: 16px;\n  width: 30%\n"])));
+var InsideInfo2 = exports.InsideInfo2 = _styledComponents.default.div(_templateObject0 || (_templateObject0 = _taggedTemplateLiteral(["\n  display:flex;\n  justify-content: flex-end;\n  font-size: 16px;\n  width: 30%\n"])));

@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.SmsPreviewWrapper = exports.SmsPreviewContentWrapper = exports.SmsPreviewContent = exports.SmsContentLayout = exports.InputWrapper = exports.Description = exports.Container = exports.ContactWrapper = exports.ButtonWrapper = exports.BottomSpace = void 0;
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 var _react = _interopRequireDefault(require("react"));
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject0;
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 function _taggedTemplateLiteral(e, t) { return t || (t = e.slice(0)), Object.freeze(Object.defineProperties(e, { raw: { value: Object.freeze(t) } })); }
@@ -36,4 +36,4 @@ var Description = exports.Description = _styledComponents.default.div(_templateO
   return props.theme.colors.primary;
 });
 var BottomSpace = exports.BottomSpace = _styledComponents.default.div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  height: 1px;\n"])));
-var ContactWrapper = exports.ContactWrapper = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  margin-bottom: 15px;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  p {\n    font-size: 14px;\n    text-align: center;\n    margin-bottom: 14px;\n  }\n  button {\n    border-radius: 8px;\n    height: 44px;\n  }\n"])));
+var ContactWrapper = exports.ContactWrapper = _styledComponents.default.div(_templateObject0 || (_templateObject0 = _taggedTemplateLiteral(["\n  margin-bottom: 15px;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  p {\n    font-size: 14px;\n    text-align: center;\n    margin-bottom: 14px;\n  }\n  button {\n    border-radius: 8px;\n    height: 44px;\n  }\n"])));

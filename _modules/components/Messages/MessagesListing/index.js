@@ -18,8 +18,7 @@ var _useWindowSize2 = require("../../../hooks/useWindowSize");
 var _utils = require("../../../utils");
 var _styles = require("./styles");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function _interopRequireWildcard(e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != _typeof(e) && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (var _t in e) "default" !== _t && {}.hasOwnProperty.call(e, _t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, _t)) && (i.get || i.set) ? o(f, _t, i) : f[_t] = e[_t]); return f; })(e, t); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
@@ -65,29 +64,29 @@ var MessagesListingUI = function MessagesListingUI(props) {
     isOpenOrderDetail = _useState8[0],
     setIsOpenOrderDetail = _useState8[1];
   var _useState9 = (0, _react.useState)(null),
-    _useState10 = _slicedToArray(_useState9, 2),
-    orderDetailId = _useState10[0],
-    setOrderDetailId = _useState10[1];
+    _useState0 = _slicedToArray(_useState9, 2),
+    orderDetailId = _useState0[0],
+    setOrderDetailId = _useState0[1];
+  var _useState1 = (0, _react.useState)(null),
+    _useState10 = _slicedToArray(_useState1, 2),
+    detailsOrder = _useState10[0],
+    setDetailsOrder = _useState10[1];
   var _useState11 = (0, _react.useState)(null),
     _useState12 = _slicedToArray(_useState11, 2),
-    detailsOrder = _useState12[0],
-    setDetailsOrder = _useState12[1];
+    selectedOrder = _useState12[0],
+    setSelectedOrder = _useState12[1];
   var _useState13 = (0, _react.useState)(null),
     _useState14 = _slicedToArray(_useState13, 2),
-    selectedOrder = _useState14[0],
-    setSelectedOrder = _useState14[1];
-  var _useState15 = (0, _react.useState)(null),
+    orderIdForUnreadCountUpdate = _useState14[0],
+    setOrderIdForUnreadCountUpdate = _useState14[1];
+  var _useState15 = (0, _react.useState)(false),
     _useState16 = _slicedToArray(_useState15, 2),
-    orderIdForUnreadCountUpdate = _useState16[0],
-    setOrderIdForUnreadCountUpdate = _useState16[1];
-  var _useState17 = (0, _react.useState)(false),
+    filterModalOpen = _useState16[0],
+    setFilterModalOpen = _useState16[1];
+  var _useState17 = (0, _react.useState)(null),
     _useState18 = _slicedToArray(_useState17, 2),
-    filterModalOpen = _useState18[0],
-    setFilterModalOpen = _useState18[1];
-  var _useState19 = (0, _react.useState)(null),
-    _useState20 = _slicedToArray(_useState19, 2),
-    timeStatus = _useState20[0],
-    setTimeStatus = _useState20[1];
+    timeStatus = _useState18[0],
+    setTimeStatus = _useState18[1];
   var handleOpenOrderDetail = function handleOpenOrderDetail(order) {
     setDetailsOrder(order);
     setOrderDetailId(order.id);

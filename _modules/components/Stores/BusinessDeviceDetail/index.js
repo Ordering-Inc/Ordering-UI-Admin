@@ -15,8 +15,7 @@ var _Shared = require("../../Shared");
 var _styles2 = require("./styles");
 var _reactLoadingSkeleton = _interopRequireDefault(require("react-loading-skeleton"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function _interopRequireWildcard(e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != _typeof(e) && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (var _t in e) "default" !== _t && {}.hasOwnProperty.call(e, _t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, _t)) && (i.get || i.set) ? o(f, _t, i) : f[_t] = e[_t]); return f; })(e, t); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
@@ -29,7 +28,7 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 var BusinessDeviceDetailUI = function BusinessDeviceDetailUI(props) {
-  var _formState$changes5, _formState$changes$na, _formState$changes6, _formState$changes$bu, _formState$changes7, _formState$changes8, _formState$changes$us, _formState$changes9, _formState$changes$co, _formState$changes10;
+  var _formState$changes5, _formState$changes$na, _formState$changes6, _formState$changes$bu, _formState$changes7, _formState$changes8, _formState$changes$us, _formState$changes9, _formState$changes$co, _formState$changes0;
   var selectedDevice = props.selectedDevice,
     deleteDevice = props.deleteDevice,
     formState = props.formState,
@@ -58,16 +57,16 @@ var BusinessDeviceDetailUI = function BusinessDeviceDetailUI(props) {
     businessSearchVal = _useState8[0],
     setBusinessSearchVal = _useState8[1];
   var _useState9 = (0, _react.useState)(''),
-    _useState10 = _slicedToArray(_useState9, 2),
-    userSearchVal = _useState10[0],
-    setUserSearchVal = _useState10[1];
-  var _useState11 = (0, _react.useState)({
+    _useState0 = _slicedToArray(_useState9, 2),
+    userSearchVal = _useState0[0],
+    setUserSearchVal = _useState0[1];
+  var _useState1 = (0, _react.useState)({
       open: false,
       content: []
     }),
-    _useState12 = _slicedToArray(_useState11, 2),
-    alertState = _useState12[0],
-    setAlertState = _useState12[1];
+    _useState10 = _slicedToArray(_useState1, 2),
+    alertState = _useState10[0],
+    setAlertState = _useState10[1];
   var moreOptions = [{
     value: 0,
     content: t('DELETE', 'Delete')
@@ -205,7 +204,7 @@ var BusinessDeviceDetailUI = function BusinessDeviceDetailUI(props) {
       return setUserSearchVal(val);
     }
   })), selectedDevice && /*#__PURE__*/_react.default.createElement(_styles2.FormControl, null, /*#__PURE__*/_react.default.createElement("label", null, t('DEVICE_CODE', 'Device Code')), /*#__PURE__*/_react.default.createElement(_styles.Input, {
-    value: (_formState$changes$co = formState === null || formState === void 0 || (_formState$changes10 = formState.changes) === null || _formState$changes10 === void 0 ? void 0 : _formState$changes10.code) !== null && _formState$changes$co !== void 0 ? _formState$changes$co : selectedDevice === null || selectedDevice === void 0 ? void 0 : selectedDevice.code,
+    value: (_formState$changes$co = formState === null || formState === void 0 || (_formState$changes0 = formState.changes) === null || _formState$changes0 === void 0 ? void 0 : _formState$changes0.code) !== null && _formState$changes$co !== void 0 ? _formState$changes$co : selectedDevice === null || selectedDevice === void 0 ? void 0 : selectedDevice.code,
     onChange: function onChange(e) {
       return handleChangeFormState({
         code: e.target.value

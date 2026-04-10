@@ -15,8 +15,7 @@ var _GoTriangleDown = _interopRequireDefault(require("@meronex/icons/go/GoTriang
 var _useWindowSize = require("../../hooks/useWindowSize");
 var _styles = require("./styles");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function _interopRequireWildcard(e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != _typeof(e) && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (var _t in e) "default" !== _t && {}.hasOwnProperty.call(e, _t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, _t)) && (i.get || i.set) ? o(f, _t, i) : f[_t] = e[_t]); return f; })(e, t); }
 function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
@@ -71,24 +70,24 @@ var OrderListing = exports.OrderListing = function OrderListing(props) {
     currentPage = _useState8[0],
     setCurrentPage = _useState8[1];
   var _useState9 = (0, _react.useState)(10),
-    _useState10 = _slicedToArray(_useState9, 1),
-    ordersPerPage = _useState10[0];
+    _useState0 = _slicedToArray(_useState9, 1),
+    ordersPerPage = _useState0[0];
 
   // Get current orders
   var indexOfLastPost = currentPage * ordersPerPage;
   var indexOfFirstPost = indexOfLastPost - ordersPerPage;
-  var _useState11 = (0, _react.useState)([]),
+  var _useState1 = (0, _react.useState)([]),
+    _useState10 = _slicedToArray(_useState1, 2),
+    currentOrders = _useState10[0],
+    setCurrentOrders = _useState10[1];
+  var _useState11 = (0, _react.useState)(null),
     _useState12 = _slicedToArray(_useState11, 2),
-    currentOrders = _useState12[0],
-    setCurrentOrders = _useState12[1];
+    totalPages = _useState12[0],
+    setTotalPages = _useState12[1];
   var _useState13 = (0, _react.useState)(null),
     _useState14 = _slicedToArray(_useState13, 2),
-    totalPages = _useState14[0],
-    setTotalPages = _useState14[1];
-  var _useState15 = (0, _react.useState)(null),
-    _useState16 = _slicedToArray(_useState15, 2),
-    totalOrders = _useState16[0],
-    setTotalOrders = _useState16[1];
+    totalOrders = _useState14[0],
+    setTotalOrders = _useState14[1];
 
   // Change page
   var prevPaginate = function prevPaginate() {

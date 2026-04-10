@@ -9,8 +9,7 @@ var _orderingComponentsAdmin = require("ordering-components-admin");
 var _react = _interopRequireWildcard(require("react"));
 var _styles = require("../../../styles");
 var _styles2 = require("./styles");
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function _interopRequireWildcard(e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != _typeof(e) && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (var _t in e) "default" !== _t && {}.hasOwnProperty.call(e, _t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, _t)) && (i.get || i.set) ? o(f, _t, i) : f[_t] = e[_t]); return f; })(e, t); }
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -18,7 +17,7 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t.return && (u = t.return(), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; } /* eslint-disable camelcase */
 var BusinessCateringDelivery = exports.BusinessCateringDelivery = function BusinessCateringDelivery(props) {
-  var _ref, _cateringValues$find, _cateringValues$find4, _cateringValues$find7, _cateringValues$find10, _cateringValues$find13;
+  var _ref, _cateringValues$find, _cateringValues$find4, _cateringValues$find7, _cateringValues$find0, _cateringValues$find11;
   var business = props.business,
     type = props.type,
     changePreorderConfigs = props.changePreorderConfigs;
@@ -155,16 +154,16 @@ var BusinessCateringDelivery = exports.BusinessCateringDelivery = function Busin
   }, t('USE_DEFAULT_VALUE', 'Use default value')))), /*#__PURE__*/_react.default.createElement(_styles2.Section, null, /*#__PURE__*/_react.default.createElement(_styles2.SwitchContainer, null, /*#__PURE__*/_react.default.createElement("p", null, t('MINIMUM_DAYS_PREORDER_ORDER_TYPE', 'Minimum days to preorder per order type')), /*#__PURE__*/_react.default.createElement("p", null, t('DEFAULT', 'Default'), " = 0 (", t('ALLOWS_ASAP_ORDERS', 'allows asap orders'), ").")), /*#__PURE__*/_react.default.createElement(_styles2.InputContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
     ref: ref_preorder_minimum_days,
     placeholder: "0",
-    defaultValue: (_cateringValues$find10 = cateringValues.find(function (val) {
+    defaultValue: (_cateringValues$find0 = cateringValues.find(function (val) {
       return val.name === 'preorder_minimum_days';
-    })) === null || _cateringValues$find10 === void 0 ? void 0 : _cateringValues$find10.value,
+    })) === null || _cateringValues$find0 === void 0 ? void 0 : _cateringValues$find0.value,
     onChange: function onChange(evt) {
-      var _cateringValues$find11;
+      var _cateringValues$find1;
       return _onChange({
         value: evt.target.value,
-        id: (_cateringValues$find11 = cateringValues.find(function (val) {
+        id: (_cateringValues$find1 = cateringValues.find(function (val) {
           return val.name === 'preorder_minimum_days';
-        })) === null || _cateringValues$find11 === void 0 ? void 0 : _cateringValues$find11.id,
+        })) === null || _cateringValues$find1 === void 0 ? void 0 : _cateringValues$find1.id,
         type: type
       });
     },
@@ -173,27 +172,27 @@ var BusinessCateringDelivery = exports.BusinessCateringDelivery = function Busin
     }
   }), /*#__PURE__*/_react.default.createElement("p", null, "(", t('DAYS', 'Days'), ")"), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     onClick: function onClick() {
-      var _cateringValues$find12;
+      var _cateringValues$find10;
       return handleClickDefaultButton({
         value: 0,
-        id: (_cateringValues$find12 = cateringValues.find(function (val) {
+        id: (_cateringValues$find10 = cateringValues.find(function (val) {
           return val.name === 'preorder_minimum_days';
-        })) === null || _cateringValues$find12 === void 0 ? void 0 : _cateringValues$find12.id
+        })) === null || _cateringValues$find10 === void 0 ? void 0 : _cateringValues$find10.id
       }, ref_preorder_minimum_days);
     }
   }, t('USE_DEFAULT_VALUE', 'Use default value')))), /*#__PURE__*/_react.default.createElement(_styles2.Section, null, /*#__PURE__*/_react.default.createElement(_styles2.SwitchContainer, null, /*#__PURE__*/_react.default.createElement("p", null, t('MAXIMUM_DAYS', 'Maximum days')), /*#__PURE__*/_react.default.createElement("p", null, t('DEFAULT', 'Default'), " = 15 ", t('DAYS', 'Days'))), /*#__PURE__*/_react.default.createElement(_styles2.InputContainer, null, /*#__PURE__*/_react.default.createElement(_styles.Input, {
     ref: ref_preorder_maximum_days,
     placeholder: "15",
-    defaultValue: (_cateringValues$find13 = cateringValues.find(function (val) {
+    defaultValue: (_cateringValues$find11 = cateringValues.find(function (val) {
       return val.name === 'preorder_maximum_days';
-    })) === null || _cateringValues$find13 === void 0 ? void 0 : _cateringValues$find13.value,
+    })) === null || _cateringValues$find11 === void 0 ? void 0 : _cateringValues$find11.value,
     onChange: function onChange(evt) {
-      var _cateringValues$find14;
+      var _cateringValues$find12;
       return _onChange({
         value: evt.target.value,
-        id: (_cateringValues$find14 = cateringValues.find(function (val) {
+        id: (_cateringValues$find12 = cateringValues.find(function (val) {
           return val.name === 'preorder_maximum_days';
-        })) === null || _cateringValues$find14 === void 0 ? void 0 : _cateringValues$find14.id,
+        })) === null || _cateringValues$find12 === void 0 ? void 0 : _cateringValues$find12.id,
         type: type
       });
     },
@@ -202,12 +201,12 @@ var BusinessCateringDelivery = exports.BusinessCateringDelivery = function Busin
     }
   }), /*#__PURE__*/_react.default.createElement("p", null, "(", t('DAYS', 'Days'), ")"), /*#__PURE__*/_react.default.createElement(_styles.Button, {
     onClick: function onClick() {
-      var _cateringValues$find15;
+      var _cateringValues$find13;
       return handleClickDefaultButton({
         value: 15,
-        id: (_cateringValues$find15 = cateringValues.find(function (val) {
+        id: (_cateringValues$find13 = cateringValues.find(function (val) {
           return val.name === 'preorder_maximum_days';
-        })) === null || _cateringValues$find15 === void 0 ? void 0 : _cateringValues$find15.id
+        })) === null || _cateringValues$find13 === void 0 ? void 0 : _cateringValues$find13.id
       }, ref_preorder_maximum_days);
     }
   }, t('USE_DEFAULT_VALUE', 'Use default value')))));

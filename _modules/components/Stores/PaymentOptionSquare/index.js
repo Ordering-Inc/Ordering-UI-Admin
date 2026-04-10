@@ -22,8 +22,7 @@ var _SiSquare = _interopRequireDefault(require("@meronex/icons/si/SiSquare"));
 var _utils = require("../../../utils");
 var _styles4 = require("./styles");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != _typeof(e) && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function _interopRequireWildcard(e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != _typeof(e) && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (var _t in e) "default" !== _t && {}.hasOwnProperty.call(e, _t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, _t)) && (i.get || i.set) ? o(f, _t, i) : f[_t] = e[_t]); return f; })(e, t); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
@@ -251,7 +250,7 @@ var PaymentOptionSquareUI = function PaymentOptionSquareUI(props) {
       className: "fill"
     }) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), /*#__PURE__*/_react.default.createElement(_styles3.TabOptionName, null, site.name));
   })), paymentTabs === 2 && orderTypes.map(function (type) {
-    var _ref10, _changesState$allowed;
+    var _ref0, _changesState$allowed;
     return /*#__PURE__*/_react.default.createElement(_styles3.TabOption, {
       key: type.value,
       onClick: function onClick() {
@@ -260,11 +259,11 @@ var PaymentOptionSquareUI = function PaymentOptionSquareUI(props) {
           value: type.value
         });
       }
-    }, (_ref10 = (_changesState$allowed = changesState === null || changesState === void 0 ? void 0 : changesState.allowed_order_types) !== null && _changesState$allowed !== void 0 ? _changesState$allowed : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : businessPaymethod.allowed_order_types) !== null && _ref10 !== void 0 && _ref10.includes(type.value) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, {
+    }, (_ref0 = (_changesState$allowed = changesState === null || changesState === void 0 ? void 0 : changesState.allowed_order_types) !== null && _changesState$allowed !== void 0 ? _changesState$allowed : businessPaymethod === null || businessPaymethod === void 0 ? void 0 : businessPaymethod.allowed_order_types) !== null && _ref0 !== void 0 && _ref0.includes(type.value) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, {
       className: "fill"
     }) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), /*#__PURE__*/_react.default.createElement(_styles3.TabOptionName, null, type.text));
   }), paymentTabs === 3 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, (deviceState === null || deviceState === void 0 || (_deviceState$devices = deviceState.devices) === null || _deviceState$devices === void 0 ? void 0 : _deviceState$devices.length) > 0 && (deviceState === null || deviceState === void 0 ? void 0 : deviceState.devices.map(function (device) {
-    var _ref11, _changesState$devices, _businessPaymethod$de;
+    var _ref1, _changesState$devices, _businessPaymethod$de;
     return /*#__PURE__*/_react.default.createElement(_styles3.TabOption, {
       key: device.id,
       onClick: function onClick() {
@@ -273,9 +272,9 @@ var PaymentOptionSquareUI = function PaymentOptionSquareUI(props) {
           value: device.id
         });
       }
-    }, (_ref11 = (_changesState$devices = changesState === null || changesState === void 0 ? void 0 : changesState.devices) !== null && _changesState$devices !== void 0 ? _changesState$devices : businessPaymethod === null || businessPaymethod === void 0 || (_businessPaymethod$de = businessPaymethod.devices) === null || _businessPaymethod$de === void 0 ? void 0 : _businessPaymethod$de.map(function (s) {
+    }, (_ref1 = (_changesState$devices = changesState === null || changesState === void 0 ? void 0 : changesState.devices) !== null && _changesState$devices !== void 0 ? _changesState$devices : businessPaymethod === null || businessPaymethod === void 0 || (_businessPaymethod$de = businessPaymethod.devices) === null || _businessPaymethod$de === void 0 ? void 0 : _businessPaymethod$de.map(function (s) {
       return s.id;
-    })) !== null && _ref11 !== void 0 && _ref11.includes(device.id) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, {
+    })) !== null && _ref1 !== void 0 && _ref1.includes(device.id) ? /*#__PURE__*/_react.default.createElement(_RiCheckboxFill.default, {
       className: "fill"
     }) : /*#__PURE__*/_react.default.createElement(_RiCheckboxBlankLine.default, null), /*#__PURE__*/_react.default.createElement(_styles3.TabOptionName, null, device.name));
   })), (deviceState === null || deviceState === void 0 || (_deviceState$devices2 = deviceState.devices) === null || _deviceState$devices2 === void 0 ? void 0 : _deviceState$devices2.length) === 0 && /*#__PURE__*/_react.default.createElement(EmptyMessage, null, t('NO_ASSIGNED_DEVICES', 'There are no assigned devices'))), /*#__PURE__*/_react.default.createElement(_Shared.Confirm, {

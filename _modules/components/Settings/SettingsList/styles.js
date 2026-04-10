@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.SubmitBtnWrapper = exports.SkeletonWrapper = exports.SettingsListContainer = exports.Required = exports.OptionsError = exports.GeneralTitle = exports.GeneralContainer = exports.FormGroupWrapper = exports.FormGroupText = exports.FormGroupCheck = exports.FormContainer = exports.Description = exports.CheckBoxWrapper = void 0;
 var _styledComponents = _interopRequireDefault(require("styled-components"));
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject0, _templateObject1, _templateObject10, _templateObject11;
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function _taggedTemplateLiteral(e, t) { return t || (t = e.slice(0)), Object.freeze(Object.defineProperties(e, { raw: { value: Object.freeze(t) } })); }
 var SettingsListContainer = exports.SettingsListContainer = _styledComponents.default.div(_templateObject || (_templateObject = _taggedTemplateLiteral([""])));
@@ -23,14 +23,14 @@ var FormGroupCheck = exports.FormGroupCheck = _styledComponents.default.div(_tem
 });
 var FormGroupWrapper = exports.FormGroupWrapper = _styledComponents.default.div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  padding-top: 10px;\n"])));
 var Required = exports.Required = _styledComponents.default.span(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  font-weight: 600;\n  font-size: 10px;\n  color: #E63757;\n"])));
-var SkeletonWrapper = exports.SkeletonWrapper = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  margin-top: 52px;\n\n  div {\n    margin-bottom: 15px;\n  }\n"])));
-var CheckBoxWrapper = exports.CheckBoxWrapper = _styledComponents.default.div(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  margin-bottom: 20px;\n\n  > label {\n    font-weight: 600;\n    margin: 0px;\n    font-size: 14px;\n    color: ", ";\n  }\n  > p {\n    font-size: 14px;\n    margin-bottom: 0px;\n    margin-top: 10px;\n  }\n"])), function (props) {
+var SkeletonWrapper = exports.SkeletonWrapper = _styledComponents.default.div(_templateObject0 || (_templateObject0 = _taggedTemplateLiteral(["\n  margin-top: 52px;\n\n  div {\n    margin-bottom: 15px;\n  }\n"])));
+var CheckBoxWrapper = exports.CheckBoxWrapper = _styledComponents.default.div(_templateObject1 || (_templateObject1 = _taggedTemplateLiteral(["\n  margin-bottom: 20px;\n\n  > label {\n    font-weight: 600;\n    margin: 0px;\n    font-size: 14px;\n    color: ", ";\n  }\n  > p {\n    font-size: 14px;\n    margin-bottom: 0px;\n    margin-top: 10px;\n  }\n"])), function (props) {
   return props.theme.colors.headingColor;
 });
-var SubmitBtnWrapper = exports.SubmitBtnWrapper = _styledComponents.default.div(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  position: sticky;\n  top: 100%;\n\n  button {\n    height: 44px;\n    background: ", ";\n    color: white;\n    border-radius: 8px;\n    font-size: 14px;\n    margin: 20px 0 10px 0;\n  }\n"])), function (props) {
+var SubmitBtnWrapper = exports.SubmitBtnWrapper = _styledComponents.default.div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  position: sticky;\n  top: 100%;\n\n  button {\n    height: 44px;\n    background: ", ";\n    color: white;\n    border-radius: 8px;\n    font-size: 14px;\n    margin: 20px 0 10px 0;\n  }\n"])), function (props) {
   return props.theme.colors.primary;
 });
-var Description = exports.Description = _styledComponents.default.p(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  font-size: 14px;\n  margin-top: ", ";\n  margin-bottom: 5px;\n"])), function (_ref) {
+var Description = exports.Description = _styledComponents.default.p(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  font-size: 14px;\n  margin-top: ", ";\n  margin-bottom: 5px;\n"])), function (_ref) {
   var typeSix = _ref.typeSix;
   return typeSix ? '20px' : '0px';
 });
