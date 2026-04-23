@@ -185,6 +185,7 @@ export const SettingsListUI = (props) => {
                               handleSelectChange={(value) => handleInputChange(value, config?.id)}
                               label={config?.name}
                               description={config?.description}
+                              formState={formState}
                             />
                           ) : (
                             <SettingsSelectUI
