@@ -130,6 +130,15 @@ const BusinessWalletsListUI = (props) => {
                 placeholder={t('SELECT_A_OPTION', 'Select a option')}
               />
             )}
+            {currentConfig?.type === 7 && (
+              <input
+                type='password'
+                defaultValue={currentConfig?.value}
+                onChange={(e) => handleUpdateWallet(currentConfig?.id, { value: e.target.value })}
+                className='form-control'
+                placeholder={currentConfig?.name}
+              />
+            )}
           </DetailsContainer>
         </SideBar>
       )}

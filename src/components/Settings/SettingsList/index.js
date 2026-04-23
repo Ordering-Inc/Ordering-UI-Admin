@@ -163,6 +163,21 @@ export const SettingsListUI = (props) => {
                         )
                       }
                       {
+                        config.type === 7 && (
+                          <FormGroupText className='form-group'>
+                            <label>{config?.name}</label>
+                            {config?.description && <Description>{config?.description}</Description>}
+                            <input
+                              type='password'
+                              defaultValue={config?.value}
+                              onChange={(e) => handleInputChange(e.target.value, config?.id)}
+                              className='form-control'
+                              placeholder={config?.name}
+                            />
+                          </FormGroupText>
+                        )
+                      }
+                      {
                         config.type === 2 && (
                           config.key === 'country_autocomplete' ? (
                             <SettingsCountryFilter

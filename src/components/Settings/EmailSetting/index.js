@@ -117,6 +117,22 @@ const EmailSettingUI = (props) => {
                         />
                       )
                     }
+                    {
+                      config.type === 7 && (
+                        <FormGroupText className='form-group'>
+                          <label>{config?.name}</label>
+                          {config?.description && <Description>{config?.description}</Description>}
+                          <input
+                            type='password'
+                            defaultValue={config?.value}
+                            onChange={(e) => handleInputChange(e.target.value, config?.id)}
+                            className='form-control'
+                            placeholder={config?.name}
+                            autoComplete='new-password'
+                          />
+                        </FormGroupText>
+                      )
+                    }
                   </div>
                 ))
               }
