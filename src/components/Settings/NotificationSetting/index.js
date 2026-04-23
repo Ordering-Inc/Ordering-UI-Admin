@@ -162,6 +162,40 @@ const NotificationSettingUI = (props) => {
                         </>
                       )
                     }
+                    {
+                      config.type === 7 && (
+                        <FormGroupText className='form-group'>
+                          <TitleWrapper>
+                            <label>{config?.name}</label>
+                            {tooltips?.[config?.key] && (
+                              <OverlayTrigger
+                                placement='bottom'
+                                overlay={
+                                  <Tooltip>
+                                    {tooltips?.[config?.key]}
+                                  </Tooltip>
+                                }
+                              >
+                                <IconButton
+                                  color='primary'
+                                  className='tour_btn'
+                                >
+                                  <InfoCircle />
+                                </IconButton>
+                              </OverlayTrigger>
+                            )}
+                          </TitleWrapper>
+                          {config?.description && <Description>{config?.description}</Description>}
+                          <input
+                            type='password'
+                            defaultValue={config?.value}
+                            onChange={(e) => handleInputChange(e.target.value, config?.id)}
+                            className='form-control'
+                            placeholder={config?.name}
+                          />
+                        </FormGroupText>
+                      )
+                    }
                   </div>
                 ))
               }
