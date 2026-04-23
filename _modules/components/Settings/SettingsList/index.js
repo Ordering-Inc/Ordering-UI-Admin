@@ -169,6 +169,16 @@ var SettingsListUI = exports.SettingsListUI = function SettingsListUI(props) {
       },
       className: "form-control",
       placeholder: config === null || config === void 0 ? void 0 : config.name
+    })), config.type === 7 && /*#__PURE__*/_react.default.createElement(_styles2.FormGroupText, {
+      className: "form-group"
+    }, /*#__PURE__*/_react.default.createElement("label", null, config === null || config === void 0 ? void 0 : config.name), (config === null || config === void 0 ? void 0 : config.description) && /*#__PURE__*/_react.default.createElement(_styles2.Description, null, config === null || config === void 0 ? void 0 : config.description), /*#__PURE__*/_react.default.createElement("input", {
+      type: "password",
+      defaultValue: config === null || config === void 0 ? void 0 : config.value,
+      onChange: function onChange(e) {
+        return handleInputChange(e.target.value, config === null || config === void 0 ? void 0 : config.id);
+      },
+      className: "form-control",
+      placeholder: config === null || config === void 0 ? void 0 : config.name
     })), config.type === 2 && (config.key === 'country_autocomplete' ? /*#__PURE__*/_react.default.createElement(_SettingsCountryFilter.SettingsCountryFilter, {
       defaultValue: config === null || config === void 0 ? void 0 : config.value,
       handleSelectChange: function handleSelectChange(value) {

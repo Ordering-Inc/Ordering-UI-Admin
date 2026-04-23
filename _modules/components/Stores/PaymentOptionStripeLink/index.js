@@ -272,6 +272,16 @@ var PaymentOptionStripeLinkUI = function PaymentOptionStripeLinkUI(props) {
         });
       },
       placeholder: t('SELECT_A_OPTION', 'Select a option')
+    }), (config === null || config === void 0 ? void 0 : config.type) === 7 && /*#__PURE__*/_react.default.createElement("input", {
+      type: "password",
+      defaultValue: config === null || config === void 0 ? void 0 : config.value,
+      onChange: function onChange(e) {
+        return handleUpdateConfigs(config === null || config === void 0 ? void 0 : config.id, {
+          value: e.target.value
+        });
+      },
+      className: "form-control",
+      placeholder: config === null || config === void 0 ? void 0 : config.name
     }));
   }))), paymentTabs === 1 && (sitesState === null || sitesState === void 0 || (_sitesState$sites3 = sitesState.sites) === null || _sitesState$sites3 === void 0 ? void 0 : _sitesState$sites3.length) > 0 && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_styles2.TabOption, {
     key: "all",

@@ -138,6 +138,16 @@ var BusinessWalletsListUI = function BusinessWalletsListUI(props) {
       });
     },
     placeholder: t('SELECT_A_OPTION', 'Select a option')
+  }), (currentConfig === null || currentConfig === void 0 ? void 0 : currentConfig.type) === 7 && /*#__PURE__*/_react.default.createElement("input", {
+    type: "password",
+    defaultValue: currentConfig === null || currentConfig === void 0 ? void 0 : currentConfig.value,
+    onChange: function onChange(e) {
+      return handleUpdateWallet(currentConfig === null || currentConfig === void 0 ? void 0 : currentConfig.id, {
+        value: e.target.value
+      });
+    },
+    className: "form-control",
+    placeholder: currentConfig === null || currentConfig === void 0 ? void 0 : currentConfig.name
   }))));
 };
 var BusinessWalletsList = exports.BusinessWalletsList = function BusinessWalletsList(props) {

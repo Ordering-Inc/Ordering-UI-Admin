@@ -56,7 +56,17 @@ var SiteSettingDetails = exports.SiteSettingDetails = function SiteSettingDetail
       handleSelectChange: function handleSelectChange(value) {
         return handleChangeConfig(value, selectedSiteId, config === null || config === void 0 ? void 0 : config.id);
       }
-    }));
+    }), config.type === 7 && /*#__PURE__*/_react.default.createElement(_styles.FormGroupText, {
+      className: "form-group"
+    }, /*#__PURE__*/_react.default.createElement("label", null, config === null || config === void 0 ? void 0 : config.name), /*#__PURE__*/_react.default.createElement("input", {
+      type: "password",
+      defaultValue: config === null || config === void 0 ? void 0 : config.value,
+      onChange: function onChange(e) {
+        return handleChangeConfig(e.target.value, selectedSiteId, config === null || config === void 0 ? void 0 : config.id);
+      },
+      className: "form-control",
+      placeholder: config === null || config === void 0 ? void 0 : config.name
+    })));
   }))), !siteConfigsState.loading && siteConfigsState.error && /*#__PURE__*/_react.default.createElement(_Shared.NotFoundSource, {
     content: t('NOT_FOUND_CONFIG', 'Sorry, we couldn\'t find the config.')
   })));

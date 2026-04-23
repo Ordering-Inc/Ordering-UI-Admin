@@ -150,6 +150,22 @@ var NotificationSettingUI = function NotificationSettingUI(props) {
       handleSelectChange: function handleSelectChange(value) {
         return handleInputChange(value, config === null || config === void 0 ? void 0 : config.id);
       }
+    })), config.type === 7 && /*#__PURE__*/_react.default.createElement(_styles3.FormGroupText, {
+      className: "form-group"
+    }, /*#__PURE__*/_react.default.createElement(_styles2.TitleWrapper, null, /*#__PURE__*/_react.default.createElement("label", null, config === null || config === void 0 ? void 0 : config.name), (tooltips === null || tooltips === void 0 ? void 0 : tooltips[config === null || config === void 0 ? void 0 : config.key]) && /*#__PURE__*/_react.default.createElement(_reactBootstrap.OverlayTrigger, {
+      placement: "bottom",
+      overlay: /*#__PURE__*/_react.default.createElement(_reactBootstrap.Tooltip, null, tooltips === null || tooltips === void 0 ? void 0 : tooltips[config === null || config === void 0 ? void 0 : config.key])
+    }, /*#__PURE__*/_react.default.createElement(_styles.IconButton, {
+      color: "primary",
+      className: "tour_btn"
+    }, /*#__PURE__*/_react.default.createElement(_reactBootstrapIcons.InfoCircle, null)))), (config === null || config === void 0 ? void 0 : config.description) && /*#__PURE__*/_react.default.createElement(_styles3.Description, null, config === null || config === void 0 ? void 0 : config.description), /*#__PURE__*/_react.default.createElement("input", {
+      type: "password",
+      defaultValue: config === null || config === void 0 ? void 0 : config.value,
+      onChange: function onChange(e) {
+        return handleInputChange(e.target.value, config === null || config === void 0 ? void 0 : config.id);
+      },
+      className: "form-control",
+      placeholder: config === null || config === void 0 ? void 0 : config.name
     })));
   }))), /*#__PURE__*/_react.default.createElement(ContextAwareToggle, {
     eventKey: "1"
