@@ -66,6 +66,20 @@ export const CountrySettingDetail = (props) => {
                           />
                         )
                       }
+                      {
+                        config.type === 7 && (
+                          <FormGroupText className='form-group'>
+                            <label>{config?.name}</label>
+                            <input
+                              type='password'
+                              defaultValue={config?.value}
+                              onChange={(e) => handleChangeConfig(e.target.value, selectedCountryId, config?.id)}
+                              className='form-control'
+                              placeholder={config?.name}
+                            />
+                          </FormGroupText>
+                        )
+                      }
                     </div>
                   ))
                 }
