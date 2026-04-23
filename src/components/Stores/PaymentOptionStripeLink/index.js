@@ -273,6 +273,15 @@ const PaymentOptionStripeLinkUI = (props) => {
                       placeholder={t('SELECT_A_OPTION', 'Select a option')}
                     />
                   )}
+                  {config?.type === 7 && (
+                    <input
+                      type='password'
+                      defaultValue={config?.value}
+                      onChange={(e) => handleUpdateConfigs(config?.id, { value: e.target.value })}
+                      className='form-control'
+                      placeholder={config?.name}
+                    />
+                  )}
                 </>
               )
             })}
